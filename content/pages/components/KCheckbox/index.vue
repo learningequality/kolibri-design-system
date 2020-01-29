@@ -57,10 +57,10 @@
 
   /* eslint-disable import/no-duplicates */
   import Example from './Example.vue';
-  import exampleCode from '!!raw-loader!./Example.vue';
+  // import exampleCode from '!!raw-loader!./Example.vue';
   /* eslint-enable import/no-duplicates */
 
-  import kCheckboxApi from '!vue-doc!~lib/KCheckbox';
+  // import kCheckboxApi from '!vue-doc!~lib/KCheckbox';
 
   export default {
     name: 'KCheckbox',
@@ -72,8 +72,8 @@
       Example,
     },
     data: () => ({
-      kCheckboxApi,
-      exampleCode,
+      kCheckboxApi: {}, // TODO
+      exampleCode: {}, // TODO
     }),
   };
 

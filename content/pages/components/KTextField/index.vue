@@ -136,10 +136,10 @@
 
   /* eslint-disable import/no-duplicates */
   import Example from './Example.vue';
-  import exampleCode from '!!raw-loader!./Example.vue';
+  // import exampleCode from '!!raw-loader!./Example.vue';
   /* eslint-enable import/no-duplicates */
 
-  import kTextboxApi from '!vue-doc!~lib/KTextbox';
+  // import kTextboxApi from '!vue-doc!~lib/KTextbox';
 
   export default {
     name: 'KTextField',
@@ -150,8 +150,8 @@
       Example,
     },
     data: () => ({
-      kTextboxApi,
-      exampleCode,
+      kTextboxApi: {}, // TODO
+      exampleCode: {}, // TODO
     }),
   };
 

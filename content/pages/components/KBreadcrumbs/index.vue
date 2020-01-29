@@ -38,10 +38,10 @@
 
   /* eslint-disable import/no-duplicates */
   import Example from './Example.vue';
-  import exampleCode from '!!raw-loader!./Example.vue';
+  // import exampleCode from '!!raw-loader!./Example.vue';
   /* eslint-enable import/no-duplicates */
 
-  import kBreadcrumbsApi from '!vue-doc!~lib/KBreadcrumbs';
+  // import kBreadcrumbsApi from '!vue-doc!~lib/KBreadcrumbs';
 
   export default {
     name: 'KBreadcrumbs',
@@ -53,8 +53,8 @@
       Example,
     },
     data: () => ({
-      kBreadcrumbsApi,
-      exampleCode,
+      kBreadcrumbsApi: {}, // TODO
+      exampleCode: {}, // TODO
     }),
     computed: {
       breadcrumbs() {

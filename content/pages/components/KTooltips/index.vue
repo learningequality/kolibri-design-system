@@ -28,10 +28,10 @@
 
   /* eslint-disable import/no-duplicates */
   import Example from './Example.vue';
-  import exampleCode from '!!raw-loader!./Example.vue';
+  // import exampleCode from '!!raw-loader!./Example.vue';
   /* eslint-enable import/no-duplicates */
 
-  import KTooltipApi from '!vue-doc!~lib/KTooltip';
+  // import KTooltipApi from '!vue-doc!~lib/KTooltip';
 
   export default {
     name: 'KTooltips',
@@ -42,8 +42,8 @@
       Example,
     },
     data: () => ({
-      KTooltipApi,
-      exampleCode,
+      KTooltipApi: {}, // TODO
+      exampleCode: {}, // TODO
     }),
   };
 

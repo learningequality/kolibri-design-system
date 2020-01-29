@@ -64,7 +64,7 @@
 <script>
 
   import lockr from 'lockr';
-  import { patternRoutes, componentRoutes } from '../../routes.js';
+  // import { patternRoutes, componentRoutes } from '../../routes.js';
   import state from '../../state';
   import NavSectionList from './NavSectionList';
   import { termList, matches } from './filter';
@@ -103,15 +103,17 @@
       },
       visiblePatternRoutes() {
         // show a page if either the page title or the section title matches
-        return patternRoutes.filter(route =>
-          matches(this.terms, route.meta.title + this.patternsText)
-        );
+        return [];
+        // return patternRoutes.filter(route =>
+        //   matches(this.terms, route.meta.title + this.patternsText)
+        // );
       },
       visibleComponentRoutes() {
         // show a component if either the component name or the section title matches
-        return componentRoutes.filter(route =>
-          matches(this.terms, route.meta.componentAPI.name + this.componentsText)
-        );
+        return [];
+        // return componentRoutes.filter(route =>
+        //   matches(this.terms, route.meta.componentAPI.name + this.componentsText)
+        // );
       },
     },
     watch: {
@@ -120,9 +122,9 @@
       },
     },
     created() {
-      this.closed = lockr.get(NAV_CLOSED_COOKIE, false);
-      this.patternRoutes = patternRoutes;
-      this.componentRoutes = componentRoutes;
+      this.closed = process.client ? lockr.get(NAV_CLOSED_COOKIE, false) : false;
+      // this.patternRoutes = patternRoutes;
+      // this.componentRoutes = componentRoutes;
     },
     methods: {
       toggle() {

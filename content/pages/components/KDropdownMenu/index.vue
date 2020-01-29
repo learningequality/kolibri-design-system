@@ -21,10 +21,10 @@
 
   /* eslint-disable import/no-duplicates */
   import Example from './Example.vue';
-  import exampleCode from '!!raw-loader!./Example.vue';
+  // import exampleCode from '!!raw-loader!./Example.vue';
   /* eslint-enable import/no-duplicates */
 
-  import kDropdownMenuApi from '!vue-doc!~lib/KDropdownMenu';
+  // import kDropdownMenuApi from '!vue-doc!~lib/KDropdownMenu';
 
   export default {
     name: 'KDropdownMenu',
@@ -35,8 +35,8 @@
       Example,
     },
     data: () => ({
-      kDropdownMenuApi,
-      exampleCode,
+      kDropdownMenuApi: {}, // TODO
+      exampleCode: {}, // TODO
     }),
   };
 

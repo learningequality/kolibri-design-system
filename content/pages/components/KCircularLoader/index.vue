@@ -27,7 +27,7 @@
   import Example from './Example';
   import ExampleCode from '!!raw-loader!./Example';
 
-  import KCircularLoaderApi from '!vue-doc!~lib/loaders/KCircularLoader';
+  // import KCircularLoaderApi from '!vue-doc!~lib/loaders/KCircularLoader';
   /* eslint-enable import/no-duplicates */
 
   export default {
@@ -40,7 +40,7 @@
     },
     data: () => ({
       ExampleCode,
-      KCircularLoaderApi,
+      KCircularLoaderApi: {}, // TODO
     }),
   };
 

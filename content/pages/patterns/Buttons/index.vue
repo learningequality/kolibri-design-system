@@ -136,7 +136,7 @@
 
   /* eslint-disable import/no-duplicates */
   import Example from './Example';
-  import exampleCode from '!!raw-loader!./Example.vue';
+  // import exampleCode from '!!raw-loader!./Example.vue';
   /* eslint-enable import/no-duplicates */
 
   export default {
@@ -151,7 +151,7 @@
     },
     data() {
       return {
-        exampleCode,
+        exampleCode: {}, // TODO
       };
     },
   };

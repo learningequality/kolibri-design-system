@@ -43,10 +43,10 @@
 
   /* eslint-disable import/no-duplicates */
   import Example from './Example.vue';
-  import exampleCode from '!!raw-loader!./Example.vue';
+  // import exampleCode from '!!raw-loader!./Example.vue';
   /* eslint-enable import/no-duplicates */
 
-  import kRadioButtonApi from '!vue-doc!~lib/KRadioButton';
+  // import kRadioButtonApi from '!vue-doc!~lib/KRadioButton';
 
   export default {
     name: 'KRadioButton',
@@ -57,8 +57,8 @@
       Example,
     },
     data: () => ({
-      kRadioButtonApi,
-      exampleCode,
+      kRadioButtonApi: {}, // TODO
+      exampleCode: {}, // TODO
     }),
   };
 

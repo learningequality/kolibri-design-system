@@ -25,11 +25,11 @@
 
   /* eslint-disable import/no-duplicates */
   import Example from './Example.vue';
-  import exampleCode from '!!raw-loader!./Example.vue';
+  // import exampleCode from '!!raw-loader!./Example.vue';
   /* eslint-enable import/no-duplicates */
 
-  import kGridApi from '!vue-doc!~lib/grids/KGrid';
-  import kGridItemApi from '!vue-doc!~lib/grids/KGridItem';
+  // import kGridApi from '!vue-doc!~lib/grids/KGrid';
+  // import kGridItemApi from '!vue-doc!~lib/grids/KGridItem';
 
   export default {
     name: 'Grids',
@@ -40,9 +40,9 @@
       Example,
     },
     data: () => ({
-      kGridApi,
-      kGridItemApi,
-      exampleCode,
+      kGridApi: {}, // TODO
+      kGridItemApi: {}, // TODO
+      exampleCode: {}, // TODO
     }),
   };
 

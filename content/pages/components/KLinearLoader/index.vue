@@ -29,7 +29,7 @@
   import Example from './Example';
   import ExampleCode from '!!raw-loader!./Example';
 
-  import KLinearLoaderApi from '!vue-doc!~lib/loaders/KLinearLoader';
+  // import KLinearLoaderApi from '!vue-doc!~lib/loaders/KLinearLoader';
   /* eslint-enable import/no-duplicates */
 
   export default {
@@ -42,7 +42,7 @@
     },
     data: () => ({
       ExampleCode,
-      KLinearLoaderApi,
+      KLinearLoaderApi: {}, // TODO
     }),
   };
 
