@@ -12,7 +12,7 @@
 <script>
 
   import log from 'loglevel';
-  import KResponsiveWindowMixin from 'kolibri-components/src/KResponsiveWindowMixin';
+  import KResponsiveWindowMixin from '~lib/KResponsiveWindowMixin';
   import { validateAlignment, validateSpan } from './common';
 
   /**
@@ -110,7 +110,7 @@
   @import '~purecss/build/grids-units.css';
   @import './extra-units.css';
 
-  @import '../styles/styleDefinitions.scss';
+  @import '../styles/styleDefinitions';
 
   .grid-item {
     // override pure grid default font family

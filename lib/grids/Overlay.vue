@@ -25,8 +25,8 @@
 
 <script>
 
-  import KResponsiveElementMixin from 'kolibri-components/src/KResponsiveElementMixin';
-  import KResponsiveWindowMixin from 'kolibri-components/src/KResponsiveWindowMixin';
+  import KResponsiveElementMixin from '~lib/KResponsiveElementMixin';
+  import KResponsiveWindowMixin from '~lib/KResponsiveWindowMixin';
 
   export default {
     name: 'Overlay',

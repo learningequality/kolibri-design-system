@@ -100,7 +100,7 @@
 <style lang="scss" scoped>
 
   @import '~keen-ui/src/styles/imports';
-  @import '../styles/styleDefinitions.scss';
+  @import '../styles/styleDefinitions';
 
   .delay {
     animation-delay: 1s;

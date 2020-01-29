@@ -17,7 +17,7 @@
 <script>
 
   import log from 'loglevel';
-  import KResponsiveWindowMixin from 'kolibri-components/src/KResponsiveWindowMixin';
+  import KResponsiveWindowMixin from '~lib/KResponsiveWindowMixin';
   import Overlay from './Overlay';
   import { validateGutter } from './common';
 
