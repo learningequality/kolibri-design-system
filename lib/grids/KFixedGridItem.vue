@@ -12,8 +12,8 @@
 <script>
 
   import log from 'loglevel';
-  import KResponsiveWindowMixin from '~lib/KResponsiveWindowMixin';
   import { validateAlignment, validateSpan } from './common';
+  import KResponsiveWindowMixin from '~~/lib/KResponsiveWindowMixin';
 
   /**
    * Basic fixed grid item

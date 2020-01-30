@@ -149,9 +149,9 @@
 
 <script>
 
-  import PageTemplate from '~content/common/PageTemplate';
-  import PageSection from '~content/common/PageSection';
-  import ExternalLink from '~content/common/ExternalLink';
+  import PageTemplate from '~/common/PageTemplate';
+  import PageSection from '~/common/PageSection';
+  import ExternalLink from '~/common/ExternalLink';
 
   export default {
     name: 'Inclusive',

@@ -13,7 +13,7 @@
 
 <script>
 
-  import KResponsiveWindowMixin from '~lib/KResponsiveWindowMixin';
+  import KResponsiveWindowMixin from '~~/lib/KResponsiveWindowMixin';
 
   export default {
     name: 'KPageContainer',

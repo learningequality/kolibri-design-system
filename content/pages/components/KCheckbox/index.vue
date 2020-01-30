@@ -50,17 +50,17 @@
 
 <script>
 
-  import VueExample from '~content/common/VueExample';
-  import PageTemplate from '~content/common/PageTemplate';
-  import PageSection from '~content/common/PageSection';
-  import Show from '~content/common/Show';
+  import Example from './Example.vue';
+  import VueExample from '~/common/VueExample';
+  import PageTemplate from '~/common/PageTemplate';
+  import PageSection from '~/common/PageSection';
+  import Show from '~/common/Show';
 
   /* eslint-disable import/no-duplicates */
-  import Example from './Example.vue';
   // import exampleCode from '!!raw-loader!./Example.vue';
   /* eslint-enable import/no-duplicates */
 
-  // import kCheckboxApi from '!vue-doc!~lib/KCheckbox';
+  // import kCheckboxApi from '!vue-doc!~~/lib/KCheckbox';
 
   export default {
     name: 'KCheckbox',

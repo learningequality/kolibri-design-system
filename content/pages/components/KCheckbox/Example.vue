@@ -33,7 +33,7 @@
 
 <script>
 
-  import KCheckbox from '~lib/KCheckbox';
+  import KCheckbox from '~~/lib/KCheckbox';
 
   export default {
     name: 'Example',

@@ -53,7 +53,7 @@
 
 <script>
 
-  import KModal from '~lib/KModal';
+  import KModal from '~~/lib/KModal';
 
   export default {
     name: 'Example',

@@ -14,9 +14,9 @@
 
 <script>
 
-  import KResponsiveWindowMixin from '~lib/KResponsiveWindowMixin';
   import KFixedGrid from './KFixedGrid';
   import { validateGutter } from './common';
+  import KResponsiveWindowMixin from '~~/lib/KResponsiveWindowMixin';
 
   /**
    * Grid layout with a dynamic number of columns based on the current window width.

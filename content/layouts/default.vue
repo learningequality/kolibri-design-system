@@ -12,11 +12,11 @@
 
 <script>
 
-  import state from '~content/state';
-  import SideNav from '~content/common/SideNav';
+  import state from '../state';
+  import SideNav from '../common/SideNav';
 
   export default {
-    name: 'App',
+    name: 'Default',
     components: {
       SideNav,
     },
@@ -32,7 +32,7 @@
 
 <style lang="scss" scoped>
 
-  @import '~content/common/globals';
+  @import '../common/globals';
 
   .content {
     padding-left: 32px;
@@ -44,7 +44,7 @@
 
 <style lang="scss">
 
-  @import '~content/common/globals';
+  @import '../common/globals';
 
   // match Prism font family
   code {

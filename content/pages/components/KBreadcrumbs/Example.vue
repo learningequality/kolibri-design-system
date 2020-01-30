@@ -7,7 +7,7 @@
 
 <script>
 
-  import KBreadcrumbs from '~lib/KBreadcrumbs';
+  import KBreadcrumbs from '~~/lib/KBreadcrumbs';
 
   export default {
     name: 'Example',

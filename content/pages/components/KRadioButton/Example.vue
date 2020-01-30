@@ -37,7 +37,7 @@
 
 <script>
 
-  import KRadioButton from '~lib/KRadioButton';
+  import KRadioButton from '~~/lib/KRadioButton';
 
   export default {
     name: 'Example',

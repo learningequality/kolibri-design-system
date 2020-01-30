@@ -22,8 +22,8 @@
 
 <script>
 
-  import globalThemeState from '~lib/styles/globalThemeState';
   import SectionLink from './SectionLink';
+  import globalThemeState from '~~/lib/styles/globalThemeState';
 
   const TOKENS = 'tokens.';
   const BRAND = 'brand.';

@@ -130,16 +130,16 @@
 
 <script>
 
-  import VueExample from '~content/common/VueExample';
-  import PageTemplate from '~content/common/PageTemplate';
-  import PageSection from '~content/common/PageSection';
+  import Example from './Example.vue';
+  import VueExample from '~/common/VueExample';
+  import PageTemplate from '~/common/PageTemplate';
+  import PageSection from '~/common/PageSection';
 
   /* eslint-disable import/no-duplicates */
-  import Example from './Example.vue';
   // import exampleCode from '!!raw-loader!./Example.vue';
   /* eslint-enable import/no-duplicates */
 
-  // import kTextboxApi from '!vue-doc!~lib/KTextbox';
+  // import kTextboxApi from '!vue-doc!~~/lib/KTextbox';
 
   export default {
     name: 'KTextField',

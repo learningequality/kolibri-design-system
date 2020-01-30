@@ -27,8 +27,8 @@
 <script>
 
   import { throttle } from 'frame-throttle';
-  import KResponsiveElementMixin from '~lib/KResponsiveElementMixin';
   import state from '../../state';
+  import KResponsiveElementMixin from '~~/lib/KResponsiveElementMixin.js';
 
   export default {
     name: 'Header',

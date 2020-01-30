@@ -21,7 +21,7 @@
 
 <script>
 
-  import KDropdownMenu from '~lib/KDropdownMenu';
+  import KDropdownMenu from '~~/lib/KDropdownMenu';
 
   export default {
     name: 'Example',

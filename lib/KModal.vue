@@ -94,8 +94,8 @@
 <script>
 
   import log from 'loglevel';
-  import KResponsiveWindowMixin from '~lib/KResponsiveWindowMixin';
   import debounce from 'lodash/debounce';
+  import KResponsiveWindowMixin from '~~/lib/KResponsiveWindowMixin';
 
   /**
    * Used to focus attention on a singular action/task

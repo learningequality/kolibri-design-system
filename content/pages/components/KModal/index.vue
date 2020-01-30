@@ -172,10 +172,10 @@
 <script>
 
   /* eslint-disable import/no-duplicates */
-  import PageTemplate from '~content/common/PageTemplate';
-  import PageSection from '~content/common/PageSection';
-  import VueExample from '~content/common/VueExample';
   import Example from './Example.vue';
+  import PageTemplate from '~/common/PageTemplate';
+  import PageSection from '~/common/PageSection';
+  import VueExample from '~/common/VueExample';
   import ExampleCode from '!!raw-loader!./Example.vue';
   /* eslint-enable import/no-duplicates */
 

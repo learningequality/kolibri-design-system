@@ -128,14 +128,14 @@
 
 <script>
 
-  import VueExample from '~content/common/VueExample';
-  import PageTemplate from '~content/common/PageTemplate';
-  import PageSection from '~content/common/PageSection';
-  import Show from '~content/common/Show';
-  import ExternalLink from '~content/common/ExternalLink';
+  import Example from './Example';
+  import VueExample from '~/common/VueExample';
+  import PageTemplate from '~/common/PageTemplate';
+  import PageSection from '~/common/PageSection';
+  import Show from '~/common/Show';
+  import ExternalLink from '~/common/ExternalLink';
 
   /* eslint-disable import/no-duplicates */
-  import Example from './Example';
   // import exampleCode from '!!raw-loader!./Example.vue';
   /* eslint-enable import/no-duplicates */
 

@@ -31,7 +31,7 @@
 
 <script>
 
-  import KTextbox from '~lib/KTextbox';
+  import KTextbox from '~~/lib/KTextbox';
 
   export default {
     name: 'Example',
