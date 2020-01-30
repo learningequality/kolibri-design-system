@@ -11,7 +11,7 @@
     "generate": "nuxt generate",
     "lint-fix": "yarn lint -w",
     "lint-watch": "yarn lint -w -m",
-    "lint": "kolibri-tools lint '**/*.{js,vue,scss,less,css}' -i '**/node_modules/**','content/.nuxt'",
+    "lint": "kolibri-tools lint '**/*.{js,vue,scss,less,css}' -i '**/node_modules','**/.nuxt'",
     "test": "jest"
   },
   "dependencies": {

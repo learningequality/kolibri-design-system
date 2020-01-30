@@ -9,5 +9,5 @@ export default {
     link: [{ rel: 'icon', type: 'image/x-icon', href: '/kolibri.ico' }],
   },
   rootDir: './',
-  srcDir: './content/',
+  srcDir: './docs/',
 };
