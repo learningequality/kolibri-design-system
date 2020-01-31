@@ -13962,7 +13962,7 @@ supports-color@^7.0.0, supports-color@^7.1.0:
   dependencies:
     has-flag "^4.0.0"
 
-svg-icon-inline-loader@^3.0.0:
+svg-icon-inline-loader@^3.0.0, svg-icon-inline-loader@^3.1.0:
   version "3.1.0"
   resolved "https://registry.yarnpkg.com/svg-icon-inline-loader/-/svg-icon-inline-loader-3.1.0.tgz#c69c08e40d9292d245ce3bfd60a2fbc89fa3a5bc"
   integrity sha1-xpwI5A2SktJFzjv9YKL7yJ+jpbw=

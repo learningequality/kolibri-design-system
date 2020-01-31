@@ -16,7 +16,7 @@
   import SideNav from '../common/SideNav';
 
   export default {
-    name: 'Default',
+    name: 'Default', // eslint-disable-line kolibri/vue-filename-and-component-name-match
     components: {
       SideNav,
     },
@@ -45,6 +45,17 @@
 <style lang="scss">
 
   @import '../common/globals';
+
+  .visuallyhidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    border: 0;
+  }
 
   // match Prism font family
   code {
@@ -86,7 +97,9 @@
     background: $selection-color;
   }
 
-  body {
+  body,
+  html {
+    font-family: 'Noto Sans', sans-serif;
     background-color: white;
   }
 

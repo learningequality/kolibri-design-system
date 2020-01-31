@@ -5,7 +5,6 @@
   "description": "The Kolibri Design System defines common design patterns and code for use in Kolibri applications",
   "license": "MIT",
   "author": "Learning Equality",
-  "// comment //": "Run script commands as `yarn COMMAND`, e.g. `yarn dev`",
   "scripts": {
     "dev": "npm-run-all --parallel dev-only lint-watch",
     "dev-only": "nuxt",
@@ -15,8 +14,9 @@
     "_lint": "kolibri-tools lint '**/*.{js,vue,scss,less,css}' -i '**/node_modules','**/.nuxt'",
     "_test": "jest"
   },
-  "files": ["lib"],
-  "// comment //": "dependencies related to running code in the shared UI library",
+  "files": [
+    "lib"
+  ],
   "dependencies": {
     "aphrodite": "https://github.com/learningequality/aphrodite/",
     "css-element-queries": "^1.2.0",
@@ -25,9 +25,7 @@
     "popper.js": "^1.14.6",
     "purecss": "^0.6.2"
   },
-  "// comment //": "TODO - peer dependencies should be provided by the library consumer",
   "peerDependencies": {},
-  "// comment //": "dev dependencies relate to both building _and_ running the docs",
   "devDependencies": {
     "@nuxtjs/eslint-config": "^1.0.1",
     "@nuxtjs/eslint-module": "^1.0.0",
@@ -41,13 +39,14 @@
     "eslint-plugin-prettier": "^3.0.1",
     "eslint-plugin-vue": "^6.1.2",
     "jest": "^24.1.0",
-    "lockr": "^0.8.5",
     "kolibri-tools": "0.13.0-dev.9",
+    "lockr": "^0.8.5",
     "npm-run-all": "^4.1.5",
     "nuxt": "^2.0.0",
     "prettier": "^1.18.2",
     "prismjs": "^1.15.0",
     "raw-loader": "0.5.1",
+    "svg-icon-inline-loader": "^3.1.0",
     "vue-jest": "^4.0.0-0",
     "vue-meta": "^2.3.2",
     "vue-prism-component": "^1.1.1"
