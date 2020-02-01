@@ -87,7 +87,12 @@ The directories and files in `/docs/pages/` are mapped by NuxtJS to URLs. Start 
 
 Common components used in the documentation site are in `/docs/common/`, and the primary page layout is `/docs/layouts/default.vue`.
 
-The documentation site is intentionally built _without_ depending on the Kolibri shared UI library in order to make sure the UI library can be updated and modified independently of the design system documentation site. At some point we may want to revisit this decision, but in the meantime please limit references to `/lib` files to examples of usage.
+
+### Implementation notes
+
+The documentation site is intentionally built _without_ depending on the Kolibri shared UI library in order to make sure the UI library can be updated and modified independently of the design system documentation site. At some point we may want to revisit this decision, but in the meantime please limit references to `/lib` files to examples of usage. (In fact there is currently at least one exception to this rule: usage of `KResponsiveElementMixin` inside the `Header` component.)
+
+Additionally, we do _not_ use client-side routing. The reason is that we make extensive use of `#anchor` links, and there are many issues in both [NuxtJS](https://github.com/nuxt/nuxt.js/issues/5359) and [Vue Router](https://stackoverflow.com/questions/45201014/how-to-handle-anchors-bookmarks-with-vue-router/45206192) with mixing anchors and client-side routing. In practice, this means that there should be no instances of `<router-link>` or `<nuxt-link>` in documentation code.
 
 ### Deployment
 
