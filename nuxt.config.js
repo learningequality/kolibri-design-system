@@ -29,4 +29,8 @@ export default {
       });
     },
   },
+  router: {
+    // disable scroll behavior because we don't use client-side routing
+    scrollBehavior() {},
+  },
 };
