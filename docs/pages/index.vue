@@ -2,52 +2,66 @@
 
   <PageTemplate>
 
-    <PageSection title="A shared vocabulary" anchor="#vocabulary">
+    <PageSection title="Purpose" anchor="#purpose">
       <p>
-        This guide is meant to provide patterns and components that
-        provide a 'default' way to design and build new functionality in
-        Kolibri. Diligently using the patterns and components in this
-        guide has a number of benefits, including:
+        The Kolibri Design System contains resources for designers and developers building Kolibri products. The purpose is to:
       </p>
       <ul>
-        <li>reduced time to design and build new functionality</li>
-        <li>a consistent, learnable end-user experience</li>
-        <li>accessibility by default</li>
+        <li>Reduce the time it takes to design and build our products</li>
+        <li>Create consistent and predictable end-user experiences</li>
+        <li>Ensure accessibility, responsiveness, and cross-browser compatibility</li>
       </ul>
       <p>
-        As a matter of practice, we should by default <em>always</em>
-        follow the guide. Therefore, it's best to keep the guidance
-        in here as minimal as possible to give ourselves the flexibility
-        to deal with unexpected situations.
+        The design system includes both documentation design patterns and a shared front-end UI library. Together, these provide solutions to common design and implementation needs in Kolibri products.
+      </p>
+      <p>
+        If the design system is failing to achieve the objectives above, it needs to be updated. Your contributions and input are appreciated. For more information, see the <a href="#updates">Updates</a> section below, the <a href="https://github.com/learningequality/kolibri-design-system">GitHub repository</a>, or the <a href="https://www.notion.so/learningequality/Kolibri-Design-System-for-LE-products-976ea82b50f844ea9149a7abed497ea9">Notion project</a>.
       </p>
     </PageSection>
-    <PageSection title="Exceptions to the rules" anchor="#exceptions">
+    <PageSection title="Scope" anchor="#scope">
       <p>
-        Violating the style guide comes with some costs:
+        The Kolibri Design System contains guidance and functionality that reflects very common design patterns across all of our products. It also gives guidance about patterns and component that are consistently different between products, for example due to different user needs or browser requirements.
+      </p>
+      <p>
+        It should <em>not</em> contain design patterns, UI components, or configuration parameters that are rarely used or liable to change in the future.
+      </p>
+      <p>
+        The public API of the shared UI library is <em>only</em> that which is documented in this site. Functionality which is not documented here should be considered either experimental or a private implementation detail.
+      </p>
+    </PageSection>
+    <PageSection title="Exceptions" anchor="#exceptions">
+      <p>
+        If using an existing pattern or component would <em>significantly</em> degrade the user experience compared to designing and building an alternate user interface, we should prioritize the user experience and build the custom UI.
+      </p>
+      <p>
+        On the other hand, if using an existing pattern or component would not significantly degrade the UX, we should prioritize consistency and reuse. The benefits of standardization here outweigh the marginal benefits of a UI customized for a narrow need.
+      </p>
+      <p>
+        Decisions to deviate from the design system should be made intentionally, and the justification to do so should be documented. Undocumented deviations may be mistakes, oversights, or technical/UX debt.
+      </p>
+      <p>
+        Over time we should be able to observe patterns in the intentional deviations, and use them as guidance for implementing updates to the design system that benefit the rest of the product ecosystem.
+      </p>
+    </PageSection>
+    <PageSection title="Updates" anchor="#updates">
+      <p>
+        The process for making updates to the design system is still being formulated. There are a number of factors that need to be taken into consideration, including:
       </p>
       <ul>
-        <li>increased effort in both design and development</li>
-        <li>reduced consistency in the end-user experience</li>
-        <li>reduced maintainability of the code base</li>
+        <li>The need for rapid and easy iteration and improvement</li>
+        <li>Protection against unexpected and hard-to-test regressions</li>
+        <li>Sustainability, maintainability, and prevention of bloat</li>
+        <li>Input from all relevant stakeholders</li>
+        <li>Smooth update and migration paths</li>
       </ul>
       <p>
-        That said, there <em>will</em> be cases where we choose to use an
-        alternate pattern or component than what is suggested by the
-        guide in order to improve the user experience, and this is OK.
-        Deviations from the guide should be intentional and explicit.
+        In the meantime, we welcome direct feedback and contributions! It's important that the Design System works for you, so please help shape it.
       </p>
-    </PageSection>
-    <PageSection title="Changes to the guide" anchor="#changes">
-      <p>
-        This is intended to be a <em>living</em> style guide. The guide should match
-        the <em>current state</em> of Kolibri, not what we aspire it to be.
-      </p>
-      <p>
-        If we notice that we are often deviating from some guidance, or that the guide
-        does not handle a common pattern, we should update the patterns or components
-        in the guide and the application simultaneously. In general, consistency is
-        preferred over piece-meal improvements.
-      </p>
+      <ul>
+        <li>Share ideas or concerns with Devon, Jessica, and Jacob directly</li>
+        <li>Submit a <a href="https://github.com/learningequality/kolibri-design-system/pulls">pull request</a> or <a href="https://github.com/learningequality/kolibri-design-system/issues">issue</a> to the GitHub repo</li>
+        <li>Leave a comment in the <a href="https://www.notion.so/learningequality/Kolibri-Design-System-for-LE-products-976ea82b50f844ea9149a7abed497ea9">Notion project</a></li>
+      </ul>
     </PageSection>
 
   </PageTemplate>
