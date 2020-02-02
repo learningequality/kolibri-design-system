@@ -10,9 +10,9 @@
 <script>
 
   import log from 'loglevel';
+  import KResponsiveWindowMixin from '../KResponsiveWindowMixin';
   import KFixedGridItem from './KFixedGridItem';
   import { validateAlignment, validateSpan } from './common';
-  import KResponsiveWindowMixin from '~~/lib/KResponsiveWindowMixin';
 
   function choose(preferred, backup) {
     return preferred ? preferred : backup;

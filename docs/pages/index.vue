@@ -71,8 +71,8 @@
 
 <script>
 
-  import PageTemplate from '../common/PageTemplate';
-  import PageSection from '../common/PageSection';
+  import PageTemplate from '~/common/PageTemplate';
+  import PageSection from '~/common/PageSection';
 
   export default {
     name: 'Index', // eslint-disable-line kolibri/vue-filename-and-component-name-match

@@ -65,9 +65,9 @@
 
   import lockr from 'lockr';
   // import { patternRoutes, componentRoutes } from '../../routes.js';
-  import state from '../../state';
   import NavSectionList from './NavSectionList';
   import { termList, matches } from './filter';
+  import state from '~/state';
 
   const NAV_CLOSED_COOKIE = 'nav-closed';
 

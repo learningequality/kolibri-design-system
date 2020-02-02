@@ -17,9 +17,9 @@
 <script>
 
   import log from 'loglevel';
+  import KResponsiveWindowMixin from '../KResponsiveWindowMixin';
   import Overlay from './Overlay';
   import { validateGutter } from './common';
-  import KResponsiveWindowMixin from '~~/lib/KResponsiveWindowMixin';
 
   /**
    * Grid layout with a fixed number of columns

@@ -25,8 +25,8 @@
 
 <script>
 
-  import KResponsiveElementMixin from '~~/lib/KResponsiveElementMixin';
-  import KResponsiveWindowMixin from '~~/lib/KResponsiveWindowMixin';
+  import KResponsiveElementMixin from '../KResponsiveElementMixin';
+  import KResponsiveWindowMixin from '../KResponsiveWindowMixin';
 
   export default {
     name: 'Overlay',

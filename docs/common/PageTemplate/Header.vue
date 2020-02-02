@@ -27,7 +27,7 @@
 <script>
 
   import { throttle } from 'frame-throttle';
-  import state from '../../state';
+  import state from '~/state';
   import KResponsiveElementMixin from '~~/lib/KResponsiveElementMixin.js';
 
   export default {

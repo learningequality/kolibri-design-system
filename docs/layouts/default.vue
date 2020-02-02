@@ -12,8 +12,8 @@
 
 <script>
 
-  import state from '../state';
-  import SideNav from '../common/SideNav';
+  import state from '~/state';
+  import SideNav from '~/common/SideNav';
 
   export default {
     name: 'Default', // eslint-disable-line kolibri/vue-filename-and-component-name-match
@@ -32,7 +32,7 @@
 
 <style lang="scss" scoped>
 
-  @import '../common/globals';
+  @import '~/common/globals';
 
   .content {
     padding-left: 32px;
@@ -44,7 +44,7 @@
 
 <style lang="scss">
 
-  @import '../common/globals';
+  @import '~/common/globals';
 
   .visuallyhidden {
     position: absolute;
