@@ -39,7 +39,7 @@ The shared UI library is made available as source code, not a built distribution
 
 The public API of the shared UI library is _only_ that which is documented in the documentation. Functionality which is not documented should be considered either experimental or a private implementation detail.
 
-## Development
+## Development of the documentation site
 
 How to make updates to the Kolibri Design System
 
@@ -88,11 +88,30 @@ The directories and files in `/docs/pages/` are mapped by NuxtJS to URLs. Start 
 Common components used in the documentation site are in `/docs/common/`, and the primary page layout is `/docs/layouts/default.vue`.
 
 
-### Implementation notes
+### Design of the documentation site
 
-The documentation site is intentionally built _without_ depending on the Kolibri shared UI library in order to make sure the UI library can be updated and modified independently of the design system documentation site. At some point we may want to revisit this decision, but in the meantime please limit references to `/lib` files to examples of usage. (In fact there is currently at least one exception to this rule: usage of `KResponsiveElementMixin` inside the `Header` component.)
+The documentation site itself intentionally does _not_ conform to the design system it describes, for two reasons:
 
-Additionally, we do _not_ use client-side routing. The reason is that we make extensive use of `#anchor` links, and there are many issues in both [NuxtJS](https://github.com/nuxt/nuxt.js/issues/5359) and [Vue Router](https://stackoverflow.com/questions/45201014/how-to-handle-anchors-bookmarks-with-vue-router/45206192) with mixing anchors and client-side routing. In practice, this means that there should be no instances of `<router-link>` or `<nuxt-link>` in documentation code.
+1. The user-interface of the site (links, buttons, headers, etc) is intentionally built _without_ depending on the Kolibri shared UI library. This helps ensure as we update the UI library, we only need to update content and examples in the documentation, not the implementation of the documentation.
+2. From a design perspective, it's important that the documentation site looks and feels sufficiently distinct from the design patterns it describes, so that users do not mistakenly immitate it. Instead, users should focus on the patterns that are explicitly documented.
+
+From a coding perspective this means that references to `~~/lib` code should in general only appear in `~/pages/` as illustrations of the shared UI library. However, we might decide on a case-by-case basis to have occasional exceptions to this rule. For example, we currently use `~~/lib/KResponsiveElementMixin` inside `~/common/Header` because it would be excessive to duplicate that functionality.
+
+
+### Routing
+
+We do _not_ use client-side routing. The reason is that we make extensive use of `#anchor` links, and there are many issues in both [NuxtJS](https://github.com/nuxt/nuxt.js/issues/5359) and [Vue Router](https://stackoverflow.com/questions/45201014/how-to-handle-anchors-bookmarks-with-vue-router/45206192) with mixing anchors and client-side routing. In practice, this means that there should be no instances of `<router-link>` or `<nuxt-link>` in documentation code.
+
+
+### Import aliases
+
+NuxtJS provides two webpack [import aliases](https://nuxtjs.org/guide/directory-structure#aliases):
+
+* `~~/` points to the root of the repository
+* `~/` points to the `/docs` directory
+
+These aliases should _not_ be used by code inside the `/lib` directory because external webpack configurations will not handle them correctly.
+
 
 ### Deployment
 
