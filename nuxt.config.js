@@ -17,6 +17,7 @@ export default {
   },
   rootDir: './',
   srcDir: './docs/',
+  plugins: ['~/plugins/load-common-components.js'],
   build: {
     extend(config) {
       // handles <mat-svg/>, <ion-svg/>, <iconic-svg/>, and <file-svg/> svg inlining
