@@ -4,4 +4,10 @@ const esLintConfig = require('kolibri-tools/.eslintrc');
 // not be recognized if auto-formatted to camel case
 esLintConfig.rules['vue/attribute-hyphenation'] = 0;
 
+// Allow nuxt resources to be found
+esLintConfig.settings['import/resolver'].nuxt = {
+  extensions: ['.js', '.vue'],
+  nuxtSrcDir: 'docs',
+};
+
 module.exports = esLintConfig;
