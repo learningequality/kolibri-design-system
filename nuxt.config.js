@@ -19,6 +19,20 @@ export default {
   srcDir: './docs/',
   plugins: ['~/plugins/load-common-components.js'],
   build: {
+    extractCSS: true,
+    optimization: {
+      // this appears to be necessary to prevent a flash of unstyled text
+      splitChunks: {
+        cacheGroups: {
+          styles: {
+            name: 'styles',
+            test: /\.(css|vue|scss)$/,
+            chunks: 'all',
+            enforce: true,
+          },
+        },
+      },
+    },
     extend(config) {
       // handles <mat-svg/>, <ion-svg/>, <iconic-svg/>, and <file-svg/> svg inlining
       config.module.rules.push({

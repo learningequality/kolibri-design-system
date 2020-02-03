@@ -5,7 +5,7 @@
 
       <h1 class="header">
         <a href="#" class="header-logo" @click="toggle">
-          <img src="./kolibri-logo.svg">
+          <file-svg src="./kolibri-logo.svg" />
         </a>
         <span v-show="!closed" class="header-text">Design System</span>
       </h1>
