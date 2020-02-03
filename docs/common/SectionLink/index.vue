@@ -1,7 +1,7 @@
 <template>
 
   <router-link :id="anchorId" :to="to">
-    <file-svg class="icon-link" src="./link.svg" />
+    <file-svg class="icon-link" src="../../assets/link.svg" />
     <span class="visuallyhidden">link to section</span>
   </router-link>
 

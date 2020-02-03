@@ -1,14 +1,12 @@
 <template>
 
-  <div
-    class="header"
-    :class="{ fixed: scrolled }"
-    :style="style"
-  >
+  <div class="header" :class="{ scrolled }">
     <h1 class="header-text">
-      <slot></slot>
+      <component :is="codeStyle ? 'code' : 'span'">
+        {{ title }}
+      </component>
       <a href="#" @click="scrollToTop">
-        <file-svg class="icon-link" src="../SectionLink/link.svg" />
+        <file-svg class="icon-link" src="../../assets/link.svg" />
         <span class="visuallyhidden">link to current page</span>
       </a>
     </h1>
@@ -26,17 +24,20 @@
 
 <script>
 
-  import { throttle } from 'frame-throttle';
-  import state from '~/state';
-  import KResponsiveElementMixin from '~~/lib/KResponsiveElementMixin.js';
-
   export default {
     name: 'Header',
-    mixins: [KResponsiveElementMixin],
     props: {
       sections: {
         type: Array,
         required: true,
+      },
+      codeStyle: {
+        type: Boolean,
+        default: false,
+      },
+      title: {
+        type: String,
+        required: false,
       },
     },
     data() {
@@ -44,31 +45,11 @@
         scrolled: false,
       };
     },
-    computed: {
-      throttledHandleScroll() {
-        return throttle(this.handleScroll);
-      },
-      style() {
-        return {
-          left: `${this.navWidth}px`,
-          // Pos fixed inline style necessary for responsive-element compatibility
-          position: 'fixed',
-        };
-      },
-      navWidth() {
-        return state.navWidth;
-      },
-    },
-    watch: {
-      elementHeight() {
-        this.$emit('heightChange', this.elementHeight);
-      },
-    },
     mounted() {
-      window.addEventListener('scroll', this.throttledHandleScroll);
+      window.addEventListener('scroll', this.handleScroll);
     },
     beforeDestroy() {
-      window.removeEventListener('scroll', this.throttledHandleScroll);
+      window.removeEventListener('scroll', this.handleScroll);
     },
     methods: {
       handleScroll() {
@@ -86,10 +67,6 @@
 <style lang="scss" scoped>
 
   .header {
-    position: fixed;
-    top: 0;
-    right: 0;
-    z-index: 999999;
     padding-top: 16px;
     padding-bottom: 16px;
     padding-left: 32px;
@@ -99,7 +76,7 @@
     transition: border 0.25s ease;
   }
 
-  .header.fixed {
+  .scrolled {
     border-bottom: 1px solid #dedede;
   }
 

@@ -1,15 +1,25 @@
 <template>
 
-  <div class="content-wrapper" :style="{ paddingTop: `${headerHeight}px` }">
+  <div class="content-wrapper">
+    <SideNav />
     <Header
       :sections="sections"
-      @heightChange="newHeight => headerHeight = newHeight"
-    >
-      <code v-if="componentName">{{ componentName }}</code>
-      <span v-else>{{ routeTitle }}</span>
-    </Header>
-    <div>
-      <slot></slot>
+      :title="title"
+      :codeStyle="isComponent"
+      class="floating-header"
+    />
+    <div class="border">
+      <!-- used as a spacer -->
+      <Header
+        :sections="sections"
+        :title="title"
+        :codeStyle="isComponent"
+        style="visibility: hidden;"
+      />
+      <!-- end of spacer -->
+      <div class="content">
+        <slot></slot>
+      </div>
     </div>
   </div>
 
@@ -20,28 +30,27 @@
 
   import PageSection from '../PageSection';
   import Header from './Header';
+  import SideNav from './SideNav';
 
   export default {
     name: 'PageTemplate',
     components: {
       Header,
+      SideNav,
     },
     props: {
-      componentName: {
-        type: String,
-        required: false,
+      isComponent: {
+        type: Boolean,
+        default: false,
       },
-    },
-    data() {
-      return {
-        headerHeight: 0,
-      };
+      title: {
+        type: String,
+        required: true,
+      },
     },
     computed: {
-      routeTitle() {
-        return this.$route.meta ? this.$route.meta.title : null;
-      },
       sections() {
+        // look at children for sections and extract links
         return this.$slots.default
           .filter(
             node =>
@@ -52,6 +61,9 @@
           .map(node => node.componentOptions.propsData);
       },
     },
+    head: {
+      title: 'Home',
+    },
   };
 
 </script>
@@ -59,11 +71,27 @@
 
 <style lang="scss" scoped>
 
+  @import '~/assets/definitions';
+
+  .floating-header {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: $nav-width;
+    z-index: 999999;
+  }
+
   .content-wrapper {
-    min-width: 350px;
-    padding-right: 32px;
-    padding-bottom: 64px;
-    margin-right: auto;
+    margin-left: $nav-width;
+  }
+
+  .border {
+    border-left: 1px solid $border-color;
+  }
+
+  .content {
+    padding-left: 32px;
+    margin-bottom: 400px;
   }
 
 </style>

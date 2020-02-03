@@ -1,16 +1,13 @@
 <template>
 
-  <div class="nav-wrapper" :style="{ width: `${navWidth}px` }">
+  <div class="nav-wrapper">
     <nav class="sidenav">
-
       <h1 class="header">
-        <a href="#" class="header-logo" @click="toggle">
-          <file-svg src="./kolibri-logo.svg" />
-        </a>
-        <span v-show="!closed" class="header-text">Design System</span>
+        <file-svg src="./kolibri-logo.svg" class="logo" />
+        <span class="header-text">Design System</span>
       </h1>
 
-      <template v-show="!closed">
+      <template v-if="false">
 
         <input
           v-model="filterText"
@@ -26,36 +23,36 @@
         >
           ✕
         </button>
-
-        <div class="nav-links">
-
-          <a v-show="showHome" :href="'/'" exact>
-            {{ homeText }}
-          </a>
-
-          <NavSectionList v-show="showPatterns" :title="patternsText">
-            <li v-for="(route, i) in visiblePatternRoutes" :key="i">
-              <a :href="route">
-                {{ route.meta.title }}
-              </a>
-            </li>
-          </NavSectionList>
-
-          <NavSectionList v-show="showComponents" :title="componentsText">
-            <li v-for="(route, i) in visibleComponentRoutes" :key="i">
-              <a :href="route">
-                <code>{{ route.meta.componentAPI.name }}</code>
-              </a>
-            </li>
-          </NavSectionList>
-
-        </div>
       </template>
+
+      <div class="nav-links">
+
+        <a v-show="showHome" :href="'/'" exact>
+          {{ homeText }}
+        </a>
+
+        <NavSectionList v-show="showPatterns" :title="patternsText">
+          <li v-for="(route, i) in visiblePatternRoutes" :key="i">
+            <a :href="route">
+              {{ route.meta.title }}
+            </a>
+          </li>
+        </NavSectionList>
+
+        <NavSectionList v-show="showComponents" :title="componentsText">
+          <li v-for="(route, i) in visibleComponentRoutes" :key="i">
+            <a :href="route">
+              <code>{{ route.meta.componentAPI.name }}</code>
+            </a>
+          </li>
+        </NavSectionList>
+
+      </div>
 
     </nav>
 
     <!-- used to help indicate that there is more to see if one scrolls down -->
-    <div v-show="!closed" class="bottom-gradient"></div>
+    <div class="bottom-gradient"></div>
   </div>
 
 </template>
@@ -63,13 +60,8 @@
 
 <script>
 
-  import lockr from 'lockr';
-  // import { patternRoutes, componentRoutes } from '../../routes.js';
   import NavSectionList from './NavSectionList';
   import { termList, matches } from './filter';
-  import state from '~/state';
-
-  const NAV_CLOSED_COOKIE = 'nav-closed';
 
   export default {
     name: 'SideNav',
@@ -78,7 +70,6 @@
     },
     data() {
       return {
-        closed: false,
         filterText: '',
         homeText: 'Home',
         patternsText: 'Patterns',
@@ -86,9 +77,6 @@
       };
     },
     computed: {
-      navWidth() {
-        return state.navWidth;
-      },
       terms() {
         return termList(this.filterText);
       },
@@ -116,22 +104,6 @@
         // );
       },
     },
-    watch: {
-      closed(val) {
-        state.navWidth = val ? 84 : 260;
-      },
-    },
-    created() {
-      this.closed = process.client ? lockr.get(NAV_CLOSED_COOKIE, false) : false;
-      // this.patternRoutes = patternRoutes;
-      // this.componentRoutes = componentRoutes;
-    },
-    methods: {
-      toggle() {
-        this.closed = !this.closed;
-        lockr.set(NAV_CLOSED_COOKIE, this.closed);
-      },
-    },
   };
 
 </script>
@@ -139,7 +111,7 @@
 
 <style lang="scss" scoped>
 
-  @import '../globals';
+  @import '~/assets/definitions';
 
   .header {
     margin-bottom: 24px;
@@ -148,7 +120,7 @@
     color: $header-color;
   }
 
-  .header-logo {
+  .logo {
     width: 55px;
     height: 45px;
     vertical-align: middle;
@@ -195,6 +167,7 @@
     bottom: 0;
     left: 0;
     z-index: 100;
+    width: $nav-width;
   }
 
   .sidenav {

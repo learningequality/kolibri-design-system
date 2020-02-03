@@ -1,6 +1,6 @@
 <template>
 
-  <PageTemplate>
+  <PageTemplate title="Home">
 
     <PageSection title="Purpose" anchor="#purpose">
       <p>

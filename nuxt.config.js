@@ -1,7 +1,7 @@
 export default {
   mode: 'universal',
   head: {
-    title: 'Kolibri Design System',
+    title: 'Kolibri Design System', // default
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
@@ -18,6 +18,7 @@ export default {
   rootDir: './',
   srcDir: './docs/',
   plugins: ['~/plugins/load-common-components.js'],
+  css: ['normalize.css/normalize.css', '~/assets/main.scss'],
   build: {
     extractCSS: true,
     optimization: {
