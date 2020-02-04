@@ -3,7 +3,7 @@
   <section :style="style" class="section-wrapper">
     <h2 v-if="title">
       {{ title }}
-      <SectionLink v-if="anchor" :to="anchor" />
+      <AnchorTarget v-if="anchor" :anchor="anchor" />
     </h2>
     <slot></slot>
   </section>
@@ -13,13 +13,8 @@
 
 <script>
 
-  import SectionLink from './SectionLink';
-
   export default {
     name: 'PageSection',
-    components: {
-      SectionLink,
-    },
     props: {
       title: {
         type: String,

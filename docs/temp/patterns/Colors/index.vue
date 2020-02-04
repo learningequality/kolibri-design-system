@@ -41,17 +41,17 @@
       </p>
       <p>
         Color tokens are by themselves abstract and defined by a purpose, not a color value. A
-        <router-link to="#theme">
+        <InternalLink href="#theme">
           theme
-        </router-link>
+        </InternalLink>
         makes them concrete by mapping them to specific
-        <router-link to="#brand">
+        <InternalLink href="#brand">
           brand colors
-        </router-link>
+        </InternalLink>
         and
-        <router-link to="#palette">
+        <InternalLink href="#palette">
           palette colors
-        </router-link>.
+        </InternalLink>.
       </p>
       <p>
         When using tokens, it's very important to use them because of their purposes, not because of their color values. Multiple tokens will commonly share a single color value.
@@ -242,17 +242,11 @@
 
 <script>
 
-  import ExternalLink from '~/common/ExternalLink';
-  import PageTemplate from '~/common/PageTemplate';
-  import PageSection from '~/common/PageSection';
   import ColorBlock from '~/common/ColorBlock';
 
   export default {
     name: 'Colors',
     components: {
-      PageTemplate,
-      PageSection,
-      ExternalLink,
       ColorBlock,
     },
     computed: {

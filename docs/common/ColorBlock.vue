@@ -3,12 +3,12 @@
   <div class="block-wrapper">
     <div class="color-block" :style="{ backgroundColor: value }"></div>
     <div class="code name">
-      <code>{{ name }}</code><SectionLink v-if="definition" :to="anchor" />
+      <code>{{ name }}</code><AnchorTarget v-if="definition" :anchor="anchor" />
     </div>
     <div class="code value">
-      <router-link v-if="isToken && showTokenCrossLink" :to="tokenAnchor">
+      <InternalLink v-if="isToken && showTokenCrossLink" :href="tokenAnchor">
         <code>{{ tokenSource }}</code>
-      </router-link>
+      </InternalLink>
       <code v-else-if="isToken">{{ tokenSource }}</code>
       <code v-else>{{ value }}</code>
     </div>
@@ -22,7 +22,6 @@
 
 <script>
 
-  import SectionLink from './SectionLink';
   import globalThemeState from '~~/lib/styles/globalThemeState';
 
   const TOKENS = 'tokens.';
@@ -35,9 +34,6 @@
 
   export default {
     name: 'ColorBlock',
-    components: {
-      SectionLink,
-    },
     props: {
       name: {
         type: String,

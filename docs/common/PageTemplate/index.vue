@@ -78,7 +78,7 @@
     top: 0;
     right: 0;
     left: $nav-width;
-    z-index: 999999;
+    z-index: 100;
   }
 
   .content-wrapper {

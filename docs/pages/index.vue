@@ -15,7 +15,13 @@
         The design system includes both documentation design patterns and a shared front-end UI library. Together, these provide solutions to common design and implementation needs in Kolibri products.
       </p>
       <p>
-        If the design system is failing to achieve the objectives above, it needs to be updated. Your contributions and input are appreciated. For more information, see the <a href="#updates">Updates</a> section below, the <a href="https://github.com/learningequality/kolibri-design-system">GitHub repository</a>, or the <a href="https://www.notion.so/learningequality/Kolibri-Design-System-for-LE-products-976ea82b50f844ea9149a7abed497ea9">Notion project</a>.
+        If the design system is failing to achieve the objectives above, it needs to be updated. Your contributions and input are appreciated. For more information, see the <InternalLink href="#updates">
+          Updates
+        </InternalLink> section below, the <ExternalLink href="https://github.com/learningequality/kolibri-design-system">
+          GitHub repository
+        </ExternalLink>, or the <ExternalLink href="https://www.notion.so/learningequality/Kolibri-Design-System-for-LE-products-976ea82b50f844ea9149a7abed497ea9">
+          Notion project
+        </ExternalLink>.
       </p>
     </PageSection>
     <PageSection title="Scope" anchor="#scope">
@@ -59,8 +65,18 @@
       </p>
       <ul>
         <li>Share ideas or concerns with Devon, Jessica, and Jacob directly</li>
-        <li>Submit a <a href="https://github.com/learningequality/kolibri-design-system/pulls">pull request</a> or <a href="https://github.com/learningequality/kolibri-design-system/issues">issue</a> to the GitHub repo</li>
-        <li>Leave a comment in the <a href="https://www.notion.so/learningequality/Kolibri-Design-System-for-LE-products-976ea82b50f844ea9149a7abed497ea9">Notion project</a></li>
+        <li>
+          Submit a <ExternalLink href="https://github.com/learningequality/kolibri-design-system/pulls">
+            pull request
+          </ExternalLink> or <ExternalLink href="https://github.com/learningequality/kolibri-design-system/issues">
+            issue
+          </ExternalLink> to the GitHub repo
+        </li>
+        <li>
+          Leave a comment in the <ExternalLink href="https://www.notion.so/learningequality/Kolibri-Design-System-for-LE-products-976ea82b50f844ea9149a7abed497ea9">
+            Notion project
+          </ExternalLink>
+        </li>
       </ul>
     </PageSection>
 
@@ -71,15 +87,8 @@
 
 <script>
 
-  import PageTemplate from '~/common/PageTemplate';
-  import PageSection from '~/common/PageSection';
-
   export default {
     name: 'Index', // eslint-disable-line kolibri/vue-filename-and-component-name-match
-    components: {
-      PageTemplate,
-      PageSection,
-    },
   };
 
 </script>

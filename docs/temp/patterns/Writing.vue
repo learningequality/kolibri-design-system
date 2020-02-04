@@ -59,17 +59,8 @@
 
 <script>
 
-  import PageTemplate from '~/common/PageTemplate';
-  import PageSection from '~/common/PageSection';
-  import ExternalLink from '~/common/ExternalLink';
-
   export default {
     name: 'Writing',
-    components: {
-      PageTemplate,
-      PageSection,
-      ExternalLink,
-    },
   };
 
 </script>

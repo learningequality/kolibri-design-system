@@ -1,10 +1,9 @@
 <template>
 
-  <span>
-    <!-- eslint-disable -->
-    <a :href="href" target="_blank">{{ text }}<mat-svg category="action" name="open_in_new" class="pop" /></a>
-    <!-- eslint-enable -->
-  </span>
+  <!-- eslint-disable -->
+  <!-- prevent line from wrapping so that icon displays correctly -->
+  <a :href="href" target="_blank"><template v-if="text">{{ text }}</template><template v-else><slot></slot></template><mat-svg category="action" name="open_in_new" class="pop" /></a>
+  <!-- eslint-enable -->
 
 </template>
 
@@ -16,7 +15,7 @@
     props: {
       text: {
         type: String,
-        required: true,
+        required: false,
       },
       href: {
         type: String,

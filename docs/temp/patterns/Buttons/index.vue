@@ -130,10 +130,7 @@
 
   import Example from './Example';
   import VueExample from '~/common/VueExample';
-  import PageTemplate from '~/common/PageTemplate';
-  import PageSection from '~/common/PageSection';
   import Show from '~/common/Show';
-  import ExternalLink from '~/common/ExternalLink';
 
   /* eslint-disable import/no-duplicates */
   // import exampleCode from '!!raw-loader!./Example.vue';
@@ -142,8 +139,6 @@
   export default {
     name: 'Buttons',
     components: {
-      PageTemplate,
-      PageSection,
       VueExample,
       Show,
       Example,
