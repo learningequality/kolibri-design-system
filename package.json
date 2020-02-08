@@ -6,6 +6,8 @@
   "license": "MIT",
   "author": "Learning Equality",
   "scripts": {
+    "styleguide": "vue-styleguidist server",
+    "styleguide:build": "vue-styleguidist build",
     "dev": "npm-run-all --parallel dev-only _lint-watch-fix",
     "dev-only": "nuxt",
     "generate": "nuxt generate",
