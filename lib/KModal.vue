@@ -97,6 +97,9 @@
   import debounce from 'lodash/debounce';
   import KResponsiveWindowMixin from './KResponsiveWindowMixin';
 
+  // check for Nuxt.js SSR
+  const nuxtServerSideRendering = process && process.server;
+
   /**
    * Used to focus attention on a singular action/task
    */
@@ -206,6 +209,9 @@
       this.lastFocus = document.activeElement;
     },
     mounted() {
+      if (nuxtServerSideRendering) {
+        return;
+      }
       // Remove scrollbars from the <html> tag, so user's can't scroll while modal is open
       window.document.documentElement.style['overflow'] = 'hidden';
       this.$nextTick(() => {
@@ -220,6 +226,9 @@
       this.updateContentSectionStyle();
     },
     destroyed() {
+      if (nuxtServerSideRendering) {
+        return;
+      }
       // Restore scrollbars to <html> tag
       window.document.documentElement.style['overflow'] = null;
       window.removeEventListener('focus', this.focusElementTest, true);
