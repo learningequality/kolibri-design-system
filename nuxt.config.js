@@ -17,7 +17,7 @@ export default {
   },
   rootDir: './',
   srcDir: './docs/',
-  plugins: ['~/plugins/load-common-components.js'],
+  plugins: ['~/plugins/load-common-components.js', '~/plugins/load-lib-components.js'],
   css: ['normalize.css/normalize.css', '~/assets/main.scss'],
   build: {
     extractCSS: true,

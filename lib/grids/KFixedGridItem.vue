@@ -107,9 +107,8 @@
 <style lang="scss" scoped>
 
   // pure grid units
-  @import '~purecss/build/grids-units.css';
+  @import 'purecss/build/grids-units.css';
   @import './extra-units.css';
-
   @import '../styles/styleDefinitions';
 
   .grid-item {
