@@ -85,13 +85,4 @@
 </template>
 
 
-<script>
-
-  export default {
-    name: 'Index', // eslint-disable-line kolibri/vue-filename-and-component-name-match
-  };
-
-</script>
-
-
 <style lang="scss" scoped></style>

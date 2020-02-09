@@ -57,13 +57,4 @@
 </template>
 
 
-<script>
-
-  export default {
-    name: 'Writing',
-  };
-
-</script>
-
-
 <style lang="scss" scoped></style>

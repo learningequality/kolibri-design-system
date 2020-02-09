@@ -147,13 +147,4 @@
 </template>
 
 
-<script>
-
-  export default {
-    name: 'Inclusive',
-  };
-
-</script>
-
-
 <style lang="scss" scoped></style>
