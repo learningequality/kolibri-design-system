@@ -57,7 +57,7 @@
        */
       delay: {
         type: Boolean,
-        required: true,
+        default: false,
       },
       /**
        * Determinate or indeterminate
