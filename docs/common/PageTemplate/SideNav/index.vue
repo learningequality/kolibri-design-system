@@ -7,8 +7,7 @@
         <span class="header-text">Design System</span>
       </h1>
 
-      <template v-if="false">
-
+      <div class="filter-wrapper">
         <input
           v-model="filterText"
           class="filter"
@@ -23,30 +22,20 @@
         >
           ✕
         </button>
-      </template>
+      </div>
 
       <div class="nav-links">
-
-        <a v-show="showHome" :href="'/'" exact>
-          {{ homeText }}
-        </a>
-
+        <NavLink v-show="showHome" :text="homeText" :href="'/'" />
         <NavSectionList v-show="showPatterns" :title="patternsText">
-          <li v-for="(route, i) in visiblePatternRoutes" :key="i">
-            <a :href="route">
-              {{ route.meta.title }}
-            </a>
+          <li v-for="(page, i) in visiblePatternRoutes" :key="i">
+            <NavLink :text="page.title" :href="page.path" />
           </li>
         </NavSectionList>
-
         <NavSectionList v-show="showComponents" :title="componentsText">
-          <li v-for="(route, i) in visibleComponentRoutes" :key="i">
-            <a :href="route">
-              <code>{{ route.meta.componentAPI.name }}</code>
-            </a>
+          <li v-for="(page, i) in visibleComponentRoutes" :key="i">
+            <NavLink :text="page.componentAPI.name" :href="page.path" code />
           </li>
         </NavSectionList>
-
       </div>
 
     </nav>
@@ -60,13 +49,16 @@
 
 <script>
 
+  import { patternPages } from '../pages.js';
   import NavSectionList from './NavSectionList';
+  import NavLink from './NavLink';
   import { termList, matches } from './filter';
 
   export default {
     name: 'SideNav',
     components: {
       NavSectionList,
+      NavLink,
     },
     data() {
       return {
@@ -91,16 +83,13 @@
       },
       visiblePatternRoutes() {
         // show a page if either the page title or the section title matches
-        return [];
-        // return patternRoutes.filter(route =>
-        //   matches(this.terms, route.meta.title + this.patternsText)
-        // );
+        return patternPages.filter(page => matches(this.terms, page.title + this.patternsText));
       },
       visibleComponentRoutes() {
         // show a component if either the component name or the section title matches
         return [];
         // return componentRoutes.filter(route =>
-        //   matches(this.terms, route.meta.componentAPI.name + this.componentsText)
+        //   matches(this.terms, route.componentAPI.name + this.componentsText)
         // );
       },
     },
@@ -131,15 +120,19 @@
     margin-left: 8px;
   }
 
+  .filter-wrapper {
+    position: relative;
+  }
+
   .filter {
-    display: block;
     width: 100%;
-    padding: 4px 8px;
+    padding-top: 4px;
+    padding-right: 32px;
+    padding-bottom: 4px;
+    padding-left: 8px;
     font-size: 12px;
     border: 1px solid $border-color;
     border-radius: 4px;
-    outline-width: 1px;
-    outline-offset: -1px;
     &::placeholder {
       color: $border-color;
     }
@@ -147,8 +140,14 @@
 
   .filter-clear-button {
     position: absolute;
-    top: 84px;
-    right: 24px;
+    top: 3px;
+    right: 2px;
+    width: 30px;
+    height: 21px;
+    font-size: 14px;
+    background: none;
+    border: 0;
+    border-radius: 2px;
   }
 
   .bottom-gradient {
@@ -185,32 +184,6 @@
 
   .nav-links {
     margin-top: 16px;
-
-    a {
-      display: block;
-      padding: 8px;
-      margin-right: -8px;
-      margin-bottom: 2px;
-      margin-left: -8px;
-      color: $link-color;
-      text-decoration: none;
-      border-radius: 4px;
-      outline-offset: 3px;
-
-      &:hover {
-        color: $link-hover-color;
-        background-color: #efefef;
-
-        code {
-          color: $link-hover-color;
-        }
-      }
-
-      &.router-link-active {
-        color: black;
-        background-color: $border-color;
-      }
-    }
   }
 
 </style>

@@ -57,3 +57,13 @@ html {
   line-height: 1.5;
   background-color: white;
 }
+
+// https://www.paulirish.com/2012/box-sizing-border-box-ftw/
+html {
+  box-sizing: border-box;
+}
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}

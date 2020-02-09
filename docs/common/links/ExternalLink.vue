@@ -32,7 +32,7 @@
   .pop {
     display: inline-block;
     width: 16px;
-    margin-left: 2px;
+    margin-left: 4px;
     vertical-align: text-top;
   }
 

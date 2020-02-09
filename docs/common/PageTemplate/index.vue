@@ -28,9 +28,22 @@
 
 <script>
 
+  import consola from 'consola';
   import PageSection from '../PageSection';
+  import { homePage, patternPages } from './pages.js';
   import Header from './Header';
   import SideNav from './SideNav';
+
+  function currentPage(currentPath) {
+    if (currentPath === '/') {
+      return homePage;
+    }
+    const page = patternPages.find(p => p.path === currentPath);
+    if (!page) {
+      consola.warn(`'${currentPath}' not found in pages.js`);
+    }
+    return page;
+  }
 
   export default {
     name: 'PageTemplate',
@@ -42,10 +55,6 @@
       isComponent: {
         type: Boolean,
         default: false,
-      },
-      title: {
-        type: String,
-        required: true,
       },
     },
     computed: {
@@ -60,9 +69,16 @@
           )
           .map(node => node.componentOptions.propsData);
       },
+      title() {
+        const page = currentPage(this.$route.path);
+        const main = 'Kolibri Design System';
+        return page ? `${page.title} - ${main}` : main;
+      },
     },
-    head: {
-      title: 'Home',
+    head() {
+      return {
+        title: this.title,
+      };
     },
   };
 
@@ -90,8 +106,9 @@
   }
 
   .content {
+    padding-right: 32px;
+    padding-bottom: 400px;
     padding-left: 32px;
-    margin-bottom: 400px;
   }
 
 </style>
