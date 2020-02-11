@@ -10,11 +10,6 @@
   -->
 
   <div class="ui-textbox" :class="classes">
-    <div v-if="icon || $slots.icon" class="ui-textbox-icon-wrapper">
-      <slot name="icon">
-        <UiIcon :icon="icon" :style="isActive ? { color: $themeTokens.primary } : {}" />
-      </slot>
-    </div>
 
     <div class="ui-textbox-content">
       <label class="ui-textbox-label">
@@ -110,16 +105,16 @@
 
 <script>
 
-  import UiIcon from 'keen-ui/src/UiIcon.vue';
-
   import autosize from 'autosize';
-  import autofocus from 'keen-ui/src/directives/autofocus';
+
+  function autofocus(el, { value }) {
+    if (value) {
+      el.focus();
+    }
+  }
 
   export default {
     name: 'KeenUiTextbox',
-    components: {
-      UiIcon,
-    },
 
     directives: {
       autofocus,
@@ -131,11 +126,6 @@
       value: {
         type: [String, Number],
         default: '',
-      },
-      icon: String,
-      iconPosition: {
-        type: String,
-        default: 'left', // 'left' or 'right'
       },
       label: String,
       floatingLabel: {
@@ -206,7 +196,7 @@
     computed: {
       classes() {
         return [
-          `ui-textbox--icon-position-${this.iconPosition}`,
+          'ui-textbox--icon-position-left',
           { 'is-active': this.isActive },
           { 'is-invalid': this.invalid },
           { 'is-touched': this.isTouched },
@@ -368,7 +358,7 @@
 
 <style lang="scss" scoped>
 
-  @import '~keen-ui/src/styles/imports';
+  @import '../keen/styles/imports';
 
   /* stylelint-disable */
 

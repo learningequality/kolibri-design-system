@@ -20,7 +20,10 @@
   ],
   "dependencies": {
     "aphrodite": "https://github.com/learningequality/aphrodite/",
+    "autosize": "^3.0.21",
     "css-element-queries": "^1.2.0",
+    "fuzzysearch": "^1.0.3",
+    "lodash": "^4.17.15",
     "material-design-icons": "^3.0.1",
     "popper.js": "^1.14.6",
     "purecss": "^0.6.2"

@@ -99,7 +99,7 @@
 
 <style lang="scss" scoped>
 
-  @import '~keen-ui/src/styles/imports';
+  @import '../keen/styles/imports';
   @import '../styles/styleDefinitions';
 
   .delay {

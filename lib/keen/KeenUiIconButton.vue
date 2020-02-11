@@ -27,7 +27,7 @@
       }"
     >
       <slot>
-        <UiIcon :icon="icon" />
+        <KeenUiIcon :icon="icon" />
       </slot>
     </div>
 
@@ -40,7 +40,7 @@
       :stroke="4.5"
     />
 
-    <UiPopover
+    <KeenUiPopover
       v-if="hasDropdown"
       ref="dropdown"
 
@@ -53,9 +53,9 @@
       @open="onDropdownOpen"
     >
       <slot name="dropdown"></slot>
-    </UiPopover>
+    </KeenUiPopover>
 
-    <UiTooltip
+    <KeenUiTooltip
       v-if="tooltip"
 
       trigger="button"
@@ -64,7 +64,7 @@
       :position="tooltipPosition"
     >
       {{ tooltip }}
-    </UiTooltip>
+    </KeenUiTooltip>
   </button>
 
 </template>
@@ -72,17 +72,17 @@
 
 <script>
 
-  import UiIcon from 'keen-ui/src/UiIcon';
-  import UiPopover from 'keen-ui/src/UiPopover';
-  import UiTooltip from 'keen-ui/src/UiTooltip';
+  import KeenUiIcon from './KeenUiIcon';
+  import KeenUiPopover from './KeenUiPopover';
+  import KeenUiTooltip from './KeenUiTooltip';
 
   export default {
-    name: 'KIconButton',
+    name: 'KeenUiIconButton',
 
     components: {
-      UiIcon,
-      UiPopover,
-      UiTooltip,
+      KeenUiIcon,
+      KeenUiPopover,
+      KeenUiTooltip,
     },
 
     props: {
@@ -226,9 +226,9 @@
 
 <style lang="scss">
 
-  @import '~keen-ui/src/styles/imports';
+  @import './styles/imports';
 
-  /* stylelint-disable csstree/validator */
+  /* stylelint-disable */
 
   $keen-ui-icon-button-size: rem-calc(36px) !default;
   $keen-ui-icon-button--size-small: rem-calc(32px) !default;
