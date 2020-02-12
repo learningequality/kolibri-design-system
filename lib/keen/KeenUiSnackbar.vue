@@ -57,7 +57,7 @@
 
 <style lang="scss" scoped>
 
-  @import '../styles/styleDefinitions';
+  @import '../styles/definitions';
   @import './styles/imports';
 
   $ui-snackbar-background-color: #323232 !default;

@@ -313,7 +313,7 @@
 
 <style lang="scss" scoped>
 
-  @import './styles/styleDefinitions';
+  @import './styles/definitions';
 
   .modal-overlay {
     position: fixed;

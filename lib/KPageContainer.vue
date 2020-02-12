@@ -44,7 +44,7 @@
 
 <style lang="scss" scoped>
 
-  @import './styles/styleDefinitions';
+  @import './styles/definitions';
 
   .page-container {
     @extend %dropshadow-1dp;
