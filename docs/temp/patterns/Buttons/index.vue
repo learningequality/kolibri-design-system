@@ -147,7 +147,6 @@
       VueExample,
       Show,
       Example,
-      ExternalLink,
     },
     data() {
       return {

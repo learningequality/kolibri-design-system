@@ -21,14 +21,13 @@
 
 <script>
 
+  /* eslint-disable import/no-duplicates */
   import Example from './Example';
   import PageTemplate from '~/common/PageTemplate';
   import PageSection from '~/common/PageSection';
   import VueExample from '~/common/VueExample';
 
-  /* eslint-disable import/no-duplicates */
   import ExampleCode from '!!raw-loader!./Example';
-
   // import KLinearLoaderApi from '!vue-doc!~~/lib/loaders/KLinearLoader';
   /* eslint-enable import/no-duplicates */
 
