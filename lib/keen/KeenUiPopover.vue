@@ -10,7 +10,7 @@
     @keydown.esc="closeDropdown"
   >
     <slot></slot>
-    <div class="ui-popover__focus-redirector" tabindex="0" @focus="restrictFocus"></div>
+    <div class="ui-popover-focus-redirector" tabindex="0" @focus="restrictFocus"></div>
   </div>
 
 </template>
@@ -174,15 +174,15 @@
           this.$el.focus();
         }
       },
-
+      // @public
       open() {
         this.openDropdown();
       },
-
+      // @public
       close() {
         this.closeDropdown();
       },
-
+      // @public
       toggle() {
         this.toggleDropdown();
       },
@@ -212,7 +212,7 @@
     }
   }
 
-  .ui-popover__focus-redirector {
+  .ui-popover-focus-redirector {
     position: absolute;
     opacity: 0;
   }
