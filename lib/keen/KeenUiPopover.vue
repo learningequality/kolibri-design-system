@@ -18,11 +18,14 @@
 
 <script>
 
-  // import Drop from 'tether-drop';
   import classlist from './helpers/classlist';
 
   // check for Nuxt.js SSR
   const nuxtServerSideRendering = process && process.server;
+  let Drop = undefined;
+  if (!nuxtServerSideRendering) {
+    Drop = require('tether-drop');
+  }
 
   export default {
     name: 'KeenUiPopover',
