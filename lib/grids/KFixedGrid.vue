@@ -115,9 +115,4 @@
 </script>
 
 
-<style lang="scss">
-
-  // Include pure-css definitions globally (unscoped)
-  @import '~purecss/build/grids-core.css';
-
-</style>
+<style lang="scss"></style>
