@@ -6,72 +6,12 @@
 <script>
   const VueTemplateCompiler = require('vue-template-compiler');
 
-  const iconTypes = [
-    // tracking
-    'correct',
-    'helpNeeded',
-    'hint',
-    'incorrect',
-    'inProgress',
-    'mastered',
-    'notStarted',
-    'rectified',
-    // coaching
-    'coach',
-    'lesson',
-    'question',
-    'quiz',
-    // content
-    'app',
-    'audio',
-    'channel',
-    'doc',
-    'document',
-    'exercise',
-    'topic',
-    'video',
-    'html5',
-    'slideshow',
-    'unlistedchannel',
-    'multiple',
-    'done',
-    // users
-    'classroom',
-    'group',
-    'people',
-    'permission',
-    'person',
-    // misc
-    'dot',
-    'error',
-    // UI
-    'back',
-    'forward',
-    'clear',
-    'dropdown',
-    'language',
-    'logout',
-    'menu',
-    'search',
-    // side nav
-    'learn',
-    'device',
-    'profile',
-    'login',
-    'logout',
-    'coach',
-    'facility',
-  ];
-
   export default {
     name: 'KIcon',
     props: {
       icon: {
         type: String,
-        required: true,
-        validator(value) {
-          return iconTypes.includes(value);
-        },
+        required: false,
       },
       /**
        * color to apply to the icon
@@ -80,16 +20,36 @@
         type: String,
         required: false,
       },
+      materialName: {
+        type: String,
+        required: false,
+      }
     },
     created() {
+      // Make sure we have icon or materialName. Favor icon - so if both are given
+      // materialName is ignored.
+
+      // TODO: This will be updated to pull the icon from the upcoming dictionary
+      let fileName = this.icon ? this.icon : this.materialName;
+      if(!fileName) {
+        console.error("Cannot render icon without one of the two props 'icon' or 'materialName'");
+        return;
+      }
       const SVG_FILE_PREFIX = "data:image/svg+xml;base64,";
 
       const styles = ":style=style";
       const a11yAttrs = `role="presentation" focusable="false"`;
       const cssClass = `:class="rtlClass"`;
 
-      // ... hard coded svg below ...
-      const svgFile = require("@material-icons/svg/svg/arrow_back/baseline.svg");
+      // Dynamically pull in the icon requested and console an error if we cannot find it.
+      let svgFile;
+      try {
+        svgFile = require(`@material-icons/svg/svg/${fileName}/baseline.svg`);
+      } catch(e) {
+        console.error(`Could not load SVG for ${fileName}`);
+        return;
+      }
+
       const svgBase64 = svgFile.replace(SVG_FILE_PREFIX, "");
       const svgElementString = atob(svgBase64);
       const styledAndAccessibleSvg = svgElementString.replace("<svg", `<svg ${cssClass} ${styles} ${a11yAttrs}`);
@@ -118,7 +78,7 @@
 </script>
 
 
-<style lang="scss" scoped>
+<style scoped>
 
   .rtl-flip-icon {
     transform: scaleX(-1);
