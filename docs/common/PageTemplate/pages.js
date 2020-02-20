@@ -16,6 +16,10 @@ export const patternPages = [
     path: '/colors',
     title: 'Colors',
   },
+  {
+    path: '/icons',
+    title: 'Icons',
+  },
 ];
 
 export const libraryPages = [
