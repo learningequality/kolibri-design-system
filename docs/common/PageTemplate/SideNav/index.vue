@@ -25,15 +25,15 @@
       </div>
 
       <div class="nav-links">
-        <NavLink v-show="showHome" :text="homePage.title" :href="homePage.path" />
+        <NavLink v-show="showHome" :page="homePage" />
         <NavSectionList v-show="showPatterns" :title="patternsText">
           <li v-for="(page, i) in visiblePatternRoutes" :key="i">
-            <NavLink :text="page.title" :href="page.path" />
+            <NavLink :page="page" />
           </li>
         </NavSectionList>
         <NavSectionList v-show="showComponents" :title="componentsText">
           <li v-for="(page, i) in visibleComponentRoutes" :key="i">
-            <NavLink :text="page.title" :href="page.path" code />
+            <NavLink :page="page" />
           </li>
         </NavSectionList>
       </div>
@@ -63,7 +63,6 @@
     data() {
       return {
         filterText: '',
-        homeText: 'Home',
         patternsText: 'Patterns',
         componentsText: 'Kolibri Library',
       };
