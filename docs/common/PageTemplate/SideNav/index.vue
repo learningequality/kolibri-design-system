@@ -25,7 +25,7 @@
       </div>
 
       <div class="nav-links">
-        <NavLink v-show="showHome" :text="homeText" :href="'/'" />
+        <NavLink v-show="showHome" :text="homePage.title" :href="homePage.path" />
         <NavSectionList v-show="showPatterns" :title="patternsText">
           <li v-for="(page, i) in visiblePatternRoutes" :key="i">
             <NavLink :text="page.title" :href="page.path" />
@@ -33,7 +33,7 @@
         </NavSectionList>
         <NavSectionList v-show="showComponents" :title="componentsText">
           <li v-for="(page, i) in visibleComponentRoutes" :key="i">
-            <NavLink :text="page.componentAPI.name" :href="page.path" code />
+            <NavLink :text="page.title" :href="page.path" code />
           </li>
         </NavSectionList>
       </div>
@@ -49,7 +49,7 @@
 
 <script>
 
-  import { patternPages } from '../pages.js';
+  import { homePage, patternPages, libraryPages } from '../pages.js';
   import NavSectionList from './NavSectionList';
   import NavLink from './NavLink';
   import { termList, matches } from './filter';
@@ -65,15 +65,18 @@
         filterText: '',
         homeText: 'Home',
         patternsText: 'Patterns',
-        componentsText: 'Kolibri components',
+        componentsText: 'Kolibri Library',
       };
     },
     computed: {
+      homePage() {
+        return homePage;
+      },
       terms() {
         return termList(this.filterText);
       },
       showHome() {
-        return matches(this.terms, this.homeText);
+        return matches(this.terms, this.homePage.title);
       },
       showPatterns() {
         return this.visiblePatternRoutes.length || matches(this.terms, this.patternsText);
@@ -87,10 +90,7 @@
       },
       visibleComponentRoutes() {
         // show a component if either the component name or the section title matches
-        return [];
-        // return componentRoutes.filter(route =>
-        //   matches(this.terms, route.componentAPI.name + this.componentsText)
-        // );
+        return libraryPages.filter(page => matches(this.terms, page.title + this.patternsText));
       },
     },
   };

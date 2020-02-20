@@ -1,8 +1,8 @@
 <template>
 
-  <a :href="href" :class="{ active: href === $route.path }">
-    <code v-if="code">{{ text }}</code>
-    <template v-else>{{ text }}</template>
+  <code v-if="code">{{ text }}</code> <!-- WIP -->
+  <a v-else :href="href" :class="{ active: href === $route.path }">
+    <template>{{ text }}</template>
   </a>
 
 </template>
@@ -35,9 +35,19 @@
 
   @import '~/assets/definitions';
 
+  // WIP
+  code {
+    display: block;
+    padding: 4px 8px;
+    margin-right: -8px;
+    margin-bottom: 2px;
+    margin-left: -8px;
+    color: #777777;
+  }
+
   a {
     display: block;
-    padding: 8px;
+    padding: 4px 8px;
     margin-right: -8px;
     margin-bottom: 2px;
     margin-left: -8px;
