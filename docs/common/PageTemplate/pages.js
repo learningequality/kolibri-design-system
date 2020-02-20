@@ -12,4 +12,8 @@ export const patternPages = [
     path: '/inclusive',
     title: 'Inclusive',
   },
+  {
+    path: '/colors',
+    title: 'Colors',
+  },
 ];
