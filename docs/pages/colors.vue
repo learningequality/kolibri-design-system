@@ -13,7 +13,7 @@
         <li>Support for alternate themes</li>
       </ul>
       <p>
-        Some examples of named colors in the Kolibri design system include:
+        Some examples of named colors in the Kolibri Design System include:
       </p>
       <ColorBlock name="tokens.text" />
       <ColorBlock name="tokens.error" />
@@ -131,7 +131,7 @@
 
     <PageSection title="Scales" anchor="#scales">
       <p>
-        A color scale – sometimes called a color ramp – is an evenly-spaced ramp of shades for a particular color hue. In Kolibri, we follow <ExternalLink text="Google's Material convention" href="https://material.io/archive/guidelines/style/color.html" /> and segment colors into ten brightness levels, named <code>v_50</code>, <code>v_100</code>, <code>v_20</code>, … <code>v_800</code>, <code>v_900</code>:
+        A color scale – sometimes called a color ramp – is an evenly-spaced ramp of shades for a particular color hue. In the Kolibri Design System, we follow <ExternalLink text="Google's Material convention" href="https://material.io/archive/guidelines/style/color.html" /> and segment colors into ten brightness levels, named <code>v_50</code>, <code>v_100</code>, <code>v_20</code>, … <code>v_800</code>, <code>v_900</code>:
       </p>
       <ColorBlock name="palette.blue.v_50" />
       <ColorBlock name="palette.blue.v_100" />
@@ -151,7 +151,7 @@
         Brand colors are chosen to reflect the mood, identity, or trademark of an application or an organization. The design system defines primary (dominant) and secondary (accent) branded color hues.
       </p>
       <p>
-        Kolibri has what we call "Kolibri Purple" as its primary and "Kolibri Teal" as its secondary, available across the full brightness scale:
+        The Kolibri Design System has what we call "Kolibri Purple" as its primary and "Kolibri Teal" as its secondary, available across the full brightness scale:
       </p>
 
       <div>
@@ -218,7 +218,7 @@
 
     <PageSection title="Themes" anchor="#themes">
       <p>
-        Kolibri comes with a default theme built in, which defines every brightness value of the primary and secondary brand colors. Additionally, the Kolibri application has a default mapping which assigns concrete values to all tokens. For example, by default we set <code>$themeTokens.error</code> to be equal to <code>$themePalette.red.v_700</code>
+        The Kolibri Design System comes with a default theme built in, which defines every brightness value of the primary and secondary brand colors. Additionally, the Kolibri application has a default mapping which assigns concrete values to all tokens. For example, by default we set <code>$themeTokens.error</code> to be equal to <code>$themePalette.red.v_700</code>
       </p>
       <p>
         When setting new brand colors:
