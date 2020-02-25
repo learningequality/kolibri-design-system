@@ -88,7 +88,24 @@
     profile: 'account_circle/baseline',
     login: 'exit_to_app/baseline',
       // logout & coach defined above
-    facility: 'settings_input_antenna/baseline'
+    facility: 'settings_input_antenna/baseline',
+
+    // Studio
+    info: 'info/baseline',
+    star: 'star/baseline',
+    star_border: 'star_border/baseline',
+    more_vert: 'more_vert/baseline',
+    content_copy: 'content_copy/baseline',
+    edit: 'edit/baseline',
+    delete: 'delete/baseline',
+    check: 'check/baseline',
+    help: 'help/outline',
+    expand_more: 'expand_more/baseline',
+    expand_less: 'expand_less/baseline',
+    add: 'add/baseline',
+    keyboard_arrow_up: 'keyboard_arrow_up/baseline',
+    keyboard_arrow_down: 'keyboard_arrow_down/baseline',
+    close: 'close/baseline', // Same as clear...
   }
 
   export default {
@@ -163,11 +180,7 @@
         }
       }
     },
-    created() {
-      // Make sure we have icon or materialName. Favor icon - so if both are given
-      // materialName is ignored.
-
-      // TODO: This will be updated to pull the icon from the upcoming dictionary
+    render(createElement) {
       let fileName = this.icon ? this.icon : this.materialName;
       if(!fileName) {
         console.error("Cannot render icon without one of the two props 'icon' or 'materialName'");
@@ -184,12 +197,10 @@
       const svgBase64 = svgFile.replace(SVG_FILE_PREFIX, "");
       const svgElementString = atob(svgBase64);
       const styledAndAccessibleSvg = svgElementString.replace("<svg", `<svg ${cssClass} ${styles} ${a11yAttrs}`);
-      console.log(styledAndAccessibleSvg);
-      console.log(typeof(styledAndAccessibleSvg));
-      const template = VueTemplateCompiler.compileToFunctions(styledAndAccessibleSvg);
-      this.$options.render = template.render;
-    },
 
+      const template = VueTemplateCompiler.compileToFunctions(styledAndAccessibleSvg);
+      return template.render.call(this, createElement);
+    },
   };
 
 </script>
