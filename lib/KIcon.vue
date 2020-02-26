@@ -30,48 +30,6 @@
    * the icon on Github.
    */
   const KolibriIcons = {
-    // tracking
-    correct: 'check_circle/baseline',
-    helpNeeded: 'error/baseline',
-    hint: 'lightbulb/outline',
-    incorrect: 'close/baseline',
-    inProgress: 'access_time/baseline',
-    mastered: 'stars/baseline',
-    notStarted: 'brightness_1/baseline',
-    rectified: 'lens/baseline',
-
-    // coaching
-    coach: 'local_library/baseline',
-    lesson: 'import_contacts/baseline',
-    question: 'keyboard_arrow_right/baseline',
-    quiz: 'assignment_late/baseline',
-
-    // content types
-    app: 'widgets/baseline',
-    html5: 'widgets/baseline',
-    audio: 'audiotrack/baseline',
-    channel: 'apps/baseline',
-    doc: 'book/baseline',
-    document: 'book/baseline',
-    exercise: 'assignment/baseline',
-    topic: 'folder/baseline',
-    video: 'ondemand_video/baseline',
-    slideshow: 'photo_library/baseline',
-    unlistedchannel: 'lock_open/baseline',
-    multiple: 'view_module/baseline',
-    done: 'done/baseline',
-
-    // users
-    classroom: 'business/baseline',
-    group: 'group_work/baseline',
-    people: 'people/baseline',
-    person: 'person/baseline',
-    permission: 'vpn_key/baseline',
-
-    // misc
-    dot: 'brightness_1/baseline',
-    error: 'error/baseline',
-
     // UI
     back: 'arrow_back/baseline',
     forward: 'arrow_forward/baseline',
@@ -81,27 +39,70 @@
     logout: 'exit_to_app/baseline',
     menu: 'menu/baseline',
     search: 'search/baseline',
+    error: 'error/baseline',
 
-    // side nav
+    // Features and links
     learn: 'school/baseline',
     device: 'tablet_mac/baseline',
     profile: 'account_circle/baseline',
     login: 'exit_to_app/baseline',
-      // logout & coach defined above
+    /* logout */
+    coach: 'local_library/baseline',
     facility: 'settings_input_antenna/baseline',
+
+    // Users
+    classroom: 'business/baseline',
+    group: 'group_work/baseline',
+    people: 'people/baseline',
+    person: 'person/baseline',
+    permission: 'vpn_key/baseline',
+
+    // Content
+    app: 'widgets/baseline',
+    audio: 'audiotrack/baseline',
+    channel: 'apps/baseline',
+    doc: 'book/baseline',
+    document: 'book/baseline',
+    exercise: 'assignment/baseline',
+    topic: 'folder/baseline',
+    video: 'ondemand_video/baseline',
+    html5: 'widgets/baseline',
+    slideshow: 'photo_library/baseline',
+    unlistedchannel: 'lock_open/baseline',
+    done: 'done/baseline',
+
+
+    // Progress tracking
+    correct: 'check_circle/baseline',
+    helpNeeded: 'error/baseline',
+    hint: 'lightbulb/outline',
+    incorrect: 'close/baseline',
+    inProgress: 'access_time/baseline',
+    mastered: 'stars/baseline',
+    notStarted: 'brightness_1/baseline',
+    rectified: 'lens/baseline',
+
+    // Coaching
+    /* coach */
+    lesson: 'import_contacts/baseline',
+    question: 'keyboard_arrow_right/baseline',
+    quiz: 'assignment_late/baseline',
+
+    // Miscellaneous
+    dot: 'brightness_1/baseline',
 
     // Studio
     info: 'info/baseline',
     star: 'star/baseline',
     star_border: 'star_border/baseline',
-    more_vert: 'more_vert/baseline',
-    content_copy: 'content_copy/baseline',
+    options: 'more_vert/baseline',
+    copy: 'content_copy/baseline',
     edit: 'edit/baseline',
     delete: 'delete/baseline',
     check: 'check/baseline',
     help: 'help/outline',
-    expand_more: 'expand_more/baseline',
-    expand_less: 'expand_less/baseline',
+    arrow_down: 'expand_more/baseline',
+    arrow_up: 'expand_less/baseline',
     add: 'add/baseline',
     keyboard_arrow_up: 'keyboard_arrow_up/baseline',
     keyboard_arrow_down: 'keyboard_arrow_down/baseline',
