@@ -5,19 +5,60 @@
 
     <PageSection title="Overview" anchor="#overview">
       <p>
-        Kolibri products uses a large number of icons that have a special meaning within our ecosystem. They generally draw from <ExternalLink text="Material Icons" href="https://material.io/resources/icons/" />, but may also include custom icons.
+        Kolibri products use a large number of icons that have a special meaning within our ecosystem. They generally draw from <ExternalLink text="Material Icons" href="https://material.io/resources/icons/" />, but may also include custom icons.
       </p>
       <p>
         Importantly, we reference icons by a token specific to the Kolibri Design System rather than Material's names, in order to make token references more meaningful to designers and developers.
       </p>
-      <p>
-        Note that many of these icons also are used with  <InternalLink href="colors" text="conventional colors" />
-        in the design system.
-      </p>
-
     </PageSection>
 
-    <PageSection title="UI" anchor="#ui">
+    <PageSection title="Size and text" anchor="#size-text">
+      <p>
+        Icons should be scaled relative to their surrounding text size. Use the <code>KLabeledIcon</code> component to automatically set a consistent sizing and spacing with associated text:
+      </p>
+      <h3>
+        <KLabeledIcon icon="lesson" label="Header 3" />
+      </h3>
+      <h4>
+        <KLabeledIcon icon="lesson" label="Header 4" />
+      </h4>
+      <h5>
+        <KLabeledIcon icon="lesson" label="Header 5" />
+      </h5>
+      <p>
+        <KLabeledIcon icon="lesson" label="Paragraph" />
+      </p>
+    </PageSection>
+
+    <PageSection title="Color" anchor="#color">
+      <p>
+        When inline with text, icons should be the same color as the text.
+      </p>
+      <p>
+        Note that many of these icons also are used with <InternalLink href="colors" text="conventional colors" /> in the design system. For example, the <InternalLink href="#tokens-coach" text="coach" code /> icon is often shown using the <InternalLink href="/colors#tokens-coachContent" text="coachContent" code /> color, e.g. <KIcon icon="coach" :color="$themeTokens.coachContent" />.
+      </p>
+    </PageSection>
+
+    <PageSection title="Internationalization" anchor="#i18n">
+      <p>
+        Avoid using icons that are culture- or context-specific.
+      </p>
+      <p>
+        Icons which in some sense relate to the passage of time must be mirrored when viewed in a right-to-left language. Read more about <ExternalLink href="https://material.io/design/usability/bidirectionality.html#mirroring-elements" text="icon bidirectionality" /> from the Material design guidelines.
+      </p>
+      <p>
+        When used with the <code>KIcon</code> component, icons will be automatically flipped when appropriate.
+      </p>
+    </PageSection>
+
+    <PageSection title="Accessibility" anchor="#a11y">
+      <p>
+        If it is not purely decorative, ensure that the icon or its parent component has associated text that can be read by a screen reader.
+      </p>
+    </PageSection>
+
+    <PageSection title="Tokens" anchor="#tokens">
+      <h3>UI</h3>
       <IconBlock
         v-for="name in ui"
         :key="name"
@@ -25,9 +66,8 @@
         definition
         class="icon-block"
       />
-    </PageSection>
 
-    <PageSection title="Features and links" anchor="#features">
+      <h3>Features and links</h3>
       <IconBlock
         v-for="name in features"
         :key="name"
@@ -35,9 +75,8 @@
         definition
         class="icon-block"
       />
-    </PageSection>
 
-    <PageSection title="Users" anchor="#users">
+      <h3>Users</h3>
       <IconBlock
         v-for="name in users"
         :key="name"
@@ -45,9 +84,8 @@
         definition
         class="icon-block"
       />
-    </PageSection>
 
-    <PageSection title="Content" anchor="#content">
+      <h3>Content</h3>
       <IconBlock
         v-for="name in content"
         :key="name"
@@ -55,9 +93,8 @@
         definition
         class="icon-block"
       />
-    </PageSection>
 
-    <PageSection title="Progress tracking" anchor="#progress">
+      <h3>Progress tracking</h3>
       <IconBlock
         v-for="name in progressTracking"
         :key="name"
@@ -65,9 +102,8 @@
         definition
         class="icon-block"
       />
-    </PageSection>
 
-    <PageSection title="Coaching" anchor="#coaching">
+      <h3>Coaching</h3>
       <IconBlock
         v-for="name in coaching"
         :key="name"
@@ -75,9 +111,8 @@
         definition
         class="icon-block"
       />
-    </PageSection>
 
-    <PageSection title="Miscellaneous" anchor="#misc">
+      <h3>Miscellaneous</h3>
       <IconBlock
         v-for="name in misc"
         :key="name"
