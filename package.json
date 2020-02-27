@@ -26,9 +26,9 @@
     "fuzzysearch": "^1.0.3",
     "lodash": "^4.17.15",
     "material-design-icons": "^3.0.1",
+    "material-svg-precompiled-vue-templates": "https://github.com/nucleogenesis/material-svg-precompiled-vue-templates",
     "popper.js": "^1.14.6",
-    "purecss": "^0.6.2",
-    "vue-template-compiler": "^2.6.11"
+    "purecss": "^0.6.2"
   },
   "peerDependencies": {},
   "devDependencies": {

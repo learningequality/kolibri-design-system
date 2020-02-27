@@ -4,8 +4,6 @@
 -->
 
 <script>
-  const VueTemplateCompiler = require('vue-template-compiler');
-
   /**
    * There are 5 styles of icon available.
    *
@@ -156,7 +154,7 @@
       /* eslint-enable kolibri/vue-no-unused-properties */
       svgFromIcon() {
         if(this.icon) {
-          return require(`@material-icons/svg/svg/${KolibriIcons[this.icon]}.svg`);
+          return require(`material-svg-precompiled-vue-templates/svg/${KolibriIcons[this.icon]}.js`);
         } else {
           return null;
         }
@@ -172,7 +170,7 @@
             this.materialName + "/baseline";
           // Try to find the icon and return an error if we can't.
           try {
-            return require(`@material-icons/svg/svg/${fileName}.svg`);
+            return require(`material-svg-precompiled-vue-templates/svg/${fileName}.js`);
           } catch(e) {
             const error = `Failed to load SVG for material icons name ${this.materialName}.`;
             console.error(error);
@@ -187,20 +185,10 @@
         console.error("Cannot render icon without one of the two props 'icon' or 'materialName'");
         return;
       }
-      const SVG_FILE_PREFIX = "data:image/svg+xml;base64,";
 
-      const styles = ":style=style";
-      const a11yAttrs = `role="presentation" focusable="false"`;
-      const cssClass = `:class="rtlClass"`;
+      const svgRenderFn = this.icon ? this.svgFromIcon : this.svgFromMaterialName;
 
-      const svgFile = this.icon ? this.svgFromIcon : this.svgFromMaterialName;
-
-      const svgBase64 = svgFile.replace(SVG_FILE_PREFIX, "");
-      const svgElementString = atob(svgBase64);
-      const styledAndAccessibleSvg = svgElementString.replace("<svg", `<svg ${cssClass} ${styles} ${a11yAttrs}`);
-
-      const template = VueTemplateCompiler.compileToFunctions(styledAndAccessibleSvg);
-      return template.render.call(this, createElement);
+      return svgRenderFn.call(this, createElement);
     },
   };
 
@@ -208,6 +196,13 @@
 
 
 <style scoped>
+
+  svg {
+    position: relative;
+    top: 0.125em;
+    width: 1.125em;
+    height: 1.125em;
+  }
 
   .rtl-flip-icon {
     transform: scaleX(-1);
