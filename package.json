@@ -13,13 +13,14 @@
     "lint-watch": "yarn _lint -m",
     "_lint-watch-fix": "yarn _lint -w -m",
     "_lint": "kolibri-tools lint '**/*.{js,vue,scss,less,css}' -i ,'**/node_modules/**','**/.nuxt/**','**/dist/**'",
-    "_test": "jest"
+    "_test": "jest",
+    "precompile-svgs": "rm -rf lib/material-svg && node lib/utils/precompileSvgs.js",
+    "postinstall": "yarn precompile-svgs"
   },
   "files": [
     "lib"
   ],
   "dependencies": {
-    "@material-icons/svg": "git+https://github.com/material-icons/material-icons.git",
     "aphrodite": "https://github.com/learningequality/aphrodite/",
     "autosize": "^3.0.21",
     "css-element-queries": "^1.2.0",
@@ -48,6 +49,11 @@
     "svg-icon-inline-loader": "^3.1.0",
     "vue-jest": "^4.0.0-0",
     "vue-meta": "^2.3.2",
-    "vue-prism-component": "^1.1.1"
+    "vue-prism-component": "^1.1.1",
+    "@material-icons/svg": "git+https://github.com/material-icons/material-icons.git",
+    "atob": "^2.1.2",
+    "escodegen": "^1.14.1",
+    "espree": "^6.1.2",
+    "vue-template-compiler": "^2.5.17"
   }
 }

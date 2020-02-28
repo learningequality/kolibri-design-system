@@ -29,82 +29,82 @@
    */
   const KolibriIcons = {
     // UI
-    back: 'arrow_back/baseline',
-    forward: 'arrow_forward/baseline',
-    clear: 'clear/baseline',
-    dropdown: 'arrow_drop_down/baseline',
-    language: 'language/baseline',
-    logout: 'exit_to_app/baseline',
-    menu: 'menu/baseline',
-    search: 'search/baseline',
-    error: 'error/baseline',
+    back: require('./material-svg/arrow_back/baseline'),
+    forward: require('./material-svg/arrow_forward/baseline'),
+    clear: require('./material-svg/clear/baseline'),
+    dropdown: require('./material-svg/arrow_drop_down/baseline'),
+    language: require('./material-svg/language/baseline'),
+    logout: require('./material-svg/exit_to_app/baseline'),
+    menu: require('./material-svg/menu/baseline'),
+    search: require('./material-svg/search/baseline'),
+    error: require('./material-svg/error/baseline'),
 
     // Features and links
-    learn: 'school/baseline',
-    device: 'tablet_mac/baseline',
-    profile: 'account_circle/baseline',
-    login: 'exit_to_app/baseline',
+    learn: require('./material-svg/school/baseline'),
+    device: require('./material-svg/tablet_mac/baseline'),
+    profile: require('./material-svg/account_circle/baseline'),
+    login: require('./material-svg/exit_to_app/baseline'),
     /* logout */
-    coach: 'local_library/baseline',
-    facility: 'settings_input_antenna/baseline',
+    coach: require('./material-svg/local_library/baseline'),
+    facility: require('./material-svg/settings_input_antenna/baseline'),
 
     // Users
-    classroom: 'business/baseline',
-    group: 'group_work/baseline',
-    people: 'people/baseline',
-    person: 'person/baseline',
-    permission: 'vpn_key/baseline',
+    classroom: require('./material-svg/business/baseline'),
+    group: require('./material-svg/group_work/baseline'),
+    people: require('./material-svg/people/baseline'),
+    person: require('./material-svg/person/baseline'),
+    permission: require('./material-svg/vpn_key/baseline'),
 
     // Content
-    app: 'widgets/baseline',
-    audio: 'audiotrack/baseline',
-    channel: 'apps/baseline',
-    doc: 'book/baseline',
-    document: 'book/baseline',
-    exercise: 'assignment/baseline',
-    topic: 'folder/baseline',
-    video: 'ondemand_video/baseline',
-    html5: 'widgets/baseline',
-    slideshow: 'photo_library/baseline',
-    unlistedchannel: 'lock_open/baseline',
-    done: 'done/baseline',
+    app: require('./material-svg/widgets/baseline'),
+    audio: require('./material-svg/audiotrack/baseline'),
+    channel: require('./material-svg/apps/baseline'),
+    doc: require('./material-svg/book/baseline'),
+    document: require('./material-svg/book/baseline'),
+    exercise: require('./material-svg/assignment/baseline'),
+    topic: require('./material-svg/folder/baseline'),
+    video: require('./material-svg/ondemand_video/baseline'),
+    html5: require('./material-svg/widgets/baseline'),
+    slideshow: require('./material-svg/photo_library/baseline'),
+    unlistedchannel: require('./material-svg/lock_open/baseline'),
+    done: require('./material-svg/done/baseline'),
 
 
     // Progress tracking
-    correct: 'check_circle/baseline',
-    helpNeeded: 'error/baseline',
-    hint: 'lightbulb/outline',
-    incorrect: 'close/baseline',
-    inProgress: 'access_time/baseline',
-    mastered: 'stars/baseline',
-    notStarted: 'brightness_1/baseline',
-    rectified: 'lens/baseline',
+    correct: require('./material-svg/check_circle/baseline'),
+    helpNeeded: require('./material-svg/error/baseline'),
+    hint: require('./material-svg/lightbulb/outline'),
+    incorrect: require('./material-svg/close/baseline'),
+    inProgress: require('./material-svg/access_time/baseline'),
+    mastered: require('./material-svg/stars/baseline'),
+    notStarted: require('./material-svg/brightness_1/baseline'),
+    rectified: require('./material-svg/lens/baseline'),
 
     // Coaching
     /* coach */
-    lesson: 'import_contacts/baseline',
-    question: 'keyboard_arrow_right/baseline',
-    quiz: 'assignment_late/baseline',
+    lesson: require('./material-svg/import_contacts/baseline'),
+    question: require('./material-svg/keyboard_arrow_right/baseline'),
+    quiz: require('./material-svg/assignment_late/baseline'),
 
     // Miscellaneous
-    dot: 'brightness_1/baseline',
+    dot: require('./material-svg/brightness_1/baseline'),
 
     // Studio
-    info: 'info/baseline',
-    star: 'star/baseline',
-    star_border: 'star_border/baseline',
-    options: 'more_vert/baseline',
-    copy: 'content_copy/baseline',
-    edit: 'edit/baseline',
-    delete: 'delete/baseline',
-    check: 'check/baseline',
-    help: 'help/outline',
-    arrow_down: 'expand_more/baseline',
-    arrow_up: 'expand_less/baseline',
-    add: 'add/baseline',
-    keyboard_arrow_up: 'keyboard_arrow_up/baseline',
-    keyboard_arrow_down: 'keyboard_arrow_down/baseline',
-    close: 'close/baseline', // Same as clear...
+    info: require('./material-svg/info/baseline'),
+    star: require('./material-svg/star/baseline'),
+    star_border: require('./material-svg/star_border/baseline'),
+    options: require('./material-svg/more_vert/baseline'),
+    copy: require('./material-svg/content_copy/baseline'),
+    edit: require('./material-svg/edit/baseline'),
+    delete: require('./material-svg/delete/baseline'),
+    check: require('./material-svg/check/baseline'),
+    help: require('./material-svg/help/outline'),
+    arrow_down: require('./material-svg/expand_more/baseline'),
+    arrow_up: require('./material-svg/expand_less/baseline'),
+    add: require('./material-svg/add/baseline'),
+    keyboard_arrow_up: require('./material-svg/keyboard_arrow_up/baseline'),
+    keyboard_arrow_down: require('./material-svg/keyboard_arrow_down/baseline'),
+    close: require('./material-svg/close/baseline'), // Same as clear...
   }
 
   export default {
@@ -125,17 +125,9 @@
        * materialName should refer to the icon you want.
        * If you want a specific style, add it after a forward slash
        */
-      materialName: {
-        type: String,
+      materialSvgRenderFn: {
+        type: Function,
         required: false,
-        validator(str) {
-          if(str.includes('/')) {
-            let style = str.split('/')[1];
-            return ['baseline', 'outline', 'twotone', 'round', 'sharp'].includes(style);
-          } else {
-            return true;
-          }
-        }
       }
     },
     computed: {
@@ -164,24 +156,12 @@
         if(this.icon) {
           return "Not loaded due to 'icon' prop being provided.";
         } else {
-          // Append baseline if we aren't given a style
-          let fileName = this.materialName.indexOf("/") >= 0 ?
-            this.materialName :
-            this.materialName + "/baseline";
-          // Try to find the icon and return an error if we can't.
-          try {
-            return require(`material-svg-precompiled-vue-templates/svg/${fileName}.js`);
-          } catch(e) {
-            const error = `Failed to load SVG for material icons name ${this.materialName}.`;
-            console.error(error);
-            return null;
-          }
+          return this.materialSvgRenderFn;
         }
       }
     },
     render(createElement) {
-      let fileName = this.icon ? this.icon : this.materialName;
-      if(!fileName) {
+      if(!this.icon && !this.materialSvgRenderFn) {
         console.error("Cannot render icon without one of the two props 'icon' or 'materialName'");
         return;
       }
