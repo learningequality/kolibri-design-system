@@ -146,7 +146,7 @@
       /* eslint-enable kolibri/vue-no-unused-properties */
       svgFromIcon() {
         if(this.icon) {
-          return require(`material-svg-precompiled-vue-templates/svg/${KolibriIcons[this.icon]}.js`);
+          return KolibriIcons[this.icon];
         } else {
           return null;
         }
