@@ -25,12 +25,14 @@
 
     <!-- the radio buttons the user sees -->
     <KIcon
+      v-if="isChecked"
       icon="radio_button_checked"
       class="checked"
       name="radio_button_checked"
       :style="[{ fill: $themeTokens.primary }, disabledStyle, activeStyle ]"
     />
     <KIcon
+      v-else
       icon="radio_button_unchecked"
       class="unchecked"
       name="radio_button_unchecked"
