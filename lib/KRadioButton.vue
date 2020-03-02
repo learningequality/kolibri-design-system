@@ -22,19 +22,18 @@
       @change="update($event)"
       @keydown="$emit('keydown', $event)"
     >
+
     <!-- the radio buttons the user sees -->
-    <mat-svg
-      v-if="isChecked"
-      category="toggle"
-      name="radio_button_checked"
+    <KIcon
+      icon="radio_button_checked"
       class="checked"
+      name="radio_button_checked"
       :style="[{ fill: $themeTokens.primary }, disabledStyle, activeStyle ]"
     />
-    <mat-svg
-      v-else
-      category="toggle"
-      name="radio_button_unchecked"
+    <KIcon
+      icon="radio_button_unchecked"
       class="unchecked"
+      name="radio_button_unchecked"
       :style="[{ fill: $themeTokens.annotation }, disabledStyle, activeStyle ]"
     />
 

@@ -22,23 +22,20 @@
           @keydown="$emit('keydown', $event)"
         >
 
-        <mat-svg
+        <KIcon
           v-if="isCurrentlyIndeterminate"
           :style="notBlank"
-          category="toggle"
-          name="indeterminate_check_box"
+          icon="indeterminate_check_box"
         />
-        <mat-svg
+        <KIcon
           v-else-if="!isCurrentlyIndeterminate && isCurrentlyChecked"
           :style="[ notBlank, activeOutline ]"
-          category="toggle"
-          name="check_box"
+          icon="check_box"
         />
-        <mat-svg
+        <KIcon
           v-else
           :style="[ blank, activeOutline ]"
-          category="toggle"
-          name="check_box_outline_blank"
+          icon="check_box_outline_blank"
         />
 
       </div>

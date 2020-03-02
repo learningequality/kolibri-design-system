@@ -88,6 +88,7 @@
 
     // Miscellaneous
     dot: require('./material-svg/brightness_1/baseline'),
+    checkbox_circle: require('./material-svg/open_in_new/baseline'),
 
     // Studio
     info: require('./material-svg/info/baseline'),
@@ -105,6 +106,13 @@
     keyboard_arrow_up: require('./material-svg/keyboard_arrow_up/baseline'),
     keyboard_arrow_down: require('./material-svg/keyboard_arrow_down/baseline'),
     close: require('./material-svg/close/baseline'), // Same as clear...
+
+    // Found while removing mat-svg
+    indeterminate_check_box: require('./material-svg/indeterminate_check_box/baseline'),
+    radio_button_checked: require('./material-svg/radio_button_checked/baseline'),
+    radio_button_unchecked: require('./material-svg/radio_button_unchecked/baseline'),
+    check_box: require('./material-svg/check_box/baseline'),
+    check_box_outline_blank: require('./material-svg/check_box_outline_blank/baseline'),
   }
 
   export default {
@@ -121,14 +129,6 @@
         type: String,
         required: false,
       },
-      /**
-       * materialName should refer to the icon you want.
-       * If you want a specific style, add it after a forward slash
-       */
-      materialSvgRenderFn: {
-        type: Function,
-        required: false,
-      }
     },
     computed: {
       /* eslint-disable kolibri/vue-no-unused-properties */
@@ -145,30 +145,16 @@
       },
       /* eslint-enable kolibri/vue-no-unused-properties */
       svgFromIcon() {
+        console.log(this);
         if(this.icon) {
           return KolibriIcons[this.icon];
         } else {
           return null;
         }
       },
-      svgFromMaterialName() {
-        // Avoid expensive computation
-        if(this.icon) {
-          return "Not loaded due to 'icon' prop being provided.";
-        } else {
-          return this.materialSvgRenderFn;
-        }
-      }
     },
     render(createElement) {
-      if(!this.icon && !this.materialSvgRenderFn) {
-        console.error("Cannot render icon without one of the two props 'icon' or 'materialName'");
-        return;
-      }
-
-      const svgRenderFn = this.icon ? this.svgFromIcon : this.svgFromMaterialName;
-
-      return svgRenderFn.call(this, createElement);
+      return this.svgFromIcon.call(this, createElement);
     },
   };
 
