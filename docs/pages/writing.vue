@@ -38,7 +38,7 @@
     </PageSection>
     <PageSection title="Additional notes" anchor="#notes">
 
-      <p>These guidelines are specific to Kolibri and not in Material:</p>
+      <p>These guidelines are specific to the Kolibri Design System and not in Material:</p>
 
       <ul>
         <li>
