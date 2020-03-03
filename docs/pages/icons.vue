@@ -147,7 +147,6 @@
           'html5',
           'slideshow',
           'unlistedchannel',
-          'multiple',
           'done',
         ];
       },

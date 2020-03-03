@@ -112,7 +112,7 @@
       if (value) {
         el.focus();
       }
-    }
+    },
   };
 
   export default {
