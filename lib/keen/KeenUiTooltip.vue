@@ -9,8 +9,14 @@
 
 <script>
 
-  import Tooltip from 'tether-tooltip';
   import UUID from './helpers/uuid';
+
+  // check for Nuxt.js SSR
+  const nuxtServerSideRendering = process && process.server;
+  let Tooltip = undefined;
+  if (!nuxtServerSideRendering) {
+    Tooltip = require('tether-tooltip');
+  }
 
   export default {
     name: 'KeenUiTooltip',
@@ -63,21 +69,23 @@
 
     methods: {
       initialize() {
-        if (this.trigger !== undefined && this.$parent.$refs[this.trigger]) {
-          const triggerEl = this.$parent.$refs[this.trigger]._isVue
-            ? this.$parent.$refs[this.trigger].$el // Use .$el if the ref is a Vue component
-            : this.$parent.$refs[this.trigger];
+        if (process && process.client) {
+          if (this.trigger !== undefined && this.$parent.$refs[this.trigger]) {
+            const triggerEl = this.$parent.$refs[this.trigger]._isVue
+              ? this.$parent.$refs[this.trigger].$el // Use .$el if the ref is a Vue component
+              : this.$parent.$refs[this.trigger];
 
-          this.tooltip = new Tooltip({
-            target: triggerEl,
-            content: this.$refs.tooltip,
-            classes: 'ui-tooltip--theme-default',
-            position: this.position,
-            openOn: this.openOn,
-            openDelay: this.openDelay,
-          });
+            this.tooltip = new Tooltip({
+              target: triggerEl,
+              content: this.$refs.tooltip,
+              classes: 'ui-tooltip--theme-default',
+              position: this.position,
+              openOn: this.openOn,
+              openDelay: this.openDelay,
+            });
 
-          triggerEl.setAttribute('aria-describedby', this.id);
+            triggerEl.setAttribute('aria-describedby', this.id);
+          }
         }
       },
     },
