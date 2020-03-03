@@ -16,24 +16,36 @@
       <p>
         Icons should be scaled relative to their surrounding text size. Use the <code>KLabeledIcon</code> component to automatically set a consistent sizing and spacing with associated text:
       </p>
-      <h3>
-        <KLabeledIcon icon="lesson" label="Header 3" />
-      </h3>
-      <h4>
-        <KLabeledIcon icon="lesson" label="Header 4" />
-      </h4>
-      <h5>
-        <KLabeledIcon icon="lesson" label="Header 5" />
-      </h5>
-      <p>
-        <KLabeledIcon icon="lesson" label="Paragraph" />
-      </p>
+      <Show>
+        <h3>
+          <KLabeledIcon icon="lesson" label="Header 3" />
+        </h3>
+        <h4>
+          <KLabeledIcon icon="lesson" label="Header 4" />
+        </h4>
+        <h5>
+          <KLabeledIcon icon="lesson" label="Header 5" />
+        </h5>
+      </Show>
+
     </PageSection>
 
     <PageSection title="Color" anchor="#color">
       <p>
-        When inline with text, icons should be the same color as the text.
+        When inline with text, icons should usually be the same color as the text:
       </p>
+      <DoNot>
+        <template v-slot:do>
+          <h4>
+            <KLabeledIcon icon="video" label="Awesome video" />
+          </h4>
+        </template>
+        <template v-slot:not>
+          <h4>
+            <KLabeledIcon icon="video" color="green" label="Awesome video" />
+          </h4>
+        </template>
+      </DoNot>
       <p>
         Note that many of these icons also are used with <InternalLink href="colors" text="conventional colors" /> in the design system. For example, the <InternalLink href="#tokens-coach" text="coach" code /> icon is often shown using the <InternalLink href="/colors#tokens-coachContent" text="coachContent" code /> color, e.g. <KIcon icon="coach" :color="$themeTokens.coachContent" />.
       </p>
@@ -60,8 +72,8 @@
     <PageSection title="Tokens" anchor="#tokens">
       <h3>UI</h3>
       <IconBlock
-        v-for="name in ui"
-        :key="name"
+        v-for="(name, index) in ui"
+        :key="index"
         :name="name"
         definition
         class="icon-block"
@@ -69,8 +81,8 @@
 
       <h3>Features and links</h3>
       <IconBlock
-        v-for="name in features"
-        :key="name"
+        v-for="(name, index) in features"
+        :key="index"
         :name="name"
         definition
         class="icon-block"
@@ -78,8 +90,8 @@
 
       <h3>Users</h3>
       <IconBlock
-        v-for="name in users"
-        :key="name"
+        v-for="(name, index) in users"
+        :key="index"
         :name="name"
         definition
         class="icon-block"
@@ -87,8 +99,8 @@
 
       <h3>Content</h3>
       <IconBlock
-        v-for="name in content"
-        :key="name"
+        v-for="(name, index) in content"
+        :key="index"
         :name="name"
         definition
         class="icon-block"
@@ -96,8 +108,8 @@
 
       <h3>Progress tracking</h3>
       <IconBlock
-        v-for="name in progressTracking"
-        :key="name"
+        v-for="(name, index) in progressTracking"
+        :key="index"
         :name="name"
         definition
         class="icon-block"
@@ -105,8 +117,8 @@
 
       <h3>Coaching</h3>
       <IconBlock
-        v-for="name in coaching"
-        :key="name"
+        v-for="(name, index) in coaching"
+        :key="index"
         :name="name"
         definition
         class="icon-block"
@@ -114,8 +126,8 @@
 
       <h3>Miscellaneous</h3>
       <IconBlock
-        v-for="name in misc"
-        :key="name"
+        v-for="(name, index) in misc"
+        :key="index"
         :name="name"
         definition
         class="icon-block"
@@ -131,11 +143,15 @@
 <script>
 
   import IconBlock from '~/common/IconBlock';
+  import Show from '~/common/Show';
+  import DoNot from '~/common/DoNot';
 
   export default {
     name: 'Icons',
     components: {
       IconBlock,
+      Show,
+      DoNot,
     },
     computed: {
       ui() {
