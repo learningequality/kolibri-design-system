@@ -1,8 +1,14 @@
 <template>
 
-  <a :href="href" :class="{ active: href === $route.path }">
-    <code v-if="code">{{ text }}</code>
-    <template v-else>{{ text }}</template>
+  <div v-if="page.disabled" class="disabled-link">
+    <code v-if="page.code">{{ page.title }}</code>
+    <template else>
+      {{ page.title }}
+    </template>
+  </div>
+  <a v-else :href="page.path" :class="{ active: page.path === $route.path }">
+    <code v-if="page.code">{{ page.title }}</code>
+    <template v-else>{{ page.title }}</template>
   </a>
 
 </template>
@@ -13,17 +19,14 @@
   export default {
     name: 'NavLink',
     props: {
-      text: {
-        type: String,
-        required: true,
-      },
-      href: {
-        type: String,
-        required: true,
-      },
-      code: {
-        type: Boolean,
-        default: false,
+      page: {
+        type: Object,
+        validator(page) {
+          if (!page.path || !page.title) {
+            return false;
+          }
+          return true;
+        },
       },
     },
   };
@@ -35,9 +38,18 @@
 
   @import '~/assets/definitions';
 
+  .disabled-link {
+    display: block;
+    padding: 4px 8px;
+    margin-right: -8px;
+    margin-bottom: 2px;
+    margin-left: -8px;
+    color: #777777;
+  }
+
   a {
     display: block;
-    padding: 8px;
+    padding: 4px 8px;
     margin-right: -8px;
     margin-bottom: 2px;
     margin-left: -8px;

@@ -1,7 +1,12 @@
-<!--
-  No template here. This component uses a render function dynamically
-  below in the created() lifecycle hook
--->
+<template>
+
+  <component
+    :is="svgFromIcon"
+    :style="style"
+    :rtlClass="rtlClass"
+  />
+
+</template>
 
 <script>
   /**
@@ -131,9 +136,6 @@
       },
     },
     computed: {
-      /* eslint-disable kolibri/vue-no-unused-properties */
-      // We are generating a string template using these computed properties so
-      // they are indeed being used in the created() lifecycle hook
       style() {
         if (this.color) {
           return { fill: this.color };
@@ -143,18 +145,13 @@
       rtlClass() {
         return this.isRtl ? 'rtl-flip-icon' : '';
       },
-      /* eslint-enable kolibri/vue-no-unused-properties */
       svgFromIcon() {
-        console.log(this);
         if(this.icon) {
           return KolibriIcons[this.icon];
         } else {
           return null;
         }
       },
-    },
-    render(createElement) {
-      return this.svgFromIcon.call(this, createElement);
     },
   };
 

@@ -34,10 +34,11 @@
   import Header from './Header';
   import SideNav from './SideNav';
 
-  function currentPage(currentPath) {
-    if (currentPath === '/') {
+  function currentPage(path) {
+    if (path === '/') {
       return homePage;
     }
+    const currentPath = path.replace(/\/$/, '');
     const page = patternPages.find(p => p.path === currentPath);
     if (!page) {
       consola.warn(`'${currentPath}' not found in pages.js`);
@@ -71,13 +72,19 @@
       },
       title() {
         const page = currentPage(this.$route.path);
+        if (page) {
+          return page.title;
+        }
+        return undefined;
+      },
+      fullTitle() {
         const main = 'Kolibri Design System';
-        return page ? `${page.title} - ${main}` : main;
+        return this.title ? `${this.title} - ${main}` : main;
       },
     },
     head() {
       return {
-        title: this.title,
+        title: this.fullTitle,
       };
     },
   };
