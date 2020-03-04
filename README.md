@@ -7,6 +7,8 @@ How to use the Kolibri Design System
 
 ### Documentation
 
+[![Netlify Status](https://api.netlify.com/api/v1/badges/9ae9ac56-7240-4480-b5a8-01645cb903ca/deploy-status)](https://app.netlify.com/sites/kolibri-design-system/deploys)
+
 See **[https://kolibri-design-system.netlify.com](https://kolibri-design-system.netlify.com)** for the latest design system documentation.
 
 This contains resources for designers and developers who are building Kolibri products using the design system patterns and the shared UI library.
