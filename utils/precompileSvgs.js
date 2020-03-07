@@ -12,7 +12,7 @@ const styles = ':style="styles"';
 const a11yAttrs = `role="presentation" focusable="false"`;
 const cssClass = `:class="rtlClass"`;
 
-const baseSVGPath = './lib/material-svg';
+const baseSVGPath = './lib/KIcon/material-svg';
 
 // Make the base svg directory
 fs.mkdirSync(baseSVGPath);
