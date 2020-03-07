@@ -1,3 +1,10 @@
+
+/*
+  Do not run this file directly. Instead use:
+  yarn run precompile-svgs
+*/
+
+
 const fs = require('fs');
 
 const materialSvgPath = './node_modules/@material-icons/svg/svg';
@@ -5,7 +12,7 @@ const styles = ':style="styles"';
 const a11yAttrs = `role="presentation" focusable="false"`;
 const cssClass = `:class="rtlClass"`;
 
-const baseSVGPath = 'lib/material-svg';
+const baseSVGPath = './lib/material-svg';
 
 // Make the base svg directory
 fs.mkdirSync(baseSVGPath);
