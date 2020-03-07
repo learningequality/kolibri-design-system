@@ -107,11 +107,13 @@
 
   import autosize from 'autosize';
 
-  function autofocus(el, { value }) {
-    if (value) {
-      el.focus();
-    }
-  }
+  const autofocus = {
+    inserted(el, { value }) {
+      if (value) {
+        el.focus();
+      }
+    },
+  };
 
   export default {
     name: 'KeenUiTextbox',

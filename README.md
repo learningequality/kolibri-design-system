@@ -120,3 +120,12 @@ These aliases should _not_ be used by code inside the `/lib` directory because e
 The documentation site is currently deployed to Netlifty automatically when changes are pushed to one of the primary branches. This is configured in the `/netlify.toml` file and authenticated with the [Netlify GitHub app](https://docs.netlify.com/configure-builds/repo-permissions-linking/#authentication-with-the-netlify-github-app).
 
 Longer-term, we will likely want to transition to Google Cloud for more control of the deployment. Specifically, we'll want to
+
+
+### SVG Icons
+
+Icons are drawn from https://github.com/material-icons/material-icons and then converted to Vue components. This is currently pinned by the `yarn.lock`. If we upgrade it, we need to regenerate the Vue components by running:
+
+```bash
+yarn run precompile-svgs
+```

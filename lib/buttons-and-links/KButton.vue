@@ -15,10 +15,9 @@
     <template v-else>
       <span>{{ text }}</span>
     </template>
-    <mat-svg
+    <KIcon
       v-if="hasDropdown"
-      category="navigation"
-      name="arrow_drop_down"
+      icon="dropdown"
       class="dropdown-arrow"
       :style="arrowStyles"
     />

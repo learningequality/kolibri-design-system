@@ -4,10 +4,7 @@
     <nav class="breadcrumbs">
       <div v-show="collapsedCrumbs.length" class="breadcrumbs-dropdown-wrapper">
         <KeenUiIconButton :hasDropdown="true" size="small">
-          <mat-svg
-            name="expand_more"
-            category="navigation"
-          />
+          <KIcon icon="arrow_down" />
           <div slot="dropdown" class="breadcrumbs-dropdown">
             <ol class="breadcrumbs-dropdown-items">
               <li
