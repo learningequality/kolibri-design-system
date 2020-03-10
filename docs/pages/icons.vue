@@ -124,14 +124,6 @@
         class="icon-block"
       />
 
-      <h3>Miscellaneous</h3>
-      <IconBlock
-        v-for="(name, index) in misc"
-        :key="index"
-        :name="name"
-        definition
-        class="icon-block"
-      />
     </PageSection>
 
   </PageTemplate>
@@ -161,10 +153,11 @@
           'clear',
           'dropdown',
           'language',
-          'logout',
           'menu',
           'search',
+          'dot',
           'error',
+          'done',
         ];
       },
       features() {
@@ -173,24 +166,23 @@
       progressTracking() {
         return [
           'correct',
+          'incorrect',
           'helpNeeded',
           'hint',
-          'incorrect',
-          'inProgress',
           'mastered',
-          'notStarted',
           'rectified',
+          'inProgress',
+          'notStarted',
         ];
       },
       coaching() {
-        return ['coach', 'lesson', 'question', 'quiz'];
+        return ['lesson', 'question', 'quiz'];
       },
       content() {
         return [
           'app',
           'audio',
           'channel',
-          'doc',
           'document',
           'exercise',
           'topic',
@@ -198,14 +190,11 @@
           'html5',
           'slideshow',
           'unlistedchannel',
-          'done',
+          'coachContent',
         ];
       },
       users() {
         return ['classroom', 'group', 'people', 'permission', 'person'];
-      },
-      misc() {
-        return ['dot'];
       },
     },
   };
