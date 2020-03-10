@@ -31,6 +31,9 @@
 
     <PageSection title="Color" anchor="#color">
       <p>
+        Many of these icons also are used with <InternalLink href="colors" text="conventional colors" /> in the design system. For example, the <InternalLink href="#tokens-coachContent" text="coachContent" code /> icon is often shown using the <InternalLink href="/colors#tokens-coachContent" text="coachContent" code /> color, e.g. <KIcon icon="coachContent" />. Icons often have a default color associated with them, and this can be overridden as needed.
+      </p>
+      <p>
         When inline with text, icons should usually be the same color as the text:
       </p>
       <DoNot>
@@ -41,12 +44,12 @@
         </template>
         <template v-slot:not>
           <h4>
-            <KLabeledIcon icon="video" color="green" label="Awesome video" />
+            <KLabeledIcon icon="video" color="green" label="Awesome video" class="wrong-colors" />
           </h4>
         </template>
       </DoNot>
       <p>
-        Note that many of these icons also are used with <InternalLink href="colors" text="conventional colors" /> in the design system. For example, the <InternalLink href="#tokens-coach" text="coach" code /> icon is often shown using the <InternalLink href="/colors#tokens-coachContent" text="coachContent" code /> color, e.g. <KIcon icon="coach" :color="$themeTokens.coachContent" />.
+        There are exceptions to this pattern, however. For example in the columns of coach reports, most text is dark gray for readibility color while the icons for Mastered, In-progress, etc are colored.
       </p>
     </PageSection>
 
@@ -204,6 +207,11 @@
   .icon-block {
     display: inline-block;
     width: 250px;
+  }
+
+  // hack to simulate bad behavior
+  /deep/ .wrong-colors svg {
+    fill: blue !important;
   }
 
 </style>

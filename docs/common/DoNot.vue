@@ -35,7 +35,7 @@
 
   .show {
     display: inline-block;
-    margin-right: 16px;
+    margin: 8px;
     border: 1px solid #dedede;
     border-radius: 4px;
   }
