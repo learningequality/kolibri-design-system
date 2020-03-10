@@ -1,12 +1,12 @@
 <template>
 
-  <svg :class="rtlClass" :style="styles" role="presentation" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M2 6h12v2H2zm0 4h12v2H2zm0 4h8v2H2zm14.01 3L13 14l-1.5 1.5l4.51 4.5L23 13l-1.5-1.5z"/></svg>
+  <svg role="presentation" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M2 6h12v2H2zm0 4h12v2H2zm0 4h8v2H2zm14.01 3L13 14l-1.5 1.5l4.51 4.5L23 13l-1.5-1.5z"/></svg>
 
 </template>
 
 
 <script>
 
-  export default {"name":"Twotone","props":["rtlClass","styles"]}
+  export default {"name":"Twotone"}
 
 </script>
