@@ -1,6 +1,5 @@
 <template>
 
-  <!-- eslint-disable max-len -->
   <PageTemplate>
 
     <PageSection title="Overview" anchor="#overview">
@@ -127,7 +126,6 @@
     </PageSection>
 
   </PageTemplate>
-  <!-- eslint-enable max-len -->
 
 </template>
 
@@ -139,7 +137,6 @@
   import DoNot from '~/common/DoNot';
 
   export default {
-    name: 'Icons',
     components: {
       IconBlock,
       Show,
