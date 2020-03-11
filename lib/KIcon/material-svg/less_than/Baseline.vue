@@ -1,12 +1,12 @@
 <template>
 
-  <svg :class="rtlClass" :style="styles" role="presentation" focusable="false" width="24" height="24" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17.5 17.5L9.25 12l8.25-5.5l-1-1.5L6 12l10.5 7z" fill-rule="evenodd"/></svg>
+  <svg role="presentation" focusable="false" width="24" height="24" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17.5 17.5L9.25 12l8.25-5.5l-1-1.5L6 12l10.5 7z" fill-rule="evenodd"/></svg>
 
 </template>
 
 
 <script>
 
-  export default {"name":"Baseline","props":["rtlClass","styles"]}
+  export default {"name":"Baseline"}
 
 </script>

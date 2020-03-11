@@ -1,15 +1,17 @@
 <template>
 
   <component
-    :is="svgFromIcon"
-    :style="style"
-    :rtlClass="rtlClass"
+    :is="svgIconComponent"
+    :style="{ fill: computedColor }"
+    :class="{ 'rtl-flip-icon': rtlFlip }"
   />
 
 </template>
 
 
 <script>
+
+  import { themeTokens } from '../styles/theme';
 
   /**
    * There are 5 styles of icon available.
@@ -36,103 +38,160 @@
    */
   const KolibriIcons = {
     // UI
-    back: require('./material-svg/arrow_back/Baseline.vue').default,
-    forward: require('./material-svg/arrow_forward/Baseline.vue').default,
-    clear: require('./material-svg/clear/Baseline.vue').default,
-    dropdown: require('./material-svg/arrow_drop_down/Baseline.vue').default,
-    language: require('./material-svg/language/Baseline.vue').default,
-    logout: require('./material-svg/exit_to_app/Baseline.vue').default,
-    menu: require('./material-svg/menu/Baseline.vue').default,
-    search: require('./material-svg/search/Baseline.vue').default,
-    error: require('./material-svg/error/Baseline.vue').default,
+    back: {
+      icon: require('./material-svg/arrow_back/Baseline.vue').default,
+      rtlFlip: true,
+    },
+    forward: {
+      icon: require('./material-svg/arrow_forward/Baseline.vue').default,
+      rtlFlip: true,
+    },
+    clear: { icon: require('./material-svg/clear/Baseline.vue').default },
+    dropdown: { icon: require('./material-svg/arrow_drop_down/Baseline.vue').default },
+    language: { icon: require('./material-svg/language/Baseline.vue').default },
+    logout: {
+      icon: require('./material-svg/exit_to_app/Baseline.vue').default,
+      rtlFlip: true,
+    },
+    menu: { icon: require('./material-svg/menu/Baseline.vue').default },
+    search: { icon: require('./material-svg/search/Baseline.vue').default },
+    error: {
+      icon: require('./material-svg/error/Baseline.vue').default,
+      defaultColor: themeTokens().error,
+    },
 
     // Features and links
-    learn: require('./material-svg/school/Baseline.vue').default,
-    device: require('./material-svg/tablet_mac/Baseline.vue').default,
-    profile: require('./material-svg/account_circle/Baseline.vue').default,
-    login: require('./material-svg/exit_to_app/Baseline.vue').default,
-    /* logout */
-    coach: require('./material-svg/local_library/Baseline.vue').default,
-    facility: require('./material-svg/settings_input_antenna/Baseline.vue').default,
+    learn: { icon: require('./material-svg/school/Baseline.vue').default },
+    device: { icon: require('./material-svg/tablet_mac/Baseline.vue').default },
+    profile: { icon: require('./material-svg/account_circle/Baseline.vue').default },
+    login: { icon: require('./material-svg/exit_to_app/Baseline.vue').default },
+    coach: { icon: require('./material-svg/local_library/Baseline.vue').default },
+    facility: { icon: require('./material-svg/settings_input_antenna/Baseline.vue').default },
 
     // Users
-    classroom: require('./material-svg/business/Baseline.vue').default,
-    group: require('./material-svg/group_work/Baseline.vue').default,
-    people: require('./material-svg/people/Baseline.vue').default,
-    person: require('./material-svg/person/Baseline.vue').default,
-    permission: require('./material-svg/vpn_key/Baseline.vue').default,
+    classroom: { icon: require('./material-svg/business/Baseline.vue').default },
+    group: { icon: require('./material-svg/group_work/Baseline.vue').default },
+    people: { icon: require('./material-svg/people/Baseline.vue').default },
+    person: { icon: require('./material-svg/person/Baseline.vue').default },
+    permission: { icon: require('./material-svg/vpn_key/Baseline.vue').default },
 
     // Content
-    app: require('./material-svg/widgets/Baseline.vue').default,
-    audio: require('./material-svg/audiotrack/Baseline.vue').default,
-    channel: require('./material-svg/apps/Baseline.vue').default,
-    doc: require('./material-svg/book/Baseline.vue').default,
-    document: require('./material-svg/book/Baseline.vue').default,
-    exercise: require('./material-svg/assignment/Baseline.vue').default,
-    topic: require('./material-svg/folder/Baseline.vue').default,
-    video: require('./material-svg/ondemand_video/Baseline.vue').default,
-    html5: require('./material-svg/widgets/Baseline.vue').default,
-    slideshow: require('./material-svg/photo_library/Baseline.vue').default,
-    unlistedchannel: require('./material-svg/lock_open/Baseline.vue').default,
-    done: require('./material-svg/done/Baseline.vue').default,
+    app: { icon: require('./material-svg/widgets/Baseline.vue').default },
+    audio: { icon: require('./material-svg/audiotrack/Baseline.vue').default },
+    channel: { icon: require('./material-svg/apps/Baseline.vue').default },
+    doc: { icon: require('./material-svg/book/Baseline.vue').default },
+    document: { icon: require('./material-svg/book/Baseline.vue').default },
+    exercise: { icon: require('./material-svg/assignment/Baseline.vue').default },
+    topic: { icon: require('./material-svg/folder/Baseline.vue').default },
+    video: { icon: require('./material-svg/ondemand_video/Baseline.vue').default },
+    html5: { icon: require('./material-svg/widgets/Baseline.vue').default },
+    slideshow: { icon: require('./material-svg/photo_library/Baseline.vue').default },
+    unlistedchannel: { icon: require('./material-svg/lock_open/Baseline.vue').default },
+    done: {
+      icon: require('./material-svg/done/Baseline.vue').default,
+      defaultColor: themeTokens().success,
+    },
+    coachContent: {
+      icon: require('./material-svg/local_library/Baseline.vue').default,
+      defaultColor: themeTokens().coachContent,
+    },
 
     // Progress tracking
-    correct: require('./material-svg/check_circle/Baseline.vue').default,
-    helpNeeded: require('./material-svg/error/Baseline.vue').default,
-    hint: require('./material-svg/lightbulb/Outline.vue').default,
-    incorrect: require('./material-svg/close/Baseline.vue').default,
-    inProgress: require('./material-svg/access_time/Baseline.vue').default,
-    mastered: require('./material-svg/stars/Baseline.vue').default,
-    notStarted: require('./material-svg/brightness_1/Baseline.vue').default,
-    rectified: require('./material-svg/lens/Baseline.vue').default,
+    correct: {
+      icon: require('./material-svg/check_circle/Baseline.vue').default,
+      defaultColor: themeTokens().correct,
+    },
+    helpNeeded: {
+      icon: require('./material-svg/error/Baseline.vue').default,
+      defaultColor: themeTokens().incorrect,
+    },
+    hint: {
+      icon: require('./material-svg/lightbulb/Outline.vue').default,
+      defaultColor: themeTokens().annotation,
+    },
+    incorrect: {
+      icon: require('./material-svg/close/Baseline.vue').default,
+      defaultColor: themeTokens().annotation,
+    },
+    inProgress: {
+      icon: require('./material-svg/access_time/Baseline.vue').default,
+      defaultColor: themeTokens().progress,
+    },
+    mastered: {
+      icon: require('./material-svg/stars/Baseline.vue').default,
+      defaultColor: themeTokens().mastered,
+    },
+    notStarted: {
+      icon: require('./material-svg/brightness_1/Baseline.vue').default,
+      defaultColor: themeTokens().textDisabled,
+    },
+    rectified: {
+      icon: require('./material-svg/lens/Baseline.vue').default,
+      defaultColor: themeTokens().annotation,
+    },
 
     // Coaching
-    /* coach */
-    lesson: require('./material-svg/import_contacts/Baseline.vue').default,
-    question: require('./material-svg/keyboard_arrow_right/Baseline.vue').default,
-    quiz: require('./material-svg/assignment_late/Baseline.vue').default,
+    lesson: { icon: require('./material-svg/import_contacts/Baseline.vue').default },
+    question: { icon: require('./material-svg/keyboard_arrow_right/Baseline.vue').default },
+    quiz: { icon: require('./material-svg/assignment_late/Baseline.vue').default },
 
     // Miscellaneous
-    dot: require('./material-svg/brightness_1/Baseline.vue').default,
-    checkbox_circle: require('./material-svg/open_in_new/Baseline.vue').default,
+    dot: { icon: require('./material-svg/brightness_1/Baseline.vue').default },
+    checkbox_circle: { icon: require('./material-svg/open_in_new/Baseline.vue').default },
 
     // Studio
-    info: require('./material-svg/info/Baseline.vue').default,
-    star: require('./material-svg/star/Baseline.vue').default,
-    star_border: require('./material-svg/star_border/Baseline.vue').default,
-    options: require('./material-svg/more_vert/Baseline.vue').default,
-    copy: require('./material-svg/content_copy/Baseline.vue').default,
-    edit: require('./material-svg/edit/Baseline.vue').default,
-    delete: require('./material-svg/delete/Baseline.vue').default,
-    check: require('./material-svg/check/Baseline.vue').default,
-    help: require('./material-svg/help/Outline.vue').default,
-    arrow_down: require('./material-svg/expand_more/Baseline.vue').default,
-    arrow_up: require('./material-svg/expand_less/Baseline.vue').default,
-    add: require('./material-svg/add/Baseline.vue').default,
-    keyboard_arrow_up: require('./material-svg/keyboard_arrow_up/Baseline.vue').default,
-    keyboard_arrow_down: require('./material-svg/keyboard_arrow_down/Baseline.vue').default,
-    close: require('./material-svg/close/Baseline.vue').default, // Same as clear...
+    info: { icon: require('./material-svg/info/Baseline.vue').default },
+    star: { icon: require('./material-svg/star/Baseline.vue').default },
+    star_border: { icon: require('./material-svg/star_border/Baseline.vue').default },
+    options: { icon: require('./material-svg/more_vert/Baseline.vue').default },
+    copy: {
+      icon: require('./material-svg/content_copy/Baseline.vue').default,
+      rtlFlip: true,
+    },
+    edit: { icon: require('./material-svg/edit/Baseline.vue').default },
+    delete: { icon: require('./material-svg/delete/Baseline.vue').default },
+    check: { icon: require('./material-svg/check/Baseline.vue').default },
+    help: { icon: require('./material-svg/help/Outline.vue').default },
+    arrow_down: { icon: require('./material-svg/expand_more/Baseline.vue').default },
+    arrow_up: { icon: require('./material-svg/expand_less/Baseline.vue').default },
+    add: { icon: require('./material-svg/add/Baseline.vue').default },
+    keyboard_arrow_up: { icon: require('./material-svg/keyboard_arrow_up/Baseline.vue').default },
+    keyboard_arrow_down: {
+      icon: require('./material-svg/keyboard_arrow_down/Baseline.vue').default,
+    },
+    close: { icon: require('./material-svg/close/Baseline.vue').default },
 
     // Found while removing mat-svg
-    indeterminate_check_box: require('./material-svg/indeterminate_check_box/Baseline.vue').default,
-    radio_button_checked: require('./material-svg/radio_button_checked/Baseline.vue').default,
-    radio_button_unchecked: require('./material-svg/radio_button_unchecked/Baseline.vue').default,
-    check_box: require('./material-svg/check_box/Baseline.vue').default,
-    check_box_outline_blank: require('./material-svg/check_box_outline_blank/Baseline.vue').default,
+    indeterminate_check_box: {
+      icon: require('./material-svg/indeterminate_check_box/Baseline.vue').default,
+    },
+    radio_button_checked: {
+      icon: require('./material-svg/radio_button_checked/Baseline.vue').default,
+    },
+    radio_button_unchecked: {
+      icon: require('./material-svg/radio_button_unchecked/Baseline.vue').default,
+    },
+    check_box: { icon: require('./material-svg/check_box/Baseline.vue').default },
+    check_box_outline_blank: {
+      icon: require('./material-svg/check_box_outline_blank/Baseline.vue').default,
+    },
   };
 
   export default {
     name: 'KIcon',
     props: {
+      /**
+       * Icon token identifier
+       */
       icon: {
         type: String,
-        required: false,
-        validator(i) {
-          return Object.keys(KolibriIcons).includes(i);
+        required: true,
+        validator(value) {
+          return Object.keys(KolibriIcons).includes(value);
         },
       },
       /**
-       * color to apply to the icon
+       * Color to apply to the icon
        */
       color: {
         type: String,
@@ -140,21 +199,19 @@
       },
     },
     computed: {
-      style() {
+      computedColor() {
         if (this.color) {
-          return { fill: this.color };
+          return this.color;
+        } else if (KolibriIcons[this.icon].defaultColor) {
+          return KolibriIcons[this.icon].defaultColor;
         }
-        return { fill: 'black' };
+        return this.$themeTokens.text;
       },
-      rtlClass() {
-        return this.isRtl ? 'rtl-flip-icon' : '';
+      rtlFlip() {
+        return KolibriIcons[this.icon].rtlFlip && this.isRtl;
       },
-      svgFromIcon() {
-        if (this.icon) {
-          return KolibriIcons[this.icon];
-        } else {
-          return null;
-        }
+      svgIconComponent() {
+        return KolibriIcons[this.icon].icon;
       },
     },
   };

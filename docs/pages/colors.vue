@@ -1,6 +1,5 @@
 <template>
 
-  <!-- eslint-disable max-len -->
   <PageTemplate>
 
     <PageSection title="Overview" anchor="#overview">
@@ -235,7 +234,6 @@
     </PageSection>
 
   </PageTemplate>
-  <!-- eslint-enable max-len -->
 
 </template>
 
@@ -245,7 +243,6 @@
   import ColorBlock from '~/common/ColorBlock';
 
   export default {
-    name: 'Colors',
     components: {
       ColorBlock,
     },

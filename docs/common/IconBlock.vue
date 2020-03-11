@@ -28,7 +28,7 @@
     },
     computed: {
       anchor() {
-        return this.definition ? '#icon-' + this.name : null;
+        return this.definition ? '#token-' + this.name : null;
       },
     },
   };

@@ -1,16 +1,12 @@
-
 /*
   Do not run this file directly. Instead use:
   yarn run precompile-svgs
 */
 
-
 const fs = require('fs');
 
 const materialSvgPath = './node_modules/@material-icons/svg/svg';
-const styles = ':style="styles"';
 const a11yAttrs = `role="presentation" focusable="false"`;
-const cssClass = `:class="rtlClass"`;
 
 const baseSVGPath = './lib/KIcon/material-svg';
 
@@ -28,10 +24,7 @@ fs.readdirSync(materialSvgPath).forEach(svgDir => {
     // Read the SVG
     const materialSvgFile = fs.readFileSync(`${materialDir}/${svgFile}`, 'utf8');
     // Apply the Kolibri-specific a11y styles and attrs
-    const styledAndAccessibleSvg = materialSvgFile.replace(
-      '<svg',
-      `<svg ${cssClass} ${styles} ${a11yAttrs}`
-    );
+    const styledAndAccessibleSvg = materialSvgFile.replace('<svg', `<svg ${a11yAttrs}`);
 
     // Uppercase the first letter to conform to Vue filename expectations
     const newFileName = (svgFile.charAt(0).toUpperCase() + svgFile.slice(1)).replace('svg', 'vue');
@@ -39,7 +32,6 @@ fs.readdirSync(materialSvgPath).forEach(svgDir => {
     // Generate the component's object
     const scriptObj = JSON.stringify({
       name: `${newFileName.replace('.vue', '')}`,
-      props: ['rtlClass', 'styles'],
     });
 
     const script = `export default ${scriptObj}`;

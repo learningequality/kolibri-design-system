@@ -1,9 +1,15 @@
 <template>
 
   <a :href="href">
-    <template v-if="text">
+    <code v-if="code && text">
+      {{ text }}
+    </code>
+    <template v-else-if="text">
       {{ text }}
     </template>
+    <code v-else-if="code">
+      <slot></slot>
+    </code>
     <template v-else>
       <slot></slot>
     </template>
@@ -24,6 +30,10 @@
       text: {
         type: String,
         required: false,
+      },
+      code: {
+        type: Boolean,
+        default: false,
       },
     },
   };

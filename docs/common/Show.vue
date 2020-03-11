@@ -1,7 +1,9 @@
 <template>
 
-  <div class="show">
-    <slot></slot>
+  <div>
+    <div class="show" :style="{display: block ? 'block' : 'inline-block'}">
+      <slot></slot>
+    </div>
   </div>
 
 </template>
@@ -11,6 +13,12 @@
 
   export default {
     name: 'Show',
+    props: {
+      block: {
+        type: Boolean,
+        default: false,
+      },
+    },
   };
 
 </script>
@@ -19,10 +27,9 @@
 <style lang="scss" scoped>
 
   .show {
-    padding-right: 8px;
-    padding-left: 8px;
-    margin-right: -8px;
-    margin-left: -8px;
+    padding-right: 24px;
+    padding-left: 24px;
+    margin: 8px;
     border: 1px solid #dedede;
     border-radius: 4px;
   }
