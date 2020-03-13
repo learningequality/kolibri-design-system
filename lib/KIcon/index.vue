@@ -175,6 +175,14 @@
     check_box_outline_blank: {
       icon: require('./material-svg/check_box_outline_blank/Baseline.vue').default,
     },
+    cancel: { icon: require('./material-svg/cancel/Baseline.vue').default },
+      // left/right found in navbar/index
+    keyboard_arrow_left: { icon: require('./material-svg/keyboard_arrow_left/Baseline.vue').default, rtlFlip: true },
+    keyboard_arrow_right: { icon: require('./material-svg/keyboard_arrow_right/Baseline.vue').default, rtlFlip: true },
+    // ProgressIcon
+    schedule: { icon: require('./material-svg/schedule/Baseline.vue').default },
+    // DragSortWidget
+    drag: { icon: require('./material-svg/drag_indicator/Baseline.vue').default },
   };
 
   export default {

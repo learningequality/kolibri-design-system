@@ -14,7 +14,7 @@
     "_lint-watch-fix": "yarn _lint -w -m",
     "_lint": "kolibri-tools lint '**/*.{js,vue,scss,less,css}' -i ,'**/node_modules/**','**/.nuxt/**','**/dist/**','**/material-svg/**'",
     "_test": "jest",
-    "precompile-svgs": "rm -rf lib/material-svg && node utils/precompileSvgs.js"
+    "precompile-svgs": "rm -rf lib/KIcon/material-svg && node utils/precompileSvgs.js"
   },
   "files": [
     "lib"

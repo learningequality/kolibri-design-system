@@ -8,7 +8,6 @@ const SVGO = require('svgo');
 
 const materialSvgPath = './node_modules/@material-icons/svg/svg';
 const a11yAttrs = `role="presentation" focusable="false"`;
-const cssClass = `:class="rtlClass"`;
 const viewBox = `viewBox="0 0 24 24"`;
 
 const baseSVGPath = './lib/KIcon/material-svg';
@@ -29,13 +28,11 @@ fs.readdirSync(materialSvgPath).forEach(svgDir => {
 
     var svgo = new SVGO();
     svgo.optimize(materialSvgFile).then(r => {
-      // Apply the Kolibri-specific a11y styles and attrs
+      // Apply the Kolibri-specific a11y and other attrs
       const styledAndAccessibleSvg = r.data.replace(
         '<svg',
-        `<svg ${cssClass} ${styles} ${a11yAttrs} ${viewBox}`
+        `<svg ${a11yAttrs} ${viewBox}`
       );
-
-
 
       // Uppercase the first letter to conform to Vue filename expectations
       const newFileName = (svgFile.charAt(0).toUpperCase() + svgFile.slice(1)).replace('svg', 'vue');
@@ -43,7 +40,6 @@ fs.readdirSync(materialSvgPath).forEach(svgDir => {
       // Generate the component's object
       const scriptObj = JSON.stringify({
         name: `${newFileName.replace('.vue', '')}`,
-        props: ['rtlClass', 'styles'],
       });
 
       const script = `export default ${scriptObj}`;
