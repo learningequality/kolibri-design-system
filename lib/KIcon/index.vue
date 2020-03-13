@@ -183,6 +183,10 @@
     schedule: { icon: require('./material-svg/schedule/Baseline.vue').default },
     // DragSortWidget
     drag: { icon: require('./material-svg/drag_indicator/Baseline.vue').default },
+    // CreateExamPreview
+    minus_sign: { icon: require('./material-svg/remove/Baseline.vue').default },
+    plus_sign: { icon: require('./material-svg/add/Baseline.vue').default },
+    refresh: { icon: require('./material-svg/refresh/Baseline.vue').default },
   };
 
   export default {
