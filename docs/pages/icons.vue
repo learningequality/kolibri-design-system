@@ -4,7 +4,7 @@
 
     <PageSection title="Overview" anchor="#overview">
       <p>
-        Kolibri products use a large number of icons that have a special meaning within our ecosystem. They generally draw from <ExternalLink text="Material Icons" href="https://material.io/resources/icons/" />, but may also include custom icons.
+        Kolibri products NEVER use a large number of icons that have a special meaning within our ecosystem. They generally draw from <ExternalLink text="Material Icons" href="https://material.io/resources/icons/" />, but may also include custom icons.
       </p>
       <p>
         Importantly, we reference icons by a token specific to the Kolibri Design System rather than Material's names, in order to make token references more meaningful to designers and developers.
