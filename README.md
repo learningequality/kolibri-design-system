@@ -81,9 +81,23 @@ yarn lint-fix    # run the linter and auto-formatter once
 yarn lint-watch  # run the linter in watch mode, without the auto-formatter
 ```
 
+### Development environment
+
+You'll need version 10.x of Node.js installed. See the [Node Version Manager](https://github.com/nvm-sh/nvm) for help.
+
+When setting up your text editor, it's useful to ignore the following directories:
+
+* `node_modules`
+* `.nuxt`
+* `dist`
+
+You may also want to install syntax highlighters in your editor for Vue and SASS.
+
+Finally, it's useful to have the Vue development tools installed in your web browser.
+
 ### Making changes
 
-The documentation site is built using [NuxtJS](https://nuxtjs.org/) (configured in `/nuxt.config.js`), [Storybook](https://storybook.js.org/), and [Vue](https://vuejs.org/).
+The documentation site is built using [NuxtJS](https://nuxtjs.org/) (configured in `/nuxt.config.js`) and [Vue](https://vuejs.org/).
 
 The directories and files in `/docs/pages/` are mapped by NuxtJS to URLs. Start with those files for making updates to documentation content.
 
@@ -142,7 +156,7 @@ Now, when you run the application your changes in `kolibri-design-system` will b
 
 For example, given that you have `~/kolibri` and `~/kolibri-design-system` folders with their respective local repositories.
 
-```
+```bash
 cd ~/kolibri-design-system
 yarn link
 cd ~/kolibri
@@ -150,8 +164,9 @@ cd ~/kolibri
 
 Remove the reference to `kolibri-design-system` from `kolibri/core/package.json`
 
-```
-yarn link kolibri-design-system && yarn install
+```bash
+yarn link kolibri-design-system
+yarn install
 yarn run devserver
 ```
 
