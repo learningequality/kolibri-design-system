@@ -81,9 +81,23 @@ yarn lint-fix    # run the linter and auto-formatter once
 yarn lint-watch  # run the linter in watch mode, without the auto-formatter
 ```
 
+### Development environment
+
+You'll need a recent version of Node.js installed.
+
+When setting up your text editor, it's useful to ignore the following directories:
+
+* `node_modules`
+* `.nuxt`
+* `dist`
+
+You may also want to install syntax highlighters in your editor for Vue and SASS.
+
+Finally, it's useful to have the Vue development tools installed in your web browser.
+
 ### Making changes
 
-The documentation site is built using [NuxtJS](https://nuxtjs.org/) (configured in `/nuxt.config.js`), [Storybook](https://storybook.js.org/), and [Vue](https://vuejs.org/).
+The documentation site is built using [NuxtJS](https://nuxtjs.org/) (configured in `/nuxt.config.js`) and [Vue](https://vuejs.org/).
 
 The directories and files in `/docs/pages/` are mapped by NuxtJS to URLs. Start with those files for making updates to documentation content.
 
