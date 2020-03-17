@@ -187,6 +187,33 @@
     minus_sign: { icon: require('./material-svg/remove/Baseline.vue').default },
     plus_sign: { icon: require('./material-svg/add/Baseline.vue').default },
     refresh: { icon: require('./material-svg/refresh/Baseline.vue').default },
+    // ReportsControls
+    print: { icon: require('./material-svg/print/Baseline.vue').default },
+    get_app: { icon: require('./material-svg/get_app/Baseline.vue').default },
+    // TopNavbar
+    dashboard: { icon: require('./material-svg/dashboard/Baseline.vue').default },
+    insert_chart: { icon: require('./material-svg/insert_chart/Baseline.vue').default },
+    // DeviceTopNav
+    https: { icon: require('./material-svg/https/Baseline.vue').default },
+    perm_device_information: { icon: require('./material-svg/perm_device_information/Baseline.vue').default },
+    settings: { icon: require('./material-svg/settings/Baseline.vue').default },
+    // SettingsButton
+    tune: { icon: require('./material-svg/tune/Baseline.vue').default },
+    // TocButton
+    list: { icon: require('./material-svg/list/Baseline.vue').default },
+    // TopBar (and likely others?)
+    fullscreen: { icon: require('./material-svg/fullscreen/Baseline.vue').default },
+    fullscreen_exit: { icon: require('./material-svg/fullscreen_exit/Baseline.vue').default },
+    //SyncInterface
+    verified_user: { icon: require('./material-svg/verified_user/Baseline.vue').default },
+    //FacilityTopNav
+    save: { icon: require('./material-svg/save/Baseline.vue').default },
+    domain: { icon: require('./material-svg/domain/Baseline.vue').default },
+    // LearnTopNav
+    forum: { icon: require('./material-svg/forum/Baseline.vue').default },
+    // Searchbox
+    filter_list: { icon: require('./material-svg/filter_list/Baseline.vue').default },
+    warning: { icon: require('./material-svg/warning/Baseline.vue').default },
   };
 
   export default {
