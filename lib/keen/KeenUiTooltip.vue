@@ -1,6 +1,6 @@
 <template>
 
-  <div :id="id" ref="tooltip" class="ui-tooltip" role="tooltip">
+  <div class="ui-tooltip">
     <slot></slot>
   </div>
 
@@ -9,85 +9,94 @@
 
 <script>
 
-  import UUID from './helpers/uuid';
-
-  // check for Nuxt.js SSR
-  const nuxtServerSideRendering = process && process.server;
-  let Tooltip = undefined;
-  if (!nuxtServerSideRendering) {
-    Tooltip = require('tether-tooltip');
-  }
+  import tippy from 'tippy.js/esm';
+  import elementRef from './helpers/element-ref';
 
   export default {
     name: 'KeenUiTooltip',
 
     props: {
-      trigger: {
+      animation: {
         type: String,
-        required: true,
+        default: 'fade', // 'fade', 'shift-away', or 'none'
       },
-      position: {
-        type: String,
-        default: 'bottom center',
-      },
-      openOn: {
-        type: String,
-        default: 'hover focus',
+      appendToBody: {
+        type: Boolean,
+        default: true,
       },
       openDelay: {
         type: Number,
         default: 0,
       },
-    },
-
-    data() {
-      return {
-        tooltip: null,
-        id: UUID.short('ui-tooltip-'),
-      };
-    },
-
-    watch: {
-      trigger() {
-        if (this.tooltip === null) {
-          this.initialize();
-        }
+      openOn: {
+        type: String,
+        default: 'mouseenter focus', // 'mouseenter', 'focus', 'click', or 'manual', plus 'hover' (compat)
       },
+      position: {
+        type: String,
+        default: 'bottom', // 'top', 'right', 'bottom', 'left', 'top-{start|end}', 'right-{start|end}', etc.
+      },
+      trigger: {
+        validator(value) {
+          return elementRef.validate(
+            value,
+            '[UiTooltip]: Invalid prop: "trigger". Expected Element, VueComponent or CSS selector string.'
+          );
+        },
+      },
+      zIndex: Number,
     },
 
     mounted() {
-      if (this.tooltip === null) {
-        this.initialize();
+      this.triggerEl = elementRef.resolve(this.trigger, this.$el.parentElement);
+
+      if (!this.triggerEl) {
+        /* eslint-disable-next-line no-console */
+        console.error('[UiTooltip]: Trigger element not found.');
+        return;
       }
+
+      const options = {
+        // `animateFill: true` makes the backdrop animate, making the fade look like a shift-away
+        animateFill: this.animation !== 'fade',
+        // Use 'fade' when animation is 'none', as 'none' it's not a valid Tippy.js option.
+        // The effect of no transition is achieved by `duration: 0` below.
+        animation: this.animation === 'none' ? 'fade' : this.animation,
+        arrow: false,
+        content: this.$el,
+        delay: [this.openDelay, 0],
+        distance: 4,
+        duration: this.animation === 'none' ? 0 : [250, 200],
+        ignoreAttributes: true,
+        lazy: true,
+        multiple: true,
+        placement: this.position,
+        theme: 'ui-tooltip',
+        trigger: this.openOn.replace('hover', 'mouseenter'),
+        zIndex: this.zIndex,
+        popperOptions: {
+          modifiers: {
+            computeStyle: {
+              // Disable GPU acceleration to fix blurry text in popover on Windows (Chrome)
+              // https://github.com/twbs/bootstrap/issues/23590
+              gpuAcceleration: !(window.devicePixelRatio < 1.5 && /Win/.test(navigator.platform)),
+            },
+          },
+        },
+      };
+
+      if (!this.appendToBody) {
+        options.appendTo = this.triggerEl.parentElement;
+      }
+
+      this.tip = tippy(this.triggerEl, options);
     },
 
     beforeDestroy() {
-      if (this.tooltip !== null) {
-        this.tooltip.destroy();
+      if (this.tip) {
+        this.tip.destroy();
+        this.tip = null;
       }
-    },
-
-    methods: {
-      initialize() {
-        if (process && process.client) {
-          if (this.trigger !== undefined && this.$parent.$refs[this.trigger]) {
-            const triggerEl = this.$parent.$refs[this.trigger]._isVue
-              ? this.$parent.$refs[this.trigger].$el // Use .$el if the ref is a Vue component
-              : this.$parent.$refs[this.trigger];
-
-            this.tooltip = new Tooltip({
-              target: triggerEl,
-              content: this.$refs.tooltip,
-              classes: 'ui-tooltip--theme-default',
-              position: this.position,
-              openOn: this.openOn,
-              openDelay: this.openDelay,
-            });
-
-            triggerEl.setAttribute('aria-describedby', this.id);
-          }
-        }
-      },
     },
   };
 
@@ -97,117 +106,21 @@
 <style lang="scss">
 
   @import './styles/imports';
+  /* Not to be pulled in unless necessary
+  @import './styles/tippy/tippy';
+  */
 
-  /* stylelint-disable */
+  .ui-tooltip-theme {
+    padding: 0.3rem rem(8px);
+    font-size: rem(13px);
+    line-height: 1.4;
+    color: white;
+    text-align: center;
+    background-color: rgba($md-grey-900, 0.9);
+    border-radius: $ui-default-border-radius;
 
-  $tooltip-content-margin: rem-calc(4px) !default;
-
-  .ui-tooltip {
-    line-height: 1;
-  }
-
-  // The following classes are unprefixed and not BEM
-  // because they are generated by Tether Tooltip
-
-  .tooltip-element,
-  .tooltip-element::after,
-  .tooltip-element::before,
-  .tooltip-element *,
-  .tooltip-element *::after,
-  .tooltip-element *::before {
-    box-sizing: border-box;
-  }
-
-  .tooltip-element {
-    position: absolute;
-    display: none;
-    opacity: 0;
-    transition: opacity 0.2s;
-  }
-
-  .tooltip-element.tooltip-open {
-    display: block;
-  }
-
-  .tooltip-element.tooltip-after-open {
-    opacity: 1;
-  }
-
-  .tooltip-element.ui-tooltip--theme-default {
-    z-index: $z-index-tooltip;
-    max-width: 100%;
-    max-height: 100%;
-    pointer-events: none;
-
-    .tooltip-content {
-      position: relative;
-      display: flex;
-      align-items: center;
-      height: rem-calc(26px);
-      padding: rem-calc(0 8px);
-      font-family: inherit;
-      font-size: rem-calc(13px);
-      line-height: 1;
-      color: white;
-      background: $md-grey-900;
-      border-radius: $ui-default-border-radius;
-      opacity: 0.9;
-    }
-
-    &.tooltip-element-attached-bottom.tooltip-element-attached-center .tooltip-content {
-      margin-bottom: $tooltip-content-margin;
-    }
-
-    &.tooltip-element-attached-top.tooltip-element-attached-center .tooltip-content {
-      margin-top: $tooltip-content-margin;
-    }
-
-    &.tooltip-element-attached-right.tooltip-element-attached-middle .tooltip-content {
-      margin-right: $tooltip-content-margin;
-    }
-
-    &.tooltip-element-attached-left.tooltip-element-attached-middle .tooltip-content {
-      margin-left: $tooltip-content-margin;
-    }
-
-    &.tooltip-element-attached-top.tooltip-element-attached-left.tooltip-target-attached-bottom
-      .tooltip-content {
-      margin-top: $tooltip-content-margin;
-    }
-
-    &.tooltip-element-attached-top.tooltip-element-attached-right.tooltip-target-attached-bottom
-      .tooltip-content {
-      margin-top: $tooltip-content-margin;
-    }
-
-    &.tooltip-element-attached-bottom.tooltip-element-attached-left.tooltip-target-attached-top
-      .tooltip-content {
-      margin-bottom: $tooltip-content-margin;
-    }
-
-    &.tooltip-element-attached-bottom.tooltip-element-attached-right.tooltip-target-attached-top
-      .tooltip-content {
-      margin-bottom: $tooltip-content-margin;
-    }
-
-    &.tooltip-element-attached-top.tooltip-element-attached-right.tooltip-target-attached-left
-      .tooltip-content {
-      margin-right: $tooltip-content-margin;
-    }
-
-    &.tooltip-element-attached-top.tooltip-element-attached-left.tooltip-target-attached-right
-      .tooltip-content {
-      margin-left: $tooltip-content-margin;
-    }
-
-    &.tooltip-element-attached-bottom.tooltip-element-attached-right.tooltip-target-attached-left
-      .tooltip-content {
-      margin-right: $tooltip-content-margin;
-    }
-
-    &.tooltip-element-attached-bottom.tooltip-element-attached-left.tooltip-target-attached-right
-      .tooltip-content {
-      margin-left: $tooltip-content-margin;
+    .tippy-backdrop {
+      background-color: rgba($md-grey-900, 0.9);
     }
   }
 
