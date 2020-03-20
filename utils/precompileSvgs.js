@@ -29,13 +29,13 @@ fs.readdirSync(materialSvgPath).forEach(svgDir => {
     var svgo = new SVGO();
     svgo.optimize(materialSvgFile).then(r => {
       // Apply the Kolibri-specific a11y and other attrs
-      const styledAndAccessibleSvg = r.data.replace(
-        '<svg',
-        `<svg ${a11yAttrs} ${viewBox}`
-      );
+      const styledAndAccessibleSvg = r.data.replace('<svg', `<svg ${a11yAttrs} ${viewBox}`);
 
       // Uppercase the first letter to conform to Vue filename expectations
-      const newFileName = (svgFile.charAt(0).toUpperCase() + svgFile.slice(1)).replace('svg', 'vue');
+      const newFileName = (svgFile.charAt(0).toUpperCase() + svgFile.slice(1)).replace(
+        'svg',
+        'vue'
+      );
 
       // Generate the component's object
       const scriptObj = JSON.stringify({
@@ -51,6 +51,5 @@ fs.readdirSync(materialSvgPath).forEach(svgDir => {
       // the material-icons package.
       fs.writeFileSync(`${localDir}/${newFileName}`, componentText);
     });
-
   });
 });

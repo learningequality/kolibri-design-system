@@ -1,7 +1,7 @@
 <template>
 
   <!--
-  This component was forked from the Keen library in order to handle
+  This component was forked from the  library in order to handle
   dynamic styling of the loader background color.
 
   Logic and styling has been consolidated with the KLinearLoader to simplify

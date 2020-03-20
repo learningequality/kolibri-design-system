@@ -1,7 +1,7 @@
 <template>
 
   <div class="mh">
-    <KeenUiTextbox
+    <UiTextbox
       ref="textbox"
       v-model="currentText"
       class="textbox"
@@ -31,14 +31,14 @@
 
 <script>
 
-  import KeenUiTextbox from './KeenUiTextbox';
+  import UiTextbox from '../keen/UiTextbox';
 
   /**
    * Handles user input.
    */
   export default {
     name: 'KTextbox',
-    components: { KeenUiTextbox },
+    components: { UiTextbox },
     inheritAttrs: true,
     props: {
       /**

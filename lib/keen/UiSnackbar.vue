@@ -1,7 +1,7 @@
 <template>
 
   <!--
-   This component was forked from the Keen library in order to handle
+   This component was forked from the  library in order to handle
    dynamic styling of the action button.
 
    The formatting has been changed to match our linters. We may eventually
@@ -35,7 +35,7 @@
 <script>
 
   export default {
-    name: 'KeenUiSnackbar',
+    name: 'UiSnackbar',
     props: {
       message: String,
       action: String,

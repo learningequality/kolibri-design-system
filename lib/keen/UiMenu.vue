@@ -1,7 +1,7 @@
 <template>
 
   <ul class="ui-menu" role="menu" :class="classes">
-    <KeenUiMenuOption
+    <UiMenuOption
       v-for="(option, index) in options"
       :key="index"
       :disable-ripple="disableRipple"
@@ -18,7 +18,7 @@
       @keydown.esc.native.esc="closeMenu"
     >
       <slot name="option" :option="option"></slot>
-    </KeenUiMenuOption>
+    </UiMenuOption>
 
     <div
       v-if="containFocus"
@@ -35,15 +35,15 @@
 
 <script>
 
-  import KeenUiMenuOption from './KeenUiMenuOption.vue';
+  import UiMenuOption from './UiMenuOption.vue';
 
   import config from './config';
 
   export default {
-    name: 'KeenUiMenu',
+    name: 'UiMenu',
 
     components: {
-      KeenUiMenuOption,
+      UiMenuOption,
     },
 
     props: {

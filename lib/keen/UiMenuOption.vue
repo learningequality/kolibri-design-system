@@ -27,7 +27,7 @@
 <script>
 
   export default {
-    name: 'KeenUiMenuOption',
+    name: 'UiMenuOption',
 
     props: {
       type: String,

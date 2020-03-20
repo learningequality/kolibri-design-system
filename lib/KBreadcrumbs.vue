@@ -3,7 +3,7 @@
   <div v-show="showSingleItem || crumbs.length > 1">
     <nav class="breadcrumbs">
       <div v-show="collapsedCrumbs.length" class="breadcrumbs-dropdown-wrapper">
-        <KeenUiIconButton :hasDropdown="true" size="small">
+        <UiIconButton :hasDropdown="true" size="small">
           <KIcon icon="arrow_down" />
           <div slot="dropdown" class="breadcrumbs-dropdown">
             <ol class="breadcrumbs-dropdown-items">
@@ -21,7 +21,7 @@
               </li>
             </ol>
           </div>
-        </KeenUiIconButton>
+        </UiIconButton>
       </div>
 
       <ol class="breadcrumbs-visible-items">
@@ -93,7 +93,7 @@
   import throttle from 'lodash/throttle';
   import every from 'lodash/every';
   import keys from 'lodash/keys';
-  import KeenUiIconButton from './keen/KeenUiIconButton';
+  import UiIconButton from './keen/UiIconButton';
   import KResponsiveElementMixin from './KResponsiveElementMixin';
 
   const DROPDOWN_BTN_WIDTH = 55;
@@ -110,7 +110,7 @@
    */
   export default {
     name: 'KBreadcrumbs',
-    components: { KeenUiIconButton },
+    components: { UiIconButton },
     mixins: [KResponsiveElementMixin],
     props: {
       /**

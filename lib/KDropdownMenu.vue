@@ -16,7 +16,7 @@
       />
     </div>
 
-    <KeenUiPopover
+    <UiPopover
       v-if="!disabled"
       ref="popover"
       trigger="buttonContainer"
@@ -25,11 +25,11 @@
       @close="handleClose"
       @open="handleOpen"
     >
-      <KeenUiMenu
+      <UiMenu
         :options="options"
         @select="handleSelection"
       />
-    </KeenUiPopover>
+    </UiPopover>
 
   </div>
 
@@ -38,8 +38,8 @@
 
 <script>
 
-  import KeenUiPopover from './keen/KeenUiPopover';
-  import KeenUiMenu from './keen/KeenUiMenu';
+  import UiPopover from './keen/UiPopover';
+  import UiMenu from './keen/UiMenu';
   import { validator } from './buttons-and-links/appearances';
 
   /**
@@ -48,8 +48,8 @@
   export default {
     name: 'KDropdownMenu',
     components: {
-      KeenUiPopover,
-      KeenUiMenu,
+      UiPopover,
+      UiMenu,
     },
     props: {
       /**

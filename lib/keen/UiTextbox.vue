@@ -1,7 +1,7 @@
 <template>
 
   <!--
-   This component was forked from the Keen library in order to handle
+   This component was forked from the  library in order to handle
    dynamic styling of the drop down text color.
 
    The formatting has been changed to match our linters. We may eventually
@@ -116,7 +116,7 @@
   };
 
   export default {
-    name: 'KeenUiTextbox',
+    name: 'UiTextbox',
 
     directives: {
       autofocus,

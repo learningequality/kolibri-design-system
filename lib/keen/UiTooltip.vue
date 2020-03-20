@@ -13,7 +13,7 @@
   import elementRef from './helpers/element-ref';
 
   export default {
-    name: 'KeenUiTooltip',
+    name: 'UiTooltip',
 
     props: {
       animation: {
@@ -106,6 +106,7 @@
 <style lang="scss">
 
   @import './styles/imports';
+
   /* Not to be pulled in unless necessary
   @import './styles/tippy/tippy';
   */
