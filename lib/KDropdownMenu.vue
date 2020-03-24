@@ -19,7 +19,7 @@
     <UiPopover
       v-if="!disabled"
       ref="popover"
-      trigger="buttonContainer"
+      :trigger="$refs.buttonContainer"
       :containFocus="false"
       :dropdownPosition="position"
       @close="handleClose"
