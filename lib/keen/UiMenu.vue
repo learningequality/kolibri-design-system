@@ -11,11 +11,11 @@
     :contain-focus="containFocus"
   >
     <UiMenuOption
+      v-for="(option, index) in options"
       :key="index"
       :disable-ripple="disableRipple"
       :disabled="option[keys.disabled]"
       :href="option[keys.href]"
-      v-for="(option, index) in options"
       :icon-props="iconProps || option[keys.iconProps]"
       :icon="hasIcons ? option[keys.icon] : null"
       :label="option[keys.type] === 'divider' ? null : option[keys.label] || option"

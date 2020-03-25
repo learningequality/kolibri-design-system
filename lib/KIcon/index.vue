@@ -201,7 +201,9 @@
     insert_chart: { icon: require('./material-svg/insert_chart/Baseline.vue').default },
     // DeviceTopNav
     https: { icon: require('./material-svg/https/Baseline.vue').default },
-    perm_device_information: { icon: require('./material-svg/perm_device_information/Baseline.vue').default },
+    perm_device_information: {
+      icon: require('./material-svg/perm_device_information/Baseline.vue').default,
+    },
     settings: { icon: require('./material-svg/settings/Baseline.vue').default },
     // SettingsButton
     tune: { icon: require('./material-svg/tune/Baseline.vue').default },
