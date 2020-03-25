@@ -34,6 +34,7 @@
 
 </template>
 
+
 <script>
 
   import UiFocusContainer from './UiFocusContainer.vue';
@@ -120,7 +121,10 @@
 
 </script>
 
+
 <style lang="scss">
+
+  /* stylelint-disable */
 
   @import './styles/imports';
 

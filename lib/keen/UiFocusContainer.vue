@@ -3,28 +3,28 @@
   <component :is="tag" class="ui-focus-container">
     <span
       v-if="renderRedirector"
-      class="ui-focus-container__focus-redirector"
+      class="ui-focus-container-focus-redirector"
 
       tabindex="0"
 
       @focus="redirectFocus($event, { isTabbingForward: false })"
     ></span>
 
-    <div ref="content" class="ui-focus-container__content" tabindex="-1">
+    <div ref="content" class="ui-focus-container-content" tabindex="-1">
       <slot></slot>
     </div>
 
     <span
       v-if="!disabled && containFocus"
       ref="lastFocusable"
-      class="ui-focus-container__last-focusable"
+      class="ui-focus-container-last-focusable"
 
       tabindex="-1"
     ></span>
 
     <span
       v-if="renderRedirector"
-      class="ui-focus-container__focus-redirector"
+      class="ui-focus-container-focus-redirector"
 
       tabindex="0"
 
@@ -33,6 +33,7 @@
   </component>
 
 </template>
+
 
 <script>
 
@@ -70,6 +71,9 @@
     },
 
     methods: {
+      /**
+       * @public
+       */
       focus() {
         this.$refs.content.focus();
       },
@@ -98,15 +102,16 @@
 
 </script>
 
+
 <style lang="scss">
 
-  .ui-focus-container__focus-redirector,
-  .ui-focus-container__last-focusable {
+  .ui-focus-container-focus-redirector,
+  .ui-focus-container-last-focusable {
     position: absolute;
     opacity: 0;
   }
 
-  .ui-focus-container__content {
+  .ui-focus-container-content {
     outline: none;
   }
 

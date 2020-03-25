@@ -38,6 +38,7 @@
       },
       trigger: {
         validator(value) {
+          /* eslint-disable-next-line import/no-named-as-default-member */
           return elementRef.validate(
             value,
             '[UiTooltip]: Invalid prop: "trigger". Expected Element, VueComponent or CSS selector string.'
@@ -48,6 +49,7 @@
     },
 
     mounted() {
+      /* eslint-disable-next-line import/no-named-as-default-member */
       this.triggerEl = elementRef.resolve(this.trigger, this.$el.parentElement);
 
       if (!this.triggerEl) {
@@ -106,6 +108,8 @@
 <style lang="scss">
 
   @import './styles/imports';
+
+  /* stylelint-disable */
 
   /* Not to be pulled in unless necessary
   @import './styles/tippy/tippy';

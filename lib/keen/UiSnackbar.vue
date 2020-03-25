@@ -33,6 +33,7 @@
 
 </template>
 
+
 <script>
 
   export default {
@@ -40,10 +41,12 @@
     props: {
       message: String,
       action: String,
+      /* - no use after being re-vendored
       actionColor: {
         type: String,
         default: 'accent', // 'primary' or 'accent'
       },
+      */
       transition: {
         type: String,
         default: 'slide', // 'slide' or 'fade'
@@ -80,7 +83,7 @@
 
 <style lang="scss" scoped>
 
- /* stylelint disable */
+  /* stylelint-disable */
 
   @import '../styles/definitions';
   @import './styles/imports';
@@ -119,9 +122,7 @@
   .ui-snackbar-action-button {
     @include font-family-noto;
 
-    background-color: $ui-snackbar-background-color !important;
     position: relative;
-    box-shadow: none;
     min-width: initial;
     min-height: initial;
     padding: 0;
@@ -136,9 +137,11 @@
     touch-action: manipulation; // IE
     cursor: pointer;
     background: none;
+    background-color: $ui-snackbar-background-color !important;
     border: 0;
     border-radius: $ui-default-border-radius;
     outline: none;
+    box-shadow: none;
     &:hover {
       background-color: lighten($ui-snackbar-background-color, 5%) !important;
     }

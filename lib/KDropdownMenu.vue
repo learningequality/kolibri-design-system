@@ -121,7 +121,7 @@
         if (
           popover.contains(focusedElement) &&
           (focusedElement.classList.contains('ui-popover') ||
-            focusedElement.classList.contains('ui-popover__focus-redirector') ||
+            focusedElement.classList.contains('ui-popover-focus-redirector') ||
             focusedElement.classList.contains('ui-menu-option'))
         ) {
           this.focusOnButton();

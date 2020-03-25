@@ -16,6 +16,7 @@
 
 </template>
 
+
 <script>
 
   import tippy from 'tippy.js/esm';
@@ -72,6 +73,7 @@
       },
       trigger: {
         validator(value) {
+          /* eslint-disable-next-line import/no-named-as-default-member */
           return elementRef.validate(
             value,
             '[UiPopover]: Invalid prop: "trigger". Expected Element, VueComponent or CSS selector string which matches an existing element.'
@@ -113,9 +115,11 @@
 
     methods: {
       setupPopover() {
+        /* eslint-disable-next-line import/no-named-as-default-member */
         this.triggerEl = elementRef.resolve(this.trigger, this.$el.parentElement);
 
         if (!this.triggerEl) {
+          /* eslint-disable-next-line no-console */
           console.error('[UiPopover]: Trigger element not found.');
           return;
         }
@@ -180,7 +184,9 @@
       isOpen() {
         return this.tip && this.tip.state.isVisible;
       },
-
+      /**
+       * @public
+       */
       open() {
         if (this.tip) {
           this.tip.show();
@@ -193,14 +199,18 @@
           this.tip.hide();
         }
       },
-
+      /**
+       * @public
+       */
       toggle(options = { returnFocus: true }) {
         if (this.tip) {
           this.returnFocus = options.returnFocus;
           this.tip[this.isOpen() ? 'hide' : 'show']();
         }
       },
-
+      /**
+       * @public
+       */
       scheduleUpdate() {
         if (this.tip) {
           this.tip.popperInstance.scheduleUpdate();
@@ -251,15 +261,18 @@
 
         // Add event listeners in the next tick, otherwise they're triggered immediately
         setTimeout(() => {
+          /* eslint-disable-next-line import/no-named-as-default-member */
           this.removeExternalClickListener = events.on('click', document, e => {
             this.closeOnExternal(e, { returnFocus: false });
           });
 
+          /* eslint-disable-next-line import/no-named-as-default-member */
           this.removeEscListener = events.onKeydown(27, document, () => {
             this.close({ returnFocus: true });
           });
 
           if (this.closeOnScroll) {
+            /* eslint-disable-next-line import/no-named-as-default-member */
             this.removeScrollListener = events.on('scroll', document, e => {
               this.closeOnExternal(e, { returnFocus: true });
             });
@@ -287,6 +300,7 @@
   };
 
 </script>
+
 
 <style lang="scss">
 

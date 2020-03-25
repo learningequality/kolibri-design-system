@@ -73,6 +73,7 @@
 
 </template>
 
+
 <script>
 
   import UiIcon from './UiIcon.vue';
@@ -181,7 +182,7 @@
       isAnchor() {
         return this.href !== undefined;
       },
-
+      /* !! removed during vendoring
       progressColor() {
         if (this.type === 'primary') {
           if (this.color === 'default' || this.color === 'black') {
@@ -197,6 +198,7 @@
 
         return 'black';
       },
+      */
     },
 
     methods: {
@@ -211,19 +213,25 @@
       onDropdownClose() {
         this.$emit('dropdown-close');
       },
-
+      /**
+       * @public
+       */
       openDropdown() {
         if (this.$refs.dropdown) {
           this.$refs.dropdown.open();
         }
       },
-
+      /**
+       * @public
+       */
       closeDropdown() {
         if (this.$refs.dropdown) {
           this.$refs.dropdown.close();
         }
       },
-
+      /**
+       * @public
+       */
       toggleDropdown() {
         if (this.$refs.dropdown) {
           this.$refs.dropdown.toggle();

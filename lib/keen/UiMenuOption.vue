@@ -11,11 +11,11 @@
     :target="isAnchor ? (disabled ? null : target) : null"
   >
     <slot v-if="!isDivider">
-      <div class="ui-menu-option__content">
+      <div class="ui-menu-option-content">
         <UiIcon
           v-if="icon"
 
-          class="ui-menu-option__icon"
+          class="ui-menu-option-icon"
           :icon-set="iconProps.iconSet"
           :icon="icon"
           :remove-text="iconProps.removeText"
@@ -23,11 +23,11 @@
           :use-svg="iconProps.useSvg"
         />
 
-        <div class="ui-menu-option__text">
+        <div class="ui-menu-option-text">
           {{ label }}
         </div>
 
-        <div v-if="secondaryText" class="ui-menu-option__secondary-text">
+        <div v-if="secondaryText" class="ui-menu-option-secondary-text">
           {{ secondaryText }}
         </div>
       </div>
@@ -36,6 +36,7 @@
   </component>
 
 </template>
+
 
 <script>
 
@@ -88,7 +89,10 @@
 
 </script>
 
+
 <style lang="scss">
+
+  /* stylelint-disable */
 
   @import './styles/imports';
 
@@ -126,33 +130,33 @@
         cursor: default;
         opacity: 0.5;
 
-        .ui-menu-option__secondary-text {
+        .ui-menu-option-secondary-text {
           color: $secondary-text-color;
         }
       }
     }
   }
 
-  .ui-menu-option__content {
+  .ui-menu-option-content {
     display: flex;
     align-items: center;
     height: rem(40px);
     padding: rem(0 16px);
   }
 
-  .ui-menu-option__icon {
+  .ui-menu-option-icon {
     margin-right: rem(16px);
     font-size: rem(18px);
     color: $secondary-text-color;
   }
 
-  .ui-menu-option__text {
+  .ui-menu-option-text {
     @include text-truncation;
 
     flex-grow: 1;
   }
 
-  .ui-menu-option__secondary-text {
+  .ui-menu-option-secondary-text {
     flex-shrink: 0;
     margin-left: rem(4px);
     font-size: rem(13px);
