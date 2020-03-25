@@ -14,7 +14,7 @@
 <script>
 
   export default {
-    name: 'KeenUiIcon',
+    name: 'UiIcon',
 
     props: {
       icon: String,

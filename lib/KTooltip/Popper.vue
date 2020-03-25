@@ -25,7 +25,7 @@
     box-shadow: rgb(58, 58, 58) 0 0 6px 0;
   }
 
-  .popper .popper__arrow {
+  .popper .popper-arrow {
     width: 0;
     height: 0;
     border-style: solid;
@@ -37,7 +37,7 @@
     margin-bottom: 5px;
   }
 
-  .popper[x-placement^="top"] .popper__arrow {
+  .popper[x-placement^="top"] .popper-arrow {
     border-width: 5px 5px 0 5px;
     border-color: #fafafa transparent transparent transparent;
     bottom: -5px;
@@ -50,7 +50,7 @@
     margin-top: 5px;
   }
 
-  .popper[x-placement^="bottom"] .popper__arrow {
+  .popper[x-placement^="bottom"] .popper-arrow {
     border-width: 0 5px 5px 5px;
     border-color: transparent transparent #fafafa transparent;
     top: -5px;
@@ -63,7 +63,7 @@
     margin-left: 5px;
   }
 
-  .popper[x-placement^="right"] .popper__arrow {
+  .popper[x-placement^="right"] .popper-arrow {
     border-width: 5px 5px 5px 0;
     border-color: transparent #fafafa transparent transparent;
     left: -5px;
@@ -76,7 +76,7 @@
     margin-right: 5px;
   }
 
-  .popper[x-placement^="left"] .popper__arrow {
+  .popper[x-placement^="left"] .popper-arrow {
     border-width: 5px 0 5px 5px;
     border-color: transparent transparent transparent #fafafa;
     right: -5px;
@@ -347,7 +347,7 @@
 
         const arrow = document.createElement('div');
         arrow.setAttribute('x-arrow', '');
-        arrow.className = 'popper__arrow';
+        arrow.className = 'popper-arrow';
         element.appendChild(arrow);
       },
 

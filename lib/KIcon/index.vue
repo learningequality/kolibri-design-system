@@ -176,9 +176,15 @@
       icon: require('./material-svg/check_box_outline_blank/Baseline.vue').default,
     },
     cancel: { icon: require('./material-svg/cancel/Baseline.vue').default },
-      // left/right found in navbar/index
-    keyboard_arrow_left: { icon: require('./material-svg/keyboard_arrow_left/Baseline.vue').default, rtlFlip: true },
-    keyboard_arrow_right: { icon: require('./material-svg/keyboard_arrow_right/Baseline.vue').default, rtlFlip: true },
+    // left/right found in navbar/index
+    keyboard_arrow_left: {
+      icon: require('./material-svg/keyboard_arrow_left/Baseline.vue').default,
+      rtlFlip: true,
+    },
+    keyboard_arrow_right: {
+      icon: require('./material-svg/keyboard_arrow_right/Baseline.vue').default,
+      rtlFlip: true,
+    },
     // ProgressIcon
     schedule: { icon: require('./material-svg/schedule/Baseline.vue').default },
     // DragSortWidget
@@ -195,7 +201,9 @@
     insert_chart: { icon: require('./material-svg/insert_chart/Baseline.vue').default },
     // DeviceTopNav
     https: { icon: require('./material-svg/https/Baseline.vue').default },
-    perm_device_information: { icon: require('./material-svg/perm_device_information/Baseline.vue').default },
+    perm_device_information: {
+      icon: require('./material-svg/perm_device_information/Baseline.vue').default,
+    },
     settings: { icon: require('./material-svg/settings/Baseline.vue').default },
     // SettingsButton
     tune: { icon: require('./material-svg/tune/Baseline.vue').default },

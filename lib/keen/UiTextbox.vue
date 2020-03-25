@@ -1,27 +1,22 @@
 <template>
 
   <!--
-   This component was forked from the Keen library in order to handle
+   This component was forked from the  library in order to handle
    dynamic styling of the drop down text color.
 
    The formatting has been changed to match our linters. We may eventually
    want to simply consolidate it with our component and remove any unused
    functionality.
   -->
-
   <div class="ui-textbox" :class="classes">
+    <div v-if="icon || $slots.icon" class="ui-textbox-icon-wrapper">
+      <slot name="icon">
+        <UiIcon :icon="icon" />
+      </slot>
+    </div>
 
     <div class="ui-textbox-content">
       <label class="ui-textbox-label">
-        <div
-          v-if="label || $slots.default"
-          class="ui-textbox-label-text"
-          :class="labelClasses"
-          :style="isActive ? { color: $themeTokens.primary } : {}"
-        >
-          <slot>{{ label }}</slot>
-        </div>
-
         <input
           v-if="!multiLine"
           ref="input"
@@ -32,6 +27,7 @@
           :disabled="disabled"
           :max="maxValue"
           :maxlength="enforceMaxlength ? maxlength : null"
+          :minlength="minlength"
           :min="minValue"
           :name="name"
           :number="type === 'number' ? true : null"
@@ -40,7 +36,7 @@
           :required="required"
           :step="stepValue"
           :style="isActive ? { borderBottomColor: $themeTokens.primary } : {}"
-
+          :tabindex="tabindex"
           :type="type"
           :value="value"
           @blur="onBlur"
@@ -62,14 +58,17 @@
           :autocomplete="autocomplete ? autocomplete : null"
           :disabled="disabled"
           :maxlength="enforceMaxlength ? maxlength : null"
+          :minlength="minlength"
           :name="name"
           :placeholder="hasFloatingLabel ? null : placeholder"
-
           :readonly="readonly"
-
           :required="required"
+
           :rows="rows"
           :style="isActive ? { borderBottomColor: $themeTokens.primary } : {}"
+
+          :tabindex="tabindex"
+
           @blur="onBlur"
           @change="onChange"
           @focus="onFocus"
@@ -78,6 +77,15 @@
           @keydown.enter="onKeydownEnter"
           @keydown="onKeydown"
         ></textarea>
+
+        <div
+          v-if="label || $slots.default"
+          class="ui-textbox-label-text"
+          :class="labelClasses"
+          :style="isActive ? { color: $themeTokens.primary } : {}"
+        >
+          <slot>{{ label }}</slot>
+        </div>
       </label>
 
       <div v-if="hasFeedback || maxlength" class="ui-textbox-feedback">
@@ -94,7 +102,7 @@
         </div>
 
         <div v-if="maxlength" class="ui-textbox-counter">
-          {{ $tr('maxLengthCounter', { current: valueLength, max: maxlength }) }}
+          {{ valueLength + '/' + maxlength }}
         </div>
       </div>
     </div>
@@ -106,6 +114,7 @@
 <script>
 
   import autosize from 'autosize';
+  import UiIcon from './UiIcon.vue';
 
   const autofocus = {
     inserted(el, { value }) {
@@ -116,7 +125,11 @@
   };
 
   export default {
-    name: 'KeenUiTextbox',
+    name: 'UiTextbox',
+
+    components: {
+      UiIcon,
+    },
 
     directives: {
       autofocus,
@@ -125,9 +138,15 @@
     props: {
       name: String,
       placeholder: String,
+      tabindex: [String, Number],
       value: {
         type: [String, Number],
         default: '',
+      },
+      icon: String,
+      iconPosition: {
+        type: String,
+        default: 'left', // 'left' or 'right'
       },
       label: String,
       floatingLabel: {
@@ -158,10 +177,11 @@
       min: Number,
       max: Number,
       step: {
-        type: String,
+        type: [String, Number],
         default: 'any',
       },
       maxlength: Number,
+      minlength: Number,
       enforceMaxlength: {
         type: Boolean,
         default: false,
@@ -198,7 +218,7 @@
     computed: {
       classes() {
         return [
-          'ui-textbox--icon-position-left',
+          `ui-textbox--icon-position-${this.iconPosition}`,
           { 'is-active': this.isActive },
           { 'is-invalid': this.invalid },
           { 'is-touched': this.isTouched },
@@ -254,7 +274,7 @@
       },
 
       hasFeedback() {
-        return Boolean(this.help) || Boolean(this.error) || Boolean(this.$slots.error);
+        return this.showError || this.showHelp;
       },
 
       showError() {
@@ -262,7 +282,7 @@
       },
 
       showHelp() {
-        return !this.showError && (Boolean(this.help) || Boolean(this.$slots.help));
+        return Boolean(this.help) || Boolean(this.$slots.help);
       },
     },
 
@@ -318,7 +338,6 @@
       onKeydownEnter(e) {
         this.$emit('keydown-enter', e);
       },
-
       /**
        * @public
        */
@@ -339,7 +358,6 @@
       resetTouched(options = { touched: false }) {
         this.isTouched = options.touched;
       },
-
       /**
        * @public
        */
@@ -348,10 +366,12 @@
           autosize.update(this.$refs.textarea);
         }
       },
-    },
-
-    $trs: {
-      maxLengthCounter: '{current, number, integer}/{max, number, integer}',
+      /**
+       * @public
+       */
+      focus() {
+        (this.$refs.input || this.$refs.textarea).focus();
+      },
     },
   };
 
@@ -360,9 +380,9 @@
 
 <style lang="scss" scoped>
 
-  @import '../keen/styles/imports';
-
   /* stylelint-disable */
+
+  @import './styles/imports';
 
   .ui-textbox {
     display: flex;
@@ -379,12 +399,11 @@
         border-bottom-color: $ui-input-border-color--hover;
       }
     }
-    &:focus {
-    }
 
     &.is-active:not(.is-disabled) {
       .ui-textbox-input,
       .ui-textbox-textarea {
+        border-bottom-color: $ui-input-border-color--active;
         border-bottom-width: $ui-input-border-width--active;
       }
     }
@@ -397,15 +416,16 @@
 
     &.has-counter {
       .ui-textbox-feedback-text {
-        padding-right: rem-calc(48px);
+        padding-right: rem(48px);
       }
     }
 
     &.has-floating-label {
       .ui-textbox-label-text {
         // Behaves like a block, but width is the width of its content.
-        // Needed here so label doesn't overflow parent when scaled.
+        // Needed here so label doesn't overflow parent when scaled up (to appear inline).
         display: table;
+        width: fit-content;
 
         &.is-inline {
           color: $ui-input-label-color; // So the hover styles don't override it
@@ -416,6 +436,15 @@
         &.is-floating {
           transform: translateY(0) scale(1);
         }
+      }
+
+      // Fixes glitch in chrome where label and input value overlap each other
+      // when webkit-autofill value has not been propagated yet (e.g. https://github.com/vuejs/vue/issues/1331)
+      // The webkit-autofill value will only be propagated on first click into the viewport.
+      // Before that .is-inline will be wrongly set and cause the auto filled input value and the label to overlap.
+      // This fix will style the wrong .is-inline like an .is-floating in case :-webkit-autofill is set.
+      .ui-textbox-label > input:-webkit-autofill + .ui-textbox-label-text.is-inline {
+        transform: translateY(0) scale(1);
       }
     }
 
@@ -455,7 +484,8 @@
   }
 
   .ui-textbox-label {
-    display: block;
+    display: flex;
+    flex-direction: column-reverse;
     width: 100%;
     padding: 0;
     margin: 0;
@@ -464,7 +494,7 @@
   .ui-textbox-icon-wrapper {
     flex-shrink: 0;
     padding-top: $ui-input-icon-margin-top;
-    margin-right: rem-calc(12px);
+    margin-right: rem(12px);
 
     .ui-icon {
       color: $ui-input-icon-color;
@@ -486,9 +516,7 @@
   }
 
   .ui-textbox-input,
-  .ui-textbox-textarea,
-  .ui-textbox-input:focus,
-  .ui-textbox-textarea:focus {
+  .ui-textbox-textarea {
     display: block;
     width: 100%;
     padding: 0;
@@ -512,7 +540,7 @@
   }
 
   .ui-textbox-textarea {
-    padding-bottom: rem-calc(6px);
+    padding-bottom: rem(6px);
     overflow-x: hidden;
     overflow-y: auto;
     resize: vertical;
@@ -533,6 +561,16 @@
     right: 0;
   }
 
-  /* stylelint-enable */
+  // ================================================
+  // Icon position
+  // ================================================
+
+  .ui-textbox--icon-position-right {
+    .ui-textbox-icon-wrapper {
+      order: 1;
+      margin-right: 0;
+      margin-left: rem(8px);
+    }
+  }
 
 </style>

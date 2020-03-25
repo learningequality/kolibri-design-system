@@ -1,49 +1,51 @@
 <template>
 
-  <ul class="ui-menu" role="menu" :class="classes">
-    <KeenUiMenuOption
+  <UiFocusContainer
+    ref="focusContainer"
+    class="ui-menu"
+    role="menu"
+    tag="ul"
+    lazy
+
+    :class="classes"
+    :contain-focus="containFocus"
+  >
+    <UiMenuOption
       v-for="(option, index) in options"
       :key="index"
       :disable-ripple="disableRipple"
       :disabled="option[keys.disabled]"
+      :href="option[keys.href]"
       :icon-props="iconProps || option[keys.iconProps]"
       :icon="hasIcons ? option[keys.icon] : null"
       :label="option[keys.type] === 'divider' ? null : option[keys.label] || option"
       :secondary-text="hasSecondaryText ? option[keys.secondaryText] : null"
+      :target="option[keys.target]"
 
       :type="option[keys.type]"
       @click.native="selectOption(option)"
-      @keydown.enter.native.prevent="selectOption(option)"
+      @keydown.enter.native="selectOption(option)"
 
       @keydown.esc.native.esc="closeMenu"
     >
       <slot name="option" :option="option"></slot>
-    </KeenUiMenuOption>
-
-    <div
-      v-if="containFocus"
-      class="ui-menu-focus-redirector"
-
-      tabindex="0"
-
-      @focus="redirectFocus"
-    ></div>
-  </ul>
+    </UiMenuOption>
+  </UiFocusContainer>
 
 </template>
 
 
 <script>
 
-  import KeenUiMenuOption from './KeenUiMenuOption.vue';
-
-  import config from './config';
+  import UiFocusContainer from './UiFocusContainer.vue';
+  import UiMenuOption from './UiMenuOption.vue';
 
   export default {
-    name: 'KeenUiMenu',
+    name: 'UiMenu',
 
     components: {
-      KeenUiMenuOption,
+      UiFocusContainer,
+      UiMenuOption,
     },
 
     props: {
@@ -69,12 +71,21 @@
       keys: {
         type: Object,
         default() {
-          return config.data.UiMenu.keys;
+          return {
+            icon: 'icon',
+            type: 'type',
+            label: 'label',
+            secondaryText: 'secondaryText',
+            iconProps: 'iconProps',
+            disabled: 'disabled',
+            href: 'href',
+            target: 'target',
+          };
         },
       },
       disableRipple: {
         type: Boolean,
-        default: config.data.disableRipple,
+        default: false,
       },
       raised: {
         type: Boolean,
@@ -105,11 +116,6 @@
       closeMenu() {
         this.$emit('close');
       },
-
-      redirectFocus(e) {
-        e.stopPropagation();
-        this.$el.querySelector('.ui-menu-option').focus();
-      },
     },
   };
 
@@ -118,22 +124,22 @@
 
 <style lang="scss">
 
-  @import './styles/imports';
-
   /* stylelint-disable */
 
+  @import './styles/imports';
+
   .ui-menu {
-    min-width: rem-calc(168px);
-    max-width: rem-calc(272px);
+    min-width: rem(168px);
+    max-width: rem(272px);
     max-height: 100vh;
-    padding: rem-calc(4px 0);
+    padding: rem(4px 0);
     margin: 0;
     overflow-x: hidden;
     overflow-y: auto;
     font-family: $font-stack;
     list-style: none;
     background-color: white;
-    border: rem-calc(1px) solid rgba(black, 0.08);
+    border: rem(1px) solid rgba(black, 0.08);
     outline: none;
 
     &.is-raised {
@@ -143,14 +149,9 @@
     }
 
     &.has-secondary-text {
-      min-width: rem-calc(240px);
-      max-width: rem-calc(304px);
+      min-width: rem(240px);
+      max-width: rem(304px);
     }
-  }
-
-  .ui-menu-focus-redirector {
-    position: absolute;
-    opacity: 0;
   }
 
 </style>

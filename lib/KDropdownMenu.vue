@@ -16,20 +16,20 @@
       />
     </div>
 
-    <KeenUiPopover
+    <UiPopover
       v-if="!disabled"
       ref="popover"
-      trigger="buttonContainer"
+      :trigger="$refs.buttonContainer"
       :containFocus="false"
       :dropdownPosition="position"
       @close="handleClose"
       @open="handleOpen"
     >
-      <KeenUiMenu
+      <UiMenu
         :options="options"
         @select="handleSelection"
       />
-    </KeenUiPopover>
+    </UiPopover>
 
   </div>
 
@@ -38,8 +38,8 @@
 
 <script>
 
-  import KeenUiPopover from './keen/KeenUiPopover';
-  import KeenUiMenu from './keen/KeenUiMenu';
+  import UiPopover from './keen/UiPopover';
+  import UiMenu from './keen/UiMenu';
   import { validator } from './buttons-and-links/appearances';
 
   /**
@@ -48,8 +48,8 @@
   export default {
     name: 'KDropdownMenu',
     components: {
-      KeenUiPopover,
-      KeenUiMenu,
+      UiPopover,
+      UiMenu,
     },
     props: {
       /**
@@ -121,7 +121,7 @@
         if (
           popover.contains(focusedElement) &&
           (focusedElement.classList.contains('ui-popover') ||
-            focusedElement.classList.contains('ui-popover__focus-redirector') ||
+            focusedElement.classList.contains('ui-popover-focus-redirector') ||
             focusedElement.classList.contains('ui-menu-option'))
         ) {
           this.focusOnButton();

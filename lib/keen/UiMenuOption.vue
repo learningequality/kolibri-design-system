@@ -1,37 +1,66 @@
 <template>
 
-  <li
-    ref="menuOption"
+  <component
+    :is="isAnchor ? 'a' : 'li'"
     class="ui-menu-option"
-    role="menu-item"
 
+    role="menu-item"
     :class="classes"
-    :tabindex="(isDivider || disabled) ? null : '0'"
+    :href="isAnchor ? (disabled ? null : href) : null"
+    :tabindex="(isDivider || isAnchor || disabled) ? null : '0'"
+    :target="isAnchor ? (disabled ? null : target) : null"
   >
     <slot v-if="!isDivider">
       <div class="ui-menu-option-content">
+        <UiIcon
+          v-if="icon"
+
+          class="ui-menu-option-icon"
+          :icon-set="iconProps.iconSet"
+          :icon="icon"
+          :remove-text="iconProps.removeText"
+
+          :use-svg="iconProps.useSvg"
+        />
+
         <div class="ui-menu-option-text">
           {{ label }}
         </div>
+
         <div v-if="secondaryText" class="ui-menu-option-secondary-text">
           {{ secondaryText }}
         </div>
       </div>
     </slot>
 
-  </li>
+  </component>
 
 </template>
 
 
 <script>
 
+  import UiIcon from './UiIcon.vue';
+
   export default {
-    name: 'KeenUiMenuOption',
+    name: 'UiMenuOption',
+
+    components: {
+      UiIcon,
+    },
 
     props: {
       type: String,
       label: String,
+      href: String,
+      target: String,
+      icon: String,
+      iconProps: {
+        type: Object,
+        default() {
+          return {};
+        },
+      },
       secondaryText: String,
       disabled: {
         type: Boolean,
@@ -44,11 +73,16 @@
         return {
           'is-divider': this.isDivider,
           'is-disabled': this.disabled,
+          'is-anchor': this.isAnchor,
         };
       },
 
       isDivider() {
         return this.type === 'divider';
+      },
+
+      isAnchor() {
+        return !this.isDivider && this.href !== undefined;
       },
     },
   };
@@ -58,36 +92,37 @@
 
 <style lang="scss">
 
-  @import './styles/imports';
-
   /* stylelint-disable */
+
+  @import './styles/imports';
 
   .ui-menu-option {
     position: relative;
     display: block;
     width: 100%;
-    font-family: $font-stack;
+    font-family: inherit;
     user-select: none;
 
     &.is-divider {
       display: block;
-      height: rem-calc(1px);
+      height: rem(1px);
       padding: 0;
-      margin: rem-calc(6px 0);
+      margin: rem(6px 0);
       background-color: rgba(black, 0.08);
     }
 
     &:not(.is-divider) {
-      min-height: rem-calc(40px);
+      min-height: rem(40px);
       font-size: $ui-dropdown-item-font-size;
       font-weight: normal;
       color: $primary-text-color;
+      text-decoration: none;
       cursor: pointer;
       outline: none;
 
       &:hover:not(.is-disabled),
       body[modality='keyboard'] &:focus {
-        background-color: #eeeeee; // rgba(black, 0.1);
+        background-color: $ui-menu-item-hover-color;
       }
 
       &.is-disabled {
@@ -105,8 +140,14 @@
   .ui-menu-option-content {
     display: flex;
     align-items: center;
-    height: rem-calc(40px);
-    padding: rem-calc(0 16px);
+    height: rem(40px);
+    padding: rem(0 16px);
+  }
+
+  .ui-menu-option-icon {
+    margin-right: rem(16px);
+    font-size: rem(18px);
+    color: $secondary-text-color;
   }
 
   .ui-menu-option-text {
@@ -117,8 +158,8 @@
 
   .ui-menu-option-secondary-text {
     flex-shrink: 0;
-    margin-left: rem-calc(4px);
-    font-size: rem-calc(13px);
+    margin-left: rem(4px);
+    font-size: rem(13px);
     color: $hint-text-color;
   }
 
