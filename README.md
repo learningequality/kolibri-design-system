@@ -129,3 +129,30 @@ Icons are drawn from https://github.com/material-icons/material-icons and then c
 ```bash
 yarn run precompile-svgs
 ```
+
+### Development in parallel with other applications
+
+If you are working on this repository and want to see live updates to the component library here in other applications that are using this library, then you will need to do a few things.
+
+1. While in the root of your local `kolibri-design-system` repository, run `yarn link`.
+2. In the application where you intend to use `kolibri-design-system` remove the reference to `kolibri-design-system` from the `package.json` of that project.
+3. In the root of the application where you intend to use `kolibri-design-system` run `yarn link kolibri-design-system && yarn install`.
+
+Now, when you run the application your changes in `kolibri-design-system` will be updated live where your app expects its dependency on `kolibri-design-system` to live.
+
+For example, given that you have `~/kolibri` and `~/kolibri-design-system` folders with their respective local repositories.
+
+```
+cd ~/kolibri-design-system
+yarn link
+cd ~/kolibri
+```
+
+Remove the reference to `kolibri-design-system` from `kolibri/core/package.json`
+
+```
+yarn link kolibri-design-system && yarn install
+yarn run devserver
+```
+
+Now you're all set to see your changes to the Kolibri Design System working live in Kolibri!
