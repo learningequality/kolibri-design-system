@@ -104,6 +104,7 @@
   .header-text {
     display: inline-block;
     margin-left: 8px;
+    font-weight: 400;
   }
 
   .filter-wrapper {

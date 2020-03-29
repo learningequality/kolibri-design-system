@@ -3,23 +3,17 @@
   <div
     v-if="page.disabled"
     class="block disabled-link"
+    :class="{ code: page.isCode }"
   >
-    <code v-if="page.isCode">{{ page.title }}</code>
-    <template v-else>
-      {{ page.title }}
-    </template>
+    {{ page.title }}
   </div>
   <a
     v-else
     class="block enabled-link"
     :href="page.path"
-    :class="{ currentPage }"
+    :class="{ currentPage, code: page.isCode }"
   >
-    <code
-      v-if="page.isCode"
-      class="code"
-    >{{ page.title }}</code>
-    <template v-else>{{ page.title }}</template>
+    {{ page.title }}
   </a>
 
 </template>
@@ -66,11 +60,6 @@
     color: #777777;
   }
 
-  .code {
-    display: block;
-    background-color: transparent;
-  }
-
   .enabled-link {
     color: $link-color;
     text-decoration: none;
@@ -84,8 +73,7 @@
     }
   }
 
-  .currentPage,
-  .currentPage .code {
+  .currentPage {
     color: black;
     background-color: $border-color;
 
