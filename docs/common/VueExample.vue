@@ -17,13 +17,11 @@
 <script>
 
   import CodeBlock from './CodeBlock';
-  import Show from './Show';
 
   export default {
     name: 'VueExample',
     components: {
       CodeBlock,
-      Show,
     },
     props: {
       code: {

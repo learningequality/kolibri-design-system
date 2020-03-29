@@ -136,14 +136,10 @@
 <script>
 
   import IconBlock from '~/common/IconBlock';
-  import Show from '~/common/Show';
-  import DoNot from '~/common/DoNot';
 
   export default {
     components: {
       IconBlock,
-      Show,
-      DoNot,
     },
     computed: {
       ui() {
