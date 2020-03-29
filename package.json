@@ -16,6 +16,7 @@
     "_lint-watch-fix": "yarn _lint -w -m",
     "_lint": "kolibri-tools lint '**/*.{js,vue,scss,less,css}' -i ,'**/node_modules/**','**/.nuxt/**','**/dist/**','**/material-svg/**'",
     "_test": "jest",
+    "generate-lib-docs": "node utils/genDocs.js",
     "precompile-svgs": "rm -rf lib/KIcon/material-svg && node utils/precompileSvgs.js"
   },
   "files": [
@@ -39,6 +40,7 @@
     "@vue/test-utils": "^1.0.0-beta.27",
     "@vuedoc/parser": "^1.4.0",
     "babel-jest": "^24.1.0",
+    "chokidar": "^3.3.1",
     "eslint-import-resolver-nuxt": "^1.0.0",
     "jest": "^24.1.0",
     "kolibri-tools": "0.13.0-dev.9",
