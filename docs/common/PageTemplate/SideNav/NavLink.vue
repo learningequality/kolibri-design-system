@@ -1,13 +1,24 @@
 <template>
 
-  <div v-if="page.disabled" class="disabled-link">
-    <code v-if="page.code">{{ page.title }}</code>
-    <template else>
+  <div
+    v-if="page.disabled"
+    class="block disabled-link"
+  >
+    <code v-if="page.isCode">{{ page.title }}</code>
+    <template v-else>
       {{ page.title }}
     </template>
   </div>
-  <a v-else :href="page.path" :class="{ active: page.path === $route.path }">
-    <code v-if="page.code">{{ page.title }}</code>
+  <a
+    v-else
+    class="block enabled-link"
+    :href="page.path"
+    :class="{ currentPage }"
+  >
+    <code
+      v-if="page.isCode"
+      class="code"
+    >{{ page.title }}</code>
     <template v-else>{{ page.title }}</template>
   </a>
 
@@ -29,6 +40,11 @@
         },
       },
     },
+    computed: {
+      currentPage() {
+        return this.page.path === this.$route.path;
+      },
+    },
   };
 
 </script>
@@ -38,36 +54,42 @@
 
   @import '~/assets/definitions';
 
-  .disabled-link {
+  .block {
     display: block;
     padding: 4px 8px;
     margin-right: -8px;
     margin-bottom: 2px;
     margin-left: -8px;
+  }
+
+  .disabled-link {
     color: #777777;
   }
 
-  a {
+  .code {
     display: block;
-    padding: 4px 8px;
-    margin-right: -8px;
-    margin-bottom: 2px;
-    margin-left: -8px;
+    background-color: transparent;
+  }
+
+  .enabled-link {
     color: $link-color;
     text-decoration: none;
     border-radius: 4px;
     outline-offset: 3px;
+    transition: all 0.2s ease;
 
     &:hover {
       color: $link-hover-color;
       background-color: #efefef;
-
-      code {
-        color: $link-hover-color;
-      }
     }
+  }
 
-    &.active {
+  .currentPage,
+  .currentPage .code {
+    color: black;
+    background-color: $border-color;
+
+    &:hover {
       color: black;
       background-color: $border-color;
     }

@@ -4,16 +4,16 @@
     <SideNav />
     <Header
       :sections="sections"
-      :title="title"
-      :codeStyle="isComponent"
+      :title="page.title"
+      :codeStyle="page.isCode"
       class="floating-header"
     />
     <div class="border">
       <!-- used as a spacer -->
       <Header
         :sections="sections"
-        :title="title"
-        :codeStyle="isComponent"
+        :title="page.title"
+        :codeStyle="page.isCode"
         style="visibility: hidden;"
       />
       <!-- end of spacer -->
@@ -30,21 +30,9 @@
 
   import consola from 'consola';
   import PageSection from '../PageSection';
-  import { homePage, patternPages } from './pages.js';
+  import tableOfContents from './tableOfContents.js';
   import Header from './Header';
   import SideNav from './SideNav';
-
-  function currentPage(path) {
-    if (path === '/') {
-      return homePage;
-    }
-    const currentPath = path.replace(/\/$/, '');
-    const page = patternPages.find(p => p.path === currentPath);
-    if (!page) {
-      consola.warn(`'${currentPath}' not found in pages.js`);
-    }
-    return page;
-  }
 
   export default {
     name: 'PageTemplate',
@@ -52,13 +40,21 @@
       Header,
       SideNav,
     },
-    props: {
-      isComponent: {
-        type: Boolean,
-        default: false,
-      },
-    },
     computed: {
+      page() {
+        const path = this.$route.path;
+        // Search for page
+        for (const section of tableOfContents) {
+          for (const page of section.pages) {
+            if (path === page.path) {
+              return page;
+            }
+          }
+        }
+        // Page not found
+        consola.error(`'${path}' not found in pages.js`);
+        return undefined;
+      },
       sections() {
         // look at children for sections and extract links
         return this.$slots.default
@@ -70,16 +66,9 @@
           )
           .map(node => node.componentOptions.propsData);
       },
-      title() {
-        const page = currentPage(this.$route.path);
-        if (page) {
-          return page.title;
-        }
-        return undefined;
-      },
       fullTitle() {
         const main = 'Kolibri Design System';
-        return this.title ? `${this.title} - ${main}` : main;
+        return this.page.title ? `${this.page.title} - ${main}` : main;
       },
     },
     head() {

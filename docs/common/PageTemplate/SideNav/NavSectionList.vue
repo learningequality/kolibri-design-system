@@ -1,12 +1,19 @@
 <template>
 
   <div>
-    <div class="hr-line"></div>
-    <div class="section-heading">
-      {{ title }}
-    </div>
+    <template v-if="section.title">
+      <div class="hr-line"></div>
+      <div class="section-heading">
+        {{ section.title }}
+      </div>
+    </template>
     <ul>
-      <slot></slot>
+      <li
+        v-for="page in section.pages"
+        :key="page.title"
+      >
+        <NavLink :page="page" />
+      </li>
     </ul>
   </div>
 
@@ -15,11 +22,16 @@
 
 <script>
 
+  import NavLink from './NavLink';
+
   export default {
     name: 'NavSectionList',
+    components: {
+      NavLink,
+    },
     props: {
-      title: {
-        type: String,
+      section: {
+        type: Object,
         required: true,
       },
     },
