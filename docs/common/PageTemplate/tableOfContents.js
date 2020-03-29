@@ -120,7 +120,6 @@ export default [
         path: '/KCheckbox',
         title: 'KCheckbox',
         isCode: true,
-        disabled: true,
       }),
       new Page({
         path: '/KCircularLoader',
