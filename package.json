@@ -6,18 +6,17 @@
   "license": "MIT",
   "author": "Learning Equality",
   "scripts": {
-    "styleguide": "vue-styleguidist server",
-    "styleguide:build": "vue-styleguidist build",
-    "dev": "npm-run-all --parallel dev-only _lint-watch-fix",
-    "dev-only": "nuxt",
-    "generate": "nuxt generate",
+    "dev": "npm-run-all --parallel _dev-only _lint-watch-fix _jsdocs-watch",
+    "generate": "yarn run _jsdocs && nuxt generate",
     "lint-fix": "yarn _lint -w",
     "lint-watch": "yarn _lint -m",
+    "precompile-svgs": "rm -rf lib/KIcon/material-svg && node utils/precompileSvgs.js",
+    "_dev-only": "nuxt",
     "_lint-watch-fix": "yarn _lint -w -m",
     "_lint": "kolibri-tools lint '**/*.{js,vue,scss,less,css}' -i ,'**/node_modules/**','**/.nuxt/**','**/dist/**','**/material-svg/**'",
     "_test": "jest",
-    "generate-lib-docs": "node utils/genDocs.js",
-    "precompile-svgs": "rm -rf lib/KIcon/material-svg && node utils/precompileSvgs.js"
+    "_jsdocs-watch": "chokidar \"**/K*.vue\" -c \"node utils/parseJsDocs.js\"",
+    "_jsdocs": "node utils/parseJsDocs.js"
   },
   "files": [
     "lib"
@@ -41,7 +40,9 @@
     "@vuedoc/parser": "^1.4.0",
     "babel-jest": "^24.1.0",
     "chokidar": "^3.3.1",
+    "chokidar-cli": "^2.1.0",
     "eslint-import-resolver-nuxt": "^1.0.0",
+    "globby": "^6.1.0",
     "jest": "^24.1.0",
     "kolibri-tools": "0.13.0-dev.9",
     "lockr": "^0.8.5",

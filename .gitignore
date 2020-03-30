@@ -13,3 +13,6 @@ Icon
 # nuxt output directory
 .nuxt
 dist
+
+# jsdoc output
+docs/jsdocs.js
