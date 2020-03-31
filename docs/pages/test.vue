@@ -1,6 +1,6 @@
 <template>
 
-  <PageTemplate>
+  <DocsPageTemplate>
 
     <div>
       <Hello :number="3" />
@@ -80,7 +80,7 @@
       />
     </div>
     -->
-  </PageTemplate>
+  </DocsPageTemplate>
 
 </template>
 

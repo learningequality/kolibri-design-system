@@ -10,7 +10,7 @@
     </h1>
     <ul v-if="sections.length" class="nav">
       <li v-for="(section, i) in sections" :key="i" class="nav-item">
-        <InternalLink :href="section.anchor" :text="section.title" />
+        <DocsInternalLink :href="section.anchor" :text="section.title" />
       </li>
     </ul>
   </div>

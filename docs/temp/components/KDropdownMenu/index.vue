@@ -1,14 +1,14 @@
 <template>
 
-  <PageTemplate :completed="false">
+  <DocsPageTemplate :completed="false">
 
-    <PageSection title="Usage" anchor="#usage" fullwidth>
-      <VueExample :code="exampleCode">
+    <DocsPageSection title="Usage" anchor="#usage" fullwidth>
+      <DocsVueExample :code="exampleCode">
         <Example />
-      </VueExample>
-    </PageSection>
+      </DocsVueExample>
+    </DocsPageSection>
 
-  </PageTemplate>
+  </DocsPageTemplate>
 
 </template>
 
@@ -16,9 +16,9 @@
 <script>
 
   import Example from './Example.vue';
-  import VueExample from '~/common/VueExample';
-  import PageTemplate from '~/common/PageTemplate';
-  import PageSection from '~/common/PageSection';
+  import DocsVueExample from '~/common/DocsVueExample';
+  import DocsPageTemplate from '~/common/DocsPageTemplate';
+  import DocsPageSection from '~/common/DocsPageSection';
 
   /* eslint-disable import/no-duplicates */
   // import exampleCode from '!!raw-loader!./Example.vue';
@@ -29,9 +29,9 @@
   export default {
     name: 'KDropdownMenu',
     components: {
-      PageTemplate,
-      PageSection,
-      VueExample,
+      DocsPageTemplate,
+      DocsPageSection,
+      DocsVueExample,
       Example,
     },
     data: () => ({

@@ -1,18 +1,18 @@
 <template>
 
-  <PageTemplate>
+  <DocsPageTemplate>
 
-    <PageSection title="Overview" anchor="#overview">
+    <DocsPageSection title="Overview" anchor="#overview">
       <p>
-        In general, we follow <ExternalLink href="https://material.io/archive/guidelines/style/writing.html" text="Material Design's writing guidelines" />. Our slightly adapted version is below.
+        In general, we follow <DocsExternalLink href="https://material.io/archive/guidelines/style/writing.html" text="Material Design's writing guidelines" />. Our slightly adapted version is below.
       </p>
-    </PageSection>
-    <PageSection title="Language &amp; tone" anchor="#language">
+    </DocsPageSection>
+    <DocsPageSection title="Language &amp; tone" anchor="#language">
 
 
       <ul>
         <li>Address the user as 'you', and avoid using 'we'</li>
-        <li>Use the <ExternalLink href="https://en.wikipedia.org/wiki/Singular_they" text="gender-neutral singular" /> 'they'</li>
+        <li>Use the <DocsExternalLink href="https://en.wikipedia.org/wiki/Singular_they" text="gender-neutral singular" /> 'they'</li>
         <li>Be concise</li>
         <li>Write in the present tense</li>
         <li>Write simply and directly</li>
@@ -24,8 +24,8 @@
         <li>Communicate only essential details</li>
       </ul>
 
-    </PageSection>
-    <PageSection title="Punctuation" anchor="#punctuation">
+    </DocsPageSection>
+    <DocsPageSection title="Punctuation" anchor="#punctuation">
 
       <ul>
         <li>Use sentence-style caps</li>
@@ -35,8 +35,8 @@
         <li>Avoid exclamation marks</li>
       </ul>
 
-    </PageSection>
-    <PageSection title="Additional notes" anchor="#notes">
+    </DocsPageSection>
+    <DocsPageSection title="Additional notes" anchor="#notes">
 
       <p>These guidelines are specific to the Kolibri Design System and not in Material:</p>
 
@@ -50,9 +50,9 @@
           "You are a coach", not "You are a Coach"
         </li>
       </ul>
-    </PageSection>
+    </DocsPageSection>
 
-  </PageTemplate>
+  </DocsPageTemplate>
 
 </template>
 

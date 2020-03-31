@@ -3,7 +3,7 @@
   <section :style="style" class="section-wrapper">
     <h2 v-if="title">
       {{ title }}
-      <AnchorTarget v-if="anchor" :anchor="anchor" />
+      <DocsAnchorTarget v-if="anchor" :anchor="anchor" />
     </h2>
     <slot></slot>
   </section>
@@ -14,7 +14,7 @@
 <script>
 
   export default {
-    name: 'PageSection',
+    name: 'DocsPageSection',
     props: {
       title: {
         type: String,

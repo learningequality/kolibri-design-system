@@ -3,12 +3,12 @@
   <div class="block-wrapper">
     <div class="color-block" :style="{ backgroundColor: value }"></div>
     <div class="code name">
-      <code>{{ name }}</code><AnchorTarget v-if="definition" :anchor="anchor" />
+      <code>{{ name }}</code><DocsAnchorTarget v-if="definition" :anchor="anchor" />
     </div>
     <div class="code value">
-      <InternalLink v-if="isToken && showTokenCrossLink" :href="tokenAnchor">
+      <DocsInternalLink v-if="isToken && showTokenCrossLink" :href="tokenAnchor">
         <code>{{ tokenSource }}</code>
-      </InternalLink>
+      </DocsInternalLink>
       <code v-else-if="isToken">{{ tokenSource }}</code>
       <code v-else>{{ value }}</code>
     </div>
@@ -33,7 +33,7 @@
   }
 
   export default {
-    name: 'ColorBlock',
+    name: 'DocsColorBlock',
     props: {
       name: {
         type: String,

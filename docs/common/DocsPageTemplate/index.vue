@@ -29,13 +29,13 @@
 <script>
 
   import consola from 'consola';
-  import PageSection from '../PageSection';
+  import DocsPageSection from '../DocsPageSection';
   import Header from './Header';
   import SideNav from './SideNav';
   import tableOfContents from '~/tableOfContents.js';
 
   export default {
-    name: 'PageTemplate',
+    name: 'DocsPageTemplate',
     components: {
       Header,
       SideNav,
@@ -61,7 +61,7 @@
           .filter(
             node =>
               node.componentOptions &&
-              node.componentOptions.tag === PageSection.name &&
+              node.componentOptions.tag === DocsPageSection.name &&
               node.componentOptions.propsData.anchor
           )
           .map(node => node.componentOptions.propsData);

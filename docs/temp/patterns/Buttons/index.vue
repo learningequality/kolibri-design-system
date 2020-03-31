@@ -1,8 +1,8 @@
 <template>
 
-  <PageTemplate>
+  <DocsPageTemplate>
 
-    <PageSection title="Overview" anchor="#overview">
+    <DocsPageSection title="Overview" anchor="#overview">
       <p>
         Buttons use the <code>&lt;button&gt;</code> HTML tag and trigger an action on the current
         page. Links use the <code>&lt;a&gt;</code> HTML tag and navigate to a new URL.
@@ -17,16 +17,16 @@
         or control-click to open a page in a new tab, then a link should be used.
         Otherwise, a button should be used.
       </p>
-    </PageSection>
+    </DocsPageSection>
 
-    <PageSection title="Visual styles" anchor="#visualstyles">
+    <DocsPageSection title="Visual styles" anchor="#visualstyles">
 
       <p>
         There are 3 main appearances of button and link components.
         (Remember that a button component can visually look like a link,
         and a link component can visually look like a button.)
         Each appearance maps to a different level of
-        <ExternalLink href="https://en.wikipedia.org/wiki/Visual_hierarchy" text="visual hierarchy" />:
+        <DocsExternalLink href="https://en.wikipedia.org/wiki/Visual_hierarchy" text="visual hierarchy" />:
       </p>
       <ul>
         <li><strong>Raised buttons:</strong> button-like appearance for more prominent actions</li>
@@ -37,11 +37,11 @@
         </li>
       </ul>
 
-      <Show>
+      <DocsShow>
         <KButton text="Raised button" :primary="true" appearance="raised-button" />
         <KButton text="Flat button" :primary="true" appearance="flat-button" />
         <KButton text="Basic link" :primary="true" appearance="basic-link" />
-      </Show>
+      </DocsShow>
 
       <p>
         Actions with a button-like appearance can also be <strong>primary</strong> or
@@ -49,19 +49,19 @@
         and it should be a common or default action.
       </p>
 
-      <Show>
+      <DocsShow>
         <KButton text="Primary" :primary="true" appearance="raised-button" />
         <KButton text="Secondary" :primary="false" appearance="raised-button" />
         <br>
         <KButton text="Primary" :primary="true" appearance="flat-button" />
         <KButton text="Secondary" :primary="false" appearance="flat-button" />
-      </Show>
+      </DocsShow>
 
       <p>
         Note that we don't use a "secondary basic link" style.
       </p>
-    </PageSection>
-    <PageSection title="Label text" anchor="#labels">
+    </DocsPageSection>
+    <DocsPageSection title="Label text" anchor="#labels">
       <ul>
         <li>Labels should typically have a single word, or two at most</li>
         <li>
@@ -71,9 +71,9 @@
         <li>Never use commas or other punctuation</li>
         <li>Do not add icons to buttons</li>
       </ul>
-    </PageSection>
+    </DocsPageSection>
 
-    <PageSection title="Placement" anchor="#placement">
+    <DocsPageSection title="Placement" anchor="#placement">
       <p>
         We have some conventions regarding placement of 'raised button' and
         'flat button' actions:
@@ -84,8 +84,8 @@
         <li>Global actions related to tables should be put above the table and right-aligned</li>
       </ul>
 
-    </PageSection>
-    <PageSection title="Usage" anchor="#usage" fullwidth>
+    </DocsPageSection>
+    <DocsPageSection title="Usage" anchor="#usage" fullwidth>
 
       <p>There are three components that all look the same, but are used for different purposes:</p>
       <ul>
@@ -104,24 +104,24 @@
         </li>
       </ul>
 
-      <VueExample :code="exampleCode">
+      <DocsVueExample :code="exampleCode">
         <Example />
-      </VueExample>
+      </DocsVueExample>
 
-    </PageSection>
+    </DocsPageSection>
 
-    <PageSection title="Exceptions" anchor="#exceptions">
+    <DocsPageSection title="Exceptions" anchor="#exceptions">
       <ul>
         <li>
           On the sign-in page, the primary button is wider to give it visual dominance
         </li>
       </ul>
 
-    </PageSection>
+    </DocsPageSection>
 
 
 
-  </PageTemplate>
+  </DocsPageTemplate>
 
 </template>
 
@@ -129,8 +129,8 @@
 <script>
 
   import Example from './Example';
-  import VueExample from '~/common/VueExample';
-  import Show from '~/common/Show';
+  import DocsVueExample from '~/common/DocsVueExample';
+  import DocsShow from '~/common/DocsShow';
 
   /* eslint-disable import/no-duplicates */
   // import exampleCode from '!!raw-loader!./Example.vue';
@@ -139,8 +139,8 @@
   export default {
     name: 'Buttons',
     components: {
-      VueExample,
-      Show,
+      DocsVueExample,
+      DocsShow,
       Example,
     },
     data() {

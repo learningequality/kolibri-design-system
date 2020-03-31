@@ -21,7 +21,7 @@
 <script>
 
   export default {
-    name: 'InternalLink',
+    name: 'DocsInternalLink',
     props: {
       href: {
         type: String,

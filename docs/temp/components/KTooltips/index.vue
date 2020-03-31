@@ -1,8 +1,8 @@
 <template>
 
-  <PageTemplate :completed="false">
+  <DocsPageTemplate :completed="false">
 
-    <PageSection>
+    <DocsPageSection>
       <h1>Tooltips</h1>
 
 
@@ -11,11 +11,11 @@
 
 
       <h2>Code Example</h2>
-      <VueExample :code="exampleCode">
+      <DocsVueExample :code="exampleCode">
         <Example />
-      </VueExample>
-    </PageSection>
-  </PageTemplate>
+      </DocsVueExample>
+    </DocsPageSection>
+  </DocsPageTemplate>
 
 </template>
 
@@ -23,9 +23,9 @@
 <script>
 
   import Example from './Example.vue';
-  import VueExample from '~/common/VueExample';
-  import PageTemplate from '~/common/PageTemplate';
-  import PageSection from '~/common/PageSection';
+  import DocsVueExample from '~/common/DocsVueExample';
+  import DocsPageTemplate from '~/common/DocsPageTemplate';
+  import DocsPageSection from '~/common/DocsPageSection';
 
   /* eslint-disable import/no-duplicates */
   // import exampleCode from '!!raw-loader!./Example.vue';
@@ -36,9 +36,9 @@
   export default {
     name: 'KTooltips',
     components: {
-      PageTemplate,
-      PageSection,
-      VueExample,
+      DocsPageTemplate,
+      DocsPageSection,
+      DocsVueExample,
       Example,
     },
     data: () => ({

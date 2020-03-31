@@ -1,12 +1,12 @@
 <template>
 
-  <PageTemplate :completed="false">
+  <DocsPageTemplate :completed="false">
 
-    <PageSection>
+    <DocsPageSection>
       <h3>Code Example</h3>
-      <VueExample :code="ExampleCode">
+      <DocsVueExample :code="ExampleCode">
         <Example />
-      </VueExample>
+      </DocsVueExample>
 
       <h3>Guidelines</h3>
 
@@ -163,8 +163,8 @@
       <p>
         There should never be horizontal scrolling inside a modal
       </p>
-    </PageSection>
-  </PageTemplate>
+    </DocsPageSection>
+  </DocsPageTemplate>
 
 </template>
 
@@ -173,18 +173,18 @@
 
   /* eslint-disable import/no-duplicates */
   import Example from './Example.vue';
-  import PageTemplate from '~/common/PageTemplate';
-  import PageSection from '~/common/PageSection';
-  import VueExample from '~/common/VueExample';
+  import DocsPageTemplate from '~/common/DocsPageTemplate';
+  import DocsPageSection from '~/common/DocsPageSection';
+  import DocsVueExample from '~/common/DocsVueExample';
   import ExampleCode from '!!raw-loader!./Example.vue';
   /* eslint-enable import/no-duplicates */
 
   export default {
     name: 'KModal',
     components: {
-      PageTemplate,
-      PageSection,
-      VueExample,
+      DocsPageTemplate,
+      DocsPageSection,
+      DocsVueExample,
       Example,
     },
     data() {

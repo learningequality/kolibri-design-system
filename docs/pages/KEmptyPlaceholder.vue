@@ -1,19 +1,19 @@
 <template>
 
-  <PageTemplate>
-    <PageSection title="Overview" anchor="#overview">
+  <DocsPageTemplate>
+    <DocsPageSection title="Overview" anchor="#overview">
       <p>
         The <code>KEmptyPlaceholder</code> component is used in situations where the value is not applicable ("N/A") or does not exist. It is a wide, light-gray dash, like this: <KEmptyPlaceholder />
       </p>
       <p>
         Using the placeholder component is preferred to leaving a empty or blank space because it communicates to the user that a value <em>could</em> possibly exist there, and aids with visual scanning in tables, grids, and lists of data.
       </p>
-    </PageSection>
-    <PageSection title="Example" anchor="#example">
+    </DocsPageSection>
+    <DocsPageSection title="Example" anchor="#example">
       <p>
         In the example below, an average score cannot be calculated until the user has attempted at least one exercise:
       </p>
-      <Show>
+      <DocsShow>
         <table>
           <thead>
             <tr>
@@ -64,15 +64,15 @@
             </tr>
           </tbody>
         </table>
-      </Show>
-    </PageSection>
-    <PageSection title="Usage" anchor="#usage">
+      </DocsShow>
+    </DocsPageSection>
+    <DocsPageSection title="Usage" anchor="#usage">
       <p>
         This component has no API.
       </p>
-    </PageSection>
+    </DocsPageSection>
 
-  </PageTemplate>
+  </DocsPageTemplate>
 
 </template>
 

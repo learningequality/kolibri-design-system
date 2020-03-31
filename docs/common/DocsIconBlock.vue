@@ -5,7 +5,7 @@
       <KIcon :icon="name" class="icon" />
     </div>
     <div class="code name">
-      <code>{{ name }}</code><AnchorTarget v-if="definition" :anchor="anchor" />
+      <code>{{ name }}</code><DocsAnchorTarget v-if="definition" :anchor="anchor" />
     </div>
   </div>
 
@@ -15,7 +15,7 @@
 <script>
 
   export default {
-    name: 'IconBlock',
+    name: 'DocsIconBlock',
     props: {
       name: {
         type: String,

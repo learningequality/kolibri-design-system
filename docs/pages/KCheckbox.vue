@@ -1,10 +1,10 @@
 <template>
 
-  <PageTemplate>
+  <DocsPageTemplate>
 
-    <PageSection title="Overview" anchor="#overview">
+    <DocsPageSection title="Overview" anchor="#overview">
       <p>These are checkbox components:</p>
-      <Show>
+      <DocsShow>
         <KCheckbox
           label="Some label"
           :checked="true"
@@ -13,7 +13,7 @@
           label="Another label"
           :checked="false"
         />
-      </Show>
+      </DocsShow>
       <p>
         The checkbox is generally used to select one of two possible values in a form. It should not be used to make real-time changes; for this situation, use a <code>KSwitch</code> component instead.
       </p>
@@ -31,20 +31,20 @@
       <p>
         Checkboxes can also have a "partially-checked" or "indeterminate" state used in cases where the value is neither true nor false, such as when a subset of a topic is selected:
       </p>
-      <Show>
+      <DocsShow>
         <KCheckbox
           label="Topic is selected"
           :indeterminate="true"
         />
-      </Show>
+      </DocsShow>
       <p>
         A user cannot enter the indeterminate state by interacting directly with the checkbox; it only occurs due to external interactions.
       </p>
-    </PageSection>
+    </DocsPageSection>
 
     <ComponentDocs />
 
-  </PageTemplate>
+  </DocsPageTemplate>
 
 </template>
 

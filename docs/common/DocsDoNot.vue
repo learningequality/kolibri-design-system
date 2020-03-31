@@ -25,7 +25,7 @@
 <script>
 
   export default {
-    name: 'DoNot',
+    name: 'DocsDoNot',
   };
 
 </script>

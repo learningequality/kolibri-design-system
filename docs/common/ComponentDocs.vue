@@ -1,7 +1,7 @@
 <template>
 
   <div>
-    <PageSection
+    <DocsPageSection
       v-if="api.description"
       title="Description"
       anchor="#description"
@@ -9,9 +9,9 @@
       <p v-if="api.description">
         {{ api.description }}
       </p>
-    </PageSection>
+    </DocsPageSection>
 
-    <PageSection
+    <DocsPageSection
       v-if="api.props.length"
       title="Props"
       anchor="#props"
@@ -51,9 +51,9 @@
           </tr>
         </tbody>
       </table>
-    </PageSection>
+    </DocsPageSection>
 
-    <PageSection
+    <DocsPageSection
       v-if="api.events.length"
       title="Events"
       anchor="#events"
@@ -74,9 +74,9 @@
           </tr>
         </tbody>
       </table>
-    </PageSection>
+    </DocsPageSection>
 
-    <PageSection
+    <DocsPageSection
       v-if="api.slots.length"
       title="Slots"
       anchor="#slots"
@@ -97,9 +97,9 @@
           </tr>
         </tbody>
       </table>
-    </PageSection>
+    </DocsPageSection>
 
-    <PageSection
+    <DocsPageSection
       v-if="api.methods.length"
       title="Methods"
       anchor="#methods"
@@ -120,7 +120,7 @@
           </tr>
         </tbody>
       </table>
-    </PageSection>
+    </DocsPageSection>
 
   </div>
 
