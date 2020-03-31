@@ -1,6 +1,9 @@
 /*
   The table of contents is made of list of sections that themselves
   each contain a list of pages.
+
+  To modify pages and ordering, update the Table of Contents section
+  below.
 */
 
 import sortBy from 'lodash/sortBy';
@@ -45,6 +48,10 @@ class Page {
     this.disabled = disabled;
   }
 }
+
+/***********************************************/
+/*   Table of contents                         */
+/***********************************************/
 
 export default [
   new Section({

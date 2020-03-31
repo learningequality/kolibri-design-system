@@ -30,9 +30,9 @@
 
   import consola from 'consola';
   import PageSection from '../PageSection';
-  import tableOfContents from './tableOfContents.js';
   import Header from './Header';
   import SideNav from './SideNav';
+  import tableOfContents from '~/tableOfContents.js';
 
   export default {
     name: 'PageTemplate',

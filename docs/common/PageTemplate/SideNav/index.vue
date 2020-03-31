@@ -43,9 +43,9 @@
 
 <script>
 
-  import tableOfContents from '../tableOfContents.js';
   import NavSectionList from './NavSectionList';
   import { termList, matches } from './filter';
+  import tableOfContents from '~/tableOfContents.js';
 
   export default {
     name: 'SideNav',
