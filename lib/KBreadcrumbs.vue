@@ -3,25 +3,28 @@
   <div v-show="showSingleItem || crumbs.length > 1">
     <nav class="breadcrumbs">
       <div v-show="collapsedCrumbs.length" class="breadcrumbs-dropdown-wrapper">
-        <UiIconButton :hasDropdown="true" size="small">
-          <KIcon icon="arrow_down" />
-          <div slot="dropdown" class="breadcrumbs-dropdown">
-            <ol class="breadcrumbs-dropdown-items">
-              <li
-                v-for="(crumb, index) in collapsedCrumbs"
-                :key="index"
-                class="breadcrumbs-dropdown-item"
-              >
-                <KRouterLink
-                  :text="crumb.text"
-                  :to="crumb.link"
-                  :style="{ maxWidth: `${collapsedCrumbMaxWidth}px` }"
-                  dir="auto"
-                />
-              </li>
-            </ol>
-          </div>
-        </UiIconButton>
+        <KIconButton
+          size="small"
+          :icon="showDropdown ? 'arrow_up' : 'arrow_down'"
+          appearance="raised-button"
+          @click="showDropdown = !showDropdown"
+        />
+        <div v-if="showDropdown" class="breadcrumbs-dropdown">
+          <ol class="breadcrumbs-dropdown-items">
+            <li
+              v-for="(crumb, index) in collapsedCrumbs"
+              :key="index"
+              class="breadcrumbs-dropdown-item"
+            >
+              <KRouterLink
+                :text="crumb.text"
+                :to="crumb.link"
+                :style="{ maxWidth: `${collapsedCrumbMaxWidth}px` }"
+                dir="auto"
+              />
+            </li>
+          </ol>
+        </div>
       </div>
 
       <ol class="breadcrumbs-visible-items">
@@ -93,7 +96,6 @@
   import throttle from 'lodash/throttle';
   import every from 'lodash/every';
   import keys from 'lodash/keys';
-  import UiIconButton from './keen/UiIconButton';
   import KResponsiveElementMixin from './KResponsiveElementMixin';
 
   const DROPDOWN_BTN_WIDTH = 55;
@@ -110,7 +112,6 @@
    */
   export default {
     name: 'KBreadcrumbs',
-    components: { UiIconButton },
     mixins: [KResponsiveElementMixin],
     props: {
       /**
@@ -145,6 +146,7 @@
       // Each object contains:
       // text, router-link 'to' object, vue ref, a resize sensor, and its collapsed state
       crumbs: [],
+      showDropdown: false,
     }),
     computed: {
       collapsedCrumbs() {
@@ -247,6 +249,8 @@
 
 <style lang="scss" scoped>
 
+  @import './styles/definitions';
+
   .breadcrumbs {
     margin-top: 8px;
     margin-bottom: 8px;
@@ -266,6 +270,10 @@
   }
 
   .breadcrumbs-dropdown {
+    position: absolute;
+    @extend %dropshadow-16dp;
+    background: white;
+    z-index: 100;
     padding: 16px;
     font-weight: bold;
   }
