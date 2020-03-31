@@ -1,6 +1,6 @@
 <template>
 
-  <PageTemplate :componentName="api.name">
+  <div>
     <PageSection
       v-if="api.description"
       title="Description"
@@ -16,10 +16,10 @@
       title="Props"
       anchor="#props"
     >
-      <CoreTable>
-        <thead slot="thead">
+      <table>
+        <thead>
           <tr>
-            <th>Props</th>
+            <th>Name</th>
             <th>Type</th>
             <th>Required</th>
             <th>Default</th>
@@ -28,19 +28,20 @@
             </th>
           </tr>
         </thead>
-        <tbody slot="tbody">
+        <tbody>
           <tr v-for="(prop, i) in api.props" :key="i">
             <td><code>{{ prop.name }}</code></td>
-            <td><code>{{ parsePropType(prop.value.type) }}</code></td>
+            <td><code>{{ prop.type.name }}</code></td>
             <td>
-              <code v-if="parsePropRequired(prop.value.required) === 'true'">true</code>
+              <code v-if="prop.required === true">true</code>
+              <code v-else-if="prop.required === false">true</code>
               <template v-else>
                 —
               </template>
             </td>
             <td>
-              <code v-if="parsePropDefault(prop.value.type, prop.value.default)">
-                {{ parsePropDefault(prop.value.type, prop.value.default) }}
+              <code v-if="prop.defaultValue">
+                {{ prop.defaultValue.value }}
               </code>
               <template v-else>
                 —
@@ -49,7 +50,7 @@
             <td>{{ prop.description || '—' }}</td>
           </tr>
         </tbody>
-      </CoreTable>
+      </table>
     </PageSection>
 
     <PageSection
@@ -57,8 +58,8 @@
       title="Events"
       anchor="#events"
     >
-      <CoreTable>
-        <thead slot="thead">
+      <table>
+        <thead>
           <tr>
             <th>Events</th>
             <th class="stretch">
@@ -66,13 +67,13 @@
             </th>
           </tr>
         </thead>
-        <tbody slot="tbody">
+        <tbody>
           <tr v-for="(event, i) in api.events" :key="i">
             <td><code>{{ event.name }}</code></td>
             <td>{{ event.description || '—' }}</td>
           </tr>
         </tbody>
-      </CoreTable>
+      </table>
     </PageSection>
 
     <PageSection
@@ -80,8 +81,8 @@
       title="Slots"
       anchor="#slots"
     >
-      <CoreTable>
-        <thead slot="thead">
+      <table>
+        <thead>
           <tr>
             <th>Slots</th>
             <th class="stretch">
@@ -89,13 +90,13 @@
             </th>
           </tr>
         </thead>
-        <tbody slot="tbody">
+        <tbody>
           <tr v-for="(slot, i) in api.slots" :key="i">
             <td><code>{{ slot.name }}</code></td>
             <td>{{ slot.description || '—' }}</td>
           </tr>
         </tbody>
-      </CoreTable>
+      </table>
     </PageSection>
 
     <PageSection
@@ -103,8 +104,8 @@
       title="Methods"
       anchor="#methods"
     >
-      <CoreTable>
-        <thead slot="thead">
+      <table>
+        <thead>
           <tr>
             <th>Methods</th>
             <th class="stretch">
@@ -112,74 +113,29 @@
             </th>
           </tr>
         </thead>
-        <tbody slot="tbody">
+        <tbody>
           <tr v-for="(method, i) in api.methods" :key="i">
             <td><code>{{ method.name }}</code></td>
             <td>{{ method.description || '—' }}</td>
           </tr>
         </tbody>
-      </CoreTable>
+      </table>
     </PageSection>
 
-  </PageTemplate>
+  </div>
 
 </template>
 
 
 <script>
 
-  import escodegen from 'escodegen';
-  import CoreTable from 'kolibri.coreVue.components.CoreTable';
-  import PageTemplate from './PageTemplate';
-  import PageSection from './PageSection';
+  import jsdocs from '~/jsdocs';
 
   export default {
     name: 'ComponentDocs',
-    components: {
-      CoreTable,
-      PageSection,
-      PageTemplate,
-    },
     computed: {
       api() {
-        return this.$route.meta.componentAPI;
-      },
-    },
-    methods: {
-      parsePropType(propType) {
-        if (!propType) {
-          return 'null';
-        }
-        if (propType.type === 'ArrayExpression') {
-          let arrayDescription = '';
-          propType.elements.forEach((element, index) => {
-            if (index !== 0) {
-              arrayDescription += ', ';
-            }
-            arrayDescription += propType.elements[index].name;
-          });
-          return arrayDescription;
-        }
-        return propType;
-      },
-      parsePropRequired(propRequired) {
-        if (!propRequired) {
-          return 'false';
-        }
-        if (propRequired === true) {
-          return 'true';
-        }
-        return escodegen.generate(propRequired);
-      },
-      parsePropDefault(propType, propDefault) {
-        if (propDefault && propDefault.type === 'ArrowFunctionExpression') {
-          return escodegen.generate(propDefault.body);
-        }
-        const stringfiedDefault = JSON.stringify(propDefault);
-        if (stringfiedDefault) {
-          return stringfiedDefault;
-        }
-        return null;
+        return jsdocs[this.$route.name];
       },
     },
   };
@@ -188,6 +144,12 @@
 
 
 <style lang="scss" scoped>
+
+  td,
+  th {
+    padding: 8px;
+    text-align: left;
+  }
 
   th {
     min-width: 50px;

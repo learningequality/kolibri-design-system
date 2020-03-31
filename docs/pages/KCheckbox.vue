@@ -42,9 +42,7 @@
       </p>
     </PageSection>
 
-    <PageSection title="Usage" anchor="#usage" fullwidth>
-      Hello
-    </PageSection>
+    <ComponentDocs />
 
   </PageTemplate>
 
@@ -52,6 +50,8 @@
 
 
 <script>
+
+  import jsdocs from '~/jsdocs';
 
   export default {};
 
