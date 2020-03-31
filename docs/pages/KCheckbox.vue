@@ -1,6 +1,6 @@
 <template>
 
-  <DocsPageTemplate>
+  <DocsPageTemplate apiDocs>
 
     <DocsPageSection title="Overview" anchor="#overview">
       <p>These are checkbox components:</p>
@@ -42,20 +42,6 @@
       </p>
     </DocsPageSection>
 
-    <ComponentDocs />
-
   </DocsPageTemplate>
 
 </template>
-
-
-<script>
-
-  import jsdocs from '~/jsdocs';
-
-  export default {};
-
-</script>
-
-
-<style lang="scss" scoped></style>

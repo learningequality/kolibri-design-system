@@ -1,0 +1,14 @@
+td,
+th {
+  padding: 8px;
+  text-align: left;
+}
+
+th {
+  min-width: 50px;
+}
+
+.stretch {
+  width: 100%;
+  min-width: 150px;
+}

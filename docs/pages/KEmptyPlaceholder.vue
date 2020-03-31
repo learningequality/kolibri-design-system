@@ -1,6 +1,6 @@
 <template>
 
-  <DocsPageTemplate>
+  <DocsPageTemplate apiDocs>
     <DocsPageSection title="Overview" anchor="#overview">
       <p>
         The <code>KEmptyPlaceholder</code> component is used in situations where the value is not applicable ("N/A") or does not exist. It is a wide, light-gray dash, like this: <KEmptyPlaceholder />
@@ -65,11 +65,6 @@
           </tbody>
         </table>
       </DocsShow>
-    </DocsPageSection>
-    <DocsPageSection title="Usage" anchor="#usage">
-      <p>
-        This component has no API.
-      </p>
     </DocsPageSection>
 
   </DocsPageTemplate>

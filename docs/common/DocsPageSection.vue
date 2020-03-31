@@ -18,11 +18,11 @@
     props: {
       title: {
         type: String,
-        required: false,
+        required: true,
       },
       anchor: {
         type: String,
-        required: false,
+        required: true,
       },
       fullwidth: {
         type: Boolean,
