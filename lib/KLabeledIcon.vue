@@ -3,10 +3,10 @@
   <span class="labeled-icon-wrapper">
     <div class="icon">
       <slot name="icon">
-        <KIcon v-if="icon" :icon="icon" />
+        <KIcon v-if="icon" :icon="icon" :color="color || $themeTokens.text" />
       </slot>
     </div>
-    <div class="label">
+    <div class="label" :style="{ color: color || $themeTokens.text }">
       <!-- nest slot inside span to get alignment and flow correct for mixed RLT/LTR -->
       <span dir="auto" class="debug-warning">
         <!-- Use zero-width space when empty -->
@@ -31,6 +31,11 @@
     props: {
       // If provided, will render a KIcon with the same 'icon' prop
       icon: {
+        type: String,
+        required: false,
+      },
+      // If provided
+      color: {
         type: String,
         required: false,
       },
