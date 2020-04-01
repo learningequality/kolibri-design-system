@@ -3,7 +3,7 @@
   <table>
     <thead>
       <tr>
-        <th>Slots</th>
+        <th>Name</th>
         <th class="stretch">
           Description
         </th>
@@ -12,7 +12,12 @@
     <tbody>
       <tr v-for="(slot, i) in api" :key="i">
         <td><code>{{ slot.name }}</code></td>
-        <td>{{ slot.description || '—' }}</td>
+        <td>
+          <template v-if="slot.description">
+            {{ slot.description }}
+          </template>
+          <KEmptyPlaceholder v-else />
+        </td>
       </tr>
     </tbody>
   </table>

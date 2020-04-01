@@ -19,19 +19,20 @@
         <td>
           <code v-if="prop.required === true">true</code>
           <code v-else-if="prop.required === false">true</code>
-          <template v-else>
-            —
-          </template>
+          <KEmptyPlaceholder v-else />
         </td>
         <td>
           <code v-if="prop.defaultValue">
             {{ prop.defaultValue.value }}
           </code>
-          <template v-else>
-            —
-          </template>
+          <KEmptyPlaceholder v-else />
         </td>
-        <td>{{ prop.description || '—' }}</td>
+        <td>
+          <template v-if="prop.description">
+            {{ prop.description }}
+          </template>
+          <KEmptyPlaceholder v-else />
+        </td>
       </tr>
     </tbody>
   </table>

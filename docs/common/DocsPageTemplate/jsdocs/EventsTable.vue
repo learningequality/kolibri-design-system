@@ -3,7 +3,7 @@
   <table>
     <thead>
       <tr>
-        <th>Events</th>
+        <th>Name</th>
         <th class="stretch">
           Description
         </th>
@@ -12,7 +12,12 @@
     <tbody>
       <tr v-for="(event, i) in api" :key="i">
         <td><code>{{ event.name }}</code></td>
-        <td>{{ event.description || '—' }}</td>
+        <td>
+          <template v-if="event.description">
+            {{ event.description }}
+          </template>
+          <KEmptyPlaceholder v-else />
+        </td>
       </tr>
     </tbody>
   </table>

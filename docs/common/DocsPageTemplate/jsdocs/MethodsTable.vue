@@ -3,7 +3,7 @@
   <table>
     <thead>
       <tr>
-        <th>Methods</th>
+        <th>Name</th>
         <th class="stretch">
           Description
         </th>
@@ -12,7 +12,12 @@
     <tbody>
       <tr v-for="(method, i) in api" :key="i">
         <td><code>{{ method.name }}</code></td>
-        <td>{{ method.description || '—' }}</td>
+        <td>
+          <template v-if="method.description">
+            {{ method.description }}
+          </template>
+          <KEmptyPlaceholder v-else />
+        </td>
       </tr>
     </tbody>
   </table>
