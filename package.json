@@ -6,7 +6,7 @@
   "license": "MIT",
   "author": "Learning Equality",
   "scripts": {
-    "dev": "npm-run-all --parallel _dev-only _lint-watch-fix _jsdocs-watch",
+    "dev": "npm-run-all --parallel _dev-only _lint-watch-fix _jsdocs-watch _jsdocs",
     "generate": "yarn run _jsdocs && nuxt generate",
     "lint-fix": "yarn _lint -w",
     "lint-watch": "yarn _lint -m",
