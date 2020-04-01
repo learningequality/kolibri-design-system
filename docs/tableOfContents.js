@@ -109,7 +109,40 @@ export default [
     ],
   }),
   new Section({
-    title: 'Code library',
+    title: 'Code library docs',
+    pages: [
+      new Page({
+        path: '/library',
+        title: 'Getting started',
+      }),
+    ],
+  }),
+  new Section({
+    title: 'Code library utilities',
+    autoSort: true,
+    pages: [
+      new Page({
+        path: '/KThemePlugin',
+        title: 'KThemePlugin',
+        isCode: true,
+        disabled: true,
+      }),
+      new Page({
+        path: '/KResponsiveWindowMixin',
+        title: 'KResponsiveWindowMixin',
+        isCode: true,
+        disabled: true,
+      }),
+      new Page({
+        path: '/KResponsiveElementMixin',
+        title: 'KResponsiveElementMixin',
+        isCode: true,
+        disabled: true,
+      }),
+    ],
+  }),
+  new Section({
+    title: 'Code library components',
     autoSort: true,
     pages: [
       new Page({
@@ -195,12 +228,6 @@ export default [
         disabled: true,
       }),
       new Page({
-        path: '/KThemePlugin',
-        title: 'KThemePlugin',
-        isCode: true,
-        disabled: true,
-      }),
-      new Page({
         path: '/KIcon',
         title: 'KIcon',
         isCode: true,
@@ -215,18 +242,6 @@ export default [
       new Page({
         path: '/KSwitch',
         title: 'KSwitch',
-        isCode: true,
-        disabled: true,
-      }),
-      new Page({
-        path: '/KResponsiveWindowMixin',
-        title: 'KResponsiveWindowMixin',
-        isCode: true,
-        disabled: true,
-      }),
-      new Page({
-        path: '/KResponsiveElementMixin',
-        title: 'KResponsiveElementMixin',
         isCode: true,
         disabled: true,
       }),
