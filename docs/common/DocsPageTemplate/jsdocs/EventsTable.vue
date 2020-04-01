@@ -13,9 +13,7 @@
       <tr v-for="(event, i) in api" :key="i">
         <td><code>{{ event.name }}</code></td>
         <td>
-          <template v-if="event.description">
-            {{ event.description }}
-          </template>
+          <vue-simple-markdown v-if="event.description" :source="event.description" />
           <KEmptyPlaceholder v-else />
         </td>
       </tr>

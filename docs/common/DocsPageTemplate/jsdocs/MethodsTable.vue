@@ -13,9 +13,7 @@
       <tr v-for="(method, i) in api" :key="i">
         <td><code>{{ method.name }}</code></td>
         <td>
-          <template v-if="method.description">
-            {{ method.description }}
-          </template>
+          <vue-simple-markdown v-if="method.description" :source="method.description" />
           <KEmptyPlaceholder v-else />
         </td>
       </tr>

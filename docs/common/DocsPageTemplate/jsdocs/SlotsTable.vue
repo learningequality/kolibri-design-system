@@ -13,9 +13,7 @@
       <tr v-for="(slot, i) in api" :key="i">
         <td><code>{{ slot.name }}</code></td>
         <td>
-          <template v-if="slot.description">
-            {{ slot.description }}
-          </template>
+          <vue-simple-markdown v-if="slot.description" :source="slot.description" />
           <KEmptyPlaceholder v-else />
         </td>
       </tr>

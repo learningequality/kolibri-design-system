@@ -57,6 +57,7 @@
     "vue-jest": "^4.0.0-0",
     "vue-meta": "^2.3.2",
     "vue-prism-component": "^1.1.1",
+    "vue-simple-markdown": "^1.1.2",
     "vue-styleguidist": "^4.14.0",
     "vue-template-compiler": "^2.5.17"
   }

@@ -1,5 +1,6 @@
 import Vue from 'vue';
 
+import VueSimpleMarkdown from 'vue-simple-markdown';
 import DocsExternalLink from '~/common/DocsExternalLink';
 import DocsInternalLink from '~/common/DocsInternalLink';
 import DocsAnchorTarget from '~/common/DocsAnchorTarget';
@@ -15,3 +16,5 @@ Vue.component('DocsAnchorTarget', DocsAnchorTarget);
 Vue.component('DocsExternalLink', DocsExternalLink);
 Vue.component('DocsShow', DocsShow);
 Vue.component('DocsDoNot', DocsDoNot);
+
+Vue.use(VueSimpleMarkdown);

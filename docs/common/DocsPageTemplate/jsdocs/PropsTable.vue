@@ -28,9 +28,7 @@
           <KEmptyPlaceholder v-else />
         </td>
         <td>
-          <template v-if="prop.description">
-            {{ prop.description }}
-          </template>
+          <vue-simple-markdown v-if="prop.description" :source="prop.description" />
           <KEmptyPlaceholder v-else />
         </td>
       </tr>
