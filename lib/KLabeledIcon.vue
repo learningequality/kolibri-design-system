@@ -3,7 +3,7 @@
   <span class="labeled-icon-wrapper">
     <div class="icon">
       <slot name="icon">
-        <KIcon v-if="icon" :icon="icon" :color="color || $themeTokens.text" />
+        <KIcon v-if="icon" :icon="icon" :color="color || $themeTokens.text" style="top: 2px;" />
       </slot>
     </div>
     <div class="label" :style="{ color: color || $themeTokens.text }">
