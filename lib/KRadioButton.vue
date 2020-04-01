@@ -179,6 +179,7 @@
     opacity: 0;
   }
 
+  // KIcon overrides
   .checked,
   .unchecked {
     position: absolute;

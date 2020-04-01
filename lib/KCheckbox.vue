@@ -25,16 +25,19 @@
         <KIcon
           v-if="isCurrentlyIndeterminate"
           :style="notBlank"
+          class="indeterminate"
           icon="indeterminate_check_box"
         />
         <KIcon
           v-else-if="!isCurrentlyIndeterminate && isCurrentlyChecked"
           :style="[ notBlank, activeOutline ]"
+          class="checked"
           icon="check_box"
         />
         <KIcon
           v-else
           :style="[ blank, activeOutline ]"
+          class="unchecked"
           icon="check_box_outline_blank"
         />
 
@@ -226,6 +229,15 @@
     .k-checkbox-label {
       cursor: default;
     }
+  }
+
+  // KIcon overrides
+  .indeterminate,
+  .unchecked,
+  .checked {
+    height: $checkbox-height;
+    width: $checkbox-height;
+    top: 0;
   }
 
 </style>
