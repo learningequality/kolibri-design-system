@@ -8,6 +8,12 @@
 
 
 <script>
+/**
+ * Used to create a consistently spaced horizontal set of buttons and/or links.
+ *
+ * KButtonGroup works with KButton, KIconButton, KRouterLink and KExternalLink and any <a> or <button> tags.
+ * in it's default slot.
+ */
 
 export default {
   name: "KButtonGroup",

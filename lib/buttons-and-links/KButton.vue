@@ -20,6 +20,7 @@
       icon="dropdown"
       class="dropdown-arrow"
       :style="arrowStyles"
+      style="width: 24px; height: 24px;"
     />
   </component>
 
@@ -69,6 +70,10 @@
         required: false,
         default: false,
       },
+      icon: {
+        type: String,
+        required: false,
+      }
     },
     computed: {
       htmlTag() {
