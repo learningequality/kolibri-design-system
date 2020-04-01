@@ -6,8 +6,16 @@
     :href="href"
     :download="download"
     dir="auto"
+    @mouseenter="hovering = true"
+    @mouseleave="hovering = false"
   >
-    {{ text }}
+    <KIcon
+      v-if="icon"
+      :icon="icon"
+      style="top: 4px;"
+      :color="hovering ? $themeTokens.primaryDark : $themeTokens.primary"
+    />
+    <span :style="spanStyle">{{ text }}</span>
   </a>
 
 </template>
@@ -38,6 +46,34 @@
         type: String,
         required: false,
       },
+      /**
+       * If provided, shows a KIcon in front of the text
+       */
+      icon: {
+        type: String,
+        required: false,
+      }
+    },
+    data() {
+      return {
+        hovering: false,
+      }
+    },
+    computed: {
+      /**
+       * If icon is provided, add 8px margin between the icon and the text
+       */
+      spanStyle() {
+        if(this.icon) {
+          if(this.isRtl) {
+            return { marginRight: '8px' }
+          } else {
+            return { marginLeft: '8px' };
+          }
+        } else {
+          return {};
+        }
+      }
     },
   };
 
