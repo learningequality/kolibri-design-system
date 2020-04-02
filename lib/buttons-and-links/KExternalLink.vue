@@ -9,13 +9,23 @@
     @mouseenter="hovering = true"
     @mouseleave="hovering = false"
   >
-    <KIcon
-      v-if="icon"
-      :icon="icon"
-      style="top: 4px;"
-      :color="hovering ? $themeTokens.primaryDark : $themeTokens.primary"
-    />
+    <slot name="icon">
+      <KIcon
+        v-if="icon"
+        :icon="icon"
+        style="top: 4px;"
+        :color="hovering ? $themeTokens.primaryDark : $themeTokens.primary"
+      />
+    </slot>
     <span :style="spanStyle">{{ text }}</span>
+    <slot name="iconAfter">
+      <KIcon
+        v-if="iconAfter"
+        :icon="iconAfter"
+        style="top: 4px;"
+        :color="hovering ? $themeTokens.primaryDark : $themeTokens.primary"
+      />
+    </slot>
   </a>
 
 </template>
@@ -50,6 +60,13 @@
        * If provided, shows a KIcon in front of the text
        */
       icon: {
+        type: String,
+        required: false,
+      },
+      /**
+       * If provided, shows a KIcon after the text
+       */
+      iconAfter: {
         type: String,
         required: false,
       }

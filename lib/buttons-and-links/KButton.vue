@@ -9,12 +9,23 @@
     :disabled="disabled"
     tabindex="0"
     @click="handleClick"
-    @keyup.enter.stop.prevent="handelPressEnter"
+    @keyup.enter.stop.prevent="handlePressEnter"
   >
+    <slot name="icon">
+      <KIcon v-if="icon" :icon="icon" :color="$themeTokens.textInverted" />
+    </slot>
+
     <slot v-if="$slots.default"></slot>
+
     <template v-else>
       <span>{{ text }}</span>
     </template>
+
+    <slot name="iconAfter">
+      <KIcon v-if="iconAfter" :icon="iconAfter" :color="$themeTokens.textInverted" />
+    </slot>
+
+    <!-- Dropdown arrow icon -->
     <KIcon
       v-if="hasDropdown"
       icon="dropdown"
@@ -70,10 +81,20 @@
         required: false,
         default: false,
       },
+      /**
+       * If provided, prepends a KIcon to the text in the button
+       */
       icon: {
         type: String,
         required: false,
-      }
+      },
+      /**
+       * If provided, appends an KIcon to the text in the button.
+       */
+      iconAfter: {
+        type: String,
+        required: false,
+      },
     },
     computed: {
       htmlTag() {
@@ -101,7 +122,7 @@
         this.blurWhenClicked();
         this.$emit('click', event);
       },
-      handelPressEnter(event) {
+      handlePressEnter(event) {
         this.blurWhenClicked();
         // HACK: for 'a' tags, the 'click' event is not getting fired
         if (this.htmlTag === 'a') {
