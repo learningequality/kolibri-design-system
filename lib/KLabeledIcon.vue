@@ -16,7 +16,7 @@
         </slot>
       </span>
     </span>
-    <span class="iconAfter">
+    <span class="icon-after">
       <slot name="iconAfter">
         <KIcon v-if="iconAfter" :icon="iconAfter" :color="color || $themeTokens.text" style="top: 2px;" />
       </slot>
@@ -77,11 +77,11 @@
       labelStyle() {
         let styles = {};
         // Margin for icons - use em to match parent font size
-        if(this.iconAfter || this.$slots['iconAfter']) {
+        if (this.iconAfter || this.$slots['iconAfter']) {
           styles['marginRight'] = '1.975em';
         }
 
-        if(this.icon || this.$slots['icon']) {
+        if (this.icon || this.$slots['icon']) {
           styles['marginLeft'] = '1.975em';
         }
 
@@ -105,7 +105,7 @@
     left: 0;
   }
 
-  .iconAfter {
+  .icon-after {
     position: absolute;
     right: 0;
   }

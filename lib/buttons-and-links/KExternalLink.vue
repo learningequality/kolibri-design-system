@@ -69,28 +69,28 @@
       iconAfter: {
         type: String,
         required: false,
-      }
+      },
     },
     data() {
       return {
         hovering: false,
-      }
+      };
     },
     computed: {
       /**
        * If icon is provided, add 8px margin between the icon and the text
        */
       spanStyle() {
-        if(this.icon) {
-          if(this.isRtl) {
-            return { marginRight: '8px' }
+        if (this.icon) {
+          if (this.isRtl) {
+            return { marginRight: '8px' };
           } else {
             return { marginLeft: '8px' };
           }
         } else {
           return {};
         }
-      }
+      },
     },
   };
 

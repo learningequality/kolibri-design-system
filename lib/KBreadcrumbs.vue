@@ -270,12 +270,13 @@
   }
 
   .breadcrumbs-dropdown {
-    position: absolute;
     @extend %dropshadow-16dp;
-    background: white;
+
+    position: absolute;
     z-index: 100;
     padding: 16px;
     font-weight: bold;
+    background: white;
   }
 
   .breadcrumbs-dropdown-items {

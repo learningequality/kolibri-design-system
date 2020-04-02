@@ -235,9 +235,9 @@
   .indeterminate,
   .unchecked,
   .checked {
-    height: $checkbox-height;
-    width: $checkbox-height;
     top: 0;
+    width: $checkbox-height;
+    height: $checkbox-height;
   }
 
 </style>
