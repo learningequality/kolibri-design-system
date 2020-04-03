@@ -5,6 +5,7 @@
 
 How to use the Kolibri Design System
 
+
 ### Documentation
 
 [![Netlify Status](https://api.netlify.com/api/v1/badges/9ae9ac56-7240-4480-b5a8-01645cb903ca/deploy-status)](https://app.netlify.com/sites/kolibri-design-system/deploys)
@@ -12,6 +13,7 @@ How to use the Kolibri Design System
 See **[https://kolibri-design-system.netlify.app](https://kolibri-design-system.netlify.app)** for the latest design system documentation.
 
 This contains resources for designers and developers who are building Kolibri products using the design system patterns and the shared UI library.
+
 
 ### Shared UI library
 
@@ -37,9 +39,10 @@ import KButton from 'kolibri-design-system/lib/KButton';
 
 Refer to the [documentation](https://kolibri-design-system.netlify.app) for specifics.
 
-The shared UI library is made available as source code, not a built distribution, and requires the external application to supply both build and runtime dependencies such as webpack, Vue, and Sass. These requirements will eventually be specified in `/package.json` as `peerDependencies`.
+The shared UI library is made available as source code, not a built distribution, and requires the external application to supply both build and runtime dependencies such as webpack, Vue, and Sass. These requirements will eventually be specified in `/package.json` as `peerDependencies` - ref: [#20](https://github.com/learningequality/kolibri-design-system/issues/20).
 
 The public API of the shared UI library is _only_ that which is documented in the documentation. Functionality which is not documented should be considered either experimental or a private implementation detail.
+
 
 ## Development of the documentation site
 
@@ -51,7 +54,8 @@ The design system has two primary components, the shared UI library (under `/lib
 
 The shared UI library code is built from Vue, Javascript, and Sass. It requires the dependencies specified under the `dependencies` and `peerDependencies` attributes of `/package.json`. An external application will import and functionality from `kolibri-design-system/lib` as [described in the documentation](https://kolibri-design-system.netlify.app), and then generate build artifacts as necessary for the application's specific deployment or distribution requirements.
 
-The documentation site is built using [NuxtJS](https://nuxtjs.org/), [Storybook](https://storybook.js.org/), and [Vue](https://vuejs.org/). It requires the dependencies specified in the `devDependencies` attribute of `/package.json` to build and run. The documentation site can either be run locally using the Node.js development server, or exported as a static site and uploaded to a CDN.
+The documentation site is built using [NuxtJS](https://nuxtjs.org/) and [Vue](https://vuejs.org/). It requires the dependencies specified in the `devDependencies` attribute of `/package.json` to build and run. The documentation site can either be run locally using the Node.js development server, or exported as a static site and uploaded to a CDNde
+
 
 ### Running the documentation locally
 
@@ -95,13 +99,55 @@ You may also want to install syntax highlighters in your editor for Vue and SASS
 
 Finally, it's useful to have the Vue development tools installed in your web browser.
 
-### Making changes
+
+### Making changes to content
 
 The documentation site is built using [NuxtJS](https://nuxtjs.org/) (configured in `/nuxt.config.js`) and [Vue](https://vuejs.org/).
 
 The directories and files in `/docs/pages/` are mapped by NuxtJS to URLs. Start with those files for making updates to documentation content.
 
-Common components used in the documentation site are in `/docs/common/`, and the primary page layout is `/docs/layouts/default.vue`.
+Common components used in the documentation site are prefixed with `Docs*` and available for use in all pages.
+
+Layout:
+
+* `<DocsPageTemplate />` - the main page template used by all pages
+* `<DocsPageSection />` - sections within the page template with auto-generated anchor links
+
+Links:
+
+* `<DocsAnchorTarget />` - for adding Anchor links to pages
+* `<DocsExternalLink />` - links to an external website
+* `<DocsInternalLink />` - links within the design system
+
+Illustration:
+
+* `<DocsShow />` - for showing a theme color
+* `<DocsDoNot />` - for showing side-by-side "Do" and "Do not" illustrations
+* `<DocsColorBlock />` - for showing a theme color
+* `<DocsIconBlock />` - for showing an icon
+
+
+All Kolibri shared components (for example `KButton`) are also available to be used within content. However, this should be limited to using them for _examples of usage_ only.
+
+
+### Making changes to component docs
+
+The `DocsPageTemplate` component takes an optional Boolean prop called `apiDocs`. When provided, the template will look for a shared library component with the same name, extract documentation for the component's props, events, slots, and methods, and display those at the bottom of the page after any other `DocsPageSection` components.
+
+To make updates to this content, modify the library component directly. We support a combination of Markdown and JSDocs inside the components.
+
+JSDocs functionality is provided by the [`vue-docgen-api`](https://www.npmjs.com/package/vue-docgen-api) package. For more information, see [Documenting components](https://vue-styleguidist.github.io/docs/Documenting.html)
+
+
+### Adding dependencies
+
+There is one top-level `package.json` file, and:
+
+* Dependencies used by the shared component library (`/lib`) are in `dependencies`
+* Some other dependencies used by the shared component library (`/lib`) are expected/assumed to be provided by the library user
+* _All_ other design system dependencies should be specified in `devDependencies`. This includes both build and run-time Nuxt-related dependencies
+
+See [issue #20](https://github.com/learningequality/kolibri-design-system/issues/20) for more information about how this situation could be improved.
 
 
 ### Design of the documentation site
