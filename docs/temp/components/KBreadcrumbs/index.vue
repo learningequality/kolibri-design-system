@@ -1,7 +1,7 @@
 <template>
 
-  <PageTemplate>
-    <PageSection title="Usage guidelines" anchor="#usage">
+  <DocsPageTemplate>
+    <DocsPageSection title="Usage guidelines" anchor="#usage">
 
       <p>
         Breadcrumbs should be used to aid navigation across channels, topic trees, and resources.
@@ -13,18 +13,18 @@
         This text might be redundant with the same name in an adjacent header, which is ok.
       </p>
 
-      <Show>
+      <DocsShow>
         <KBreadcrumbs :items="breadcrumbs" />
-      </Show>
-    </PageSection>
+      </DocsShow>
+    </DocsPageSection>
 
-    <PageSection title="Code example" anchor="#example" fullwidth>
-      <VueExample :code="exampleCode">
+    <DocsPageSection title="Code example" anchor="#example" fullwidth>
+      <DocsVueExample :code="exampleCode">
         <Example />
-      </VueExample>
-    </PageSection>
+      </DocsVueExample>
+    </DocsPageSection>
 
-  </PageTemplate>
+  </DocsPageTemplate>
 
 </template>
 
@@ -32,10 +32,10 @@
 <script>
 
   import Example from './Example.vue';
-  import VueExample from '~/common/VueExample';
-  import PageTemplate from '~/common/PageTemplate';
-  import PageSection from '~/common/PageSection';
-  import Show from '~/common/Show';
+  import DocsVueExample from '~/common/DocsVueExample';
+  import DocsPageTemplate from '~/common/DocsPageTemplate';
+  import DocsPageSection from '~/common/DocsPageSection';
+  import DocsShow from '~/common/DocsShow';
 
   /* eslint-disable import/no-duplicates */
   // import exampleCode from '!!raw-loader!./Example.vue';
@@ -46,10 +46,10 @@
   export default {
     name: 'KBreadcrumbs',
     components: {
-      PageTemplate,
-      PageSection,
-      VueExample,
-      Show,
+      DocsPageTemplate,
+      DocsPageSection,
+      DocsVueExample,
+      DocsShow,
       Example,
     },
     data: () => ({

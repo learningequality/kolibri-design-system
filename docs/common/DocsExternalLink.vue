@@ -11,7 +11,7 @@
 <script>
 
   export default {
-    name: 'ExternalLink',
+    name: 'DocsExternalLink',
     props: {
       text: {
         type: String,

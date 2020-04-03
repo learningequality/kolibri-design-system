@@ -11,11 +11,19 @@
   border: 0;
 }
 
-// match Prism font family
 code {
-  font-family: $code-font-stack;
-  color: $code-color;
+  display: inline-block;
+  padding-right: 0.35em;
+  padding-left: 0.35em;
+  font-family: 'Source Code Pro', monospace;
+  font-weight: 400;
   white-space: nowrap;
+  background-color: #918caf24;
+  border-radius: 0.25em;
+}
+
+.code {
+  font-family: 'Source Code Pro', monospace;
 }
 
 a code {

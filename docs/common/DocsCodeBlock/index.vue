@@ -15,7 +15,7 @@
   document.removeEventListener('DOMContentLoaded', Prism.highlightAll);
 
   export default {
-    name: 'CodeBlock',
+    name: 'DocsCodeBlock',
     components: {
       PrismComponent,
     },

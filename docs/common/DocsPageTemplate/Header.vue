@@ -2,9 +2,7 @@
 
   <div class="header" :class="{ scrolled }">
     <h1 class="header-text">
-      <component :is="codeStyle ? 'code' : 'span'">
-        {{ title }}
-      </component>
+      <span :class="{ code: codeStyle }">{{ title }}</span>
       <a href="#" @click="scrollToTop">
         <file-svg class="icon-link" src="../../assets/link.svg" />
         <span class="visuallyhidden">link to current page</span>
@@ -12,7 +10,7 @@
     </h1>
     <ul v-if="sections.length" class="nav">
       <li v-for="(section, i) in sections" :key="i" class="nav-item">
-        <InternalLink :href="section.anchor" :text="section.title" />
+        <DocsInternalLink :href="section.anchor" :text="section.title" />
       </li>
     </ul>
   </div>
@@ -104,6 +102,7 @@
 
   .header-text {
     margin: 0;
+    font-weight: 400;
   }
 
   .icon-link {

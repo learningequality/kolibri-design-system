@@ -1,10 +1,10 @@
 <template>
 
   <div class="section-link-with-target">
-    <InternalLink :href="anchor">
-      <file-svg class="icon-link" src="../../assets/link.svg" />
+    <DocsInternalLink :href="anchor">
+      <file-svg class="icon-link" src="../assets/link.svg" />
       <span class="visuallyhidden">link to section</span>
-    </InternalLink>
+    </DocsInternalLink>
     <!-- hidden target to account for variable height of header -->
     <a :id="anchorId" :href="anchor" class="offset-target">#</a>
   </div>
@@ -15,7 +15,7 @@
 <script>
 
   export default {
-    name: 'AnchorTarget',
+    name: 'DocsAnchorTarget',
     props: {
       anchor: {
         type: String,

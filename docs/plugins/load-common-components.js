@@ -1,13 +1,20 @@
 import Vue from 'vue';
 
-import ExternalLink from '~/common/links/ExternalLink';
-import InternalLink from '~/common/links/InternalLink';
-import AnchorTarget from '~/common/links/AnchorTarget';
-import PageSection from '~/common/PageSection';
-import PageTemplate from '~/common/PageTemplate';
+import VueSimpleMarkdown from 'vue-simple-markdown';
+import DocsExternalLink from '~/common/DocsExternalLink';
+import DocsInternalLink from '~/common/DocsInternalLink';
+import DocsAnchorTarget from '~/common/DocsAnchorTarget';
+import DocsPageSection from '~/common/DocsPageSection';
+import DocsPageTemplate from '~/common/DocsPageTemplate';
+import DocsDoNot from '~/common/DocsDoNot';
+import DocsShow from '~/common/DocsShow';
 
-Vue.component('PageTemplate', PageTemplate);
-Vue.component('PageSection', PageSection);
-Vue.component('InternalLink', InternalLink);
-Vue.component('AnchorTarget', AnchorTarget);
-Vue.component('ExternalLink', ExternalLink);
+Vue.component('DocsPageTemplate', DocsPageTemplate);
+Vue.component('DocsPageSection', DocsPageSection);
+Vue.component('DocsInternalLink', DocsInternalLink);
+Vue.component('DocsAnchorTarget', DocsAnchorTarget);
+Vue.component('DocsExternalLink', DocsExternalLink);
+Vue.component('DocsShow', DocsShow);
+Vue.component('DocsDoNot', DocsDoNot);
+
+Vue.use(VueSimpleMarkdown);

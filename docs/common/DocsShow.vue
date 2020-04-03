@@ -12,7 +12,7 @@
 <script>
 
   export default {
-    name: 'Show',
+    name: 'DocsShow',
     props: {
       block: {
         type: Boolean,

@@ -25,17 +25,11 @@
       </div>
 
       <div class="nav-links">
-        <NavLink v-show="showHome" :page="homePage" />
-        <NavSectionList v-show="showPatterns" :title="patternsText">
-          <li v-for="(page, i) in visiblePatternRoutes" :key="i">
-            <NavLink :page="page" />
-          </li>
-        </NavSectionList>
-        <NavSectionList v-show="showComponents" :title="componentsText">
-          <li v-for="(page, i) in visibleComponentRoutes" :key="i">
-            <NavLink :page="page" />
-          </li>
-        </NavSectionList>
+        <NavSectionList
+          v-for="section in visibleTableOfContents"
+          :key="section.title"
+          :section="section"
+        />
       </div>
 
     </nav>
@@ -49,47 +43,40 @@
 
 <script>
 
-  import { homePage, patternPages, libraryPages } from '../pages.js';
   import NavSectionList from './NavSectionList';
-  import NavLink from './NavLink';
   import { termList, matches } from './filter';
+  import tableOfContents from '~/tableOfContents.js';
 
   export default {
     name: 'SideNav',
     components: {
       NavSectionList,
-      NavLink,
     },
     data() {
       return {
         filterText: '',
-        patternsText: 'Patterns',
-        componentsText: 'Kolibri Library',
       };
     },
     computed: {
-      homePage() {
-        return homePage;
-      },
       terms() {
         return termList(this.filterText);
       },
-      showHome() {
-        return matches(this.terms, this.homePage.title);
-      },
-      showPatterns() {
-        return this.visiblePatternRoutes.length || matches(this.terms, this.patternsText);
-      },
-      showComponents() {
-        return this.visibleComponentRoutes.length || matches(this.terms, this.componentsText);
-      },
-      visiblePatternRoutes() {
-        // show a page if either the page title or the section title matches
-        return patternPages.filter(page => matches(this.terms, page.title + this.patternsText));
-      },
-      visibleComponentRoutes() {
-        // show a component if either the component name or the section title matches
-        return libraryPages.filter(page => matches(this.terms, page.title + this.patternsText));
+      visibleTableOfContents() {
+        let toc = [];
+        for (const section of tableOfContents) {
+          // if the section title matches, add the entire thing
+          if (matches(this.terms, section.title)) {
+            toc.push(section);
+          }
+          // otherwise, check for matching pages
+          else {
+            const matchingPages = section.pages.filter(page => matches(this.terms, page.title));
+            if (matchingPages.length) {
+              toc.push(section.clone({ pages: matchingPages }));
+            }
+          }
+        }
+        return toc;
       },
     },
   };
@@ -117,6 +104,7 @@
   .header-text {
     display: inline-block;
     margin-left: 8px;
+    font-weight: 400;
   }
 
   .filter-wrapper {

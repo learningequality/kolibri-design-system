@@ -44,6 +44,7 @@
         v-if="!label && $slots.default"
         class="k-checkbox-label"
       >
+        <!-- @slot Used as an alternative to the `label` prop -->
         <slot></slot>
       </div>
 
@@ -74,14 +75,14 @@
     name: 'KCheckbox',
     props: {
       /**
-       * Label
+       * Text label
        */
       label: {
         type: String,
         required: false,
       },
       /**
-       * Whether to show label
+       * Whether or not to show the label
        */
       showLabel: {
         type: Boolean,
@@ -95,7 +96,7 @@
         default: false,
       },
       /**
-       * Indeterminate state, overrides checked state
+       * Indeterminate state. Overrides `checked` state
        */
       indeterminate: {
         type: Boolean,
@@ -170,6 +171,8 @@
       },
       /**
        * @public
+       *
+       * Sets keyboard focus to the checkbox
        */
       focus() {
         this.$refs.kCheckboxInput.focus();

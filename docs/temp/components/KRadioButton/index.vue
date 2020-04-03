@@ -1,13 +1,13 @@
 <template>
 
-  <PageTemplate :completed="false">
+  <DocsPageTemplate :completed="false">
 
-    <PageSection>
+    <DocsPageSection>
 
       <h2>Code Example</h2>
-      <VueExample :code="exampleCode">
+      <DocsVueExample :code="exampleCode">
         <Example />
-      </VueExample>
+      </DocsVueExample>
 
       <h2>Guidelines</h2>
       <h3>Usage</h3>
@@ -29,8 +29,8 @@
         <li>Labels should be short and concise. Should not be sentences.</li>
       </ul>
 
-    </PageSection>
-  </PageTemplate>
+    </DocsPageSection>
+  </DocsPageTemplate>
 
 </template>
 
@@ -38,9 +38,9 @@
 <script>
 
   import Example from './Example.vue';
-  import VueExample from '~/common/VueExample';
-  import PageTemplate from '~/common/PageTemplate';
-  import PageSection from '~/common/PageSection';
+  import DocsVueExample from '~/common/DocsVueExample';
+  import DocsPageTemplate from '~/common/DocsPageTemplate';
+  import DocsPageSection from '~/common/DocsPageSection';
 
   /* eslint-disable import/no-duplicates */
   // import exampleCode from '!!raw-loader!./Example.vue';
@@ -51,9 +51,9 @@
   export default {
     name: 'KRadioButton',
     components: {
-      PageTemplate,
-      PageSection,
-      VueExample,
+      DocsPageTemplate,
+      DocsPageSection,
+      DocsVueExample,
       Example,
     },
     data: () => ({

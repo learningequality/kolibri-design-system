@@ -2,12 +2,12 @@
 
   <KGrid>
     <KGridItem class="prism-wrapper" :layout12="{ span: alwaysStack ? 12 : 6 }">
-      <CodeBlock language="html" :code="code" />
+      <DocsCodeBlock language="html" :code="code" />
     </KGridItem>
     <KGridItem :layout12="{ span: alwaysStack ? 12 : 6 }">
-      <Show class="show">
+      <DocsShow class="show">
         <slot></slot>
-      </Show>
+      </DocsShow>
     </KGridItem>
   </KGrid>
 
@@ -16,14 +16,12 @@
 
 <script>
 
-  import CodeBlock from './CodeBlock';
-  import Show from './Show';
+  import DocsCodeBlock from './DocsCodeBlock';
 
   export default {
-    name: 'VueExample',
+    name: 'DocsVueExample',
     components: {
-      CodeBlock,
-      Show,
+      DocsCodeBlock,
     },
     props: {
       code: {

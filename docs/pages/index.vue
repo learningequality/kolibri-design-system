@@ -1,8 +1,8 @@
 <template>
 
-  <PageTemplate>
+  <DocsPageTemplate>
 
-    <PageSection title="Purpose" anchor="#purpose">
+    <DocsPageSection title="Purpose" anchor="#purpose">
       <p>
         The Kolibri Design System contains resources for designers and developers building Kolibri products. The purpose is to:
       </p>
@@ -15,16 +15,16 @@
         The design system includes both documentation design patterns and a shared front-end UI library. Together, these provide solutions to common design and implementation needs in Kolibri products.
       </p>
       <p>
-        If the design system is failing to achieve the objectives above, it needs to be updated. Your contributions and input are appreciated. For more information, see the <InternalLink href="#updates">
+        If the design system is failing to achieve the objectives above, it needs to be updated. Your contributions and input are appreciated. For more information, see the <DocsInternalLink href="#updates">
           Updates
-        </InternalLink> section below, the <ExternalLink href="https://github.com/learningequality/kolibri-design-system">
+        </DocsInternalLink> section below, the <DocsExternalLink href="https://github.com/learningequality/kolibri-design-system">
           GitHub repository
-        </ExternalLink>, or the <ExternalLink href="https://www.notion.so/learningequality/Kolibri-Design-System-for-LE-products-976ea82b50f844ea9149a7abed497ea9">
+        </DocsExternalLink>, or the <DocsExternalLink href="https://www.notion.so/learningequality/Kolibri-Design-System-for-LE-products-976ea82b50f844ea9149a7abed497ea9">
           Notion project
-        </ExternalLink>.
+        </DocsExternalLink>.
       </p>
-    </PageSection>
-    <PageSection title="Scope" anchor="#scope">
+    </DocsPageSection>
+    <DocsPageSection title="Scope" anchor="#scope">
       <p>
         The Kolibri Design System contains guidance and functionality that reflects very common design patterns across all of our products. It also gives guidance about patterns and component that are consistently different between products, for example due to different user needs or browser requirements.
       </p>
@@ -34,8 +34,8 @@
       <p>
         The public API of the shared UI library is <em>only</em> that which is documented in this site. Functionality which is not documented here should be considered either experimental or a private implementation detail.
       </p>
-    </PageSection>
-    <PageSection title="Exceptions" anchor="#exceptions">
+    </DocsPageSection>
+    <DocsPageSection title="Exceptions" anchor="#exceptions">
       <p>
         If using an existing pattern or component would <em>significantly</em> degrade the user experience compared to designing and building an alternate user interface, we should prioritize the user experience and build the custom UI.
       </p>
@@ -48,8 +48,8 @@
       <p>
         Over time we should be able to observe patterns in the intentional deviations, and use them as guidance for implementing updates to the design system that benefit the rest of the product ecosystem.
       </p>
-    </PageSection>
-    <PageSection title="Updates" anchor="#updates">
+    </DocsPageSection>
+    <DocsPageSection title="Updates" anchor="#updates">
       <p>
         The process for making updates to the design system is still being formulated. There are a number of factors that need to be taken into consideration, including:
       </p>
@@ -66,21 +66,21 @@
       <ul>
         <li>Share ideas or concerns with Devon, Jessica, and Jacob directly</li>
         <li>
-          Submit a <ExternalLink href="https://github.com/learningequality/kolibri-design-system/pulls">
+          Submit a <DocsExternalLink href="https://github.com/learningequality/kolibri-design-system/pulls">
             pull request
-          </ExternalLink> or <ExternalLink href="https://github.com/learningequality/kolibri-design-system/issues">
+          </DocsExternalLink> or <DocsExternalLink href="https://github.com/learningequality/kolibri-design-system/issues">
             issue
-          </ExternalLink> to the GitHub repo
+          </DocsExternalLink> to the GitHub repo
         </li>
         <li>
-          Leave a comment in the <ExternalLink href="https://www.notion.so/learningequality/Kolibri-Design-System-for-LE-products-976ea82b50f844ea9149a7abed497ea9">
+          Leave a comment in the <DocsExternalLink href="https://www.notion.so/learningequality/Kolibri-Design-System-for-LE-products-976ea82b50f844ea9149a7abed497ea9">
             Notion project
-          </ExternalLink>
+          </DocsExternalLink>
         </li>
       </ul>
-    </PageSection>
+    </DocsPageSection>
 
-  </PageTemplate>
+  </DocsPageTemplate>
 
 </template>
 
