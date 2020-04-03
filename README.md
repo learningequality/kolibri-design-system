@@ -9,7 +9,7 @@ How to use the Kolibri Design System
 
 [![Netlify Status](https://api.netlify.com/api/v1/badges/9ae9ac56-7240-4480-b5a8-01645cb903ca/deploy-status)](https://app.netlify.com/sites/kolibri-design-system/deploys)
 
-See **[https://kolibri-design-system.netlify.com](https://kolibri-design-system.netlify.com)** for the latest design system documentation.
+See **[https://kolibri-design-system.netlify.app](https://kolibri-design-system.netlify.app)** for the latest design system documentation.
 
 This contains resources for designers and developers who are building Kolibri products using the design system patterns and the shared UI library.
 
@@ -35,7 +35,7 @@ yarn add https://github.com/learningequality/kolibri-design-system#v1.0.1
 import KButton from 'kolibri-design-system/lib/KButton';
 ```
 
-Refer to the [documentation](https://kolibri-design-system.netlify.com) for specifics.
+Refer to the [documentation](https://kolibri-design-system.netlify.app) for specifics.
 
 The shared UI library is made available as source code, not a built distribution, and requires the external application to supply both build and runtime dependencies such as webpack, Vue, and Sass. These requirements will eventually be specified in `/package.json` as `peerDependencies`.
 
@@ -49,7 +49,7 @@ How to make updates to the Kolibri Design System
 
 The design system has two primary components, the shared UI library (under `/lib`) and the documentation site (under `/docs`).
 
-The shared UI library code is built from Vue, Javascript, and Sass. It requires the dependencies specified under the `dependencies` and `peerDependencies` attributes of `/package.json`. An external application will import and functionality from `kolibri-design-system/lib` as [described in the documentation](https://kolibri-design-system.netlify.com), and then generate build artifacts as necessary for the application's specific deployment or distribution requirements.
+The shared UI library code is built from Vue, Javascript, and Sass. It requires the dependencies specified under the `dependencies` and `peerDependencies` attributes of `/package.json`. An external application will import and functionality from `kolibri-design-system/lib` as [described in the documentation](https://kolibri-design-system.netlify.app), and then generate build artifacts as necessary for the application's specific deployment or distribution requirements.
 
 The documentation site is built using [NuxtJS](https://nuxtjs.org/), [Storybook](https://storybook.js.org/), and [Vue](https://vuejs.org/). It requires the dependencies specified in the `devDependencies` attribute of `/package.json` to build and run. The documentation site can either be run locally using the Node.js development server, or exported as a static site and uploaded to a CDN.
 
