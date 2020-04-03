@@ -19,9 +19,9 @@
       </p>
       <p>Layout:</p>
       <ul>
-        <li>Always left-aligned</li>
-        <li>When used in a group, always vertically stacked</li>
-        <li>Avoid hierarchical nesting</li>
+        <li>Aligned with container margin</li>
+        <li>When used in a group, vertically stacked</li>
+        <li>Hierarchical nesting is avoided</li>
       </ul>
       <p>Labels:</p>
       <ul>
