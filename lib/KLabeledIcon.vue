@@ -36,17 +36,17 @@
       KIcon,
     },
     props: {
-      // If provided, will render a KIcon using the value given as the `icon` prop. The icon will be prepended to the label.
+      // An icon that will be prepended to the label. Uses the same icon names as the `KIcon` component
       icon: {
         type: String,
         required: false,
       },
-      // If provided, will render a KICon using the value given as the `icon` prop. The iconAfter will be appended to the label.
+      // An icon that will be appended to the label. Uses the same icon names as the `KIcon` component
       iconAfter: {
         type: String,
         required: false,
       },
-      // If provided, determines the color of the label and any icons that are provided.
+      // If provided, determines the color of the label and any icons that are provided
       color: {
         type: String,
         required: false,
@@ -78,11 +78,11 @@
         let styles = {};
         // Margin for icons - use em to match parent font size
         if (this.iconAfter || this.$slots['iconAfter']) {
-          styles['marginRight'] = '1.975em';
+          styles['marginRight'] = '1.975em'; // scale with parent font size
         }
 
         if (this.icon || this.$slots['icon']) {
-          styles['marginLeft'] = '1.975em';
+          styles['marginLeft'] = '1.975em'; // scale with parent font size
         }
 
         return styles;
