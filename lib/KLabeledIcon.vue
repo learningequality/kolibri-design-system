@@ -1,6 +1,6 @@
 <template>
 
-  <span class="labeled-icon-wrapper">
+  <span class="labeled-icon-wrapper" v-on="$listeners">
     <span class="icon">
       <slot name="icon">
         <KIcon v-if="icon" :icon="icon" :color="color || $themeTokens.text" style="top: 2px;" />
