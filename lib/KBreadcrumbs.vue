@@ -9,7 +9,11 @@
           appearance="raised-button"
           @click="showDropdown = !showDropdown"
         />
-        <div v-if="showDropdown" class="breadcrumbs-dropdown">
+        <div
+          v-if="showDropdown"
+          class="breadcrumbs-dropdown"
+          :style="{ background: $themeTokens.surface }"
+        >
           <ol class="breadcrumbs-dropdown-items">
             <li
               v-for="(crumb, index) in collapsedCrumbs"
@@ -270,13 +274,12 @@
   }
 
   .breadcrumbs-dropdown {
-    @extend %dropshadow-16dp;
+    @extend %dropshadow-8dp;
 
     position: absolute;
-    z-index: 100;
+    z-index: 8;
     padding: 16px;
     font-weight: bold;
-    background: white;
   }
 
   .breadcrumbs-dropdown-items {
