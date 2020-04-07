@@ -268,13 +268,14 @@
 
 <style lang="scss" scoped>
 
+  @import '../styles/definitions';
+
   svg {
     position: relative;
     top: 0.125em;
     width: 1.125em;
     height: 1.125em;
-    // 1s and not $core-time because it works
-    transition: fill 1s ease;
+    transition: fill $core-time ease;
   }
 
   .rtl-flip-icon {
