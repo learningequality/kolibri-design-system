@@ -95,7 +95,7 @@
   .nav {
     padding: 0;
     margin: 0;
-    margin-top: 8px;
+    margin-top: 20px;
     list-style: none;
   }
 
