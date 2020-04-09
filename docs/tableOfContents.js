@@ -82,11 +82,6 @@ export default [
         title: 'Icons',
       }),
       new Page({
-        path: '/typography',
-        title: 'Typography',
-        disabled: true,
-      }),
-      new Page({
         path: '/layout',
         title: 'Layout and grids',
         disabled: true,
