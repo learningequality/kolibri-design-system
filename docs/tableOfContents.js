@@ -145,12 +145,6 @@ export default [
         isCode: true,
       }),
       new Page({
-        path: '/KBreadcrumbs',
-        title: 'KBreadcrumbs',
-        isCode: true,
-        disabled: true,
-      }),
-      new Page({
         path: '/KCheckbox',
         title: 'KCheckbox',
         isCode: true,
@@ -159,7 +153,6 @@ export default [
         path: '/KCircularLoader',
         title: 'KCircularLoader',
         isCode: true,
-        disabled: true,
       }),
       new Page({
         path: '/KLinearLoader',

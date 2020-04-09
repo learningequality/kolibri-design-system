@@ -93,10 +93,6 @@
         type: Boolean,
         default: false,
       },
-      size: {
-        type: Number,
-        default: 32,
-      },
       type: {
         type: String,
         default: 'indeterminate', // 'indeterminate' or 'determinate'
@@ -105,15 +101,11 @@
         type: Number,
         default: 0,
       },
+      size: {
+        type: Number,
+        default: 32,
+      },
       stroke: Number,
-      autoStroke: {
-        type: Boolean,
-        default: true,
-      },
-      disableTransition: {
-        type: Boolean,
-        default: false,
-      },
     },
 
     computed: {
