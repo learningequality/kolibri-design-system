@@ -100,6 +100,10 @@ export default [
         title: 'Modals',
         disabled: true,
       }),
+      new Page({
+        path: '/loaders',
+        title: 'Loaders',
+      }),
     ],
   }),
   new Section({
