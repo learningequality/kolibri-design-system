@@ -18,11 +18,7 @@
       </DocsShow>
     </DocsPageSection>
 
-    <DocsPageSection title="Code example" anchor="#example" fullwidth>
-      <DocsVueExample :code="exampleCode">
-        <Example />
-      </DocsVueExample>
-    </DocsPageSection>
+    <DocsPageSection title="Code example" anchor="#example" fullwidth />
 
   </DocsPageTemplate>
 
@@ -32,7 +28,6 @@
 <script>
 
   import Example from './Example.vue';
-  import DocsVueExample from '~/common/DocsVueExample';
   import DocsPageTemplate from '~/common/DocsPageTemplate';
   import DocsPageSection from '~/common/DocsPageSection';
   import DocsShow from '~/common/DocsShow';
@@ -48,7 +43,6 @@
     components: {
       DocsPageTemplate,
       DocsPageSection,
-      DocsVueExample,
       DocsShow,
       Example,
     },

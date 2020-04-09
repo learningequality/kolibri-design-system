@@ -2,11 +2,7 @@
 
   <DocsPageTemplate :completed="false">
 
-    <DocsPageSection title="Usage" anchor="#usage" fullwidth>
-      <DocsVueExample :code="exampleCode">
-        <Example />
-      </DocsVueExample>
-    </DocsPageSection>
+    <DocsPageSection title="Usage" anchor="#usage" fullwidth />
 
   </DocsPageTemplate>
 
@@ -16,7 +12,6 @@
 <script>
 
   import Example from './Example.vue';
-  import DocsVueExample from '~/common/DocsVueExample';
   import DocsPageTemplate from '~/common/DocsPageTemplate';
   import DocsPageSection from '~/common/DocsPageSection';
 
@@ -31,7 +26,6 @@
     components: {
       DocsPageTemplate,
       DocsPageSection,
-      DocsVueExample,
       Example,
     },
     data: () => ({

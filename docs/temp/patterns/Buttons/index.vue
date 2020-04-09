@@ -104,9 +104,7 @@
         </li>
       </ul>
 
-      <DocsVueExample :code="exampleCode">
-        <Example />
-      </DocsVueExample>
+
 
     </DocsPageSection>
 
@@ -129,7 +127,6 @@
 <script>
 
   import Example from './Example';
-  import DocsVueExample from '~/common/DocsVueExample';
   import DocsShow from '~/common/DocsShow';
 
   /* eslint-disable import/no-duplicates */
@@ -139,7 +136,6 @@
   export default {
     name: 'Buttons',
     components: {
-      DocsVueExample,
       DocsShow,
       Example,
     },

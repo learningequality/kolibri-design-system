@@ -5,9 +5,7 @@
     <DocsPageSection>
 
       <h2>Code Example</h2>
-      <DocsVueExample :code="exampleCode">
-        <Example />
-      </DocsVueExample>
+
 
       <h2>Guidelines</h2>
       <h3>Usage</h3>
@@ -38,7 +36,6 @@
 <script>
 
   import Example from './Example.vue';
-  import DocsVueExample from '~/common/DocsVueExample';
   import DocsPageTemplate from '~/common/DocsPageTemplate';
   import DocsPageSection from '~/common/DocsPageSection';
 
@@ -53,7 +50,6 @@
     components: {
       DocsPageTemplate,
       DocsPageSection,
-      DocsVueExample,
       Example,
     },
     data: () => ({
