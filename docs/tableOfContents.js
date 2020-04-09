@@ -158,7 +158,6 @@ export default [
         path: '/KLinearLoader',
         title: 'KLinearLoader',
         isCode: true,
-        disabled: true,
       }),
       new Page({
         path: '/KDropdownMenu',
