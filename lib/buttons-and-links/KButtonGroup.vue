@@ -1,8 +1,8 @@
 <template>
 
-  <span class="button-group">
+  <div class="button-group">
     <slot></slot>
-  </span>
+  </div>
 
 </template>
 
@@ -26,6 +26,7 @@
 <style lang="scss" scoped>
 
   .button-group {
+    display: inline-block;
     overflow: hidden;
   }
 
