@@ -1,13 +1,17 @@
 <template>
 
   <div class="header" :class="{ scrolled }">
-    <h1 class="header-text">
-      <span :class="{ code: codeStyle }">{{ title }}</span>
-      <a href="#" @click="scrollToTop">
-        <file-svg class="icon-link" src="../../assets/link.svg" />
-        <span class="visuallyhidden">link to current page</span>
-      </a>
-    </h1>
+    <div>
+      <h1 class="header-text">
+        <span :class="{ code: codeStyle }">{{ title }}</span>
+        <a href="#" @click="scrollToTop">
+          <file-svg class="icon-link" src="../../assets/link.svg" />
+          <span class="visuallyhidden">link to current page</span>
+        </a>
+      </h1>
+      <GitHubLink style="float: right" />
+    </div>
+    <div style="clear: both;"></div>
     <ul v-if="sections.length" class="nav">
       <li v-for="(section, i) in sections" :key="i" class="nav-item">
         <DocsInternalLink :href="section.anchor" :text="section.title" />
@@ -20,8 +24,13 @@
 
 <script>
 
+  import GitHubLink from './GitHubLink.vue';
+
   export default {
     name: 'Header',
+    components: {
+      GitHubLink,
+    },
     props: {
       sections: {
         type: Array,
@@ -101,6 +110,7 @@
   }
 
   .header-text {
+    display: inline-block;
     margin: 0;
     font-weight: 400;
   }
