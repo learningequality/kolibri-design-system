@@ -99,7 +99,6 @@ export default [
       new Page({
         path: '/buttons',
         title: 'Buttons and links',
-        disabled: true,
       }),
       new Page({
         path: '/modals',

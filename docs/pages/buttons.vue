@@ -104,8 +104,6 @@
         </li>
       </ul>
 
-
-
     </DocsPageSection>
 
     <DocsPageSection title="Exceptions" anchor="#exceptions">
@@ -117,8 +115,6 @@
 
     </DocsPageSection>
 
-
-
   </DocsPageTemplate>
 
 </template>
@@ -126,25 +122,7 @@
 
 <script>
 
-  import Example from './Example';
-  import DocsShow from '~/common/DocsShow';
-
-  /* eslint-disable import/no-duplicates */
-  // import exampleCode from '!!raw-loader!./Example.vue';
-  /* eslint-enable import/no-duplicates */
-
-  export default {
-    name: 'Buttons',
-    components: {
-      DocsShow,
-      Example,
-    },
-    data() {
-      return {
-        exampleCode: {}, // TODO
-      };
-    },
-  };
+  export default {};
 
 </script>
 
