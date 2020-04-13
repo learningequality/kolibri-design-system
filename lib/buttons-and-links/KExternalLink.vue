@@ -6,8 +6,26 @@
     :href="href"
     :download="download"
     dir="auto"
+    @mouseenter="hovering = true"
+    @mouseleave="hovering = false"
   >
-    {{ text }}
+    <slot name="icon">
+      <KIcon
+        v-if="icon"
+        :icon="icon"
+        style="top: 4px;"
+        :color="hovering ? $themeTokens.primaryDark : $themeTokens.primary"
+      />
+    </slot>
+    <span :style="spanStyle">{{ text }}</span>
+    <slot name="iconAfter">
+      <KIcon
+        v-if="iconAfter"
+        :icon="iconAfter"
+        style="top: 4px;"
+        :color="hovering ? $themeTokens.primaryDark : $themeTokens.primary"
+      />
+    </slot>
   </a>
 
 </template>
@@ -37,6 +55,41 @@
       download: {
         type: String,
         required: false,
+      },
+      /**
+       * If provided, shows a KIcon in front of the text
+       */
+      icon: {
+        type: String,
+        required: false,
+      },
+      /**
+       * If provided, shows a KIcon after the text
+       */
+      iconAfter: {
+        type: String,
+        required: false,
+      },
+    },
+    data() {
+      return {
+        hovering: false,
+      };
+    },
+    computed: {
+      /**
+       * If icon is provided, add 8px margin between the icon and the text
+       */
+      spanStyle() {
+        if (this.icon) {
+          if (this.isRtl) {
+            return { marginRight: '8px' };
+          } else {
+            return { marginLeft: '8px' };
+          }
+        } else {
+          return {};
+        }
       },
     },
   };

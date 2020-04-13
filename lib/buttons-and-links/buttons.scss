@@ -10,7 +10,6 @@ $raised-shadow: 0 1px 5px rgba(0, 0, 0, 0.2), 0 2px 2px rgba(0, 0, 0, 0.14),
   max-width: 100%;
   min-height: 36px;
   padding: 0 16px;
-  margin: 8px;
   overflow: hidden;
   font-size: 14px;
   font-weight: bold;
@@ -41,7 +40,9 @@ a.button {
   box-shadow: $raised-shadow;
 }
 
-.link {
+.link,
+.link .label > span > span {
+  // KRouterLink target text
   display: inline-block;
   padding: 0;
   text-align: left;

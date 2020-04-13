@@ -2,7 +2,26 @@
 
   <!-- no extra whitespace inside link -->
   <router-link :class="buttonClasses" :to="to" dir="auto">
-    {{ text }}
+    <KLabeledIcon @mouseenter="hovering = true" @mouseleave="hovering = false">
+      <KIcon
+        v-if="icon"
+        slot="icon"
+        :icon="icon"
+        style="top: 0px; height: 24px; width: 24px;"
+        :color="hovering ? $themeTokens.primaryDark : $themeTokens.primary"
+      />
+
+      <!-- Keep on the same line to avoid empty underlined spacing -->
+      <span>{{ text }}</span>
+
+      <KIcon
+        v-if="iconAfter"
+        slot="iconAfter"
+        :icon="iconAfter"
+        style="top: 0px; height: 24px; width: 24px;"
+        :color="hovering ? $themeTokens.primaryDark : $themeTokens.primary"
+      />
+    </KLabeledIcon>
   </router-link>
 
 </template>
@@ -26,6 +45,25 @@
         required: true,
         type: Object,
       },
+      /**
+       * If provided, shows a KIcon in front of the text
+       */
+      icon: {
+        type: String,
+        required: false,
+      },
+      /**
+       * If provided, shows a KIcon after the text
+       */
+      iconAfter: {
+        type: String,
+        required: false,
+      },
+    },
+    data() {
+      return {
+        hovering: false,
+      };
     },
   };
 
