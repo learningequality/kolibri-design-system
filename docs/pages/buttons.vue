@@ -17,6 +17,23 @@
         or control-click to open a page in a new tab, then a link should be used.
         Otherwise, a button should be used.
       </p>
+
+      <p>As such, there are three components that all behave similarly, but are used for different purposes:</p>
+      <ul>
+        <li>
+          <code>KButton</code> is used to create <code>&lt;button&gt;</code> tags with
+          <code>@click</code> event handlers.
+        </li>
+        <li>
+          <code>KRouterLink</code> is used to create Vue router <code>&lt;router-link&gt;</code>
+          components with <code>:to</code> properties. These compile into <code>&lt;a&gt;</code>
+          tags.
+        </li>
+        <li>
+          <code>KExternalLink</code> is used to create standard <code>&lt;a&gt;</code> tags with an
+          <code>href</code> attribute.
+        </li>
+      </ul>
     </DocsPageSection>
 
     <DocsPageSection title="Visual styles" anchor="#visualstyles">
@@ -85,41 +102,6 @@
       </ul>
 
     </DocsPageSection>
-    <DocsPageSection title="Usage" anchor="#usage" fullwidth>
-
-      <p>There are three components that all look the same, but are used for different purposes:</p>
-      <ul>
-        <li>
-          <code>KButton</code> is used to create <code>&lt;button&gt;</code> tags with
-          <code>@click</code> event handlers.
-        </li>
-        <li>
-          <code>KRouterLink</code> is used to create Vue router <code>&lt;router-link&gt;</code>
-          components with <code>:to</code> properties. These compile into <code>&lt;a&gt;</code>
-          tags.
-        </li>
-        <li>
-          <code>KExternalLink</code> is used to create standard <code>&lt;a&gt;</code> tags with an
-          <code>href</code> attribute.
-        </li>
-      </ul>
-
-      <DocsVueExample :code="exampleCode">
-        <Example />
-      </DocsVueExample>
-
-    </DocsPageSection>
-
-    <DocsPageSection title="Exceptions" anchor="#exceptions">
-      <ul>
-        <li>
-          On the sign-in page, the primary button is wider to give it visual dominance
-        </li>
-      </ul>
-
-    </DocsPageSection>
-
-
 
   </DocsPageTemplate>
 
@@ -128,27 +110,7 @@
 
 <script>
 
-  import Example from './Example';
-  import DocsVueExample from '~/common/DocsVueExample';
-  import DocsShow from '~/common/DocsShow';
-
-  /* eslint-disable import/no-duplicates */
-  // import exampleCode from '!!raw-loader!./Example.vue';
-  /* eslint-enable import/no-duplicates */
-
-  export default {
-    name: 'Buttons',
-    components: {
-      DocsVueExample,
-      DocsShow,
-      Example,
-    },
-    data() {
-      return {
-        exampleCode: {}, // TODO
-      };
-    },
-  };
+  export default {};
 
 </script>
 

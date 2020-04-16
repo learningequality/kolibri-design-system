@@ -14,5 +14,6 @@ Icon
 .nuxt
 dist
 
-# jsdoc output
+# pregenerated output
+docs/gitBranch.js
 docs/jsdocs.js

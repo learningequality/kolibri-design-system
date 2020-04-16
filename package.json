@@ -15,8 +15,8 @@
     "_lint-watch-fix": "yarn _lint -w -m",
     "_lint": "kolibri-tools lint '**/*.{js,vue,scss,less,css}' -i ,'**/node_modules/**','**/.nuxt/**','**/dist/**','**/material-svg/**'",
     "_test": "jest",
-    "_jsdocs-watch": "chokidar \"**/K*.vue\" -c \"node utils/parseJsDocs.js\"",
-    "_jsdocs": "node utils/parseJsDocs.js"
+    "_jsdocs-watch": "chokidar \"**/K*.vue\" -c \"node utils/pregenerate.js\"",
+    "_jsdocs": "node utils/pregenerate.js"
   },
   "files": [
     "lib"

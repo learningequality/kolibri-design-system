@@ -82,11 +82,6 @@ export default [
         title: 'Icons',
       }),
       new Page({
-        path: '/typography',
-        title: 'Typography',
-        disabled: true,
-      }),
-      new Page({
         path: '/layout',
         title: 'Layout and grids',
         disabled: true,
@@ -99,12 +94,15 @@ export default [
       new Page({
         path: '/buttons',
         title: 'Buttons and links',
-        disabled: true,
       }),
       new Page({
         path: '/modals',
         title: 'Modals',
         disabled: true,
+      }),
+      new Page({
+        path: '/loaders',
+        title: 'Loaders',
       }),
     ],
   }),
@@ -151,12 +149,6 @@ export default [
         isCode: true,
       }),
       new Page({
-        path: '/KBreadcrumbs',
-        title: 'KBreadcrumbs',
-        isCode: true,
-        disabled: true,
-      }),
-      new Page({
         path: '/KCheckbox',
         title: 'KCheckbox',
         isCode: true,
@@ -165,13 +157,11 @@ export default [
         path: '/KCircularLoader',
         title: 'KCircularLoader',
         isCode: true,
-        disabled: true,
       }),
       new Page({
         path: '/KLinearLoader',
         title: 'KLinearLoader',
         isCode: true,
-        disabled: true,
       }),
       new Page({
         path: '/KDropdownMenu',

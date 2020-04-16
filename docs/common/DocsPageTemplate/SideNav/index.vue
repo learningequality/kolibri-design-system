@@ -89,6 +89,7 @@
   @import '~/assets/definitions';
 
   .header {
+    margin-top: 24px;
     margin-bottom: 24px;
     font-size: 20px;
     font-weight: bold;

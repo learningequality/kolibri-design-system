@@ -4,9 +4,7 @@
 
     <DocsPageSection>
       <h3>Code Example</h3>
-      <DocsVueExample :code="ExampleCode">
-        <Example />
-      </DocsVueExample>
+
 
       <h3>Guidelines</h3>
 
@@ -175,7 +173,6 @@
   import Example from './Example.vue';
   import DocsPageTemplate from '~/common/DocsPageTemplate';
   import DocsPageSection from '~/common/DocsPageSection';
-  import DocsVueExample from '~/common/DocsVueExample';
   import ExampleCode from '!!raw-loader!./Example.vue';
   /* eslint-enable import/no-duplicates */
 
@@ -184,7 +181,6 @@
     components: {
       DocsPageTemplate,
       DocsPageSection,
-      DocsVueExample,
       Example,
     },
     data() {
