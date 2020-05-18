@@ -22,6 +22,8 @@
     "lib"
   ],
   "dependencies": {
+    "@babel/core": "^7.9.6",
+    "@babel/preset-env": "^7.9.6",
     "aphrodite": "https://github.com/learningequality/aphrodite/",
     "autosize": "^3.0.21",
     "css-element-queries": "^1.2.0",

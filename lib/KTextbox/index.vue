@@ -19,6 +19,7 @@
       :floatingLabel="floatingLabel"
       :multiLine="textArea"
       :rows="3"
+      :placeholder="placeholder"
       @input="updateText"
       @keydown="emitKeydown"
       @focus="$emit('focus')"
@@ -131,6 +132,11 @@
       floatingLabel: {
         type: Boolean,
         default: true,
+      },
+      placeholder: {
+        type: String,
+        default: '',
+        require: false,
       },
     },
     data() {
