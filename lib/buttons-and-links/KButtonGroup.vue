@@ -31,9 +31,10 @@
   }
 
   /* KButton can produce <a> or <button> tags */
-  .button-group > a:not(:first-child),
-  .button-group > button:not(:first-child) {
-    margin-left: 16px;
+  .button-group > a
+  .button-group > button {
+    margin-right: 8px;
+    margin-left: 8px;
   }
 
 </style>
