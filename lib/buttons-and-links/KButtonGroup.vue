@@ -31,7 +31,7 @@
   }
 
   /* KButton can produce <a> or <button> tags */
-  .button-group > a
+  .button-group > a,
   .button-group > button {
     margin-right: 8px;
     margin-left: 8px;
