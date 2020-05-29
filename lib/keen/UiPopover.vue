@@ -19,7 +19,7 @@
 
 <script>
 
-  import tippy from 'tippy.js/esm';
+  import tippy from 'tippy.js/umd';
 
   import classlist from './helpers/classlist';
   import elementRef from './helpers/element-ref';

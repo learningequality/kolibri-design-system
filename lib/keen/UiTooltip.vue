@@ -9,7 +9,7 @@
 
 <script>
 
-  import tippy from 'tippy.js/esm';
+  import tippy from 'tippy.js/umd';
   import elementRef from './helpers/element-ref';
 
   export default {
