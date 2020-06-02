@@ -21,6 +21,7 @@
               class="breadcrumbs-dropdown-item"
             >
               <KRouterLink
+                class="krouter-item"
                 :text="crumb.text"
                 :to="crumb.link"
                 :style="{ maxWidth: `${collapsedCrumbMaxWidth}px` }"
@@ -292,7 +293,7 @@
     display: block;
     padding-top: 8px;
     padding-bottom: 8px;
-    a {
+    .krouter-item {
       display: inline-block;
       max-width: 300px;
       overflow: hidden;
@@ -312,8 +313,7 @@
   .breadcrumbs-visible-item {
     display: inline-block;
     vertical-align: middle;
-    a,
-    span {
+    &:first-child {
       display: inline-block;
       max-width: 300px;
       overflow: hidden;
