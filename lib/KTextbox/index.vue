@@ -76,9 +76,8 @@
         required: false,
       },
       /**
-       * Show the `invalidText` even if the user has not focused or change the input
-       * Note that `false` here does not mean the text will never show but `true`
-       * does mean that it will definitely show.
+       * Show the `invalidText` even if the user has not focused or change the input.
+       * `invalid` must also be `true` for this to take effect.
        */
       showInvalidText: {
         type: Boolean,
