@@ -69,10 +69,20 @@
         default: false,
       },
       /**
-       * Text displayed if input is invalid
+       * Text displayed when the user is notified of invalid input
        */
       invalidText: {
         type: String,
+        required: false,
+      },
+      /**
+       * Show the `invalidText` even if the user has not focused or change the input
+       * Note that `false` here does not mean the text will never show but `true`
+       * does mean that it will definitely show.
+       */
+      showInvalidText: {
+        type: Boolean,
+        default: false,
         required: false,
       },
       /**
@@ -141,7 +151,7 @@
     },
     computed: {
       showInvalidMessage() {
-        return this.invalid && this.changedOrFocused;
+        return this.invalid && (this.changedOrFocused || this.showInvalidText);
       },
     },
     watch: {
