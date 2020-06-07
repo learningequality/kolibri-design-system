@@ -18,14 +18,23 @@ export default `;
 
 async function writeApi() {
   const componentFolder = path.resolve('./lib/');
-  const files = await globby('**/K*.vue', { cwd: componentFolder });
+  const simpleFiles = await globby('**/K*.vue', { cwd: componentFolder });
   const output = {};
 
-  for (const filename of files) {
+  for (const filename of simpleFiles) {
     const filepath = path.resolve(componentFolder, filename);
     const val = await docGenAPI.parse(filepath);
     output[val.displayName] = val;
   }
+
+  const complexFiles = await globby('**/K*/index.vue', { cwd: componentFolder });
+
+  for (const filename of complexFiles) {
+    const filepath = path.resolve(componentFolder, filename);
+    const val = await docGenAPI.parse(filepath);
+    output[val.displayName] = val;
+  }
+
   const outputPath = path.resolve('./docs/jsdocs.js');
   fs.writeFileSync(outputPath, docsOutputString + JSON.stringify(output, null, 2));
   consola.info('Wrote jsdocs to', outputPath);

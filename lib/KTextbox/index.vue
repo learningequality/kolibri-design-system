@@ -12,6 +12,7 @@
       :autofocus="autofocus"
       :maxlength="maxlength"
       :autocomplete="autocomplete"
+      :autocapitalize="autocapitalize"
       :type="type"
       :min="min"
       :max="max"
@@ -93,6 +94,13 @@
        * HTML5 autocomplete attribute (off, on, name, username, current-password, etc.)
        */
       autocomplete: {
+        type: String,
+        required: false,
+      },
+      /**
+       * HTML5 autocapitalize attribute. Used for touch-input enabled UI (none, etc.)
+       */
+      autocapitalize: {
         type: String,
         required: false,
       },

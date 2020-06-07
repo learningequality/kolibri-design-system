@@ -283,6 +283,11 @@ export default [
         isCode: true,
         disabled: true,
       }),
+      new Page({
+        path: '/KTextbox',
+        title: 'KTextbox',
+        isCode: true,
+      }),
     ],
   }),
 ];
