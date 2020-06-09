@@ -7,7 +7,7 @@
         {{ section.title }}
       </div>
     </template>
-    <ul>
+    <ul class="ul-default-style">
       <li
         v-for="page in section.pages"
         :key="page.title"
@@ -42,7 +42,7 @@
 
 <style lang="scss" scoped>
 
-  ul {
+  .ul-default-style {
     padding: 0;
     margin: 0;
     list-style-type: none;
