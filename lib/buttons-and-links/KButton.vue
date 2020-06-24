@@ -11,9 +11,13 @@
     @click="handleClick"
     @keyup.enter.stop.prevent="handlePressEnter"
   >
-    <slot name="icon">
-      <KIcon v-if="icon" :icon="icon" :color="$themeTokens.textInverted" />
-    </slot>
+    <!-- icon may come by slot or by prop -->
+    <slot name="icon"></slot>
+    <KIcon 
+      v-if="icon" 
+      :icon="icon" 
+      :color="iconColor"
+    />
 
     <slot v-if="$slots.default"></slot>
 
@@ -21,9 +25,13 @@
       <span>{{ text }}</span>
     </template>
 
-    <slot name="iconAfter">
-      <KIcon v-if="iconAfter" :icon="iconAfter" :color="$themeTokens.textInverted" />
-    </slot>
+    <!-- iconAfter may come by slot or by prop -->
+    <slot name="iconAfter"></slot>
+    <KIcon 
+      v-if="iconAfter" 
+      :icon="iconAfter"
+      :color="iconColor"
+    />
 
     <!-- Dropdown arrow icon -->
     <KIcon
@@ -97,6 +105,11 @@
       },
     },
     computed: {
+      iconColor() {
+        return this.appearance === 'raised-button' ?
+          this.$themeTokens.textInverted :
+          this.$themeTokens.primary;
+      },
       htmlTag() {
         // Necessary to allow basic links to be rendered as 'inline' instead of
         // 'inline-block': https://stackoverflow.com/a/27770128
