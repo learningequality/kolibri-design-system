@@ -196,7 +196,7 @@ If you are working on the design system library code in this repo and want to se
 
 1. While in the root of your local `kolibri-design-system` repository, run `yarn link`.
 2. In the application where you intend to use `kolibri-design-system` remove the reference to `kolibri-design-system` from the `package.json` of that project.
-3. In the root of the application where you intend to use `kolibri-design-system` run `yarn link kolibri-design-system && yarn install`.
+3. In the root of the application where you intend to use `kolibri-design-system` run `yarn link kolibri-design-system` and then `yarn install`.
 
 Now, when you run the application your changes in `kolibri-design-system` will be updated live where your app expects its dependency on `kolibri-design-system` to live.
 
