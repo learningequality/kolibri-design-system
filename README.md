@@ -212,7 +212,6 @@ Remove the reference to `kolibri-design-system` from `kolibri/core/package.json`
 
 ```bash
 yarn link kolibri-design-system
-yarn install
 yarn run devserver
 ```
 
