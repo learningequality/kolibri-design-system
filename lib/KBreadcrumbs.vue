@@ -55,6 +55,7 @@
             <span
               :style="{ maxWidth: `${lastCrumbMaxWidth}px` }"
               dir="auto"
+              class="link-text"
             >
               {{ crumb.text }}
             </span>
@@ -313,7 +314,8 @@
   .breadcrumbs-visible-item {
     display: inline-block;
     vertical-align: middle;
-    &:first-child {
+
+    /deep/ .link-text {
       display: inline-block;
       max-width: 300px;
       overflow: hidden;

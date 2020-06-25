@@ -12,7 +12,7 @@
       />
 
       <!-- Keep on the same line to avoid empty underlined spacing -->
-      <span>{{ text }}</span>
+      <span class="link-text">{{ text }}</span>
 
       <KIcon
         v-if="iconAfter"
