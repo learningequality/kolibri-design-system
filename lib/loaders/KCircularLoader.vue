@@ -9,9 +9,7 @@
   -->
 
 
-  <transition
-    :name="disableTransition ? null : 'ui-progress-circular--transition-fade'"
-  >
+  <transition name="ui-progress-circular--transition-fade">
     <div
       class="ui-progress-circular"
       :class="[classes, { delay }]"
@@ -106,10 +104,6 @@
         default: 32,
       },
       stroke: Number,
-      disableTransition: {
-        type: Boolean,
-        default: false,
-      },
     },
 
     computed: {
