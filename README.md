@@ -192,7 +192,7 @@ yarn run precompile-svgs
 
 ### Development in parallel with other applications
 
-If you are working on this repository and want to see live updates to the component library here in other applications that are using this library, then you will need to do a few things.
+If you are working on the design system library code in this repo and want to see local updates reflected in other applications that are using this library, then you will need to do a few things.
 
 1. While in the root of your local `kolibri-design-system` repository, run `yarn link`.
 2. In the application where you intend to use `kolibri-design-system` remove the reference to `kolibri-design-system` from the `package.json` of that project.
