@@ -104,10 +104,6 @@
         default: 32,
       },
       stroke: Number,
-      disableTransition: {
-        type: Boolean,
-        default: false,
-      },
     },
 
     computed: {
