@@ -17,9 +17,7 @@
         or control-click to open a page in a new tab, then a link should be used.
         Otherwise, a button should be used.
       </p>
-
       <p>As such, there are three components that all behave similarly, but are used for different purposes:</p>
-      <!-- TODO: add a flat secondary icon button to these examples below. See Google doc for example -->
       <ul>
         <li>
           <code>KButton</code> is used to create <code>&lt;button&gt;</code> tags with
@@ -53,7 +51,7 @@
           hyperlink-like appearance for deemphasized actions, or actions inline within text
         </li>
       </ul>
-
+      <!-- TODO: add a flat secondary icon button to these examples below. See Google doc for example -->
       <DocsShow>
         <KButton text="Raised button" :primary="true" appearance="raised-button" />
         <KButton text="Flat button" :primary="true" appearance="flat-button" />
