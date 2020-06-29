@@ -19,6 +19,7 @@
       </p>
 
       <p>As such, there are three components that all behave similarly, but are used for different purposes:</p>
+      <!-- TODO: add a flat secondary icon button to these examples below. See Google doc for example -->
       <ul>
         <li>
           <code>KButton</code> is used to create <code>&lt;button&gt;</code> tags with
@@ -37,7 +38,6 @@
     </DocsPageSection>
 
     <DocsPageSection title="Visual styles" anchor="#visualstyles">
-
       <p>
         There are 3 main appearances of button and link components.
         (Remember that a button component can visually look like a link,
@@ -77,16 +77,23 @@
       <p>
         Note that we don't use a "secondary basic link" style.
       </p>
+      <p>
+        Buttons can also contain both text and an icon. Based on the need, the icon can come either before or after the text. This should be used sparingly - only when the icon significantly adds value to the meaning of the button.
+      </p>
+      <!-- TODO: implement 2 examples - one with icon appearing before text, the other with and icon appearing after the text. See Google doc for examples -->
+      <p>
+        <b>TODO: INSERT BUTTONS WITH ICONS HERE</b>
+      </p>
     </DocsPageSection>
     <DocsPageSection title="Label text" anchor="#labels">
       <ul>
-        <li>Labels should typically have a single word, or two at most</li>
+        <li>Labels should typically have a single word, or two at most, although there is an exception for links</li>
         <li>
           Avoid ambiguity; be specific about the action that will be performed. For example,
           use 'Save' instead of 'OK'
         </li>
         <li>Never use commas or other punctuation</li>
-        <li>Do not add icons to buttons</li>
+        <li>For raised and flat buttons, always use all-caps text</li>
       </ul>
     </DocsPageSection>
 
@@ -102,6 +109,57 @@
       </ul>
 
     </DocsPageSection>
+
+    <DocsPageSection title="Icon buttons" anchor="icon_buttons">
+      <p>
+        Use icon buttons for editors, or in situations where using text buttons would hinder the user experience.
+      </p>
+      <p>
+        Default to using flat secondary style for icon buttons.
+      </p>
+      <p>
+        Be sure to consider internationalization, translation, and cultural meaning in the use of icon buttons.
+      </p>
+      <p>
+        Always include a tooltip with the name of the action for icon buttons.
+      </p>
+      <!-- TODO: implement icon button that shows an example tooltip label on hover. See Google doc for example -->
+      <p>
+        <b>TODO: INSERT ICON BUTTON EXAMPLE HERE</b>
+      </p>
+
+    </DocsPageSection>
+
+    <DocsPageSection title="Dropdowns" anchor="dropdowns">
+      <p>
+        There are variations of buttons which can open a dropdown menu:
+      </p>
+      <!-- TODO: implement 3 examples: primary button, primary flat button, and secondary icon button that function as dropdowns. See Google doc for example -->
+      <p>
+        <b>TODO: INSERT DROPDOWN BUTTON EXAMPLES HERE</b>
+      </p>
+
+    </DocsPageSection>
+
+    <DocsPageSection title="Visual specs" anchor="specs" />
+    <ul>
+      <li>Border radius: 2px</li>
+      <li>Elevation: 4dp</li>
+      <li>Font size: 14px</li>
+      <li>Icon size: 14px</li>
+      <li>Text button padding: 8px 16px</li>
+      <li>Icon button padding: 8px</li>
+    </ul>
+    <p>
+      Don't:
+    </p>
+    <ul>
+      <li>Use outlines for buttons</li>
+      <li>Use full-width buttons</li>
+      <li>Set arbitrary fixed widths</li>
+      <li>Change the border radius</li>
+      <li>Change the drop-shadow</li>
+    </ul>
 
   </DocsPageTemplate>
 
