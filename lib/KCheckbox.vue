@@ -26,19 +26,19 @@
           v-if="isCurrentlyIndeterminate"
           :style="notBlank"
           class="checkbox-icon"
-          icon="indeterminate_check_box"
+          icon="indeterminateCheck"
         />
         <KIcon
           v-else-if="!isCurrentlyIndeterminate && isCurrentlyChecked"
           :style="[ notBlank, activeOutline ]"
           class="checkbox-icon"
-          icon="check_box"
+          icon="checked"
         />
         <KIcon
           v-else
           :style="[ blank, activeOutline ]"
           class="checkbox-icon"
-          icon="check_box_outline_blank"
+          icon="unchecked"
         />
 
       </div>
