@@ -148,16 +148,17 @@
       <li>Text button padding: 8px 16px</li>
       <li>Icon button padding: 8px</li>
     </ul>
-    <p>
-      Don't:
-    </p>
-    <ul>
-      <li>Use outlines for buttons</li>
-      <li>Use full-width buttons</li>
-      <li>Set arbitrary fixed widths</li>
-      <li>Change the border radius</li>
-      <li>Change the drop-shadow</li>
-    </ul>
+    <DocsDoNot>
+      <template v-slot:not>
+        <ul>
+          <li>Use outlines for buttons</li>
+          <li>Use full-width buttons</li>
+          <li>Set arbitrary fixed widths</li>
+          <li>Change the border radius</li>
+          <li>Change the drop-shadow</li>
+        </ul>
+      </template>
+    </DocsDoNot>
 
   </DocsPageTemplate>
 
