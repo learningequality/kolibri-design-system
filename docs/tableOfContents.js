@@ -98,7 +98,6 @@ export default [
       new Page({
         path: '/modals',
         title: 'Modals',
-        disabled: true,
       }),
       new Page({
         path: '/loaders',
