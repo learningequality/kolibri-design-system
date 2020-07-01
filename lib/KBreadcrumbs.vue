@@ -318,9 +318,6 @@
 
     .krouter-item {
       width: 100%;
-      /deep/  {
-        max-width: 100%;
-      }
     }
   }
 
