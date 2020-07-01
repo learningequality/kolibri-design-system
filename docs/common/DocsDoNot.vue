@@ -1,7 +1,7 @@
 <template>
 
   <div>
-    <div class="show">
+    <div v-if="$slots.do" class="show">
       <div class="header">
         <span class="mark do">✔</span> Do
       </div>
@@ -9,7 +9,7 @@
         <slot name="do"></slot>
       </div>
     </div>
-    <div class="show">
+    <div v-if="$slots.not" class="show">
       <div class="header">
         <span class="mark not">✘</span> Don't
       </div>
