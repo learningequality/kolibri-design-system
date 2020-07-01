@@ -108,7 +108,7 @@
 
     </DocsPageSection>
 
-    <DocsPageSection title="Icon buttons" anchor="icon_buttons">
+    <DocsPageSection title="Icon buttons" anchor="#icon_buttons">
       <p>
         Use icon buttons for editors, or in situations where using text buttons would hinder the user experience.
       </p>
@@ -128,7 +128,7 @@
 
     </DocsPageSection>
 
-    <DocsPageSection title="Dropdowns" anchor="dropdowns">
+    <DocsPageSection title="Dropdowns" anchor="#dropdowns">
       <p>
         There are variations of buttons which can open a dropdown menu:
       </p>
@@ -139,7 +139,7 @@
 
     </DocsPageSection>
 
-    <DocsPageSection title="Visual specs" anchor="specs" />
+    <DocsPageSection title="Visual specs" anchor="#specs" />
     <ul>
       <li>Border radius: 2px</li>
       <li>Elevation: 4dp</li>
