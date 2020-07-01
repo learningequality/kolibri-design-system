@@ -65,7 +65,11 @@
     },
     computed: {
       page() {
-        const path = this.$route.path;
+        let path = this.$route.path;
+        // clear trailing slashes, which is necessary on netlify but not locally
+        if (path !== '/') {
+          path = path.replace(/\/$/, '');
+        }
         // Search for page
         for (const section of tableOfContents) {
           for (const page of section.pages) {
