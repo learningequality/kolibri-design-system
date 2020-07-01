@@ -13,7 +13,7 @@
 
       <!-- Keep on the same line to avoid empty underlined spacing -->
       <slot name="text" :text="text">
-        <span>{{ text }}</span>
+        <span class="link-text">{{ text }}</span>
       </slot>
 
       <KIcon
