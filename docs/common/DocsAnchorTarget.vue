@@ -1,7 +1,11 @@
 <template>
 
   <div class="section-link-with-target">
-    <DocsInternalLink :href="anchor">
+    <DocsInternalLink
+      class="link"
+      :href="anchor"
+      :style="{top: `${verticalOffset}px`}"
+    >
       <file-svg class="icon-link" src="../assets/link.svg" />
       <span class="visuallyhidden">link to section</span>
     </DocsInternalLink>
@@ -33,6 +37,10 @@
           return true;
         },
       },
+      verticalOffset: {
+        type: Number,
+        default: 0,
+      },
     },
     computed: {
       anchorId() {
@@ -52,6 +60,10 @@
     white-space: nowrap;
   }
 
+  .link {
+    position: relative;
+  }
+
   .icon-link {
     width: 14px;
     height: 14px;
@@ -61,7 +73,7 @@
 
   .offset-target {
     position: relative;
-    top: -130px; // TODO: set dynamically based on actual height of header
+    top: -160px; // TODO: set dynamically based on actual height of header
     visibility: hidden;
   }
 

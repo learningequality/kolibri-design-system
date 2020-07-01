@@ -2,10 +2,16 @@
 
   <div class="block-wrapper">
     <div class="innner-icon-block">
-      <KIcon :icon="name" class="icon" />
+      <KIcon :icon="aliasList[0]" class="icon" />
     </div>
-    <div class="code name">
-      <code>{{ name }}</code><DocsAnchorTarget v-if="definition" :anchor="anchor" />
+    <div class="code alias">
+      <div v-for="(aliasItem, index) in aliasList" :key="index">
+        <code>{{ aliasItem }}</code>
+        <DocsAnchorTarget
+          :verticalOffset="2"
+          :anchor="anchor(aliasItem)"
+        />
+      </div>
     </div>
   </div>
 
@@ -15,20 +21,16 @@
 <script>
 
   export default {
-    name: 'DocsIconBlock',
+    name: 'IconBlock',
     props: {
-      name: {
-        type: String,
+      aliasList: {
+        type: Array,
         required: true,
       },
-      definition: {
-        type: Boolean,
-        default: false,
-      },
     },
-    computed: {
-      anchor() {
-        return this.definition ? '#token-' + this.name : null;
+    methods: {
+      anchor(alias) {
+        return `#token-${alias}`;
       },
     },
   };
@@ -40,8 +42,7 @@
 
   .block-wrapper {
     position: relative;
-    padding: 4px;
-    margin-bottom: 8px;
+    min-height: 40px;
   }
 
   .innner-icon-block {
@@ -64,10 +65,11 @@
     }
   }
 
-  .name {
+  .alias {
     margin-top: 8px;
     font-size: 12px;
     font-weight: bold;
+    white-space: nowrap;
   }
 
 </style>
