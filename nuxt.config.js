@@ -42,7 +42,7 @@ export default {
         loader: 'svg-icon-inline-loader',
         exclude: /node_modules/,
       });
-      config.devtool = 'cheap-source-map';
+      config.devtool = 'source-map';
     },
     cssSourceMap: true,
   },
