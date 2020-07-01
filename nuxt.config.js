@@ -42,7 +42,9 @@ export default {
         loader: 'svg-icon-inline-loader',
         exclude: /node_modules/,
       });
+      config.devtool = 'source-map';
     },
+    cssSourceMap: true,
   },
   vue: {
     config: {
