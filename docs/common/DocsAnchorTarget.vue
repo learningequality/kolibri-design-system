@@ -14,13 +14,23 @@
 
 <script>
 
+  import log from 'loglevel';
+
   export default {
     name: 'DocsAnchorTarget',
     props: {
       anchor: {
         type: String,
         validator(value) {
-          return value.match(/^#[a-zA-Z0-9_-]*$/);
+          if (!value.startsWith('#')) {
+            log.warn(`'anchor' prop value '${value}' must start with a '#'`);
+            return false;
+          }
+          if (!value.match(/^#[a-zA-Z0-9_-]*$/)) {
+            log.warn(`'anchor' prop value '${value}' must match /^#[a-zA-Z0-9_-]*$/`);
+            return false;
+          }
+          return true;
         },
       },
     },
