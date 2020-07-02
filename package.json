@@ -12,8 +12,8 @@
     "lint-fix": "yarn lint -w",
     "lint-watch": "yarn lint -m",
     "pregenerate": "node utils/pregenerate.js",
-    "precompile-svgs": "rm -rf lib/KIcon/material-svg && node utils/precompileSvgs.js",
     "_dev-only": "nuxt --port 4000",
+    "precompile-svgs": "rm -rf lib/KIcon/precompiled-icons && node utils/precompileSvgs.js",
     "_lint-watch-fix": "yarn lint -w -m",
     "_test": "jest",
     "_pregenerate-watch": "chokidar \"**/K*.vue\" -c \"node utils/pregenerate.js\""
@@ -24,6 +24,7 @@
   "dependencies": {
     "@babel/core": "^7.9.6",
     "@babel/preset-env": "^7.9.6",
+    "@mdi/svg": "^5.3.45",
     "aphrodite": "https://github.com/learningequality/aphrodite/",
     "autosize": "^3.0.21",
     "css-element-queries": "^1.2.0",

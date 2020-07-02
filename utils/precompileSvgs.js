@@ -5,56 +5,143 @@
 
 const fs = require('fs');
 const crypto = require('crypto');
+
 const SVGO = require('svgo');
 
-const materialSvgPath = './node_modules/@material-icons/svg/svg';
+var svgo = new SVGO(); // You use this one.
+
+// Some attrs used during SVG optimization
 const a11yAttrs = `role="presentation" focusable="false"`;
 const viewBox = `viewBox="0 0 24 24"`;
 
-const baseSVGPath = './lib/KIcon/material-svg';
+// This is where we will be putting the precompiled Vue files
+const basePathForPrecompiledSvgs = './lib/KIcon/precompiled-icons';
 
-// Make the base svg directory
-fs.mkdirSync(baseSVGPath);
+/**
+ * Tell the script where to get icons and how to namespace them.
+ *
+ * `iconLibPath` is where we find the original icon SVG files
+ * `namespace` is appended to basePathForPrecompiledSvgs to namespace the libraries
+ */
+const config = [
+  // https://github.com/material-icons/material-icons
+  {
+    iconLibPath: './node_modules/@material-icons/svg/svg',
+    namespace: 'material-icons',
+  },
+  // https://github.com/Templarian/MaterialDesign-SVG
+  {
+    iconLibPath: './node_modules/@mdi/svg/svg',
+    namespace: 'mdi',
+  },
+  // Icons that we made here at LE
+  {
+    iconLibPath: './utils/custom-icon-svgs',
+    namespace: 'le',
+  },
+];
 
-fs.readdirSync(materialSvgPath).forEach(svgDir => {
-  // This is the ./svg/NAME_OF_ICON directory
-  const localDir = `${baseSVGPath}/${svgDir}`;
-  fs.mkdirSync(localDir);
+// Before we do anything we need to make the base svg directory. This directory ought not exist.
+try {
+  fs.mkdirSync(basePathForPrecompiledSvgs);
+} catch (e) {
+  console.log(
+    `Failed to create base SVG directory. You may need to remove the ${basePathForPrecompiledSvgs} directory.\nError message: ${e}`
+  );
+}
 
-  const materialDir = `${materialSvgPath}/${svgDir}`;
-  // Read the SVGs from the material icons package directory
-  fs.readdirSync(materialDir).forEach(svgFile => {
-    // Read the SVG
-    const materialSvgFile = fs.readFileSync(`${materialDir}/${svgFile}`, 'utf8');
+class LibPrecompiler {
+  /**
+   * iconLibPath | String | Root path where all icons to be precompiled live
+   * namespace | String | Path appended to basePathForPrecompiledSvgs to keep packages separated
+   */
+  constructor(iconLibPath, namespace) {
+    this.iconLibPath = iconLibPath;
+    this.namespace = namespace;
+  }
 
-    var svgo = new SVGO();
-    svgo.optimize(materialSvgFile).then(r => {
+  writePath(appendedPath) {
+    const basePath = `${basePathForPrecompiledSvgs}/${this.namespace}`;
+    return appendedPath ? `${basePath}/${appendedPath}` : basePath;
+  }
+
+  // Returns stringified Vue SFC file from a given SVG file
+  optimizeSvg(file) {
+    return svgo.optimize(file).then(r => {
       // Apply the Kolibri-specific a11y and other attrs
       const styledAndAccessibleSvg = r.data.replace('<svg', `<svg ${a11yAttrs} ${viewBox}`);
 
       // Uppercase the first letter to conform to Vue filename expectations
-      const newFileName = (svgFile.charAt(0).toUpperCase() + svgFile.slice(1)).replace(
-        'svg',
-        'vue'
-      );
+      //const newFileName = (file.charAt(0).toUpperCase() + file.slice(1)).replace('svg', 'vue');
 
       // Generate a unique name for the icon component which is also a valid tag name.
       // The component name is used to disambiguate between aliases, but is otherwise arbitrary.
       const hash = crypto
         .createHash('md5')
-        .update(`${materialDir}/${svgFile}`)
+        .update(`${this.writePath()}/${file}`)
         .digest('hex');
       // Generate the component's object
       const scriptObj = JSON.stringify({ name: 'icon-' + hash });
 
       const script = `export default ${scriptObj}`;
 
-      // Wrap the SVG in a Vue template tag
-      const componentText = `<template>\n\n  ${styledAndAccessibleSvg}\n\n</template>\n\n\n<script>\n\n  ${script}\n\n</script>`;
-
-      // Write that file as a vue file in the same place it and filename (sans .svg) it uses in
-      // the material-icons package.
-      fs.writeFileSync(`${localDir}/${newFileName}`, componentText);
+      // Wrap the SVG in a Vue template tag and return it (wrapped in this promise)
+      return `<template>\n\n  ${styledAndAccessibleSvg}\n\n</template>\n\n\n<script>\n\n  ${script}\n\n</script>`;
     });
-  });
+  }
+
+  // Check if the file is a file or dir
+  isFile(path) {
+    return fs.lstatSync(path).isFile();
+  }
+
+  // Given a path that leads to a dir of icons, precompile them
+  // No recursion here - just works one level deep (for now and hopefully forever)
+  precompileDir(libIconsPath) {
+    const dirPath = libIconsPath.replace(/(.*\/)+/, '');
+    fs.mkdirSync(this.writePath(dirPath));
+    fs.readdirSync(libIconsPath).forEach(libFilePath => {
+      const iconPath = `${libIconsPath}/${libFilePath}`;
+      if (this.isFile(iconPath)) {
+        // dirPath is the last dir so we get rid of everything up to and including the last '/'
+        this.precompileSvg(iconPath, dirPath);
+      }
+    });
+  }
+
+  // libFilePath is where we find the original SVG
+  // dirPath is a path we append to where we write and is used when we're reading
+  // svg files from a subdirectory of this.iconLibPath so that we maintain the dir structure
+  precompileSvg(libFilePath, dirPath = null) {
+    // Read the file and convert it into the Vue SFC string we need
+    try {
+      this.optimizeSvg(fs.readFileSync(libFilePath, 'utf8')).then(vueFileString => {
+        const writeLocation = this.writePath(dirPath);
+
+        const filename = libFilePath.replace(/(.*\/)+/, '').replace('.svg', '.vue');
+
+        fs.writeFileSync(`${writeLocation}/${filename}`, vueFileString);
+      });
+    } catch (e) {
+      console.log(`\n\nFailed to optimize and save ${libFilePath}. Error message: ${e}`);
+      return;
+    }
+  }
+
+  // The entry point for the class. If ES6 supported it every other method in this class would be private.
+  process() {
+    // Ensure our target path exists
+    fs.mkdirSync(this.writePath());
+
+    // Read everything in the given dir and process the dir or svg accordingly
+    fs.readdirSync(this.iconLibPath).forEach(path => {
+      const libIconPath = `${this.iconLibPath}/${path}`;
+      this.isFile(libIconPath) ? this.precompileSvg(libIconPath) : this.precompileDir(libIconPath);
+    });
+  }
+}
+
+// Process every one of the above.
+config.forEach(c => {
+  new LibPrecompiler(c.iconLibPath, c.namespace).process();
 });
