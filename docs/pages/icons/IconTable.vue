@@ -72,7 +72,7 @@
         return;
       }
       // track a list of aliases
-      const iconIdentifier = KolibriIcons[alias].icon.__file;
+      const iconIdentifier = KolibriIcons[alias].icon.name;
       if (iconGroups[iconIdentifier]) {
         iconGroups[iconIdentifier].push(alias);
         iconGroups[iconIdentifier].sort();
