@@ -6,7 +6,11 @@
       :href="anchor"
       :style="{top: `${verticalOffset}px`}"
     >
-      <file-svg class="icon-link" src="../assets/link.svg" />
+      <file-svg
+        src="../assets/link.svg"
+        class="icon-link"
+        :class="{ highlighed }"
+      />
       <span class="visuallyhidden">link to section</span>
     </DocsInternalLink>
     <!-- hidden target to account for variable height of header -->
@@ -42,9 +46,24 @@
         default: 0,
       },
     },
+    data() {
+      return { highlighed: false };
+    },
     computed: {
       anchorId() {
         return this.anchor.replace('#', '');
+      },
+    },
+    mounted() {
+      this.updateHighlight();
+      window.addEventListener('hashchange', this.updateHighlight, false);
+    },
+    destroyed() {
+      window.removeEventListener('hashchange', this.updateHighlight, false);
+    },
+    methods: {
+      updateHighlight() {
+        this.highlighed = window.location.hash === this.anchor;
       },
     },
   };
@@ -53,6 +72,8 @@
 
 
 <style lang="scss" scoped>
+
+  @import '~/assets/definitions';
 
   .section-link-with-target {
     position: relative;
@@ -69,6 +90,12 @@
     height: 14px;
     margin-right: 8px;
     margin-left: 8px;
+    transition: all 0.15s ease;
+  }
+
+  .highlighed {
+    fill: $header-color;
+    transform: scale(1.25);
   }
 
   .offset-target {
