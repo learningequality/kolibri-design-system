@@ -18,7 +18,7 @@
     <slot v-if="$slots.default"></slot>
 
     <template v-else>
-      <span>{{ text }}</span>
+      <span class="link-text">{{ text }}</span>
     </template>
 
     <slot name="iconAfter">
