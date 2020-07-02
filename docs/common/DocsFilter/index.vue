@@ -2,17 +2,18 @@
 
   <div class="filter-wrapping-div">
     <input
+      ref="input"
       :value="value"
       class="filter-input"
       placeholder="filter"
       type="text"
       @input="setVal($event.target.value)"
-      @keydown.esc="setVal('')"
+      @keydown.esc="escPressed"
     >
     <button
       v-show="value"
       class="filter-clear-button"
-      @click="setVal('')"
+      @click="clickClearButton"
     >
       ✕
     </button>
@@ -32,6 +33,17 @@
       },
     },
     methods: {
+      escPressed() {
+        if (this.value) {
+          this.setVal('');
+        } else {
+          this.$refs.input.blur();
+        }
+      },
+      clickClearButton() {
+        this.setVal('');
+        this.$refs.input.focus();
+      },
       setVal(newVal) {
         this.$emit('input', newVal);
       },
