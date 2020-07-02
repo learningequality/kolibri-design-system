@@ -376,6 +376,7 @@
 
   .content {
     padding: 0 24px;
+    overflow-x: hidden;
   }
 
   .scroll-shadow {
