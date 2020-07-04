@@ -4,6 +4,7 @@
 */
 
 const fs = require('fs');
+const crypto = require('crypto');
 const SVGO = require('svgo');
 
 const materialSvgPath = './node_modules/@material-icons/svg/svg';
@@ -37,10 +38,14 @@ fs.readdirSync(materialSvgPath).forEach(svgDir => {
         'vue'
       );
 
+      // Generate a unique name for the icon component which is also a valid tag name.
+      // The component name is used to disambiguate between aliases, but is otherwise arbitrary.
+      const hash = crypto
+        .createHash('md5')
+        .update(`${materialDir}/${svgFile}`)
+        .digest('hex');
       // Generate the component's object
-      const scriptObj = JSON.stringify({
-        name: `${newFileName.replace('.vue', '')}`,
-      });
+      const scriptObj = JSON.stringify({ name: 'icon-' + hash });
 
       const script = `export default ${scriptObj}`;
 

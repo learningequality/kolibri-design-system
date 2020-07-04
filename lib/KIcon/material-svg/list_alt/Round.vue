@@ -7,6 +7,6 @@
 
 <script>
 
-  export default {"name":"Round"}
+  export default {"name":"icon-ed068981e8d20b029d81a83265108409"}
 
 </script>

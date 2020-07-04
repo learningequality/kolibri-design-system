@@ -5,7 +5,11 @@
       <h1 class="header-text">
         <span :class="{ code: codeStyle }">{{ title }}</span>
         <a href="#" @click="scrollToTop">
-          <file-svg class="icon-link" src="../../assets/link.svg" />
+          <file-svg
+            src="../../assets/link.svg"
+            class="icon-link"
+            :class="{ highlighed }"
+          />
           <span class="visuallyhidden">link to current page</span>
         </a>
       </h1>
@@ -48,13 +52,17 @@
     data() {
       return {
         scrolled: false,
+        highlighed: false,
       };
     },
     mounted() {
-      window.addEventListener('scroll', this.handleScroll);
+      this.updateHighlight();
+      window.addEventListener('scroll', this.handleScroll, false);
+      window.addEventListener('hashchange', this.updateHighlight, false);
     },
     beforeDestroy() {
-      window.removeEventListener('scroll', this.handleScroll);
+      window.removeEventListener('scroll', this.handleScroll, false);
+      window.removeEventListener('hashchange', this.updateHighlight, false);
     },
     methods: {
       handleScroll() {
@@ -63,6 +71,9 @@
       scrollToTop() {
         window.scrollTo(0, 0);
       },
+      updateHighlight() {
+        this.highlighed = ['', '#'].includes(window.location.hash);
+      },
     },
   };
 
@@ -70,6 +81,8 @@
 
 
 <style lang="scss" scoped>
+
+  @import '~/assets/definitions';
 
   .header {
     padding-top: 16px;
@@ -120,6 +133,12 @@
     height: 14px;
     margin-right: 8px;
     margin-left: 8px;
+    transition: all 0.15s ease;
+  }
+
+  .highlighed {
+    fill: $header-color;
+    transform: scale(1.25);
   }
 
 </style>

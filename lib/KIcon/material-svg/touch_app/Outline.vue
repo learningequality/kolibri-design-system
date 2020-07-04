@@ -7,6 +7,6 @@
 
 <script>
 
-  export default {"name":"Outline"}
+  export default {"name":"icon-cdd69e334132fae0bb2c58ddadfe354b"}
 
 </script>

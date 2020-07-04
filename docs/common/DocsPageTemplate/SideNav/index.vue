@@ -7,22 +7,7 @@
         <span class="header-text">Design System</span>
       </h1>
 
-      <div class="filter-wrapper">
-        <input
-          v-model="filterText"
-          class="filter"
-          placeholder="filter"
-          type="text"
-          @keydown.esc="filterText = ''"
-        >
-        <button
-          v-show="filterText"
-          class="filter-clear-button"
-          @click="filterText = ''"
-        >
-          ✕
-        </button>
-      </div>
+      <DocsFilter v-model="filterText" />
 
       <div class="nav-links">
         <NavSectionList
@@ -43,14 +28,16 @@
 
 <script>
 
+  import DocsFilter from '../../DocsFilter';
+  import { termList, matches } from '../../DocsFilter/utils';
   import NavSectionList from './NavSectionList';
-  import { termList, matches } from './filter';
   import tableOfContents from '~/tableOfContents.js';
 
   export default {
     name: 'SideNav',
     components: {
       NavSectionList,
+      DocsFilter,
     },
     data() {
       return {
@@ -106,36 +93,6 @@
     display: inline-block;
     margin-left: 8px;
     font-weight: 400;
-  }
-
-  .filter-wrapper {
-    position: relative;
-  }
-
-  .filter {
-    width: 100%;
-    padding-top: 4px;
-    padding-right: 32px;
-    padding-bottom: 4px;
-    padding-left: 8px;
-    font-size: 12px;
-    border: 1px solid $border-color;
-    border-radius: 4px;
-    &::placeholder {
-      color: $border-color;
-    }
-  }
-
-  .filter-clear-button {
-    position: absolute;
-    top: 3px;
-    right: 2px;
-    width: 30px;
-    height: 21px;
-    font-size: 14px;
-    background: none;
-    border: 0;
-    border-radius: 2px;
   }
 
   .bottom-gradient {
