@@ -76,6 +76,10 @@
       <IconTable />
     </DocsPageSection>
 
+    <DocsPageSection title="Custom icons" anchor="#custom-icons">
+      <p>If the default Material icon library and/or community-contributed libraries are insufficient, use <DocsExternalLink href="https://material.io/design/iconography/system-icons.html" text="Material's icon creation guidelines" /> to create a new one.</p>
+    </DocsPageSection>
+
   </DocsPageTemplate>
 
 </template>
