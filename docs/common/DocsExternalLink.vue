@@ -2,7 +2,7 @@
 
   <!-- eslint-disable -->
   <!-- prevent line from wrapping so that icon displays correctly -->
-  <a :href="href" target="_blank"><template v-if="text">{{ text }}</template><template v-else><slot></slot></template><KIcon icon="checked" class="pop" /></a>
+  <a :href="href" target="_blank"><template v-if="text">{{ text }}</template><template v-else><slot></slot></template><KIcon icon="openNewTab" class="pop" disableColor /></a>
   <!-- eslint-enable -->
 
 </template>

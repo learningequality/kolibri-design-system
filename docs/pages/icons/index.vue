@@ -71,61 +71,13 @@
       </p>
     </DocsPageSection>
 
-    <DocsPageSection title="Tokens" anchor="#tokens">
-      <h3>UI</h3>
-      <DocsIconBlock
-        v-for="(name, index) in ui"
-        :key="index"
-        :name="name"
-        definition
-        class="icon-block"
-      />
+    <DocsPageSection title="Icons" anchor="#icons">
+      <p>These icons have special meaning in Kolibri products</p>
+      <IconTable />
+    </DocsPageSection>
 
-      <h3>Features and links</h3>
-      <DocsIconBlock
-        v-for="(name, index) in features"
-        :key="index"
-        :name="name"
-        definition
-        class="icon-block"
-      />
-
-      <h3>Users</h3>
-      <DocsIconBlock
-        v-for="(name, index) in users"
-        :key="index"
-        :name="name"
-        definition
-        class="icon-block"
-      />
-
-      <h3>Content</h3>
-      <DocsIconBlock
-        v-for="(name, index) in content"
-        :key="index"
-        :name="name"
-        definition
-        class="icon-block"
-      />
-
-      <h3>Progress tracking</h3>
-      <DocsIconBlock
-        v-for="(name, index) in progressTracking"
-        :key="index"
-        :name="name"
-        definition
-        class="icon-block"
-      />
-
-      <h3>Coaching</h3>
-      <DocsIconBlock
-        v-for="(name, index) in coaching"
-        :key="index"
-        :name="name"
-        definition
-        class="icon-block"
-      />
-
+    <DocsPageSection title="Custom icons" anchor="#custom-icons">
+      <p>If the default Material icon library and/or community-contributed libraries are insufficient, use <DocsExternalLink href="https://material.io/design/iconography/system-icons.html" text="Material's icon creation guidelines" /> to create a new one.</p>
     </DocsPageSection>
 
   </DocsPageTemplate>
@@ -135,63 +87,11 @@
 
 <script>
 
-  import DocsIconBlock from '~/common/DocsIconBlock';
+  import IconTable from './IconTable';
 
   export default {
     components: {
-      DocsIconBlock,
-    },
-    computed: {
-      ui() {
-        return [
-          'back',
-          'forward',
-          'clear',
-          'dropdown',
-          'language',
-          'menu',
-          'search',
-          'dot',
-          'error',
-          'done',
-        ];
-      },
-      features() {
-        return ['learn', 'device', 'profile', 'login', 'logout', 'coach', 'facility'];
-      },
-      progressTracking() {
-        return [
-          'correct',
-          'incorrect',
-          'helpNeeded',
-          'hint',
-          'mastered',
-          'rectified',
-          'inProgress',
-          'notStarted',
-        ];
-      },
-      coaching() {
-        return ['lesson', 'question', 'quiz'];
-      },
-      content() {
-        return [
-          'app',
-          'audio',
-          'channel',
-          'document',
-          'exercise',
-          'topic',
-          'video',
-          'html5',
-          'slideshow',
-          'unlistedchannel',
-          'coachContent',
-        ];
-      },
-      users() {
-        return ['classroom', 'group', 'people', 'permission', 'person'];
-      },
+      IconTable,
     },
   };
 
@@ -199,11 +99,6 @@
 
 
 <style lang="scss" scoped>
-
-  .icon-block {
-    display: inline-block;
-    width: 250px;
-  }
 
   // hack to simulate bad behavior
   /deep/ .wrong-colors svg {

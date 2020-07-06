@@ -22,7 +22,7 @@
     <slot v-if="$slots.default"></slot>
 
     <template v-else>
-      <span>{{ text }}</span>
+      <span class="link-text">{{ text }}</span>
     </template>
 
     <!-- iconAfter may come by slot or by prop -->

@@ -11,7 +11,6 @@
 
 <script>
 
-  import { themeTokens } from '../styles/theme';
   import { KolibriIcons } from './iconDefinitions';
 
   export default {
@@ -34,9 +33,21 @@
         type: String,
         required: false,
       },
+      /**
+       * @private
+       * Don't apply automatic fill, allowing external styling.
+       * Currently used by the design system itself; private until we see a broader need.
+       */
+      disableColor: {
+        type: Boolean,
+        default: false,
+      },
     },
     computed: {
       computedColor() {
+        if (this.disableColor) {
+          return null;
+        }
         if (this.color) {
           return this.color;
         } else if (KolibriIcons[this.icon].defaultColor) {

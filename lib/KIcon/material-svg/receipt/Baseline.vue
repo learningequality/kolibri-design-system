@@ -7,6 +7,6 @@
 
 <script>
 
-  export default {"name":"Baseline"}
+  export default {"name":"icon-a353e544370efcea4e93d0979125b5b7"}
 
 </script>

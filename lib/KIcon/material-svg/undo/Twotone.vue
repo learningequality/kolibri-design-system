@@ -7,6 +7,6 @@
 
 <script>
 
-  export default {"name":"Twotone"}
+  export default {"name":"icon-14f6a55b432038d826f64a6a1eb7c994"}
 
 </script>

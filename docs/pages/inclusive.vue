@@ -111,7 +111,7 @@
 
 
     </DocsPageSection>
-    <DocsPageSection title="Internationalization" anchor="#color">
+    <DocsPageSection title="Internationalization" anchor="#i18n">
 
       <p>
         All user-facing text and iconography needs to be internationalized. For text

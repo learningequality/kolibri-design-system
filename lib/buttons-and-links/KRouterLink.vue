@@ -2,7 +2,7 @@
 
   <!-- no extra whitespace inside link -->
   <router-link :class="buttonClasses" :to="to" dir="auto">
-    <KLabeledIcon @mouseenter="hovering = true" @mouseleave="hovering = false">
+    <KLabeledIcon @mouseenter="hovering = true" @mouseleave="hovering = false" :maxWidth="maxWidth">
       <KIcon
         v-if="icon"
         slot="icon"
@@ -12,7 +12,9 @@
       />
 
       <!-- Keep on the same line to avoid empty underlined spacing -->
-      <span>{{ text }}</span>
+      <slot name="text" :text="text">
+        <span class="link-text">{{ text }}</span>
+      </slot>
 
       <KIcon
         v-if="iconAfter"
@@ -58,6 +60,14 @@
       iconAfter: {
         type: String,
         required: false,
+      },
+      /**
+       * Set a max width for content
+       */
+      maxWidth: {
+        type: String,
+        required: false,
+        default: '100%',
       },
     },
     data() {
