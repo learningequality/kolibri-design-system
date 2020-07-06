@@ -265,7 +265,7 @@
           if (this.$refs.content.clientHeight !== 0) {
             // add a vertical scrollbar if content doesn't fit
             if (this.$refs.content.scrollHeight > this.$refs.content.clientHeight) {
-              this.$refs.content.style.overflowY = 'auto'; 
+              this.$refs.content.style.overflowY = 'auto';
             }
           }
         }

@@ -2,7 +2,7 @@
 
   <!-- no extra whitespace inside link -->
   <router-link :class="buttonClasses" :to="to" dir="auto">
-    <KLabeledIcon @mouseenter="hovering = true" @mouseleave="hovering = false" :maxWidth="maxWidth">
+    <KLabeledIcon :maxWidth="maxWidth" @mouseenter="hovering = true" @mouseleave="hovering = false">
       <KIcon
         v-if="icon"
         slot="icon"
