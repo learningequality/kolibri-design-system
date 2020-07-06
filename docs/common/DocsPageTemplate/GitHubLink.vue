@@ -20,7 +20,6 @@
 </template>
 
 
-
 <script>
 
   import consola from 'consola';

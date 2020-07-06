@@ -263,7 +263,7 @@
 <style lang="scss" scoped>
 
   @import './styles/definitions';
-  $crumbMaxWidth: 300px;
+  $crumb-max-width: 300px;
 
   .breadcrumbs {
     margin-top: 8px;
@@ -276,7 +276,7 @@
   .breadcrumbs-crumb-text {
     display: inline-block;
     width: 100%;
-    max-width: $crumbMaxWidth;
+    max-width: $crumb-max-width;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -299,8 +299,8 @@
     @extend %dropshadow-8dp;
 
     position: absolute;
-    max-width: 100%;
     z-index: 8;
+    max-width: 100%;
     padding: 16px;
     font-weight: bold;
   }
@@ -326,9 +326,9 @@
     width: 100%;
     padding: 0;
     margin: 0;
+    white-space: nowrap;
     vertical-align: middle;
     list-style: none;
-    white-space: nowrap;
 
     .breadcrumbs-collapsed & {
       // account for dropdown button width

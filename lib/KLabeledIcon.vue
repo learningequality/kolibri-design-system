@@ -94,9 +94,7 @@
           margins += 1.975;
         }
 
-        const maxWidth = (margins > 0)
-          ? `calc(${this.maxWidth} - ${margins}em)`
-          : this.maxWidth;
+        const maxWidth = margins > 0 ? `calc(${this.maxWidth} - ${margins}em)` : this.maxWidth;
         return { ...styles, maxWidth };
       },
     },
