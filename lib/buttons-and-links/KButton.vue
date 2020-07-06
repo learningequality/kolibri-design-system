@@ -106,9 +106,9 @@
     },
     computed: {
       iconColor() {
-        return this.appearance === 'raised-button' ?
-          this.$themeTokens.textInverted :
-          this.$themeTokens.primary;
+        return this.appearance === 'raised-button'
+          ? this.$themeTokens.textInverted
+          : this.$themeTokens.primary;
       },
       htmlTag() {
         // Necessary to allow basic links to be rendered as 'inline' instead of

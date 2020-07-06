@@ -258,6 +258,16 @@
             this.maxContentHeight = maxContentHeightCheck;
             this.scrollShadow = this.maxContentHeight < this.$refs.content.scrollHeight;
           }
+
+          // make sure that overflow-y won't be updated to 'auto' if this
+          // function is running for the first time
+          // (otherwise Firefox would add a vertical scrollbar right away)
+          if (this.$refs.content.clientHeight !== 0) {
+            // add a vertical scrollbar if content doesn't fit
+            if (this.$refs.content.scrollHeight > this.$refs.content.clientHeight) {
+              this.$refs.content.style.overflowY = 'auto';
+            }
+          }
         }
       }, 50),
       emitCancelEvent() {
@@ -366,7 +376,7 @@
 
   .content {
     padding: 0 24px;
-    overflow-y: auto;
+    overflow-x: hidden;
   }
 
   .scroll-shadow {

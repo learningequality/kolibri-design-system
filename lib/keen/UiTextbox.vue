@@ -23,6 +23,7 @@
 
           v-autofocus="autofocus"
           class="ui-textbox-input"
+          :autocapitalize="autocapitalize ? autocapitalize : null"
           :autocomplete="autocomplete ? autocomplete : null"
           :disabled="disabled"
           :max="maxValue"
@@ -55,6 +56,7 @@
           v-autofocus="autofocus"
           :value="value"
           class="ui-textbox-textarea"
+          :autocapitalize="autocapitalize ? autocapitalize : null"
           :autocomplete="autocomplete ? autocomplete : null"
           :disabled="disabled"
           :maxlength="enforceMaxlength ? maxlength : null"
@@ -166,6 +168,7 @@
         default: 2,
       },
       autocomplete: String,
+      autocapitalize: String,
       autofocus: {
         type: Boolean,
         default: false,
