@@ -182,12 +182,6 @@ export default [
         disabled: true,
       }),
       new Page({
-        path: '/KTextField',
-        title: 'KTextField',
-        isCode: true,
-        disabled: true,
-      }),
-      new Page({
         path: '/KTooltip',
         title: 'KTooltip',
         isCode: true,
