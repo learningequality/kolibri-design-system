@@ -8,7 +8,7 @@
   "scripts": {
     "dev": "npm-run-all --parallel _dev-only _lint-watch-fix _pregenerate-watch pregenerate",
     "generate": "yarn run pregenerate && nuxt generate",
-    "lint": "kolibri-tools lint '**/*.{js,vue,scss,less,css}' -i ,'**/node_modules/**','**/.nuxt/**','**/dist/**','**/material-svg/**','**/lib/keen/**'",
+    "lint": "kolibri-tools lint '**/*.{js,vue,scss,less,css}' -i ,'**/node_modules/**','**/.nuxt/**','**/dist/**','**/material-svg/**','**/lib/keen/**','gitBranch.js','jsdocs.js'",
     "lint-fix": "yarn lint -w",
     "lint-watch": "yarn lint -m",
     "pregenerate": "node utils/pregenerate.js",
