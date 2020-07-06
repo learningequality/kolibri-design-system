@@ -130,7 +130,7 @@
 
     <DocsPageSection title="Internationalization" anchor="#internationalization">
       <p>
-        Modals should be keyboard accessible for users who use assistive technology. Tabbing should limit the user to the options within a modal only and not extend to the UI beneath it.
+        If a button group happens to exceed the width of a modal, the buttons should wrap, with the secondary action appearing below the primary action. Buttons should still right-align.
       </p>
     </DocsPageSection>
 
