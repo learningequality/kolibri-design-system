@@ -281,6 +281,7 @@ export default [
         path: '/KTextbox',
         title: 'KTextbox',
         isCode: true,
+        disabled: true,
       }),
     ],
   }),
