@@ -27,7 +27,6 @@
 
   .button-group {
     display: inline-block;
-    overflow: hidden;
   }
 
   /* KButton can produce <a> or <button> tags */

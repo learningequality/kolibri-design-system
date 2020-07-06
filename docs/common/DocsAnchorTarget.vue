@@ -1,8 +1,16 @@
 <template>
 
   <div class="section-link-with-target">
-    <DocsInternalLink :href="anchor">
-      <file-svg class="icon-link" src="../assets/link.svg" />
+    <DocsInternalLink
+      class="link"
+      :href="anchor"
+      :style="{top: `${verticalOffset}px`}"
+    >
+      <file-svg
+        src="../assets/link.svg"
+        class="icon-link"
+        :class="{ highlighed }"
+      />
       <span class="visuallyhidden">link to section</span>
     </DocsInternalLink>
     <!-- hidden target to account for variable height of header -->
@@ -14,19 +22,48 @@
 
 <script>
 
+  import log from 'loglevel';
+
   export default {
     name: 'DocsAnchorTarget',
     props: {
       anchor: {
         type: String,
         validator(value) {
-          return value.match(/^#[a-zA-Z0-9_-]*$/);
+          if (!value.startsWith('#')) {
+            log.warn(`'anchor' prop value '${value}' must start with a '#'`);
+            return false;
+          }
+          if (!value.match(/^#[a-zA-Z0-9_-]*$/)) {
+            log.warn(`'anchor' prop value '${value}' must match /^#[a-zA-Z0-9_-]*$/`);
+            return false;
+          }
+          return true;
         },
       },
+      verticalOffset: {
+        type: Number,
+        default: 0,
+      },
+    },
+    data() {
+      return { highlighed: false };
     },
     computed: {
       anchorId() {
         return this.anchor.replace('#', '');
+      },
+    },
+    mounted() {
+      this.updateHighlight();
+      window.addEventListener('hashchange', this.updateHighlight, false);
+    },
+    destroyed() {
+      window.removeEventListener('hashchange', this.updateHighlight, false);
+    },
+    methods: {
+      updateHighlight() {
+        this.highlighed = window.location.hash === this.anchor;
       },
     },
   };
@@ -36,10 +73,16 @@
 
 <style lang="scss" scoped>
 
+  @import '~/assets/definitions';
+
   .section-link-with-target {
     position: relative;
     display: inline-block;
     white-space: nowrap;
+  }
+
+  .link {
+    position: relative;
   }
 
   .icon-link {
@@ -47,11 +90,17 @@
     height: 14px;
     margin-right: 8px;
     margin-left: 8px;
+    transition: all 0.15s ease;
+  }
+
+  .highlighed {
+    fill: $header-color;
+    transform: scale(1.25);
   }
 
   .offset-target {
     position: relative;
-    top: -130px; // TODO: set dynamically based on actual height of header
+    top: -160px; // TODO: set dynamically based on actual height of header
     visibility: hidden;
   }
 

@@ -17,7 +17,7 @@
         :color="hovering ? $themeTokens.primaryDark : $themeTokens.primary"
       />
     </slot>
-    <span :style="spanStyle">{{ text }}</span>
+    <span class="link-text" :style="spanStyle">{{ text }}</span>
     <slot name="iconAfter">
       <KIcon
         v-if="iconAfter"

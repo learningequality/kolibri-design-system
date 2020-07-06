@@ -7,6 +7,6 @@
 
 <script>
 
-  export default {"name":"Sharp"}
+  export default {"name":"icon-d7257c05398df54ee0413e03a8cc59e0"}
 
 </script>

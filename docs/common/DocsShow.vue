@@ -27,8 +27,7 @@
 <style lang="scss" scoped>
 
   .show {
-    padding-right: 24px;
-    padding-left: 24px;
+    padding: 8px 24px;
     margin: 8px;
     border: 1px solid #dedede;
     border-radius: 4px;

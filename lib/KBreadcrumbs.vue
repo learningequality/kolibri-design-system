@@ -1,12 +1,19 @@
 <template>
 
-  <div v-show="showSingleItem || crumbs.length > 1">
+  <div
+    v-show="showSingleItem || crumbs.length > 1"
+    :class="{'breadcrumbs-collapsed': collapsedCrumbs.length}"
+  >
     <nav class="breadcrumbs">
-      <div v-show="collapsedCrumbs.length" class="breadcrumbs-dropdown-wrapper">
+      <div
+        v-show="collapsedCrumbs.length"
+        class="breadcrumbs-dropdown-wrapper"
+      >
         <KIconButton
           size="small"
           :icon="showDropdown ? 'arrow_up' : 'arrow_down'"
           appearance="raised-button"
+          :style="{ verticalAlign: 'middle' }"
           @click="showDropdown = !showDropdown"
         />
         <div
@@ -21,11 +28,14 @@
               class="breadcrumbs-dropdown-item"
             >
               <KRouterLink
+                class="krouter-item"
                 :text="crumb.text"
                 :to="crumb.link"
-                :style="{ maxWidth: `${collapsedCrumbMaxWidth}px` }"
-                dir="auto"
-              />
+              >
+                <template #text="{ text }">
+                  <span class="breadcrumbs-crumb-text" dir="auto">{{ text }}</span>
+                </template>
+              </KRouterLink>
             </li>
           </ol>
         </div>
@@ -43,7 +53,11 @@
               :text="crumb.text"
               :to="crumb.link"
               dir="auto"
-            />
+            >
+              <template #text="{ text }">
+                <span class="breadcrumbs-crumb-text">{{ text }}</span>
+              </template>
+            </KRouterLink>
           </li>
 
           <li
@@ -52,7 +66,7 @@
             class="breadcrumb-visible-item-last breadcrumbs-visible-item"
           >
             <span
-              :style="{ maxWidth: `${lastCrumbMaxWidth}px` }"
+              class="breadcrumbs-crumb-text"
               dir="auto"
             >
               {{ crumb.text }}
@@ -73,7 +87,11 @@
             :key="index"
             class="breadcrumbs-visible-item breadcrumbs-visible-item-notlast"
           >
-            <KRouterLink :text="crumb.text" :to="crumb.link" tabindex="-1" />
+            <KRouterLink :text="crumb.text" :to="crumb.link" tabindex="-1">
+              <template #text="{ text }">
+                <span class="breadcrumbs-crumb-text">{{ text }}</span>
+              </template>
+            </KRouterLink>
           </li>
 
           <li
@@ -82,7 +100,9 @@
             :key="index"
             class="breadcrumb-visible-item-last breadcrumbs-visible-item"
           >
-            <span :style="{ maxWidth: `${lastCrumbMaxWidth}px` }">{{ crumb.text }}</span>
+            <span class="breadcrumbs-crumb-text">
+              {{ crumb.text }}
+            </span>
           </li>
         </template>
       </ol>
@@ -103,8 +123,6 @@
   import KResponsiveElementMixin from './KResponsiveElementMixin';
 
   const DROPDOWN_BTN_WIDTH = 55;
-  const DROPDOWN_SIDE_PADDING = 32; // pulled from .breadcrumbs-dropdown
-  const MAX_CRUMB_WIDTH = 300; // pulled from .breadcrumbs-visible-item class
 
   function validateLinkObject(object) {
     const validKeys = ['name', 'path', 'params', 'query'];
@@ -158,15 +176,6 @@
       },
       parentWidth() {
         return this.elementWidth;
-      },
-      lastCrumbMaxWidth() {
-        if (this.collapsedCrumbs.length) {
-          return Math.min(this.parentWidth - DROPDOWN_BTN_WIDTH, MAX_CRUMB_WIDTH);
-        }
-        return Math.min(this.parentWidth, MAX_CRUMB_WIDTH);
-      },
-      collapsedCrumbMaxWidth() {
-        return Math.min(this.parentWidth - DROPDOWN_SIDE_PADDING, MAX_CRUMB_WIDTH);
       },
     },
     watch: {
@@ -254,17 +263,30 @@
 <style lang="scss" scoped>
 
   @import './styles/definitions';
+  $crumbMaxWidth: 300px;
 
   .breadcrumbs {
     margin-top: 8px;
     margin-bottom: 8px;
     font-size: 16px;
     font-weight: bold;
+    white-space: nowrap;
+  }
+
+  .breadcrumbs-crumb-text {
+    display: inline-block;
+    width: 100%;
+    max-width: $crumbMaxWidth;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    vertical-align: middle;
   }
 
   .breadcrumbs-dropdown-wrapper {
     display: inline-block;
     vertical-align: middle;
+
     &::after {
       margin-right: 8px;
       margin-left: 8px;
@@ -277,6 +299,7 @@
     @extend %dropshadow-8dp;
 
     position: absolute;
+    max-width: 100%;
     z-index: 8;
     padding: 16px;
     font-weight: bold;
@@ -292,35 +315,31 @@
     display: block;
     padding-top: 8px;
     padding-bottom: 8px;
-    a {
-      display: inline-block;
-      max-width: 300px;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
+
+    .krouter-item {
+      width: 100%;
     }
   }
 
   .breadcrumbs-visible-items {
     display: inline-block;
+    width: 100%;
     padding: 0;
     margin: 0;
     vertical-align: middle;
     list-style: none;
+    white-space: nowrap;
+
+    .breadcrumbs-collapsed & {
+      // account for dropdown button width
+      width: calc(100% - 55px);
+    }
   }
 
   .breadcrumbs-visible-item {
     display: inline-block;
+    max-width: 100%;
     vertical-align: middle;
-    a,
-    span {
-      display: inline-block;
-      max-width: 300px;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-      vertical-align: middle;
-    }
   }
 
   .breadcrumbs-visible-item-notlast {

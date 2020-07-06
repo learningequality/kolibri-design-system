@@ -56,6 +56,12 @@
         type: String,
         required: false,
       },
+      // If provided, will limit label width to this value
+      maxWidth: {
+        type: String,
+        required: false,
+        default: '100%',
+      },
     },
     computed: {
       labelEmpty() {
@@ -76,16 +82,22 @@
       },
       labelStyle() {
         let styles = {};
+        let margins = 0;
         // Margin for icons - use em to match parent font size
         if (this.iconAfter || this.$slots['iconAfter']) {
           styles['marginRight'] = '1.975em'; // scale with parent font size
+          margins += 1.975;
         }
 
         if (this.icon || this.$slots['icon']) {
           styles['marginLeft'] = '1.975em'; // scale with parent font size
+          margins += 1.975;
         }
 
-        return styles;
+        const maxWidth = (margins > 0)
+          ? `calc(${this.maxWidth} - ${margins}em)`
+          : this.maxWidth;
+        return { ...styles, maxWidth };
       },
     },
   };
@@ -98,6 +110,7 @@
   .labeled-icon-wrapper {
     position: relative;
     display: inline-block;
+    max-width: 100%;
   }
 
   .icon {

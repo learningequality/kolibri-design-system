@@ -17,3 +17,6 @@ dist
 # pregenerated output
 docs/gitBranch.js
 docs/jsdocs.js
+
+# IDE
+.idea
