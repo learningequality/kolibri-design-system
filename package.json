@@ -6,17 +6,17 @@
   "license": "MIT",
   "author": "Learning Equality",
   "scripts": {
-    "dev": "npm-run-all --parallel _dev-only _lint-watch-fix _jsdocs-watch _jsdocs",
-    "generate": "yarn run _jsdocs && nuxt generate",
-    "lint": "kolibri-tools lint '**/*.{js,vue,scss,less,css}' -i ,'**/node_modules/**','**/.nuxt/**','**/dist/**','**/material-svg/**','**/lib/keen/**'",
+    "dev": "npm-run-all --parallel _dev-only _lint-watch-fix _pregenerate-watch pregenerate",
+    "generate": "yarn run pregenerate && nuxt generate",
+    "lint": "kolibri-tools lint '**/*.{js,vue,scss,less,css}' -i ,'**/node_modules/**','**/.nuxt/**','**/dist/**','**/material-svg/**','**/lib/keen/**','**/docs/gitBranch.js','**/docs/jsdocs.js'",
     "lint-fix": "yarn lint -w",
     "lint-watch": "yarn lint -m",
+    "pregenerate": "node utils/pregenerate.js",
     "precompile-svgs": "rm -rf lib/KIcon/material-svg && node utils/precompileSvgs.js",
     "_dev-only": "nuxt",
     "_lint-watch-fix": "yarn lint -w -m",
     "_test": "jest",
-    "_jsdocs-watch": "chokidar \"**/K*.vue\" -c \"node utils/pregenerate.js\"",
-    "_jsdocs": "node utils/pregenerate.js"
+    "_pregenerate-watch": "chokidar \"**/K*.vue\" -c \"node utils/pregenerate.js\""
   },
   "files": [
     "lib"
