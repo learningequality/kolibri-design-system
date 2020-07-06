@@ -14,8 +14,10 @@ jobs:
       with:
         node-version: 10.x
 
-    - name: Install dependencies
-      run: yarn --frozen-lockfile
+    - uses: bahmutov/npm-install@v1
+
+    - name: Pre-generate docs
+      run: yarn run pregenerate
 
     - name: Run linter
       run: yarn run lint
