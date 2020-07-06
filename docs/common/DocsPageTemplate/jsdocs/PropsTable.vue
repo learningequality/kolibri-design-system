@@ -18,7 +18,7 @@
         <td><code>{{ prop.type.name }}</code></td>
         <td>
           <code v-if="prop.required === true">true</code>
-          <code v-else-if="prop.required === false">true</code>
+          <code v-else-if="prop.required === false">false</code>
           <KEmptyPlaceholder v-else />
         </td>
         <td>

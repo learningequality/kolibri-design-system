@@ -182,12 +182,6 @@ export default [
         disabled: true,
       }),
       new Page({
-        path: '/KTextField',
-        title: 'KTextField',
-        isCode: true,
-        disabled: true,
-      }),
-      new Page({
         path: '/KTooltip',
         title: 'KTooltip',
         isCode: true,
@@ -280,6 +274,12 @@ export default [
       new Page({
         path: '/KFixedGridItem',
         title: 'KFixedGridItem',
+        isCode: true,
+        disabled: true,
+      }),
+      new Page({
+        path: '/KTextbox',
+        title: 'KTextbox',
         isCode: true,
         disabled: true,
       }),
