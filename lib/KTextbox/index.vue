@@ -100,14 +100,14 @@
         required: false,
       },
       /**
-       * HTML5 autocomplete attribute (off, on, name, username, current-password, etc.)
+       * HTML5 autocomplete attribute (`off`, `on`, `name`, `username`, `current-password`, etc)
        */
       autocomplete: {
         type: String,
         required: false,
       },
       /**
-       * HTML5 autocapitalize attribute. Used for touch-input enabled UI (none, etc.)
+       * HTML5 autocapitalize attribute. Used for touch-input enabled UI (`off`, `on`, `words`, etc)
        */
       autocapitalize: {
         type: String,
