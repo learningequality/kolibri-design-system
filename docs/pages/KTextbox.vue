@@ -14,9 +14,8 @@
 
       <DocsShow>
         <KTextbox
-          label="Some label"
-
           v-model="textbox1"
+          label="Some label"
         />
       </DocsShow>
 
@@ -26,25 +25,21 @@
 
       <DocsShow>
         <KTextbox
-          label="Some label"
-
-          autocapitalize="none"
-
           v-model="textbox2"
+          label="Some label"
+          autocapitalize="none"
         />
       </DocsShow>
 
       <h3>Multi-line</h3>
 
-      <p>Milti-line text input slightly more than the minimal example advisable.</p>
+      <p>Multi-line text input slightly more than the minimal example advisable.</p>
 
       <DocsShow>
         <KTextbox
-          label="Some label"
-
-          multiLine="true"
-
           v-model="textbox3"
+          label="Some label"
+          multiLine="true"
         />
       </DocsShow>
 
@@ -54,12 +49,10 @@
 
       <DocsShow>
         <KTextbox
+          v-model="textbox4"
           label="Some label"
-
           autocapitalize="none"
           multiLine="true"
-
-          v-model="textbox4"
         />
       </DocsShow>
     </DocsPageSection>
