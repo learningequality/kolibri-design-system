@@ -14,7 +14,7 @@ const viewBox = `viewBox="0 0 24 24"`;
 const baseSVGPath = './lib/KIcon/material-svg';
 
 // Make the base svg directory
-fs.mkdirSync(baseSVGPath);
+fs.mkdirSync(baseSVGPath );
 
 fs.readdirSync(materialSvgPath).forEach(svgDir => {
   // This is the ./svg/NAME_OF_ICON directory
