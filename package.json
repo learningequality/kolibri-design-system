@@ -13,7 +13,7 @@
     "lint-watch": "yarn lint -m",
     "pregenerate": "node utils/pregenerate.js",
     "precompile-svgs": "rm -rf lib/KIcon/material-svg && node utils/precompileSvgs.js",
-    "_dev-only": "nuxt",
+    "_dev-only": "nuxt --port 4000",
     "_lint-watch-fix": "yarn lint -w -m",
     "_test": "jest",
     "_pregenerate-watch": "chokidar \"**/K*.vue\" -c \"node utils/pregenerate.js\""
