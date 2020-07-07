@@ -5,6 +5,7 @@
 
 const fs = require('fs');
 const crypto = require('crypto');
+const consola = require('consola');
 
 const SVGO = require('svgo');
 
@@ -45,7 +46,7 @@ const config = [
 try {
   fs.mkdirSync(basePathForPrecompiledSvgs);
 } catch (e) {
-  console.log(
+  consola.log(
     `Failed to create base SVG directory. You may need to remove the ${basePathForPrecompiledSvgs} directory.\nError message: ${e}`
   );
 }
@@ -126,7 +127,7 @@ class LibPrecompiler {
         fs.writeFileSync(`${writeLocation}/${filename}`, vueFileString);
       });
     } catch (e) {
-      console.log(`\n\nFailed to optimize and save ${libFilePath}. Error message: ${e}`);
+      consola.log(`\n\nFailed to optimize and save ${libFilePath}. Error message: ${e}`);
       return;
     }
   }
