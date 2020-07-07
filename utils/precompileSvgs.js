@@ -46,7 +46,7 @@ const config = [
 try {
   fs.mkdirSync(basePathForPrecompiledSvgs);
 } catch (e) {
-  consola.log(
+  consola.error(
     `Failed to create base SVG directory. You may need to remove the ${basePathForPrecompiledSvgs} directory.\nError message: ${e}`
   );
 }
@@ -127,7 +127,7 @@ class LibPrecompiler {
         fs.writeFileSync(`${writeLocation}/${filename}`, vueFileString);
       });
     } catch (e) {
-      consola.log(`\n\nFailed to optimize and save ${libFilePath}. Error message: ${e}`);
+      consola.error(`\n\nFailed to optimize and save ${libFilePath}. Error message: ${e}`);
       return;
     }
   }
