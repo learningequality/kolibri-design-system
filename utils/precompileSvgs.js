@@ -69,7 +69,10 @@ class LibPrecompiler {
   optimizeSvg(file) {
     return svgo.optimize(file).then(r => {
       // Apply the Kolibri-specific a11y and other attrs
-      const styledAndAccessibleSvg = r.data.replace('<svg', `<svg ${a11yAttrs} ${viewBox}`);
+      const withAttrs = r.data.replace('<svg', `<svg ${a11yAttrs}`);
+      const styledAndAccessibleSvg = withAttrs.includes('viewBox')
+        ? withAttrs
+        : withAttrs.replace('<svg', `<svg ${viewBox}`);
 
       // Uppercase the first letter to conform to Vue filename expectations
       //const newFileName = (file.charAt(0).toUpperCase() + file.slice(1)).replace('svg', 'vue');

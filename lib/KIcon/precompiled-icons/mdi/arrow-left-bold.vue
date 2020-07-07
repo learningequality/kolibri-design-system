@@ -1,6 +1,6 @@
 <template>
 
-  <svg role="presentation" focusable="false" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" width="24" height="24"><path d="M20 9v6h-8v4.84L4.16 12 12 4.16V9h8z"/></svg>
+  <svg viewBox="0 0 24 24" role="presentation" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24"><path d="M20 9v6h-8v4.84L4.16 12 12 4.16V9h8z"/></svg>
 
 </template>
 
