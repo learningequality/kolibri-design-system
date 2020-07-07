@@ -19,7 +19,7 @@
     <UiPopover
       v-if="!disabled"
       ref="popover"
-      z-index="12"
+      :z-index="12"
       :trigger="$refs.buttonContainer"
       :containFocus="false"
       :dropdownPosition="position"
