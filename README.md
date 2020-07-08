@@ -72,7 +72,7 @@ Run the development server using
 yarn dev
 ```
 
-This will launch a documentation development server at `http://localhost:3000/`. It also launches a linter and auto-formatter based on the [`kolibri-tools`](https://github.com/learningequality/kolibri/tree/develop/packages/kolibri-tools) package.
+This will launch a documentation development server at `http://localhost:4000/`. It also launches a linter and auto-formatter based on the [`kolibri-tools`](https://github.com/learningequality/kolibri/tree/develop/packages/kolibri-tools) package.
 
 There are few other commands available:
 

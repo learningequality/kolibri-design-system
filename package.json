@@ -8,12 +8,12 @@
   "scripts": {
     "dev": "npm-run-all --parallel _dev-only _lint-watch-fix _pregenerate-watch pregenerate",
     "generate": "yarn run pregenerate && nuxt generate",
-    "lint": "kolibri-tools lint '**/*.{js,vue,scss,less,css}' -i ,'**/node_modules/**','**/.nuxt/**','**/dist/**','**/material-svg/**','**/lib/keen/**','**/docs/gitBranch.js','**/docs/jsdocs.js'",
+    "lint": "kolibri-tools lint '**/*.{js,vue,scss,less,css}' -i ,'**/node_modules/**','**/.nuxt/**','**/dist/**','**/lib/KIcon/precompiled-icons/**','**/lib/keen/**','**/docs/gitBranch.js','**/docs/jsdocs.js'",
     "lint-fix": "yarn lint -w",
     "lint-watch": "yarn lint -m",
     "pregenerate": "node utils/pregenerate.js",
-    "precompile-svgs": "rm -rf lib/KIcon/material-svg && node utils/precompileSvgs.js",
     "_dev-only": "nuxt --port 4000",
+    "precompile-svgs": "rm -rf lib/KIcon/precompiled-icons && node utils/precompileSvgs.js",
     "_lint-watch-fix": "yarn lint -w -m",
     "_test": "jest",
     "_pregenerate-watch": "chokidar \"**/K*.vue\" -c \"node utils/pregenerate.js\""
@@ -24,6 +24,7 @@
   "dependencies": {
     "@babel/core": "^7.9.6",
     "@babel/preset-env": "^7.9.6",
+    "@mdi/svg": "^5.3.45",
     "aphrodite": "https://github.com/learningequality/aphrodite/",
     "autosize": "^3.0.21",
     "css-element-queries": "^1.2.0",
@@ -44,6 +45,7 @@
     "babel-jest": "^24.1.0",
     "chokidar": "^3.3.1",
     "chokidar-cli": "^2.1.0",
+    "consola": "^2.14.0",
     "eslint-import-resolver-nuxt": "^1.0.0",
     "globby": "^6.1.0",
     "jest": "^24.1.0",

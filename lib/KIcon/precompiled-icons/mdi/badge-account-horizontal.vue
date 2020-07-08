@@ -1,0 +1,12 @@
+<template>
+
+  <svg viewBox="0 0 24 24" role="presentation" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24"><path d="M22 4h-8v3h-4V4H2a2 2 0 00-2 2v14a2 2 0 002 2h20a2 2 0 002-2V6a2 2 0 00-2-2M8 9a2 2 0 012 2 2 2 0 01-2 2 2 2 0 01-2-2 2 2 0 012-2m4 8H4v-1c0-1.33 2.67-2 4-2s4 .67 4 2v1m8 1h-6v-2h6v2m0-4h-6v-2h6v2m0-4h-6V8h6v2m-7-4h-2V2h2v4z"/></svg>
+
+</template>
+
+
+<script>
+
+  export default {"name":"icon-460e4b24199366e29cf96bcc3b80ce84"}
+
+</script>
