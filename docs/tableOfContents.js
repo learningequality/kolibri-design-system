@@ -104,6 +104,10 @@ export default [
         path: '/loaders',
         title: 'Loaders',
       }),
+      new Page({
+        path: '/snackbars',
+        title: 'Snackbars',
+      }),
     ],
   }),
   new Section({
