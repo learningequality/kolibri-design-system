@@ -1301,6 +1301,11 @@
   version "0.0.1"
   resolved "git+https://github.com/material-icons/material-icons.git#61b8cc912486959dec9830948d7df8e7763f6c94"
 
+"@mdi/svg@^5.3.45":
+  version "5.3.45"
+  resolved "https://registry.yarnpkg.com/@mdi/svg/-/svg-5.3.45.tgz#27456a94ffa16b71c0a6581b584f24ed9d4f6b2e"
+  integrity sha512-MHUZBDSRDG6uWcRlQs4nALliPRT8u4gg5E+knk7FuFBUb3NjFgjT0PjdnTyEN0f3mwVLzLvggs7v7G/NVO+gaw==
+
 "@mrmlnc/readdir-enhanced@^2.2.1":
   version "2.2.1"
   resolved "https://registry.yarnpkg.com/@mrmlnc/readdir-enhanced/-/readdir-enhanced-2.2.1.tgz#524af240d1a360527b730475ecfa1344aa540dde"
@@ -4547,6 +4552,11 @@ consola@^2.10.0, consola@^2.10.1, consola@^2.11.1, consola@^2.6.0, consola@^2.9.
   version "2.11.3"
   resolved "https://registry.yarnpkg.com/consola/-/consola-2.11.3.tgz#f7315836224c143ac5094b47fd4c816c2cd1560e"
   integrity sha512-aoW0YIIAmeftGR8GSpw6CGQluNdkWMWh3yEFjH/hmynTYnMtibXszii3lxCXmk8YxJtI3FAK5aTiquA5VH68Gw==
+
+consola@^2.14.0:
+  version "2.14.0"
+  resolved "https://registry.yarnpkg.com/consola/-/consola-2.14.0.tgz#162ee903b6c9c4de25077d93f34ab902ebcb4dac"
+  integrity sha512-A2j1x4u8d6SIVikhZROfpFJxQZie+cZOfQMyI/tu2+hWXe8iAv7R6FW6s6x04/7zBCst94lPddztot/d6GJiuQ==
 
 console-browserify@1.1.x:
   version "1.1.0"

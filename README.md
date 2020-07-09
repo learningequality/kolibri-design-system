@@ -1,3 +1,5 @@
+[![Netlify Status](https://api.netlify.com/api/v1/badges/9ae9ac56-7240-4480-b5a8-01645cb903ca/deploy-status)](https://app.netlify.com/sites/kolibri-design-system/deploys) ![Lint](https://github.com/learningequality/kolibri-design-system/workflows/Lint/badge.svg?branch=v0.2.x)
+
 
 # Kolibri Design System
 
@@ -5,15 +7,11 @@
 
 How to use the Kolibri Design System
 
-
 ### Documentation
-
-[![Netlify Status](https://api.netlify.com/api/v1/badges/9ae9ac56-7240-4480-b5a8-01645cb903ca/deploy-status)](https://app.netlify.com/sites/kolibri-design-system/deploys)
 
 See **[https://kolibri-design-system.netlify.app](https://kolibri-design-system.netlify.app)** for the latest design system documentation.
 
 This contains resources for designers and developers who are building Kolibri products using the design system patterns and the shared UI library.
-
 
 ### Shared UI library
 
@@ -74,7 +72,7 @@ Run the development server using
 yarn dev
 ```
 
-This will launch a documentation development server at `http://localhost:3000/`. It also launches a linter and auto-formatter based on the [`kolibri-tools`](https://github.com/learningequality/kolibri/tree/develop/packages/kolibri-tools) package.
+This will launch a documentation development server at `http://localhost:4000/`. It also launches a linter and auto-formatter based on the [`kolibri-tools`](https://github.com/learningequality/kolibri/tree/develop/packages/kolibri-tools) package.
 
 There are few other commands available:
 

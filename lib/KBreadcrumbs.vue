@@ -11,7 +11,7 @@
       >
         <KIconButton
           size="small"
-          :icon="showDropdown ? 'arrow_up' : 'arrow_down'"
+          :icon="showDropdown ? 'chevronUp' : 'chevronDown'"
           appearance="raised-button"
           :style="{ verticalAlign: 'middle' }"
           @click="showDropdown = !showDropdown"
