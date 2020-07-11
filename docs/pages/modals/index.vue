@@ -19,8 +19,7 @@
         <li>Text prop below title</li>
         <li>Secondary button</li>
       </ul>
-      <!-- DEV TODO: Insert two modals: one with primary + cancel, one with just a close button. See Google doc for examples -->
-      <img class="modal-example" src="./modal-types.png">
+      <img src="./modal-types.png">
       <h3>
         Title
       </h3>
@@ -194,10 +193,4 @@
 </template>
 
 
-<style lang="scss" scoped>
-
-  .modal-example {
-    width: 100%;
-  }
-
-</style>
+<style lang="scss" scoped></style>
