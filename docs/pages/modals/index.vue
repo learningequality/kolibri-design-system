@@ -20,7 +20,7 @@
         <li>Secondary button</li>
       </ul>
       <!-- DEV TODO: Insert two modals: one with primary + cancel, one with just a close button. See Google doc for examples -->
-      <img id="modal-example" src="./modal-types.png">
+      <img class="modal-example" src="./modal-types.png">
       <h3>
         Title
       </h3>
@@ -196,7 +196,7 @@
 
 <style lang="scss" scoped>
 
-  #modal-example {
+  .modal-example {
     width: 100%;
   }
 
