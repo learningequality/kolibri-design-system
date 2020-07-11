@@ -20,9 +20,7 @@
         <li>Secondary button</li>
       </ul>
       <!-- DEV TODO: Insert two modals: one with primary + cancel, one with just a close button. See Google doc for examples -->
-      <p>
-        <strong>INSERT EXAMPLES HERE</strong>
-      </p>
+      <img id="modal-example" src="./modal-types.png">
       <h3>
         Title
       </h3>
@@ -31,14 +29,10 @@
       </p>
       <DocsDoNot>
         <template v-slot:do>
-          <p>
-            <strong>[insert example from gdoc]</strong>           
-          </p>
+          <img src="./modal-title.png">
         </template>
         <template v-slot:not>
-          <p>
-            <strong>[insert example from gdoc]</strong>           
-          </p>
+          <img src="./modal-badtitle.png">
         </template>
       </DocsDoNot>
       <h3>
@@ -82,10 +76,15 @@
     <DocsPageSection title="Style" anchor="#style">
       <h3>Size</h3>
       <p>
-        TBD
+        Generally, modals should be of three sizes to accommodate varied screen sizes:
       </p>
+      <ul>
+        <li><strong>Small:</strong> 300px width. Default size of modals</li>
+        <li><strong>Medium:</strong> 450px width. Use for text-heavy modals</li>
+        <li><strong>Large:</strong> 100% width. Use on an exceptional, case-by-case basis</li>
+      </ul>
       <p>
-        <strong>INSERT EXAMPLES HERE</strong>
+        If there are other cases when a simple modal should be increased in width, follow Material’s guide: <strong>increment by 56px</strong>.
       </p>
       <h3>
         Scrim
@@ -106,10 +105,10 @@
         Dismissing modals
       </h3>
       <p>
-        Modals with a primary button can be dismissed in a few ways: through a “cancel/close” button within the modal, pressing the escape key, or pressing the browser back button. For these modals, the enter key should trigger the primary action.
+        Modals with a primary button can be dismissed in a few ways: through a “cancel/close” button within the modal, or pressing the escape key. For these modals, the enter key should trigger the primary action.
       </p>
       <p>
-        Modals that are purely informational and contain only a single dismissive button can also be dismissed with the escape key, the enter key, or browser back.
+        Modals that are purely informational and contain only a single dismissive button can also be dismissed with the escape key or the enter key.
       </p>
       <p>
         Modals are never dismissible by clicking the backdrop.
@@ -128,26 +127,16 @@
       </p>
     </DocsPageSection>
 
-    <DocsPageSection title="Internationalization" anchor="#internationalization">
-      <p>
-        If a button group happens to exceed the width of a modal, the buttons should wrap, with the secondary action appearing below the primary action. Buttons should still right-align.
-      </p>
-    </DocsPageSection>
-
     <DocsPageSection title="Examples" anchor="#examples">
       <DocsDoNot>
         <template v-slot:do>
-          <p>
-            <strong>[insert example from gdoc]</strong>           
-          </p>
+          <img src="./modal.png">
           <p>
             Present one modal at a time
           </p>
         </template>
         <template v-slot:not>
-          <p>
-            <strong>[insert example from gdoc]</strong>           
-          </p>
+          <img src="./modal-overlay.png">
           <p>
             Overlay a modal on top of a modal
           </p>
@@ -156,17 +145,13 @@
 
       <DocsDoNot>
         <template v-slot:do>
-          <p>
-            <strong>[insert example from gdoc]</strong>           
-          </p>
+          <img src="./modal-checks.png">
           <p>
             Use modals for simple, singular, focused tasks
           </p>
         </template>
         <template v-slot:not>
-          <p>
-            <strong>[insert example from gdoc]</strong>           
-          </p>
+          <img src="./modal-table.png">
           <p>
             Insert a table or other complex interactions
           </p>
@@ -175,17 +160,13 @@
 
       <DocsDoNot>
         <template v-slot:do>
-          <p>
-            <strong>[insert example from gdoc]</strong>           
-          </p>
+          <img src="./modal-delete.png">
           <p>
             Use language which directly implies the result of the action
           </p>
         </template>
         <template v-slot:not>
-          <p>
-            <strong>[insert example from gdoc]</strong>           
-          </p>
+          <img src="./modal-alert.png">
           <p>
             Use ambiguous language for titles, content, and actions
           </p>
@@ -194,17 +175,13 @@
 
       <DocsDoNot>
         <template v-slot:do>
-          <p>
-            <strong>[insert example from gdoc]</strong>           
-          </p>
+          <img src="./modal.png">
           <p>
             Present a single way to continue through and exit the modal
           </p>
         </template>
         <template v-slot:not>
-          <p>
-            <strong>[insert example from gdoc]</strong>           
-          </p>
+          <img src="./modal-back.png">
           <p>
             Use an ‘X’ button, back, or other duplicative actions
           </p>
@@ -217,4 +194,10 @@
 </template>
 
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+
+  #modal-example {
+    width: 100%;
+  }
+
+</style>
