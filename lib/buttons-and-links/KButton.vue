@@ -106,7 +106,7 @@
     },
     computed: {
       iconColor() {
-        if(this.primary) {
+        if (this.primary) {
           return this.appearance === 'raised-button'
             ? this.$themeTokens.textInverted
             : this.$themeTokens.primary;
