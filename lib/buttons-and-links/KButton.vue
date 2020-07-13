@@ -106,9 +106,13 @@
     },
     computed: {
       iconColor() {
-        return this.primary
-          ? this.$themeTokens.textInverted
-          : this.$themeTokens.primary;
+        if(this.primary) {
+          return this.appearance === 'raised-button'
+            ? this.$themeTokens.textInverted
+            : this.$themeTokens.primary;
+        } else {
+          return this.$themeTokens.text;
+        }
       },
       htmlTag() {
         // Necessary to allow basic links to be rendered as 'inline' instead of
