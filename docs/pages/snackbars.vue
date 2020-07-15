@@ -16,11 +16,9 @@
         Snackbars confirm the following:
       </p>
       <ul>
-        <li>Changes were successfully saved</li>
-        <li>An operation(s) was successful</li>
+        <li>An operation was successful</li>
         <li>An operation has started or ended</li>
         <li>A user-made selection or removal was made</li>
-        <li>Snackbars do not denote failure</li>
       </ul>
 
       <p>
@@ -40,48 +38,34 @@
         <li>Button text should be 1 verb</li>
         <li>A “Undo” action can be provided for users to reverse an operation</li>
         <li>A “Retry” action can be provided for users to restart an operation</li>
-        <li>A "Dismiss" action can be provided for users to dismiss a persistent snackbar from view</li>
         <li>Have a timeout of 6 seconds so users can read and decide whether to take action</li>
       </ul>
     </DocsPageSection>
 
-    <DocsPageSection title="Guidelines" anchor="#guidelines">
-      <p>
-        <strong>Language</strong>
-      </p>
+    <DocsPageSection title="Language" anchor="#language">
       <ul>
         <li>Snackbars should contain short messages</li>
         <li>Avoid user-created references (e.g. name of a resource)</li>
         <li>Snackbar text should be written in a consistent Noun + verb format (e.g. “profile updated, changes saved, connection timed out)</li>
         <li>Snackbar messages may span two lines to accomodate cases such as long translation or disconnection messages </li>
       </ul>
+    </DocsPageSection>
 
-      <p>
-        <strong>Layout and placement</strong>
-      </p>
+    <DocsPageSection title="Layout and quantity" anchor="#layout">
       <ul>
         <li>When confirming an action inside of a modal, the snackbar appears above the scrim </li>
         <li>Situate snackbars on the bottom left corner of the screen, with 24px left and bottom margin</li>
-      </ul>
-
-      <p>
-        <strong>Quantity</strong>
-      </p>
-      <ul>
         <li>Only one snackbar can be visible at any given time. If multiple snackbars need to appear, have them appear one at a time and immediately replace the previous snackbar</li>
       </ul>
-
-      <p>
-        <strong>Accessibility</strong>
-      </p>
-      <ul>
-        <li>Avoid using snackbars for critical information that users need to act on immediately. It may be difficult for users with low dexterity or vision to access it. Consider using an alert banner or dialog instead.</li>
-
-      </ul>
-
     </DocsPageSection>
 
-    <DocsPageSection title="Visual specs" anchor="#visual specs">
+    <DocsPageSection title="Accessibility" anchor="#accessibility">
+      <ul>
+        <li>Avoid using snackbars for critical information that users need to act on immediately. It may be difficult for users with low dexterity or vision to access it. Consider using an alert banner or dialog instead.</li>
+      </ul>
+    </DocsPageSection>
+
+    <DocsPageSection title="Specifications" anchor="#specifications">
       <ul>
         <li>Background color: $k-grey-900</li>
         <li>Text: 14px white and bolded</li>
