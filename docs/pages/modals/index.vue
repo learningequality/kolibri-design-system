@@ -19,7 +19,10 @@
         <li>Text prop below title</li>
         <li>Secondary button</li>
       </ul>
-      <img src="./modal-types.png">
+      <DocsShow>
+        <img class="modal-img" src="./modal.png">
+        <img class="modal-img" src="./modal-info.png">
+      </DocsShow>
       <h3>
         Title
       </h3>
@@ -130,14 +133,14 @@
       <DocsDoNot>
         <template v-slot:do>
           <img src="./modal.png">
-          <p>
+          <p class="do-dont">
             Present one modal at a time
           </p>
         </template>
         <template v-slot:not>
           <img src="./modal-overlay.png">
-          <p>
-            Overlay a modal on top of a modal
+          <p class="do-dont">
+            Overlay modals on modals
           </p>
         </template>
       </DocsDoNot>
@@ -145,13 +148,13 @@
       <DocsDoNot>
         <template v-slot:do>
           <img src="./modal-checks.png">
-          <p>
+          <p class="do-dont">
             Use modals for simple, singular, focused tasks
           </p>
         </template>
         <template v-slot:not>
           <img src="./modal-table.png">
-          <p>
+          <p class="do-dont">
             Insert a table or other complex interactions
           </p>
         </template>
@@ -160,13 +163,13 @@
       <DocsDoNot>
         <template v-slot:do>
           <img src="./modal-delete.png">
-          <p>
+          <p class="do-dont">
             Use language which directly implies the result of the action
           </p>
         </template>
         <template v-slot:not>
           <img src="./modal-alert.png">
-          <p>
+          <p class="do-dont">
             Use ambiguous language for titles, content, and actions
           </p>
         </template>
@@ -175,13 +178,13 @@
       <DocsDoNot>
         <template v-slot:do>
           <img src="./modal.png">
-          <p>
+          <p class="do-dont">
             Present a single way to continue through and exit the modal
           </p>
         </template>
         <template v-slot:not>
           <img src="./modal-back.png">
-          <p>
+          <p class="do-dont">
             Use an ‘X’ button, back, or other duplicative actions
           </p>
         </template>
@@ -193,4 +196,11 @@
 </template>
 
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+
+  img,
+  .do-dont {
+    width: 250px;
+  }
+
+</style>
