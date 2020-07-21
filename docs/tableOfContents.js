@@ -98,7 +98,6 @@ export default [
       new Page({
         path: '/modals',
         title: 'Modals',
-        disabled: true,
       }),
       new Page({
         path: '/loaders',
@@ -183,7 +182,6 @@ export default [
         path: '/KRadioButton',
         title: 'KRadioButton',
         isCode: true,
-        disabled: true,
       }),
       new Page({
         path: '/KTooltip',
