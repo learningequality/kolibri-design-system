@@ -183,7 +183,6 @@ export default [
         path: '/KRadioButton',
         title: 'KRadioButton',
         isCode: true,
-        disabled: true,
       }),
       new Page({
         path: '/KTooltip',
