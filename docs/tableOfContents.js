@@ -104,6 +104,10 @@ export default [
         path: '/modals',
         title: 'Modals',
       }),
+      new Page({
+        path: '/snackbars',
+        title: 'Snackbars',
+      }),
     ],
   }),
   new Section({
@@ -114,10 +118,6 @@ export default [
         path: '/forms',
         title: 'Forms',
         disabled: true,
-      }),
-      new Page({
-        path: '/snackbars',
-        title: 'Snackbars',
       }),
     ],
   }),

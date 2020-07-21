@@ -13,6 +13,7 @@
 
     <DocsPageSection title="Containers" anchor="#containers">
       <p>A container is a shape used to represent an enclosed area. Containers can hold various UI elements such as an image, icon, or surface. They can be flexible and accommodate the width or height of the content within, or they can be rigid and fixed in size.</p>
+      <p>To reduce visual noise, avoid nesting containers in containers.</p>
       <img src="./containers.png">
       <h3>
         Specs
@@ -67,13 +68,13 @@
       </p>
       <video width="600" controls loop>
         <source src="./fixed-column.mp4" type="video/mp4">
-        Your browser does not support the video tag
+        Your browser does not support the video HTML tag
       </video>
       <h3>
         Breakpoints
       </h3>
       <p>
-        Page layouts should be designed for each of the breakpoint ranges below.
+        Each breakpoint range has default: number of columns, gutter width, margin, and padding. These defaults can be changed according to exceptional needs.
       </p>
       <table>
         <tr>
@@ -90,7 +91,7 @@
           <td>Level 0</td>
           <td>4</td>
           <td>16px</td>
-          <td>8px 16px 16px</td>
+          <td>16px</td>
         </tr>
         <tr>
           <td>480-599px</td>
@@ -98,7 +99,7 @@
           <td>Level 1</td>
           <td>4</td>
           <td>16px</td>
-          <td>8px 16px 16px</td>
+          <td>16px</td>
         </tr>
         <tr>
           <td>600-839px</td>
@@ -106,7 +107,7 @@
           <td>Level 2</td>
           <td>8</td>
           <td>16px</td>
-          <td>8px 24px 24px</td>
+          <td>24px</td>
         </tr>
         <tr>
           <td>840-959px</td>
@@ -114,7 +115,7 @@
           <td>Level 3</td>
           <td>12</td>
           <td>16px</td>
-          <td>8px 24px 24px</td>
+          <td>24px</td>
         </tr>
         <tr>
           <td>960-1263px</td>
@@ -122,7 +123,7 @@
           <td>Level 4</td>
           <td>12</td>
           <td>24px</td>
-          <td>8px 24px 24px</td>
+          <td>24px</td>
         </tr>
         <tr>
           <td>1264-1430px</td>
@@ -130,7 +131,7 @@
           <td>Level 5</td>
           <td>12</td>
           <td>24px</td>
-          <td>8px 24px 24px</td>
+          <td>24px</td>
         </tr>
       </table>
       <p>Define <DocsExternalLink href="https://material.io/design/layout/spacing-methods.html#spacing" text="keylines" /> in increments of 4px or 8 px when UI elements must be placed outside of the alignment to columns and rows within a grid.</p>
