@@ -113,7 +113,7 @@
         Modals that are purely informational and contain only a single dismissive button can also be dismissed with the escape key or the enter key.
       </p>
       <p>
-        Modals are never dismissible by clicking the backdrop.
+        Modals are never dismissible by clicking the scrim.
       </p>
     </DocsPageSection>
 
