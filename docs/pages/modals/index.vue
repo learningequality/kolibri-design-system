@@ -92,7 +92,7 @@
         Scrim
       </h3>
       <p>
-        The scrim should be rgba(0,0,0,0.7).
+        The scrim is the semi-translucent backdrop which covers the rest of the page. It should be <code>rgba(0,0,0,0.7)</code>.
       </p>
     </DocsPageSection>
 
