@@ -22,7 +22,7 @@
         <li>Align with container margin</li>
         <li>Stack vertically in lists</li>
         <li>
-          Avoid nesting radio buttons/li>
+          Avoid nesting radio buttons
         </li>
       </ul>
     </DocsPageSection>
