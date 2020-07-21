@@ -17,7 +17,7 @@
       </p>
       <ul>
         <li>Loading initial page content</li>
-        <li>Representing a progress of a measurable task</li>
+        <li>Representing the progress of a measurable task</li>
       </ul>
     </DocsPageSection>
 
