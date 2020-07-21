@@ -103,7 +103,6 @@ export default [
       new Page({
         path: '/modals',
         title: 'Modals',
-        disabled: true,
       }),
     ],
   }),
@@ -115,6 +114,10 @@ export default [
         path: '/forms',
         title: 'Forms',
         disabled: true,
+      }),
+      new Page({
+        path: '/snackbars',
+        title: 'Snackbars',
       }),
     ],
   }),
@@ -192,7 +195,6 @@ export default [
         path: '/KRadioButton',
         title: 'KRadioButton',
         isCode: true,
-        disabled: true,
       }),
       new Page({
         path: '/KTooltip',

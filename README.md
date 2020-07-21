@@ -102,7 +102,7 @@ Finally, it's useful to have the Vue development tools installed in your web bro
 
 The documentation site is built using [NuxtJS](https://nuxtjs.org/) (configured in `/nuxt.config.js`) and [Vue](https://vuejs.org/).
 
-The directories and files in `/docs/pages/` are mapped by NuxtJS to URLs. Start with those files for making updates to documentation content.
+The directories and files in `/docs/pages/` are mapped by NuxtJS to URLs. Start with those files for making updates to documentation content. The table of contents, including sections and pages, are defined in `/docs/tableOfContents.js`.
 
 Common components used in the documentation site are prefixed with `Docs*` and available for use in all pages.
 
