@@ -46,6 +46,13 @@ writeApi();
 /*  Extract Git branch info        */
 
 function getGitBranch() {
+  // Check if available from Netlify env vars
+  // https://docs.netlify.com/configure-builds/environment-variables/#netlify-configuration-variables
+  if (process.env.NETLIFY && process.env.HEAD) {
+    return Promise.resolve(process.env.HEAD);
+  }
+
+  // Otherwise extract using git
   return new Promise(resolve => {
     const cmd = 'git rev-parse --abbrev-ref HEAD';
     exec(cmd, (error, stdout, stderr) => {
