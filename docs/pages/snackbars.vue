@@ -4,65 +4,40 @@
 
     <DocsPageSection title="Overview" anchor="#overview">
       <p>
-        Snackbars are short and affirmative messages that momentarily grab the user’s attention to convey non-critical information. Compared to other alert mechanisms, they are transient and generally do not persist on the page.
-      </p>
-      <p>
-        In Kolibri, snackbars typically appear following an action taken by the user, and the contents of the snackbar should inform the user something about the success of the action.
+        Snackbars are short and affirmative messages that momentarily grab the user’s attention to convey non-critical information. They are transient and do not persist on the page.
       </p>
     </DocsPageSection>
 
     <DocsPageSection title="Usage" anchor="#usage">
       <p>
-        Snackbars confirm the following:
+        Snackbars typically appear following an action taken by the user, and the contents of the snackbar should inform the user something about the results of an operation starting or completing successfully.
       </p>
-      <ul>
-        <li>An operation was successful</li>
-        <li>An operation has started or ended</li>
-        <li>A user-made selection or removal was made</li>
-      </ul>
-
+      <p>Snackbars should be located 24px from the bottom-left corner of the screen.</p>
+      <p>Only one snackbar should be visible at a time. If multiple snackbars need to appear, have them appear sequentially, replacing the previous snackbar.</p>
       <p>
-        Special usage cases:
+        Avoid using snackbars for critical information. It may be difficult for users with low dexterity or vision to access it. Consider using an alert banner or modal instead.
       </p>
-      <ul>
-        <li><strong>User inactivity</strong>: the user automatically signs out from Kolibri due to inactivity</li>
-        <li><strong>Guiding learner progression</strong>: after completing a resource a snackbar appears prompting the user to move to the next resource</li>
-      </ul>
-    </DocsPageSection>
-
-    <DocsPageSection title="Actions" anchor="#actions">
       <p>
-        Snackbars can house button text so the user can take a follow up action
+        Snackbars can occasionally be used for other purposes. Some atypical use-cases include alerts for being signed out due to inactivity, or prompting the user to move on after completing a resource.
+      </p>
+    </DocsPageSection>
+
+    <DocsPageSection title="Inline buttons" anchor="#inline-buttons">
+      <p>
+        Snackbars may occasionally include a button so the user can take a follow up, non-critical action. Common examples are 'undo' and 'retry'. Note that some users will never have the opportunity to click this button.
+      </p>
+    </DocsPageSection>
+
+    <DocsPageSection title="Text content" anchor="#text-content">
+      <p>
+        Snackbar messages should be concisely written sentence fragments. Examples include:
       </p>
       <ul>
-        <li>Button text should be 1 verb</li>
-        <li>A “Undo” action can be provided for users to reverse an operation</li>
-        <li>A “Retry” action can be provided for users to restart an operation</li>
-        <li>Have a timeout of 6 seconds so users can read and decide whether to take action</li>
+        <li>Profile updated</li>
+        <li>Changes saved</li>
+        <li>Resource added</li>
       </ul>
-    </DocsPageSection>
-
-    <DocsPageSection title="Language" anchor="#language">
-      <ul>
-        <li>Snackbars should contain short messages</li>
-        <li>Avoid user-created references (e.g. name of a resource)</li>
-        <li>Snackbar text should be written in a consistent Noun + verb format (e.g. “profile updated, changes saved, connection timed out)</li>
-        <li>Snackbar messages may span two lines to accomodate cases such as long translation or disconnection messages </li>
-      </ul>
-    </DocsPageSection>
-
-    <DocsPageSection title="Layout and quantity" anchor="#layout">
-      <ul>
-        <li>When confirming an action inside of a modal, the snackbar appears above the scrim </li>
-        <li>Situate snackbars on the bottom left corner of the screen, with 24px left and bottom margin</li>
-        <li>Only one snackbar can be visible at any given time. If multiple snackbars need to appear, have them appear one at a time and immediately replace the previous snackbar</li>
-      </ul>
-    </DocsPageSection>
-
-    <DocsPageSection title="Accessibility" anchor="#accessibility">
-      <ul>
-        <li>Avoid using snackbars for critical information that users need to act on immediately. It may be difficult for users with low dexterity or vision to access it. Consider using an alert banner or dialog instead.</li>
-      </ul>
+      <p>Avoid including user-inputted text such as the name of a resource or lesson because we have less control over the length of this text.</p>
     </DocsPageSection>
 
     <DocsPageSection title="Specifications" anchor="#specifications">
