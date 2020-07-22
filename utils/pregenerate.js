@@ -79,8 +79,9 @@ export default `;
 function writeGit() {
   const environmentInfo = getEnvironmentInfo();
   const outputPath = path.resolve('./docs/environment.js');
-  fs.writeFileSync(outputPath, gitOutputString + JSON.stringify(environmentInfo, null, 2) + ';');
-  consola.info(`Wrote '${environmentInfo}' to ${outputPath}`);
+  const env = JSON.stringify(environmentInfo, null, 2);
+  fs.writeFileSync(outputPath, gitOutputString + env + ';\n');
+  consola.info(`Wrote environment to ${outputPath}:\n${env}`);
 }
 
 writeGit();
