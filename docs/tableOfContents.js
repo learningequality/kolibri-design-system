@@ -89,6 +89,17 @@ export default [
     ],
   }),
   new Section({
+    title: 'Patterns',
+    autoSort: true,
+    pages: [
+      new Page({
+        path: '/forms',
+        title: 'Forms',
+        disabled: true,
+      }),
+    ],
+  }),
+  new Section({
     title: 'Components',
     autoSort: true,
     pages: [
@@ -107,17 +118,6 @@ export default [
       new Page({
         path: '/snackbars',
         title: 'Snackbars',
-      }),
-    ],
-  }),
-  new Section({
-    title: 'Patterns',
-    autoSort: true,
-    pages: [
-      new Page({
-        path: '/forms',
-        title: 'Forms',
-        disabled: true,
       }),
     ],
   }),
