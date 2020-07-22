@@ -68,6 +68,7 @@
             <span
               class="breadcrumbs-crumb-text"
               dir="auto"
+              style="text-decoration: none;"
             >
               {{ crumb.text }}
             </span>
@@ -281,6 +282,9 @@
     text-overflow: ellipsis;
     white-space: nowrap;
     vertical-align: middle;
+    // this is overriden with inline styles on the last
+    // breadcrumb in the template
+    text-decoration: underline;
   }
 
   .breadcrumbs-dropdown-wrapper {
