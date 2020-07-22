@@ -1,8 +1,12 @@
 <template>
 
   <div class="block-wrapper">
-    <div class="innner-icon-block">
-      <KIcon :icon="aliasList[0]" class="icon" />
+    <div class="inner-icon-block">
+      <KIcon
+        v-if="aliasList && aliasList.length"
+        :icon="aliasList[0]"
+        class="icon"
+      />
     </div>
     <div class="code alias">
       <div v-for="(aliasItem, index) in aliasList" :key="index">
@@ -45,7 +49,7 @@
     min-height: 40px;
   }
 
-  .innner-icon-block {
+  .inner-icon-block {
     position: absolute;
     width: 40px;
     height: 40px;
