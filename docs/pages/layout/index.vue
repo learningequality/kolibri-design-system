@@ -3,7 +3,7 @@
   <DocsPageTemplate>
 
     <DocsPageSection title="Overview" anchor="#overview">
-      <p>The goal of good layout is legibility - to aid the user in quickly identifying what they need on the page. This is achieved through effective use of white space, graphics, typography, and controlled use of lines.</p>
+      <p>The goal of good layout is legibility - to aid the user in quickly identifying what they need on the page. This is achieved through effective use of white space, graphics, typography, and visual separators.</p>
     </DocsPageSection>
 
     <DocsPageSection title="Spacing" anchor="#spacing">
@@ -16,17 +16,21 @@
       <p>To reduce visual noise, avoid nesting containers in containers.</p>
       <img src="./containers.png">
       <h3>
-        Specs
+        Specifications
       </h3>
       <ul>
-        <li>Background color: tokens.surface (#ffffff)</li>
+        <li>
+          Background color: <DocsInternalLink href="/colors#tokens-surface" code>
+            tokens.surface
+          </DocsInternalLink> (<code>#ffffff</code>)
+        </li>
         <li>Default border radius: 4px</li>
         <li>Elevation: 1dp</li>
         <li>Spacing between containers: 24px</li>
         <li>Padding: 16px (small screens), 24px (medium and large screens)</li>
       </ul>
       <h3>
-        Max width
+        Maximum width of a container
       </h3>
       <p>
         If a page container contains text, set its maximum width to 1000px in order to aid readability on larger screens.
@@ -46,11 +50,15 @@
       </h3>
       <ul>
         <li>Width: 1px</li>
-        <li>Color: tokens.fineline (#dedede)</li>
+        <li>
+          Color: <DocsInternalLink href="/colors#tokens-fineLine" code>
+            tokens.fineline
+          </DocsInternalLink> (<code>#dedede</code>)
+        </li>
       </ul>
     </DocsPageSection>
 
-    <DocsPageSection title="Responsive Grids" anchor="#grids">
+    <DocsPageSection title="Responsive grids" anchor="#grids">
       <p>Grids allow containers and their contained UI components to adapt to screen sizes and orientations and ensure consistent layouts across different parts of the application. Grids do not extend to the width of the window, just the container element.</p>
       <p>Each Learning Equality product should utilize a grid system, and generally apply the guidelines from <DocsExternalLink href="https://material.io/design/layout/responsive-layout-grid.html#" text="Material Design" />.</p>
       <h3>
@@ -82,7 +90,7 @@
           <th><DocsExternalLink href="https://v15.vuetifyjs.com/en/framework/grid" text="Vuetify" /></th>
           <th>KGrid</th>
           <th>Columns</th>
-          <th>Margins & Gutters</th>
+          <th>Margins &amp; Gutters</th>
           <th>Padding</th>
         </tr>
         <tr>
