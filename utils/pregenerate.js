@@ -1,6 +1,5 @@
 const path = require('path');
 const fs = require('fs');
-const exec = require('child_process').exec;
 const docGenAPI = require('vue-docgen-api');
 const globby = require('globby');
 const consola = require('consola');
@@ -43,26 +42,27 @@ async function writeApi() {
 writeApi();
 
 /***********************************/
-/*  Extract Git branch info        */
+/*  Extract env info from Netlify  */
 
-function getGitBranch() {
-  // Check if available from Netlify env vars
-  // https://docs.netlify.com/configure-builds/environment-variables/#netlify-configuration-variables
-  if (process.env.NETLIFY && process.env.HEAD) {
-    return Promise.resolve(process.env.HEAD);
+// https://docs.netlify.com/configure-builds/environment-variables/#netlify-configuration-variables
+function getEnvironmentInfo() {
+  // local env
+  if (!process.env.NETLIFY) {
+    return { local: true };
   }
-
-  // Otherwise extract using git
-  return new Promise(resolve => {
-    const cmd = 'git rev-parse --abbrev-ref HEAD';
-    exec(cmd, (error, stdout, stderr) => {
-      if (error) {
-        consola.error('Could not get git branch:', stderr);
-        resolve('');
-      }
-      resolve(stdout.trim());
-    });
-  });
+  // netlify PR
+  if (process.env.PULL_REQUEST) {
+    // BRANCH is something like `pull/79/head`
+    return {
+      local: false,
+      url: process.env.REPOSITORY_URL + '/' + process.env.BRANCH,
+    };
+  }
+  // BRANCH is something like `v0.2.x` or `develop`
+  return {
+    local: false,
+    url: process.env.REPOSITORY_URL + '/tree/' + process.env.BRANCH,
+  };
 }
 
 const gitOutputString = `
@@ -73,11 +73,11 @@ const gitOutputString = `
 
 export default `;
 
-async function writeGit() {
-  const gitBranch = await getGitBranch();
-  const outputPath = path.resolve('./docs/gitBranch.js');
-  fs.writeFileSync(outputPath, gitOutputString + JSON.stringify(gitBranch, null, 2));
-  consola.info(`Wrote '${gitBranch}' to ${outputPath}`);
+function writeGit() {
+  const environmentInfo = getEnvironmentInfo();
+  const outputPath = path.resolve('./docs/environment.js');
+  fs.writeFileSync(outputPath, gitOutputString + JSON.stringify(environmentInfo, null, 2) + ';');
+  consola.info(`Wrote '${environmentInfo}' to ${outputPath}`);
 }
 
 writeGit();
