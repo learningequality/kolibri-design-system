@@ -46,23 +46,26 @@ writeApi();
 
 // https://docs.netlify.com/configure-builds/environment-variables/#netlify-configuration-variables
 function getEnvironmentInfo() {
-  // local env
+  // probably running local dev environment
   if (!process.env.NETLIFY) {
     return { local: true };
   }
-  // netlify PR
-  if (process.env.PULL_REQUEST) {
-    // BRANCH is something like `pull/79/head`
-    return {
-      local: false,
-      url: process.env.REPOSITORY_URL + '/' + process.env.BRANCH,
-    };
-  }
-  // BRANCH is something like `v0.2.x` or `develop`
-  return {
+  const env = {
     local: false,
-    url: process.env.REPOSITORY_URL + '/tree/' + process.env.BRANCH,
+    branch: process.env.BRANCH,
   };
+  // BRANCH is something like `v0.2.x` or `develop`
+  if (!process.env.PULL_REQUEST) {
+    env.url = process.env.REPOSITORY_URL + '/tree/' + env.branch;
+    return env;
+  }
+  // BRANCH might be something like `pull/79/head`
+  const reMatch = /^(pull\/\d+)\/head$/.exec(process.env.BRANCH);
+  if (reMatch) {
+    env.branch = reMatch[1]; // strip off the '/head' part
+  }
+  env.url = process.env.REPOSITORY_URL + '/' + env.branch;
+  return env;
 }
 
 const gitOutputString = `
