@@ -229,7 +229,6 @@ export default [
         path: '/KSwitch',
         title: 'KSwitch',
         isCode: true,
-        disabled: true,
       }),
       new Page({
         path: '/KButton',
