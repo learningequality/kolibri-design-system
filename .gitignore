@@ -15,7 +15,7 @@ Icon
 dist
 
 # pregenerated output
-docs/gitBranch.js
+docs/environment.js
 docs/jsdocs.js
 
 # IDE
