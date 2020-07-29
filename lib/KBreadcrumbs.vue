@@ -279,12 +279,12 @@
     width: 100%;
     max-width: $crumb-max-width;
     overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    vertical-align: middle;
     // this is overriden with inline styles on the last
     // breadcrumb in the template
     text-decoration: underline;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    vertical-align: middle;
   }
 
   .breadcrumbs-dropdown-wrapper {
