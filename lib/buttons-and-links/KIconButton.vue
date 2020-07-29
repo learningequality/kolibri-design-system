@@ -60,9 +60,11 @@
       ariaLabel: {
         type: String,
       },
+      // TODO: This ought to be required
       tooltip: {
         type: String,
-        required: true,
+        required: false,
+        default: null,
       },
     },
     computed: {
