@@ -70,11 +70,13 @@
         <KButtonGroup style="margin-bottom: 8px;">
           <KButton text="Primary" :primary="true" appearance="raised-button" />
           <KButton text="Secondary" :primary="false" appearance="raised-button" />
+          <KIconButton tooltip="KIconButton" icon="plus" :primary="true" appearance="raised-button" />
         </KButtonGroup>
         <br>
         <KButtonGroup>
           <KButton text="Primary" :primary="true" appearance="flat-button" />
           <KButton text="Secondary" :primary="false" appearance="flat-button" />
+          <KIconButton tooltip="KIconButton" icon="plus" :primary="false" appearance="flat-button" />
         </KButtonGroup>
       </DocsShow>
 
