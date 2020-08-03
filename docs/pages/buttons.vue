@@ -133,10 +133,9 @@
       <p>
         Always include a tooltip with the name of the action for icon buttons.
       </p>
-      <!-- TODO: implement icon button that shows an example tooltip label on hover. See Google doc for example -->
       <DocsShow>
         <KButtonGroup>
-          <KIconButton tooltip="Add" text="Flat button" :primary="true" icon="plus" appearance="raised-button" />
+          <KIconButton tooltip="Add" text="Flat button" :primary="true" icon="plus" appearance="flat-button" />
           <KIconButton tooltip="Subtract" text="Flat button" :primary="false" icon="minus" appearance="flat-button" />
         </KButtonGroup>
       </DocsShow>
