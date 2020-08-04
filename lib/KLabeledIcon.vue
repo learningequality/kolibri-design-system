@@ -83,14 +83,16 @@
       labelStyle() {
         let styles = {};
         let margins = 0;
+        let leftLtr = this.isRtl ? 'marginRight' : 'marginLeft';
+        let rightLtr = this.isRtl ? 'marginLeft' : 'marginRight';
         // Margin for icons - use em to match parent font size
         if (this.iconAfter || this.$slots['iconAfter']) {
-          styles['marginRight'] = '1.975em'; // scale with parent font size
+          styles[rightLtr] = '1.975em'; // scale with parent font size
           margins += 1.975;
         }
 
         if (this.icon || this.$slots['icon']) {
-          styles['marginLeft'] = '1.975em'; // scale with parent font size
+          styles[leftLtr] = '1.975em'; // scale with parent font size
           margins += 1.975;
         }
 
@@ -108,7 +110,7 @@
   .labeled-icon-wrapper {
     position: relative;
     display: inline-block;
-    max-width: 100%;
+    width: 100%;
   }
 
   .icon {

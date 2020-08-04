@@ -6,6 +6,8 @@
     :href="href"
     :download="download"
     dir="auto"
+    target="_blank"
+    rel="noopener noreferrer"
     @mouseenter="hovering = true"
     @mouseleave="hovering = false"
   >
