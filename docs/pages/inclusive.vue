@@ -3,10 +3,7 @@
   <DocsPageTemplate>
     <DocsPageSection title="Overview" anchor="#overview">
       <p>
-        At Learning Equality, one of our
-        <DocsExternalLink href="https://learningequality.org/about/values/" text="core values" />
-        is to
-        "design for everyone". Kolibri products should be accessible to the widest possible
+        Kolibri products should be accessible to the widest possible
         audience, in the broadest sense of the word 'accessible'. It should run on
         wide variety of devices, render correctly on a wide variety of screen sizes
         and assistive technologies, be understandable to people from a wide variety

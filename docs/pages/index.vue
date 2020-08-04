@@ -64,7 +64,7 @@
         In the meantime, we welcome direct feedback and contributions! It's important that the Design System works for you, so please help shape it.
       </p>
       <ul>
-        <li>Share ideas or concerns with Devon, Jessica, and Jacob directly</li>
+        <li>Share ideas or concerns with Devon, Jessica, Khang, and Jacob directly, or file issues in this repo.</li>
         <li>
           Submit a <DocsExternalLink href="https://github.com/learningequality/kolibri-design-system/pulls">
             pull request
