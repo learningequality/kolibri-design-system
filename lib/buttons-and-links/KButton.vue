@@ -17,6 +17,7 @@
       v-if="icon" 
       :icon="icon" 
       :color="iconColor"
+      class="prop-icon"
     />
 
     <slot v-if="$slots.default"></slot>
@@ -31,6 +32,7 @@
       v-if="iconAfter" 
       :icon="iconAfter"
       :color="iconColor"
+      class="prop-icon"
     />
 
     <!-- Dropdown arrow icon -->
@@ -167,6 +169,10 @@
   .dropdown-arrow {
     position: relative;
     top: 6px;
+  }
+
+  .prop-icon {
+    top: 3px;
   }
 
 </style>

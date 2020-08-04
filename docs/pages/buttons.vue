@@ -51,11 +51,13 @@
           hyperlink-like appearance for deemphasized actions, or actions inline within text
         </li>
       </ul>
-      <!-- TODO: add a flat secondary icon button to these examples below. See Google doc for example -->
       <DocsShow>
-        <KButton text="Raised button" :primary="true" appearance="raised-button" />
-        <KButton text="Flat button" :primary="true" appearance="flat-button" />
-        <KButton text="Basic link" :primary="true" appearance="basic-link" />
+        <KButtonGroup>
+          <KButton text="Raised button" :primary="true" appearance="raised-button" />
+          <KButton text="Flat button" :primary="true" appearance="flat-button" />
+          <KIconButton tooltip="A tooltip" text="Flat button" :primary="false" icon="plus" appearance="flat-button" />
+          <KButton text="Basic link" :primary="true" appearance="basic-link" />
+        </KButtonGroup>
       </DocsShow>
 
       <p>
@@ -65,11 +67,17 @@
       </p>
 
       <DocsShow>
-        <KButton text="Primary" :primary="true" appearance="raised-button" />
-        <KButton text="Secondary" :primary="false" appearance="raised-button" />
+        <KButtonGroup style="margin-bottom: 8px;">
+          <KButton text="Primary" :primary="true" appearance="raised-button" />
+          <KButton text="Secondary" :primary="false" appearance="raised-button" />
+          <KIconButton tooltip="KIconButton" icon="plus" :primary="true" appearance="raised-button" />
+        </KButtonGroup>
         <br>
-        <KButton text="Primary" :primary="true" appearance="flat-button" />
-        <KButton text="Secondary" :primary="false" appearance="flat-button" />
+        <KButtonGroup>
+          <KButton text="Primary" :primary="true" appearance="flat-button" />
+          <KButton text="Secondary" :primary="false" appearance="flat-button" />
+          <KIconButton tooltip="KIconButton" icon="plus" :primary="false" appearance="flat-button" />
+        </KButtonGroup>
       </DocsShow>
 
       <p>
@@ -78,10 +86,14 @@
       <p>
         Buttons can also contain both text and an icon. Based on the need, the icon can come either before or after the text. This should be used sparingly - only when the icon significantly adds value to the meaning of the button.
       </p>
-      <!-- TODO: implement 2 examples - one with icon appearing before text, the other with and icon appearing after the text. See Google doc for examples -->
-      <p>
-        <b>TODO: INSERT BUTTONS WITH ICONS HERE</b>
-      </p>
+
+      <DocsShow>
+        <KButtonGroup>
+          <KButton text="Previous" :primary="true" icon="back" appearance="raised-button" />
+          <KButton text="Next" :primary="true" iconAfter="forward" appearance="raised-button" />
+        </KButtonGroup>
+      </DocsShow>
+
     </DocsPageSection>
     <DocsPageSection title="Label text" anchor="#labels">
       <ul>
@@ -121,10 +133,12 @@
       <p>
         Always include a tooltip with the name of the action for icon buttons.
       </p>
-      <!-- TODO: implement icon button that shows an example tooltip label on hover. See Google doc for example -->
-      <p>
-        <b>TODO: INSERT ICON BUTTON EXAMPLE HERE</b>
-      </p>
+      <DocsShow>
+        <KButtonGroup>
+          <KIconButton tooltip="Add" text="Flat button" :primary="true" icon="plus" appearance="flat-button" />
+          <KIconButton tooltip="Subtract" text="Flat button" :primary="false" icon="minus" appearance="flat-button" />
+        </KButtonGroup>
+      </DocsShow>
 
     </DocsPageSection>
 
@@ -133,9 +147,13 @@
         There are variations of buttons which can open a dropdown menu:
       </p>
       <!-- TODO: implement 3 examples: primary button, primary flat button, and secondary icon button that function as dropdowns. See Google doc for example -->
-      <p>
-        <b>TODO: INSERT DROPDOWN BUTTON EXAMPLES HERE</b>
-      </p>
+      <DocsShow>
+        <KDropdownMenu style="margin-right: 8px;" text="Primary" :primary="true" :options="['Primary', 'Dropdown']" appearance="raised-button" />
+        <KDropdownMenu style="margin-right: 8px;" text="Secondary" :primary="false" :options="['Secondary', 'Dropdown']" appearance="raised-button" />
+        <KDropdownMenu text="Icon dropdown" :primary="false" :options="['Icon button', 'Flat button', 'Dropdown']" appearance="raised-button">
+          <KIconButton slot="button" tooltip="Dropdown options" icon="optionsHorizontal" appearance="flat-button" :primary="false" />
+        </KDropdownMenu>
+      </DocsShow>
 
     </DocsPageSection>
 

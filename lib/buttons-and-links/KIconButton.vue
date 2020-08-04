@@ -9,6 +9,13 @@
     :aria-label="ariaLabel"
     v-on="$listeners"
   >
+    <UiTooltip
+      v-if="tooltip"
+      open-on="hover"
+      position="bottom"
+    >
+      {{ tooltip }}
+    </UiTooltip>
     <!-- UiIconButton used flexbox - 7px is the magic centering number -->
     <KIcon :icon="icon" :color="color" :style="iconStyles" />
   </KButton>
@@ -18,8 +25,11 @@
 
 <script>
 
+  import UiTooltip from '../keen/UiTooltip.vue';
+
   export default {
     name: 'KIconButton',
+    components: { UiTooltip },
     props: {
       appearance: {
         type: String,
@@ -49,6 +59,11 @@
       },
       ariaLabel: {
         type: String,
+      },
+      tooltip: {
+        type: String,
+        required: false,
+        default: null,
       },
     },
     computed: {

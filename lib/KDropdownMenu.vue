@@ -6,7 +6,9 @@
       ref="buttonContainer"
       class="button-container dib"
     >
+      <slot name="button"></slot>
       <KButton
+        v-if="!$slots.button"
         ref="button"
         :text="text"
         :appearance="appearance"
