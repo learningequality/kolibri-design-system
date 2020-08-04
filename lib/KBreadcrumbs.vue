@@ -68,6 +68,7 @@
             <span
               class="breadcrumbs-crumb-text"
               dir="auto"
+              style="text-decoration: none;"
             >
               {{ crumb.text }}
             </span>
@@ -278,6 +279,9 @@
     width: 100%;
     max-width: $crumb-max-width;
     overflow: hidden;
+    // this is overriden with inline styles on the last
+    // breadcrumb in the template
+    text-decoration: underline;
     text-overflow: ellipsis;
     white-space: nowrap;
     vertical-align: middle;
