@@ -125,6 +125,9 @@
 
   .label {
     display: inline-block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    vertical-align: top;
   }
 
   .debug-warning > svg {
