@@ -36,6 +36,7 @@
   .show {
     display: inline-block;
     margin: 8px;
+    vertical-align: top;
     border: 1px solid #dedede;
     border-radius: 4px;
   }
