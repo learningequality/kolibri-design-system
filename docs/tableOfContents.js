@@ -71,6 +71,10 @@ export default [
         title: 'Colors and themes',
       }),
       new Page({
+        path: '/errors',
+        title: 'Errors',
+      }),
+      new Page({
         path: '/icons',
         title: 'Icons',
       }),
