@@ -60,6 +60,10 @@ export default [
         path: '/',
         title: 'Home',
       }),
+      new Page({
+        path: '/principles',
+        title: 'Design principles',
+      }),
     ],
   }),
   new Section({
