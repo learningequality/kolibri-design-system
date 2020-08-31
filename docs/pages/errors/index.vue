@@ -79,53 +79,46 @@
       </DocsDoNot>
     </DocsPageSection>
 
-    <DocsPageSection title="Components" anchor="#components">
+    <DocsPageSection title="Components and patterns" anchor="#components">
       <h3>
         Color
       </h3>
+      <DocsColorBlock name="tokens.error" definition />
       <h3>
         Icon
       </h3>
-      <KLabeledIcon icon="error" label="error" />
+      <KIcon icon="error" />
+      <p>
+        Sizes: 14px, 24px
+      </p>
       <h3>
         Banner
       </h3>
       <p>
-        Banners are appended to the app bar and notify the user about global errors and/or notifications that affect the whole app experience.
-      </p>
-      <p>
-        <strong>INSERT IMAGE</strong>
-      </p>
+        Banners are appended to the app bar and notify the user about global system errors and/or notifications that affect the whole app experience.
+      </p>      
+      <img src="./banner.png">
       <h3>
         Error summary
       </h3>
       <p>
         Error summaries should appear at the top of the page and use an alert component. Use them in forms or for page-level errors that are not associated with a specific component or location on the page. 
       </p>
-      <p>
-        <strong>INSERT IMAGE</strong>
-      </p>
+      <img src="./alert.png">
       <h3>
         Inline error messages
       </h3>
       <p>
-        Place inline error messages in close proximity to where the error occurred.
+        Place inline error messages in close proximity to where the error occurred. This can be an icon only, or icon and text. When paired with text, use <code>KLabeledIcon</code>
       </p>
-      <p>
-        This can be an icon only, or icon and text. When paired with text, use <code>KLabeledIcon</code>
-      </p>
-      <p>
-        <strong>INSERT IMAGE</strong>
-      </p>
+      <img src="./inline-error.png">
       <h3>
         Page error
       </h3>
       <p>
-        Sometimes pages do not load because of 404 or 500 errors, unsupported browsers, and restricted permissions. 
+        Sometimes pages do not load because of 404 or 500 errors, unsupported browsers, and restricted permissions. Users should see a brief explanation of what went wrong and an action that might help address the problem.
       </p>
-      <p>
-        <strong>INSERT IMAGE</strong>
-      </p>
+      <img src="./page.png">
     </DocsPageSection>
 
     <DocsPageSection title="Preventing errors" anchor="#preventing-errors">
@@ -136,10 +129,11 @@
         Disable, don't hide
       </h3>
       <p>
-        If an operation can cause unintentional and irreversible data loss, or will create errors under the current condition, disable the action rather than hiding it. Disabling it provides the user with context as to what is possible. It should be clear as to what needs to be done for the action to become possible.
+        If an operation can cause unintentional and irreversible data loss, or will create errors under the current condition, disable the action rather than hiding it. Disabling it provides the user with context as to what is possible. It should be clear to the user what they need to do for the action to become possible.
       </p>
+      <img src="./disable.png">
       <p>
-        <strong>INSERT IMAGE</strong>
+        However, forms that create or update data generally should not have a disabled submit button and follow our form validation patterns instead.
       </p>
       <h3>
         Warnings
@@ -150,18 +144,14 @@
       <p>
         For conditions which partially block or interrupt the user experience, use a warning icon with <code>palette.orange.v_400</code> and informative language of the consequences under the current condition.
       </p>
-      <p>
-        <strong>INSERT IMAGE</strong>
-      </p>
+      <img src="./warning.png">
       <h3>
         Undo
       </h3>
       <p>
-        Modals are helpful for preventing errors but should not be overused since they disrupt the user flow. For operations with relatively significant but not critical consequences, provide the option to undo an action.
+        Modals are helpful for preventing errors but should not be overused since they can disrupt user flow. For operations with relatively significant but not critical consequences, provide the option to undo an action.
       </p>
-      <p>
-        <strong>INSERT IMAGE</strong>
-      </p>
+      <img src="./undo.png">
       <h3>
         Good defaults
       </h3>
@@ -179,21 +169,22 @@
       </p>
       <DocsDoNot>
         <template v-slot:do>
-          <p class="do-dont">
-            image 1
-          </p>
+          <img class="do-dont" src="./disclosure-do.png">
         </template>
         <template v-slot:not>
-          <p class="do-dont">
-            image 2
-          </p>
+          <img class="do-dont" src="./disclosure-dont.png">
         </template>
       </DocsDoNot>
     </DocsPageSection>
 
     <DocsPageSection title="Accessibility" anchor="#accessibility">
       <p>
-        TBD
+        Do not use red color as the only indicator for errors. Color alone is not sufficient to indicate an error state. Errors must be accompanied by an additional visual indicator such as an icon as mentioned in <DocsInternalLink href="/errors#components">
+          inline error messages
+        </DocsInternalLink>.
+      </p>
+      <p>
+        Important information to resolve errors should also be keyboard accessible. Avoid using snackbars and tooltips as the primary way to access this critical information.
       </p>
     </DocsPageSection>
 
@@ -202,10 +193,26 @@
 </template>
 
 
+<script>
+
+  import KIcon from '~~/lib/KIcon/';
+  import DocsColorBlock from '~/common/DocsColorBlock';
+
+  export default {
+    components: {
+      DocsColorBlock,
+      KIcon,
+    },
+  };
+
+</script>
+
+
 <style lang="scss" scoped>
 
+  .img,
   .do-dont {
-    width: 250px;
+    max-width: 250px;
   }
 
 </style>
