@@ -1,6 +1,6 @@
 <template>
 
-  <div class="docs-container">
+  <div>
     <div v-if="$slots.do" class="show">
       <div class="header">
         <span class="mark do">✔</span> Do
