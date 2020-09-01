@@ -44,8 +44,8 @@
   import MethodsTable from './jsdocs/MethodsTable';
   import Header from './Header';
   import SideNav from './SideNav';
-  import jsdocs from '~/jsdocs.js';
-  import tableOfContents from '~/tableOfContents.js';
+  import jsdocs from '@/jsdocs';
+  import tableOfContents from '@/tableOfContents.js';
 
   export default {
     name: 'DocsPageTemplate',
