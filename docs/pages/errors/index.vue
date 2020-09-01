@@ -83,7 +83,7 @@
       <h3>
         Color
       </h3>
-      <DocsColorBlock name="tokens.error" definition />
+      <DocsColorBlock name="tokens.error" />
       <h3>
         Icon
       </h3>
