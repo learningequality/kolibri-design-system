@@ -89,7 +89,7 @@
       </h3>
       <KIcon icon="error" />
       <p>
-        Sizes: 14px, 24px
+        Sizes: <code>14px</code>, <code>24px</code>
       </p>
       <h3>
         Banner
