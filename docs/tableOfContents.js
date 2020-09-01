@@ -91,6 +91,16 @@ export default [
         title: 'Layout',
       }),
       new Page({
+        path: '/motion',
+        title: 'Motion',
+        disabled: true,
+      }),
+      new Page({
+        path: '/typography',
+        title: 'Typography',
+        disabled: true,
+      }),
+      new Page({
         path: '/writing',
         title: 'Writing',
       }),
@@ -101,8 +111,48 @@ export default [
     autoSort: true,
     pages: [
       new Page({
+        path: '/autosave',
+        title: 'Auto-save',
+        disabled: true,
+      }),
+      new Page({
+        path: '/renderers',
+        title: 'Content renderers',
+        disabled: true,
+      }),
+      new Page({
+        path: '/dragdrop',
+        title: 'Drag and drop',
+        disabled: true,
+      }),
+      new Page({
+        path: '/fileuploader',
+        title: 'File uploaders',
+        disabled: true,
+      }),
+      new Page({
         path: '/forms',
         title: 'Forms',
+        disabled: true,
+      }),
+      new Page({
+        path: '/pagination',
+        title: 'Pagination',
+        disabled: true,
+      }),
+      new Page({
+        path: '/tables',
+        title: 'Tables',
+        disabled: true,
+      }),
+      new Page({
+        path: '/time',
+        title: 'Time',
+        disabled: true,
+      }),
+      new Page({
+        path: '/toolbar',
+        title: 'Toolbar',
         disabled: true,
       }),
     ],
@@ -112,8 +162,33 @@ export default [
     autoSort: true,
     pages: [
       new Page({
+        path: '/alerts',
+        title: 'Alerts',
+        disabled: true,
+      }),
+      new Page({
+        path: '/badges',
+        title: 'Badges',
+        disabled: true,
+      }),
+      new Page({
+        path: '/banners',
+        title: 'Banners',
+        disabled: true,
+      }),
+      new Page({
         path: '/buttons',
         title: 'Buttons and links',
+      }),
+      new Page({
+        path: '/cards',
+        title: 'Cards',
+        disabled: true,
+      }),
+      new Page({
+        path: '/filters',
+        title: 'Filters',
+        disabled: true,
       }),
       new Page({
         path: '/loaders',
@@ -126,6 +201,16 @@ export default [
       new Page({
         path: '/snackbars',
         title: 'Snackbars',
+      }),
+      new Page({
+        path: '/tabs',
+        title: 'Tabs',
+        disabled: true,
+      }),
+      new Page({
+        path: '/tooltips',
+        title: 'Tooltips',
+        disabled: true,
       }),
     ],
   }),
