@@ -104,7 +104,7 @@ class LibPrecompiler {
     fs.mkdirSync(this._writePath(dirPath));
     fs.readdirSync(libIconsPath).forEach(libFilePath => {
       const iconPath = `${libIconsPath}/${libFilePath}`;
-      if (iconPath.endsWith(".svg") && this._isFile(iconPath)) {
+      if (iconPath.endsWith('.svg') && this._isFile(iconPath)) {
         // dirPath is the last dir so we get rid of everything up to and including the last '/'
         this._precompileSvg(iconPath, dirPath);
       }
@@ -117,7 +117,7 @@ class LibPrecompiler {
   _precompileSvg(libFilePath, dirPath = null) {
     // Read the file and convert it into the Vue SFC string we need
     try {
-      const file = fs.readFileSync(libFilePath, 'utf8')
+      const file = fs.readFileSync(libFilePath, 'utf8');
       this._optimizeSvg(file).then(svgFileString => {
         const vueFileString = this._generateVueTemplate(svgFileString, file);
         const writeLocation = this._writePath(dirPath);
@@ -139,7 +139,7 @@ class LibPrecompiler {
     fs.readdirSync(this.iconLibPath).forEach(path => {
       const libIconPath = `${this.iconLibPath}/${path}`;
       if (this._isFile(libIconPath)) {
-        if (libIconPath.endsWith(".svg")) {
+        if (libIconPath.endsWith('.svg')) {
           this._precompileSvg(libIconPath);
         }
       } else {
