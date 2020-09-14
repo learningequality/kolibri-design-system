@@ -61,13 +61,13 @@ class LibPrecompiler {
     this.namespace = namespace;
   }
 
-  writePath(appendedPath) {
+  _writePath(appendedPath) {
     const basePath = `${basePathForPrecompiledSvgs}/${this.namespace}`;
     return appendedPath ? `${basePath}/${appendedPath}` : basePath;
   }
 
   // Returns an optimized, accessible form of the SVG
-  optimizeSvg(file) {
+  _optimizeSvg(file) {
     return svgo.optimize(file).then(optimized => {
       // Apply the Kolibri-specific a11y and other attrs
       const withAttrs = optimized.data.replace('<svg', `<svg ${a11yAttrs}`);
@@ -78,12 +78,12 @@ class LibPrecompiler {
   }
 
   // Returns stringified Vue SFC file from a given SVG file
-  generateVueTemplate(svg, originalFile) {
+  _generateVueTemplate(svg, originalFile) {
     // Generate a unique name for the icon component which is also a valid tag name.
     // The component name is used to disambiguate between aliases, but is otherwise arbitrary.
     const hash = crypto
       .createHash('md5')
-      .update(`${this.writePath()}/${originalFile}`)
+      .update(`${this._writePath()}/${originalFile}`)
       .digest('hex');
     // Generate the component's object
     const scriptObj = JSON.stringify({ name: 'icon-' + hash });
@@ -93,20 +93,20 @@ class LibPrecompiler {
   }
 
   // Check if the file is a file or dir
-  isFile(path) {
+  _isFile(path) {
     return fs.lstatSync(path).isFile();
   }
 
   // Given a path that leads to a dir of icons, precompile them
   // No recursion here - just works one level deep (for now and hopefully forever)
-  precompileDir(libIconsPath) {
+  _precompileDir(libIconsPath) {
     const dirPath = libIconsPath.replace(/(.*\/)+/, '');
-    fs.mkdirSync(this.writePath(dirPath));
+    fs.mkdirSync(this._writePath(dirPath));
     fs.readdirSync(libIconsPath).forEach(libFilePath => {
       const iconPath = `${libIconsPath}/${libFilePath}`;
-      if (iconPath.endsWith(".svg") && this.isFile(iconPath)) {
+      if (iconPath.endsWith(".svg") && this._isFile(iconPath)) {
         // dirPath is the last dir so we get rid of everything up to and including the last '/'
-        this.precompileSvg(iconPath, dirPath);
+        this._precompileSvg(iconPath, dirPath);
       }
     });
   }
@@ -114,13 +114,13 @@ class LibPrecompiler {
   // libFilePath is where we find the original SVG
   // dirPath is a path we append to where we write and is used when we're reading
   // svg files from a subdirectory of this.iconLibPath so that we maintain the dir structure
-  precompileSvg(libFilePath, dirPath = null) {
+  _precompileSvg(libFilePath, dirPath = null) {
     // Read the file and convert it into the Vue SFC string we need
     try {
       const file = fs.readFileSync(libFilePath, 'utf8')
-      this.optimizeSvg(file).then(svgFileString => {
-        const vueFileString = this.generateVueTemplate(svgFileString, file);
-        const writeLocation = this.writePath(dirPath);
+      this._optimizeSvg(file).then(svgFileString => {
+        const vueFileString = this._generateVueTemplate(svgFileString, file);
+        const writeLocation = this._writePath(dirPath);
         const filename = libFilePath.replace(/(.*\/)+/, '').replace('.svg', '.vue');
         fs.writeFileSync(`${writeLocation}/${filename}`, vueFileString);
       });
@@ -130,20 +130,20 @@ class LibPrecompiler {
     }
   }
 
-  // The entry point for the class. If ES6 supported it every other method in this class would be private.
+  // The main entry point
   process() {
     // Ensure our target path exists
-    fs.mkdirSync(this.writePath());
+    fs.mkdirSync(this._writePath());
 
     // Read everything in the given dir and process the dir or svg accordingly
     fs.readdirSync(this.iconLibPath).forEach(path => {
       const libIconPath = `${this.iconLibPath}/${path}`;
-      if (this.isFile(libIconPath)) {
+      if (this._isFile(libIconPath)) {
         if (libIconPath.endsWith(".svg")) {
-          this.precompileSvg(libIconPath);
+          this._precompileSvg(libIconPath);
         }
       } else {
-        this.precompileDir(libIconPath);
+        this._precompileDir(libIconPath);
       }
     });
   }
