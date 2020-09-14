@@ -37,7 +37,7 @@ const config = [
   },
   // Icons that we made here at LE
   {
-    iconLibPath: './utils/custom-icon-svgs',
+    iconLibPath: './custom-icons',
     namespace: 'le',
   },
 ];
@@ -68,9 +68,9 @@ class LibPrecompiler {
 
   // Returns stringified Vue SFC file from a given SVG file
   optimizeSvg(file) {
-    return svgo.optimize(file).then(r => {
+    return svgo.optimize(file).then(optimized => {
       // Apply the Kolibri-specific a11y and other attrs
-      const withAttrs = r.data.replace('<svg', `<svg ${a11yAttrs}`);
+      const withAttrs = optimized.data.replace('<svg', `<svg ${a11yAttrs}`);
       const styledAndAccessibleSvg = withAttrs.includes('viewBox')
         ? withAttrs
         : withAttrs.replace('<svg', `<svg ${viewBox}`);
@@ -106,7 +106,7 @@ class LibPrecompiler {
     fs.mkdirSync(this.writePath(dirPath));
     fs.readdirSync(libIconsPath).forEach(libFilePath => {
       const iconPath = `${libIconsPath}/${libFilePath}`;
-      if (this.isFile(iconPath)) {
+      if (iconPath.endsWith(".svg") && this.isFile(iconPath)) {
         // dirPath is the last dir so we get rid of everything up to and including the last '/'
         this.precompileSvg(iconPath, dirPath);
       }
@@ -140,7 +140,13 @@ class LibPrecompiler {
     // Read everything in the given dir and process the dir or svg accordingly
     fs.readdirSync(this.iconLibPath).forEach(path => {
       const libIconPath = `${this.iconLibPath}/${path}`;
-      this.isFile(libIconPath) ? this.precompileSvg(libIconPath) : this.precompileDir(libIconPath);
+      if (this.isFile(libIconPath)) {
+        if (libIconPath.endsWith(".svg")) {
+          this.precompileSvg(libIconPath);
+        }
+      } else {
+        this.precompileDir(libIconPath);
+      }
     });
   }
 }
