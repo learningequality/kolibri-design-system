@@ -66,32 +66,30 @@ class LibPrecompiler {
     return appendedPath ? `${basePath}/${appendedPath}` : basePath;
   }
 
-  // Returns stringified Vue SFC file from a given SVG file
+  // Returns an optimized, accessible form of the SVG
   optimizeSvg(file) {
     return svgo.optimize(file).then(optimized => {
       // Apply the Kolibri-specific a11y and other attrs
       const withAttrs = optimized.data.replace('<svg', `<svg ${a11yAttrs}`);
-      const styledAndAccessibleSvg = withAttrs.includes('viewBox')
+      return withAttrs.includes('viewBox')
         ? withAttrs
         : withAttrs.replace('<svg', `<svg ${viewBox}`);
-
-      // Uppercase the first letter to conform to Vue filename expectations
-      //const newFileName = (file.charAt(0).toUpperCase() + file.slice(1)).replace('svg', 'vue');
-
-      // Generate a unique name for the icon component which is also a valid tag name.
-      // The component name is used to disambiguate between aliases, but is otherwise arbitrary.
-      const hash = crypto
-        .createHash('md5')
-        .update(`${this.writePath()}/${file}`)
-        .digest('hex');
-      // Generate the component's object
-      const scriptObj = JSON.stringify({ name: 'icon-' + hash });
-
-      const script = `export default ${scriptObj}`;
-
-      // Wrap the SVG in a Vue template tag and return it (wrapped in this promise)
-      return `<template>\n\n  ${styledAndAccessibleSvg}\n\n</template>\n\n\n<script>\n\n  ${script}\n\n</script>`;
     });
+  }
+
+  // Returns stringified Vue SFC file from a given SVG file
+  generateVueTemplate(svg, originalFile) {
+    // Generate a unique name for the icon component which is also a valid tag name.
+    // The component name is used to disambiguate between aliases, but is otherwise arbitrary.
+    const hash = crypto
+      .createHash('md5')
+      .update(`${this.writePath()}/${originalFile}`)
+      .digest('hex');
+    // Generate the component's object
+    const scriptObj = JSON.stringify({ name: 'icon-' + hash });
+    const script = `export default ${scriptObj}`;
+    // Wrap the SVG in a Vue template tag and return it (wrapped in this promise)
+    return `<template>\n\n  ${svg}\n\n</template>\n\n\n<script>\n\n  ${script}\n\n</script>`;
   }
 
   // Check if the file is a file or dir
@@ -119,11 +117,11 @@ class LibPrecompiler {
   precompileSvg(libFilePath, dirPath = null) {
     // Read the file and convert it into the Vue SFC string we need
     try {
-      this.optimizeSvg(fs.readFileSync(libFilePath, 'utf8')).then(vueFileString => {
+      const file = fs.readFileSync(libFilePath, 'utf8')
+      this.optimizeSvg(file).then(svgFileString => {
+        const vueFileString = this.generateVueTemplate(svgFileString, file);
         const writeLocation = this.writePath(dirPath);
-
         const filename = libFilePath.replace(/(.*\/)+/, '').replace('.svg', '.vue');
-
         fs.writeFileSync(`${writeLocation}/${filename}`, vueFileString);
       });
     } catch (e) {
