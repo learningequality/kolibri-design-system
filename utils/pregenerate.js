@@ -35,8 +35,9 @@ async function writeApi() {
   }
 
   const outputPath = path.resolve('./docs/jsdocs.js');
-  fs.writeFileSync(outputPath, docsOutputString + JSON.stringify(output, null, 2));
-  consola.info('Wrote jsdocs to', outputPath);
+  fs.writeFile(outputPath, docsOutputString + JSON.stringify(output, null, 2), () =>
+    consola.info('Wrote jsdocs to', outputPath)
+  );
 }
 
 writeApi();
@@ -90,8 +91,9 @@ function writeGit() {
   const environmentInfo = getEnvironmentInfo();
   const outputPath = path.resolve('./docs/environment.js');
   const env = JSON.stringify(environmentInfo, null, 2);
-  fs.writeFileSync(outputPath, gitOutputString + env + ';\n');
-  consola.info(`Wrote environment to ${outputPath}`);
+  fs.writeFile(outputPath, gitOutputString + env + ';\n', () =>
+    consola.info(`Wrote environment to ${outputPath}`)
+  );
 }
 
 writeGit();
