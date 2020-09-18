@@ -208,6 +208,10 @@ export default [
         disabled: true,
       }),
       new Page({
+        path: '/textfields',
+        title: 'Text fields',
+      }),
+      new Page({
         path: '/tooltips',
         title: 'Tooltips',
         disabled: true,
@@ -385,8 +389,8 @@ export default [
         disabled: true,
       }),
       new Page({
-        path: '/KTextbox',
-        title: 'KTextbox',
+        path: '/KTextfield',
+        title: 'KTextfield',
         isCode: true,
         disabled: true,
       }),
