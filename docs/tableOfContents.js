@@ -195,6 +195,10 @@ export default [
         title: 'Loaders',
       }),
       new Page({
+        path: '/menus',
+        title: 'Menus',
+      }),
+      new Page({
         path: '/modals',
         title: 'Modals',
       }),
