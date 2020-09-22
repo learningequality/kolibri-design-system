@@ -167,6 +167,10 @@ export default [
         disabled: true,
       }),
       new Page({
+        path: '/appbars',
+        title: 'App bars',
+      }),
+      new Page({
         path: '/badges',
         title: 'Badges',
         disabled: true,
