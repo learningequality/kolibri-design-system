@@ -48,7 +48,7 @@
     </DocsPageSection>
 
     <DocsPageSection title="Titles" anchor="#titles">
-      <p>Appbars must have titles that describe high-level information.</p>
+      <p>Appbars must have titles that describe the current page</p>
       <ul>
         <li>Titles can describe a feature a user is engaged in (e.g. Create Quiz)</li>
         <li>Titles can describe a high-level section of an app (e.g. Learn, Coach)</li>
