@@ -23,7 +23,7 @@
         type: String,
         required: true,
         validator(value) {
-          if(Object.keys(KolibriIcons).includes(value)) {
+          if (Object.keys(KolibriIcons).includes(value)) {
             return true;
           } else {
             /* eslint-disable-next-line no-console */
