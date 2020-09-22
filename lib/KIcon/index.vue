@@ -23,7 +23,12 @@
         type: String,
         required: true,
         validator(value) {
-          return Object.keys(KolibriIcons).includes(value);
+          if(Object.keys(KolibriIcons).includes(value)) {
+            return true;
+          } else {
+            console.error(`KIcon: No icon defined for token: ${value}`);
+            return false;
+          }
         },
       },
       /**
