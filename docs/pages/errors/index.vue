@@ -96,13 +96,13 @@
       </h3>
       <p>
         Banners are appended to the app bar and notify the user about global system errors and/or notifications that affect the whole app experience.
-      </p>      
+      </p>
       <img src="./banner.png">
       <h3>
         Error summary
       </h3>
       <p>
-        Error summaries should appear at the top of the page and use an alert component. Use them in forms or for page-level errors that are not associated with a specific component or location on the page. 
+        Error summaries should appear at the top of the page and use an alert component. Use them in forms or for page-level errors that are not associated with a specific component or location on the page.
       </p>
       <img src="./alert.png">
       <h3>
@@ -162,7 +162,7 @@
         Progressive disclosure
       </h3>
       <p>
-        Error messages are important, but should not overwhelm the user. Apply the concept of <DocsExternalLink href="https://www.interaction-design.org/literature/topics/progressive-disclosure" text="progressive disclosure" /> to prevent surprises and frustration. 
+        Error messages are important, but should not overwhelm the user. Apply the concept of <DocsExternalLink href="https://www.interaction-design.org/literature/topics/progressive-disclosure" text="progressive disclosure" /> to prevent surprises and frustration.
       </p>
       <p>
         For error messages, this means not showing all error messages at once. Show enough information for the user to discover where the problem is, and present the detail they need at the moment of resolving the error.
