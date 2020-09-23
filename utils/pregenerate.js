@@ -62,11 +62,13 @@ function getEnvironmentInfo() {
     local: false,
     branch: process.env.BRANCH,
   };
+
   // BRANCH is something like `v0.2.x` or `develop`
-  if (!process.env.PULL_REQUEST) {
+  if (!process.env.PULL_REQUEST || process.env.PULL_REQUEST === 'false') {
     env.url = process.env.REPOSITORY_URL + '/tree/' + env.branch;
     return env;
   }
+
   // BRANCH might be something like `pull/79/head`
   const reMatch = /^(pull\/\d+)\/head$/.exec(process.env.BRANCH);
   if (reMatch) {
