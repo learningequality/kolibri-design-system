@@ -13,16 +13,21 @@
 
 <script>
 
+  const consola = require('consola');
+
   export default {
     name: 'DocsPageSection',
     props: {
       title: {
         type: String,
-        required: true,
+        required: false,
       },
       anchor: {
         type: String,
-        required: true,
+        required: false,
+        validator(value) {
+          return value.match(/#\w+/);
+        },
       },
       fullwidth: {
         type: Boolean,
@@ -33,6 +38,13 @@
       style() {
         return this.fullwidth ? {} : { maxWidth: '700px' };
       },
+    },
+    mounted() {
+      if (this.title && !this.anchor) {
+        consola.warn(`DocsPageSection: An anchor is required for title '${this.title}'`);
+      } else if (!this.title && this.anchor) {
+        consola.warn(`DocsPageSection: A title is required for anchor '${this.anchor}'`);
+      }
     },
   };
 

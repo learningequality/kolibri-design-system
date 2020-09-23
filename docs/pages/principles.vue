@@ -2,7 +2,7 @@
 
   <DocsPageTemplate>
 
-    <DocsPageSection title="" anchor="">
+    <DocsPageSection>
       <p>These principles allow Learning Equality to apply its core values to the product design process. For non-designers, they also shed light on how the design team makes and prioritizes design decisions internally.</p>
       <p>When making decisions that affect our users, we encourage you to reference these principles during the product development process and to hold yourself accountable to these standards.</p>
       <p>Finally, these principles are a work in progress. The intent is that this is a living set of principles that will evolve to better serve the design team, the product process, and our users.</p>
