@@ -34,8 +34,8 @@
             log.warn(`'anchor' prop value '${value}' must start with a '#'`);
             return false;
           }
-          if (!value.match(/^#[a-zA-Z0-9_-]*$/)) {
-            log.warn(`'anchor' prop value '${value}' must match /^#[a-zA-Z0-9_-]*$/`);
+          if (!value.match(/^#[\w.:]*$/)) {
+            log.warn(`'anchor' prop value '${value}' invalid`);
             return false;
           }
           return true;
