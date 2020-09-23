@@ -6,9 +6,12 @@
       <code>{{ name }}</code><DocsAnchorTarget v-if="definition" :anchor="anchor" />
     </div>
     <div class="code value">
-      <DocsInternalLink v-if="isToken && showTokenCrossLink" :href="tokenAnchor">
-        <code>{{ tokenSource }}</code>
-      </DocsInternalLink>
+      <DocsInternalLink
+        v-if="isToken && showTokenCrossLink"
+        code
+        :text="tokenSource"
+        :href="tokenAnchor"
+      />
       <code v-else-if="isToken">{{ tokenSource }}</code>
       <code v-else>{{ value }}</code>
     </div>

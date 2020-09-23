@@ -25,9 +25,7 @@
 
     <DocsPageSection title="Language" anchor="#language">
       <p>
-        Follow the <DocsInternalLink href="/writing">
-          writing guidelines
-        </DocsInternalLink> with a special focus on clear, concise, and natural language. Explain causes of errors if it will help the user resolve their issue, but do not use complex technical terms and run-on explanations.
+        Follow the <DocsInternalLink text="writing guidelines" href="/writing" /> with a special focus on clear, concise, and natural language. Explain causes of errors if it will help the user resolve their issue, but do not use complex technical terms and run-on explanations.
       </p>
       <p>
         Error messages should also be actionable. Offer the solution as an action when possible and make sure the action label is specific to the outcome. If including an action isn’t possible, then briefly explain how the user can fix their problem.
@@ -96,13 +94,13 @@
       </h3>
       <p>
         Banners are appended to the app bar and notify the user about global system errors and/or notifications that affect the whole app experience.
-      </p>      
+      </p>
       <img src="./banner.png">
       <h3>
         Error summary
       </h3>
       <p>
-        Error summaries should appear at the top of the page and use an alert component. Use them in forms or for page-level errors that are not associated with a specific component or location on the page. 
+        Error summaries should appear at the top of the page and use an alert component. Use them in forms or for page-level errors that are not associated with a specific component or location on the page.
       </p>
       <img src="./alert.png">
       <h3>
@@ -162,7 +160,7 @@
         Progressive disclosure
       </h3>
       <p>
-        Error messages are important, but should not overwhelm the user. Apply the concept of <DocsExternalLink href="https://www.interaction-design.org/literature/topics/progressive-disclosure" text="progressive disclosure" /> to prevent surprises and frustration. 
+        Error messages are important, but should not overwhelm the user. Apply the concept of <DocsExternalLink href="https://www.interaction-design.org/literature/topics/progressive-disclosure" text="progressive disclosure" /> to prevent surprises and frustration.
       </p>
       <p>
         For error messages, this means not showing all error messages at once. Show enough information for the user to discover where the problem is, and present the detail they need at the moment of resolving the error.
@@ -179,9 +177,7 @@
 
     <DocsPageSection title="Accessibility" anchor="#accessibility">
       <p>
-        Do not use red color as the only indicator for errors. Color alone is not sufficient to indicate an error state. Errors must be accompanied by an additional visual indicator such as an icon as mentioned in <DocsInternalLink href="/errors#components">
-          inline error messages
-        </DocsInternalLink>.
+        Do not use red color as the only indicator for errors. Color alone is not sufficient to indicate an error state. Errors must be accompanied by an additional visual indicator such as an icon as mentioned in <DocsInternalLink text="inline error messages" href="/errors#components" />.
       </p>
       <p>
         Important information to resolve errors should also be keyboard accessible. Avoid using snackbars and tooltips as the primary way to access this critical information.

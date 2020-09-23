@@ -12,9 +12,7 @@
         A switch toggle is used to select and execute an action instantly, in real time. A switch is toggled successfully when the switch thumb slides to the other side of the track upon click or press.
       </p>
       <p>
-        For selections that require a confirmation to execute and are housed in a form, use <DocsInternalLink href="/KCheckbox" code>
-          KCheckbox
-        </DocsInternalLink> component instead.
+        For selections that require a confirmation to execute and are housed in a form, use <DocsInternalLink code text="KCheckbox" href="/KCheckbox" /> component instead.
       </p>
     </DocsPageSection>
 
@@ -33,27 +31,19 @@
       <ul>
         <li>
           Thumb ON color:
-          <DocsInternalLink href="/colors#palette-green-v_500" code>
-            palette.green.v_500
-          </DocsInternalLink>
+          <DocsInternalLink code text="palette.green.v_500" href="/colors#palette-green-v_500" />
         </li>
         <li>
           Track ON color:
-          <DocsInternalLink href="/colors#palette-green-v_200" code>
-            palette.green.v_200
-          </DocsInternalLink>
+          <DocsInternalLink code text="palette.green.v_200" href="/colors#palette-green-v_200" />
         </li>
         <li>
           Thumb OFF color:
-          <DocsInternalLink href="/colors#palette-grey-v_400" code>
-            palette.grey.v_400
-          </DocsInternalLink>
+          <DocsInternalLink code text="palette.grey.v_400" href="/colors#palette-grey-v_400" />
         </li>
         <li>
           Track OFF color:
-          <DocsInternalLink href="/colors#palette-grey-v_50" code>
-            palette.grey.v_50
-          </DocsInternalLink>
+          <DocsInternalLink code text="palette.grey.v_50" href="/colors#palette-grey-v_50" />
         </li>
       </ul>
     </DocsPageSection>
