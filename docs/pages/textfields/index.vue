@@ -180,34 +180,24 @@
         <li>Min width: 252px</li>
         <li>Corner radius: 2px</li>
         <li>
-          Fill color: 
-          <DocsInternalLink href="/colors#palette-grey-v_400" code>
-            palette.grey.v_400
-          </DocsInternalLink>, 0.25 opacity
+          Fill color:
+          <DocsInternalLink code text="palette.grey.v_400" href="/colors#palette-grey-v_400" />, 0.25 opacity
         </li>
         <li>
           Bottom stroke color:
-          <DocsInternalLink href="/colors#palette-grey-v_500" code>
-            palette.grey.v_500
-          </DocsInternalLink>
+          <DocsInternalLink code text="palette.grey.v_500" href="/colors#palette-grey-v_500" />
         </li>
         <li>
           Bottom stroke focused color:
-          <DocsInternalLink href="/colors#tokens.primary" code>
-            tokens.primary
-          </DocsInternalLink>
+          <DocsInternalLink code text="tokens.primary" href="/colors#tokens.primary" />
         </li>
         <li>
-          Label text color: 
-          <DocsInternalLink href="/colors#palette-grey-v_300" code>
-            palette.grey.v_300
-          </DocsInternalLink>
+          Label text color:
+          <DocsInternalLink code text="palette.grey.v_300" href="/colors#palette-grey-v_300" />
         </li>
         <li>
           Focused text color:
-          <DocsInternalLink href="/colors#tokens.primary" code>
-            tokens.text
-          </DocsInternalLink>
+          <DocsInternalLink code text="tokens.text" href="/colors#tokens.primary" />
         </li>
       </ul>
     </DocsPageSection>

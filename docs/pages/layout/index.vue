@@ -20,9 +20,7 @@
       </h3>
       <ul>
         <li>
-          Background color: <DocsInternalLink href="/colors#tokens-surface" code>
-            tokens.surface
-          </DocsInternalLink> (<code>#ffffff</code>)
+          Background color: <DocsInternalLink code text="tokens.surface" href="/colors#tokens-surface" /> (<code>#ffffff</code>)
         </li>
         <li>Default border radius: 4px</li>
         <li>Elevation: 1dp</li>
@@ -51,9 +49,7 @@
       <ul>
         <li>Width: 1px</li>
         <li>
-          Color: <DocsInternalLink href="/colors#tokens-fineLine" code>
-            tokens.fineline
-          </DocsInternalLink> (<code>#dedede</code>)
+          Color: <DocsInternalLink code text="tokens.fineline" href="/colors#tokens-fineLine" /> (<code>#dedede</code>)
         </li>
       </ul>
     </DocsPageSection>

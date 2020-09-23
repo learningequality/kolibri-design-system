@@ -86,28 +86,20 @@
         <li>Min width: 128px</li>
         <li>Menu elevation: 4dp</li>
         <li>
-          Background color: 
-          <DocsInternalLink href="/colors#palette.white" code>
-            tokens.surface
-          </DocsInternalLink>
+          Background color:
+          <DocsInternalLink code text="tokens.surface" href="/colors#palette.white" />
         </li>
         <li>
-          Option text color: 
-          <DocsInternalLink href="/colors#palette-grey-v_100" code>
-            tokens.text
-          </DocsInternalLink>
+          Option text color:
+          <DocsInternalLink code text="tokens.text" href="/colors#palette-grey-v_100" />
         </li>
         <li>
-          Option text hover color: 
-          <DocsInternalLink href="/colors#palette-grey-v_100" code>
-            palette.grey.v_100
-          </DocsInternalLink>
+          Option text hover color:
+          <DocsInternalLink code text="palette.grey.v_100" href="/colors#palette-grey-v_100" />
         </li>
         <li>
-          Iconography color: 
-          <DocsInternalLink href="/colors#palette-grey-v_900" code>
-            palette.grey.v_900
-          </DocsInternalLink>
+          Iconography color:
+          <DocsInternalLink code text="palette.grey.v_900" href="/colors#palette-grey-v_900" />
         </li>
       </ul>
       <h3>Dropdown menu</h3>

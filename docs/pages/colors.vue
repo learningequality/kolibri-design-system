@@ -40,17 +40,11 @@
       </p>
       <p>
         Color tokens are by themselves abstract and defined by a purpose, not a color value. A
-        <DocsInternalLink href="#theme">
-          theme
-        </DocsInternalLink>
+        <DocsInternalLink text="theme" href="#theme" />
         makes them concrete by mapping them to specific
-        <DocsInternalLink href="#brand">
-          brand colors
-        </DocsInternalLink>
+        <DocsInternalLink text="brand colors" href="#brand" />
         and
-        <DocsInternalLink href="#palette">
-          palette colors
-        </DocsInternalLink>.
+        <DocsInternalLink text="palette colors" href="#palette" />.
       </p>
       <p>
         When using tokens, it's very important to use them because of their purposes, not because of their color values. Multiple tokens will commonly share a single color value.

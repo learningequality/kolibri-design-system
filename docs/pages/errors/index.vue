@@ -25,9 +25,7 @@
 
     <DocsPageSection title="Language" anchor="#language">
       <p>
-        Follow the <DocsInternalLink href="/writing">
-          writing guidelines
-        </DocsInternalLink> with a special focus on clear, concise, and natural language. Explain causes of errors if it will help the user resolve their issue, but do not use complex technical terms and run-on explanations.
+        Follow the <DocsInternalLink text="writing guidelines" href="/writing" /> with a special focus on clear, concise, and natural language. Explain causes of errors if it will help the user resolve their issue, but do not use complex technical terms and run-on explanations.
       </p>
       <p>
         Error messages should also be actionable. Offer the solution as an action when possible and make sure the action label is specific to the outcome. If including an action isn’t possible, then briefly explain how the user can fix their problem.
@@ -179,9 +177,7 @@
 
     <DocsPageSection title="Accessibility" anchor="#accessibility">
       <p>
-        Do not use red color as the only indicator for errors. Color alone is not sufficient to indicate an error state. Errors must be accompanied by an additional visual indicator such as an icon as mentioned in <DocsInternalLink href="/errors#components">
-          inline error messages
-        </DocsInternalLink>.
+        Do not use red color as the only indicator for errors. Color alone is not sufficient to indicate an error state. Errors must be accompanied by an additional visual indicator such as an icon as mentioned in <DocsInternalLink text="inline error messages" href="/errors#components" />.
       </p>
       <p>
         Important information to resolve errors should also be keyboard accessible. Avoid using snackbars and tooltips as the primary way to access this critical information.
