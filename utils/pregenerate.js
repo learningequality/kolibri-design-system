@@ -46,6 +46,14 @@ writeApi();
 
 // https://docs.netlify.com/configure-builds/environment-variables/#netlify-configuration-variables
 function getEnvironmentInfo() {
+  // debug info
+  const info = ` Netlify environment variables:
+    NETLIFY:        ${process.env.NETLIFY}
+    BRANCH:         ${process.env.BRANCH}
+    PULL_REQUEST:   ${process.env.PULL_REQUEST}
+    REPOSITORY_URL: ${process.env.REPOSITORY_URL}`;
+  consola.info(info);
+
   // probably running local dev environment
   if (!process.env.NETLIFY) {
     return { local: true };
@@ -81,7 +89,7 @@ function writeGit() {
   const outputPath = path.resolve('./docs/environment.js');
   const env = JSON.stringify(environmentInfo, null, 2);
   fs.writeFileSync(outputPath, gitOutputString + env + ';\n');
-  consola.info(`Wrote environment to ${outputPath}:\n${env}`);
+  consola.info(`Wrote environment to ${outputPath}`);
 }
 
 writeGit();
