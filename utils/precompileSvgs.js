@@ -37,7 +37,7 @@ const config = [
   },
   // Icons that we made here at LE
   {
-    iconLibPath: './utils/custom-icon-svgs',
+    iconLibPath: './custom-icons',
     namespace: 'le',
   },
 ];
@@ -61,54 +61,52 @@ class LibPrecompiler {
     this.namespace = namespace;
   }
 
-  writePath(appendedPath) {
+  _writePath(appendedPath) {
     const basePath = `${basePathForPrecompiledSvgs}/${this.namespace}`;
     return appendedPath ? `${basePath}/${appendedPath}` : basePath;
   }
 
-  // Returns stringified Vue SFC file from a given SVG file
-  optimizeSvg(file) {
-    return svgo.optimize(file).then(r => {
+  // Returns an optimized, accessible form of the SVG
+  _optimizeSvg(file) {
+    return svgo.optimize(file).then(optimized => {
       // Apply the Kolibri-specific a11y and other attrs
-      const withAttrs = r.data.replace('<svg', `<svg ${a11yAttrs}`);
-      const styledAndAccessibleSvg = withAttrs.includes('viewBox')
+      const withAttrs = optimized.data.replace('<svg', `<svg ${a11yAttrs}`);
+      return withAttrs.includes('viewBox')
         ? withAttrs
         : withAttrs.replace('<svg', `<svg ${viewBox}`);
-
-      // Uppercase the first letter to conform to Vue filename expectations
-      //const newFileName = (file.charAt(0).toUpperCase() + file.slice(1)).replace('svg', 'vue');
-
-      // Generate a unique name for the icon component which is also a valid tag name.
-      // The component name is used to disambiguate between aliases, but is otherwise arbitrary.
-      const hash = crypto
-        .createHash('md5')
-        .update(`${this.writePath()}/${file}`)
-        .digest('hex');
-      // Generate the component's object
-      const scriptObj = JSON.stringify({ name: 'icon-' + hash });
-
-      const script = `export default ${scriptObj}`;
-
-      // Wrap the SVG in a Vue template tag and return it (wrapped in this promise)
-      return `<template>\n\n  ${styledAndAccessibleSvg}\n\n</template>\n\n\n<script>\n\n  ${script}\n\n</script>`;
     });
   }
 
+  // Returns stringified Vue SFC file from a given SVG file
+  _generateVueTemplate(svg, originalFile) {
+    // Generate a unique name for the icon component which is also a valid tag name.
+    // The component name is used to disambiguate between aliases, but is otherwise arbitrary.
+    const hash = crypto
+      .createHash('md5')
+      .update(`${this._writePath()}/${originalFile}`)
+      .digest('hex');
+    // Generate the component's object
+    const scriptObj = JSON.stringify({ name: 'icon-' + hash });
+    const script = `export default ${scriptObj}`;
+    // Wrap the SVG in a Vue template tag and return it (wrapped in this promise)
+    return `<template>\n\n  ${svg}\n\n</template>\n\n\n<script>\n\n  ${script}\n\n</script>`;
+  }
+
   // Check if the file is a file or dir
-  isFile(path) {
+  _isFile(path) {
     return fs.lstatSync(path).isFile();
   }
 
   // Given a path that leads to a dir of icons, precompile them
   // No recursion here - just works one level deep (for now and hopefully forever)
-  precompileDir(libIconsPath) {
+  _precompileDir(libIconsPath) {
     const dirPath = libIconsPath.replace(/(.*\/)+/, '');
-    fs.mkdirSync(this.writePath(dirPath));
+    fs.mkdirSync(this._writePath(dirPath));
     fs.readdirSync(libIconsPath).forEach(libFilePath => {
       const iconPath = `${libIconsPath}/${libFilePath}`;
-      if (this.isFile(iconPath)) {
+      if (iconPath.endsWith('.svg') && this._isFile(iconPath)) {
         // dirPath is the last dir so we get rid of everything up to and including the last '/'
-        this.precompileSvg(iconPath, dirPath);
+        this._precompileSvg(iconPath, dirPath);
       }
     });
   }
@@ -116,14 +114,14 @@ class LibPrecompiler {
   // libFilePath is where we find the original SVG
   // dirPath is a path we append to where we write and is used when we're reading
   // svg files from a subdirectory of this.iconLibPath so that we maintain the dir structure
-  precompileSvg(libFilePath, dirPath = null) {
+  _precompileSvg(libFilePath, dirPath = null) {
     // Read the file and convert it into the Vue SFC string we need
     try {
-      this.optimizeSvg(fs.readFileSync(libFilePath, 'utf8')).then(vueFileString => {
-        const writeLocation = this.writePath(dirPath);
-
+      const file = fs.readFileSync(libFilePath, 'utf8');
+      this._optimizeSvg(file).then(svgFileString => {
+        const vueFileString = this._generateVueTemplate(svgFileString, file);
+        const writeLocation = this._writePath(dirPath);
         const filename = libFilePath.replace(/(.*\/)+/, '').replace('.svg', '.vue');
-
         fs.writeFileSync(`${writeLocation}/${filename}`, vueFileString);
       });
     } catch (e) {
@@ -132,15 +130,21 @@ class LibPrecompiler {
     }
   }
 
-  // The entry point for the class. If ES6 supported it every other method in this class would be private.
+  // The main entry point
   process() {
     // Ensure our target path exists
-    fs.mkdirSync(this.writePath());
+    fs.mkdirSync(this._writePath());
 
     // Read everything in the given dir and process the dir or svg accordingly
     fs.readdirSync(this.iconLibPath).forEach(path => {
       const libIconPath = `${this.iconLibPath}/${path}`;
-      this.isFile(libIconPath) ? this.precompileSvg(libIconPath) : this.precompileDir(libIconPath);
+      if (this._isFile(libIconPath)) {
+        if (libIconPath.endsWith('.svg')) {
+          this._precompileSvg(libIconPath);
+        }
+      } else {
+        this._precompileDir(libIconPath);
+      }
     });
   }
 }

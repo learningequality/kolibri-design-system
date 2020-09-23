@@ -188,6 +188,13 @@ Icons are drawn from https://github.com/material-icons/material-icons and then c
 yarn run precompile-svgs
 ```
 
+We also output a set of reStructuredText replacement strings into the file ``docs/rstIconReplacements.txt`` which can be used in
+user docs based on Sphinx. To update this file, run
+
+```bash
+yarn run pregenerate
+```
+
 ### Development in parallel with other applications
 
 If you are working on the design system library code in this repo and want to see local updates reflected in other applications that are using this library, then you will need to do a few things.
