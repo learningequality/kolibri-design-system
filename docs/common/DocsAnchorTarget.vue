@@ -10,8 +10,8 @@
         src="../assets/link.svg"
         class="icon-link"
         :class="{ highlighed }"
+        aria-label="Link to section"
       />
-      <span class="visuallyhidden">link to section</span>
     </DocsInternalLink>
     <!-- hidden target to account for variable height of header -->
     <a :id="anchorId" :href="anchor" class="offset-target">#</a>
