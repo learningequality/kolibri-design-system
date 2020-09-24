@@ -2,6 +2,7 @@ import Vue from 'vue';
 
 import VueSimpleMarkdown from 'vue-simple-markdown';
 import DocsExternalLink from '~/common/DocsExternalLink';
+import DocsGithubLink from '~/common/DocsGithubLink';
 import DocsInternalLink from '~/common/DocsInternalLink';
 import DocsAnchorTarget from '~/common/DocsAnchorTarget';
 import DocsPageSection from '~/common/DocsPageSection';
@@ -14,6 +15,7 @@ Vue.component('DocsPageSection', DocsPageSection);
 Vue.component('DocsInternalLink', DocsInternalLink);
 Vue.component('DocsAnchorTarget', DocsAnchorTarget);
 Vue.component('DocsExternalLink', DocsExternalLink);
+Vue.component('DocsGithubLink', DocsGithubLink);
 Vue.component('DocsShow', DocsShow);
 Vue.component('DocsDoNot', DocsDoNot);
 

@@ -31,11 +31,11 @@
         type: String,
         validator(value) {
           if (!value.startsWith('#')) {
-            log.warn(`'anchor' prop value '${value}' must start with a '#'`);
+            log.error(`'anchor' prop value '${value}' must start with a '#'`);
             return false;
           }
           if (!value.match(/^#[\w.:]*$/)) {
-            log.warn(`'anchor' prop value '${value}' invalid`);
+            log.error(`'anchor' prop value '${value}' invalid`);
             return false;
           }
           return true;
