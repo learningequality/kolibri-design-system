@@ -13,7 +13,7 @@
       v-if="tooltip"
       open-on="hover"
       position="bottom"
-      style="z-index: 24;"
+      zIndex="24"
     >
       {{ tooltip }}
     </UiTooltip>
