@@ -4,15 +4,15 @@
 
     <DocsPageSection title="Overview" anchor="#overview">
       <p>
-        App bars are used to provide users a means of navigation through pages in our applications. They allow access to top-level pages, navigate back to a specific page, or dismiss edit forms
+        App bars show information and actions related to the current page. They can be used for branding, navigation, and providing actions to the user
       </p>
 
       <p>
-        We have four types of app bars: <em>primary bars</em>, <em>back arrow bars</em>, <em>form bars</em>, and <em>bottom bars</em>
+        We have one type of bottom app bar and three types of top app bars: <em>primary bars</em>, <em>back arrow bars</em>, and <em>full-screen modal bars</em>
       </p>
 
       <h3>Primary bars</h3>
-      <p>Primary bars are placed on top level pages in Kolibri. They may house subtabs that lead to different sections of the application</p>
+      <p>Primary bars are placed on top level pages. They may contain tabs that lead to top-level sections in this part of the application</p>
       <DocsShow>
         <img class="modal-img" src="./primary-1.png">
       </DocsShow>
@@ -21,34 +21,42 @@
       </DocsShow>
 
       <h3>Back arrow bars</h3>
-      <p>Back arrow topbars allow users to navigate back to the previous page</p>
+      <p>Back arrow buttons allow users to navigate back to the parent page in the hierarchy</p>
       <DocsShow>
         <img class="modal-img" src="./back-1.png">
       </DocsShow>
 
-      <h3>Form bars</h3>
-      <p>Form bars allows users to dismiss a full-screen form and land on the previous page</p>
+      <h3>Full-screen modal bars</h3>
+      <p>Full-screen modal bars allows users to dismiss a full-screen form from view</p>
       <DocsShow>
         <img class="modal-img" src="./form-1.png">
       </DocsShow>
 
       <h3>Bottom bars</h3>
-      <p>Bottom bars are placed on pages that house editing, content selection, or multi-step processes. They may contain buttons that allow the user to submit specific action(s) or continue with the process. Bottom bars can also contain contextual information and error messaging relevant to the task</p>
+      <p>Bottom bars contain contextual metadata and actions related to a page. Use bottom bars to accompany pages with full-screen forms or content selection. Bottom bars are usually sticky to the bottom of a page</p>
       <DocsShow>
         <img class="modal-img" src="./bottom-1.png">
       </DocsShow>
     </DocsPageSection>
 
     <DocsPageSection title="Layout" anchor="#layout">
+      <h3>Top bars</h3>
       <ul>
         <li>Place navigation icons on the far left</li>
         <li>Place titles to the right of the navigation icon</li>
         <li>Place contextual icons to the far right</li>
       </ul>
+      <h3>Bottom bars</h3>
+      <ul>
+        <li>Place buttons on the far right</li>
+        <li>Place any contextual metadata related to the task on the far left</li>
+        <li>Place any contextual errors on the bottom of the metadata</li>
+        <li>Place bottom bars at the bottom of the browser window</li>
+      </ul>
     </DocsPageSection>
 
     <DocsPageSection title="Titles" anchor="#titles">
-      <p>Appbars must have titles that describe the current page</p>
+      <p>Top bars must have titles that describe the current page</p>
       <ul>
         <li>Titles can describe a feature a user is engaged in (e.g. Create Quiz)</li>
         <li>Titles can describe a high-level section of an app (e.g. Learn, Coach)</li>
@@ -61,13 +69,13 @@
       <template v-slot:do>
         <img src="./do-1.png">
         <p class="do-dont">
-          Use general titles in app bars
+          Use general titles in top bars
         </p>
       </template>
       <template v-slot:not>
         <img src="./dont-1.png">
         <p class="do-dont">
-          Use user-generated text in app bars
+          Use user-generated text in top bars
         </p>
       </template>
     </DocsDoNot>
@@ -80,7 +88,7 @@
       <template v-slot:do>
         <img src="./exception-1.png">
         <p class="do-dont">
-          Appbar color may change to white for critical workspaces
+          Change top app bar color to white if visual contrast is needed between the background and action buttons
         </p>
       </template>
     </DocsDoNot>
@@ -89,7 +97,7 @@
       <template v-slot:do>
         <img src="./exception-2.png">
         <p class="do-dont">
-          Learning aids and indicators can be placed in app bars
+          Place learning aids in top bars
         </p>
       </template>
     </DocsDoNot>
@@ -98,16 +106,7 @@
       <template v-slot:do>
         <img src="./exception-3.png">
         <p class="do-dont">
-          Search text fields can be placed in app bars when global searching is a critical feature
-        </p>
-      </template>
-    </DocsDoNot>
-
-    <DocsDoNot style="display: inline-block;">
-      <template v-slot:do>
-        <img src="./exception-4.png">
-        <p class="do-dont">
-          For resource pages in the Learn app, use a back link at the top of the page instead of an app bar
+          Place custom search fields in top bars
         </p>
       </template>
     </DocsDoNot>
@@ -120,51 +119,28 @@
       </ul>
     </DocsPageSection>
 
-    <DocsPageSection title="Behaviors" anchor="#browser-behaviors">
-      <h3>Browser</h3>
-      <ul>
-        <li>Back and forward buttons can move a user through topbar tabs</li>
-        <li>Back arrow topbars can be used on both pages that do and do not have a URL</li>
-        <li>Appbar actions can be collapsed into an overflow menu as the browser window size decreases</li>
-      </ul>
-
+    <DocsPageSection title="Behaviors" anchor="#behaviors">
+      <p>Small screens and browser windows have an effect on different top bar components</p>
       <h3>Scrolling</h3>
       <ul>
-        <li>Scrolling upwards hides topbars</li>
-        <li>Scrolling downwards reveals topbars</li>
-        <li>Bottom bars are sticky to the bottom of the browser window</li>
+        <li>Scrolling upwards hides the top bar</li>
+        <li>Scrolling downwards reveals the top bar</li>
+      </ul>
+
+      <h3>Responsiveness</h3>
+      <ul>
+        <li>Top bar actions can be collapsed into an overflow menu</li>
+        <li>Top bar tabs can become horizontally scrollable</li>
+        <li>Search bars can shift to a new line and span the full screen width</li>
       </ul>
     </DocsPageSection>
 
     <DocsPageSection title="Accessibility" anchor="#accessibility">
       <ul>
         <li>Icon and title placement become mirrored for right-to-left languages</li>
-        <li>Appbar titles and iconography colors must meet <a href="https://www.w3.org/WAI/WCAG21/Understanding/contrast-minimum.html" target="_blank">1.4.3 Contrast (Level AA) criteria</a></li>
+        <li>Top bar titles and iconography colors must meet <a href="https://www.w3.org/WAI/WCAG21/Understanding/contrast-minimum.html" target="_blank">1.4.3 Contrast (Level AA) criteria</a></li>
       </ul>
     </DocsPageSection>
-
-    <!--<DocsShow>
-        <img class="modal-img" src="./dropdown-menu.png">
-      </DocsShow>-->
-
-    <!--<DocsShow>
-        <img class="modal-img" src="./filter-menu.png">
-      </DocsShow>-->
-
-    <!--<DocsDoNot>
-      <template v-slot:do>
-        <img src="./icon-do.png">
-        <p class="do-dont">
-          Use iconography as a visual aid for important actions
-        </p>
-      </template>
-      <template v-slot:not>
-        <img src="./icon-dont.png">
-        <p class="do-dont">
-          Use repetitive iconography in filter menus
-        </p>
-      </template>
-    </DocsDoNot>-->
 
   </DocsPageTemplate>
 
