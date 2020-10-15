@@ -11,9 +11,9 @@
   >
     <UiTooltip
       v-if="tooltip"
+      :zIndex="24"
       open-on="hover"
       position="bottom"
-      zIndex="24"
     >
       {{ tooltip }}
     </UiTooltip>
