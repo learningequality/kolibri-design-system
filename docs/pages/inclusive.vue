@@ -80,7 +80,7 @@
         Like with keyboard navigation, using the built-in components is a good way to
         ensure compatibility with screen readers. However, it's also critical to test
         all new functionality. See this
-        <DocsExternalLink href="https://github.com/learningequality/kolibri/wiki/Accessibility-Resources-(Tools)" text="comprehensive list of A11y testing tools" />.
+        <DocsExternalLink href="https://kolibri-dev.readthedocs.io/en/develop/manual_testing/a11y_resources/index.html" text="comprehensive list of A11y testing tools" />.
       </p>
 
       <p>
