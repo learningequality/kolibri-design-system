@@ -51,7 +51,7 @@
         required: false,
       },
       /**
-       * If provided, create a link to a RP in the design-system repo
+       * If provided, create a link to a PR in the design-system repo
        */
       pull: {
         type: [String, Number],
@@ -80,6 +80,7 @@
           return `https://github.com/learningequality/kolibri-design-system/pull/${this.pull}`;
         if (this.issue)
           return `https://github.com/learningequality/kolibri-design-system/issue/${this.issue}`;
+        log.error(`No URL, PR, or issue provided`);
         return undefined;
       },
     },
