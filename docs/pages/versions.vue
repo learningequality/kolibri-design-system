@@ -16,7 +16,6 @@
         <li>Added errors documentation - <DocsGithubLink pull="97" /></li>
         <li>Added switches documentation - <DocsGithubLink pull="105" /></li>
         <li>Added menu documentation - <DocsGithubLink pull="106" /></li>
-        <li>Added 'email', 'sidebar', and 'add' icons - <DocsGithubLink pull="110" /></li>
       </ul>
       <h4>Library updates</h4>
       <ul>
