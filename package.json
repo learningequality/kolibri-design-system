@@ -64,6 +64,7 @@
     "vue-meta": "^2.3.2",
     "vue-prism-component": "^1.1.1",
     "vue-simple-markdown": "^1.1.2",
-    "vue-template-compiler": "^2.5.17"
+    "vue-template-compiler": "^2.5.17",
+    "xml-loader": "^1.2.1"
   }
 }
