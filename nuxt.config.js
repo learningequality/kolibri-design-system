@@ -47,6 +47,11 @@ export default {
         test: /\.tbx$/,
         loader: 'xml-loader',
       });
+      // allow this file to be displayed
+      config.module.rules.push({
+        test: /rstIconReplacements.txt/,
+        loader: 'raw-loader',
+      });
       config.devtool = 'source-map';
     },
     cssSourceMap: true,
