@@ -82,7 +82,7 @@
 
     <DocsPageSection title="Usage in documentation" anchor="#rst">
       <p>
-        For use in documentation such as the <DocsExternalLink href="https://kolibri.readthedocs.io/" text="Kolibri User Docs" />, all icons above have <DocsExternalLink href="https://docutils.sourceforge.io/docs/ref/rst/directives.html#directives-for-substitution-definitions" text="substitutions" /> available in reStructuredText replacement syntax below:
+        For use in documentation such as the <DocsExternalLink href="https://kolibri.readthedocs.io/" text="Kolibri User Docs" />, all icons above have substitutions available in <DocsExternalLink href="https://docutils.sourceforge.io/docs/ref/rst/directives.html#directives-for-substitution-definitions" text="reStructuredText replacement syntax" /> below:
       </p>
       <textarea v-model="text" class="replacements code" readonly></textarea>
       <p>
