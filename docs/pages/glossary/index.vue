@@ -12,7 +12,25 @@
     </DocsPageSection>
 
     <DocsPageSection title="Terms" anchor="#terms">
-      <pre>{{ terms }}</pre>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Term</th>
+            <th>Part of speech</th>
+            <th class="stretch">
+              Description
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="(term, i) in terms" :key="i">
+            <th>{{ term.term }}</th>
+            <td>{{ term.note }}</td>
+            <td>{{ term.description }}</td>
+          </tr>
+        </tbody>
+      </table>
     </DocsPageSection>
 
 
@@ -24,10 +42,11 @@
 
 <script>
 
+  import sortBy from 'lodash/sortBy';
   import tbxGlossary from './glossary.tbx';
 
   function tbxAttribute(element, name) {
-    return element[name] ? element[name][0]._ : undefined;
+    return element[name] ? element[name][0]._ : '';
   }
 
   function tbxTerm(entry) {
@@ -39,7 +58,7 @@
     };
   }
 
-  const terms = tbxGlossary.martif.text[0].body[0].termEntry.map(tbxTerm);
+  const terms = sortBy(tbxGlossary.martif.text[0].body[0].termEntry.map(tbxTerm), ['term']);
 
   export default {
     computed: {
@@ -52,4 +71,22 @@
 </script>
 
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+
+  td,
+  th {
+    padding: 8px;
+    text-align: left;
+    vertical-align: top;
+  }
+
+  th {
+    min-width: 50px;
+  }
+
+  .stretch {
+    width: 100%;
+    min-width: 150px;
+  }
+
+</style>
