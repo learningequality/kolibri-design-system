@@ -34,9 +34,7 @@
       </table>
     </DocsPageSection>
 
-
-
-  </docspagetemplate>
+  </DocsPageTemplate>
 
 </template>
 
