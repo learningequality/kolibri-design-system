@@ -5,6 +5,8 @@
     :class="buttonClasses"
     :href="href"
     :download="download"
+    :openInNewTab="openInNewTab"
+    :target="openInNewTab ? '_blank' : false"
     dir="auto"
     @mouseenter="hovering = true"
     @mouseleave="hovering = false"
@@ -68,6 +70,13 @@
        */
       iconAfter: {
         type: String,
+        required: false,
+      },
+      /**
+       * If provided, opens link in new tab
+       */
+      openInNewTab: {
+        type: Boolean,
         required: false,
       },
     },
