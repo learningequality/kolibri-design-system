@@ -28,16 +28,14 @@
 
 <script>
 
-  import DocsFilter from '../../DocsFilter';
-  import { termList, matches } from '../../DocsFilter/utils';
   import NavSectionList from './NavSectionList';
+  import { termList, matches } from '~/common/DocsFilter/utils';
   import tableOfContents from '~/tableOfContents.js';
 
   export default {
     name: 'SideNav',
     components: {
       NavSectionList,
-      DocsFilter,
     },
     data() {
       return {
