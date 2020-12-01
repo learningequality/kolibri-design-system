@@ -12,6 +12,7 @@
     </DocsPageSection>
 
     <DocsPageSection title="Terms" anchor="#terms" fullwidth>
+      <DocsFilter v-model="filterText" class="filter" />
       <table style="max-width: 1000px">
         <thead>
           <tr>
@@ -25,7 +26,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr v-for="(term, i) in terms" :key="i">
+          <tr v-for="(term, i) in visibleTerms" :key="i">
             <th>{{ term.term }}</th>
             <td><em>{{ term.note }}</em></td>
             <td>{{ term.description }}</td>
@@ -43,6 +44,7 @@
 
   import sortBy from 'lodash/sortBy';
   import tbxGlossary from './glossary.tbx';
+  import { termList, matches } from '~/common/DocsFilter/utils';
 
   function tbxAttribute(element, name) {
     return element[name] ? element[name][0]._ : '';
@@ -57,12 +59,20 @@
     };
   }
 
-  const terms = sortBy(tbxGlossary.martif.text[0].body[0].termEntry.map(tbxTerm), ['term']);
+  const glossaryTerms = sortBy(tbxGlossary.martif.text[0].body[0].termEntry.map(tbxTerm), ['term']);
 
   export default {
+    data() {
+      return {
+        filterText: '',
+      };
+    },
     computed: {
-      terms() {
-        return terms;
+      visibleTerms() {
+        return glossaryTerms.filter(term => matches(this.filterTerms, term.term));
+      },
+      filterTerms() {
+        return termList(this.filterText);
       },
     },
   };
@@ -86,6 +96,11 @@
   .stretch {
     width: 100%;
     min-width: 150px;
+  }
+
+  .filter {
+    max-width: 300px;
+    margin-bottom: 8px;
   }
 
 </style>
