@@ -11,12 +11,13 @@
       </p>
     </DocsPageSection>
 
-    <DocsPageSection title="Terms" anchor="#terms">
-
-      <table>
+    <DocsPageSection title="Terms" anchor="#terms" fullwidth>
+      <table style="max-width: 1000px">
         <thead>
           <tr>
-            <th>Term</th>
+            <th style="min-width: 150px">
+              Term
+            </th>
             <th>Part of speech</th>
             <th class="stretch">
               Description
@@ -26,7 +27,7 @@
         <tbody>
           <tr v-for="(term, i) in terms" :key="i">
             <th>{{ term.term }}</th>
-            <td>{{ term.note }}</td>
+            <td><em>{{ term.note }}</em></td>
             <td>{{ term.description }}</td>
           </tr>
         </tbody>
