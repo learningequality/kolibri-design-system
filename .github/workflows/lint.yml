@@ -3,21 +3,37 @@ name: Lint
 on: [push, pull_request]
 
 jobs:
-  build:
+  lint:
     runs-on: ubuntu-latest
 
     steps:
+      - uses: actions/checkout@v2
 
-    - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 10.x
 
-    - uses: actions/setup-node@v1
-      with:
-        node-version: 10.x
+      - name: npm load cache
+        uses: actions/cache@v2
+        with:
+          path: '**/node_modules'
+          key: ${{ runner.os }}-actions-npm-${{ github.sha }}
+          restore-keys: |
+            ${{ runner.os }}-actions-npm-
 
-    - uses: bahmutov/npm-install@v1
+      - run: npm install
 
-    - name: Pre-generate docs
-      run: yarn run pregenerate
+      - name: Pre-generate docs
+        run: yarn run pregenerate
 
-    - name: Run linter
-      run: yarn run lint
+      - name: Run linter
+        run: yarn run lint
+
+      - name: Check for modified files
+        run: |
+          if [[ `git status --porcelain --untracked-files=no` ]]; then
+            echo "Tracked files were modified by 'yarn run pregenerate'"
+            exit 1
+          else
+            exit 0
+          fi
