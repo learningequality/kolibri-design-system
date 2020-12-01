@@ -3,7 +3,7 @@ name: Lint
 on: [push, pull_request]
 
 jobs:
-  build:
+  lint:
     runs-on: ubuntu-latest
 
     steps:
@@ -13,10 +13,21 @@ jobs:
         with:
           node-version: 10.x
 
-      - uses: bahmutov/npm-install@v1
+      - name: npm load cache
+        uses: actions/cache@v2
+        with:
+          path: '**/node_modules'
+          key: ${{ runner.os }}-actions-npm-${{ github.sha }}
+          restore-keys: |
+            ${{ runner.os }}-actions-npm-
+
+      - run: npm install
 
       - name: Pre-generate docs
         run: yarn run pregenerate
+
+      - name: Run linter
+        run: yarn run lint
 
       - name: Check for modified files
         run: |
@@ -26,6 +37,3 @@ jobs:
           else
             exit 0
           fi
-
-      - name: Run linter
-        run: yarn run lint
