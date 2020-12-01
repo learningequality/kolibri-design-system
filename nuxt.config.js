@@ -42,6 +42,11 @@ export default {
         loader: 'svg-icon-inline-loader',
         exclude: /node_modules/,
       });
+      // used for glossary
+      config.module.rules.push({
+        test: /\.tbx$/,
+        loader: 'xml-loader',
+      });
       config.devtool = 'source-map';
     },
     cssSourceMap: true,

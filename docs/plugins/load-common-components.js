@@ -8,6 +8,7 @@ import DocsPageSection from '~/common/DocsPageSection';
 import DocsPageTemplate from '~/common/DocsPageTemplate';
 import DocsDoNot from '~/common/DocsDoNot';
 import DocsShow from '~/common/DocsShow';
+import DocsFilter from '~/common/DocsFilter';
 
 Vue.component('DocsPageTemplate', DocsPageTemplate);
 Vue.component('DocsPageSection', DocsPageSection);
@@ -16,5 +17,6 @@ Vue.component('DocsAnchorTarget', DocsAnchorTarget);
 Vue.component('DocsExternalLink', DocsExternalLink);
 Vue.component('DocsShow', DocsShow);
 Vue.component('DocsDoNot', DocsDoNot);
+Vue.component('DocsFilter', DocsFilter);
 
 Vue.use(VueSimpleMarkdown);

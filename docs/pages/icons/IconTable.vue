@@ -34,7 +34,6 @@
 
   import IconBlock from './IconBlock';
   import { termList, matches } from '~/common/DocsFilter/utils';
-  import DocsFilter from '~/common/DocsFilter';
   import { KolibriIcons } from '~~/lib/KIcon/iconDefinitions.js';
 
   /**
@@ -86,7 +85,6 @@
   export default {
     components: {
       IconBlock,
-      DocsFilter,
     },
     data() {
       return {
