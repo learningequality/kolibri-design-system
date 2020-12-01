@@ -7,17 +7,16 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - uses: actions/checkout@v2
 
-    - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 10.x
 
-    - uses: actions/setup-node@v1
-      with:
-        node-version: 10.x
+      - uses: bahmutov/npm-install@v1
 
-    - uses: bahmutov/npm-install@v1
+      - name: Pre-generate docs
+        run: yarn run pregenerate
 
-    - name: Pre-generate docs
-      run: yarn run pregenerate
-
-    - name: Run linter
-      run: yarn run lint
+      - name: Run linter
+        run: yarn run lint
