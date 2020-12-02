@@ -64,6 +64,10 @@ export default [
         path: '/principles',
         title: 'Design principles',
       }),
+      new Page({
+        path: '/versions',
+        title: 'Version history',
+      }),
     ],
   }),
   new Section({
