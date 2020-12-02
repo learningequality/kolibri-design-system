@@ -103,6 +103,12 @@
           </slot>
         </div>
 
+        <!-- Placeholder to keep the text height spacing in place even when
+          not showing any errors -->
+        <div v-else class="ui-textbox-feedback-text">
+          &nbsp;
+        </div>
+
         <div v-if="maxlength" class="ui-textbox-counter">
           {{ valueLength + '/' + maxlength }}
         </div>
@@ -433,7 +439,8 @@
         &.is-inline {
           color: $ui-input-label-color; // So the hover styles don't override it
           cursor: text;
-          transform: translateY($ui-input-label-top--inline) scale(1.1);
+          // 1em here is custom to keep text centered
+          transform: translateY(1em) scale(1.1);
         }
 
         &.is-floating {
@@ -490,8 +497,10 @@
     display: flex;
     flex-direction: column-reverse;
     width: 100%;
-    padding: 0;
+    padding: 4px 0 0 0;
     margin: 0;
+    background: #e9e9e9;
+    border-radius: 4px 4px 0 0;
   }
 
   .ui-textbox-icon-wrapper {
@@ -509,7 +518,7 @@
   }
 
   .ui-textbox-label-text {
-    margin-bottom: $ui-input-label-margin-bottom;
+    margin: 0 8px 0;
     font-size: $ui-input-label-font-size;
     line-height: $ui-input-label-line-height;
     color: $ui-input-label-color;
@@ -522,7 +531,7 @@
   .ui-textbox-textarea {
     display: block;
     width: 100%;
-    padding: 0;
+    padding: 0 0 0 8px;
     margin: 0;
     font-size: $ui-input-text-font-size;
     font-weight: normal;
