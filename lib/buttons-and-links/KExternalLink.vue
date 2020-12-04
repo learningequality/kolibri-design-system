@@ -7,6 +7,7 @@
     :download="download"
     :openInNewTab="openInNewTab"
     :target="openInNewTab ? '_blank' : false"
+    rel="noopener noreferrer"
     dir="auto"
     @mouseenter="hovering = true"
     @mouseleave="hovering = false"
