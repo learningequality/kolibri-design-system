@@ -66,6 +66,8 @@ cd design-system
 yarn install
 ```
 
+(Note: if you see a timeout error like `ESOCKETTIMEDOUT`, you can configure yarn with a higher timeout value [as described here](https://github.com/yarnpkg/yarn/issues/5540#issuecomment-374069461).)
+
 Run the development server using
 
 ```bash
