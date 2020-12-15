@@ -9,7 +9,7 @@ How to use the Kolibri Design System
 
 ### Documentation
 
-See **[https://kolibri-design-system.netlify.app](https://kolibri-design-system.netlify.app)** for the latest design system documentation.
+See **[design-system.learningequality.org](https://design-system.learningequality.org)** for the latest design system documentation.
 
 This contains resources for designers and developers who are building Kolibri products using the design system patterns and the shared UI library.
 
