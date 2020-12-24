@@ -59,13 +59,6 @@
         required: false,
       },
       /**
-       * If provided, shows a KIcon after the text
-       */
-      iconAfter: {
-        type: String,
-        required: false,
-      },
-      /**
        * If provided, opens link in new tab
        */
       openInNewTab: {
