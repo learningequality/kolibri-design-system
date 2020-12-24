@@ -12,19 +12,11 @@
     @mouseenter="hovering = true"
     @mouseleave="hovering = false"
   >
-    <slot name="icon">
-      <KIcon
-        v-if="icon"
-        :icon="icon"
-        style="top: 4px;"
-        :color="hovering ? $themeTokens.primaryDark : $themeTokens.primary"
-      />
-    </slot>
     <span class="link-text" :style="spanStyle">{{ text }}</span>
-    <slot name="iconAfter">
+    <slot name="openInNewTab">
       <KIcon
-        v-if="iconAfter"
-        :icon="iconAfter"
+        v-if="openInNewTab"
+        icon="openNewTab"
         style="top: 4px;"
         :color="hovering ? $themeTokens.primaryDark : $themeTokens.primary"
       />
