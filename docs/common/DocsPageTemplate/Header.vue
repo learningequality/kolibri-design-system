@@ -13,7 +13,7 @@
           <span class="visuallyhidden">link to current page</span>
         </a>
       </h1>
-      <GitHubLink style="float: right" />
+      <BranchLink style="float: right" />
     </div>
     <div style="clear: both;"></div>
     <ul v-if="sections.length" class="nav">
@@ -28,12 +28,12 @@
 
 <script>
 
-  import GitHubLink from './GitHubLink.vue';
+  import BranchLink from './BranchLink.vue';
 
   export default {
     name: 'Header',
     components: {
-      GitHubLink,
+      BranchLink,
     },
     props: {
       sections: {

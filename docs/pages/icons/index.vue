@@ -80,6 +80,19 @@
       <p>If the default Material icon library and/or community-contributed libraries are insufficient, use <DocsExternalLink href="https://material.io/design/iconography/system-icons.html" text="Material's icon creation guidelines" /> to create a new one.</p>
     </DocsPageSection>
 
+    <DocsPageSection title="Usage in documentation" anchor="#rst">
+      <p>
+        For use in documentation such as the <DocsExternalLink href="https://kolibri.readthedocs.io/" text="Kolibri User Docs" />, all icons above have substitutions available in <DocsExternalLink href="https://docutils.sourceforge.io/docs/ref/rst/directives.html#directives-for-substitution-definitions" text="reStructuredText replacement syntax" /> below:
+      </p>
+      <textarea v-model="text" class="replacements code" readonly></textarea>
+      <p>
+        Copy and paste it into a file such as <code>rstIconReplacements.txt</code> and then add it to your <code>conf.py</code> file <DocsExternalLink href="https://github.com/learningequality/kolibri-docs/blob/d582797e0d62d1482501954b6d0680031bce18cd/docs/conf.py#L174-L181" text="like this" />.
+      </p>
+      <p>
+        Then in <code>*.rst</code> files you can use, for example, <code>|video|</code> to insert the <KIcon icon="video" /> video icon. Note that these icons will <em>not</em> have screen-reader-accessible labels associated with them, so they should always be accompanied by descriptive text.
+      </p>
+    </DocsPageSection>
+
   </DocsPageTemplate>
 
 </template>
@@ -87,11 +100,17 @@
 
 <script>
 
+  import text from '../../rstIconReplacements.txt';
   import IconTable from './IconTable';
 
   export default {
     components: {
       IconTable,
+    },
+    computed: {
+      text() {
+        return text;
+      },
     },
   };
 
@@ -103,6 +122,16 @@
   // hack to simulate bad behavior
   /deep/ .wrong-colors svg {
     fill: blue !important;
+  }
+
+  .replacements {
+    display: block;
+    width: 100%;
+    height: 100px;
+    font-size: smaller;
+    white-space: pre;
+    border: 1px solid #dedede;
+    border-radius: 4px;
   }
 
 </style>

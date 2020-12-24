@@ -9,7 +9,7 @@ How to use the Kolibri Design System
 
 ### Documentation
 
-See **[https://kolibri-design-system.netlify.app](https://kolibri-design-system.netlify.app)** for the latest design system documentation.
+See **[design-system.learningequality.org](https://design-system.learningequality.org)** for the latest design system documentation.
 
 This contains resources for designers and developers who are building Kolibri products using the design system patterns and the shared UI library.
 
@@ -29,7 +29,7 @@ You can also specify a particular version of the design system. For example, thi
 yarn add https://github.com/learningequality/kolibri-design-system#v1.0.1
 ```
 
- Importable components and utilities are available under the `lib` path, for example:
+Importable components and utilities are available under the `lib` path, for example:
 
 ```javascript
 import KButton from 'kolibri-design-system/lib/KButton';
@@ -65,6 +65,8 @@ Install the dependencies using `yarn`:
 cd design-system
 yarn install
 ```
+
+(Note: if you see a timeout error like `ESOCKETTIMEDOUT`, you can configure yarn with a higher timeout value [as described here](https://github.com/yarnpkg/yarn/issues/5540#issuecomment-374069461).)
 
 Run the development server using
 
@@ -188,7 +190,7 @@ Icons are drawn from https://github.com/material-icons/material-icons and then c
 yarn run precompile-svgs
 ```
 
-We also output a set of reStructuredText replacement strings into the file ``docs/rstIconReplacements.txt`` which can be used in
+We also output a set of reStructuredText replacement strings into the file `docs/rstIconReplacements.txt` which can be used in
 user docs based on Sphinx. To update this file, run
 
 ```bash
