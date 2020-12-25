@@ -59,7 +59,7 @@
         required: false,
       },
       /**
-       * If provided, opens link in new tab
+       * If provided, opens link in new tab and displays a "pop out" icon
        */
       openInNewTab: {
         type: Boolean,
