@@ -72,15 +72,13 @@
         let styles = {};
         let leftLtr = this.isRtl ? 'marginRight' : 'marginLeft';
         let rightLtr = this.isRtl ? 'marginLeft' : 'marginRight';
-
-          if (this.openInNewTab) {
-            if(this.isRtl){
-              styles[leftLtr] = '8px';
-              } else {
-              styles[rightLtr] = '8px';
-            }
+        if (this.openInNewTab) {
+          if (this.isRtl) {
+            styles[leftLtr] = '8px';
+          } else {
+            styles[rightLtr] = '8px';
           }
-
+        }
         return { ...styles };
       },
     },
