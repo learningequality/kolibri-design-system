@@ -17,7 +17,7 @@
       <KIcon
         v-if="openInNewTab"
         icon="openNewTab"
-        style="top: 4px;"
+        :style="iconStyle"
         :color="hovering ? $themeTokens.primaryDark : $themeTokens.primary"
       />
     </slot>
@@ -72,7 +72,6 @@
         let styles = {};
         if (this.openInNewTab) {
           if (this.isRtl) {
-            // If RTL-language, but English link, displays correct margins
             styles['marginRight'] = '8px';
             if (this.text !== this.href) {
               styles['marginRight'] = '0px';
@@ -84,7 +83,20 @@
         }
         return { ...styles };
       },
+      /**
+       * Changes icon direction according to language of text of URL
+       */
+      iconStyle() {
+        let styles = { 'top': '4px' };
+        if (this.text === this.href) {
+          styles['transform'] = 'scaleX(1)';
+        }
+        return { ...styles };
+      }
     },
+    methods: {
+
+    }
   };
 
 </script>
