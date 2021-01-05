@@ -87,16 +87,14 @@
        * Changes icon direction according to language of text of URL
        */
       iconStyle() {
-        let styles = { 'top': '4px' };
+        let styles = { top: '4px' };
         if (this.text === this.href) {
           styles['transform'] = 'scaleX(1)';
         }
         return { ...styles };
-      }
+      },
     },
-    methods: {
-
-    }
+    methods: {},
   };
 
 </script>
