@@ -70,13 +70,16 @@
        */
       spanStyle() {
         let styles = {};
-        let leftLtr = this.isRtl ? 'marginRight' : 'marginLeft';
-        let rightLtr = this.isRtl ? 'marginLeft' : 'marginRight';
         if (this.openInNewTab) {
           if (this.isRtl) {
-            styles[leftLtr] = '8px';
+            // If RTL-language, but English link, displays correct margins
+            styles['marginRight'] = '8px';
+            if (this.text !== this.href) {
+              styles['marginRight'] = '0px';
+              styles['marginLeft'] = '8px';
+            }
           } else {
-            styles[rightLtr] = '8px';
+            styles['marginLeft'] = '8px';
           }
         }
         return { ...styles };
