@@ -79,7 +79,7 @@
               styles['marginLeft'] = '8px';
             }
           } else {
-            styles['marginLeft'] = '8px';
+            styles['marginRight'] = '8px';
           }
         }
         return { ...styles };
