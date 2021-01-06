@@ -17,7 +17,7 @@
       <KIcon
         v-if="openInNewTab"
         icon="openNewTab"
-        :style="iconStyle"
+        style="top: 4px;"
         :color="hovering ? $themeTokens.primaryDark : $themeTokens.primary"
       />
     </slot>
@@ -80,16 +80,6 @@
           } else {
             styles['marginRight'] = '8px';
           }
-        }
-        return { ...styles };
-      },
-      /**
-       * Changes icon direction according to language of text of URL
-       */
-      iconStyle() {
-        let styles = { top: '4px' };
-        if (this.text === this.href) {
-          styles['transform'] = 'scaleX(1)';
         }
         return { ...styles };
       },
