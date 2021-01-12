@@ -75,9 +75,10 @@
           ...this.sizeStyles,
           // Circle
           borderRadius: '50%',
-          // Remove mins & padding
+          // Added minWidth to prevent squished/oval effect
+          minWidth: '32px',
+          // Remove minHeight & padding
           minHeight: '0px',
-          minWidth: '0px',
           padding: '0',
           ':hover': hover,
         };
