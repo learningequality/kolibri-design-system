@@ -12,7 +12,23 @@
     @mouseenter="hovering = true"
     @mouseleave="hovering = false"
   >
+    <slot name="icon">
+      <KIcon
+        v-if="icon"
+        :icon="icon"
+        style="top: 4px;"
+        :color="hovering ? $themeTokens.primaryDark : $themeTokens.primary"
+      />
+    </slot>
     <span class="link-text" :style="spanStyle">{{ text }}</span>
+    <slot name="iconAfter">
+      <KIcon
+        v-if="iconAfter"
+        :icon="iconAfter"
+        style="top: 4px;"
+        :color="hovering ? $themeTokens.primaryDark : $themeTokens.primary"
+      />
+    </slot>
     <slot name="openInNewTab">
       <KIcon
         v-if="openInNewTab"
@@ -58,6 +74,20 @@
         type: Boolean,
         default: false,
       },
+      /**
+       * If provided, shows a KIcon in front of the text
+       */
+      icon: {
+        type: String,
+        required: false,
+      },
+      /**
+       * If provided, shows a KIcon after the text
+       */
+      iconAfter: {
+        type: String,
+        required: false,
+      },
     },
     data() {
       return {
@@ -66,25 +96,34 @@
     },
     computed: {
       /**
-       * If link opens in new tab, add 8px margin between the icon and the text
+       * If link opens in new tab or if icon is provided, add 8px margin between the icon and the text
        */
       spanStyle() {
         let styles = {};
-        if (this.openInNewTab) {
+        if (this.openInNewTab || this.icon) {
           if (this.isRtl) {
+            // If RTL-language, but English link, displays correct margins
             styles['marginRight'] = '8px';
+            // Checks to see if link for new tab is in same dir as page lang
             if (this.text !== this.href) {
               styles['marginRight'] = '0px';
               styles['marginLeft'] = '8px';
             }
           } else {
-            styles['marginRight'] = '8px';
+            if (this.text === this.href) {
+              styles['marginRight'] = '8px';
+            } else {
+              styles['marginLeft'] = '8px';
+            }
           }
+        }
+
+        if (this.iconAfter) {
+          styles['marginRight'] = '8px';
         }
         return { ...styles };
       },
     },
-    methods: {},
   };
 
 </script>
