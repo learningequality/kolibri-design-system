@@ -2,27 +2,19 @@
 
   <!-- no extra whitespace inside link -->
   <router-link :class="buttonClasses" :to="to" dir="auto">
-    <KLabeledIcon :maxWidth="maxWidth" @mouseenter="hovering = true" @mouseleave="hovering = false">
-      <KIcon
-        v-if="icon"
-        slot="icon"
-        :icon="icon"
-        style="top: 0px; height: 24px; width: 24px;"
-        :color="hovering ? $themeTokens.primaryDark : $themeTokens.primary"
-      />
+    <KLabeledIcon
+      :maxWidth="maxWidth"
+      :icon="icon"
+      :iconAfter="iconAfter"
+      @mouseenter="hovering = true"
+      @mouseleave="hovering = false"
+    >
 
       <!-- Keep on the same line to avoid empty underlined spacing -->
       <slot name="text" :text="text">
         <span class="link-text">{{ text }}</span>
       </slot>
 
-      <KIcon
-        v-if="iconAfter"
-        slot="iconAfter"
-        :icon="iconAfter"
-        style="top: 0px; height: 24px; width: 24px;"
-        :color="hovering ? $themeTokens.primaryDark : $themeTokens.primary"
-      />
     </KLabeledIcon>
   </router-link>
 
