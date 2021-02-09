@@ -83,16 +83,11 @@
       spanStyle() {
         let styles = {};
         if (this.icon) {
-          if(this.isRtl) {
-            styles['marginRight'] = '8px';
-          } else {
-            styles['marginLeft'] = '8px';
-          }
+          styles['marginLeft'] = '8px';
         }
         if (this.iconAfter) {
           styles['marginRight'] = '8px';
         }
-        console.log('*********',styles)
         return { ...styles};
       },
     },
