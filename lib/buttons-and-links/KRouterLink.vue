@@ -2,27 +2,31 @@
 
   <!-- no extra whitespace inside link -->
   <router-link :class="buttonClasses" :to="to" dir="auto">
-    <KLabeledIcon :maxWidth="maxWidth" @mouseenter="hovering = true" @mouseleave="hovering = false">
-      <KIcon
-        v-if="icon"
-        slot="icon"
-        :icon="icon"
-        style="top: 0px; height: 24px; width: 24px;"
-        :color="hovering ? $themeTokens.primaryDark : $themeTokens.primary"
-      />
-
-      <!-- Keep on the same line to avoid empty underlined spacing -->
-      <slot name="text" :text="text">
-        <span class="link-text">{{ text }}</span>
+    <KLabeledIcon
+      :maxWidth="maxWidth"
+      @mouseenter="hovering = true"
+      @mouseleave="hovering = false"
+    >
+      <slot name="icon">
+        <KIcon
+          v-if="icon"
+          :icon="icon"
+          style="top: 4px;"
+          :color="hovering ? $themeTokens.primaryDark : $themeTokens.primary"
+        />
       </slot>
 
-      <KIcon
-        v-if="iconAfter"
-        slot="iconAfter"
-        :icon="iconAfter"
-        style="top: 0px; height: 24px; width: 24px;"
-        :color="hovering ? $themeTokens.primaryDark : $themeTokens.primary"
-      />
+      <span class="link-text" :style="spanStyle">{{ text }}</span>
+
+      <slot name="iconAfter">
+        <KIcon
+          v-if="iconAfter"
+          :icon="iconAfter"
+          style="top: 4px;"
+          :color="hovering ? $themeTokens.primaryDark : $themeTokens.primary"
+        />
+      </slot>
+
     </KLabeledIcon>
   </router-link>
 
@@ -74,6 +78,23 @@
       return {
         hovering: false,
       };
+    },
+    computed: {
+      spanStyle() {
+        let styles = {};
+        if (this.icon) {
+          if(this.isRtl) {
+            styles['marginRight'] = '8px';
+          } else {
+            styles['marginLeft'] = '8px';
+          }
+        }
+        if (this.iconAfter) {
+          styles['marginRight'] = '8px';
+        }
+        console.log('*********',styles)
+        return { ...styles};
+      },
     },
   };
 
