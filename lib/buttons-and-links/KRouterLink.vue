@@ -7,25 +7,24 @@
       @mouseenter="hovering = true"
       @mouseleave="hovering = false"
     >
-      <slot name="icon">
-        <KIcon
-          v-if="icon"
-          :icon="icon"
-          style="top: 4px;"
-          :color="hovering ? $themeTokens.primaryDark : $themeTokens.primary"
-        />
-      </slot>
+      <KIcon
+        v-if="icon"
+        slot="icon"
+        :icon="icon"
+        style="top: 2px;"
+        :color="hovering ? $themeTokens.primaryDark : $themeTokens.primary"
+      />
 
-      <span class="link-text" :style="spanStyle">{{ text }}</span>
+      <span class="link-text">{{ text }}</span>
 
-      <slot name="iconAfter">
-        <KIcon
-          v-if="iconAfter"
-          :icon="iconAfter"
-          style="top: 4px;"
-          :color="hovering ? $themeTokens.primaryDark : $themeTokens.primary"
-        />
-      </slot>
+      <KIcon
+        v-if="iconAfter"
+        slot="iconAfter"
+        :icon="iconAfter"
+        style="top: 2px;"
+        :color="hovering ? $themeTokens.primaryDark : $themeTokens.primary"
+      />
+
 
     </KLabeledIcon>
   </router-link>
@@ -78,18 +77,6 @@
       return {
         hovering: false,
       };
-    },
-    computed: {
-      spanStyle() {
-        let styles = {};
-        if (this.icon) {
-          styles['marginLeft'] = '8px';
-        }
-        if (this.iconAfter) {
-          styles['marginRight'] = '8px';
-        }
-        return { ...styles };
-      },
     },
   };
 
