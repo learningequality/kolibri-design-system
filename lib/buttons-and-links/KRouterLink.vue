@@ -1,7 +1,7 @@
 <template>
 
   <!-- no extra whitespace inside link -->
-  <router-link :class="buttonClasses" :to="to" dir="auto">
+  <router-link :class="buttonClasses" :to="to" replace dir="auto">
     <KLabeledIcon :maxWidth="maxWidth" @mouseenter="hovering = true" @mouseleave="hovering = false">
       <KIcon
         v-if="icon"
