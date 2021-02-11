@@ -150,7 +150,7 @@ export default [
       }),
       new Page({
         path: '/pageheader',
-        title: 'Page header',
+        title: 'Page headers',
         disabled: false,
       }),
       new Page({
@@ -165,7 +165,7 @@ export default [
       }),
       new Page({
         path: '/toolbar',
-        title: 'Toolbar',
+        title: 'Toolbars',
         disabled: true,
       }),
     ],
