@@ -15,18 +15,24 @@
       </p>
       <ol>
         <li>
-          <strong>Navigation.</strong> This should lead the user to the parent page in the hierarchy.
+          <strong>Navigation.</strong> This should lead the user to the parent page in the hierarchy. Do not use this on pages that have <DocsInternalLink href="/appbars" text="back arrow bars" />.
         </li>
         <li>
           <strong>Page title.</strong> Keep the title limited to a few words at maximum, and make it specific to the content within the current page. Icons can be also be placed inline of page titles.
         </li>
         <li>
-          <strong>Buttons.</strong> Use up to two buttons in the page header. Primary buttons usually begin a flow to add new things to the page. Secondary buttons usually open menus and begin other flows that affect the whole page. Follow button guidelines.
+          <strong>Buttons.</strong> Use up to two buttons in the page header. Primary buttons usually begin a flow to add new things to the page. Secondary buttons usually open menus and begin other flows that affect the whole page. Follow <DocsInternalLink href="/buttons" text="button guidelines" />.
         </li>
         <li>
           <strong>Description.</strong> This should be a one-line summary of what the user can accomplish on the current page.
         </li>
       </ol>
+
+      <h3>More on page titles</h3>
+      <p>
+        Page titles should correspond to <DocsInternalLink href="/appbars/#titles" text="app bar titles" />. If there are tabs in the app bar, the page title should be consistent with the current tab, although a word or two can be added on to the page title for clarity.
+      </p>
+      <img src="./page-header2.png">
     </DocsPageSection>
 
     <DocsPageSection title="Page titles and the browser" anchor="#browser">
