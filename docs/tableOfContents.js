@@ -149,6 +149,11 @@ export default [
         disabled: true,
       }),
       new Page({
+        path: '/pageheader',
+        title: 'Page headers',
+        disabled: false,
+      }),
+      new Page({
         path: '/tables',
         title: 'Tables',
         disabled: true,
@@ -160,7 +165,7 @@ export default [
       }),
       new Page({
         path: '/toolbar',
-        title: 'Toolbar',
+        title: 'Toolbars',
         disabled: true,
       }),
     ],
