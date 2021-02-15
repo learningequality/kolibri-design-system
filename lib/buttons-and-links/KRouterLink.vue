@@ -64,7 +64,7 @@
        */
       replace: {
         type: Boolean,
-        required: false,
+        default: false,
       },
       /**
        * If provided, shows a KIcon after the text
