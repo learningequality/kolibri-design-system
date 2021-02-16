@@ -1,0 +1,28 @@
+<template>
+
+  <DocsPageTemplate apiDocs>
+
+    <DocsPageSection title="Overview" anchor="#overview">
+      <p>The <code>KButtonGroup</code> component is used to provide consistent, 8px spacing for buttons. For example:</p>
+      <DocsShow>
+        <KButtonGroup>
+          <KButton
+            text="Button 1"
+          />
+          <KButton
+            text="Button 2"
+          />
+          <KButton
+            text="Primary button"
+            primary
+          />
+        </KButtonGroup>
+      </DocsShow>
+      <p>
+        It is most often used with the <code>KButton</code>, <code>KRouterLink</code> and <code>KExternalLink</code> components.
+      </p>
+    </DocsPageSection>
+
+  </DocsPageTemplate>
+
+</template>

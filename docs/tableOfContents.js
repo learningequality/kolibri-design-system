@@ -386,6 +386,13 @@ export default [
         title: 'KRouterLink',
         isCode: true,
         disabled: true,
+        keywords: buttonRelatedItems,
+      }),
+      new Page({
+        path: '/KButtonGroup',
+        title: 'KButtonGroup',
+        isCode: true,
+        keywords: ['button'],
       }),
       new Page({
         path: '/KContentRenderer',

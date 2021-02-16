@@ -1,6 +1,7 @@
 <template>
 
   <div class="button-group">
+    <!-- @slot Slot to wrap buttons and provide consistent spacing -->
     <slot></slot>
   </div>
 
