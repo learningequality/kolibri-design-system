@@ -41,17 +41,21 @@ class Page {
     title, // used in side nav, page header, and document title
     isCode = false, // if true, format using <code> tag
     disabled = false, // placeholder - don't link
+    keywords = [], // additional terms to match
   } = {}) {
     this.path = path;
     this.title = title;
     this.isCode = isCode;
     this.disabled = disabled;
+    this.keywords = keywords;
   }
 }
 
 /***********************************************/
 /*   Table of contents                         */
 /***********************************************/
+
+const buttonRelatedItems = ['button', 'link'];
 
 export default [
   new Section({
@@ -286,6 +290,7 @@ export default [
         path: '/KCheckbox',
         title: 'KCheckbox',
         isCode: true,
+        keywords: ['button'],
       }),
       new Page({
         path: '/KCircularLoader',
@@ -360,18 +365,21 @@ export default [
         path: '/KSwitch',
         title: 'KSwitch',
         isCode: true,
+        keywords: ['button'],
       }),
       new Page({
         path: '/KButton',
         title: 'KButton',
         isCode: true,
         disabled: true,
+        keywords: buttonRelatedItems,
       }),
       new Page({
         path: '/KExternalLink',
         title: 'KExternalLink',
         isCode: true,
         disabled: true,
+        keywords: buttonRelatedItems,
       }),
       new Page({
         path: '/KRouterLink',

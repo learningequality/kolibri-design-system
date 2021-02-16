@@ -53,9 +53,11 @@
           if (matches(this.terms, section.title)) {
             toc.push(section);
           }
-          // otherwise, check for matching pages
+          // otherwise, check for matching pages by title and keywords
           else {
-            const matchingPages = section.pages.filter(page => matches(this.terms, page.title));
+            const matchingPages = section.pages.filter(page =>
+              matches(this.terms, page.title + page.keywords.join(' '))
+            );
             if (matchingPages.length) {
               toc.push(section.clone({ pages: matchingPages }));
             }
