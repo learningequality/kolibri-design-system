@@ -43,6 +43,7 @@
       /* color: hex or rgb[a] color */
       color: {
         type: String,
+        default: null,
       },
       disabled: {
         type: Boolean,
@@ -58,6 +59,7 @@
       },
       ariaLabel: {
         type: String,
+        default: null,
       },
       tooltip: {
         type: String,

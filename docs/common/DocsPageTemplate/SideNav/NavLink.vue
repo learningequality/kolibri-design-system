@@ -26,6 +26,7 @@
     props: {
       page: {
         type: Object,
+        required: true,
         validator(page) {
           if (!page.path || !page.title) {
             return false;

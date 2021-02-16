@@ -47,6 +47,7 @@
        */
       value: {
         type: [String, Number],
+        default: null,
       },
       /**
        * Label

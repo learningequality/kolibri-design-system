@@ -89,7 +89,6 @@
        */
       position: {
         type: String,
-        required: false,
         default: 'bottom right',
         validator(val) {
           return [

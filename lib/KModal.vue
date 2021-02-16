@@ -150,7 +150,6 @@
        */
       size: {
         type: String,
-        required: false,
         default: 'medium',
         validator(val) {
           return ['small', 'medium', 'large'].includes(val);

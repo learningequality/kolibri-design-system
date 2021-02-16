@@ -103,7 +103,10 @@
         type: Number,
         default: 32,
       },
-      stroke: Number,
+      stroke: {
+        type: Number,
+        default: null,
+      },
     },
 
     computed: {
