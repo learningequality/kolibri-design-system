@@ -57,28 +57,27 @@
        */
       icon: {
         type: String,
-        required: false,
+        default: null,
       },
       /**
-       * If provided, calls window.history.replaceState() so navigation will not leave history record
+       * Use window.history.replaceState() so navigation will not leave history record
        */
       replace: {
         type: Boolean,
-        required: false,
+        default: false,
       },
       /**
        * If provided, shows a KIcon after the text
        */
       iconAfter: {
         type: String,
-        required: false,
+        default: null,
       },
       /**
        * Set a max width for content
        */
       maxWidth: {
         type: String,
-        required: false,
         default: '100%',
       },
     },

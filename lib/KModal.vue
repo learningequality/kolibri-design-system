@@ -115,18 +115,18 @@
         required: true,
       },
       /**
-       * The text of the submit button
+       * If provided, text of the submit button
        */
       submitText: {
         type: String,
-        required: false,
+        default: null,
       },
       /**
-       * The text of the cancel button
+       * If provided, text of the cancel button
        */
       cancelText: {
         type: String,
-        required: false,
+        default: null,
       },
       /**
        * Disable the submit button

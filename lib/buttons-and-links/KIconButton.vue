@@ -35,7 +35,6 @@
       appearance: {
         type: String,
         default: 'flat-button',
-        required: false,
       },
       icon: {
         type: String,
@@ -52,7 +51,6 @@
       buttonType: {
         type: String,
         default: 'button',
-        required: false,
       },
       size: {
         type: String,
@@ -63,7 +61,6 @@
       },
       tooltip: {
         type: String,
-        required: false,
         default: null,
       },
     },

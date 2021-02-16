@@ -82,7 +82,7 @@
        */
       label: {
         type: String,
-        required: false,
+        default: null,
       },
       /**
        * Whether or not to show the label

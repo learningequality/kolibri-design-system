@@ -74,7 +74,7 @@
        */
       invalidText: {
         type: String,
-        required: false,
+        default: null,
       },
       /**
        * Show the `invalidText` even if the user has not focused or change the input.
@@ -83,7 +83,6 @@
       showInvalidText: {
         type: Boolean,
         default: false,
-        required: false,
       },
       /**
        * Whether or not to autofocus
@@ -97,21 +96,21 @@
        */
       maxlength: {
         type: Number,
-        required: false,
+        default: null,
       },
       /**
        * HTML5 autocomplete attribute (`off`, `on`, `name`, `username`, `current-password`, etc)
        */
       autocomplete: {
         type: String,
-        required: false,
+        default: null,
       },
       /**
        * HTML5 autocapitalize attribute. Used for touch-input enabled UI (`off`, `on`, `words`, etc)
        */
       autocapitalize: {
         type: String,
-        required: false,
+        default: null,
       },
       /**
        * HTML5 type of input (text, password, number, etc.)
@@ -125,14 +124,14 @@
        */
       min: {
         type: Number,
-        required: false,
+        default: null,
       },
       /**
        * Maximum value, used when type is 'number'
        */
       max: {
         type: Number,
-        required: false,
+        default: null,
       },
       /**
        * Display as text area.

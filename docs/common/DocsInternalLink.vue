@@ -29,7 +29,7 @@
       },
       text: {
         type: String,
-        required: false,
+        default: null,
       },
       code: {
         type: Boolean,

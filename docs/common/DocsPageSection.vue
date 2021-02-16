@@ -20,7 +20,7 @@
     props: {
       title: {
         type: String,
-        required: false,
+        default: null,
       },
       anchor: {
         type: String,
