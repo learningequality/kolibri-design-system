@@ -13,9 +13,9 @@
   >
     <!-- icon may come by slot or by prop -->
     <slot name="icon"></slot>
-    <KIcon 
-      v-if="icon" 
-      :icon="icon" 
+    <KIcon
+      v-if="icon"
+      :icon="icon"
       :color="iconColor"
       class="prop-icon"
     />
@@ -28,8 +28,8 @@
 
     <!-- iconAfter may come by slot or by prop -->
     <slot name="iconAfter"></slot>
-    <KIcon 
-      v-if="iconAfter" 
+    <KIcon
+      v-if="iconAfter"
       :icon="iconAfter"
       :color="iconColor"
       class="prop-icon"
