@@ -20,19 +20,20 @@
       <p>As such, there are three components that all behave similarly, but are used for different purposes:</p>
       <ul>
         <li>
-          <code>KButton</code> is used to create <code>&lt;button&gt;</code> tags with
+          <DocsLibraryLink page="KButton" /> is used to create <code>&lt;button&gt;</code> tags with
           <code>@click</code> event handlers.
         </li>
         <li>
-          <code>KRouterLink</code> is used to create Vue router <code>&lt;router-link&gt;</code>
+          <DocsLibraryLink page="KRouterLink" /> is used to create Vue router <code>&lt;router-link&gt;</code>
           components with <code>:to</code> properties. These compile into <code>&lt;a&gt;</code>
           tags.
         </li>
         <li>
-          <code>KExternalLink</code> is used to create standard <code>&lt;a&gt;</code> tags with an
+          <DocsLibraryLink page="KExternalLink" /> is used to create standard <code>&lt;a&gt;</code> tags with an
           <code>href</code> attribute.
         </li>
       </ul>
+      <p>We also provide a <DocsLibraryLink page="KButtonGroup" /> wrapper component to set standardized spacing between groups of buttons.</p>
     </DocsPageSection>
 
     <DocsPageSection title="Visual styles" anchor="#visualstyles">
