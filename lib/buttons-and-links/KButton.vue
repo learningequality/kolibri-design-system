@@ -23,7 +23,7 @@
     <slot v-if="$slots.default"></slot>
 
     <template v-else>
-      <span class="link-text" :style="spanStyle">{{ text }}</span>
+      <span class="link-text" :style="textStyle">{{ text }}</span>
     </template>
 
     <!-- iconAfter may come by slot or by prop -->
@@ -108,7 +108,17 @@
     },
     computed: {
       iconColor() {
-        return this.primary ? this.$themeTokens.primaryDark : this.$themeTokens.primary;
+        if (this.appearance === 'basic-link') {
+          return this.$themeTokens.primary;
+        }
+
+        if (this.primary) {
+          return this.appearance === 'raised-button'
+            ? this.$themeTokens.textInverted
+            : this.$themeTokens.primary;
+        } else {
+          return this.$themeTokens.text;
+        }
       },
       htmlTag() {
         // Necessary to allow basic links to be rendered as 'inline' instead of
@@ -126,7 +136,7 @@
         }
         return {};
       },
-      spanStyle() {
+      textStyle() {
         let styles = {};
         if (this.icon) {
           this.isRtl ? (styles['marginRight'] = '8px') : (styles['marginLeft'] = '8px');
