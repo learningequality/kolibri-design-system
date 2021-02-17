@@ -3,7 +3,12 @@
   <DocsPageTemplate apiDocs>
 
     <DocsPageSection title="Overview" anchor="#overview">
-      <p>The <code>KButtonGroup</code> component is used to provide consistent, 8px spacing for buttons. For example:</p>
+      <p>
+        For an overview of buttons and links in Kolibri, see the <DocsInternalLink text="Buttons and links" href="/buttons" /> page.
+      </p>
+      <p>
+        The <code>KButtonGroup</code> component is used to provide consistent, 8px spacing for buttons. For example:
+      </p>
       <DocsShow>
         <KButtonGroup>
           <KButton

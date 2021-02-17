@@ -371,7 +371,6 @@ export default [
         path: '/KButton',
         title: 'KButton',
         isCode: true,
-        disabled: true,
         keywords: buttonRelatedItems,
       }),
       new Page({
