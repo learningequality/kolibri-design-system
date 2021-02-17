@@ -145,16 +145,42 @@
 
     <DocsPageSection title="Dropdowns" anchor="#dropdowns">
       <p>
-        There are variations of buttons which can open a dropdown menu:
+        Buttons can also have drop-down menus. Currently this is implemented using the poorly-named <code>KDropdownMenu</code> component, but this is subject to change.
       </p>
       <!-- TODO: implement 3 examples: primary button, primary flat button, and secondary icon button that function as dropdowns. See Google doc for example -->
       <DocsShow>
-        <KDropdownMenu style="margin-right: 8px;" text="Primary" :primary="true" :options="['Primary', 'Dropdown']" appearance="raised-button" />
-        <KDropdownMenu style="margin-right: 8px;" text="Secondary" :primary="false" :options="['Secondary', 'Dropdown']" appearance="raised-button" />
-        <KDropdownMenu text="Icon dropdown" :primary="false" :options="['Icon button', 'Flat button', 'Dropdown']" appearance="raised-button">
-          <KIconButton slot="button" tooltip="Dropdown options" icon="optionsHorizontal" appearance="flat-button" :primary="false" />
+        <KDropdownMenu
+          style="margin-right: 16px;"
+          text="Primary"
+          :primary="true"
+          :options="['Option 1', 'Option 2']"
+          appearance="raised-button"
+        />
+        <KDropdownMenu
+          style="margin-right: 16px;"
+          text="Secondary"
+          :primary="false"
+          :options="['Option 1', 'Option 2']"
+          appearance="raised-button"
+        />
+        <KDropdownMenu
+          text="Icon dropdown"
+          :primary="false"
+          :options="['Option 1', 'Option 2']"
+          appearance="raised-button"
+        >
+          <KIconButton
+            slot="button"
+            tooltip="Dropdown options"
+            icon="optionsHorizontal"
+            appearance="flat-button"
+            :primary="false"
+          />
         </KDropdownMenu>
       </DocsShow>
+      <p>
+        Caution: <code>KDropdownMenu</code> does not work with the <DocsLibraryLink page="KButtonGroup" /> component.
+      </p>
 
     </DocsPageSection>
 
