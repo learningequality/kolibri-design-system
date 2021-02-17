@@ -377,14 +377,12 @@ export default [
         path: '/KExternalLink',
         title: 'KExternalLink',
         isCode: true,
-        disabled: true,
         keywords: buttonRelatedItems,
       }),
       new Page({
         path: '/KRouterLink',
         title: 'KRouterLink',
         isCode: true,
-        disabled: true,
         keywords: buttonRelatedItems,
       }),
       new Page({
