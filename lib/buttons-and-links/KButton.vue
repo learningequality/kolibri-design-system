@@ -13,9 +13,9 @@
   >
     <!-- icon may come by slot or by prop -->
     <slot name="icon"></slot>
-    <KIcon 
-      v-if="icon" 
-      :icon="icon" 
+    <KIcon
+      v-if="icon"
+      :icon="icon"
       :color="iconColor"
       class="prop-icon"
     />
@@ -23,13 +23,13 @@
     <slot v-if="$slots.default"></slot>
 
     <template v-else>
-      <span class="link-text">{{ text }}</span>
+      <span class="link-text" :style="textStyle">{{ text }}</span>
     </template>
 
     <!-- iconAfter may come by slot or by prop -->
     <slot name="iconAfter"></slot>
-    <KIcon 
-      v-if="iconAfter" 
+    <KIcon
+      v-if="iconAfter"
       :icon="iconAfter"
       :color="iconColor"
       class="prop-icon"
@@ -108,6 +108,10 @@
     },
     computed: {
       iconColor() {
+        if (this.appearance === 'basic-link') {
+          return this.$themeTokens.primary;
+        }
+
         if (this.primary) {
           return this.appearance === 'raised-button'
             ? this.$themeTokens.textInverted
@@ -131,6 +135,16 @@
           };
         }
         return {};
+      },
+      textStyle() {
+        let styles = {};
+        if (this.icon) {
+          this.isRtl ? (styles['marginRight'] = '8px') : (styles['marginLeft'] = '8px');
+        }
+        if (this.iconAfter) {
+          styles['marginRight'] = '8px';
+        }
+        return { ...styles };
       },
     },
     methods: {
