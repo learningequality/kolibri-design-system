@@ -7,27 +7,30 @@
     :replace="replace"
     dir="auto"
   >
-    <KLabeledIcon :maxWidth="maxWidth" @mouseenter="hovering = true" @mouseleave="hovering = false">
+    <KLabeledIcon
+      :maxWidth="maxWidth"
+      @mouseenter="hovering = true"
+      @mouseleave="hovering = false"
+    >
       <KIcon
         v-if="icon"
         slot="icon"
         :icon="icon"
-        style="top: 0px; height: 24px; width: 24px;"
+        style="top: 2px;"
         :color="hovering ? $themeTokens.primaryDark : $themeTokens.primary"
       />
 
-      <!-- Keep on the same line to avoid empty underlined spacing -->
-      <slot name="text" :text="text">
-        <span class="link-text">{{ text }}</span>
-      </slot>
+      <span class="link-text">{{ text }}</span>
 
       <KIcon
         v-if="iconAfter"
         slot="iconAfter"
         :icon="iconAfter"
-        style="top: 0px; height: 24px; width: 24px;"
+        style="top: 2px;"
         :color="hovering ? $themeTokens.primaryDark : $themeTokens.primary"
       />
+
+
     </KLabeledIcon>
   </router-link>
 
