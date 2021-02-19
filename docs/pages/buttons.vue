@@ -145,7 +145,7 @@
 
     <DocsPageSection title="Dropdowns" anchor="#dropdowns">
       <p>
-        Buttons can also have drop-down menus. Currently this is implemented using the poorly-named <code>KDropdownMenu</code> component, but this is subject to change.
+        Buttons can also have drop-down menus. Currently this is implemented using the poorly-named <code>KDropdownMenu</code> component, but this is <DocsGithubLink text="subject to change" issue="164" />.
       </p>
       <!-- TODO: implement 3 examples: primary button, primary flat button, and secondary icon button that function as dropdowns. See Google doc for example -->
       <DocsShow>
