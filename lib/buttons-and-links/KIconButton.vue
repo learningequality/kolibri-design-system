@@ -35,7 +35,6 @@
       appearance: {
         type: String,
         default: 'flat-button',
-        required: false,
       },
       icon: {
         type: String,
@@ -44,6 +43,7 @@
       /* color: hex or rgb[a] color */
       color: {
         type: String,
+        default: null,
       },
       disabled: {
         type: Boolean,
@@ -52,7 +52,6 @@
       buttonType: {
         type: String,
         default: 'button',
-        required: false,
       },
       size: {
         type: String,
@@ -60,10 +59,10 @@
       },
       ariaLabel: {
         type: String,
+        default: null,
       },
       tooltip: {
         type: String,
-        required: false,
         default: null,
       },
     },

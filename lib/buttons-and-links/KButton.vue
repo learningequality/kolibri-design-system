@@ -88,7 +88,6 @@
        */
       hasDropdown: {
         type: Boolean,
-        required: false,
         default: false,
       },
       /**
@@ -96,14 +95,14 @@
        */
       icon: {
         type: String,
-        required: false,
+        default: null,
       },
       /**
        * If provided, appends an KIcon to the text in the button.
        */
       iconAfter: {
         type: String,
-        required: false,
+        default: null,
       },
     },
     computed: {

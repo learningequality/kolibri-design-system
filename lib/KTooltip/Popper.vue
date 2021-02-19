@@ -150,10 +150,22 @@
         type: Boolean,
         default: false,
       },
-      content: String,
-      enterActiveClass: String,
-      leaveActiveClass: String,
-      boundariesSelector: String,
+      content: {
+        type: String,
+        default: null,
+      },
+      enterActiveClass: {
+        type: String,
+        default: null,
+      },
+      leaveActiveClass: {
+        type: String,
+        default: null,
+      },
+      boundariesSelector: {
+        type: String,
+        default: null,
+      },
       reference: {}, // eslint-disable-line
       forceShow: {
         type: Boolean,

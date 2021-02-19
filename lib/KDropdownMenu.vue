@@ -67,7 +67,6 @@
        */
       appearance: {
         type: String,
-        required: false,
         default: 'raised-button',
         validator,
       },
@@ -76,7 +75,6 @@
        */
       disabled: {
         type: Boolean,
-        required: false,
         default: false,
       },
       /**
@@ -91,7 +89,6 @@
        */
       position: {
         type: String,
-        required: false,
         default: 'bottom right',
         validator(val) {
           return [

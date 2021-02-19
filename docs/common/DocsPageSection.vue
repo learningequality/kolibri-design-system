@@ -20,11 +20,11 @@
     props: {
       title: {
         type: String,
-        required: false,
+        default: null,
       },
       anchor: {
         type: String,
-        required: false,
+        default: null,
         validator(value) {
           return value.match(/#\w+/);
         },

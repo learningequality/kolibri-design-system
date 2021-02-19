@@ -36,7 +36,7 @@
        */
       gutter: {
         type: [Number, String],
-        required: false,
+        default: null,
         validator: validateGutter,
       },
       /**

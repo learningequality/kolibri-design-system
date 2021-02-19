@@ -72,14 +72,14 @@
        */
       label: {
         type: String,
-        required: false,
+        required: true,
       },
       /**
-       * Description for label
+       * If provided, description underneath label
        */
       description: {
         type: String,
-        required: false,
+        default: null,
       },
       /**
        * Value that is currently assigned via v-model

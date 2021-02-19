@@ -41,21 +41,21 @@
        */
       text: {
         type: String,
-        required: false,
+        default: null,
       },
       /**
        * If provided, set the link URL
        */
       href: {
         type: String,
-        required: false,
+        default: null,
       },
       /**
        * If provided, create a link to a PR in the design-system repo
        */
       pull: {
         type: [String, Number],
-        required: false,
+        default: null,
         validator,
       },
       /**
@@ -63,7 +63,7 @@
        */
       issue: {
         type: [String, Number],
-        required: false,
+        default: null,
         validator,
       },
     },

@@ -64,8 +64,8 @@
        * Specifies that the file is meant to be downloaded, not displayed in a separate tab.
        */
       download: {
-        type: String,
-        required: false,
+        type: Boolean,
+        default: false,
       },
       /**
        * If provided, opens link in new tab and displays a "pop out" icon

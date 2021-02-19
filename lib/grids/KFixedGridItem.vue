@@ -29,7 +29,7 @@
        */
       span: {
         type: [Number, String],
-        required: false,
+        default: null,
         validator: validateSpan,
       },
       /**
@@ -45,7 +45,7 @@
     inject: ['gridMetrics'], // provided by the parent grid component
     computed: {
       computedSpan() {
-        if (this.span === undefined) {
+        if (this.span === null) {
           return this.gridMetrics.numCols;
         }
         return parseInt(this.span);

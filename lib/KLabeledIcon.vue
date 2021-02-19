@@ -39,27 +39,26 @@
       // An icon that will be prepended to the label. Uses the same icon names as the `KIcon` component
       icon: {
         type: String,
-        required: false,
+        default: null,
       },
       // An icon that will be appended to the label. Uses the same icon names as the `KIcon` component
       iconAfter: {
         type: String,
-        required: false,
+        default: null,
       },
       // If provided, determines the color of the label and any icons that are provided
       color: {
         type: String,
-        required: false,
+        default: null,
       },
       // If provided, will place this text in the default slot
       label: {
         type: String,
-        required: false,
+        default: null,
       },
       // If provided, will limit label width to this value
       maxWidth: {
         type: String,
-        required: false,
         default: '100%',
       },
     },

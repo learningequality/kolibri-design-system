@@ -42,9 +42,18 @@
   export default {
     name: 'KSwitch',
     props: {
-      name: String,
-      label: String,
-      tabindex: [String, Number],
+      name: {
+        type: String,
+        default: null,
+      },
+      label: {
+        type: String,
+        required: true,
+      },
+      tabindex: {
+        type: [String, Number],
+        default: null,
+      },
       value: {
         type: Boolean,
         required: true,

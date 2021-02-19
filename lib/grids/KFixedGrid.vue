@@ -49,7 +49,7 @@
        */
       gutter: {
         type: [Number, String],
-        required: false,
+        default: null,
         validator: validateGutter,
       },
       /**
@@ -72,7 +72,7 @@
         return parseInt(this.numCols);
       },
       actualGutterSize() {
-        if (this.gutter !== undefined) {
+        if (this.gutter !== null) {
           return this.gutter;
         }
         return this.windowGutter;
@@ -102,7 +102,7 @@
       });
       Object.defineProperty(gridMetrics, 'direction', {
         enumerable: true,
-        get: () => (this.$el ? getComputedStyle(this.$el).direction : undefined),
+        get: () => (this.$el ? getComputedStyle(this.$el).direction : null),
       });
       Object.defineProperty(gridMetrics, 'debug', {
         enumerable: true,
