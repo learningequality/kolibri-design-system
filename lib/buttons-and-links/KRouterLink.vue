@@ -1,7 +1,12 @@
 <template>
 
   <!-- no extra whitespace inside link -->
-  <router-link :class="buttonClasses" :to="to" dir="auto">
+  <router-link
+    :class="buttonClasses"
+    :to="to"
+    :replace="replace"
+    dir="auto"
+  >
     <KLabeledIcon
       :maxWidth="maxWidth"
       @mouseenter="hovering = true"
@@ -56,6 +61,13 @@
       icon: {
         type: String,
         required: false,
+      },
+      /**
+       * If provided, calls window.history.replaceState() so navigation will not leave history record
+       */
+      replace: {
+        type: Boolean,
+        default: false,
       },
       /**
        * If provided, shows a KIcon after the text
