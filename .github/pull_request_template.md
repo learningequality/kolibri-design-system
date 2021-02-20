@@ -11,7 +11,7 @@ assignees: ''
 
 ## Description
 
-*What does this PR do? Briefly describe in 1-2 sentences*
+<!-- What does this PR do? Briefly describe in 1-2 sentences* -->
 
 #### Issue Addressed (if applicable)
 
@@ -19,7 +19,7 @@ Addresses #*PR# HERE*
 
 #### Before/After Screenshots (if applicable)
 
-*Insert images here*
+<!-- Insert images here -->
 
 
 ## Steps to Test
@@ -32,16 +32,16 @@ Addresses #*PR# HERE*
 
 ### At a high level, how did you implement this?
 
-*Briefly describe how this works*
+<!-- Briefly describe how this works -->
 
 ### Does this introduce any tech-debt items?
 
-*List anything that will need to be addressed later*
+<!-- List anything that will need to be addressed later -->
 
 
 ## Checklist
 
-*Delete anything that doesn't apply*
+<!-- Delete anything that doesn't apply -->
 
 - [ ] Is the code clean and well-commented?
 - [ ] Are there tests for this change?
@@ -49,4 +49,4 @@ Addresses #*PR# HERE*
 
 ## Comments
 
-*Any additional notes you'd like to add*
+<!-- Any additional notes you'd like to add -->
