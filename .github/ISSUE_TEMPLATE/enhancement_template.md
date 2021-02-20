@@ -14,7 +14,6 @@ Instructions:
 
 -->
 
-# Enhancement Request
 ## Product
 <!-- Where could this enhancement be useful? (Kolibri, Studio, etc.) -->
 

@@ -14,7 +14,6 @@ Instructions:
 
 -->
 
-# Bug
 ## Product
 <!-- Where did you notice this bug? (Kolibri, Studio, Design System, etc.) -->
 
