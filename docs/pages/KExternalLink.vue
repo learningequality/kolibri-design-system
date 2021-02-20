@@ -4,30 +4,7 @@
 
     <DocsPageSection title="Overview" anchor="#overview">
       <p>
-        For an overview of buttons and links in Kolibri, see the <DocsInternalLink text="Buttons and links" href="/buttons" /> page.
-      </p>
-      <p>
-        The <code>KExternalLink</code> component creates an <code>&lt;a&gt;</code> tag and is appropriate for links that use server-side routing.
-      </p>
-      <p>
-        It can take on a number of visual styles, including buttons:
-      </p>
-      <DocsShow>
-        <p>
-          <KButtonGroup style="margin-bottom: 8px;">
-            <KExternalLink text="Primary" :primary="true" appearance="raised-button" />
-            <KExternalLink text="Secondary" :primary="false" appearance="raised-button" />
-          </KButtonGroup>
-        </p>
-        <p>
-          <KButtonGroup>
-            <KExternalLink text="Primary" :primary="true" appearance="flat-button" />
-            <KExternalLink text="Secondary" :primary="false" appearance="flat-button" />
-          </KButtonGroup>
-        </p>
-      </DocsShow>
-      <p>
-        and also links:
+        Creates an <code>&lt;a&gt;</code> tag and is appropriate for links that use server-side routing.
       </p>
       <DocsShow>
         <p>
@@ -38,15 +15,28 @@
         </p>
       </DocsShow>
       <p>
-        See also:
+        and buttons:
       </p>
+      <DocsShow>
+        <KButtonGroup>
+          <KExternalLink text="Primary" :primary="true" appearance="raised-button" />
+          <KExternalLink text="Primary flat" :primary="true" appearance="flat-button" />
+          <KExternalLink text="Secondary" :primary="false" appearance="raised-button" />
+          <KExternalLink text="Secondary flat" :primary="false" appearance="flat-button" />
+        </KButtonGroup>
+      </DocsShow>
+    </DocsPageSection>
+    <DocsPageSection title="Related" anchor="#related">
       <ul>
-        <li><DocsLibraryLink page="KButton" /></li>
-        <li><DocsLibraryLink page="KButtonGroup" /></li>
-        <li><DocsLibraryLink page="KIconButton" /></li>
-        <li><DocsLibraryLink page="KRouterLink" /></li>
+        <li>
+          <DocsInternalLink text="Buttons and links" href="/buttons" /> has an overview and usage guidance
+        </li>
+        <li><DocsLibraryLink page="KButton" /> and <DocsLibraryLink page="KRouterLink" /> are similar but handle events differently</li>
+        <li>
+          <code>KIconButton</code> has a tooltip instead of a text label
+        </li>
+        <li><DocsLibraryLink page="KButtonGroup" /> is used for button layout</li>
       </ul>
-
     </DocsPageSection>
 
   </DocsPageTemplate>

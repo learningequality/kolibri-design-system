@@ -4,49 +4,39 @@
 
     <DocsPageSection title="Overview" anchor="#overview">
       <p>
-        For an overview of buttons and links in Kolibri, see the <DocsInternalLink text="Buttons and links" href="/buttons" /> page.
-      </p>
-      <p>
-        The <code>KRouterLink</code> component creates a <DocsExternalLink href="https://router.vuejs.org/api/#router-link" text="router-link" code /> element and is appropriate for triggering internal Vue router navigation on-click.
-      </p>
-      <p>
-        It can take on a number of visual styles, including buttons:
+        Creates a <DocsExternalLink href="https://router.vuejs.org/api/" text="Vue client-side router" /> link. It can take on a number of visual styles, including links:
       </p>
       <DocsShow>
         <p>
-          <KButtonGroup style="margin-bottom: 8px;">
-            <KRouterLink text="Primary" :primary="true" appearance="raised-button" />
-            <KRouterLink text="Secondary" :primary="false" appearance="raised-button" />
-          </KButtonGroup>
+          <KRouterLink :to="{}" text="Link" appearance="basic-link" />
         </p>
         <p>
-          <KButtonGroup>
-            <KRouterLink text="Primary" :primary="true" appearance="flat-button" />
-            <KRouterLink text="Secondary" :primary="false" appearance="flat-button" />
-          </KButtonGroup>
+          <KRouterLink :to="{}" text="Link with icon before" appearance="basic-link" icon="person" />
         </p>
       </DocsShow>
       <p>
-        and also links:
+        and buttons:
       </p>
       <DocsShow>
-        <p>
-          <KRouterLink text="Link" appearance="basic-link" />
-        </p>
-        <p>
-          <KRouterLink text="Link with icon before" appearance="basic-link" icon="person" />
-        </p>
+        <KButtonGroup>
+          <KRouterLink :to="{}" text="Primary" :primary="true" appearance="raised-button" />
+          <KRouterLink :to="{}" text="Primary flat" :primary="true" appearance="flat-button" />
+          <KRouterLink :to="{}" text="Secondary" :primary="false" appearance="raised-button" />
+          <KRouterLink :to="{}" text="Secondary flat" :primary="false" appearance="flat-button" />
+        </KButtonGroup>
       </DocsShow>
-      <p>
-        See also:
-      </p>
+    </DocsPageSection>
+    <DocsPageSection title="Related" anchor="#related">
       <ul>
-        <li><DocsLibraryLink page="KButton" /></li>
-        <li><DocsLibraryLink page="KButtonGroup" /></li>
-        <li><DocsLibraryLink page="KExternalLink" /></li>
-        <li><DocsLibraryLink page="KIconButton" /></li>
+        <li>
+          <DocsInternalLink text="Buttons and links" href="/buttons" /> has an overview and usage guidance
+        </li>
+        <li><DocsLibraryLink page="KButton" /> and <DocsLibraryLink page="KExternalLink" /> are similar but handle events differently</li>
+        <li>
+          <code>KIconButton</code> has a tooltip instead of a text label
+        </li>
+        <li><DocsLibraryLink page="KButtonGroup" /> is used for button layout</li>
       </ul>
-
     </DocsPageSection>
 
   </DocsPageTemplate>
