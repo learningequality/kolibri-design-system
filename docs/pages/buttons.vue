@@ -24,7 +24,11 @@
           <DocsLibraryLink page="KExternalLink" /> is used to create standard <code>&lt;a&gt;</code> tags with an <code>href</code> attribute.
         </li>
       </ul>
-      <p>We also provide a <DocsLibraryLink page="KButtonGroup" /> wrapper component to set standardized spacing between groups of buttons.</p>
+      <p>We also provide:</p>
+      <ul>
+        <li>a <DocsLibraryLink page="KButtonGroup" /> wrapper component to set standardized spacing between groups of buttons.</li>
+        <li>a <DocsLibraryLink page="KIconButton" /> for smaller icon-and-tooltip buttons</li>
+      </ul>
     </DocsPageSection>
 
     <DocsPageSection title="Visual styles" anchor="#visualstyles">
@@ -109,7 +113,7 @@
 
     <DocsPageSection title="Icon buttons" anchor="#icon_buttons">
       <p>
-        Use icon buttons for editors, or in situations where using text buttons would hinder the user experience. Use the flat secondary style by default.
+        Use <DocsLibraryLink page="KIconButton" /> in situations where larger buttons with visible text would hinder the user experience. Use the flat secondary style unless the action should be highlighted.
       </p>
       <p>
         A tooltip with the name of the action is required for an icon button.

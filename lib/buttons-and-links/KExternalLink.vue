@@ -12,6 +12,7 @@
     @mouseenter="hovering = true"
     @mouseleave="hovering = false"
   >
+    <!-- @slot Slot alternative to the `icon` prop -->
     <slot name="icon">
       <KIcon
         v-if="icon"
@@ -21,6 +22,7 @@
       />
     </slot>
     <span class="link-text" :style="spanStyle">{{ text }}</span>
+    <!-- @slot Slot alternative to the `iconAfter` prop -->
     <slot name="iconAfter">
       <KIcon
         v-if="iconAfter"
@@ -29,6 +31,7 @@
         :color="hovering ? $themeTokens.primaryDark : $themeTokens.primary"
       />
     </slot>
+    <!-- @slot unknown purpose -->
     <slot name="openInNewTab">
       <KIcon
         v-if="openInNewTab"

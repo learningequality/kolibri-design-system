@@ -356,6 +356,12 @@ export default [
         disabled: true,
       }),
       new Page({
+        path: '/KIconButton',
+        title: 'KIconButton',
+        isCode: true,
+        keywords: buttonRelatedItems,
+      }),
+      new Page({
         path: '/KLabeledIcon',
         title: 'KLabeledIcon',
         isCode: true,

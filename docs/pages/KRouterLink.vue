@@ -33,7 +33,7 @@
         </li>
         <li><DocsLibraryLink page="KButton" /> and <DocsLibraryLink page="KExternalLink" /> are similar but handle events differently</li>
         <li>
-          <code>KIconButton</code> has a tooltip instead of a text label
+          <DocsLibraryLink page="KIconButton" /> has a tooltip instead of a text label
         </li>
         <li><DocsLibraryLink page="KButtonGroup" /> is used for button layout</li>
       </ul>
