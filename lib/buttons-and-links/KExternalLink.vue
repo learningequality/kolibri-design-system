@@ -58,7 +58,7 @@
        */
       href: {
         type: String,
-        required: true,
+        default: null,
       },
       /**
        * Specifies that the file is meant to be downloaded, not displayed in a separate tab.
