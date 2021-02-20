@@ -46,7 +46,6 @@
         <KButtonGroup>
           <KButton text="Raised button" :primary="true" appearance="raised-button" />
           <KButton text="Flat button" :primary="true" appearance="flat-button" />
-          <KIconButton tooltip="A tooltip" text="Flat button" :primary="false" icon="plus" appearance="flat-button" />
           <KButton text="Basic link" :primary="true" appearance="basic-link" />
         </KButtonGroup>
       </DocsShow>
@@ -59,21 +58,19 @@
         <KButtonGroup style="margin-bottom: 8px;">
           <KButton text="Primary" :primary="true" appearance="raised-button" />
           <KButton text="Secondary" :primary="false" appearance="raised-button" />
-          <KIconButton tooltip="KIconButton" icon="plus" :primary="true" appearance="raised-button" />
         </KButtonGroup>
         <br>
         <KButtonGroup>
           <KButton text="Primary" :primary="true" appearance="flat-button" />
           <KButton text="Secondary" :primary="false" appearance="flat-button" />
-          <KIconButton tooltip="KIconButton" icon="plus" :primary="false" appearance="flat-button" />
         </KButtonGroup>
       </DocsShow>
 
       <p>
-        Note that we don't use a "secondary basic link" style.
+        Note that we don't have a "secondary basic link" style.
       </p>
       <p>
-        Buttons can also contain both text and an icon. Based on the need, the icon can come either before or after the text. This should be used sparingly - only when the icon significantly adds value to the meaning of the button.
+        Buttons can also contain an icon. Based on the need, the icon can come either before or after the text. Icons should be used sparingly when it adds significant value to the meaning of the button.
       </p>
 
       <DocsShow>
@@ -91,43 +88,43 @@
           Avoid ambiguity; be specific about the action that will be performed. For example,
           use 'Save' instead of 'OK'
         </li>
-        <li>Never use commas or other punctuation</li>
-        <li>For raised and flat buttons, always use all-caps text</li>
+        <li>Avoid commas and other punctuation</li>
       </ul>
     </DocsPageSection>
 
     <DocsPageSection title="Placement" anchor="#placement">
       <p>
-        We have some conventions regarding placement of 'raised button' and
-        'flat button' actions:
+        We have some conventions regarding placement of 'raised' and 'flat' buttons:
       </p>
       <ul>
-        <li>Right-aligned in modal pop-ups</li>
-        <li>Left-aligned in page forms</li>
-        <li>Global actions related to tables should be put above the table and right-aligned</li>
+        <li>Right-aligned at the bottom of modal pop-ups</li>
+        <li>Left-aligned a the bottom of page forms</li>
+        <li>Global actions related to full pages should be right-aligned and to the right of the page title on large screens, and left-aligned below the title on small screens. Use of <code>KGrid</code> is recommended</li>
       </ul>
+      <p>
+        Use the <DocsLibraryLink page="KButtonGroup" /> component to add specing between adjacent buttons.
+      </p>
 
     </DocsPageSection>
 
     <DocsPageSection title="Icon buttons" anchor="#icon_buttons">
       <p>
-        Use icon buttons for editors, or in situations where using text buttons would hinder the user experience.
-      </p>
-      <p>
-        Default to using flat secondary style for icon buttons.
-      </p>
-      <p>
-        Be sure to consider internationalization, translation, and cultural meaning in the use of icon buttons.
+        Use icon buttons for editors, or in situations where using text buttons would hinder the user experience. Use the flat secondary style by default.
       </p>
       <p>
         A tooltip with the name of the action is required for an icon button.
       </p>
       <DocsShow>
         <KButtonGroup>
+          <KIconButton tooltip="Add" icon="plus" :primary="true" appearance="raised-button" />
+          <KIconButton tooltip="Subtract" icon="minus" :primary="false" appearance="raised-button" />
           <KIconButton tooltip="Add" text="Flat button" :primary="true" icon="plus" appearance="flat-button" />
           <KIconButton tooltip="Subtract" text="Flat button" :primary="false" icon="minus" appearance="flat-button" />
         </KButtonGroup>
       </DocsShow>
+      <p>
+        Be sure to consider internationalization, translation, and cultural implications when choosing icons.
+      </p>
 
     </DocsPageSection>
 

@@ -47,7 +47,7 @@
         v-if="!label && $slots.default"
         class="k-checkbox-label"
       >
-        <!-- @slot Used as an alternative to the `label` prop -->
+        <!-- @slot Slot alternative to the `label` prop -->
         <slot></slot>
       </div>
 

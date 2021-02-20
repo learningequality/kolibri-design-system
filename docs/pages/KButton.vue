@@ -4,10 +4,7 @@
 
     <DocsPageSection title="Overview" anchor="#overview">
       <p>
-        For an overview of buttons and links in Kolibri, see the <DocsInternalLink text="Buttons and links" href="/buttons" /> page.
-      </p>
-      <p>
-        The <code>KButton</code> component creates a <code>&lt;button&gt;</code> tag and is appropriate for triggering javascript functions on-click.
+        Creates a <code>&lt;button&gt;</code> tag and is appropriate for triggering javascript functions on-click.
       </p>
       <p>
         It can take on a number of visual styles, including buttons:
@@ -15,9 +12,9 @@
       <DocsShow>
         <KButtonGroup>
           <KButton text="Primary" :primary="true" appearance="raised-button" />
+          <KButton text="Primary flat" :primary="true" appearance="flat-button" />
           <KButton text="Secondary" :primary="false" appearance="raised-button" />
-          <KButton text="Primary" :primary="true" appearance="flat-button" />
-          <KButton text="Secondary" :primary="false" appearance="flat-button" />
+          <KButton text="Secondary flat" :primary="false" appearance="flat-button" />
         </KButtonGroup>
       </DocsShow>
       <p>
@@ -32,12 +29,14 @@
         </p>
       </DocsShow>
     </DocsPageSection>
-    <DocsPageSection title="Related components" anchor="#related">
+    <DocsPageSection title="Related" anchor="#related">
       <ul>
-        <li><DocsLibraryLink page="KButtonGroup" /></li>
-        <li><DocsLibraryLink page="KExternalLink" /></li>
-        <li><DocsLibraryLink page="KIconButton" /></li>
-        <li><DocsLibraryLink page="KRouterLink" /></li>
+        <li>
+          <DocsInternalLink text="Buttons and links" href="/buttons" /> has an overview and usage guidance
+        </li>
+        <li><DocsLibraryLink page="KExternalLink" /> and <DocsLibraryLink page="KRouterLink" /> are similar but handle events differently</li>
+        <li><DocsLibraryLink page="KIconButton" /> has a tooltip instead of a text label</li>
+        <li><DocsLibraryLink page="KButtonGroup" /> is used for button layout</li>
       </ul>
     </DocsPageSection>
 
