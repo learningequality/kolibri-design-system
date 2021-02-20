@@ -13,21 +13,15 @@
         It can take on a number of visual styles, including buttons:
       </p>
       <DocsShow>
-        <p>
-          <KButtonGroup style="margin-bottom: 8px;">
-            <KButton text="Primary" :primary="true" appearance="raised-button" />
-            <KButton text="Secondary" :primary="false" appearance="raised-button" />
-          </KButtonGroup>
-        </p>
-        <p>
-          <KButtonGroup>
-            <KButton text="Primary" :primary="true" appearance="flat-button" />
-            <KButton text="Secondary" :primary="false" appearance="flat-button" />
-          </KButtonGroup>
-        </p>
+        <KButtonGroup>
+          <KButton text="Primary" :primary="true" appearance="raised-button" />
+          <KButton text="Secondary" :primary="false" appearance="raised-button" />
+          <KButton text="Primary" :primary="true" appearance="flat-button" />
+          <KButton text="Secondary" :primary="false" appearance="flat-button" />
+        </KButtonGroup>
       </DocsShow>
       <p>
-        and also links:
+        and links:
       </p>
       <DocsShow>
         <p>
@@ -37,16 +31,14 @@
           <KButton text="Link with icon before" appearance="basic-link" icon="person" />
         </p>
       </DocsShow>
-      <p>
-        See also:
-      </p>
+    </DocsPageSection>
+    <DocsPageSection title="Related components" anchor="#related">
       <ul>
         <li><DocsLibraryLink page="KButtonGroup" /></li>
         <li><DocsLibraryLink page="KExternalLink" /></li>
         <li><DocsLibraryLink page="KIconButton" /></li>
         <li><DocsLibraryLink page="KRouterLink" /></li>
       </ul>
-
     </DocsPageSection>
 
   </DocsPageTemplate>
