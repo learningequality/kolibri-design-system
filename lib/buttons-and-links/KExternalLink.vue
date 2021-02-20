@@ -79,14 +79,14 @@
        */
       icon: {
         type: String,
-        required: false,
+        default: null,
       },
       /**
        * If provided, shows a KIcon after the text
        */
       iconAfter: {
         type: String,
-        required: false,
+        default: null,
       },
     },
     data() {
