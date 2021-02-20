@@ -7,6 +7,7 @@
     :appearanceOverrides="appearanceOverrides"
     :buttonType="buttonType"
     :aria-label="ariaLabel"
+    text=""
     v-on="$listeners"
   >
     <UiTooltip
@@ -63,7 +64,7 @@
       },
       tooltip: {
         type: String,
-        default: null,
+        required: true,
       },
     },
     computed: {

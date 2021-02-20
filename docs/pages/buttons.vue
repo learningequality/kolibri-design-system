@@ -132,7 +132,7 @@
         Be sure to consider internationalization, translation, and cultural meaning in the use of icon buttons.
       </p>
       <p>
-        Always include a tooltip with the name of the action for icon buttons.
+        A tooltip with the name of the action is required for an icon button.
       </p>
       <DocsShow>
         <KButtonGroup>
