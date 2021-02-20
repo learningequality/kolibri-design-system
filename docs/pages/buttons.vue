@@ -4,33 +4,24 @@
 
     <DocsPageSection title="Overview" anchor="#overview">
       <p>
-        Buttons use the <code>&lt;button&gt;</code> HTML tag and trigger an action on the current
-        page. Links use the <code>&lt;a&gt;</code> HTML tag and navigate to a new URL.
+        Buttons use the <code>&lt;button&gt;</code> HTML tag and trigger an action on the current page. Links use the <code>&lt;a&gt;</code> HTML tag and navigate to a new URL.
       </p>
       <p>
-        Buttons and links are <em>not</em> visually distinguishable.
-        Buttons can visually look like classic links,
-        and links can visually look like classic buttons.
+        Buttons and links are <em>not</em> visually distinguishable. Buttons can visually look like classic links, and links can visually look like classic buttons.
       </p>
       <p>
-        When the user would expect to use navigation history, right-click to copy a URL,
-        or control-click to open a page in a new tab, then a link should be used.
-        Otherwise, a button should be used.
+        When the user would expect to use navigation history, right-click to copy a URL, or control-click to open a page in a new tab, then a link should be used. Otherwise, a button should be used.
       </p>
       <p>As such, there are three components that all behave similarly, but are used for different purposes:</p>
       <ul>
         <li>
-          <DocsLibraryLink page="KButton" /> is used to create <code>&lt;button&gt;</code> tags with
-          <code>@click</code> event handlers.
+          <DocsLibraryLink page="KButton" /> is used to create <code>&lt;button&gt;</code> tags with <code>@click</code> event handlers.
         </li>
         <li>
-          <DocsLibraryLink page="KRouterLink" /> is used to create Vue router <code>&lt;router-link&gt;</code>
-          components with <code>:to</code> properties. These compile into <code>&lt;a&gt;</code>
-          tags.
+          <DocsLibraryLink page="KRouterLink" /> is used to create Vue router <code>&lt;router-link&gt;</code> components with <code>:to</code> properties. These compile into <code>&lt;a&gt;</code> tags.
         </li>
         <li>
-          <DocsLibraryLink page="KExternalLink" /> is used to create standard <code>&lt;a&gt;</code> tags with an
-          <code>href</code> attribute.
+          <DocsLibraryLink page="KExternalLink" /> is used to create standard <code>&lt;a&gt;</code> tags with an <code>href</code> attribute.
         </li>
       </ul>
       <p>We also provide a <DocsLibraryLink page="KButtonGroup" /> wrapper component to set standardized spacing between groups of buttons.</p>
@@ -38,18 +29,17 @@
 
     <DocsPageSection title="Visual styles" anchor="#visualstyles">
       <p>
-        There are 3 main appearances of button and link components.
-        (Remember that a button component can visually look like a link,
-        and a link component can visually look like a button.)
-        Each appearance maps to a different level of
-        <DocsExternalLink href="https://en.wikipedia.org/wiki/Visual_hierarchy" text="visual hierarchy" />:
+        There are 3 main appearances of button and link components. (Remember that a button component can visually look like a link, and a link component can visually look like a button.) Each appearance maps to a different level of <DocsExternalLink href="https://en.wikipedia.org/wiki/Visual_hierarchy" text="visual hierarchy" />:
       </p>
       <ul>
-        <li><strong>Raised buttons:</strong> button-like appearance for more prominent actions</li>
-        <li><strong>Flat buttons:</strong> button-like appearance for less prominent actions</li>
         <li>
-          <strong>Basic links:</strong>
-          hyperlink-like appearance for deemphasized actions, or actions inline within text
+          <strong>Raised buttons:</strong> button-like appearance for more prominent actions
+        </li>
+        <li>
+          <strong>Flat buttons:</strong> button-like appearance for less prominent actions
+        </li>
+        <li>
+          <strong>Basic links:</strong> hyperlink-like appearance for deemphasized actions, or actions inline within text
         </li>
       </ul>
       <DocsShow>
@@ -62,9 +52,7 @@
       </DocsShow>
 
       <p>
-        Actions with a button-like appearance can also be <strong>primary</strong> or
-        <strong>secondary</strong>. There should only be one primary button visible at a time,
-        and it should be a common or default action.
+        Actions with a button-like appearance can also be <strong>primary</strong> or <strong>secondary</strong>. There should only be one primary button visible at a time, and it should be a common or default action.
       </p>
 
       <DocsShow>
