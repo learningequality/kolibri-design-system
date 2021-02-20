@@ -40,13 +40,14 @@ Addresses #*PR# HERE*
 <!-- List anything that will need to be addressed later -->
 
 
-## Checklist
+## Checklist for the Reviewer
 
-<!-- Delete anything that doesn't apply -->
+<!-- Delete anything that doesn't apply so your reviewer knows what to check for -->
 
 - [ ] Is the code clean and well-commented?
 - [ ] Are there tests for this change?
 - [ ] Are all UI components LTR and RTL compliant (if applicable)?
+- [ ] _Add other things to check for here_
 
 ## Comments
 
