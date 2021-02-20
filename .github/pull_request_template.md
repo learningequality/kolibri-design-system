@@ -1,6 +1,6 @@
 ---
-name: PULL_REQUEST
-about: Create pull request
+name: Pull Request
+about: Create a pull request
 title: "[TITLE]: Brief description of PR"
 labels: ''
 assignees: ''
@@ -13,13 +13,14 @@ assignees: ''
 
 <!-- What does this PR do? Briefly describe in 1-2 sentences* -->
 
-#### Issue Addressed (if applicable)
+#### Issue Addressed
+<!-- Only necessary if applicable -->
 
 Addresses #*PR# HERE*
 
-#### Before/After Screenshots (if applicable)
+### Before/After Screenshots
 
-<!-- Insert images here -->
+<!-- Insert images here if applicable -->
 
 
 ## Steps to Test
