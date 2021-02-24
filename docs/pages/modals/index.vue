@@ -27,7 +27,7 @@
         Title
       </h3>
       <p>
-        Keep this short, concise, and easy for the user to understand. Should not be structured as a sentence or question, and should not contain user-generated text.
+        Keep this short, concise, and easy for the user to understand. Titles should not be structured as a sentence or question, and should not contain user-generated text. Titles should also not have verbs that end in "-ing". 
       </p>
       <DocsDoNot>
         <template v-slot:do>

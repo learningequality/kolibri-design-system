@@ -49,6 +49,9 @@
           Avoid creating new Proper Nouns in casual messages. For example,
           "You are a coach", not "You are a Coach"
         </li>
+        <li>
+          Avoid using gerunds in modal or page titles. This creates the impression that the task is in progress when it may not be. For example, "Publish channel", not "Publishing channel"
+        </li>
       </ul>
     </DocsPageSection>
 
