@@ -1,16 +1,23 @@
 <template>
 
   <!-- no extra whitespace inside link -->
+
+  <!-- The use of @mouseenter.native and @mouseleave.native allows us to
+  listen to the DOM events directly, since routerlink does not emit those
+  events -->
+
   <router-link
     :class="buttonClasses"
     :to="to"
     :replace="replace"
     dir="auto"
-    @mouseenter="hovering = true"
-    @mouseleave="hovering = false"
+    @mouseenter.native="hovering = true"
+    @mouseleave.native="hovering = false"
   >
 
-    <slot name="icon">
+    <slot
+      name="icon"
+    >
       <KIcon
         v-if="icon"
         :icon="icon"
@@ -79,7 +86,7 @@
     },
     computed: {
       /**
-       * If link opens in new tab or if icon is provided, add 8px margin between the icon and the text
+       * If icon is provided, add 8px margin between the icon and the text
        */
       spanStyle() {
         let styles = {};
@@ -87,7 +94,7 @@
           if (this.isRtl) {
             // If RTL-language, but English link, displays correct margins
             styles['marginRight'] = '8px';
-            // Checks to see if link for new tab is in same dir as page lang
+            // Checks to see if link is in same dir as page lang
             if (this.text !== this.href) {
               styles['marginRight'] = '0px';
               styles['marginLeft'] = '8px';
