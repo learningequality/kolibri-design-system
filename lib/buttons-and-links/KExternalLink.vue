@@ -9,7 +9,7 @@
     :target="openInNewTab ? '_blank' : false"
     rel="noopener noreferrer"
     dir="auto"
-    @mouseenter="hovering = true"
+    @mouseover="hovering = true"
     @mouseleave="hovering = false"
   >
     <slot name="icon">
@@ -20,7 +20,13 @@
         :color="hovering ? $themeTokens.primaryDark : $themeTokens.primary"
       />
     </slot>
-    <span class="link-text" :style="spanStyle">{{ text }}</span>
+
+    <slot v-if="$slots.default"></slot>
+
+    <template v-else>
+      <span class="link-text" :style="spanStyle">{{ text }}</span>
+    </template>
+
     <slot name="iconAfter">
       <KIcon
         v-if="iconAfter"

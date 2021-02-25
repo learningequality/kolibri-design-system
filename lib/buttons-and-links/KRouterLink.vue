@@ -2,7 +2,7 @@
 
   <!-- no extra whitespace inside link -->
 
-  <!-- The use of @mouseenter.native and @mouseleave.native allows us to
+  <!-- The use of @mouseover.native and @mouseleave.native allows us to
   listen to the DOM events directly, since routerlink does not emit those
   events -->
 
@@ -11,13 +11,11 @@
     :to="to"
     :replace="replace"
     dir="auto"
-    @mouseenter.native="hovering = true"
+    @mouseover.native="hovering = true"
     @mouseleave.native="hovering = false"
   >
 
-    <slot
-      name="icon"
-    >
+    <slot name="icon">
       <KIcon
         v-if="icon"
         :icon="icon"
@@ -25,7 +23,13 @@
         :color="hovering ? $themeTokens.primaryDark : $themeTokens.primary"
       />
     </slot>
-    <span class="link-text" :style="spanStyle">{{ text }}</span>
+
+    <slot v-if="$slots.default"></slot>
+
+    <template v-else>
+      <span class="link-text" :style="spanStyle">{{ text }}</span>
+    </template>
+
     <slot name="iconAfter">
       <KIcon
         v-if="iconAfter"
