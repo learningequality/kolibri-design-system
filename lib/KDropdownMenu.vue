@@ -1,29 +1,17 @@
 <template>
-
-  <div class="dib">
-    <!-- Added because the trigger could not be a vue element smh-->
-    <div
-      ref="buttonContainer"
-      class="button-container dib"
-    >
-      <slot name="button"></slot>
-      <KButton
-        v-if="!$slots.button"
-        ref="button"
-        :text="text"
-        :appearance="appearance"
-        :disabled="disabled"
-        :hasDropdown="true"
-        :primary="$attrs.primary"
-      />
-    </div>
-
-    <UiPopover
+  <KButton
+    ref="button"
+    :appearance="appearance"
+    :disabled="disabled"
+    :hasDropdown="true"
+    :primary="$attrs.primary"
+  >
+  <span>{{text}}</span>
+  <UiPopover
       v-if="!disabled"
       ref="popover"
       :z-index="12"
-      :trigger="$refs.buttonContainer"
-      :containFocus="false"
+      :containFocus="true"
       :dropdownPosition="position"
       @close="handleClose"
       @open="handleOpen"
@@ -31,10 +19,10 @@
       <UiMenu
         :options="options"
         @select="handleSelection"
+        :containFocus="containFocus"
       />
-    </UiPopover>
-
-  </div>
+    </UiPopover> 
+  </KButton>
 
 </template>
 
