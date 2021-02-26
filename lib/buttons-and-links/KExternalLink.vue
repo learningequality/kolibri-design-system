@@ -9,7 +9,7 @@
     :target="openInNewTab ? '_blank' : false"
     rel="noopener noreferrer"
     dir="auto"
-    @mouseover="hovering = true"
+    @mouseenter="hovering = true"
     @mouseleave="hovering = false"
   >
     <slot name="icon">

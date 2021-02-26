@@ -2,16 +2,15 @@
 
   <!-- no extra whitespace inside link -->
 
-  <!-- The use of @mouseover.native and @mouseleave.native allows us to
-  listen to the DOM events directly, since routerlink does not emit those
-  events -->
+  <!-- The use of modifiers `.native` allows us to listen to the DOM events
+  directly, since routerlink does not emit those events -->
 
   <router-link
     :class="buttonClasses"
     :to="to"
     :replace="replace"
     dir="auto"
-    @mouseover.native="hovering = true"
+    @mouseenter.native="hovering = true"
     @mouseleave.native="hovering = false"
   >
 

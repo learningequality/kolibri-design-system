@@ -10,6 +10,8 @@
     tabindex="0"
     @click="handleClick"
     @keyup.enter.stop.prevent="handlePressEnter"
+    @mouseenter="hovering = true"
+    @mouseleave="hovering = false"
   >
     <!-- icon may come by slot or by prop -->
     <slot name="icon"></slot>
@@ -105,10 +107,15 @@
         default: null,
       },
     },
+    data() {
+      return {
+        hovering: false,
+      };
+    },
     computed: {
       iconColor() {
         if (this.appearance === 'basic-link') {
-          return this.$themeTokens.primary;
+          return this.hovering? this.$themeTokens.primaryDark : this.$themeTokens.primary;
         }
 
         if (this.primary) {
@@ -138,8 +145,23 @@
       textStyle() {
         let styles = {};
         if (this.icon) {
-          this.isRtl ? (styles['marginRight'] = '8px') : (styles['marginLeft'] = '8px');
+          if (this.isRtl) {
+            // If RTL-language, but English link, displays correct margins
+            styles['marginRight'] = '8px';
+            // Checks to see if link for new tab is in same dir as page lang
+            if (this.text !== this.href) {
+              styles['marginRight'] = '0px';
+              styles['marginLeft'] = '8px';
+            }
+          } else {
+            if (this.text === this.href) {
+              styles['marginRight'] = '8px';
+            } else {
+              styles['marginLeft'] = '8px';
+            }
+          }
         }
+
         if (this.iconAfter) {
           styles['marginRight'] = '8px';
         }
@@ -185,7 +207,7 @@
   }
 
   .prop-icon {
-    top: 3px;
+    top: 4px;
   }
 
 </style>
