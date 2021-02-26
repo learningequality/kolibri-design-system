@@ -115,7 +115,7 @@
     computed: {
       iconColor() {
         if (this.appearance === 'basic-link') {
-          return this.hovering? this.$themeTokens.primaryDark : this.$themeTokens.primary;
+          return this.hovering ? this.$themeTokens.primaryDark : this.$themeTokens.primary;
         }
 
         if (this.primary) {
