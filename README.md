@@ -59,10 +59,15 @@ The documentation site is built using [NuxtJS](https://nuxtjs.org/) and [Vue](ht
 
 Clone this repository using [Git](https://help.github.com/en/github/getting-started-with-github/set-up-git), optionally [forking](https://help.github.com/en/github/getting-started-with-github/fork-a-repo) it first if you plan to submit changes.
 
+First, change to the directory where you cloned the repo:
+
+```bash
+cd kolibri-design-system
+```
+
 Install the dependencies using `yarn`:
 
 ```bash
-cd design-system
 yarn install
 ```
 
@@ -208,18 +213,20 @@ If you are working on the design system library code in this repo and want to se
 
 Now, when you run the application your changes in `kolibri-design-system` will be updated live where your app expects its dependency on `kolibri-design-system` to live.
 
-For example, given that you have `~/kolibri` and `~/kolibri-design-system` folders with their respective local repositories.
+For example, given that you have `./kolibri` and `./kolibri-design-system` folders with their respective local repositories:
+
+First, remove the reference to `kolibri-design-system` from `./kolibri/core/package.json` which points at the online repo. Next,
 
 ```bash
-cd ~/kolibri-design-system
+# change to the KDS repo and add it to yarn's local package registry
+cd ./kolibri-design-system
 yarn link
-cd ~/kolibri
-```
 
-Remove the reference to `kolibri-design-system` from `kolibri/core/package.json`
-
-```bash
+# change to the Kolibri repo and link to the local package
+cd ../kolibri
 yarn link kolibri-design-system
+
+# run the Kolibri devserver
 yarn run devserver
 ```
 
