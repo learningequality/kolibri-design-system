@@ -115,9 +115,10 @@ Layout:
 
 Links:
 
-* `<DocsAnchorTarget />` - for adding Anchor links to pages
+* `<DocsAnchorTarget />` - for creating anchor link targets
 * `<DocsExternalLink />` - links to an external website
-* `<DocsInternalLink />` - links within the design system
+* `<DocsInternalLink />` - links to pages within the design system
+* `<DocsLibraryLink />` - links to library components with `<code>` formatting
 
 Illustration:
 
