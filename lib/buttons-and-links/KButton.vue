@@ -20,7 +20,7 @@
       class="prop-icon"
     />
 
-    <!-- @slot Slot alternative to the `text` prop -->
+    <!-- @slot Pass sub-components into the button, which provides more flexibility than and takes precedence over the `text` prop -->
     <slot v-if="$slots.default"></slot>
 
     <template v-else>
