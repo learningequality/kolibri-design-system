@@ -1,35 +1,26 @@
----
-name: Pull Request
-about: Create a pull request
-title: "[TITLE]: Brief description of PR"
-labels: ''
-assignees: ''
-
----
-
 <!-- Please remove any unused sections -->
 
 ## Description
 
 <!-- What does this PR do? Briefly describe in 1-2 sentences* -->
 
-#### Issue Addressed
+#### Issue addressed
 <!-- Only necessary if applicable -->
 
 Addresses #*PR# HERE*
 
-### Before/After Screenshots
+### Before/after screenshots
 
 <!-- Insert images here if applicable -->
 
 
-## Steps to Test
+## Steps to test
 
 1. Step 1
 2. Step 2
 3. ...
 
-## (Optional) Implementation Notes
+## (optional) Implementation notes
 
 ### At a high level, how did you implement this?
 
@@ -40,7 +31,7 @@ Addresses #*PR# HERE*
 <!-- List anything that will need to be addressed later -->
 
 
-## Checklist for the Reviewer
+## Reviewer guidance
 
 <!-- Delete anything that doesn't apply so your reviewer knows what to check for -->
 
