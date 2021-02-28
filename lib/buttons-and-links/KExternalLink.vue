@@ -35,14 +35,12 @@
         :color="hovering ? $themeTokens.primaryDark : $themeTokens.primary"
       />
     </slot>
-    <slot name="openInNewTab">
-      <KIcon
-        v-if="openInNewTab"
-        icon="openNewTab"
-        style="top: 4px;"
-        :color="hovering ? $themeTokens.primaryDark : $themeTokens.primary"
-      />
-    </slot>
+    <KIcon
+      v-if="openInNewTab"
+      icon="openNewTab"
+      style="top: 4px;"
+      :color="hovering ? $themeTokens.primaryDark : $themeTokens.primary"
+    />
   </a>
 
 </template>
