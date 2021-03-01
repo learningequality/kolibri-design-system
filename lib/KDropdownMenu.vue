@@ -1,4 +1,5 @@
 <template>
+
   <KButton
     ref="button"
     :appearance="appearance"
@@ -6,8 +7,8 @@
     :hasDropdown="true"
     :primary="$attrs.primary"
   >
-  <span>{{text}}</span>
-  <UiPopover
+    <span>{{ text }}</span>
+    <UiPopover
       v-if="!disabled"
       ref="popover"
       :z-index="12"
@@ -19,7 +20,6 @@
       <UiMenu
         :options="options"
         @select="handleSelection"
-        :containFocus="containFocus"
       />
     </UiPopover> 
   </KButton>
@@ -148,18 +148,3 @@
   };
 
 </script>
-
-
-<style lang="scss" scoped>
-
-  .dib {
-    display: inline-block;
-  }
-
-  .button-container {
-    /deep/ .button {
-      margin: 0;
-    }
-  }
-
-</style>
