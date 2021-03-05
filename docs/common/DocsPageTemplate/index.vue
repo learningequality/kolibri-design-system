@@ -106,7 +106,7 @@
       },
       apiSections() {
         const sections = [];
-        if (this.api.props && this.api.props.length) {
+        if (this.api && this.api.props && this.api.props.length) {
           sections.push({
             key: 'props',
             anchor: '#props',
@@ -114,7 +114,7 @@
             component: PropsTable,
           });
         }
-        if (this.api.events && this.api.events.length) {
+        if (this.api && this.api.events && this.api.events.length) {
           sections.push({
             key: 'events',
             anchor: '#events',
@@ -122,7 +122,7 @@
             component: EventsTable,
           });
         }
-        if (this.api.slots && this.api.slots.length) {
+        if (this.api && this.api.slots && this.api.slots.length) {
           sections.push({
             key: 'slots',
             anchor: '#slots',
@@ -130,7 +130,7 @@
             component: SlotsTable,
           });
         }
-        if (this.api.methods && this.api.methods.length) {
+        if (this.api && this.api.methods && this.api.methods.length) {
           sections.push({
             key: 'methods',
             anchor: '#methods',
