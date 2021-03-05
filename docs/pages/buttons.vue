@@ -106,7 +106,7 @@
         <li>Global actions related to full pages should be right-aligned and to the right of the page title on large screens, and left-aligned below the title on small screens. Use of <code>KGrid</code> is recommended</li>
       </ul>
       <p>
-        Use the <DocsLibraryLink page="KButtonGroup" /> component to add specing between adjacent buttons.
+        Use the <DocsLibraryLink page="KButtonGroup" /> component to add spacing between adjacent buttons.
       </p>
 
     </DocsPageSection>
