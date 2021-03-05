@@ -12,7 +12,7 @@
         A switch toggle is used to select and execute an action instantly, in real time. A switch is toggled successfully when the switch thumb slides to the other side of the track upon click or press.
       </p>
       <p>
-        For selections that require a confirmation to execute and are housed in a form, use <DocsInternalLink code text="KCheckbox" href="/KCheckbox" /> component instead.
+        For selections that require a confirmation to execute and are housed in a form, use <DocsLibraryLink page="KCheckbox" /> component instead.
       </p>
     </DocsPageSection>
 

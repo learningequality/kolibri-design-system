@@ -1,16 +1,18 @@
 import flow from 'lodash/flow';
-import words from 'lodash/words';
-import lowerCase from 'lodash/lowerCase';
+import toLower from 'lodash/toLower';
 import deburr from 'lodash/deburr';
 import every from 'lodash/every';
 import includes from 'lodash/includes';
 
 // normalize a term
-const cleanup = flow([lowerCase, deburr]);
+const cleanup = flow([toLower, deburr]);
 
 // given an input query string, return a list of search terms
 export function termList(filterText) {
-  return words(filterText).map(cleanup);
+  return filterText
+    .split(' ')
+    .map(cleanup)
+    .filter(val => val);
 }
 
 // given a list of search terms, decide whether to match some section or page

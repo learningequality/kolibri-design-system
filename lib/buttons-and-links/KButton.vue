@@ -11,7 +11,7 @@
     @click="handleClick"
     @keyup.enter.stop.prevent="handlePressEnter"
   >
-    <!-- icon may come by slot or by prop -->
+    <!-- @slot Slot alternative to the `icon` prop -->
     <slot name="icon"></slot>
     <KIcon
       v-if="icon"
@@ -20,13 +20,14 @@
       class="prop-icon"
     />
 
+    <!-- @slot Pass sub-components into the button, which provides more flexibility than and takes precedence over the `text` prop -->
     <slot v-if="$slots.default"></slot>
 
     <template v-else>
       <span class="link-text" :style="textStyle">{{ text }}</span>
     </template>
 
-    <!-- iconAfter may come by slot or by prop -->
+    <!-- @slot Slot alternative to the `iconAfter` prop -->
     <slot name="iconAfter"></slot>
     <KIcon
       v-if="iconAfter"
@@ -61,7 +62,7 @@
     mixins: [buttonMixin],
     props: {
       /**
-       * Button appearance: 'raised-button', 'flat-button', or 'basic-link'
+       * Button appearance: `'raised-button'`, `'flat-button'`, or `'basic-link'`
        */
       appearance: {
         type: String,
@@ -76,7 +77,7 @@
         default: false,
       },
       /**
-       * HTML button 'type' attribute (e.g. 'submit', 'reset')
+       * HTML button `type` attribute (e.g. `'submit'`, `'reset'`)
        */
       type: {
         type: String,
@@ -91,14 +92,14 @@
         default: false,
       },
       /**
-       * If provided, prepends a KIcon to the text in the button
+       * If provided, prepends a `KIcon` to the text in the button
        */
       icon: {
         type: String,
         default: null,
       },
       /**
-       * If provided, appends an KIcon to the text in the button.
+       * If provided, appends an `KIcon` to the text in the button
        */
       iconAfter: {
         type: String,
@@ -148,10 +149,10 @@
     },
     methods: {
       handleClick(event) {
+        this.blurWhenClicked();
         /**
          * Emitted when the button is triggered
          */
-        this.blurWhenClicked();
         this.$emit('click', event);
       },
       handlePressEnter(event) {
