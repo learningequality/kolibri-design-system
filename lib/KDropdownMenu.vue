@@ -18,6 +18,7 @@
       @open="handleOpen"
     >
       <UiMenu
+        ref="menu"
         :options="options"
         @select="handleSelection"
       />
@@ -101,7 +102,11 @@
     },
     methods: {
       handleOpen() {
+        this.$nextTick(() => this.setFocus());
         window.addEventListener('keyup', this.handleKeyUp, true);
+      },
+      setFocus() {
+        this.$refs.menu.$el.querySelector('li').focus();
       },
       handleClose() {
         const focusedElement = document.activeElement;
@@ -116,16 +121,16 @@
         }
         window.removeEventListener('keyup', this.handleKeyUp, true);
       },
-      handleKeyUp(event) {
-        if (event.shiftKey && event.keyCode == 9) {
-          const popover = this.$refs.popover.$el;
-          const popoverIsOpen = popover.clientWidth > 0 && popover.clientHeight > 0;
-          if (popoverIsOpen && !popover.contains(document.activeElement)) {
-            this.closePopover();
-            this.focusOnButton();
-          }
-        }
-      },
+      // handleKeyUp(event) {
+      //   if (event.shiftKey && event.keyCode == 9) {
+      //     const popover = this.$refs.popover.$el;
+      //     const popoverIsOpen = popover.clientWidth > 0 && popover.clientHeight > 0;
+      //     if (popoverIsOpen && !popover.contains(document.activeElement)) {
+      //       this.closePopover();
+      //       this.focusOnButton();
+      //     }
+      //   }
+      // },
       handleSelection(selection) {
         /**
          * Emitted when an option is selected
