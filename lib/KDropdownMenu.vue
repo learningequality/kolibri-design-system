@@ -121,16 +121,16 @@
         }
         window.removeEventListener('keyup', this.handleKeyUp, true);
       },
-      // handleKeyUp(event) {
-      //   if (event.shiftKey && event.keyCode == 9) {
-      //     const popover = this.$refs.popover.$el;
-      //     const popoverIsOpen = popover.clientWidth > 0 && popover.clientHeight > 0;
-      //     if (popoverIsOpen && !popover.contains(document.activeElement)) {
-      //       this.closePopover();
-      //       this.focusOnButton();
-      //     }
-      //   }
-      // },
+      handleKeyUp(event) {
+        if (event.shiftKey && event.keyCode == 9) {
+          const popover = this.$refs.popover.$el;
+          const popoverIsOpen = popover.clientWidth > 0 && popover.clientHeight > 0;
+          if (popoverIsOpen && !popover.contains(document.activeElement)) {
+            this.closePopover();
+            this.focusOnButton();
+          }
+        }
+      },
       handleSelection(selection) {
         /**
          * Emitted when an option is selected

@@ -8,7 +8,6 @@
     lazy
 
     :class="classes"
-    :contain-focus="containFocus"
   >
     <UiMenuOption
       v-for="(option, index) in options"
@@ -105,6 +104,9 @@
       activeOutline() {
         return this.isActive ? this.$coreOutline : {};
       },
+      redirectFocus() {
+        console.log(document.activeElement)
+      },
     },
 
     methods: {
@@ -116,7 +118,6 @@
         this.$emit('select', option);
         this.closeMenu();
       },
-
       closeMenu() {
         this.$emit('close');
       },
