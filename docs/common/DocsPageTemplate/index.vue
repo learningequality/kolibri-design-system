@@ -102,7 +102,7 @@
       },
       api() {
         if (!this.apiDocs) return {};
-        return jsdocs[this.$route.name];
+        return jsdocs[this.page.title];
       },
       apiSections() {
         const sections = [];

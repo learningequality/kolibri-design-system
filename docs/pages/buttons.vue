@@ -15,19 +15,19 @@
       <p>As such, there are three components that all behave similarly, but are used for different purposes:</p>
       <ul>
         <li>
-          <DocsLibraryLink page="KButton" /> is used to create <code>&lt;button&gt;</code> tags with <code>@click</code> event handlers.
+          <DocsLibraryLink component="KButton" /> is used to create <code>&lt;button&gt;</code> tags with <code>@click</code> event handlers.
         </li>
         <li>
-          <DocsLibraryLink page="KRouterLink" /> is used to create Vue router <code>&lt;router-link&gt;</code> components with <code>:to</code> properties. These compile into <code>&lt;a&gt;</code> tags.
+          <DocsLibraryLink component="KRouterLink" /> is used to create Vue router <code>&lt;router-link&gt;</code> components with <code>:to</code> properties. These compile into <code>&lt;a&gt;</code> tags.
         </li>
         <li>
-          <DocsLibraryLink page="KExternalLink" /> is used to create standard <code>&lt;a&gt;</code> tags with an <code>href</code> attribute.
+          <DocsLibraryLink component="KExternalLink" /> is used to create standard <code>&lt;a&gt;</code> tags with an <code>href</code> attribute.
         </li>
       </ul>
       <p>We also provide:</p>
       <ul>
-        <li>a <DocsLibraryLink page="KButtonGroup" /> wrapper component to set standardized spacing between groups of buttons.</li>
-        <li>a <DocsLibraryLink page="KIconButton" /> for smaller icon-and-tooltip buttons</li>
+        <li>a <DocsLibraryLink component="KButtonGroup" /> wrapper component to set standardized spacing between groups of buttons.</li>
+        <li>a <DocsLibraryLink component="KIconButton" /> for smaller icon-and-tooltip buttons</li>
       </ul>
     </DocsPageSection>
 
@@ -106,14 +106,14 @@
         <li>Global actions related to full pages should be right-aligned and to the right of the page title on large screens, and left-aligned below the title on small screens. Use of <code>KGrid</code> is recommended</li>
       </ul>
       <p>
-        Use the <DocsLibraryLink page="KButtonGroup" /> component to add spacing between adjacent buttons.
+        Use the <DocsLibraryLink component="KButtonGroup" /> component to add spacing between adjacent buttons.
       </p>
 
     </DocsPageSection>
 
     <DocsPageSection title="Icon buttons" anchor="#icon_buttons">
       <p>
-        Use <DocsLibraryLink page="KIconButton" /> in situations where larger buttons with visible text would hinder the user experience. Use the flat secondary style unless the action should be highlighted.
+        Use <DocsLibraryLink component="KIconButton" /> in situations where larger buttons with visible text would hinder the user experience. Use the flat secondary style unless the action should be highlighted.
       </p>
       <p>
         A tooltip with the name of the action is required for an icon button.
@@ -168,7 +168,7 @@
         </KDropdownMenu>
       </DocsShow>
       <p>
-        Caution: <code>KDropdownMenu</code> does not work with the <DocsLibraryLink page="KButtonGroup" /> component.
+        Caution: <code>KDropdownMenu</code> does not work with the <DocsLibraryLink component="KButtonGroup" /> component.
       </p>
 
     </DocsPageSection>
