@@ -5,8 +5,10 @@
     <DocsPageSection title="Overview" anchor="#overview">
       <DocsShow>
         <KSwitch
-          :value="true"
+          v-model="exampleData"
+          label="Things are happening"
         />
+        <p>Value: {{ exampleData }}</p>
       </DocsShow>
       <p>
         A switch toggle is used to select and execute an action instantly, in real time. A switch is toggled successfully when the switch thumb slides to the other side of the track upon click or press.
@@ -64,7 +66,13 @@
 
 <script>
 
-  export default {};
+  export default {
+    data() {
+      return {
+        exampleData: true,
+      };
+    },
+  };
 
 </script>
 
