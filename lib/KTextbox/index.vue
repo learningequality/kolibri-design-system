@@ -20,10 +20,11 @@
       :floatingLabel="floatingLabel"
       :multiLine="textArea"
       :rows="3"
+      :style="changedOrFocused ? this.$coreOutline : {} "
       @input="updateText"
       @keydown="emitKeydown"
-      @focus="$emit('focus')"
-      @blur="$emit('blur')"
+      @focus="onFocus"
+      @blur="onBlur"
     />
   </div>
 
@@ -191,9 +192,14 @@
        * @public
        * Focuses on the textbox
        */
-      focus() {
+
+      onFocus(e) {
         this.changedOrFocused = true;
-        this.$refs.textbox.$el.querySelector('input').focus();
+        this.$emit('focus', e);
+      },
+      onBlur(e) {
+        this.changedOrFocused = false;
+        this.$emit('blur', e);
       },
     },
   };
