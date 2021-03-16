@@ -138,6 +138,11 @@ export default [
         disabled: true,
       }),
       new Page({
+        path: '/filters',
+        title: 'Filters',
+        disabled: false,
+      }),
+      new Page({
         path: '/fileuploader',
         title: 'File uploaders',
         disabled: true,
