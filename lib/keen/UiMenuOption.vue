@@ -9,10 +9,6 @@
     :href="isAnchor ? (disabled ? null : href) : null"
     :tabindex="(isDivider || isAnchor || disabled) ? null : '0'"
     :target="isAnchor ? (disabled ? null : target) : null"
-    @focus="onFocus"
-    @blur="onBlur"
-    :style="isActive ? this.activeStyles : {}"
-
   >
     <slot v-if="!isDivider">
       <div class="ui-menu-option-content">
@@ -72,12 +68,6 @@
       },
     },
 
-    data() {
-      return {
-        isActive: false,
-      };
-    },
-
     computed: {
       classes() {
         return {
@@ -94,20 +84,7 @@
       isAnchor() {
         return !this.isDivider && this.href !== undefined;
       },
-      activeStyles() {
-        return { ...this.$coreOutline, outlineOffset: '-2px' }
-      },
     },
-    methods: {
-      onFocus(e) {
-        this.isActive = true;
-        this.$emit('focus', e);
-      },
-      onBlur(e) {
-        this.isActive = false;
-        this.$emit('blur', e);
-      },
-    }
   };
 
 </script>

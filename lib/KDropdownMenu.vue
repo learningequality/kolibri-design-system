@@ -98,12 +98,12 @@
       },
     },
     beforeDestroy() {
-      window.removeEventListener('keyup', this.handleKeyUp, true);
+      window.removeEventListener('keydown', this.handleArrowKeys, true);
     },
     methods: {
       handleOpen() {
         this.$nextTick(() => this.setFocus());
-        window.addEventListener('keyup', this.handleKeyUp, true);
+        window.addEventListener('keydown', this.handleArrowKeys, true);
       },
       setFocus() {
         this.$refs.menu.$el.querySelector('li').focus();
@@ -121,14 +121,23 @@
         }
         window.removeEventListener('keyup', this.handleKeyUp, true);
       },
-      handleKeyUp(event) {
-        if (event.shiftKey && event.keyCode == 9) {
-          const popover = this.$refs.popover.$el;
-          const popoverIsOpen = popover.clientWidth > 0 && popover.clientHeight > 0;
-          if (popoverIsOpen && !popover.contains(document.activeElement)) {
-            this.closePopover();
-            this.focusOnButton();
-          }
+      handleArrowKeys(event) {
+        // identify the menu state and length 
+        const popover = this.$refs.popover.$el;
+        const menuElements = this.$refs.menu.$el.querySelector('div').children
+        const lastChild = menuElements[menuElements.length - 1]
+        const popoverIsOpen = popover.clientWidth > 0 && popover.clientHeight > 0;
+        // set current element and its siblings
+        let focusedElement = document.activeElement;
+        let sibling = focusedElement.nextElementSibling;
+        let prevSibling = focusedElement.previousElementSibling;
+        // manage rotating through the options
+        if (event.keyCode == 38 && popoverIsOpen) {
+          event.preventDefault()
+          prevSibling ? this.$nextTick(() => prevSibling.focus()) : this.$nextTick(() => lastChild.focus())
+        } else if (event.keyCode == 40 && popoverIsOpen) {
+          event.preventDefault()
+          sibling ? this.$nextTick(() => sibling.focus()) : this.$nextTick(() => this.setFocus());
         }
       },
       handleSelection(selection) {

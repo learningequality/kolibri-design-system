@@ -104,9 +104,6 @@
       activeOutline() {
         return this.isActive ? this.$coreOutline : {};
       },
-      redirectFocus() {
-        console.log(document.activeElement)
-      },
     },
 
     methods: {
