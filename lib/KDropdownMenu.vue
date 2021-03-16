@@ -122,10 +122,10 @@
         window.removeEventListener('keyup', this.handleKeyUp, true);
       },
       handleArrowKeys(event) {
-        // identify the menu state and length 
+        // identify the menu state and length
         const popover = this.$refs.popover.$el;
-        const menuElements = this.$refs.menu.$el.querySelector('div').children
-        const lastChild = menuElements[menuElements.length - 1]
+        const menuElements = this.$refs.menu.$el.querySelector('div').children;
+        const lastChild = menuElements[menuElements.length - 1];
         const popoverIsOpen = popover.clientWidth > 0 && popover.clientHeight > 0;
         // set current element and its siblings
         let focusedElement = document.activeElement;
@@ -133,10 +133,12 @@
         let prevSibling = focusedElement.previousElementSibling;
         // manage rotating through the options
         if (event.keyCode == 38 && popoverIsOpen) {
-          event.preventDefault()
-          prevSibling ? this.$nextTick(() => prevSibling.focus()) : this.$nextTick(() => lastChild.focus())
+          event.preventDefault();
+          prevSibling
+            ? this.$nextTick(() => prevSibling.focus())
+            : this.$nextTick(() => lastChild.focus());
         } else if (event.keyCode == 40 && popoverIsOpen) {
-          event.preventDefault()
+          event.preventDefault();
           sibling ? this.$nextTick(() => sibling.focus()) : this.$nextTick(() => this.setFocus());
         }
       },
