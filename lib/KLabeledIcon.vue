@@ -65,9 +65,9 @@
     data() {
       return {
         noWhiteSpace: {
-          'white-space': 'nowrap'
+          'white-space': 'nowrap',
         },
-      }
+      };
     },
     computed: {
       labelEmpty() {
