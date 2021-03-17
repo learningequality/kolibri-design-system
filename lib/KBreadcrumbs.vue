@@ -34,6 +34,9 @@
               >
                 <template #text="{ text }">
                   <span class="breadcrumbs-crumb-text" dir="auto">{{ text }}</span>
+                  <div class="tooltip">
+                    {{ text }}
+                  </div>
                 </template>
               </KRouterLink>
             </li>
@@ -56,6 +59,9 @@
             >
               <template #text="{ text }">
                 <span class="breadcrumbs-crumb-text">{{ text }}</span>
+                <div class="tooltip">
+                  {{ text }}
+                </div>
               </template>
             </KRouterLink>
           </li>
@@ -91,6 +97,9 @@
             <KRouterLink :text="crumb.text" :to="crumb.link" tabindex="-1">
               <template #text="{ text }">
                 <span class="breadcrumbs-crumb-text">{{ text }}</span>
+                <div class="tooltip">
+                  {{ text }}
+                </div>
               </template>
             </KRouterLink>
           </li>
@@ -358,6 +367,25 @@
   .breadcrumbs-offscreen {
     position: absolute;
     left: -1000em;
+  }
+  
+   .tooltip {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    padding: 5px;
+    font-size: 12px;
+    word-wrap: break-word;
+    visibility: hidden;
+    background-color: #ffffff;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+  }
+
+  .breadcrumbs-crumb-text:hover + .tooltip {
+    visibility: visible;
+    opacity: 1;
+    transition: opacity 0.5s ease;
   }
 
 </style>
