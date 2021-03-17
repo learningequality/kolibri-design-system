@@ -6,7 +6,7 @@
         <KIcon v-if="icon" :icon="icon" :color="color || $themeTokens.text" style="top: 2px;" />
       </slot>
     </span>
-    <span class="label" :style="labelStyle">
+    <span class="label" :style="[ labelStyle, noWhiteSpace ]">
       <!-- nest slot inside span to get alignment and flow correct for mixed RLT/LTR -->
       <span dir="auto" class="debug-warning">
         <!-- Use zero-width space when empty -->
@@ -62,6 +62,13 @@
         default: '100%',
       },
     },
+    data() {
+      return {
+        noWhiteSpace: {
+          'white-space': 'nowrap'
+        },
+      }
+    },
     computed: {
       labelEmpty() {
         if (this.label) {
@@ -109,8 +116,6 @@
   .labeled-icon-wrapper {
     position: relative;
     display: inline-block;
-    min-width: 100%;
-    // Fixes the text-wrapping in Safari
     max-width: 100%;
   }
 
