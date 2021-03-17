@@ -20,7 +20,7 @@
         :color="hovering ? $themeTokens.primaryDark : $themeTokens.primary"
       />
 
-      <span class="link-text">{{ text }}</span>
+      <span class="link-text" style="white-space: nowrap;">{{ text }}</span>
 
       <KIcon
         v-if="iconAfter"

@@ -109,6 +109,8 @@
   .labeled-icon-wrapper {
     position: relative;
     display: inline-block;
+    min-width: 100%;
+    // Fixes the text-wrapping in Safari
     max-width: 100%;
   }
 
