@@ -15,7 +15,7 @@
         />
       </DocsShow>
       <p>
-        The checkbox is generally used to select one of two possible values in a form. It should not be used to make real-time changes; for this situation, use a <DocsLibraryLink page="KSwitch" /> component instead.
+        The checkbox is generally used to select one of two possible values in a form. It should not be used to make real-time changes; for this situation, use a <DocsLibraryLink component="KSwitch" /> component instead.
       </p>
       <p>Layout:</p>
       <ul>

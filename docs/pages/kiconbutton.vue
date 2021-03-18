@@ -4,7 +4,7 @@
 
     <DocsPageSection title="Overview" anchor="#overview">
       <p>
-        Use <DocsLibraryLink page="KIconButton" /> in situations where larger buttons with visible text would hinder the user experience. Use the flat secondary style unless the action should be highlighted.
+        Use <DocsLibraryLink component="KIconButton" /> in situations where larger buttons with visible text would hinder the user experience. Use the flat secondary style unless the action should be highlighted.
       </p>
       <p>
         A tooltip with the name of the action is required for an icon button.
@@ -23,8 +23,8 @@
         <li>
           <DocsInternalLink text="Buttons and links" href="/buttons" /> has an overview and usage guidance
         </li>
-        <li><DocsLibraryLink page="KButton" />, <DocsLibraryLink page="KExternalLink" />, and <DocsLibraryLink page="KRouterLink" /> are all similar but handle events differently</li>
-        <li><DocsLibraryLink page="KButtonGroup" /> is used for button layout</li>
+        <li><DocsLibraryLink component="KButton" />, <DocsLibraryLink component="KExternalLink" />, and <DocsLibraryLink component="KRouterLink" /> are all similar but handle events differently</li>
+        <li><DocsLibraryLink component="KButtonGroup" /> is used for button layout</li>
       </ul>
     </DocsPageSection>
 
