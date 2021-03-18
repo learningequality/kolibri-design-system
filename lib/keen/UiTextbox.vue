@@ -84,14 +84,14 @@
           v-if="label || $slots.default"
           class="ui-textbox-label-text"
           :class="labelClasses"
-          :style="isActive ? { color: $themeTokens.primary } : {}"
+          :style="isActive ? { color: $themeTokens.primaryDark } : {}"
         >
           <slot>{{ label }}</slot>
         </div>
       </label>
 
       <div v-if="hasFeedback || maxlength" class="ui-textbox-feedback">
-        <div v-if="showError" class="ui-textbox-feedback-text">
+        <div v-if="showError" class="ui-textbox-feedback-text" style="{ color: $themeTokens.error }">
           <slot name="error">
             {{ error }}
           </slot>
