@@ -183,9 +183,11 @@ These aliases should _not_ be used by code inside the `/lib` directory because e
 
 ### Deployment
 
-The documentation site is currently deployed to Netlifty automatically when changes are pushed to one of the primary branches. This is configured in the `/netlify.toml` file and authenticated with the [Netlify GitHub app](https://docs.netlify.com/configure-builds/repo-permissions-linking/#authentication-with-the-netlify-github-app).
+The documentation site is currently deployed to Netlifty automatically when changes are pushed to one of the primary branches. This is configured in the Netlify web UI to run `yarn generate` and point at the created `dist` directory.
 
-Longer-term, we will likely want to transition to Google Cloud for more control of the deployment. Specifically, we'll want to
+Netlify is authenticated with the [Netlify GitHub app](https://docs.netlify.com/configure-builds/repo-permissions-linking/#authentication-with-the-netlify-github-app).
+
+Note that we currently use the deprecated Nuxt.js `mode: universal` flag, and should switch to the newer `target: static` flag.
 
 
 ### SVG Icons
