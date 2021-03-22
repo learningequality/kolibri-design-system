@@ -6,6 +6,7 @@
     :to="to"
     :replace="replace"
     dir="auto"
+    style="display: block;"
   >
     <KLabeledIcon
       :maxWidth="maxWidth"
@@ -20,7 +21,7 @@
         :color="hovering ? $themeTokens.primaryDark : $themeTokens.primary"
       />
 
-      <span class="link-text" style="white-space: nowrap;">{{ text }}</span>
+      <span class="link-text">{{ text }}</span>
 
       <KIcon
         v-if="iconAfter"

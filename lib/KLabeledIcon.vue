@@ -108,7 +108,7 @@
 
   .labeled-icon-wrapper {
     position: relative;
-    display: inline-block;
+    display: block;
     max-width: 100%;
   }
 
