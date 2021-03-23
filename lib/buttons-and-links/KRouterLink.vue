@@ -6,7 +6,6 @@
     :to="to"
     :replace="replace"
     dir="auto"
-    style="display: block;"
   >
     <KLabeledIcon
       :maxWidth="maxWidth"
