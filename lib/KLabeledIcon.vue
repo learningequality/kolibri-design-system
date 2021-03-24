@@ -6,7 +6,7 @@
         <KIcon v-if="icon" :icon="icon" :color="color || $themeTokens.text" style="top: 2px;" />
       </slot>
     </span>
-    <span class="label" :style="[ labelStyle, { 'white-space': 'nowrap' } ]">
+    <span class="label" :style="labelStyle">
       <!-- nest slot inside span to get alignment and flow correct for mixed RLT/LTR -->
       <span dir="auto" class="debug-warning">
         <!-- Use zero-width space when empty -->
@@ -108,8 +108,8 @@
 
   .labeled-icon-wrapper {
     position: relative;
-    display: block;
-    max-width: 100%;
+    display: inline-block;
+    width: 100%;
   }
 
   .icon {
