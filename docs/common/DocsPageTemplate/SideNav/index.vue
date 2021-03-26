@@ -9,7 +9,7 @@
 
       <DocsFilter v-model="filterText" />
 
-      <div class="nav-links">
+      <div class="nav-links" if="loaded">
         <NavSectionList
           v-for="section in visibleTableOfContents"
           :key="section.title"
@@ -40,6 +40,7 @@
     data() {
       return {
         filterText: '',
+        loaded: false,
       };
     },
     computed: {
@@ -65,6 +66,23 @@
         }
         return toc;
       },
+    },
+    watch: {
+      filterText(newValue) {
+        if (window) {
+          window.sessionStorage.setItem('nav-filter', newValue);
+        }
+      },
+    },
+    mounted() {
+      if (window) {
+        const val = window.sessionStorage.getItem('nav-filter');
+        if (val) {
+          this.filterText = val;
+        }
+      }
+      // don't show the nav until the filter is set
+      this.loaded = true;
     },
   };
 
@@ -100,7 +118,7 @@
     right: 16px;
     bottom: 0;
     left: 0;
-    height: 100px;
+    height: 64px;
     pointer-events: none;
     background-image: linear-gradient(to bottom, transparent, white);
   }
