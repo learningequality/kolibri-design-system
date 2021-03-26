@@ -1,7 +1,11 @@
 <template>
 
   <div class="nav-wrapper">
-    <nav class="sidenav">
+    <nav
+      ref="links"
+      class="sidenav"
+      @scroll="throttleHandleScroll"
+    >
       <h1 class="header">
         <file-svg src="./kolibri-logo.svg" class="logo" />
         <span class="header-text">Design System</span>
@@ -28,6 +32,7 @@
 
 <script>
 
+  import throttle from 'lodash/throttle';
   import NavSectionList from './NavSectionList';
   import { termList, matches } from '~/common/DocsFilter/utils';
   import tableOfContents from '~/tableOfContents.js';
@@ -76,13 +81,19 @@
     },
     mounted() {
       if (window) {
-        const val = window.sessionStorage.getItem('nav-filter');
-        if (val) {
-          this.filterText = val;
+        const filterText = window.sessionStorage.getItem('nav-filter');
+        if (filterText) {
+          this.filterText = filterText;
         }
+        this.$refs.links.scrollTop = window.sessionStorage.getItem('nav-scroll');
       }
-      // don't show the nav until the filter is set
+      // don't show the nav until the state is set
       this.loaded = true;
+    },
+    methods: {
+      throttleHandleScroll: throttle(function handleScroll() {
+        window.sessionStorage.setItem('nav-scroll', this.$refs.links.scrollTop);
+      }, 100),
     },
   };
 
