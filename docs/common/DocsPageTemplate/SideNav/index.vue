@@ -6,20 +6,22 @@
       class="sidenav"
       @scroll="throttleHandleScroll"
     >
-      <h1 class="header">
-        <file-svg src="./kolibri-logo.svg" class="logo" />
-        <span class="header-text">Design System</span>
-      </h1>
+      <template if="loaded">
+        <h1 class="header">
+          <file-svg src="./kolibri-logo.svg" class="logo" />
+          <span class="header-text">Design System</span>
+        </h1>
 
-      <DocsFilter v-model="filterText" />
+        <DocsFilter v-model="filterText" />
 
-      <div class="nav-links" if="loaded">
-        <NavSectionList
-          v-for="section in visibleTableOfContents"
-          :key="section.title"
-          :section="section"
-        />
-      </div>
+        <div class="nav-links">
+          <NavSectionList
+            v-for="section in visibleTableOfContents"
+            :key="section.title"
+            :section="section"
+          />
+        </div>
+      </template>
 
     </nav>
 
