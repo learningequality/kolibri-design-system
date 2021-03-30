@@ -21,8 +21,13 @@
         :color="hovering ? $themeTokens.primaryDark : $themeTokens.primary"
       />
     </slot>
-    <span class="link-text" :style="spanStyle">{{ text }}</span>
-    <!-- @slot Slot alternative to the `iconAfter` prop -->
+
+    <slot v-if="$slots.default"></slot>
+
+    <template v-else>
+      <span class="link-text" :style="spanStyle">{{ text }}</span>
+    </template>
+
     <slot name="iconAfter">
       <KIcon
         v-if="iconAfter"
@@ -31,15 +36,12 @@
         :color="hovering ? $themeTokens.primaryDark : $themeTokens.primary"
       />
     </slot>
-    <!-- @slot unknown purpose -->
-    <slot name="openInNewTab">
-      <KIcon
-        v-if="openInNewTab"
-        icon="openNewTab"
-        style="top: 4px;"
-        :color="hovering ? $themeTokens.primaryDark : $themeTokens.primary"
-      />
-    </slot>
+    <KIcon
+      v-if="openInNewTab"
+      icon="openNewTab"
+      style="top: 4px;"
+      :color="hovering ? $themeTokens.primaryDark : $themeTokens.primary"
+    />
   </a>
 
 </template>
