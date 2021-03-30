@@ -41,17 +41,21 @@ class Page {
     title, // used in side nav, page header, and document title
     isCode = false, // if true, format using <code> tag
     disabled = false, // placeholder - don't link
+    keywords = [], // additional terms to match
   } = {}) {
     this.path = path;
     this.title = title;
     this.isCode = isCode;
     this.disabled = disabled;
+    this.keywords = keywords;
   }
 }
 
 /***********************************************/
 /*   Table of contents                         */
 /***********************************************/
+
+const buttonRelatedItems = ['button', 'link'];
 
 export default [
   new Section({
@@ -132,6 +136,11 @@ export default [
         path: '/dragdrop',
         title: 'Drag and drop',
         disabled: true,
+      }),
+      new Page({
+        path: '/filters',
+        title: 'Filters',
+        disabled: false,
       }),
       new Page({
         path: '/fileuploader',
@@ -254,19 +263,19 @@ export default [
     autoSort: true,
     pages: [
       new Page({
-        path: '/KThemePlugin',
+        path: '/kthemeplugin',
         title: 'KThemePlugin',
         isCode: true,
         disabled: true,
       }),
       new Page({
-        path: '/KResponsiveWindowMixin',
+        path: '/kresponsivewindowmixin',
         title: 'KResponsiveWindowMixin',
         isCode: true,
         disabled: true,
       }),
       new Page({
-        path: '/KResponsiveElementMixin',
+        path: '/kresponsiveelementmixin',
         title: 'KResponsiveElementMixin',
         isCode: true,
         disabled: true,
@@ -278,139 +287,153 @@ export default [
     autoSort: true,
     pages: [
       new Page({
-        path: '/KEmptyPlaceholder',
+        path: '/kemptyplaceholder',
         title: 'KEmptyPlaceholder',
         isCode: true,
       }),
       new Page({
-        path: '/KCheckbox',
+        path: '/kcheckbox',
         title: 'KCheckbox',
         isCode: true,
+        keywords: ['button'],
       }),
       new Page({
-        path: '/KCircularLoader',
+        path: '/kcircularloader',
         title: 'KCircularLoader',
         isCode: true,
       }),
       new Page({
-        path: '/KLinearLoader',
+        path: '/klinearloader',
         title: 'KLinearLoader',
         isCode: true,
       }),
       new Page({
-        path: '/KDropdownMenu',
+        path: '/kdropdownmenu',
         title: 'KDropdownMenu',
         isCode: true,
         disabled: true,
       }),
       new Page({
-        path: '/KModal',
+        path: '/kmodal',
         title: 'KModal',
         isCode: true,
         disabled: true,
       }),
       new Page({
-        path: '/KRadioButton',
+        path: '/kradiobutton',
         title: 'KRadioButton',
         isCode: true,
       }),
       new Page({
-        path: '/KTooltip',
+        path: '/ktooltip',
         title: 'KTooltip',
         isCode: true,
         disabled: true,
       }),
       new Page({
-        path: '/KPageContainer',
+        path: '/kpagecontainer',
         title: 'KPageContainer',
         isCode: true,
         disabled: true,
       }),
       new Page({
-        path: '/KPageContainerDivider',
+        path: '/kpagecontainerdivider',
         title: 'KPageContainerDivider',
         isCode: true,
         disabled: true,
       }),
       new Page({
-        path: '/KPageContainerTabs',
+        path: '/kpagecontainertabs',
         title: 'KPageContainerTabs',
         isCode: true,
         disabled: true,
       }),
       new Page({
-        path: '/KPageContainerTabLink',
+        path: '/kpagecontainertablink',
         title: 'KPageContainerTabLink',
         isCode: true,
         disabled: true,
       }),
       new Page({
-        path: '/KIcon',
+        path: '/kicon',
         title: 'KIcon',
         isCode: true,
         disabled: true,
       }),
       new Page({
-        path: '/KLabeledIcon',
+        path: '/kiconbutton',
+        title: 'KIconButton',
+        isCode: true,
+        keywords: buttonRelatedItems,
+      }),
+      new Page({
+        path: '/klabeledicon',
         title: 'KLabeledIcon',
         isCode: true,
         disabled: true,
       }),
       new Page({
-        path: '/KSwitch',
+        path: '/kswitch',
         title: 'KSwitch',
         isCode: true,
+        keywords: ['button'],
       }),
       new Page({
-        path: '/KButton',
+        path: '/kbutton',
         title: 'KButton',
         isCode: true,
-        disabled: true,
+        keywords: buttonRelatedItems,
       }),
       new Page({
-        path: '/KExternalLink',
+        path: '/kexternallink',
         title: 'KExternalLink',
         isCode: true,
-        disabled: true,
+        keywords: buttonRelatedItems,
       }),
       new Page({
-        path: '/KRouterLink',
+        path: '/krouterlink',
         title: 'KRouterLink',
         isCode: true,
-        disabled: true,
+        keywords: buttonRelatedItems,
       }),
       new Page({
-        path: '/KContentRenderer',
+        path: '/kbuttongroup',
+        title: 'KButtonGroup',
+        isCode: true,
+        keywords: ['button'],
+      }),
+      new Page({
+        path: '/kcontentrenderer',
         title: 'KContentRenderer',
         isCode: true,
         disabled: true,
       }),
       new Page({
-        path: '/KGrid',
+        path: '/kgrid',
         title: 'KGrid',
         isCode: true,
         disabled: true,
       }),
       new Page({
-        path: '/KFixedGrid',
+        path: '/kfixedgrid',
         title: 'KFixedGrid',
         isCode: true,
         disabled: true,
       }),
       new Page({
-        path: '/KGridItem',
+        path: '/kgriditem',
         title: 'KGridItem',
         isCode: true,
         disabled: true,
       }),
       new Page({
-        path: '/KFixedGridItem',
+        path: '/kfixedgriditem',
         title: 'KFixedGridItem',
         isCode: true,
         disabled: true,
       }),
       new Page({
-        path: '/KTextfield',
+        path: '/ktextfield',
         title: 'KTextfield',
         isCode: true,
         disabled: true,

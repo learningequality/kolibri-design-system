@@ -5,8 +5,9 @@
     :disabled="disabled"
     :appearance="appearance"
     :appearanceOverrides="appearanceOverrides"
-    :buttonType="buttonType"
+    :type="buttonType"
     :aria-label="ariaLabel"
+    text=""
     v-on="$listeners"
   >
     <UiTooltip
@@ -32,38 +33,61 @@
     name: 'KIconButton',
     components: { UiTooltip },
     props: {
+      /**
+       * Button appearance: `'raised-button'` or `'flat-button'`
+       */
       appearance: {
         type: String,
         default: 'flat-button',
       },
+      /**
+       * Name of icon to display
+       */
       icon: {
         type: String,
         required: true,
       },
-      /* color: hex or rgb[a] color */
+      /**
+       * Optional hex or rgb[a] color for the button background
+       */
       color: {
         type: String,
         default: null,
       },
+      /**
+       * Whether or not button is disabled
+       */
       disabled: {
         type: Boolean,
         default: false,
       },
+      /**
+       * HTML button `type` attribute (e.g. `'submit'`, `'reset'`)
+       */
       buttonType: {
         type: String,
         default: 'button',
       },
+      /**
+       * Button size: `'mini'`, `'small'`, `'regular'`, or `'large'`
+       */
       size: {
         type: String,
-        default: null,
+        default: 'regular',
       },
+      /**
+       * `aria-label` attribute
+       */
       ariaLabel: {
         type: String,
         default: null,
       },
+      /**
+       * Tooltip label
+       */
       tooltip: {
         type: String,
-        default: null,
+        required: true,
       },
     },
     computed: {
@@ -74,9 +98,10 @@
           ...this.sizeStyles,
           // Circle
           borderRadius: '50%',
-          // Remove mins & padding
+          // Added minWidth to prevent squished/oval effect
+          minWidth: '32px',
+          // Remove minHeight & padding
           minHeight: '0px',
-          minWidth: '0px',
           padding: '0',
           ':hover': hover,
         };

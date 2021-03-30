@@ -44,15 +44,18 @@
       </div>
 
       <div
-        v-if="!label && $slots.default"
+        v-if="$slots.default"
         class="k-checkbox-label"
       >
-        <!-- @slot Used as an alternative to the `label` prop -->
         <slot></slot>
+        <div v-if="description" class="description"> 
+          {{ description }} 
+        </div>
       </div>
 
+      <!-- In this case, we presume that there is a `label` prop given -->
       <label
-        v-else-if="label && !$slots.default"
+        v-else
         dir="auto"
         class="k-checkbox-label"
         :for="id"
@@ -61,6 +64,9 @@
         @click.prevent
       >
         {{ label }}
+        <div v-if="description" class="description"> 
+          {{ description }} 
+        </div>
       </label>
 
     </div>
@@ -111,6 +117,14 @@
       disabled: {
         type: Boolean,
         default: false,
+      },
+      /**
+       * Description - subtext to the label
+       */
+      description: {
+        type: String,
+        default: null,
+        required: false,
       },
     },
     data: () => ({
@@ -239,6 +253,11 @@
     top: 0;
     width: $checkbox-height;
     height: $checkbox-height;
+  }
+
+  .description {
+    font-size: 12px;
+    line-height: normal;
   }
 
 </style>

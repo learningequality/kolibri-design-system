@@ -79,7 +79,7 @@
         if (this.pull)
           return `https://github.com/learningequality/kolibri-design-system/pull/${this.pull}`;
         if (this.issue)
-          return `https://github.com/learningequality/kolibri-design-system/issue/${this.issue}`;
+          return `https://github.com/learningequality/kolibri-design-system/issues/${this.issue}`;
         log.error(`No URL, PR, or issue provided`);
         return undefined;
       },

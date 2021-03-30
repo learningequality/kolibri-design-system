@@ -12,6 +12,7 @@
     @mouseenter="hovering = true"
     @mouseleave="hovering = false"
   >
+    <!-- @slot Slot alternative to the `icon` prop -->
     <slot name="icon">
       <KIcon
         v-if="icon"
@@ -62,7 +63,7 @@
        */
       href: {
         type: String,
-        required: true,
+        default: null,
       },
       /**
        * Specifies that the file is meant to be downloaded, not displayed in a separate tab.

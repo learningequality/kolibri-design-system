@@ -11,7 +11,10 @@
     </thead>
     <tbody>
       <tr v-for="(event, i) in api" :key="i">
-        <td><code>{{ event.name }}</code></td>
+        <td class="first-col">
+          <code>{{ event.name }}</code>
+          <DocsAnchorTarget :anchor="`#event:${event.name}`" />
+        </td>
         <td>
           <vue-simple-markdown v-if="event.description" :source="event.description" />
           <KEmptyPlaceholder v-else />
