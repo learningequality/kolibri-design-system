@@ -80,14 +80,14 @@
        */
       ariaLabel: {
         type: String,
-        default: null,  // https://github.com/learningequality/kolibri-design-system/issues/168
+        default: null, // https://github.com/learningequality/kolibri-design-system/issues/168
       },
       /**
        * Tooltip label
        */
       tooltip: {
         type: String,
-        default: null,  // https://github.com/learningequality/kolibri-design-system/issues/168
+        default: null, // https://github.com/learningequality/kolibri-design-system/issues/168
       },
     },
     computed: {
