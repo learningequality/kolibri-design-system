@@ -70,7 +70,7 @@
         if (path !== '/') {
           path = path.replace(/\/$/, '');
         }
-        // Search for page
+        // search for page
         for (const section of tableOfContents) {
           for (const page of section.pages) {
             if (path === page.path) {
@@ -78,8 +78,8 @@
             }
           }
         }
-        // Page not found
-        consola.error(`'${path}' not found in pages.js`);
+        // page not found
+        consola.error(`'${path}' not found`);
         return undefined;
       },
       pageSections() {
