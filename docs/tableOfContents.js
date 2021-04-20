@@ -56,6 +56,7 @@ class Page {
 /***********************************************/
 
 const buttonRelatedItems = ['button', 'link'];
+const textRelatedItems = ['text', 'area', 'field', 'box'];
 
 export default [
   new Section({
@@ -149,6 +150,7 @@ export default [
       new Page({
         path: '/textfields',
         title: 'Text fields',
+        keywords: textRelatedItems,
       }),
     ],
   }),
@@ -302,10 +304,10 @@ export default [
         disabled: true,
       }),
       new Page({
-        path: '/ktextfield',
-        title: 'KTextfield',
+        path: '/ktextbox',
+        title: 'KTextbox',
         isCode: true,
-        disabled: true,
+        keywords: textRelatedItems,
       }),
     ],
   }),

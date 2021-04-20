@@ -22,8 +22,8 @@
       :rows="3"
       @input="updateText"
       @keydown="emitKeydown"
-      @focus="$emit('focus')"
-      @blur="$emit('blur')"
+      @focus="emitFocus"
+      @blur="emitBlur"
     />
   </div>
 
@@ -43,35 +43,28 @@
     inheritAttrs: true,
     props: {
       /**
-       * v-model
-       */
-      value: {
-        type: [String, Number],
-        default: null,
-      },
-      /**
-       * Label
+       * Label for the text field
        */
       label: {
         type: String,
         required: true,
       },
       /**
-       * Whether or not disabled
+       * Value of the text field
        */
-      disabled: {
-        type: Boolean,
-        default: false,
+      value: {
+        type: [String, Number],
+        default: null,
       },
       /**
-       * Whether or not input is invalid
+       * Whether or not the current `value` is invalid
        */
       invalid: {
         type: Boolean,
         default: false,
       },
       /**
-       * Text displayed when the user is notified of invalid input
+       * Text conditionally displayed based on values of `invalid` and `showInvalidText`
        */
       invalidText: {
         type: String,
@@ -86,6 +79,13 @@
         default: false,
       },
       /**
+       * Whether or not the field is disabled
+       */
+      disabled: {
+        type: Boolean,
+        default: false,
+      },
+      /**
        * Whether or not to autofocus
        */
       autofocus: {
@@ -93,7 +93,7 @@
         default: false,
       },
       /**
-       * Max allowed length of input
+       * Maximum number of characters for `value`
        */
       maxlength: {
         type: Number,
@@ -114,28 +114,28 @@
         default: null,
       },
       /**
-       * HTML5 type of input (text, password, number, etc.)
+       * HTML5 type of input (`text`, `password`, `number`, etc.)
        */
       type: {
         type: String,
         default: 'text',
       },
       /**
-       * Minimum value, used when type is 'number'
+       * Minimum value (when `value` type is `number`)
        */
       min: {
         type: Number,
         default: null,
       },
       /**
-       * Maximum value, used when type is 'number'
+       * Maximum value (when `value` type is `number`)
        */
       max: {
         type: Number,
         default: null,
       },
       /**
-       * Display as text area.
+       * Whether to display as a multi-line text area
        */
       textArea: {
         type: Boolean,
@@ -169,27 +169,41 @@
     },
     methods: {
       updateText() {
-        // v-model is just a :value + @input
         /**
-         * Emits input event with new value
+         * @private
+         * Emitted on each change with new `value`
          */
         this.$emit('input', this.currentText);
       },
       /**
-       * @public
+       * @private
+       * Resets text field value to default.
+       * Unclear if this is used anywhere
        */
       reset() {
         this.$refs.textbox.reset();
       },
       emitKeydown(e) {
         /**
-         * Emits keydown event
+         * Emitted with `keydown` events
          */
         this.$emit('keydown', e);
       },
+      emitBlur(e) {
+        /**
+         * Emitted with `blur` events
+         */
+        this.$emit('blur', e);
+      },
+      emitFocus(e) {
+        /**
+         * Emitted with `focus` events
+         */
+        this.$emit('focus', e);
+      },
       /**
        * @public
-       * Focuses on the textbox
+       * Puts keyboard focus in the text field
        */
       focus() {
         this.changedOrFocused = true;
