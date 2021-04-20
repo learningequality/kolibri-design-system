@@ -6,7 +6,7 @@
   "license": "MIT",
   "author": "Learning Equality",
   "scripts": {
-    "dev": "npm-run-all --parallel _dev-only _lint-watch-fix _pregenerate-watch pregenerate",
+    "dev": "npm-run-all --parallel _dev-only _lint-watch-fix _api-watch pregenerate",
     "generate": "yarn run pregenerate && nuxt generate",
     "lint": "kolibri-tools lint '**/*.{js,vue,scss,less,css}' -i ,'**/node_modules/**','**/.nuxt/**','**/dist/**','**/lib/KIcon/precompiled-icons/**','**/lib/keen/**','**/docs/environment.js','**/docs/jsdocs.js'",
     "lint-fix": "yarn lint -w",
@@ -16,7 +16,7 @@
     "precompile-svgs": "rm -rf lib/KIcon/precompiled-icons && node utils/precompileSvgs.js",
     "_lint-watch-fix": "yarn lint -w -m",
     "_test": "jest",
-    "_pregenerate-watch": "chokidar \"**/K*.vue\" -c \"node utils/pregenerate.js\""
+    "_api-watch": "chokidar \"**/lib/**\" -c \"node utils/extractApi.js\""
   },
   "files": [
     "lib"
