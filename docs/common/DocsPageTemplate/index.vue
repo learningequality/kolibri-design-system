@@ -24,6 +24,7 @@
           :key="i"
           :title="section.title"
           :anchor="section.anchor"
+          fullwidth
         >
           <component :is="section.component" :api="api[section.key]" />
         </DocsPageSection>

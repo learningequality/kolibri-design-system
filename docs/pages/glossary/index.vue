@@ -16,7 +16,7 @@
       <table style="max-width: 1000px">
         <thead>
           <tr>
-            <th style="min-width: 150px">
+            <th style="min-width: 200px">
               Term
             </th>
             <th>Part of speech</th>
