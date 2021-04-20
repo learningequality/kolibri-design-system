@@ -13,7 +13,7 @@
       class="k-tooltip"
       :style="{ backgroundColor: $themeTokens.text, color: $themeTokens.textInverted }"
     >
-      <!--Default slot that will contain the tooltip content.-->
+      <!-- @slot Text of the tooltip -->
       <slot></slot>
     </div>
   </Popper>
@@ -36,18 +36,19 @@
     },
     props: {
       /**
-       * String of ref which tooltip will be positioned relative to.
+       * Name of `ref` element within the parent's `$refs` object. Tooltip will be
+       * positioned relative to this element.
        */
       reference: {
         type: String,
         required: true,
       },
       /**
-       * Parent's refs object which should contain the reference.
+       * Parent's `$refs` object which should contain the named `reference`.
        */
       refs: {
         type: Object,
-        default: () => {},
+        required: true,
       },
       /**
        * Whether or not tooltip is disabled
@@ -57,7 +58,7 @@
         default: false,
       },
       /**
-       * Placement of tooltip relative to reference element. Supports any popper.js placement string
+       * Placement of tooltip relative to `reference`. Supports any _popper.js_ placement string
        */
       placement: {
         type: String,
