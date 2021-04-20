@@ -142,8 +142,9 @@
         default: false,
       },
       /**
-       * @private
-       * Whether or not to display as a floating label
+       * @ignore
+       * Whether or not to display as a floating label.
+       * This should not actually be used
        */
       floatingLabel: {
         type: Boolean,
@@ -170,7 +171,6 @@
     methods: {
       updateText() {
         /**
-         * @private
          * Emitted on each change with new `value`
          */
         this.$emit('input', this.currentText);
@@ -178,11 +178,13 @@
       /**
        * @private
        * Resets text field value to default.
-       * Unclear if this is used anywhere
+       * Unclear if this is used anywhere.
        */
+      /* eslint-disable kolibri/vue-no-unused-methods */
       reset() {
         this.$refs.textbox.reset();
       },
+      /* eslint-enable kolibri/vue-no-unused-methods */
       emitKeydown(e) {
         /**
          * Emitted with `keydown` events
