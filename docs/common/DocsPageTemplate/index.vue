@@ -47,6 +47,20 @@
   import jsdocs from '~/jsdocs.js';
   import tableOfContents from '~/tableOfContents.js';
 
+  function sectionsForDefaultSlot(children) {
+    if (children === undefined) {
+      return [];
+    }
+    return children
+      .filter(
+        node =>
+          node.componentOptions &&
+          node.componentOptions.tag === DocsPageSection.name &&
+          node.componentOptions.propsData.anchor
+      )
+      .map(node => node.componentOptions.propsData);
+  }
+
   export default {
     name: 'DocsPageTemplate',
     components: {
@@ -84,14 +98,7 @@
       },
       pageSections() {
         // look at children for sections and extract links
-        const pageSections = this.$slots.default
-          .filter(
-            node =>
-              node.componentOptions &&
-              node.componentOptions.tag === DocsPageSection.name &&
-              node.componentOptions.propsData.anchor
-          )
-          .map(node => node.componentOptions.propsData);
+        const pageSections = sectionsForDefaultSlot(this.$slots.default);
         // add any applicable API sections
         this.apiSections.forEach(section => pageSections.push(section));
         return pageSections;
