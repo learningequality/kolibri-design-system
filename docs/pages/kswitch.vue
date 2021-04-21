@@ -1,6 +1,6 @@
 <template>
 
-  <DocsPageTemplate>
+  <DocsPageTemplate apiDocs>
 
     <DocsPageSection title="Overview" anchor="#overview">
       <DocsShow>
