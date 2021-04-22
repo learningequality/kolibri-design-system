@@ -189,7 +189,6 @@ export default [
         path: '/kmodal',
         title: 'KModal',
         isCode: true,
-        disabled: true,
       }),
       new Page({
         path: '/kradiobutton',

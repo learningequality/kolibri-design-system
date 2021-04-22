@@ -6,6 +6,9 @@
       <p>
         Simple modals break the user’s attention away from the main UI in order to focus attention on a singular action or task. They can contain alerts about important information and allow the user to edit data.
       </p>
+      <p>
+        You can use the <DocsLibraryLink component="KModal" /> component to implement modals.
+      </p>
     </DocsPageSection>
 
     <DocsPageSection title="Layout" anchor="#layout">
