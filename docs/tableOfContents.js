@@ -209,7 +209,6 @@ export default [
         path: '/kicon',
         title: 'KIcon',
         isCode: true,
-        disabled: true,
       }),
       new Page({
         path: '/kiconbutton',
