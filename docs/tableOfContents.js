@@ -205,7 +205,6 @@ export default [
         path: '/kpagecontainer',
         title: 'KPageContainer',
         isCode: true,
-        disabled: true,
       }),
       new Page({
         path: '/kicon',

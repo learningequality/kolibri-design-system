@@ -5,6 +5,7 @@
     :class="classes"
     :style="{ backgroundColor: $themeTokens.surface, marginTop: `${topMargin}px` }"
   >
+    <!-- @slot Contents of the page container -->
     <slot></slot>
   </div>
 
@@ -19,11 +20,16 @@
     name: 'KPageContainer',
     mixins: [KResponsiveWindowMixin],
     props: {
-      // If true, removes the padding inside the container
+      /**
+       * Whether or not to disable internal container padding
+       */
       noPadding: {
         type: Boolean,
         default: false,
       },
+      /**
+       * Value in pixels for top margin
+       */
       topMargin: {
         type: Number,
         default: 24,
