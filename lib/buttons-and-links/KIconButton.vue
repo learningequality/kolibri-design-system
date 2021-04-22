@@ -34,18 +34,18 @@
     components: { UiTooltip },
     props: {
       /**
-       * Button appearance: `'raised-button'` or `'flat-button'`
-       */
-      appearance: {
-        type: String,
-        default: 'flat-button',
-      },
-      /**
        * Name of icon to display
        */
       icon: {
         type: String,
         required: true,
+      },
+      /**
+       * Button appearance: `'raised-button'` or `'flat-button'`
+       */
+      appearance: {
+        type: String,
+        default: 'flat-button',
       },
       /**
        * Optional hex or rgb[a] color for the button background
