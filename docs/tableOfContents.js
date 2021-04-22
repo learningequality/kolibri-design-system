@@ -221,7 +221,6 @@ export default [
         path: '/klabeledicon',
         title: 'KLabeledIcon',
         isCode: true,
-        disabled: true,
       }),
       new Page({
         path: '/kswitch',
