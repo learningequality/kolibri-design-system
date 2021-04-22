@@ -208,24 +208,6 @@ export default [
         disabled: true,
       }),
       new Page({
-        path: '/kpagecontainerdivider',
-        title: 'KPageContainerDivider',
-        isCode: true,
-        disabled: true,
-      }),
-      new Page({
-        path: '/kpagecontainertabs',
-        title: 'KPageContainerTabs',
-        isCode: true,
-        disabled: true,
-      }),
-      new Page({
-        path: '/kpagecontainertablink',
-        title: 'KPageContainerTabLink',
-        isCode: true,
-        disabled: true,
-      }),
-      new Page({
         path: '/kicon',
         title: 'KIcon',
         isCode: true,
