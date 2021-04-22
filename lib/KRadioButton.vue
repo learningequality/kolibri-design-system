@@ -19,8 +19,8 @@
       :autofocus="autofocus"
       @focus="active = true"
       @blur="active = false"
-      @change="update($event)"
-      @keydown="$emit('keydown', $event)"
+      @change="update"
+      @keydown="keydown"
     >
 
     <!-- the radio buttons the user sees -->
@@ -48,6 +48,7 @@
       >
         {{ description }}
       </div>
+      <!-- @slot Shown below label text and description -->
       <slot></slot>
     </span>
 
@@ -68,42 +69,42 @@
     },
     props: {
       /**
-       * Label
+       * Label text
        */
       label: {
         type: String,
         required: true,
       },
       /**
-       * If provided, description underneath label
-       */
-      description: {
-        type: String,
-        default: null,
-      },
-      /**
-       * Value that is currently assigned via v-model
+       * Component `data` with which to associate this radio button and its siblings
        */
       currentValue: {
         type: [String, Number, Boolean],
         required: true,
       },
       /**
-       * Unique value of this particular radio button
+       * Unique value that will be assigned to `v-model` data when this radio button is selected
        */
       value: {
         type: [String, Number, Boolean],
         required: true,
       },
       /**
-       * Disabled state
+       * If provided, description underneath label text
+       */
+      description: {
+        type: String,
+        default: null,
+      },
+      /**
+       * Whether or not the field is disabled
        */
       disabled: {
         type: Boolean,
         default: false,
       },
       /**
-       * Autofocus on mount
+       * Whether or not to auto-focus on mount
        */
       autofocus: {
         type: Boolean,
@@ -128,22 +129,29 @@
         return this.disabled ? { fill: this.$themeTokens.textDisabled } : {};
       },
     },
-
     methods: {
       /**
        * @public
+       * Puts keyboard focus on the radiobutton
        */
       focus() {
         this.$refs.input.focus();
       },
+      keydown(event) {
+        /**
+         * Emitted with `keydown` events
+         */
+        this.$emit('keydown', event);
+      },
       update(event) {
         /**
-         * Emits change event
+         * Emitted on each change with new boolean of button state
          */
         this.$emit('change', this.isChecked, event);
 
-        // emitting input, resolves browser compatibility issues
-        // with v-model's @input default and <input type=radio>
+        /**
+         * Used to set `value` to `v-model` when checked
+         */
         this.$emit('input', this.value);
       },
     },
