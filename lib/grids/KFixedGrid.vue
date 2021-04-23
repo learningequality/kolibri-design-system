@@ -2,6 +2,7 @@
 
   <div style="direction: inherit;">
     <div class="pure-g" :style="style">
+      <!-- @slot Children of a `KFixedGrid` must be `KFixedGridItem` components -->
       <slot></slot>
     </div>
     <Overlay
@@ -30,7 +31,7 @@
     mixins: [KResponsiveWindowMixin],
     props: {
       /**
-       * The number of columns. Can be an integer between 2 and 12
+       * The number of columns. Can be an integer between `2` and `12`
        */
       numCols: {
         type: [Number, String],
@@ -44,8 +45,8 @@
         },
       },
       /**
-       * Set the size of gutter in pixels. If not provided, the gutter is set tp 16px
-       * if either window dimension is less than 600px, and set to 24px otherwise.
+       * The size of column gutters in pixels. If not provided, the gutter is set to `16px`
+       * if either window dimension is less than `600px`, and set to `24px` otherwise.
        */
       gutter: {
         type: [Number, String],
@@ -53,6 +54,7 @@
         validator: validateGutter,
       },
       /**
+       * @ignore
        * EXPERIMENTAL: Extra styles to attach to the internal grid DOM node
        */
       gridStyle: {
@@ -60,7 +62,7 @@
         default: () => ({}),
       },
       /**
-       * EXPERIMENTAL: Show gridlines for debugging purposes
+       * Show gridlines for debugging purposes
        */
       debug: {
         type: Boolean,

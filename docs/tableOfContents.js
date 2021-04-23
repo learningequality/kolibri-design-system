@@ -55,8 +55,9 @@ class Page {
 /*   Table of contents                         */
 /***********************************************/
 
-const buttonRelatedItems = ['button', 'link'];
-const textRelatedItems = ['text', 'area', 'field', 'box'];
+const buttonRelatedKeywords = ['button', 'link'];
+const textRelatedKeywords = ['text', 'area', 'field', 'box'];
+const layoutRelatedKeywords = ['grid', 'layout', 'container', 'page'];
 
 export default [
   new Section({
@@ -98,6 +99,7 @@ export default [
       new Page({
         path: '/layout',
         title: 'Layout',
+        keywords: layoutRelatedKeywords,
       }),
       new Page({
         path: '/writing',
@@ -150,7 +152,7 @@ export default [
       new Page({
         path: '/textfields',
         title: 'Text fields',
-        keywords: textRelatedItems,
+        keywords: textRelatedKeywords,
       }),
     ],
   }),
@@ -204,6 +206,7 @@ export default [
         path: '/kpagecontainer',
         title: 'KPageContainer',
         isCode: true,
+        keywords: layoutRelatedKeywords,
       }),
       new Page({
         path: '/kicon',
@@ -214,7 +217,7 @@ export default [
         path: '/kiconbutton',
         title: 'KIconButton',
         isCode: true,
-        keywords: buttonRelatedItems,
+        keywords: buttonRelatedKeywords,
       }),
       new Page({
         path: '/klabeledicon',
@@ -231,19 +234,19 @@ export default [
         path: '/kbutton',
         title: 'KButton',
         isCode: true,
-        keywords: buttonRelatedItems,
+        keywords: buttonRelatedKeywords,
       }),
       new Page({
         path: '/kexternallink',
         title: 'KExternalLink',
         isCode: true,
-        keywords: buttonRelatedItems,
+        keywords: buttonRelatedKeywords,
       }),
       new Page({
         path: '/krouterlink',
         title: 'KRouterLink',
         isCode: true,
-        keywords: buttonRelatedItems,
+        keywords: buttonRelatedKeywords,
       }),
       new Page({
         path: '/kbuttongroup',
@@ -261,31 +264,31 @@ export default [
         path: '/kgrid',
         title: 'KGrid',
         isCode: true,
-        disabled: true,
+        keywords: layoutRelatedKeywords,
       }),
       new Page({
         path: '/kfixedgrid',
         title: 'KFixedGrid',
         isCode: true,
-        disabled: true,
+        keywords: layoutRelatedKeywords,
       }),
       new Page({
         path: '/kgriditem',
         title: 'KGridItem',
         isCode: true,
-        disabled: true,
+        keywords: layoutRelatedKeywords,
       }),
       new Page({
         path: '/kfixedgriditem',
         title: 'KFixedGridItem',
         isCode: true,
-        disabled: true,
+        keywords: layoutRelatedKeywords,
       }),
       new Page({
         path: '/ktextbox',
         title: 'KTextbox',
         isCode: true,
-        keywords: textRelatedItems,
+        keywords: textRelatedKeywords,
       }),
     ],
   }),

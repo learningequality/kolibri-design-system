@@ -6,6 +6,7 @@
     :gridStyle="gridStyle"
     :debug="debug"
   >
+    <!-- @slot Children of a `KFixedGrid` must be `KGridItem` components -->
     <slot></slot>
   </KFixedGrid>
 
@@ -21,7 +22,7 @@
   /**
    * Grid layout with a dynamic number of columns based on the current window width.
    *
-   * The grid will have 4 columns for small windows (width < 840 px), 8 columns
+   * The grid will have 4 columns for small windows (width < 840px), 8 columns
    * for medium windows (840 px <= width < 960), and 12 columns for large windows
    * (960px <=  width)
    */
@@ -31,8 +32,8 @@
     mixins: [KResponsiveWindowMixin],
     props: {
       /**
-       * Set the size of gutter in pixels. If not provided, the gutter is set tp 16px
-       * if either window dimension is less than 600px, and set to 24px otherwise.
+       * The size of column gutters in pixels. If not provided, the gutter is set to `16px`
+       * if either window dimension is less than `600px`, and set to `24px` otherwise.
        */
       gutter: {
         type: [Number, String],
@@ -40,16 +41,15 @@
         validator: validateGutter,
       },
       /**
+       * @ignore
        * EXPERIMENTAL: Extra styles to attach to the internal grid DOM node
-       * @protected
        */
       gridStyle: {
         type: Object,
         default: () => ({}),
       },
       /**
-       * EXPERIMENTAL: Show gridlines for debugging purposes
-       * @protected
+       * Show gridlines for debugging purposes
        */
       debug: {
         type: Boolean,

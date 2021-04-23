@@ -2,6 +2,7 @@
 
   <div class="grid-item" :class="unitClass" :style="computedStyle">
     <div :class="{ debug: gridMetrics.debug, error: !validInputs }">
+      <!-- @slot Contents of the grid item -->
       <slot></slot>
     </div>
   </div>
@@ -33,8 +34,8 @@
         validator: validateSpan,
       },
       /**
-       * Horizontal alignment of the item's contents. Can be 'right',
-       * 'left', or 'center'.
+       * Horizontal alignment of the item's contents. Can be `'right'`,
+       * `'left'`, or `'center'`.
        */
       alignment: {
         type: String,
