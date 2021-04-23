@@ -15,23 +15,35 @@ const docsOutputString = `
 
 export default `;
 
+function notTest(filePath) {
+  return !filePath.includes('.spec.');
+}
+
 async function writeApi() {
   const componentFolder = path.resolve('./lib/');
-  const simpleFiles = await globby('**/K*.vue', { cwd: componentFolder });
+  const simpleFiles = await globby('**/K*.{vue,js}', { cwd: componentFolder });
   const output = {};
 
-  for (const filename of simpleFiles) {
+  for (const filename of simpleFiles.filter(notTest)) {
     const filepath = path.resolve(componentFolder, filename);
-    const val = await docGenAPI.parse(filepath);
-    output[val.displayName] = val;
+    try {
+      const val = await docGenAPI.parse(filepath);
+      output[val.displayName] = val;
+    } catch (e) {
+      consola.warn(`Could not extract docs from ${filepath}`);
+    }
   }
 
-  const complexFiles = await globby('**/K*/index.vue', { cwd: componentFolder });
+  const complexFiles = await globby('**/K*/index.{vue,js}', { cwd: componentFolder });
 
-  for (const filename of complexFiles) {
+  for (const filename of complexFiles.filter(notTest)) {
     const filepath = path.resolve(componentFolder, filename);
-    const val = await docGenAPI.parse(filepath);
-    output[val.displayName] = val;
+    try {
+      const val = await docGenAPI.parse(filepath);
+      output[val.displayName] = val;
+    } catch (e) {
+      consola.warn(`Could not extract docs from ${filepath}`);
+    }
   }
 
   const outputPath = path.resolve('./docs/jsdocs.js');

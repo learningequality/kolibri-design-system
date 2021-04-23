@@ -257,7 +257,6 @@ export default [
         path: '/kcontentrenderer',
         title: 'KContentRenderer',
         isCode: true,
-        disabled: true,
       }),
       new Page({
         path: '/kgrid',
