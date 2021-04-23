@@ -81,62 +81,66 @@
         Each breakpoint range has default: number of columns, gutter width, margin, and padding. These defaults can be changed according to exceptional needs.
       </p>
       <table>
-        <tr>
-          <th>Range</th>
-          <th><DocsExternalLink href="https://v15.vuetifyjs.com/en/framework/grid" text="Vuetify" /></th>
-          <th>KGrid</th>
-          <th>Columns</th>
-          <th>Margins &amp; Gutters</th>
-          <th>Padding</th>
-        </tr>
-        <tr>
-          <td>0-479px</td>
-          <td>xs</td>
-          <td>Level 0</td>
-          <td>4</td>
-          <td>16px</td>
-          <td>16px</td>
-        </tr>
-        <tr>
-          <td>480-599px</td>
-          <td>xs</td>
-          <td>Level 1</td>
-          <td>4</td>
-          <td>16px</td>
-          <td>16px</td>
-        </tr>
-        <tr>
-          <td>600-839px</td>
-          <td>sm</td>
-          <td>Level 2</td>
-          <td>8</td>
-          <td>16px</td>
-          <td>24px</td>
-        </tr>
-        <tr>
-          <td>840-959px</td>
-          <td>sm</td>
-          <td>Level 3</td>
-          <td>12</td>
-          <td>16px</td>
-          <td>24px</td>
-        </tr>
-        <tr>
-          <td>960-1263px</td>
-          <td>md</td>
-          <td>Level 4</td>
-          <td>12</td>
-          <td>24px</td>
-          <td>24px</td>
-        </tr>
-        <tr>
-          <td>1264-1430px</td>
-          <td>lg</td>
-          <td>Level 5</td>
-          <td>12</td>
-          <td>24px</td>
-          <td>24px</td>
-        </tr>
+        <thead>
+          <tr>
+            <th>Range</th>
+            <th><DocsExternalLink href="https://v15.vuetifyjs.com/en/framework/grid" text="Vuetify" /></th>
+            <th>KGrid</th>
+            <th>Columns</th>
+            <th>Margins &amp; Gutters</th>
+            <th>Padding</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>0-479px</td>
+            <td>xs</td>
+            <td>Level 0</td>
+            <td>4</td>
+            <td>16px</td>
+            <td>16px</td>
+          </tr>
+          <tr>
+            <td>480-599px</td>
+            <td>xs</td>
+            <td>Level 1</td>
+            <td>4</td>
+            <td>16px</td>
+            <td>16px</td>
+          </tr>
+          <tr>
+            <td>600-839px</td>
+            <td>sm</td>
+            <td>Level 2</td>
+            <td>8</td>
+            <td>16px</td>
+            <td>24px</td>
+          </tr>
+          <tr>
+            <td>840-959px</td>
+            <td>sm</td>
+            <td>Level 3</td>
+            <td>12</td>
+            <td>16px</td>
+            <td>24px</td>
+          </tr>
+          <tr>
+            <td>960-1263px</td>
+            <td>md</td>
+            <td>Level 4</td>
+            <td>12</td>
+            <td>24px</td>
+            <td>24px</td>
+          </tr>
+          <tr>
+            <td>1264-1430px</td>
+            <td>lg</td>
+            <td>Level 5</td>
+            <td>12</td>
+            <td>24px</td>
+            <td>24px</td>
+          </tr>
+        </tbody>
       </table>
       <p>Define <DocsExternalLink href="https://material.io/design/layout/spacing-methods.html#spacing" text="keylines" /> in increments of 4px or 8 px when UI elements must be placed outside of the alignment to columns and rows within a grid.</p>
     </DocsPageSection>

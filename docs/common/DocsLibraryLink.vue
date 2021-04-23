@@ -1,7 +1,7 @@
 <template>
 
-  <a :href="'/' + page">
-    <code>{{ page }}</code>
+  <a :href="'/' + component.toLowerCase()">
+    <code>{{ component }}</code>
   </a>
 
 </template>
@@ -12,7 +12,7 @@
   export default {
     name: 'DocsLibraryLink',
     props: {
-      page: {
+      component: {
         type: String,
         required: true,
       },

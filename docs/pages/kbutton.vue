@@ -32,11 +32,11 @@
         <li>
           <DocsInternalLink text="Buttons and links" href="/buttons" /> has an overview and usage guidance
         </li>
-        <li><DocsLibraryLink page="KExternalLink" /> and <DocsLibraryLink page="KRouterLink" /> are similar but handle events differently</li>
+        <li><DocsLibraryLink component="KExternalLink" /> and <DocsLibraryLink component="KRouterLink" /> are similar but handle events differently</li>
         <li>
-          <DocsLibraryLink page="KIconButton" /> has a tooltip instead of a text label
+          <DocsLibraryLink component="KIconButton" /> has a tooltip instead of a text label
         </li>
-        <li><DocsLibraryLink page="KButtonGroup" /> is used for button layout</li>
+        <li><DocsLibraryLink component="KButtonGroup" /> is used for button layout</li>
       </ul>
     </DocsPageSection>
 

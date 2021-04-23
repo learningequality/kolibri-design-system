@@ -24,7 +24,7 @@
         </KButtonGroup>
       </DocsShow>
       <p>
-        It is most often used with the <DocsLibraryLink page="KButton" />, <DocsLibraryLink page="KRouterLink" /> and <DocsLibraryLink page="KExternalLink" /> components.
+        It is most often used with the <DocsLibraryLink component="KButton" />, <DocsLibraryLink component="KRouterLink" /> and <DocsLibraryLink component="KExternalLink" /> components.
       </p>
     </DocsPageSection>
 

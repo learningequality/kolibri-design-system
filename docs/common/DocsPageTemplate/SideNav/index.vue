@@ -1,21 +1,27 @@
 <template>
 
   <div class="nav-wrapper">
-    <nav class="sidenav">
-      <h1 class="header">
-        <file-svg src="./kolibri-logo.svg" class="logo" />
-        <span class="header-text">Design System</span>
-      </h1>
+    <nav
+      ref="links"
+      class="sidenav"
+      @scroll="throttleHandleScroll"
+    >
+      <template if="loaded">
+        <h1 class="header">
+          <file-svg src="./kolibri-logo.svg" class="logo" />
+          <span class="header-text">Design System</span>
+        </h1>
 
-      <DocsFilter v-model="filterText" />
+        <DocsFilter v-model="filterText" />
 
-      <div class="nav-links">
-        <NavSectionList
-          v-for="section in visibleTableOfContents"
-          :key="section.title"
-          :section="section"
-        />
-      </div>
+        <div class="nav-links">
+          <NavSectionList
+            v-for="section in visibleTableOfContents"
+            :key="section.title"
+            :section="section"
+          />
+        </div>
+      </template>
 
     </nav>
 
@@ -28,6 +34,7 @@
 
 <script>
 
+  import throttle from 'lodash/throttle';
   import NavSectionList from './NavSectionList';
   import { termList, matches } from '~/common/DocsFilter/utils';
   import tableOfContents from '~/tableOfContents.js';
@@ -40,6 +47,7 @@
     data() {
       return {
         filterText: '',
+        loaded: false,
       };
     },
     computed: {
@@ -65,6 +73,29 @@
         }
         return toc;
       },
+    },
+    watch: {
+      filterText(newValue) {
+        if (window) {
+          window.sessionStorage.setItem('nav-filter', newValue);
+        }
+      },
+    },
+    mounted() {
+      if (window) {
+        const filterText = window.sessionStorage.getItem('nav-filter');
+        if (filterText) {
+          this.filterText = filterText;
+        }
+        this.$refs.links.scrollTop = window.sessionStorage.getItem('nav-scroll');
+      }
+      // don't show the nav until the state is set
+      this.loaded = true;
+    },
+    methods: {
+      throttleHandleScroll: throttle(function handleScroll() {
+        window.sessionStorage.setItem('nav-scroll', this.$refs.links.scrollTop);
+      }, 100),
     },
   };
 
@@ -100,7 +131,7 @@
     right: 16px;
     bottom: 0;
     left: 0;
-    height: 100px;
+    height: 64px;
     pointer-events: none;
     background-image: linear-gradient(to bottom, transparent, white);
   }
