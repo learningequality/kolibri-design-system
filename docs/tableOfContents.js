@@ -185,7 +185,6 @@ export default [
         path: '/kdropdownmenu',
         title: 'KDropdownMenu',
         isCode: true,
-        disabled: true,
       }),
       new Page({
         path: '/kmodal',
