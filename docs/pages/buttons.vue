@@ -102,7 +102,7 @@
       </p>
       <ul>
         <li>Right-aligned at the bottom of modal pop-ups</li>
-        <li>Left-aligned a the bottom of page forms</li>
+        <li>Left-aligned at the bottom of page forms</li>
         <li>Global actions related to full pages should be right-aligned and to the right of the page title on large screens, and left-aligned below the title on small screens. Use of <code>KGrid</code> is recommended</li>
       </ul>
       <p>
