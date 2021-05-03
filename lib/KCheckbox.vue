@@ -48,8 +48,8 @@
         class="k-checkbox-label"
       >
         <slot></slot>
-        <div v-if="description" class="description"> 
-          {{ description }} 
+        <div v-if="description" class="description">
+          {{ description }}
         </div>
       </div>
 
@@ -64,8 +64,8 @@
         @click.prevent
       >
         {{ label }}
-        <div v-if="description" class="description"> 
-          {{ description }} 
+        <div v-if="description" class="description">
+          {{ description }}
         </div>
       </label>
 
@@ -188,7 +188,6 @@
       },
       /**
        * @public
-       *
        * Sets keyboard focus to the checkbox
        */
       focus() {

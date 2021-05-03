@@ -13,7 +13,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr v-for="(prop, i) in api" :key="i">
+      <tr v-for="(prop, i) in publicApi" :key="i">
         <td class="first-col">
           <code>{{ prop.name }}</code>
           <DocsAnchorTarget :anchor="`#prop:${prop.name}`" />
@@ -48,6 +48,24 @@
       api: {
         type: Array,
         required: true,
+      },
+    },
+    computed: {
+      publicApi() {
+        /* parses items from jsdocs.js
+         * refs:
+         * - https://vue-styleguidist.github.io/docs/Documenting.html#ignoring-props
+         * - https://vue-styleguidist.github.io/docs/Documenting.html#available-tags
+         */
+        return this.api.filter(docItem => {
+          if (!docItem['tags']) {
+            return true;
+          }
+          if (docItem['tags']['ignore'] || docItem['tags']['deprecated']) {
+            return false;
+          }
+          return true;
+        });
       },
     },
   };

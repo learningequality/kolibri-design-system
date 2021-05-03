@@ -41,7 +41,7 @@
           @submit.prevent="emitSubmitEvent"
           @keyup.enter.stop
         >
-          <!-- Default slot for content -->
+          <!-- Wrapper for main content -->
           <div
             ref="content"
             class="content"
@@ -51,6 +51,7 @@
             } : {} ]"
             :class="{ 'scroll-shadow': scrollShadow }"
           >
+            <!-- @slot Main content of modal -->
             <slot></slot>
           </div>
 
@@ -58,7 +59,7 @@
             ref="actions"
             class="actions"
           >
-            <!-- Slot for buttons -->
+            <!-- @slot Alternative buttons and actions below main content -->
             <slot
               v-if="$slots.actions"
               name="actions"
@@ -271,13 +272,17 @@
       }, 50),
       emitCancelEvent() {
         if (!this.cancelDisabled) {
-          // Emitted when the cancel button is clicked or the esc key is pressed
+          /**
+           * Emitted when the cancel button is clicked or the esc key is pressed
+           */
           this.$emit('cancel');
         }
       },
       emitSubmitEvent() {
         if (!this.submitDisabled) {
-          // Emitted when the submit button or the enter key is pressed
+          /**
+           * Emitted when the submit button or the enter key is pressed
+           */
           this.$emit('submit');
         }
       },

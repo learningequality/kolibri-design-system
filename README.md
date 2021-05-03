@@ -142,7 +142,7 @@ The `DocsPageTemplate` component takes an optional Boolean prop called `apiDocs`
 
 To make updates to this content, modify the library component directly. We support a combination of Markdown and JSDocs inside the components.
 
-JSDocs functionality is provided by the [`vue-docgen-api`](https://www.npmjs.com/package/vue-docgen-api) package. For more information, see [Documenting components](https://vue-styleguidist.github.io/docs/Documenting.html)
+JSDocs functionality is primarily provided by the [`vue-docgen-api`](https://www.npmjs.com/package/vue-docgen-api) package. For more information, see [Documenting components](https://vue-styleguidist.github.io/docs/Documenting.html). Note that we leverage a specific subset of the functionality described there. Documenting this is an [open issue](https://github.com/learningequality/kolibri-design-system/issues/222).
 
 
 ### Adding dependencies

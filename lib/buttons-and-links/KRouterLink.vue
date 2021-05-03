@@ -14,6 +14,7 @@
     @mouseleave.native="hovering = false"
   >
 
+    <!-- @slot Optional slot as alternative to `icon` prop -->
     <slot name="icon">
       <KIcon
         v-if="icon"
@@ -23,12 +24,14 @@
       />
     </slot>
 
+    <!-- @slot Optional slot as alternative to `text` prop -->
     <slot v-if="$slots.default"></slot>
 
     <template v-else>
       <span class="link-text" :style="spanStyle">{{ text }}</span>
     </template>
 
+    <!-- @slot Optional slot as alternative to `iconAfter` prop -->
     <slot name="iconAfter">
       <KIcon
         v-if="iconAfter"
@@ -61,9 +64,16 @@
         type: Object,
       },
       /**
-       * If provided, shows a KIcon in front of the text
+       * If provided, shows a `KIcon` with the given name before the text
        */
       icon: {
+        type: String,
+        default: null,
+      },
+      /**
+       * If provided, shows a `KIcon` with the given name after the text
+       */
+      iconAfter: {
         type: String,
         default: null,
       },
@@ -73,13 +83,6 @@
       replace: {
         type: Boolean,
         default: false,
-      },
-      /**
-       * If provided, shows a KIcon after the text
-       */
-      iconAfter: {
-        type: String,
-        default: null,
       },
     },
     data() {

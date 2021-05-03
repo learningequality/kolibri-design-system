@@ -21,7 +21,7 @@
         :options="options"
         @select="handleSelection"
       />
-    </UiPopover> 
+    </UiPopover>
   </KButton>
 
 </template>
@@ -51,7 +51,14 @@
         required: true,
       },
       /**
-       * Button appearance: 'raised-button' or 'flat-button'
+       * An array of options objects, with one object per dropdown item
+       */
+      options: {
+        type: Array,
+        required: true,
+      },
+      /**
+       * Button appearance: `'raised-button'` or `'flat-button'`
        */
       appearance: {
         type: String,
@@ -59,18 +66,11 @@
         validator,
       },
       /**
-       * Whether or not button is disabled
+       * Whether or not the button is disabled
        */
       disabled: {
         type: Boolean,
         default: false,
-      },
-      /**
-       * An array of option objects
-       */
-      options: {
-        type: Array,
-        required: true,
       },
       /**
        * The position of the dropdown relative to the button
@@ -128,7 +128,7 @@
       },
       handleSelection(selection) {
         /**
-         * Emitted when the an option is selected.
+         * Emitted when an option is selected
          */
         this.$emit('select', selection);
         this.closePopover();

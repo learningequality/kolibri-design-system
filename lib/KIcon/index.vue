@@ -40,9 +40,9 @@
         default: null,
       },
       /**
-       * @private
+       * @ignore
        * Don't apply automatic fill, allowing external styling.
-       * Currently used by the design system itself; private until we see a broader need.
+       * Currently used by the design system itself. Not exposed until we see a broader need
        */
       disableColor: {
         type: Boolean,
