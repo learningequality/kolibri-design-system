@@ -10,26 +10,29 @@
     tabindex="0"
     @click="handleClick"
     @keyup.enter.stop.prevent="handlePressEnter"
+    @mouseenter="hovering = true"
+    @mouseleave="hovering = false"
   >
-    <!-- icon may come by slot or by prop -->
+    <!-- @slot Slot alternative to the `icon` prop -->
     <slot name="icon"></slot>
-    <KIcon 
-      v-if="icon" 
-      :icon="icon" 
+    <KIcon
+      v-if="icon"
+      :icon="icon"
       :color="iconColor"
       class="prop-icon"
     />
 
+    <!-- @slot Pass sub-components into the button, which provides more flexibility than and takes precedence over the `text` prop -->
     <slot v-if="$slots.default"></slot>
 
     <template v-else>
-      <span class="link-text">{{ text }}</span>
+      <span class="link-text" :style="textStyle">{{ text }}</span>
     </template>
 
-    <!-- iconAfter may come by slot or by prop -->
+    <!-- @slot Slot alternative to the `iconAfter` prop -->
     <slot name="iconAfter"></slot>
-    <KIcon 
-      v-if="iconAfter" 
+    <KIcon
+      v-if="iconAfter"
       :icon="iconAfter"
       :color="iconColor"
       class="prop-icon"
@@ -61,7 +64,7 @@
     mixins: [buttonMixin],
     props: {
       /**
-       * Button appearance: 'raised-button', 'flat-button', or 'basic-link'
+       * Button appearance: `'raised-button'`, `'flat-button'`, or `'basic-link'`
        */
       appearance: {
         type: String,
@@ -76,38 +79,46 @@
         default: false,
       },
       /**
-       * HTML button 'type' attribute (e.g. 'submit', 'reset')
+       * HTML button `type` attribute (e.g. `'submit'`, `'reset'`)
        */
       type: {
         type: String,
         default: 'button',
       },
       /**
-       * @private
-       * Adds a dropdown arrow
+       * @ignore
+       * Adds a dropdown arrow - internal use only
        */
       hasDropdown: {
         type: Boolean,
-        required: false,
         default: false,
       },
       /**
-       * If provided, prepends a KIcon to the text in the button
+       * If provided, prepends a `KIcon` to the text in the button
        */
       icon: {
         type: String,
-        required: false,
+        default: null,
       },
       /**
-       * If provided, appends an KIcon to the text in the button.
+       * If provided, appends an `KIcon` to the text in the button
        */
       iconAfter: {
         type: String,
-        required: false,
+        default: null,
       },
+    },
+    data() {
+      return {
+        hovering: false,
+      };
     },
     computed: {
       iconColor() {
+        if (this.appearance === 'basic-link') {
+          return this.hovering ? this.$themeTokens.primaryDark : this.$themeTokens.primary;
+        }
+
         if (this.primary) {
           return this.appearance === 'raised-button'
             ? this.$themeTokens.textInverted
@@ -132,13 +143,38 @@
         }
         return {};
       },
+      textStyle() {
+        let styles = {};
+        if (this.icon) {
+          if (this.isRtl) {
+            // If RTL-language, but English link, displays correct margins
+            styles['marginRight'] = '8px';
+            // Checks to see if link for new tab is in same dir as page lang
+            if (this.text !== this.href) {
+              styles['marginRight'] = '0px';
+              styles['marginLeft'] = '8px';
+            }
+          } else {
+            if (this.text === this.href) {
+              styles['marginRight'] = '8px';
+            } else {
+              styles['marginLeft'] = '8px';
+            }
+          }
+        }
+
+        if (this.iconAfter) {
+          styles['marginRight'] = '8px';
+        }
+        return { ...styles };
+      },
     },
     methods: {
       handleClick(event) {
+        this.blurWhenClicked();
         /**
          * Emitted when the button is triggered
          */
-        this.blurWhenClicked();
         this.$emit('click', event);
       },
       handlePressEnter(event) {
@@ -172,7 +208,7 @@
   }
 
   .prop-icon {
-    top: 3px;
+    top: 4px;
   }
 
 </style>

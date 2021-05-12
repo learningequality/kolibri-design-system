@@ -24,6 +24,7 @@
           :key="i"
           :title="section.title"
           :anchor="section.anchor"
+          fullwidth
         >
           <component :is="section.component" :api="api[section.key]" />
         </DocsPageSection>
@@ -46,6 +47,20 @@
   import SideNav from './SideNav';
   import jsdocs from '~/jsdocs.js';
   import tableOfContents from '~/tableOfContents.js';
+
+  function sectionsForDefaultSlot(children) {
+    if (children === undefined) {
+      return [];
+    }
+    return children
+      .filter(
+        node =>
+          node.componentOptions &&
+          node.componentOptions.tag === DocsPageSection.name &&
+          node.componentOptions.propsData.anchor
+      )
+      .map(node => node.componentOptions.propsData);
+  }
 
   export default {
     name: 'DocsPageTemplate',
@@ -70,7 +85,7 @@
         if (path !== '/') {
           path = path.replace(/\/$/, '');
         }
-        // Search for page
+        // search for page
         for (const section of tableOfContents) {
           for (const page of section.pages) {
             if (path === page.path) {
@@ -78,20 +93,13 @@
             }
           }
         }
-        // Page not found
-        consola.error(`'${path}' not found in pages.js`);
+        // page not found
+        consola.error(`'${path}' not found`);
         return undefined;
       },
       pageSections() {
         // look at children for sections and extract links
-        const pageSections = this.$slots.default
-          .filter(
-            node =>
-              node.componentOptions &&
-              node.componentOptions.tag === DocsPageSection.name &&
-              node.componentOptions.propsData.anchor
-          )
-          .map(node => node.componentOptions.propsData);
+        const pageSections = sectionsForDefaultSlot(this.$slots.default);
         // add any applicable API sections
         this.apiSections.forEach(section => pageSections.push(section));
         return pageSections;
@@ -102,11 +110,11 @@
       },
       api() {
         if (!this.apiDocs) return {};
-        return jsdocs[this.$route.name];
+        return jsdocs[this.page.title];
       },
       apiSections() {
         const sections = [];
-        if (this.api.props && this.api.props.length) {
+        if (this.api && this.api.props && this.api.props.length) {
           sections.push({
             key: 'props',
             anchor: '#props',
@@ -114,7 +122,7 @@
             component: PropsTable,
           });
         }
-        if (this.api.events && this.api.events.length) {
+        if (this.api && this.api.events && this.api.events.length) {
           sections.push({
             key: 'events',
             anchor: '#events',
@@ -122,7 +130,7 @@
             component: EventsTable,
           });
         }
-        if (this.api.slots && this.api.slots.length) {
+        if (this.api && this.api.slots && this.api.slots.length) {
           sections.push({
             key: 'slots',
             anchor: '#slots',
@@ -130,7 +138,7 @@
             component: SlotsTable,
           });
         }
-        if (this.api.methods && this.api.methods.length) {
+        if (this.api && this.api.methods && this.api.methods.length) {
           sections.push({
             key: 'methods',
             anchor: '#methods',

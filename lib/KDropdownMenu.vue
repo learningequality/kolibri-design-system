@@ -1,29 +1,18 @@
 <template>
 
-  <div class="dib">
-    <!-- Added because the trigger could not be a vue element smh-->
-    <div
-      ref="buttonContainer"
-      class="button-container dib"
-    >
-      <slot name="button"></slot>
-      <KButton
-        v-if="!$slots.button"
-        ref="button"
-        :text="text"
-        :appearance="appearance"
-        :disabled="disabled"
-        :hasDropdown="true"
-        :primary="$attrs.primary"
-      />
-    </div>
-
+  <KButton
+    ref="button"
+    :appearance="appearance"
+    :disabled="disabled"
+    :hasDropdown="true"
+    :primary="$attrs.primary"
+  >
+    <span>{{ text }}</span>
     <UiPopover
       v-if="!disabled"
       ref="popover"
       :z-index="12"
-      :trigger="$refs.buttonContainer"
-      :containFocus="false"
+      :containFocus="true"
       :dropdownPosition="position"
       @close="handleClose"
       @open="handleOpen"
@@ -33,8 +22,7 @@
         @select="handleSelection"
       />
     </UiPopover>
-
-  </div>
+  </KButton>
 
 </template>
 
@@ -63,35 +51,32 @@
         required: true,
       },
       /**
-       * Button appearance: 'raised-button' or 'flat-button'
-       */
-      appearance: {
-        type: String,
-        required: false,
-        default: 'raised-button',
-        validator,
-      },
-      /**
-       * Whether or not button is disabled
-       */
-      disabled: {
-        type: Boolean,
-        required: false,
-        default: false,
-      },
-      /**
-       * An array of option objects
+       * An array of options objects, with one object per dropdown item
        */
       options: {
         type: Array,
         required: true,
       },
       /**
+       * Button appearance: `'raised-button'` or `'flat-button'`
+       */
+      appearance: {
+        type: String,
+        default: 'raised-button',
+        validator,
+      },
+      /**
+       * Whether or not the button is disabled
+       */
+      disabled: {
+        type: Boolean,
+        default: false,
+      },
+      /**
        * The position of the dropdown relative to the button
        */
       position: {
         type: String,
-        required: false,
         default: 'bottom right',
         validator(val) {
           return [
@@ -143,7 +128,7 @@
       },
       handleSelection(selection) {
         /**
-         * Emitted when the an option is selected.
+         * Emitted when an option is selected
          */
         this.$emit('select', selection);
         this.closePopover();
@@ -160,18 +145,3 @@
   };
 
 </script>
-
-
-<style lang="scss" scoped>
-
-  .dib {
-    display: inline-block;
-  }
-
-  .button-container {
-    /deep/ .button {
-      margin: 0;
-    }
-  }
-
-</style>

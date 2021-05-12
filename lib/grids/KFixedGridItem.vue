@@ -2,6 +2,7 @@
 
   <div class="grid-item" :class="unitClass" :style="computedStyle">
     <div :class="{ debug: gridMetrics.debug, error: !validInputs }">
+      <!-- @slot Contents of the grid item -->
       <slot></slot>
     </div>
   </div>
@@ -29,12 +30,12 @@
        */
       span: {
         type: [Number, String],
-        required: false,
+        default: null,
         validator: validateSpan,
       },
       /**
-       * Horizontal alignment of the item's contents. Can be 'right',
-       * 'left', or 'center'.
+       * Horizontal alignment of the item's contents. Can be `'right'`,
+       * `'left'`, or `'center'`.
        */
       alignment: {
         type: String,
@@ -45,7 +46,7 @@
     inject: ['gridMetrics'], // provided by the parent grid component
     computed: {
       computedSpan() {
-        if (this.span === undefined) {
+        if (this.span === null) {
           return this.gridMetrics.numCols;
         }
         return parseInt(this.span);

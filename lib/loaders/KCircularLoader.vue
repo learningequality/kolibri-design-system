@@ -85,25 +85,40 @@
     name: 'KCircularLoader',
     props: {
       /**
-       * Whether there should be a delay before the loader displays
+       * One of `'determinate'` or `'indeterminate'`. Determinate loaders represent a known completion percentage, while indeterminate loaders simply show that activity is currently happening.
+       */
+      type: {
+        type: String,
+        default: 'indeterminate', // 'indeterminate' or 'determinate'
+      },
+      /**
+       * For determinate loaders, value between 0 and 100 representing percentage completion
+       */
+      progress: {
+        type: Number,
+        default: 0,
+      },
+      /**
+       * Whether there should be a delay before the loader displays. Useful if the action often takes less than a second or two.
        */
       delay: {
         type: Boolean,
         default: false,
       },
-      type: {
-        type: String,
-        default: 'indeterminate', // 'indeterminate' or 'determinate'
-      },
-      progress: {
-        type: Number,
-        default: 0,
-      },
+      /**
+       * Overall size of the loader in pixels
+       */
       size: {
         type: Number,
         default: 32,
       },
-      stroke: Number,
+      /**
+       * Stroke width of the loader in pixels
+       */
+      stroke: {
+        type: Number,
+        default: 4,
+      },
     },
 
     computed: {

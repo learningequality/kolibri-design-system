@@ -16,7 +16,7 @@
       <table style="max-width: 1000px">
         <thead>
           <tr>
-            <th style="min-width: 150px">
+            <th style="min-width: 200px">
               Term
             </th>
             <th>Part of speech</th>
@@ -27,7 +27,12 @@
         </thead>
         <tbody>
           <tr v-for="(term, i) in visibleTerms" :key="i">
-            <th>{{ term.term }}</th>
+            <th>
+              {{ term.term }}
+              <DocsAnchorTarget
+                :anchor="anchor(term)"
+              />
+            </th>
             <td><em>{{ term.note }}</em></td>
             <td>{{ term.description }}</td>
           </tr>
@@ -73,6 +78,18 @@
       },
       filterTerms() {
         return termList(this.filterText);
+      },
+    },
+    methods: {
+      anchor(term) {
+        // standarize url
+        return `#${term.term
+          .toLowerCase()
+          .split(' ')
+          .join('_')
+          .replace('(', '')
+          .replace(')', '')
+          .replace(',', '')}`;
       },
     },
   };

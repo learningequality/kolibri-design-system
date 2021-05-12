@@ -13,10 +13,16 @@
   export default {
     name: 'DocsExternalLink',
     props: {
+      /**
+       * If provided, set the link text. Can also pass a slot.
+       */
       text: {
         type: String,
-        required: false,
+        default: null,
       },
+      /**
+       * Link URL
+       */
       href: {
         type: String,
         required: true,

@@ -29,12 +29,13 @@
     props: {
       anchor: {
         type: String,
+        required: true,
         validator(value) {
           if (!value.startsWith('#')) {
             log.error(`'anchor' prop value '${value}' must start with a '#'`);
             return false;
           }
-          if (!value.match(/^#[\w.:]*$/)) {
+          if (!value.match(/^#[\w\-.:]*$/)) {
             log.error(`'anchor' prop value '${value}' invalid`);
             return false;
           }

@@ -1,6 +1,7 @@
 <template>
 
   <KFixedGridItem :span="currentSpan" :alignment="currentAlignment">
+    <!-- @slot Contents of the grid item -->
     <slot></slot>
   </KFixedGridItem>
 

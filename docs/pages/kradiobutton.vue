@@ -1,6 +1,6 @@
 <template>
 
-  <DocsPageTemplate>
+  <DocsPageTemplate apiDocs>
 
     <DocsPageSection title="Overview" anchor="#overview">
       <p>
@@ -8,9 +8,24 @@
       </p>
       <DocsShow>
         <KRadioButton
-          label="Some label"
-          :checked="true"
+          v-model="exampleValue"
+          label="Option A"
+          value="val-a"
         />
+        <KRadioButton
+          v-model="exampleValue"
+          label="Option B"
+          value="val-b"
+        />
+        <KRadioButton
+          v-model="exampleValue"
+          label="Option C"
+          description="This one is special!"
+          value="val-c"
+        />
+        <p>
+          Current value: {{ exampleValue }}
+        </p>
       </DocsShow>
       <p>
         A radio button is used to make a single selection from a group of options. Radio buttons should be used instead of checkboxes if only one option can be selected.
@@ -49,7 +64,13 @@
 
 <script>
 
-  export default {};
+  export default {
+    data() {
+      return {
+        exampleValue: 'val-b',
+      };
+    },
+  };
 
 </script>
 

@@ -9,7 +9,7 @@
     </DocsPageSection>
     <DocsPageSection title="Equitable access" anchor="#equitable">
       <p class="description">
-        Equity is at the heart of Learning Equality’s mission. Our products address barriers of access to educational opportunity that are faced by marginalized populations.
+        Equity is at the heart of Learning Equality’s mission. Our products address barriers of access to education that are faced by marginalized communities and populations.
       </p>
       <ul>
         <li>Aim to be as functional as possible in situations with unstable or no internet access</li>
@@ -20,7 +20,7 @@
     </DocsPageSection>
     <DocsPageSection title="Effective learning" anchor="#effective">
       <p class="description">
-        The learning process can sometimes feel tiring and challenging. Learning can be far more effective by keeping people motivated and engaged. We support not only concept and skill proficiency, but also the ability to continue learning in the future.
+        The learning process can sometimes feel tiring and challenging. Learning can be far more effective by keeping people motivated and engaged. We support not only concept and skill proficiency but also the process of learning.
       </p>
       <ul>
         <li>Support learner progression as people master and engage content more deeply</li>
@@ -31,7 +31,7 @@
     </DocsPageSection>
     <DocsPageSection title="Community ownership" anchor="#community">
       <p class="description">
-        Communities understand their own needs best. Our tools enable them to have ownership over how their goals, educational resources, and identities are represented. We understand that one size doesn’t fit all, so we serve the unique needs of our communities in these ways:
+        Communities understand their own needs best. Our tools enable them to have ownership over how their goals, educational resources, and identities are represented. We understand that one size doesn’t fit all, so we design to serve the unique needs of our communities in these ways:
       </p>
       <ul>
         <li>Make it easy to share and collaborate online and offline</li>
@@ -42,7 +42,7 @@
     </DocsPageSection>
     <DocsPageSection title="Consistent experiences" anchor="#consistent">
       <p class="description">
-        Consistency removes friction with the product, allowing people to focus on what they’re trying to get done. Each function of our products should feel empowering and familiar with the rest of the product ecosystem.
+        Consistency removes friction with the product, allowing people to focus on what they’re trying to get done. Each function of our products should feel empowering and coherent with the rest of the product ecosystem.
       </p>
       <ul>
         <li>Lean on established patterns and components that live in our design system</li>

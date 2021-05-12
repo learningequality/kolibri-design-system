@@ -42,38 +42,88 @@
   export default {
     name: 'KSwitch',
     props: {
-      name: String,
-      label: String,
-      tabindex: [String, Number],
+      /**
+       * Current value of the switch state: on or off
+       */
       value: {
         type: Boolean,
         required: true,
       },
+      /**
+       * @ignore
+       * does this need to be exposed?
+       */
+      name: {
+        type: String,
+        default: null,
+      },
+      /**
+       * If provided, show a text label next to the switch
+       */
+      label: {
+        type: String,
+        default: null,
+      },
+      /**
+       * @ignore
+       * does this need to be exposed?
+       */
+      tabindex: {
+        type: [String, Number],
+        default: null,
+      },
+      /**
+       * @ignore
+       * might not be used
+       */
       trueValue: {
         type: Boolean,
         default: true,
       },
+      /**
+       * @ignore
+       * might not be used
+       */
       falseValue: {
         type: Boolean,
         default: false,
       },
+      /**
+       * @ignore
+       * might not be used
+       */
       submittedValue: {
         type: String,
         default: 'on', // HTML default
       },
+      /**
+       * @ignore
+       * seems redundant with 'value'
+       */
       checked: {
         type: Boolean,
         default: false,
       },
+      /**
+       * @ignore
+       * not used
+       */
       color: {
         type: String,
         // 'primary' by default, but could add more later
         default: 'primary',
       },
+      /**
+       * @ignore
+       * not used
+       */
       switchPosition: {
         type: String,
         default: 'left', // 'left' or 'right'
       },
+      /**
+       * Whether or not the switch is disabled
+       */
       disabled: {
         type: Boolean,
         default: false,
@@ -109,8 +159,15 @@
       onClick(e) {
         const isCheckedPrevious = this.isChecked;
         const isChecked = e.target.checked;
+        /**
+         * Emitted on each change with new `value`
+         */
         this.$emit('input', isChecked ? this.trueValue : this.falseValue, e);
         if (isCheckedPrevious !== isChecked) {
+          /**
+           * @ignore
+           * does this need to be exposed?
+           */
           this.$emit('change', isChecked ? this.trueValue : this.falseValue, e);
         }
       },

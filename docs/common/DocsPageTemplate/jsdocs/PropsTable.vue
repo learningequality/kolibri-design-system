@@ -4,23 +4,25 @@
     <thead>
       <tr>
         <th>Name</th>
-        <th>Type</th>
-        <th>Required</th>
-        <th>Default</th>
         <th class="stretch">
           Description
         </th>
+        <th>Type</th>
+        <th>Default</th>
+        <th>Required</th>
       </tr>
     </thead>
     <tbody>
-      <tr v-for="(prop, i) in api" :key="i">
-        <td><code>{{ prop.name }}</code></td>
-        <td><code>{{ prop.type.name }}</code></td>
+      <tr v-for="(prop, i) in publicApi" :key="i">
+        <td class="first-col">
+          <code>{{ prop.name }}</code>
+          <DocsAnchorTarget :anchor="`#prop:${prop.name}`" />
+        </td>
         <td>
-          <code v-if="prop.required === true">true</code>
-          <code v-else-if="prop.required === false">false</code>
+          <vue-simple-markdown v-if="prop.description" :source="prop.description" />
           <KEmptyPlaceholder v-else />
         </td>
+        <td><code>{{ prop.type.name }}</code></td>
         <td>
           <code v-if="prop.defaultValue">
             {{ prop.defaultValue.value }}
@@ -28,8 +30,8 @@
           <KEmptyPlaceholder v-else />
         </td>
         <td>
-          <vue-simple-markdown v-if="prop.description" :source="prop.description" />
-          <KEmptyPlaceholder v-else />
+          <KEmptyPlaceholder v-if="!prop.required" />
+          <code v-else>true</code>
         </td>
       </tr>
     </tbody>
@@ -46,6 +48,24 @@
       api: {
         type: Array,
         required: true,
+      },
+    },
+    computed: {
+      publicApi() {
+        /* parses items from jsdocs.js
+         * refs:
+         * - https://vue-styleguidist.github.io/docs/Documenting.html#ignoring-props
+         * - https://vue-styleguidist.github.io/docs/Documenting.html#available-tags
+         */
+        return this.api.filter(docItem => {
+          if (!docItem['tags']) {
+            return true;
+          }
+          if (docItem['tags']['ignore'] || docItem['tags']['deprecated']) {
+            return false;
+          }
+          return true;
+        });
       },
     },
   };

@@ -9,6 +9,9 @@
       <p>
         Importantly, we reference icons by a token specific to the Kolibri Design System rather than Material's names, in order to make token references more meaningful to designers and developers.
       </p>
+      <p>
+        You can use the <DocsLibraryLink component="KIcon" /> and <DocsLibraryLink component="KLabeledIcon" /> components to easily insert any icon. Some other components such as links and buttons also provide props as shortcuts for easily inserting icons by token name.
+      </p>
     </DocsPageSection>
 
     <DocsPageSection title="Size and text" anchor="#size-text">

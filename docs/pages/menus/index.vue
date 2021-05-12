@@ -53,7 +53,7 @@
         <li>Menus appear above all other UI elements</li>
         <li>Menus appear directly below the element that generated it</li>
         <li>Menus do not move from their original location when scrolling through the page</li>
-        <li>Menus should never touch the edge of the browser screen</li>
+        <li>Menus should never touch the edge of the browser screen. Apply an offset of 8px.</li>
       </ul>
     </DocsPageSection>
 

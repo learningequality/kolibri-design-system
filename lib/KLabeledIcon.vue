@@ -2,6 +2,7 @@
 
   <span class="labeled-icon-wrapper" v-on="$listeners">
     <span class="icon">
+      <!-- @slot Optional slot as alternative to `icon` prop -->
       <slot name="icon">
         <KIcon v-if="icon" :icon="icon" :color="color || $themeTokens.text" style="top: 2px;" />
       </slot>
@@ -9,14 +10,16 @@
     <span class="label" :style="labelStyle">
       <!-- nest slot inside span to get alignment and flow correct for mixed RLT/LTR -->
       <span dir="auto" class="debug-warning">
-        <!-- Use zero-width space when empty -->
+        <!-- @slot Optional slot as alternative to `label` prop -->
         <slot>
           <span v-if="!labelEmpty">{{ label }}</span>
+          <!-- Use zero-width space when empty -->
           <span v-else>&#8203;</span>
         </slot>
       </span>
     </span>
     <span class="icon-after">
+      <!-- @slot Optional slot as alternative to `iconAfter` prop -->
       <slot name="iconAfter">
         <KIcon v-if="iconAfter" :icon="iconAfter" :color="color || $themeTokens.text" style="top: 2px;" />
       </slot>
@@ -36,30 +39,39 @@
       KIcon,
     },
     props: {
-      // An icon that will be prepended to the label. Uses the same icon names as the `KIcon` component
-      icon: {
-        type: String,
-        required: false,
-      },
-      // An icon that will be appended to the label. Uses the same icon names as the `KIcon` component
-      iconAfter: {
-        type: String,
-        required: false,
-      },
-      // If provided, determines the color of the label and any icons that are provided
-      color: {
-        type: String,
-        required: false,
-      },
-      // If provided, will place this text in the default slot
+      /**
+       * Text label
+       */
       label: {
         type: String,
-        required: false,
+        default: null,
       },
-      // If provided, will limit label width to this value
+      /**
+       * An icon that will be prepended to the label. Uses the same icon names as the `KIcon` component
+       */
+      icon: {
+        type: String,
+        default: null,
+      },
+      /**
+       * An icon that will be appended to the label. Uses the same icon names as the `KIcon` component
+       */
+      iconAfter: {
+        type: String,
+        default: null,
+      },
+      /**
+       * If provided, sets the color of the label and any icons that are provided
+       */
+      color: {
+        type: String,
+        default: null,
+      },
+      /**
+       * Limits label width to this value
+       */
       maxWidth: {
         type: String,
-        required: false,
         default: '100%',
       },
     },
@@ -110,7 +122,7 @@
   .labeled-icon-wrapper {
     position: relative;
     display: inline-block;
-    max-width: 100%;
+    width: 100%;
   }
 
   .icon {

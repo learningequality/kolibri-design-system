@@ -53,14 +53,7 @@
     name: 'KLinearLoader',
     props: {
       /**
-       * Whether there should be a delay before the loader displays
-       */
-      delay: {
-        type: Boolean,
-        default: false,
-      },
-      /**
-       * Determinate or indeterminate
+       * One of `'determinate'` or `'indeterminate'`. Determinate loaders represent a known completion percentage, while indeterminate loaders simply show that activity is currently happening.
        */
       type: {
         type: String,
@@ -69,9 +62,19 @@
           return val === 'determinate' || val === 'indeterminate';
         },
       },
+      /**
+       * For determinate loaders, value between 0 and 100 representing percentage completion
+       */
       progress: {
         type: Number,
         default: 0,
+      },
+      /**
+       * Whether there should be a delay before the loader displays. Useful if the action often takes less than a second or two.
+       */
+      delay: {
+        type: Boolean,
+        default: false,
       },
     },
 

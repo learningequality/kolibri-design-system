@@ -6,6 +6,9 @@
       <p>
         Text fields allow users to enter or edit text within forms and modals. They also support multiple text formats including email and numbers. Additionally, they can trigger the appearance of dropdown menus.
       </p>
+      <p>
+        You can use the <DocsLibraryLink component="KTextbox" /> component to implement text fields.
+      </p>
     </DocsPageSection>
 
     <DocsPageSection title="Text" anchor="#text">

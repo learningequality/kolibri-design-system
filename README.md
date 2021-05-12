@@ -59,10 +59,15 @@ The documentation site is built using [NuxtJS](https://nuxtjs.org/) and [Vue](ht
 
 Clone this repository using [Git](https://help.github.com/en/github/getting-started-with-github/set-up-git), optionally [forking](https://help.github.com/en/github/getting-started-with-github/fork-a-repo) it first if you plan to submit changes.
 
+First, change to the directory where you cloned the repo:
+
+```bash
+cd kolibri-design-system
+```
+
 Install the dependencies using `yarn`:
 
 ```bash
-cd design-system
 yarn install
 ```
 
@@ -115,9 +120,10 @@ Layout:
 
 Links:
 
-* `<DocsAnchorTarget />` - for adding Anchor links to pages
+* `<DocsAnchorTarget />` - for creating anchor link targets
 * `<DocsExternalLink />` - links to an external website
-* `<DocsInternalLink />` - links within the design system
+* `<DocsInternalLink />` - links to pages within the design system
+* `<DocsLibraryLink />` - links to library components with `<code>` formatting
 
 Illustration:
 
@@ -136,7 +142,7 @@ The `DocsPageTemplate` component takes an optional Boolean prop called `apiDocs`
 
 To make updates to this content, modify the library component directly. We support a combination of Markdown and JSDocs inside the components.
 
-JSDocs functionality is provided by the [`vue-docgen-api`](https://www.npmjs.com/package/vue-docgen-api) package. For more information, see [Documenting components](https://vue-styleguidist.github.io/docs/Documenting.html)
+JSDocs functionality is primarily provided by the [`vue-docgen-api`](https://www.npmjs.com/package/vue-docgen-api) package. For more information, see [Documenting components](https://vue-styleguidist.github.io/docs/Documenting.html). Note that we leverage a specific subset of the functionality described there. Documenting this is an [open issue](https://github.com/learningequality/kolibri-design-system/issues/222).
 
 
 ### Adding dependencies
@@ -177,9 +183,11 @@ These aliases should _not_ be used by code inside the `/lib` directory because e
 
 ### Deployment
 
-The documentation site is currently deployed to Netlifty automatically when changes are pushed to one of the primary branches. This is configured in the `/netlify.toml` file and authenticated with the [Netlify GitHub app](https://docs.netlify.com/configure-builds/repo-permissions-linking/#authentication-with-the-netlify-github-app).
+The documentation site is currently deployed to Netlifty automatically when changes are pushed to one of the primary branches. This is configured in the Netlify web UI to run `yarn generate` and point at the created `dist` directory.
 
-Longer-term, we will likely want to transition to Google Cloud for more control of the deployment. Specifically, we'll want to
+Netlify is authenticated with the [Netlify GitHub app](https://docs.netlify.com/configure-builds/repo-permissions-linking/#authentication-with-the-netlify-github-app).
+
+Note that we currently use the deprecated Nuxt.js `mode: universal` flag, and should switch to the newer `target: static` flag.
 
 
 ### SVG Icons
@@ -207,18 +215,20 @@ If you are working on the design system library code in this repo and want to se
 
 Now, when you run the application your changes in `kolibri-design-system` will be updated live where your app expects its dependency on `kolibri-design-system` to live.
 
-For example, given that you have `~/kolibri` and `~/kolibri-design-system` folders with their respective local repositories.
+For example, given that you have `./kolibri` and `./kolibri-design-system` folders with their respective local repositories:
+
+First, remove the reference to `kolibri-design-system` from `./kolibri/core/package.json` which points at the online repo. Next,
 
 ```bash
-cd ~/kolibri-design-system
+# change to the KDS repo and add it to yarn's local package registry
+cd ./kolibri-design-system
 yarn link
-cd ~/kolibri
-```
 
-Remove the reference to `kolibri-design-system` from `kolibri/core/package.json`
-
-```bash
+# change to the Kolibri repo and link to the local package
+cd ../kolibri
 yarn link kolibri-design-system
+
+# run the Kolibri devserver
 yarn run devserver
 ```
 

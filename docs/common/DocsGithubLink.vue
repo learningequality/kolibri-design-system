@@ -41,21 +41,21 @@
        */
       text: {
         type: String,
-        required: false,
+        default: null,
       },
       /**
        * If provided, set the link URL
        */
       href: {
         type: String,
-        required: false,
+        default: null,
       },
       /**
        * If provided, create a link to a PR in the design-system repo
        */
       pull: {
         type: [String, Number],
-        required: false,
+        default: null,
         validator,
       },
       /**
@@ -63,7 +63,7 @@
        */
       issue: {
         type: [String, Number],
-        required: false,
+        default: null,
         validator,
       },
     },
@@ -79,7 +79,7 @@
         if (this.pull)
           return `https://github.com/learningequality/kolibri-design-system/pull/${this.pull}`;
         if (this.issue)
-          return `https://github.com/learningequality/kolibri-design-system/issue/${this.issue}`;
+          return `https://github.com/learningequality/kolibri-design-system/issues/${this.issue}`;
         log.error(`No URL, PR, or issue provided`);
         return undefined;
       },

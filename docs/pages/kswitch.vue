@@ -1,18 +1,20 @@
 <template>
 
-  <DocsPageTemplate>
+  <DocsPageTemplate apiDocs>
 
     <DocsPageSection title="Overview" anchor="#overview">
       <DocsShow>
         <KSwitch
-          :value="true"
+          v-model="exampleData"
+          label="Things are happening"
         />
+        <p>Value: {{ exampleData }}</p>
       </DocsShow>
       <p>
         A switch toggle is used to select and execute an action instantly, in real time. A switch is toggled successfully when the switch thumb slides to the other side of the track upon click or press.
       </p>
       <p>
-        For selections that require a confirmation to execute and are housed in a form, use <DocsInternalLink code text="KCheckbox" href="/KCheckbox" /> component instead.
+        For selections that require a confirmation to execute and are housed in a form, use <DocsLibraryLink component="KCheckbox" /> component instead.
       </p>
     </DocsPageSection>
 
@@ -64,7 +66,13 @@
 
 <script>
 
-  export default {};
+  export default {
+    data() {
+      return {
+        exampleData: true,
+      };
+    },
+  };
 
 </script>
 

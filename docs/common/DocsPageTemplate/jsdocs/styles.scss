@@ -11,5 +11,10 @@ th {
 
 .stretch {
   width: 100%;
-  min-width: 150px;
+  min-width: 175px;
+}
+
+.first-col {
+  min-width: 175px;
+  white-space: nowrap;
 }

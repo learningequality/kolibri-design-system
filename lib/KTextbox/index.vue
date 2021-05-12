@@ -23,8 +23,13 @@
       :style="changedOrFocused ? this.$coreOutline : {} "
       @input="updateText"
       @keydown="emitKeydown"
+<<<<<<< HEAD
       @focus="onFocus"
       @blur="onBlur"
+=======
+      @focus="emitFocus"
+      @blur="emitBlur"
+>>>>>>> d98a9dbae7b8c49a9228e97f07f70ed059b7855d
     />
   </div>
 
@@ -44,38 +49,32 @@
     inheritAttrs: true,
     props: {
       /**
-       * v-model
-       */
-      value: {
-        type: [String, Number],
-      },
-      /**
-       * Label
+       * Label for the text field
        */
       label: {
         type: String,
         required: true,
       },
       /**
-       * Whether or not disabled
+       * Value of the text field
        */
-      disabled: {
-        type: Boolean,
-        default: false,
+      value: {
+        type: [String, Number],
+        default: null,
       },
       /**
-       * Whether or not input is invalid
+       * Whether or not the current `value` is invalid
        */
       invalid: {
         type: Boolean,
         default: false,
       },
       /**
-       * Text displayed when the user is notified of invalid input
+       * Text conditionally displayed based on values of `invalid` and `showInvalidText`
        */
       invalidText: {
         type: String,
-        required: false,
+        default: null,
       },
       /**
        * Show the `invalidText` even if the user has not focused or change the input.
@@ -84,7 +83,13 @@
       showInvalidText: {
         type: Boolean,
         default: false,
-        required: false,
+      },
+      /**
+       * Whether or not the field is disabled
+       */
+      disabled: {
+        type: Boolean,
+        default: false,
       },
       /**
        * Whether or not to autofocus
@@ -94,57 +99,58 @@
         default: false,
       },
       /**
-       * Max allowed length of input
+       * Maximum number of characters for `value`
        */
       maxlength: {
         type: Number,
-        required: false,
+        default: null,
       },
       /**
        * HTML5 autocomplete attribute (`off`, `on`, `name`, `username`, `current-password`, etc)
        */
       autocomplete: {
         type: String,
-        required: false,
+        default: null,
       },
       /**
        * HTML5 autocapitalize attribute. Used for touch-input enabled UI (`off`, `on`, `words`, etc)
        */
       autocapitalize: {
         type: String,
-        required: false,
+        default: null,
       },
       /**
-       * HTML5 type of input (text, password, number, etc.)
+       * HTML5 type of input (`text`, `password`, `number`, etc.)
        */
       type: {
         type: String,
         default: 'text',
       },
       /**
-       * Minimum value, used when type is 'number'
+       * Minimum value (when `value` type is `number`)
        */
       min: {
         type: Number,
-        required: false,
+        default: null,
       },
       /**
-       * Maximum value, used when type is 'number'
+       * Maximum value (when `value` type is `number`)
        */
       max: {
         type: Number,
-        required: false,
+        default: null,
       },
       /**
-       * Display as text area.
+       * Whether to display as a multi-line text area
        */
       textArea: {
         type: Boolean,
         default: false,
       },
       /**
-       * @private
-       * Whether or not to display as a floating label
+       * @ignore
+       * Whether or not to display as a floating label.
+       * This should not actually be used
        */
       floatingLabel: {
         type: Boolean,
@@ -170,27 +176,42 @@
     },
     methods: {
       updateText() {
-        // v-model is just a :value + @input
         /**
-         * Emits input event with new value
+         * Emitted on each change with new `value`
          */
         this.$emit('input', this.currentText);
       },
       /**
-       * @public
+       * @private
+       * Resets text field value to default.
+       * Unclear if this is used anywhere.
        */
+      /* eslint-disable kolibri/vue-no-unused-methods */
       reset() {
         this.$refs.textbox.reset();
       },
+      /* eslint-enable kolibri/vue-no-unused-methods */
       emitKeydown(e) {
         /**
-         * Emits keydown event
+         * Emitted with `keydown` events
          */
         this.$emit('keydown', e);
       },
+      emitBlur(e) {
+        /**
+         * Emitted with `blur` events
+         */
+        this.$emit('blur', e);
+      },
+      emitFocus(e) {
+        /**
+         * Emitted with `focus` events
+         */
+        this.$emit('focus', e);
+      },
       /**
        * @public
-       * Focuses on the textbox
+       * Puts keyboard focus in the text field
        */
 
       onFocus(e) {
