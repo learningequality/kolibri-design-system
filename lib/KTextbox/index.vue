@@ -23,13 +23,8 @@
       :style="changedOrFocused ? this.$coreOutline : {} "
       @input="updateText"
       @keydown="emitKeydown"
-<<<<<<< HEAD
-      @focus="onFocus"
-      @blur="onBlur"
-=======
       @focus="emitFocus"
       @blur="emitBlur"
->>>>>>> d98a9dbae7b8c49a9228e97f07f70ed059b7855d
     />
   </div>
 
