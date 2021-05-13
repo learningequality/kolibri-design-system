@@ -23,7 +23,7 @@
       :style="changedOrFocused ? this.$coreOutline : {} "
       @input="updateText"
       @keydown="emitKeydown"
-      @focus="emitFocus"
+      @click="emitFocus"
       @blur="emitBlur"
     />
   </div>
@@ -196,26 +196,18 @@
         /**
          * Emitted with `blur` events
          */
+        this.changedOrFocused = false;
         this.$emit('blur', e);
       },
       emitFocus(e) {
         /**
          * Emitted with `focus` events
          */
-        this.$emit('focus', e);
-      },
-      /**
-       * @public
-       * Puts keyboard focus in the text field
-       */
-
-      onFocus(e) {
+        if (document.addEventListener('click')) {
+          this.changedOrFocused = false;
+        }
         this.changedOrFocused = true;
         this.$emit('focus', e);
-      },
-      onBlur(e) {
-        this.changedOrFocused = false;
-        this.$emit('blur', e);
       },
     },
   };
