@@ -13,6 +13,7 @@
       :maxlength="maxlength"
       :autocomplete="autocomplete"
       :autocapitalize="autocapitalize"
+      :style="changedOrFocused ? this.$coreOutline : {'background-color': 'yellow'}"
       :type="type"
       :min="min"
       :max="max"
@@ -20,10 +21,9 @@
       :floatingLabel="floatingLabel"
       :multiLine="textArea"
       :rows="3"
-      :style="changedOrFocused ? this.$coreOutline : {} "
       @input="updateText"
       @keydown="emitKeydown"
-      @click="emitFocus"
+      @focus="emitFocus"
       @blur="emitBlur"
     />
   </div>
@@ -197,17 +197,28 @@
          * Emitted with `blur` events
          */
         this.changedOrFocused = false;
+        console.log('emit blur changedorfocused', this.changedOrFocused)
         this.$emit('blur', e);
       },
       emitFocus(e) {
         /**
          * Emitted with `focus` events
          */
-        if (document.addEventListener('click')) {
-          this.changedOrFocused = false;
-        }
+        document.addEventListener('click', this.handleFocusOnKeyboard);
         this.changedOrFocused = true;
         this.$emit('focus', e);
+      },
+      handleFocusOnKeyboard() {
+        this.changedOrFocused = false;
+        console.log('handlefocus on keybard', this.changedOrFocused)
+      },
+      /**
+       * @public
+       * Puts keyboard focus in the text field
+       */
+      focus() {
+          this.changedOrFocused = true;
+          this.$refs.textbox.$el.querySelector('input').focus();
       },
     },
   };
@@ -219,6 +230,7 @@
 
   .textbox {
     max-width: 400px;
+
   }
 
   .mh {
