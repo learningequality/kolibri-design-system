@@ -13,7 +13,7 @@
       :maxlength="maxlength"
       :autocomplete="autocomplete"
       :autocapitalize="autocapitalize"
-      :style="changedOrFocused ? this.$coreOutline : {'background-color': 'yellow'}"
+      :style="changedOrFocused ? this.$coreOutline : {}"
       :type="type"
       :min="min"
       :max="max"
@@ -197,20 +197,14 @@
          * Emitted with `blur` events
          */
         this.changedOrFocused = false;
-        console.log('emit blur changedorfocused', this.changedOrFocused)
         this.$emit('blur', e);
       },
       emitFocus(e) {
         /**
          * Emitted with `focus` events
          */
-        document.addEventListener('click', this.handleFocusOnKeyboard);
         this.changedOrFocused = true;
         this.$emit('focus', e);
-      },
-      handleFocusOnKeyboard() {
-        this.changedOrFocused = false;
-        console.log('handlefocus on keybard', this.changedOrFocused)
       },
       /**
        * @public
