@@ -211,8 +211,8 @@
        * Puts keyboard focus in the text field
        */
       focus() {
-          this.changedOrFocused = true;
-          this.$refs.textbox.$el.querySelector('input').focus();
+        this.changedOrFocused = true;
+        this.$refs.textbox.$el.querySelector('input').focus();
       },
     },
   };
@@ -224,7 +224,6 @@
 
   .textbox {
     max-width: 400px;
-
   }
 
   .mh {
