@@ -1,6 +1,6 @@
 <template>
 
-  <!-- Vendored from  UI UISwitch component https://josephuspaye.github.io/-UI/#/ui-switch -->
+  <!-- Vendored from  UI UISwitch component https://josephuspaye.github.io/Keen-UI/#/ui-switch -->
   <label class="k-switch" :class="classes">
     <div class="k-switch-input-wrapper">
       <input
@@ -243,9 +243,8 @@
   .k-switch-input {
     position: absolute;
     opacity: 0;
-    body[modality='keyboard'] &:focus + .k-switch-thumb {
+    &:focus-visible + .k-switch-thumb {
       .k-switch-focus-ring {
-        opacity: 1;
         transform: scale(1);
       }
     }
@@ -282,7 +281,7 @@
     height: $k-switch-focus-ring-size;
     background-color: rgba(0, 0, 0, 0.1);
     border-radius: 50%;
-    opacity: 0;
+    opacity: 0.5;
     transition: background-color 0.2s ease, transform 0.15s ease, opacity 0.15s ease;
     transform: scale(0);
   }
