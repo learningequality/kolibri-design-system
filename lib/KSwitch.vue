@@ -255,7 +255,7 @@
 
   .k-switch-thumb {
     position: absolute;
-    z-index: 2;
+    z-index: 1;
     width: $k-switch-thumb-size;
     height: $k-switch-thumb-size;
     background-color: $k-switch-thumb-color;
