@@ -35,8 +35,6 @@ Importable components and utilities are available under the `lib` path, for exam
 import KButton from 'kolibri-design-system/lib/KButton';
 ```
 
-Refer to the [documentation](https://kolibri-design-system.netlify.app) for specifics.
-
 The shared UI library is made available as source code, not a built distribution, and requires the external application to supply both build and runtime dependencies such as webpack, Vue, and Sass. These requirements will eventually be specified in `/package.json` as `peerDependencies` - ref: [#20](https://github.com/learningequality/kolibri-design-system/issues/20).
 
 The public API of the shared UI library is _only_ that which is documented in the documentation. Functionality which is not documented should be considered either experimental or a private implementation detail.
