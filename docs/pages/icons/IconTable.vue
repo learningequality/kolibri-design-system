@@ -14,7 +14,7 @@
       />
     </div>
     <h3 v-if="displayedWithColor.length">
-      Aliases with default colors
+      Learning activities
     </h3>
     <div class="icon-table">
       <IconBlock
@@ -25,6 +25,17 @@
       />
     </div>
 
+    <h3 v-if="displayedWithColor.length">
+      Learning activities
+    </h3>
+    <div class="icon-table">
+      <IconBlock
+        v-for="(aliasList, index) in withOwnColor"
+        :key="index"
+        :aliasList="aliasList"
+        class="icon-block"
+      />
+    </div>
   </div>
 
 </template>
@@ -66,7 +77,8 @@
     const iconGroups = {};
     Object.keys(KolibriIcons).forEach(alias => {
       // exit if not applicable
-      const hasDefaultColor = Boolean(KolibriIcons[alias].defaultColor);
+      const hasDefaultColor =
+        Boolean(KolibriIcons[alias].defaultColor) && KolibriIcons[alias].defaultColor === true;
       if ((withDefaultColor && !hasDefaultColor) || (!withDefaultColor && hasDefaultColor)) {
         return;
       }
@@ -106,6 +118,9 @@
       },
       displayedWithColor() {
         return this.withColor.filter(this.termFilter);
+      },
+      withOwnColor() {
+        return this.withColor.filter(e => e.defaultColor === true);
       },
     },
     methods: {
