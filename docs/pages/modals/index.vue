@@ -30,7 +30,7 @@
         Title
       </h3>
       <p>
-        Keep this short, concise, and easy for the user to understand. Should not be structured as a sentence or question, and should not contain user-generated text.
+        Keep this short, concise, and easy for the user to understand. Titles should not be structured as a sentence or question, and should not contain user-generated text. Use verbs in the imperative form. Do not use verbs that end in "-ing"; doing so may give users the impression that a task is in progress when it is not.
       </p>
       <DocsDoNot>
         <template v-slot:do>

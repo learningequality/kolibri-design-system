@@ -33,6 +33,9 @@
         Page titles should correspond to <DocsInternalLink href="/appbars/#titles" text="app bar titles" />. If there are tabs in the app bar, the page title should be consistent with the current tab, although a word or two can be added on to the page title for clarity.
       </p>
       <img src="./page-header2.png">
+      <p>
+        Write any verbs that appear in page titles in the imperative form. Do not use verbs that end in "-ing"; doing so may give users the impression that a task is in progress when it is not.
+      </p>
     </DocsPageSection>
 
     <DocsPageSection title="Page titles and the browser" anchor="#browser">
