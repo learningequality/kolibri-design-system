@@ -13,6 +13,7 @@
       :maxlength="maxlength"
       :autocomplete="autocomplete"
       :autocapitalize="autocapitalize"
+      :style="changedOrFocused ? this.$coreOutline : {}"
       :type="type"
       :min="min"
       :max="max"
@@ -195,12 +196,14 @@
         /**
          * Emitted with `blur` events
          */
+        this.changedOrFocused = false;
         this.$emit('blur', e);
       },
       emitFocus(e) {
         /**
          * Emitted with `focus` events
          */
+        this.changedOrFocused = true;
         this.$emit('focus', e);
       },
       /**

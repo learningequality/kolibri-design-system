@@ -1,30 +1,29 @@
 <template>
 
-  <!-- Vendored from  UI UISwitch component https://josephuspaye.github.io/-UI/#/ui-switch -->
+  <!-- Vendored from  UI UISwitch component https://josephuspaye.github.io/Keen-UI/#/ui-switch -->
   <label class="k-switch" :class="classes">
-    <div class="k-switch-input-wrapper">
-      <input
-        ref="input"
-        class="k-switch-input"
-        type="checkbox"
-        dir="auto"
+    <div :style="isActive ? this.$coreOutline : {}">
+      <div class="k-switch-input-wrapper">
+        <input
+          ref="input"
+          class="k-switch-input"
+          type="checkbox"
+          dir="auto"
 
-        :checked.prop="isChecked"
-        :disabled="disabled"
-        :name="name"
-        :tabindex="tabindex"
-        :value="submittedValue"
+          :checked.prop="isChecked"
+          :disabled="disabled"
+          :name="name"
+          :tabindex="tabindex"
+          :value="submittedValue"
 
-        @blur="onBlur"
-        @click="onClick"
-        @focus="onFocus"
-      >
+          @blur="onBlur"
+          @click="onClick"
+          @focus="onFocus"
+        >
+        <div class="k-switch-thumb"></div>
 
-      <div class="k-switch-thumb">
-        <div class="k-switch-focus-ring"></div>
+        <div class="k-switch-track"></div>
       </div>
-
-      <div class="k-switch-track"></div>
     </div>
 
     <div v-if="label || $slots.default" class="k-switch-label-text">
@@ -192,7 +191,6 @@
   $k-switch-thumb-color: #fafafa !default;
   $k-switch-track-width: 34px !default;
   $k-switch-track-height: 14px !default;
-  $k-switch-focus-ring-size: $k-switch-thumb-size * 2.1 !default;
 
   .k-switch {
     position: relative;
@@ -243,12 +241,6 @@
   .k-switch-input {
     position: absolute;
     opacity: 0;
-    body[modality='keyboard'] &:focus + .k-switch-thumb {
-      .k-switch-focus-ring {
-        opacity: 1;
-        transform: scale(1);
-      }
-    }
   }
 
   .k-switch-track {
@@ -272,19 +264,6 @@
     transition-timing-function: ease;
     transition-duration: 0.2s;
     transition-property: background-color, transform;
-  }
-  .k-switch-focus-ring {
-    position: absolute;
-    top: -(($k-switch-focus-ring-size - $k-switch-thumb-size) / 2);
-    left: -(($k-switch-focus-ring-size - $k-switch-thumb-size) / 2);
-    z-index: -1;
-    width: $k-switch-focus-ring-size;
-    height: $k-switch-focus-ring-size;
-    background-color: rgba(0, 0, 0, 0.1);
-    border-radius: 50%;
-    opacity: 0;
-    transition: background-color 0.2s ease, transform 0.15s ease, opacity 0.15s ease;
-    transform: scale(0);
   }
   .k-switch-label-text {
     margin-left: 16px;
@@ -313,9 +292,6 @@
       }
       .k-switch-thumb {
         background-color: #4caf50;
-      }
-      .k-switch-focus-ring {
-        background-color: #a5d6a7;
       }
     }
   }
