@@ -125,6 +125,13 @@
         background-color: $ui-menu-item-hover-color;
       }
 
+      &:focus:not(.is-disabled),
+      body[modality='keyboard'] &:focus {
+        background-color: $ui-menu-item-hover-color;
+        outline: $focus-outline-color solid 3px;
+        outline-offset: -2px;
+      }
+
       &.is-disabled {
         color: $secondary-text-color;
         cursor: default;

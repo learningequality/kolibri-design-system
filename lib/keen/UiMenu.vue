@@ -8,7 +8,6 @@
     lazy
 
     :class="classes"
-    :contain-focus="containFocus"
   >
     <UiMenuOption
       v-for="(option, index) in options"
@@ -112,7 +111,6 @@
         this.$emit('select', option);
         this.closeMenu();
       },
-
       closeMenu() {
         this.$emit('close');
       },
