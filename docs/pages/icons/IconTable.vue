@@ -25,6 +25,17 @@
       />
     </div>
 
+    <h3 v-if="displayedWithColor.length">
+      Learning activities
+    </h3>
+    <div class="icon-table">
+      <IconBlock
+        v-for="(aliasList, index) in displayedLearningActivity"
+        :key="index"
+        :aliasList="aliasList"
+        class="icon-block"
+      />
+    </div>
   </div>
 
 </template>
@@ -60,16 +71,14 @@
    * Return an object where the keys are unique icon identifiers. These identifiers
    * map to an array of alphabetically sorted aliases associated with that icon.
    *
-   * Parameter `withDefaultColor` selects icons with or without a defined default color.
+   * Parameter `filterFn` must take 1 alias and return true or false. When false, the alias
+   * will not be included in the output.
    */
-  function getIconGroups(withDefaultColor) {
+  function getIconGroups(filterFn) {
     const iconGroups = {};
-    Object.keys(KolibriIcons).forEach(alias => {
-      // exit if not applicable
-      const hasDefaultColor = Boolean(KolibriIcons[alias].defaultColor);
-      if ((withDefaultColor && !hasDefaultColor) || (!withDefaultColor && hasDefaultColor)) {
-        return;
-      }
+    const filteredIcons = Object.keys(KolibriIcons).filter(filterFn);
+
+    filteredIcons.forEach(alias => {
       // track a list of aliases
       const iconIdentifier = KolibriIcons[alias].icon.name;
       if (iconGroups[iconIdentifier]) {
@@ -96,16 +105,22 @@
         return termList(this.filterText);
       },
       general() {
-        return sortedIconAliases(getIconGroups(false));
+        return sortedIconAliases(getIconGroups(this.blackIconFilter));
       },
       displayedGeneral() {
         return this.general.filter(this.termFilter);
       },
       withColor() {
-        return sortedIconAliases(getIconGroups(true));
+        return sortedIconAliases(getIconGroups(this.iconWithDefaultColorFilter));
       },
       displayedWithColor() {
         return this.withColor.filter(this.termFilter);
+      },
+      withLearningActivity() {
+        return sortedIconAliases(getIconGroups(this.learningActivityIconFilter));
+      },
+      displayedLearningActivity() {
+        return this.withLearningActivity.filter(this.termFilter);
       },
     },
     methods: {
@@ -116,6 +131,15 @@
           }
         }
         return false;
+      },
+      blackIconFilter(alias) {
+        return !KolibriIcons[alias].defaultColor && !KolibriIcons[alias].learningActivity;
+      },
+      iconWithDefaultColorFilter(alias) {
+        return Boolean(KolibriIcons[alias].defaultColor);
+      },
+      learningActivityIconFilter(alias) {
+        return KolibriIcons[alias].learningActivity;
       },
     },
   };
