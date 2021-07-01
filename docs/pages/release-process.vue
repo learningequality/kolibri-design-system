@@ -76,7 +76,7 @@
         import KModal from 'kolibri-design-system/lib/KButton';
       </DocsShowCode>
       <p>
-        <strong>If (and only if)</strong> we plan on introducing breaking changes to a component, we would add a sub-directory called <code>next</code> to house this work and allow people to test or even use the alpha version while they are still mostly using <code>2.x.y</code> stable:
+        If <strong>(and only if)</strong> we plan on introducing breaking changes to a component, we would add a sub-directory called <code>next</code> to house this work and allow people to test or even use the alpha version while they are still mostly using <code>2.x.y</code> stable:
       </p>
       <DocsShowCode language="javascript">
         // imports KButton version 3.0.0-alpha (next unstable)
@@ -86,15 +86,13 @@
         An update to <code>next</code> code might count as a patch release bump for the current stable semantic version. For example, we might release <code>2.3.5</code> with a changelog entry like:
       </p>
       <p>
-        <em><strong>Version 2.3.5</strong></em>
-        <em>Renamed the </em><em><code>text</code></em><em> prop in </em><em><code>lib/KButton/next</code></em><em> to </em><em><code>label</code></em>
+        <em><strong>Version 2.3.5</strong>: Renamed the <code>text</code> prop in <code>lib/KButton/next</code> to <code>label</code></em>
       </p>
       <p>
         Once we release KDS version <code>3.0.0</code> stable, code in <code>next</code> becomes stable, and stable becomes <code>deprecated</code>:
       </p>
       <p>
-        <em><strong>Version 3.0.0</strong></em>
-        <em>Added a new version of </em><em><code>KButton</code></em><em> addressing API inconsistency</em>
+        <em><strong>Version 3.0.0</strong>: Added a new version of <code>KButton</code> addressing API inconsistency</em>
       </p>
       <DocsShowCode language="javascript">
         // imports KButton version 2.3.5 (deprecated)
@@ -107,8 +105,7 @@
         It's unlikely that at this point a new <code>next</code> version of <code>KButton</code> would also be introduced, because we want to minimize churn and and unnecessary breaking changes. However, in rare cases we might need to do this, and there be three versions all available simultaneously:
       </p>
       <p>
-        <em><strong>Version 3.0.1</strong></em>
-        <em>Added a new alpha version of </em><em><code>KButton</code></em><em> to address unexpected issue</em>
+        <em><strong>Version 3.0.1</strong>: Added a new alpha version of <code>KButton</code> to address unexpected issue</em>
       </p>
       <DocsShowCode language="javascript">
         // imports KButton version 2.3.5 (deprecated)
