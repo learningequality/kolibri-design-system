@@ -74,6 +74,10 @@ export default [
         path: '/changelog',
         title: 'Changelog',
       }),
+      new Page({
+        path: '/release-process',
+        title: 'Release process',
+      }),
     ],
   }),
   new Section({
