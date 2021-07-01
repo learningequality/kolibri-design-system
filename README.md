@@ -190,11 +190,21 @@ Note that we currently use the deprecated Nuxt.js `mode: universal` flag, and sh
 
 ### SVG Icons
 
-Icons are drawn from https://github.com/material-icons/material-icons and then converted to Vue components. This is currently pinned by the `yarn.lock`. If we upgrade it, we need to regenerate the Vue components by running:
+There are three sources of icons:
+
+- [Google Material Design Icons](https://github.com/material-icons/material-icons) (a version pinned in [yarn.lock](yarn.lock))
+- [Material Design Icons](https://github.com/Templarian/MaterialDesign-SVG) (a version pinned in [yarn.lock](yarn.lock))
+- [Custom Learning Equality icons](custom-icons)
+
+Icons from them are then converted to Vue components by our custom precompilation script. After updating any of these sources, we need to regenerate the Vue components by running:
 
 ```bash
 yarn run precompile-svgs
 ```
+
+We don't expose all icons in our KDS public API. Only icons defined in [the icons definitions file](lib/KIcon/iconDefinitions.js) are exposed, and we use our custom aliases for them.
+
+#### reStructuredText replacement strings
 
 We also output a set of reStructuredText replacement strings into the file `docs/rstIconReplacements.txt` which can be used in
 user docs based on Sphinx. To update this file, run
@@ -202,6 +212,18 @@ user docs based on Sphinx. To update this file, run
 ```bash
 yarn run pregenerate
 ```
+#### Example: Upgrading Google Material Design Icons
+
+It is advised to commit changes at each step to make reviewing files other than those in *precompiled-icons/* easier, especially in case of large updates.
+
+1. Run `yarn upgrade @material-icons/svg`
+2. Run `yarn run precompile-svgs`
+3. Review updates of all public icons defined in [the icons definitions file](lib/KIcon/iconDefinitions.js)
+
+Large upgrades can result in a colossal git diff which makes reviewing changes of selected public icons in detail difficult. To make such upgrades smoother, in addition to visually reviewing [icons in KDS documentation](https://design-system.learningequality.org/icons/#icons), you can use a report that is printed in a terminal as soon as the precompilation process ends. It contains all exposed icons aliases together with information about whether an icon has been updated or no. If it's been updated, git diff will be printed.
+
+4. Run `yarn run pregenerate`
+5. Write down notes to the changelog about any public updates like visual changes of icons, updates of their aliases, and updates of reStructuredText replacement strings
 
 ### Development in parallel with other applications
 
