@@ -196,7 +196,7 @@ There are three sources of icons:
 - [Material Design Icons](https://github.com/Templarian/MaterialDesign-SVG) (a version pinned in [yarn.lock](yarn.lock))
 - [Custom Learning Equality icons](custom-icons)
 
-Icons from them are then converted to Vue components by our custom precompilation script. After updating any of these sources, we need to regenerate the Vue components by running:
+Icons from these sources are then converted to Vue components by our custom precompilation script. After updating any of these sources, we need to regenerate the Vue components by running:
 
 ```bash
 yarn run precompile-svgs
