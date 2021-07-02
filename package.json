@@ -13,7 +13,7 @@
     "lint-watch": "yarn lint -m",
     "pregenerate": "node utils/pregenerate.js",
     "_dev-only": "nuxt --port 4000",
-    "precompile-svgs": "rm -rf lib/KIcon/precompiled-icons && node utils/precompileSvgs.js",
+    "precompile-svgs": "rm -rf lib/KIcon/precompiled-icons && node utils/precompileSvgs/index.js",
     "_lint-watch-fix": "yarn lint -w -m",
     "_test": "jest",
     "_api-watch": "chokidar \"**/lib/**\" -c \"node utils/extractApi.js\""

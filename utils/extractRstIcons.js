@@ -18,7 +18,7 @@ const consola = require('consola');
   changes to the implementation of iconDefinitions.js and KIcon might break this.
 
   A slightly preferable implementation might be to extract this information during the
-  precompileSvgs.js process, importing iconDefinitions.js directly, and parsing the
+  precompileSvgs/index.js process, importing iconDefinitions.js directly, and parsing the
   information as real javascript. However this would require webpack tooling which
   is – at present – unavailable to this pre-processing script. We also might want to
   consider a different source of truth besides iconDefinitions.js, but this was deemed

@@ -11,6 +11,8 @@ const SVGO = require('svgo');
 
 var svgo = new SVGO(); // You use this one.
 
+const precompilationDiff = require('./precompilationDiff.js');
+
 // Some attrs used during SVG optimization
 const a11yAttrs = `role="presentation" focusable="false"`;
 const viewBox = `viewBox="0 0 24 24"`;
@@ -153,3 +155,7 @@ class LibPrecompiler {
 config.forEach(c => {
   new LibPrecompiler(c.iconLibPath, c.namespace).process();
 });
+
+consola.success('Precompilation has been successful');
+consola.info(`Updates of KDS public icons: \n`);
+precompilationDiff.print();
