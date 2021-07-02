@@ -1,0 +1,12 @@
+<template>
+
+  <svg viewBox="0 0 24 24" role="presentation" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24"><path opacity=".3" d="M16 16.5l-4-4-4 4V20h8z"/><path opacity=".3" d="M16 16.5l-4-4-4 4V20h8z"/><path d="M6 22h12v-6l-4-4 3.99-4.01L18 2H6l.01 5.99L10 12l-4 3.99V22zM8 7.5V4h8v3.5l-4 4-4-4zm0 9l4-4 4 4V20H8v-3.5z"/></svg>
+
+</template>
+
+
+<script>
+
+  export default {"name":"icon-427974b382e02bc9a9d63bcf48c96c1d"}
+
+</script>
