@@ -28,7 +28,7 @@ function print() {
       const iconAlias = iconDefinitionMatch[1];
       const iconPath = path.resolve(path.join('./lib/KIcon/', iconDefinitionMatch[2]));
 
-      exec('git diff ' + iconPath, (error, stdout, stderr) => {
+      exec('git diff --color=always ' + iconPath, (error, stdout, stderr) => {
         if (error) {
           consola.error(error.message);
           return;
