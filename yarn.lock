@@ -1297,8 +1297,8 @@
     "@types/yargs" "^13.0.0"
 
 "@material-icons/svg@git+https://github.com/material-icons/material-icons.git":
-  version "0.0.1"
-  resolved "git+https://github.com/material-icons/material-icons.git#61b8cc912486959dec9830948d7df8e7763f6c94"
+  version "1.0.12"
+  resolved "git+https://github.com/material-icons/material-icons.git#edab9649ec8395f7374eaeaa38fb7d620de9a5ab"
 
 "@mdi/svg@^5.3.45":
   version "5.3.45"
