@@ -46,24 +46,40 @@
       </ul>
     </DocsPageSection>
 
-    <DocsPageSection title="Git branches and tags" anchor="#git">
+    <DocsPageSection title="Design patterns and APIs" anchor="#design-patterns">
+
+      <p>The design system provides two kinds of "contracts" which may change from release to release:</p>
+
+      <ul>
+        <li>The set of design patterns and guidance describe the current UX/UI conventions and best practices</li>
+        <li>The set of library components and their configuration options describe the current API</li>
+      </ul>
+
+      <p>
+        Significant changes to design patterns can be as important as API changes. For example, if we were to introduce strict new guidance that says "No text should ever be smaller than 11px", this would be considered a <code>MAJOR</code> version change because it requires us to go through the Learning Platform, Studio, and Data Portal to ensure that this new guidance is actually being followed.
+      </p>
+
+    </DocsPageSection>
+
+
+    <DocsPageSection title="Technical details" anchor="#technical-details">
+
+      <h3>Git branches and tags</h3>
       <p>
         The design system is currently developed and released from a single <code>main</code> branch. Updates are made in transient feature branches, tested, and merged into <code>main</code>. Specific releases (such as <code>v1.2.3</code>) are represented as <DocsExternalLink text="Github releases" href="https://docs.github.com/en/github/administering-a-repository/releasing-projects-on-github/managing-releases-in-a-repository" /> and <DocsExternalLink text="Git tags" href="https://git-scm.com/book/en/v2/Git-Basics-Tagging" />.
       </p>
       <p>
         The single-branch model does not support maintaining multiple releases in parallel – for example, releasing a new <code>v1.2.3</code> after <code>v1.3.0</code> has already happened. If this becomes necessary at some point we would make a dedicated release branch called <code>v1.2.x</code> for the purpose, similar to Kolibri's <DocsExternalLink text="branching model" href="https://kolibri-dev.readthedocs.io/en/develop/release_process.html#branches-and-tags" />.
       </p>
-    </DocsPageSection>
 
-    <DocsPageSection title="Update policies" anchor="#update-policies">
+      <h3>Update policies</h3>
       <ul>
         <li>All user-facing changes for each release should be documented in the <DocsInternalLink text="changelog" href="/changelog" />.</li>
         <li>The unstable or develop branches of product repos should track the <code>HEAD</code> of the design system <code>main</code> branch. It is the responsibility of the Design System Circle to make sure this happens.</li>
         <li>The stable or release branches of product repos should be pinned to a stable, tagged version of the design system.</li>
       </ul>
-    </DocsPageSection>
 
-    <DocsPageSection title="'Next' and 'Deprecated' components" anchor="#next-deprecated">
+      <h3>'Next' and 'Deprecated' components</h3>
       <p>
         To help smooth upgrades, the design system has a process for making both pre-release and deprecated versions of individual components available from a single monorepo:
       </p>
