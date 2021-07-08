@@ -43,29 +43,13 @@
         Over time we should be able to observe patterns in the intentional deviations, and use them as guidance for implementing updates to the design system that benefit the rest of the product ecosystem.
       </p>
     </DocsPageSection>
-    <DocsPageSection title="Updates" anchor="#updates">
+    <DocsPageSection title="Contributing" anchor="#contributing">
       <p>
-        The process for making updates to the design system is still being formulated. There are a number of factors that need to be taken into consideration, including:
+        We welcome feedback and contributions! It's important that the Design System works for you, so please help shape it. Feel free to submit a <DocsExternalLink text="pull request" href="https://github.com/learningequality/kolibri-design-system/pulls" /> or <DocsExternalLink text="issue" href="https://github.com/learningequality/kolibri-design-system/issues" /> to the GitHub repo.
       </p>
-      <ul>
-        <li>The need for rapid and easy iteration and improvement</li>
-        <li>Protection against unexpected and hard-to-test regressions</li>
-        <li>Sustainability, maintainability, and prevention of bloat</li>
-        <li>Input from all relevant stakeholders</li>
-        <li>Smooth update and migration paths</li>
-      </ul>
       <p>
-        In the meantime, we welcome direct feedback and contributions! It's important that the Design System works for you, so please help shape it.
+        To get started, see the <DocsInternalLink text="release process" href="/release-process" /> and the <DocsExternalLink text="project readme" href="https://github.com/learningequality/kolibri-design-system#readme" />.
       </p>
-      <ul>
-        <li>Share ideas or concerns with Devon, Jessica, Khang, and Jacob directly, or file issues in this repo.</li>
-        <li>
-          Submit a <DocsExternalLink text="pull request" href="https://github.com/learningequality/kolibri-design-system/pulls" /> or <DocsExternalLink text="issue" href="https://github.com/learningequality/kolibri-design-system/issues" /> to the GitHub repo
-        </li>
-        <li>
-          Leave a comment in the <DocsExternalLink text="Notion project" href="https://www.notion.so/learningequality/Kolibri-Design-System-for-LE-products-976ea82b50f844ea9149a7abed497ea9" />
-        </li>
-      </ul>
     </DocsPageSection>
 
   </DocsPageTemplate>
