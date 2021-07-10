@@ -7,12 +7,7 @@ assignees: ''
 
 ---
 
-<!-- Please remove any unused sections
-
-Instructions:
-- Title line template: [Title]: Brief description
-
--->
+<!-- Please remove any unused sections -->
 
 ## Product
 <!-- Where did you notice this bug? (Kolibri, Studio, Design System, etc.) -->
