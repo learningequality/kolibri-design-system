@@ -22,6 +22,8 @@
         <li>Added 'email', 'sidebar', and 'add' icons - <DocsGithubLink pull="110" /></li>
         <li>Updated 'clipboard' icon - <DocsGithubLink pull="121" /></li>
         <li>Fixed z-order bug in icon button - <DocsGithubLink pull="95" />, <DocsGithubLink pull="122" /></li>
+        <li>The filled icon with <code>copy</code> and <code>duplicate</code> aliases and the outlined <code>copyToClipboard</code> merged into one outlined icon with <code>copy</code> alias - <DocsGithubLink pull="251" /></li>
+        <li>Removed <code>domain</code> alias from the icon that had previously had two <code>domain</code> and <code>facility</code> aliases - <DocsGithubLink pull="251" /></li> 
       </ul>
       <h4>Docs site updates</h4>
       <ul>

@@ -1,12 +1,12 @@
 <template>
 
-  <svg viewBox="0 0 24 24" role="presentation" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24"><path d="M6.05 8.05a7.001 7.001 0 00-.02 9.88c1.47-3.4 4.09-6.24 7.36-7.93A15.952 15.952 0 008 19.32c2.6 1.23 5.8.78 7.95-1.37 2.99-2.99 3.83-11.14 4.01-13.38a.489.489 0 00-.53-.53c-2.24.18-10.39 1.02-13.38 4.01z"/></svg>
+  <svg viewBox="0 0 24 24" role="presentation" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24"><path d="M19.95 5.97a2.018 2.018 0 00-1.92-1.92c-.7-.03-1.37-.05-2.02-.05-5.03 0-8.52.97-10.46 2.91-3.68 3.68-3.15 8.9.09 11.9h.01a16 16 0 017.67-8.8c-.21.18-4.7 3.58-5.51 10.25 1.05.48 2.2.75 3.36.75 2.05 0 4.16-.8 5.92-2.55 2.19-2.2 3.14-6.36 2.86-12.49z"/></svg>
 
 </template>
 
 
 <script>
 
-  export default {"name":"icon-40af57bf7136cf4c740242cfa49a9012"}
+  export default {"name":"icon-5bfc3c5eea2080928dfb0912b2f8af79"}
 
 </script>
