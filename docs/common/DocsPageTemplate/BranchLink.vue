@@ -9,7 +9,7 @@
     <span v-else>
       Local environment
     </span>
-    <span>| <DocsInternalLink text="Version history" href="/versions" /></span>
+    <span>| <DocsInternalLink text="Changelog" href="/changelog" /></span>
   </div>
 
 </template>

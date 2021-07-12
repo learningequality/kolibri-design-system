@@ -10,6 +10,7 @@ import DocsPageSection from '~/common/DocsPageSection';
 import DocsPageTemplate from '~/common/DocsPageTemplate';
 import DocsDoNot from '~/common/DocsDoNot';
 import DocsShow from '~/common/DocsShow';
+import DocsShowCode from '~/common/DocsShowCode';
 import DocsFilter from '~/common/DocsFilter';
 
 Vue.component('DocsPageTemplate', DocsPageTemplate);
@@ -20,6 +21,7 @@ Vue.component('DocsAnchorTarget', DocsAnchorTarget);
 Vue.component('DocsExternalLink', DocsExternalLink);
 Vue.component('DocsGithubLink', DocsGithubLink);
 Vue.component('DocsShow', DocsShow);
+Vue.component('DocsShowCode', DocsShowCode);
 Vue.component('DocsDoNot', DocsDoNot);
 Vue.component('DocsFilter', DocsFilter);
 

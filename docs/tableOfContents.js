@@ -71,8 +71,12 @@ export default [
         title: 'Design principles',
       }),
       new Page({
-        path: '/versions',
-        title: 'Version history',
+        path: '/changelog',
+        title: 'Changelog',
+      }),
+      new Page({
+        path: '/release-process',
+        title: 'Release process',
       }),
     ],
   }),
