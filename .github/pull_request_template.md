@@ -33,7 +33,6 @@ Addresses #*PR# HERE*
 - [ ] If there are any front-end changes, before/after screenshots are included
 - [ ] Critical and brittle code paths are covered by unit tests
 - [ ] The change has been added to the `changelog`
-- [ ] A separate PR has been submitted to point the `unstable` branch of the affected Kolibri product to the most recent version of KDS (see post-merge updates for details)
 
 ## Reviewer guidance
 <!-- Delete anything that doesn't apply so your reviewer knows what to check for -->
