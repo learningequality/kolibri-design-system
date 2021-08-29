@@ -174,12 +174,12 @@ ___
 
 ## Library updates
 ___
-- Added email, sidebar, and add icons - #[110]
-- Updated clipboard icon - #[121]
+- Added `email`, `sidebar`, and `add` icons - #[110]
+- Updated `clipboard` icon - #[121]
 - Fixed z-order bug in icon button - #[95], #[122]
-- The filled icon with copy and duplicate aliases and the outlined copyToClipboard merged into one outlined icon with copy alias - #[251]
-- Removed domain alias from the icon that had previously had two domain and facility aliases - #[251]
-- Added a11y, alternativeRoute, disconnected, forwardRounded, and restart icons - #[252]
+- The filled icon with `copy` and `duplicate` aliases and the outlined `copyToClipboard` merged into one outlined icon with `copy` alias - #[251]
+- Removed `domain` alias from the icon that had previously had two `domain` and `facility` aliases - #[251]
+- Added `a11y`, `alternativeRoute`, `disconnected`, `forwardRounded`, and `restart` icons - #[252]
 - Fixed regression related to external links opening in new tabs - #[93]
 
 ## Docs site updates
@@ -207,4 +207,4 @@ ___
 This was the first release of the Design System, with documentation written in a Nuxt-based statically-generated site. The focus was on migrating components out of the Kolibri and making them reusable in a shared component library.
 
 # Version 0.1
-The design system was originally based on a set of internal Kolibri components and their use as documented in the Kolibri Style Guide, which was first introduced into the Kolibri code base in version 0.6. This remained until version 0.13 after which the content was migrated to the [current site](https://design-system.learningequality.org/ "Kolibri Design System Documentation").
+The design system was originally based on a set of internal Kolibri components and their use as documented in the Kolibri Style Guide, which was first introduced into the Kolibri code base [in version 0.6](https://github.com/learningequality/kolibri/tree/release-v0.6.x/kolibri/plugins/style_guide). This remained until [version 0.13](https://github.com/learningequality/kolibri/tree/release-v0.13.x/kolibri/plugins/style_guide) after which the content was migrated to the [current site](https://design-system.learningequality.org/ "Kolibri Design System Documentation").
