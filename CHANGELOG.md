@@ -9,6 +9,7 @@ ___
 
 - #[140] - Material-design-icons is no longer a direct dependency (only a dev dependency) which should reduce timeout errors for products depending on KDS
 - #[227] - Remove focus ring when not using keyboard to navigate (e.g. when hovering)
+- #[255] - Add `CHANGELOG.md`
 
 ## Icons
 ___
@@ -159,6 +160,7 @@ __Changed__
 [194]: https://github.com/learningequality/kolibri-design-system/pull/194
 [223]: https://github.com/learningequality/kolibri-design-system/pull/223
 [250]: https://github.com/learningequality/kolibri-design-system/pull/250
+[255]: https://github.com/learningequality/kolibri-design-system/pull/255
 
 
 # 0.2.1
