@@ -156,7 +156,7 @@
       return {
         currentText: this.value,
         changedOrFocused: false,
-        focusedOnce: false,
+        hasBeenFocused: false,
       };
     },
     computed: {
@@ -204,10 +204,11 @@
         /**
          * Emitted with `focus` events
          */
-        if (!this.autofocus || this.focusedOnce) {
+        // Skip first focus event if autofocus is enabled
+        if (!this.autofocus || this.hasBeenFocused) {
           this.changedOrFocused = true;
         }
-        this.focusedOnce = true;
+        this.hasBeenFocused = true;
         this.$emit('focus', e);
       },
       /**
@@ -216,7 +217,7 @@
        */
       focus() {
         this.changedOrFocused = true;
-        this.focusedOnce = true;
+        this.hasBeenFocused = true;
         this.$refs.textbox.$el.querySelector('input').focus();
       },
     },
