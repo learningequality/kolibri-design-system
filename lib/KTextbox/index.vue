@@ -156,6 +156,7 @@
       return {
         currentText: this.value,
         changedOrFocused: false,
+        focusedOnce: false,
       };
     },
     computed: {
@@ -203,7 +204,10 @@
         /**
          * Emitted with `focus` events
          */
-        this.changedOrFocused = true;
+        if (!this.autofocus || this.focusedOnce) {
+          this.changedOrFocused = true;
+        }
+        this.focusedOnce = true;
         this.$emit('focus', e);
       },
       /**
@@ -212,6 +216,7 @@
        */
       focus() {
         this.changedOrFocused = true;
+        this.focusedOnce = true;
         this.$refs.textbox.$el.querySelector('input').focus();
       },
     },
