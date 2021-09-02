@@ -158,13 +158,14 @@
           :options="['Option 1', 'Option 2']"
           appearance="raised-button"
         >
-          <KIconButton
-            slot="button"
-            tooltip="Dropdown options"
-            icon="optionsHorizontal"
-            appearance="flat-button"
-            :primary="false"
-          />
+          <template #button>
+            <KIconButton
+              tooltip="Dropdown options"
+              icon="optionsHorizontal"
+              appearance="flat-button"
+              :primary="false"
+            />
+          </template>
         </KDropdownMenu>
       </DocsShow>
       <p>

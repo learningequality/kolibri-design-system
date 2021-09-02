@@ -1,7 +1,7 @@
 <template>
 
   <div>
-    <div class="show" :style="{display: block ? 'block' : 'inline-block'}">
+    <div class="show" :style="{ display: block ? 'block' : 'inline-block' }">
       <slot></slot>
     </div>
   </div>

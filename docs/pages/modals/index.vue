@@ -33,10 +33,10 @@
         Keep this short, concise, and easy for the user to understand. Titles should not be structured as a sentence or question, and should not contain user-generated text. Use verbs in the imperative form. Do not use verbs that end in "-ing"; doing so may give users the impression that a task is in progress when it is not.
       </p>
       <DocsDoNot>
-        <template v-slot:do>
+        <template #do>
           <img src="./modal-title.png">
         </template>
-        <template v-slot:not>
+        <template #not>
           <img src="./modal-badtitle.png">
         </template>
       </DocsDoNot>
@@ -134,13 +134,13 @@
 
     <DocsPageSection title="Examples" anchor="#examples">
       <DocsDoNot>
-        <template v-slot:do>
+        <template #do>
           <img src="./modal.png">
           <p class="do-dont">
             Present one modal at a time
           </p>
         </template>
-        <template v-slot:not>
+        <template #not>
           <img src="./modal-overlay.png">
           <p class="do-dont">
             Overlay modals on modals
@@ -149,13 +149,13 @@
       </DocsDoNot>
 
       <DocsDoNot>
-        <template v-slot:do>
+        <template #do>
           <img src="./modal-checks.png">
           <p class="do-dont">
             Use modals for simple, singular, focused tasks
           </p>
         </template>
-        <template v-slot:not>
+        <template #not>
           <img src="./modal-table.png">
           <p class="do-dont">
             Insert a table or other complex interactions
@@ -164,13 +164,13 @@
       </DocsDoNot>
 
       <DocsDoNot>
-        <template v-slot:do>
+        <template #do>
           <img src="./modal-delete.png">
           <p class="do-dont">
             Use language which directly implies the result of the action
           </p>
         </template>
-        <template v-slot:not>
+        <template #not>
           <img src="./modal-alert.png">
           <p class="do-dont">
             Use ambiguous language for titles, content, and actions
@@ -179,13 +179,13 @@
       </DocsDoNot>
 
       <DocsDoNot>
-        <template v-slot:do>
+        <template #do>
           <img src="./modal.png">
           <p class="do-dont">
             Present a single way to continue through and exit the modal
           </p>
         </template>
-        <template v-slot:not>
+        <template #not>
           <img src="./modal-back.png">
           <p class="do-dont">
             Use an ‘X’ button, back, or other duplicative actions

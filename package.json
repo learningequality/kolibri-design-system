@@ -8,7 +8,7 @@
   "scripts": {
     "dev": "npm-run-all --parallel _dev-only _lint-watch-fix _api-watch pregenerate",
     "generate": "yarn run pregenerate && nuxt generate",
-    "lint": "kolibri-tools lint '**/*.{js,vue,scss,less,css}' -i ,'**/node_modules/**','**/.nuxt/**','**/dist/**','**/lib/KIcon/precompiled-icons/**','**/lib/keen/**','**/docs/environment.js','**/docs/jsdocs.js'",
+    "lint": "kolibri-tools lint --pattern '**/*.{js,vue,scss,less,css}' -i ,'**/node_modules/**','**/.nuxt/**','**/dist/**','**/lib/KIcon/precompiled-icons/**','**/lib/keen/**','**/docs/environment.js','**/docs/jsdocs.js'",
     "lint-fix": "yarn lint -w",
     "lint-watch": "yarn lint -m",
     "pregenerate": "node utils/pregenerate.js",
@@ -47,7 +47,7 @@
     "eslint-import-resolver-nuxt": "^1.0.0",
     "globby": "^6.1.0",
     "jest": "^24.1.0",
-    "kolibri-tools": "0.15.0-dev.1",
+    "kolibri-tools": "0.15.0-dev.3",
     "lockr": "^0.8.5",
     "material-design-icons": "^3.0.1",
     "normalize.css": "^8.0.1",

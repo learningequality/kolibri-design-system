@@ -22,7 +22,7 @@
     </DocsPageSection>
 
     <DocsDoNot>
-      <template v-slot:do>
+      <template #do>
         <img src="../loaders/topbar.png" style="max-width:400px;">
         <p>
           Append linear loaders to appbars to load page content
@@ -31,7 +31,7 @@
     </DocsDoNot>
 
     <DocsDoNot>
-      <template v-slot:do>
+      <template #do>
         <img src="../loaders/tasks.png" style="max-width:400px;">
         <p>
           Place linear loaders near information related to the task being measured
@@ -40,7 +40,7 @@
     </DocsDoNot>
 
     <DocsDoNot>
-      <template v-slot:do>
+      <template #do>
         <img src="../loaders/tables.png" style="max-width:400px;">
         <p>
           Append linear loaders to data tables
@@ -62,7 +62,7 @@
     </DocsPageSection>
 
     <DocsDoNot>
-      <template v-slot:do>
+      <template #do>
         <img src="../loaders/loading-more.png" style="max-width:400px;">
         <p>
           Place below existing content to indicate where new content appears
@@ -71,7 +71,7 @@
     </DocsDoNot>
 
     <DocsDoNot>
-      <template v-slot:do>
+      <template #do>
         <img src="../loaders/centering.png" style="max-width:400px;">
         <p>
           Center circular loaders when loading new information
