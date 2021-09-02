@@ -9,7 +9,8 @@
     <span v-else>
       Local environment
     </span>
-    <span>| <DocsInternalLink text="Changelog" href="/changelog" /></span>
+    <span>|</span>
+    <DocsGithubLink text="Changelog" href="https://github.com/learningequality/kolibri-design-system/blob/main/CHANGELOG.md" />
   </div>
 
 </template>
