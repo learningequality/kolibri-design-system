@@ -74,7 +74,7 @@
 
       <h3>Update policies</h3>
       <ul>
-        <li>All user-facing changes for each release should be documented in the <DocsInternalLink text="changelog" href="/changelog" />.</li>
+        <li>All user-facing changes for each release should be documented in the <DocsGithubLink text="changelog" href="https://github.com/learningequality/kolibri-design-system/blob/main/CHANGELOG.md" />.</li>
         <li>The unstable or develop branches of product repos should track the <code>HEAD</code> of the design system <code>main</code> branch. It is the responsibility of the Design System Circle to make sure this happens.</li>
         <li>The stable or release branches of product repos should be pinned to a stable, tagged version of the design system.</li>
       </ul>
