@@ -90,7 +90,7 @@
         </div>
       </label>
 
-      <div v-if="hasFeedback || maxlength" class="ui-textbox-feedback">
+      <div v-if="showHelp || hasErrorFeedback || maxlength" class="ui-textbox-feedback">
         <div v-if="showError" class="ui-textbox-feedback-text" style="{ color: $themeTokens.error }">
           <slot name="error">
             {{ error }}
@@ -104,7 +104,7 @@
         </div>
 
         <!-- Placeholder to keep the text height spacing in place even when
-          not showing any errors -->
+             not showing any errors -->
         <div v-else class="ui-textbox-feedback-text">
           &nbsp;
         </div>
@@ -282,12 +282,12 @@
         return this.value ? this.value.length : 0;
       },
 
-      hasFeedback() {
-        return this.showError || this.showHelp;
+      hasErrorFeedback() {
+        return Boolean(this.error) || Boolean(this.$slots.error);
       },
 
       showError() {
-        return this.invalid && (Boolean(this.error) || Boolean(this.$slots.error));
+        return this.invalid && this.hasErrorFeedback;
       },
 
       showHelp() {
