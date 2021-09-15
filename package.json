@@ -41,7 +41,7 @@
     "consola": "^2.15.3",
     "eslint-import-resolver-nuxt": "^1.0.1",
     "globby": "^6.1.0",
-    "kolibri-tools": "0.15.0-dev.3",
+    "kolibri-tools": "0.15.0-dev.4",
     "lockr": "^0.8.4",
     "material-design-icons": "^3.0.1",
     "normalize.css": "^8.0.1",
