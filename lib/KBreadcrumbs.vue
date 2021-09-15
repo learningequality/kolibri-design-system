@@ -2,7 +2,7 @@
 
   <div
     v-show="showSingleItem || crumbs.length > 1"
-    :class="{'breadcrumbs-collapsed': collapsedCrumbs.length}"
+    :class="{ 'breadcrumbs-collapsed': collapsedCrumbs.length }"
   >
     <nav class="breadcrumbs">
       <div

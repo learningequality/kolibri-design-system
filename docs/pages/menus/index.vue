@@ -34,13 +34,13 @@
     </DocsPageSection>
 
     <DocsDoNot>
-      <template v-slot:do>
+      <template #do>
         <img src="./text-do.png">
         <p class="do-dont">
           Minimize text and rely on interface clarity
         </p>
       </template>
-      <template v-slot:not>
+      <template #not>
         <img src="./text-dont.png">
         <p class="do-dont">
           Write repetitive menu option text
@@ -67,13 +67,13 @@
     </DocsPageSection>
 
     <DocsDoNot>
-      <template v-slot:do>
+      <template #do>
         <img src="./icon-do.png">
         <p class="do-dont">
           Use iconography as a visual aid for important actions
         </p>
       </template>
-      <template v-slot:not>
+      <template #not>
         <img src="./icon-dont.png">
         <p class="do-dont">
           Use repetitive iconography in filter menus

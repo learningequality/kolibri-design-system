@@ -35,7 +35,7 @@
     </DocsPageSection>
 
     <DocsDoNot>
-      <template v-slot:do>
+      <template #do>
         <img src="./assistive-1.png">
         <p class="do-dont">
           Use helper text to indicate an input is required
@@ -44,7 +44,7 @@
     </DocsDoNot>
 
     <DocsDoNot>
-      <template v-slot:do>
+      <template #do>
         <img src="./assistive-2.png">
         <p class="do-dont">
           Show a ratio of characters used and total character limit for fields with character limits
@@ -59,7 +59,7 @@
     </DocsPageSection>
 
     <DocsDoNot style="display: inline-block;">
-      <template v-slot:do>
+      <template #do>
         <img src="./icon-1.png">
         <p class="do-dont">
           Include a clear icon to indicate an ability to clear the field when text is present
@@ -68,7 +68,7 @@
     </DocsDoNot>
 
     <DocsDoNot style="display: inline-block;">
-      <template v-slot:do>
+      <template #do>
         <img src="./icon-2.png">
         <p class="do-dont">
           Include a copy icon to indicate information is able to be copied
@@ -77,7 +77,7 @@
     </DocsDoNot>
 
     <DocsDoNot style="display: inline-block;">
-      <template v-slot:do>
+      <template #do>
         <img src="./icon-3.png">
         <p class="do-dont">
           Include an info icon that reveals more information on hover or click
@@ -86,7 +86,7 @@
     </DocsDoNot>
 
     <DocsDoNot style="display: inline-block;">
-      <template v-slot:do>
+      <template #do>
         <img src="./icon-4.png">
         <p class="do-dont">
           Include controls that can affect the the input of a numeric text field
@@ -95,7 +95,7 @@
     </DocsDoNot>
 
     <DocsDoNot style="display: inline-block;">
-      <template v-slot:do>
+      <template #do>
         <img src="./icon-5.png">
         <p class="do-dont">
           Include a dropdown icon to indicate the presence of a nested menu component
@@ -104,7 +104,7 @@
     </DocsDoNot>
 
     <DocsDoNot style="display: inline-block;">
-      <template v-slot:do>
+      <template #do>
         <img src="./icon-6.png">
         <p class="do-dont">
           Include an icon signifier to the left of the label to indicates a theme or category of the dropdown menu options
@@ -124,7 +124,7 @@
       </ul>
 
       <DocsDoNot>
-        <template v-slot:do>
+        <template #do>
           <img src="./errors-1.png">
           <p class="do-dont">
             Be specific as possible about how to resolve the error
@@ -133,7 +133,7 @@
       </DocsDoNot>
 
       <DocsDoNot>
-        <template v-slot:do>
+        <template #do>
           <img src="./errors-2.png">
           <p class="do-dont">
             Provide general error text for nonspecific errors
@@ -142,7 +142,7 @@
       </DocsDoNot>
 
       <DocsDoNot>
-        <template v-slot:not>
+        <template #not>
           <img src="./errors-3.png">
           <p class="do-dont">
             Stack error text below helper text
@@ -159,7 +159,7 @@
     </DocsPageSection>
 
     <DocsDoNot>
-      <template v-slot:do>
+      <template #do>
         <img src="./advanced-1.png">
         <p class="do-dont">
           Prompt autocomplete suggestions to help users navigate lengthy dropdown menus
@@ -168,7 +168,7 @@
     </DocsDoNot>
 
     <DocsDoNot>
-      <template v-slot:do>
+      <template #do>
         <img src="./advanced-2.png">
         <p class="do-dont">
           Display multiple selections as chips

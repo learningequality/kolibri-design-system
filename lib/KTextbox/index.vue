@@ -13,7 +13,7 @@
       :maxlength="maxlength"
       :autocomplete="autocomplete"
       :autocapitalize="autocapitalize"
-      :style="changedOrFocused ? this.$coreOutline : {}"
+      :style="changedOrFocused ? $coreOutline : {}"
       :type="type"
       :min="min"
       :max="max"

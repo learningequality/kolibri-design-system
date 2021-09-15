@@ -2,7 +2,7 @@
 
   <!-- Vendored from  UI UISwitch component https://josephuspaye.github.io/Keen-UI/#/ui-switch -->
   <label class="k-switch" :class="classes">
-    <div :style="isActive ? this.$coreOutline : {}">
+    <div :style="isActive ? $coreOutline : {}">
       <div class="k-switch-input-wrapper">
         <input
           ref="input"

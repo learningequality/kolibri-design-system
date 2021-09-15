@@ -38,10 +38,10 @@
         Placeholder text should let the user know what data can be filtered when they input text. State this concisely in the imperative form.
       </p>
       <DocsDoNot>
-        <template v-slot:do>
+        <template #do>
           <img class="do-dont" src="./text-filter-do.png">
         </template>
-        <template v-slot:not>
+        <template #not>
           <img class="do-dont" src="./text-filter-dont.png">
         </template>
       </DocsDoNot>
@@ -58,10 +58,10 @@
         Frame the text of options concisely and as affirmative statements.
       </p>
       <DocsDoNot>
-        <template v-slot:do>
+        <template #do>
           <img class="do-dont" src="./checkbox-1.png">
         </template>
-        <template v-slot:not>
+        <template #not>
           <img class="do-dont" src="./checkbox-2.png">
         </template>
       </DocsDoNot>

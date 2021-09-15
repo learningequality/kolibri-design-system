@@ -8,7 +8,7 @@
         class="icon"
       />
     </div>
-    <div class="code alias">
+    <div class="alias code">
       <div v-for="(aliasItem, index) in aliasList" :key="index">
         <code>{{ aliasItem }}</code>
         <DocsAnchorTarget

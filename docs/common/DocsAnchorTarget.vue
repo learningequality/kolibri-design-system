@@ -4,7 +4,7 @@
     <DocsInternalLink
       class="link"
       :href="anchor"
-      :style="{top: `${verticalOffset}px`}"
+      :style="{ top: `${verticalOffset}px` }"
     >
       <file-svg
         src="../assets/link.svg"

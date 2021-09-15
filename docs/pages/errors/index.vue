@@ -31,12 +31,12 @@
         Error messages should also be actionable. Offer the solution as an action when possible and make sure the action label is specific to the outcome. If including an action isn’t possible, then briefly explain how the user can fix their problem.
       </p>
       <DocsDoNot>
-        <template v-slot:do>
+        <template #do>
           <p class="do-dont">
             “Sorry, something went wrong. <u>Refresh page</u>"
           </p>
         </template>
-        <template v-slot:not>
+        <template #not>
           <p class="do-dont">
             “500 internal server error. It looks like the server failed to fulfill an apparently valid GET or POST request. We are aware of this issue and you can try solving it by reloading the page. We apologize for the inconvenience and hope this doesn’t occur again.”
           </p>
@@ -49,12 +49,12 @@
         Let the user know what went wrong without blaming them. Do not use all caps, exclamation points, or other alarmist language.
       </p>
       <DocsDoNot>
-        <template v-slot:do>
+        <template #do>
           <p class="do-dont">
             “Please enter a valid email”
           </p>
         </template>
-        <template v-slot:not>
+        <template #not>
           <p class="do-dont">
             “WARNING!! You didn’t fill this out”
           </p>
@@ -64,12 +64,12 @@
         Even though errors can induce negative emotions, avoid being too whimsical and lighthearted. This can have the opposite effect and cause more frustration.
       </p>
       <DocsDoNot>
-        <template v-slot:do>
+        <template #do>
           <p class="do-dont">
             “Storage limit reached”
           </p>
         </template>
-        <template v-slot:not>
+        <template #not>
           <p class="do-dont">
             “Whoops! Looks like the tank is too full &#x1f60e;"
           </p>
@@ -166,10 +166,10 @@
         For error messages, this means not showing all error messages at once. Show enough information for the user to discover where the problem is, and present the detail they need at the moment of resolving the error.
       </p>
       <DocsDoNot>
-        <template v-slot:do>
+        <template #do>
           <img class="do-dont" src="./disclosure-do.png">
         </template>
-        <template v-slot:not>
+        <template #not>
           <img class="do-dont" src="./disclosure-dont.png">
         </template>
       </DocsDoNot>

@@ -40,12 +40,12 @@
         When inline with text, icons should usually be the same color as the text:
       </p>
       <DocsDoNot>
-        <template v-slot:do>
+        <template #do>
           <h4>
             <KLabeledIcon icon="video" label="Awesome video" />
           </h4>
         </template>
-        <template v-slot:not>
+        <template #not>
           <h4>
             <KLabeledIcon icon="video" color="green" label="Awesome video" class="wrong-colors" />
           </h4>
@@ -87,7 +87,7 @@
       <p>
         For use in documentation such as the <DocsExternalLink href="https://kolibri.readthedocs.io/" text="Kolibri User Docs" />, all icons above have substitutions available in <DocsExternalLink href="https://docutils.sourceforge.io/docs/ref/rst/directives.html#directives-for-substitution-definitions" text="reStructuredText replacement syntax" /> below:
       </p>
-      <textarea v-model="text" class="replacements code" readonly></textarea>
+      <textarea v-model="text" class="code replacements" readonly></textarea>
       <p>
         Copy and paste it into a file such as <code>rstIconReplacements.txt</code> and then add it to your <code>conf.py</code> file <DocsExternalLink href="https://github.com/learningequality/kolibri-docs/blob/d582797e0d62d1482501954b6d0680031bce18cd/docs/conf.py#L174-L181" text="like this" />.
       </p>
