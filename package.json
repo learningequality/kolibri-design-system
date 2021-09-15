@@ -56,5 +56,10 @@
     "vue-prism-component": "^1.1.1",
     "vue-simple-markdown": "^1.1.5",
     "xml-loader": "^1.2.1"
+  },
+  "resolutions": {
+    "@babel/preset-env": "7.12.17",
+    "postcss-loader": "3.0.0",
+    "css-loader": "3.6.0"
   }
 }
