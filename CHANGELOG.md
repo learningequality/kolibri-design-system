@@ -62,6 +62,7 @@ Releases are recorded as git tags in the [Github releases](https://github.com/le
 - [#195] - `KLabeledIcon` - Fixed text-wrapping in Safari so child takes full width of parent
 - [#200] - Design system - Fixed keyboard focus rings in examples
 - [#209] - Design system - Fixed sidebar vertical scrolling
+- [#256] - `KTextBox` - Fixed autofocus error
 
 <!-- Referenced PRs -->
 
@@ -106,6 +107,7 @@ Releases are recorded as git tags in the [Github releases](https://github.com/le
 [#223]: https://github.com/learningequality/kolibri-design-system/pull/223
 [#250]: https://github.com/learningequality/kolibri-design-system/pull/250
 [#255]: https://github.com/learningequality/kolibri-design-system/pull/255
+[#256]: https://github.com/learningequality/kolibri-design-system/pull/256
 
 ## Version 0.2.1
 
