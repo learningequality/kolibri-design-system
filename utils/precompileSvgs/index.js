@@ -57,7 +57,7 @@ if (customOnly) {
   rimraf.sync(path.join(basePathForPrecompiledSvgs, 'le'));
 } else {
   rimraf.sync(basePathForPrecompiledSvgs);
-  fs.mkdirSync(target);
+  fs.mkdirSync(basePathForPrecompiledSvgs);
 }
 
 class LibPrecompiler {
