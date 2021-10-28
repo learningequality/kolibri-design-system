@@ -154,6 +154,10 @@ export default [
         title: 'Text fields',
         keywords: textRelatedKeywords,
       }),
+      new Page({
+        path: '/loaders',
+        title: 'Loaders',
+      }),
     ],
   }),
   new Section({
