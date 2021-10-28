@@ -2,40 +2,55 @@
 
   <div>
     <DocsFilter v-model="filterText" class="filter" />
-    <h3 v-if="displayedGeneral.length">
-      General aliases
+
+    <h3 v-if="general.length">
+      General use
     </h3>
     <div class="icon-table">
       <IconBlock
-        v-for="(aliasList, index) in displayedGeneral"
-        :key="index"
-        :aliasList="aliasList"
-        class="icon-block"
-      />
-    </div>
-    <h3 v-if="displayedWithColor.length">
-      Aliases with default colors
-    </h3>
-    <div class="icon-table">
-      <IconBlock
-        v-for="(aliasList, index) in displayedWithColor"
+        v-for="(aliasList, index) in general"
         :key="index"
         :aliasList="aliasList"
         class="icon-block"
       />
     </div>
 
-    <h3 v-if="displayedWithColor.length">
-      Learning activities
+    <h3 v-if="withColor.length">
+      Aliases with default colors
     </h3>
     <div class="icon-table">
       <IconBlock
-        v-for="(aliasList, index) in displayedLearningActivity"
+        v-for="(aliasList, index) in withColor"
         :key="index"
         :aliasList="aliasList"
         class="icon-block"
       />
     </div>
+
+    <h3 v-if="learningActivities.length">
+      Learning activities
+    </h3>
+    <div class="icon-table">
+      <IconBlock
+        v-for="(aliasList, index) in learningActivities"
+        :key="index"
+        :aliasList="aliasList"
+        class="icon-block"
+      />
+    </div>
+
+    <h3 v-if="resourceCategories.length">
+      Resource categories
+    </h3>
+    <div class="icon-table">
+      <IconBlock
+        v-for="(aliasList, index) in resourceCategories"
+        :key="index"
+        :aliasList="aliasList"
+        class="icon-block"
+      />
+    </div>
+
   </div>
 
 </template>
@@ -105,22 +120,30 @@
         return termList(this.filterText);
       },
       general() {
-        return sortedIconAliases(getIconGroups(this.blackIconFilter));
-      },
-      displayedGeneral() {
-        return this.general.filter(this.termFilter);
+        return sortedIconAliases(
+          getIconGroups(alias => {
+            return (
+              !KolibriIcons[alias].defaultColor &&
+              !KolibriIcons[alias].learningActivity &&
+              !KolibriIcons[alias].resourceCategory
+            );
+          })
+        ).filter(this.termFilter);
       },
       withColor() {
-        return sortedIconAliases(getIconGroups(this.iconWithDefaultColorFilter));
+        return sortedIconAliases(
+          getIconGroups(alias => Boolean(KolibriIcons[alias].defaultColor))
+        ).filter(this.termFilter);
       },
-      displayedWithColor() {
-        return this.withColor.filter(this.termFilter);
+      learningActivities() {
+        return sortedIconAliases(
+          getIconGroups(alias => Boolean(KolibriIcons[alias].learningActivity))
+        ).filter(this.termFilter);
       },
-      withLearningActivity() {
-        return sortedIconAliases(getIconGroups(this.learningActivityIconFilter));
-      },
-      displayedLearningActivity() {
-        return this.withLearningActivity.filter(this.termFilter);
+      resourceCategories() {
+        return sortedIconAliases(
+          getIconGroups(alias => Boolean(KolibriIcons[alias].resourceCategory))
+        ).filter(this.termFilter);
       },
     },
     methods: {
@@ -131,15 +154,6 @@
           }
         }
         return false;
-      },
-      blackIconFilter(alias) {
-        return !KolibriIcons[alias].defaultColor && !KolibriIcons[alias].learningActivity;
-      },
-      iconWithDefaultColorFilter(alias) {
-        return Boolean(KolibriIcons[alias].defaultColor);
-      },
-      learningActivityIconFilter(alias) {
-        return KolibriIcons[alias].learningActivity;
       },
     },
   };

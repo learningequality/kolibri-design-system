@@ -4,8 +4,10 @@
 */
 
 const fs = require('fs');
+const path = require('path');
 const crypto = require('crypto');
 const consola = require('consola');
+var rimraf = require('rimraf');
 
 const SVGO = require('svgo');
 
@@ -26,31 +28,36 @@ const basePathForPrecompiledSvgs = './lib/KIcon/precompiled-icons';
  * `iconLibPath` is where we find the original icon SVG files
  * `namespace` is appended to basePathForPrecompiledSvgs to namespace the libraries
  */
+
 const config = [
-  // https://github.com/material-icons/material-icons
-  {
-    iconLibPath: './node_modules/@material-icons/svg/svg',
-    namespace: 'material-icons',
-  },
-  // https://github.com/Templarian/MaterialDesign-SVG
-  {
-    iconLibPath: './node_modules/@mdi/svg/svg',
-    namespace: 'mdi',
-  },
-  // Icons that we made here at LE
+  // Custom icons that we made here at LE
   {
     iconLibPath: './custom-icons',
     namespace: 'le',
   },
 ];
 
-// Before we do anything we need to make the base svg directory. This directory ought not exist.
-try {
+const customOnly = process.argv.includes('--custom');
+
+if (!customOnly) {
+  // https://github.com/material-icons/material-icons
+  config.push({
+    iconLibPath: './node_modules/@material-icons/svg/svg',
+    namespace: 'material-icons',
+  });
+  // https://github.com/Templarian/MaterialDesign-SVG
+  config.push({
+    iconLibPath: './node_modules/@mdi/svg/svg',
+    namespace: 'mdi',
+  });
+}
+
+// Clean up directories
+if (customOnly) {
+  rimraf.sync(path.join(basePathForPrecompiledSvgs, 'le'));
+} else {
+  rimraf.sync(basePathForPrecompiledSvgs);
   fs.mkdirSync(basePathForPrecompiledSvgs);
-} catch (e) {
-  consola.error(
-    `Failed to create base SVG directory. You may need to remove the ${basePathForPrecompiledSvgs} directory.\nError message: ${e}`
-  );
 }
 
 class LibPrecompiler {

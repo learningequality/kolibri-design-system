@@ -202,6 +202,12 @@ Icons from these sources are then converted to Vue components by our custom prec
 yarn run precompile-svgs
 ```
 
+You can also regenerate just the custom icons which is faster:
+
+```bash
+yarn run precompile-custom-svgs
+```
+
 We don't expose all icons in our KDS public API. Only icons defined in [the icons definitions file](lib/KIcon/iconDefinitions.js) are exposed, and we use our custom aliases for them.
 
 #### reStructuredText replacement strings

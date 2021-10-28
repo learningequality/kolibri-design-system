@@ -43,7 +43,7 @@ const ICON_DEFINITION_PATTERN = /\n {2}(\w+): {.*?\s+icon:\s+require\('(.+?)'\).
 const ICON_DEFINITION_COLOR_PATTERN = /defaultColor:\s+themeTokens\(\)\.(\w+)/s;
 
 // Within an icon file, match just the SVG tag
-const TEMPLATE_PATTERN = /<svg.*?\/><\/svg>/;
+const TEMPLATE_PATTERN = /<svg.*?><\/svg>/;
 
 function writeRstIcons() {
   // Load iconDefinitions.js as a simple text file
