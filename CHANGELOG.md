@@ -2,6 +2,19 @@
 
 Releases are recorded as git tags in the [Github releases](https://github.com/learningequality/kolibri-design-system/releases) page.
 
+## Version 1.1.0
+
+### Added
+
+- [#270] - New icons for Kolibri 0.15
+- [#272] - Enable 'Loaders' documentation page which was previously hidden
+
+<!-- Referenced PRs -->
+
+[#270]: https://github.com/learningequality/kolibri-design-system/pull/270
+[#272]: https://github.com/learningequality/kolibri-design-system/pull/272
+
+
 ## Version 1.0.0
 
 ### Added
