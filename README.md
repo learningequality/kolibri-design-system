@@ -3,9 +3,11 @@
 
 # Kolibri Design System
 
-## Usage
+Note that the Kolibri Design System is not intended to be used as a dependency outside of Kolibri products.
 
-How to use the Kolibri Design System
+If you are building a Kolibri plugin you should _not_ add the design system as a dependency because it will be made available as a dependency of Kolibri itself.
+
+## Usage
 
 ### Documentation
 
