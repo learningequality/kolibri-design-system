@@ -13,8 +13,8 @@
     "lint-watch": "yarn lint -m",
     "pregenerate": "node utils/pregenerate.js",
     "_dev-only": "nuxt --port 4000",
-    "precompile-svgs": "node utils/precompileSvgs/index.js",
-    "precompile-custom-svgs": "node utils/precompileSvgs/index.js --custom",
+    "precompile-svgs": "node utils/precompileSvgs/index.js && yarn run pregenerate",
+    "precompile-custom-svgs": "node utils/precompileSvgs/index.js --custom && yarn run pregenerate",
     "_lint-watch-fix": "yarn lint -w -m",
     "_test": "jest",
     "_api-watch": "chokidar \"**/lib/**\" -c \"node utils/extractApi.js\""
