@@ -214,6 +214,8 @@ We don't expose all icons in our KDS public API. Only icons defined in [the icon
 
 In order to use icons in documentation we also output a set of reStructuredText replacement strings. These are added the file `docs/rstIconReplacements.txt` which can be used in docs based on Sphinx. The file is available for download from https://design-system.learningequality.org/icons/#rst
 
+This command should be run after any icon ID changes.
+
 ```bash
 yarn run pregenerate
 ```
