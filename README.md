@@ -208,16 +208,18 @@ You can also regenerate just the custom icons which is faster:
 yarn run precompile-custom-svgs
 ```
 
+One of these commands should be run after any icon changes.
+
 We don't expose all icons in our KDS public API. Only icons defined in [the icons definitions file](lib/KIcon/iconDefinitions.js) are exposed, and we use our custom aliases for them.
 
-#### reStructuredText replacement strings
+In order to use icons in documentation we also output a set of reStructuredText replacement strings. These are added the file `docs/rstIconReplacements.txt` which can be used in docs based on Sphinx. The file is available for download from https://design-system.learningequality.org/icons/#rst
 
-We also output a set of reStructuredText replacement strings into the file `docs/rstIconReplacements.txt` which can be used in
-user docs based on Sphinx. To update this file, run
+This command should be run after any icon ID changes.
 
 ```bash
 yarn run pregenerate
 ```
+
 #### Example: Upgrading Google Material Design Icons
 
 It is advised to commit changes at each step to make reviewing files other than those in *precompiled-icons/* easier, especially in case of large updates.
