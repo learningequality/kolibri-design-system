@@ -90,7 +90,7 @@
         </div>
       </label>
 
-      <div v-if="showHelp || hasErrorFeedback || maxlength" class="ui-textbox-feedback">
+      <div v-show="showHelp || hasErrorFeedback || maxlength" class="ui-textbox-feedback">
         <div v-if="showError" class="ui-textbox-feedback-text" style="{ color: $themeTokens.error }">
           <slot name="error">
             {{ error }}
