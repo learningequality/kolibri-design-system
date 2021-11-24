@@ -15,7 +15,6 @@
         :tabindex="0"
         role="dialog"
         aria-labelledby="modal-title"
-        :class="size"
         :style="[ modalSizeStyles, { background: $themeTokens.surface } ]"
       >
 
@@ -98,6 +97,11 @@
   import debounce from 'lodash/debounce';
   import KResponsiveWindowMixin from './KResponsiveWindowMixin';
 
+  const SIZE_SM = 'small';
+  const SIZE_MD = 'medium';
+  const SIZE_LG = 'large';
+  const SIZE_STRINGS = [SIZE_SM, SIZE_MD, SIZE_LG];
+
   // check for Nuxt.js SSR
   const nuxtServerSideRendering = process && process.server;
 
@@ -144,16 +148,21 @@
         default: false,
       },
       /**
-       * How wide the modal should be.
-       * Small - 300 px.
-       * Medium - 450px.
-       * Large - 100%.
+       * Width of modal. For consistency use the strings `'small'`, `'medium'`, or `'large'`.
+       * For more precise control use an integer number of pixels.
        */
       size: {
-        type: String,
+        type: [String, Number],
         default: 'medium',
         validator(val) {
-          return ['small', 'medium', 'large'].includes(val);
+          if (typeof val === 'string') {
+            if (!SIZE_STRINGS.includes(val)) {
+              log.error(`'${val}' is not one of: ${SIZE_STRINGS}`);
+              return false;
+            }
+            return true;
+          }
+          return val > 0;
         },
       },
       /**
@@ -178,7 +187,14 @@
         return {
           'max-width': `${this.maxModalWidth - 32}px`,
           'max-height': `${this.windowHeight - 32}px`,
+          width: this.modalWidth,
         };
+      },
+      modalWidth() {
+        if (this.size === SIZE_SM) return '300px';
+        if (this.size === SIZE_MD) return '450px';
+        if (this.size === SIZE_LG) return '100%';
+        return `${this.size}px`;
       },
       maxModalWidth() {
         if (this.windowWidth < 1000) {
@@ -403,18 +419,6 @@
 
   .actions button:last-of-type {
     margin-left: 16px;
-  }
-
-  .small {
-    width: 300px;
-  }
-
-  .medium {
-    width: 450px;
-  }
-
-  .large {
-    width: 100%;
   }
 
 </style>
