@@ -31,12 +31,15 @@ $core-time: 0.25s;
 
 /*
   Mixin for font-family to ensure that the full fonts are not referenced until they've
-  been loaded using the FontFaceObserver in i18n.js.
+  been loaded using the FontFaceObserver in Kolibri's setupAndLoadFonts.js file.
 
   Even though partials are loaded immediately, we need the 'partial-fonts-loaded' class
   for CSS specificity purposes.
 
-  TODO: add support for standard online-based loading mechanisms
+  TODO:
+  Add support for standard online-based loading mechanisms, such as would be used
+  in Studio. In particular, this would need to be swapped out for the Google font API:
+  https://developers.google.com/fonts/docs/getting_started
 */
 @mixin font-family-noto {
   .partial-fonts-loaded & {
