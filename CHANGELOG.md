@@ -2,6 +2,14 @@
 
 Releases are recorded as git tags in the [Github releases](https://github.com/learningequality/kolibri-design-system/releases) page.
 
+## Version 1.2.1
+
+- [#279] - Fix vertical shifting of `KTextbox`
+
+<!-- Referenced PRs -->
+
+[#279]: https://github.com/learningequality/kolibri-design-system/pull/279
+
 ## Version 1.2.0
 
 - [#281] - Allow `KModal` to take a `size` in pixels
