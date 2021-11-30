@@ -2,6 +2,19 @@
 
 Releases are recorded as git tags in the [Github releases](https://github.com/learningequality/kolibri-design-system/releases) page.
 
+## Version 1.2.0
+
+- [#281] - Allow `KModal` to take a `size` in pixels
+- [#278] - Adds `timer` icon
+- [#275] - Renames some icons: `socialScienceResource` -> `socialSciencesResource`, `mathResource` -> `mathematicsResource`, `scienceResource` -> `sciencesResource`, `readingWritingResource` -> `readingAndWritingResource`
+
+<!-- Referenced PRs -->
+
+[#281]: https://github.com/learningequality/kolibri-design-system/pull/281
+[#278]: https://github.com/learningequality/kolibri-design-system/pull/278
+[#275]: https://github.com/learningequality/kolibri-design-system/pull/275
+
+
 ## Version 1.1.0
 
 ### Added
