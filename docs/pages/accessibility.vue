@@ -24,7 +24,7 @@
         We should aim to allow zooming up to 200%, and down to 480x600 px in both profile and landscape. The app should always remain functional in all extreme screen sizes. Depending on the context, we may want to put additional effort into creating custom layouts optimized for particular screen sizes. For example, we should put additional effort into optimizing the mobile Learner experience, while for administrators this might not be as critical.
       </p>
       <p>
-        When designing and building layouts, we use the breakpoints defined by Material Design. These are exposed in our app by the <code>responsiveWindow</code> Vue component mixin. We should never use CSS media queries.
+        When designing and building layouts, we use the breakpoints defined by Material Design. These are exposed in our app by the <code>responsiveWindow</code> Vue component mixin. We should never use CSS media queries. See the <DocsInternalLink href="/layout" text="See the Layout page" /> for more information.
       </p>
     </DocsPageSection>
 
@@ -38,7 +38,7 @@
         <li>conventional keyboard shortcuts for common input widgets</li>
       </ul>
       <p>
-        Using the built-in components outlined in this guide is a good way to ensure that your UI will be navigable by keyboard.
+        Using the built-in components outlined in this guide is a good way to ensure that your UI will be navigable by keyboard. When building custom components, use our standard focus outline <code>$coreOutline</code> as described in <DocsInternalLink href="/styling#focus-outline" text="the Styling page" />.
       </p>
     </DocsPageSection>
 
@@ -47,7 +47,7 @@
         All content that can be read by sighted users should be readable by screen readers. Additionally, the app should leverage screen-reader-specific functionality – such as labels, semantically correct HTML tags, and visually-hidden text – that associates descriptive text with functionality.
       </p>
       <p>
-        Like with keyboard navigation, using the built-in components is a good way to ensure compatibility with screen readers. However, it's also critical to test all new functionality. See this <DocsExternalLink href="https://kolibri-dev.readthedocs.io/en/develop/manual_testing/a11y_resources/index.html" text="comprehensive list of A11y testing tools" />.
+        Like with keyboard navigation, using the built-in components is a good way to ensure compatibility with screen readers. However, it's also critical to test all new functionality. See this <DocsExternalLink href="https://kolibri-dev.readthedocs.io/en/develop/manual_testing/a11y_resources/index.html" text="comprehensive list of accessibility testing tools" />.
       </p>
       <p>
         Some specific things to watch for:
