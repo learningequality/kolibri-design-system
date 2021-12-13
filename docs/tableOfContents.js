@@ -93,8 +93,8 @@ export default [
         title: 'Icons',
       }),
       new Page({
-        path: '/inclusive',
-        title: 'Inclusive design',
+        path: '/accessibility',
+        title: 'Accessibility',
       }),
       new Page({
         path: '/layout',
