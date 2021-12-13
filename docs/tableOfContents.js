@@ -85,10 +85,6 @@ export default [
         title: 'Colors',
       }),
       new Page({
-        path: '/errors',
-        title: 'Errors',
-      }),
-      new Page({
         path: '/icons',
         title: 'Icons',
       }),
@@ -122,6 +118,10 @@ export default [
       new Page({
         path: '/pageheader',
         title: 'Page headers',
+      }),
+      new Page({
+        path: '/errors',
+        title: 'Errors',
       }),
     ],
   }),
