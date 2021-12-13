@@ -82,7 +82,7 @@ export default [
     pages: [
       new Page({
         path: '/colors',
-        title: 'Colors and themes',
+        title: 'Colors',
       }),
       new Page({
         path: '/errors',
