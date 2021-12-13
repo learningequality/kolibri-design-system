@@ -21,6 +21,10 @@ $core-time: 0.25s;
 
 // Accelerate and decelerate easing functions from
 // from https://material.io/design/motion/speed.html#easing.
+%md-standard-func {
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
 %md-accelerate-func {
   transition-timing-function: cubic-bezier(0, 0, 0.2, 1);
 }

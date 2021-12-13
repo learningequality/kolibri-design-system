@@ -43,9 +43,9 @@
       </p>
 
       <ul>
-        <li><code>$themeBrand</code></li>
-        <li><code>$themeTokens</code></li>
-        <li><code>$themePalette</code></li>
+        <li><code>$themeBrand</code> contains colors related to the aesthetic color scheme</li>
+        <li><code>$themeTokens</code> contains colors with special meanings in Kolibri</li>
+        <li><code>$themePalette</code> contains a wide range of additional compatible colors</li>
       </ul>
 
       <p>

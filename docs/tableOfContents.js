@@ -105,6 +105,10 @@ export default [
         path: '/glossary',
         title: 'Glossary',
       }),
+      new Page({
+        path: '/styling',
+        title: 'Styling',
+      }),
     ],
   }),
   new Section({
