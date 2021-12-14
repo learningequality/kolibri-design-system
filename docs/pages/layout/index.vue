@@ -7,142 +7,257 @@
     </DocsPageSection>
 
     <DocsPageSection title="Spacing" anchor="#spacing">
-      <p>To aid with alignment, all UI elements should be spaced out in increments of 8px. On smaller screens or in more compact spaces, the increment can be reduced to 4px.</p>
-      <p>All margin and padding measurements should be incremented by these units.</p>
+      <p>
+        To aid with alignment, all UI elements should be spaced out in increments of <code>8px</code>. On smaller screens or in more compact spaces, the increment can be reduced to <code>4px</code>. All margin and padding measurements should be incremented by these units.
+      </p>
+      <p>
+        Similarly, define <DocsExternalLink href="https://material.io/design/layout/spacing-methods.html#spacing" text="keylines" /> in increments of <code>4px</code> or <code>8px</code> when UI elements must be placed outside of the alignment to columns and rows within a grid.
+      </p>
     </DocsPageSection>
 
-    <DocsPageSection title="Containers" anchor="#containers">
-      <p>A container is a shape used to represent an enclosed area. Containers can hold various UI elements such as an image, icon, or surface. They can be flexible and accommodate the width or height of the content within, or they can be rigid and fixed in size.</p>
+    <DocsPageSection title="Page containers" anchor="#page-containers">
+      <p>
+        A page container is a shape used to represent an enclosed area. Page containers can hold various UI elements such as an image, icon, or surface. They can be flexible and accommodate the width or height of the content within, or they can be rigid and fixed in size.
+      </p>
+      <p>
+        Page containers can be implemented using <DocsInternalLink text="KPageContainer" href="/kpagecontainer" code /> which includes responsive internal padding that automatically gets smaller on smaller windows. Containers and their contents can be arranged using <DocsInternalLink text="KGrid" href="/kgrid" code /> or <DocsInternalLink text="KFixedGrid" href="/kfixedgrid" code />, described below.
+      </p>
       <p>To reduce visual noise, avoid nesting containers in containers.</p>
       <img src="./containers.png">
       <h3>
-        Specifications
-      </h3>
-      <ul>
-        <li>
-          Background color: <DocsInternalLink code text="tokens.surface" href="/colors#tokens-surface" /> (<code>#ffffff</code>)
-        </li>
-        <li>Default border radius: 4px</li>
-        <li>Elevation: 1dp</li>
-        <li>Spacing between containers: 24px</li>
-        <li>Padding: 16px (small screens), 24px (medium and large screens)</li>
-      </ul>
-      <h3>
-        Maximum width of a container
+        Maximum width
       </h3>
       <p>
-        If a page container contains text, set its maximum width to 1000px in order to aid readability on larger screens.
+        If a page container contains text, set its maximum width to <code>1000px</code> in order to aid readability on larger screens. Extra space should be allocated equally on both sides such that the page container is centered.
       </p>
+
       <h3>
         Dividers
       </h3>
       <p>
-        Use dividers to create visual distinction between sections within a container. A divider should span the entire width of a container.
+        Use dividers to create visual distinction between sections within a page container. A divider should span the entire width of a container and be <code>1px</code> high with color <DocsInternalLink code text="tokens.fineline" href="/colors#tokens-fineLine" />.
       </p>
       <p>
         Use sparingly and reserve them for situations where white space does not properly separate elements or groups of elements, such as a table, compact list items, or list sections.
       </p>
       <img src="./dividers.png">
-      <h3>
-        Specs
-      </h3>
-      <ul>
-        <li>Width: 1px</li>
-        <li>
-          Color: <DocsInternalLink code text="tokens.fineline" href="/colors#tokens-fineLine" /> (<code>#dedede</code>)
-        </li>
-      </ul>
+      <p>
+        Dividers may also have internal page container tabs associated with them, such as in Kolibri Coach reports and planning pages. These may be added to the design system in the future.
+      </p>
     </DocsPageSection>
 
-    <DocsPageSection title="Responsive grids" anchor="#grids">
-      <p>Grids allow containers and their contained UI components to adapt to screen sizes and orientations and ensure consistent layouts across different parts of the application. Grids do not extend to the width of the window, just the container element.</p>
-      <p>Each Learning Equality product should utilize a grid system, and generally apply the guidelines from <DocsExternalLink href="https://material.io/design/layout/responsive-layout-grid.html#" text="Material Design" />.</p>
-      <h3>
-        Nested grids
-      </h3>
+    <DocsPageSection title="Responsiveness" anchor="#responsiveness">
       <p>
-        A page can contain nested grids. A container component can exist on a grid and also have its own grid that its contained components can lie on.
+        There are three primary breakpoints in the design system that should suffice to design and build responsive layouts in the majority of cases. These are:
+      </p>
+      <ul>
+        <li>Small: <code>width &lt; 600px</code></li>
+        <li>Medium: <code>600px &lt; width &lt; 840px</code></li>
+        <li>Large: <code>840px &lt; width</code></li>
+      </ul>
+      <p>
+        If more granularity is necessary there are additional breakpoints defined:
+      </p>
+      <ul>
+        <li>Level 0: <code>&lt; 480px</code></li>
+        <li>Level 1: <code>&lt; 600px</code></li>
+        <li>Level 2: <code>&lt; 840px</code></li>
+        <li>Level 3: <code>&lt; 960px</code></li>
+        <li>Level 4: <code>&lt; 1280px</code></li>
+        <li>Level 5: <code>&lt; 1440px</code></li>
+        <li>Level 6: <code>&lt; 1600px</code></li>
+        <li>Level 7: <code>&gt;= 1600px</code></li>
+      </ul>
+      <p>
+        Responsive layouts in the design system are built using reactive javascript state in Vue components rather than CSS media queries. This is done using the <code>KResponsiveWindowMixin</code> Vue <DocsExternalLink text="mixin" href="https://vuejs.org/v2/guide/mixins.html" />. Once added to a component it provides the following reactive window state information:
+      </p>
+      <ul>
+        <li><code>windowIsSmall</code>: boolean</li>
+        <li><code>windowIsMedium</code>: boolean</li>
+        <li><code>windowIsLarge</code>: boolean</li>
+        <li><code>windowHeight</code>: integer height in pixels</li>
+        <li><code>windowWidth</code>: integer width in pixels</li>
+        <li><code>windowBreakpoint</code>: integer breakpoint level</li>
+      </ul>
+      <p>
+        These reactive properties are used to dynamically drive the layout of components by adjusting inline styles, CSS classes, component visibility, or even swapping out one component for a completely different one.
+      </p>
+      <p>
+        For example, consider a Vue file with this in its template and script:
+      </p>
+      <!-- eslint-disable -->
+      <!-- prevent prettier from changing indentation -->
+      <DocsShowCode language="html">
+        &lt;div class="box" :style="boxStyle"&gt;
+          Box 1
+        &lt;/div&gt;
+        &lt;div class="box" :style="boxStyle"&gt;
+          Box 2
+        &lt;/div&gt;
+      </DocsShowCode>
+      <DocsShowCode language="javascript">
+        computed: {
+          boxStyle() {
+            if (this.windowIsLarge) {
+              return { display: 'block' };
+            }
+            return { display: 'inline-block' };
+          },
+        },
+      </DocsShowCode>
+      <!-- eslint-enable -->
+      <p>
+        This results in the two boxes that stack vertically on small screens and otherwise display side-by-side:
+      </p>
+      <DocsShow>
+        <div>Breakpoint level: {{ windowBreakpoint }}</div>
+        <div>Window is large: {{ windowIsLarge }}</div>
+        <div>
+          <div class="box" :style="boxStyle">
+            Box 1
+          </div>
+          <div class="box" :style="boxStyle">
+            Box 2
+          </div>
+        </div>
+      </DocsShow>
+      <p>
+        Try adjusting your browser window size to see the example in action.
+      </p>
+
+
+    </DocsPageSection>
+
+    <DocsPageSection title="Grid system" anchor="#grid-system">
+      <p>
+        Grids allow UI components to adapt to screen sizes and orientations and ensure consistent, visually-appealing layouts both within a particular page and across different pages. Our grid system gives designers and engineers a shared vocabulary for communicating about page page layouts and how they adapt to variations in content and screen sizes.
+      </p>
+      <p>
+        The design conventions and Vue components provided by the design system work well together, but both can also be used on their own: Designs specified using the grid system do not need to be implemented using grid components, and grid components can be used even when not explicitly specified in the designs.
+      </p>
+      <p>
+        That said, when designers use grid system conventions and engineers use grid system components we can more easily:
+      </p>
+      <ul>
+        <li>Align elements on the page to aid readability and improve aesthetics</li>
+        <li>Design and build responsive behaviors which are robust to changes in content and screen size</li>
+      </ul>
+      <p>
+        Like many aspects of our design system, the grid system draws heavily from Material's <DocsExternalLink href="https://material.io/design/layout/responsive-layout-grid.html#" text="Responsive layout grid" />. Some of the illustrations below are also copied from the Material site.
+      </p>
+      <h3>Key concepts</h3>
+      <p>
+        Four key concepts form the basis of our grid system. Explicitly using these concepts in designs will help translate layouts to implementation:
+      </p>
+      <ol>
+        <li><strong>Columns</strong> define boundaries for horizontal alignment</li>
+        <li><strong>Gutters</strong> provide padding between columns</li>
+        <li><strong>Margins</strong> provide padding outside of columns</li>
+        <li><strong>Grid items</strong> hold content in blocks that span some number of columns</li>
+      </ol>
+      <p>
+        <strong>Columns</strong>, <strong>gutters</strong>, and <strong>margins</strong> are defined the same as in Material Design:
+      </p>
+      <img src="./concepts.png" width="800px">
+      <p>
+        The example below shows a small window with four columns. The page container on the left is one column wide and the page containers on the right are three columns wide:
       </p>
       <img src="./nested.png">
-      <h3>
-        Fixed column width
-      </h3>
       <p>
-        By default, margins have a fixed width, and column width changes responsively. When the need arises, columns can be a fixed width, and margins can change responsively.
+        <strong>Grid items</strong> are a concept specific to Kolibri's grid system, based loosely on the <DocsExternalLink text="same concept from CSS grids" href="https://www.w3schools.com/css/css_grid_item.asp" />. Grid items represent a group of content that should expand and contract together as sizes and contents change. Below, there is a single-column grid item on the far left. Inside each page container on the right, there is a single-column grid item on the left and a two-column grid item on the right:
       </p>
-      <video width="600" controls loop>
-        <source src="./fixed-column.mp4" type="video/mp4">
-        Your browser does not support the video HTML tag
-      </video>
+      <img src="./items.png">
+      <p>
+        For browser compatibility reasons our grid system is based on <code>inline-block</code> and not CSS grids, so the behavior is slightly different and vertical alignment can be somewhat trickier, sometimes requiring nesting grids.
+      </p>
+
       <h3>
         Breakpoints
       </h3>
       <p>
-        Each breakpoint range has default: number of columns, gutter width, margin, and padding. These defaults can be changed according to exceptional needs.
+        The total number of columns on the page constrains the maximum width of the grid items. To ensure reasonable behaviors at all screen sizes, our grid system defines different layouts for different screen sizes corresponding to the responsiveness <DocsInternalLink text="breakpoints defined above" href="#responsiveness" />. Each breakpoint range has default number of columns, gutter width, margin, and padding. These defaults can be changed if necessary.
       </p>
-      <table>
-        <thead>
-          <tr>
-            <th>Range</th>
-            <th><DocsExternalLink href="https://v15.vuetifyjs.com/en/framework/grid" text="Vuetify" /></th>
-            <th>KGrid</th>
-            <th>Columns</th>
-            <th>Margins &amp; Gutters</th>
-            <th>Padding</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>0-479px</td>
-            <td>xs</td>
-            <td>Level 0</td>
-            <td>4</td>
-            <td>16px</td>
-            <td>16px</td>
-          </tr>
-          <tr>
-            <td>480-599px</td>
-            <td>xs</td>
-            <td>Level 1</td>
-            <td>4</td>
-            <td>16px</td>
-            <td>16px</td>
-          </tr>
-          <tr>
-            <td>600-839px</td>
-            <td>sm</td>
-            <td>Level 2</td>
-            <td>8</td>
-            <td>16px</td>
-            <td>24px</td>
-          </tr>
-          <tr>
-            <td>840-959px</td>
-            <td>sm</td>
-            <td>Level 3</td>
-            <td>12</td>
-            <td>16px</td>
-            <td>24px</td>
-          </tr>
-          <tr>
-            <td>960-1263px</td>
-            <td>md</td>
-            <td>Level 4</td>
-            <td>12</td>
-            <td>24px</td>
-            <td>24px</td>
-          </tr>
-          <tr>
-            <td>1264-1430px</td>
-            <td>lg</td>
-            <td>Level 5</td>
-            <td>12</td>
-            <td>24px</td>
-            <td>24px</td>
-          </tr>
-        </tbody>
-      </table>
-      <p>Define <DocsExternalLink href="https://material.io/design/layout/spacing-methods.html#spacing" text="keylines" /> in increments of 4px or 8 px when UI elements must be placed outside of the alignment to columns and rows within a grid.</p>
+      <ul>
+        <li>Small windows have four columns with <code>16px</code> gutters</li>
+        <li>Medium windows have eight columns with <code>16px</code> gutters</li>
+        <li>Large windows have twelve columns with <code>24px</code> gutters</li>
+      </ul>
+      <p>
+        Note that we also use <DocsExternalLink href="https://v15.vuetifyjs.com/en/framework/grid" text="Vuetify" /> in Studio, and those breakpoints are slightly different.
+      </p>
+
+      <h3>
+        Responsive grids
+      </h3>
+      <p>
+        The <DocsInternalLink text="KGrid" href="/kgrid" code /> and <DocsInternalLink text="KGridItem" href="/kgriditem" code /> components implement grid containers and items with responsiveness built in. <code>KGrid</code> automatically changes the total number of columns based on window size, and <code>KGridItem</code> allows specifying column spans and text alignment for each of the three window size ranges.
+      </p>
+      <p>
+        For example, a common pattern in Kolibri is to have a button right-aligned at the top of a page alongside the header on large windows, but on medium and small windows to move the button underneath the header and left-align it. To do this with the responsive grid:
+      </p>
+      <!-- eslint-disable -->
+      <!-- prevent prettier from changing indentation -->
+      <DocsShowCode language="html">
+        &lt;KGrid&gt;
+          &lt;KGridItem :layout12="{ span: 9 }"&gt;
+            &lt;h2&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit&lt;/h2&gt;
+          &lt;/KGridItem&gt;
+          &lt;KGridItem :layout12="{ span: 3, alignment: 'right' }"&gt;
+            &lt;KButton text="Button" primary/&gt;
+          &lt;/KGridItem&gt;
+        &lt;/KGrid&gt;
+      </DocsShowCode>
+      <!-- eslint-enable -->
+
+      <p>
+        Each grid item is described by layout objects which can contain a column <code>span</code> and default text <code>alignment</code>. When no additional layout information is provided, the <code>span</code> defaults to the total number of columns (i.e. full-width), and <code>alignment</code> defaults to <code>'right'</code>.
+      </p>
+      <p>
+        In the code above, we leave the defaults for <code>layout4</code> and <code>layout8</code> breakpoints. For large-screen, twelve-column layouts however we specify that the header grid item should span 9 columns and the button grid item should span 3 and be right-aligned.
+      </p>
+      <p>
+        Try resizing the browser to see the behavior:
+      </p>
+      <DocsShow>
+        <KGrid>
+          <KGridItem :layout12="{ span: 9 }">
+            <h2>Lorem ipsum dolor sit amet, consectetur adipiscing elit</h2>
+          </KGridItem>
+          <KGridItem :layout12="{ span: 3, alignment: 'right' }">
+            <KButton
+              :style="{ position: 'relative', top: windowIsLarge ? '16px' : null }"
+              text="Button"
+              primary
+            />
+          </KGridItem>
+        </KGrid>
+      </DocsShow>
+      <p>
+        Note that an additional complexity not shown in the example above is that conditional styling sometimes needs to be applied using <code>KResponsiveWindowMixin</code> properties. See the source code of this page for details.
+      </p>
+      <p>
+        Also note that grid containers have a <code>debug</code> property that will show helpful visual information about columns and grid items when set to <code>true</code>.
+      </p>
+      <h3>
+        Fixed grids
+      </h3>
+      <p>
+        There are some situations where it is not desirable to have the number of columns vary dynamically with screen size. In these situations you can use the The <DocsInternalLink text="KFixedGrid" href="/kfixedgrid" code /> and <DocsInternalLink text="KFixedGridItem" href="/kfixedgriditem" code /> components. <code>KFixedGrid</code> has a <code>numCols</code> property to set the number of columns, and <code>KFixedGridItem</code> takes simple <code>span</code> and <code>alignment</code> properties rather than the layout objects.
+      </p>
+      <h3>
+        Nested grids
+      </h3>
+      <p>
+        A page can contain nested grids. A container component can exist on a grid and also have its own grid that its contained components can lie on. This can be valuable for handling complex layouts.
+      </p>
+      <p>
+        The example shown above would probably need to be implemented using nested grids:
+      </p>
+      <img src="./nested2.png">
+      <p>
+        Here it might make sense to make the outer grid responsive, and implement the inner page containers or cards with fixed grids.
+      </p>
+
     </DocsPageSection>
 
 
@@ -151,13 +266,29 @@
 </template>
 
 
+<script>
+
+  import responsiveWindowMixin from '~~/lib/KResponsiveWindowMixin.js';
+
+  export default {
+    mixins: [responsiveWindowMixin],
+    computed: {
+      boxStyle() {
+        return { display: this.windowIsLarge ? 'inline-block' : 'block' };
+      },
+    },
+  };
+
+</script>
+
+
 <style lang="scss" scoped>
 
-  td,
-  th {
-    padding: 8px;
-    text-align: left;
-    vertical-align: top;
+  .box {
+    padding: 16px;
+    margin-top: 8px;
+    margin-right: 8px;
+    border: 1px solid gray;
   }
 
 </style>
