@@ -15,7 +15,7 @@
         The design system includes both documentation design patterns and a shared front-end UI library. Together, these provide solutions to common design and implementation needs in Kolibri products.
       </p>
       <p>
-        If the design system is failing to achieve the objectives above, it needs to be updated. Your contributions and input are appreciated. For more information, see the <DocsInternalLink text="Updates" href="#updates" /> section below, the <DocsExternalLink text="GitHub repository" href="https://github.com/learningequality/kolibri-design-system" />, or the <DocsExternalLink text="Notion project" href="https://www.notion.so/learningequality/Kolibri-Design-System-for-LE-products-976ea82b50f844ea9149a7abed497ea9" />.
+        If the design system is failing to achieve the objectives above, it needs to be updated. Your contributions and input are appreciated. For more information, see the <DocsInternalLink text="Updates" href="#updates" /> section below, the <DocsExternalLink text="GitHub repository" href="https://github.com/learningequality/kolibri-design-system" />, the <DocsExternalLink text="Notion project" href="https://www.notion.so/learningequality/Kolibri-Design-System-for-LE-products-976ea82b50f844ea9149a7abed497ea9" />, or the <DocsExternalLink text="Kolibri Design System Figma file" href="https://www.figma.com/file/JPL94qI0O1s9FOHV92OeCmpS/Kolibri-Design-System?node-id=0%3A1" />.
       </p>
     </DocsPageSection>
     <DocsPageSection title="Scope" anchor="#scope">
