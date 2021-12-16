@@ -69,7 +69,7 @@
         <li>Level 7: <code>&gt;= 1600px</code></li>
       </ul>
       <p>
-        Responsive layouts in the design system are built using reactive javascript state in Vue components rather than CSS media queries. This is done using the <code>KResponsiveWindowMixin</code> Vue <DocsExternalLink text="mixin" href="https://vuejs.org/v2/guide/mixins.html" />. Once added to a component it provides the following reactive window state information:
+        Responsive layouts in the design system are built using reactive javascript state in Vue components rather than CSS media queries. This is done using the <code>KResponsiveWindowMixin</code> Vue mixin. Once added to a component it provides the following reactive window state information:
       </p>
       <ul>
         <li><code>windowIsSmall</code>: boolean</li>
@@ -107,7 +107,7 @@
       </DocsShowCode>
       <!-- eslint-enable -->
       <p>
-        This results in the two boxes that stack vertically on small screens and otherwise display side-by-side:
+        This results in two boxes that stack vertically on small screens and otherwise display side-by-side:
       </p>
       <DocsShow>
         <div>Breakpoint level: {{ windowBreakpoint }}</div>

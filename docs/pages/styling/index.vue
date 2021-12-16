@@ -27,14 +27,22 @@
       <p>
         Use these by importing the design system's <code>definitions.scss</code> file. For example, this HTML and SCSS in a Vue template:
       </p>
+      <DocsShowCode language="html">
+        &lt;div class="box"&gt;Hello!&lt;/div&gt;
+      </DocsShowCode>
+      <!-- eslint-disable -->
+      <!-- prevent prettier from changing indentation -->
       <DocsShowCode language="css">
         @import '~kolibri-design-system/lib/styles/definitions'
 
-        .box { @extend %dropshadow-4dp; border-radius: $radius; text-align: center; }
+        .box {
+          @extend %dropshadow-4dp;
+
+          border-radius: $radius;
+          text-align: center;
+        }
       </DocsShowCode>
-      <DocsShowCode language="html">
-        &lt;div :class="box"&gt;Hello!&lt;/div&gt;
-      </DocsShowCode>
+      <!-- eslint-enable -->
       <p>can help easily reproduce styles like:</p>
       <DocsShow>
         <div class="box">
