@@ -39,14 +39,15 @@
   /**
    * Responsive grid item used with KGrid.
    *
-   * Accepts "layout objects" as props, which can define values for  'span',
+   * Accepts "layout objects" as props, which can define values for 'span',
    * 'alignment', or both.
    *
    * If no span is defined for a particular layout, the item will span the full
    * width of the grid.
    *
    * If no alignment is defined for a particular layout, the item's contents
-   * will be left-aligned.
+   * will be left-aligned. Set `alignment` to `'auto'` to set `dir="auto"`
+   * for user-generated content to support bidirectional text.
    */
   export default {
     name: 'KGridItem',

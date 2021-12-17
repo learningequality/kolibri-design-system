@@ -1,7 +1,10 @@
 <template>
 
   <div class="grid-item" :class="unitClass" :style="computedStyle">
-    <div :class="{ debug: gridMetrics.debug, error: !validInputs }">
+    <div
+      :class="{ debug: gridMetrics.debug, error: !validInputs }"
+      :dir="alignment === 'auto' ? 'auto' : null"
+    >
       <!-- @slot Contents of the grid item -->
       <slot></slot>
     </div>
@@ -34,8 +37,9 @@
         validator: validateSpan,
       },
       /**
-       * Horizontal alignment of the item's contents. Can be `'right'`,
-       * `'left'`, or `'center'`.
+       * Horizontal alignment of the item's contents. `'left'`, `'right'`,
+       * and `'center'` will set `text-align`. `'auto'` will set `dir="auto"`
+       * for user-generated content to support bidirectional text.
        */
       alignment: {
         type: String,
@@ -72,6 +76,19 @@
           paddingLeft: padding,
           paddingRight: padding,
         };
+
+        // no text-align should be set - handled by dir="auto"
+        if (this.alignment === 'auto') {
+          return style;
+        }
+
+        // centered regardless of RTL
+        if (this.alignment === 'center') {
+          style.textAlign = 'center';
+          return style;
+        }
+
+        // handle left and right alignment
         let isRtl = this.isRtl;
         if (this.gridMetrics && this.gridMetrics.direction) {
           isRtl = this.gridMetrics.direction === 'rtl';
