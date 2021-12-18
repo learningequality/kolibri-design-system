@@ -34,20 +34,78 @@
 
     </DocsPageSection>
 
+    <DocsPageSection title="Usage" anchor="#usage">
+
+      <h3>Computed styles</h3>
+
+      <p>
+        For technical reasons relating to supporting dynamic themes colors must be set using Javascript. Adding <code>Vue.use(KThemePlugin)</code> makes all colors available on every Vue component in your application under the following objects:
+      </p>
+
+      <ul>
+        <li><code>$themeBrand</code> contains colors related to the aesthetic color scheme</li>
+        <li><code>$themeTokens</code> contains colors with special meanings in Kolibri</li>
+        <li><code>$themePalette</code> contains a wide range of additional compatible colors</li>
+      </ul>
+
+      <p>
+        For example, to color text using <code>$themeTokens.error</code> you use can a <DocsExternalLink text="computed style" href="https://vuejs.org/v2/guide/class-and-style.html" /> to write:
+      </p>
+
+      <DocsShowCode language="html">
+        &lt;div :style="{ color: $themeTokens.error }"&gt;This is an error&lt;/div&gt;
+      </DocsShowCode>
+
+      <p>
+        This will display:
+      </p>
+
+      <DocsShow>
+        <div :style="{ color: $themeTokens.error }">
+          This is an error
+        </div>
+      </DocsShow>
+
+      <p>Move style definitions from the template to computed props if the style gets complex.</p>
+
+      <h3>Computed classes</h3>
+
+      <p>
+        We also attach a special helper function <code>$computedClass</code> which can be used to dynamically create new classes. This is useful for specifying colors in pseudo-elements such as <code>:hover</code> or <code>:focus</code>. For example:
+      </p>
+
+      <DocsShowCode language="html">
+        &lt;input :class="$computedClass({ '::placeholder': { color: $themeTokens.annotation } })" /&gt;
+      </DocsShowCode>
+
+      <p>This is usually not necessary, and using <code>style</code> is preferred for simplicity when possible.</p>
+
+      <h3>Notation</h3>
+      <p>
+        In the references below we use the following shorthand:
+      </p>
+      <ul>
+        <li><code>brand</code> refers to <code>$themeBrand</code></li>
+        <li><code>tokens</code> refers to <code>$themeTokens</code></li>
+        <li><code>palette</code> refers to <code>$themePalette</code></li>
+      </ul>
+
+
+    </DocsPageSection>
+
+
     <DocsPageSection title="Tokens" anchor="#tokens">
       <p>
         Color tokens are the most important set of named colors because they have a specific, well-defined usage within the application. Over time, our set of tokens should grow and shrink as necessary to fit the needs of the application.
       </p>
       <p>
-        Color tokens are by themselves abstract and defined by a purpose, not a color value. A
-        <DocsInternalLink text="theme" href="#theme" />
-        makes them concrete by mapping them to specific
+        Color tokens are by themselves abstract and defined by a purpose, not a color value. A theme makes them concrete by mapping them to specific
         <DocsInternalLink text="brand colors" href="#brand" />
         and
         <DocsInternalLink text="palette colors" href="#palette" />.
       </p>
       <p>
-        When using tokens, it's very important to use them because of their purposes, not because of their color values. Multiple tokens will commonly share a single color value.
+        When using tokens, it's very important to choose them based on their semantic purpose, not because of their color values. This ensures that new themes can be created effectively.
       </p>
 
       <h3>Brand shortcuts</h3>
@@ -206,24 +264,6 @@
           />
         </div>
       </div>
-
-    </DocsPageSection>
-
-    <DocsPageSection title="Themes" anchor="#themes">
-      <p>
-        The Kolibri Design System comes with a default theme built in, which defines every brightness value of the primary and secondary brand colors. Additionally, the Kolibri application has a default mapping which assigns concrete values to all tokens. For example, by default we set <code>$themeTokens.error</code> to be equal to <code>$themePalette.red.v_700</code>
-      </p>
-      <p>
-        When setting new brand colors:
-      </p>
-      <ol>
-        <li>
-          Generate new scales from base colors using <DocsExternalLink text="materialpalettes.com" href="https://materialpalettes.com/" />
-        </li>
-        <li>
-          Redefine the values for <code>$themeTokens.primary</code> and <code>$themeTokens.primaryDark</code> to ensure that color contrast with <code>$themeTokens.textInverted</code> is sufficient.
-        </li>
-      </ol>
 
     </DocsPageSection>
 

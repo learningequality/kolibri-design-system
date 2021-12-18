@@ -45,10 +45,10 @@
     </DocsPageSection>
     <DocsPageSection title="Contributing" anchor="#contributing">
       <p>
-        We welcome feedback and contributions! It's important that the Design System works for you, so please help shape it. Feel free to submit a <DocsExternalLink text="pull request" href="https://github.com/learningequality/kolibri-design-system/pulls" /> or <DocsExternalLink text="issue" href="https://github.com/learningequality/kolibri-design-system/issues" /> to the GitHub repo.
+        We welcome feedback and contributions! It's important that the Design System works for you, so please help shape it. To get started contributing to the design system, see the <DocsInternalLink text="release process" href="/release-process" /> and the <DocsExternalLink text="project readme" href="https://github.com/learningequality/kolibri-design-system#readme" />. Feel free to submit a <DocsExternalLink text="pull request" href="https://github.com/learningequality/kolibri-design-system/pulls" /> or <DocsExternalLink text="issue" href="https://github.com/learningequality/kolibri-design-system/issues" /> to the GitHub repo.
       </p>
       <p>
-        To get started, see the <DocsInternalLink text="release process" href="/release-process" /> and the <DocsExternalLink text="project readme" href="https://github.com/learningequality/kolibri-design-system#readme" />.
+        To contribute to the Kolibri ecosystem and Learning Equality more generally, see <DocsExternalLink text="ways to contribute" href="https://kolibri-dev.readthedocs.io/en/develop/contributing/ways_to_contribute.html" /> in the developer documentation or get in touch on our <DocsExternalLink text="community forums" href="https://community.learningequality.org/" />.
       </p>
     </DocsPageSection>
 

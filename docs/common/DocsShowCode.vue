@@ -22,9 +22,10 @@
       Prism,
     },
     props: {
+      // `display: block` takes up full width
       block: {
         type: Boolean,
-        default: false,
+        default: true,
       },
       language: {
         type: String,

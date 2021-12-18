@@ -82,19 +82,15 @@ export default [
     pages: [
       new Page({
         path: '/colors',
-        title: 'Colors and themes',
-      }),
-      new Page({
-        path: '/errors',
-        title: 'Errors',
+        title: 'Colors',
       }),
       new Page({
         path: '/icons',
         title: 'Icons',
       }),
       new Page({
-        path: '/inclusive',
-        title: 'Inclusive design',
+        path: '/accessibility',
+        title: 'Accessibility',
       }),
       new Page({
         path: '/layout',
@@ -109,6 +105,10 @@ export default [
         path: '/glossary',
         title: 'Glossary',
       }),
+      new Page({
+        path: '/styling',
+        title: 'Styling',
+      }),
     ],
   }),
   new Section({
@@ -122,6 +122,10 @@ export default [
       new Page({
         path: '/pageheader',
         title: 'Page headers',
+      }),
+      new Page({
+        path: '/errors',
+        title: 'Errors',
       }),
     ],
   }),
