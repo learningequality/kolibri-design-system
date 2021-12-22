@@ -138,8 +138,8 @@
     mixins: [KResponsiveElementMixin],
     props: {
       /**
-       * An array of objects, each with a 'text' attribute (String) and a
-       * 'link' attribute (vue router link object). The 'link' attribute
+       * An array of objects, each with a `text` attribute (String) and a
+       * `link` attribute (vue router link object). The `link` attribute
        * of the last item in the array is optional and ignored.
        */
       items: {
@@ -156,7 +156,7 @@
       },
       /**
        * By default, the breadcrums will be hidden when the length of items is 1.
-       * When set to 'true', a breadcrumb will be shown even when there is only one.
+       * When set to `true`, a breadcrumb will be shown even when there is only one.
        */
       showSingleItem: {
         type: Boolean,
