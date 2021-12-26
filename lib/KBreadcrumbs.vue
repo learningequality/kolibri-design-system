@@ -13,7 +13,6 @@
           size="small"
           :icon="showDropdown ? 'chevronUp' : 'chevronDown'"
           appearance="raised-button"
-          :style="{ verticalAlign: 'middle' }"
           @click="showDropdown = !showDropdown"
         />
         <div
@@ -68,7 +67,6 @@
             <span
               class="breadcrumbs-crumb-text"
               dir="auto"
-              style="text-decoration: none;"
             >
               {{ crumb.text }}
             </span>
@@ -267,10 +265,12 @@
   $crumb-max-width: 300px;
 
   .breadcrumbs {
+    height: 32px;
     margin-top: 8px;
     margin-bottom: 8px;
     font-size: 16px;
     font-weight: bold;
+    line-height: 32px;
     white-space: nowrap;
   }
 
@@ -279,22 +279,17 @@
     width: 100%;
     max-width: $crumb-max-width;
     overflow: hidden;
-    // this is overriden with inline styles on the last
-    // breadcrumb in the template
-    text-decoration: underline;
     text-overflow: ellipsis;
     white-space: nowrap;
-    vertical-align: middle;
+    vertical-align: bottom;
   }
 
   .breadcrumbs-dropdown-wrapper {
     display: inline-block;
-    vertical-align: middle;
 
     &::after {
       margin-right: 8px;
       margin-left: 8px;
-      vertical-align: middle;
       content: '›';
     }
   }
@@ -331,7 +326,6 @@
     padding: 0;
     margin: 0;
     white-space: nowrap;
-    vertical-align: middle;
     list-style: none;
 
     .breadcrumbs-collapsed & {
@@ -343,14 +337,12 @@
   .breadcrumbs-visible-item {
     display: inline-block;
     max-width: 100%;
-    vertical-align: middle;
   }
 
   .breadcrumbs-visible-item-notlast {
     &::after {
       margin-right: 8px;
       margin-left: 8px;
-      vertical-align: middle;
       content: '›';
     }
   }
