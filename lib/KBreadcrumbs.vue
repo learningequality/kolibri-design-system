@@ -66,6 +66,7 @@
           >
             <span
               class="breadcrumbs-crumb-text"
+              :style="{ maxWidth: lastBreadcrumbMaxWidth }"
               dir="auto"
             >
               {{ crumb.text }}
@@ -99,7 +100,10 @@
             :key="index"
             class="breadcrumb-visible-item-last breadcrumbs-visible-item"
           >
-            <span class="breadcrumbs-crumb-text">
+            <span
+              class="breadcrumbs-crumb-text"
+              :style="{ maxWidth: lastBreadcrumbMaxWidth }"  
+            >
               {{ crumb.text }}
             </span>
           </li>
@@ -121,6 +125,7 @@
   import KResponsiveElementMixin from './KResponsiveElementMixin';
 
   const DROPDOWN_BTN_WIDTH = 55;
+  const DEFAULT_LAST_BREADCRUMB_MAX_WIDTH = 300;
 
   function validateLinkObject(object) {
     const validKeys = ['name', 'path', 'params', 'query'];
@@ -167,6 +172,7 @@
       // text, router-link 'to' object, vue ref, and its collapsed state
       crumbs: [],
       showDropdown: false,
+      lastBreadcrumbMaxWidth: `${DEFAULT_LAST_BREADCRUMB_MAX_WIDTH}px`,
     }),
     computed: {
       collapsedCrumbs() {
@@ -212,40 +218,54 @@
       },
       updateCrumbs() {
         if (this.crumbs.length) {
-          const tempCrumbs = Array.from(this.crumbs);
-          let lastCrumbWidth = Math.ceil(tempCrumbs.pop().ref[0].getBoundingClientRect().width);
-          let remainingWidth = this.parentWidth - DROPDOWN_BTN_WIDTH - lastCrumbWidth;
-          let trackingIndex = this.crumbs.length - 2;
+          // needs to be reset before another re-calculation
+          // otherwise calculactions below won't be precise
+          this.lastBreadcrumbMaxWidth = `${DEFAULT_LAST_BREADCRUMB_MAX_WIDTH}px`;
 
-          while (tempCrumbs.length) {
-            if (remainingWidth <= 0) {
-              tempCrumbs.forEach((crumb, index) => {
-                const updatedCrumb = crumb;
-                updatedCrumb.collapsed = true;
-                this.crumbs.splice(index, 1, updatedCrumb);
-              });
-              break;
+          this.$nextTick(() => {
+            const tempCrumbs = Array.from(this.crumbs);
+            let lastCrumbWidth = Math.ceil(tempCrumbs.pop().ref[0].getBoundingClientRect().width);
+            let remainingWidth = this.parentWidth - DROPDOWN_BTN_WIDTH - lastCrumbWidth;
+            let trackingIndex = this.crumbs.length - 2;
+
+            while (tempCrumbs.length) {
+              if (remainingWidth <= 0) {
+                tempCrumbs.forEach((crumb, index) => {
+                  const updatedCrumb = crumb;
+                  updatedCrumb.collapsed = true;
+                  this.crumbs.splice(index, 1, updatedCrumb);
+                });
+                break;
+              }
+
+              lastCrumbWidth = Math.ceil(
+                tempCrumbs[tempCrumbs.length - 1].ref[0].getBoundingClientRect().width
+              );
+
+              if (lastCrumbWidth > remainingWidth) {
+                tempCrumbs.forEach((crumb, index) => {
+                  const updatedCrumb = crumb;
+                  updatedCrumb.collapsed = true;
+                  this.crumbs.splice(index, 1, updatedCrumb);
+                });
+                break;
+              }
+
+              remainingWidth -= lastCrumbWidth;
+              const lastCrumb = tempCrumbs.pop();
+              lastCrumb.collapsed = false;
+              this.crumbs.splice(trackingIndex, 1, lastCrumb);
+              trackingIndex -= 1;
             }
 
-            lastCrumbWidth = Math.ceil(
-              tempCrumbs[tempCrumbs.length - 1].ref[0].getBoundingClientRect().width
-            );
-
-            if (lastCrumbWidth > remainingWidth) {
-              tempCrumbs.forEach((crumb, index) => {
-                const updatedCrumb = crumb;
-                updatedCrumb.collapsed = true;
-                this.crumbs.splice(index, 1, updatedCrumb);
-              });
-              break;
+            // Allow the last breadcrumb use all space available
+            // Fixes https://github.com/learningequality/kolibri-design-system/issues/198
+            // and https://github.com/learningequality/kolibri/issues/6918
+            if (remainingWidth > 0) {
+              this.lastBreadcrumbMaxWidth = `${DEFAULT_LAST_BREADCRUMB_MAX_WIDTH +
+                remainingWidth}px`;
             }
-
-            remainingWidth -= lastCrumbWidth;
-            const lastCrumb = tempCrumbs.pop();
-            lastCrumb.collapsed = false;
-            this.crumbs.splice(trackingIndex, 1, lastCrumb);
-            trackingIndex -= 1;
-          }
+          });
         }
       },
     },
