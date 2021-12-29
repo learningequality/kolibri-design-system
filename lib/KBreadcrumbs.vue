@@ -187,7 +187,16 @@
     },
     mounted() {
       this.attachRefs();
-      this.$watch('parentWidth', this.throttleUpdateCrumbs);
+      // The throttled update function is defined here and not as a method on purpose
+      // since having it defined as a method on the options object would cause problems
+      // when there are more KBreadcrumbs instances rendered on one page.
+      // In such a scenario, all instances would share the same throttled function
+      // resulting in some instances not being updated when they should be.
+      // This is happening because of how the Vue component constructor and instances are built.
+      // Having it defined in the context of the `mounted` function ensures that each component
+      // instance will have its own throttled update function.
+      const throttledUpdateCrumbs = throttle(this.updateCrumbs, 100);
+      this.$watch('parentWidth', throttledUpdateCrumbs);
     },
     methods: {
       attachRefs() {
@@ -239,9 +248,6 @@
           }
         }
       },
-      throttleUpdateCrumbs: throttle(function updateCrumbs() {
-        this.updateCrumbs();
-      }, 100),
     },
   };
 
