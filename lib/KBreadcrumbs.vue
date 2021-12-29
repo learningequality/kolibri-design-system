@@ -113,7 +113,6 @@
 
 <script>
 
-  import ResizeSensor from 'css-element-queries/src/ResizeSensor';
   import filter from 'lodash/filter';
   import startsWith from 'lodash/startsWith';
   import throttle from 'lodash/throttle';
@@ -165,7 +164,7 @@
     data: () => ({
       // Array of crumb objects.
       // Each object contains:
-      // text, router-link 'to' object, vue ref, a resize sensor, and its collapsed state
+      // text, router-link 'to' object, vue ref, and its collapsed state
       crumbs: [],
       showDropdown: false,
     }),
@@ -180,36 +179,26 @@
     watch: {
       items(val) {
         this.crumbs = Array.from(val);
-        this.attachSensors();
+        this.attachRefs();
       },
     },
     created() {
       this.crumbs = Array.from(this.items);
     },
     mounted() {
-      this.attachSensors();
+      this.attachRefs();
       this.$watch('parentWidth', this.throttleUpdateCrumbs);
     },
-
-    beforeDestroy() {
-      this.detachSensors();
-    },
     methods: {
-      attachSensors() {
+      attachRefs() {
         this.$nextTick(() => {
           const crumbRefs = filter(this.$refs, (value, key) => startsWith(key, 'crumb'));
           this.crumbs = this.crumbs.map((crumb, index) => {
             const updatedCrumb = crumb;
             updatedCrumb.ref = crumbRefs[index];
-            updatedCrumb.sensor = new ResizeSensor(updatedCrumb.ref, this.throttleUpdateCrumbs);
             return updatedCrumb;
           });
           this.updateCrumbs();
-        });
-      },
-      detachSensors() {
-        this.crumbs.forEach(crumb => {
-          crumb.sensor.detach(this.throttleUpdateCrumbs);
         });
       },
       updateCrumbs() {
