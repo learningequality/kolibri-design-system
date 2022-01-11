@@ -36,7 +36,7 @@
       </div>
 
       <div>
-        When there is only one item, it won't be displayed by default. If needed, you can set <code>showSingleItem</code> to <code>true</code> to show it:
+        When there is only one item, it won't be displayed by default. You can set <code>showSingleItem</code> to <code>true</code> to show it:
 
         <DocsShow block>
           <KBreadcrumbs
@@ -59,6 +59,7 @@
       <ul>
         <li>It should include the current item</li>
         <li>The current item can be repeated in a page header</li>
+        <li>Allow the single breadcrumb (<code>showSingleItem=true</code>) only when there isn't any other page header or label that shows what the current level is</li>
       </ul>
     </DocsPageSection>
   </DocsPageTemplate>
