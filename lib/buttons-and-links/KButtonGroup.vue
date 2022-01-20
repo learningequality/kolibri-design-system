@@ -1,13 +1,3 @@
-<template>
-
-  <div class="button-group">
-    <!-- @slot Slot to wrap buttons and provide consistent spacing -->
-    <slot></slot>
-  </div>
-
-</template>
-
-
 <script>
 
   /**
@@ -19,6 +9,16 @@
 
   export default {
     name: 'KButtonGroup',
+    render(createElement) {
+      var children = [];
+      this.$slots.default.forEach(element => {
+        if (element.tag) {
+          children.push(createElement('span', { class: 'button-group-item' }, [element]));
+        }
+      });
+
+      return createElement('div', { class: 'button-group' }, children);
+    },
   };
 
 </script>
@@ -28,11 +28,17 @@
 
   .button-group {
     display: inline-block;
+    margin-bottom: -12px;
+  }
+
+  .button-group-item {
+    display: inline-block;
+    height: 48px;
   }
 
   /* KButton can produce <a> or <button> tags */
-  .button-group > a,
-  .button-group > button {
+  .button-group-item > a,
+  .button-group-item > button {
     margin-right: 8px;
     margin-left: 8px;
   }
