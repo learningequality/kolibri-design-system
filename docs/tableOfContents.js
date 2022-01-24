@@ -296,6 +296,11 @@ export default [
         isCode: true,
         keywords: textRelatedKeywords,
       }),
+      new Page({
+        path: '/kbreadcrumbs',
+        title: 'KBreadcrumbs',
+        isCode: true,
+      }),
     ],
   }),
 ];

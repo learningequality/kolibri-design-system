@@ -13,7 +13,6 @@
           size="small"
           :icon="showDropdown ? 'chevronUp' : 'chevronDown'"
           appearance="raised-button"
-          :style="{ verticalAlign: 'middle' }"
           @click="showDropdown = !showDropdown"
         />
         <div
@@ -67,8 +66,8 @@
           >
             <span
               class="breadcrumbs-crumb-text"
+              :style="{ maxWidth: lastBreadcrumbMaxWidth }"
               dir="auto"
-              style="text-decoration: none;"
             >
               {{ crumb.text }}
             </span>
@@ -101,7 +100,10 @@
             :key="index"
             class="breadcrumb-visible-item-last breadcrumbs-visible-item"
           >
-            <span class="breadcrumbs-crumb-text">
+            <span
+              class="breadcrumbs-crumb-text"
+              :style="{ maxWidth: lastBreadcrumbMaxWidth }"  
+            >
               {{ crumb.text }}
             </span>
           </li>
@@ -115,7 +117,6 @@
 
 <script>
 
-  import ResizeSensor from 'css-element-queries/src/ResizeSensor';
   import filter from 'lodash/filter';
   import startsWith from 'lodash/startsWith';
   import throttle from 'lodash/throttle';
@@ -124,6 +125,7 @@
   import KResponsiveElementMixin from './KResponsiveElementMixin';
 
   const DROPDOWN_BTN_WIDTH = 55;
+  const DEFAULT_LAST_BREADCRUMB_MAX_WIDTH = 300;
 
   function validateLinkObject(object) {
     const validKeys = ['name', 'path', 'params', 'query'];
@@ -138,8 +140,8 @@
     mixins: [KResponsiveElementMixin],
     props: {
       /**
-       * An array of objects, each with a 'text' attribute (String) and a
-       * 'link' attribute (vue router link object). The 'link' attribute
+       * An array of objects, each with a `text` attribute (String) and a
+       * `link` attribute (vue router link object). The `link` attribute
        * of the last item in the array is optional and ignored.
        */
       items: {
@@ -156,7 +158,7 @@
       },
       /**
        * By default, the breadcrums will be hidden when the length of items is 1.
-       * When set to 'true', a breadcrumb will be shown even when there is only one.
+       * When set to `true`, a breadcrumb will be shown even when there is only one.
        */
       showSingleItem: {
         type: Boolean,
@@ -167,9 +169,10 @@
     data: () => ({
       // Array of crumb objects.
       // Each object contains:
-      // text, router-link 'to' object, vue ref, a resize sensor, and its collapsed state
+      // text, router-link 'to' object, vue ref, and its collapsed state
       crumbs: [],
       showDropdown: false,
+      lastBreadcrumbMaxWidth: `${DEFAULT_LAST_BREADCRUMB_MAX_WIDTH}px`,
     }),
     computed: {
       collapsedCrumbs() {
@@ -182,79 +185,89 @@
     watch: {
       items(val) {
         this.crumbs = Array.from(val);
-        this.attachSensors();
+        this.attachRefs();
       },
     },
     created() {
       this.crumbs = Array.from(this.items);
     },
     mounted() {
-      this.attachSensors();
-      this.$watch('parentWidth', this.throttleUpdateCrumbs);
-    },
-
-    beforeDestroy() {
-      this.detachSensors();
+      this.attachRefs();
+      // The throttled update function is defined here and not as a method on purpose
+      // since having it defined as a method on the options object would cause problems
+      // when there are more KBreadcrumbs instances rendered on one page.
+      // In such a scenario, all instances would share the same throttled function
+      // resulting in some instances not being updated when they should be.
+      // This is happening because of how the Vue component constructor and instances are built.
+      // Having it defined in the context of the `mounted` function ensures that each component
+      // instance will have its own throttled update function.
+      const throttledUpdateCrumbs = throttle(this.updateCrumbs, 100);
+      this.$watch('parentWidth', throttledUpdateCrumbs);
     },
     methods: {
-      attachSensors() {
+      attachRefs() {
         this.$nextTick(() => {
           const crumbRefs = filter(this.$refs, (value, key) => startsWith(key, 'crumb'));
           this.crumbs = this.crumbs.map((crumb, index) => {
             const updatedCrumb = crumb;
             updatedCrumb.ref = crumbRefs[index];
-            updatedCrumb.sensor = new ResizeSensor(updatedCrumb.ref, this.throttleUpdateCrumbs);
             return updatedCrumb;
           });
           this.updateCrumbs();
         });
       },
-      detachSensors() {
-        this.crumbs.forEach(crumb => {
-          crumb.sensor.detach(this.throttleUpdateCrumbs);
-        });
-      },
       updateCrumbs() {
         if (this.crumbs.length) {
-          const tempCrumbs = Array.from(this.crumbs);
-          let lastCrumbWidth = Math.ceil(tempCrumbs.pop().ref[0].getBoundingClientRect().width);
-          let remainingWidth = this.parentWidth - DROPDOWN_BTN_WIDTH - lastCrumbWidth;
-          let trackingIndex = this.crumbs.length - 2;
+          // needs to be reset before another re-calculation
+          // otherwise calculactions below won't be precise
+          this.lastBreadcrumbMaxWidth = `${DEFAULT_LAST_BREADCRUMB_MAX_WIDTH}px`;
 
-          while (tempCrumbs.length) {
-            if (remainingWidth <= 0) {
-              tempCrumbs.forEach((crumb, index) => {
-                const updatedCrumb = crumb;
-                updatedCrumb.collapsed = true;
-                this.crumbs.splice(index, 1, updatedCrumb);
-              });
-              break;
+          this.$nextTick(() => {
+            const tempCrumbs = Array.from(this.crumbs);
+            let lastCrumbWidth = Math.ceil(tempCrumbs.pop().ref[0].getBoundingClientRect().width);
+            let remainingWidth = this.parentWidth - DROPDOWN_BTN_WIDTH - lastCrumbWidth;
+            let trackingIndex = this.crumbs.length - 2;
+
+            while (tempCrumbs.length) {
+              if (remainingWidth <= 0) {
+                tempCrumbs.forEach((crumb, index) => {
+                  const updatedCrumb = crumb;
+                  updatedCrumb.collapsed = true;
+                  this.crumbs.splice(index, 1, updatedCrumb);
+                });
+                break;
+              }
+
+              lastCrumbWidth = Math.ceil(
+                tempCrumbs[tempCrumbs.length - 1].ref[0].getBoundingClientRect().width
+              );
+
+              if (lastCrumbWidth > remainingWidth) {
+                tempCrumbs.forEach((crumb, index) => {
+                  const updatedCrumb = crumb;
+                  updatedCrumb.collapsed = true;
+                  this.crumbs.splice(index, 1, updatedCrumb);
+                });
+                break;
+              }
+
+              remainingWidth -= lastCrumbWidth;
+              const lastCrumb = tempCrumbs.pop();
+              lastCrumb.collapsed = false;
+              this.crumbs.splice(trackingIndex, 1, lastCrumb);
+              trackingIndex -= 1;
             }
 
-            lastCrumbWidth = Math.ceil(
-              tempCrumbs[tempCrumbs.length - 1].ref[0].getBoundingClientRect().width
-            );
-
-            if (lastCrumbWidth > remainingWidth) {
-              tempCrumbs.forEach((crumb, index) => {
-                const updatedCrumb = crumb;
-                updatedCrumb.collapsed = true;
-                this.crumbs.splice(index, 1, updatedCrumb);
-              });
-              break;
+            // Allow the last breadcrumb use all space available
+            // Fixes https://github.com/learningequality/kolibri-design-system/issues/198
+            // and https://github.com/learningequality/kolibri/issues/6918
+            if (remainingWidth > 0) {
+              this.lastBreadcrumbMaxWidth = `${DEFAULT_LAST_BREADCRUMB_MAX_WIDTH +
+                remainingWidth}px`;
             }
-
-            remainingWidth -= lastCrumbWidth;
-            const lastCrumb = tempCrumbs.pop();
-            lastCrumb.collapsed = false;
-            this.crumbs.splice(trackingIndex, 1, lastCrumb);
-            trackingIndex -= 1;
-          }
+          });
         }
       },
-      throttleUpdateCrumbs: throttle(function updateCrumbs() {
-        this.updateCrumbs();
-      }, 100),
     },
   };
 
@@ -267,10 +280,12 @@
   $crumb-max-width: 300px;
 
   .breadcrumbs {
+    height: 32px;
     margin-top: 8px;
     margin-bottom: 8px;
     font-size: 16px;
     font-weight: bold;
+    line-height: 32px;
     white-space: nowrap;
   }
 
@@ -279,22 +294,17 @@
     width: 100%;
     max-width: $crumb-max-width;
     overflow: hidden;
-    // this is overriden with inline styles on the last
-    // breadcrumb in the template
-    text-decoration: underline;
     text-overflow: ellipsis;
     white-space: nowrap;
-    vertical-align: middle;
+    vertical-align: bottom;
   }
 
   .breadcrumbs-dropdown-wrapper {
     display: inline-block;
-    vertical-align: middle;
 
     &::after {
       margin-right: 8px;
       margin-left: 8px;
-      vertical-align: middle;
       content: '›';
     }
   }
@@ -331,7 +341,6 @@
     padding: 0;
     margin: 0;
     white-space: nowrap;
-    vertical-align: middle;
     list-style: none;
 
     .breadcrumbs-collapsed & {
@@ -343,14 +352,12 @@
   .breadcrumbs-visible-item {
     display: inline-block;
     max-width: 100%;
-    vertical-align: middle;
   }
 
   .breadcrumbs-visible-item-notlast {
     &::after {
       margin-right: 8px;
       margin-left: 8px;
-      vertical-align: middle;
       content: '›';
     }
   }
