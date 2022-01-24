@@ -2,13 +2,18 @@
 
 Releases are recorded as git tags in the [Github releases](https://github.com/learningequality/kolibri-design-system/releases) page.
 
-## Version 1.2.2
+## Version 1.3.0
 
 - [#291] - When tracking input modality with `trackInputModality`, modality is set to keyboard only when the TAB key is pressed
+- [#292] - Add `KBreadcrumbs` page to the components documentation
+- [#292] - Optimize `KBreadcrumbs` to use all space available
+- [#292] - Fix `KBreadcrumbs` items vertical alignment
+- [#292] - Fix `KBreadcrumbs` items not collapsing when there are more instances on a page
 
 <!-- Referenced PRs -->
 
 [#291]: https://github.com/learningequality/kolibri-design-system/pull/291
+[#292]: https://github.com/learningequality/kolibri-design-system/pull/292
 
 ## Version 1.2.1
 
