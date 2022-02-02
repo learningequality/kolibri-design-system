@@ -8,6 +8,8 @@
   "scripts": {
     "dev": "npm-run-all --parallel _dev-only _lint-watch-fix _api-watch pregenerate",
     "generate": "yarn run pregenerate && nuxt generate",
+    "test": "yarn run test-jest --watch",
+    "test-jest": "kolibri-tools test --config ./jest.conf.js",
     "lint": "kolibri-tools lint --pattern '**/*.{js,vue,scss,less,css}' -i ,'**/node_modules/**','**/.nuxt/**','**/dist/**','**/lib/KIcon/precompiled-icons/**','**/lib/keen/**','**/docs/environment.js','**/docs/jsdocs.js'",
     "lint-fix": "yarn lint -w",
     "lint-watch": "yarn lint -m",
