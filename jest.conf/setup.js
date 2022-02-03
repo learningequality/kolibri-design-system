@@ -4,6 +4,7 @@ import * as Aphrodite from 'aphrodite';
 import * as AphroditeNoImportant from 'aphrodite/no-important';
 
 import Vue from 'vue';
+import VueRouter from 'vue-router';
 import KThemePlugin from '../lib/KThemePlugin';
 import KContentPlugin from '../lib/content/KContentPlugin';
 
@@ -24,6 +25,7 @@ global.afterEach(() => {
 });
 
 // Register Vue plugins and components
+Vue.use(VueRouter);
 Vue.use(KThemePlugin);
 Vue.use(KContentPlugin);
 

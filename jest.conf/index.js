@@ -8,7 +8,7 @@ const moduleNameMapper = {
 };
 
 module.exports = {
-  rootDir: path.resolve(__dirname,'..'),
+  rootDir: path.resolve(__dirname, '..'),
   moduleFileExtensions: ['js', 'json', 'vue'],
   moduleNameMapper,
   testEnvironment: 'jsdom',

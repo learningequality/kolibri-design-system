@@ -59,6 +59,7 @@
     "vue-jest": "^3.0.7",
     "vue-meta": "^2.4.0",
     "vue-prism-component": "^1.1.1",
+    "vue-router": "^3.5.3",
     "vue-simple-markdown": "^1.1.5",
     "xml-loader": "^1.2.1"
   },
