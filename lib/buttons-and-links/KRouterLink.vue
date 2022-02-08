@@ -9,6 +9,7 @@
     :class="buttonClasses"
     :to="to"
     :replace="replace"
+    data-test="router-link"
     dir="auto"
     @mouseenter.native="hovering = true"
     @mouseleave.native="hovering = false"
