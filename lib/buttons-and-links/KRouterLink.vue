@@ -21,6 +21,7 @@
         :icon="icon"
         style="top: 4px;"
         :color="hovering ? $themeTokens.primaryDark : $themeTokens.primary"
+        data-test="icon-before"
       />
     </slot>
 
@@ -38,6 +39,7 @@
         :icon="iconAfter"
         style="top: 4px;"
         :color="hovering ? $themeTokens.primaryDark : $themeTokens.primary"
+        data-test="icon-after"
       />
     </slot>
   </router-link>
