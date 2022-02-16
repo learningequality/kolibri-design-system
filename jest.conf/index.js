@@ -18,6 +18,12 @@ module.exports = {
     '^.+\\.vue$': 'vue-jest',
   },
   snapshotSerializers: ['jest-serializer-vue'],
+  globals: {
+    'vue-jest': {
+      hideStyleWarn: true,
+      experimentalCSSCompile: true,
+    },
+  },
   setupFilesAfterEnv: [path.resolve(__dirname, './setup')],
   verbose: true,
 };

@@ -9,6 +9,7 @@
     :class="buttonClasses"
     :to="to"
     :replace="replace"
+    data-test="router-link"
     dir="auto"
     @mouseenter.native="hovering = true"
     @mouseleave.native="hovering = false"
@@ -21,6 +22,7 @@
         :icon="icon"
         style="top: 4px;"
         :color="hovering ? $themeTokens.primaryDark : $themeTokens.primary"
+        data-test="icon-before"
       />
     </slot>
 
@@ -38,6 +40,7 @@
         :icon="iconAfter"
         style="top: 4px;"
         :color="hovering ? $themeTokens.primaryDark : $themeTokens.primary"
+        data-test="icon-after"
       />
     </slot>
   </router-link>
