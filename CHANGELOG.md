@@ -2,6 +2,21 @@
 
 Releases are recorded as git tags in the [Github releases](https://github.com/learningequality/kolibri-design-system/releases) page.
 
+## Version 1.3.1
+
+- [#309] - Add jest testing environment to KDS
+- [#311] - Add tests for `KRouterLink`
+- [#313] - Add tests for `KButton`
+- [#315] - Add tests for `KCheckbox`
+- [#320] - Add tests for `KModal`
+
+<!-- Referenced PRs -->
+[#309]: https://github.com/learningequality/kolibri-design-system/pull/309
+[#311]: https://github.com/learningequality/kolibri-design-system/pull/311
+[#313]: https://github.com/learningequality/kolibri-design-system/pull/313
+[#315]: https://github.com/learningequality/kolibri-design-system/pull/315
+[#320]: https://github.com/learningequality/kolibri-design-system/pull/320
+
 ## Version 1.3.0
 
 - [#291] - When tracking input modality with `trackInputModality`, modality is set to keyboard only when the TAB key is pressed
