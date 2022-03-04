@@ -30,7 +30,7 @@
             v-if="hasError"
             class="visuallyhidden"
           >
-            {{ $tr('errorAlert', { title }) }}
+            {{ errorMessage }}
           </span>
         </h1>
 
@@ -171,6 +171,11 @@
       hasError: {
         type: Boolean,
         default: false,
+      },
+      errorMessage: {
+        type: String,
+        default: null,
+        required: false,
       },
     },
     data() {
@@ -331,10 +336,6 @@
           this.focusModal();
         }
       },
-    },
-    $trs: {
-      // error alerts
-      errorAlert: 'Error in { title }',
     },
   };
 
