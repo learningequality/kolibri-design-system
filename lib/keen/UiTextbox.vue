@@ -91,7 +91,7 @@
       </label>
 
       <div class="ui-textbox-feedback">
-        <div v-if="showError" class="ui-textbox-feedback-text" style="{ color: $themeTokens.error }">
+        <div v-if="showError" class="ui-textbox-feedback-text" :style="{ color: $themeTokens.error }">
           <slot name="error">
             {{ error }}
           </slot>
