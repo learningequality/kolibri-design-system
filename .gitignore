@@ -21,3 +21,6 @@ docs/jsdocs.js
 # IDE
 .idea
 kolibri-design-system.iml
+
+# ignore storybook stories
+stories/

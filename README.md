@@ -263,3 +263,12 @@ yarn run devserver
 ```
 
 Now you're all set to see your changes to the Kolibri Design System working live in Kolibri!
+
+
+### Using Storybook locally 
+
+The Kolibri Design System is configured with [Storybook](https://storybook.js.org/) and can be used locally. This is a tool designed to give you a chance to play with and tests components and the various combinations of props they might be configured with.
+
+In order to make use of this tool, you will need to create a `stories/` directory in the root of your KDS repository. Inside of that folder, you can create any number of `*.stories.js` files according to the [Storybook VueJS docs](https://storybook.js.org/docs/vue/writing-stories/introduction). __Note: The `stories/` directory is included in the .gitignore, so these will not be committed along with any of your other work.__
+
+Once you have stories created, you can run `yarn storybook` to start a server, which will open in your browser a window showing all of the stories you've created.
