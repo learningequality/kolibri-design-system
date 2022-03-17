@@ -9,6 +9,7 @@ Releases are recorded as git tags in the [Github releases](https://github.com/le
 - [#313] - Add tests for `KButton`
 - [#315] - Add tests for `KCheckbox`
 - [#320] - Add tests for `KModal`
+- [#322] - Add tests for `KTextbox`
 
 <!-- Referenced PRs -->
 [#309]: https://github.com/learningequality/kolibri-design-system/pull/309
@@ -16,6 +17,8 @@ Releases are recorded as git tags in the [Github releases](https://github.com/le
 [#313]: https://github.com/learningequality/kolibri-design-system/pull/313
 [#315]: https://github.com/learningequality/kolibri-design-system/pull/315
 [#320]: https://github.com/learningequality/kolibri-design-system/pull/320
+[#322]: https://github.com/learningequality/kolibri-design-system/pull/322
+
 
 ## Version 1.3.0
 
