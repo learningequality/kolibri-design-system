@@ -124,7 +124,7 @@
       handleOpenMenuNavigation(event) {
         // identify the menu state and length
         if (!this.$refs.popover && !this.$refs.popover.$el) {
-          return
+          return;
         }
         const popover = this.$refs.popover.$el;
         const menuElements = this.$refs.menu.$el.querySelector('div').children;
@@ -145,7 +145,7 @@
           sibling ? this.$nextTick(() => sibling.focus()) : this.$nextTick(() => this.setFocus());
           // if a tab key, not an arrow key, close the popover and advance to next item in the tab index
         } else if (event.keyCode == 9 && popoverIsOpen) {
-          this.closePopover()
+          this.closePopover();
         }
       },
       handleSelection(selection) {
