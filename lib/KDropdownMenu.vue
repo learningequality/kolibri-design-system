@@ -103,7 +103,7 @@
     methods: {
       handleOpen() {
         this.$nextTick(() => this.setFocus());
-        window.addEventListener('keydown', this.handleArrowKeys, true);
+        window.addEventListener('keydown', this.handleOpenMenuNavigation, true);
       },
       setFocus() {
         this.$refs.menu.$el.querySelector('li').focus();
@@ -121,8 +121,11 @@
         }
         window.removeEventListener('keyup', this.handleKeyUp, true);
       },
-      handleArrowKeys(event) {
+      handleOpenMenuNavigation(event) {
         // identify the menu state and length
+        if (!this.$refs.popover && !this.$refs.popover.$el) {
+          return
+        }
         const popover = this.$refs.popover.$el;
         const menuElements = this.$refs.menu.$el.querySelector('div').children;
         const lastChild = menuElements[menuElements.length - 1];
@@ -140,6 +143,9 @@
         } else if (event.keyCode == 40 && popoverIsOpen) {
           event.preventDefault();
           sibling ? this.$nextTick(() => sibling.focus()) : this.$nextTick(() => this.setFocus());
+          // if a tab key, not an arrow key, close the popover and advance to next item in the tab index
+        } else if (event.keyCode == 9 && popoverIsOpen) {
+          this.closePopover()
         }
       },
       handleSelection(selection) {
