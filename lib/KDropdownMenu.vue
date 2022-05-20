@@ -98,7 +98,7 @@
       },
     },
     beforeDestroy() {
-      window.removeEventListener('keydown', this.handleArrowKeys, true);
+      window.removeEventListener('keydown', this.handleOpenMenuNavigation, true);
     },
     methods: {
       handleOpen() {
@@ -134,17 +134,21 @@
         let focusedElement = document.activeElement;
         let sibling = focusedElement.nextElementSibling;
         let prevSibling = focusedElement.previousElementSibling;
-        // manage rotating through the options
-        if (event.keyCode == 38 && popoverIsOpen) {
+
+        // manage rotating through the options using arrow keys
+        // UP arrow: .keyCode is depricated and should used only as a fallback
+        console.log(event.key);
+        if ((event.key == 'ArrowUp' || event.keyCode == 38) && popoverIsOpen) {
           event.preventDefault();
           prevSibling
             ? this.$nextTick(() => prevSibling.focus())
             : this.$nextTick(() => lastChild.focus());
-        } else if (event.keyCode == 40 && popoverIsOpen) {
+          // DOWN arrow
+        } else if ((event.key == 'ArrowDown' || event.keyCode == 40) && popoverIsOpen) {
           event.preventDefault();
           sibling ? this.$nextTick(() => sibling.focus()) : this.$nextTick(() => this.setFocus());
-          // if a tab key, not an arrow key, close the popover and advance to next item in the tab index
-        } else if (event.keyCode == 9 && popoverIsOpen) {
+          // if a TAB key, not an arrow key, close the popover and advance to next item in the tab index
+        } else if ((event.key == 'Tab' || event.keyCode == 9) && popoverIsOpen) {
           this.closePopover();
         }
       },
