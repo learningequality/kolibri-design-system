@@ -137,7 +137,6 @@
 
         // manage rotating through the options using arrow keys
         // UP arrow: .keyCode is depricated and should used only as a fallback
-        console.log(event.key);
         if ((event.key == 'ArrowUp' || event.keyCode == 38) && popoverIsOpen) {
           event.preventDefault();
           prevSibling
