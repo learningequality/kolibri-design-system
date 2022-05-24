@@ -3,9 +3,12 @@
   <component
     :is="isAnchor ? 'a' : 'li'"
     class="ui-menu-option"
-
+    supports-modality=keyboard
+    @focus="isActive = true"
+    @blur="isActive = false"
     role="menu-item"
     :class="classes"
+    :style="activeStyle"
     :href="isAnchor ? (disabled ? null : href) : null"
     :tabindex="(isDivider || isAnchor || disabled) ? null : '0'"
     :target="isAnchor ? (disabled ? null : target) : null"
@@ -41,6 +44,8 @@
 <script>
 
   import UiIcon from './UiIcon.vue';
+  import globalThemeState from '../styles/globalThemeState';
+
 
   export default {
     name: 'UiMenuOption',
@@ -48,6 +53,10 @@
     components: {
       UiIcon,
     },
+
+    data:() => ({
+      isActive: false,
+    }),
 
     props: {
       type: String,
@@ -77,6 +86,9 @@
         };
       },
 
+      activeStyle() {
+        return this.isActive ? {...this.$coreOutline, outlineOffset: '-2px' } : {}
+      },
       isDivider() {
         return this.type === 'divider';
       },
@@ -121,6 +133,11 @@
       outline: none;
 
       &:hover:not(.is-disabled),
+      body[modality='keyboard'] &:focus {
+        background-color: $ui-menu-item-hover-color;
+      }
+
+      &:focus:not(.is-disabled),
       body[modality='keyboard'] &:focus {
         background-color: $ui-menu-item-hover-color;
       }

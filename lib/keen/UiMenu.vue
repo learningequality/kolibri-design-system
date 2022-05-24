@@ -8,7 +8,6 @@
     lazy
 
     :class="classes"
-    :contain-focus="containFocus"
   >
     <UiMenuOption
       v-for="(option, index) in options"
@@ -27,6 +26,7 @@
       @keydown.enter.native="selectOption(option)"
 
       @keydown.esc.native.esc="closeMenu"
+      :style="[ activeOutline ]"
     >
       <slot name="option" :option="option"></slot>
     </UiMenuOption>
@@ -101,6 +101,9 @@
           'has-secondary-text': this.hasSecondaryText,
         };
       },
+      activeOutline() {
+        return this.isActive ? this.$coreOutline : {};
+      },
     },
 
     methods: {
@@ -112,7 +115,6 @@
         this.$emit('select', option);
         this.closeMenu();
       },
-
       closeMenu() {
         this.$emit('close');
       },
