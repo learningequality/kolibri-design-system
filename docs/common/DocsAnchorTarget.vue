@@ -22,8 +22,6 @@
 
 <script>
 
-  import log from 'loglevel';
-
   export default {
     name: 'DocsAnchorTarget',
     props: {
@@ -32,11 +30,11 @@
         required: true,
         validator(value) {
           if (!value.startsWith('#')) {
-            log.error(`'anchor' prop value '${value}' must start with a '#'`);
+            console.error(`'anchor' prop value '${value}' must start with a '#'`);
             return false;
           }
           if (!value.match(/^#[\w\-.:]*$/)) {
-            log.error(`'anchor' prop value '${value}' invalid`);
+            console.error(`'anchor' prop value '${value}' invalid`);
             return false;
           }
           return true;

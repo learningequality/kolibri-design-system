@@ -93,7 +93,6 @@
 
 <script>
 
-  import log from 'loglevel';
   import debounce from 'lodash/debounce';
   import KResponsiveWindowMixin from './KResponsiveWindowMixin';
 
@@ -157,7 +156,7 @@
         validator(val) {
           if (typeof val === 'string') {
             if (!SIZE_STRINGS.includes(val)) {
-              log.error(`'${val}' is not one of: ${SIZE_STRINGS}`);
+              console.error(`'${val}' is not one of: ${SIZE_STRINGS}`);
               return false;
             }
             return true;
@@ -216,12 +215,12 @@
     },
     created() {
       if (this.$props.cancelText && !this.$listeners.cancel) {
-        log.error(
+        console.error(
           'A "cancelText" has been set, but there is no "cancel" listener. The "cancel" button may not work correctly.'
         );
       }
       if (this.$props.submitText && !this.$listeners.submit) {
-        log.error(
+        console.error(
           'A "submitText" has been set, but there is no "submit" listener. The "submit" button may not work correctly.'
         );
       }

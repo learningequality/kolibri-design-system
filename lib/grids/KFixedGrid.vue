@@ -17,7 +17,6 @@
 
 <script>
 
-  import log from 'loglevel';
   import KResponsiveWindowMixin from '../KResponsiveWindowMixin';
   import Overlay from './Overlay';
   import { validateGutter } from './common';
@@ -38,7 +37,7 @@
         required: true,
         validator(value) {
           if (value < 2 || value > 12) {
-            log.error(`Number of columns (${value}) must be between 2 and 12`);
+            console.error(`Number of columns (${value}) must be between 2 and 12`);
             return false;
           }
           return true;
