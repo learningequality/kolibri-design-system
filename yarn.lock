@@ -6261,7 +6261,7 @@ fragment-cache@^0.2.1:
 frame-throttle@^3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/frame-throttle/-/frame-throttle-3.0.0.tgz#a666e007c10af6239909cf73871be09a7ea1c6d1"
-  integrity sha1-pmbgB8EK9iOZCc9zhxvgmn6hxtE=
+  integrity sha512-ENBi8VP95xoHf8JpxPwEaCdZneOrtxl0U2H5p2oS896u3NzriR9kRcylvJ+FcCW3qZfZFJ5TDeOT5LbENndBnQ==
 
 fresh@0.5.2, fresh@^0.5.2:
   version "0.5.2"
