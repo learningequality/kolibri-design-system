@@ -15,7 +15,6 @@
 
 <script>
 
-  import log from 'loglevel';
   import KResponsiveWindowMixin from '../KResponsiveWindowMixin';
   import { validateAlignment, validateSpan } from './common';
 
@@ -104,12 +103,12 @@
       },
       validInputs() {
         if (!this.gridMetrics || !this.gridMetrics.numCols || !this.gridMetrics.gutterWidth) {
-          log.error('Grid metrics were not provided by parent');
+          console.error('Grid metrics were not provided by parent');
           return false;
         }
 
         if (this.computedSpan > this.gridMetrics.numCols) {
-          log.error(
+          console.error(
             `Item span (${this.computedSpan}) is larger than grid size (${this.gridMetrics.numCols})`
           );
           return false;

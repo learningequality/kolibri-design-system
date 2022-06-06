@@ -17,16 +17,14 @@
 
 <script>
 
-  import log from 'loglevel';
-
   function validator(value) {
     if (typeof value === 'string') {
       if (value.startsWith('#')) {
-        log.error(`PR or issue number '${value}' should not start with a '#'`);
+        console.error(`PR or issue number '${value}' should not start with a '#'`);
         return false;
       }
       if (!value.match(/^\d+$/)) {
-        log.error(`PR or issue number '${value}' invalid`);
+        console.error(`PR or issue number '${value}' invalid`);
         return false;
       }
     }
@@ -80,13 +78,13 @@
           return `https://github.com/learningequality/kolibri-design-system/pull/${this.pull}`;
         if (this.issue)
           return `https://github.com/learningequality/kolibri-design-system/issues/${this.issue}`;
-        log.error(`No URL, PR, or issue provided`);
+        console.error(`No URL, PR, or issue provided`);
         return undefined;
       },
     },
     mounted() {
       if (this.pull && this.issue) {
-        log.warn("Pass either 'pull' or 'issue', not both");
+        console.warn("Pass either 'pull' or 'issue', not both");
       }
     },
   };

@@ -10,7 +10,6 @@
 
 <script>
 
-  import log from 'loglevel';
   import KResponsiveWindowMixin from '../KResponsiveWindowMixin';
   import KFixedGridItem from './KFixedGridItem';
   import { validateAlignment, validateSpan } from './common';
@@ -23,7 +22,7 @@
     const allowed = ['span', 'alignment'];
     for (const key in obj) {
       if (!allowed.includes(key)) {
-        log.error(`Unexpected layout object property: '${key}'`);
+        console.error(`Unexpected layout object property: '${key}'`);
         return false;
       }
     }
