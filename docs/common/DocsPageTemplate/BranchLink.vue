@@ -10,7 +10,7 @@
       Local environment
     </span>
     <span>|</span>
-    <DocsGithubLink text="Changelog" href="https://github.com/learningequality/kolibri-design-system/blob/main/CHANGEconsole.md" />
+    <DocsGithubLink text="Changelog" href="https://github.com/learningequality/kolibri-design-system/blob/main/CHANGELOG.md" />
   </div>
 
 </template>
