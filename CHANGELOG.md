@@ -2,6 +2,11 @@
 
 Releases are recorded as git tags in the [Github releases](https://github.com/learningequality/kolibri-design-system/releases) page.
 
+## Version 1.4.x
+- [#185] - Handle arrow key navigation and improve focusOutline
+- [#338] - Allow for new 'nav' slot inline in the toolbar
+
+
 ## Version 1.3.1
 
 - [#309] - Add jest testing environment to KDS
