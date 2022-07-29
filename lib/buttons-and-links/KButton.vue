@@ -22,11 +22,11 @@
       data-test="iconBefore"
       class="prop-icon"
     />
-
+    <slot name="menu"></slot>
     <!-- @slot Pass sub-components into the button, which provides more flexibility than and takes precedence over the `text` prop -->
     <slot v-if="$slots.default"></slot>
 
-    <template v-else>
+    <template>
       <span class="link-text" :style="textStyle">{{ text }}</span>
     </template>
 
