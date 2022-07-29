@@ -1,28 +1,20 @@
 <template>
-    <!-- <KButton
-      v-if="!$slots.button"
-      ref="button"
-      :text="text"
-      :appearance="appearance"
-      :disabled="disabled"
-      :hasDropdown="true"
-      :primary="$attrs.primary"
-    >
-      <span>{{ text }}</span> -->
-      <UiPopover
-      v-if="!disabled"
-      ref="popover"
-      :z-index="12"
-      :containFocus="true"
-      :dropdownPosition="position"
-      @close="handleClose"
-      @open="handleOpen"
-    >
-      <UiMenu ref="menu" :options="options" @select="handleSelection" :hasIcons="hasIcons" />
-    </UiPopover>
-    <!-- </KButton>
-    <slot name="button"></slot>
-  </div> -->
+  <UiPopover
+    v-if="!disabled"
+    ref="popover"
+    :z-index="12"
+    :containFocus="true"
+    :dropdownPosition="position"
+    @close="handleClose"
+    @open="handleOpen"
+  >
+    <UiMenu 
+      ref="menu" 
+      :options="options" 
+      @select="handleSelection" 
+      :hasIcons="hasIcons" 
+    />
+  </UiPopover>
 </template>
 
 
@@ -42,40 +34,11 @@ export default {
   },
   props: {
     /**
-     * Button label text
-     */
-    text: {
-      type: String,
-      required: false,
-    },
-    /**
-     * Button label icon
-     */
-    icon: {
-      type: String,
-      required: false,
-    },
-    /**
      * An array of options objects, with one object per dropdown item
      */
     options: {
       type: Array,
       required: true,
-    },
-    /**
-     * Button appearance: `'raised-button'` or `'flat-button'`
-     */
-    appearance: {
-      type: String,
-      default: 'raised-button',
-      validator,
-    },
-    /**
-     * Whether or not the button is disabled
-     */
-    disabled: {
-      type: Boolean,
-      default: false,
     },
     /**
      * Whether or not the options display an icon
