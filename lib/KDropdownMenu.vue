@@ -21,7 +21,6 @@
 <script>
 import UiPopover from './keen/UiPopover';
 import UiMenu from './keen/UiMenu';
-import { validator } from './buttons-and-links/appearances';
 
 /**
  * The KDropdownMenu component is used to contain multiple actions
