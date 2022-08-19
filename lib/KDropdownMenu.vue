@@ -128,7 +128,6 @@
         }
       },
       handleSelection(selection) {
-        console.log('handling selection', selection);
         /**
          * Emitted when an option is selected
          */
