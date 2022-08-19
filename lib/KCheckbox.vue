@@ -43,15 +43,17 @@
 
       </div>
 
-      <div
+      <label
         v-if="$slots.default"
+        :for="id"
         class="k-checkbox-label"
       >
+        <!-- @slot Optional slot as alternative to `label` prop. Its content will be rendered within `<label>`. -->
         <slot></slot>
         <div v-if="description" class="description">
           {{ description }}
         </div>
-      </div>
+      </label>
 
       <!-- In this case, we presume that there is a `label` prop given -->
       <label
@@ -91,7 +93,7 @@
         default: null,
       },
       /**
-       * Whether or not to show the label
+       * Whether or not to show the label provided via the `label` prop (doesn't apply to labels provided via the default slot)
        */
       showLabel: {
         type: Boolean,
