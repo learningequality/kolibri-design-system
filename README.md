@@ -247,8 +247,6 @@ Now, when you run the application your changes in `kolibri-design-system` will b
 
 For example, given that you have `./kolibri` and `./kolibri-design-system` folders with their respective local repositories:
 
-First, remove the reference to `kolibri-design-system` from `./kolibri/core/package.json` which points at the online repo. Next,
-
 ```bash
 # change to the KDS repo and add it to yarn's local package registry
 cd ./kolibri-design-system
