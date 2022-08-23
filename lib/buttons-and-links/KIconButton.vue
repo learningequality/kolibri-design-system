@@ -10,11 +10,12 @@
     text=""
     v-on="$listeners"
   >
+    <!-- if no "position" is passed as a prop, defaults to bottom, as previously -->
     <UiTooltip
       v-if="tooltip"
       :zIndex="24"
       open-on="hover"
-      position="bottom"
+      :position="tooltipPosition" 
     >
       {{ tooltip }}
     </UiTooltip>
@@ -89,6 +90,13 @@
       tooltip: {
         type: String,
         default: null, // https://github.com/learningequality/kolibri-design-system/issues/168
+      },
+      /**
+       * Tooltip position, passes to existing 'UiTooltip' prop for position
+       */
+      tooltipPosition: {
+        type: String,
+        default: 'bottom',
       },
     },
     computed: {
