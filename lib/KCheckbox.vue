@@ -43,19 +43,7 @@
 
       </div>
 
-      <div
-        v-if="$slots.default"
-        class="k-checkbox-label"
-      >
-        <slot></slot>
-        <div v-if="description" class="description">
-          {{ description }}
-        </div>
-      </div>
-
-      <!-- In this case, we presume that there is a `label` prop given -->
       <label
-        v-else
         dir="auto"
         class="k-checkbox-label"
         :for="id"
@@ -63,12 +51,17 @@
         :style="labelStyle"
         @click.prevent
       >
-        {{ label }}
+        <template v-if="$slots.default">
+          <!-- @slot Optional slot as alternative to `label` prop -->
+          <slot></slot>
+        </template>
+        <template v-else>
+          {{ label }}
+        </template>
         <div v-if="description" class="description">
           {{ description }}
         </div>
       </label>
-
     </div>
   </div>
 
