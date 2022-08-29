@@ -4,6 +4,7 @@ Releases are recorded as git tags in the [Github releases](https://github.com/le
 
 ## Develop (version not yet known)
 - [#351] - Wrap `KCheckbox` default slot's content in <label>
+- [#355] - Add `KSelect` to KDS
 
 
 ## Version 1.4.x

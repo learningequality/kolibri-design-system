@@ -151,7 +151,7 @@
     data() {
       return {
         // workaround for Keen-ui not displaying floating labels for empty objects
-        selection: Object.keys(this.value).length === 0 ? '' : this.value,
+        selection: Object.keys(this.value || {}).length === 0 ? '' : this.value,
       };
     },
     computed: {
