@@ -232,6 +232,12 @@ export default [
         isCode: true,
       }),
       new Page({
+        path: '/kselect',
+        title: 'KSelect',
+        isCode: true,
+        keywords: ['field', 'box'],
+      }),
+      new Page({
         path: '/kswitch',
         title: 'KSwitch',
         isCode: true,

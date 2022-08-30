@@ -74,8 +74,12 @@
       <p>
         By default, data should be filtered by the “all data” option. However, pre-filtering to one or more options can happen in exceptional cases where doing so improves the experience.
       </p>
+      <h3>Hiding vs disabling</h3>
       <p>
-        If selecting a filter option would result in “0 results” being shown, that option should be hidden from the dropdown.
+        If selecting a filter option would result in “0 results” being shown, that option should be hidden from the dropdown, hide the filter option. If all filter options in a dropdown would always result in “0 results,” hide the entire filter.
+      </p>
+      <p>
+        If one or more filters have already been applied, and combining remaining filter options would show “0 results,” those remaining filters should be disabled. If all potential remaining selections in a filter dropdown/section will show “0 results,” disable the entire filter section until the current filter sections are cleared.
       </p>
     </DocsPageSection>
 
