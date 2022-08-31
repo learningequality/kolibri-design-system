@@ -4,7 +4,7 @@
     v-show="showSingleItem || crumbs.length > 1"
     :class="{ 'breadcrumbs-collapsed': collapsedCrumbs.length }"
   >
-    <nav class="breadcrumbs">
+    <nav class="breadcrumbs" v-bind="$attrs" :aria-label="$attrs.ariaLabel">
       <div
         v-show="collapsedCrumbs.length"
         class="breadcrumbs-dropdown-wrapper"
