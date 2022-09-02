@@ -23,7 +23,8 @@
       class="prop-icon"
     />
     <slot name="menu"></slot>
-    <!-- @slot Pass sub-components into the button, which provides more flexibility than and takes precedence over the `text` prop -->
+    <!-- @slot Pass sub-components into the button, which provides more flexibility -->
+    <!-- @slot no longer takes prescendence over text. Both slot and text can now be used -->
     <slot v-if="$slots.default"></slot>
 
     <template>

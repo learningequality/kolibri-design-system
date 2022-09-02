@@ -92,7 +92,7 @@
         default: null, // https://github.com/learningequality/kolibri-design-system/issues/168
       },
       /**
-       * Tooltip position, passes to existing 'UiTooltip' prop for position
+       * Tooltip position: `'top', 'right', 'bottom', 'left'`
        */
       tooltipPosition: {
         type: String,
