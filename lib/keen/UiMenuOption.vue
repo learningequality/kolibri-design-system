@@ -24,10 +24,10 @@
         <div class="ui-menu-option-text">
           {{ label }}
         </div>
-<!--
+
         <div v-if="secondaryText" class="ui-menu-option-secondary-text">
           {{ secondaryText }}
-        </div> -->
+        </div>
       </div>
     </slot>
 
