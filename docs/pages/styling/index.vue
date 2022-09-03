@@ -28,7 +28,9 @@
         Use these by importing the design system's <code>definitions.scss</code> file. For example, this HTML and SCSS in a Vue template:
       </p>
       <DocsShowCode language="html">
-        &lt;div class="box"&gt;Hello!&lt;/div&gt;
+        <div class="box">
+          Hello!
+        </div>
       </DocsShowCode>
       <!-- eslint-disable -->
       <!-- prevent prettier from changing indentation -->

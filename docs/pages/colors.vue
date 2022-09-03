@@ -53,7 +53,9 @@
       </p>
 
       <DocsShowCode language="html">
-        &lt;div :style="{ color: $themeTokens.error }"&gt;This is an error&lt;/div&gt;
+        <div :style="{ color: $themeTokens.error }">
+          This is an error
+        </div>
       </DocsShowCode>
 
       <p>
@@ -75,7 +77,7 @@
       </p>
 
       <DocsShowCode language="html">
-        &lt;input :class="$computedClass({ '::placeholder': { color: $themeTokens.annotation } })" /&gt;
+        <input :class="$computedClass({ '::placeholder': { color: $themeTokens.annotation } })">
       </DocsShowCode>
 
       <p>This is usually not necessary, and using <code>style</code> is preferred for simplicity when possible.</p>
