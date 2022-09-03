@@ -19,6 +19,7 @@ export default {
   srcDir: './docs/',
   plugins: ['~/plugins/load-common-components.js', '~/plugins/load-lib-components.js'],
   css: ['normalize.css/normalize.css', '~/assets/main.scss'],
+  modulesDir: ['node_modules', 'docs'], // allow custom DocsShowCode loader to be found
   build: {
     extractCSS: true,
     optimization: {
@@ -40,6 +41,12 @@ export default {
         test: /\.vue$/,
         enforce: 'pre',
         loader: 'svg-icon-inline-loader',
+        exclude: /node_modules/,
+      });
+      // handles escaping HTML inside <DocsShowCode> slots
+      config.module.rules.push({
+        test: /\.vue$/,
+        loader: 'common/DocsShowCode/webpack-loader.js',
         exclude: /node_modules/,
       });
       // used for glossary
