@@ -140,19 +140,16 @@
       <p>
         For example, a common pattern in Kolibri is to have a button right-aligned at the top of a page alongside the header on large windows, but on medium and small windows to move the button underneath the header and left-align it. To do this with the responsive grid:
       </p>
-      <!-- eslint-disable -->
-      <!-- prevent prettier from changing indentation -->
       <DocsShowCode language="html">
-        &lt;KGrid&gt;
-          &lt;KGridItem :layout12="{ span: 9 }"&gt;
-            &lt;h2&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit&lt;/h2&gt;
-          &lt;/KGridItem&gt;
-          &lt;KGridItem :layout12="{ span: 3, alignment: 'right' }"&gt;
-            &lt;KButton text="Button" primary/&gt;
-          &lt;/KGridItem&gt;
-        &lt;/KGrid&gt;
+        <KGrid>
+          <KGridItem :layout12="{ span: 9 }">
+            <h2>Lorem ipsum dolor sit amet, consectetur adipiscing elit</h2>
+          </KGridItem>
+          <KGridItem :layout12="{ span: 3, alignment: 'right' }">
+            <KButton text="Button" primary />
+          </KGridItem>
+        </KGrid>
       </DocsShowCode>
-      <!-- eslint-enable -->
 
       <p>
         Each grid item is described by layout objects which can contain a column <code>span</code> and default text <code>alignment</code>. When no additional layout information is provided, the <code>span</code> defaults to the total number of columns (i.e. full-width), and <code>alignment</code> defaults to <code>'right'</code>.
