@@ -25,6 +25,7 @@
         </li>
         <li><DocsLibraryLink component="KButton" />, <DocsLibraryLink component="KExternalLink" />, and <DocsLibraryLink component="KRouterLink" /> are all similar but handle events differently</li>
         <li><DocsLibraryLink component="KButtonGroup" /> is used for button layout</li>
+        <li><DocsLibraryLink component="KDropdownMenu" /> and <DocsInternalLink text="Buttons and links" href="/buttons" /> have more detail about adding a menu of options to a button component</li>
       </ul>
     </DocsPageSection>
 

@@ -15,17 +15,12 @@
   >
     <slot v-if="!isDivider">
       <div class="ui-menu-option-content">
-        <UiIcon
+        <KIcon
+        class="k-icon"
           v-if="icon"
-
-          class="ui-menu-option-icon"
-          :icon-set="iconProps.iconSet"
           :icon="icon"
-          :remove-text="iconProps.removeText"
-
-          :use-svg="iconProps.useSvg"
         />
-
+ 
         <div class="ui-menu-option-text">
           {{ label }}
         </div>
@@ -178,6 +173,11 @@
     margin-left: rem(4px);
     font-size: rem(13px);
     color: $hint-text-color;
+  }
+
+  .k-icon {
+    top: 0px !important;
+    margin: 0px 8px;
   }
 
 </style>

@@ -1,29 +1,21 @@
 <template>
 
-  <KButton
-    ref="button"
-    :appearance="appearance"
-    :disabled="disabled"
-    :hasDropdown="true"
-    :primary="$attrs.primary"
+  <UiPopover
+    v-if="!disabled"
+    ref="popover"
+    :z-index="12"
+    :containFocus="true"
+    :dropdownPosition="position"
+    @close="handleClose"
+    @open="handleOpen"
   >
-    <span>{{ text }}</span>
-    <UiPopover
-      v-if="!disabled"
-      ref="popover"
-      :z-index="12"
-      :containFocus="true"
-      :dropdownPosition="position"
-      @close="handleClose"
-      @open="handleOpen"
-    >
-      <UiMenu
-        ref="menu"
-        :options="options"
-        @select="handleSelection"
-      />
-    </UiPopover>
-  </KButton>
+    <UiMenu 
+      ref="menu" 
+      :options="options" 
+      :hasIcons="hasIcons" 
+      @select="handleSelection" 
+    />
+  </UiPopover>
 
 </template>
 
@@ -32,7 +24,6 @@
 
   import UiPopover from './keen/UiPopover';
   import UiMenu from './keen/UiMenu';
-  import { validator } from './buttons-and-links/appearances';
 
   /**
    * The KDropdownMenu component is used to contain multiple actions
@@ -45,13 +36,6 @@
     },
     props: {
       /**
-       * Button label text
-       */
-      text: {
-        type: String,
-        required: true,
-      },
-      /**
        * An array of options objects, with one object per dropdown item
        */
       options: {
@@ -59,17 +43,9 @@
         required: true,
       },
       /**
-       * Button appearance: `'raised-button'` or `'flat-button'`
+       * Whether or not the options display an icon
        */
-      appearance: {
-        type: String,
-        default: 'raised-button',
-        validator,
-      },
-      /**
-       * Whether or not the button is disabled
-       */
-      disabled: {
+      hasIcons: {
         type: Boolean,
         default: false,
       },

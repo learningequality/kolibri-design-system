@@ -5,12 +5,11 @@ Releases are recorded as git tags in the [Github releases](https://github.com/le
 ## Develop (version not yet known)
 - [#351] - Wrap `KCheckbox` default slot's content in <label>
 - [#355] - Add `KSelect` to KDS
-
+- [#346] - Update KDropdownMenu API: `KDropdownMenu` no longer contains a button. `KDropdownMenu` can be used in `KButton` or `KIconButton` `slots`. Both `slots` and `text` can now be used in `KButton` - `slots` do not take precedence over `text`.
 
 ## Version 1.4.x
 - [#185] - Handle arrow key navigation and improve focusOutline
 - [#338] - Allow for new 'nav' slot inline in the toolbar
-
 
 ## Version 1.3.1
 
