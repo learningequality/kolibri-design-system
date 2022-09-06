@@ -21,6 +21,7 @@
     </UiTooltip>
     <!-- UiIconButton used flexbox - 7px is the magic centering number -->
     <KIcon :icon="icon" :color="color" :style="iconStyles" />
+    <!-- @slot Pass sub-components into the button, typically `KDropdownMenu` -->
     <slot name="menu"></slot>
   </KButton>
 

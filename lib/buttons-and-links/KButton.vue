@@ -22,9 +22,9 @@
       data-test="iconBefore"
       class="prop-icon"
     />
+    <!-- @slot Pass sub-components into the button, typically `KDropdownMenu` -->
     <slot name="menu"></slot>
-    <!-- @slot Pass sub-components into the button, which provides more flexibility -->
-    <!-- @slot no longer takes prescendence over text. Both slot and text can now be used -->
+    <!-- @slot Slot alternative to the `text` prop -->
     <slot v-if="$slots.default"></slot>
 
     <template>
