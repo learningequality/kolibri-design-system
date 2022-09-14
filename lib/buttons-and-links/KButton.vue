@@ -88,8 +88,7 @@
         default: 'button',
       },
       /**
-       * @ignore
-       * Adds a dropdown arrow - internal use only
+       * Adds a dropdown arrow
        */
       hasDropdown: {
         type: Boolean,
