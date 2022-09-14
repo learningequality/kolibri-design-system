@@ -1,7 +1,6 @@
 <template>
 
   <UiPopover
-    v-if="!disabled"
     ref="popover"
     :z-index="12"
     :containFocus="true"
