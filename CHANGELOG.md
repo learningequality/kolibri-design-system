@@ -8,6 +8,8 @@ Releases are recorded as git tags in the [Github releases](https://github.com/le
 - [#346] - `KDropdownMenu` no longer contains a button. Relatedly, all props that relate to buttons were removed from `KDropdownMenu`, namely `text`, `appearance`, `disabled`. Therefore, when migrating to this version, `KDropdownMenu` needs to be wrapped in `KButton` or `KIconButton`'s' `menu` slot and these obsolete props moved to button components from `KDropdownMenu`.
 - [#346] - `KDropdownMenu` has a new prop `hasIcons` (whether or not the options display an icon). 
 - [#346] - `KButton`: The default slot doesn't take precedence over `text` prop anymore (the default slot content will be rendered above `text` if provided).
+- [#361] - `KButton` exposes `hasDropdown` prop which will show the dropdown icon in a button.
+- [#361] - Fixes 'Property or method "disabled" is not defined on the instance but referenced during render.' raised by `KDropdownMenu`
 
 ## Version 1.4.x
 - [#185] - Handle arrow key navigation and improve focusOutline
