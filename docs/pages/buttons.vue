@@ -137,8 +137,7 @@
         Buttons can also have drop-down menus. 
       </p>
       <p> 
-        The API for this has been updated, and now the <code>KDropdownMenu</code> component can be added using <code>template</code> with <code>#menu</code> to a <code>slot</code> in either a <code>KButton</code> or a <code>KIconButton</code>. 
-        Previously, the <code>KDropdownMenu</code> component was responsible for the button rendering as well as the menu, but now, it only manages the menu itself.
+        <code>KDropdownMenu</code> component can be added using <code>#menu</code> slot in either a <code>KButton</code> or a <code>KIconButton</code>. 
       </p>
 
       <DocsShow>
@@ -175,7 +174,7 @@
         </KButtonGroup>
 
       </DocsShow>
-      <p>For more guidance, see the <code>KDropdownMenu</code> component.</p>
+      <p>For more guidance, see the <DocsLibraryLink component="KDropdownMenu" /> component.</p>
     </DocsPageSection>
 
     <DocsPageSection title="Visual specs" anchor="#specs" />
