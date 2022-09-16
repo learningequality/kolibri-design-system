@@ -69,63 +69,8 @@
         <li>Level 7: <code>&gt;= 1600px</code></li>
       </ul>
       <p>
-        Responsive layouts in the design system are built using reactive javascript state in Vue components rather than CSS media queries. This is done using the <code>KResponsiveWindowMixin</code> Vue mixin. Once added to a component it provides the following reactive window state information:
+        Responsive layouts in the design system are built using reactive JavaScript state in Vue components rather than CSS media queries. This is done using <DocsLibraryLink component="KResponsiveWindow" /> when reactive window's size information is needed or <DocsLibraryLink component="KResponsiveElement" /> when reactive component's size information is needed.
       </p>
-      <ul>
-        <li><code>windowIsSmall</code>: boolean</li>
-        <li><code>windowIsMedium</code>: boolean</li>
-        <li><code>windowIsLarge</code>: boolean</li>
-        <li><code>windowHeight</code>: integer height in pixels</li>
-        <li><code>windowWidth</code>: integer width in pixels</li>
-        <li><code>windowBreakpoint</code>: integer breakpoint level</li>
-      </ul>
-      <p>
-        These reactive properties are used to dynamically drive the layout of components by adjusting inline styles, CSS classes, component visibility, or even swapping out one component for a completely different one.
-      </p>
-      <p>
-        For example, consider a Vue file with this in its template and script:
-      </p>
-      <!-- eslint-disable -->
-      <!-- prevent prettier from changing indentation -->
-      <DocsShowCode language="html">
-        &lt;div class="box" :style="boxStyle"&gt;
-          Box 1
-        &lt;/div&gt;
-        &lt;div class="box" :style="boxStyle"&gt;
-          Box 2
-        &lt;/div&gt;
-      </DocsShowCode>
-      <DocsShowCode language="javascript">
-        computed: {
-          boxStyle() {
-            if (this.windowIsLarge) {
-              return { display: 'block' };
-            }
-            return { display: 'inline-block' };
-          },
-        },
-      </DocsShowCode>
-      <!-- eslint-enable -->
-      <p>
-        This results in two boxes that stack vertically on small screens and otherwise display side-by-side:
-      </p>
-      <DocsShow>
-        <div>Breakpoint level: {{ windowBreakpoint }}</div>
-        <div>Window is large: {{ windowIsLarge }}</div>
-        <div>
-          <div class="box" :style="boxStyle">
-            Box 1
-          </div>
-          <div class="box" :style="boxStyle">
-            Box 2
-          </div>
-        </div>
-      </DocsShow>
-      <p>
-        Try adjusting your browser window size to see the example in action.
-      </p>
-
-
     </DocsPageSection>
 
     <DocsPageSection title="Grid system" anchor="#grid-system">
@@ -265,30 +210,3 @@
 
 </template>
 
-
-<script>
-
-  import responsiveWindowMixin from '~~/lib/KResponsiveWindowMixin.js';
-
-  export default {
-    mixins: [responsiveWindowMixin],
-    computed: {
-      boxStyle() {
-        return { display: this.windowIsLarge ? 'inline-block' : 'block' };
-      },
-    },
-  };
-
-</script>
-
-
-<style lang="scss" scoped>
-
-  .box {
-    padding: 16px;
-    margin-top: 8px;
-    margin-right: 8px;
-    border: 1px solid gray;
-  }
-
-</style>
