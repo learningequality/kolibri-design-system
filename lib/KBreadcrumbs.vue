@@ -138,6 +138,7 @@
   export default {
     name: 'KBreadcrumbs',
     mixins: [KResponsiveElementMixin],
+    inheritAttrs: false,
     props: {
       /**
        * An array of objects, each with a `text` attribute (String) and a
