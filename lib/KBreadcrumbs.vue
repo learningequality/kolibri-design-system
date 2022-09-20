@@ -4,7 +4,7 @@
     v-show="showSingleItem || crumbs.length > 1"
     :class="{ 'breadcrumbs-collapsed': collapsedCrumbs.length }"
   >
-    <nav class="breadcrumbs">
+    <nav class="breadcrumbs" v-bind="$attrs" :aria-label="$attrs.ariaLabel">
       <div
         v-show="collapsedCrumbs.length"
         class="breadcrumbs-dropdown-wrapper"
@@ -138,6 +138,7 @@
   export default {
     name: 'KBreadcrumbs',
     mixins: [KResponsiveElementMixin],
+    inheritAttrs: false,
     props: {
       /**
        * An array of objects, each with a `text` attribute (String) and a
