@@ -2,7 +2,7 @@
 
 Releases are recorded as git tags in the [Github releases](https://github.com/learningequality/kolibri-design-system/releases) page.
 
-## Develop (version not yet known)
+## Develop (to become version 1.5.x)
 
 - [#351] - Wrap `KCheckbox` default slot's content in <label>
 - [#355] - Add `KSelect` to KDS
