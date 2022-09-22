@@ -22,10 +22,12 @@ Releases are recorded as git tags in the [Github releases](https://github.com/le
 
 - [#185] - Handle arrow key navigation and improve focusOutline
 - [#338] - Allow for new 'nav' slot inline in the toolbar
+- [#362] - Add documentation pages for 'KResponsiveWindow' and 'KResponsiveElement'
 
 <!-- Referenced PRs -->
 [#185]: https://github.com/learningequality/kolibri-design-system/pull/185
 [#338]: https://github.com/learningequality/kolibri-design-system/pull/338
+[#362]: https://github.com/learningequality/kolibri-design-system/pull/362
 
 ## Version 1.3.1
 

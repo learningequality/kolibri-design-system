@@ -58,6 +58,7 @@ class Page {
 const buttonRelatedKeywords = ['button', 'link'];
 const textRelatedKeywords = ['text', 'area', 'field', 'box'];
 const layoutRelatedKeywords = ['grid', 'layout', 'container', 'page'];
+const responsiveComponentsRelatedKeywords = ['responsive', 'mixin', 'breakpoint'];
 
 export default [
   new Section({
@@ -306,6 +307,18 @@ export default [
         path: '/kbreadcrumbs',
         title: 'KBreadcrumbs',
         isCode: true,
+      }),
+      new Page({
+        path: '/kresponsivewindow',
+        title: 'KResponsiveWindow',
+        isCode: true,
+        keywords: [...responsiveComponentsRelatedKeywords, 'window'],
+      }),
+      new Page({
+        path: '/kresponsiveelement',
+        title: 'KResponsiveElement',
+        isCode: true,
+        keywords: [...responsiveComponentsRelatedKeywords, 'element'],
       }),
     ],
   }),
