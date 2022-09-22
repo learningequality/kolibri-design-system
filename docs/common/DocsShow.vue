@@ -1,7 +1,7 @@
 <template>
 
   <div>
-    <div class="show" :style="{ display: block ? 'block' : 'inline-block' }">
+    <div class="show" :style="style">
       <slot></slot>
     </div>
   </div>
@@ -18,6 +18,18 @@
         type: Boolean,
         default: false,
       },
+      padding: {
+        type: Boolean,
+        default: true,
+      },
+    },
+    computed: {
+      style() {
+        return {
+          display: this.block ? 'block' : 'inline-block',
+          padding: this.padding ? '8px 24px' : null,
+        };
+      },
     },
   };
 
@@ -27,7 +39,6 @@
 <style lang="scss" scoped>
 
   .show {
-    padding: 8px 24px;
     margin: 8px;
     border: 1px solid #dedede;
     border-radius: 4px;

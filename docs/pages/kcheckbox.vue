@@ -53,7 +53,7 @@
       <!-- eslint-disable -->
       <!-- prevent prettier from changing indentation -->
       <DocsShowCode language="html">
-        &lt;KCheckbox label="First lesson" /&gt;
+        <KCheckbox label="First lesson" />;
       </DocsShowCode>
       <!-- eslint-enable -->
       <DocsShow>
@@ -65,9 +65,9 @@
       <!-- eslint-disable -->
       <!-- prevent prettier from changing indentation -->
       <DocsShowCode language="html">
-        &lt;KCheckbox&gt;
-          &lt;KLabeledIcon icon="lesson" label="First lesson" /&gt;
-        &lt;/KCheckbox&gt;
+        <KCheckbox>
+          <KLabeledIcon icon="lesson" label="First lesson" />
+        </KCheckbox>
       </DocsShowCode>
       <!-- eslint-enable -->
       <DocsShow>
@@ -82,11 +82,11 @@
           <!-- eslint-disable -->
           <!-- prevent prettier from changing indentation -->
           <DocsShowCode language="html">
-            &lt;KCheckbox&gt;
-              &lt;label&gt;
-                &lt;KLabeledIcon icon="lesson" label="First lesson" /&gt;
-              &lt;/label&gt;
-            &lt;/KCheckbox&gt;
+            <KCheckbox>
+              <label>
+                <KLabeledIcon icon="lesson" label="First lesson"></KLabeledIcon>
+              </label>
+            </KCheckbox>
           </DocsShowCode>
           <!-- eslint-enable -->
 
