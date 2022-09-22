@@ -23,15 +23,15 @@
           </div>
         </slot>
       </div>
-    </div>
-
-    <div class="ui-toolbar__body" :class="{ 'has-brand-divider': hasBrandDivider }">
       <slot>
         <div v-if="title" class="ui-toolbar__title">
           {{ title }}
         </div>
       </slot>
+      <slot name="navigation" class="ui-toolbar__nav"></slot>
     </div>
+
+    
 
     <div class="ui-toolbar__right">
       <slot name="actions"></slot>
@@ -134,9 +134,12 @@
   .ui-toolbar {
     position: relative;
     display: flex;
+    align-content: center;
     align-items: center;
+    justify-content: space-between;
     height: $ui-toolbar-height;
     padding-left: rem(16px);
+    max-width: 100%;
     font-family: inherit;
     font-size: $ui-toolbar-font-size;
 
@@ -155,14 +158,20 @@
   }
 
   .ui-toolbar__left {
-    display: flex;
-    flex-shrink: 0;
-    align-items: center;
+    display: inline-flex;
   }
 
   .ui-toolbar__nav-icon {
     margin-right: rem(8px);
     margin-left: rem(-16px);
+  }
+
+  .ui-toolbar__nav {
+    margin-right: rem(8px);
+    margin-left: rem(-16px);
+    display: flex;
+    align-items: bottom;
+    margin-left: 16px;
   }
 
   .ui-toolbar__brand {
@@ -175,8 +184,6 @@
   }
 
   .ui-toolbar__body {
-    display: flex;
-    flex-grow: 1;
 
     &.has-brand-divider {
       padding-left: rem(24px);
@@ -186,8 +193,7 @@
   }
 
   .ui-toolbar__right {
-    flex-shrink: 0;
-    margin-left: auto;
+    display: inline-block;
   }
 
   .ui-toolbar__progress {

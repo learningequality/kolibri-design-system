@@ -134,44 +134,47 @@
 
     <DocsPageSection title="Dropdowns" anchor="#dropdowns">
       <p>
-        Buttons can also have drop-down menus. Currently this is implemented using the poorly-named <code>KDropdownMenu</code> component, but this is <DocsGithubLink text="subject to change" issue="164" />.
+        Buttons can also have drop-down menus. 
       </p>
-      <!-- TODO: implement 3 examples: primary button, primary flat button, and secondary icon button that function as dropdowns. See Google doc for example -->
-      <DocsShow>
-        <KDropdownMenu
-          style="margin-right: 16px;"
-          text="Primary"
-          :primary="true"
-          :options="['Option 1', 'Option 2']"
-          appearance="raised-button"
-        />
-        <KDropdownMenu
-          style="margin-right: 16px;"
-          text="Secondary"
-          :primary="false"
-          :options="['Option 1', 'Option 2']"
-          appearance="raised-button"
-        />
-        <KDropdownMenu
-          text="Icon dropdown"
-          :primary="false"
-          :options="['Option 1', 'Option 2']"
-          appearance="raised-button"
-        >
-          <template #button>
-            <KIconButton
-              tooltip="Dropdown options"
-              icon="optionsHorizontal"
-              appearance="flat-button"
-              :primary="false"
-            />
-          </template>
-        </KDropdownMenu>
-      </DocsShow>
-      <p>
-        Caution: <code>KDropdownMenu</code> does not work with the <DocsLibraryLink component="KButtonGroup" /> component.
+      <p> 
+        <code>KDropdownMenu</code> component can be added using <code>#menu</code> slot in either a <code>KButton</code> or a <code>KIconButton</code>. 
       </p>
 
+      <DocsShow>
+        <KButtonGroup>
+          <KButton
+            text="Options"
+            :primary="true"
+            iconAfter="chevronDown"
+          >
+            <KDropdownMenu
+              style="margin-right: 16px;"
+              text="Primary"
+              :primary="true"
+              :options="['Option 1', 'Option 2']"
+              appearance="raised-button"
+            />
+          </KButton>
+          <KIconButton
+            tooltip="Dropdown options"
+            icon="optionsHorizontal"
+            appearance="flat-button"
+            :primary="false"
+          >
+            <template #menu>
+              <KDropdownMenu
+                style="margin-right: 16px;"
+                text="Primary"
+                :primary="true"
+                :options="['Option 1', 'Option 2']"
+                appearance="raised-button"
+              />
+            </template>
+          </KIconButton>
+        </KButtonGroup>
+
+      </DocsShow>
+      <p>For more guidance, see the <DocsLibraryLink component="KDropdownMenu" /> component.</p>
     </DocsPageSection>
 
     <DocsPageSection title="Visual specs" anchor="#specs" />
@@ -194,6 +197,3 @@
   export default {};
 
 </script>
-
-
-<style lang="scss" scoped></style>

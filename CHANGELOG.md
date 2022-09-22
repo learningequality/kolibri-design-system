@@ -2,6 +2,31 @@
 
 Releases are recorded as git tags in the [Github releases](https://github.com/learningequality/kolibri-design-system/releases) page.
 
+## Develop (version not yet known)
+
+- [#351] - Wrap `KCheckbox` default slot's content in <label>
+- [#355] - Add `KSelect` to KDS
+- [#346] - `KDropdownMenu` no longer contains a button. Relatedly, all props that relate to buttons were removed from `KDropdownMenu`, namely `text`, `appearance`, `disabled`. Therefore, when migrating to this version, `KDropdownMenu` needs to be wrapped in `KButton` or `KIconButton`'s' `menu` slot and these obsolete props moved to button components from `KDropdownMenu`.
+- [#346] - `KDropdownMenu` has a new prop `hasIcons` (whether or not the options display an icon). 
+- [#346] - `KButton`: The default slot doesn't take precedence over `text` prop anymore (the default slot content will be rendered above `text` if provided).
+- [#361] - `KButton` exposes `hasDropdown` prop which will show the dropdown icon in a button.
+- [#361] - Fixes 'Property or method "disabled" is not defined on the instance but referenced during render.' raised by `KDropdownMenu`
+
+<!-- Referenced PRs -->
+[#351]: https://github.com/learningequality/kolibri-design-system/pull/351
+[#355]: https://github.com/learningequality/kolibri-design-system/pull/355
+[#346]: https://github.com/learningequality/kolibri-design-system/pull/346
+[#361]: https://github.com/learningequality/kolibri-design-system/pull/361
+
+## Version 1.4.x
+
+- [#185] - Handle arrow key navigation and improve focusOutline
+- [#338] - Allow for new 'nav' slot inline in the toolbar
+
+<!-- Referenced PRs -->
+[#185]: https://github.com/learningequality/kolibri-design-system/pull/185
+[#338]: https://github.com/learningequality/kolibri-design-system/pull/338
+
 ## Version 1.3.1
 
 - [#309] - Add jest testing environment to KDS

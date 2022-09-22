@@ -13,15 +13,15 @@ jobs:
         with:
           node-version: 10.x
 
-      - name: npm load cache
+      - name: Cache Node.js modules
         uses: actions/cache@v2
         with:
           path: '**/node_modules'
-          key: ${{ runner.os }}-actions-npm-${{ github.sha }}
+          key: ${{ runner.OS }}-node-${{ hashFiles('**/yarn.lock') }}
           restore-keys: |
-            ${{ runner.os }}-actions-npm-
+            ${{ runner.OS }}-node-
 
-      - run: npm install
+      - run: yarn --frozen-lockfile
 
       - name: Pre-generate docs
         run: yarn run pregenerate

@@ -37,6 +37,7 @@
           <DocsLibraryLink component="KIconButton" /> has a tooltip instead of a text label
         </li>
         <li><DocsLibraryLink component="KButtonGroup" /> is used for button layout</li>
+        <li><DocsLibraryLink component="KDropdownMenu" /> and <DocsInternalLink text="Buttons and links" href="/buttons" /> have more detail about adding a menu of options to a button component</li>
       </ul>
     </DocsPageSection>
 

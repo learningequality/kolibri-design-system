@@ -10,16 +10,19 @@
     text=""
     v-on="$listeners"
   >
+    <!-- if no "position" is passed as a prop, defaults to bottom, as previously -->
     <UiTooltip
       v-if="tooltip"
       :zIndex="24"
       open-on="hover"
-      position="bottom"
+      :position="tooltipPosition" 
     >
       {{ tooltip }}
     </UiTooltip>
     <!-- UiIconButton used flexbox - 7px is the magic centering number -->
     <KIcon :icon="icon" :color="color" :style="iconStyles" />
+    <!-- @slot Pass sub-components into the button, typically `KDropdownMenu` -->
+    <slot name="menu"></slot>
   </KButton>
 
 </template>
@@ -88,6 +91,13 @@
       tooltip: {
         type: String,
         default: null, // https://github.com/learningequality/kolibri-design-system/issues/168
+      },
+      /**
+       * Tooltip position: `'top', 'right', 'bottom', 'left'`
+       */
+      tooltipPosition: {
+        type: String,
+        default: 'bottom',
       },
     },
     computed: {
