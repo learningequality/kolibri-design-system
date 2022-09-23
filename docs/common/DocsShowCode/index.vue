@@ -1,9 +1,10 @@
 <template>
 
-  <DocsShow :block="block">
-    <Prism :language="language">
+  <DocsShow :block="block" :padding="false">
+    <!-- Note that slot contents are HTML-escaped using webpack-loader.js -->
+    <PrismComponent :language="language">
       <slot></slot>
-    </Prism>
+    </PrismComponent>
   </DocsShow>
 
 </template>
@@ -11,15 +12,15 @@
 
 <script>
 
-  import 'prismjs';
+  import Prism from 'prismjs';
   import 'prismjs/themes/prism.css';
   import 'prismjs/plugins/normalize-whitespace/prism-normalize-whitespace';
-  import Prism from 'vue-prism-component';
+  import PrismComponent from 'vue-prism-component';
 
   export default {
     name: 'DocsShowCode',
     components: {
-      Prism,
+      PrismComponent,
     },
     props: {
       // `display: block` takes up full width
@@ -31,6 +32,11 @@
         type: String,
         required: true,
       },
+    },
+    mounted() {
+      // Ensure prism-normalize-whitespace plugin is run
+      // ref: https://github.com/egoist/vue-prism-component/issues/10#issuecomment-988938865
+      Prism.highlightAll();
     },
   };
 
@@ -48,7 +54,7 @@
   }
 
   pre[class*='language-'] {
-    padding: 0;
+    padding: 8px 24px;
     margin: 0;
   }
 
