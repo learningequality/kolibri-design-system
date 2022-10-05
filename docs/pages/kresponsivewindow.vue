@@ -81,26 +81,26 @@
         Consider a Vue file with this in its template and script:
       </p>
       <!-- eslint-disable -->
-        <!-- prevent prettier from changing indentation -->
-        <DocsShowCode language="html">
-          <div class="box" :style="boxStyle">
-            Box 1
-          </div>
-          <div class="box" :style="boxStyle">
-            Box 2
-          </div>
-        </DocsShowCode>
-        <DocsShowCode language="javascript">
-          computed: {
-            boxStyle() {
-              if (this.windowIsLarge) {
-                return { display: 'inline-block' };
-              }
-              return { display: 'block' };
-            },
+      <!-- prevent prettier from changing indentation -->
+      <DocsShowCode language="html">
+        <div class="box" :style="boxStyle">
+          Box 1
+        </div>
+        <div class="box" :style="boxStyle">
+          Box 2
+        </div>
+      </DocsShowCode>
+      <DocsShowCode language="javascript">
+        computed: {
+          boxStyle() {
+            if (this.windowIsLarge) {
+              return { display: 'inline-block' };
+            }
+            return { display: 'block' };
           },
-        </DocsShowCode>
-        <!-- eslint-enable -->
+        },
+      </DocsShowCode>
+      <!-- eslint-enable -->
       <p>
         This results in two boxes that stack vertically on small screens and otherwise display side-by-side:
       </p>
@@ -126,30 +126,30 @@
         Consider a Vue file with this in its template and script:
       </p>
       <!-- eslint-disable -->
-        <!-- prevent prettier from changing indentation -->
-        <DocsShowCode language="html">
-          <div class="box" :style="boxStyle">
-            Box 1
-          </div>
-          <div class="box" :style="boxStyle">
-            Box 2
-          </div>
-        </DocsShowCode>
-        <DocsShowCode language="javascript">
-          setup() {
-            ...
+      <!-- prevent prettier from changing indentation -->
+      <DocsShowCode language="html">
+        <div class="box" :style="boxStyle">
+          Box 1
+        </div>
+        <div class="box" :style="boxStyle">
+          Box 2
+        </div>
+      </DocsShowCode>
+      <DocsShowCode language="javascript">
+        setup() {
+          ...
 
-            const boxStyle = computed(function () {
-              return { display: windowIsLarge.value ? 'inline-block' : 'block' };
-            });
+          const boxStyle = computed(function () {
+            return { display: windowIsLarge.value ? 'inline-block' : 'block' };
+          });
 
-            return { 
-              ..., 
-              boxStyle,
-            };
-          }
-        </DocsShowCode>
-        <!-- eslint-enable -->
+          return { 
+            ..., 
+            boxStyle,
+          };
+        }
+      </DocsShowCode>
+      <!-- eslint-enable -->
       <p>
         This results in two boxes that stack vertically on small screens and otherwise display side-by-side:
       </p>
