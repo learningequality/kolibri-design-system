@@ -119,7 +119,7 @@
       <p>
         Try adjusting your browser window size to see the example in action.
       </p>
-    </DocsPageSection>ßßßß
+    </DocsPageSection>
 
     <DocsPageSection title="Composable Example" anchor="#composable-example">
       <p>
@@ -139,7 +139,7 @@
           setup() {
             ...
 
-            const boxStyle = computed(() => {
+            const boxStyle = computed(function () {
               return { display: windowIsLarge.value ? 'inline-block' : 'block' };
             });
 
