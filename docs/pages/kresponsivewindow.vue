@@ -154,13 +154,13 @@
         This results in two boxes that stack vertically on small screens and otherwise display side-by-side:
       </p>
       <DocsShow>
-        <div>Breakpoint level: {{ _windowBreakpoint }}</div>
-        <div>Window is large: {{ _windowIsLarge }}</div>
+        <div>Breakpoint level: {{ composableWindowBreakpoint }}</div>
+        <div>Window is large: {{ composableWindowIsLarge }}</div>
         <div>
-          <div class="box" :style="_boxStyle">
+          <div class="box" :style="composableBoxStyle">
             Box 1
           </div>
-          <div class="box" :style="_boxStyle">
+          <div class="box" :style="composableBoxStyle">
             Box 2
           </div>
         </div>
@@ -189,21 +189,21 @@
 
   import { computed } from '@vue/composition-api';
   import responsiveWindowMixin from '~~/lib/KResponsiveWindowMixin.js';
-  import useKResponsiveWindow from '~~/lib/useKResponsiveWindow.js';
+  import useKResponsiveWindow from '~~/lib/useKResponsiveWindow';
 
   export default {
     mixins: [responsiveWindowMixin],
     setup() {
       const {
-        windowBreakpoint: _windowBreakpoint,
-        windowIsLarge: _windowIsLarge,
+        windowBreakpoint: composableWindowBreakpoint,
+        windowIsLarge: composableWindowIsLarge,
       } = useKResponsiveWindow();
 
-      const _boxStyle = computed(() => {
-        return { display: _windowIsLarge.value ? 'inline-block' : 'block' };
+      const composableBoxStyle = computed(() => {
+        return { display: composableWindowIsLarge.value ? 'inline-block' : 'block' };
       });
 
-      return { _windowBreakpoint, _windowIsLarge, _boxStyle };
+      return { composableWindowBreakpoint, composableWindowIsLarge, composableBoxStyle };
     },
     computed: {
       boxStyle() {
