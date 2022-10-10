@@ -74,6 +74,10 @@
       <!-- eslint-enable -->
 
       <p><code>useKResponsiveWindow()</code> returns an object of reactive properties, that you could destruture.</p>
+
+
+      <h3>Mixin vs composable</h3>
+      <p>Mixins come with several drawbacks including namespace collision, tight coupling, and dificulties associated with developer debugging. It is recommended that composables are used instead as they attemp to resolve these drawbacks. Benefits among others, include better logic reusability and better code organization.</p>
     </DocsPageSection>
 
     <DocsPageSection title="Mixin Example" anchor="#mixin-example">
