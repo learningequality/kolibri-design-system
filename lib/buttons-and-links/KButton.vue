@@ -27,7 +27,9 @@
 
     <slot v-if="$slots.default"></slot>
 
+    <template>
     <span class="link-text" :style="textStyle">{{ text }}</span>
+    </template>
 
     <!-- @slot Slot alternative to the `iconAfter` prop -->
     <slot name="iconAfter"></slot>
