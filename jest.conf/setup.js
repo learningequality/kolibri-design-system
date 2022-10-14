@@ -1,3 +1,4 @@
+import 'mock-match-media/jest-setup.cjs';
 import 'regenerator-runtime/runtime';
 import '@testing-library/jest-dom';
 import * as Aphrodite from 'aphrodite';
