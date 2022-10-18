@@ -11,12 +11,14 @@ Releases are recorded as git tags in the [Github releases](https://github.com/le
 - [#346] - `KButton`: The default slot doesn't take precedence over `text` prop anymore (the default slot content will be rendered above `text` if provided).
 - [#361] - `KButton` exposes `hasDropdown` prop which will show the dropdown icon in a button.
 - [#361] - Fixes 'Property or method "disabled" is not defined on the instance but referenced during render.' raised by `KDropdownMenu`
+- [#377] - Implement `useKResponsiveWindow` composable.
 
 <!-- Referenced PRs -->
 [#351]: https://github.com/learningequality/kolibri-design-system/pull/351
 [#355]: https://github.com/learningequality/kolibri-design-system/pull/355
 [#346]: https://github.com/learningequality/kolibri-design-system/pull/346
 [#361]: https://github.com/learningequality/kolibri-design-system/pull/361
+[#377]: https://github.com/learningequality/kolibri-design-system/pull/377
 
 ## Version 1.4.x
 
