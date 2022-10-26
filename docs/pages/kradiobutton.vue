@@ -9,17 +9,17 @@
       <DocsShow>
         <KRadioButton
           v-model="exampleValue"
-          label="Option A Lorem ipsum dolor"
+          label="Option A"
           value="val-a"
         />
         <KRadioButton
           v-model="exampleValue"
-          label="Option B  Lorem ipsum dolor"
+          label="Option B"
           value="val-b"
         />
         <KRadioButton
           v-model="exampleValue"
-          label="Option C  Lorem ipsum dolor"
+          label="Option C"
           description="This one is special!"
           value="val-c"
         />
