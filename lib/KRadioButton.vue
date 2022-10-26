@@ -1,58 +1,69 @@
 <template>
 
-  <!-- HTML makes clicking label apply to input by default -->
-  <label
-    :class="['k-radio-button', { disabled }]"
-    :style="{ color: disabled ? $themeTokens.textDisabled : '' }"
+  <div
+    class="k-radio-button-container"
+    :class="{ 'k-radio-button-disabled': disabled }"
+    @click="toggleCheck"
   >
-    <!-- v-model listens for @input event by default -->
-    <!-- @input has compatibility issues for input of type radio -->
-    <!-- Here, manually listen for @change (no compatibility issues) -->
-    <input
-      :id="id"
-      ref="input"
-      type="radio"
-      class="input"
-      :checked="isChecked"
-      :value="value"
-      :disabled="disabled"
-      :autofocus="autofocus"
-      @focus="active = true"
-      @blur="active = false"
-      @change="update"
-      @keydown="keydown"
-    >
+    <div class="tr">
+      <div class="k-radio-button">
+        <input
+          :id="id"
+          ref="input"
+          type="radio"
+          class="k-radio-button-input"
+          :checked="isChecked"
+          :value="value"
+          :disabled="disabled"
+          :autofocus="autofocus"
+          @click.stop="toggleCheck"
+          @focus="active = true"
+          @blur="blur"
+          @change="update"
+          @keydown="keydown"
+        >
 
-    <!-- the radio buttons the user sees -->
-    <KIcon
-      v-if="isChecked"
-      icon="radioSelected"
-      class="checked"
-      name="radio_button_checked"
-      :style="[{ fill: $themeTokens.primary }, disabledStyle, activeStyle ]"
-    />
-    <KIcon
-      v-else
-      icon="radioUnselected"
-      class="unchecked"
-      name="radio_button_unchecked"
-      :style="[{ fill: $themeTokens.annotation }, disabledStyle, activeStyle ]"
-    />
-
-    <span class="text" dir="auto">
-      <div class="truncate-text">{{ label }}</div>
-      <div
-        v-if="description"
-        class="description"
-        :style="[{ color: disabled ? '' : $themeTokens.annotation }, disabledStyle ]"
-      >
-        {{ description }}
+        <KIcon
+          v-if="isChecked"
+          icon="radioSelected"
+          class="radio-button-icon"
+          name="radio_button_checked"
+          :style="[{ fill: $themeTokens.primary }, disabledStyle, activeStyle ]"
+        />
+        <KIcon
+          v-else
+          icon="radioUnselected"
+          class="radio-button-icon"
+          name="radio_button_unchecked"
+          :style="[{ fill: $themeTokens.annotation }, disabledStyle, activeStyle ]"
+        />
       </div>
-      <!-- @slot Shown below label text and description -->
-      <slot></slot>
-    </span>
 
-  </label>
+      <label
+        dir="auto"
+        class="k-radio-button-label"
+        :for="id"
+        :class="{ 'visuallyhidden': !showLabel }"
+        :style="labelStyle"
+        @click.prevent
+      >
+        <template v-if="$slots.default">
+          <!-- @slot Optional slot as alternative to `label` prop -->
+          <slot></slot>
+        </template>
+        <template v-else>
+          <div :class="[truncateText]">{{ label }}</div>
+        </template>
+        <div 
+          v-if="description" 
+          class="description" 
+          :style="[{ color: disabled ? '' : $themeTokens.annotation }, disabledStyle ]"
+        >
+          {{ description }}
+        </div>
+      </label>
+    </div>
+  </div>
 
 </template>
 
@@ -69,11 +80,18 @@
     },
     props: {
       /**
-       * Label text
+       * Text label
        */
       label: {
         type: String,
-        required: true,
+        default: null,
+      },
+      /**
+       * Whether or not to show the label
+       */
+      showLabel: {
+        type: Boolean,
+        default: true,
       },
       /**
        * Component `data` with which to associate this radio button and its siblings
@@ -110,6 +128,13 @@
         type: Boolean,
         default: false,
       },
+      /**
+       * Whether or not to truncate label
+       */
+      truncateLabel: {
+        type: Boolean,
+        default: false,
+      },
     },
     data: () => ({
       active: false,
@@ -128,8 +153,22 @@
       disabledStyle() {
         return this.disabled ? { fill: this.$themeTokens.textDisabled } : {};
       },
+      labelStyle() {
+        return {
+          color: this.disabled ? this.$themeTokens.textDisabled : '',
+        };
+      },
+      truncateText() {
+        return this.truncateLabel ? 'truncate-text' : '';
+      },
     },
     methods: {
+      toggleCheck(event) {
+        if (!this.disabled) {
+          this.focus();
+          this.update(event);
+        }
+      },
       /**
        * @public
        * Puts keyboard focus on the radiobutton
@@ -154,6 +193,13 @@
          */
         this.$emit('input', this.value);
       },
+      blur() {
+        this.active = false;
+        /**
+         * Emits blur event, useful for validation
+         */
+        this.$emit('blur');
+      },
     },
   };
 
@@ -164,51 +210,63 @@
 
   $radio-height: 24px;
 
-  .k-radio-button {
-    position: relative;
-    display: block;
+  .k-radio-button-container {
+    display: table;
+    width: 100%;
     margin-top: 8px;
     margin-bottom: 8px;
-    &:not(.disabled) {
-      cursor: pointer;
-    }
+    table-layout: fixed;
   }
 
-  .input,
-  .text {
-    // consistent look in inline and block displays
+  .tr {
+    display: table-row;
+  }
+
+  .k-radio-button {
+    position: relative;
+    display: table-cell;
+    width: $radio-height;
+    height: $radio-height;
     vertical-align: top;
+    cursor: pointer;
   }
 
-  .input {
-    width: $radio-height;
-    height: $radio-height;
-    // use opacity, not appearance:none because ie compatibility
-    opacity: 0;
-  }
-
-  // KIcon overrides
-  .checked,
-  .unchecked {
+  .k-radio-button-input {
     position: absolute;
-    top: 0;
-    left: 0;
-    // lay our custom radio buttons on top of the actual element
-    width: $radio-height;
-    height: $radio-height;
+    top: 50%;
+    left: 50%;
+    cursor: pointer;
+    opacity: 0;
+    transform: translate(-50%, -50%);
   }
 
-  .text {
-    display: inline-block;
-    max-width: calc(100% - #{$radio-height});
+  .k-radio-button-label {
+    display: table-cell;
     padding-left: 8px;
-    line-height: $radio-height;
+    line-height: 24px;
+    cursor: pointer;
+    user-select: none;
+  }
+
+  .k-radio-button-disabled {
+    .k-radio-button,
+    .k-radio-button-input,
+    .k-radio-button-label {
+      cursor: default;
+    }
   }
 
   .truncate-text {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+  }
+
+  //KIcon overrides
+  .radio-button-icon {
+    top: 0;
+    width: $radio-height;
+    height: $radio-height;
   }
 
   .description {

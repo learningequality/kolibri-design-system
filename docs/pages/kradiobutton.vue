@@ -9,19 +9,25 @@
       <DocsShow>
         <KRadioButton
           v-model="exampleValue"
-          label="Option A"
+          label="Option A Lorem ipsum dolor"
           value="val-a"
         />
         <KRadioButton
           v-model="exampleValue"
-          label="Option B"
+          label="Option B  Lorem ipsum dolor"
           value="val-b"
         />
         <KRadioButton
           v-model="exampleValue"
-          label="Option C"
+          label="Option C  Lorem ipsum dolor"
           description="This one is special!"
           value="val-c"
+        />
+        <KRadioButton
+          v-model="exampleValue"
+          label="Truncated label. Adjusting your browser window size to see this in action."
+          value="val-d"
+          truncateLabel
         />
         <p>
           Current value: {{ exampleValue }}
