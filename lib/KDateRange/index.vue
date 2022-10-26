@@ -1,56 +1,55 @@
 <template>
 
-  <!-- <KModal
+  <KModal
     cancelText="Cancel"
     :title="title"
     :submitText="submitText"
-    size="480px"
+    :size="modalSize"
     :submitDisabled="disabled"
     @submit="apply"
     @cancel="cancel"
-  > -->
-  <div>
-    <slot name="description">
-      <p id="modal-description" ref="description" class="description">
-        {{ description }}
-      </p>
-    </slot>
-    <div class="date-inputs">
-      <div id="left-input">
-        <KDateInput
-          inputRef="dateStartRangeInput"
-          :selectedDate="dateRange.start"
-          :firstAllowedDate="firstAllowedDate"
-          :lastAllowedDate="lastAllowedDate"
-          legendText="Start Date"
-          name="date"
-          @updateDate="setStartDate"
-        />
-      </div>
-      <div id="right-input">
-        <KDateInput
-          ref="dateEndRangeInput"
-          :selectedDate="dateRange.end"
-          :firstAllowedDate="firstAllowedDate"
-          :lastAllowedDate="lastAllowedDate"
-          legendText="End Date"
-          name="date"
-          @updateDate="setEndDate"
-        />
-      </div>
-    </div>
+  >
     <div>
-      <KDateCalendar
-        :firstAllowedDate="firstAllowedDate"
-        :lastAllowedDate="lastAllowedDate"
-        :selectedStartDate="dateRange.start"
-        :selectedEndDate="dateRange.end"
-        v-bind.sync="dateRange"
-        @updateSelectedDates="setSelectedDates"
-      />
+      <slot name="description">
+        <p id="modal-description" ref="description" class="description">
+          {{ description }}
+        </p>
+      </slot>
+      <div class="date-inputs">
+        <div id="left-input">
+          <KDateInput
+            inputRef="dateStartRangeInput"
+            :selectedDate="dateRange.start"
+            :firstAllowedDate="firstAllowedDate"
+            :lastAllowedDate="lastAllowedDate"
+            :comparisonDate="dateRange.end"
+            legendText="Start Date"
+            @updateDate="setStartDate"
+          />
+        </div>
+        <div id="right-input">
+          <KDateInput
+            inputRef="dateEndRangeInput"
+            :selectedDate="dateRange.end"
+            :firstAllowedDate="firstAllowedDate"
+            :lastAllowedDate="lastAllowedDate"
+            legendText="End Date"
+            @updateDate="setEndDate"
+          />
+        </div>
+      </div>
+      <div>
+        <KDateCalendar
+          :firstAllowedDate="firstAllowedDate"
+          :lastAllowedDate="lastAllowedDate"
+          :selectedStartDate="dateRange.start"
+          :selectedEndDate="dateRange.end"
+          v-bind.sync="dateRange"
+          @updateSelectedDates="setSelectedDatesFromCalendar"
+        />
+      </div>
     </div>
-  </div>
-  <!-- </KModal> -->
+  </KModal>
 
 </template>
 
@@ -61,6 +60,8 @@
   import KModal from '/Users/lharris/kolibri-design-system/lib/KModal.vue';
   import KDateInput from '/Users/lharris/kolibri-design-system/lib/KDateRange/KDateInput.vue';
   import KDateCalendar from '/Users/lharris/kolibri-design-system/lib/KDateRange/KDateCalendar.vue';
+  import isAfter from 'date-fns/is_after';
+  import isBefore from 'date-fns/is_before';
 
   export default {
     name: 'KDateRange',
@@ -70,32 +71,44 @@
       KDateCalendar,
     },
     props: {
-      // constrains the selection to after this date, disabling dates prior
+      /**
+       * Constrains the selection to after this date, disabling dates prior
+       */
       firstAllowedDate: {
         type: Date,
         default: null,
       },
-      // constrains date selection to before this date, disabling dates after
+      /**
+       * Constrains date selection to before this date, disabling dates after
+       */
       lastAllowedDate: {
         type: Date,
         default: new Date(),
       },
-      // default value of start date
+      /**
+       *  Default value of start date
+       */
       defaultStartDate: {
         type: Date,
         default: null,
       },
-      // default value of end date
+      /**
+       *  Default value of end date
+       */
       defaultEndDate: {
         type: Date,
         default: new Date(),
       },
-      // submission text of modal
+      /**
+       *  Submission text of modal
+       */
       submitText: {
         type: String,
         default: 'Generate',
       },
-      // title text to customize the modal's title
+      /**
+       *  Title text to customize the modal's title
+       */
       title: {
         type: String,
         default: '',
@@ -107,15 +120,23 @@
           start: this.defaultStartDate ? this.defaultStartDate : null,
         },
         description: 'The default start date is the last time you exported this log',
+        modalSize: 480,
       };
     },
     computed: {
       // Modal generate button is disabled if this function returns true
       disabled() {
         return (
-          this.dateRange.start === null ||
-          this.dateRange.end === null ||
-          this.dateRange.start >= this.dateRange.end
+          !this.dateRange.start ||
+          !this.dateRange.end ||
+          !this.isValidDate(this.dateRange.start) ||
+          !this.isValidDate(this.dateRange.end) ||
+          isBefore(this.dateRange.start, this.firstAllowed) ||
+          isBefore(this.dateRange.end, this.firstAllowed) ||
+          isBefore(this.dateRange.end, this.dateRange.start) ||
+          isAfter(this.dateRange.start, this.lastAllowedDate) ||
+          isAfter(this.dateRange.end, this.lastAllowedDate) ||
+          isAfter(this.dateRange.start, this.dateRange.end)
         );
       },
     },
@@ -133,18 +154,22 @@
       setStartDate(newDate) {
         if (this.dateRange.start && newDate !== this.dateRange.start) {
           this.dateRange = { start: newDate, end: null };
-          // this.$emit('selectedStart', this.dateRange.start);
         }
+        this.$emit('setRange', { start: this.dateRange.start, end: this.dateRange.end });
       },
       // when a new value is inserted into the input, update end key of the dateRange object
       setEndDate(date) {
         if (this.dateRange.end || date != this.dateRange.end) {
           this.dateRange = { start: this.dateRange.start, end: date };
-          // this.$emit('selectedEnd', this.dateRange.end);
         }
+        this.$emit('setRange', { start: this.dateRange.start, end: this.dateRange.end });
       },
-      setSelectedDates(dates) {
+      setSelectedDatesFromCalendar(dates) {
         this.dateRange = { start: dates['start'], end: dates['end'] };
+        this.$emit('setRange', { start: this.dateRange.start, end: this.dateRange.end });
+      },
+      isValidDate(date) {
+        return new Date(date) !== 'Invalid Date' && !isNaN(new Date(date));
       },
     },
   };
@@ -155,7 +180,7 @@
 <style lang="css" scoped>
 
   .description {
-    padding: 6px;
+    margin-top: 0;
     font-size: 15px;
     font-style: normal;
     font-weight: 400;
@@ -163,17 +188,18 @@
   }
 
   .date-inputs {
-    display: inline-block;
-    margin-left: -5px;
+    margin-left: -15px;
     text-decoration-color: #616161;
   }
 
   #left-input {
-    float: left;
+    display: inline-block;
+    width: 49%;
   }
 
   #right-input {
-    float: right;
+    display: inline-block;
+    width: 49%;
   }
 
 </style>

@@ -1,7 +1,7 @@
 <template>
 
   <div class="calendar">
-    <div class="calendar-buttons">
+    <div class="calendar-wrap">
       <KIconButton
         tooltip="Previous Month"
         icon="chevronLeft"
@@ -18,8 +18,6 @@
         size="mini"
         @click="goNextMonth"
       />
-    </div>
-    <div class="calendar-wrap">
       <div class="calendar-month-left">
         <div class="months-text">
           {{ monthsLocale[activeMonth] + ' ' + activeYearStart }}
@@ -29,7 +27,9 @@
             v-for="dayinweekindex in numOfDays"
             :key="dayinweekindex"
             :class="[{ 'calendar-days--disabled': isDateDisabled(weekindex, dayinweekindex, activeMonthDay, activeMonthDate) || isDateDisabledLeft(weekindex, dayinweekindex, activeMonthDay),
-                       'selected': isDateSelected(weekindex, dayinweekindex, 'first', activeMonthDay, activeMonthDate) }]"
+                       'selected-first': ( selectionOrder(weekindex, dayinweekindex, 'first', activeMonthDay, activeMonthDate) === 'first'),
+                       'selected-second': ( selectionOrder(weekindex, dayinweekindex, 'first', activeMonthDay, activeMonthDate) === 'second')
+            }]"
             @click="selectFirstItem(weekindex, dayinweekindex)"
           >
             <KDateDay
@@ -37,7 +37,7 @@
               :isSelected="isDateSelected(weekindex, dayinweekindex, 'first', activeMonthDay, activeMonthDate)"
               :isInRange="isDateInRange(weekindex, dayinweekindex, 'first', activeMonthDay, activeMonthDate)"
               :isDisabled="isDateDisabled(weekindex, dayinweekindex, activeMonthDay, activeMonthDate) || isDateDisabledLeft(weekindex, dayinweekindex, activeMonthDay)"
-              :isLastDay="isLastDay(weekindex, dayinweekindex, activeMonthDay, activeMonthDate)"
+              :isLastDay="isLastDay(weekindex, dayinweekindex, 'first', activeMonthDay, activeMonthDate)"
               :isEndOfWeek="dayinweekindex === 7"
               :isStartOfWeek="dayinweekindex === 1"
               :activeMonth="activeMonth"
@@ -53,7 +53,10 @@
           <li
             v-for="dayinweekindex in numOfDays"
             :key="dayinweekindex"
-            :class="[{ 'calendar-days--disabled': isDateDisabled(weekindex, dayinweekindex, nextActiveMonthDay, nextActiveMonthDate) || isDateDisabledRight(weekindex, dayinweekindex, nextActiveMonthDay) }]"
+            :class="[{ 'calendar-days--disabled': isDateDisabled(weekindex, dayinweekindex, nextActiveMonthDay, nextActiveMonthDate) || isDateDisabledRight(weekindex, dayinweekindex, nextActiveMonthDay),
+                       'selected-first': ( selectionOrder(weekindex, dayinweekindex, 'second', nextActiveMonthDay, nextActiveMonthDate) === 'first'),
+                       'selected-second': ( selectionOrder(weekindex, dayinweekindex, 'second', nextActiveMonthDay, nextActiveMonthDate) === 'second')
+            }]"
             @click="selectSecondItem(weekindex, dayinweekindex)"
           >
             <KDateDay
@@ -61,7 +64,7 @@
               :isSelected="isDateSelected(weekindex, dayinweekindex, 'second', nextActiveMonthDay, nextActiveMonthDate)"
               :isInRange="isDateInRange(weekindex, dayinweekindex, 'second', nextActiveMonthDay, nextActiveMonthDate)"
               :isDisabled="isDateDisabled(weekindex, dayinweekindex, nextActiveMonthDay, nextActiveMonthDate) || isDateDisabledRight(weekindex, dayinweekindex, nextActiveMonthDay)"
-              :isLastDay="isLastDay(weekindex, dayinweekindex, nextActiveMonthDay, nextActiveMonthDate)"
+              :isLastDay="isLastDay(weekindex, dayinweekindex, 'second', nextActiveMonthDay, nextActiveMonthDate)"
               :isEndOfWeek="dayinweekindex === 7"
               :isStartOfWeek="dayinweekindex === 1"
               :activeMonth="nextActiveMonth"
@@ -78,11 +81,9 @@
 <script>
 
   import format from 'date-fns/format';
-  import parse from 'date-fns/parse';
-  import startOfDay from 'date-fns/start_of_day';
-  import isWithinRange from 'date-fns/is_within_range';
   import KIconButton from '/Users/lharris/kolibri-design-system/lib/buttons-and-links/KIconButton.vue';
   import KDateDay from '/Users/lharris/kolibri-design-system/lib/KDateRange/KDateDay.vue';
+  import isAfter from 'date-fns/is_after';
 
   const months = [
     'January',
@@ -113,16 +114,15 @@
       // constrains date selection to before this date, disabling dates after
       lastAllowedDate: {
         type: Date,
-        // default: new Date(),
+        default: new Date(),
       },
-      // default value of start date
+      // default value of selected start date
       selectedStartDate: {
         type: Date,
       },
-      // default value of end date
+      // default value of selected end date
       selectedEndDate: {
         type: Date,
-        // default: new Date(),
       },
     },
     data() {
@@ -138,7 +138,6 @@
       };
     },
     computed: {
-      // returns the month names
       monthsLocale() {
         return months;
       },
@@ -150,11 +149,11 @@
       nextActiveMonthDay() {
         return new Date(this.activeYearEnd, this.nextActiveMonth, 1).getDay();
       },
-      // returns the date of the month of the end of the left side calendar month
+      // returns the end date of the month on the left side calendar month
       activeMonthDate() {
         return new Date(this.activeYearEnd, this.nextActiveMonth, 0).getDate();
       },
-      // returns the date of the month of the end of the right side calendar month
+      // returns the end date of the month on the right side calendar month
       nextActiveMonthDate() {
         return new Date(this.activeYearEnd, this.activeMonth + 2, 0).getDate();
       },
@@ -170,22 +169,22 @@
       },
     },
     created() {
-      // if the activeMonth is December, change year
+      // if the activeMonth is December, add one year to activeYearEnd property
       if (this.activeMonth === 11) this.activeYearEnd = this.activeYearStart + 1;
     },
     methods: {
-      // find the index number within month of where day should be placed
+      // returns the index number within month of where day should be placed
       getDayIndexInMonth(weekindex, dayinweekindex, activeMonthDay) {
         const date = this.numOfDays * (weekindex - 1) + dayinweekindex;
         return date - activeMonthDay;
       },
-      // find date cell of where day should be placed
+      // returns placement where day should be placed on calendar
       getDayCell(weekindex, dayinweekindex, activeMonthDay, activeMonthDate) {
         const result = this.getDayIndexInMonth(weekindex, dayinweekindex, activeMonthDay);
         // bound by > 0 and < last day of month
         return result > 0 && result <= activeMonthDate ? result : null;
       },
-      // update end and start date of dateRangeObject
+      // update end and start date of dateRange Object
       getNewDateRange(result, activeMonth, activeYear) {
         const newData = {};
         let key = 'start';
@@ -231,7 +230,7 @@
         );
         this.$emit('updateSelectedDates', this.dateRange);
       },
-      // returns true for the first and last selected dates in date range
+      // returns true for the selected start and end dates in date range
       isDateSelected(weekindex, dayinweekindex, key, activeMonthDay, activeMonthDate) {
         const result = this.getDayIndexInMonth(weekindex, dayinweekindex, activeMonthDay);
         if (result < 1 || result > activeMonthDate) return false;
@@ -249,7 +248,43 @@
             format(this.selectedEndDate, 'DD/MM/YYYY') === format(currDate, 'DD/MM/YYYY'))
         );
       },
-      // returns true for the dates in between start and end date range
+      // returns order of selection for css styling
+      selectionOrder(weekindex, dayinweekindex, key, activeMonthDay, activeMonthDate) {
+        const result = this.getDayIndexInMonth(weekindex, dayinweekindex, activeMonthDay);
+        if (result < 1 || result > activeMonthDate) return false;
+        let currDate = null;
+        if (key === 'first') {
+          currDate = new Date(this.activeYearStart, this.activeMonth, result);
+        } else {
+          currDate = new Date(this.activeYearEnd, this.nextActiveMonth, result);
+        }
+        if (
+          this.selectedStartDate &&
+          this.selectedEndDate &&
+          this.isValidDate(this.selectedStartDate) &&
+          this.isValidDate(this.selectedEndDate) &&
+          isAfter(this.selectedEndDate, this.selectedStartDate) &&
+          format(this.selectedStartDate, 'DD/MM/YYYY') !==
+            format(this.selectedEndDate, 'DD/MM/YYYY')
+        ) {
+          if (
+            this.selectedStartDate &&
+            format(this.selectedStartDate, 'DD/MM/YYYY') === format(currDate, 'DD/MM/YYYY') &&
+            !(dayinweekindex === 7)
+          ) {
+            return 'first';
+          } else if (
+            this.selectedEndDate &&
+            format(this.selectedEndDate, 'DD/MM/YYYY') === format(currDate, 'DD/MM/YYYY') &&
+            !(dayinweekindex === 1)
+          ) {
+            return 'second';
+          }
+        } else {
+          return '';
+        }
+      },
+      // returns true for the dates in between the start and end date
       isDateInRange(weekindex, dayinweekindex, key, activeMonthDay, activeMonthDate) {
         const result = this.getDayIndexInMonth(weekindex, dayinweekindex, activeMonthDay);
         if (result < 1 || result > activeMonthDate) return false;
@@ -263,7 +298,8 @@
         return (
           this.selectedStartDate &&
           this.selectedEndDate &&
-          isWithinRange(currDate, this.selectedStartDate, this.selectedEndDate)
+          this.selectedStartDate < currDate &&
+          this.selectedEndDate > currDate
         );
       },
       isDateDisabled(weekindex, dayinweekindex, activeMonthDay, activeMonthDate) {
@@ -291,15 +327,21 @@
         );
         return currDate <= firstAllowed || currDate > this.lastAllowedDate;
       },
-      isLastDay(weekindex, dayinweekindex, nextActiveMonthDay, nextActiveMonthDate) {
+      // return true if date is last day of month for css border rounding
+      isLastDay(weekindex, dayinweekindex, key, nextActiveMonthDay, nextActiveMonthDate) {
         const result = this.getDayCell(
           weekindex,
           dayinweekindex,
           nextActiveMonthDay,
           nextActiveMonthDate
         );
-        var LastDay = new Date(this.activeYearStart, this.activeMonth + 1, 0).getDate();
-        return result === LastDay;
+        let lastDay = null;
+        if (key === 'first') {
+          lastDay = new Date(this.activeYearStart, this.activeMonth + 1, 0).getDate();
+        } else {
+          lastDay = new Date(this.activeYearEnd, this.nextActiveMonth + 1, 0).getDate();
+        }
+        return result === lastDay;
       },
       goPrevMonth() {
         const prevMonth = new Date(this.activeYearStart, this.activeMonth, 0);
@@ -313,6 +355,9 @@
         this.activeYearStart = nextMonth.getFullYear();
         this.activeYearEnd = nextMonth.getFullYear();
       },
+      isValidDate(date) {
+        return new Date(date) !== 'Invalid Date' && !isNaN(new Date(date));
+      },
     },
   };
 
@@ -321,38 +366,24 @@
 
 <style lang="css" scoped>
 
-  .description {
-    padding: 6px;
-    font-size: 15px;
-    font-style: normal;
-    font-weight: 400;
-    color: #3a3a3a;
+  .calendar-wrap {
+    position: relative;
   }
 
-  .date-inputs {
-    display: inline-block;
-    margin-left: -5px;
-    text-decoration-color: #616161;
+  .left {
+    position: absolute;
+    top: 0;
+    left: 0;
   }
 
-  #left-input {
-    float: left;
-  }
-
-  #right-input {
-    float: right;
-  }
-
-  .calendar-buttons {
-    display: flex;
-    justify-content: space-between;
+  .right {
+    position: absolute;
+    top: 0;
+    right: 0;
   }
 
   .months-text {
-    margin-top: -22px;
     margin-bottom: 10px;
-    font-size: 0.99em;
-    font-weight: 400;
     text-align: center;
   }
 
@@ -367,10 +398,8 @@
   }
 
   .calendar {
-    position: absolute;
-    width: 420px;
     height: auto;
-    margin-top: -20px;
+    margin-right: 5px;
     font-family: 'Noto Sans';
     font-size: 14px;
     background: white;
@@ -383,13 +412,11 @@
   .calendar-month-left,
   .calendar-month-right {
     float: left;
-    width: 47%;
-
-    /* padding: 5px; */
+    width: 48%;
   }
 
   .calendar-month-right {
-    margin-left: 25px;
+    margin-left: 15px;
   }
 
   .calendar-days {
@@ -399,23 +426,30 @@
 
   .calendar-days li {
     display: inline-block;
-    width: 13.6%;
-    line-height: 2.1em;
+    width: 14%;
+    margin-top: 6px;
   }
 
   .calendar-days li.calendar-days--disabled {
     color: #e0e0e0;
     pointer-events: none;
     cursor: not-allowed;
+    opacity: 0.3;
   }
 
-  .calendar-days li.selected {
+  li.selected-first {
     background-color: #e3f0ed;
+    border-top-left-radius: 95px;
+    border-bottom-left-radius: 80px;
   }
 
-  /* ---------------------------------------------
-                          DATE PICKER __ VISUALLY HIDDEN ITEMS
-                        --------------------------------------------- */
+  li.selected-second {
+    background-color: #e3f0ed;
+    border-top-right-radius: 60px;
+    border-bottom-right-radius: 60px;
+  }
+
+  /* VISUALLY HIDDEN ITEMS */
   .k-date-vhidden {
     position: absolute;
     top: 0;

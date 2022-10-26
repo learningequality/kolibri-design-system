@@ -4,7 +4,7 @@
     autocomplete="off"
     :primary="false"
     appearance="flat-button"
-    :appearanceOverrides="{ width: '24px', minWidth: '18px', height: '24px', minHeight: '18px', marginTop: '6px', fontSize: '0.885em', fontWeight: 'normal', lineHeight: '0px', padding: '0' }"
+    :appearanceOverrides="{ width: '30px', minWidth: '24px', height: '29px', minHeight: '23px', fontSize: '0.885em', fontWeight: 'lighter', lineHeight: '0px', padding: '0', color: ' #616161' }"
     :disabled="isDisabled"
     :class="[{
       'calendar-days-selected': isSelected,
@@ -55,15 +55,9 @@
       isLastDay: {
         type: Boolean,
       },
-      // activeYear: {
-      //   type: Number,
-      // },
-      // activeMonth: {
-      //   type: Number,
-      // },
-      // dayIndex: {
-      //   type: Number,
-      // },
+      activeMonth: {
+        type: Number,
+      },
     },
     data() {
       return {};
@@ -74,9 +68,6 @@
       },
     },
     methods: {
-      // getDate() {
-      //   return new Date(this.activeYear, this.activeMonth, this.dayIndex);
-      // },
       toMonthName(monthNumber) {
         const date = new Date();
         date.setMonth(monthNumber);
@@ -90,55 +81,38 @@
 
 <style lang="css" scoped>
 
-  button:hover {
+  button:hover,
+  .calendar-days-in-range:hover {
     color: #000000;
     background: #eeeeee;
     border-radius: 15px;
   }
 
   button.calendar-days-selected {
-    color: #ffffff;
+    color: #ffffff !important;
     background: #328168;
     border-radius: 15px;
   }
 
   .calendar-days-in-range {
-    width: 35px !important;
-    padding: 5px !important;
-    color: #616161;
     background: #e3f0ed;
     border-radius: 0;
   }
 
-  .calendar-days-in-range:hover {
-    color: #616161;
-    background: #e3f0ed;
-    border-radius: 15px;
-  }
-
-  .calendar-days-in-range.end-of-week {
-    border-top-right-radius: 15px;
-    border-bottom-right-radius: 15px;
-  }
-
-  .calendar-days-in-range.start-of-week {
-    border-top-left-radius: 15px;
-    border-bottom-left-radius: 15px;
-  }
-
+  .calendar-days-in-range.end-of-week,
   .calendar-days-in-range.last-day {
     border-top-right-radius: 15px;
     border-bottom-right-radius: 15px;
   }
 
+  .calendar-days-in-range.start-of-week,
   .calendar-days-in-range.first-day {
     border-top-left-radius: 15px;
     border-bottom-left-radius: 15px;
   }
 
-  /* ---------------------------------------------
-                           DATE PICKER __ VISUALLY HIDDEN ITEMS
-                        --------------------------------------------- */
+  /* VISUALLY HIDDEN ITEMS */
+
   .k-date-vhidden {
     position: absolute;
     top: 0;

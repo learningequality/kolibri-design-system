@@ -16,7 +16,7 @@
         :showInvalidText="showInvalidText"
         :invalidText="invalidDateErrorText"
       />
-      <input type="hidden" :name="name" :value="selectedDate">
+      <input type="hidden" name="date" :value="selectedDate">
       <span class="k-date-vhidden">
         <span v-if="selectedDate">
           The selected {{ legendText }} date is {{ selectedDate.toLocaleDateString(dateFormatterLocale, { weekday:
@@ -47,9 +47,6 @@
         type: String,
         default: 'en-US',
       },
-      name: {
-        type: String,
-      },
       inputRef: {
         type: String,
       },
@@ -65,9 +62,14 @@
       lastAllowedDate: {
         type: Date,
       },
+      // date that is selected, if there is one
       selectedDate: {
         type: Date,
         default: null,
+      },
+      // comparision date for validation
+      comparisonDate: {
+        type: Date,
       },
     },
     data() {
@@ -79,7 +81,6 @@
       };
     },
     computed: {
-      // getter & setter for default start date
       defaultSelectedDate: {
         // getter
         get() {
@@ -87,7 +88,6 @@
         },
         // setter
         set(newValue) {
-          // Note: we are using destructuring assignment syntax here.
           if (this.timeout) clearTimeout(this.timeout);
           this.timeout = setTimeout(() => {
             const [day, month, year] = newValue.split('/');
@@ -117,12 +117,23 @@
               return true;
             }
             const newDate = new Date(year, month - 1, day);
-
+            // validate if start date is after comparision date
+            if (
+              this.legendText === 'Start Date' &&
+              this.comparisonDate &&
+              isAfter(newDate, this.comparisonDate)
+            ) {
+              this.invalidDateErrorText = 'Start date cannot be after end date';
+              this.showInvalidText = true;
+              return true;
+            }
+            // validate if input date is after the last allowed date
             if (isAfter(newDate, this.lastAllowedDate)) {
               this.invalidDateErrorText = 'Cannot select a future date';
               this.showInvalidText = true;
               return true;
             }
+            // validate if input date is before the first allowed date
             if (isBefore(newDate, this.firstAllowed)) {
               this.invalidDateErrorText =
                 'Date must be after ' + format(this.firstAllowed, 'DD/MM/YYYY');
@@ -152,13 +163,12 @@
 
 <style lang="css" scoped>
 
-  /* ---------------------------------------------
-                VISUALLY HIDDEN ITEMS
-      --------------------------------------------- */
   .date-input-fieldset {
+    padding-bottom: 0;
     border: 0;
   }
 
+  /* VISUALLY HIDDEN ITEMS */
   .k-date-vhidden {
     position: absolute;
     top: 0;
