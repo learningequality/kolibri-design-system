@@ -81,9 +81,9 @@
 <script>
 
   import format from 'date-fns/format';
-  import KIconButton from '/Users/lharris/kolibri-design-system/lib/buttons-and-links/KIconButton.vue';
-  import KDateDay from '/Users/lharris/kolibri-design-system/lib/KDateRange/KDateDay.vue';
   import isAfter from 'date-fns/is_after';
+  import KIconButton from '../buttons-and-links/KIconButton';
+  import KDateDay from './KDateDay';
 
   const months = [
     'January',
@@ -110,6 +110,7 @@
       // constrains the selection to after this date, disabling dates prior
       firstAllowedDate: {
         type: Date,
+        default: null,
       },
       // constrains date selection to before this date, disabling dates after
       lastAllowedDate: {
@@ -119,10 +120,12 @@
       // default value of selected start date
       selectedStartDate: {
         type: Date,
+        default: null,
       },
       // default value of selected end date
       selectedEndDate: {
         type: Date,
+        default: null,
       },
     },
     data() {
@@ -131,7 +134,7 @@
           start: this.selectedStartDate ? this.selectedStartDate : null,
         },
         numOfDays: 7,
-        isFirstChoice: this.selectedStartDate ? false : true,
+        isFirstChoice: this.selectedStartDate && this.selectedEndDate ? true : false,
         activeMonth: new Date().getMonth() - 1,
         activeYearStart: new Date().getFullYear(),
         activeYearEnd: new Date().getFullYear(),
@@ -196,17 +199,11 @@
         const resultDate = new Date(activeYear, activeMonth, result);
         if (!this.isFirstChoice && resultDate < this.dateRange.start) {
           this.isFirstChoice = false;
-          this.selectedStartDate = resultDate;
           return { start: resultDate };
         }
 
         // toggle first choice
         this.isFirstChoice = !this.isFirstChoice;
-        if (key === 'start') {
-          this.selectedStartDate = resultDate;
-        } else {
-          this.selectedEndDate = resultDate;
-        }
         newData[key] = resultDate;
         return newData;
       },

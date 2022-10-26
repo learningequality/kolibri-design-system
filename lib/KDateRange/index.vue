@@ -16,7 +16,7 @@
         </p>
       </slot>
       <div class="date-inputs">
-        <div id="left-input">
+        <div class="left-input">
           <KDateInput
             inputRef="dateStartRangeInput"
             :selectedDate="dateRange.start"
@@ -27,7 +27,7 @@
             @updateDate="setStartDate"
           />
         </div>
-        <div id="right-input">
+        <div class="right-input">
           <KDateInput
             inputRef="dateEndRangeInput"
             :selectedDate="dateRange.end"
@@ -57,11 +57,12 @@
 <script>
 
   import { mapActions } from 'vuex';
-  import KModal from '/Users/lharris/kolibri-design-system/lib/KModal.vue';
-  import KDateInput from '/Users/lharris/kolibri-design-system/lib/KDateRange/KDateInput.vue';
-  import KDateCalendar from '/Users/lharris/kolibri-design-system/lib/KDateRange/KDateCalendar.vue';
   import isAfter from 'date-fns/is_after';
   import isBefore from 'date-fns/is_before';
+  import KModal from '../KModal';
+  import KResponsiveWindowMixin from '../KResponsiveWindowMixin';
+  import KDateCalendar from './KDateCalendar';
+  import KDateInput from './KDateInput';
 
   export default {
     name: 'KDateRange',
@@ -70,6 +71,7 @@
       KDateInput,
       KDateCalendar,
     },
+    mixins: [KResponsiveWindowMixin],
     props: {
       /**
        * Constrains the selection to after this date, disabling dates prior
@@ -97,7 +99,9 @@
        */
       defaultEndDate: {
         type: Date,
-        default: new Date(),
+        default() {
+          return new Date();
+        },
       },
       /**
        *  Submission text of modal
@@ -118,6 +122,7 @@
       return {
         dateRange: {
           start: this.defaultStartDate ? this.defaultStartDate : null,
+          end: this.defaultEndDate ? this.defaultEndDate : null,
         },
         description: 'The default start date is the last time you exported this log',
         modalSize: 480,
@@ -192,12 +197,12 @@
     text-decoration-color: #616161;
   }
 
-  #left-input {
+  .left-input {
     display: inline-block;
     width: 49%;
   }
 
-  #right-input {
+  .right-input {
     display: inline-block;
     width: 49%;
   }

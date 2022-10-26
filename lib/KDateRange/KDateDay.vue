@@ -25,7 +25,7 @@
 
 <script>
 
-  import KButton from '/Users/lharris/kolibri-design-system/lib/buttons-and-links/KButton.vue';
+  import KButton from '../buttons-and-links/KButton';
 
   export default {
     name: 'KDateDay',
@@ -57,6 +57,7 @@
       },
       activeMonth: {
         type: Number,
+        default: null,
       },
     },
     data() {

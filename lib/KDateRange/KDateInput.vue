@@ -32,10 +32,11 @@
 <script>
 
   import format from 'date-fns/format';
-  import KTextBox from '/Users/lharris/kolibri-design-system/lib/KTextbox';
   import isAfter from 'date-fns/is_after';
   import isBefore from 'date-fns/is_before';
+  import KTextBox from '../KTextbox';
 
+  /* eslint-disable no-useless-escape */
   const dateFormat = /^(0?[1-9]|[12][0-9]|3[01])[\/\-](0?[1-9]|1[012])[\/\-]\d{4}$/;
   export default {
     name: 'KDateInput',
@@ -49,6 +50,7 @@
       },
       inputRef: {
         type: String,
+        default: null,
       },
       legendText: {
         type: String,
@@ -57,10 +59,12 @@
       // constrains the selection to after this date, disabling dates prior
       firstAllowedDate: {
         type: Date,
+        default: null,
       },
       // last allowed date to be returned as End Date
       lastAllowedDate: {
         type: Date,
+        default: null,
       },
       // date that is selected, if there is one
       selectedDate: {
@@ -70,6 +74,7 @@
       // comparision date for validation
       comparisonDate: {
         type: Date,
+        default: null,
       },
     },
     data() {

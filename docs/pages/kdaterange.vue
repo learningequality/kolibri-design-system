@@ -5,15 +5,17 @@
     <DocsPageSection title="Overview" anchor="#overview">
       <div>
         <DocsShow>
-          <KDateRange
-            class="demo"
-            :defaultStartDate="defaultStartDate"
-            :firstAllowedDate="firstAllowedDate"
-            :lastAllowedDate="lastAllowedDate"
-            title="Select a date range"
-            @setRange="setDateRange"
-            @cancel="displayModal(false)"
-          />
+          <ClientOnly>
+            <KDateRange
+              class="demo"
+              :defaultStartDate="defaultStartDate"
+              :firstAllowedDate="firstAllowedDate"
+              :lastAllowedDate="lastAllowedDate"
+              title="Select a date range"
+              @setRange="setDateRange"
+              @cancel="displayModal(false)"
+            />
+          </ClientOnly>
         </DocsShow>
       </div>
     </DocsPageSection>
@@ -46,7 +48,6 @@
   };
 
 </script>
-
 
 <style lang="css" scoped>
 
