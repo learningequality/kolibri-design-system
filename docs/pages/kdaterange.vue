@@ -13,7 +13,6 @@
               :lastAllowedDate="lastAllowedDate"
               title="Select a date range"
               @setRange="setDateRange"
-              @cancel="displayModal(false)"
             />
           </ClientOnly>
         </DocsShow>
@@ -26,8 +25,6 @@
 
 <script>
 
-  import { mapActions } from 'vuex';
-
   export default {
     data() {
       return {
@@ -39,7 +36,6 @@
       };
     },
     methods: {
-      ...mapActions(['displayModal']),
       setDateRange(dates) {
         this.startDate = dates['start'];
         this.endDate = dates['end'];

@@ -6,8 +6,8 @@
     :submitText="submitText"
     :size="modalSize"
     :submitDisabled="disabled"
-    @submit="apply"
-    @cancel="cancel"
+    @submit="onSubmit"
+    @cancel="onCancel"
   >
     <div>
       <slot name="description">
@@ -64,6 +64,8 @@
   import KDateCalendar from './KDateCalendar';
   import KDateInput from './KDateInput';
 
+  var startOfToday = require('date-fns/start_of_today');
+
   export default {
     name: 'KDateRange',
     components: {
@@ -100,36 +102,33 @@
       defaultEndDate: {
         type: Date,
         default() {
-          return new Date();
+          return startOfToday();
         },
       },
-      /**
-       *  Submission text of modal
-       */
       submitText: {
         type: String,
         default: 'Generate',
       },
-      /**
-       *  Title text to customize the modal's title
-       */
       title: {
         type: String,
         default: '',
+      },
+      description: {
+        type: String,
+        default: 'The default start date is the last time you exported this log',
       },
     },
     data() {
       return {
         dateRange: {
           start: this.defaultStartDate ? this.defaultStartDate : null,
-          end: this.defaultEndDate ? this.defaultEndDate : null,
+          end: this.defaultStartDate && this.defaultEndDate ? this.defaultEndDate : null,
         },
-        description: 'The default start date is the last time you exported this log',
         modalSize: 480,
       };
     },
     computed: {
-      // Modal generate button is disabled if this function returns true
+      // Modal submit button is disabled if this function returns true
       disabled() {
         return (
           !this.dateRange.start ||
@@ -140,38 +139,38 @@
           isBefore(this.dateRange.end, this.firstAllowed) ||
           isBefore(this.dateRange.end, this.dateRange.start) ||
           isAfter(this.dateRange.start, this.lastAllowedDate) ||
-          isAfter(this.dateRange.end, this.lastAllowedDate) ||
-          isAfter(this.dateRange.start, this.dateRange.end)
+          isAfter(this.dateRange.end, this.lastAllowedDate)
         );
       },
     },
     methods: {
       ...mapActions(['displayModal']),
-      // setting the range when the generate button is hit
-      apply() {
+      onSubmit() {
         this.$emit('setRange', { start: this.dateRange.start, end: this.dateRange.end });
         this.displayModal(false);
       },
-      cancel() {
+      onCancel() {
+        this.$emit('cancel');
         this.displayModal(false);
       },
-      // when a new value is inserted into the input, update start key of the dateRange object
+      /**
+       *  Updates start key of the dateRange object when a new value is inserted into the input
+       */
       setStartDate(newDate) {
         if (this.dateRange.start && newDate !== this.dateRange.start) {
           this.dateRange = { start: newDate, end: null };
         }
-        this.$emit('setRange', { start: this.dateRange.start, end: this.dateRange.end });
       },
-      // when a new value is inserted into the input, update end key of the dateRange object
+      /**
+       *  Updates end key of the dateRange object when a new value is inserted into the input
+       */
       setEndDate(date) {
         if (this.dateRange.end || date != this.dateRange.end) {
           this.dateRange = { start: this.dateRange.start, end: date };
         }
-        this.$emit('setRange', { start: this.dateRange.start, end: this.dateRange.end });
       },
       setSelectedDatesFromCalendar(dates) {
         this.dateRange = { start: dates['start'], end: dates['end'] };
-        this.$emit('setRange', { start: this.dateRange.start, end: this.dateRange.end });
       },
       isValidDate(date) {
         return new Date(date) !== 'Invalid Date' && !isNaN(new Date(date));

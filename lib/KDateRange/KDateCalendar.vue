@@ -3,6 +3,7 @@
   <div class="calendar">
     <div class="calendar-wrap">
       <KIconButton
+        aria-label="Previous Month"
         tooltip="Previous Month"
         icon="chevronLeft"
         appearance="flat-button"
@@ -11,6 +12,7 @@
         @click="goPrevMonth"
       />
       <KIconButton
+        aria-label="Next Month"
         tooltip="Next Month"
         icon="chevronRight"
         appearance="flat-button"
@@ -107,22 +109,30 @@
       KDateDay,
     },
     props: {
-      // constrains the selection to after this date, disabling dates prior
+      /**
+       * constrains the selection to after this date, disabling dates prior
+       */
       firstAllowedDate: {
         type: Date,
         default: null,
       },
-      // constrains date selection to before this date, disabling dates after
+      /**
+       * constrains date selection to before this date, disabling dates after
+       */
       lastAllowedDate: {
         type: Date,
         default: new Date(),
       },
-      // default value of selected start date
+      /**
+       * default value of selected start date
+       */
       selectedStartDate: {
         type: Date,
         default: null,
       },
-      // default value of selected end date
+      /**
+       * default value of selected end date
+       */
       selectedEndDate: {
         type: Date,
         default: null,
@@ -130,11 +140,13 @@
     },
     data() {
       return {
+        // Set preselected dates if selected start and end dates are given
         dateRange: {
           start: this.selectedStartDate ? this.selectedStartDate : null,
+          end: this.selectedStartDate && this.selectedEndDate ? this.selectedEndDate : null,
         },
         numOfDays: 7,
-        isFirstChoice: this.selectedStartDate && this.selectedEndDate ? true : false,
+        isFirstChoice: this.selectedStartDate ? true : false,
         activeMonth: new Date().getMonth() - 1,
         activeYearStart: new Date().getFullYear(),
         activeYearEnd: new Date().getFullYear(),
@@ -144,50 +156,64 @@
       monthsLocale() {
         return months;
       },
-      // returns the day of week of the beginning of the left side calendar month
+      /**
+       * returns the day of week of the beginning of the left side calendar month
+       */
       activeMonthDay() {
         return new Date(this.activeYearStart, this.activeMonth, 1).getDay();
       },
-      // returns the day of week of the beginnning of the right side month
+      /**
+       * returns the day of week of the beginnning of the right side month
+       */
       nextActiveMonthDay() {
         return new Date(this.activeYearEnd, this.nextActiveMonth, 1).getDay();
       },
-      // returns the end date of the month on the left side calendar month
+      /**
+       * returns the last day of the month on the left side calendar month
+       */
       activeMonthDate() {
         return new Date(this.activeYearEnd, this.nextActiveMonth, 0).getDate();
       },
-      // returns the end date of the month on the right side calendar month
+      /**
+       * returns the last day of the month on the right side calendar month
+       */
       nextActiveMonthDate() {
         return new Date(this.activeYearEnd, this.activeMonth + 2, 0).getDate();
       },
-      // returns the next month that will display after current active month
+      /**
+       * returns the next month that comes after the current active month
+       */
       nextActiveMonth() {
         return this.activeMonth >= 11 ? 0 : this.activeMonth + 1;
       },
     },
     watch: {
-      // updates to the year based on nextActiveMonth changes
       nextActiveMonth(value) {
         if (value === 0) this.activeYearEnd = this.activeYearStart + 1;
       },
     },
     created() {
-      // if the activeMonth is December, add one year to activeYearEnd property
       if (this.activeMonth === 11) this.activeYearEnd = this.activeYearStart + 1;
     },
     methods: {
-      // returns the index number within month of where day should be placed
+      /**
+       * returns the index number within month of where day should be placed
+       */
       getDayIndexInMonth(weekindex, dayinweekindex, activeMonthDay) {
         const date = this.numOfDays * (weekindex - 1) + dayinweekindex;
         return date - activeMonthDay;
       },
-      // returns placement where day should be placed on calendar
+      /**
+       * returns placement where day should be placed on calendar
+       */
       getDayCell(weekindex, dayinweekindex, activeMonthDay, activeMonthDate) {
         const result = this.getDayIndexInMonth(weekindex, dayinweekindex, activeMonthDay);
         // bound by > 0 and < last day of month
         return result > 0 && result <= activeMonthDate ? result : null;
       },
-      // update end and start date of dateRange Object
+      /**
+       * update end and start date of dateRange Object
+       */
       getNewDateRange(result, activeMonth, activeYear) {
         const newData = {};
         let key = 'start';
@@ -207,7 +233,6 @@
         newData[key] = resultDate;
         return newData;
       },
-      // when a user selects the first item on the calendar
       selectFirstItem(weekindex, dayinweekindex) {
         const result = this.getDayIndexInMonth(weekindex, dayinweekindex, this.activeMonthDay);
         this.dateRange = Object.assign(
@@ -217,7 +242,6 @@
         );
         this.$emit('updateSelectedDates', this.dateRange);
       },
-      // when a user selects the seccond item on the calendar
       selectSecondItem(weekindex, dayinweekindex) {
         const result = this.getDayIndexInMonth(weekindex, dayinweekindex, this.nextActiveMonthDay);
         this.dateRange = Object.assign(
@@ -227,17 +251,10 @@
         );
         this.$emit('updateSelectedDates', this.dateRange);
       },
-      // returns true for the selected start and end dates in date range
       isDateSelected(weekindex, dayinweekindex, key, activeMonthDay, activeMonthDate) {
         const result = this.getDayIndexInMonth(weekindex, dayinweekindex, activeMonthDay);
         if (result < 1 || result > activeMonthDate) return false;
-
-        let currDate = null;
-        if (key === 'first') {
-          currDate = new Date(this.activeYearStart, this.activeMonth, result);
-        } else {
-          currDate = new Date(this.activeYearEnd, this.nextActiveMonth, result);
-        }
+        var currDate = this.getDate(key, result);
         return (
           (this.selectedStartDate &&
             format(this.selectedStartDate, 'DD/MM/YYYY') === format(currDate, 'DD/MM/YYYY')) ||
@@ -245,16 +262,14 @@
             format(this.selectedEndDate, 'DD/MM/YYYY') === format(currDate, 'DD/MM/YYYY'))
         );
       },
-      // returns order of selection for css styling
+      /**
+       * returns order of selection for css styling
+       */
       selectionOrder(weekindex, dayinweekindex, key, activeMonthDay, activeMonthDate) {
         const result = this.getDayIndexInMonth(weekindex, dayinweekindex, activeMonthDay);
         if (result < 1 || result > activeMonthDate) return false;
-        let currDate = null;
-        if (key === 'first') {
-          currDate = new Date(this.activeYearStart, this.activeMonth, result);
-        } else {
-          currDate = new Date(this.activeYearEnd, this.nextActiveMonth, result);
-        }
+        var currDate = this.getDate(key, result);
+        // the light green background radius and direction order is based on these attributes
         if (
           this.selectedStartDate &&
           this.selectedEndDate &&
@@ -273,7 +288,8 @@
           } else if (
             this.selectedEndDate &&
             format(this.selectedEndDate, 'DD/MM/YYYY') === format(currDate, 'DD/MM/YYYY') &&
-            !(dayinweekindex === 1)
+            !(dayinweekindex === 1) &&
+            !(result === 1)
           ) {
             return 'second';
           }
@@ -281,17 +297,10 @@
           return '';
         }
       },
-      // returns true for the dates in between the start and end date
       isDateInRange(weekindex, dayinweekindex, key, activeMonthDay, activeMonthDate) {
         const result = this.getDayIndexInMonth(weekindex, dayinweekindex, activeMonthDay);
         if (result < 1 || result > activeMonthDate) return false;
-
-        let currDate = null;
-        if (key === 'first') {
-          currDate = new Date(this.activeYearStart, this.activeMonth, result);
-        } else {
-          currDate = new Date(this.activeYearEnd, this.nextActiveMonth, result);
-        }
+        var currDate = this.getDate(key, result);
         return (
           this.selectedStartDate &&
           this.selectedEndDate &&
@@ -299,11 +308,17 @@
           this.selectedEndDate > currDate
         );
       },
-      isDateDisabled(weekindex, dayinweekindex, activeMonthDay, activeMonthDate) {
+      /**
+       * returns true for dates that are not apart of the current month; should be hidden from view
+       */
+      isDateDisabled(weekindex, dayinweekindex, activeMonthDay, activeMonthDate) { 
         const result = this.getDayIndexInMonth(weekindex, dayinweekindex, activeMonthDay);
         // bound by > 0 and < last day of month
         return !(result > 0 && result <= activeMonthDate);
       },
+      /**
+       * returns true for disabled dates before the firstAllowedDate; should be visible but grayed out
+       */
       isDateDisabledLeft(weekindex, dayinweekindex, activeMonthDay) {
         const result = this.getDayIndexInMonth(weekindex, dayinweekindex, activeMonthDay);
         const currDate = new Date(this.activeYearStart, this.activeMonth, result);
@@ -314,6 +329,9 @@
         );
         return currDate <= firstAllowed || currDate > this.lastAllowedDate;
       },
+      /**
+       * returns true for disabled dates after the lastAllowedDate; should be visible but grayed out
+       */
       isDateDisabledRight(weekindex, dayinweekindex, activeMonthDay) {
         const result = this.getDayIndexInMonth(weekindex, dayinweekindex, activeMonthDay);
         const currDate = new Date(this.activeYearStart, this.activeMonth + 1, result);
@@ -324,7 +342,9 @@
         );
         return currDate <= firstAllowed || currDate > this.lastAllowedDate;
       },
-      // return true if date is last day of month for css border rounding
+      /**
+       * return true if date is last day of month for css border rounding
+       */
       isLastDay(weekindex, dayinweekindex, key, nextActiveMonthDay, nextActiveMonthDate) {
         const result = this.getDayCell(
           weekindex,
@@ -354,6 +374,15 @@
       },
       isValidDate(date) {
         return new Date(date) !== 'Invalid Date' && !isNaN(new Date(date));
+      },
+      getDate(key, day) {
+        let currDate = null;
+        if (key === 'first') {
+          currDate = new Date(this.activeYearStart, this.activeMonth, day);
+        } else {
+          currDate = new Date(this.activeYearEnd, this.nextActiveMonth, day);
+        }
+        return currDate;
       },
     },
   };
@@ -444,18 +473,6 @@
     background-color: #e3f0ed;
     border-top-right-radius: 60px;
     border-bottom-right-radius: 60px;
-  }
-
-  /* VISUALLY HIDDEN ITEMS */
-  .k-date-vhidden {
-    position: absolute;
-    top: 0;
-    width: 1px;
-    height: 1px;
-    padding: 0;
-    overflow: hidden;
-    clip: rect(1px, 1px, 1px, 1px);
-    border: 0;
   }
 
 </style>

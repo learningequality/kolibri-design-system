@@ -64,6 +64,19 @@
       return {};
     },
     computed: {
+      styleOverrides() {
+        return {
+          width: '30px',
+          minWidth: '24px', 
+          height: '29px', 
+          minHeight: '23px', 
+          fontSize: '0.885em', 
+          fontWeight: 'lighter', 
+          lineHeight: '0px', 
+          padding: '0', 
+          color: ' #616161'
+        };
+      },
       isFirstDay() {
         return this.day === 1;
       },
