@@ -4,7 +4,7 @@
     autocomplete="off"
     :primary="false"
     appearance="flat-button"
-    :appearanceOverrides="{ width: '30px', minWidth: '24px', height: '29px', minHeight: '23px', fontSize: '0.885em', fontWeight: 'lighter', lineHeight: '0px', padding: '0', color: ' #616161' }"
+    :appearanceOverrides="styleOverrides"
     :disabled="isDisabled"
     :class="[{
       'calendar-days-selected': isSelected,
@@ -67,14 +67,14 @@
       styleOverrides() {
         return {
           width: '30px',
-          minWidth: '24px', 
-          height: '29px', 
-          minHeight: '23px', 
-          fontSize: '0.885em', 
-          fontWeight: 'lighter', 
-          lineHeight: '0px', 
-          padding: '0', 
-          color: ' #616161'
+          minWidth: '24px',
+          height: '29px',
+          minHeight: '23px',
+          fontSize: '0.885em',
+          fontWeight: 'lighter',
+          lineHeight: '0px',
+          padding: '0',
+          color: this.$themePalette.grey.v_700,
         };
       },
       isFirstDay() {

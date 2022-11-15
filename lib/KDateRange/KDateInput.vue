@@ -7,18 +7,19 @@
       </legend>
       <KTextBox
         :ref="inputRef"
-        v-model.lazy="dateStr"
+        :value="value"
         type="text"
         :label="legendText"
         autoComplete="off"
-        :invalid="isInvalidDate"
-        :showInvalidText="isInvalidDate"
-        :invalidText="invalidDateErrorText"
+        :invalid="Boolean(errorMessage)"
+        :showInvalidText="Boolean(errorMessage)"
+        :invalidText="errorMessage"
+        @input="handleInput"
       />
-      <input type="hidden" name="date" :value="selectedDate">
+      <input type="hidden" name="date" :value="valueAsDate">
       <span class="k-date-vhidden">
-        <span v-if="selectedDate">
-          The selected {{ legendText }} date is {{ selectedDate.toLocaleDateString(dateFormatterLocale, { weekday:
+        <span v-if="valueAsDate" data-test="valueAsDate">
+          The selected {{ legendText }} date is {{ valueAsDate.toLocaleDateString(dateFormatterLocale, { weekday:
             'long', month: 'long', day: 'numeric' }) }}
         </span>
       </span>
@@ -30,17 +31,10 @@
 
 <script>
 
-  import format from 'date-fns/format';
-  import isAfter from 'date-fns/is_after';
-  import isBefore from 'date-fns/is_before';
-  import { interpret, send } from 'xstate';
+  import { startOfDay } from 'date-fns';
   import KTextBox from '../KTextbox';
-  import { validationMachine } from './ValidationMachine';
+  import { DATE_FMT } from './validationConstants';
 
-  var startOfDay = require('date-fns/start_of_day');
-
-  /* eslint-disable no-useless-escape */
-  const dateFormat = /^(0?[1-9]|[12][0-9]|3[01])[\/\-](0?[1-9]|1[012])[\/\-]\d{4}$/;
   export default {
     name: 'KDateInput',
     components: {
@@ -59,122 +53,31 @@
         type: String,
         required: true,
       },
-      firstAllowedDate: {
-        type: Date,
-        default: null,
+      errorMessage: {
+        type: [String, Boolean],
+        default: false,
       },
-      lastAllowedDate: {
-        type: Date,
-        default: null,
+      value: {
+        type: String,
+        default: DATE_FMT,
       },
-      selectedDate: {
-        type: Date,
-        default: null,
-      },
-      comparisonDate: {
-        type: Date,
-        default: null,
-      },
-    },
-    data() {
-      return {
-        timeout: null,
-        invalidDateErrorText: '',
-        firstAllowed: null,
-        validationMachine: interpret(validationMachine),
-      };
     },
     computed: {
-      dateStr: {
-        // getter
-        get() {
-          return this.getDateString(this.selectedDate);
-        },
-        // setter
-        set(newValue) {
-          if (this.timeout) clearTimeout(this.timeout);
-          this.timeout = setTimeout(() => {
-            const [day, month, year] = newValue.split('/');
-            const newDate = startOfDay(new Date(year, month - 1, day));
-            if (newDate !== 'Invalid Date') {
-              this.$emit('updateDate', newDate);
-            }
-          }, 1000);
-        },
+      valueAsDate() {
+        if (this.value) {
+          return this.createDate(this.value);
+        }
+        return '';
       },
-      isInvalidDate() {
-        return this.validationMachine._state.value === 'failure';
-      },
-    },
-    watch: {
-      dateStr(newValue, oldValue) {
-        this.validationMachine.send('REVALIDATE', { dateStr: newValue });
-      },
-      comparisonDate(newValue, oldValue) {
-        this.validationMachine.send('REVALIDATE', { comparisonDate: newValue });
-      },
-    },
-    created() {
-      this.validationMachine.start();
-      this.firstAllowed = new Date(
-        this.firstAllowedDate.getFullYear(),
-        this.firstAllowedDate.getMonth() - 1,
-        this.firstAllowedDate.getDate()
-      );
-      console.log(validationMachine);
-      console.log(interpret);
     },
     methods: {
-      // isInvalidDate(dateStr) {
-      //   if (dateStr) {
-      //     if (dateStr === 'DD/MM/YYYY') {
-      //       return false;
-      //     } else if (dateStr.match(dateFormat)) {
-      //       const [day, month, year] = dateStr.split('/');
-      //       if (isNaN(day) || isNaN(month) || isNaN(year)) {
-      //         //this.setErrorText(true, 'Please enter a valid date');
-      //         return true;
-      //       }
-      //       const newDate = startOfDay(new Date(year, month - 1, day));
-      //       // validate if start date is after comparision (end) date
-      //       if (
-      //         this.legendText === 'Start Date' &&
-      //         this.comparisonDate &&
-      //         isAfter(newDate, this.comparisonDate)
-      //       ) {
-      //         //this.setErrorText(true, 'Start date cannot be after end date');
-      //         return true;
-      //       }
-      //       // validate if input date is after the last allowed date
-      //       if (isAfter(newDate, this.lastAllowedDate)) {
-      //         //this.setErrorText(true, 'Cannot select a future date');
-      //         return true;
-      //       }
-      //       // validate if input date is before the first allowed date
-      //       if (isBefore(newDate, this.firstAllowed)) {
-      //         // this.setErrorText(
-      //         //   true,
-      //         //   'Date must be after ' + format(this.firstAllowed, 'DD/MM/YYYY')
-      //         // );
-      //         return true;
-      //       }
-      //     } else {
-      //       //this.setErrorText(true, 'Please enter a valid date');
-      //       return true;
-      //     }
-      //     //this.showInvalidText = false;
-      //     return false;
-      //   }
-      // },
-      getDateString(date) {
-        if (!date) {
-          return 'DD/MM/YYYY';
-        }
-        return format(date, 'DD/MM/YYYY');
+      createDate(dateStr) {
+        const [day, month, year] = dateStr.split('/');
+        const newDate = startOfDay(new Date(year, month - 1, day));
+        return newDate;
       },
-      setErrorText(showError, errorText) {
-        this.invalidDateErrorText = errorText;
-        this.showInvalidText = showError;
+      handleInput(val) {
+        this.$emit('updateDate', val);
       },
     },
   };

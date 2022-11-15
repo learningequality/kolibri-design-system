@@ -3,6 +3,9 @@
   <DocsPageTemplate apiDocs>
 
     <DocsPageSection title="Overview" anchor="#overview">
+      The KDateRange is a modal component that implements two KDateInput components 
+      and a KDateCalendar for a start and end date selection. For design guidance, see the page 
+      on <DocsInternalLink href="modals" text="modals" />.
       <div>
         <DocsShow>
           <ClientOnly>
@@ -12,6 +15,10 @@
               :firstAllowedDate="firstAllowedDate"
               :lastAllowedDate="lastAllowedDate"
               title="Select a date range"
+              submitText="Generate"
+              description="The default start date is the last time you exported this log"
+              cancelText="Cancel"
+              v-bind="errorMessages"
               @setRange="setDateRange"
             />
           </ClientOnly>
@@ -25,6 +32,9 @@
 
 <script>
 
+  import format from 'date-fns/format';
+  import validationConstants from '../../lib/KDateRange/validationConstants';
+
   export default {
     data() {
       return {
@@ -34,6 +44,25 @@
         startDate: null,
         endDate: null,
       };
+    },
+    computed: {
+      firstAllowed() {
+        const date = new Date(
+          this.firstAllowedDate.getFullYear(),
+          this.firstAllowedDate.getMonth() - 1,
+          this.firstAllowedDate.getDate()
+        );
+        return format(date, 'DD/MM/YYYY');
+      },
+      errorMessages() {
+        return {
+          [validationConstants.MALFORMED]: 'Please enter a valid date',
+          [validationConstants.START_DATE_AFTER_END_DATE]: 'Start date cannot be after end date',
+          [validationConstants.FUTURE_DATE]: 'Cannot select a future date',
+          [validationConstants.DATE_BEFORE_FIRST_ALLOWED]:
+            'Date must be after ' + this.firstAllowed,
+        };
+      },
     },
     methods: {
       setDateRange(dates) {

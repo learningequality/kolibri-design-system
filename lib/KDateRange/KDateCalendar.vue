@@ -82,8 +82,7 @@
 
 <script>
 
-  import format from 'date-fns/format';
-  import isAfter from 'date-fns/is_after';
+  import { format, isAfter } from 'date-fns';
   import KIconButton from '../buttons-and-links/KIconButton';
   import KDateDay from './KDateDay';
 
@@ -127,14 +126,14 @@
        * default value of selected start date
        */
       selectedStartDate: {
-        type: Date,
+        type: [Date, null],
         default: null,
       },
       /**
        * default value of selected end date
        */
       selectedEndDate: {
-        type: Date,
+        type: [Date, null],
         default: null,
       },
     },
@@ -311,7 +310,7 @@
       /**
        * returns true for dates that are not apart of the current month; should be hidden from view
        */
-      isDateDisabled(weekindex, dayinweekindex, activeMonthDay, activeMonthDate) { 
+      isDateDisabled(weekindex, dayinweekindex, activeMonthDay, activeMonthDate) {
         const result = this.getDayIndexInMonth(weekindex, dayinweekindex, activeMonthDay);
         // bound by > 0 and < last day of month
         return !(result > 0 && result <= activeMonthDate);
