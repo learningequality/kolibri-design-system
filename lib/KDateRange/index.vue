@@ -187,11 +187,16 @@
       this.debouncedSetStartDate = debounce(this.setStartDate, 500);
       this.debouncedSetEndDate = debounce(this.setEndDate, 500);
 
+      const firstAllowed = new Date(
+        this.firstAllowedDate.getFullYear(),
+        this.firstAllowedDate.getMonth() - 1,
+        this.firstAllowedDate.getDate()
+      );
       const currentContext = {
         startDate: this.dateRange.start,
         endDate: this.dateRange.end,
         lastAllowedDate: this.lastAllowedDate,
-        firstAllowedDate: this.firstAllowedDate,
+        firstAllowedDate: firstAllowed,
       };
       this.validationMachine = interpret(
         validationMachine.withContext({ ...initialContext, ...currentContext })
