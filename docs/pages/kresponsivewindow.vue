@@ -42,33 +42,69 @@
       <p>
         Provided reactive properties can then be accessed on the component instance via <code>this</code>.
       </p>
+
+      <h3>As composable</h3>
+      <p>It can be imported as <code>useKResponsiveWindow</code>. Register it in the script part of a component file:</p>
+
+      <!-- eslint-disable -->
+      <!-- prevent prettier from changing indentation -->
+      <DocsShowCode language="javascript">
+        import useKResponsiveWindow from 'kolibri-design-system/lib/useKResponsiveWindow';
+
+        export default {
+          setup() {
+            const {
+              windowWidth,
+              windowIsLarge,
+              windowBreakpoint,
+              ...
+            } = useKResponsiveWindow();
+
+            //Peform some operations with the properties
+
+            return {
+              windowWidth,
+              windowIsLarge,
+              windowBreakpoint,
+              ...
+            };
+          }
+        };
+      </DocsShowCode>
+      <!-- eslint-enable -->
+
+      <p><code>useKResponsiveWindow()</code> returns an object of reactive properties, that you could destruture.</p>
+
+
+      <h3>Mixin vs composable</h3>
+      <p>Mixins come with several drawbacks including namespace collision, tight coupling, and dificulties associated with developer debugging. It is recommended that composables are used instead as they attemp to resolve these drawbacks. Benefits among others, include better logic reusability and better code organization.</p>
     </DocsPageSection>
 
-    <DocsPageSection title="Example" anchor="#example">
+    <DocsPageSection title="Mixin Example" anchor="#mixin-example">
       <p>
         Consider a Vue file with this in its template and script:
       </p>
       <!-- eslint-disable -->
-        <!-- prevent prettier from changing indentation -->
-        <DocsShowCode language="html">
-          <div class="box" :style="boxStyle">
-            Box 1
-          </div>
-          <div class="box" :style="boxStyle">
-            Box 2
-          </div>
-        </DocsShowCode>
-        <DocsShowCode language="javascript">
-          computed: {
-            boxStyle() {
-              if (this.windowIsLarge) {
-                return { display: 'inline-block' };
-              }
-              return { display: 'block' };
-            },
+      <!-- prevent prettier from changing indentation -->
+      <DocsShowCode language="html">
+        <div class="box" :style="boxStyle">
+          Box 1
+        </div>
+        <div class="box" :style="boxStyle">
+          Box 2
+        </div>
+      </DocsShowCode>
+      <DocsShowCode language="javascript">
+        computed: {
+          boxStyle() {
+            if (this.windowIsLarge) {
+              return { display: 'inline-block' };
+            }
+            return { display: 'block' };
           },
-        </DocsShowCode>
-        <!-- eslint-enable -->
+        },
+      </DocsShowCode>
+      <!-- eslint-enable -->
       <p>
         This results in two boxes that stack vertically on small screens and otherwise display side-by-side:
       </p>
@@ -80,6 +116,55 @@
             Box 1
           </div>
           <div class="box" :style="boxStyle">
+            Box 2
+          </div>
+        </div>
+      </DocsShow>
+      <p>
+        Try adjusting your browser window size to see the example in action.
+      </p>
+    </DocsPageSection>
+
+    <DocsPageSection title="Composable Example" anchor="#composable-example">
+      <p>
+        Consider a Vue file with this in its template and script:
+      </p>
+      <!-- eslint-disable -->
+      <!-- prevent prettier from changing indentation -->
+      <DocsShowCode language="html">
+        <div class="box" :style="boxStyle">
+          Box 1
+        </div>
+        <div class="box" :style="boxStyle">
+          Box 2
+        </div>
+      </DocsShowCode>
+      <DocsShowCode language="javascript">
+        setup() {
+          ...
+
+          const boxStyle = computed(function () {
+            return { display: windowIsLarge.value ? 'inline-block' : 'block' };
+          });
+
+          return { 
+            ..., 
+            boxStyle,
+          };
+        }
+      </DocsShowCode>
+      <!-- eslint-enable -->
+      <p>
+        This results in two boxes that stack vertically on small screens and otherwise display side-by-side:
+      </p>
+      <DocsShow>
+        <div>Breakpoint level: {{ composableWindowBreakpoint }}</div>
+        <div>Window is large: {{ composableWindowIsLarge }}</div>
+        <div>
+          <div class="box" :style="composableBoxStyle">
+            Box 1
+          </div>
+          <div class="box" :style="composableBoxStyle">
             Box 2
           </div>
         </div>
@@ -106,10 +191,24 @@
 
 <script>
 
+  import { computed } from '@vue/composition-api';
   import responsiveWindowMixin from '~~/lib/KResponsiveWindowMixin.js';
+  import useKResponsiveWindow from '~~/lib/useKResponsiveWindow';
 
   export default {
     mixins: [responsiveWindowMixin],
+    setup() {
+      const {
+        windowBreakpoint: composableWindowBreakpoint,
+        windowIsLarge: composableWindowIsLarge,
+      } = useKResponsiveWindow();
+
+      const composableBoxStyle = computed(() => {
+        return { display: composableWindowIsLarge.value ? 'inline-block' : 'block' };
+      });
+
+      return { composableWindowBreakpoint, composableWindowIsLarge, composableBoxStyle };
+    },
     computed: {
       boxStyle() {
         return { display: this.windowIsLarge ? 'inline-block' : 'block' };

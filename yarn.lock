@@ -4512,6 +4512,11 @@ css-loader@3.6.0, css-loader@4.3.0, css-loader@^3.3.2:
     schema-utils "^2.7.0"
     semver "^6.3.0"
 
+css-mediaquery@^0.1.2:
+  version "0.1.2"
+  resolved "https://registry.yarnpkg.com/css-mediaquery/-/css-mediaquery-0.1.2.tgz#6a2c37344928618631c54bd33cedd301da18bea0"
+  integrity sha512-COtn4EROW5dBGlE/4PiKnh6rZpAPxDeFLaEEwt4i10jpDMFt2EhQGS79QmmrO+iKCHv0PU/HrOWEhijFd1x99Q==
+
 css-modules-loader-core@^1.1.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/css-modules-loader-core/-/css-modules-loader-core-1.1.0.tgz#5908668294a1becd261ae0a4ce21b0b551f21d16"
@@ -9955,6 +9960,13 @@ mixin-deep@^1.2.0:
   integrity sha512-NKmAlESf6jMGym1++R0Ra7wvhV+wFW63FaSOFPwRahvea0gMUcGUhVeAg/0BC0wiv9ih5NYPB1Wn1UEI1/L+xQ==
   dependencies:
     minimist "^1.2.5"
+
+mock-match-media@^0.3.0:
+  version "0.3.0"
+  resolved "https://registry.yarnpkg.com/mock-match-media/-/mock-match-media-0.3.0.tgz#1fff5e70edaa0a37e7f2b5f1e75fe77aec79a09e"
+  integrity sha512-fT0MDsCcTSITZMyz9w7kU/tFJ/Lmrcrr6EVHS9cfcog46202YKGlpmBAXKzr25XpqMfTyufZJHwMFp+B4IfknQ==
+  dependencies:
+    css-mediaquery "^0.1.2"
 
 move-concurrently@^1.0.1:
   version "1.0.1"

@@ -1,4 +1,5 @@
 import Vue from 'vue';
+import VueCompositionAPI from '@vue/composition-api';
 import KThemePlugin from '~~/lib/KThemePlugin';
 import trackInputModality from '~~/lib/styles/trackInputModality';
 
@@ -7,4 +8,5 @@ import trackInputModality from '~~/lib/styles/trackInputModality';
 // See `KThemePlugin` `$coreOutline` and `globalThemeState.inputModality`
 trackInputModality({ disableFocusRingByDefault: false });
 
+Vue.use(VueCompositionAPI);
 Vue.use(KThemePlugin);

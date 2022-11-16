@@ -23,6 +23,12 @@
           description="This one is special!"
           value="val-c"
         />
+        <KRadioButton
+          v-model="exampleValue"
+          label="Truncated label. Adjusting your browser window size to see this in action."
+          value="val-d"
+          truncateLabel
+        />
         <p>
           Current value: {{ exampleValue }}
         </p>
