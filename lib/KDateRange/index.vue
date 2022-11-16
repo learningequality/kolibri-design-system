@@ -173,8 +173,10 @@
         return (
           !this.dateRange.start ||
           !this.dateRange.end ||
-          !this.isValidDate(this.dateRange.start) ||
-          !this.isValidDate(this.dateRange.end) ||
+          Boolean(this.invalidStartErrorMessage) ||
+          Boolean(this.invalidEndErrorMessage) ||
+          this.isPlaceholder(this.dateRange.start) ||
+          this.isPlaceholder(this.dateRange.end) ||
           isBefore(this.dateRange.start, this.firstAllowed) ||
           isBefore(this.dateRange.end, this.firstAllowed) ||
           isBefore(this.dateRange.end, this.dateRange.start) ||
@@ -182,21 +184,23 @@
           isAfter(this.dateRange.end, this.lastAllowedDate)
         );
       },
+      firstAllowed() {
+        return new Date(
+          this.firstAllowedDate.getFullYear(),
+          this.firstAllowedDate.getMonth() - 1,
+          this.firstAllowedDate.getDate()
+        );
+      },
     },
     created() {
       this.debouncedSetStartDate = debounce(this.setStartDate, 500);
       this.debouncedSetEndDate = debounce(this.setEndDate, 500);
 
-      const firstAllowed = new Date(
-        this.firstAllowedDate.getFullYear(),
-        this.firstAllowedDate.getMonth() - 1,
-        this.firstAllowedDate.getDate()
-      );
       const currentContext = {
         startDate: this.dateRange.start,
         endDate: this.dateRange.end,
         lastAllowedDate: this.lastAllowedDate,
-        firstAllowedDate: firstAllowed,
+        firstAllowedDate: this.firstAllowed,
       };
       this.validationMachine = interpret(
         validationMachine.withContext({ ...initialContext, ...currentContext })
@@ -237,8 +241,8 @@
           endDate: this.dateRange.end,
         });
       },
-      isValidDate(date) {
-        return new Date(date) !== 'Invalid Date' && !isNaN(new Date(date));
+      isPlaceholder(dateStr) {
+        return dateStr === DATE_FMT;
       },
       getDateString(date) {
         if (!date) {
