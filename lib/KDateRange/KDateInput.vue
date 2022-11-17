@@ -18,7 +18,7 @@
       />
       <input type="hidden" name="date" :value="valueAsDate">
       <span class="k-date-vhidden">
-        <span v-if="valueAsDate" data-test="valueAsDate">
+        <span v-if="valueAsDate">
           The selected {{ legendText }} date is {{ valueAsDate.toLocaleDateString(dateFormatterLocale, { weekday:
             'long', month: 'long', day: 'numeric' }) }}
         </span>

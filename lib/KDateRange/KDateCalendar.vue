@@ -28,6 +28,7 @@
           <li
             v-for="dayinweekindex in numOfDays"
             :key="dayinweekindex"
+            :style="buttonStyles"
             :class="[{ 'calendar-days--disabled': isDateDisabled(weekindex, dayinweekindex, activeMonthDay, activeMonthDate) || isDateDisabledLeft(weekindex, dayinweekindex, activeMonthDay),
                        'selected-first': ( selectionOrder(weekindex, dayinweekindex, 'first', activeMonthDay, activeMonthDate) === 'first'),
                        'selected-second': ( selectionOrder(weekindex, dayinweekindex, 'first', activeMonthDay, activeMonthDate) === 'second')
@@ -55,9 +56,11 @@
           <li
             v-for="dayinweekindex in numOfDays"
             :key="dayinweekindex"
-            :class="[{ 'calendar-days--disabled': isDateDisabled(weekindex, dayinweekindex, nextActiveMonthDay, nextActiveMonthDate) || isDateDisabledRight(weekindex, dayinweekindex, nextActiveMonthDay),
-                       'selected-first': ( selectionOrder(weekindex, dayinweekindex, 'second', nextActiveMonthDay, nextActiveMonthDate) === 'first'),
-                       'selected-second': ( selectionOrder(weekindex, dayinweekindex, 'second', nextActiveMonthDay, nextActiveMonthDate) === 'second')
+            :style="buttonStyles"
+            :class="[{
+              'calendar-days--disabled': isDateDisabled(weekindex, dayinweekindex, nextActiveMonthDay, nextActiveMonthDate) || isDateDisabledRight(weekindex, dayinweekindex, nextActiveMonthDay),
+              'selected-first': (selectionOrder(weekindex, dayinweekindex, 'second', nextActiveMonthDay, nextActiveMonthDate) === 'first'),
+              'selected-second': (selectionOrder(weekindex, dayinweekindex, 'second', nextActiveMonthDay, nextActiveMonthDate) === 'second')
             }]"
             @click="selectSecondItem(weekindex, dayinweekindex)"
           >
@@ -184,6 +187,12 @@
        */
       nextActiveMonth() {
         return this.activeMonth >= 11 ? 0 : this.activeMonth + 1;
+      },
+      buttonStyles() {
+        return {
+          '--selected-button-bg-color': this.$themeBrand.secondary.v_50,
+          '--disabled-button-color': this.$themePalette.grey.v_300,
+        };
       },
     },
     watch: {
@@ -321,12 +330,7 @@
       isDateDisabledLeft(weekindex, dayinweekindex, activeMonthDay) {
         const result = this.getDayIndexInMonth(weekindex, dayinweekindex, activeMonthDay);
         const currDate = new Date(this.activeYearStart, this.activeMonth, result);
-        const firstAllowed = new Date(
-          this.firstAllowedDate.getFullYear(),
-          this.firstAllowedDate.getMonth() - 1,
-          0
-        );
-        return currDate <= firstAllowed || currDate > this.lastAllowedDate;
+        return currDate < this.firstAllowedDate || currDate > this.lastAllowedDate;
       },
       /**
        * returns true for disabled dates after the lastAllowedDate; should be visible but grayed out
@@ -334,12 +338,7 @@
       isDateDisabledRight(weekindex, dayinweekindex, activeMonthDay) {
         const result = this.getDayIndexInMonth(weekindex, dayinweekindex, activeMonthDay);
         const currDate = new Date(this.activeYearStart, this.activeMonth + 1, result);
-        const firstAllowed = new Date(
-          this.firstAllowedDate.getFullYear(),
-          this.firstAllowedDate.getMonth() - 1,
-          0
-        );
-        return currDate <= firstAllowed || currDate > this.lastAllowedDate;
+        return currDate < this.firstAllowedDate || currDate > this.lastAllowedDate;
       },
       /**
        * return true if date is last day of month for css border rounding
@@ -456,20 +455,20 @@
   }
 
   .calendar-days li.calendar-days--disabled {
-    color: #e0e0e0;
+    color: var(--disabled-button-color);
     pointer-events: none;
     cursor: not-allowed;
     opacity: 0.3;
   }
 
   li.selected-first {
-    background-color: #e3f0ed;
+    background-color: var(--selected-button-bg-color);
     border-top-left-radius: 95px;
     border-bottom-left-radius: 80px;
   }
 
   li.selected-second {
-    background-color: #e3f0ed;
+    background-color: var(--selected-button-bg-color);
     border-top-right-radius: 60px;
     border-bottom-right-radius: 60px;
   }

@@ -55,7 +55,7 @@
 <script>
 
   import { mapActions } from 'vuex';
-  import { format, isAfter, isBefore, startOfDay, startOfToday } from 'date-fns';
+  import { format, startOfDay, startOfToday } from 'date-fns';
   import { interpret } from 'xstate';
   import get from 'lodash/get';
   import debounce from 'lodash/debounce';
@@ -101,7 +101,9 @@
        */
       defaultEndDate: {
         type: Date,
-        default: startOfToday(),
+        default() {
+          return startOfToday();
+        },
       },
       /**
        *  Submission text of modal
@@ -155,11 +157,11 @@
     data() {
       return {
         dateRange: {
-          start: this.defaultStartDate ? format(this.defaultStartDate, DATE_FMT) : null,
+          start: this.defaultStartDate ? format(this.defaultStartDate, DATE_FMT) : DATE_FMT,
           end:
             this.defaultStartDate && this.defaultEndDate
               ? format(this.defaultEndDate, DATE_FMT)
-              : null,
+              : DATE_FMT,
         },
         modalSize: 480,
         validationMachine: null,
@@ -171,36 +173,21 @@
       // Modal submit button is disabled if this function returns true
       disabled() {
         return (
-          !this.dateRange.start ||
-          !this.dateRange.end ||
           Boolean(this.invalidStartErrorMessage) ||
           Boolean(this.invalidEndErrorMessage) ||
           this.isPlaceholder(this.dateRange.start) ||
-          this.isPlaceholder(this.dateRange.end) ||
-          isBefore(this.dateRange.start, this.firstAllowed) ||
-          isBefore(this.dateRange.end, this.firstAllowed) ||
-          isBefore(this.dateRange.end, this.dateRange.start) ||
-          isAfter(this.dateRange.start, this.lastAllowedDate) ||
-          isAfter(this.dateRange.end, this.lastAllowedDate)
-        );
-      },
-      firstAllowed() {
-        return new Date(
-          this.firstAllowedDate.getFullYear(),
-          this.firstAllowedDate.getMonth() - 1,
-          this.firstAllowedDate.getDate()
+          this.isPlaceholder(this.dateRange.end)
         );
       },
     },
     created() {
-      this.debouncedSetStartDate = debounce(this.setStartDate, 500);
-      this.debouncedSetEndDate = debounce(this.setEndDate, 500);
-
+      this.debouncedSetStartDate = debounce(this.setStartDate, 750);
+      this.debouncedSetEndDate = debounce(this.setEndDate, 750);
       const currentContext = {
         startDate: this.dateRange.start,
         endDate: this.dateRange.end,
         lastAllowedDate: this.lastAllowedDate,
-        firstAllowedDate: this.firstAllowed,
+        firstAllowedDate: this.firstAllowedDate,
       };
       this.validationMachine = interpret(
         validationMachine.withContext({ ...initialContext, ...currentContext })
@@ -208,8 +195,7 @@
       this.validationMachine.start();
 
       /** On every transition of the machine, we will revalidate and update our messages */
-      this.validationMachine.onTransition(state => {
-        console.log(state);
+      this.validationMachine.onTransition(() => {
         this.getInvalidStartErrorMessage();
         this.getInvalidEndErrorMessage();
       });
@@ -273,7 +259,7 @@
       /** updating start date with input from textbox */
       setStartDate(newVal) {
         this.dateRange = { start: newVal, end: DATE_FMT };
-        this.validationMachine.send('REVALIDATE', { startDate: newVal });
+        this.validationMachine.send('REVALIDATE', { startDate: newVal, endDate: DATE_FMT });
       },
       /** updating end date with input from textbox */
       setEndDate(newVal) {

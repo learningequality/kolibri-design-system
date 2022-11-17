@@ -5,6 +5,7 @@
     :primary="false"
     appearance="flat-button"
     :appearanceOverrides="styleOverrides"
+    :style="buttonStyles"
     :disabled="isDisabled"
     :class="[{
       'calendar-days-selected': isSelected,
@@ -64,6 +65,15 @@
       return {};
     },
     computed: {
+      buttonStyles() {
+        return {
+          '--selected-button-bg-color': this.$themeBrand.secondary.v_600,
+          '--selected-button-text-color': this.$themePalette.white,
+          '--in-range-button-bg-color': this.$themeBrand.secondary.v_50,
+          '--in-range-button-text-color': this.$themePalette.grey.v_700,
+          '--in-range-button-hover-color': this.$themePalette.grey.v_200,
+        };
+      },
       styleOverrides() {
         return {
           width: '30px',
@@ -97,19 +107,18 @@
 
   button:hover,
   .calendar-days-in-range:hover {
-    color: #000000;
-    background: #eeeeee;
+    background-color: var(--in-range-button-hover-color);
     border-radius: 15px;
   }
 
   button.calendar-days-selected {
-    color: #ffffff !important;
-    background: #328168;
+    color: var(--selected-button-text-color) !important;
+    background-color: var(--selected-button-bg-color);
     border-radius: 15px;
   }
 
   .calendar-days-in-range {
-    background: #e3f0ed;
+    background-color: var(--in-range-button-bg-color);
     border-radius: 0;
   }
 

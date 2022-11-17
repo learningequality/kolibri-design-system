@@ -39,28 +39,20 @@
     data() {
       return {
         defaultStartDate: new Date(2022, 8, 1),
-        firstAllowedDate: new Date(2022, 1, 1),
+        firstAllowedDate: new Date(2022, 0, 1),
         lastAllowedDate: new Date(),
         startDate: null,
         endDate: null,
       };
     },
     computed: {
-      firstAllowed() {
-        const date = new Date(
-          this.firstAllowedDate.getFullYear(),
-          this.firstAllowedDate.getMonth() - 1,
-          this.firstAllowedDate.getDate()
-        );
-        return format(date, 'DD/MM/YYYY');
-      },
       errorMessages() {
         return {
           [validationConstants.MALFORMED]: 'Please enter a valid date',
           [validationConstants.START_DATE_AFTER_END_DATE]: 'Start date cannot be after end date',
           [validationConstants.FUTURE_DATE]: 'Cannot select a future date',
           [validationConstants.DATE_BEFORE_FIRST_ALLOWED]:
-            'Date must be after ' + this.firstAllowed,
+            'Date must be after ' + format(this.firstAllowedDate, 'DD/MM/YYYY'),
         };
       },
     },
