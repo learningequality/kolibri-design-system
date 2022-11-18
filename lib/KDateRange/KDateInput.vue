@@ -16,7 +16,7 @@
         :invalidText="errorMessage"
         @input="handleInput"
       />
-      <input type="hidden" name="date" :value="valueAsDate">
+      <input type="hidden" name="date" :value="valueAsDate" data-test="valueAsDate">
       <span class="k-date-vhidden">
         <span v-if="valueAsDate">
           The selected {{ legendText }} date is {{ valueAsDate.toLocaleDateString(dateFormatterLocale, { weekday:

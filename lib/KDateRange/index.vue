@@ -24,6 +24,7 @@
             :errorMessage="invalidStartErrorMessage"
             legendText="Start Date"
             @updateDate="debouncedSetStartDate"
+            data-test="startDate"
           />
         </div>
         <div class="right-input">
@@ -33,6 +34,7 @@
             :errorMessage="invalidEndErrorMessage"
             legendText="End Date"
             @updateDate="debouncedSetEndDate"
+            data-test="endDate"
           />
         </div>
       </div>
