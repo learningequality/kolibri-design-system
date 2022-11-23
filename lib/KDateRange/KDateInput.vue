@@ -1,10 +1,7 @@
 <template>
 
   <div>
-    <fieldset :aria-label="legendText" class="date-input-fieldset">
-      <legend class="k-date-vhidden">
-        {{ legendText }}
-      </legend>
+    <fieldset :aria-labelledby="legendText" class="date-input-fieldset" aria-describedby="date-desc" aria-live="polite">
       <KTextBox
         :ref="inputRef"
         :value="value"
@@ -15,12 +12,11 @@
         :showInvalidText="Boolean(errorMessage)"
         :invalidText="errorMessage"
         @input="handleInput"
-      />
+      />  
       <input type="hidden" name="date" :value="valueAsDate" data-test="valueAsDate">
       <span class="k-date-vhidden">
-        <span v-if="valueAsDate">
-          The selected {{ legendText }} date is {{ valueAsDate.toLocaleDateString(dateFormatterLocale, { weekday:
-            'long', month: 'long', day: 'numeric' }) }}
+        <span v-if="valueAsDate" id="date-desc">
+          {{ dateDescription }}
         </span>
       </span>
     </fieldset>
@@ -68,6 +64,21 @@
           return this.createDate(this.value);
         }
         return '';
+      },
+      dateDescription() {
+        if (
+          Object.prototype.toString.call(this.valueAsDate) === '[object Date]' &&
+          isNaN(this.valueAsDate)
+        ) {
+          return ' ';
+        } else {
+          return this.valueAsDate.toLocaleDateString(this.dateFormatterLocale, {
+            year: 'numeric',
+            weekday: 'long',
+            month: 'long',
+            day: 'numeric',
+          });
+        }
       },
     },
     methods: {

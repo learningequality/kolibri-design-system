@@ -18,7 +18,7 @@
   >
     {{ day }}
     <span aria-hidden="true" class="k-date-vhidden">{{ day }}</span>
-    <span class="k-date-vhidden">{{ day + " " + toMonthName(activeMonth) }}</span>
+    <span :aria-hidden="isDisabled" class="k-date-vhidden">{{ toMonthName(activeMonth) }}</span>
   </KButton>
 
 </template>

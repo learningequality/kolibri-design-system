@@ -6,8 +6,9 @@
     :submitText="submitText"
     :size="modalSize"
     :submitDisabled="disabled"
+    data-test="dateRangeModal"
     @submit="onSubmit"
-    @cancel="onCancel"
+    @cancel="$emit('cancel')"
   >
     <div>
       <!-- @slot Description of modal -->
@@ -20,11 +21,12 @@
         <div class="left-input">
           <KDateInput
             :value="dateRange.start"
+            :dateFormatterLocale="dateFormatterLocale"
             inputRef="dateStartRangeInput"
             :errorMessage="invalidStartErrorMessage"
             legendText="Start Date"
-            @updateDate="debouncedSetStartDate"
             data-test="startDate"
+            @updateDate="debouncedSetStartDate"
           />
         </div>
         <div class="right-input">
@@ -32,9 +34,10 @@
             :value="dateRange.end"
             inputRef="dateEndRangeInput"
             :errorMessage="invalidEndErrorMessage"
+            :dateFormatterLocale="dateFormatterLocale"
             legendText="End Date"
-            @updateDate="debouncedSetEndDate"
             data-test="endDate"
+            @updateDate="debouncedSetEndDate"
           />
         </div>
       </div>
@@ -56,7 +59,6 @@
 
 <script>
 
-  import { mapActions } from 'vuex';
   import { format, startOfDay, startOfToday } from 'date-fns';
   import { interpret } from 'xstate';
   import get from 'lodash/get';
@@ -136,6 +138,13 @@
         default: null,
       },
       /**
+       *  Date Format
+       */
+      dateFormatterLocale: {
+        type: String,
+        default: 'en-US',
+      },
+      /**
        *  Validation machine error messages
        *  bound to validationConstants.js
        */
@@ -203,22 +212,16 @@
       });
     },
     methods: {
-      ...mapActions(['displayModal']),
       onSubmit() {
         /**
          * Emitted when the submit button or the enter key is pressed
          */
-        this.$emit('setRange', { start: this.dateRange.start, end: this.dateRange.end });
-        this.displayModal(false);
+        this.$emit('submit', {
+          start: this.createDate(this.dateRange.start),
+          end: this.createDate(this.dateRange.end),
+        });
       },
-      onCancel() {
-        /**
-         * Emitted when the cancel button is clicked or the esc key is pressed
-         */
-        this.$emit('cancel');
-        this.displayModal(false);
-      },
-      /** updating dateRange object with dates selected through calendar click */
+      /** Updates dateRange object with dates selected through calendar click */
       setSelectedDatesFromCalendar(dates) {
         this.dateRange = {
           start: this.getDateString(dates['start']),
@@ -229,6 +232,7 @@
           endDate: this.dateRange.end,
         });
       },
+      /** Checks if dateStr is equal to the placeholder. If so, submit should be disabled */
       isPlaceholder(dateStr) {
         return dateStr === DATE_FMT;
       },
@@ -238,15 +242,27 @@
         }
         return format(date, DATE_FMT);
       },
+      /** Returns startDateInvalid message from validation machine */
       invalidStart() {
         return this.validationMachine._state.context.startDateInvalid;
       },
+      /** Returns endDateInvalid message from validation machine */
       invalidEnd() {
         return this.validationMachine._state.context.endDateInvalid;
       },
+      /**
+       *  Maps the value of invalidStart to validationConstants
+       *  and sets the start date error message to the
+       *  corresponding error message
+       */
       getInvalidStartErrorMessage() {
         this.invalidStartErrorMessage = get(this, this.invalidStart(), '');
       },
+      /**
+       *  Maps the value of invalidEnd to validationConstants
+       *  and sets the end date error message to the
+       *  corresponding error message
+       */
       getInvalidEndErrorMessage() {
         this.invalidEndErrorMessage = get(this, this.invalidEnd(), '');
       },
@@ -258,12 +274,12 @@
         const newDate = startOfDay(new Date(year, month - 1, day));
         return newDate;
       },
-      /** updating start date with input from textbox */
+      /** Updates start date with input from textbox */
       setStartDate(newVal) {
         this.dateRange = { start: newVal, end: DATE_FMT };
         this.validationMachine.send('REVALIDATE', { startDate: newVal, endDate: DATE_FMT });
       },
-      /** updating end date with input from textbox */
+      /** Updates end date with input from textbox */
       setEndDate(newVal) {
         this.dateRange = { start: this.dateRange.start, end: newVal };
         this.validationMachine.send('REVALIDATE', { endDate: newVal });
