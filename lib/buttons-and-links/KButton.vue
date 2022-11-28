@@ -214,10 +214,4 @@
     top: 4px;
   }
 
-  // adds this class to mock disabled item behavior, which can be used for a tags
-  .disabled {
-    pointer-events: none;
-    cursor: default;
-  }
-
 </style>
