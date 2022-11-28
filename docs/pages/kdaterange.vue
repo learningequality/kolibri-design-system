@@ -13,13 +13,16 @@
             class="demo"
             :firstAllowedDate="firstAllowedDate"
             :lastAllowedDate="lastAllowedDate"
-            dateFormatterLocale="ko-KR"
-            title="Select a date range"
+            :defaultStartDate="defaultStartDate"
             submitText="Generate"
-            description="The default start date is the last time you exported this log"
             cancelText="Cancel"
+            title="Select a date range"
+            description="The default start date is the last time you exported this log"
+            dateLocale="en-US"
+            startDateLegendText="Start Date"
+            endDateLegendText="End Date"
             v-bind="errorMessages"
-            @submit="setDateRange"
+            @submit="modalShown = false"
             @cancel="modalShown = false"
           />
         </ClientOnly>
@@ -42,10 +45,9 @@
     },
     data() {
       return {
+        defaultStartDate: new Date(2022, 8, 1),
         firstAllowedDate: new Date(2022, 0, 1),
         lastAllowedDate: new Date(),
-        startDate: null,
-        endDate: null,
         modalShown: false,
       };
     },
@@ -58,14 +60,6 @@
           [validationConstants.DATE_BEFORE_FIRST_ALLOWED]:
             'Date must be after ' + format(this.firstAllowedDate, 'DD/MM/YYYY'),
         };
-      },
-    },
-    methods: {
-      setDateRange(dates) {
-        this.modalShown = false;
-        this.startDate = dates['start'];
-        this.endDate = dates['end'];
-        console.log('Date Range Set To:', this.startDate, this.endDate);
       },
     },
   };

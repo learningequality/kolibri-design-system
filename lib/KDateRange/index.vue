@@ -21,10 +21,10 @@
         <div class="left-input">
           <KDateInput
             :value="dateRange.start"
-            :dateFormatterLocale="dateFormatterLocale"
+            :dateLocale="dateLocale"
             inputRef="dateStartRangeInput"
             :errorMessage="invalidStartErrorMessage"
-            legendText="Start Date"
+            :legendText="startDateLegendText"
             data-test="startDate"
             @updateDate="debouncedSetStartDate"
           />
@@ -34,8 +34,8 @@
             :value="dateRange.end"
             inputRef="dateEndRangeInput"
             :errorMessage="invalidEndErrorMessage"
-            :dateFormatterLocale="dateFormatterLocale"
-            legendText="End Date"
+            :dateLocale="dateLocale"
+            :legendText="endDateLegendText"
             data-test="endDate"
             @updateDate="debouncedSetEndDate"
           />
@@ -47,6 +47,7 @@
           :lastAllowedDate="lastAllowedDate"
           :selectedStartDate="createDate(dateRange.start)"
           :selectedEndDate="createDate(dateRange.end)"
+          :dateLocale="dateLocale"
           v-bind.sync="dateRange"
           @updateSelectedDates="setSelectedDatesFromCalendar"
         />
@@ -138,11 +139,25 @@
         default: null,
       },
       /**
-       *  Date Format
+       *  Locale string for language and date formatting
        */
-      dateFormatterLocale: {
+      dateLocale: {
         type: String,
-        default: 'en-US',
+        required: true,
+      },
+      /**
+       *  Start date input label
+       */
+      startDateLegendText: {
+        type: String,
+        required: true,
+      },
+      /**
+       *  End date input label
+       */
+      endDateLegendText: {
+        type: String,
+        required: true,
       },
       /**
        *  Validation machine error messages

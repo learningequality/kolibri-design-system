@@ -37,9 +37,8 @@
       KTextBox,
     },
     props: {
-      dateFormatterLocale: {
+      dateLocale: {
         type: String,
-        default: 'en-US',
       },
       inputRef: {
         type: String,
@@ -72,7 +71,7 @@
         ) {
           return ' ';
         } else {
-          return this.valueAsDate.toLocaleDateString(this.dateFormatterLocale, {
+          return this.valueAsDate.toLocaleDateString(this.dateLocale, {
             year: 'numeric',
             weekday: 'long',
             month: 'long',

@@ -22,57 +22,59 @@
       />
       <div class="calendar-month-left">
         <div class="months-text">
-          {{ monthsLocale[activeMonth] + ' ' + activeYearStart }}
+          {{ monthString(activeMonth) + ' ' + activeYearStart }}
         </div>
-        <ul v-for="weekindex in 6" :key="weekindex" class="calendar-days">
+        <ul v-for="weekIndex in 6" :key="weekIndex" class="calendar-days">
           <li
-            v-for="dayinweekindex in numOfDays"
-            :key="dayinweekindex"
+            v-for="dayInWeekIndex in numOfDays"
+            :key="dayInWeekIndex"
             :style="buttonStyles"
-            :class="[{ 'calendar-days--disabled': isDateDisabled(weekindex, dayinweekindex, activeMonthDay, activeMonthDate) || isDateDisabledLeft(weekindex, dayinweekindex, activeMonthDay),
-                       'selected-first': ( selectionOrder(weekindex, dayinweekindex, 'first', activeMonthDay, activeMonthDate) === 'first'),
-                       'selected-second': ( selectionOrder(weekindex, dayinweekindex, 'first', activeMonthDay, activeMonthDate) === 'second')
+            :class="[{ 'calendar-days--disabled': isDateDisabled(weekIndex, dayInWeekIndex, activeMonthDay, activeMonthDate) || isDateDisabledLeft(weekIndex, dayInWeekIndex, activeMonthDay),
+                       'selected-first': ( selectionOrder(weekIndex, dayInWeekIndex, 'first', activeMonthDay, activeMonthDate) === 'first'),
+                       'selected-second': ( selectionOrder(weekIndex, dayInWeekIndex, 'first', activeMonthDay, activeMonthDate) === 'second')
             }]"
-            @click="selectFirstItem(weekindex, dayinweekindex)"
+            @click="selectFirstItem(weekIndex, dayInWeekIndex)"
           >
             <KDateDay
-              :day="getDayCell(weekindex, dayinweekindex, activeMonthDay, activeMonthDate)"
-              :isSelected="isDateSelected(weekindex, dayinweekindex, 'first', activeMonthDay, activeMonthDate)"
-              :isInRange="isDateInRange(weekindex, dayinweekindex, 'first', activeMonthDay, activeMonthDate)"
-              :isDisabled="isDateDisabled(weekindex, dayinweekindex, activeMonthDay, activeMonthDate) || isDateDisabledLeft(weekindex, dayinweekindex, activeMonthDay)"
-              :isLastDay="isLastDay(weekindex, dayinweekindex, 'first', activeMonthDay, activeMonthDate)"
-              :isEndOfWeek="dayinweekindex === 7"
-              :isStartOfWeek="dayinweekindex === 1"
+              :day="getDayCell(weekIndex, dayInWeekIndex, activeMonthDay, activeMonthDate)"
+              :isSelected="isDateSelected(weekIndex, dayInWeekIndex, 'first', activeMonthDay, activeMonthDate)"
+              :isInRange="isDateInRange(weekIndex, dayInWeekIndex, 'first', activeMonthDay, activeMonthDate)"
+              :isDisabled="isDateDisabled(weekIndex, dayInWeekIndex, activeMonthDay, activeMonthDate) || isDateDisabledLeft(weekIndex, dayInWeekIndex, activeMonthDay)"
+              :isLastDay="isLastDay(weekIndex, dayInWeekIndex, 'first', activeMonthDay, activeMonthDate)"
+              :isEndOfWeek="dayInWeekIndex === 7"
+              :isStartOfWeek="dayInWeekIndex === 1"
               :activeMonth="activeMonth"
+              :dateLocale="dateLocale"
             />
           </li>
         </ul>
       </div>
       <div class="calendar-month-right">
         <div class="months-text">
-          {{ monthsLocale[nextActiveMonth] + ' ' + activeYearEnd }}
+          {{ monthString(nextActiveMonth) + ' ' + activeYearEnd }}
         </div>
-        <ul v-for="weekindex in 6" :key="weekindex" class="calendar-days">
+        <ul v-for="weekIndex in 6" :key="weekIndex" class="calendar-days">
           <li
-            v-for="dayinweekindex in numOfDays"
-            :key="dayinweekindex"
+            v-for="dayInWeekIndex in numOfDays"
+            :key="dayInWeekIndex"
             :style="buttonStyles"
             :class="[{
-              'calendar-days--disabled': isDateDisabled(weekindex, dayinweekindex, nextActiveMonthDay, nextActiveMonthDate) || isDateDisabledRight(weekindex, dayinweekindex, nextActiveMonthDay),
-              'selected-first': (selectionOrder(weekindex, dayinweekindex, 'second', nextActiveMonthDay, nextActiveMonthDate) === 'first'),
-              'selected-second': (selectionOrder(weekindex, dayinweekindex, 'second', nextActiveMonthDay, nextActiveMonthDate) === 'second')
+              'calendar-days--disabled': isDateDisabled(weekIndex, dayInWeekIndex, nextActiveMonthDay, nextActiveMonthDate) || isDateDisabledRight(weekIndex, dayInWeekIndex, nextActiveMonthDay),
+              'selected-first': (selectionOrder(weekIndex, dayInWeekIndex, 'second', nextActiveMonthDay, nextActiveMonthDate) === 'first'),
+              'selected-second': (selectionOrder(weekIndex, dayInWeekIndex, 'second', nextActiveMonthDay, nextActiveMonthDate) === 'second')
             }]"
-            @click="selectSecondItem(weekindex, dayinweekindex)"
+            @click="selectSecondItem(weekIndex, dayInWeekIndex)"
           >
             <KDateDay
-              :day="getDayCell(weekindex, dayinweekindex, nextActiveMonthDay, nextActiveMonthDate)"
-              :isSelected="isDateSelected(weekindex, dayinweekindex, 'second', nextActiveMonthDay, nextActiveMonthDate)"
-              :isInRange="isDateInRange(weekindex, dayinweekindex, 'second', nextActiveMonthDay, nextActiveMonthDate)"
-              :isDisabled="isDateDisabled(weekindex, dayinweekindex, nextActiveMonthDay, nextActiveMonthDate) || isDateDisabledRight(weekindex, dayinweekindex, nextActiveMonthDay)"
-              :isLastDay="isLastDay(weekindex, dayinweekindex, 'second', nextActiveMonthDay, nextActiveMonthDate)"
-              :isEndOfWeek="dayinweekindex === 7"
-              :isStartOfWeek="dayinweekindex === 1"
+              :day="getDayCell(weekIndex, dayInWeekIndex, nextActiveMonthDay, nextActiveMonthDate)"
+              :isSelected="isDateSelected(weekIndex, dayInWeekIndex, 'second', nextActiveMonthDay, nextActiveMonthDate)"
+              :isInRange="isDateInRange(weekIndex, dayInWeekIndex, 'second', nextActiveMonthDay, nextActiveMonthDate)"
+              :isDisabled="isDateDisabled(weekIndex, dayInWeekIndex, nextActiveMonthDay, nextActiveMonthDate) || isDateDisabledRight(weekIndex, dayInWeekIndex, nextActiveMonthDay)"
+              :isLastDay="isLastDay(weekIndex, dayInWeekIndex, 'second', nextActiveMonthDay, nextActiveMonthDate)"
+              :isEndOfWeek="dayInWeekIndex === 7"
+              :isStartOfWeek="dayInWeekIndex === 1"
               :activeMonth="nextActiveMonth"
+              :dateLocale="dateLocale"
             />
           </li>
         </ul>
@@ -138,6 +140,12 @@
       selectedEndDate: {
         type: [Date, null],
         default: null,
+      },
+      /**
+       *  Locale string for date formatting
+       */
+      dateLocale: {
+        type: String,
       },
     },
     data() {
@@ -207,15 +215,15 @@
       /**
        * returns the index number within month of where day should be placed
        */
-      getDayIndexInMonth(weekindex, dayinweekindex, activeMonthDay) {
-        const date = this.numOfDays * (weekindex - 1) + dayinweekindex;
+      getDayIndexInMonth(weekIndex, dayInWeekIndex, activeMonthDay) {
+        const date = this.numOfDays * (weekIndex - 1) + dayInWeekIndex;
         return date - activeMonthDay;
       },
       /**
        * returns placement where day should be placed on calendar
        */
-      getDayCell(weekindex, dayinweekindex, activeMonthDay, activeMonthDate) {
-        const result = this.getDayIndexInMonth(weekindex, dayinweekindex, activeMonthDay);
+      getDayCell(weekIndex, dayInWeekIndex, activeMonthDay, activeMonthDate) {
+        const result = this.getDayIndexInMonth(weekIndex, dayInWeekIndex, activeMonthDay);
         // bound by > 0 and < last day of month
         return result > 0 && result <= activeMonthDate ? result : null;
       },
@@ -241,8 +249,8 @@
         newData[key] = resultDate;
         return newData;
       },
-      selectFirstItem(weekindex, dayinweekindex) {
-        const result = this.getDayIndexInMonth(weekindex, dayinweekindex, this.activeMonthDay);
+      selectFirstItem(weekIndex, dayInWeekIndex) {
+        const result = this.getDayIndexInMonth(weekIndex, dayInWeekIndex, this.activeMonthDay);
         this.dateRange = Object.assign(
           {},
           this.dateRange,
@@ -250,8 +258,8 @@
         );
         this.$emit('updateSelectedDates', this.dateRange);
       },
-      selectSecondItem(weekindex, dayinweekindex) {
-        const result = this.getDayIndexInMonth(weekindex, dayinweekindex, this.nextActiveMonthDay);
+      selectSecondItem(weekIndex, dayInWeekIndex) {
+        const result = this.getDayIndexInMonth(weekIndex, dayInWeekIndex, this.nextActiveMonthDay);
         this.dateRange = Object.assign(
           {},
           this.dateRange,
@@ -259,8 +267,8 @@
         );
         this.$emit('updateSelectedDates', this.dateRange);
       },
-      isDateSelected(weekindex, dayinweekindex, key, activeMonthDay, activeMonthDate) {
-        const result = this.getDayIndexInMonth(weekindex, dayinweekindex, activeMonthDay);
+      isDateSelected(weekIndex, dayInWeekIndex, key, activeMonthDay, activeMonthDate) {
+        const result = this.getDayIndexInMonth(weekIndex, dayInWeekIndex, activeMonthDay);
         if (result < 1 || result > activeMonthDate) return false;
         var currDate = this.getDate(key, result);
         return (
@@ -273,11 +281,11 @@
       /**
        * returns order of selection for css styling
        */
-      selectionOrder(weekindex, dayinweekindex, key, activeMonthDay, activeMonthDate) {
-        const result = this.getDayIndexInMonth(weekindex, dayinweekindex, activeMonthDay);
+      selectionOrder(weekIndex, dayInWeekIndex, key, activeMonthDay, activeMonthDate) {
+        const result = this.getDayIndexInMonth(weekIndex, dayInWeekIndex, activeMonthDay);
         if (result < 1 || result > activeMonthDate) return false;
         var currDate = this.getDate(key, result);
-        // the light green background radius and direction order is based on these attributes
+        // the light colored background radius and direction order is based on these attributes
         if (
           this.selectedStartDate &&
           this.selectedEndDate &&
@@ -290,13 +298,13 @@
           if (
             this.selectedStartDate &&
             format(this.selectedStartDate, 'DD/MM/YYYY') === format(currDate, 'DD/MM/YYYY') &&
-            !(dayinweekindex === 7)
+            !(dayInWeekIndex === 7)
           ) {
             return 'first';
           } else if (
             this.selectedEndDate &&
             format(this.selectedEndDate, 'DD/MM/YYYY') === format(currDate, 'DD/MM/YYYY') &&
-            !(dayinweekindex === 1) &&
+            !(dayInWeekIndex === 1) &&
             !(result === 1)
           ) {
             return 'second';
@@ -305,8 +313,8 @@
           return '';
         }
       },
-      isDateInRange(weekindex, dayinweekindex, key, activeMonthDay, activeMonthDate) {
-        const result = this.getDayIndexInMonth(weekindex, dayinweekindex, activeMonthDay);
+      isDateInRange(weekIndex, dayInWeekIndex, key, activeMonthDay, activeMonthDate) {
+        const result = this.getDayIndexInMonth(weekIndex, dayInWeekIndex, activeMonthDay);
         if (result < 1 || result > activeMonthDate) return false;
         var currDate = this.getDate(key, result);
         return (
@@ -319,34 +327,34 @@
       /**
        * returns true for dates that are not apart of the current month; should be hidden from view
        */
-      isDateDisabled(weekindex, dayinweekindex, activeMonthDay, activeMonthDate) {
-        const result = this.getDayIndexInMonth(weekindex, dayinweekindex, activeMonthDay);
+      isDateDisabled(weekIndex, dayInWeekIndex, activeMonthDay, activeMonthDate) {
+        const result = this.getDayIndexInMonth(weekIndex, dayInWeekIndex, activeMonthDay);
         // bound by > 0 and < last day of month
         return !(result > 0 && result <= activeMonthDate);
       },
       /**
        * returns true for disabled dates before the firstAllowedDate; should be visible but grayed out
        */
-      isDateDisabledLeft(weekindex, dayinweekindex, activeMonthDay) {
-        const result = this.getDayIndexInMonth(weekindex, dayinweekindex, activeMonthDay);
+      isDateDisabledLeft(weekIndex, dayInWeekIndex, activeMonthDay) {
+        const result = this.getDayIndexInMonth(weekIndex, dayInWeekIndex, activeMonthDay);
         const currDate = new Date(this.activeYearStart, this.activeMonth, result);
         return currDate < this.firstAllowedDate || currDate > this.lastAllowedDate;
       },
       /**
        * returns true for disabled dates after the lastAllowedDate; should be visible but grayed out
        */
-      isDateDisabledRight(weekindex, dayinweekindex, activeMonthDay) {
-        const result = this.getDayIndexInMonth(weekindex, dayinweekindex, activeMonthDay);
+      isDateDisabledRight(weekIndex, dayInWeekIndex, activeMonthDay) {
+        const result = this.getDayIndexInMonth(weekIndex, dayInWeekIndex, activeMonthDay);
         const currDate = new Date(this.activeYearStart, this.activeMonth + 1, result);
         return currDate < this.firstAllowedDate || currDate > this.lastAllowedDate;
       },
       /**
        * return true if date is last day of month for css border rounding
        */
-      isLastDay(weekindex, dayinweekindex, key, nextActiveMonthDay, nextActiveMonthDate) {
+      isLastDay(weekIndex, dayInWeekIndex, key, nextActiveMonthDay, nextActiveMonthDate) {
         const result = this.getDayCell(
-          weekindex,
-          dayinweekindex,
+          weekIndex,
+          dayInWeekIndex,
           nextActiveMonthDay,
           nextActiveMonthDate
         );
@@ -381,6 +389,14 @@
           currDate = new Date(this.activeYearEnd, this.nextActiveMonth, day);
         }
         return currDate;
+      },
+      /**
+       * takes in index of month, returns string of month based on languagel/locale tag
+       */
+      monthString(monthIndex) {
+        const date = new Date();
+        date.setMonth(monthIndex);
+        return date.toLocaleString(this.dateLocale, { month: 'long' });
       },
     },
   };

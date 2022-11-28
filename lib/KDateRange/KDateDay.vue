@@ -60,6 +60,9 @@
         type: Number,
         default: null,
       },
+      dateLocale: {
+        type: String,
+      },
     },
     data() {
       return {};
@@ -95,7 +98,7 @@
       toMonthName(monthNumber) {
         const date = new Date();
         date.setMonth(monthNumber);
-        return date.toLocaleString('en-US', { month: 'long' });
+        return date.toLocaleString(this.dateLocale, { month: 'long' });
       },
     },
   };
