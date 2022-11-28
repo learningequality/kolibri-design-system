@@ -7,7 +7,7 @@
         Creates a <code>&lt;button&gt;</code> tag and is appropriate for triggering javascript functions on-click. It can take on a number of visual styles, including both links and buttons.
       </p>
 
-       <p>
+      <p>
         Since <code>:disabled</code> does not work on <code>&lt;a&gt;</code> tags, you can use the <code>disabled</code> class that exists on KButton to prevent pointer events.
       </p>
       <DocsShow>
