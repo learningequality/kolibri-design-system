@@ -62,6 +62,7 @@
       },
       dateLocale: {
         type: String,
+        required: true,
       },
     },
     data() {

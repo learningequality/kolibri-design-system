@@ -39,6 +39,7 @@
     props: {
       dateLocale: {
         type: String,
+        required: true,
       },
       inputRef: {
         type: String,

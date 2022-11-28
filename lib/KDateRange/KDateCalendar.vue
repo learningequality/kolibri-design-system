@@ -91,21 +91,6 @@
   import KIconButton from '../buttons-and-links/KIconButton';
   import KDateDay from './KDateDay';
 
-  const months = [
-    'January',
-    'February',
-    'March',
-    'April',
-    'May',
-    'June',
-    'July',
-    'August',
-    'September',
-    'October',
-    'November',
-    'December',
-  ];
-
   export default {
     name: 'KDateCalendar',
     components: {
@@ -146,6 +131,7 @@
        */
       dateLocale: {
         type: String,
+        required: true,
       },
     },
     data() {
@@ -163,9 +149,6 @@
       };
     },
     computed: {
-      monthsLocale() {
-        return months;
-      },
       /**
        * returns the day of week of the beginning of the left side calendar month
        */

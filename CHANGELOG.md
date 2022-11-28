@@ -13,6 +13,7 @@ Releases are recorded as git tags in the [Github releases](https://github.com/le
 - [#361] - Fixes 'Property or method "disabled" is not defined on the instance but referenced during render.' raised by `KDropdownMenu`
 - [#377] - Implement `useKResponsiveWindow` composable.
 - [#380] - Wrap `KRadioButton` text.
+- [#384] - Add `KDateRange` to KDS
 
 <!-- Referenced PRs -->
 [#351]: https://github.com/learningequality/kolibri-design-system/pull/351
@@ -21,6 +22,7 @@ Releases are recorded as git tags in the [Github releases](https://github.com/le
 [#361]: https://github.com/learningequality/kolibri-design-system/pull/361
 [#377]: https://github.com/learningequality/kolibri-design-system/pull/377
 [#380]: https://github.com/learningequality/kolibri-design-system/pull/380
+[#384]: https://github.com/learningequality/kolibri-design-system/pull/384
 
 ## Version 1.4.x
 
