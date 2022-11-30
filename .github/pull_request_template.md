@@ -42,14 +42,5 @@ Addresses #*PR# HERE*
 - [ ] Are all UI components LTR and RTL compliant (if applicable)?
 - [ ] _Add other things to check for here_
 
-## Post-merge updates and tracking
-<!-- After merging, unstable branches of Kolibri products (Learning Platform, Studio, and Data Portal) should be updated to point at the merge commit resulting from this PR. This process should be led by the submitter of the Design System PR in collaboration with other LE team members working on the other product repos. -->
-- [ ] Learning Platform update PR is submitted
-- [ ] Learning Platform update PR is merged
-- [ ] Studio update PR is submitted
-- [ ] Studio update PR is merged
-- [ ] Data Portal update PR is submitted
-- [ ] Data Portal update PR is merged
-
 ## Comments
 <!-- Any additional notes you'd like to add -->
