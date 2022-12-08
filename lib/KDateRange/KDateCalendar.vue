@@ -3,8 +3,8 @@
   <div class="calendar">
     <div class="calendar-wrap">
       <KIconButton
-        aria-label="Previous Month"
-        tooltip="Previous Month"
+        :aria-label="previousMonthText"
+        :tooltip="previousMonthText"
         icon="chevronLeft"
         appearance="flat-button"
         class="left"
@@ -12,8 +12,8 @@
         @click="goPrevMonth"
       />
       <KIconButton
-        aria-label="Next Month"
-        tooltip="Next Month"
+        :aria-label="nextMonthText"
+        :tooltip="nextMonthText"
         icon="chevronRight"
         appearance="flat-button"
         class="right"
@@ -28,10 +28,15 @@
           <li
             v-for="dayInWeekIndex in numOfDays"
             :key="dayInWeekIndex"
-            :style="buttonStyles"
-            :class="[{ 'calendar-days--disabled': isDateDisabled(weekIndex, dayInWeekIndex, activeMonthDay, activeMonthDate) || isDateDisabledLeft(weekIndex, dayInWeekIndex, activeMonthDay),
-                       'selected-first': ( selectionOrder(weekIndex, dayInWeekIndex, 'first', activeMonthDay, activeMonthDate) === 'first'),
-                       'selected-second': ( selectionOrder(weekIndex, dayInWeekIndex, 'first', activeMonthDay, activeMonthDate) === 'second')
+            :style="[
+              (selectionOrder(weekIndex, dayInWeekIndex, 'first', activeMonthDay, activeMonthDate) === 'first') ||
+                (selectionOrder(weekIndex, dayInWeekIndex, 'first', activeMonthDay, activeMonthDate) === 'second') ?
+                  { backgroundColor: $themeBrand.secondary.v_50 } : {}
+            ]"
+            :class="[{
+              'calendar-days--disabled': isDateDisabled(weekIndex, dayInWeekIndex, activeMonthDay, activeMonthDate) || isDateDisabledLeft(weekIndex, dayInWeekIndex, activeMonthDay),
+              'selected-first': ( selectionOrder(weekIndex, dayInWeekIndex, 'first', activeMonthDay, activeMonthDate) === 'first'),
+              'selected-second': ( selectionOrder(weekIndex, dayInWeekIndex, 'first', activeMonthDay, activeMonthDate) === 'second')
             }]"
             @click="selectFirstItem(weekIndex, dayInWeekIndex)"
           >
@@ -57,7 +62,11 @@
           <li
             v-for="dayInWeekIndex in numOfDays"
             :key="dayInWeekIndex"
-            :style="buttonStyles"
+            :style="[
+              (selectionOrder(weekIndex, dayInWeekIndex, 'second', nextActiveMonthDay, nextActiveMonthDate) === 'first') ||
+                (selectionOrder(weekIndex, dayInWeekIndex, 'second', nextActiveMonthDay, nextActiveMonthDate) === 'second') ?
+                  { backgroundColor: $themeBrand.secondary.v_50 } : {}
+            ]"
             :class="[{
               'calendar-days--disabled': isDateDisabled(weekIndex, dayInWeekIndex, nextActiveMonthDay, nextActiveMonthDate) || isDateDisabledRight(weekIndex, dayInWeekIndex, nextActiveMonthDay),
               'selected-first': (selectionOrder(weekIndex, dayInWeekIndex, 'second', nextActiveMonthDay, nextActiveMonthDate) === 'first'),
@@ -133,6 +142,20 @@
         type: String,
         required: true,
       },
+      /**
+       *  label for previous month button
+       */
+      previousMonthText: {
+        type: String,
+        required: true,
+      },
+      /**
+       *  label for next month button
+       */
+      nextMonthText: {
+        type: String,
+        required: true,
+      },
     },
     data() {
       return {
@@ -145,7 +168,6 @@
         isFirstChoice: this.selectedStartDate ? true : false,
         activeMonth: new Date().getMonth() - 1,
         activeYearStart: new Date().getFullYear(),
-        activeYearEnd: new Date().getFullYear(),
       };
     },
     computed: {
@@ -179,16 +201,11 @@
       nextActiveMonth() {
         return this.activeMonth >= 11 ? 0 : this.activeMonth + 1;
       },
-      buttonStyles() {
-        return {
-          '--selected-button-bg-color': this.$themeBrand.secondary.v_50,
-          '--disabled-button-color': this.$themePalette.grey.v_300,
-        };
-      },
-    },
-    watch: {
-      nextActiveMonth(value) {
-        if (value === 0) this.activeYearEnd = this.activeYearStart + 1;
+      activeYearEnd() {
+        if (this.nextActiveMonth === 0) {
+          return this.activeYearStart + 1;
+        }
+        return this.activeYearStart;
       },
     },
     created() {
@@ -214,19 +231,18 @@
        * update end and start date of dateRange Object
        */
       getNewDateRange(result, activeMonth, activeYear) {
-        const newData = {};
-        let key = 'start';
-        if (!this.isFirstChoice) {
-          key = 'end';
-        } else {
-          newData['end'] = null;
-        }
         const resultDate = new Date(activeYear, activeMonth, result);
         if (!this.isFirstChoice && resultDate < this.dateRange.start) {
           this.isFirstChoice = false;
           return { start: resultDate };
         }
-
+        const newData = {};
+        let key = 'start';
+        if (!this.isFirstChoice) {
+          key = 'end';
+        } else {
+          newData.end = null;
+        }
         // toggle first choice
         this.isFirstChoice = !this.isFirstChoice;
         newData[key] = resultDate;
@@ -341,36 +357,30 @@
           nextActiveMonthDay,
           nextActiveMonthDate
         );
-        let lastDay = null;
-        if (key === 'first') {
-          lastDay = new Date(this.activeYearStart, this.activeMonth + 1, 0).getDate();
-        } else {
-          lastDay = new Date(this.activeYearEnd, this.nextActiveMonth + 1, 0).getDate();
-        }
+        const lastDay =
+          key === 'first'
+            ? new Date(this.activeYearStart, this.activeMonth + 1, 0).getDate()
+            : new Date(this.activeYearEnd, this.nextActiveMonth + 1, 0).getDate();
         return result === lastDay;
       },
       goPrevMonth() {
         const prevMonth = new Date(this.activeYearStart, this.activeMonth, 0);
         this.activeMonth = prevMonth.getMonth();
         this.activeYearStart = prevMonth.getFullYear();
-        this.activeYearEnd = prevMonth.getFullYear();
       },
       goNextMonth() {
         const nextMonth = new Date(this.activeYearEnd, this.nextActiveMonth, 2);
         this.activeMonth = nextMonth.getMonth();
         this.activeYearStart = nextMonth.getFullYear();
-        this.activeYearEnd = nextMonth.getFullYear();
       },
       isValidDate(date) {
-        return new Date(date) !== 'Invalid Date' && !isNaN(new Date(date));
+        return !isNaN(new Date(date));
       },
       getDate(key, day) {
-        let currDate = null;
-        if (key === 'first') {
-          currDate = new Date(this.activeYearStart, this.activeMonth, day);
-        } else {
-          currDate = new Date(this.activeYearEnd, this.nextActiveMonth, day);
-        }
+        const currDate =
+          key === 'first'
+            ? new Date(this.activeYearStart, this.activeMonth, day)
+            : new Date(this.activeYearEnd, this.nextActiveMonth, day);
         return currDate;
       },
       /**
@@ -454,20 +464,17 @@
   }
 
   .calendar-days li.calendar-days--disabled {
-    color: var(--disabled-button-color);
     pointer-events: none;
     cursor: not-allowed;
     opacity: 0.3;
   }
 
   li.selected-first {
-    background-color: var(--selected-button-bg-color);
     border-top-left-radius: 95px;
     border-bottom-left-radius: 80px;
   }
 
   li.selected-second {
-    background-color: var(--selected-button-bg-color);
     border-top-right-radius: 60px;
     border-bottom-right-radius: 60px;
   }

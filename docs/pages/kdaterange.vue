@@ -3,8 +3,8 @@
   <DocsPageTemplate apiDocs>
 
     <DocsPageSection title="Overview" anchor="#overview">
-      The KDateRange is a modal component that implements two KDateInput components 
-      and a KDateCalendar for a start and end date selection.
+      The KDateRange is a modal component that contains two input components and a calendar component that 
+      allow for a start and end date selection. 
       <div>
         <KButton text="open demo" :primary="true" appearance="flat-button" :style="{ marginTop: '5px' }" @click="modalShown = true" />
         <ClientOnly>
@@ -13,14 +13,15 @@
             class="demo"
             :firstAllowedDate="firstAllowedDate"
             :lastAllowedDate="lastAllowedDate"
-            :defaultStartDate="defaultStartDate"
             submitText="Generate"
             cancelText="Cancel"
             title="Select a date range"
-            description="The default start date is the last time you exported this log"
+            description="(Optional) Description of modal component"
             dateLocale="en-US"
             startDateLegendText="Start Date"
             endDateLegendText="End Date"
+            previousMonthText="Previous Month"
+            nextMonthText="Next Month"
             v-bind="errorMessages"
             @submit="modalShown = false"
             @cancel="modalShown = false"
@@ -45,7 +46,6 @@
     },
     data() {
       return {
-        defaultStartDate: new Date(2022, 8, 1),
         firstAllowedDate: new Date(2022, 0, 1),
         lastAllowedDate: new Date(),
         modalShown: false,

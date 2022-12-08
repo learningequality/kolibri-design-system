@@ -5,8 +5,9 @@
     :primary="false"
     appearance="flat-button"
     :appearanceOverrides="styleOverrides"
-    :style="buttonStyles"
+    :style="[inRangeStyle, selectedStyle]"
     :disabled="isDisabled"
+    :aria-hidden="isDisabled"
     :class="[{
       'calendar-days-selected': isSelected,
       'calendar-days-in-range': isInRange,
@@ -69,14 +70,23 @@
       return {};
     },
     computed: {
-      buttonStyles() {
-        return {
-          '--selected-button-bg-color': this.$themeBrand.secondary.v_600,
-          '--selected-button-text-color': this.$themePalette.white,
-          '--in-range-button-bg-color': this.$themeBrand.secondary.v_50,
-          '--in-range-button-text-color': this.$themePalette.grey.v_700,
-          '--in-range-button-hover-color': this.$themePalette.grey.v_200,
-        };
+      inRangeStyle() {
+        return this.isInRange
+          ? {
+              backgroundColor: this.$themeBrand.secondary.v_50,
+              ':hover': {
+                backgroundColor: this.$themePalette.grey.v_200,
+              },
+            }
+          : {};
+      },
+      selectedStyle() {
+        return this.isSelected
+          ? {
+              backgroundColor: this.$themeBrand.secondary.v_600,
+              color: this.$themePalette.white + '!important',
+            }
+          : {};
       },
       styleOverrides() {
         return {
@@ -110,19 +120,12 @@
 <style lang="css" scoped>
 
   button:hover,
+  button.calendar-days-selected,
   .calendar-days-in-range:hover {
-    background-color: var(--in-range-button-hover-color);
-    border-radius: 15px;
-  }
-
-  button.calendar-days-selected {
-    color: var(--selected-button-text-color) !important;
-    background-color: var(--selected-button-bg-color);
     border-radius: 15px;
   }
 
   .calendar-days-in-range {
-    background-color: var(--in-range-button-bg-color);
     border-radius: 0;
   }
 

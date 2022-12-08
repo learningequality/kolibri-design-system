@@ -1,7 +1,7 @@
 <template>
 
   <div>
-    <fieldset :aria-labelledby="legendText" class="date-input-fieldset" aria-describedby="date-desc" aria-live="polite">
+    <fieldset :aria-label="legendText" class="date-input-fieldset" :aria-describedby="inputId" aria-live="polite">
       <KTextBox
         :ref="inputRef"
         :value="value"
@@ -15,7 +15,7 @@
       />  
       <input type="hidden" name="date" :value="valueAsDate" data-test="valueAsDate">
       <span class="k-date-vhidden">
-        <span v-if="valueAsDate" id="date-desc">
+        <span v-if="valueAsDate" :id="inputId">
           {{ dateDescription }}
         </span>
       </span>
@@ -28,6 +28,7 @@
 <script>
 
   import { startOfDay } from 'date-fns';
+  import { v4 as uuidv4 } from 'uuid';
   import KTextBox from '../KTextbox';
   import { DATE_FMT } from './validationConstants';
 
@@ -71,14 +72,22 @@
           isNaN(this.valueAsDate)
         ) {
           return ' ';
-        } else {
-          return this.valueAsDate.toLocaleDateString(this.dateLocale, {
+        }
+        return (
+          this.legendText +
+          ' ' +
+          this.valueAsDate.toLocaleDateString(this.dateLocale, {
             year: 'numeric',
             weekday: 'long',
             month: 'long',
             day: 'numeric',
-          });
-        }
+          })
+        );
+      },
+      inputId() {
+        return `DateDesc_${uuidv4()
+          .split('-')
+          .pop()}`;
       },
     },
     methods: {

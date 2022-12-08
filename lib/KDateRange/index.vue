@@ -48,6 +48,8 @@
           :selectedStartDate="createDate(dateRange.start)"
           :selectedEndDate="createDate(dateRange.end)"
           :dateLocale="dateLocale"
+          :previousMonthText="previousMonthText"
+          :nextMonthText="nextMonthText"
           v-bind.sync="dateRange"
           @updateSelectedDates="setSelectedDatesFromCalendar"
         />
@@ -156,6 +158,20 @@
        *  End date input label
        */
       endDateLegendText: {
+        type: String,
+        required: true,
+      },
+      /**
+       *  label for previous month button
+       */
+      previousMonthText: {
+        type: String,
+        required: true,
+      },
+      /**
+       *  label for next month button
+       */
+      nextMonthText: {
         type: String,
         required: true,
       },
@@ -317,7 +333,6 @@
 
   .date-inputs {
     margin-left: -15px;
-    text-decoration-color: #616161;
   }
 
   .left-input {
