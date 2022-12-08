@@ -207,3 +207,13 @@
 
 </template>
 
+
+<script>
+
+  import responsiveWindowMixin from '~~/lib/KResponsiveWindowMixin.js';
+
+  export default {
+    mixins: [responsiveWindowMixin],
+  };
+
+</script>
