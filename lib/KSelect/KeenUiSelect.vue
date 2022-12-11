@@ -666,7 +666,7 @@
         }
 
         this.$emit('select', option, {
-          selected: this.multiple ? shouldSelect : true,
+          selected: this.isOptionSelected(option),
         });
 
         this.clearQuery();
