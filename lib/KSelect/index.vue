@@ -19,6 +19,7 @@
     :placeholder="placeholder"
     @change="handleChange"
     @blur="$emit('blur')"
+    @select="handleSelect"
   >
     <template #display>
       <slot name="display"></slot>
@@ -173,6 +174,9 @@
     methods: {
       handleChange(newSelection) {
         this.selection = newSelection;
+      },
+      handleSelect(newSelection, options) {
+        this.$emit('select', newSelection, options);
       },
     },
   };
