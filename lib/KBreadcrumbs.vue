@@ -27,6 +27,7 @@
               class="breadcrumbs-dropdown-item"
             >
               <KRouterLink
+                v-if="crumb.link"
                 class="krouter-item"
                 :text="crumb.text"
                 :to="crumb.link"
@@ -35,6 +36,7 @@
                   <span class="breadcrumbs-crumb-text" dir="auto">{{ text }}</span>
                 </template>
               </KRouterLink>
+              <span v-else dir="auto">{{ crumb.text }}</span>
             </li>
           </ol>
         </div>
@@ -49,6 +51,7 @@
             class="breadcrumbs-visible-item breadcrumbs-visible-item-notlast"
           >
             <KRouterLink
+              v-if="crumb.link"
               :text="crumb.text"
               :to="crumb.link"
               dir="auto"
@@ -57,6 +60,7 @@
                 <span class="breadcrumbs-crumb-text">{{ text }}</span>
               </template>
             </KRouterLink>
+            <span v-else>{{ crumb.text }}</span>
           </li>
 
           <li
@@ -87,11 +91,12 @@
             :key="index"
             class="breadcrumbs-visible-item breadcrumbs-visible-item-notlast"
           >
-            <KRouterLink :text="crumb.text" :to="crumb.link" tabindex="-1">
+            <KRouterLink v-if="crumb.link" :text="crumb.text" :to="crumb.link" tabindex="-1">
               <template #text="{ text }">
                 <span class="breadcrumbs-crumb-text">{{ text }}</span>
               </template>
             </KRouterLink>
+            <span v-else>{{ crumb.text }}</span>
           </li>
 
           <li
@@ -143,7 +148,9 @@
       /**
        * An array of objects, each with a `text` attribute (String) and a
        * `link` attribute (vue router link object). The `link` attribute
-       * of the last item in the array is optional and ignored.
+       * of the last item in the array is optional and ignored. The `link`
+       * attribute can be set to `null` which will render the breadcrumb only
+       * as text, regardless of its position in the breadcrumb.
        */
       items: {
         type: Array,
@@ -153,8 +160,8 @@
           if (!crumbItems.every(crumb => Boolean(crumb.text))) {
             return false;
           }
-          // All, but the last, must have a valid router link
-          return crumbItems.slice(0, -1).every(crumb => validateLinkObject(crumb.link));
+          // If link is truthy make sure it is a valid router link
+          return crumbItems.every(crumb => !crumb.link || validateLinkObject(crumb.link));
         },
       },
       /**
