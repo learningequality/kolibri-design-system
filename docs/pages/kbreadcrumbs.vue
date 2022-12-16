@@ -47,6 +47,21 @@
           />
         </DocsShow>
       </div>
+
+      <div>
+        Links to intermediary items can be disabled by omitting the <code>link</code> attribute, or making it falsey.
+
+        <DocsShow block>
+          <KBreadcrumbs
+            :items="[
+              { text: 'Global Digital Library', link: { path: '#' } },
+              { text: 'English' },
+              { text: 'Reading ', link: { path: '#' } },
+              { text: 'Level 2 ', link: { path: '#' } },
+            ]"
+          />
+        </DocsShow>
+      </div>
     </DocsPageSection>
 
     <DocsPageSection title="Placement" anchor="#placement">
