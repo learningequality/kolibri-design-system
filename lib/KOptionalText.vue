@@ -41,7 +41,7 @@
     },
     computed: {
       textEmpty() {
-        if (this.text) {
+        if (this.text && this.text.trim()) {
           return false;
         }
 
