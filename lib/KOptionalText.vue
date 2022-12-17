@@ -50,9 +50,6 @@
       },
     },
     methods: {
-      /**
-       * Returns the text to display
-       */
       getSlotsText() {
         if (!this.$slots.default || !this.$slots.default.length) {
           return '';
