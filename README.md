@@ -240,8 +240,7 @@ Large upgrades can result in a colossal git diff which makes reviewing changes o
 If you are working on the design system library code in this repo and want to see local updates reflected in other applications that are using this library, then you will need to do a few things.
 
 1. While in the root of your local `kolibri-design-system` repository, run `yarn link`.
-2. In the application where you intend to use `kolibri-design-system` remove the reference to `kolibri-design-system` from the `package.json` of that project.
-3. In the root of the application where you intend to use `kolibri-design-system` run `yarn link kolibri-design-system` and then `yarn install`.
+2. In the root of the application where you intend to use `kolibri-design-system` run `yarn link kolibri-design-system` and then `yarn install`.
 
 Now, when you run the application your changes in `kolibri-design-system` will be updated live where your app expects its dependency on `kolibri-design-system` to live.
 
