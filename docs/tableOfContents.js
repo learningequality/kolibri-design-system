@@ -191,6 +191,11 @@ export default [
         isCode: true,
       }),
       new Page({
+        path: '/kdaterange',
+        title: 'KDateRange',
+        isCode: true,
+      }),
+      new Page({
         path: '/kdropdownmenu',
         title: 'KDropdownMenu',
         isCode: true,
