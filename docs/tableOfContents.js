@@ -59,6 +59,7 @@ const buttonRelatedKeywords = ['button', 'link'];
 const textRelatedKeywords = ['text', 'area', 'field', 'box'];
 const layoutRelatedKeywords = ['grid', 'layout', 'container', 'page'];
 const responsiveComponentsRelatedKeywords = ['responsive', 'mixin', 'breakpoint'];
+const tabsRelatedKeywords = ['tab', 'tabs', 'panel', 'tablist', 'tabpanel'];
 
 export default [
   new Section({
@@ -153,6 +154,10 @@ export default [
       new Page({
         path: '/snackbars',
         title: 'Snackbars',
+      }),
+      new Page({
+        path: '/tabs',
+        title: 'Tabs',
       }),
       new Page({
         path: '/textfields',
@@ -324,6 +329,24 @@ export default [
         title: 'KResponsiveElement',
         isCode: true,
         keywords: [...responsiveComponentsRelatedKeywords, 'element'],
+      }),
+      new Page({
+        path: '/ktabs',
+        title: 'KTabs',
+        isCode: true,
+        keywords: tabsRelatedKeywords,
+      }),
+      new Page({
+        path: '/ktabslist',
+        title: 'KTabsList',
+        isCode: true,
+        keywords: tabsRelatedKeywords,
+      }),
+      new Page({
+        path: '/ktabspanel',
+        title: 'KTabsPanel',
+        isCode: true,
+        keywords: tabsRelatedKeywords,
       }),
     ],
   }),
