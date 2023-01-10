@@ -1,6 +1,6 @@
 <template>
 
-  <span v-if="!textEmpty" :style="textStyle">
+  <span v-if="!textEmpty" :style="appearanceOverrides">
     <template v-if="text">
       {{ text }}
     </template>
@@ -34,7 +34,7 @@
       /**
        * If provided, sets the styles of the text
        */
-      textStyle: {
+      appearanceOverrides: {
         type: Object,
         default: null,
       },
@@ -55,13 +55,16 @@
           return '';
         }
 
-        return this.$slots.default
+        return this.getNodesText(this.$slots.default);
+      },
+      getNodesText(nodes) {
+        return nodes
           .map(node => {
             if (node.text) {
               return node.text;
             }
             if (node.children) {
-              return node.children.map(child => child.text).join('');
+              return this.getNodesText(node.children);
             }
             return '';
           })
