@@ -1,0 +1,159 @@
+<template>
+
+  <div>
+    <img
+      id="kimg"
+      :src="src"
+      :alt="alternateText"
+      :style="cssVars"
+    >
+    <slot></slot>
+  </div>
+
+</template>
+
+
+<script>
+
+  export default {
+    name: 'KImg',
+    props: {
+      /**
+       * Sets the image path
+       */
+      src: {
+        type: String,
+        default: null,
+      },
+      /**
+       * Alternate text for the image. This is required and will throw a warning when it's not provided (empty) unless isDecorative is true
+       */
+      altText: {
+        type: String,
+        default: '',
+      },
+      /**
+       * Sets the image as decorative. This sets the alt image property to an empty string.
+       */
+      isDecorative: {
+        type: Boolean,
+        default: false,
+      },
+      /**
+       * Sets the height for the component
+       */
+      height: {
+        type: [Number, String],
+        default: undefined,
+      },
+      /**
+       * Sets the width for the component
+       */
+      width: {
+        type: [Number, String],
+        default: undefined,
+      },
+      /**
+       * Sets the maximum height for the component
+       */
+      maxHeight: {
+        type: [Number, String],
+        default: undefined,
+      },
+      /**
+       * Sets the minimum height for the component
+       */
+      minHeight: {
+        type: [Number, String],
+        default: undefined,
+      },
+      /**
+       * Sets the maximum width for the component
+       */
+      maxWidth: {
+        type: [Number, String],
+        default: undefined,
+      },
+      /**
+       * 	Sets the minimum width for the component
+       */
+      minWidth: {
+        type: [Number, String],
+        default: undefined,
+      },
+    },
+    computed: {
+      alternateText() {
+        return this.isDecorative ? '' : this.altText;
+      },
+      imgHeight() {
+        return this.validateAndFormatUnits(this.height);
+      },
+      imgWidth() {
+        return this.validateAndFormatUnits(this.width);
+      },
+      imgMaxHeight() {
+        return this.validateAndFormatUnits(this.maxHeight);
+      },
+      imgMinHeight() {
+        return this.validateAndFormatUnits(this.minHeight);
+      },
+      imgMaxWidth() {
+        return this.validateAndFormatUnits(this.maxWidth);
+      },
+      imgMinWidth() {
+        return this.validateAndFormatUnits(this.minWidth);
+      },
+      cssVars() {
+        return {
+          '--height': this.imgHeight,
+          '--width': this.imgWidth,
+          '--max-height': this.imgMaxHeight,
+          '--min-height': this.imgMinHeight,
+          '--max-width': this.imgMaxWidth,
+          '--min-width': this.imgMinWidth,
+        };
+      },
+    },
+    created() {
+      if (!this.isDecorative && !this.altText) {
+        throw new Error('Missing required prop - provide altText or indicate isDecorative');
+      }
+    },
+    methods: {
+      validateAndFormatUnits(propValue) {
+        if (propValue) {
+          if (Number.isInteger(propValue)) {
+            return `${propValue}px`;
+          } else {
+            // split numbers apart from units
+            const [, ...arr] = propValue.match(/(\d*)([\s\S]*)/);
+            const validUnits = ['px', 'em', 'rem', 'vh'];
+
+            // if made up of valid numbers and valid units
+            if (!isNaN(arr[0]) && validUnits.includes(arr[1])) {
+              return propValue;
+            }
+          }
+        }
+        return 'auto';
+      },
+    },
+  };
+
+</script>
+
+
+<style scoped>
+
+  #kimg {
+    height: var(--height);
+    width: var(--width);
+    max-height: var(--max-height);
+    min-height: var(--min-height);
+    max-width: var(--max-width);
+    min-width: var(--min-width);
+  }
+
+</style>
+
