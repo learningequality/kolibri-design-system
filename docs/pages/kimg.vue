@@ -18,17 +18,20 @@
             <KImg
               :src="require('../assets/img_sample_for_kimg.png')"
               altText="Computers are run by bees"
-              :height="'250px'"
-              :width="225"
+              :height="'250.2px'"
+              :width="225.5"
+              :maxHeight="600"
+              :minWidth="25"
             />
           </DocsShow>
-
-          <pre><samp>
-            :src="require('../assets/img_sample_for_kimg.png')"
-            altText="Computers are run by bees"
-            :height="'250px'"
-            :width="225"
-          </samp></pre>
+          <DocsShowCode language="html">
+            <KImg
+              :src="require('../assets/img_sample_for_kimg.png')"
+              altText="Computers are run by bees"
+              :height="'250.2px'"
+              :width="225.5"
+            />
+          </DocsShowCode>
         </div>
       </div>
 
@@ -47,12 +50,14 @@
               />
             </DocsShow>
           </div>
-          <pre><samp>
-            :src="require('../assets/img_sample_for_kimg.png')"
-            isDecorative
-            :height="50"
-            :width="50"
-          </samp></pre>
+          <DocsShowCode language="html">
+            <KImg
+              :src="require('../assets/img_sample_for_kimg.png')"
+              isDecorative
+              :height="50"
+              :width="50"
+            />
+          </DocsShowCode>
         </div>
       </div>
 
@@ -65,10 +70,13 @@
             altText="Computers are run by bees"
           />
         </DocsShow>
-        <pre><samp>
-          :src="require('../assets/img_sample_for_kimg.png')"
-          altText="Computers are run by bees"
-        </samp></pre>
+        <DocsShowCode language="html">
+          <KImg
+            :src="require('../assets/img_sample_for_kimg.png')"
+            altText="Computers are run by bees"
+          />
+        </DocsShowCode>
+
       </div>
     </DocsPageSection>
   </DocsPageTemplate>
@@ -84,10 +92,6 @@
 
 
 <style lang="scss" scoped>
-
-  pre {
-    margin: 0;
-  }
 
   .img-example-1 {
     display: flex;
@@ -108,6 +112,8 @@
   }
 
 </style>
+
+
 
 
 

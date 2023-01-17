@@ -236,6 +236,7 @@ export default [
         path: '/kimg',
         title: 'KImg',
         isCode: true,
+        keywords: ['image', 'img'],
       }),
       new Page({
         path: '/klabeledicon',

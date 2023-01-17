@@ -2,10 +2,9 @@
 
   <div>
     <img
-      id="kimg"
       :src="src"
       :alt="alternateText"
-      :style="cssVars"
+      :style="styleObject"
     >
     <slot></slot>
   </div>
@@ -82,6 +81,18 @@
         default: undefined,
       },
     },
+    data() {
+      return {
+        styleObject: {
+          height: this.imgHeight,
+          width: this.imgWidth,
+          maxHeight: this.imgMaxHeight,
+          minHeight: this.imgMinHeight,
+          maxWidth: this.imgMaxWidth,
+          minWidth: this.imgMinWidth,
+        },
+      };
+    },
     computed: {
       alternateText() {
         return this.isDecorative ? '' : this.altText;
@@ -104,16 +115,6 @@
       imgMinWidth() {
         return this.validateAndFormatUnits(this.minWidth);
       },
-      cssVars() {
-        return {
-          '--height': this.imgHeight,
-          '--width': this.imgWidth,
-          '--max-height': this.imgMaxHeight,
-          '--min-height': this.imgMinHeight,
-          '--max-width': this.imgMaxWidth,
-          '--min-width': this.imgMinWidth,
-        };
-      },
     },
     created() {
       if (!this.isDecorative && !this.altText) {
@@ -123,12 +124,26 @@
     methods: {
       validateAndFormatUnits(propValue) {
         if (propValue) {
-          if (Number.isInteger(propValue)) {
+          if (!isNaN(propValue)) {
             return `${propValue}px`;
           } else {
             // split numbers apart from units
-            const [, ...arr] = propValue.match(/(\d*)([\s\S]*)/);
-            const validUnits = ['px', 'em', 'rem', 'vh'];
+            const [, ...arr] = propValue.match(/(\d*\.?\d+)([a-zA-Z | %]*)/);
+            const validUnits = [
+              '%',
+              'cm',
+              'em',
+              'ex',
+              'ch',
+              'in',
+              'lh',
+              'mm',
+              'px',
+              'rem',
+              'rlh',
+              'vh',
+              'vw',
+            ];
 
             // if made up of valid numbers and valid units
             if (!isNaN(arr[0]) && validUnits.includes(arr[1])) {
@@ -136,7 +151,6 @@
             }
           }
         }
-        return 'auto';
       },
     },
   };
@@ -144,16 +158,4 @@
 </script>
 
 
-<style scoped>
-
-  #kimg {
-    height: var(--height);
-    width: var(--width);
-    max-height: var(--max-height);
-    min-height: var(--min-height);
-    max-width: var(--max-width);
-    min-width: var(--min-width);
-  }
-
-</style>
-
+<style scoped></style>
