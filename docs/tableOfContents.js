@@ -233,6 +233,12 @@ export default [
         keywords: buttonRelatedKeywords,
       }),
       new Page({
+        path: '/kimg',
+        title: 'KImg',
+        isCode: true,
+        keywords: ['image', 'img'],
+      }),
+      new Page({
         path: '/klabeledicon',
         title: 'KLabeledIcon',
         isCode: true,
