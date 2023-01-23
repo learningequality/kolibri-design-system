@@ -166,7 +166,7 @@
         },
         numOfDays: 7,
         isFirstChoice: this.selectedStartDate ? true : false,
-        activeMonth: new Date().getMonth() - 1,
+        activeMonth: new Date().getMonth() - 1 == -1 ? 11 : new Date().getMonth() - 1,
         activeYearStart: new Date().getFullYear(),
       };
     },
@@ -209,7 +209,7 @@
       },
     },
     created() {
-      if (this.activeMonth === 11) this.activeYearEnd = this.activeYearStart + 1;
+      if (this.activeMonth === 11) this.activeYearStart = this.activeYearStart - 1;
     },
     methods: {
       /**
@@ -433,7 +433,6 @@
   .calendar {
     height: auto;
     margin-right: 5px;
-    font-family: 'Noto Sans';
     font-size: 14px;
     background: white;
   }
