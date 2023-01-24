@@ -22,12 +22,20 @@
         type: Boolean,
         default: true,
       },
+      /**
+       * Toggles dark background
+       */
+      dark: {
+        type: Boolean,
+        required: false,
+      },
     },
     computed: {
       style() {
         return {
           display: this.block ? 'block' : 'inline-block',
           padding: this.padding ? '8px 24px' : null,
+          backgroundColor: this.dark ? this.$themePalette.grey.v_500 : undefined,
         };
       },
     },
