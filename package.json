@@ -38,7 +38,7 @@
   "devDependencies": {
     "@material-icons/svg": "git+https://github.com/material-icons/material-icons.git",
     "@mdi/svg": "^5.9.55",
-    "@vuedoc/parser": "^1.4.0",
+    "@vuedoc/parser": "^3.4.0",
     "babel-jest": "^27.4.6",
     "chokidar-cli": "^2.1.0",
     "consola": "^2.15.3",
