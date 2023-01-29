@@ -77,7 +77,7 @@
     },
     methods: {
       handleOpen() {
-        this.$nextTick(() => this.setFocus());
+        this.$nextTick(() => this.$nextTick(() => this.setFocus()));
         window.addEventListener('keydown', this.handleOpenMenuNavigation, true);
       },
       setFocus() {
