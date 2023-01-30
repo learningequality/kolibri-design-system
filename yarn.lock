@@ -10017,10 +10017,10 @@ mixin-deep@^1.2.0:
   dependencies:
     minimist "^1.2.5"
 
-mock-match-media@^0.3.0:
-  version "0.3.0"
-  resolved "https://registry.yarnpkg.com/mock-match-media/-/mock-match-media-0.3.0.tgz#1fff5e70edaa0a37e7f2b5f1e75fe77aec79a09e"
-  integrity sha512-fT0MDsCcTSITZMyz9w7kU/tFJ/Lmrcrr6EVHS9cfcog46202YKGlpmBAXKzr25XpqMfTyufZJHwMFp+B4IfknQ==
+mock-match-media@^0.4.2:
+  version "0.4.2"
+  resolved "https://registry.yarnpkg.com/mock-match-media/-/mock-match-media-0.4.2.tgz#d054acd99579c58eec49b0a824cc7655ec6049e4"
+  integrity sha512-1Q/Z7cfqWVTZd5Iz0bLxqzl6/8vaPl4KxxciRSRu+TCeGxRlxGDgjwWre0KkHlfS01r1iGCUWuF0n3ftvS/C/A==
   dependencies:
     css-mediaquery "^0.1.2"
 
