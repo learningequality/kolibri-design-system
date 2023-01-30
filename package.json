@@ -49,7 +49,7 @@
     "kolibri-tools": "0.15.0-dev.4",
     "lockr": "^0.8.4",
     "material-design-icons": "^3.0.1",
-    "mock-match-media": "^0.3.0",
+    "mock-match-media": "^0.4.2",
     "normalize.css": "^8.0.1",
     "npm-run-all": "^4.1.5",
     "nuxt": "2.11.0",
