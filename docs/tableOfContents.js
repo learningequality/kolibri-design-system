@@ -175,6 +175,11 @@ export default [
         isCode: true,
       }),
       new Page({
+        path: '/koptionaltext',
+        title: 'KOptionalText',
+        isCode: true,
+      }),
+      new Page({
         path: '/kcheckbox',
         title: 'KCheckbox',
         isCode: true,

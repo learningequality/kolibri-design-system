@@ -5,6 +5,7 @@
       {{ text }}
     </template>
     <template v-else>
+      <!-- @slot Pass sub-components to render, if none of the nodes in the entire node hierarchy contain text, then the `KEmptyPlaceholder` component will be rendered -->
       <slot></slot>
     </template>
   </span>
@@ -25,7 +26,7 @@
     },
     props: {
       /**
-       * Text to display
+       * Text to display. If the text is missing or empty, then `KEmptyPlaceholder` will be rendered
        */
       text: {
         type: String,
@@ -35,7 +36,7 @@
        * If provided, sets the styles of the text
        */
       appearanceOverrides: {
-        type: Object,
+        type: [Object, String],
         default: null,
       },
     },
