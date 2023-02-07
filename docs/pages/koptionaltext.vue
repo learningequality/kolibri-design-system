@@ -9,7 +9,7 @@
         Using the KOptionalText component is preferred to leaving a empty or blank space because it communicates to the user that a value <em>could</em> possibly exist there, and aids with visual scanning in tables, grids, and lists of data.
       </p>
     </DocsPageSection>
-    <DocsPageSection title="Example" anchor="#example">
+    <DocsPageSection title="Example using props" anchor="#example-props">
       <p>
         In the example below, an average score cannot be calculated until the user has attempted at least one exercise:
       </p>
@@ -65,11 +65,82 @@
           </tbody>
         </table>
       </DocsShow>
+      <p>
+        For this example, `text` prop is used to pass in the text to be displayed. If the text is empty or undefined, the placeholder will be displayed:
+      </p>
+      <!-- eslint-disable -->
+      <!-- prevent prettier from changing indentation -->
+      <DocsShowCode language="html">
+    <KOptionalText text="9%" :appearanceOverrides="{ color: 'red' }" />
+    <KOptionalText text="" /> <!-- empty string, show placeholder -->
+      </DocsShowCode>
+      <!-- eslint-enable -->
     </DocsPageSection>
-
+    <DocsPageSection title="Example using slot" anchor="#example-slot">
+      <p>
+        In the example below, it displays user information, highlighting the user's last name, but first and last names are optional:
+      </p>
+      <DocsShow>
+        <ul>
+          <li>
+            <strong>Id:</strong> 1
+          </li>
+          <li>
+            <strong>Name:&nbsp;</strong>
+            <KOptionalText>
+              <span> </span>
+              <span style="color: black; background: yellow;"> </span>
+            </KOptionalText>
+          </li>
+          ...
+        </ul>
+      </DocsShow>
+      <p>
+        An example of a user that has a first and last name:
+      </p>
+      <DocsShow>
+        <ul>
+          <li>
+            <strong>Id:</strong> 2
+          </li>
+          <li>
+            <strong>Name:&nbsp;</strong>
+            <KOptionalText>
+              <span>Peter</span>
+              <span style="color: black; background: yellow;">Jhonson</span>
+            </KOptionalText>
+          </li>
+          ...
+        </ul>
+      </DocsShow>
+      <p>
+        For this example, component slot is used to pass in some spans to be displayed. Slots can be used when there is a more complex structure to be displayed.
+      </p>
+      <!-- eslint-disable -->
+      <!-- prevent prettier from changing indentation -->
+      <DocsShowCode language="html">
+    <KOptionalText>
+      {{ userExampleName }}
+      {{ userExampleLastName }}
+    </KOptionalText>
+      </DocsShowCode>
+      <!-- eslint-enable -->
+    </DocsPageSection>
   </DocsPageTemplate>
 
 </template>
+
+
+<script>
+
+  export default {
+    data: () => ({
+      userExampleName: '<span> {{ user.name }} </span>',
+      userExampleLastName: '<span class="highlight"> {{ user.lastname }} </span>',
+    }),
+  };
+
+</script>
 
 
 <style lang="scss" scoped>
