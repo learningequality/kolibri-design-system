@@ -32,7 +32,6 @@
         :class="$computedClass({ ':focus': $coreOutline })"
         :tabindex="disabled ? null : '0'"
 
-        @click="toggleDropdown"
         @focus="onFocus"
         @keydown.enter.prevent="openDropdown"
         @keydown.space.prevent="openDropdown"
@@ -75,11 +74,18 @@
           />
         </div>
 
-        <transition name="ui-select-transition-fade">
+        <UiPopover
+          ref="dropdown"
+          class="ui-select-dropdown"
+
+          :zIndex="202"
+
+          @close="onClose"
+          @open="onOpen"
+        >
           <div
-            v-show="showDropdown"
-            ref="dropdown"
-            class="ui-select-dropdown"
+            ref="dropdownContent"
+            class="ui-select-dropdown-content"
             :style="{ color: $themeTokens.primary, backgroundColor: $themeTokens.surface, bottom: dropdownButtonBottom }"
             tabindex="-1"
             @keydown.enter.prevent.stop="selectHighlighted"
@@ -166,7 +172,7 @@
               </div>
             </ul>
           </div>
-        </transition>
+        </UiPopover>
       </div>
 
       <div v-if="hasFeedback" class="ui-select-feedback">
@@ -194,6 +200,7 @@
   import startswith from 'lodash/startsWith';
   import sortby from 'lodash/sortBy';
   import UiIcon from '../keen/UiIcon';
+  import UiPopover from '../keen/UiPopover';
 
   import { looseIndexOf, looseEqual } from '../keen/helpers/util';
   import { scrollIntoView, resetScroll } from '../keen/helpers/element-scroll';
@@ -204,6 +211,7 @@
     name: 'KeenUiSelect',
     components: {
       UiIcon,
+      UiPopover,
       KeenUiSelectOption,
     },
     props: {
@@ -319,7 +327,6 @@
         isActive: false,
         isTouched: false,
         highlightedOption: null,
-        showDropdown: false,
         initialValue: JSON.stringify(this.value),
         quickMatchString: '',
         quickMatchTimeout: null,
@@ -463,7 +470,6 @@
             option[this.keys.label].toLowerCase(),
             this.quickMatchString.toLowerCase()
           );
-
           return option;
         });
       },
@@ -500,16 +506,6 @@
         resetScroll(this.$refs.optionsList);
       },
 
-      showDropdown() {
-        if (this.showDropdown) {
-          this.onOpen();
-          this.$emit('dropdown-open');
-        } else {
-          this.onClose();
-          this.$emit('dropdown-close');
-        }
-      },
-
       query() {
         this.$emit('query-change', this.query);
       },
@@ -534,7 +530,7 @@
     },
 
     mounted() {
-      document.addEventListener('click', this.onExternalClick);
+      this.addExternalClickListener(this.$el, this.onExternalClick);
       // Find nearest scrollable ancestor
       this.scrollableAncestor = this.$el;
       while (
@@ -555,10 +551,29 @@
     },
 
     beforeDestroy() {
-      document.removeEventListener('click', this.onExternalClick);
+      this.removeExternalClickListener();
     },
 
     methods: {
+      addExternalClickListener(element = this.$el, callback = null) {
+        this.externalClickListener = e => {
+          if (!element.contains(e.target)) {
+            if (typeof callback === 'function') {
+              callback(e);
+            } else {
+              this.$emit('external-click', e);
+            }
+          }
+        };
+
+        document.addEventListener('click', this.externalClickListener);
+      },
+
+      removeExternalClickListener() {
+        document.removeEventListener('click', this.externalClickListener);
+        this.externalClickListener = null;
+      },
+
       setValue(value) {
         value = value ? value : this.multiple ? [] : '';
 
@@ -743,11 +758,6 @@
         this.query = '';
       },
 
-      toggleDropdown() {
-        this.calculateSpaceBelow();
-        this[this.showDropdown ? 'closeDropdown' : 'openDropdown']();
-      },
-
       openDropdown() {
         if (this.disabled || this.clearableState) {
           return;
@@ -757,7 +767,7 @@
           this.highlightNextOption();
         }
 
-        this.showDropdown = true;
+        this.$refs.dropdown.open();
         // IE: clicking label doesn't focus the select element
         // to set isActive to true
         if (!this.isActive) {
@@ -766,7 +776,7 @@
       },
 
       closeDropdown(options = { autoBlur: false }) {
-        this.showDropdown = false;
+        this.$refs.dropdown.close();
         this.query = '';
         if (!this.isTouched) {
           this.isTouched = true;
@@ -780,8 +790,35 @@
         }
       },
 
+      // !!!!!!!!!!!!!!! functionality lost due to refactoring when updating this file to align with
+      // changes KeenUI's made to their source code to fix "dropdown getting stuck inside modal" problem -- KeenUi also
+      // refactored their UiPopover, adding in a new JS dropdown library and a couple related dependencies. i wanted to
+      // avoid expanding the scope of this PR and its testing so did not make the same changes to our vendored UiPopover,
+      // concerned about unintended effects on our other components that use our current version of UiPopover.
+
+      // i have attempted to take what we need from KeenUI's update to UiSelect and accomplish the rest through
+      // additional functions & CSS targeting. the dropdown now extends beyond the modal as desired but you cannot tab
+      // through it and it does not highlight upon mouseover (though that specifically could be solved with CSS :hover
+      // targeting, it doesn't address the underlying loss of functionality)
+      //
+      // each time i end up in a tangle...some highlights (lowlights haha):
+
+      // - with unintended side effects leading to behavior of dropdown closing upon highlight;
+
+      // - unsuccessfully attempted to adapt functionality from KDropdownMenu where UiPopover is ostensibly working with
+      // highlight functions [rather than CSS targeting of :hover] & tabbing through options;
+      //
+      // - this onMouseover function is "working" and mouseovers are registering, still not providing desired
+      // highlight-upon-hover functionality;
+      //
+      // - CSS targeting of each element on :hover in KeenUiSelectOption solves highlight-upon-hover issue on surface
+      // level but does not address inability to tab through options and simply disguises broken functionality underneath).
+      //
+
+      // have tried to clean up most attempts since they were muddying the waters 🫠
+
       onMouseover(option) {
-        if (this.showDropdown) {
+        if (this.$refs.dropdown.isOpen()) {
           this.highlightOption(option, { autoScroll: false });
         }
       },
@@ -799,15 +836,20 @@
         this.isActive = false;
         this.$emit('blur', e);
 
-        if (this.showDropdown) {
+        if (this.$refs.dropdown.isOpen()) {
           this.closeDropdown({ autoBlur: true });
         }
       },
 
       onOpen() {
+        document.addEventListener('scroll', this.onExternalScroll, true);
+        this.$emit('dropdown-open');
+
+        this.$refs.dropdown.$el.style.width = this.$refs.label.getBoundingClientRect().width + 'px';
+
         this.highlightedOption = this.multiple ? null : this.value;
         this.$nextTick(() => {
-          this.$refs[this.hasSearch ? 'searchInput' : 'dropdown'].focus();
+          this.$refs[this.hasSearch ? 'searchInput' : 'dropdownContent'].focus();
           const selectedOption = this.$refs.optionsList.querySelector('.is-selected');
           if (selectedOption) {
             this.scrollOptionIntoView(selectedOption);
@@ -820,16 +862,24 @@
       },
 
       onClose() {
+        document.removeEventListener('scroll', this.onExternalScroll, true);
+
         this.highlightedOption = this.multiple ? null : this.value;
+
+        this.$emit('dropdown-close');
       },
 
-      onExternalClick(e) {
-        if (!this.$el.contains(e.target)) {
-          if (this.showDropdown) {
-            this.closeDropdown({ autoBlur: true });
-          } else if (this.isActive) {
-            this.isActive = false;
-          }
+      onExternalClick() {
+        if (this.$refs.dropdown.isOpen()) {
+          this.closeDropdown({ autoBlur: true });
+        } else if (this.isActive) {
+          this.isActive = false;
+        }
+      },
+
+      onExternalScroll(e) {
+        if (e.target !== this.$refs.optionsList) {
+          this.closeDropdown();
         }
       },
 
@@ -853,6 +903,7 @@
       resetTouched(options = { touched: false }) {
         this.isTouched = options.touched;
       },
+
       calculateSpaceBelow() {
         // Get the height of element
         const buttonHeight = this.$el.getBoundingClientRect().height;
@@ -998,7 +1049,6 @@
   }
 
   .ui-select-label {
-    position: relative;
     display: block;
     width: 100%;
     padding: 0;
@@ -1072,7 +1122,6 @@
 
   .ui-select-dropdown {
     position: absolute;
-    z-index: $z-index-dropdown;
     display: block;
     width: 100%;
     min-width: rem-calc(180px);
@@ -1081,7 +1130,10 @@
     margin-bottom: rem-calc(8px);
     list-style-type: none;
     outline: none;
-    box-shadow: 1px 2px 8px $md-grey-600;
+  }
+
+  .ui-select-dropdown-content {
+    outline: none;
   }
 
   .ui-select-search-input {
@@ -1168,20 +1220,6 @@
       margin-right: 0;
       margin-left: rem-calc(8px);
     }
-  }
-
-  // ================================================
-  // Transitions
-  // ================================================
-
-  .ui-select-transition-fade-enter-active,
-  .ui-select-transition-fade-leave-active {
-    transition: opacity 0.2s ease;
-  }
-
-  .ui-select-transition-fade-enter,
-  .ui-select-transition-fade-leave-active {
-    opacity: 0;
   }
 
   /* stylelint-enable */
