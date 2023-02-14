@@ -80,7 +80,7 @@
             v-show="showDropdown"
             ref="dropdown"
             class="ui-select-dropdown"
-            :style="{ color: $themeTokens.primary, backgroundColor: $themeTokens.surface }"
+            :style="{ color: $themeTokens.primary, backgroundColor: $themeTokens.surface, bottom: dropdownButtonBottom }"
             tabindex="-1"
             @keydown.enter.prevent.stop="selectHighlighted"
             @keydown.space.prevent.stop="selectHighlighted"
@@ -323,6 +323,9 @@
         initialValue: JSON.stringify(this.value),
         quickMatchString: '',
         quickMatchTimeout: null,
+        scrollableAncestor: null,
+        dropdownButtonBottom: 'auto',
+        maxDropdownHeight: 256,
       };
     },
 
@@ -532,6 +535,23 @@
 
     mounted() {
       document.addEventListener('click', this.onExternalClick);
+      // Find nearest scrollable ancestor
+      this.scrollableAncestor = this.$el;
+      while (
+        (this.scrollableAncestor &&
+          this.scrollableAncestor.clientHeight < this.scrollableAncestor.scrollHeight) ||
+        !/auto|scroll/.test(window.getComputedStyle(this.scrollableAncestor).overflowY)
+      ) {
+        if (!this.scrollableAncestor.parentNode) {
+          break;
+        }
+        this.scrollableAncestor = this.scrollableAncestor.parentNode;
+
+        // Stop if we reach the body-- tagName is likely uppercase
+        if (/body/i.test(this.scrollableAncestor.tagName)) {
+          break;
+        }
+      }
     },
 
     beforeDestroy() {
@@ -666,7 +686,7 @@
         }
 
         this.$emit('select', option, {
-          selected: this.multiple ? shouldSelect : true,
+          selected: !this.isOptionSelected(option),
         });
 
         this.clearQuery();
@@ -724,6 +744,7 @@
       },
 
       toggleDropdown() {
+        this.calculateSpaceBelow();
         this[this.showDropdown ? 'closeDropdown' : 'openDropdown']();
       },
 
@@ -737,7 +758,6 @@
         }
 
         this.showDropdown = true;
-
         // IE: clicking label doesn't focus the select element
         // to set isActive to true
         if (!this.isActive) {
@@ -832,6 +852,22 @@
 
       resetTouched(options = { touched: false }) {
         this.isTouched = options.touched;
+      },
+      calculateSpaceBelow() {
+        // Get the height of element
+        const buttonHeight = this.$el.getBoundingClientRect().height;
+
+        // Get the position of the element relative to the viewport
+        const buttonPosition = this.$el.getBoundingClientRect().top;
+
+        // Check if there is enough space below element
+        // and update the "dropdownButtonBottom" data property accordingly
+        const notEnoughSpaceBelow =
+          buttonPosition > this.maxDropdownHeight &&
+          this.scrollableAncestor.offsetHeight - buttonPosition <
+            buttonHeight + this.maxDropdownHeight;
+
+        this.dropdownButtonBottom = notEnoughSpaceBelow ? buttonHeight + 'px' : 'auto';
       },
     },
   };

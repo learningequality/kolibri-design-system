@@ -180,6 +180,11 @@ export default [
         isCode: true,
       }),
       new Page({
+        path: '/koptionaltext',
+        title: 'KOptionalText',
+        isCode: true,
+      }),
+      new Page({
         path: '/kcheckbox',
         title: 'KCheckbox',
         isCode: true,
@@ -236,6 +241,12 @@ export default [
         title: 'KIconButton',
         isCode: true,
         keywords: buttonRelatedKeywords,
+      }),
+      new Page({
+        path: '/kimg',
+        title: 'KImg',
+        isCode: true,
+        keywords: ['image', 'img'],
       }),
       new Page({
         path: '/klabeledicon',
