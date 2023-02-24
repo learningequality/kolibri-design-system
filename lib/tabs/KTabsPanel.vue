@@ -18,7 +18,8 @@
 
 <script>
 
-  import { getTabElementId, getTabPanelElementId, getFirstFocusableChild } from './utils';
+  import { getFirstFocusableChild } from '../utils/focusManagement';
+  import { getTabElementId, getTabPanelElementId } from './utils';
 
   /**
    * A part of a tabbed interface that displays
