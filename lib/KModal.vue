@@ -365,7 +365,6 @@
     top: 50%;
     left: 50%;
     margin: 0 auto;
-    overflow-y: auto;
     border-radius: $radius;
     transform: translate(-50%, -50%);
 
@@ -396,7 +395,6 @@
 
   .content {
     padding: 0 24px;
-    overflow-x: hidden;
   }
 
   .scroll-shadow {
