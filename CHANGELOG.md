@@ -15,6 +15,8 @@ Releases are recorded as git tags in the [Github releases](https://github.com/le
 - [#380] - Wrap `KRadioButton` text.
 - [#384] - Add `KDateRange` to KDS
 - [#403] - Add `KOptionalText` to KDS
+- [#420] - Add `KTabs`, `KTabsList`, and `KTabsPanel`
+- [#420] - Fix randomly missing focus ring
 
 <!-- Referenced PRs -->
 [#351]: https://github.com/learningequality/kolibri-design-system/pull/351
@@ -25,6 +27,7 @@ Releases are recorded as git tags in the [Github releases](https://github.com/le
 [#380]: https://github.com/learningequality/kolibri-design-system/pull/380
 [#384]: https://github.com/learningequality/kolibri-design-system/pull/384
 [#403]: https://github.com/learningequality/kolibri-design-system/pull/403
+[#420]: https://github.com/learningequality/kolibri-design-system/pull/420
 
 ## Version 1.4.x
 
