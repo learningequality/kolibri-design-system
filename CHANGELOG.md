@@ -3,7 +3,7 @@
 Releases are recorded as git tags in the [Github releases](https://github.com/learningequality/kolibri-design-system/releases) page.
 
 ## Develop (to become version 1.5.x)
-
+- [#424] - Adds `laptop` `cloud `and `wifi` icons to KDS
 - [#351] - Wrap `KCheckbox` default slot's content in <label>
 - [#355] - Add `KSelect` to KDS
 - [#346] - `KDropdownMenu` no longer contains a button. Relatedly, all props that relate to buttons were removed from `KDropdownMenu`, namely `text`, `appearance`, `disabled`. Therefore, when migrating to this version, `KDropdownMenu` needs to be wrapped in `KButton` or `KIconButton`'s' `menu` slot and these obsolete props moved to button components from `KDropdownMenu`.
