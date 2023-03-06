@@ -3,6 +3,7 @@
 Releases are recorded as git tags in the [Github releases](https://github.com/learningequality/kolibri-design-system/releases) page.
 
 ## Develop (to become version 1.5.x)
+- [#425] - Adds `pinned` and `notPinned` icons. Updates `cloud` icon to outline
 - [#424] - Adds `laptop` `cloud `and `wifi` icons to KDS
 - [#351] - Wrap `KCheckbox` default slot's content in <label>
 - [#355] - Add `KSelect` to KDS
@@ -19,6 +20,7 @@ Releases are recorded as git tags in the [Github releases](https://github.com/le
 - [#420] - Fix randomly missing focus ring
 
 <!-- Referenced PRs -->
+[#425]: https://github.com/learningequality/kolibri-design-system/pull/425
 [#351]: https://github.com/learningequality/kolibri-design-system/pull/351
 [#355]: https://github.com/learningequality/kolibri-design-system/pull/355
 [#346]: https://github.com/learningequality/kolibri-design-system/pull/346
