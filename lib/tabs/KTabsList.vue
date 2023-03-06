@@ -176,11 +176,8 @@
           if (activeRouteTab !== undefined) {
             const activeRouteTabId = activeRouteTab.dataset.tabid;
             this.emitActivate(activeRouteTabId);
-            this.focusedTabIdx = this.getTabIdx(activeRouteTabId);
           }
         });
-      } else {
-        this.focusedTabIdx = this.getTabIdx(this.activeTabId);
       }
       this.$el.addEventListener('keyup', this.onKeyUp);
     },
