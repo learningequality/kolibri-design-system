@@ -29,6 +29,7 @@ Releases are recorded as git tags in the [Github releases](https://github.com/le
 [#384]: https://github.com/learningequality/kolibri-design-system/pull/384
 [#403]: https://github.com/learningequality/kolibri-design-system/pull/403
 [#420]: https://github.com/learningequality/kolibri-design-system/pull/420
+[#424]: https://github.com/learningequality/kolibri-design-system/pull/424
 [#426]: https://github.com/learningequality/kolibri-design-system/pull/426
 
 ## Version 1.4.x
