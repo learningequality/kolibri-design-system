@@ -21,7 +21,6 @@
         <div class="left-input">
           <KDateInput
             :value="dateRange.start"
-            :dateLocale="dateLocale"
             inputRef="dateStartRangeInput"
             :errorMessage="invalidStartErrorMessage"
             :legendText="startDateLegendText"
@@ -34,7 +33,6 @@
             :value="dateRange.end"
             inputRef="dateEndRangeInput"
             :errorMessage="invalidEndErrorMessage"
-            :dateLocale="dateLocale"
             :legendText="endDateLegendText"
             data-test="endDate"
             @updateDate="debouncedSetEndDate"
@@ -47,7 +45,6 @@
           :lastAllowedDate="lastAllowedDate"
           :selectedStartDate="createDate(dateRange.start)"
           :selectedEndDate="createDate(dateRange.end)"
-          :dateLocale="dateLocale"
           :previousMonthText="previousMonthText"
           :nextMonthText="nextMonthText"
           v-bind.sync="dateRange"
@@ -139,13 +136,6 @@
       description: {
         type: [String, null],
         default: null,
-      },
-      /**
-       *  Locale string for language and date formatting
-       */
-      dateLocale: {
-        type: String,
-        required: true,
       },
       /**
        *  Start date input label

@@ -19,6 +19,7 @@ Releases are recorded as git tags in the [Github releases](https://github.com/le
 - [#403] - Add `KOptionalText` to KDS
 - [#420] - Add `KTabs`, `KTabsList`, and `KTabsPanel`
 - [#420] - Fix randomly missing focus ring
+- [#427] - Update `KDateRange` to use `vue-intl` function `$formatDate` for date formatting and translations
 
 <!-- Referenced PRs -->
 [#425]: https://github.com/learningequality/kolibri-design-system/pull/425
@@ -33,6 +34,7 @@ Releases are recorded as git tags in the [Github releases](https://github.com/le
 [#420]: https://github.com/learningequality/kolibri-design-system/pull/420
 [#424]: https://github.com/learningequality/kolibri-design-system/pull/424
 [#426]: https://github.com/learningequality/kolibri-design-system/pull/426
+[#427]: https://github.com/learningequality/kolibri-design-system/pull/427
 
 ## Version 1.4.x
 

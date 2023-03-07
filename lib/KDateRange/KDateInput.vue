@@ -38,10 +38,6 @@
       KTextBox,
     },
     props: {
-      dateLocale: {
-        type: String,
-        required: true,
-      },
       inputRef: {
         type: String,
         default: null,
@@ -76,7 +72,7 @@
         return (
           this.legendText +
           ' ' +
-          this.valueAsDate.toLocaleDateString(this.dateLocale, {
+          this.$formatDate(this.valueAsDate, {
             year: 'numeric',
             weekday: 'long',
             month: 'long',

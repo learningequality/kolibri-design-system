@@ -17,7 +17,6 @@
             cancelText="Cancel"
             title="Select a date range"
             description="(Optional) Description of modal component"
-            dateLocale="en-US"
             startDateLegendText="Start Date"
             endDateLegendText="End Date"
             previousMonthText="Previous Month"

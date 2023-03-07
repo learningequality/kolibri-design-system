@@ -49,7 +49,6 @@
               :isEndOfWeek="dayInWeekIndex === 7"
               :isStartOfWeek="dayInWeekIndex === 1"
               :activeMonth="activeMonth"
-              :dateLocale="dateLocale"
             />
           </li>
         </ul>
@@ -83,7 +82,6 @@
               :isEndOfWeek="dayInWeekIndex === 7"
               :isStartOfWeek="dayInWeekIndex === 1"
               :activeMonth="nextActiveMonth"
-              :dateLocale="dateLocale"
             />
           </li>
         </ul>
@@ -134,13 +132,6 @@
       selectedEndDate: {
         type: [Date, null],
         default: null,
-      },
-      /**
-       *  Locale string for date formatting
-       */
-      dateLocale: {
-        type: String,
-        required: true,
       },
       /**
        *  label for previous month button
