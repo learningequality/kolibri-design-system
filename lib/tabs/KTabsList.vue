@@ -176,11 +176,8 @@
           if (activeRouteTab !== undefined) {
             const activeRouteTabId = activeRouteTab.dataset.tabid;
             this.emitActivate(activeRouteTabId);
-            this.focusedTabIdx = this.getTabIdx(activeRouteTabId);
           }
         });
-      } else {
-        this.focusedTabIdx = this.getTabIdx(this.activeTabId);
       }
       this.$el.addEventListener('keyup', this.onKeyUp);
     },
@@ -247,6 +244,7 @@
       },
       onClick(tabId, navigate, event) {
         this.focusedTabIdx = this.getTabIdx(tabId);
+        this.emitClick(tabId);
         this.emitActivate(tabId);
         if (navigate) {
           navigate(event);
@@ -271,6 +269,15 @@
          * Emitted when a tab is activated. Its payload is the active tab ID.
          */
         this.$emit('activate', tabId);
+      },
+      emitClick(tabId) {
+        /**
+         * Emitted when a tab is clicked. Its payload is the active tab ID.
+         * When compared to the `activate` event, `click` is emitted only when
+         * a user is interacting with tabs, whereas `activate` can be emitted
+         * programatically in addition to user interaction.
+         */
+        this.$emit('click', tabId);
       },
     },
   };
