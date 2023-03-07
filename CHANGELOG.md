@@ -3,6 +3,7 @@
 Releases are recorded as git tags in the [Github releases](https://github.com/learningequality/kolibri-design-system/releases) page.
 
 ## Develop (to become version 1.5.x)
+- [#426] - Adds `'click'` event to `KTabsList`
 - [#424] - Adds `laptop` `cloud `and `wifi` icons to KDS
 - [#351] - Wrap `KCheckbox` default slot's content in <label>
 - [#355] - Add `KSelect` to KDS
@@ -28,6 +29,7 @@ Releases are recorded as git tags in the [Github releases](https://github.com/le
 [#384]: https://github.com/learningequality/kolibri-design-system/pull/384
 [#403]: https://github.com/learningequality/kolibri-design-system/pull/403
 [#420]: https://github.com/learningequality/kolibri-design-system/pull/420
+[#426]: https://github.com/learningequality/kolibri-design-system/pull/426
 
 ## Version 1.4.x
 
