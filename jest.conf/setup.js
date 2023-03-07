@@ -5,9 +5,9 @@ import * as AphroditeNoImportant from 'aphrodite/no-important';
 
 import Vue from 'vue';
 import VueRouter from 'vue-router';
+import VueIntl from 'vue-intl';
 import KThemePlugin from '../lib/KThemePlugin';
 import KContentPlugin from '../lib/content/KContentPlugin';
-import VueIntl from 'vue-intl';
 
 global.beforeEach(() => {
   return new Promise(resolve => {
