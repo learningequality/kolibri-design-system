@@ -61,10 +61,6 @@
         type: Number,
         default: null,
       },
-      dateLocale: {
-        type: String,
-        required: true,
-      },
     },
     data() {
       return {};
@@ -109,7 +105,7 @@
       toMonthName(monthNumber) {
         const date = new Date();
         date.setMonth(monthNumber);
-        return date.toLocaleString(this.dateLocale, { month: 'long' });
+        return this.$formatDate(date, { month: 'long' });
       },
     },
   };

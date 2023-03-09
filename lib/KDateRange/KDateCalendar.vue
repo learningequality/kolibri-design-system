@@ -21,7 +21,7 @@
         @click="goNextMonth"
       />
       <div class="calendar-month-left">
-        <div class="months-text">
+        <div class="months-text" data-test="previousMonth">
           {{ monthString(activeMonth) + ' ' + activeYearStart }}
         </div>
         <ul v-for="weekIndex in 6" :key="weekIndex" class="calendar-days">
@@ -36,7 +36,7 @@
             :class="[{
               'calendar-days--disabled': isDateDisabled(weekIndex, dayInWeekIndex, activeMonthDay, activeMonthDate) || isDateDisabledLeft(weekIndex, dayInWeekIndex, activeMonthDay),
               'selected-first': ( selectionOrder(weekIndex, dayInWeekIndex, 'first', activeMonthDay, activeMonthDate) === 'first'),
-              'selected-second': ( selectionOrder(weekIndex, dayInWeekIndex, 'first', activeMonthDay, activeMonthDate) === 'second')
+              'selected-second': ( selectionOrder(weekIndex, dayInWeekIndex, 'first', activeMonthDay, activeMonthDate) === 'second'),
             }]"
             @click="selectFirstItem(weekIndex, dayInWeekIndex)"
           >
@@ -49,13 +49,12 @@
               :isEndOfWeek="dayInWeekIndex === 7"
               :isStartOfWeek="dayInWeekIndex === 1"
               :activeMonth="activeMonth"
-              :dateLocale="dateLocale"
             />
           </li>
         </ul>
       </div>
       <div class="calendar-month-right">
-        <div class="months-text">
+        <div class="months-text" data-test="currentMonth">
           {{ monthString(nextActiveMonth) + ' ' + activeYearEnd }}
         </div>
         <ul v-for="weekIndex in 6" :key="weekIndex" class="calendar-days">
@@ -83,7 +82,6 @@
               :isEndOfWeek="dayInWeekIndex === 7"
               :isStartOfWeek="dayInWeekIndex === 1"
               :activeMonth="nextActiveMonth"
-              :dateLocale="dateLocale"
             />
           </li>
         </ul>
@@ -134,13 +132,6 @@
       selectedEndDate: {
         type: [Date, null],
         default: null,
-      },
-      /**
-       *  Locale string for date formatting
-       */
-      dateLocale: {
-        type: String,
-        required: true,
       },
       /**
        *  label for previous month button
@@ -389,7 +380,7 @@
       monthString(monthIndex) {
         const date = new Date();
         date.setMonth(monthIndex);
-        return date.toLocaleString(this.dateLocale, { month: 'long' });
+        return this.$formatDate(date, { month: 'long' });
       },
     },
   };
