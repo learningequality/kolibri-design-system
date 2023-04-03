@@ -149,9 +149,8 @@
   import UiProgressCircular from '../keen/UiProgressCircular.vue';
   import { looseIndexOf, looseEqual } from '../keen/helpers/util';
   import { scrollIntoView, resetScroll } from '../keen/helpers/element-scroll';
+  import events from '../keen/helpers/events';
   import UiSelectOption from './KeenUiSelectOption.vue';
-
-  import RespondsToExternalClick from './mixins/RespondsToExternalClick';
 
   export default {
     name: 'UiSelect',
@@ -162,8 +161,6 @@
       UiProgressCircular,
       UiSelectOption,
     },
-
-    mixins: [RespondsToExternalClick],
 
     props: {
       name: String,
@@ -246,6 +243,7 @@
     },
 
     emits: [
+      'external-click',
       'update:modelValue',
       'query-change',
       'change',
@@ -407,7 +405,46 @@
       }
     },
 
+    beforeUnmount() {
+      if (typeof this.destroyExternalClickListener === 'function') {
+        this.removeExternalClickListener();
+      }
+    },
+
     methods: {
+      addExternalClickListener(
+        elements = [this.$el],
+        callback = null,
+        options = { passive: true }
+      ) {
+        elements = Array.isArray(elements) ? elements : [elements];
+
+        this.destroyExternalClickListener = events.on(
+          'click',
+          document,
+          e => {
+            for (let i = 0; i < elements.length; i++) {
+              if (elements[i].contains(e.target)) {
+                return; // End early, click was internal
+              }
+            }
+
+            if (typeof callback === 'function') {
+              callback(e);
+            } else {
+              this.$emit('external-click', e);
+            }
+          },
+          options
+        );
+      },
+      removeExternalClickListener() {
+        if (this.destroyExternalClickListener) {
+          this.destroyExternalClickListener();
+          this.destroyExternalClickListener = null;
+        }
+      },
+
       setValue(value) {
         this.$emit('update:modelValue', value);
         this.$emit('change', value);
