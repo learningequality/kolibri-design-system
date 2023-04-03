@@ -144,14 +144,14 @@
 <script>
 
   import fuzzysearch from 'fuzzysearch';
-  import UiIcon from './UiIcon.vue';
-  import UiPopover from './UiPopover.vue';
-  import UiProgressCircular from './UiProgressCircular.vue';
-  import UiSelectOption from './UiSelectOption.vue';
+  import UiIcon from '../keen/UiIcon.vue';
+  import UiPopover from '../keen/UiPopover.vue';
+  import UiProgressCircular from '../keen/UiProgressCircular.vue';
+  import { looseIndexOf, looseEqual } from '../keen/helpers/util';
+  import { scrollIntoView, resetScroll } from '../keen/helpers/element-scroll';
+  import UiSelectOption from './KeenUiSelectOption.vue';
 
   import RespondsToExternalClick from './mixins/RespondsToExternalClick';
-  import { looseIndexOf, looseEqual } from './helpers/util';
-  import { scrollIntoView, resetScroll } from './helpers/element-scroll';
 
   export default {
     name: 'UiSelect',
@@ -616,7 +616,7 @@
 
 <style lang="scss">
 
-  @import './styles/imports';
+  @import '../keen/styles/imports';
 
   .ui-select {
     position: relative;

@@ -38,7 +38,7 @@
 
 <script>
 
-  import UiIcon from './UiIcon.vue';
+  import UiIcon from '../keen/UiIcon.vue';
 
   export default {
     name: 'UiSelectOption',
@@ -100,7 +100,7 @@
 
 <style lang="scss">
 
-  @import './styles/imports';
+  @import '../keen/styles/imports';
 
   $ui-select-option-checkbox-color: rgba(black, 0.38) !default;
 
@@ -113,7 +113,7 @@
     user-select: none;
 
     &.is-selected {
-      font-weight: $font-weight--semibold;
+      font-weight: 500;
       color: $brand-primary-color;
       background-color: rgba(black, 0.05);
 

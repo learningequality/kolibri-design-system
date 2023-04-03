@@ -1,4 +1,4 @@
-import events from '../helpers/events';
+import events from '../../keen/helpers/events';
 
 export default {
     emits: ['external-click'],
