@@ -6,7 +6,7 @@
       'k-select-inline': inline,
       'k-select-disabled': disabled,
     }"
-    :value="selection"
+    :modelValue="selection"
     :options="options"
     :label="label"
     :floatingLabel="floatingLabel"
