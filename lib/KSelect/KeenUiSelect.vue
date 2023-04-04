@@ -233,6 +233,10 @@
         type: String,
         default: 'left', // 'left' or 'right'
       },
+      insideModal: {
+        type: Boolean,
+        default: false,
+      },
       label: {
         type: String,
         default: null,
@@ -744,7 +748,11 @@
       },
 
       toggleDropdown() {
-        this.calculateSpaceBelow();
+        // if called on dropdown inside modal, dropdown will generally render above input/placeholder when opened,
+        // rather than below it: we want to render dropdown above input only in cases where there isn't enough
+        // space available beneath input, but when dropdown extends outside a modal the func doesn't work as intended
+        if (!this.insideModal) this.calculateSpaceBelow();
+
         this[this.showDropdown ? 'closeDropdown' : 'openDropdown']();
       },
 

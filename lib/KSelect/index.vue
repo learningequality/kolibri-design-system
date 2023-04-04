@@ -10,6 +10,7 @@
     :options="options"
     :label="label"
     :floatingLabel="floatingLabel"
+    :insideModal="insideModal"
     :disabled="disabled"
     :invalid="invalid"
     :error="invalidText"
@@ -99,6 +100,13 @@
       label: {
         type: String,
         default: null,
+      },
+      /**
+       * Whether situated inside a modal or not
+       */
+      insideModal: {
+        type: Boolean,
+        default: false,
       },
       /**
        * Whether disabled or not

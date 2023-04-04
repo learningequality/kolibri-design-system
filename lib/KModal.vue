@@ -15,7 +15,11 @@
         :tabindex="0"
         role="dialog"
         aria-labelledby="modal-title"
-        :style="[ modalSizeStyles, { background: $themeTokens.surface } ]"
+        :style="[
+          modalSizeStyles,
+          { background: $themeTokens.surface },
+          containsKSelect ? { overflowY: 'unset' } : { overflowY: 'auto' }
+        ]"
       >
 
         <!-- Modal Title -->
@@ -48,7 +52,10 @@
               borderTop: `1px solid ${$themeTokens.fineLine}`,
               borderBottom: `1px solid ${$themeTokens.fineLine}`,
             } : {} ]"
-            :class="{ 'scroll-shadow': scrollShadow }"
+            :class="{
+              'scroll-shadow': scrollShadow,
+              'contains-kselect': containsKSelect
+            }"
           >
             <!-- @slot Main content of modal -->
             <slot></slot>
@@ -182,6 +189,8 @@
         lastFocus: null,
         maxContentHeight: '1000',
         contentHeight: 0,
+        previousContentHeight: 0,
+        containsKSelect: false,
         scrollShadow: false,
         delayedEnough: false,
       };
@@ -241,6 +250,10 @@
       });
       window.addEventListener('focus', this.focusElementTest, true);
       window.setTimeout(() => (this.delayedEnough = true), 500);
+
+      // if modal contains KSelect, special classes & styles will be applied
+      const kSelectCheck = document.getElementsByClassName('ui-select k-select');
+      this.containsKSelect = kSelectCheck.length > 0;
     },
     updated() {
       this.updateContentSectionStyle();
@@ -265,24 +278,35 @@
       updateContentSectionStyle: debounce(function() {
         if (this.$refs.title && this.$refs.actions) {
           if (Math.abs(this.$refs.content.scrollHeight - this.contentHeight) >= 8) {
+            // if there's dropdown & it is opened, the new scrollHeight detected shouldn't be applied,
+            // or else the modal will elongate after the dropdown content has been closed
+            this.previousContentHeight = this.contentHeight;
+
             this.contentHeight = this.$refs.content.scrollHeight;
           }
+
           const maxContentHeightCheck =
             this.windowHeight -
             this.$refs.title.clientHeight -
             this.$refs.actions.clientHeight -
             32;
+
           // to prevent max height from toggling between pixels
           // we set a threshold of how many pixels the height should change before we update
           if (Math.abs(maxContentHeightCheck - this.maxContentHeight) >= 8) {
-            this.maxContentHeight = maxContentHeightCheck;
-            this.scrollShadow = this.maxContentHeight < this.$refs.content.scrollHeight;
+            if (!this.containsKSelect) {
+              this.maxContentHeight = maxContentHeightCheck;
+              this.scrollShadow = this.maxContentHeight < this.$refs.content.scrollHeight;
+            } else if (this.containsKSelect && this.previousContentHeight > 0) {
+              // if there's dropdown & it is opened, the new scrollHeight detected shouldn't be applied
+              this.maxContentHeight = this.previousContentHeight;
+            }
           }
 
-          // make sure that overflow-y won't be updated to 'auto' if this
-          // function is running for the first time
-          // (otherwise Firefox would add a vertical scrollbar right away)
-          if (this.$refs.content.clientHeight !== 0) {
+          // make sure that overflow-y won't be updated to 'auto' if this function is running for the first time
+          // (otherwise Firefox would add a vertical scrollbar right away) + don't apply if modal contains KSelect
+          // (otherwise KSelect will be trapped inside modal if KSelect is opened a second time)
+          if (this.$refs.content.clientHeight !== 0 && !this.containsKSelect) {
             // add a vertical scrollbar if content doesn't fit
             if (this.$refs.content.scrollHeight > this.$refs.content.clientHeight) {
               this.$refs.content.style.overflowY = 'auto';
@@ -395,6 +419,7 @@
 
   .content {
     padding: 0 24px;
+    overflow-x: hidden;
   }
 
   .scroll-shadow {
@@ -405,6 +430,10 @@
     background-repeat: no-repeat;
     background-attachment: local, local, scroll, scroll;
     background-size: 100% 20px, 100% 20px, 100% 10px, 100% 10px;
+  }
+
+  .contains-kselect {
+    overflow: unset;
   }
 
   .actions {

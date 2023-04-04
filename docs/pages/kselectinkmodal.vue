@@ -11,6 +11,7 @@
             :options="options"
             label="Who are you?"
             placeholder="Nobody"
+            :insideModal="true"
           />
           <p>Value: {{ exampleData }}</p>
         </KModal>
