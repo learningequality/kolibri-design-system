@@ -11,7 +11,6 @@
             :options="options"
             label="Who are you?"
             placeholder="Nobody"
-            :insideModal="true"
           />
           <p>Value: {{ exampleData }}</p>
         </KModal>
@@ -58,11 +57,11 @@
           },
           {
             label: 'bob barker',
-            value: 'barker',
+            value: 'priceisright',
           },
           {
             label: 'billie jean',
-            value: 'billiejean',
+            value: 'notmylove',
           },
         ],
       };

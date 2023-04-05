@@ -233,10 +233,6 @@
         type: String,
         default: 'left', // 'left' or 'right'
       },
-      insideModal: {
-        type: Boolean,
-        default: false,
-      },
       label: {
         type: String,
         default: null,
@@ -320,6 +316,7 @@
     data() {
       return {
         query: '',
+        isInsideModal: false,
         isActive: false,
         isTouched: false,
         highlightedOption: null,
@@ -556,6 +553,10 @@
           break;
         }
       }
+
+      // if located within KModal, special styles will be applied
+      const kModalCheck = document.getElementsByClassName('modal');
+      this.isInsideModal = kModalCheck.length > 0;
     },
 
     beforeDestroy() {
@@ -751,7 +752,7 @@
         // if called on dropdown inside modal, dropdown will generally render above input/placeholder when opened,
         // rather than below it: we want to render dropdown above input only in cases where there isn't enough
         // space available beneath input, but when dropdown extends outside a modal the func doesn't work as intended
-        if (!this.insideModal) this.calculateSpaceBelow();
+        if (!this.isInsideModal) this.calculateSpaceBelow();
 
         this[this.showDropdown ? 'closeDropdown' : 'openDropdown']();
       },
