@@ -260,11 +260,6 @@ export default [
         keywords: ['field', 'box'],
       }),
       new Page({
-        path: '/kselectinkmodal',
-        title: 'KSelectInKModal',
-        isCode: true,
-      }),
-      new Page({
         path: '/kswitch',
         title: 'KSwitch',
         isCode: true,
