@@ -554,9 +554,11 @@
         }
       }
 
-      // if located within KModal, special styles will be applied
-      const kModalCheck = document.getElementsByClassName('modal');
-      this.isInsideModal = kModalCheck.length > 0;
+      // look for KSelects nested within modals
+      const allSelects = document.querySelectorAll('div.modal div.ui-select');
+      // create array from a nodelist [IE does not support Array.from()]
+      const allSelectsArr = Array.prototype.slice.call(allSelects);
+      this.isInsideModal = allSelectsArr.includes(this.$el);
     },
 
     beforeDestroy() {

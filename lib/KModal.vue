@@ -252,8 +252,8 @@
       window.setTimeout(() => (this.delayedEnough = true), 500);
 
       // if modal contains KSelect, special classes & styles will be applied
-      const kSelectCheck = document.getElementsByClassName('ui-select k-select');
-      this.containsKSelect = kSelectCheck.length > 0;
+      const kSelectCheck = document.querySelector('div.modal div.ui-select');
+      this.containsKSelect = !!kSelectCheck;
     },
     updated() {
       this.updateContentSectionStyle();
