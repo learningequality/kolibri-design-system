@@ -189,13 +189,15 @@
         lastFocus: null,
         maxContentHeight: '1000',
         contentHeight: 0,
-        previousContentHeight: 0,
         containsKSelect: false,
         scrollShadow: false,
         delayedEnough: false,
       };
     },
     computed: {
+      modalContentHeight() {
+        return this.$refs.content.getBoundingClientRect().height || this.$refs.content.scrollHeight;
+      },
       modalSizeStyles() {
         return {
           'max-width': `${this.maxModalWidth - 32}px`,
@@ -280,9 +282,9 @@
           if (Math.abs(this.$refs.content.scrollHeight - this.contentHeight) >= 8) {
             // if there's dropdown & it is opened, the new scrollHeight detected shouldn't be applied,
             // or else the modal will elongate after the dropdown content has been closed
-            this.previousContentHeight = this.contentHeight;
-
-            this.contentHeight = this.$refs.content.scrollHeight;
+            this.contentHeight = this.containsKSelect
+              ? this.modalContentHeight
+              : this.$refs.content.scrollHeight;
           }
 
           const maxContentHeightCheck =
@@ -294,13 +296,8 @@
           // to prevent max height from toggling between pixels
           // we set a threshold of how many pixels the height should change before we update
           if (Math.abs(maxContentHeightCheck - this.maxContentHeight) >= 8) {
-            if (!this.containsKSelect) {
-              this.maxContentHeight = maxContentHeightCheck;
-              this.scrollShadow = this.maxContentHeight < this.$refs.content.scrollHeight;
-            } else if (this.containsKSelect && this.previousContentHeight > 0) {
-              // if there's dropdown & it is opened, the new scrollHeight detected shouldn't be applied
-              this.maxContentHeight = this.previousContentHeight;
-            }
+            this.maxContentHeight = maxContentHeightCheck;
+            this.scrollShadow = this.maxContentHeight < this.$refs.content.scrollHeight;
           }
 
           // make sure that overflow-y won't be updated to 'auto' if this function is running for the first time
