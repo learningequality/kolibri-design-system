@@ -7,6 +7,8 @@
    The formatting has been changed to match our linters. We may eventually
    want to simply consolidate it with our component and remove any unused
    functionality.
+
+   BELOW: KModal targets KeenUiSelect by using div.ui-select selector
   -->
   <div class="ui-select" :class="classes">
     <input
@@ -316,6 +318,7 @@
     data() {
       return {
         query: '',
+        isInsideModal: false,
         isActive: false,
         isTouched: false,
         highlightedOption: null,
@@ -552,6 +555,12 @@
           break;
         }
       }
+
+      // look for KSelects nested within modals
+      const allSelects = document.querySelectorAll('div.modal div.ui-select');
+      // create array from a nodelist [IE does not support Array.from()]
+      const allSelectsArr = Array.prototype.slice.call(allSelects);
+      this.isInsideModal = allSelectsArr.includes(this.$el);
     },
 
     beforeDestroy() {
@@ -744,7 +753,11 @@
       },
 
       toggleDropdown() {
-        this.calculateSpaceBelow();
+        // if called on dropdown inside modal, dropdown will generally render above input/placeholder when opened,
+        // rather than below it: we want to render dropdown above input only in cases where there isn't enough
+        // space available beneath input, but when dropdown extends outside a modal the func doesn't work as intended
+        if (!this.isInsideModal) this.calculateSpaceBelow();
+
         this[this.showDropdown ? 'closeDropdown' : 'openDropdown']();
       },
 
