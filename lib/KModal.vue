@@ -9,6 +9,7 @@
       @keyup.esc.stop="emitCancelEvent"
       @keyup.enter="handleEnter"
     >
+      <!-- KeenUiSelect targets modal by using div.modal selector -->
       <div
         ref="modal"
         class="modal"
@@ -196,6 +197,10 @@
     },
     computed: {
       modalContentHeight() {
+        // if modal contains KSelect, the correct value of its content.scrollHeight is overwritten by the height of the
+        // KSelect options once KSelect is opened & the modal will elongate after KSelect is closed.
+        // in that case, getBoundingClientRect().height is a better reflection of content height but during the loading
+        // state it is temporarily 0 and fallback content.scrollHeight is accurate, as KSelect has not yet been opened
         return this.$refs.content.getBoundingClientRect().height || this.$refs.content.scrollHeight;
       },
       modalSizeStyles() {

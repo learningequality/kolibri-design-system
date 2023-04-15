@@ -1,5 +1,4 @@
 <template>
-
   <!--
    This component was forked from the Keen library in order to handle
    dynamic styling.
@@ -8,6 +7,7 @@
    want to simply consolidate it with our component and remove any unused
    functionality.
   -->
+  <!-- KModal targets KeenUiSelect by using div.ui-select selector -->
   <div class="ui-select" :class="classes">
     <input
       v-if="name"
