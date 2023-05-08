@@ -93,7 +93,7 @@
         default: 'indeterminate', // 'indeterminate' or 'determinate'
       },
       /**
-       * Whether the loader should be displayed or not. It needs to be used instead of `v-if/v-show` for `freeze` to work.
+       * Whether the loader should be displayed or not. It needs to be used instead of `v-if/v-show` for `minVisibleTime` to work.
        */
       show: {
         type: Boolean,
@@ -114,9 +114,9 @@
         default: false,
       },
       /**
-       * Do not hide the loader until `freeze` in milliseconds. Useful to avoid jarring UX when the actions finishes very fast. In comparison to `delay`, `freeze` emhpasises that an action associated with the loader is indeed taking place. `show` needs to be used instead of `v-if/v-show` for this to work.
+       * Do not hide the loader until `minVisibleTime` in milliseconds. Useful to avoid jarring UX when the actions finishes very fast. In comparison to `delay`, `minVisibleTime` emphasizes that an action associated with the loader is indeed taking place. `show` needs to be used instead of `v-if/v-show` for this to work.
        */
-      freeze: {
+      minVisibleTime: {
         type: Number,
         default: 0,
       },
@@ -220,11 +220,11 @@
       },
 
       freezeLoader() {
-        if (this.show && this.freeze > 0) {
+        if (this.show && this.minVisibleTime > 0) {
           this.isFrozen = true;
           this.freezeTimeoutId = setTimeout(() => {
             this.isFrozen = false;
-          }, this.freeze);
+          }, this.minVisibleTime);
         }
       },
     },
