@@ -20,6 +20,7 @@ Releases are recorded as git tags in the [Github releases](https://github.com/le
 - [#420] - Add `KTabs`, `KTabsList`, and `KTabsPanel`
 - [#420] - Fix randomly missing focus ring
 - [#427] - Update `KDateRange` to use `vue-intl` function `$formatDate` for date formatting and translations
+- [#433] - Add new `props` to `KCircularLoader`:  `minVisibleTime` and `show`
 
 <!-- Referenced PRs -->
 [#425]: https://github.com/learningequality/kolibri-design-system/pull/425
@@ -35,6 +36,7 @@ Releases are recorded as git tags in the [Github releases](https://github.com/le
 [#424]: https://github.com/learningequality/kolibri-design-system/pull/424
 [#426]: https://github.com/learningequality/kolibri-design-system/pull/426
 [#427]: https://github.com/learningequality/kolibri-design-system/pull/427
+[#433]: https://github.com/learningequality/kolibri-design-system/pull/433
 
 ## Version 1.4.x
 
