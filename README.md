@@ -255,6 +255,9 @@ yarn link
 cd ../kolibri
 yarn link kolibri-design-system
 
+# re-install dependencies
+yarn install
+
 # run the Kolibri devserver
 yarn run devserver
 ```
