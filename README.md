@@ -235,6 +235,10 @@ Large upgrades can result in a colossal git diff which makes reviewing changes o
 4. Run `yarn run pregenerate`
 5. Write down notes to the changelog about any public updates like visual changes of icons, updates of their aliases, and updates of reStructuredText replacement strings
 
+### Keen UI vendored files
+
+Several years ago, we vendored [Keen UI](https://github.com/JosephusPaye/Keen-UI). Since then, some of the components were updated occasionally to match Keen UI updates, but overall we use fairly old versions. We agreed not to follow Keen UI updates and consider forked components as "our own". Therefore, Keen UI components can be modified directly as needed.
+
 ### Development in parallel with other applications
 
 If you are working on the design system library code in this repo and want to see local updates reflected in other applications that are using this library, then you will need to do a few things.
@@ -254,6 +258,9 @@ yarn link
 # change to the Kolibri repo and link to the local package
 cd ../kolibri
 yarn link kolibri-design-system
+
+# re-install dependencies
+yarn install
 
 # run the Kolibri devserver
 yarn run devserver
