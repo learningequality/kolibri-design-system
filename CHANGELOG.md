@@ -3,6 +3,7 @@
 Releases are recorded as git tags in the [Github releases](https://github.com/learningequality/kolibri-design-system/releases) page.
 
 ## Develop (to become version 1.5.x)
+- [#438] - Adds `flex` properties to `KRouterLink`
 - [#426] - Adds `'click'` event to `KTabsList`
 - [#425] - Adds `pinned` and `notPinned` icons. Updates `cloud` icon to outline
 - [#424] - Adds `laptop` `cloud `and `wifi` icons to KDS
