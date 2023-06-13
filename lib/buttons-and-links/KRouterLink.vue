@@ -9,6 +9,7 @@
     :class="buttonClasses"
     :to="to"
     :replace="replace"
+    style="display: flex"
     data-test="router-link"
     dir="auto"
     @mouseenter.native="hovering = true"
@@ -20,7 +21,7 @@
       <KIcon
         v-if="icon"
         :icon="icon"
-        style="top: 4px;"
+        style="top: 4px; flex-shrink: 0"
         :color="hovering ? $themeTokens.primaryDark : $themeTokens.primary"
         data-test="icon-before"
       />
@@ -38,7 +39,7 @@
       <KIcon
         v-if="iconAfter"
         :icon="iconAfter"
-        style="top: 4px;"
+        style="top: 4px; flex-shrink: 0"
         :color="hovering ? $themeTokens.primaryDark : $themeTokens.primary"
         data-test="icon-after"
       />
