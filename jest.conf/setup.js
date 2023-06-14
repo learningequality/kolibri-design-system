@@ -7,7 +7,6 @@ import Vue from 'vue';
 import VueRouter from 'vue-router';
 import VueIntl from 'vue-intl';
 import KThemePlugin from '../lib/KThemePlugin';
-import KContentPlugin from '../lib/content/KContentPlugin';
 
 global.beforeEach(() => {
   return new Promise(resolve => {
@@ -28,7 +27,6 @@ global.afterEach(() => {
 // Register Vue plugins and components
 Vue.use(VueRouter);
 Vue.use(KThemePlugin);
-Vue.use(KContentPlugin);
 Vue.use(VueIntl);
 
 Vue.config.silent = true;
