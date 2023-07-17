@@ -156,7 +156,7 @@
           end: this.selectedStartDate && this.selectedEndDate ? this.selectedEndDate : null,
         },
         numOfDays: 7,
-        isFirstChoice: this.selectedStartDate ? true : false,
+        isFirstChoice: this.selectedStartDate == null ? true : false,
         activeMonth: new Date().getMonth() - 1 == -1 ? 11 : new Date().getMonth() - 1,
         activeYearStart: new Date().getFullYear(),
       };

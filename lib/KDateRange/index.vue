@@ -68,7 +68,7 @@
   import KDateCalendar from './KDateCalendar';
   import KDateInput from './KDateInput';
   import { validationMachine, initialContext } from './ValidationMachine';
-  import validationConstants, { DATE_FMT } from './validationConstants';
+  import validationConstants from './validationConstants';
 
   export default {
     name: 'KDateRange',
@@ -189,11 +189,11 @@
     data() {
       return {
         dateRange: {
-          start: this.defaultStartDate ? format(this.defaultStartDate, DATE_FMT) : DATE_FMT,
+          start: this.defaultStartDate ? format(this.defaultStartDate, 'YYYY-MM-DD') : null,
           end:
             this.defaultStartDate && this.defaultEndDate
-              ? format(this.defaultEndDate, DATE_FMT)
-              : DATE_FMT,
+              ? format(this.defaultEndDate, 'YYYY-MM-DD')
+              : null,
         },
         modalSize: 480,
         validationMachine: null,
@@ -255,13 +255,13 @@
       },
       /** Checks if dateStr is equal to the placeholder. If so, submit should be disabled */
       isPlaceholder(dateStr) {
-        return dateStr === DATE_FMT;
+        return dateStr === null;
       },
       getDateString(date) {
         if (!date) {
-          return DATE_FMT;
+          return null;
         }
-        return format(date, DATE_FMT);
+        return format(date, 'YYYY-MM-DD');
       },
       /** Returns startDateInvalid message from validation machine */
       invalidStart() {
@@ -291,14 +291,14 @@
         if (!dateStr) {
           return null;
         }
-        const [day, month, year] = dateStr.split('/');
+        const [year, month, day] = dateStr.split('-');
         const newDate = startOfDay(new Date(year, month - 1, day));
         return newDate;
       },
       /** Updates start date with input from textbox */
       setStartDate(newVal) {
-        this.dateRange = { start: newVal, end: DATE_FMT };
-        this.validationMachine.send('REVALIDATE', { startDate: newVal, endDate: DATE_FMT });
+        this.dateRange = { start: newVal, end: null };
+        this.validationMachine.send('REVALIDATE', { startDate: newVal, endDate: null });
       },
       /** Updates end date with input from textbox */
       setEndDate(newVal) {
