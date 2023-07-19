@@ -4,6 +4,7 @@
     <fieldset :aria-label="legendText" class="date-input-fieldset" :aria-describedby="inputId" aria-live="polite">
       <KTextBox
         :ref="inputRef"
+        :class="langDir"
         :value="value"
         type="date"
         :label="legendText"
@@ -79,6 +80,12 @@
         }
         return '';
       },
+      langDir() {
+        if (this.isRtl) {
+          return 'is-rtl';
+        }
+        return 'not-rtl';
+      },
     },
     mounted() {
       this.$nextTick(() => {
@@ -124,18 +131,24 @@
   }
 
   /* HIDES BROWSER NATIVE DATEPICKER */
-  /deep/ input[type='date']::-webkit-inner-spin-button,
-  /deep/ input[type='date']::-webkit-calendar-picker-indicator {
-    display: none;
-    appearance: none;
-    visibility: hidden !important;
-  }
-
   /deep/ input[type='date'] {
     width: 150px;
-    clip-path: inset(0 25px 0 0);
     text-transform: uppercase !important;
     border: 0;
+    &::-webkit-inner-spin-button,
+    &::-webkit-calendar-picker-indicator {
+      display: none;
+      appearance: none;
+      visibility: hidden !important;
+    }
+  }
+
+  /deep/ div.is-rtl input[type='date'] {
+    clip-path: inset(0 0 0 25px);
+  }
+
+  /deep/ div.not-rtl input[type='date'] {
+    clip-path: inset(0 25px 0 0);
   }
 
 </style>
