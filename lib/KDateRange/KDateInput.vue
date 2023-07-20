@@ -7,6 +7,7 @@
         :class="langDir"
         :value="value"
         type="date"
+        pattern="\d{4}-\d{2}-\d{2}" 
         :label="legendText"
         autoComplete="off"
         :invalid="Boolean(errorMessage)"
