@@ -1,10 +1,10 @@
 <template>
 
-  <div>
+  <div :style="containerStyles">
     <img
       :src="src"
       :alt="alternateText"
-      :style="styleObject"
+      :style="imgStyles"
       @error="onError"
     >
     <slot></slot>
@@ -40,42 +40,42 @@
         default: false,
       },
       /**
-       * Sets the height for the component
+       * Sets the height for the container
        */
       height: {
         type: [Number, String],
         default: undefined,
       },
       /**
-       * Sets the width for the component
+       * Sets the width for the container
        */
       width: {
         type: [Number, String],
         default: undefined,
       },
       /**
-       * Sets the maximum height for the component
+       * Sets the maximum height for the container
        */
       maxHeight: {
         type: [Number, String],
         default: undefined,
       },
       /**
-       * Sets the minimum height for the component
+       * Sets the minimum height for the container
        */
       minHeight: {
         type: [Number, String],
         default: undefined,
       },
       /**
-       * Sets the maximum width for the component
+       * Sets the maximum width for the container
        */
       maxWidth: {
         type: [Number, String],
         default: undefined,
       },
       /**
-       * 	Sets the minimum width for the component
+       * 	Sets the minimum width for the container
        */
       minWidth: {
         type: [Number, String],
@@ -90,40 +90,26 @@
         default: () => ({}),
       },
     },
-    data() {
-      return {
-        styleObject: {
-          height: this.imgHeight,
-          width: this.imgWidth,
-          maxHeight: this.imgMaxHeight,
-          minHeight: this.imgMinHeight,
-          maxWidth: this.imgMaxWidth,
-          minWidth: this.imgMinWidth,
-          ...this.appearanceOverrides,
-        },
-      };
-    },
     computed: {
       alternateText() {
         return this.isDecorative ? '' : this.altText;
       },
-      imgHeight() {
-        return this.validateAndFormatUnits(this.height);
+      containerStyles() {
+        return {
+          height: this.validateAndFormatUnits(this.height),
+          width: this.validateAndFormatUnits(this.width),
+          maxHeight: this.validateAndFormatUnits(this.maxHeight),
+          minHeight: this.validateAndFormatUnits(this.minHeight),
+          maxWidth: this.validateAndFormatUnits(this.maxWidth),
+          minWidth: this.validateAndFormatUnits(this.minWidth),
+          ...this.appearanceOverrides,
+        };
       },
-      imgWidth() {
-        return this.validateAndFormatUnits(this.width);
-      },
-      imgMaxHeight() {
-        return this.validateAndFormatUnits(this.maxHeight);
-      },
-      imgMinHeight() {
-        return this.validateAndFormatUnits(this.minHeight);
-      },
-      imgMaxWidth() {
-        return this.validateAndFormatUnits(this.maxWidth);
-      },
-      imgMinWidth() {
-        return this.validateAndFormatUnits(this.minWidth);
+      imgStyles() {
+        return {
+          width: '100%',
+          height: '100%',
+        };
       },
     },
     created() {
