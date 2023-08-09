@@ -137,7 +137,6 @@
     }
     &:dir(rtl) {
       clip-path: inset(0 0 0 25px);
-      text-align: left;
     }
     &:dir(ltr) {
       clip-path: inset(0 25px 0 0);
