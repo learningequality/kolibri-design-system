@@ -126,14 +126,14 @@
 
   /* HIDES BROWSER NATIVE DATEPICKER */
   /deep/ input[type='date'] {
-    border: 0;
     text-align: left;
     text-transform: uppercase !important;
+    border: 0;
     &::-webkit-inner-spin-button,
     &::-webkit-calendar-picker-indicator {
       display: none;
-      appearance: none;
       visibility: hidden !important;
+      appearance: none;
     }
     &:dir(rtl) {
       clip-path: inset(0 0 0 25px);
@@ -143,4 +143,5 @@
       clip-path: inset(0 25px 0 0);
     }
   }
+
 </style>
