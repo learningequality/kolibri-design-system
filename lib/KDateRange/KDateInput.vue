@@ -107,6 +107,7 @@
 
 <style lang="scss" scoped>
 
+  /* stylelint-disable */
   .date-input-fieldset {
     padding-bottom: 0;
     border: 0;
@@ -126,11 +127,13 @@
 
   /* HIDES BROWSER NATIVE DATEPICKER */
   /deep/ input[type='date'] {
+    width: 150px;
     text-align: left;
     text-transform: uppercase !important;
     border: 0;
-    appearance: none;
     -webkit-appearance: none;
+    appearance: none;
+
     &::-webkit-inner-spin-button,
     &::-webkit-calendar-picker-indicator {
       display: none;
