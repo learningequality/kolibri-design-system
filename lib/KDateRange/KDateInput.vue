@@ -129,6 +129,8 @@
     text-align: left;
     text-transform: uppercase !important;
     border: 0;
+    appearance: none;
+    -webkit-appearance: none;
     &::-webkit-inner-spin-button,
     &::-webkit-calendar-picker-indicator {
       display: none;
