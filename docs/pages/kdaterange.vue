@@ -13,7 +13,7 @@
             class="demo"
             :firstAllowedDate="firstAllowedDate"
             :lastAllowedDate="lastAllowedDate"
-            submitText="Generate"
+            submitText="Submit"
             cancelText="Cancel"
             title="Select a date range"
             description="(Optional) Description of modal component"
@@ -73,4 +73,3 @@
   }
 
 </style>
-

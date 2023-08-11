@@ -5,17 +5,18 @@
       <KTextBox
         :ref="inputRef"
         :value="value"
-        type="text"
+        type="date"
+        pattern="\d{4}-\d{2}-\d{2}" 
         :label="legendText"
         autoComplete="off"
         :invalid="Boolean(errorMessage)"
         :showInvalidText="Boolean(errorMessage)"
         :invalidText="errorMessage"
+        :floatingLabel="false"
         @input="handleInput"
       />  
-      <input type="hidden" name="date" :value="valueAsDate" data-test="valueAsDate">
       <span class="k-date-vhidden">
-        <span v-if="valueAsDate" :id="inputId">
+        <span v-if="value" :id="inputId">
           {{ dateDescription }}
         </span>
       </span>
@@ -27,10 +28,8 @@
 
 <script>
 
-  import { startOfDay } from 'date-fns';
   import { v4 as uuidv4 } from 'uuid';
   import KTextBox from '../KTextbox';
-  import { DATE_FMT } from './validationConstants';
 
   export default {
     name: 'KDateInput',
@@ -51,49 +50,54 @@
         default: false,
       },
       value: {
-        type: String,
-        default: DATE_FMT,
+        type: [Date, String],
+        default: null,
       },
     },
     computed: {
-      valueAsDate() {
+      dateDescription() {
         if (this.value) {
-          return this.createDate(this.value);
+          const valueAsDate = new Date(this.value);
+          valueAsDate.setDate(valueAsDate.getDate() + 1);
+          return (
+            this.legendText +
+            ' ' +
+            this.$formatDate(valueAsDate, {
+              year: 'numeric',
+              weekday: 'long',
+              month: 'long',
+              day: 'numeric',
+            })
+          );
         }
         return '';
       },
-      dateDescription() {
-        if (
-          Object.prototype.toString.call(this.valueAsDate) === '[object Date]' &&
-          isNaN(this.valueAsDate)
-        ) {
-          return ' ';
-        }
-        return (
-          this.legendText +
-          ' ' +
-          this.$formatDate(this.valueAsDate, {
-            year: 'numeric',
-            weekday: 'long',
-            month: 'long',
-            day: 'numeric',
-          })
-        );
-      },
       inputId() {
-        return `DateDesc_${uuidv4()
-          .split('-')
-          .pop()}`;
+        if (this.value) {
+          return `DateDesc_${uuidv4()
+            .split('-')
+            .pop()}`;
+        }
+        return '';
       },
     },
+    mounted() {
+      this.$nextTick(() => {
+        const inputs = document.querySelectorAll('input[type = date]');
+        for (const input of inputs) {
+          input.addEventListener('click', this.disableNativeCalendar);
+          input.addEventListener('focus', this.disableNativeCalendar);
+        }
+      });
+    },
     methods: {
-      createDate(dateStr) {
-        const [day, month, year] = dateStr.split('/');
-        const newDate = startOfDay(new Date(year, month - 1, day));
-        return newDate;
-      },
       handleInput(val) {
-        this.$emit('updateDate', val);
+        if (val) {
+          this.$emit('updateDate', val);
+        }
+      },
+      disableNativeCalendar(e) {
+        e.preventDefault();
       },
     },
   };
@@ -101,8 +105,9 @@
 </script>
 
 
-<style lang="css" scoped>
+<style lang="scss" scoped>
 
+  /* stylelint-disable */
   .date-input-fieldset {
     padding-bottom: 0;
     border: 0;
@@ -118,6 +123,29 @@
     overflow: hidden;
     clip: rect(1px, 1px, 1px, 1px);
     border: 0;
+  }
+
+  /* HIDES BROWSER NATIVE DATEPICKER */
+  /deep/ input[type='date'] {
+    width: 150px;
+    text-align: left;
+    text-transform: uppercase !important;
+    border: 0;
+    -webkit-appearance: none;
+    appearance: none;
+
+    &::-webkit-inner-spin-button,
+    &::-webkit-calendar-picker-indicator {
+      display: none;
+      visibility: hidden !important;
+      appearance: none;
+    }
+    &:dir(rtl) {
+      clip-path: inset(0 0 0 25px);
+    }
+    &:dir(ltr) {
+      clip-path: inset(0 25px 0 0);
+    }
   }
 
 </style>

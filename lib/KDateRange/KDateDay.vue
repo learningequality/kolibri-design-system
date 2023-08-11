@@ -138,7 +138,6 @@
   }
 
   /* VISUALLY HIDDEN ITEMS */
-
   .k-date-vhidden {
     position: absolute;
     top: 0;

@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import VueCompositionAPI from '@vue/composition-api';
+import VueIntl from 'vue-intl';
 import KThemePlugin from '~~/lib/KThemePlugin';
 import trackInputModality from '~~/lib/styles/trackInputModality';
 
@@ -10,3 +11,4 @@ trackInputModality({ disableFocusRingByDefault: false });
 
 Vue.use(VueCompositionAPI);
 Vue.use(KThemePlugin);
+Vue.use(VueIntl);
