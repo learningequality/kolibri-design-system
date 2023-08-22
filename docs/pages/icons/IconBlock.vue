@@ -5,6 +5,7 @@
       <KIcon
         v-if="aliasList && aliasList.length"
         :icon="aliasList[0]"
+        color="pink"
         class="icon"
       />
     </div>
