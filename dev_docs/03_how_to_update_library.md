@@ -4,7 +4,7 @@ The design system has two primary parts, the UI component library [`/lib`](../li
 
 ## Prerequisites
 
-Your development server is set up and running as described in [Getting started](./01_getting_started.md).
+Your development server is set up and running at http://localhost:4000/ as described in [Getting started](./01_getting_started.md).
 
 ## Add/update a component
 
@@ -33,7 +33,11 @@ The documentation development server can be used to visually test components upd
 
 **Playground page**
 
-TODO
+Open [/docs/pages/playground.vue](../docs/pages/playground.vue) and add a component you're working on there. Then, as you're developing, you will see it update live at http://localhost:4000/playground. See an example in the playground file.
+
+If you are working on a new component, make sure to register it first in `KThemePlugin`, as described in the "How to add a new component" section above, in order to make it available on the playground page.
+
+Please do not commit any updates to the playground file as it's meant as your local preview only. This will help other developers have it ready for their own work.
 
 **Components documentation pages**
 

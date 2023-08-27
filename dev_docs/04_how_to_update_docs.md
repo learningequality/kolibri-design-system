@@ -4,7 +4,7 @@ The design system has two primary parts, the UI component library [`/lib`](../li
 
 ## Prerequisites
 
-Your development server is set up and running as described in the [Getting started](./01_getting_started.md).
+Your development server is set up and running at http://localhost:4000/ as described in the [Getting started](./01_getting_started.md).
 
 ## Updating content
 
