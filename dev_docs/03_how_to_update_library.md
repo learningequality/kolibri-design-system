@@ -25,7 +25,7 @@ There are two ways to visually test updates as you're developing:
 
 See the two sections below for detailed guidance.
 
-Option (1) is simpler and sufficient as the first step, so we recommend starting that way. On certain occasions, it may be necessary to test an update in a product. You are welcome to try (2) if you'd like to, but typically we do not require contributors to do so, or we will provide support if needed.
+Option (1) is simpler and sufficient as the first step, so we recommend starting that way. On certain occasions, it may be necessary to test an update in a product. If you're a contributor, you are welcome to try (2) as well, but typically we do not require contributors to do so, or we will provide support if needed.
 
 ### (1) Preview updates in the Kolibri Design System environment
 
@@ -35,13 +35,13 @@ The documentation development server can be used to visually test components upd
 
 Open [/docs/pages/playground.vue](../docs/pages/playground.vue) and add a component you're working on there. Then, as you're developing, you will see it update live at http://localhost:4000/playground. See an example in the playground file.
 
-If you are working on a new component, make sure to register it first in `KThemePlugin`, as described in the "How to add a new component" section above, in order to make it available on the playground page.
+If you are working on a new component, make sure to register it first in `KThemePlugin` as described in the "How to add a new component" section above in order to make it available on the playground page.
 
 Please do not commit any updates to the playground file as it's meant as your local preview only. This will help other developers have it ready for their own work.
 
 **Components documentation pages**
 
-The majority of existing components have documentation pages that often show live components in different states. One example of this can be seen on the KBreadcrumbs documentation page at http://localhost:4000/kbreadcrumbs. Its source code is located in [`/docs/pages/kbreadcrumbs.vue`](../docs/pages/kbreadcrumbs.vue).
+The majority of existing components have documentation pages that often show live components in different states. One example of this can be seen on the `KBreadcrumbs` component documentation page at http://localhost:4000/kbreadcrumbs. The documentation page source code is located in [`/docs/pages/kbreadcrumbs.vue`](../docs/pages/kbreadcrumbs.vue).
 
 You can find links to documentation pages for existing components on the documentation website in the "Code library components" section at the bottom of the side navigation. 
 

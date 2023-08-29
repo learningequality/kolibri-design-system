@@ -1,3 +1,5 @@
+<!-- Also update README.md (duplicate) -->
+
 # How can I contribute?
 
 1. 💻 Follow the [Getting started](./dev_docs/01_getting_started.md) to set up your development server. At the bottom of that page, you will also find links that will take you to guidelines for the most common tasks.

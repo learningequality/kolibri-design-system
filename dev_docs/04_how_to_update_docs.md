@@ -1,6 +1,6 @@
 # How to update the documentation website
 
-The design system has two primary parts, the UI component library [`/lib`](../lib/) and the documentation website [`/docs`](../docs/). The following guidelines will help you update the documentation website. For guidance on developing the component library, see [How to update the component library](./04_how_to_update_library.md).
+The design system has two primary parts, the UI component library [`/lib`](../lib/) and the documentation website [`/docs`](../docs/). The following guidelines will help you update the documentation website. For guidance on developing the component library, see [How to update the component library](./03_how_to_update_library.md).
 
 ## Prerequisites
 

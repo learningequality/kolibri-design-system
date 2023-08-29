@@ -42,6 +42,7 @@ Contact us at the [Kolibri Design System GitHub Discussions](https://github.com/
 
 If you have found a bug, you can create a [Github issue](https://github.com/learningequality/kolibri-design-system/issues) following the instructions in the issue template.
 
+<!-- Also update README.md (duplicate) -->
 ## How can I contribute?
 
 1. 💻 Follow the [Getting started](./dev_docs/01_getting_started.md) to set up your development server. At the bottom of that page, you will also find links that will take you to guidelines for the most common tasks.
