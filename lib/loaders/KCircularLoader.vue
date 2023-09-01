@@ -9,7 +9,7 @@
   -->
 
 
-  <transition name="ui-progress-circular--transition-fade">
+  <transition :name="disableDefaultTransition ? '' : 'ui-progress-circular--transition-fade'">
     <div
       v-if="showLoader"
       class="ui-progress-circular"
@@ -133,6 +133,17 @@
       stroke: {
         type: Number,
         default: 4,
+      },
+      /**
+       * Disables the default fade transition. Disabling is suitable when using
+       * a loader in tandem with another component (e.g. as part of v-if/v-else)
+       * as we typically need to wrap both components in a single transition.
+       * Having a loader wrapped by its own transition can cause glitches in
+       * such situations.
+       */
+      disableDefaultTransition: {
+        type: Boolean,
+        default: false,
       },
     },
 
