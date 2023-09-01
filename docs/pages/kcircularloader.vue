@@ -30,6 +30,13 @@
       </ul>
     </DocsPageSection>
 
+    <DocsPageSection title="Related" anchor="#related">
+      <ul>
+        <li>
+          <code>KCircularLoader</code>'s <code>minVisibleTime</code> isn't sufficient when switching between more components, for example as part of <code>v-if/v-else</code> blocks. In such situations, <DocsInternalLink text="useKShow" href="/usekshow" /> may come handy.
+        </li>
+      </ul>
+    </DocsPageSection>
   </DocsPageTemplate>
 
 </template>

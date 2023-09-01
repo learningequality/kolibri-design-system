@@ -60,6 +60,7 @@ const textRelatedKeywords = ['text', 'area', 'field', 'box'];
 const layoutRelatedKeywords = ['grid', 'layout', 'container', 'page'];
 const responsiveComponentsRelatedKeywords = ['responsive', 'mixin', 'breakpoint'];
 const tabsRelatedKeywords = ['tab', 'tabs', 'panel', 'tablist', 'tabpanel'];
+const compositionRelatedKeywords = ['composable', 'composition'];
 
 export default [
   new Section({
@@ -167,6 +168,27 @@ export default [
       new Page({
         path: '/loaders',
         title: 'Loaders',
+      }),
+    ],
+  }),
+  new Section({
+    title: 'Composables',
+    autoSort: true,
+    pages: [
+      new Page({
+        path: '/usekshow',
+        title: 'useKShow',
+        isCode: true,
+        keywords: [
+          ...compositionRelatedKeywords,
+          'if',
+          'show',
+          'time',
+          'minimum',
+          'visible',
+          'loader',
+          'loading',
+        ],
       }),
     ],
   }),
