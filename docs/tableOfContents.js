@@ -381,6 +381,12 @@ export default [
         isCode: true,
         keywords: tabsRelatedKeywords,
       }),
+      new Page({
+        path: '/ktransition',
+        title: 'KTransition',
+        isCode: true,
+        keywords: ['transition'],
+      }),
     ],
   }),
 ];

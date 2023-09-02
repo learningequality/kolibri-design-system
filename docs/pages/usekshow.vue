@@ -36,14 +36,14 @@
       <p>This is a simulation of a typical use-case of showing a loader while fetching data. You can set your own fetch request length and minimum visible time, and then hit the fetch button to see the output.</p>
 
       <DocsShowCode language="html">
-        <transition name="component-fade" mode="out-in">
+        <KTransition kind="component-fade-out-in">
           <KCircularLoader
             v-if="show('key-1', isFetching, minVisibleTime )"  
           />
           <div v-else>
             Loaded!
           </div>
-        </transition>
+        </KTransition>
       </DocsShowCode>
 
       <div :style="{ marginTop: '24px', display: 'flex' }">
@@ -52,7 +52,7 @@
           <DocsShow>
             <div :style="{ width: '200px', height: '160px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', padding: '12px 2px 4px 2px' }">
               <div>
-                <transition name="component-fade" mode="out-in">
+                <KTransition kind="component-fade-out-in">
                   <KCircularLoader
                     v-if="show('key-1', isFetching, minVisibleTime )"
                     key="loader"
@@ -61,7 +61,7 @@
                   <div v-else key="message" :style="{ textAlign: 'center' }">
                     Loaded!
                   </div>
-                </transition>
+                </KTransition>
               </div>
               <div>
                 <code>isFetching: {{ isFetching }}</code>
@@ -194,17 +194,3 @@
   };
 
 </script>
-
-
-<style lang="scss" scoped>
-
-  .component-fade-enter-active,
-  .component-fade-leave-active {
-    transition: opacity 0.3s ease;
-  }
-  .component-fade-enter, .component-fade-leave-to
-  /* .component-fade-leave-active below version 2.1.8 */ {
-    opacity: 0;
-  }
-
-</style>
