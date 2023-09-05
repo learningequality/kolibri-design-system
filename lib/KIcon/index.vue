@@ -68,6 +68,13 @@
         return KolibriIcons[this.icon].icon;
       },
     },
+    mounted() {
+      if (KolibriIcons[this.icon].fixedColor && this.color) {
+        console.error(
+          `KIcon: ${this.icon} color property will not be applied because the icon has a fixed color.`
+        );
+      }
+    },
   };
 
 </script>
