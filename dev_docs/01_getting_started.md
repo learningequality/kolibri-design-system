@@ -6,6 +6,10 @@ The design system has two primary parts, the UI component library [`/lib`](../li
 
 You'll need version 10.x of Node.js installed. See the [Node Version Manager](https://github.com/nvm-sh/nvm) for help.
 
+## Troubleshooting
+
+If you experience any problems with the setup below, see if you can find a similar issue in [Tips and troubleshooting](./02_tips_and_troubleshooting.md).
+
 ## Development environment
 
 At first, [fork](https://help.github.com/en/github/getting-started-with-github/fork-a-repo) this repository.
