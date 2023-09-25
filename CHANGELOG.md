@@ -46,6 +46,14 @@ Changelog is rather internal in nature. See release notes for the public overvie
 
 <!-- Release notes prepared for all items below -->
 
+- [#450]
+  - **Description:** Add new changelog and GH action to check that the changelog is updated in each pull request
+  - **Products impact:** -
+  - **Components:** -
+  - **Breaking:** -
+  - **Impacts a11y:** -
+  - **Guidance:** -
+
 - [#448]
   - **Description:** Adds `KTransition`
   - **Products impact:** new API
