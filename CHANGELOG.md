@@ -3,6 +3,11 @@
 Releases are recorded as git tags in the [Github releases](https://github.com/learningequality/kolibri-design-system/releases) page.
 
 ## Develop (to become version 1.5.x)
+
+- [#448] - `KCircularLoader`: Renames `show` prop to `shouldShow`
+- [#448] - `KCircularLoader`: Adds `disableDefaultTransition` prop 
+- [#448] - Adds `useKShow` composable
+- [#448] - Adds `KTransition` component
 - [#426] - Adds `'click'` event to `KTabsList`
 - [#425] - Adds `pinned` and `notPinned` icons. Updates `cloud` icon to outline
 - [#424] - Adds `laptop` `cloud `and `wifi` icons to KDS
@@ -38,6 +43,7 @@ Releases are recorded as git tags in the [Github releases](https://github.com/le
 [#426]: https://github.com/learningequality/kolibri-design-system/pull/426
 [#427]: https://github.com/learningequality/kolibri-design-system/pull/427
 [#433]: https://github.com/learningequality/kolibri-design-system/pull/433
+[#448]: https://github.com/learningequality/kolibri-design-system/pull/448
 
 ## Version 1.4.x
 
