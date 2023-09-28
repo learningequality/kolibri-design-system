@@ -41,8 +41,6 @@ Changelog Guidelines
 
 Changelog is rather internal in nature. See release notes for the public overview and guidelines. Releases are recorded as git tags in the [Github releases](https://github.com/learningequality/kolibri-design-system/releases) page.
 
-## Develop
-
 ## Version 1.5.x
 
 <!-- Release notes prepared for all items below -->
