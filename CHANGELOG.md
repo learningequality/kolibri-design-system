@@ -25,6 +25,7 @@ Changelog Guidelines
 - [PR no]
   - **Description:** Summary of change(s)
   - **Products impact:** Choose from - none (for internal updates) / bugfix / new API / updated API / removed API. If it's 'none', use "-" for all items below to indicate they are not relevant.
+  - **Addresses:** Link(s) to GH issue(s) addressed. Include KDS links as well as links to related issues in a consumer product repository too.
   - **Components:** Affected public KDS component. Do not include internal sub-components or documentation components.
   - **Breaking:** Will this change break something in a consumer? Choose from: yes / no
   - **Impacts a11y:** Does this change improve a11y or adds new features that can be used to improve it? Choose from: yes / no
@@ -46,9 +47,19 @@ Changelog is rather internal in nature. See release notes for the public overvie
 
 <!-- Release notes prepared for all items below -->
 
+- [#449]
+  - **Description:** Fix textbox being unexpectedly focused after the first page load
+  - **Products impact:** bugfix
+  - **Addresses:** https://github.com/learningequality/kolibri/issues/9077
+  - **Components:** `KTextbox`
+  - **Breaking:** no
+  - **Impacts a11y:** yes
+  - **Guidance:** -
+
 - [#450]
   - **Description:** Add new changelog and GH action to check that the changelog is updated in each pull request
   - **Products impact:** -
+  - **Addresses:** -
   - **Components:** -
   - **Breaking:** -
   - **Impacts a11y:** -
@@ -57,6 +68,7 @@ Changelog is rather internal in nature. See release notes for the public overvie
 - [#448]
   - **Description:** Adds `KTransition`
   - **Products impact:** new API
+  - **Addresses:** -
   - **Components:** `KTransition`
   - **Breaking:** no
   - **Impacts a11y:** no
@@ -65,6 +77,7 @@ Changelog is rather internal in nature. See release notes for the public overvie
 - [#448]
   - **Description:** Add a new prop, `disableDefaultTransition`, to `KCircularLoader`
   - **Products impact:** new API
+  - **Addresses:** -
   - **Components:** `KCircularLoader`
   - **Breaking:** no
   - **Impacts a11y:** no
@@ -73,6 +86,7 @@ Changelog is rather internal in nature. See release notes for the public overvie
 - [#448]
   - **Description:** Rename `KCircularLoader`'s `show` prop to `shouldShow`
   - **Products impact:** updated API
+  - **Addresses:** -
   - **Components:** `KCircularLoader`
   - **Breaking:** yes
   - **Impacts a11y:** no
@@ -83,6 +97,7 @@ Changelog is rather internal in nature. See release notes for the public overvie
 - [#448]
   - **Description:** Add `useKShow` composable. Related refactoring of `KCircularLoader`.
   - **Products impact:** new API
+  - **Addresses:** -
   - **Components:** `useKShow`, `KCircularLoader`
   - **Breaking:** no
   - **Impacts a11y:** no
@@ -93,6 +108,7 @@ Changelog is rather internal in nature. See release notes for the public overvie
 - [#447]
   - **Description:** Improve contributing guidelines and add a playground page for developers
   - **Products impact:** none
+  - **Addresses:** -
   - **Components:** -
   - **Breaking:** -
   - **Impacts a11y:** -
@@ -103,6 +119,7 @@ Changelog is rather internal in nature. See release notes for the public overvie
 - [#446]
   - **Description:** Fixes icon components' `color` property not being applied for some custom icons by removing hardcoded fill color from svg files. Affected icons: `computerScienceResource`, `currentEventsResource`, `diversityResource`, `entrepreneurshipResource`, `environmentResource`, `financialLiteracyResource`, `historyResource`, `learningSkillsResource`, `literacyResource`, `logicCriticalThinkingResource`, `mathematicsResource`, `mentalHealthResource`, `readingAndWritingResource`, `sciencesResource`, `skillsResource`
   - **Products impact:** bugfix
+  - **Addresses:** https://github.com/learningequality/kolibri-design-system/issues/395
   - **Components:** `KIcon`, `KIconButton`, `KLabeledIcon`
   - **Breaking:** no
   - **Impacts a11y:** no
@@ -113,6 +130,7 @@ Changelog is rather internal in nature. See release notes for the public overvie
 - [#446]
   - **Description:** `KIcon` throws a warning about `color` prop not being applied for icons that are supposed to have fixed colors
   - **Products impact:** new API
+  - **Addresses:** https://github.com/learningequality/kolibri-design-system/issues/395
   - **Components:** `KIcon`, `KIconButton`, `KLabeledIcon`
   - **Breaking:** no
   - **Impacts a11y:** no
@@ -123,6 +141,7 @@ Changelog is rather internal in nature. See release notes for the public overvie
 - [#443]
   - **Description:** Update inputs within `KDateRange` to type `date` and add support for RTL languages
   - **Products impact:** bugfix
+  - **Addresses:** https://github.com/learningequality/kolibri-design-system/issues/442
   - **Components:** `KDateRange`
   - **Breaking:** no
   - **Impacts a11y:** no
@@ -133,6 +152,7 @@ Changelog is rather internal in nature. See release notes for the public overvie
 - [#436]
   - **Description:** Remove `KContentRenderer` component
   - **Products impact:** removed API
+  - **Addresses:** -
   - **Components:** `KContentRenderer`
   - **Breaking:** yes
   - **Impacts a11y:** no
@@ -143,6 +163,7 @@ Changelog is rather internal in nature. See release notes for the public overvie
 - [#437]
   - **Description:** Update README with our approach to vendored Keen UI files + add installation step to `yarn link` guidelines
   - **Products impact:** none
+  - **Addresses:** -
   - **Components:** -
   - **Breaking:** -
   - **Impacts a11y:** -
@@ -153,6 +174,7 @@ Changelog is rather internal in nature. See release notes for the public overvie
 - [#433]
   - **Description:** Add new `props`, `minVisibleTime` and `show`, to `KCircularLoader` to allow it being displayed for a desired minimum amount of time
   - **Products impact:** new API
+  - **Addresses:** -
   - **Components:** `KCircularLoader`
   - **Breaking:** no
   - **Impacts a11y:** no
@@ -163,6 +185,7 @@ Changelog is rather internal in nature. See release notes for the public overvie
 - [#429]
   - **Description:** Allows `KSelect` to extend outside of `KModal`
   - **Products impact:** bugfix
+  - **Addresses:** https://github.com/learningequality/kolibri-design-system/issues/324
   - **Components:** `KSelect`, `KModal`
   - **Breaking:** no
   - **Impacts a11y:** no
@@ -173,6 +196,7 @@ Changelog is rather internal in nature. See release notes for the public overvie
 - [#427]
   - **Description:** Display the months of the year within the `KDateCalendar` in the correct language
   - **Products impact:** bugfix
+  - **Addresses:** -
   - **Components:** `KDateRange`
   - **Breaking:** no
   - **Impacts a11y:** yes
@@ -183,6 +207,7 @@ Changelog is rather internal in nature. See release notes for the public overvie
 - [#426]
   - **Description:** Add `'click'` event to `KTabsList`
   - **Products impact:** new API
+  - **Addresses:** -
   - **Components:** `KTabsList`
   - **Breaking:** no
   - **Impacts a11y:** no
@@ -193,6 +218,7 @@ Changelog is rather internal in nature. See release notes for the public overvie
 - [#426]
   - **Description:** Fix `KTabsList` focus state 
   - **Products impact:** bugfix
+  - **Addresses:** -
   - **Components:** `KTabsList`, `KTabs`
   - **Breaking:** no
   - **Impacts a11y:** no
@@ -203,6 +229,7 @@ Changelog is rather internal in nature. See release notes for the public overvie
 - [#425]
   - **Description:** Adds `pinned` and `notPinned` icons
   - **Products impact:** new API
+  - **Addresses:** -
   - **Components:** -
   - **Breaking:** no
   - **Impacts a11y:** no
@@ -213,6 +240,7 @@ Changelog is rather internal in nature. See release notes for the public overvie
 - [#425]
   - **Description:** Updates `cloud` icon to outline style
   - **Products impact:** updated API
+  - **Addresses:** -
   - **Components:** -
   - **Breaking:** no
   - **Impacts a11y:** no
@@ -223,6 +251,7 @@ Changelog is rather internal in nature. See release notes for the public overvie
 - [#424]
   - **Description:** Adds `laptop`, `cloud `and `wifi` icons
   - **Products impact:** new API
+  - **Addresses:** -
   - **Components:** -
   - **Breaking:** no
   - **Impacts a11y:** no
@@ -233,6 +262,7 @@ Changelog is rather internal in nature. See release notes for the public overvie
 - [#420]
   - **Description:** Fix randomly missing focus ring
   - **Products impact:** bugfix
+  - **Addresses:** -
   - **Components:** -
   - **Breaking:** no
   - **Impacts a11y:** yes
@@ -243,6 +273,7 @@ Changelog is rather internal in nature. See release notes for the public overvie
 - [#420]
   - **Description:** Add `KTabs`, `KTabsList`, and `KTabsPanel` components
   - **Products impact:** new API
+  - **Addresses:** https://github.com/learningequality/kolibri-design-system/issues/385
   - **Components:** `KTabs`, `KTabsList`, `KTabsPanel`
   - **Breaking:** no
   - **Impacts a11y:** yes
@@ -253,6 +284,7 @@ Changelog is rather internal in nature. See release notes for the public overvie
 - [#403]
   - **Description:** Add `KOptionalText`
   - **Products impact:** new API
+  - **Addresses:** https://github.com/learningequality/kolibri-design-system/issues/285
   - **Components:** `KOptionalText`
   - **Breaking:** no
   - **Impacts a11y:** no
@@ -263,6 +295,7 @@ Changelog is rather internal in nature. See release notes for the public overvie
 - [#387]
   - **Description:** Fix `KDropdownMenu` causing the window to scroll to the top on the menu button click
   - **Products impact:** bugfix
+  - **Addresses:** https://github.com/learningequality/kolibri/pull/9833#issuecomment-1322303903
   - **Components:** `KDropdownMenu`
   - **Breaking:** no
   - **Impacts a11y:** no
@@ -273,6 +306,7 @@ Changelog is rather internal in nature. See release notes for the public overvie
 - [#406]
   - **Description:** Fixes months displayed at the turn of a year in `KDateRange`, removes font-family, and fixes console warnings
   - **Products impact:** bugfix
+  - **Addresses:** https://github.com/learningequality/kolibri-design-system/issues/405
   - **Components:** `KDateRange`
   - **Breaking:** no
   - **Impacts a11y:** no
@@ -283,6 +317,7 @@ Changelog is rather internal in nature. See release notes for the public overvie
 - [#404]
   - **Description:** Initial implementation of `KImg` component
   - **Products impact:** new API
+  - **Addresses:** https://github.com/learningequality/kolibri-design-system/issues/369
   - **Components:** `KImg`
   - **Breaking:** no
   - **Impacts a11y:** no
@@ -293,6 +328,7 @@ Changelog is rather internal in nature. See release notes for the public overvie
 - [#402]
   - **Description:** Fixes partially hidden `KSelect`'s dropdown menu when there is not enough space below the button. The menu will now show above the button in such a scenario.
   - **Products impact:** bugfix
+  - **Addresses:** https://github.com/learningequality/kolibri/issues/7752
   - **Components:** `KSelect`
   - **Breaking:** no
   - **Impacts a11y:** no
@@ -303,6 +339,7 @@ Changelog is rather internal in nature. See release notes for the public overvie
 - [#378]
   - **Description:** Fix `KDropdownMenu` not showing after its refactor in [#346] by adding missing template tags to `KButton`
   - **Products impact:** bugfix
+  - **Addresses:** https://github.com/learningequality/kolibri/issues/9754
   - **Components:** `KDropdownMenu`, `KButton` 
   - **Breaking:** no
   - **Impacts a11y:** no
@@ -313,6 +350,7 @@ Changelog is rather internal in nature. See release notes for the public overvie
 - [#384]
   - **Description:**  Add `KDateRange` component
   - **Products impact:** new API
+  - **Addresses:** https://github.com/learningequality/kolibri-design-system/issues/360
   - **Components:** `KDateRange`
   - **Breaking:** no
   - **Impacts a11y:** no
@@ -323,6 +361,7 @@ Changelog is rather internal in nature. See release notes for the public overvie
 - [#393]
   - **Description:**  Update developers documentation to not include deleting KDS from package.json
   - **Products impact:** none
+  - **Addresses:** -
   - **Components:** -
   - **Breaking:** -
   - **Impacts a11y:** -
@@ -333,6 +372,7 @@ Changelog is rather internal in nature. See release notes for the public overvie
 - [#400]
   - **Description:**  Fix `useKWindowDimension`'s resize event listener not being properly removed
   - **Products impact:** bugfix
+  - **Addresses:** https://github.com/learningequality/kolibri-design-system/issues/398
   - **Components:** `useKWindowDimension`
   - **Breaking:** no
   - **Impacts a11y:** no
@@ -343,6 +383,7 @@ Changelog is rather internal in nature. See release notes for the public overvie
 - [#401]
   - **Description:**  `KBreadcrumbs`'s links to intermediary items can be optionally disabled by omitting the `link` attribute, or making it falsey
   - **Products impact:** new API
+  - **Addresses:** -
   - **Components:** `KBreadcrumbs`
   - **Breaking:** no
   - **Impacts a11y:** no
@@ -353,6 +394,7 @@ Changelog is rather internal in nature. See release notes for the public overvie
 - [#380]
   - **Description:**  Wraps `KRadioButton`' label instead of truncating it. Adds a new `prop`,  `truncateLabel`, that turns on truncating rather than wrapping.
   - **Products impact:** updated API
+  - **Addresses:** https://github.com/learningequality/kolibri-design-system/issues/350
   - **Components:** `KRadioButton`
   - **Breaking:** yes
   - **Impacts a11y:** no
@@ -363,6 +405,7 @@ Changelog is rather internal in nature. See release notes for the public overvie
 - [#380]
   - **Description:**  Add the `showLabel` prop to `KRadioButton` to determine whether a label should be displayed. Relatedly, make `label` prop optional.
   - **Products impact:** new API
+  - **Addresses:** https://github.com/learningequality/kolibri-design-system/issues/349
   - **Components:** `KRadioButton`
   - **Breaking:** no
   - **Impacts a11y:** no
@@ -373,6 +416,7 @@ Changelog is rather internal in nature. See release notes for the public overvie
 - [#380]
   - **Description:** `KRadioButton` emits `'blur'` event on blur
   - **Products impact:** new API
+  - **Addresses:** https://github.com/learningequality/kolibri-design-system/issues/349
   - **Components:** `KRadioButton`
   - **Breaking:** no
   - **Impacts a11y:** no
@@ -383,6 +427,7 @@ Changelog is rather internal in nature. See release notes for the public overvie
 - [#377]
   - **Description:** Add `useKResponsiveWindow` composable
   - **Products impact:** new API
+  - **Addresses:** https://github.com/learningequality/kolibri-design-system/issues/288
   - **Components:** `useKResponsiveWindow`
   - **Breaking:** no
   - **Impacts a11y:** no
@@ -393,6 +438,7 @@ Changelog is rather internal in nature. See release notes for the public overvie
 - [#353]
   - **Description:** Update README.md guidance on `yarn link`
   - **Products impact:** none
+  - **Addresses:** -
   - **Components:** -
   - **Breaking:** -
   - **Impacts a11y:** -
@@ -403,6 +449,7 @@ Changelog is rather internal in nature. See release notes for the public overvie
 - [#367]
   - **Description:** Better naming of the changelog section
   - **Products impact:** none
+  - **Addresses:** -
   - **Components:** -
   - **Breaking:** -
   - **Impacts a11y:** -
@@ -413,6 +460,7 @@ Changelog is rather internal in nature. See release notes for the public overvie
 - [#358]
   - **Description:** Improves `DocsShowCode` component layout
   - **Products impact:** none
+  - **Addresses:** -
   - **Components:** -
   - **Breaking:** -
   - **Impacts a11y:** -
@@ -423,6 +471,7 @@ Changelog is rather internal in nature. See release notes for the public overvie
 - [#357]
   - **Description:** Bind all attributes to navigation element within `KBreadcrumbs`
   - **Products impact:** updated API
+  - **Addresses:** -
   - **Components:** `KBreadcrumbs`
   - **Breaking:** no
   - **Impacts a11y:** yes
@@ -433,6 +482,7 @@ Changelog is rather internal in nature. See release notes for the public overvie
 - [#361]
   - **Description:** Fixes 'Property or method "disabled" is not defined on the instance but referenced during render.' raised by `KDropdownMenu`. Related to updates introduced in [#346].
   - **Products impact:** bugfix
+  - **Addresses:** -
   - **Components:** `KDropdownMenu`
   - **Breaking:** no
   - **Impacts a11y:** no
@@ -443,6 +493,7 @@ Changelog is rather internal in nature. See release notes for the public overvie
 - [#361]
   - **Description:** `KButton` exposes `hasDropdown` prop which will show the dropdown arrow icon in a button. Related to updates introduced in [#346].
   - **Products impact:** updated API
+  - **Addresses:** -
   - **Components:** `KButton`
   - **Breaking:** no
   - **Impacts a11y:** no
@@ -453,6 +504,7 @@ Changelog is rather internal in nature. See release notes for the public overvie
 - [#346]
   - **Description:** `KButton`: The default slot doesn't take precedence over the `text` prop anymore. The slot's content will be rendered above `text` when both are provided.
   - **Products impact:** updated API
+  - **Addresses:** https://github.com/learningequality/kolibri-design-system/issues/164, https://github.com/learningequality/kolibri-design-system/issues/136
   - **Components:** `KButton`
   - **Breaking:** yes
   - **Impacts a11y:** no
@@ -463,6 +515,7 @@ Changelog is rather internal in nature. See release notes for the public overvie
 - [#346]
   - **Description:** `KDropdownMenu` has a new prop `hasIcons` which controls whether or not the options display an icon.
   - **Products impact:** new API
+  - **Addresses:** -
   - **Components:** `KDropdownMenu`
   - **Breaking:** no
   - **Impacts a11y:** no
@@ -473,6 +526,7 @@ Changelog is rather internal in nature. See release notes for the public overvie
 - [#346]
   - **Description:** `KDropdownMenu` no longer contains a button. All props related to buttons were removed from `KDropdownMenu`, namely `text`, `appearance`, and `disabled`. `KButton` and `KIconButton` has a new `#menu` slot in which `KDropdownMenu` can be placed.
   - **Products impact:** updated API
+  - **Addresses:** https://github.com/learningequality/kolibri-design-system/issues/164
   - **Components:** `KDropdownMenu`
   - **Breaking:** yes
   - **Impacts a11y:** no
@@ -483,6 +537,7 @@ Changelog is rather internal in nature. See release notes for the public overvie
 - [#355]
   - **Description:** Moves `KSelect` from Kolibri to KDS
   - **Products impact:** new API
+  - **Addresses:** https://github.com/learningequality/kolibri-design-system/issues/339
   - **Components:** `KSelect`
   - **Breaking:** no
   - **Impacts a11y:** no
@@ -493,6 +548,7 @@ Changelog is rather internal in nature. See release notes for the public overvie
 - [#351]
   - **Description:** Wrap `KCheckbox` default slot's content in `<label>`
   - **Products impact:** updated API
+  - **Addresses:** https://github.com/learningequality/kolibri-design-system/issues/347
   - **Components:** `KCheckbox`
   - **Breaking:** yes
   - **Impacts a11y:** yes

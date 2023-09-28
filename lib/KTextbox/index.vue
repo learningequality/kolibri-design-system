@@ -167,7 +167,6 @@
     watch: {
       value(val) {
         this.currentText = val;
-        this.changedOrFocused = true;
       },
     },
     methods: {
