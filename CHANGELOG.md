@@ -1,43 +1,504 @@
+<!-- 
+
+Changelog Guidelines
+
+- In contrast to release notes, changelog is detailed and contains all pull requests
+- Add the newest item to the top
+- If there are more groups of closely related changes in a pull request,
+  write more changelog items for each one of them. At a minimum, always separete
+  non-breaking changes from breaking changes
+- Copy-paste and fill in the template below for each changelog item. When doing so, please
+  pay attention to the following:
+  - Be explicit and include all affected areas (e.g. if you update `KIcon`,
+    all other components built on top of that, like `KLabeledIcon` or `KIconButton`,
+    might be affected too)
+  - Breaking updates are not only updates literally breaking a consumer but also updates
+    causing major, unexpected UI changes
+  - Focus on 'what', not 'how'  (you can mention how you solved a problem if it feels important,
+    however always emphasize what problem you solved and what impact it will have on consumers)
+  - Formulate information so that it can be easily understood even by a person who is not
+    familiar with the change in detail
+  - Consistency (see existing items)
+
+****************************
+
+- [PR no]
+  - **Description:** Summary of change(s)
+  - **Products impact:** Choose from - none (for internal updates) / bugfix / new API / updated API / removed API. If it's 'none', use "-" for all items below to indicate they are not relevant.
+  - **Components:** Affected public KDS component. Do not include internal sub-components or documentation components.
+  - **Breaking:** Will this change break something in a consumer? Choose from: yes / no
+  - **Impacts a11y:** Does this change improve a11y or adds new features that can be used to improve it? Choose from: yes / no
+  - **Guidance:** Why and how to introduce this update to a consumer? Required for breaking changes, appreciated for changes with a11y impact, and welcomed for non-breaking changes when relevant.
+
+[PR no]: [PR ref]
+
+****************************
+
+-->
+
 # Changelog
 
-Releases are recorded as git tags in the [Github releases](https://github.com/learningequality/kolibri-design-system/releases) page.
+Changelog is rather internal in nature. See release notes for the public overview and guidelines. Releases are recorded as git tags in the [Github releases](https://github.com/learningequality/kolibri-design-system/releases) page.
 
-## Develop (to become version 1.5.x)
-- [#426] - Adds `'click'` event to `KTabsList`
-- [#425] - Adds `pinned` and `notPinned` icons. Updates `cloud` icon to outline
-- [#424] - Adds `laptop` `cloud `and `wifi` icons to KDS
-- [#351] - Wrap `KCheckbox` default slot's content in <label>
-- [#355] - Add `KSelect` to KDS
-- [#346] - `KDropdownMenu` no longer contains a button. Relatedly, all props that relate to buttons were removed from `KDropdownMenu`, namely `text`, `appearance`, `disabled`. Therefore, when migrating to this version, `KDropdownMenu` needs to be wrapped in `KButton` or `KIconButton`'s' `menu` slot and these obsolete props moved to button components from `KDropdownMenu`.
-- [#346] - `KDropdownMenu` has a new prop `hasIcons` (whether or not the options display an icon). 
-- [#346] - `KButton`: The default slot doesn't take precedence over `text` prop anymore (the default slot content will be rendered above `text` if provided).
-- [#361] - `KButton` exposes `hasDropdown` prop which will show the dropdown icon in a button.
-- [#361] - Fixes 'Property or method "disabled" is not defined on the instance but referenced during render.' raised by `KDropdownMenu`
-- [#377] - Implement `useKResponsiveWindow` composable.
-- [#380] - Wrap `KRadioButton` text.
-- [#384] - Add `KDateRange` to KDS
-- [#403] - Add `KOptionalText` to KDS
-- [#420] - Add `KTabs`, `KTabsList`, and `KTabsPanel`
-- [#420] - Fix randomly missing focus ring
-- [#427] - Update `KDateRange` to use `vue-intl` function `$formatDate` for date formatting and translations
-- [#433] - Add new `props` to `KCircularLoader`:  `minVisibleTime` and `show`
-- [#443] - Update inputs within `KDateRange` to type `date`
+## Develop
 
-<!-- Referenced PRs -->
-[#425]: https://github.com/learningequality/kolibri-design-system/pull/425
-[#351]: https://github.com/learningequality/kolibri-design-system/pull/351
-[#355]: https://github.com/learningequality/kolibri-design-system/pull/355
-[#346]: https://github.com/learningequality/kolibri-design-system/pull/346
-[#361]: https://github.com/learningequality/kolibri-design-system/pull/361
-[#377]: https://github.com/learningequality/kolibri-design-system/pull/377
-[#380]: https://github.com/learningequality/kolibri-design-system/pull/380
-[#384]: https://github.com/learningequality/kolibri-design-system/pull/384
-[#403]: https://github.com/learningequality/kolibri-design-system/pull/403
-[#420]: https://github.com/learningequality/kolibri-design-system/pull/420
-[#424]: https://github.com/learningequality/kolibri-design-system/pull/424
-[#426]: https://github.com/learningequality/kolibri-design-system/pull/426
-[#427]: https://github.com/learningequality/kolibri-design-system/pull/427
+## Version 1.5.x
+
+<!-- Release notes prepared for all items below -->
+
+- [#450]
+  - **Description:** Add new changelog and GH action to check that the changelog is updated in each pull request
+  - **Products impact:** -
+  - **Components:** -
+  - **Breaking:** -
+  - **Impacts a11y:** -
+  - **Guidance:** -
+
+- [#448]
+  - **Description:** Adds `KTransition`
+  - **Products impact:** new API
+  - **Components:** `KTransition`
+  - **Breaking:** no
+  - **Impacts a11y:** no
+  - **Guidance:** Exposes predefined set of transitions built on top of Vue's `<transition>`
+
+- [#448]
+  - **Description:** Add a new prop, `disableDefaultTransition`, to `KCircularLoader`
+  - **Products impact:** new API
+  - **Components:** `KCircularLoader`
+  - **Breaking:** no
+  - **Impacts a11y:** no
+  - **Guidance:** You can use the new prop to prevent from glitches when using the loader in tandem with another component, both of them wrapped in a transition
+
+- [#448]
+  - **Description:** Rename `KCircularLoader`'s `show` prop to `shouldShow`
+  - **Products impact:** updated API
+  - **Components:** `KCircularLoader`
+  - **Breaking:** yes
+  - **Impacts a11y:** no
+  - **Guidance:** If you use `show` prop on `KCircularLoader`, rename it to `shouldShow`
+
+[#448]: https://github.com/learningequality/kolibri-design-system/pull/448
+
+- [#448]
+  - **Description:** Add `useKShow` composable. Related refactoring of `KCircularLoader`.
+  - **Products impact:** new API
+  - **Components:** `useKShow`, `KCircularLoader`
+  - **Breaking:** no
+  - **Impacts a11y:** no
+  - **Guidance:** -
+
+[#448]: https://github.com/learningequality/kolibri-design-system/pull/448
+
+- [#447]
+  - **Description:** Improve contributing guidelines and add a playground page for developers
+  - **Products impact:** none
+  - **Components:** -
+  - **Breaking:** -
+  - **Impacts a11y:** -
+  - **Guidance:** -
+
+[#447]: https://github.com/learningequality/kolibri-design-system/pull/447
+
+- [#446]
+  - **Description:** Fixes icon components' `color` property not being applied for some custom icons by removing hardcoded fill color from svg files. Affected icons: `computerScienceResource`, `currentEventsResource`, `diversityResource`, `entrepreneurshipResource`, `environmentResource`, `financialLiteracyResource`, `historyResource`, `learningSkillsResource`, `literacyResource`, `logicCriticalThinkingResource`, `mathematicsResource`, `mentalHealthResource`, `readingAndWritingResource`, `sciencesResource`, `skillsResource`
+  - **Products impact:** bugfix
+  - **Components:** `KIcon`, `KIconButton`, `KLabeledIcon`
+  - **Breaking:** no
+  - **Impacts a11y:** no
+  - **Guidance:** -
+
+[#446]: https://github.com/learningequality/kolibri-design-system/pull/446
+
+- [#446]
+  - **Description:** `KIcon` throws a warning about `color` prop not being applied for icons that are supposed to have fixed colors
+  - **Products impact:** new API
+  - **Components:** `KIcon`, `KIconButton`, `KLabeledIcon`
+  - **Breaking:** no
+  - **Impacts a11y:** no
+  - **Guidance:** -
+
+[#446]: https://github.com/learningequality/kolibri-design-system/pull/446
+
+- [#443]
+  - **Description:** Update inputs within `KDateRange` to type `date` and add support for RTL languages
+  - **Products impact:** bugfix
+  - **Components:** `KDateRange`
+  - **Breaking:** no
+  - **Impacts a11y:** no
+  - **Guidance:** -
+
+[#443]: https://github.com/learningequality/kolibri-design-system/pull/443
+
+- [#436]
+  - **Description:** Remove `KContentRenderer` component
+  - **Products impact:** removed API
+  - **Components:** `KContentRenderer`
+  - **Breaking:** yes
+  - **Impacts a11y:** no
+  - **Guidance:** Import `KContentRendered` from Kolibri repository
+
+[#436]: https://github.com/learningequality/kolibri-design-system/pull/436
+
+- [#437]
+  - **Description:** Update README with our approach to vendored Keen UI files + add installation step to `yarn link` guidelines
+  - **Products impact:** none
+  - **Components:** -
+  - **Breaking:** -
+  - **Impacts a11y:** -
+  - **Guidance:** -
+
+[#437]: https://github.com/learningequality/kolibri-design-system/pull/437
+
+- [#433]
+  - **Description:** Add new `props`, `minVisibleTime` and `show`, to `KCircularLoader` to allow it being displayed for a desired minimum amount of time
+  - **Products impact:** new API
+  - **Components:** `KCircularLoader`
+  - **Breaking:** no
+  - **Impacts a11y:** no
+  - **Guidance:** -
+
 [#433]: https://github.com/learningequality/kolibri-design-system/pull/433
+
+- [#429]
+  - **Description:** Allows `KSelect` to extend outside of `KModal`
+  - **Products impact:** bugfix
+  - **Components:** `KSelect`, `KModal`
+  - **Breaking:** no
+  - **Impacts a11y:** no
+  - **Guidance:** Some core calculations were tweaked so it would be wise to preview `KModal` and `KSelect` for regressions
+
+[#429]: https://github.com/learningequality/kolibri-design-system/pull/429
+
+- [#427]
+  - **Description:** Display the months of the year within the `KDateCalendar` in the correct language
+  - **Products impact:** bugfix
+  - **Components:** `KDateRange`
+  - **Breaking:** no
+  - **Impacts a11y:** yes
+  - **Guidance:** -
+
+[#427]: https://github.com/learningequality/kolibri-design-system/pull/427
+
+- [#426]
+  - **Description:** Add `'click'` event to `KTabsList`
+  - **Products impact:** new API
+  - **Components:** `KTabsList`
+  - **Breaking:** no
+  - **Impacts a11y:** no
+  - **Guidance:** -
+
+[#426]: https://github.com/learningequality/kolibri-design-system/pull/426
+
+- [#426]
+  - **Description:** Fix `KTabsList` focus state 
+  - **Products impact:** bugfix
+  - **Components:** `KTabsList`, `KTabs`
+  - **Breaking:** no
+  - **Impacts a11y:** no
+  - **Guidance:** -
+
+[#426]: https://github.com/learningequality/kolibri-design-system/pull/426
+
+- [#425]
+  - **Description:** Adds `pinned` and `notPinned` icons
+  - **Products impact:** new API
+  - **Components:** -
+  - **Breaking:** no
+  - **Impacts a11y:** no
+  - **Guidance:** -
+
+[#425]: https://github.com/learningequality/kolibri-design-system/pull/425
+
+- [#425]
+  - **Description:** Updates `cloud` icon to outline style
+  - **Products impact:** updated API
+  - **Components:** -
+  - **Breaking:** no
+  - **Impacts a11y:** no
+  - **Guidance:** -
+
+[#425]: https://github.com/learningequality/kolibri-design-system/pull/425
+
+- [#424]
+  - **Description:** Adds `laptop`, `cloud `and `wifi` icons
+  - **Products impact:** new API
+  - **Components:** -
+  - **Breaking:** no
+  - **Impacts a11y:** no
+  - **Guidance:** -
+
+[#424]: https://github.com/learningequality/kolibri-design-system/pull/424
+
+- [#420]
+  - **Description:** Fix randomly missing focus ring
+  - **Products impact:** bugfix
+  - **Components:** -
+  - **Breaking:** no
+  - **Impacts a11y:** yes
+  - **Guidance:** -
+
+[#420]: https://github.com/learningequality/kolibri-design-system/pull/420
+
+- [#420]
+  - **Description:** Add `KTabs`, `KTabsList`, and `KTabsPanel` components
+  - **Products impact:** new API
+  - **Components:** `KTabs`, `KTabsList`, `KTabsPanel`
+  - **Breaking:** no
+  - **Impacts a11y:** yes
+  - **Guidance:** -
+
+[#420]: https://github.com/learningequality/kolibri-design-system/pull/420
+
+- [#403]
+  - **Description:** Add `KOptionalText`
+  - **Products impact:** new API
+  - **Components:** `KOptionalText`
+  - **Breaking:** no
+  - **Impacts a11y:** no
+  - **Guidance:** -
+
+[#403]: https://github.com/learningequality/kolibri-design-system/pull/403
+
+- [#387]
+  - **Description:** Fix `KDropdownMenu` causing the window to scroll to the top on the menu button click
+  - **Products impact:** bugfix
+  - **Components:** `KDropdownMenu`
+  - **Breaking:** no
+  - **Impacts a11y:** no
+  - **Guidance:** -
+
+[#387]: https://github.com/learningequality/kolibri-design-system/pull/387
+
+- [#406]
+  - **Description:** Fixes months displayed at the turn of a year in `KDateRange`, removes font-family, and fixes console warnings
+  - **Products impact:** bugfix
+  - **Components:** `KDateRange`
+  - **Breaking:** no
+  - **Impacts a11y:** no
+  - **Guidance:** -
+
+[#406]: https://github.com/learningequality/kolibri-design-system/pull/406
+
+- [#404]
+  - **Description:** Initial implementation of `KImg` component
+  - **Products impact:** new API
+  - **Components:** `KImg`
+  - **Breaking:** no
+  - **Impacts a11y:** no
+  - **Guidance:** -
+
+[#404]: https://github.com/learningequality/kolibri-design-system/pull/404
+
+- [#402]
+  - **Description:** Fixes partially hidden `KSelect`'s dropdown menu when there is not enough space below the button. The menu will now show above the button in such a scenario.
+  - **Products impact:** bugfix
+  - **Components:** `KSelect`
+  - **Breaking:** no
+  - **Impacts a11y:** no
+  - **Guidance:** -
+
+[#402]: https://github.com/learningequality/kolibri-design-system/pull/402
+
+- [#378]
+  - **Description:** Fix `KDropdownMenu` not showing after its refactor in [#346] by adding missing template tags to `KButton`
+  - **Products impact:** bugfix
+  - **Components:** `KDropdownMenu`, `KButton` 
+  - **Breaking:** no
+  - **Impacts a11y:** no
+  - **Guidance:** -
+
+[#378]: https://github.com/learningequality/kolibri-design-system/pull/378
+
+- [#384]
+  - **Description:**  Add `KDateRange` component
+  - **Products impact:** new API
+  - **Components:** `KDateRange`
+  - **Breaking:** no
+  - **Impacts a11y:** no
+  - **Guidance:** -
+
+[#384]: https://github.com/learningequality/kolibri-design-system/pull/384
+
+- [#393]
+  - **Description:**  Update developers documentation to not include deleting KDS from package.json
+  - **Products impact:** none
+  - **Components:** -
+  - **Breaking:** -
+  - **Impacts a11y:** -
+  - **Guidance:** -
+
+[#393]: https://github.com/learningequality/kolibri-design-system/pull/393
+
+- [#400]
+  - **Description:**  Fix `useKWindowDimension`'s resize event listener not being properly removed
+  - **Products impact:** bugfix
+  - **Components:** `useKWindowDimension`
+  - **Breaking:** no
+  - **Impacts a11y:** no
+  - **Guidance:** -
+
+[#400]: https://github.com/learningequality/kolibri-design-system/pull/400
+
+- [#401]
+  - **Description:**  `KBreadcrumbs`'s links to intermediary items can be optionally disabled by omitting the `link` attribute, or making it falsey
+  - **Products impact:** new API
+  - **Components:** `KBreadcrumbs`
+  - **Breaking:** no
+  - **Impacts a11y:** no
+  - **Guidance:** -
+
+[#401]: https://github.com/learningequality/kolibri-design-system/pull/401
+
+- [#380]
+  - **Description:**  Wraps `KRadioButton`' label instead of truncating it. Adds a new `prop`,  `truncateLabel`, that turns on truncating rather than wrapping.
+  - **Products impact:** updated API
+  - **Components:** `KRadioButton`
+  - **Breaking:** yes
+  - **Impacts a11y:** no
+  - **Guidance:** Examine places where `KRadioButton` is used and see whether the new default behavior (wrapping) is problematic. If needed, you can set `truncateLabel` to `true` to retain the previous default behavior (truncating).
+
+[#380]: https://github.com/learningequality/kolibri-design-system/pull/380
+
+- [#380]
+  - **Description:**  Add the `showLabel` prop to `KRadioButton` to determine whether a label should be displayed. Relatedly, make `label` prop optional.
+  - **Products impact:** new API
+  - **Components:** `KRadioButton`
+  - **Breaking:** no
+  - **Impacts a11y:** no
+  - **Guidance:** -
+
+[#380]: https://github.com/learningequality/kolibri-design-system/pull/380
+
+- [#380]
+  - **Description:** `KRadioButton` emits `'blur'` event on blur
+  - **Products impact:** new API
+  - **Components:** `KRadioButton`
+  - **Breaking:** no
+  - **Impacts a11y:** no
+  - **Guidance:** -
+
+[#380]: https://github.com/learningequality/kolibri-design-system/pull/380
+
+- [#377]
+  - **Description:** Add `useKResponsiveWindow` composable
+  - **Products impact:** new API
+  - **Components:** `useKResponsiveWindow`
+  - **Breaking:** no
+  - **Impacts a11y:** no
+  - **Guidance:** -
+
+[#377]: https://github.com/learningequality/kolibri-design-system/pull/377
+
+- [#353]
+  - **Description:** Update README.md guidance on `yarn link`
+  - **Products impact:** none
+  - **Components:** -
+  - **Breaking:** -
+  - **Impacts a11y:** -
+  - **Guidance:** -
+
+[#353]: https://github.com/learningequality/kolibri-design-system/pull/353
+
+- [#367]
+  - **Description:** Better naming of the changelog section
+  - **Products impact:** none
+  - **Components:** -
+  - **Breaking:** -
+  - **Impacts a11y:** -
+  - **Guidance:** -
+
+[#367]: https://github.com/learningequality/kolibri-design-system/pull/367
+
+- [#358]
+  - **Description:** Improves `DocsShowCode` component layout
+  - **Products impact:** none
+  - **Components:** -
+  - **Breaking:** -
+  - **Impacts a11y:** -
+  - **Guidance:** -
+
+[#358]: https://github.com/learningequality/kolibri-design-system/pull/358
+
+- [#357]
+  - **Description:** Bind all attributes to navigation element within `KBreadcrumbs`
+  - **Products impact:** updated API
+  - **Components:** `KBreadcrumbs`
+  - **Breaking:** no
+  - **Impacts a11y:** yes
+  - **Guidance:** Even though this is a general update that allows all `KBreadcrumbs` attributes to be passed right to its `<nav>`, we intially did it to support adding `aria-label` easily. Whenever you use `KBreadcrumbs`, consider improving a11y through `ariaLabel` attribute on `KBreadcrumbs`.
+
+[#357]: https://github.com/learningequality/kolibri-design-system/pull/357
+
+- [#361]
+  - **Description:** Fixes 'Property or method "disabled" is not defined on the instance but referenced during render.' raised by `KDropdownMenu`. Related to updates introduced in [#346].
+  - **Products impact:** bugfix
+  - **Components:** `KDropdownMenu`
+  - **Breaking:** no
+  - **Impacts a11y:** no
+  - **Guidance:** -
+
+[#361]: https://github.com/learningequality/kolibri-design-system/pull/361
+
+- [#361]
+  - **Description:** `KButton` exposes `hasDropdown` prop which will show the dropdown arrow icon in a button. Related to updates introduced in [#346].
+  - **Products impact:** updated API
+  - **Components:** `KButton`
+  - **Breaking:** no
+  - **Impacts a11y:** no
+  - **Guidance:** -
+
+[#361]: https://github.com/learningequality/kolibri-design-system/pull/361
+
+- [#346]
+  - **Description:** `KButton`: The default slot doesn't take precedence over the `text` prop anymore. The slot's content will be rendered above `text` when both are provided.
+  - **Products impact:** updated API
+  - **Components:** `KButton`
+  - **Breaking:** yes
+  - **Impacts a11y:** no
+  - **Guidance:** If you use `KButton`'s default slot simultaneously with the `text` prop, the button most likely won't render as expected. You might need to add some kind of a custom condition to resolve that.
+
+[#346]: https://github.com/learningequality/kolibri-design-system/pull/346
+
+- [#346]
+  - **Description:** `KDropdownMenu` has a new prop `hasIcons` which controls whether or not the options display an icon.
+  - **Products impact:** new API
+  - **Components:** `KDropdownMenu`
+  - **Breaking:** no
+  - **Impacts a11y:** no
+  - **Guidance:** -
+
+[#346]: https://github.com/learningequality/kolibri-design-system/pull/346
+
+- [#346]
+  - **Description:** `KDropdownMenu` no longer contains a button. All props related to buttons were removed from `KDropdownMenu`, namely `text`, `appearance`, and `disabled`. `KButton` and `KIconButton` has a new `#menu` slot in which `KDropdownMenu` can be placed.
+  - **Products impact:** updated API
+  - **Components:** `KDropdownMenu`
+  - **Breaking:** yes
+  - **Impacts a11y:** no
+  - **Guidance:** Place `KDropdownMenu` into `KButton`'s or `KIconButton`'s `menu` slot and move `text`, `appearance`, and `disabled` props from `KDropdownMenu` to `KButton`/`KIconButton`. See [an example in the documentation](https://develop--kolibri-design-system.netlify.app/buttons/#dropdowns). Visit "Props" and "Slots" sections of these components' documentation pages for more details.
+
+[#346]: https://github.com/learningequality/kolibri-design-system/pull/346
+
+- [#355]
+  - **Description:** Moves `KSelect` from Kolibri to KDS
+  - **Products impact:** new API
+  - **Components:** `KSelect`
+  - **Breaking:** no
+  - **Impacts a11y:** no
+  - **Guidance:** -
+
+[#355]: https://github.com/learningequality/kolibri-design-system/pull/355
+
+- [#351]
+  - **Description:** Wrap `KCheckbox` default slot's content in `<label>`
+  - **Products impact:** updated API
+  - **Components:** `KCheckbox`
+  - **Breaking:** yes
+  - **Impacts a11y:** yes
+  - **Guidance:** Even though this will fix all places where we forgot to wrap the default's slot content in `<label>`, it will cause problems in places we didn't forget to do so as there will now be two `<label>`s wrapping the label content. Therefore, check all places where `KCheckbox` is used and if you see `<label>` in its default slot, remove it.
+
+[#351]: https://github.com/learningequality/kolibri-design-system/pull/351
 
 ## Version 1.4.x
 

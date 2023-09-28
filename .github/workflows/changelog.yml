@@ -1,0 +1,23 @@
+name: Changelog is updated
+
+on: [pull_request]
+
+permissions:
+  pull-requests: read
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: ankitjain28may/list-files-in-pr@v1.0
+        id: list-files
+        with:
+          githubToken: ${{ github.token }}
+          outputFormat: 'space-delimited'
+      - run: |
+          for file in ${{ steps.list-files.outputs.pullRequestFiles }}; do
+            if [ $file = "CHANGELOG.md" ]; then
+              exit 0
+            fi
+          done
+          exit 1

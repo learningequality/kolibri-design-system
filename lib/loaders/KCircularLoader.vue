@@ -9,9 +9,9 @@
   -->
 
 
-  <transition name="ui-progress-circular--transition-fade">
+  <transition :name="disableDefaultTransition ? '' : 'ui-progress-circular--transition-fade'">
     <div
-      v-if="showLoader"
+      v-if="show(_uid, shouldShow, minVisibleTime)"
       class="ui-progress-circular"
       :class="[classes, { delay }]"
       :style="{ 'width': size + 'px', 'height': size + 'px' }"
@@ -79,11 +79,18 @@
 
 <script>
 
+  import useKShow from '../composables/useKShow';
+
   /**
    * Used to show indeterminate loading
    */
   export default {
     name: 'KCircularLoader',
+
+    setup() {
+      const { show } = useKShow();
+      return { show };
+    },
     props: {
       /**
        * One of `'determinate'` or `'indeterminate'`. Determinate loaders represent a known completion percentage, while indeterminate loaders simply show that activity is currently happening.
@@ -95,7 +102,7 @@
       /**
        * Whether the loader should be displayed or not. It needs to be used instead of `v-if/v-show` for `minVisibleTime` to work.
        */
-      show: {
+      shouldShow: {
         type: Boolean,
         default: true,
       },
@@ -114,7 +121,7 @@
         default: false,
       },
       /**
-       * Do not hide the loader until `minVisibleTime` in milliseconds. Useful to avoid jarring UX when the actions finishes very fast. In comparison to `delay`, `minVisibleTime` emphasizes that an action associated with the loader is indeed taking place. `show` needs to be used instead of `v-if/v-show` for this to work.
+       * Do not hide the loader until `minVisibleTime` in milliseconds. Useful to avoid jarring UX when the actions finishes very fast. In comparison to `delay`, `minVisibleTime` emphasizes that an action associated with the loader is indeed taking place. `shouldShow` prop needs to be used instead of `v-if/v-show` for this to work.
        */
       minVisibleTime: {
         type: Number,
@@ -134,20 +141,20 @@
         type: Number,
         default: 4,
       },
-    },
-
-    data() {
-      return {
-        isFrozen: false,
-        freezeTimeoutId: null,
-      };
+      /**
+       * Disables the default fade transition. Disabling is suitable when using
+       * a loader in tandem with another component (e.g. as part of v-if/v-else)
+       * as we typically need to wrap both components in a single transition.
+       * Having a loader wrapped by its own transition can cause glitches in
+       * such situations.
+       */
+      disableDefaultTransition: {
+        type: Boolean,
+        default: false,
+      },
     },
 
     computed: {
-      showLoader() {
-        return this.show || this.isFrozen;
-      },
-
       classes() {
         return [`ui-progress-circular--type-${this.type}`];
       },
@@ -184,28 +191,6 @@
       },
     },
 
-    watch: {
-      show(oldVal, newVal) {
-        if (oldVal === newVal) {
-          return;
-        }
-        this.freezeLoader();
-      },
-      freeze(oldVal, newVal) {
-        if (oldVal === newVal) {
-          return;
-        }
-        if (newVal === 0 || newVal < 0) {
-          clearTimeout(this.freezeTimeoutId);
-        } else {
-          this.freezeLoader();
-        }
-      },
-    },
-    mounted() {
-      this.freezeLoader();
-    },
-
     methods: {
       moderateProgress(progress) {
         if (isNaN(progress) || progress < 0) {
@@ -217,15 +202,6 @@
         }
 
         return progress;
-      },
-
-      freezeLoader() {
-        if (this.show && this.minVisibleTime > 0) {
-          this.isFrozen = true;
-          this.freezeTimeoutId = setTimeout(() => {
-            this.isFrozen = false;
-          }, this.minVisibleTime);
-        }
       },
     },
   };
