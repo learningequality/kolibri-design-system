@@ -1,4 +1,4 @@
-<!-- 
+<!--
 
 Changelog Guidelines
 
@@ -42,6 +42,15 @@ Changelog Guidelines
 Changelog is rather internal in nature. See release notes for the public overview and guidelines. Releases are recorded as git tags in the [Github releases](https://github.com/learningequality/kolibri-design-system/releases) page.
 
 ## Version 1.5.x
+
+- [#453]
+  - **Description:** Fix sidepanel opening in Kolibri Library page after resizing window
+  - **Products impact:** bugfix
+  - **Addresses:** https://github.com/learningequality/kolibri/issues/11212
+  - **Components:** `useKResponsiveWindow` (composable)
+  - **Breaking:** no
+  - **Impacts a11y:** no
+  - **Guidance:** -
 
 <!-- Release notes prepared for all items below -->
 
@@ -214,7 +223,7 @@ Changelog is rather internal in nature. See release notes for the public overvie
 [#426]: https://github.com/learningequality/kolibri-design-system/pull/426
 
 - [#426]
-  - **Description:** Fix `KTabsList` focus state 
+  - **Description:** Fix `KTabsList` focus state
   - **Products impact:** bugfix
   - **Addresses:** -
   - **Components:** `KTabsList`, `KTabs`
@@ -338,7 +347,7 @@ Changelog is rather internal in nature. See release notes for the public overvie
   - **Description:** Fix `KDropdownMenu` not showing after its refactor in [#346] by adding missing template tags to `KButton`
   - **Products impact:** bugfix
   - **Addresses:** https://github.com/learningequality/kolibri/issues/9754
-  - **Components:** `KDropdownMenu`, `KButton` 
+  - **Components:** `KDropdownMenu`, `KButton`
   - **Breaking:** no
   - **Impacts a11y:** no
   - **Guidance:** -
