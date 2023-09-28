@@ -50,22 +50,28 @@
       },
     },
     computed: {
+      selectedIcon() {
+        if (!KolibriIcons[this.icon]) {
+          return KolibriIcons.brokenImage;
+        }
+        return KolibriIcons[this.icon];
+      },
       computedColor() {
         if (this.disableColor) {
           return null;
         }
         if (this.color) {
           return this.color;
-        } else if (KolibriIcons[this.icon].defaultColor) {
-          return KolibriIcons[this.icon].defaultColor;
+        } else if (this.selectedIcon.defaultColor) {
+          return this.selectedIcon.defaultColor;
         }
         return this.$themeTokens.text;
       },
       rtlFlip() {
-        return KolibriIcons[this.icon].rtlFlip && this.isRtl;
+        return this.selectedIcon.rtlFlip && this.isRtl;
       },
       svgIconComponent() {
-        return KolibriIcons[this.icon].icon;
+        return this.selectedIcon.icon;
       },
     },
     mounted() {
