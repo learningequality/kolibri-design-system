@@ -2,7 +2,7 @@
 
   <div>
     <img
-      :src="logo"
+      :src="src"
       :alt="alternateText"
       :style="styleObject"
     >
@@ -13,8 +13,6 @@
 
 
 <script>
-
-  import kolibriLogo from '../docs/common/DocsPageTemplate/SideNav/kolibri-logo.svg';
 
   export default {
     name: 'KImg',
@@ -82,13 +80,6 @@
         type: [Number, String],
         default: undefined,
       },
-      /**
-       * 	Renders the kolibri icon for the component
-       */
-      kolibriFly: {
-        type: Boolean,
-        default: false,
-      },
     },
     data() {
       return {
@@ -123,9 +114,6 @@
       },
       imgMinWidth() {
         return this.validateAndFormatUnits(this.minWidth);
-      },
-      logo() {
-        return this.kolibriFly ? kolibriLogo : this.src;
       },
     },
     created() {
