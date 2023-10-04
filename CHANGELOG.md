@@ -43,6 +43,15 @@ Changelog is rather internal in nature. See release notes for the public overvie
 
 ## Version 1.5.x
 
+- [#462]
+  - **Description:** Fix internal links in design system documentation
+  - **Products impact:** none
+  - **Addresses:** https://github.com/learningequality/kolibri-design-system/pull/423
+  - **Components:** none
+  - **Breaking:** no
+  - **Impacts a11y:** no
+  - **Guidance:** -
+
 - [#453]
   - **Description:** Fix sidepanel opening in Kolibri Library page after resizing window
   - **Products impact:** bugfix
