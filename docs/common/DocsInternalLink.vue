@@ -26,6 +26,9 @@
       href: {
         type: String,
         required: true,
+        validator(value) {
+          return value.startsWith('/') || value.startsWith('#');
+        },
       },
       text: {
         type: String,
