@@ -1,18 +1,18 @@
 <template>
 
   <div>
-    <img
+    <KImg
       :src="logo"
-      :alt="alternateText"
+      :altText="alternateText"
       :style="styleObject"
-    >
-    <slot></slot>
+    />
   </div>
 
 </template>
 
 <script>
 
+  import KImg from '../KImg.vue';
   import kolibriLogo from './kolibri-logo.svg';
 
   export default {
@@ -24,13 +24,6 @@
       altText: {
         type: String,
         default: '',
-      },
-      /**
-       * Sets the image as decorative. This sets the alt image property to an empty string.
-       */
-      isDecorative: {
-        type: Boolean,
-        default: false,
       },
       /**
        * Sets the height for the component
@@ -89,7 +82,7 @@
     },
     computed: {
       alternateText() {
-        return this.isDecorative ? '' : this.altText;
+        return this.altText;
       },
       imgHeight() {
         return this.validateAndFormatUnits(this.height);
@@ -114,8 +107,9 @@
       },
     },
     created() {
-      if (!this.isDecorative && !this.altText) {
-        throw new Error('Missing required prop - provide altText or indicate isDecorative');
+      console.log(this.altText);
+      if (!this.altText) {
+        throw new Error('Missing required prop - provide altText');
       }
     },
     methods: {
@@ -141,7 +135,6 @@
               'vh',
               'vw',
             ];
-
             // if made up of valid numbers and valid units
             if (!isNaN(arr[0]) && validUnits.includes(arr[1])) {
               return propValue;

@@ -33,14 +33,12 @@
       </div>
 
       <div class="img-example-2">
-        <DocsLibraryLink component="KLogo" /> requires alternative text that describes the image unless
-        <code>isDecorative</code> is <code>true</code>. In that case, any alt text provided will be overwritten to an
-        empty string.
+        <DocsLibraryLink component="KLogo" /> requires alternative text that describes the image, or it will throw an error.
         <div>
           <div>
             <DocsShow>
               <KLogo
-                isDecorative
+                altText="kolibriLogo"
                 :height="50"
                 :width="50"
               />
@@ -48,7 +46,7 @@
           </div>
           <DocsShowCode language="html">
             <KLogo
-              isDecorative
+              altText="kolibriLogo"
               :height="50"
               :width="50"
             />
