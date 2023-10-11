@@ -3,7 +3,7 @@
   <UiPopover
     ref="popover"
     :z-index="12"
-    :containFocus="true"
+    :containFocus="containFocus"
     :dropdownPosition="position"
     @close="handleClose"
     @open="handleOpen"
@@ -51,6 +51,13 @@
       hasIcons: {
         type: Boolean,
         default: false,
+      },
+      /**
+       *
+       */
+      containFocus: {
+        type: Boolean,
+        default: true,
       },
       /**
        * The position of the dropdown relative to the button
