@@ -8,12 +8,16 @@
     @close="handleClose"
     @open="handleOpen"
   >
-    <UiMenu 
-      ref="menu" 
-      :options="options" 
-      :hasIcons="hasIcons" 
-      @select="handleSelection" 
-    />
+    <UiMenu
+      ref="menu"
+      :options="options"
+      :hasIcons="hasIcons"
+      @select="handleSelection"
+    >
+      <template #option="{ option }">
+        <slot name="option" :option="option"></slot>
+      </template>
+    </UiMenu>
   </UiPopover>
 
 </template>
