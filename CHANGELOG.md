@@ -41,7 +41,11 @@ Changelog Guidelines
 
 Changelog is rather internal in nature. See release notes for the public overview and guidelines. Releases are recorded as git tags in the [Github releases](https://github.com/learningequality/kolibri-design-system/releases) page.
 
-## Version 1.5.x
+## Upcoming version
+
+<!-- All new changelog items should come here -->
+
+## Version 2.0.0
 
 - [#462]
   - **Description:** Fix internal links in design system documentation
@@ -64,8 +68,6 @@ Changelog is rather internal in nature. See release notes for the public overvie
   - **Guidance:** -
 
 [#453]: https://github.com/learningequality/kolibri-design-system/pull/453
-
-<!-- Release notes prepared for all items below -->
 
 - [#449]
   - **Description:** Fix textbox being unexpectedly focused after the first page load
