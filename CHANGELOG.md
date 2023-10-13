@@ -1,4 +1,4 @@
-<!-- 
+<!--
 
 Changelog Guidelines
 
@@ -41,9 +41,33 @@ Changelog Guidelines
 
 Changelog is rather internal in nature. See release notes for the public overview and guidelines. Releases are recorded as git tags in the [Github releases](https://github.com/learningequality/kolibri-design-system/releases) page.
 
-## Version 1.5.x
+## Upcoming version
 
-<!-- Release notes prepared for all items below -->
+<!-- All new changelog items should come here -->
+
+## Version 2.0.0
+
+- [#462]
+  - **Description:** Fix internal links in design system documentation
+  - **Products impact:** none
+  - **Addresses:** https://github.com/learningequality/kolibri-design-system/pull/423
+  - **Components:** none
+  - **Breaking:** no
+  - **Impacts a11y:** no
+  - **Guidance:** -
+
+[#462]: https://github.com/learningequality/kolibri-design-system/pull/462
+
+- [#453]
+  - **Description:** Fix sidepanel opening in Kolibri Library page after resizing window
+  - **Products impact:** bugfix
+  - **Addresses:** https://github.com/learningequality/kolibri/issues/11212
+  - **Components:** `useKResponsiveWindow` (composable)
+  - **Breaking:** no
+  - **Impacts a11y:** no
+  - **Guidance:** -
+
+[#453]: https://github.com/learningequality/kolibri-design-system/pull/453
 
 - [#449]
   - **Description:** Fix textbox being unexpectedly focused after the first page load
@@ -54,6 +78,8 @@ Changelog is rather internal in nature. See release notes for the public overvie
   - **Impacts a11y:** yes
   - **Guidance:** -
 
+[#449]: https://github.com/learningequality/kolibri-design-system/pull/449
+
 - [#450]
   - **Description:** Add new changelog and GH action to check that the changelog is updated in each pull request
   - **Products impact:** -
@@ -62,6 +88,8 @@ Changelog is rather internal in nature. See release notes for the public overvie
   - **Breaking:** -
   - **Impacts a11y:** -
   - **Guidance:** -
+
+[#450]: https://github.com/learningequality/kolibri-design-system/pull/450
 
 - [#448]
   - **Description:** Adds `KTransition`
@@ -72,6 +100,9 @@ Changelog is rather internal in nature. See release notes for the public overvie
   - **Impacts a11y:** no
   - **Guidance:** Exposes predefined set of transitions built on top of Vue's `<transition>`
 
+[#448]: https://github.com/learningequality/kolibri-design-system/pull/448
+
+
 - [#448]
   - **Description:** Add a new prop, `disableDefaultTransition`, to `KCircularLoader`
   - **Products impact:** new API
@@ -80,6 +111,8 @@ Changelog is rather internal in nature. See release notes for the public overvie
   - **Breaking:** no
   - **Impacts a11y:** no
   - **Guidance:** You can use the new prop to prevent from glitches when using the loader in tandem with another component, both of them wrapped in a transition
+
+[#448]: https://github.com/learningequality/kolibri-design-system/pull/448
 
 - [#448]
   - **Description:** Rename `KCircularLoader`'s `show` prop to `shouldShow`
@@ -214,7 +247,7 @@ Changelog is rather internal in nature. See release notes for the public overvie
 [#426]: https://github.com/learningequality/kolibri-design-system/pull/426
 
 - [#426]
-  - **Description:** Fix `KTabsList` focus state 
+  - **Description:** Fix `KTabsList` focus state
   - **Products impact:** bugfix
   - **Addresses:** -
   - **Components:** `KTabsList`, `KTabs`
@@ -338,7 +371,7 @@ Changelog is rather internal in nature. See release notes for the public overvie
   - **Description:** Fix `KDropdownMenu` not showing after its refactor in [#346] by adding missing template tags to `KButton`
   - **Products impact:** bugfix
   - **Addresses:** https://github.com/learningequality/kolibri/issues/9754
-  - **Components:** `KDropdownMenu`, `KButton` 
+  - **Components:** `KDropdownMenu`, `KButton`
   - **Breaking:** no
   - **Impacts a11y:** no
   - **Guidance:** -
