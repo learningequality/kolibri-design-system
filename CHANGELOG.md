@@ -45,7 +45,18 @@ Changelog is rather internal in nature. See release notes for the public overvie
 
 <!-- All new changelog items should come here -->
 
-## Version 2.0.0
+- [#463]
+  - **Description:** Add deprecation warning for KResponsiveWindowMixin
+  - **Products impact:** updated API
+  - **Addresses:** https://github.com/learningequality/kolibri-design-system/issues/459
+  - **Components:** KResponsiveWindowMixin
+  - **Breaking:** no
+  - **Impacts a11y:** no
+  - **Guidance:** useKResponsiveWindow composable should be used instead
+
+[#463]: https://github.com/learningequality/kolibri-design-system/pull/463
+
+## Version 2.0.0-beta0 (released - do not add new items)
 
 - [#462]
   - **Description:** Fix internal links in design system documentation
