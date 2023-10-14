@@ -4,6 +4,12 @@
     <KImg
       :src="logo"
       :altText="alternateText"
+      :height="imgHeight"
+      :width="imgWidth"
+      :maxHeight="imgMaxHeight"
+      :minHeight="imgMinHeight"
+      :maxWidth="imgMaxWidth"
+      :minWidth="imgMinWidth"
     />
   </div>
 
@@ -67,8 +73,6 @@
         default: undefined,
       },
     },
-    data() {
-      return {
     computed: {
       alternateText() {
         return this.altText;
