@@ -70,16 +70,6 @@
     },
     data() {
       return {
-        styleObject: {
-          height: this.imgHeight,
-          width: this.imgWidth,
-          maxHeight: this.imgMaxHeight,
-          minHeight: this.imgMinHeight,
-          maxWidth: this.imgMaxWidth,
-          minWidth: this.imgMinWidth,
-        },
-      };
-    },
     computed: {
       alternateText() {
         return this.altText;
