@@ -4,7 +4,6 @@
     <KImg
       :src="logo"
       :altText="alternateText"
-      :style="styleObject"
     />
   </div>
 
