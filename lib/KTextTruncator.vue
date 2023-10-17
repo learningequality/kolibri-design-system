@@ -41,10 +41,16 @@
     name: 'KTextTruncator',
     inheritAttrs: false,
     props: {
+      /**
+       * Text to be truncated
+       */
       text: {
         type: String,
         required: true,
       },
+      /**
+       * Maximum number of lines to be shown
+       */
       maxLines: {
         type: Number,
         required: false,
@@ -62,6 +68,8 @@
     },
     computed: {
       truncate() {
+        const nuxtClientSideRendering = process.client;
+
         /*
           (A)
           For one line, use standard ellipsis text overflow
@@ -76,7 +84,12 @@
         }
 
         // 54 is random number only to be able to define `supports` test condition
-        if (process.client && 'CSS' in window && CSS.supports && CSS.supports('-webkit-line-clamp: 54')) {
+        if (
+          nuxtClientSideRendering &&
+          'CSS' in window &&
+          CSS.supports &&
+          CSS.supports('-webkit-line-clamp: 54')
+        ) {
           /*
             (B)
             For multiple lines, use line clamp in browsers that support it
