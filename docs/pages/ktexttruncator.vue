@@ -1,5 +1,3 @@
-
-import KTextTruncator from '../../lib/KTextTruncator.vue';
 <template>
 
   <DocsPageTemplate :apiDocs="true">
