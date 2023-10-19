@@ -17,7 +17,6 @@
 
 <script>
 
-  import KImg from '../KImg.vue';
   import kolibriLogo from './kolibri-logo.svg';
 
   export default {
