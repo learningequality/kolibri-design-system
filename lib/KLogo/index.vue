@@ -3,13 +3,13 @@
   <div>
     <KImg
       :src="logo"
-      :altText="alternateText"
-      :height="imgHeight"
-      :width="imgWidth"
-      :maxHeight="imgMaxHeight"
-      :minHeight="imgMinHeight"
-      :maxWidth="imgMaxWidth"
-      :minWidth="imgMinWidth"
+      :altText="altText"
+      :height="height"
+      :width="width"
+      :maxHeight="maxHeight"
+      :minHeight="minHeight"
+      :maxWidth="maxWidth"
+      :minWidth="minWidth"
     />
   </div>
 
@@ -74,33 +74,11 @@
       },
     },
     computed: {
-      alternateText() {
-        return this.altText;
-      },
-      imgHeight() {
-        return this.validateAndFormatUnits(this.height);
-      },
-      imgWidth() {
-        return this.validateAndFormatUnits(this.width);
-      },
-      imgMaxHeight() {
-        return this.validateAndFormatUnits(this.maxHeight);
-      },
-      imgMinHeight() {
-        return this.validateAndFormatUnits(this.minHeight);
-      },
-      imgMaxWidth() {
-        return this.validateAndFormatUnits(this.maxWidth);
-      },
-      imgMinWidth() {
-        return this.validateAndFormatUnits(this.minWidth);
-      },
       logo() {
         return kolibriLogo;
       },
     },
     created() {
-      console.log(this.altText);
       if (!this.altText) {
         throw new Error('Missing required prop - provide altText');
       }
