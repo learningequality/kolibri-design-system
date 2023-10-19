@@ -6,6 +6,17 @@ Changelog is rather internal in nature. See release notes for the public overvie
 
 <!-- All new changelog items should come here -->
 
+- [#469]
+  - **Description:** Throttle the resize listener handler
+  - **Products impact:** updated API
+  - **Addresses:** https://github.com/learningequality/kolibri-design-system/issues/461
+  - **Components:** useKResponsiveWindow
+  - **Breaking:** no
+  - **Impacts a11y:** no
+  - **Guidance:** -
+
+[#469]: https://github.com/learningequality/kolibri-design-system/pull/469
+
 - [#472]
   - **Description:** Fix useKShow bug and add tests
   - **Products impact:** bugfix
