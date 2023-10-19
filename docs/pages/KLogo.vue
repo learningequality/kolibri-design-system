@@ -73,16 +73,16 @@
   </DocsPageTemplate>
 
 </template>
-  
-  
-  <script>
+
+
+<script>
 
   export default {};
 
 </script>
-  
-  
-  <style lang="scss" scoped>
+
+
+<style lang="scss" scoped>
 
   .img-example-1 {
     display: flex;

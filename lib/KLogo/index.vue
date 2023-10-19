@@ -15,6 +15,7 @@
 
 </template>
 
+
 <script>
 
   import kolibriLogo from './kolibri-logo.svg';
@@ -85,5 +86,6 @@
   };
 
 </script>
+
 
 <style scoped></style>
