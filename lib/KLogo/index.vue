@@ -24,7 +24,7 @@
     name: 'KLogo',
     props: {
       /**
-       * Alternate text for the image. This is required and will throw a warning when it's not provided (empty) unless isDecorative is true
+       * Alternate text for the image. This is required and will throw a warning when it's not provided (empty)
        */
       altText: {
         type: String,
