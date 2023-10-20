@@ -1,17 +1,15 @@
 <template>
 
-  <div>
-    <KImg
-      :src="logo"
-      :altText="altText"
-      :height="height"
-      :width="width"
-      :maxHeight="maxHeight"
-      :minHeight="minHeight"
-      :maxWidth="maxWidth"
-      :minWidth="minWidth"
-    />
-  </div>
+  <KImg
+    :src="logo"
+    :altText="altText"
+    :height="height"
+    :width="width"
+    :maxHeight="maxHeight"
+    :minHeight="minHeight"
+    :maxWidth="maxWidth"
+    :minWidth="minWidth"
+  />
 
 </template>
 
@@ -24,49 +22,50 @@
     name: 'KLogo',
     props: {
       /**
-       * Alternate text for the image. This is required and will throw a warning when it's not provided (empty)
+       * Alternative text for the logo
        */
       altText: {
         type: String,
+        required: true,
         default: '',
       },
       /**
-       * Sets the height for the component
+       * Sets the height for the logo
        */
       height: {
         type: [Number, String],
         default: undefined,
       },
       /**
-       * Sets the width for the component
+       * Sets the width for the logo
        */
       width: {
         type: [Number, String],
         default: undefined,
       },
       /**
-       * Sets the maximum height for the component
+       * Sets the maximum height for the logo
        */
       maxHeight: {
         type: [Number, String],
         default: undefined,
       },
       /**
-       * Sets the minimum height for the component
+       * Sets the minimum height for the logo
        */
       minHeight: {
         type: [Number, String],
         default: undefined,
       },
       /**
-       * Sets the maximum width for the component
+       * Sets the maximum width for the logo
        */
       maxWidth: {
         type: [Number, String],
         default: undefined,
       },
       /**
-       * 	Sets the minimum width for the component
+       * 	Sets the minimum width for the logo
        */
       minWidth: {
         type: [Number, String],
@@ -78,14 +77,6 @@
         return kolibriLogo;
       },
     },
-    created() {
-      if (!this.altText) {
-        throw new Error('Missing required prop - provide altText');
-      }
-    },
   };
 
 </script>
-
-
-<style scoped></style>
