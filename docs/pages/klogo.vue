@@ -2,73 +2,42 @@
 
   <DocsPageTemplate apiDocs>
     <DocsPageSection title="Overview" anchor="#overview">
-      <div>
-        Use <DocsLibraryLink component="KLogo" /> component where the kolibri Logo is needed.
+      <p>Shows Kolibri logo.</p>
 
-        <h3>Sample implementations of <DocsLibraryLink component="KLogo" /> including props:</h3>
+      <DocsShow>
+        <KLogo
+          altText="Kolibri Logo"
+          :height="150"
+          width="100%"
+          :maxWidth="150"
+        />
+      </DocsShow>
+      <DocsShowCode language="html">
+        <KLogo
+          altText="Kolibri logo"
+          :height="150"
+          width="100%"
+          :maxWidth="150"
+        />
+      </DocsShowCode>
+    </DocsPageSection>
 
-        <div>
-          Dimensions may be either numbers or strings consisting of a numeral and valid units (e.g. <code>px</code>,
-          <code>em</code>, <code>vh</code>).
-        </div>
+    <DocsPageSection title="Usage" anchor="#usage">
+      <h3>Alternative text</h3>
 
-        <div class="img-example-1">
-          <DocsShow>
-            <KLogo
-              altText="KolibriLogo"
-              :height="'250.2px'"
-              :width="225.5"
-              :maxHeight="600"
-              :minWidth="25"
-            />
-          </DocsShow>
-          <DocsShowCode language="html">
-            <KLogo
-              altText="KolibriLogo"
-              :height="'250.2px'"
-              :width="225.5"
-            />
-          </DocsShowCode>
-        </div>
-      </div>
+      <p>Alternative text (<code>altText</code>) is always required for the logo image. When creating it, consider the following:</p>
+      <ul>
+        <li>If the logo is used as a flat image, you can use the string "Kolibri logo"</li>
+        <li>If the the logo is used as a link, then the alternative text needs to give the context where the link is leading (for example "Go to home page", or similar)</li>
+      </ul>
+    </DocsPageSection>
 
-      <div class="img-example-2">
-        <DocsLibraryLink component="KLogo" /> requires alternative text that describes the image, or it will throw an error.
-        <div>
-          <div>
-            <DocsShow>
-              <KLogo
-                altText="kolibriLogo"
-                :height="50"
-                :width="50"
-              />
-            </DocsShow>
-          </div>
-          <DocsShowCode language="html">
-            <KLogo
-              altText="kolibriLogo"
-              :height="50"
-              :width="50"
-            />
-          </DocsShowCode>
-        </div>
-      </div>
-
-      <div>
-        If dimensions for the image are not specified, the size will default to the height and width of the source
-        image.
-        <DocsShow>
-          <KLogo
-            altText="KolibriLogo"
-          />
-        </DocsShow>
-        <DocsShowCode language="html">
-          <KLogo
-            altText="KolibriLogo"
-          />
-        </DocsShowCode>
-
-      </div>
+    <DocsPageSection title="Related" anchor="#related">
+      <ul>
+        <li>
+          <code>KLogo</code> is derived from <DocsLibraryLink component="KImg" /> and provides a subset of <code>KImg</code>'s API.
+        </li>
+      </ul>
     </DocsPageSection>
   </DocsPageTemplate>
 
@@ -80,32 +49,3 @@
   export default {};
 
 </script>
-
-
-<style lang="scss" scoped>
-
-  .img-example-1 {
-    display: flex;
-    margin-top: 20px;
-  }
-
-  .img-example-2 {
-    margin-top: 20px;
-    margin-bottom: 20px;
-  }
-
-  .img-example-2 > div {
-    display: flex;
-  }
-
-  .img-example-2 > div > div {
-    margin-top: 30px;
-  }
-
-</style>
-  
-  
-  
-  
-  
-  
