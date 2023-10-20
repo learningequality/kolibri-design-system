@@ -2,7 +2,7 @@
 
   <DocsPageTemplate apiDocs>
     <DocsPageSection title="Overview" anchor="#overview">
-      For design guidance, see the page on <DocsInternalLink href="modals" text="modals" />.
+      For design guidance, see the page on <DocsInternalLink href="/modals" text="modals" />.
     </DocsPageSection>
   </DocsPageTemplate>
 

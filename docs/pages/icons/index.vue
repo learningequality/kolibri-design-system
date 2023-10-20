@@ -34,7 +34,7 @@
 
     <DocsPageSection title="Color" anchor="#color">
       <p>
-        Many of these icons also are used with <DocsInternalLink href="colors" text="conventional colors" /> in the design system. For example, the <DocsInternalLink href="#tokens-coachContent" text="coachContent" code /> icon is often shown using the <DocsInternalLink href="/colors#tokens-coachContent" text="coachContent" code /> color, e.g. <KIcon icon="coachContent" />. Icons often have a default color associated with them, and this can be overridden as needed.
+        Many of these icons also are used with <DocsInternalLink href="/colors" text="conventional colors" /> in the design system. For example, the <DocsInternalLink href="#tokens-coachContent" text="coachContent" code /> icon is often shown using the <DocsInternalLink href="/colors#tokens-coachContent" text="coachContent" code /> color, e.g. <KIcon icon="coachContent" />. Icons often have a default color associated with them, and this can be overridden as needed.
       </p>
       <p>
         When inline with text, icons should usually be the same color as the text:
