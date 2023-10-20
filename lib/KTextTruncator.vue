@@ -68,13 +68,16 @@
     },
     computed: {
       truncate() {
-        const nuxtClientSideRendering = process.client;
+        const nuxtServerSideRendering = process && process.server;
+        if (nuxtServerSideRendering) {
+          return;
+        }
 
         /*
-          (A)
-          For one line, use standard ellipsis text overflow
-          that works well for such scenario
-        */
+            (A)
+            For one line, use standard ellipsis text overflow
+            that works well for such scenario
+          */
         if (this.maxLines === 1) {
           return {
             overflow: 'hidden',
@@ -84,17 +87,12 @@
         }
 
         // 54 is random number only to be able to define `supports` test condition
-        if (
-          nuxtClientSideRendering &&
-          'CSS' in window &&
-          CSS.supports &&
-          CSS.supports('-webkit-line-clamp: 54')
-        ) {
+        if ('CSS' in window && CSS.supports && CSS.supports('-webkit-line-clamp: 54')) {
           /*
-            (B)
-            For multiple lines, use line clamp in browsers that support it
-            (https://developer.mozilla.org/en-US/docs/Web/CSS/-webkit-line-clamp)
-          */
+              (B)
+              For multiple lines, use line clamp in browsers that support it
+              (https://developer.mozilla.org/en-US/docs/Web/CSS/-webkit-line-clamp)
+            */
           return {
             overflow: 'hidden',
             display: '-webkit-box',
@@ -105,15 +103,15 @@
           };
         } else {
           /*
-            (C)
-            Fallback for multiple lines in Internet Explorer and some older versions
-            of other browsers that don't support line clamp
-            (https://caniuse.com/mdn-css_properties_-webkit-line-clamp).
-            Calculate max height and add "..." in `::before` while covering it with
-            white rectangle defined in `::after` when text doesn't need to be truncated.
-            Adapted from https://hackingui.com/a-pure-css-solution-for-multiline-text-truncation/
-            and https://css-tricks.com/line-clampin/#the-hide-overflow-place-ellipsis-pure-css-way.
-          */
+              (C)
+              Fallback for multiple lines in Internet Explorer and some older versions
+              of other browsers that don't support line clamp
+              (https://caniuse.com/mdn-css_properties_-webkit-line-clamp).
+              Calculate max height and add "..." in `::before` while covering it with
+              white rectangle defined in `::after` when text doesn't need to be truncated.
+              Adapted from https://hackingui.com/a-pure-css-solution-for-multiline-text-truncation/
+              and https://css-tricks.com/line-clampin/#the-hide-overflow-place-ellipsis-pure-css-way.
+            */
           const ellipsisWidth = '1rem';
           return {
             overflow: 'hidden',
