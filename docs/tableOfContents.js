@@ -392,6 +392,11 @@ export default [
         isCode: true,
         keywords: ['transition'],
       }),
+      new Page({
+        path: '/ktexttruncator',
+        title: 'KTextTruncator',
+        isCode: true,
+      }),
     ],
   }),
 ];
