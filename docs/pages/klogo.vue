@@ -25,7 +25,7 @@
     <DocsPageSection title="Usage" anchor="#usage">
       <h3>Alternative text</h3>
 
-      <p>Alternative text (<code>altText</code>) is always required for the logo image. When creating it, consider the following:</p>
+      <p>Alternative text (<code>altText</code>) is required for the logo image. When creating it, consider the following:</p>
       <ul>
         <li>If the logo is used as a flat image, you can use the string "Kolibri logo"</li>
         <li>If the the logo is used as a link, then the alternative text needs to give the context where the link is leading (for example "Go to home page", or similar)</li>
