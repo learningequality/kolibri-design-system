@@ -4,7 +4,19 @@ Changelog is rather internal in nature. See release notes for the public overvie
 
 ## Upcoming version
 
-<!-- All new changelog items should come here -->
+
+## Version 2.0.0
+
+- [#460]
+  - **Description:** Implement KLogo
+  - **Products impact:** new API
+  - **Addresses:** https://github.com/learningequality/kolibri-design-system/issues/373
+  - **Components:** KLogo
+  - **Breaking:** no
+  - **Impacts a11y:** no
+  - **Guidance:** -
+
+[#460]: https://github.com/learningequality/kolibri-design-system/pull/460
 
 - [#470]
   - **Description:** Fix bug and add test guard in MediaQuery implementation
@@ -49,8 +61,6 @@ Changelog is rather internal in nature. See release notes for the public overvie
   - **Guidance:** useKResponsiveWindow composable should be used instead
 
 [#463]: https://github.com/learningequality/kolibri-design-system/pull/463
-
-## Version 2.0.0-beta0 (released - do not add new items)
 
 - [#462]
   - **Description:** Fix internal links in design system documentation
