@@ -7,8 +7,19 @@ Changelog is rather internal in nature. See release notes for the public overvie
 
 ## Version 2.0.0
 
+- [#464]
+  - **Description:** Add KTextTruncator
+  - **Products impact:** new API
+  - **Addresses:** https://github.com/learningequality/kolibri-design-system/issues/450
+  - **Components:** KTextTruncator
+  - **Breaking:** no
+  - **Impacts a11y:** no
+  - **Guidance:** -
+
+[#464]: https://github.com/learningequality/kolibri-design-system/pull/464
+
 - [#460]
-  - **Description:** Implement KLogo
+  - **Description:** Add KLogo
   - **Products impact:** new API
   - **Addresses:** https://github.com/learningequality/kolibri-design-system/issues/373
   - **Components:** KLogo
