@@ -6,6 +6,17 @@ Changelog is rather internal in nature. See release notes for the public overvie
 
 <!-- All new changelog items should come here -->
 
+- [#470]
+  - **Description:** Fix bug and add test guard in MediaQuery implementation
+  - **Products impact:** none
+  - **Addresses:** -
+  - **Components:** none
+  - **Breaking:** no
+  - **Impacts a11y:** no
+  - **Guidance:** -
+
+[#470]: https://github.com/learningequality/kolibri-design-system/pull/470
+
 - [#469]
   - **Description:** Throttle the resize listener handler
   - **Products impact:** updated API
