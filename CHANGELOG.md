@@ -7,6 +7,15 @@ Changelog is rather internal in nature. See release notes for the public overvie
 
 ## Version 2.0.0
 
+- [#478]
+  - **Description:** Changed _dev-only to dev-only
+  - **Products impact:** Bug fix
+  - **Addresses:** https://github.com/learningequality/kolibri-design-system/issues/474
+  - **Components:** none
+  - **Breaking:** no
+  - **Impacts a11y:** no
+  - **Guidance:** -
+
 - [#464]
   - **Description:** Add KTextTruncator
   - **Products impact:** new API
