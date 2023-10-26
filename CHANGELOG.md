@@ -15,6 +15,8 @@ Changelog is rather internal in nature. See release notes for the public overvie
   - **Breaking:** no
   - **Impacts a11y:** no
   - **Guidance:** -
+ 
+  [#478]: https://github.com/learningequality/kolibri-design-system/pull/478
 
 - [#464]
   - **Description:** Add KTextTruncator
