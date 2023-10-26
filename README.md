@@ -17,7 +17,7 @@ If you are building a Kolibri plugin you should _not_ add the design system as a
 
 Refer to [design-system.learningequality.org](https://design-system.learningequality.org) to learn about the design system patterns and components, as well as the detailed technical documentation and guidance for the library components that are available for usage in Kolibri products. 
 
-For the latest (not yet released) version, visit the design system website built from the `develop` branch at [develop--kolibri-design-system.netlify.app/](https://develop--kolibri-design-system.netlify.app/).
+For the latest (not yet released) version, visit the design system website built from the `main` branch at [main--kolibri-design-system.netlify.app/](https://main--kolibri-design-system.netlify.app/).
 
 ### Component library
 
