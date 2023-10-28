@@ -13,7 +13,7 @@
           type="radio"
           class="k-radio-button-input"
           :checked="isChecked"
-          :value="value"
+          :buttonValue="buttonValue"
           :disabled="disabled"
           :autofocus="autofocus"
           @click.stop="toggleCheck"
@@ -103,7 +103,7 @@
       /**
        * Unique value that will be assigned to `v-model` data when this radio button is selected
        */
-      value: {
+      buttonValue: {
         type: [String, Number, Boolean],
         required: true,
       },
@@ -141,7 +141,7 @@
     }),
     computed: {
       isChecked() {
-        return this.value.toString() === this.currentValue.toString();
+        return this.buttonValue.toString() === this.currentValue.toString();
       },
       id() {
         return `${this._uid}`;
@@ -189,9 +189,9 @@
         this.$emit('change', this.isChecked, event);
 
         /**
-         * Used to set `value` to `v-model` when checked
+         * Used to set `buttonValue` to `v-model` when checked
          */
-        this.$emit('input', this.value);
+        this.$emit('input', this.buttonValue);
       },
       blur() {
         this.active = false;

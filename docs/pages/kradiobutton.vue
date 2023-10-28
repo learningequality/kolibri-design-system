@@ -10,23 +10,23 @@
         <KRadioButton
           v-model="exampleValue"
           label="Option A"
-          value="val-a"
+          buttonValue="val-a"
         />
         <KRadioButton
           v-model="exampleValue"
           label="Option B"
-          value="val-b"
+          buttonValue="val-b"
         />
         <KRadioButton
           v-model="exampleValue"
           label="Option C"
           description="This one is special!"
-          value="val-c"
+          buttonValue="val-c"
         />
         <KRadioButton
           v-model="exampleValue"
           label="Truncated label. Adjusting your browser window size to see this in action."
-          value="val-d"
+          buttonValue="val-d"
           truncateLabel
         />
         <p>
