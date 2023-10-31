@@ -29,7 +29,7 @@ Changelog is rather internal in nature. See release notes for the public overvie
  
   [#482]: https://github.com/learningequality/kolibri-design-system/pull/482
 
-- [#484]
+- [#485]
   - **Description:** Updated KRadioButton 'value' prop to 'buttonValue'
   - **Products impact:** Updated API
   - **Addresses:** https://github.com/learningequality/kolibri-design-system/issues/379
@@ -38,7 +38,7 @@ Changelog is rather internal in nature. See release notes for the public overvie
   - **Impacts a11y:** 
   - **Guidance:** KRadioButton 'value' prop is deprecated. Please use the 'buttonValue' prop instead.
  
-  [#484]: https://github.com/learningequality/kolibri-design-system/pull/484
+  [#485]: https://github.com/learningequality/kolibri-design-system/pull/485
 
 - [#464]
   - **Description:** Add KTextTruncator
