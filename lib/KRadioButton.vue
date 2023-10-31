@@ -13,7 +13,7 @@
           type="radio"
           class="k-radio-button-input"
           :checked="isChecked"
-          :value="buttonValue"
+          :buttonValue="buttonValue"
           :disabled="disabled"
           :autofocus="autofocus"
           @click.stop="toggleCheck"
