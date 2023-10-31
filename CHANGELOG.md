@@ -9,7 +9,7 @@ Changelog is rather internal in nature. See release notes for the public overvie
 
 - [#478]
   - **Description:** Changed _dev-only to dev-only
-  - **Products impact:** Script Enhancement
+  - **Products impact:** -
   - **Addresses:** https://github.com/learningequality/kolibri-design-system/issues/474
   - **Components:** none
   - **Breaking:** no
@@ -20,7 +20,7 @@ Changelog is rather internal in nature. See release notes for the public overvie
 
   - [#482]
   - **Description:** Changed develop branch to main branch in Readme
-  - **Products impact:** Script Enhancement
+  - **Products impact:** -
   - **Addresses:** https://github.com/learningequality/kolibri-design-system/issues/479
   - **Components:** none
   - **Breaking:** no
