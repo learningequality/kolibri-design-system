@@ -7,7 +7,7 @@
         Implements a dropdown set of options, based on <DocsExternalLink text="Keen's UI Menu" href="https://josephuspaye.github.io/Keen-UI/#/ui-menu" />. See these docs to understand the current implementation of the options object array.
       </p>
       <p>
-        Notable possible for configuring the menu include: icons, text, secondary text, and dividers.
+        Notable possible for configuring the menu include: icons, text, secondary text, and dividers. Additionally, you can customize the appearance and render complex options using the "options" slot.
       </p>
       <p>
         Please see the <DocsInternalLink href="/buttons#dropdowns" text="Dropdown section of the Buttons and links page" /> on the buttons page for more details about how to use with a button, and a code example.
