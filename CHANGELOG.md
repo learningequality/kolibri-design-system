@@ -4,6 +4,16 @@ Changelog is rather internal in nature. See release notes for the public overvie
 
 ## Upcoming version
 
+- [#494]
+  - **Description:** Update contributing guidelines
+  - **Products impact:** none
+  - **Addresses:** -
+  - **Components:** -
+  - **Breaking:** -
+  - **Impacts a11y:** -
+  - **Guidance:** -
+
+[#494]: [https://github.com/learningequality/kolibri-design-system/pull/494]
 
 ## Version 2.0.0
 
