@@ -8,8 +8,43 @@
         :style="imgStyles"
         @error="onError"
       >
-      <!-- @slot An unstyled slot that can be used for anything that other slots are not suitable for. -->
-      <slot></slot>
+      <span
+        v-if="$slots.placeholder"
+        :style="{ position: 'absolute', top: '0', right: '0', left: '0', bottom: '0', zIndex: '0' }"
+      >
+        <!-- @slot Places content to the image placeholder area. -->
+        <slot name="placeholder"></slot>
+      </span>
+
+      <span
+        v-if="$slots.topLeft"
+        :style="{ position: 'absolute', top: '0',left: '0', zIndex: '2' }"
+      >
+        <!-- @slot Places content on top of an image, to its top left corner. -->
+        <slot name="topLeft"></slot>
+      </span>
+      <span
+        v-if="$slots.topRight"
+        :style="{ position: 'absolute', top: '0', right: '0', zIndex: '2' }"
+      >
+        <!-- @slot Places content on top of an image, to its top right corner. -->
+        <slot name="topRight"></slot>
+      </span>
+      <span
+        v-if="$slots.bottomLeft"  
+        :style="{ position: 'absolute', bottom: '0', left: '0', zIndex: '2' }"
+      >
+        <!-- @slot Places content on top of an image, to its bottom left corner. -->
+        <slot name="bottomLeft"></slot>
+      </span>
+      <span
+        v-if="$slots.bottomRight"
+        :style="{ position: 'absolute', bottom: '0', right: '0', zIndex: '2' }"
+      >
+        <!-- @slot Places content on top of an image, to its bottom right corner. -->
+        <slot name="bottomRight"></slot>
+      </span>
+
     </span>
   </span>
 
@@ -139,6 +174,24 @@
         validator: isValidScaleType,
       },
       /**
+       * A color to be displayed instead or behind an image.
+       * It creates a background area which respects the dimensions
+       * set on the container.
+       *
+       * It can serve as (1) a color of the area surrounding an image when
+       * it's letterboxed, (2) creates a placeholder area displayed
+       * over the whole container when an image source is not provided,
+       * (3) creates a progressive loading experience as the colored background
+       * is displayed while an image is loading.
+       *
+       * Its default value is `$themePalette.grey.v_200`.
+       */
+      backgroundColor: {
+        type: String,
+        required: false,
+        default: null,
+      },
+      /**
        * Accepts a Vue dynamic styles object to override the default styles to modify the appearance of the component.
        * It's attributes always take precedence over any specified styling (internal component's styles, styles calculated from props etc.)
        */
@@ -155,10 +208,15 @@
         return this.isDecorative ? '' : this.altText;
       },
       baseStyles() {
+        const backgroundColor = this.backgroundColor
+          ? this.backgroundColor
+          : this.$themePalette.grey.v_200;
+
         return {
           rootContainer: {
             display: 'block',
-            backgroundColor: this.$themePalette.grey.v_200,
+            position: 'relative',
+            backgroundColor,
             height: this.validateAndFormatUnits(this.height),
             width: this.validateAndFormatUnits(this.width),
             maxHeight: this.validateAndFormatUnits(this.maxHeight),
@@ -171,6 +229,8 @@
           },
           img: {
             display: 'block',
+            position: 'relative',
+            zIndex: '1',
           },
         };
       },

@@ -198,6 +198,74 @@
           />
         </div>
       </DocsShow>
+
+      <h3>Placeholder</h3>
+
+      <p>You can use the <code>#placeholder</code> slot to place its content to the placeholder area. The area is gray by default and respects set dimensions of the image container. You can change its color via the the <code>backgroundColor</code> prop.</p>
+
+      <DocsShowCode language="html">
+        <div>
+          <KImg
+            src=""
+            isDecorative
+            aspectRatio="16:9"
+            maxWidth="200"
+          >
+            <template #placeholder>
+              <span :style="{ display: 'flex', height: '100%', justifyContent: 'center', alignItems: 'center' }">
+                <KIcon icon="readSolid" />
+              </span>
+            </template>
+          </KImg>
+        </div>
+      </DocsShowCode>
+      <DocsShow block>
+        <div>
+          <KImg
+            src=""
+            isDecorative
+            aspectRatio="16:9"
+            maxWidth="200"
+          >
+            <template #placeholder>
+              <span :style="{ display: 'flex', height: '100%', justifyContent: 'center', alignItems: 'center' }">
+                <KIcon icon="readSolid" />
+              </span>
+            </template>
+          </KImg>
+        </div>
+      </DocsShow>
+
+      <h3>Show elements on top of an image</h3>
+
+      <p>You can use <code>#topLeft</code>, <code>#topRight</code>, <code>#bottomLeft</code>, and <code>#bottomRight</code> slots to place elements on top of an image or placeholder area.</p>
+
+      <DocsShowCode language="html">
+        <KImg
+          src="hummingbird.jpg"
+          altText="A sitting hummingbird"
+        >
+          <template #topLeft>
+            <span :style="{ display: 'inline-block', margin: '8px', padding: '2px', backgroundColor: 'white' }">
+              Top left
+            </span>
+          </template>
+        </KImg>
+      </DocsShowCode>
+      <DocsShow>
+        <KImg
+          :src="require('../assets/hummingbird CC BY-SA 4.0.jpg')"
+          altText="A sitting hummingbird"
+        >
+          <template #topLeft>
+            <span :style="{ display: 'inline-block', margin: '8px', padding: '2px', backgroundColor: 'white' }">
+              Top left
+            </span>
+          </template>
+        </KImg>
+      </DocsShow>
+
+
     </DocsPageSection>
 
   </DocsPageTemplate>
