@@ -8,7 +8,7 @@
         :style="imgStyles"
         @error="onError"
       >
-      <!-- TODO: Document slot -->
+      <!-- @slot An unstyled slot that can be used for anything that other slots are not suitable for. -->
       <slot></slot>
     </span>
   </span>
