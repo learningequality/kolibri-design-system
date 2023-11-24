@@ -2,7 +2,7 @@
 
   <UiPopover
     ref="popover"
-    :z-index="12"
+    :z-index="99"
     :containFocus="true"
     :dropdownPosition="position"
     @close="handleClose"
