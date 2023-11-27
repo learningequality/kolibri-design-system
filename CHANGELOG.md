@@ -15,8 +15,6 @@ Changelog is rather internal in nature. See release notes for the public overvie
 
 [#494]: [https://github.com/learningequality/kolibri-design-system/pull/494]
 
-## Version 2.0.0
-
 - [#478]
   - **Description:** Changed _dev-only to dev-only
   - **Products impact:** -
@@ -25,10 +23,10 @@ Changelog is rather internal in nature. See release notes for the public overvie
   - **Breaking:** no
   - **Impacts a11y:** no
   - **Guidance:** -
- 
-  [#478]: https://github.com/learningequality/kolibri-design-system/pull/478
 
-  - [#482]
+[#478]: https://github.com/learningequality/kolibri-design-system/pull/478
+
+- [#482]
   - **Description:** Changed develop branch to main branch in Readme
   - **Products impact:** -
   - **Addresses:** https://github.com/learningequality/kolibri-design-system/issues/479
@@ -36,8 +34,8 @@ Changelog is rather internal in nature. See release notes for the public overvie
   - **Breaking:** no
   - **Impacts a11y:** no
   - **Guidance:** -
- 
-  [#482]: https://github.com/learningequality/kolibri-design-system/pull/482
+
+[#482]: https://github.com/learningequality/kolibri-design-system/pull/482
 
 - [#464]
   - **Description:** Add KTextTruncator
