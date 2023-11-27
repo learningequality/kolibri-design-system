@@ -7,6 +7,17 @@ Changelog is rather internal in nature. See release notes for the public overvie
 
 ## Version 2.0.0
 
+- [#491]
+  - **Description:** Replaced setTimeout with requestAnimationFrames in tests for useKWindowDimensions and useKResponsiveWindow
+  - **Products impact:** -
+  - **Addresses:** https://github.com/learningequality/kolibri-design-system/issues/480
+  - **Components:** none
+  - **Breaking:** no
+  - **Impacts a11y:** no
+  - **Guidance:** -
+
+[#491]: [https://github.com/learningequality/kolibri-design-system/pull/491]
+
 - [#478]
   - **Description:** Changed _dev-only to dev-only
   - **Products impact:** -
