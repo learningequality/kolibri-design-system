@@ -9,7 +9,7 @@ Changelog is rather internal in nature. See release notes for the public overvie
 
 - [#492]
   - **Description:** Add autofocus directive on KRadioButton to fix autofocus behavior on dynamic rendering.
-  - **Products impact:** Kolibri's Setup Wizard
+  - **Products impact:** bugfix
   - **Addresses:** https://github.com/learningequality/kolibri-design-system/issues/489
   - **Components:** KRadioButton
   - **Breaking:** no
