@@ -15,6 +15,17 @@ Changelog is rather internal in nature. See release notes for the public overvie
 
 [#494]: [https://github.com/learningequality/kolibri-design-system/pull/494]
 
+- [#492]
+  - **Description:** Add autofocus directive on KRadioButton to fix autofocus behavior on dynamic rendering.
+  - **Products impact:** bugfix
+  - **Addresses:** https://github.com/learningequality/kolibri-design-system/issues/489
+  - **Components:** KRadioButton
+  - **Breaking:** no
+  - **Impacts a11y:** yes
+  - **Guidance:** Add "autofocus" prop on KRadioButton. This change improves keyboard navigation on forms where a KRadioButton jumps into the DOM.
+
+[#492]: https://github.com/learningequality/kolibri-design-system/pull/492
+
 - [#497]
   - **Description:** KDropdownMenu now emits a @tab event when the user hits the [Tab] key and a @close event when the menu is closed programmatically. Additionally, a new icon for Expand All was added and can be used just like any other icon with the "expandAll" name.
   - **Products impact:** updated API
