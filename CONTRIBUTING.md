@@ -13,7 +13,7 @@
 
 **👥 How to connect**
 
-- We encourage you to visit [GitHub Discussions](https://github.com/learningequality/kolibri/discussions) to connect with the Learning Equality team as well as with other contributors.
+- We encourage you to visit [GitHub Discussions](https://github.com/learningequality/kolibri-design-system/discussions) to connect with the Learning Equality team as well as with other contributors.
 - If you'd like to contribute on a regular basis, we are happy to invite you to our open-source community Slack channel. Get in touch with us at info@learningequality.org to receive an invitation.
 
 ---
