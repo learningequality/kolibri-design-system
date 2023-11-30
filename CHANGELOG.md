@@ -15,6 +15,28 @@ Changelog is rather internal in nature. See release notes for the public overvie
 
 [#494]: [https://github.com/learningequality/kolibri-design-system/pull/494]
 
+- [#497]
+  - **Description:** KDropdownMenu now emits a @tab event when the user hits the [Tab] key and a @close event when the menu is closed programmatically. Additionally, a new icon for Expand All was added and can be used just like any other icon with the "expandAll" name.
+  - **Products impact:** updated API
+  - **Addresses:** -
+  - **Components:** KDropdownMenu
+  - **Breaking:** No
+  - **Impacts a11y:** Does this change improve a11y or adds new features that can be used to improve it? Choose from: yes / no
+  - **Guidance:**  The @tab event can be used for more precise focus management as the popover by default could end up sending focus to the root HTML element by default. Note that the browser event is passed to the handler function, so you may need/want to call `preventDefault()` on that event depending on your use case.
+
+  [#497]: https://github.com/learningequality/kolibri-design-system/pull/497
+
+- [#491]
+  - **Description:** Replaced setTimeout with requestAnimationFrames in tests for useKWindowDimensions and useKResponsiveWindow
+  - **Products impact:** -
+  - **Addresses:** https://github.com/learningequality/kolibri-design-system/issues/480
+  - **Components:** none
+  - **Breaking:** no
+  - **Impacts a11y:** no
+  - **Guidance:** -
+
+  [#491]: [https://github.com/learningequality/kolibri-design-system/pull/491]
+
 - [#478]
   - **Description:** Changed _dev-only to dev-only
   - **Products impact:** -
@@ -24,7 +46,7 @@ Changelog is rather internal in nature. See release notes for the public overvie
   - **Impacts a11y:** no
   - **Guidance:** -
 
-[#478]: https://github.com/learningequality/kolibri-design-system/pull/478
+  [#478]: https://github.com/learningequality/kolibri-design-system/pull/478
 
 - [#482]
   - **Description:** Changed develop branch to main branch in Readme
@@ -35,7 +57,7 @@ Changelog is rather internal in nature. See release notes for the public overvie
   - **Impacts a11y:** no
   - **Guidance:** -
 
-[#482]: https://github.com/learningequality/kolibri-design-system/pull/482
+  [#482]: https://github.com/learningequality/kolibri-design-system/pull/482
 
 - [#464]
   - **Description:** Add KTextTruncator
