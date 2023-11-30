@@ -103,9 +103,21 @@
       /**
        * Unique value that will be assigned to `v-model` data when this radio button is selected
        */
+      
+      // eslint-disable-next-line vue/require-default-prop
       buttonValue: {
         type: [String, Number, Boolean],
-        required: true,
+        required: false,
+       
+      },
+      /**
+       * (DEPRECATED) Unique value that will be assigned to `v-model` data when this radio button is selected
+       */
+      // eslint-disable-next-line vue/require-default-prop, kolibri/vue-no-unused-properties
+      value: {
+        type: [String, Number, Boolean],
+        required: false,
+        
       },
       /**
        * If provided, description underneath label text
@@ -141,8 +153,10 @@
     }),
     computed: {
       isChecked() {
-        return this.buttonValue.toString() === this.currentValue.toString();
+        return this.currentValue === this.buttonValue || this.currentValue === this.value;
+       
       },
+       
       id() {
         return `${this._uid}`;
       },
@@ -161,6 +175,16 @@
       truncateText() {
         return this.truncateLabel ? 'truncate-text' : '';
       },
+      
+     
+    },
+    mounted() {
+      if (!this.buttonValue && !this.value) {
+        console.error("KRadioButton: buttonValue prop is required");
+      }
+      if (!this.buttonValue) {
+        console.warn("KRadioButton: 'value' prop is deprecated and will be removed in a future release. Please use 'buttonValue' instead.");
+      }
     },
     methods: {
       toggleCheck(event) {
@@ -191,7 +215,7 @@
         /**
          * Used to set `buttonValue` to `v-model` when checked
          */
-        this.$emit('input', this.buttonValue);
+         this.$emit('input',this.buttonValue || this.value);
       },
       blur() {
         this.active = false;

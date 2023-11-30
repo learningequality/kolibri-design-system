@@ -10,12 +10,12 @@
         <KRadioButton
           v-model="exampleValue"
           label="Option A"
-          buttonValue="val-a"
+          value="val-a"
         />
         <KRadioButton
           v-model="exampleValue"
           label="Option B"
-          buttonValue="val-b"
+          value="val-b"
         />
         <KRadioButton
           v-model="exampleValue"
