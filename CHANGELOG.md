@@ -32,7 +32,7 @@ Changelog is rather internal in nature. See release notes for the public overvie
   - **Addresses:** -
   - **Components:** KDropdownMenu
   - **Breaking:** No
-  - **Impacts a11y:** Does this change improve a11y or adds new features that can be used to improve it? Choose from: yes / no
+  - **Impacts a11y:** yes
   - **Guidance:**  The @tab event can be used for more precise focus management as the popover by default could end up sending focus to the root HTML element by default. Note that the browser event is passed to the handler function, so you may need/want to call `preventDefault()` on that event depending on your use case.
 
   [#497]: https://github.com/learningequality/kolibri-design-system/pull/497
