@@ -18,7 +18,7 @@
 
 ---
 
-🕖 Please allow us a few days to reply to your comments. If you don't hear from us within a week, reach out via [GitHub Discussions](https://github.com/learningequality/kolibri/discussions).
+🕖 Please allow us a few days to reply to your comments. If you don't hear from us within a week, reach out via [GitHub Discussions](https://github.com/learningequality/kolibri-design-system/discussions).
 
 As soon as you open a pull request, it may take us a week or two to review it as we're a small team. We appreciate your contribution and will provide feedback.
 
