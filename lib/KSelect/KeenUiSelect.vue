@@ -890,8 +890,8 @@
 
 <style lang="scss" scoped>
 
-  @import '~kolibri-design-system/lib/styles/definitions';
-  @import '~kolibri-design-system/lib/keen/styles/imports';
+  @import '../styles/definitions';
+  @import '../keen/styles/imports';
 
   /* stylelint-disable csstree/validator */
 
