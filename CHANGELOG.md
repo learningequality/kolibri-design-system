@@ -4,6 +4,17 @@ Changelog is rather internal in nature. See release notes for the public overvie
 
 ## Upcoming version
 
+- [#421]
+  - **Description:** Upgrades kolibri-tools dependency and removes KDS' circular dependency on itself
+  - **Products impact:** Dependency upgrade
+  - **Addresses:** -
+  - **Components:** -
+  - **Breaking:** no
+  - **Impacts a11y:** no
+  - **Guidance:** -
+
+[#421]: https://github.com/learningequality/kolibri-design-system/pull/421
+
 - [#499]
   - **Description:** Upgrades @babel/traverse dependency to address security vulnerability
   - **Products impact:** Dependency upgrade
