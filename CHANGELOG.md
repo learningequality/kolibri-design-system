@@ -4,6 +4,17 @@ Changelog is rather internal in nature. See release notes for the public overvie
 
 ## Upcoming version
 
+- [#499]
+  - **Description:** Upgrades @babel/traverse dependency to address security vulnerability
+  - **Products impact:** Dependency upgrade
+  - **Addresses:** -
+  - **Components:** -
+  - **Breaking:** no
+  - **Impacts a11y:** no
+  - **Guidance:** -
+
+[#499]: https://github.com/learningequality/kolibri-design-system/pull/499
+
 - [#467]
   - **Description:** Upgrades word-wrap dependency to address security vulnerability
   - **Products impact:** Dependency upgrade
