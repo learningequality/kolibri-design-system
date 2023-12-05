@@ -47,7 +47,7 @@
     "globby": "^6.1.0",
     "jest": "^27.4.7",
     "jest-serializer-vue": "^3.1.0",
-    "kolibri-tools": "0.15.0-dev.4",
+    "kolibri-tools": "0.15.4",
     "lockr": "^0.8.4",
     "material-design-icons": "^3.0.1",
     "mock-match-media": "^0.4.2",
