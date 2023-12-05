@@ -4,6 +4,17 @@ Changelog is rather internal in nature. See release notes for the public overvie
 
 ## Upcoming version
 
+- [#483]
+  - **Description:** Upgrades browserify-sign dependency to address security vulnerability
+  - **Products impact:** Dependency upgrade
+  - **Addresses:** -
+  - **Components:** -
+  - **Breaking:** no
+  - **Impacts a11y:** no
+  - **Guidance:** -
+
+[#483]: https://github.com/learningequality/kolibri-design-system/pull/483
+
 - [#494]
   - **Description:** Update contributing guidelines
   - **Products impact:** none
