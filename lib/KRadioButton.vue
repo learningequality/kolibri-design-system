@@ -14,7 +14,7 @@
           type="radio"
           class="k-radio-button-input"
           :checked="isChecked"
-          :value="buttonValue"
+          :value="buttonValue !== null ? buttonValue : value"
           :disabled="disabled"
           @click.stop="toggleCheck"
           @focus="active = true"
