@@ -164,8 +164,7 @@
     }),
     computed: {
       isChecked() {
-        return this.currentValue === (this.buttonValue === null ? this.value : this.buttonValue);;
-       
+        return this.currentValue === (this.buttonValue === null ? this.value : this.buttonValue);
       },
        
       id() {

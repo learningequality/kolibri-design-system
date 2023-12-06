@@ -1,7 +1,5 @@
 <template>
-
   <DocsPageTemplate apiDocs>
-
     <DocsPageSection title="Overview" anchor="#overview">
       <p>
         This is a radio button component:
@@ -62,23 +60,17 @@
         <li>By default, the first radio option is selected, but may be configured to have any option preselected</li>
       </ul>
     </DocsPageSection>
-
   </DocsPageTemplate>
-
 </template>
 
-
 <script>
-
-  export default {
-    data() {
-      return {
-        exampleValue: 'val-b',
-      };
-    },
-  };
-
+export default {
+  data() {
+    return {
+      exampleValue: 'val-b',
+    };
+  },
+};
 </script>
-
 
 <style lang="scss" scoped></style>
