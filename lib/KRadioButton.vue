@@ -10,12 +10,12 @@
         <input
           :id="id"
           ref="input"
+          v-autofocus="autofocus"
           type="radio"
           class="k-radio-button-input"
           :checked="isChecked"
           :value="buttonValue"
           :disabled="disabled"
-          :autofocus="autofocus"
           @click.stop="toggleCheck"
           @focus="active = true"
           @blur="blur"
@@ -70,11 +70,22 @@
 
 <script>
 
+  const autofocus = {
+    inserted(el, { value }) {
+      if (value) {
+        el.focus();
+      }
+    },
+  };
+
   /**
    * Used to display all options
    */
   export default {
     name: 'KRadioButton',
+    directives: {
+      autofocus,
+    },
     model: {
       prop: 'currentValue',
     },
