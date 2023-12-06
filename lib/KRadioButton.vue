@@ -115,19 +115,19 @@
        * Unique value that will be assigned to `v-model` data when this radio button is selected
        */
       
-      // eslint-disable-next-line vue/require-default-prop
+      
       buttonValue: {
         type: [String, Number, Boolean],
-        required: false,
+        default: null,
        
       },
       /**
-       * (DEPRECATED) Unique value that will be assigned to `v-model` data when this radio button is selected
+       * (DEPRECATED) 
        */
-      // eslint-disable-next-line vue/require-default-prop, kolibri/vue-no-unused-properties
+      
       value: {
         type: [String, Number, Boolean],
-        required: false,
+        default: null,
         
       },
       /**
@@ -164,7 +164,7 @@
     }),
     computed: {
       isChecked() {
-        return this.currentValue === this.buttonValue || this.currentValue === this.value;
+        return this.currentValue === (this.buttonValue === null ? this.value : this.buttonValue);;
        
       },
        
@@ -226,7 +226,7 @@
         /**
          * Used to set `buttonValue` to `v-model` when checked
          */
-         this.$emit('input',this.buttonValue || this.value);
+         this.$emit('input', this.buttonValue === null ? this.value : this.buttonValue);
       },
       blur() {
         this.active = false;
