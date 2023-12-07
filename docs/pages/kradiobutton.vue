@@ -1,4 +1,5 @@
 <template>
+
   <DocsPageTemplate apiDocs>
     <DocsPageSection title="Overview" anchor="#overview">
       <p>
@@ -61,17 +62,20 @@
       </ul>
     </DocsPageSection>
   </DocsPageTemplate>
+
 </template>
 
 
 <script>
-export default {
-  data() {
-    return {
-      exampleValue: 'val-b',
-    };
-  },
-};
+
+  export default {
+    data() {
+      return {
+        exampleValue: 'val-b',
+      };
+    },
+  };
+
 </script>
 
 
