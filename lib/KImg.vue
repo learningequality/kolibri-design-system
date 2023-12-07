@@ -5,6 +5,7 @@
       :src="src"
       :alt="alternateText"
       :style="styleObject"
+      @error="onError"
     >
     <slot></slot>
   </div>
@@ -81,6 +82,14 @@
         default: undefined,
       },
     },
+    emits: {
+      /**
+       * Emitted when the image fails to load
+       * @param {Event} event
+       * @returns {true} Denotes that the validation has passed
+       */
+      error: (event) => true,
+    },
     data() {
       return {
         styleObject: {
@@ -152,6 +161,9 @@
           }
         }
       },
+      onError (event) {
+        this.$emit('error', event);
+      }
     },
   };
 
