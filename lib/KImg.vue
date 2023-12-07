@@ -87,7 +87,8 @@
        * Emitted when the image fails to load
        * @param {Event} event
        * @returns {true} Denotes that the validation has passed
-       */
+      */
+      // eslint-disable-next-line no-unused-vars
       error: (event) => true,
     },
     data() {
