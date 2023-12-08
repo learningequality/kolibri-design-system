@@ -87,9 +87,9 @@
        * Emitted when the image fails to load
        * @param {Event} event
        * @returns {true} Denotes that the validation has passed
-      */
+       */
       // eslint-disable-next-line no-unused-vars
-      error: (event) => true,
+      error: event => true,
     },
     data() {
       return {
@@ -162,9 +162,9 @@
           }
         }
       },
-      onError (event) {
+      onError(event) {
         this.$emit('error', event);
-      }
+      },
     },
   };
 
