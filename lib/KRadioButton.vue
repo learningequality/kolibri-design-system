@@ -173,10 +173,10 @@
       },
     },
     mounted() {
-      if (this.buttonValue===null && this.value===null) {
+      if (this.buttonValue === null && this.value === null) {
         console.error('KRadioButton: buttonValue prop is required');
       }
-      if (this.buttonValue===null) {
+      if (this.buttonValue === null) {
         console.warn(
           "KRadioButton: 'value' prop is deprecated and will be removed in a future release. Please use 'buttonValue' instead."
         );
