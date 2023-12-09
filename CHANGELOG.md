@@ -4,8 +4,115 @@ Changelog is rather internal in nature. See release notes for the public overvie
 
 ## Upcoming version
 
+- [#493]
+  - **Description:** Changed the value of z-index of KDropdownMenu to 99.
+  - **Products impact:** Bugfix
+  - **Addresses:** https://github.com/learningequality/kolibri-design-system/issues/486
+  - **Components:** KDropdownMenu
+  - **Breaking:** No
+  - **Impacts a11y:** No
+  - **Guidance:** -
 
-## Version 2.0.0
+  [#493]: https://github.com/learningequality/kolibri-design-system/pull/493
+
+- [#500]
+  - **Description:** Upgrades vue-router dependency
+  - **Products impact:** Dependency upgrade
+  - **Addresses:** -
+  - **Components:** -
+  - **Breaking:** no
+  - **Impacts a11y:** no
+  - **Guidance:** -
+
+[#500]: https://github.com/learningequality/kolibri-design-system/pull/500
+
+- [#421]
+  - **Description:** Upgrades kolibri-tools dependency and removes KDS' circular dependency on itself
+  - **Products impact:** Dependency upgrade
+  - **Addresses:** -
+  - **Components:** -
+  - **Breaking:** no
+  - **Impacts a11y:** no
+  - **Guidance:** -
+
+[#421]: https://github.com/learningequality/kolibri-design-system/pull/421
+
+- [#499]
+  - **Description:** Upgrades @babel/traverse dependency to address security vulnerability
+  - **Products impact:** Dependency upgrade
+  - **Addresses:** -
+  - **Components:** -
+  - **Breaking:** no
+  - **Impacts a11y:** no
+  - **Guidance:** -
+
+[#499]: https://github.com/learningequality/kolibri-design-system/pull/499
+
+- [#467]
+  - **Description:** Upgrades word-wrap dependency to address security vulnerability
+  - **Products impact:** Dependency upgrade
+  - **Addresses:** -
+  - **Components:** -
+  - **Breaking:** no
+  - **Impacts a11y:** no
+  - **Guidance:** -
+
+[#467]: https://github.com/learningequality/kolibri-design-system/pull/467
+
+- [#483]
+  - **Description:** Upgrades browserify-sign dependency to address security vulnerability
+  - **Products impact:** Dependency upgrade
+  - **Addresses:** -
+  - **Components:** -
+  - **Breaking:** no
+  - **Impacts a11y:** no
+  - **Guidance:** -
+
+[#483]: https://github.com/learningequality/kolibri-design-system/pull/483
+
+- [#494]
+  - **Description:** Update contributing guidelines
+  - **Products impact:** none
+  - **Addresses:** -
+  - **Components:** -
+  - **Breaking:** -
+  - **Impacts a11y:** -
+  - **Guidance:** -
+
+[#494]: [https://github.com/learningequality/kolibri-design-system/pull/494]
+
+- [#492]
+  - **Description:** Add autofocus directive on KRadioButton to fix autofocus behavior on dynamic rendering.
+  - **Products impact:** bugfix
+  - **Addresses:** https://github.com/learningequality/kolibri-design-system/issues/489
+  - **Components:** KRadioButton
+  - **Breaking:** no
+  - **Impacts a11y:** yes
+  - **Guidance:** Add "autofocus" prop on KRadioButton. This change improves keyboard navigation on forms where a KRadioButton jumps into the DOM.
+
+[#492]: https://github.com/learningequality/kolibri-design-system/pull/492
+
+- [#497]
+  - **Description:** KDropdownMenu now emits a @tab event when the user hits the [Tab] key and a @close event when the menu is closed programmatically. Additionally, a new icon for Expand All was added and can be used just like any other icon with the "expandAll" name.
+  - **Products impact:** updated API
+  - **Addresses:** -
+  - **Components:** KDropdownMenu
+  - **Breaking:** No
+  - **Impacts a11y:** yes
+  - **Guidance:**  The @tab event can be used for more precise focus management as the popover by default could end up sending focus to the root HTML element by default. Note that the browser event is passed to the handler function, so you may need/want to call `preventDefault()` on that event depending on your use case.
+
+  [#497]: https://github.com/learningequality/kolibri-design-system/pull/497
+
+- [#491]
+  - **Description:** Replaced setTimeout with requestAnimationFrames in tests for useKWindowDimensions and useKResponsiveWindow
+  - **Products impact:** -
+  - **Addresses:** https://github.com/learningequality/kolibri-design-system/issues/480
+  - **Components:** none
+  - **Breaking:** no
+  - **Impacts a11y:** no
+  - **Guidance:** -
+
+  [#491]: [https://github.com/learningequality/kolibri-design-system/pull/491]
 
 - [#478]
   - **Description:** Changed _dev-only to dev-only
@@ -15,10 +122,10 @@ Changelog is rather internal in nature. See release notes for the public overvie
   - **Breaking:** no
   - **Impacts a11y:** no
   - **Guidance:** -
- 
+
   [#478]: https://github.com/learningequality/kolibri-design-system/pull/478
 
-  - [#482]
+- [#482]
   - **Description:** Changed develop branch to main branch in Readme
   - **Products impact:** -
   - **Addresses:** https://github.com/learningequality/kolibri-design-system/issues/479
@@ -26,7 +133,7 @@ Changelog is rather internal in nature. See release notes for the public overvie
   - **Breaking:** no
   - **Impacts a11y:** no
   - **Guidance:** -
- 
+
   [#482]: https://github.com/learningequality/kolibri-design-system/pull/482
 
 - [#464]
