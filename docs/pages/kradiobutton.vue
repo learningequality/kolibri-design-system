@@ -1,7 +1,6 @@
 <template>
 
   <DocsPageTemplate apiDocs>
-
     <DocsPageSection title="Overview" anchor="#overview">
       <p>
         This is a radio button component:
@@ -21,12 +20,12 @@
           v-model="exampleValue"
           label="Option C"
           description="This one is special!"
-          value="val-c"
+          buttonValue="val-c"
         />
         <KRadioButton
           v-model="exampleValue"
           label="Truncated label. Adjusting your browser window size to see this in action."
-          value="val-d"
+          buttonValue="val-d"
           truncateLabel
         />
         <p>
@@ -62,7 +61,6 @@
         <li>By default, the first radio option is selected, but may be configured to have any option preselected</li>
       </ul>
     </DocsPageSection>
-
   </DocsPageTemplate>
 
 </template>
