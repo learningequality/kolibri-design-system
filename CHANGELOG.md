@@ -3,6 +3,16 @@
 Changelog is rather internal in nature. See release notes for the public overview and guidelines. Releases are recorded as git tags in the [Github releases](https://github.com/learningequality/kolibri-design-system/releases) page.
 
 ## Upcoming version
+- [#504]
+  - **Description:**  Added custom implementation of GH action that checks that changelog is updated in each pull request
+  - **Products impact:** 
+  - **Addresses:** -
+  - **Components:** -
+  - **Breaking:** 
+  - **Impacts a11y:** 
+  - **Guidance:** -
+
+[#504]: https://github.com/learningequality/kolibri-design-system/pull/504
 
 - [#500]
   - **Description:** Upgrades vue-router dependency
