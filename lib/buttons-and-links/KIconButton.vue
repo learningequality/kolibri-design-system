@@ -8,6 +8,7 @@
     :type="buttonType"
     :aria-label="ariaLabel"
     text=""
+    v-bind="$attrs"
     v-on="$listeners"
   >
     <!-- if no "position" is passed as a prop, defaults to bottom, as previously -->

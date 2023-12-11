@@ -103,6 +103,17 @@ Changelog is rather internal in nature. See release notes for the public overvie
 
   [#491]: [https://github.com/learningequality/kolibri-design-system/pull/491]
 
+- [#465]
+  - **Description:** KDropdownMenu improvements & bind $attrs in KIconButton
+  - **Products impact:** -
+  - **Addresses:** -
+  - **Components:** KDropdownMenu, KIconButton
+  - **Breaking:** no
+  - **Impacts a11y:** yes
+  - **Guidance:** The KIconButton simply allows you to ensure that attrs you bind to it will be applied to the resulting button itself (ie, tabindex). KDropdownMenu now exposes a #option slot. This slot exposes the current option so a template snippet can be passed here to customize the display of items in the menu. This could also be used to show a list of checkboxed items or perhaps a KCircularLoader next to an item.
+
+  [#465]: https://github.com/learningequality/kolibri-design-system/pull/465
+
 - [#478]
   - **Description:** Changed _dev-only to dev-only
   - **Products impact:** -
