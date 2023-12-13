@@ -4,6 +4,17 @@ Changelog is rather internal in nature. See release notes for the public overvie
 
 ## Upcoming version
 
+- [#505]
+  - **Description:**  Added custom implementation of GH action that checks that changelog is updated in each pull request
+  - **Products impact:** none
+  - **Addresses:** https://github.com/learningequality/kolibri-design-system/issues/481
+  - **Components:** -
+  - **Breaking:** 
+  - **Impacts a11y:** 
+  - **Guidance:** -
+
+[#505]: https://github.com/learningequality/kolibri-design-system/pull/505
+
 - [#493]
   - **Description:** Changed the value of z-index of KDropdownMenu to 99.
   - **Products impact:** Bugfix
