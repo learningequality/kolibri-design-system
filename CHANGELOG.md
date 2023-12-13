@@ -15,6 +15,17 @@ Changelog is rather internal in nature. See release notes for the public overvie
 
 [#505]: https://github.com/learningequality/kolibri-design-system/pull/505
 
+- [#493]
+  - **Description:** Changed the value of z-index of KDropdownMenu to 99.
+  - **Products impact:** Bugfix
+  - **Addresses:** https://github.com/learningequality/kolibri-design-system/issues/486
+  - **Components:** KDropdownMenu
+  - **Breaking:** No
+  - **Impacts a11y:** No
+  - **Guidance:** -
+
+[#493]: https://github.com/learningequality/kolibri-design-system/pull/493
+
 - [#500]
   - **Description:** Upgrades vue-router dependency
   - **Products impact:** Dependency upgrade
