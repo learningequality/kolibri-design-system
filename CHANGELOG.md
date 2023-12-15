@@ -15,6 +15,28 @@ Changelog is rather internal in nature. See release notes for the public overvie
 
 [#502]: https://github.com/learningequality/kolibri-design-system/pull/502
 
+- [#505]
+  - **Description:**  Added custom implementation of GH action that checks that changelog is updated in each pull request
+  - **Products impact:** none
+  - **Addresses:** https://github.com/learningequality/kolibri-design-system/issues/481
+  - **Components:** -
+  - **Breaking:** 
+  - **Impacts a11y:** 
+  - **Guidance:** -
+
+[#505]: https://github.com/learningequality/kolibri-design-system/pull/505
+
+- [#493]
+  - **Description:** Changed the value of z-index of KDropdownMenu to 99.
+  - **Products impact:** Bugfix
+  - **Addresses:** https://github.com/learningequality/kolibri-design-system/issues/486
+  - **Components:** KDropdownMenu
+  - **Breaking:** No
+  - **Impacts a11y:** No
+  - **Guidance:** -
+
+[#493]: https://github.com/learningequality/kolibri-design-system/pull/493
+
 - [#500]
   - **Description:** Upgrades vue-router dependency
   - **Products impact:** Dependency upgrade
@@ -135,6 +157,17 @@ Changelog is rather internal in nature. See release notes for the public overvie
   - **Guidance:** -
 
   [#482]: https://github.com/learningequality/kolibri-design-system/pull/482
+
+- [#485]
+  - **Description:** Updated KRadioButton 'value' prop to 'buttonValue'
+  - **Products impact:** Updated API
+  - **Addresses:** https://github.com/learningequality/kolibri-design-system/issues/379
+  - **Components:** KRadioButton
+  - **Breaking:** Yes
+  - **Impacts a11y:** 
+  - **Guidance:** KRadioButton 'value' prop is deprecated. Please use the 'buttonValue' prop instead.
+ 
+  [#485]: https://github.com/learningequality/kolibri-design-system/pull/485
 
 - [#464]
   - **Description:** Add KTextTruncator

@@ -82,15 +82,6 @@
         default: undefined,
       },
     },
-    emits: {
-      /**
-       * Emitted when the image fails to load
-       * @param {Event} event
-       * @returns {true} Denotes that the validation has passed
-       */
-      // eslint-disable-next-line no-unused-vars
-      error: event => true,
-    },
     data() {
       return {
         styleObject: {
@@ -163,6 +154,10 @@
         }
       },
       onError(event) {
+        /**
+         * Emitted when the image fails to load
+         * @payload {Event} event The DOM event that triggered the error
+         */
         this.$emit('error', event);
       },
     },

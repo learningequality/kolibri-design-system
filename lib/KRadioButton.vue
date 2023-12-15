@@ -1,10 +1,6 @@
 <template>
 
-  <div
-    class="k-radio-button-container"
-    :class="{ 'k-radio-button-disabled': disabled }"
-    @click="toggleCheck"
-  >
+  <div class="k-radio-button-container" :class="{ 'k-radio-button-disabled': disabled }" @click="toggleCheck">
     <div class="tr">
       <div class="k-radio-button">
         <input
@@ -14,7 +10,7 @@
           type="radio"
           class="k-radio-button-input"
           :checked="isChecked"
-          :value="value"
+          :value="buttonValue !== null ? buttonValue : value"
           :disabled="disabled"
           @click.stop="toggleCheck"
           @focus="active = true"
@@ -54,11 +50,7 @@
         <template v-else>
           <div :class="[truncateText]">{{ label }}</div>
         </template>
-        <div 
-          v-if="description" 
-          class="description" 
-          :style="[{ color: disabled ? '' : $themeTokens.annotation }, disabledStyle ]"
-        >
+        <div v-if="description" class="description" :style="[{ color: disabled ? '' : $themeTokens.annotation }, disabledStyle ]">
           {{ description }}
         </div>
       </label>
@@ -114,9 +106,16 @@
       /**
        * Unique value that will be assigned to `v-model` data when this radio button is selected
        */
+      buttonValue: {
+        type: [String, Number, Boolean],
+        default: null,
+      },
+      /**
+       * (DEPRECATED)
+       */
       value: {
         type: [String, Number, Boolean],
-        required: true,
+        default: null,
       },
       /**
        * If provided, description underneath label text
@@ -152,7 +151,7 @@
     }),
     computed: {
       isChecked() {
-        return this.value.toString() === this.currentValue.toString();
+        return this.currentValue === (this.buttonValue === null ? this.value : this.buttonValue);
       },
       id() {
         return `${this._uid}`;
@@ -172,6 +171,16 @@
       truncateText() {
         return this.truncateLabel ? 'truncate-text' : '';
       },
+    },
+    mounted() {
+      if (this.buttonValue === null && this.value === null) {
+        console.error('KRadioButton: buttonValue prop is required');
+      }
+      if (this.buttonValue === null) {
+        console.warn(
+          "KRadioButton: 'value' prop is deprecated and will be removed in a future release. Please use 'buttonValue' instead."
+        );
+      }
     },
     methods: {
       toggleCheck(event) {
@@ -200,9 +209,9 @@
         this.$emit('change', this.isChecked, event);
 
         /**
-         * Used to set `value` to `v-model` when checked
+         * Used to set `buttonValue` to `v-model` when checked
          */
-        this.$emit('input', this.value);
+        this.$emit('input', this.buttonValue === null ? this.value : this.buttonValue);
       },
       blur() {
         this.active = false;
