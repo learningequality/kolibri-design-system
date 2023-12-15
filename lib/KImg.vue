@@ -5,6 +5,7 @@
       :src="src"
       :alt="alternateText"
       :style="styleObject"
+      @error="onError"
     >
     <slot></slot>
   </div>
@@ -151,6 +152,12 @@
             }
           }
         }
+      },
+      onError(event) {
+        /**
+         * Emitted when the image fails to load. The DOM event that triggered the error is available in the payload.
+         */
+        this.$emit('error', event);
       },
     },
   };

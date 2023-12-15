@@ -4,6 +4,17 @@ Changelog is rather internal in nature. See release notes for the public overvie
 
 ## Upcoming version
 
+- [#502]
+  - **Description:** Add dispatching of 'error' event when failed to load image for 'KImg'
+  - **Products impact:** new API
+  - **Addresses:** https://github.com/learningequality/kolibri-design-system/issues/372
+  - **Components:** KImg
+  - **Breaking:** no
+  - **Impacts a11y:** yes  
+  - **Guidance:** Allows the consumer to hook into the lifecycle of 'KImg' and handle the cases when the image fails to load
+
+[#502]: https://github.com/learningequality/kolibri-design-system/pull/502
+
 - [#505]
   - **Description:**  Added custom implementation of GH action that checks that changelog is updated in each pull request
   - **Products impact:** none
