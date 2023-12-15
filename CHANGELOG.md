@@ -4,6 +4,17 @@ Changelog is rather internal in nature. See release notes for the public overvie
 
 ## Upcoming version
 
+- [#508]
+  - **Description:** Update Github maintained github actions to latest versions
+  - **Products impact:** -
+  - **Addresses:** -
+  - **Components:** -
+  - **Breaking:** no
+  - **Impacts a11y:** no  
+  - **Guidance:** -
+
+[#508]: https://github.com/learningequality/kolibri-design-system/pull/508
+
 - [#502]
   - **Description:** Add dispatching of 'error' event when failed to load image for 'KImg'
   - **Products impact:** new API
