@@ -155,8 +155,7 @@
       },
       onError(event) {
         /**
-         * Emitted when the image fails to load
-         * @payload {Event} event The DOM event that triggered the error
+         * Emitted when the image fails to load. The DOM event that triggered the error is available in the payload.
          */
         this.$emit('error', event);
       },
