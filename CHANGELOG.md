@@ -4,6 +4,17 @@ Changelog is rather internal in nature. See release notes for the public overvie
 
 ## Upcoming version
 
+- [#509]
+  - **Description:** Introduces `appearanceOverrides` prop for the `KImg` component
+  - **Products impact:** new API 
+  - **Addresses:** https://github.com/learningequality/kolibri-design-system/issues/371
+  - **Components:** KImg
+  - **Breaking:** No
+  - **Impacts a11y:** Yes
+  - **Guidance:** Adds a way to style the component intrinsically, allowing users to make more a11y compatible components
+
+[#509]: https://github.com/learningequality/kolibri-design-system/pull/509
+
 - [#508]
   - **Description:** Update Github maintained github actions to latest versions
   - **Products impact:** -
