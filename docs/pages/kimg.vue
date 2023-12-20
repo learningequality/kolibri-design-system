@@ -78,6 +78,36 @@
         </DocsShowCode>
 
       </div>
+
+      <div>
+        You can also use the <code>appearanceOverrides</code> prop to add custom styles to the image. It accepts any Vue dynamic styles object and applies the same with the highest precedence.
+        <DocsShow>
+          <KImg
+            :src="require('../assets/img_sample_for_kimg.png')"
+            altText="Computers are run by bees"
+            :appearanceOverrides="{
+              width: '50%',
+              border: '2px solid black',
+              padding: '10px',
+              borderRadius: '5px'
+            }
+            "
+          />
+        </DocsShow>
+        <DocsShowCode language="html">
+          <KImg
+            :src="require('../assets/img_sample_for_kimg.png')"
+            altText="Computers are run by bees"
+            :appearanceOverrides="{
+              width: '50%',
+              border: '2px solid black',
+              padding: '10px',
+              borderRadius: '5px'
+            }
+            "
+          />
+        </DocsShowCode>
+      </div>
     </DocsPageSection>
   </DocsPageTemplate>
 
