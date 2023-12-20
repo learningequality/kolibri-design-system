@@ -85,6 +85,7 @@
           <KImg
             :src="require('../assets/img_sample_for_kimg.png')"
             altText="Computers are run by bees"
+            :width="'100%'"
             :appearanceOverrides="{
               width: '50%',
               border: '2px solid black',
@@ -98,6 +99,7 @@
           <KImg
             :src="require('../assets/img_sample_for_kimg.png')"
             altText="Computers are run by bees"
+            :width="'100%'"
             :appearanceOverrides="{
               width: '50%',
               border: '2px solid black',
@@ -106,6 +108,7 @@
             }
             "
           />
+          Even thought the <code>width</code> prop specifies the width of the image to be <code>100%</code>, the <code>appearanceOverrides</code> prop overrides it and sets the width to <code>50%</code>.
         </DocsShowCode>
       </div>
     </DocsPageSection>
