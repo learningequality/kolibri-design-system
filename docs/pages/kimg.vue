@@ -76,11 +76,12 @@
             altText="Computers are run by bees"
           />
         </DocsShowCode>
-
       </div>
 
       <div>
-        You can also use the <code>appearanceOverrides</code> prop to add custom styles to the image. It accepts any Vue dynamic styles object and applies the same with the highest precedence.
+        You can also use the <DocsInternalLink href="#prop:appearanceOverrides">
+          appearanceOverrides prop
+        </DocsInternalLink> to add custom styles to the image. It accepts any Vue dynamic styles object and applies the same with the highest precedence.
         <DocsShow>
           <KImg
             :src="require('../assets/img_sample_for_kimg.png')"
@@ -108,8 +109,8 @@
             }
             "
           />
-          Even thought the <code>width</code> prop specifies the width of the image to be <code>100%</code>, the <code>appearanceOverrides</code> prop overrides it and sets the width to <code>50%</code>.
         </DocsShowCode>
+        Even thought the <code>width</code> prop specifies the width of the image to be <code>100%</code>, the <code>appearanceOverrides</code> prop overrides it and sets the width to <code>50%</code>.
       </div>
     </DocsPageSection>
   </DocsPageTemplate>
