@@ -4,6 +4,17 @@ Changelog is rather internal in nature. See release notes for the public overvie
 
 ## Upcoming version
 
+- [#516]
+  - **Description:** Upgrades follow-redirects dependency
+  - **Products impact:** Dependency upgrade
+  - **Addresses:** -
+  - **Components:** -
+  - **Breaking:** no
+  - **Impacts a11y:** no
+  - **Guidance:** -
+
+[#516]: https://github.com/learningequality/kolibri-design-system/pull/516
+
 - [#508]
   - **Description:** Update Github maintained github actions to latest versions
   - **Products impact:** -
