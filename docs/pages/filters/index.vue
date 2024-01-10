@@ -106,17 +106,32 @@
 
 
 <style lang="scss" scoped>
-
-  .img-med {
-    max-width: 500px;
+ .img-med {
+    max-width: 100%;  /* Adjusted to be responsive */
+    height: auto;     /* Maintain aspect ratio */
   }
 
   .img-lg {
-    width: 100%;
+    width: 100%;  /* Adjusted to be responsive */
+    height: auto; /* Maintain aspect ratio */
   }
 
   .do-dont {
-    max-width: 250px;
+    max-width: 100%;  /* Adjusted to be responsive */
+    height: auto;     /* Maintain aspect ratio */
   }
 
+  @media (max-width: 768px) {
+    .img-med {
+      /* Adjust styles for smaller screens if needed */
+    }
+
+    .img-lg {
+      /* Adjust styles for smaller screens if needed */
+    }
+
+    .do-dont {
+      /* Adjust styles for smaller screens if needed */
+    }
+  }
 </style>
