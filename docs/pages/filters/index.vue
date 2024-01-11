@@ -107,31 +107,33 @@
 
 <style lang="scss" scoped>
  .img-med {
-    max-width: 100%;  /* Adjusted to be responsive */
-    height: auto;     /* Maintain aspect ratio */
+    max-width: 100%;  
+  height: auto;    
   }
 
   .img-lg {
-    width: 100%;  /* Adjusted to be responsive */
-    height: auto; /* Maintain aspect ratio */
+    max-width: 100%;  
+    height: auto;     
   }
 
   .do-dont {
-    max-width: 100%;  /* Adjusted to be responsive */
-    height: auto;     /* Maintain aspect ratio */
+    max-width: 100%;  
+    height: auto;     
   }
 
   @media (max-width: 768px) {
     .img-med {
-      /* Adjust styles for smaller screens if needed */
+      max-width: 100%;
+    height: auto;     
     }
 
     .img-lg {
-      /* Adjust styles for smaller screens if needed */
-    }
+  width: 100%;  
+  height: auto; 
 
     .do-dont {
-      /* Adjust styles for smaller screens if needed */
+    max-width: 100%; 
+    height: auto;     
     }
   }
 </style>
