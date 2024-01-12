@@ -192,6 +192,15 @@
         default: null,
       },
       /**
+       * The border radius of an image or its placeholder area
+       * as a standard CSS 'border-radius' value.
+       */
+      borderRadius: {
+        type: String,
+        required: false,
+        default: null,
+      },
+      /**
        * Accepts a Vue dynamic styles object to override the default styles to modify the appearance of the component.
        * It's attributes always take precedence over any specified styling (internal component's styles, styles calculated from props etc.)
        */
@@ -211,12 +220,15 @@
         const backgroundColor = this.backgroundColor
           ? this.backgroundColor
           : this.$themePalette.grey.v_200;
+        const borderRadius = this.borderRadius ? this.borderRadius : 0;
 
         return {
           rootContainer: {
             display: 'block',
             position: 'relative',
             backgroundColor,
+            borderRadius,
+            overflow: 'hidden',
             height: this.validateAndFormatUnits(this.height),
             width: this.validateAndFormatUnits(this.width),
             maxHeight: this.validateAndFormatUnits(this.maxHeight),
