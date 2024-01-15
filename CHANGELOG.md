@@ -10,10 +10,20 @@ Changelog is rather internal in nature. See release notes for the public overvie
   - **Addresses:** https://github.com/learningequality/kolibri-design-system/issues/371
   - **Components:** KImg
   - **Breaking:** No
-  - **Impacts a11y:** Yes
-  - **Guidance:** Adds a way to style the component intrinsically, allowing users to make more a11y compatible components
+  - **Impacts a11y:** No
+  - **Guidance:** -
 
 [#509]: https://github.com/learningequality/kolibri-design-system/pull/509
+- [#516]
+  - **Description:** Upgrades follow-redirects dependency
+  - **Products impact:** Dependency upgrade
+  - **Addresses:** -
+  - **Components:** -
+  - **Breaking:** no
+  - **Impacts a11y:** no
+  - **Guidance:** -
+
+[#516]: https://github.com/learningequality/kolibri-design-system/pull/516
 
 - [#508]
   - **Description:** Update Github maintained github actions to latest versions
