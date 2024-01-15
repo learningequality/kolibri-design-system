@@ -81,6 +81,14 @@
         type: [Number, String],
         default: undefined,
       },
+      /**
+       * Accepts a Vue dynamic styles object to override the default styles to modify the appearance of the component.
+       * It's attributes always take precedence over any specified styling (internal component's styles, styles calculated from props etc.)
+       */
+      appearanceOverrides: {
+        type: Object,
+        default: () => ({}),
+      },
     },
     data() {
       return {
@@ -91,6 +99,7 @@
           minHeight: this.imgMinHeight,
           maxWidth: this.imgMaxWidth,
           minWidth: this.imgMinWidth,
+          ...this.appearanceOverrides,
         },
       };
     },
