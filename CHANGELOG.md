@@ -15,7 +15,27 @@ Changelog is rather internal in nature. See release notes for the public overvie
 
 [#518]: https://github.com/learningequality/kolibri-design-system/pull/518
 
+- [#521]
+  - **Description:** Move date-fns dependency to depencies rather than dev-dependencies.
+  - **Products impact:** bugfix
+  - **Addresses:** N/A
+  - **Components:** KDateRange/KDateInput
+  - **Breaking:** no
+  - **Impacts a11y:** no
+  - **Guidance:** ~
 
+[#521]: [https://github.com/learningequality/kolibri-design-system/pull/521]
+
+- [#509]
+  - **Description:** Introduces `appearanceOverrides` prop for the `KImg` component
+  - **Products impact:** new API 
+  - **Addresses:** https://github.com/learningequality/kolibri-design-system/issues/371
+  - **Components:** KImg
+  - **Breaking:** No
+  - **Impacts a11y:** No
+  - **Guidance:** -
+
+[#509]: https://github.com/learningequality/kolibri-design-system/pull/509
 - [#516]
   - **Description:** Upgrades follow-redirects dependency
   - **Products impact:** Dependency upgrade
