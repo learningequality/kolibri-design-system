@@ -4,6 +4,17 @@ Changelog is rather internal in nature. See release notes for the public overvie
 
 ## Upcoming version
 
+- [#518]
+  - **Description:** Add testing for KImg component
+  - **Products impact:** none
+  - **Addresses:** https://github.com/learningequality/kolibri-design-system/issues/512
+  - **Components:** -
+  - **Breaking:** no
+  - **Impacts a11y:** no  - 
+  - **Guidance:** -
+
+[#518]: https://github.com/learningequality/kolibri-design-system/pull/518
+
 - [#521]
   - **Description:** Move date-fns dependency to depencies rather than dev-dependencies.
   - **Products impact:** bugfix
