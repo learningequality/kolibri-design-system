@@ -4,6 +4,17 @@ Changelog is rather internal in nature. See release notes for the public overvie
 
 ## Upcoming version
 
+- [#522]
+  - **Description:** Upgrades github-actions/cache dependency
+  - **Products impact:** Dev dependency upgrade
+  - **Addresses:** -
+  - **Components:** -
+  - **Breaking:** no
+  - **Impacts a11y:** no
+  - **Guidance:** -
+
+[#522]: https://github.com/learningequality/kolibri-design-system/pull/522
+
 - [#518]
   - **Description:** Add testing for KImg component
   - **Products impact:** none
@@ -36,6 +47,7 @@ Changelog is rather internal in nature. See release notes for the public overvie
   - **Guidance:** -
 
 [#509]: https://github.com/learningequality/kolibri-design-system/pull/509
+
 - [#516]
   - **Description:** Upgrades follow-redirects dependency
   - **Products impact:** Dependency upgrade
