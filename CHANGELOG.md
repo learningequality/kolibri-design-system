@@ -4,6 +4,11 @@ Changelog is rather internal in nature. See release notes for the public overvie
 
 ## Upcoming version
 
+<!-- Put all new updates into this section, please -->
+
+
+## Version 3.0.0
+
 - [#522]
   - **Description:** Upgrades github-actions/cache dependency
   - **Products impact:** Dev dependency upgrade
