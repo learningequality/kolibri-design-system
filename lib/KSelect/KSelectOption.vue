@@ -48,7 +48,7 @@
   import UiIcon from '../keen/UiIcon';
 
   export default {
-    name: 'KeenUiSelectOption',
+    name: 'KSelectOption',
     components: {
       UiIcon,
     },

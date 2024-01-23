@@ -136,7 +136,7 @@
               class="ui-select-options"
               :style="{ backgroundColor: $themeTokens.surface }"
             >
-              <KeenUiSelectOption
+              <KSelectOption
                 v-for="(option, index) in filteredOptions"
                 ref="options"
                 :key="index"
@@ -159,7 +159,7 @@
                   :option="option"
                   :selected="isOptionSelected(option)"
                 ></slot>
-              </KeenUiSelectOption>
+              </KSelectOption>
 
               <div v-show="hasNoResults" class="ui-select-no-results">
                 <slot name="no-results">
@@ -200,13 +200,13 @@
   import { looseIndexOf, looseEqual } from '../keen/helpers/util';
   import { scrollIntoView, resetScroll } from '../keen/helpers/element-scroll';
   import config from '../keen/config';
-  import KeenUiSelectOption from './KeenUiSelectOption.vue';
+  import KSelectOption from './KSelectOption.vue';
 
   export default {
     name: 'KeenUiSelect',
     components: {
       UiIcon,
-      KeenUiSelectOption,
+      KSelectOption,
     },
     props: {
       name: {
