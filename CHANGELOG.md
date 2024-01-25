@@ -50,7 +50,7 @@ Changelog is rather internal in nature. See release notes for the public overvie
   - **Impacts a11y:** no
   - **Guidance:** ~
 
-[#521]: [https://github.com/learningequality/kolibri-design-system/pull/521]
+[#521]: https://github.com/learningequality/kolibri-design-system/pull/521
 
 - [#509]
   - **Description:** Introduces `appearanceOverrides` prop for the `KImg` component
