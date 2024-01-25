@@ -6,6 +6,16 @@ Changelog is rather internal in nature. See release notes for the public overvie
 
 <!-- Put all new updates into this section, please -->
 
+- [#531]
+  - **Description:** Remove unused `keen-ui` dependency
+  - **Products impact:** none
+  - **Addresses:** -
+  - **Components:** -
+  - **Breaking:** -
+  - **Impacts a11y:** -
+  - **Guidance:** -
+
+[#531]: https://github.com/learningequality/kolibri-design-system/pull/531
 
 ## Version 3.0.0
 
