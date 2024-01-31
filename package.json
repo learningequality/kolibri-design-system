@@ -43,7 +43,7 @@
     "@material-icons/svg": "git+https://github.com/material-icons/material-icons.git",
     "@mdi/svg": "^5.9.55",
     "@vuedoc/parser": "^3.4.0",
-    "babel-jest": "^27.4.6",
+    "babel-jest": "^29.7.0",
     "chokidar-cli": "^3.0.0",
     "consola": "^2.15.3",
     "eslint-import-resolver-nuxt": "^1.0.1",
