@@ -2,19 +2,31 @@
 
   <DocsPageTemplate apiDocs>
     <DocsPageSection title="Overview" anchor="#overview">
-      <p>It displays an image and provides additional functionality to manipulate it such as setting dimensions, aspect ratio, scaling, letter boxing, and more.</p>
+      <p><code>KImg</code> displays an image and provides functionality to manipulate it such as setting its dimensions, aspect ratio, scaling, letterboxing, and more.</p>
     </DocsPageSection>
 
     <DocsPageSection title="Usage" anchor="#usage">
-      <p>When setting the dimensions of an image by using any of the supported methods, note that the settings are applied to the container of the image, rather than the image itself. Depending on the scale type and other settings, the image may be letterboxed. If you need to apply dimensions directly to the image, you can use <code>'fitXY'</code> scale type. This, and other modes, are illustrated in the examples below, where the original image dimensions are 200×114 px.</p>
-
       <p>Unless you set fixed dimensions, <code>KImg</code> is responsive by default.</p>
+
+      <p>
+        <em>Note that the majority of settings are applied to the image container rather than the image itself.</em> If you need to apply dimensions, aspect ratio, etc. directly to the image, you can use <code>'fitXY'</code> <DocsInternalLink href="/kimg#prop:scaleType">
+          scale type
+        </DocsInternalLink>.
+      </p>
+
+      <p>
+        Depending on the scale type and other settings, the image may be letterboxed. When an image is letterboxed, <DocsInternalLink href="/kimg#prop:backgroundColor">
+          <code>backgroundColor</code>
+        </DocsInternalLink> (gray by default) fills the remaining space.
+      </p>
+
+      <p>This is in more detail illustrated in the examples below, where the original image dimensions are 200×114 px.</p>
 
       <h3>Rendering within inline and block elements</h3>
 
       <h4>Inline</h4>
 
-      <p>When rendered within an inline element, an image preserves its original dimensions.</p>
+      <p>When rendered within an inline element, the image preserves its original dimensions by default.</p>
 
       <DocsShowCode language="html">
         <span>
@@ -36,7 +48,11 @@
 
       <h4>Block</h4>
 
-      <p>When rendered within a block element, an image scales to its parent element with the <code>'centerInside'</code> scale type (see below) by default.</p>
+      <p>
+        When rendered within a block element, the image container fills the parent block element and the image scales with the <code>'centerInside'</code> <DocsInternalLink href="/kimg#prop:scaleType">
+          scale type
+        </DocsInternalLink> by default.
+      </p>
 
       <DocsShowCode language="html">
         <div>
@@ -57,39 +73,64 @@
 
       <h3>Dimensions</h3>
 
-      <p>You can use the most common dimensions right on the <code>KImg</code> via props like <code>width</code>, <code>maxHeight</code>, etc. See <a href="#props">Props</a> for the full list of available props. Values may be either numbers or strings consisting of a numeral and valid units. The following units are supported: <code>%, cm, em, ex, ch, in, lh, mm, px, rem, rlh, vh, vw</code>. If you don't provide a unit, <code>px</code> will be used by default.</p>
+      <p>
+        You can apply the most common dimensions to the image container via props such as <DocsInternalLink href="/kimg#prop:width">
+          <code>width</code>
+        </DocsInternalLink>, <DocsInternalLink href="/kimg#prop:maxHeight">
+          <code>maxHeight</code>
+        </DocsInternalLink>, and others. Values may be either numbers or strings consisting of a numeral and a valid unit. The following units are supported: <code>%, cm, em, ex, ch, in, lh, mm, px, rem, rlh, vh, vw</code>. If you don't provide a unit, <code>px</code> will be used by default.
+      </p>
 
       <DocsShowCode language="html">
-        <div>
-          <KImg
-            src="hummingbird.jpg"
-            altText="A sitting hummingbird"
-            height="250.2px"
-            width="100%"
-            maxWidth="10vw"
-            :minWidth="25"
-          />
-        </div>
+        <KImg
+          src="hummingbird.jpg"
+          altText="A sitting hummingbird"
+          height="250.2px"
+          width="100%"
+          maxWidth="10vw"
+          :minWidth="25"
+        />
       </DocsShowCode>
 
       <h3>Alternative text</h3>
 
-      <p>Unless an image is <DocsExternalLink text="decorative" href="https://www.w3.org/WAI/tutorials/images/decorative/" />, you need to provide alternative text via <code>altText</code>. If it's meant to be decorative, then use <code>isDecorative</code> to indicate it. Then, alternative text won't be required, and the image will be hidden from assistive technologies.</p>
+      <p>
+        Unless an image is <DocsExternalLink text="decorative" href="https://www.w3.org/WAI/tutorials/images/decorative/" />, you need to provide alternative text via <DocsInternalLink href="/kimg#prop:altText">
+          <code>altText</code>
+        </DocsInternalLink>.
+      </p>
 
       <DocsShowCode language="html">
-        <div>
-          <KImg
-            src="hummingbird.jpg"
-            isDecorative
-          />
-        </div>
+        <KImg
+          src="hummingbird.jpg"
+          altText="A sitting hummingbird"
+        />
+      </DocsShowCode>
+
+      <p>
+        If it's meant to be decorative, indicate it by using <DocsInternalLink href="/kimg#prop:isDecorative">
+          <code>isDecorative</code>
+        </DocsInternalLink>. Alternative text won't be required in this case and the image will be hidden from assistive technologies.
+      </p>
+
+      <DocsShowCode language="html">
+        <KImg
+          src="hummingbird.jpg"
+          isDecorative
+        />
       </DocsShowCode>
 
       <h3>Scaling</h3>
 
+      <p>
+        The <DocsInternalLink href="/kimg#prop:scaleType">
+          scale type
+        </DocsInternalLink> determines how an image scales within the image container.
+      </p>
+
       <h4><code style="font-weight: bold">'centerInside'</code> scale type</h4>
 
-      <p>Scales an image uniformly and maintains its original aspect ratio so that both its width and height are equal to or less than the container. The image can be letterboxed. It's the safest mode as it never distorts the image.</p>
+      <p>Scales an image uniformly and maintains its original aspect ratio. Both its width and height are equal to or less than the width and height of the image container. An image can be letterboxed. It's the safest mode as it <em>never distorts an image or impairs its quality.</em></p>
 
       <DocsShowCode language="html">
         <div>
@@ -118,7 +159,7 @@
 
       <h4><code style="font-weight: bold">'contain'</code> scale type</h4>
 
-      <p>Behaves like <code>'centerInside'</code> except it ensures that at least one axis of the image fits the container exactly. The original aspect ratio is maintained. The image can be letterboxed. This mode may distort the image by enlarging it above its original size.</p>
+      <p>Behaves similarly to <code>'centerInside'</code> except it ensures that at least one axis of an image fits the image container exactly. The original aspect ratio is maintained. An image can be letterboxed. This mode <em>may impair an image's quality by enlarging it above its original size</em>.</p>
 
       <DocsShowCode language="html">
         <div>
@@ -147,7 +188,7 @@
 
       <h4><code style="font-weight: bold">'fitXY'</code> scale type</h4>
 
-      <p>Scales X and Y axis of an image independently, so that the image matches the container exactly. This mode may distort the image as its original aspect ratio is ignored. The image is never letterboxed. It could also distort the image by enlarging it above its original size.</p>
+      <p>Scales X and Y axis of an image independently, so that the image matches the container exactly. An image is never letterboxed. This mode <em>may impair an image's quality by enlarging it above its original size, or distort its aspect ratio.</em></p>
 
       <DocsShowCode language="html">
         <div>
@@ -176,9 +217,14 @@
 
       <h3>Aspect ratio</h3>
 
-      <p>You can set aspect ratio via <code>aspectRatio</code> on an image and combine it with any of the scale types.</p>
+      <p>
+        You can set the aspect ratio of the image container with 
+        <DocsInternalLink href="/kimg#prop:aspectRatio">
+          <code>aspectRatio</code>
+        </DocsInternalLink> and combine it with any of the scale types.
+      </p>
 
-      <p>Note that ratio styles are based on the width information, therefore it needs to be available in some way. For example, it could be provided directly to <code>KImg</code>, or you could ensure that its parent element has width by setting it explicitly or by using a block element.</p>
+      <p>Note that the ratio styles calculations need to have the width information, therefore it needs to be available in some way. For example, you can set the width directly on <code>KImg</code>. Alternatively, you could ensure that <code>KImg</code>'s parent element has width by setting it explicitly or by using a block element.</p>
 
       <DocsShowCode language="html">
         <div>
@@ -199,9 +245,16 @@
         </div>
       </DocsShow>
 
-      <h3>Placeholder</h3>
+      <h3>Placeholder area</h3>
 
-      <p>You can use the <code>#placeholder</code> slot to place its content to the placeholder area. The area is gray by default and respects set dimensions of the image container. You can change its color via the the <code>backgroundColor</code> prop.</p>
+      <p>
+        The placeholder area is displayed when an image is not available. The area respects the dimensions set on the image container and is gray by default. You can change the area color via <DocsInternalLink href="/kimg#prop:backgroundColor">
+          <code>backgroundColor</code>
+        </DocsInternalLink> and use the <DocsInternalLink href="/kimg#slot:placeholder">
+          <code>#placeholder</code>
+        </DocsInternalLink>
+        slot to place content in the area.
+      </p>
 
       <DocsShowCode language="html">
         <div>
@@ -236,9 +289,19 @@
         </div>
       </DocsShow>
 
-      <h3>Show elements on top of an image</h3>
+      <h3>Displaying content on top of an image</h3>
 
-      <p>You can use <code>#topLeft</code>, <code>#topRight</code>, <code>#bottomLeft</code>, and <code>#bottomRight</code> slots to place elements on top of an image or placeholder area.</p>
+      <p>
+        Use <DocsInternalLink href="/kimg#slot:topLeft">
+          <code>#topLeft</code>
+        </DocsInternalLink>, <DocsInternalLink href="/kimg#slot:topRight">
+          <code>#topRight</code>
+        </DocsInternalLink>, <DocsInternalLink href="/kimg#slot:bottomLeft">
+          <code>#bottomLeft</code>
+        </DocsInternalLink>, or <DocsInternalLink href="/kimg#slot:bottomRight">
+          <code>#bottomRight</code>
+        </DocsInternalLink> slots to place content on top of the image container.
+      </p>
 
       <DocsShowCode language="html">
         <KImg
@@ -280,4 +343,11 @@
 </script>
 
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+
+  em {
+    font-style: normal;
+    font-weight: bold;
+  }
+
+</style>

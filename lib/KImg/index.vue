@@ -12,7 +12,7 @@
         v-if="$slots.placeholder"
         :style="{ position: 'absolute', top: '0', right: '0', left: '0', bottom: '0', zIndex: '0' }"
       >
-        <!-- @slot Places content to the image placeholder area. -->
+        <!-- @slot Places content to the placeholder area. -->
         <slot name="placeholder"></slot>
       </span>
 
@@ -103,7 +103,7 @@
        */
       altText: {
         type: String,
-        default: '',
+        default: null,
       },
       /**
        * Sets the image as decorative.
@@ -117,42 +117,42 @@
        */
       height: {
         type: [Number, String],
-        default: undefined,
+        default: null,
       },
       /**
        * Sets the width of the image container
        */
       width: {
         type: [Number, String],
-        default: undefined,
+        default: null,
       },
       /**
        * Sets the maximum height of the image container
        */
       maxHeight: {
         type: [Number, String],
-        default: undefined,
+        default: null,
       },
       /**
        * Sets the minimum height of the image container
        */
       minHeight: {
         type: [Number, String],
-        default: undefined,
+        default: null,
       },
       /**
        * Sets the maximum width of the image container
        */
       maxWidth: {
         type: [Number, String],
-        default: undefined,
+        default: null,
       },
       /**
        * 	Sets the minimum width of the image container
        */
       minWidth: {
         type: [Number, String],
-        default: undefined,
+        default: null,
       },
       /**
        * Sets the ratio of the width(w) to the height(h)
@@ -160,13 +160,12 @@
        */
       aspectRatio: {
         type: String,
-        default: undefined,
+        default: null,
         validator: isValidAspectRatio,
       },
       /**
        * Specifies how an image should be scaled within the container.
-       * Can be one of  `'centerInside'` (default), `'contain'`, or `'fitXY'`.
-       * See the documentation examples.
+       * Can be one of  `'centerInside'`, `'contain'`, or `'fitXY'`.
        */
       scaleType: {
         type: String,
@@ -176,12 +175,12 @@
       /**
        * A color to be displayed instead or behind an image.
        * It creates a background area which respects the dimensions
-       * set on the container.
+       * set on the image container.
        *
        * It can serve as (1) a color of the area surrounding an image when
-       * it's letterboxed, (2) creates a placeholder area displayed
+       * it's letterboxed, (2) a placeholder area displayed
        * over the whole container when an image source is not provided,
-       * (3) creates a progressive loading experience as the colored background
+       * (3) a progressive loading experience as the colored background
        * is displayed while an image is loading.
        *
        * Its default value is `$themePalette.grey.v_200`.
@@ -192,8 +191,7 @@
         default: null,
       },
       /**
-       * The border radius of an image or its placeholder area
-       * as a standard CSS 'border-radius' value.
+       * The border radius of the image container or the placeholder area
        */
       borderRadius: {
         type: String,
@@ -201,8 +199,7 @@
         default: null,
       },
       /**
-       * Accepts a Vue dynamic styles object to override the default styles to modify the appearance of the component.
-       * It's attributes always take precedence over any specified styling (internal component's styles, styles calculated from props etc.)
+       * A dynamic style object that overrides the default styles
        */
       appearanceOverrides: {
         type: Object,
@@ -246,6 +243,11 @@
           },
         };
       },
+      /**
+       * Returns all styles related to the logic
+       * that controls how the image scales within
+       * the image container
+       */
       scaleStyles() {
         const scaleKind = isValidScaleType(this.scaleType) ? this.scaleType : ScaleTypes.CONTAIN;
         const scaleStyles = {
@@ -287,6 +289,10 @@
         };
         return scaleStyles[scaleKind];
       },
+      /**
+       * Returns all styles related to the logic
+       * that controls the image ratio
+       */
       ratioStyles() {
         if (!this.aspectRatio) {
           return {
@@ -295,6 +301,7 @@
             img: {},
           };
         }
+        // https://www.sitepoint.com/maintain-image-aspect-ratios-responsive-web-design/
         const paddingTopInPercent = (this.ratio.y / this.ratio.x) * 100;
         return {
           rootContainer: {},
