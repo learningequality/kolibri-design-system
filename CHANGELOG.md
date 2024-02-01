@@ -2,12 +2,21 @@
 
 Changelog is rather internal in nature. See release notes for the public overview and guidelines. Releases are recorded as git tags in the [Github releases](https://github.com/learningequality/kolibri-design-system/releases) page.
 
-## Upcoming version
-
-<!-- Put all new updates into this section, please -->
+## Upcoming version (`main` branch)
 
 
-## Version 3.0.0
+## Version 3.0.0 (`release-v3` branch)
+
+- [#538]
+  - **Description:** Complete KImg implementation
+  - **Products impact:** new API
+  - **Addresses:** https://github.com/learningequality/kolibri-design-system/issues/368
+  - **Components:** KImg
+  - **Breaking:** no
+  - **Impacts a11y:** yes
+  - **Guidance:** One of the benefits of using KImg is that it throws a11y related warnings
+
+[#538]: https://github.com/learningequality/kolibri-design-system/pull/538
 
 - [#522]
   - **Description:** Upgrades github-actions/cache dependency
