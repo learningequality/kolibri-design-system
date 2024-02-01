@@ -9,6 +9,17 @@ Changelog is rather internal in nature. See release notes for the public overvie
 
 ## Version 3.0.0
 
+- [#535]
+  - **Description:** Added text prop in the KToolTip component as an alternative to the slot
+  - **Products impact:** Choose from - bugfix
+  - **Addresses:** #221
+  - **Components:** KToolTip 
+  - **Breaking:** no
+  - **Impacts a11y:** no
+  - **Guidance:** -
+
+[#535]: https://github.com/learningequality/kolibri-design-system/pull/535
+
 - [#522]
   - **Description:** Upgrades github-actions/cache dependency
   - **Products impact:** Dev dependency upgrade
