@@ -17,7 +17,7 @@
       <template v-if="text"> 
         {{ text }} 
       </template>
-      <!-- Else, display @slot Text of the tooltip -->
+      <!-- @slot Slot alternative to `text` prop -->
       <slot v-else></slot>
     </div>
   </Popper>
@@ -73,7 +73,7 @@
        */
       text: {
         type: String,
-        default: '',
+        default: null,
       },
     },
     data() {
