@@ -6,7 +6,7 @@ Here, you can find all about icons - where to get them, how to add them, etc.
 
 Source icon files are stored as svg files in [`custom-icons`](../custom-icons/).
 
-### Vue icons
+### Icons as Vue components
 
 Source svg files are converted to Vue components by our precompilation script. The resulting Vue components are made public via [the icons definitions file `lib/KIcon/iconDefinitions.js`](../lib/KIcon/iconDefinitions.js). The documentation website contains automatically generated [list of available icons](https://design-system.learningequality.org/icons/#icons) that can be used via Vue components, such as `KIcon`.
 
