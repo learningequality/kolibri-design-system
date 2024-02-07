@@ -9,6 +9,17 @@ Changelog is rather internal in nature. See release notes for the public overvie
 
 ## Version 3.0.0
 
+- [#541]
+  - **Description:** Add a GitHub Actions workflow to publish a new release on npm
+  - **Products impact:** none
+  - **Addresses:** https://github.com/learningequality/kolibri-design-system/issues/532
+  - **Components:** -
+  - **Breaking:** -
+  - **Impacts a11y:** -
+  - **Guidance:** -
+
+[#541]: https://github.com/learningequality/kolibri-design-system/pull/541
+
 - [#535]
   - **Description:** Added text prop in the KToolTip component as an alternative to the slot
   - **Products impact:** Choose from - bugfix
