@@ -60,7 +60,7 @@ jobs:
       - name: Check for Changelog Section
         run: |
           description="${{ steps.fetch-pr-description.outputs.description }}"
-          if echo "$description" | grep -q '<!--CHANGELOG-->'; then
+          if echo "$description" | grep -q '<## Changelog'; then
             echo "Changelog section found in PR description."
             exit 0
           else

@@ -12,7 +12,7 @@ Addresses #*PR# HERE*
 <!-- Insert images here if applicable -->
 
 ## Changelog
-<!--CHANGELOG-->
+
 <!--
   - Fill in the changelog item(s) below. If there are more groups of closely
     related changes, prepare more changelog items for each one of them.
