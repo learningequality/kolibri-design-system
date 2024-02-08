@@ -45,7 +45,7 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
       - name: Fetch PR description
         id: fetch-pr-description
@@ -55,13 +55,16 @@ jobs:
             -H "X-GitHub-Api-Version: 2022-11-28" \
             repos/$OWNER/$REPO/pulls/$PULL_NUMBER | jq -r '.body')
           echo "::set-output name=description::${description}"
+          echo "PR Description: $description"
           
       - name: Check for Changelog Section
         run: |
           description="${{ steps.fetch-pr-description.outputs.description }}"
           if echo "$description" | grep -q '<!--CHANGELOG-->'; then
             echo "Changelog section found in PR description."
+            exit 0
           else
             echo "Changelog section not found in PR description."
             exit 1
           fi
+
