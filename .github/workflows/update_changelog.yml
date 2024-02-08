@@ -1,0 +1,31 @@
+name: Update Changelog.md
+
+on:
+  pull_request:
+    types:
+      - closed
+
+jobs:
+  update-changelog:
+    runs-on: ubuntu-latest
+    permissions: write-all
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Extract Changelog from PR description
+        id: extract-changelog
+        run: |
+          changelog=$(grep -Pzo "(?s)<!--CHANGELOG-->(.*?)<!--ENDCHANGELOG-->" ${{ github.event.before }}..${{ github.sha }} || true)
+          echo "::set-output name=changelog::${changelog}"
+
+      - name: Update Changelog in main branch
+        if: ${{ github.event.pull_request.merged == true }}
+        run: |
+          echo "${{ steps.extract-changelog.outputs.changelog }}" | sed -e '1s/^/### PR details\n/' >> CHANGELOG.md
+          git config user.name "${{ github.actor }}"
+          git config user.email "${{ github.actor }}@users.noreply.github.com"
+          git add CHANGELOG.md
+          git commit -m "Automatically update changelog [skip ci]"
+          git push
+
