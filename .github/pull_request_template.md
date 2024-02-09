@@ -11,7 +11,7 @@ Addresses #*PR# HERE*
 ### Before/after screenshots
 <!-- Insert images here if applicable -->
 
-## Changelog
+
 
 <!--
   - Fill in the changelog item(s) below. If there are more groups of closely
