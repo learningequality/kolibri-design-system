@@ -1,28 +1,27 @@
-name: Check Pull Request
+name: Check PR Description
 
 on:
   pull_request:
-    types: [opened, synchronize, edited]
+    types: [opened, edited]
 
 jobs:
-  check-section:
+  check-description:
     runs-on: ubuntu-latest
-    
+
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
-      
-    - name: Check for section
-      run: |
-        section_exists=$(curl -sSL -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
-                        -H "Accept: application/vnd.github.v3.raw" \
-                        ${{ github.api_url }}/repos/${{ github.repository }}/pulls/${{ github.event.pull_request.number }}/files \
-                        | grep "## Changelog" \
-                        | wc -l)
-        
-        if [ "$section_exists" -gt "0" ]; then
-          echo "Section found!"
-        else
-          echo "Section not found."
-          exit 1
-        fi
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Check PR Description
+        id: check_description
+        run: |
+          description=$(jq -r ".pull_request.body" "$GITHUB_EVENT_PATH")
+          if [[ "$description" == *"Changelog"* ]]; then
+            echo "::set-output name=containsChangelog::true"
+          else
+            echo "::set-output name=containsChangelog::false"
+          fi
+
+      - name: Display result
+        run: |
+          echo "PR contains Changelog section: ${{ steps.check_description.outputs.containsChangelog }}"
