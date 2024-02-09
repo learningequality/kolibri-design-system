@@ -1,23 +1,28 @@
-name: Check Changelog
+name: Check Pull Request
+
 on:
   pull_request:
-    types: [opened, synchronize, reopened]
+    types: [opened, synchronize]
 
 jobs:
-  check-changelog:
+  check-section:
     runs-on: ubuntu-latest
+    
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-      - name: Check for Changelog
-        run: |
-          description=$(curl -s -H "Accept: application/vnd.github.v3+json" ${{ github.api_url }}/repos/${{ github.repository }}/pulls/${{ github.event.pull_request.number }} | jq -r '.body')
-          if echo "$description" | grep -q '<## Changelog'; then
-            echo "Changelog section found in PR description."
-          else
-            echo "Changelog section not found in PR description."
-            exit 1
-          fi
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
+    - name: Checkout code
+      uses: actions/checkout@v2
+      
+    - name: Check for section
+      run: |
+        section_exists=$(curl -sSL -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+                        -H "Accept: application/vnd.github.v3.raw" \
+                        ${{ github.api_url }}/repos/${{ github.repository }}/pulls/${{ github.event.pull_request.number }}/files \
+                        | grep "## Changelog" \
+                        | wc -l)
+        
+        if [ "$section_exists" -gt "0" ]; then
+          echo "Section found!"
+        else
+          echo "Section not found."
+          exit 1
+        fi
