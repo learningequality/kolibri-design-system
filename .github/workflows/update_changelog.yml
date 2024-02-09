@@ -28,5 +28,5 @@ jobs:
           git add CHANGELOG.md
           git commit -m "Automatically update changelog [skip ci]"
           git push
-          exit 1x
+          exit 0
 
