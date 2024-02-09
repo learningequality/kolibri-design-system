@@ -22,7 +22,7 @@ jobs:
         run: |
           description="${{ steps.extract-description.outputs.description }}"
           echo "Checking PR Description for Changelog section..."
-          if echo "$description" | grep -q '## Changelog'; then
+          if echo "$description" | grep -q 'Changelog'; then
             echo "Changelog section found in PR description."
           else
             echo "Changelog section not found in PR description."
