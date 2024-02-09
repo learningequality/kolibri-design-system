@@ -9,27 +9,18 @@ jobs:
 
     env:
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      OWNER: ${{ github.repository_owner }}
-      REPO: ${{ github.event.repository.name }}
-      PULL_NUMBER: ${{ github.event.pull_request.number }}
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v2
 
-      - name: Fetch PR description
-        id: fetch-pr-description
-        run: |
-          description=$(gh api \
-            -H "Accept: application/vnd.github+json" \
-            -H "X-GitHub-Api-Version: 2022-11-28" \
-            repos/$OWNER/$REPO/pulls/$PULL_NUMBER | jq -r '.body')
-          echo "::set-output name=description::${description}"
-          echo "PR Description: $description"
-          
+      - name: Extract PR Description
+        id: extract-description
+        run: echo "::set-output name=description::${{ github.event.pull_request.body }}"
+
       - name: Check for Changelog Section
         run: |
-          description="${{ steps.fetch-pr-description.outputs.description }}"
+          description="${{ steps.extract-description.outputs.description }}"
           echo "Checking PR Description for Changelog section..."
           if echo "$description" | grep -q '## Changelog'; then
             echo "Changelog section found in PR description."
