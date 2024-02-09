@@ -13,26 +13,6 @@ Addresses #*PR# HERE*
 
 
 
-<!--
-  - Fill in the changelog item(s) below. If there are more groups of closely
-    related changes, prepare more changelog items for each one of them.
-    At a minimum, always separete non-breaking changes from breaking changes.
-  - This needs to be pasted to CHANGELOG.md before merging a PR.
-  - See changelog guidelines https://www.notion.so/learningequality/DRAFT-Changelog-Guidelines-106b6ebbdeda4ba5b3b3e7c490c5a4fe and existing
-    items in CHANGELOG.md as examples
- -->
-
-- [#PR no]
-  - **Description:** Summary of change(s)
-  - **Products impact:** Choose from - none (for internal updates) / bugfix / new API / updated API / removed API. If it's 'none', use "-" for all items below to indicate they are not relevant.
-  - **Addresses:** Link(s) to GH issue(s) addressed. Include KDS links as well as links to related issues in a consumer product repository too.
-  - **Components:** Affected public KDS component. Do not include internal sub-components or documentation components.
-  - **Breaking:** Will this change break something in a consumer? Choose from: yes / no
-  - **Impacts a11y:** Does this change improve a11y or adds new features that can be used to improve it? Choose from: yes / no
-  - **Guidance:** Why and how to introduce this update to a consumer? Required for breaking changes, appreciated for changes with a11y impact, and welcomed for non-breaking changes when relevant.
-
-[#PR no]: PR link
-
 ## Steps to test
 
 1. Step 1
