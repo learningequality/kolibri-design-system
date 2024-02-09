@@ -1,33 +1,3 @@
-# name: Check Changelog.md
-# on:
-#   pull_request:
-#     types: [opened, synchronize, reopened]
-# jobs:
-#   check-changelog:
-#      runs-on: ubuntu-latest
-#      permissions: write-all
-#      steps:
-#           - uses: actions/checkout@v4
-#           - name: Fetch changed files
-#             id: fetch-changed-files
-#             run: |
-#               response=$(gh api \
-#               -H "Accept: application/vnd.github+json" \
-#               -H "X-GitHub-Api-Version: 2022-11-28" \
-#                repos/${owner}/${REPO}/pulls/${PULL_NUMBER}/files)
-#               echo "$response" | jq '.' > response.json
-              
-          
-#           
-#           - name: Check if Changelog.md is changed
-#             run: |
-#               if [[ $(jq '.[].filename' response.json) == *"CHANGELOG.md"* ]]; then
-#                 echo "Changelog.md is changed"
-#                 exit 0
-#               else
-#                 echo "Changelog.md is not changed"
-#                 exit 1
-#               fi
 name: Check Changelog Section in PR Description
 on:
   pull_request:
@@ -60,11 +30,10 @@ jobs:
       - name: Check for Changelog Section
         run: |
           description="${{ steps.fetch-pr-description.outputs.description }}"
-          if echo "$description" | grep -q '<## Changelog'; then
+          echo "Checking PR Description for Changelog section..."
+          if echo "$description" | grep -q '## Changelog'; then
             echo "Changelog section found in PR description."
-            exit 0
           else
             echo "Changelog section not found in PR description."
             exit 1
           fi
-
