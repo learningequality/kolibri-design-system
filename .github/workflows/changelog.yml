@@ -16,7 +16,7 @@ jobs:
         id: check_description
         run: |
           description=$(jq -r ".pull_request.body" "$GITHUB_EVENT_PATH")
-          if [[ "$description" == *"Changelog"* ]]; then
+          if [[ "$description" == *"## Changelog"* ]]; then
             echo "::set-output name=containsChangelog::true"
           else
             echo "::set-output name=containsChangelog::false"
