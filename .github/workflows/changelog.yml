@@ -1,30 +1,23 @@
-name: Check Changelog Section in PR Description
+name: Check Changelog
 on:
   pull_request:
     types: [opened, synchronize, reopened]
 
 jobs:
-  check-changelog-section:
+  check-changelog:
     runs-on: ubuntu-latest
-
-    env:
-      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-
-      - name: Extract PR Description
-        id: extract-description
-        run: echo "::set-output name=description::${{ github.event.pull_request.body }}"
-
-      - name: Check for Changelog Section
+      - name: Check for Changelog
         run: |
-          description="${{ steps.extract-description.outputs.description }}"
-          echo "Checking PR Description for Changelog section..."
-          if echo "$description" | grep -q 'Changelog'; then
+          description=$(curl -s -H "Accept: application/vnd.github.v3+json" ${{ github.api_url }}/repos/${{ github.repository }}/pulls/${{ github.event.pull_request.number }} | jq -r '.body')
+          if echo "$description" | grep -q '<## Changelog'; then
             echo "Changelog section found in PR description."
           else
             echo "Changelog section not found in PR description."
             exit 1
           fi
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
