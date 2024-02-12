@@ -6,6 +6,7 @@ Changelog is rather internal in nature. See release notes for the public overvie
 
 <!-- Put all new updates into this section, please -->
 
+
 - [#531]
   - **Description:** Remove unused `keen-ui` dependency
   - **Products impact:** none
