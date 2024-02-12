@@ -1,8 +1,8 @@
-name: Check PR Description
+name: Check PR for Changelog
 
 on:
   pull_request:
-    types: [opened, edited, synchronize, reopened]
+    types: [opened, edited, reopened]
 
 jobs:
   check-description:
@@ -18,8 +18,10 @@ jobs:
           description=$(jq -r ".pull_request.body" "$GITHUB_EVENT_PATH")
           if [[ "$description" == *"## Changelog"* ]]; then
             echo "containsChangelog=true" >> $GITHUB_OUTPUT
+            echo "true" > containsChangelog.txt
           else
             echo "containsChangelog=false" >> $GITHUB_OUTPUT
+            echo "false" > containsChangelog.txt
           fi
       - name: Exit with appropriate code
         run: |
@@ -30,3 +32,10 @@ jobs:
             echo "PR does not contain Changelog section"
             exit 1
           fi
+      - name: Upload artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: pr-description-info
+          path: containsChangelog.txt
+          if-no-files-found: error

@@ -1,32 +1,68 @@
 name: Update Changelog.md
 
 on:
+  workflow_run:
+    workflows: ["Check PR for Changelog"]
+    types:
+      - completed
   pull_request:
     types:
       - closed
 
 jobs:
   update-changelog:
+    if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
     permissions: write-all
+
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+      - name: Download artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: pr-description-info
+
+      - name: Check if PR is from dependabot
+        id: check-dependabot
+        run: |
+          is_dependabot=$(jq -r '.pull_request.user.login' $GITHUB_EVENT_PATH)
+          echo "is_dependabot=$is_dependabot" >> $GITHUB_OUTPUT
+        
+
+      - name: Read containsChangelog value
+        id: read-contains-changelog
+        run: |
+          containsChangelog=$(cat pr-description-info/containsChangelog.txt)
+          echo "Value of containsChangelog: $containsChangelog"
+          echo "containsChangelog=$containsChangelog" >> $GITHUB_OUTPUT
 
       - name: Extract Changelog from PR description
+        if: steps.read-contains-changelog.outputs.containsChangelog == 'true'
         id: extract-changelog
         run: |
-          changelog=$(grep -Pzo "(?s)<!--CHANGELOG-->(.*?)<!--ENDCHANGELOG-->" ${{ github.event.before }}..${{ github.sha }} || true)
-          echo "::set-output name=changelog::${changelog}"
-
+          description=$(jq -r ".pull_request.body" "$GITHUB_EVENT_PATH")
+          changelog_section=$(echo "$description" | awk '/## Changelog/{flag=1; next} /##/{flag=0} flag' | sed '/<!--/,/-->/d' | sed '/<!--/,/-->/d' | sed '1d;$d')
+          echo "changelog=${changelog_section}" >> $GITHUB_OUTPUT
+      
       - name: Update Changelog in main branch
-        if: ${{ github.event.pull_request.merged == true }}
+        if: steps.check-dependabot.outputs.is_dependabot == 'dependabot[bot]' || steps.read-contains-changelog.outputs.containsChangelog == 'true'
         run: |
-          echo "${{ steps.extract-changelog.outputs.changelog }}" | sed -e '1s/^/### PR details\n/' >> CHANGELOG.md
-          git config user.name "${{ github.actor }}"
-          git config user.email "${{ github.actor }}@users.noreply.github.com"
-          git add CHANGELOG.md
-          git commit -m "Automatically update changelog [skip ci]"
-          git push
-          exit 0
+          changelog_content="${{ steps.extract-changelog.outputs.changelog }}"
+          if [ "${{ steps.check-dependabot.outputs.is_dependabot }}" == "dependabot[bot]" ]; then
+            changelog_content="**Description:** ${{ github.event.pull_request.title }}\n- **Products impact:** Dev Dependency upgrade\n- **Addresses:** -\n- **Components:** -\n- **Breaking:** -\n- **Impacts a11y:** -\n- **Guidance:** -\n\n" 
+          fi
 
+          pr_number=$(jq -r ".pull_request.number" "$GITHUB_EVENT_PATH")
+          pr_link="[#${pr_number}]"
+          pr_link_ref="[#${pr_number}]: ${{ github.event.pull_request.html_url }}"
+          changelog_content="${pr_link}\n${changelog_content}\n${pr_link_ref}\n"
+
+          changelog_content=$(echo "$changelog_content" | sed -e 's/^[ \t]*//' -e 's/[ \t]*$//')
+          sed -i "/<!-- Put all new updates into this section, please -->/a\\$changelog_content" CHANGELOG.md
+        
+      - name: Commit updated CHANGELOG
+        if: steps.check-dependabot.outputs.is_dependabot == 'dependabot[bot]' || steps.read-contains-changelog.outputs.containsChangelog == 'true'
+        uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+            branch: ${{ github.event.pull_request.base.ref }}
+            commit_message: "Update CHANGELOG.md w/ PR #${{ github.event.pull_request.number }}"
+            file_pattern: CHANGELOG.md
