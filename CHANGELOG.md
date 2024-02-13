@@ -2,10 +2,7 @@
 
 Changelog is rather internal in nature. See release notes for the public overview and guidelines. Releases are recorded as git tags in the [Github releases](https://github.com/learningequality/kolibri-design-system/releases) page.
 
-## Upcoming version
-
-<!-- Put all new updates into this section, please -->
-
+## Version 3.x.x
 
 - [#543]
   - **Description:** Added new Icons to support Studio Usability Enhancements
@@ -17,8 +14,6 @@ Changelog is rather internal in nature. See release notes for the public overvie
   - **Guidance:** Consumers can now access these icons: activities, attribution, audience, categories, levels, rename
 
 [#543]: https://github.com/learningequality/kolibri-design-system/pull/543
-
-## Version 3.0.0
 
 - [#535]
   - **Description:** Added text prop in the KToolTip component as an alternative to the slot
