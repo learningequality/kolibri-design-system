@@ -2,8 +2,7 @@ name: Publish (pre)release to npm
 
 on:
   release:
-    # include release and pre-release, exclude release draft
-    types: [released,prereleased]
+    types: [published]
 
 jobs:
   publish:
