@@ -119,15 +119,15 @@
     computed: {
       iconColor() {
         if (this.appearance === 'basic-link') {
-          return this.hovering ? this.$themeTokens.primaryDark : this.$themeTokens.primary;
+          return this.hovering ? this.$themeBrand.secondaryDark : this.$themeBrand.secondary;
         }
 
-        if (this.primary) {
+        if (this.secondary) {
           return this.appearance === 'raised-button'
-            ? this.$themeTokens.textInverted
-            : this.$themeTokens.primary;
+            ? this.$themeBrand.textInverted
+            : this.$themeBrand.secondary;
         } else {
-          return this.$themeTokens.text;
+          return this.$themeBrand.text;
         }
       },
       htmlTag() {
@@ -139,9 +139,9 @@
         return 'button';
       },
       arrowStyles() {
-        if (this.primary) {
+        if (this.secondary) {
           return {
-            fill: this.$themeTokens.textInverted,
+            fill: this.$themeBrand.textInverted,
           };
         }
         return {};
