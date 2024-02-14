@@ -15,6 +15,17 @@ Changelog is rather internal in nature. See release notes for the public overvie
 
 [#542]: https://github.com/learningequality/kolibri-design-system/pull/542
 
+- [#542]
+  - **Description:** Updates documentation for icons to the new process, adds clear guidelines
+  - **Products impact:** None
+  - **Addresses:** -
+  - **Components:** -
+  - **Breaking:** -
+  - **Impacts a11y:** -
+  - **Guidance:** -
+
+[#542]: (https://github.com/learningequality/kolibri-design-system/pull/542
+
 - [#543]
   - **Description:** Added new Icons to support Studio Usability Enhancements
   - **Products impact:** new API
