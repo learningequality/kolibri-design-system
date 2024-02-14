@@ -2,7 +2,7 @@
 
 Changelog is rather internal in nature. See release notes for the public overview and guidelines. Releases are recorded as git tags in the [Github releases](https://github.com/learningequality/kolibri-design-system/releases) page.
 
-## Version 3.x.x
+## Version 3.x.x (`release-v3` branch)
 
 - [#542]
   - **Description:** Adds a new `sort` icon
