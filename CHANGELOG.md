@@ -2,7 +2,29 @@
 
 Changelog is rather internal in nature. See release notes for the public overview and guidelines. Releases are recorded as git tags in the [Github releases](https://github.com/learningequality/kolibri-design-system/releases) page.
 
-## Version 3.x.x
+## Version 3.x.x (`release-v3` branch)
+
+- [#542]
+  - **Description:** Adds a new `sort` icon
+  - **Products impact:** New icon
+  - **Addresses:** https://github.com/learningequality/studio/issues/4426
+  - **Components:** -
+  - **Breaking:** no
+  - **Impacts a11y:** -
+  - **Guidance:** -
+
+[#542]: https://github.com/learningequality/kolibri-design-system/pull/542
+
+- [#542]
+  - **Description:** Updates documentation for icons to the new process, adds clear guidelines
+  - **Products impact:** None
+  - **Addresses:** -
+  - **Components:** -
+  - **Breaking:** -
+  - **Impacts a11y:** -
+  - **Guidance:** -
+
+[#542]: (https://github.com/learningequality/kolibri-design-system/pull/542
 
 - [#543]
   - **Description:** Added new Icons to support Studio Usability Enhancements
