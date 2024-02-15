@@ -1,10 +1,20 @@
 <template>
 
-  <div class="card">
-    <BaseCard :title="title" :headingLevel="headingLevel" :to="to" />
+  <div
+    class="card"
+    :class="$computedClass({ ':focus': $coreOutline })"
+    tabindex="0"
+    @focus="cardFocus"
+    @hover="cardHover"
+  >
+    <BaseCard
+      :title="title"
+      :headingLevel="headingLevel"
+      :to="to"
+    />
     <slot></slot>
   </div>
-  
+
 </template>
 
 
@@ -30,6 +40,14 @@
       to: {
         type: Object,
         required: true,
+      },
+    },
+    methods: {
+      cardFocus(e) {
+        this.$emit('focus', e);
+      },
+      cardHover(e) {
+        this.$emit('hover', e);
       },
     },
   };

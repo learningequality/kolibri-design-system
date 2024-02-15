@@ -1,22 +1,19 @@
 <template>
 
-  <div class="card">
-    <li>
-      <h1 :headerLevelTag="headerLevelTag">
-        <a :href="to">
-          <KTextTruncator :text="title" :maxLines="1" />
-        </a>
-      </h1>
-    </li>
-    <slot></slot>
-  </div>
+  <li style="list-style-type: none;">
+    <h1 :headerLevelTag="headerLevelTag">
+      <a :href="to">
+        <KTextTruncator :text="title" :maxLines="1" />
+      </a>
+    </h1>
+  </li>
 
 </template>
 
 
 <script>
 
-  import KTextTruncator from '../KTextTruncator.vue';
+  import KTextTruncator from '../KTextTruncator';
 
   export default {
     name: 'BaseCard',
@@ -48,8 +45,26 @@
 </script>
 
 <style lang="scss">
-.card{
-  background-color: rgb(119, 119, 128);
-  border-radius: 10px;
-}
+
+  @import '../styles/definitions';
+
+  .card {
+    @extend %dropshadow-2dp;
+
+    position: relative;
+    display: block;
+    padding: 16px;
+    margin-bottom: 24px;
+    text-align: left;
+    text-decoration: none;
+    cursor: pointer;
+    border-radius: 0.5em;
+    transition: box-shadow $core-time ease;
+
+    &:hover,
+    &:focus {
+      @extend %dropshadow-8dp;
+    }
+  }
+
 </style>
