@@ -136,7 +136,7 @@
       },
       notBlank() {
         return {
-          fill: this.disabled ? this.$themeTokens.textDisabled : this.$themeTokens.secondary,
+          fill: this.disabled ? this.$themeTokens.textDisabled : this.$themeTokens.primary,
         };
       },
       activeOutline() {

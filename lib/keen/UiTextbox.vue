@@ -36,7 +36,7 @@
           :readonly="readonly"
           :required="required"
           :step="stepValue"
-          :style="isActive ? { borderBottomColor: $themeTokens.secondaryDark } : {}"
+          :style="isActive ? { borderBottomColor: $themeTokens.primaryDark } : {}"
           :tabindex="tabindex"
           :type="type"
           :value="value"
@@ -67,7 +67,7 @@
           :required="required"
 
           :rows="rows"
-          :style="isActive ? { borderBottomColor: $themeTokens.secondary } : {}"
+          :style="isActive ? { borderBottomColor: $themeTokens.primaryDark } : {}"
 
           :tabindex="tabindex"
 
@@ -84,7 +84,7 @@
           v-if="label || $slots.default"
           class="ui-textbox-label-text"
           :class="labelClasses"
-          :style="isActive ? { color: $themeTokens.secondary } : {}"
+          :style="isActive ? { color: $themeTokens.primaryDark } : {}"
         >
           <slot>{{ label }}</slot>
         </div>

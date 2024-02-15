@@ -288,10 +288,10 @@
   .k-switch--color-primary {
     &.is-checked:not(.is-disabled) {
       .k-switch-track {
-        background-color: #a5d6a7;
+        background-color: #b4c3fb;
       }
       .k-switch-thumb {
-        background-color: #4caf50;
+        background-color: #4368f5;
       }
     }
   }

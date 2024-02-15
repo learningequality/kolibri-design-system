@@ -21,7 +21,7 @@
         v-if="icon"
         :icon="icon"
         style="top: 4px;"
-        :color="hovering ? $themeTokens.secondaryDark : $themeTokens.secondary"
+        :color="hovering ? $themeTokens.primaryDark : $themeTokens.primary"
         data-test="icon-before"
       />
     </slot>

@@ -69,7 +69,7 @@
       inRangeStyle() {
         return this.isInRange
           ? {
-              backgroundColor: this.$themeBrand.secondary.v_50,
+              backgroundColor: this.$themeBrand.primary.v_200,
               ':hover': {
                 backgroundColor: this.$themePalette.grey.v_200,
               },
@@ -79,7 +79,7 @@
       selectedStyle() {
         return this.isSelected
           ? {
-              backgroundColor: this.$themeBrand.secondary.v_600,
+              backgroundColor: this.$themeBrand.primary.v_1000,
               color: this.$themePalette.white + '!important',
             }
           : {};
