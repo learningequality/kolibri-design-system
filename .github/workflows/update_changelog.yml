@@ -1,0 +1,57 @@
+name: Update Changelog.md
+
+on:
+  workflow_run:
+    workflows: ["Check PR for Changelog"]
+    types:
+      - completed
+  pull_request:
+    types:
+      - closed
+
+jobs:
+  update-changelog:
+    if: github.event.pull_request.merged == true
+    runs-on: ubuntu-latest
+    permissions: write-all
+
+    steps:
+
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Check if PR is from dependabot
+        id: check-dependabot
+        run: |
+          is_dependabot=$(jq -r '.pull_request.user.login' $GITHUB_EVENT_PATH)
+          echo "is_dependabot=$is_dependabot" >> $GITHUB_OUTPUT
+        
+      - name: Extract and update Changelog
+        id: modify-changelog
+        run: |
+          if [ "${{ steps.check-dependabot.outputs.is_dependabot }}" == "dependabot[bot]" ]; then
+          changelog="- **Description:** ${{ github.event.pull_request.title }}\n  - **Products impact:** Dev Dependency upgrade\n  - **Addresses:** -\n  - **Components:** -\n  - **Breaking:** -\n  - **Impacts a11y:** -\n  - **Guidance:** -"
+          else
+            description=$(jq -r ".pull_request.body" "$GITHUB_EVENT_PATH")
+            changelog_section=$(echo "$description" | awk '/## Changelog/{flag=1; next} /##/{flag=0} flag' | sed '/<!--/,/-->/d' | sed '/<!--/,/-->/d' | sed '1d;$d')
+            changelog="${changelog_section}"
+          fi
+
+          pr_number=$(jq --raw-output .pull_request.number "$GITHUB_EVENT_PATH")
+          pr_link="[#${pr_number}]"
+          pr_link_ref="[#${pr_number}]: ${{ github.event.pull_request.html_url }}"
+
+          echo "- ${pr_link}" > pr_info.txt
+          echo -e "  ${changelog}" >> pr_info.txt
+          echo >> pr_info.txt
+          echo "${pr_link_ref}" >> pr_info.txt
+          echo >> pr_info.txt
+
+          sed -i "/<!-- Put all new updates into this section, please -->/r pr_info.txt" CHANGELOG.md
+        
+      - name: Commit updated CHANGELOG.md
+        uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+            branch: ${{ github.event.pull_request.base.ref }}
+            commit_message: "Update CHANGELOG.md w/ PR #${{ github.event.pull_request.number }}"
+            file_pattern: CHANGELOG.md

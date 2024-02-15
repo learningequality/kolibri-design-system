@@ -1,34 +1,34 @@
-name: Check Changelog.md
+name: Check PR for Changelog
+
 on:
   pull_request:
-    types: [opened, synchronize, reopened]
+    types: [opened, edited, reopened]
+
 jobs:
-  check-changelog:
-     runs-on: ubuntu-latest
-     permissions: write-all
-     steps:
-          - uses: actions/checkout@v4
-          - name: Fetch changed files
-            id: fetch-changed-files
-            run: |
-              response=$(gh api \
-              -H "Accept: application/vnd.github+json" \
-              -H "X-GitHub-Api-Version: 2022-11-28" \
-               repos/${owner}/${REPO}/pulls/${PULL_NUMBER}/files)
-              echo "$response" | jq '.' > response.json
-              
+  check-description:
+    runs-on: ubuntu-latest
+    steps:
+
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Check PR Description
+        id: check_description
+        run: |
+          description=$(jq -r ".pull_request.body" "$GITHUB_EVENT_PATH")
+          if [[ "$description" == *"## Changelog"* ]]; then
+            echo "containsChangelog=true" >> $GITHUB_OUTPUT
+          else
+            echo "containsChangelog=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Results
+        run: |
+          if [[ "${{ steps.check_description.outputs.containsChangelog }}" == "true" ]]; then
+            echo "PR contains Changelog section"
+            exit 0
+          else
+            echo "PR does not contain Changelog section"
+            exit 1
+          fi
           
-            env:
-              GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-              owner: ${{ github.repository_owner }}
-              REPO: ${{ github.event.repository.name }}
-              PULL_NUMBER: ${{ github.event.pull_request.number }}
-          - name: Check if Changelog.md is changed
-            run: |
-              if [[ $(jq '.[].filename' response.json) == *"CHANGELOG.md"* ]]; then
-                echo "Changelog.md is changed"
-                exit 0
-              else
-                echo "Changelog.md is not changed"
-                exit 1
-              fi
