@@ -1,6 +1,6 @@
 <template>
 
-  <li style="list-style-type: none;">
+  <li class="remove-list-style">
     <h1 :headerLevelTag="headerLevelTag">
       <a :href="to">
         <KTextTruncator :text="title" :maxLines="1" />
@@ -65,6 +65,10 @@
     &:focus {
       @extend %dropshadow-8dp;
     }
+  }
+
+  .remove-list-style {
+    list-style-type: none;
   }
 
 </style>

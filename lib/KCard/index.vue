@@ -36,6 +36,14 @@
       headingLevel: {
         type: Number,
         required: true,
+        validator(value) {
+          if (value == null) {
+            console.error(`Missing headinglevel ${value}`);
+            return false;
+          } else {
+            return true;
+          }
+        },
       },
       to: {
         type: Object,
