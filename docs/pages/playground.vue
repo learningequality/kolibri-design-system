@@ -14,6 +14,11 @@
       in lib/KBreadcrumbs.vue and see the updates reflected
       on this page
     -->
+    <KCard
+      :title="'Global Digital Library'"
+      :headingLevel="1"
+      :to="{ path: '#' }"
+    />
     <!-- <KBreadcrumbs
       :items="[
         { text: 'Global Digital Library', link: { path: '#' } },
@@ -33,7 +38,7 @@
 
 
 <script>
-
+ 
   /*
     Playground is a Vue component too,
     so you can also use `data`, `methods`, etc.
