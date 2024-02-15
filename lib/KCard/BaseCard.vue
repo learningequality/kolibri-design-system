@@ -1,11 +1,14 @@
 <template>
 
   <li class="remove-list-style">
-    <h1 :headerLevelTag="headerLevelTag">
+    <h2
+      v-if="title !== null"
+      :headerLevelTag="headerLevelTag"
+    >
       <a :href="to">
         <KTextTruncator :text="title" :maxLines="1" />
       </a>
-    </h1>
+    </h2>
   </li>
 
 </template>

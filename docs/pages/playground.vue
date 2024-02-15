@@ -14,20 +14,6 @@
       in lib/KBreadcrumbs.vue and see the updates reflected
       on this page
     -->
-    <KCard title="Card with slot" :headingLevel="6" :to="{}">
-      <template>
-        <KGrid>
-          <KGridItem>
-            hi
-          </KGridItem>
-          <KGridItem>
-            heloo
-          </KGridItem>
-        </KGrid>
-      </template>
-    </KCard>
-
-    <KCard title="Hello card" :headingLevel="3" :to="{}" />
     <!-- <KBreadcrumbs
       :items="[
         { text: 'Global Digital Library', link: { path: '#' } },
