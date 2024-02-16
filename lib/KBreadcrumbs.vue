@@ -300,7 +300,6 @@
   .breadcrumbs-crumb-text {
     display: inline-block;
     width: 100%;
-    font-size: 100px;
     max-width: $crumb-max-width;
     overflow: hidden;
     text-overflow: ellipsis;

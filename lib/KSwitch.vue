@@ -188,7 +188,7 @@
 
   $k-switch-height: 32px !default;
   $k-switch-thumb-size: 20px !default;
-  $k-switch-thumb-color: #fafafa !default;
+  $k-switch-thumb-color: #f5f5f5 !default;
   $k-switch-track-width: 34px !default;
   $k-switch-track-height: 14px !default;
 
@@ -248,7 +248,7 @@
     top: (($k-switch-thumb-size - $k-switch-track-height) / 2);
     width: $k-switch-track-width;
     height: $k-switch-track-height;
-    background-color: rgba(0, 0, 0, 0.26);
+    background-color: #cccccc;
     border-radius: 8px;
     transition: background-color 0.1s linear;
   }

@@ -317,11 +317,6 @@ export default [
         keywords: ['button'],
       }),
       new Page({
-        path: '/kcontentrenderer',
-        title: 'KContentRenderer',
-        isCode: true,
-      }),
-      new Page({
         path: '/kgrid',
         title: 'KGrid',
         isCode: true,

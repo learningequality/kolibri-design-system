@@ -188,7 +188,7 @@
         </li>
         <li>
           Bottom stroke color:
-          <DocsInternalLink code text="palette.grey.v_500" href="/colors#palette-grey-v_500" />
+          <DocsInternalLink code text="palette.grey.v_600" href="/colors#palette-grey-v_600" />
         </li>
         <li>
           Bottom stroke focused color:
@@ -196,7 +196,7 @@
         </li>
         <li>
           Label text color:
-          <DocsInternalLink code text="palette.grey.v_300" href="/colors#palette-grey-v_300" />
+          <DocsInternalLink code text="palette.grey.v_200" href="/colors#palette-grey-v_200" />
         </li>
         <li>
           Focused text color:

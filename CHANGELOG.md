@@ -6,6 +6,17 @@ Changelog is rather internal in nature. See release notes for the public overvie
 
 <!-- Put all new updates into this section, please -->
 
+- [#440]
+  - **Description:** Updates brand theme color tokens and token mapping within components
+  - **Products impact:** Brand token updates
+  - **Addresses:** - https://github.com/learningequality/kolibri-design-system/issues/545
+  - **Components:** -
+  - **Breaking:** - 
+  - **Impacts a11y:** - 
+  - **Guidance:** -
+
+[#440]: https://github.com/learningequality/kolibri-design-system/pull/440
+
 - [#531]
   - **Description:** Remove unused `keen-ui` dependency
   - **Products impact:** none
