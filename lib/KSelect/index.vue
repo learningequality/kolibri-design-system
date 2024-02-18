@@ -623,26 +623,6 @@
         return looseEqual(this.selection, option);
       },
 
-      updateOption(option, options = { select: true }) {
-        let value = [];
-        let updated = false;
-        const i = looseIndexOf(this.selection, option);
-
-        if (options.select && i < 0) {
-          value = this.selection.concat(option);
-          updated = true;
-        }
-
-        if (!options.select && i > -1) {
-          value = this.selection.slice(0, i).concat(this.selection.slice(i + 1));
-          updated = true;
-        }
-
-        if (updated) {
-          this.setValue(value);
-        }
-      },
-
       defaultFilter(option) {
         const query = this.query.toLowerCase();
         let text = option[this.keys.label] || option;
