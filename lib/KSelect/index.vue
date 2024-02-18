@@ -147,7 +147,7 @@
   import sortby from 'lodash/sortBy';
   import UiIcon from '../keen/UiIcon';
 
-  import { looseIndexOf, looseEqual } from '../keen/helpers/util';
+  import { looseEqual } from '../keen/helpers/util';
   import { scrollIntoView, resetScroll } from '../keen/helpers/element-scroll';
   import config from '../keen/config';
   import KSelectOption from './KSelectOption.vue';
