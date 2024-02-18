@@ -988,16 +988,7 @@
     &::-ms-clear {
       display: none;
     }
-  }
-
-  .ui-select-search-progress {
-    position: absolute;
-    top: rem-calc(8px);
-  }
-
-  .ui-select-search-progress {
-    right: rem-calc(12px);
-  }
+  }  
 
   .ui-select-options {
     position: relative;
