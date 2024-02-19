@@ -144,13 +144,13 @@
         <KButtonGroup>
           <KButton
             text="Options"
-            :primary="false"
+            :primary="true"
             iconAfter="chevronDown"
           >
             <KDropdownMenu
               style="margin-right: 16px;"
               text="Primary"
-              :primary="false"
+              :primary="true"
               :options="['Option 1', 'Option 2']"
               appearance="raised-button"
             />
