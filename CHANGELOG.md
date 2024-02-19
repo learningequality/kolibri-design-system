@@ -8,12 +8,12 @@ Changelog is rather internal in nature. See release notes for the public overvie
 
 - [#440]
   - **Description:** Updates brand theme color tokens and token mapping within components
-  - **Products impact:** Brand token updates
+  - **Products impact:** Updates to the UI
   - **Addresses:** - https://github.com/learningequality/kolibri-design-system/issues/545
   - **Components:** -
-  - **Breaking:** - 
+  - **Breaking:** - Yes
   - **Impacts a11y:** - 
-  - **Guidance:** -
+  - **Guidance:** - There have been updates made to the brand, palette, and token colors. The theme color scales have been reduced to 6 levels, with some colors being removed. Additionally, new content-related token labels have been introduced and existing ones have been renamed.
 
 [#440]: https://github.com/learningequality/kolibri-design-system/pull/440
 
