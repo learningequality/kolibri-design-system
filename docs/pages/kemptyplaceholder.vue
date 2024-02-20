@@ -64,6 +64,34 @@
             </tr>
           </tbody>
         </table>
+        <KListWithOverflow
+          :items="items"
+        >
+          <template #item="{ item }">
+            <KIconButton
+            tooltip="Add"
+              icon="edit"
+            />
+          </template>
+          <template #more="{ overflowItems }">
+            <KIconButton
+              tooltip="Dropdown options"
+              icon="optionsHorizontal"
+              appearance="flat-button"
+              :primary="false"
+            >
+              <template #menu>
+                <KDropdownMenu
+                  style="margin-right: 16px;"
+                  text="Primary"
+                  :primary="true"
+                  :options="['Option 1', 'Option 2']"
+                  appearance="raised-button"
+                />
+              </template>
+            </KIconButton>
+          </template>
+        </KListWithOverflow>
       </DocsShow>
     </DocsPageSection>
 
@@ -71,6 +99,58 @@
 
 </template>
 
+
+<script>
+
+  export default {
+    name: 'DocsKEmptyPlaceholder',
+    computed: {
+      items() {
+        return [ {
+          username: 'user_1',
+          exercises: 11,
+          averageScore: '85%',
+        }, {
+          username: 'user_2',
+          exercises: 0,
+          averageScore: null,
+        }, {
+          username: 'user_2',
+          exercises: 0,
+          averageScore: null,
+        }, {
+          username: 'user_2',
+          exercises: 0,
+          averageScore: null,
+        }, {
+          username: 'user_2',
+          exercises: 0,
+          averageScore: null,
+        }, {
+          username: 'user_2',
+          exercises: 0,
+          averageScore: null,
+        }, {
+          username: 'user_2',
+          exercises: 0,
+          averageScore: null,
+        }, {
+          username: 'user_2',
+          exercises: 0,
+          averageScore: null,
+        }, {
+          username: 'user_2',
+          exercises: 0,
+          averageScore: null,
+        }, {
+          username: 'user_3',
+          exercises: 5,
+          averageScore: '100%',
+        }];
+      }
+    },
+  };
+</script>
 
 <style lang="scss" scoped>
 
