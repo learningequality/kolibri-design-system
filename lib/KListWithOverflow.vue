@@ -1,6 +1,9 @@
 <template>
 
-  <div class="list-wrapper">
+  <div
+    ref="listWrapper"
+    class="list-wrapper"
+  >
     <div
       ref="list"
       class="list"
@@ -13,11 +16,16 @@
         />
       </template>
     </div>
-    <slot
-      v-if="isMoreButtonVisible"
-      name="more"
-      :overflowItems="overflowItems"
-    />
+    <div
+      class="more-button-wrapper"
+      ref="moreButtonWrapper"
+    >
+      <slot
+        v-if="isMoreButtonVisible"
+        name="more"
+        :overflowItems="overflowItems"
+      />
+    </div>
   </div>
 
 </template>
@@ -39,21 +47,10 @@
       return {
         mounted: false,
         overflowItems: [],
-        isMoreButtonVisible: false,
+        // default to true just to measure its width at first render
+        isMoreButtonVisible: true,
+        moreButtonWidth: 0,
       };
-    },
-    computed: {
-      listHeight() {
-        const defaultHeight = 50;
-        // height of the first child, assuming all children have the same height
-        const { list } = this.$refs;
-        if (!list) {
-          return defaultHeight;
-        }
-        const firstChild = list.children[0];
-        console.log('firstChild', firstChild);
-        return firstChild.clientHeight || defaultHeight;
-      },
     },
     watch: {
       isMoreButtonVisible(prev, next) {
@@ -72,7 +69,7 @@
     },
     mounted() {
       this.mounted = true;
-      this.$refs.list.style.height = `${this.listHeight}px`;
+      this.setMoreButtonWidth();
       this.$nextTick(() => {
         this.setOverflowItems();
       });
@@ -87,26 +84,50 @@
     },
     methods: {
       setOverflowItems() {
-        if (!this.mounted) {
+        const { list, listWrapper } = this.$refs;
+        if (
+          !this.mounted ||
+          !listWrapper ||
+          !list
+        ) {
           this.overflowItems = [];
           return;
         }
-        const list = this.$refs.list;
-        if (!list) {
+
+        let availableWidth = listWrapper.clientWidth;
+        availableWidth -= this.moreButtonWidth;
+        let maxWidth = 0;
+
+        const overflowItems = [];
+        for (let i = 0; i < list.children.length; i++) {
+          const item = list.children[i];
+          const itemWidth = item.clientWidth;
+          if (itemWidth > availableWidth || overflowItems.length > 0) {
+            overflowItems.push(this.items[i]);
+            item.style.visibility = 'hidden';
+          } else {
+            item.style.visibility = 'visible';
+            maxWidth += itemWidth;
+            availableWidth -= itemWidth;
+          }
+        }
+
+        
+        this.overflowItems = overflowItems;
+        this.isMoreButtonVisible = overflowItems.length > 0;
+        list.style.maxWidth = `${maxWidth}px`;
+      },
+      setMoreButtonWidth() {
+        const { moreButtonWrapper } = this.$refs;
+        if (!moreButtonWrapper) {
           return;
         }
-        const containerTop = list.offsetTop;
-        const containerBottom = containerTop + list.clientHeight;
+        this.moreButtonWidth = moreButtonWrapper.clientWidth;
 
-        this.overflowItems = this.items.filter((_, idx) => {
-          const itemRef = list.children[idx];
-          const itemRefTop = itemRef.offsetTop;
-          return itemRefTop >= containerBottom;
-        });
-
-        this.isMoreButtonVisible = this.overflowItems.length > 0;
-        console.log('overflowItems', this.overflowItems);
-      },
+        this.isMoreButtonVisible = false;
+        moreButtonWrapper.style.visibility = 'visible';
+        console.log('moreButtonWidth', this.moreButtonWidth);
+      }
     },
   }
 </script>
@@ -114,11 +135,25 @@
 
 <style>
 
-  .list {
-    overflow: hidden;
+  .list-wrapper {
     display: flex;
-    flex-wrap: wrap;
-    height: 50px;
+    justify-content: space-between;
+    flex-wrap: nowrap;
+    width: 100%;
+  }
+  .list {
+    overflow: visible;
+    display: flex;
+    flex-wrap: nowrap;
+  }
+
+  .list > * {
+    visibility: hidden;
+    flex-shrink: 0;
+  }
+
+  .more-button-wrapper {
+    visibility: hidden;
   }
 
 </style>
