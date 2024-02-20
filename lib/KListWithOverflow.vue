@@ -13,18 +13,18 @@
           name="item"
           :item="item"
           :idx="idx"
-        />
+        ></slot>
       </template>
     </div>
     <div
-      class="more-button-wrapper"
       ref="moreButtonWrapper"
+      class="more-button-wrapper"
     >
       <slot
         v-if="isMoreButtonVisible"
         name="more"
         :overflowItems="overflowItems"
-      />
+      ></slot>
     </div>
   </div>
 
@@ -53,14 +53,6 @@
       };
     },
     watch: {
-      isMoreButtonVisible(prev, next) {
-        if (!prev && next) {
-          // just in case the presence of the more button changes the overflowed items
-          this.$nextTick(() => {
-            this.setOverflowItems();
-          });
-        }
-      },
       items() {
         this.$nextTick(() => {
           this.setOverflowItems();
@@ -85,11 +77,7 @@
     methods: {
       setOverflowItems() {
         const { list, listWrapper } = this.$refs;
-        if (
-          !this.mounted ||
-          !listWrapper ||
-          !list
-        ) {
+        if (!this.mounted || !listWrapper || !list) {
           this.overflowItems = [];
           return;
         }
@@ -102,6 +90,9 @@
         for (let i = 0; i < list.children.length; i++) {
           const item = list.children[i];
           const itemWidth = item.clientWidth;
+
+          // If the item dont fit in the available space or if we have already
+          // overflowed items, we hide it
           if (itemWidth > availableWidth || overflowItemsIdx.length > 0) {
             overflowItemsIdx.push(i);
             item.style.visibility = 'hidden';
@@ -112,7 +103,7 @@
           }
         }
 
-        // check that if the moreButton were not visible, the overflowed items would fit
+        // check if overflowed items would fit if the moreButton were not visible
         const overflowedWidth = overflowItemsIdx.reduce(
           (acc, idx) => acc + list.children[idx].clientWidth,
           0
@@ -139,10 +130,10 @@
 
         this.isMoreButtonVisible = false;
         moreButtonWrapper.style.visibility = 'visible';
-        console.log('moreButtonWidth', this.moreButtonWidth);
-      }
+      },
     },
-  }
+  };
+
 </script>
 
 
