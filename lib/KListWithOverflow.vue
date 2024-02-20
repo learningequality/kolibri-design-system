@@ -98,12 +98,12 @@
         availableWidth -= this.moreButtonWidth;
         let maxWidth = 0;
 
-        const overflowItems = [];
+        const overflowItemsIdx = [];
         for (let i = 0; i < list.children.length; i++) {
           const item = list.children[i];
           const itemWidth = item.clientWidth;
-          if (itemWidth > availableWidth || overflowItems.length > 0) {
-            overflowItems.push(this.items[i]);
+          if (itemWidth > availableWidth || overflowItemsIdx.length > 0) {
+            overflowItemsIdx.push(i);
             item.style.visibility = 'hidden';
           } else {
             item.style.visibility = 'visible';
@@ -112,9 +112,22 @@
           }
         }
 
-        
-        this.overflowItems = overflowItems;
-        this.isMoreButtonVisible = overflowItems.length > 0;
+        // check that if the moreButton were not visible, the overflowed items would fit
+        const overflowedWidth = overflowItemsIdx.reduce(
+          (acc, idx) => acc + list.children[idx].clientWidth,
+          0
+        );
+        if (overflowedWidth <= this.moreButtonWidth + availableWidth) {
+          while (overflowItemsIdx.length > 0) {
+            const idx = overflowItemsIdx.pop();
+            const item = list.children[idx];
+            item.style.visibility = 'visible';
+            maxWidth += item.clientWidth;
+          }
+        }
+
+        this.overflowItems = overflowItemsIdx.map(idx => this.items[idx]);
+        this.isMoreButtonVisible = overflowItemsIdx.length > 0;
         list.style.maxWidth = `${maxWidth}px`;
       },
       setMoreButtonWidth() {
