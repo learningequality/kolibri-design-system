@@ -66,33 +66,29 @@
         </table>
       </DocsShow>
       <KListWithOverflow
-      :items="items"
-    >
-      <template #item="{ item }">
-        <KIconButton
-          tooltip="Add"
-          icon="edit"
-        />
-      </template>
-      <template #more="{ overflowItems }">
-        <KIconButton
-          tooltip="Dropdown options"
-          icon="optionsHorizontal"
-          appearance="flat-button"
-          :primary="false"
-        >
-          <template #menu>
-            <KDropdownMenu
-              style="margin-right: 16px;"
-              text="Primary"
-              :primary="true"
-              :options="['Option 1', 'Option 2']"
-              appearance="raised-button"
-            />
-          </template>
-        </KIconButton>
-      </template>
-    </KListWithOverflow>
+        :items="items"
+      >
+        <template #item="{ item }">
+          <KIconButton
+            :tooltip="item.label"
+            :icon="item.icon"
+          />
+        </template>
+        <template #more="{ overflowItems }">
+          <KIconButton
+            tooltip="More"
+            icon="optionsHorizontal"
+            appearance="flat-button"
+            :primary="false"
+          >
+            <template #menu>
+              <KDropdownMenu
+                :options="overflowItems"
+              />
+            </template>
+          </KIconButton>
+        </template>
+      </KListWithOverflow>
     </DocsPageSection>
 
   </DocsPageTemplate>
@@ -106,51 +102,54 @@
     name: 'DocsKEmptyPlaceholder',
     computed: {
       items() {
-        return [ {
-          username: 'user_1',
-          exercises: 11,
-          averageScore: '85%',
-        }, {
-          username: 'user_2',
-          exercises: 0,
-          averageScore: null,
-        }, {
-          username: 'user_2',
-          exercises: 0,
-          averageScore: null,
-        }, {
-          username: 'user_2',
-          exercises: 0,
-          averageScore: null,
-        }, {
-          username: 'user_2',
-          exercises: 0,
-          averageScore: null,
-        }, {
-          username: 'user_2',
-          exercises: 0,
-          averageScore: null,
-        }, {
-          username: 'user_2',
-          exercises: 0,
-          averageScore: null,
-        }, {
-          username: 'user_2',
-          exercises: 0,
-          averageScore: null,
-        }, {
-          username: 'user_2',
-          exercises: 0,
-          averageScore: null,
-        }, {
-          username: 'user_3',
-          exercises: 5,
-          averageScore: '100%',
-        }];
-      }
+        return [
+          {
+            label: 'Item 1',
+            icon: 'edit',
+          },
+          {
+            label: 'Item 2',
+            icon: 'edit',
+          },
+          {
+            label: 'Item 3',
+            icon: 'edit',
+          },
+          {
+            label: 'Item 4',
+            icon: 'edit',
+          },
+          {
+            label: 'Item 5',
+            icon: 'edit',
+          },
+          {
+            label: 'Item 6',
+            icon: 'edit',
+          },
+          {
+            label: 'Item 7',
+            icon: 'edit',
+          },
+          {
+            label: 'Item 8',
+            icon: 'edit',
+          },
+          {
+            label: 'Item 9',
+            icon: 'edit',
+          },
+          {
+            label: 'Item 10',
+            icon: 'edit',
+          },
+        ];
+      },
     },
   };
+
 </script>
+
 
 <style lang="scss" scoped>
 
