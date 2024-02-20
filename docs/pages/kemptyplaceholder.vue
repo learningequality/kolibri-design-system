@@ -70,7 +70,7 @@
     >
       <template #item="{ item }">
         <KIconButton
-        tooltip="Add"
+          tooltip="Add"
           icon="edit"
         />
       </template>
