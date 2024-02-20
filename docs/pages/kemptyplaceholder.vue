@@ -64,35 +64,35 @@
             </tr>
           </tbody>
         </table>
-        <KListWithOverflow
-          :items="items"
+      </DocsShow>
+      <KListWithOverflow
+      :items="items"
+    >
+      <template #item="{ item }">
+        <KIconButton
+        tooltip="Add"
+          icon="edit"
+        />
+      </template>
+      <template #more="{ overflowItems }">
+        <KIconButton
+          tooltip="Dropdown options"
+          icon="optionsHorizontal"
+          appearance="flat-button"
+          :primary="false"
         >
-          <template #item="{ item }">
-            <KIconButton
-            tooltip="Add"
-              icon="edit"
+          <template #menu>
+            <KDropdownMenu
+              style="margin-right: 16px;"
+              text="Primary"
+              :primary="true"
+              :options="['Option 1', 'Option 2']"
+              appearance="raised-button"
             />
           </template>
-          <template #more="{ overflowItems }">
-            <KIconButton
-              tooltip="Dropdown options"
-              icon="optionsHorizontal"
-              appearance="flat-button"
-              :primary="false"
-            >
-              <template #menu>
-                <KDropdownMenu
-                  style="margin-right: 16px;"
-                  text="Primary"
-                  :primary="true"
-                  :options="['Option 1', 'Option 2']"
-                  appearance="raised-button"
-                />
-              </template>
-            </KIconButton>
-          </template>
-        </KListWithOverflow>
-      </DocsShow>
+        </KIconButton>
+      </template>
+    </KListWithOverflow>
     </DocsPageSection>
 
   </DocsPageTemplate>
