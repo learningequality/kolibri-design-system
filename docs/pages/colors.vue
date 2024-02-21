@@ -117,11 +117,37 @@
       <DocsColorBlock name="tokens.primaryDark" definition>
         Default dark variant of the primary brand color. Commonly used for the hover state of interactive elements
       </DocsColorBlock>
+      <DocsColorBlock name="tokens.secondary" definition>
+        Default secondary brand color
+      </DocsColorBlock>
+      <DocsColorBlock name="tokens.secondaryDark" definition>
+        Default dark variant of the secondary brand color
+      </DocsColorBlock>
 
       <h3>UI Colors</h3>
       <DocsColorBlock name="tokens.surface" definition>
         Default background color
       </DocsColorBlock>
+      <DocsColorBlock name="tokens.appBar" definition>
+        Default app bar component color
+      </DocsColorBlock>
+      <DocsColorBlock name="tokens.appBarDark" definition>
+        Default dark color of the app bar component
+      </DocsColorBlock>
+      <DocsColorBlock name="tokens.link" definition>
+        Hyperlink text color with the application
+      </DocsColorBlock>
+      <DocsColorBlock name="tokens.fineLine" definition>
+        Used for divider lines and rules
+      </DocsColorBlock>
+      <DocsColorBlock name="tokens.loading" definition>
+        Color for loaders, spinners, and other progress indicators
+      </DocsColorBlock>
+      <DocsColorBlock name="tokens.success" definition>
+        Indicates the successful completion of an action in the application
+      </DocsColorBlock>
+
+      <h3>Text</h3>
       <DocsColorBlock name="tokens.text" definition>
         Normal text color. (Typically used on top of the <code>$themeTokens.surface</code> color)
       </DocsColorBlock>
@@ -134,20 +160,11 @@
       <DocsColorBlock name="tokens.textInverted" definition>
         Text color for creating sufficient contrast when used on dark backgrounds (such as <code>$themeTokens.primary</code>)
       </DocsColorBlock>
-      <DocsColorBlock name="tokens.loading" definition>
-        Color for loaders, spinners, and other progress indicators
-      </DocsColorBlock>
       <DocsColorBlock name="tokens.focusOutline" definition>
         Used to indicate keyboard focus
       </DocsColorBlock>
-      <DocsColorBlock name="tokens.fineLine" definition>
-        Used for divider lines and rules
-      </DocsColorBlock>
       <DocsColorBlock name="tokens.error" definition>
         Indicates an application or validation error
-      </DocsColorBlock>
-      <DocsColorBlock name="tokens.success" definition>
-        Indicates the successful completion of an action in the application
       </DocsColorBlock>
 
       <h3>Learner activity</h3>
