@@ -3,6 +3,7 @@
   <div
     ref="listWrapper"
     class="list-wrapper"
+    :style="appearanceOverrides"
   >
     <div
       ref="list"
@@ -47,6 +48,10 @@
       items: {
         type: Array,
         required: true,
+      },
+      appearanceOverrides: {
+        type: [Object, String],
+        default: null,
       },
     },
     data() {
