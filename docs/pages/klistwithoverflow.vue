@@ -65,6 +65,41 @@
           </template>
         </KListWithOverflow>
       </DocsShow>
+      <p>
+        You can also use dividers within the list by passing a <code>{ type: "divider" }</code> object, and set a #divider slot.
+        Note that the visible list will not end with a divider. And a divider object will not be passed as a first overflowed item.
+      </p>
+      <DocsShow block>
+        <KListWithOverflow
+          :items="getItems(20, 5)"
+        >
+          <template #item="{ item }">
+            <KIconButton
+              :tooltip="item.label"
+              :icon="item.icon"
+            />
+          </template>
+          <template #more="{ overflowItems }">
+            <KIconButton
+              tooltip="More"
+              icon="optionsVertical"
+              appearance="flat-button"
+              :primary="false"
+            >
+              <template #menu>
+                <KDropdownMenu
+                  :options="overflowItems"
+                />
+              </template>
+            </KIconButton>
+          </template>
+          <template #divider>
+            <div class="divider-wrapper">
+              <div :style="dividerStyle"></div>
+            </div>
+          </template>
+        </KListWithOverflow>
+      </DocsShow>
     </DocsPageSection>
 
   </DocsPageTemplate>
@@ -76,10 +111,19 @@
 
   export default {
     name: 'DocsKListWithOverflow',
+    computed: {
+      dividerStyle() {
+        return {
+          height: '100%',
+          backgroundColor: this.$themeTokens.fineLine,
+          width: '1px',
+        };
+      },
+    },
     methods: {
       getItems(number, dividerMod) {
         return Array.from({ length: number }, (_, i) =>
-          dividerMod && i % dividerMod === 0
+          dividerMod && i && i % dividerMod === 0
             ? { type: 'divider' }
             : { label: `Item ${i + 1}`, icon: 'edit' }
         );
@@ -103,6 +147,10 @@
   .table-number,
   .table-text {
     padding-right: 16px;
+  }
+
+  .divider-wrapper {
+    padding: 8px 12px;
   }
 
 </style>

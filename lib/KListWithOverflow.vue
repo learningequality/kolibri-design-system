@@ -8,11 +8,17 @@
       ref="list"
       class="list"
     >
-      <template v-for="(item, idx) in items">
+      <template v-for="(item) in items">
         <slot
+          v-if="isDivider(item)"
+          name="divider"
+          :divider="item"
+        >
+        </slot>
+        <slot
+          v-else
           name="item"
           :item="item"
-          :idx="idx"
         ></slot>
       </template>
     </div>
@@ -61,8 +67,8 @@
     },
     mounted() {
       this.mounted = true;
-      this.setMoreButtonWidth();
       this.$nextTick(() => {
+        this.setMoreButtonWidth();
         this.setOverflowItems();
       });
 
@@ -117,9 +123,32 @@
           }
         }
 
+        const removedDividerWidth = this.fixDividersVisibility(overflowItemsIdx);
+        if (removedDividerWidth) {
+          maxWidth -= removedDividerWidth;
+        }
+
         this.overflowItems = overflowItemsIdx.map(idx => this.items[idx]);
         this.isMoreButtonVisible = overflowItemsIdx.length > 0;
         list.style.maxWidth = `${maxWidth}px`;
+      },
+      fixDividersVisibility(overflowItemsIdx) {
+        if (overflowItemsIdx.length === 0) {
+          return;
+        }
+
+        const { list } = this.$refs;
+        const [firstOverflowedIdx] = overflowItemsIdx;
+        if (this.isDivider(this.items[firstOverflowedIdx])) {
+          overflowItemsIdx.shift();
+        }
+
+        const lastVisibleIdx = firstOverflowedIdx - 1;
+        if (this.isDivider(this.items[lastVisibleIdx])) {
+          const dividerNode = list.children[lastVisibleIdx];
+          dividerNode.style.visibility = 'hidden';
+          return dividerNode.clientWidth;
+        }
       },
       setMoreButtonWidth() {
         const { moreButtonWrapper } = this.$refs;
@@ -130,6 +159,9 @@
 
         this.isMoreButtonVisible = false;
         moreButtonWrapper.style.visibility = 'visible';
+      },
+      isDivider(item) {
+        return typeof item === 'object' && item.type === 'divider';
       },
     },
   };
