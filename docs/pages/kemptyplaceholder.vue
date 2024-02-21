@@ -65,90 +65,11 @@
           </tbody>
         </table>
       </DocsShow>
-      <KListWithOverflow
-        :items="items"
-      >
-        <template #item="{ item }">
-          <KIconButton
-            :tooltip="item.label"
-            :icon="item.icon"
-          />
-        </template>
-        <template #more="{ overflowItems }">
-          <KIconButton
-            tooltip="More"
-            icon="optionsHorizontal"
-            appearance="flat-button"
-            :primary="false"
-          >
-            <template #menu>
-              <KDropdownMenu
-                :options="overflowItems"
-              />
-            </template>
-          </KIconButton>
-        </template>
-      </KListWithOverflow>
     </DocsPageSection>
 
   </DocsPageTemplate>
 
 </template>
-
-
-<script>
-
-  export default {
-    name: 'DocsKEmptyPlaceholder',
-    computed: {
-      items() {
-        return [
-          {
-            label: 'Item 1',
-            icon: 'edit',
-          },
-          {
-            label: 'Item 2',
-            icon: 'edit',
-          },
-          {
-            label: 'Item 3',
-            icon: 'edit',
-          },
-          {
-            label: 'Item 4',
-            icon: 'edit',
-          },
-          {
-            label: 'Item 5',
-            icon: 'edit',
-          },
-          {
-            label: 'Item 6',
-            icon: 'edit',
-          },
-          {
-            label: 'Item 7',
-            icon: 'edit',
-          },
-          {
-            label: 'Item 8',
-            icon: 'edit',
-          },
-          {
-            label: 'Item 9',
-            icon: 'edit',
-          },
-          {
-            label: 'Item 10',
-            icon: 'edit',
-          },
-        ];
-      },
-    },
-  };
-
-</script>
 
 
 <style lang="scss" scoped>

@@ -397,6 +397,11 @@ export default [
         title: 'KTextTruncator',
         isCode: true,
       }),
+      new Page({
+        path: '/klistwithoverflow',
+        title: 'KListWithOverflow',
+        isCode: true,
+      }),
     ],
   }),
 ];
