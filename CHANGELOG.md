@@ -4,7 +4,16 @@ Changelog is rather internal in nature. See release notes for the public overvie
 
 ## Upcoming version
 
-<!-- Put all new updates into this section, please -->
+- [#555]
+  - **Description:** Add action to notify us on Slack about GH issues comments from contributors community
+  - **Products impact:** none
+  - **Addresses:** -
+  - **Components:** -
+  - **Breaking:** -
+  - **Impacts a11y:** -
+  - **Guidance:** -
+ 
+[#555]: https://github.com/learningequality/kolibri-design-system/pull/555
 
 - [#531]
   - **Description:** Remove unused `keen-ui` dependency
