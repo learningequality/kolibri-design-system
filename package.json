@@ -23,19 +23,19 @@
     "lib"
   ],
   "dependencies": {
-    "@vue/composition-api": "^1.7.2",
+    "@vue/composition-api": "1.7.2",
     "aphrodite": "https://github.com/learningequality/aphrodite/",
-    "autosize": "^3.0.21",
-    "css-element-queries": "^1.2.0",
-    "date-fns": "^1.30.1",
-    "frame-throttle": "^3.0.0",
-    "fuzzysearch": "^1.0.3",
-    "lodash": "^4.17.15",
-    "popper.js": "^1.14.6",
-    "purecss": "^0.6.2",
-    "tippy.js": "^4.2.1",
-    "vue-intl": "^3.1.0",
-    "xstate": "^4.38.3"
+    "autosize": "3.0.21",
+    "css-element-queries": "1.2.0",
+    "date-fns": "1.30.1",
+    "frame-throttle": "3.0.0",
+    "fuzzysearch": "1.0.3",
+    "lodash": "4.17.15",
+    "popper.js": "1.14.6",
+    "purecss": "0.6.2",
+    "tippy.js": "4.2.1",
+    "vue-intl": "3.1.0",
+    "xstate": "4.38.3"
   },
   "peerDependencies": {},
   "devDependencies": {
