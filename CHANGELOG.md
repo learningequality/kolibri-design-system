@@ -4,6 +4,17 @@ Changelog is rather internal in nature. See release notes for the public overvie
 
 ## Version 3.x.x (`release-v3` branch)
 
+- [#557]
+  - **Description:** Updates development documentation in regards to linking products development servers to local KDS
+  - **Products impact:** -
+  - **Addresses:** -
+  - **Components:** -
+  - **Breaking:** -
+  - **Impacts a11y:** -
+  - **Guidance:** -
+
+[#557]: https://github.com/learningequality/kolibri-design-system/pull/557
+
 - [#542]
   - **Description:** Adds a new `sort` icon
   - **Products impact:** New icon
