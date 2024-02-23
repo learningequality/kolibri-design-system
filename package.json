@@ -43,6 +43,7 @@
     "@mdi/svg": "^5.9.55",
     "@vuedoc/parser": "^3.4.0",
     "babel-jest": "^27.4.6",
+    "browserslist-config-kolibri": "0.16.0-dev.7",
     "chokidar-cli": "^3.0.0",
     "consola": "^2.15.3",
     "eslint-import-resolver-nuxt": "^1.0.1",
@@ -73,5 +74,8 @@
     "@babel/preset-env": "7.12.17",
     "postcss-loader": "3.0.0",
     "css-loader": "3.6.0"
-  }
+  },
+  "browserslist": [
+    "extends browserslist-config-kolibri"
+  ]
 }

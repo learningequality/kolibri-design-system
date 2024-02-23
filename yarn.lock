@@ -3407,6 +3407,11 @@ browserslist-config-kolibri@0.15.4:
   resolved "https://registry.yarnpkg.com/browserslist-config-kolibri/-/browserslist-config-kolibri-0.15.4.tgz#4ff60e25f3069058ce661cd72bb52ca3f785a682"
   integrity sha512-HshbX5ru9/XB5MT+jpYzx7IAkJUONVIRZzZiySC6VT1ObB/OTKooIPE08lITSXw40/j/4qWp5cO4leAGFnR3Pg==
 
+browserslist-config-kolibri@0.16.0-dev.7:
+  version "0.16.0-dev.7"
+  resolved "https://registry.yarnpkg.com/browserslist-config-kolibri/-/browserslist-config-kolibri-0.16.0-dev.7.tgz#15d2c8d76378b85642ae38f32b079ea5468367e2"
+  integrity sha512-QT0kap3ueOSC/wqSpxbjRDCBYdnsSPehe8DRj1hRGGmWyPO7RGp8hfDLKprXxSUw6ZtIm63NhSvBrTNQv/8+Jw==
+
 browserslist@^4.0.0, browserslist@^4.12.0, browserslist@^4.16.6, browserslist@^4.17.0, browserslist@^4.6.4:
   version "4.17.0"
   resolved "https://registry.yarnpkg.com/browserslist/-/browserslist-4.17.0.tgz#1fcd81ec75b41d6d4994fb0831b92ac18c01649c"
