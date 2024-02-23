@@ -75,6 +75,10 @@
     "postcss-loader": "3.0.0",
     "css-loader": "3.6.0"
   },
+  "engines": {
+    "node": "10.x",
+    "yarn": "1.x"
+  },
   "browserslist": [
     "extends browserslist-config-kolibri"
   ]
