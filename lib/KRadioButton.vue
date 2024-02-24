@@ -8,6 +8,7 @@
           ref="input"
           v-autofocus="autofocus"
           type="radio"
+          :tabindex="tabIndex"
           class="k-radio-button-input"
           :checked="isChecked"
           :value="buttonValue !== null ? buttonValue : value"
@@ -148,6 +149,7 @@
     },
     data: () => ({
       active: false,
+      tabIndex: 0,
     }),
     computed: {
       isChecked() {
@@ -219,6 +221,12 @@
          * Emits blur event, useful for validation
          */
         this.$emit('blur');
+      },
+      /**
+       * @public
+       */
+      setTabIndex(val) {
+        this.tabIndex = val;
       },
     },
   };
