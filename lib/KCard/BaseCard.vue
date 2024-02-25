@@ -1,15 +1,48 @@
 <template>
 
-  <li class="remove-list-style">
-    <h2
-      v-if="title !== null"
-      :headerLevelTag="headerLevelTag"
-    >
-      <a :href="to">
-        <KTextTruncator :text="title" :maxLines="1" />
-      </a>
-    </h2>
-  </li>
+  <div
+    :class="$computedClass({ ':focus': $coreOutline })"
+  >
+    <li class="remove-list-style">
+
+      <h2
+        v-if="title !== null && headingLevel === 2"
+      >
+        <a :href="to">
+          <KTextTruncator :text="title" :maxLines="1" />
+        </a>
+      </h2>
+      <h3
+        v-if="title !== null && headingLevel === 3"
+      >
+        <a :href="to">
+          <KTextTruncator :text="title" :maxLines="1" />
+        </a>
+      </h3>
+      <h4
+        v-if="title !== null && headingLevel === 4"
+      >
+        <a :href="to">
+          <KTextTruncator :text="title" :maxLines="1" />
+        </a>
+      </h4>
+      <h5
+        v-if="title !== null && headingLevel === 5"
+      >
+        <a :href="to">
+          <KTextTruncator :text="title" :maxLines="1" />
+        </a>
+      </h5>
+      <h6
+        v-if="title !== null && headingLevel === 6"
+      >
+        <a :href="to">
+          <KTextTruncator :text="title" :maxLines="1" />
+        </a>
+      </h6>
+
+    </li>
+  </div>
 
 </template>
 

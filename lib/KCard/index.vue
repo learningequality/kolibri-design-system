@@ -2,7 +2,6 @@
 
   <div
     class="card"
-    :class="$computedClass({ ':focus': $coreOutline })"
     tabindex="0"
     @focus="cardFocus"
     @hover="cardHover"
@@ -41,7 +40,13 @@
             console.error(`Missing headinglevel ${value}`);
             return false;
           } else {
-            return true;
+            const headingLevelRange = [2, 3, 4, 5, 6];
+            if (!headingLevelRange.includes(value)) {
+              console.error(`Headinglevel ${value} is not in range 2-6`);
+              return false;
+            } else {
+              return true;
+            }
           }
         },
       },
