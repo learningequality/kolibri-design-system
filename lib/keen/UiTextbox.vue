@@ -499,7 +499,7 @@
     width: 100%;
     padding: 4px 0 0 0;
     margin: 0;
-    background: #e9e9e9;
+    background: #F5F5F5;
     border-radius: 4px 4px 0 0;
   }
 

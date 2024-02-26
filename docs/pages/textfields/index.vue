@@ -184,7 +184,7 @@
         <li>Corner radius: 2px</li>
         <li>
           Fill color:
-          <DocsInternalLink code text="palette.grey.v_400" href="/colors#palette-grey-v_400" />, 0.25 opacity
+          <DocsInternalLink code text="palette.grey.v_50" href="/colors#palette-grey-v_50" />
         </li>
         <li>
           Bottom stroke color:
@@ -196,7 +196,7 @@
         </li>
         <li>
           Label text color:
-          <DocsInternalLink code text="palette.grey.v_200" href="/colors#palette-grey-v_200" />
+          <DocsInternalLink code text="palette.grey.v_600" href="/colors#palette-grey-v_600" />
         </li>
         <li>
           Focused text color:
