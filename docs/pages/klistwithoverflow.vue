@@ -3,103 +3,112 @@
   <DocsPageTemplate apiDocs>
     <DocsPageSection title="Overview" anchor="#overview">
       <p>
-        The <code>KListWithOverflow</code> component is used in situations where we want a horizontal list to be responsive, and adapt to the size of the screen. So that the list only shows the items that fit on the screen, and the rest are in a "see more" button.
+        The <code>KListWithOverflow</code> component is useful when we want a horizontal list that is responsive and adaptable to the container size. The list only shows the items that fit on the container element. When items exceed the available space, the component seamlessly integrates a "see more" button to show additional items.
+      </p>
+      <p>
+        This component is renderless, so it needs an array of items, slots to render the visible items and separators on the list, and a slot to render the "see more" button.
       </p>
     </DocsPageSection>
     <DocsPageSection title="Example" anchor="#example">
       <p>
         When a number of items fit within the screen boundaries, the list will be displayed without any changes. For example, since there are only 3 items here, we can see the entire list without problems.
       </p>
-      <DocsShow block>
-        <KListWithOverflow
-          :items="getItems(3)"
-        >
-          <template #item="{ item }">
-            <KIconButton
-              :tooltip="item.label"
-              :icon="item.icon"
-            />
-          </template>
-          <template #more="{ overflowItems }">
-            <KIconButton
-              tooltip="More"
-              icon="optionsVertical"
-              appearance="flat-button"
-              :primary="false"
-            >
-              <template #menu>
-                <KDropdownMenu
-                  :options="overflowItems"
-                />
-              </template>
-            </KIconButton>
-          </template>
-        </KListWithOverflow>
-      </DocsShow>
+      <div class="klist-example">
+        <DocsShow block>
+          <KListWithOverflow
+            :items="getItems(3)"
+          >
+            <template #item="{ item }">
+              <KIconButton
+                :tooltip="item.label"
+                :icon="item.icon"
+              />
+            </template>
+            <template #more="{ overflowItems }">
+              <KIconButton
+                tooltip="More"
+                icon="optionsVertical"
+                appearance="flat-button"
+                :primary="false"
+              >
+                <template #menu>
+                  <KDropdownMenu
+                    :options="overflowItems"
+                  />
+                </template>
+              </KIconButton>
+            </template>
+          </KListWithOverflow>
+        </DocsShow>
+      </div>
       <p>
-        But if the list becomes very long, and does not fit within the screen, then the overflowed items will be cut, and an element will be placed to show more. For example, here are 20 items in the list.
+        But if the list becomes very long, and does not fit within the screen, then the overflowed items will be cut, and an element will be placed to show more. For example, here are 12 items in the list.
       </p>
-      <DocsShow block>
-        <KListWithOverflow
-          :items="getItems(20)"
-        >
-          <template #item="{ item }">
-            <KIconButton
-              :tooltip="item.label"
-              :icon="item.icon"
-            />
-          </template>
-          <template #more="{ overflowItems }">
-            <KIconButton
-              tooltip="More"
-              icon="optionsVertical"
-              appearance="flat-button"
-              :primary="false"
-            >
-              <template #menu>
-                <KDropdownMenu
-                  :options="overflowItems"
-                />
-              </template>
-            </KIconButton>
-          </template>
-        </KListWithOverflow>
-      </DocsShow>
+      <div class="klist-example">
+        <DocsShow block>
+          <KListWithOverflow
+            :items="getItems(12)"
+          >
+            <template #item="{ item }">
+              <KIconButton
+                :tooltip="item.label"
+                :icon="item.icon"
+              />
+            </template>
+            <template #more="{ overflowItems }">
+              <KIconButton
+                tooltip="More"
+                icon="optionsVertical"
+                appearance="flat-button"
+                :primary="false"
+              >
+                <template #menu>
+                  <KDropdownMenu
+                    :options="overflowItems"
+                  />
+                </template>
+              </KIconButton>
+            </template>
+          </KListWithOverflow>
+        </DocsShow>
+      </div>
       <p>
         You can also use dividers within the list by passing a <code>{ type: "divider" }</code> object, and set a #divider slot.
         Note that the visible list will not end with a divider. And a divider object will not be passed as a first overflowed item.
       </p>
-      <DocsShow block>
-        <KListWithOverflow
-          :items="getItems(20, 5)"
-        >
-          <template #item="{ item }">
-            <KIconButton
-              :tooltip="item.label"
-              :icon="item.icon"
-            />
-          </template>
-          <template #more="{ overflowItems }">
-            <KIconButton
-              tooltip="More"
-              icon="optionsVertical"
-              appearance="flat-button"
-              :primary="false"
-            >
-              <template #menu>
-                <KDropdownMenu
-                  :options="overflowItems"
-                />
-              </template>
-            </KIconButton>
-          </template>
-          <template #divider>
-            <div class="divider-wrapper">
-              <div :style="dividerStyle"></div>
-            </div>
-          </template>
-        </KListWithOverflow>
-      </DocsShow>
+      <div class="klist-example">
+        <DocsShow block>
+          <KListWithOverflow
+            :items="getItems(12, 2)"
+          >
+            <template #item="{ item }">
+              <KIconButton
+                :tooltip="item.label"
+                :icon="item.icon"
+              />
+            </template>
+            <template #more="{ overflowItems }">
+              <KIconButton
+                tooltip="More"
+                icon="optionsVertical"
+                appearance="flat-button"
+                :primary="false"
+              >
+                <template #menu>
+                  <KDropdownMenu
+                    :options="overflowItems"
+                  />
+                </template>
+              </KIconButton>
+            </template>
+            <template #divider>
+              <div class="divider-wrapper">
+                <div :style="dividerStyle"></div>
+              </div>
+            </template>
+          </KListWithOverflow>
+        </DocsShow>
+      </div>
     </DocsPageSection>
 
   </DocsPageTemplate>
@@ -151,6 +160,18 @@
 
   .divider-wrapper {
     padding: 8px 12px;
+  }
+
+  .klist-example {
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  @media (max-width: 768px) {
+    .klist-example {
+      width: 100%;
+    }
   }
 
 </style>
