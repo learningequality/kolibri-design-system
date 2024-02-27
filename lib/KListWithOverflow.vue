@@ -10,12 +10,14 @@
       class="list"
     >
       <template v-for="(item) in items">
+        <!-- @slot Slot for rendering divider items -->
         <slot
           v-if="isDivider(item)"
           name="divider"
           :divider="item"
         >
         </slot>
+        <!-- @slot Slot responsible of rendering each item in the visible list -->
         <slot
           v-else
           name="item"
@@ -27,6 +29,7 @@
       ref="moreButtonWrapper"
       class="more-button-wrapper"
     >
+      <!-- @slot Slot responsible of rendering the "see more" button. This slot receives as prop a list `overflowItems` with items that dont fit into the visible list.-->
       <slot
         v-if="isMoreButtonVisible"
         name="more"
@@ -45,19 +48,28 @@
 
   export default {
     name: 'KListWithOverflow',
+    setup() {
+      const { elementWidth } = useKResponsiveElement();
+      return { elementWidth };
+    },
     props: {
+      /**
+       * An array of items to be shown, the items can be any type of object or primitive, as
+       * they are passed to the `#item` slot for rendering.
+       * The only special type of item is a divider, which must be an object with a `type`
+       * property set to "divider", and this will render the #divider slot.
+       */
       items: {
         type: Array,
         required: true,
       },
+      /**
+       * An object or string with CSS properties to be applied to the list wrapper
+       */
       appearanceOverrides: {
         type: [Object, String],
         default: null,
       },
-    },
-    setup() {
-      const { elementWidth } = useKResponsiveElement();
-      return { elementWidth };
     },
     data() {
       return {
@@ -91,6 +103,10 @@
       this.$watch('elementWidth', this.throttledSetOverflowItems);
     },
     methods: {
+      /**
+       * Sets the items that overflow the list, the visibility of the more button,
+       * and overrides the `visibility` of the list DOM elements that overflow the list.
+       */
       setOverflowItems() {
         const { list, listWrapper } = this.$refs;
         if (!this.mounted || !listWrapper || !list) {
@@ -108,7 +124,8 @@
           const itemWidth = item.clientWidth;
 
           // If the item dont fit in the available space or if we have already
-          // overflowed items, we hide it
+          // overflowed items, we hide it. This means that once one item overflows,
+          // all the following items will be hidden.
           if (itemWidth > availableWidth || overflowItemsIdx.length > 0) {
             overflowItemsIdx.push(i);
             item.style.visibility = 'hidden';
@@ -142,6 +159,13 @@
         this.isMoreButtonVisible = overflowItemsIdx.length > 0;
         list.style.maxWidth = `${maxWidth}px`;
       },
+      /**
+       * Fixes the visibility of the dividers that are shown and hidden when the list overflows.
+       * The visible list should not end with a divider, and the overflowed items should not
+       * start with a divider.
+       * @param {Array} overflowItemsIdx - The indexes of the items that overflow the list
+       * @returns {Number} The width of the removed divider from the visible list, if any
+       */
       fixDividersVisibility(overflowItemsIdx) {
         if (overflowItemsIdx.length === 0) {
           return;
@@ -160,6 +184,13 @@
           return dividerNode.clientWidth;
         }
       },
+      /**
+       * At first render we need to measure the width of the more button, but
+       * we dont show the button until we determine that there are overflowed items.
+       * To do this, the component starts with `isMoreButtonVisible` set to true, but
+       * its wrapper is hidden. After measuring the button width, we set the wrapper
+       * to visible and set the actual value of `isMoreButtonVisible`.
+       */
       setMoreButtonWidth() {
         const { moreButtonWrapper } = this.$refs;
         if (!moreButtonWrapper) {
