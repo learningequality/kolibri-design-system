@@ -3,6 +3,29 @@
 Changelog is rather internal in nature. See release notes for the public overview and guidelines. Releases are recorded as git tags in the [Github releases](https://github.com/learningequality/kolibri-design-system/releases) page.
 
 ## Version 3.x.x (`release-v3` branch)
+
+- [#552]
+  - **Description:** New `KListWithOverflow` component.
+  - **Products impact:** new API.
+  - **Addresses:** https://github.com/learningequality/kolibri-design-system/issues/556, https://github.com/learningequality/studio/issues/3423, https://github.com/learningequality/kolibri/issues/11923.
+  - **Components:** KListWithOverflow.
+  - **Breaking:** no.
+  - **Impacts a11y:** no.
+  - **Guidance:** -.
+
+[#552]: https://github.com/learningequality/kolibri-design-system/pull/552
+
+- [#552]
+  - **Description:** New `useKResponsiveElement` private composable, `KResponsiveElementMixin` translated to this composable.
+  - **Products impact:** new API.
+  - **Addresses:** -.
+  - **Components:** -.
+  - **Breaking:** no.
+  - **Impacts a11y:** no.
+  - **Guidance:** -.
+
+[#552]: https://github.com/learningequality/kolibri-design-system/pull/552
+
 - [#538]
   - **Description:** Complete KImg implementation
   - **Products impact:** new API

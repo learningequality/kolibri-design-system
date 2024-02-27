@@ -44,7 +44,7 @@
 <script>
 
   import throttle from 'lodash/throttle';
-  import useKResponsiveElement from './useKResponsiveElement';
+  import useKResponsiveElement from './composables/_useKResponsiveElement';
 
   export default {
     name: 'KListWithOverflow',
