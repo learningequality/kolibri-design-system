@@ -4,6 +4,17 @@ Changelog is rather internal in nature. See release notes for the public overvie
 
 ## Version 3.x.x (`release-v3` branch)
 
+- [#538]
+  - **Description:** Complete KImg implementation
+  - **Products impact:** new API
+  - **Addresses:** https://github.com/learningequality/kolibri-design-system/issues/368
+  - **Components:** KImg
+  - **Breaking:** no
+  - **Impacts a11y:** yes
+  - **Guidance:** One of the benefits of using KImg is that it throws a11y related warnings
+
+[#538]: https://github.com/learningequality/kolibri-design-system/pull/538
+
 - [#557]
   - **Description:** Updates development documentation in regards to linking products development servers to local KDS
   - **Products impact:** -
