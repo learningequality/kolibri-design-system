@@ -41,6 +41,7 @@
 <script>
 
   import throttle from 'lodash/throttle';
+  import useKResponsiveElement from './useKResponsiveElement';
 
   export default {
     name: 'KListWithOverflow',
@@ -53,6 +54,10 @@
         type: [Object, String],
         default: null,
       },
+    },
+    setup() {
+      const { elementWidth } = useKResponsiveElement();
+      return { elementWidth };
     },
     data() {
       return {
@@ -71,19 +76,19 @@
       },
     },
     mounted() {
-      this.mounted = true;
+      // For some reason KIconButtons takes 2 ticks to render their actual size
       this.$nextTick(() => {
-        this.setMoreButtonWidth();
-        this.setOverflowItems();
+        this.$nextTick(() => {
+          this.mounted = true;
+          this.setMoreButtonWidth();
+          this.setOverflowItems();
+        });
       });
 
       // Defining the throttled set Overflow Items here instead of as method on the options object
       // avoids sharing it across multiple instances, ensuring each component has its own function.
       this.throttledSetOverflowItems = throttle(this.setOverflowItems, 100);
-      window.addEventListener('resize', this.throttledSetOverflowItems);
-    },
-    beforeDestroy() {
-      window.removeEventListener('resize', this.throttledSetOverflowItems);
+      this.$watch('elementWidth', this.throttledSetOverflowItems);
     },
     methods: {
       setOverflowItems() {
