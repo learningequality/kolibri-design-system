@@ -21,13 +21,7 @@ For the latest (not yet released) version, visit the design system website built
 
 ### Component library
 
-The component library is a node package hosted on GitHub. It contains front-end components, utilities, and style definitions supporting the Kolibri Design System and used in Kolibri products.
-
-To add a particular pinned version to a project using `yarn`, for example `v1.0.1`, run:
-
-```bash
-yarn add https://github.com/learningequality/kolibri-design-system#v1.0.1
-```
+The component library is [a npm package](https://www.npmjs.com/package/kolibri-design-system). It contains front-end components, utilities, and style definitions supporting the Kolibri Design System and used in Kolibri products.
 
 Components and utilities will be accessible under the `lib` path. For example:
 

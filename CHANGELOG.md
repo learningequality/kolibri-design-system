@@ -4,7 +4,49 @@ Changelog is rather internal in nature. See release notes for the public overvie
 
 ## Upcoming version
 
-<!-- Put all new updates into this section, please -->
+- [#558]
+  - **Description:** Move `useKResponsiveWindow` from `/lib` to `/lib/composables`
+  - **Products impact:** Location update
+  - **Addresses:** -
+  - **Components:** `useKResponsiveWindow`
+  - **Breaking:** yes
+  - **Impacts a11y:** -
+  - **Guidance:** Update `import useKResponsiveWindow from 'kolibri-design-system/lib/useKResponsiveWindow';` from `import useKResponsiveWindow from 'kolibri-design-system/lib/composables/useKResponsiveWindow';`
+
+[#558]: https://github.com/learningequality/kolibri-design-system/pull/558
+
+- [#558]
+  - **Description:** Remove deprecated `KResponsiveWindow's` mixin documentation page in favor of a new `useKResponsiveWindow` page
+  - **Products impact:** none
+  - **Addresses:** -
+  - **Components:** `KResponsiveWindow`
+  - **Breaking:** -
+  - **Impacts a11y:** -
+  - **Guidance:** -
+
+[#558]: https://github.com/learningequality/kolibri-design-system/pull/558
+
+- [#558]
+  - **Description:** Adds engines and browserlist to package.json. Pins dependencies to exact version.
+  - **Products impact:** Dependencies
+  - **Addresses:** -
+  - **Components:** -
+  - **Breaking:** -
+  - **Impacts a11y:** -
+  - **Guidance:** -
+
+[#558]: https://github.com/learningequality/kolibri-design-system/pull/558
+
+- [#558]
+  - **Description:** Internal maintenance tasks: extract common logic to utils, move private composables to `/lib/composables` and indicate that they are private by `_` prefix in their filename. dev docs updates.
+  - **Products impact:** none
+  - **Addresses:** -
+  - **Components:** -
+  - **Breaking:** -
+  - **Impacts a11y:** -
+  - **Guidance:** -
+
+[#558]: https://github.com/learningequality/kolibri-design-system/pull/558
 
 - [#531]
   - **Description:** Remove unused `keen-ui` dependency

@@ -23,19 +23,19 @@
     "lib"
   ],
   "dependencies": {
-    "@vue/composition-api": "^1.7.2",
+    "@vue/composition-api": "1.7.2",
     "aphrodite": "https://github.com/learningequality/aphrodite/",
-    "autosize": "^3.0.21",
-    "css-element-queries": "^1.2.0",
-    "date-fns": "^1.30.1",
-    "frame-throttle": "^3.0.0",
-    "fuzzysearch": "^1.0.3",
-    "lodash": "^4.17.15",
-    "popper.js": "^1.14.6",
-    "purecss": "^0.6.2",
-    "tippy.js": "^4.2.1",
-    "vue-intl": "^3.1.0",
-    "xstate": "^4.38.3"
+    "autosize": "3.0.21",
+    "css-element-queries": "1.2.0",
+    "date-fns": "1.30.1",
+    "frame-throttle": "3.0.0",
+    "fuzzysearch": "1.0.3",
+    "lodash": "4.17.15",
+    "popper.js": "1.14.6",
+    "purecss": "0.6.2",
+    "tippy.js": "4.2.1",
+    "vue-intl": "3.1.0",
+    "xstate": "4.38.3"
   },
   "peerDependencies": {},
   "devDependencies": {
@@ -43,6 +43,7 @@
     "@mdi/svg": "^5.9.55",
     "@vuedoc/parser": "^3.4.0",
     "babel-jest": "^27.4.6",
+    "browserslist-config-kolibri": "0.16.0-dev.7",
     "chokidar-cli": "^3.0.0",
     "consola": "^2.15.3",
     "eslint-import-resolver-nuxt": "^1.0.1",
@@ -73,5 +74,12 @@
     "@babel/preset-env": "7.12.17",
     "postcss-loader": "3.0.0",
     "css-loader": "3.6.0"
-  }
+  },
+  "engines": {
+    "node": "10.x",
+    "yarn": "1.x"
+  },
+  "browserslist": [
+    "extends browserslist-config-kolibri"
+  ]
 }
