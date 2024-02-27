@@ -16,7 +16,7 @@ Changelog is rather internal in nature. See release notes for the public overvie
 [#552]: https://github.com/learningequality/kolibri-design-system/pull/552
 
 - [#552]
-  - **Description:** New `useKResponsiveElement` composable, `KResponsiveElementMixin` translated to this composable.
+  - **Description:** New `useKResponsiveElement` private composable, `KResponsiveElementMixin` translated to this composable.
   - **Products impact:** new API.
   - **Addresses:** -.
   - **Components:** -.
