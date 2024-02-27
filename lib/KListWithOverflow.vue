@@ -219,7 +219,7 @@
     width: 100%;
   }
   .list {
-    overflow: visible;
+    overflow: hidden;
     display: flex;
     flex-wrap: nowrap;
   }
