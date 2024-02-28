@@ -23,8 +23,6 @@
     /> -->
 
     <!-- Play around with your component here: -->
-
-
   </div>
 
 </template>

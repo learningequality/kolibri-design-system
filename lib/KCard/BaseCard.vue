@@ -4,43 +4,14 @@
     :class="$computedClass({ ':focus': $coreOutline })"
   >
     <li class="remove-list-style">
-
-      <h2
-        v-if="title !== null && headingLevel === 2"
+      <component
+        :is="'h' + headingLevel"
+        v-if="title !== null"
       >
         <a :href="to">
           <KTextTruncator :text="title" :maxLines="1" />
         </a>
-      </h2>
-      <h3
-        v-if="title !== null && headingLevel === 3"
-      >
-        <a :href="to">
-          <KTextTruncator :text="title" :maxLines="1" />
-        </a>
-      </h3>
-      <h4
-        v-if="title !== null && headingLevel === 4"
-      >
-        <a :href="to">
-          <KTextTruncator :text="title" :maxLines="1" />
-        </a>
-      </h4>
-      <h5
-        v-if="title !== null && headingLevel === 5"
-      >
-        <a :href="to">
-          <KTextTruncator :text="title" :maxLines="1" />
-        </a>
-      </h5>
-      <h6
-        v-if="title !== null && headingLevel === 6"
-      >
-        <a :href="to">
-          <KTextTruncator :text="title" :maxLines="1" />
-        </a>
-      </h6>
-
+      </component>
     </li>
   </div>
 
@@ -69,11 +40,6 @@
       to: {
         type: Object,
         required: true,
-      },
-    },
-    computed: {
-      headerLevelTag() {
-        return `h${this.headingLevel}`;
       },
     },
   };
