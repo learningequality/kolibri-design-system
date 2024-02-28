@@ -49,16 +49,17 @@ $ui-input-text-color--disabled: $disabled-text-color !default;
 $ui-input-text-color--invalid: $md-red !default;
 
 // Input border
-$ui-input-border-color: $divider-color !default;
-$ui-input-border-color--hover: rgba(black, 0.3) !default;
+$ui-input-border-color: $secondary-text-color !default;
+$ui-input-border-color--hover: rgba(black, 0.75) !default;
 $ui-input-border-color--active: $brand-primary-color !default;
 $ui-input-border-color--invalid: $md-red !default;
 $ui-input-border-width: 1px !default;
-$ui-input-border-width--active: 2px !default;
+$ui-input-border-width--active: 1.5px !default;
 $ui-input-border-style--disabled: dotted !default;
 
 // Input icons
 $ui-input-icon-color: $secondary-text-color !default;
+$ui-input-icon-color--active: $brand-primary-color !default;
 $ui-input-icon-opacity--disabled: 0.6 !default;
 $ui-input-icon-margin-right: rem(12px) !default;
 $ui-input-icon-margin-top: rem(4px) !default;
@@ -68,7 +69,7 @@ $ui-input-icon-margin-top--with-label: rem(24px) !default;
 $ui-input-button-color: $secondary-text-color !default;
 $ui-input-button-color--hover: $primary-text-color !default;
 $ui-input-button-opacity--disabled: 0.6 !default;
-$ui-input-button-size: rem(18px) !default;
+$ui-input-button-size: rem(24px) !default;
 $ui-input-button-margin-top: rem(7px) !default;
 $ui-input-button-margin-top--with-label: rem(27px) !default;
 

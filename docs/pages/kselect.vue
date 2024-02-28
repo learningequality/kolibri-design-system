@@ -9,6 +9,7 @@
           :options="options"
           label="Who are you?"
           placeholder="Nobody"
+          style="width:300px;"
         />
         <p>Value: {{ exampleData }}</p>
       </DocsShow>

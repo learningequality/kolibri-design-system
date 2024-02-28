@@ -84,7 +84,6 @@
           v-if="label || $slots.default"
           class="ui-textbox-label-text"
           :class="labelClasses"
-          :style="isActive ? { color: $themeTokens.primaryDark } : {}"
         >
           <slot>{{ label }}</slot>
         </div>
@@ -403,17 +402,20 @@
         color: $ui-input-label-color--hover;
       }
 
-      .ui-textbox-input,
+      .ui-textbox-label,
       .ui-textbox-textarea {
         border-bottom-color: $ui-input-border-color--hover;
+        border-bottom-width: $ui-input-border-width--active;
       }
     }
 
     &.is-active:not(.is-disabled) {
-      .ui-textbox-input,
+      .ui-textbox-label-text {
+        color: $ui-input-border-color--active;
+      }
+      .ui-textbox-label,
       .ui-textbox-textarea {
         border-bottom-color: $ui-input-border-color--active;
-        border-bottom-width: $ui-input-border-width--active;
       }
     }
 
@@ -465,7 +467,7 @@
         color: $ui-input-label-color--invalid;
       }
 
-      .ui-textbox-input,
+      .ui-textbox-label,
       .ui-textbox-textarea {
         border-bottom-color: $ui-input-border-color--invalid;
       }
@@ -477,6 +479,7 @@
 
     &.is-disabled {
       .ui-textbox-input,
+      .ui-textbox-label,
       .ui-textbox-textarea {
         color: $ui-input-text-color--disabled;
         border-bottom-style: $ui-input-border-style--disabled;
@@ -499,8 +502,11 @@
     width: 100%;
     padding: 4px 0 0 0;
     margin: 0;
-    background: #F5F5F5;
+    background: $md-grey-100;
     border-radius: 4px 4px 0 0;
+    border-bottom-color: $ui-input-border-color;
+    border-bottom-style: solid;
+    border-bottom-width: $ui-input-border-width;
   }
 
   .ui-textbox-icon-wrapper {
@@ -539,12 +545,15 @@
     cursor: auto;
     background: none;
     border: none;
-    border-bottom-color: $ui-input-border-color;
-    border-bottom-style: solid;
-    border-bottom-width: $ui-input-border-width;
     border-radius: 0;
     outline: none;
     transition: border 0.1s ease;
+  }
+
+    .ui-textbox-textarea {
+    border-bottom-color: $ui-input-border-color;
+    border-bottom-style: solid;
+    border-bottom-width: $ui-input-border-width;
   }
 
   .ui-textbox-input {
