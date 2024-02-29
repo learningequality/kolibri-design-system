@@ -117,6 +117,7 @@
         let availableWidth = listWrapper.clientWidth;
         availableWidth -= this.moreButtonWidth;
         let maxWidth = 0;
+        let maxHeight = 0;
 
         const overflowItemsIdx = [];
         for (let i = 0; i < list.children.length; i++) {
@@ -126,13 +127,16 @@
           // If the item dont fit in the available space or if we have already
           // overflowed items, we hide it. This means that once one item overflows,
           // all the following items will be hidden.
-          if (itemWidth > availableWidth || overflowItemsIdx.length > 0) {
+          if (itemWidth >= availableWidth || overflowItemsIdx.length > 0) {
             overflowItemsIdx.push(i);
             item.style.visibility = 'hidden';
           } else {
             item.style.visibility = 'visible';
             maxWidth += itemWidth;
             availableWidth -= itemWidth;
+            if (item.clientHeight > maxHeight) {
+              maxHeight = item.clientHeight;
+            }
           }
         }
 
@@ -158,6 +162,7 @@
         this.overflowItems = overflowItemsIdx.map(idx => this.items[idx]);
         this.isMoreButtonVisible = overflowItemsIdx.length > 0;
         list.style.maxWidth = `${maxWidth}px`;
+        list.style.maxHeight = `${maxHeight}px`;
       },
       /**
        * Fixes the visibility of the dividers that are shown and hidden when the list overflows.
@@ -215,13 +220,12 @@
   .list-wrapper {
     display: flex;
     justify-content: space-between;
-    flex-wrap: nowrap;
     width: 100%;
   }
   .list {
-    overflow: hidden;
+    overflow: visible;
     display: flex;
-    flex-wrap: nowrap;
+    flex-wrap: wrap;
   }
 
   .list > * {

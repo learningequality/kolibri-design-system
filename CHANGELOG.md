@@ -17,7 +17,7 @@ Changelog is rather internal in nature. See release notes for the public overvie
 
 - [#552]
   - **Description:** New `useKResponsiveElement` private composable, `KResponsiveElementMixin` translated to this composable.
-  - **Products impact:** new API.
+  - **Products impact:** -.
   - **Addresses:** -.
   - **Components:** -.
   - **Breaking:** no.

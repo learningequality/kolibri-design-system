@@ -5,9 +5,6 @@
       <p>
         The <code>KListWithOverflow</code> component is useful when we want a horizontal list that is responsive and adaptable to the container size. The list only shows the items that fit on the container element. When items exceed the available space, the component seamlessly integrates a "see more" button to show additional items.
       </p>
-      <p>
-        This component is renderless, so it needs an array of items, slots to render the visible items and separators on the list, and a slot to render the "see more" button.
-      </p>
     </DocsPageSection>
     <DocsPageSection title="Example" anchor="#example">
       <p>
@@ -73,6 +70,51 @@
         </DocsShow>
       </div>
       <p>
+        The following is a code example to render the above examples:
+      </p>
+      <DocsShowCode language="html">
+        <KListWithOverflow
+          :items="items"
+        >
+
+          <template #item="{ item }">
+            <KIconButton
+              :tooltip="item.label"
+              :icon="item.icon"
+            />
+          </template>
+
+          <template #more="{ overflowItems }">
+            <KIconButton
+              tooltip="More"
+              icon="optionsVertical"
+            >
+              <template #menu>
+                <KDropdownMenu
+                  :options="overflowItems"
+                />
+              </template>
+            </KIconButton>
+          </template>
+
+        </KListWithOverflow>
+      </DocsShowCode>
+      <!-- eslint-disable -->
+      <DocsShowCode language="javascript">
+        data() {
+          return {
+            items: [
+              { label: "Item 1", icon: "edit" },
+              { label: "Item 2", icon: "edit" },
+              { label: "Item 3", icon: "edit" },
+              // ...
+              { label: "Item 12", icon: "edit" },
+            ]
+          };
+        },
+      </DocsShowCode>
+      <!-- eslint-enable -->
+      <p>
         You can also use dividers within the list by passing a <code>{ type: "divider" }</code> object, and set a #divider slot.
         Note that the visible list will not end with a divider. And a divider object will not be passed as a first overflowed item.
       </p>
@@ -109,6 +151,36 @@
           </KListWithOverflow>
         </DocsShow>
       </div>
+      <p>
+        To use dividers, you can include a divider object in the items list, and add a #divider slot.
+      </p>
+      <DocsShowCode language="html">
+        <KListWithOverflow
+          :items="items"
+        >
+          <!-- ... -->
+          <template #divider>
+            <div class="divider-wrapper">
+              <div :style="dividerStyle"></div>
+            </div>
+          </template>
+        </KListWithOverflow>
+      </DocsShowCode>
+      <!-- eslint-disable -->
+      <DocsShowCode language="javascript">
+        data() {
+          return {
+            items: [
+              { label: "Item 1", icon: "edit" },
+              { label: "Item 2", icon: "edit" },
+              { type: "divider" },
+              { label: "Item 4", icon: "edit" },
+              // ...
+            ]
+          };
+        },
+      </DocsShowCode>
+      <!-- eslint-enable -->
     </DocsPageSection>
 
   </DocsPageTemplate>
