@@ -4,6 +4,17 @@ Changelog is rather internal in nature. See release notes for the public overvie
 
 ## Upcoming version
 
+- [#560]
+  - **Description:** Configure dependabot to run on Wednesday
+  - **Products impact:** -
+  - **Addresses:** -
+  - **Components:** -
+  - **Breaking:** -
+  - **Impacts a11y:** -
+  - **Guidance:** -
+
+[#560]: https://github.com/learningequality/kolibri-design-system/pull/560
+
 - [#558]
   - **Description:** Move `useKResponsiveWindow` from `/lib` to `/lib/composables`
   - **Products impact:** Location update
