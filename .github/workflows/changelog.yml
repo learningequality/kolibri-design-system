@@ -21,22 +21,23 @@ jobs:
       - name: Check PR Description
         id: check_description
         run: |
-            description=$(jq -r ".pull_request.body" "$GITHUB_EVENT_PATH" | awk '/## Changelog/{flag=1; next} /##/{flag=0} flag' | grep -m 1 'Description' | sed 's/^[ \t]*//;s/[ \t]*$//' | cut -d':' -f2-)
-            default_description="Summary of change(s)"
-            if [ "$description" != "$default_description" ]; then
-              echo "containsChangelog=true" >> $GITHUB_OUTPUT
-            else
-              echo "containsChangelog=false" >> $GITHUB_OUTPUT
-            fi
+          description=$(jq -r ".pull_request.body" "$GITHUB_EVENT_PATH" | awk '/## Changelog/{flag=1; next} /##/{flag=0} flag' | grep -m 1 '**Description:' | sed 's/^[[:space:]]*//;s/[[:space:]]*$//' | cut -d':' -f2- | sed 's/^\*\* //'
+          )
+          echo "$description"
+          default_description="Summary of change(s)"
+          if [ "$description" != "$default_description" ]; then
+            echo "containsChangelog=true" >> $GITHUB_OUTPUT
+          else
+            echo "containsChangelog=false" >> $GITHUB_OUTPUT
+          fi
         
 
       - name: Results
         run: |
-          if [[ "${{ steps.check_description.outputs.containsChangelog }}" == "true" || ${{ steps.check-dependabot.outputs.is_dependabot }}" == "dependabot[bot] ]]; then
+          if [[ "${{ steps.check_description.outputs.containsChangelog }}" == "true" || "${{ steps.check-dependabot.outputs.is_dependabot }}" == "dependabot[bot]" ]]; then
             echo "PR contains Changelog section/ PR made by Dependabot"
             exit 0
           else
             echo "PR does not contain Changelog section"
             exit 1
           fi
-          
