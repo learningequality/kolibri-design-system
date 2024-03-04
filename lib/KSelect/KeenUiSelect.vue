@@ -902,15 +902,18 @@
     display: flex;
     align-items: flex-start;
     margin-bottom: $ui-input-margin-bottom;
+    background: $md-grey-100;
+    border-bottom-color: $ui-input-border-color;
+    border-bottom-style: solid;
+    border-bottom-width: $ui-input-border-width;
+    border-radius: 2px 2px 0 0;
     outline: none;
 
     &:hover:not(.is-disabled) {
+      border-bottom-color: $ui-input-border-color--hover;
+      border-bottom-width: $ui-input-border-width--active;
       .ui-select-label-text {
         color: $ui-input-label-color--hover;
-      }
-
-      .ui-select-display {
-        border-bottom-color: $ui-input-border-color--hover;
       }
 
       .ui-select-dropdown-button {
@@ -919,14 +922,9 @@
     }
 
     &.is-active:not(.is-disabled) {
-      .ui-select-display {
-        border-bottom-width: $ui-input-border-width--active;
-      }
-    }
-
-    &.is-active {
-      .ui-select-display {
-        border-bottom-width: $ui-input-border-width--active;
+      border-bottom-color: $ui-input-border-color--active;
+      .ui-icon {
+        color: $ui-input-icon-color--active;
       }
     }
 
@@ -961,7 +959,6 @@
     &:not(.is-multiple) {
       .ui-select-display {
         height: $ui-input-height;
-        line-height: 1;
       }
     }
 
@@ -969,18 +966,15 @@
       .ui-select-display {
         padding-top: rem-calc(4px);
         padding-bottom: rem-calc(4px);
-        line-height: 1.4;
       }
     }
 
     &.is-invalid:not(.is-disabled) {
+      border-bottom-color: $ui-input-border-color--invalid;
       .ui-select-label-text,
+      .ui-select-dropdown-button,
       .ui-select-icon-wrapper .ui-icon {
         color: $ui-input-label-color--invalid;
-      }
-
-      .ui-select-display {
-        border-bottom-color: $ui-input-border-color--invalid;
       }
 
       .ui-select-feedback {
@@ -1050,13 +1044,11 @@
     padding: 0;
     font-size: $ui-input-text-font-size;
     font-weight: normal;
+    line-height: 1.4;
     color: $ui-input-text-color;
     cursor: pointer;
     user-select: none;
     border: 0;
-    border-bottom-color: $ui-input-border-color;
-    border-bottom-style: solid;
-    border-bottom-width: $ui-input-border-width;
     transition: border 0.1s ease;
   }
 
@@ -1110,9 +1102,6 @@
     cursor: auto;
     background: none;
     border: 0;
-    border-bottom-color: $ui-input-border-color;
-    border-bottom-style: solid;
-    border-bottom-width: $ui-input-border-width;
     border-radius: 0;
     outline: none;
     transition: border 0.1s ease;

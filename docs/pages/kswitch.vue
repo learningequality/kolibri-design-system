@@ -33,19 +33,19 @@
       <ul>
         <li>
           Thumb ON color:
-          <DocsInternalLink code text="palette.green.v_500" href="/colors#palette-green-v_500" />
+          <DocsInternalLink code text="brand.primary.v_1000" href="/colors#brand-primary-v_1000" />
         </li>
         <li>
           Track ON color:
-          <DocsInternalLink code text="palette.green.v_200" href="/colors#palette-green-v_200" />
+          <DocsInternalLink code text="brand.primary.v_400" href="/colors#brand-primary-v_400" />
         </li>
         <li>
           Thumb OFF color:
-          <DocsInternalLink code text="palette.grey.v_400" href="/colors#palette-grey-v_400" />
+          <DocsInternalLink code text="palette.grey.v_50" href="/colors#palette-grey-v_50" />
         </li>
         <li>
           Track OFF color:
-          <DocsInternalLink code text="palette.grey.v_50" href="/colors#palette-grey-v_50" />
+          <DocsInternalLink code text="palette.grey.v_200" href="/colors#palette-grey-v_200" />
         </li>
       </ul>
     </DocsPageSection>

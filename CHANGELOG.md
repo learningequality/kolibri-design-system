@@ -59,6 +59,27 @@ Changelog is rather internal in nature. See release notes for the public overvie
 
 [#558]: https://github.com/learningequality/kolibri-design-system/pull/558
 
+- [#551]
+  - **Description:** Updates `brand` colors, `palette` colors, and `token`s.
+    - Breaking changes:
+      - Removed `palette` colors: `purple`, `deeppurple`, `indigo`, `brown`, `cyan`, `teal`, `lightgreen`, `lime`, `amber`, `deeporange`, `bluegrey`
+      - Removed `palette.grey` scales: `v_300`, `v_500`, `v_700`, `v_900`
+      - Removed `brand` and `palette` scales (except `palette.grey`): `v_50`,`v_100`, `v_300`, `v_500`, `v_700`, `v_900`
+      - Removed content-related tokens: `exercise`, `video`, `audio`, `document`, `html5`, `slideshow`
+      - Removed other tokens: `appBarFullscreen`, `appBarFullscreenDark`, `linkDark`
+   - Other changes:
+      - Some existing `palette` colors look differently
+      - Adds new tokens and palette
+      - Global styles: `<body>` background color changed from `grey.v_100` to lighter `grey.v_50`
+  - **Products impact:** new API, updated API, deleted API
+  - **Addresses:** - https://github.com/learningequality/kolibri-design-system/issues/545
+  - **Components:** -
+  - **Breaking:** - yes
+  - **Impacts a11y:** - no
+  - **Guidance:** - Address all breaking changes by searching for removed palette colors, scales, and tokens. Study the updated "Colors" KDS documentation page and replace them by relevant colors/scales/tokens. Also search for any hardcoded hex,rgb(a),hsl(a), or named colors (such as 'white') and theme them instead. Visually check places that use existing palette and adjust scale (you may need to increase it as many colors are lighter). You may also see if there are any minor useful updates to in regards to new tokens (e.g. replacing a `palette` color with a new `token` that describes function of the color better). If you use `generateGlobalStyles` that generates background color for `<body>` and use grey.`v_100` in some components to match the background color, you may need to update it to `grey.v_50`.
+
+[#551]: https://github.com/learningequality/kolibri-design-system/pull/551
+
 - [#531]
   - **Description:** Remove unused `keen-ui` dependency
   - **Products impact:** none

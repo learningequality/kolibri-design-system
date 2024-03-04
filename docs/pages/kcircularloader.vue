@@ -17,7 +17,7 @@
     <DocsPageSection title="Specifications" anchor="#specifications">
       <ul>
         <li>Dimensions do not exceed 48x48px</li>
-        <li>Progress indicator uses brand.secondary.v_100</li>
+        <li>Progress indicator uses palette.grey.v_800</li>
         <li>Track width is 4px</li>
       </ul>
     </DocsPageSection>
