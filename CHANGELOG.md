@@ -91,7 +91,106 @@ Changelog is rather internal in nature. See release notes for the public overvie
 
 [#531]: https://github.com/learningequality/kolibri-design-system/pull/531
 
-## Version 3.0.0
+## Version 3.x.x (`release-v3` branch)
+
+- [#552]
+  - **Description:** New `KListWithOverflow` component.
+  - **Products impact:** new API.
+  - **Addresses:** https://github.com/learningequality/kolibri-design-system/issues/556, https://github.com/learningequality/studio/issues/3423, https://github.com/learningequality/kolibri/issues/11923.
+  - **Components:** KListWithOverflow.
+  - **Breaking:** no.
+  - **Impacts a11y:** no.
+  - **Guidance:** -.
+
+[#552]: https://github.com/learningequality/kolibri-design-system/pull/552
+
+- [#552]
+  - **Description:** New `useKResponsiveElement` private composable, `KResponsiveElementMixin` translated to this composable.
+  - **Products impact:** -.
+  - **Addresses:** -.
+  - **Components:** -.
+  - **Breaking:** no.
+  - **Impacts a11y:** no.
+  - **Guidance:** -.
+
+[#552]: https://github.com/learningequality/kolibri-design-system/pull/552
+
+- [#538]
+  - **Description:** Complete KImg implementation
+  - **Products impact:** new API
+  - **Addresses:** https://github.com/learningequality/kolibri-design-system/issues/368
+  - **Components:** KImg
+  - **Breaking:** no
+  - **Impacts a11y:** yes
+  - **Guidance:** One of the benefits of using KImg is that it throws a11y related warnings
+
+[#538]: https://github.com/learningequality/kolibri-design-system/pull/538
+
+- [#557]
+  - **Description:** Updates development documentation in regards to linking products development servers to local KDS
+  - **Products impact:** -
+  - **Addresses:** -
+  - **Components:** -
+  - **Breaking:** -
+  - **Impacts a11y:** -
+  - **Guidance:** -
+
+[#557]: https://github.com/learningequality/kolibri-design-system/pull/557
+
+- [#542]
+  - **Description:** Adds a new `sort` icon
+  - **Products impact:** New icon
+  - **Addresses:** https://github.com/learningequality/studio/issues/4426
+  - **Components:** -
+  - **Breaking:** no
+  - **Impacts a11y:** -
+  - **Guidance:** -
+
+[#542]: https://github.com/learningequality/kolibri-design-system/pull/542
+
+- [#542]
+  - **Description:** Updates documentation for icons to the new process, adds clear guidelines
+  - **Products impact:** None
+  - **Addresses:** -
+  - **Components:** -
+  - **Breaking:** -
+  - **Impacts a11y:** -
+  - **Guidance:** -
+
+[#542]: (https://github.com/learningequality/kolibri-design-system/pull/542
+
+- [#543]
+  - **Description:** Added new Icons to support Studio Usability Enhancements
+  - **Products impact:** new API
+  - **Addresses:** https://github.com/learningequality/studio/issues/3425
+  - **Components:** KIcon 
+  - **Breaking:** no
+  - **Impacts a11y:** no
+  - **Guidance:** Consumers can now access these icons: activities, attribution, audience, categories, levels, rename
+
+[#543]: https://github.com/learningequality/kolibri-design-system/pull/543
+
+- [#541]
+  - **Description:** Add a GitHub Actions workflow to publish a new release on npm
+  - **Products impact:** none
+  - **Addresses:** https://github.com/learningequality/kolibri-design-system/issues/532
+  - **Components:** -
+  - **Breaking:** -
+  - **Impacts a11y:** -
+  - **Guidance:** -
+
+[#541]: https://github.com/learningequality/kolibri-design-system/pull/541
+
+- [#535]
+  - **Description:** Added text prop in the KToolTip component as an alternative to the slot
+  - **Products impact:** Choose from - bugfix
+  - **Addresses:** #221
+  - **Components:** KToolTip 
+  - **Breaking:** no
+  - **Impacts a11y:** no
+  - **Guidance:** -
+
+[#535]: https://github.com/learningequality/kolibri-design-system/pull/535
 
 - [#522]
   - **Description:** Upgrades github-actions/cache dependency
