@@ -6,8 +6,8 @@ Changelog is rather internal in nature. See release notes for the public overvie
 
 - [#565]
   - **Description:** Revert adding engines
-  - **Products impact:** -
-  - **Addresses:** -
+  - **Products impact:** Dependencies
+  - **Addresses:** KDS not being installable by consumers that don't use Node 10
   - **Components:** -
   - **Breaking:** -
   - **Impacts a11y:** -
