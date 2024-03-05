@@ -5,7 +5,7 @@ Changelog is rather internal in nature. See release notes for the public overvie
 ## Version 4.x.x (`release-v4` branch)
 
 - [#565]
-  - **Description:** Remove node version from engines
+  - **Description:** Revert adding engines
   - **Products impact:** -
   - **Addresses:** -
   - **Components:** -
