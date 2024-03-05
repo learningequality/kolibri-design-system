@@ -4,6 +4,17 @@ Changelog is rather internal in nature. See release notes for the public overvie
 
 ## Version 4.x.x (`release-v4` branch)
 
+- [#565]
+  - **Description:** Revert adding engines
+  - **Products impact:** Dependencies
+  - **Addresses:** KDS not being installable by consumers that don't use Node 10
+  - **Components:** -
+  - **Breaking:** -
+  - **Impacts a11y:** -
+  - **Guidance:** -
+
+[#565]: https://github.com/learningequality/kolibri-design-system/pull/565
+
 - [#560]
   - **Description:** Configure dependabot to run on Wednesday
   - **Products impact:** -
