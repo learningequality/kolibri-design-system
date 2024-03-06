@@ -69,10 +69,6 @@ Changelog is rather internal in nature. See release notes for the public overvie
   - **Breaking:** -
   - **Impacts a11y:** -
   - **Guidance:** -
-<<<<<<< HEAD
- 
-[#555]: https://github.com/learningequality/kolibri-design-system/pull/555
-=======
 
 [#558]: https://github.com/learningequality/kolibri-design-system/pull/558
 
@@ -96,7 +92,6 @@ Changelog is rather internal in nature. See release notes for the public overvie
   - **Guidance:** - Address all breaking changes by searching for removed palette colors, scales, and tokens. Study the updated "Colors" KDS documentation page and replace them by relevant colors/scales/tokens. Also search for any hardcoded hex,rgb(a),hsl(a), or named colors (such as 'white') and theme them instead. Visually check places that use existing palette and adjust scale (you may need to increase it as many colors are lighter). You may also see if there are any minor useful updates to in regards to new tokens (e.g. replacing a `palette` color with a new `token` that describes function of the color better). If you use `generateGlobalStyles` that generates background color for `<body>` and use grey.`v_100` in some components to match the background color, you may need to update it to `grey.v_50`.
 
 [#551]: https://github.com/learningequality/kolibri-design-system/pull/551
->>>>>>> develop
 
 - [#531]
   - **Description:** Remove unused `keen-ui` dependency
