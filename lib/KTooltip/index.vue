@@ -13,8 +13,12 @@
       class="k-tooltip"
       :style="{ backgroundColor: $themeTokens.text, color: $themeTokens.textInverted }"
     >
-      <!-- @slot Text of the tooltip -->
-      <slot></slot>
+      <!-- If text prop is provided, display the text -->
+      <template v-if="text"> 
+        {{ text }} 
+      </template>
+      <!-- @slot Slot alternative to `text` prop -->
+      <slot v-else></slot>
     </div>
   </Popper>
 
@@ -63,6 +67,13 @@
       placement: {
         type: String,
         default: 'bottom',
+      },
+      /**
+       * Text of the tooltip
+       */
+      text: {
+        type: String,
+        default: null,
       },
     },
     data() {

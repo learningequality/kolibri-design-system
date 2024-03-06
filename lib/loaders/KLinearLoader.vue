@@ -11,7 +11,7 @@
     <div
       class="ui-progress-linear"
       :class="classes"
-      :style="{ backgroundColor: `rgba(${$themeTokens.loading}, 0.4)` }"
+      :style="{ backgroundColor: $themePalette.grey.v_100 }"
     >
       <div
         v-if="type === 'determinate'"

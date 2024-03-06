@@ -99,7 +99,7 @@
         </li>
         <li>
           Iconography color:
-          <DocsInternalLink code text="palette.grey.v_900" href="/colors#palette-grey-v_900" />
+          <DocsInternalLink code text="palette.grey.v_800" href="/colors#palette-grey-v_800" />
         </li>
       </ul>
       <h3>Dropdown menu</h3>

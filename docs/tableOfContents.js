@@ -58,7 +58,6 @@ class Page {
 const buttonRelatedKeywords = ['button', 'link'];
 const textRelatedKeywords = ['text', 'area', 'field', 'box'];
 const layoutRelatedKeywords = ['grid', 'layout', 'container', 'page'];
-const responsiveComponentsRelatedKeywords = ['responsive', 'mixin', 'breakpoint'];
 const tabsRelatedKeywords = ['tab', 'tabs', 'panel', 'tablist', 'tabpanel'];
 const compositionRelatedKeywords = ['composable', 'composition'];
 
@@ -175,6 +174,12 @@ export default [
     title: 'Composables',
     autoSort: true,
     pages: [
+      new Page({
+        path: '/usekresponsivewindow',
+        title: 'useKResponsiveWindow',
+        isCode: true,
+        keywords: [...compositionRelatedKeywords, 'responsive', 'window', 'breakpoint'],
+      }),
       new Page({
         path: '/usekshow',
         title: 'useKShow',
@@ -317,11 +322,6 @@ export default [
         keywords: ['button'],
       }),
       new Page({
-        path: '/kcontentrenderer',
-        title: 'KContentRenderer',
-        isCode: true,
-      }),
-      new Page({
         path: '/kgrid',
         title: 'KGrid',
         isCode: true,
@@ -357,16 +357,10 @@ export default [
         isCode: true,
       }),
       new Page({
-        path: '/kresponsivewindow',
-        title: 'KResponsiveWindow',
-        isCode: true,
-        keywords: [...responsiveComponentsRelatedKeywords, 'window'],
-      }),
-      new Page({
         path: '/kresponsiveelement',
         title: 'KResponsiveElement',
         isCode: true,
-        keywords: [...responsiveComponentsRelatedKeywords, 'element'],
+        keywords: ['responsive', 'mixin', 'breakpoint', 'element'],
       }),
       new Page({
         path: '/ktabs',
@@ -395,6 +389,11 @@ export default [
       new Page({
         path: '/ktexttruncator',
         title: 'KTextTruncator',
+        isCode: true,
+      }),
+      new Page({
+        path: '/klistwithoverflow',
+        title: 'KListWithOverflow',
         isCode: true,
       }),
     ],
