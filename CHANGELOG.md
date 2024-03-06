@@ -4,7 +4,16 @@ Changelog is rather internal in nature. See release notes for the public overvie
 
 ## Upcoming version 5.x.x (`develop` branch)
 
+- [#555]
+  - **Description:** Add action to notify us on Slack about GH issues comments from contributors community
+  - **Products impact:** none
+  - **Addresses:** -
+  - **Components:** -
+  - **Breaking:** -
+  - **Impacts a11y:** -
+  - **Guidance:** -
 
+[#555]: https://github.com/learningequality/kolibri-design-system/pull/555
 
 ## Version 4.x.x (`release-v4` branch)
 
