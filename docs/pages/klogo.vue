@@ -20,6 +20,27 @@
           :maxWidth="150"
         />
       </DocsShowCode>
+
+      <p>Shows Kolibri logo with background.</p>
+
+      <DocsShow>
+        <KLogo
+          altText="Kolibri Logo with background"
+          :showBackground="true"
+          :height="150"
+          width="100%"
+          :maxWidth="150"
+        />
+      </DocsShow>
+      <DocsShowCode language="html">
+        <KLogo
+          altText="Kolibri Logo with background"
+          :showBackground="true"
+          :height="150"
+          width="100%"
+          :maxWidth="150"
+        />
+      </DocsShowCode>
     </DocsPageSection>
 
     <DocsPageSection title="Usage" anchor="#usage">
