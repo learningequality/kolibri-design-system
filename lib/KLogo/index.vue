@@ -1,7 +1,7 @@
 <template>
 
   <svg
-    :class="{ 'no-background': !showBackground }"
+    :class="{ 'no-background': !showBackground, animate }"
     xmlns="http://www.w3.org/2000/svg"
     role="img"
     :width="validateAndFormatUnits(width)"
@@ -171,6 +171,13 @@
         type: Boolean,
         default: false,
       },
+      /**
+       * Whether to show the loading animation for the logo
+       */
+      animate: {
+        type: Boolean,
+        default: false,
+      },
     },
     methods: {
       validateAndFormatUnits,
@@ -179,10 +186,77 @@
 
 </script>
 
+
 <style>
 
   .no-background .background {
     display: none;
+  }
+
+  .animate .wing-inner {
+    animation: flapInner 2s 1.2s both infinite;
+  }
+
+  .animate .wing-middle {
+    animation: flapMiddle 2s 1.2s both infinite;
+  }
+
+  .animate .wing-outer {
+    animation: flapOuter 2s 1.2s both infinite;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes flapInner {
+    0% {
+      opacity: 0;
+    }
+    10% {
+      opacity: 1;
+    }
+    30% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+    }
+  }
+
+  @keyframes flapMiddle {
+    0% {
+      opacity: 0;
+    }
+    20% {
+      opacity: 0;
+    }
+    40% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+    }
+  }
+
+  @keyframes flapOuter {
+    0% {
+      opacity: 0;
+    }
+    40% {
+      opacity: 0;
+    }
+    50% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+    }
   }
 
 </style>
