@@ -62,6 +62,27 @@
           :maxWidth="150"
         />
       </DocsShowCode>
+      <p>Different color schemes can be used - but only with the showBackground prop. Note the transparent lines for the monochrome logos.</p>
+
+      <DocsShow>
+        <template
+          v-for="colorScheme in ['monoBlack', 'monoWhite', 'monoPrimary', 'monoSecondary', 'whiteGrey', 'blackGrey']"
+        >
+          <p :key="colorScheme">
+            Color scheme: {{ colorScheme }}
+          </p>
+          <KLogo
+            :key="colorScheme"
+            class="halfsquare-background"
+            :colorScheme="colorScheme"
+            altText="Kolibri Logo"
+            :showBackground="true"
+            :height="150"
+            width="100%"
+            :maxWidth="150"
+          />
+        </template>
+      </DocsShow>
     </DocsPageSection>
 
     <DocsPageSection title="Usage" anchor="#usage">
@@ -91,3 +112,19 @@
   export default {};
 
 </script>
+
+
+<style scoped>
+
+  .halfsquare-background {
+    background-size: 10px 10px; /* size of the squares */
+    background-image: 
+      linear-gradient(45deg, #ffffff 50%, #F5F5F5 50%),
+      linear-gradient(45deg, #F5F5F5 50%, #ffffff 50%);
+    background-position:
+      0 0, /* this is the position of the first pattern */
+      5px 5px; /* this position offsets the second pattern to create the checker effect */
+    background-repeat: repeat;
+  }
+
+</style>
