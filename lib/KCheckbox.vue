@@ -13,6 +13,7 @@
           ref="kCheckboxInput"
           type="checkbox"
           class="k-checkbox-input"
+          :aria-checked="ariaChecked"
           :checked="isCurrentlyChecked"
           :indeterminate.prop="isCurrentlyIndeterminate"
           :disabled="disabled"
@@ -126,6 +127,9 @@
       isActive: false,
     }),
     computed: {
+      ariaChecked() {
+        return this.isCurrentlyIndeterminate ? 'mixed' : this.isCurrentlyChecked ? 'true' : 'false';
+      },
       id() {
         return `k-checkbox-${this._uid}`;
       },

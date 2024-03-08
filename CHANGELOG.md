@@ -4,6 +4,17 @@ Changelog is rather internal in nature. See release notes for the public overvie
 
 ## Version 4.x.x (`release-v4` branch)
 
+- [#572]
+  - **Description:** Add `aria-checked` property to KCheckbox's `<input>` element
+  - **Products impact:** -
+  - **Addresses:** The `aria-checked` property being set properly improves a11y.
+  - **Components:** -
+  - **Breaking:** -
+  - **Impacts a11y:** yes
+  - **Guidance:** -
+
+[#572]: https://github.com/learningequality/kolibri-design-system/pull/572
+
 - [#565]
   - **Description:** Revert adding engines
   - **Products impact:** Dependencies
@@ -174,7 +185,7 @@ Changelog is rather internal in nature. See release notes for the public overvie
   - **Description:** Added new Icons to support Studio Usability Enhancements
   - **Products impact:** new API
   - **Addresses:** https://github.com/learningequality/studio/issues/3425
-  - **Components:** KIcon 
+  - **Components:** KIcon
   - **Breaking:** no
   - **Impacts a11y:** no
   - **Guidance:** Consumers can now access these icons: activities, attribution, audience, categories, levels, rename
@@ -196,7 +207,7 @@ Changelog is rather internal in nature. See release notes for the public overvie
   - **Description:** Added text prop in the KToolTip component as an alternative to the slot
   - **Products impact:** Choose from - bugfix
   - **Addresses:** #221
-  - **Components:** KToolTip 
+  - **Components:** KToolTip
   - **Breaking:** no
   - **Impacts a11y:** no
   - **Guidance:** -
@@ -220,7 +231,7 @@ Changelog is rather internal in nature. See release notes for the public overvie
   - **Addresses:** https://github.com/learningequality/kolibri-design-system/issues/512
   - **Components:** -
   - **Breaking:** no
-  - **Impacts a11y:** no  - 
+  - **Impacts a11y:** no  -
   - **Guidance:** -
 
 [#518]: https://github.com/learningequality/kolibri-design-system/pull/518
@@ -238,7 +249,7 @@ Changelog is rather internal in nature. See release notes for the public overvie
 
 - [#509]
   - **Description:** Introduces `appearanceOverrides` prop for the `KImg` component
-  - **Products impact:** new API 
+  - **Products impact:** new API
   - **Addresses:** https://github.com/learningequality/kolibri-design-system/issues/371
   - **Components:** KImg
   - **Breaking:** No
@@ -264,7 +275,7 @@ Changelog is rather internal in nature. See release notes for the public overvie
   - **Addresses:** -
   - **Components:** -
   - **Breaking:** no
-  - **Impacts a11y:** no  
+  - **Impacts a11y:** no
   - **Guidance:** -
 
 [#508]: https://github.com/learningequality/kolibri-design-system/pull/508
@@ -275,7 +286,7 @@ Changelog is rather internal in nature. See release notes for the public overvie
   - **Addresses:** https://github.com/learningequality/kolibri-design-system/issues/372
   - **Components:** KImg
   - **Breaking:** no
-  - **Impacts a11y:** yes  
+  - **Impacts a11y:** yes
   - **Guidance:** Allows the consumer to hook into the lifecycle of 'KImg' and handle the cases when the image fails to load
 
 [#502]: https://github.com/learningequality/kolibri-design-system/pull/502
@@ -285,8 +296,8 @@ Changelog is rather internal in nature. See release notes for the public overvie
   - **Products impact:** none
   - **Addresses:** https://github.com/learningequality/kolibri-design-system/issues/481
   - **Components:** -
-  - **Breaking:** 
-  - **Impacts a11y:** 
+  - **Breaking:**
+  - **Impacts a11y:**
   - **Guidance:** -
 
 [#505]: https://github.com/learningequality/kolibri-design-system/pull/505
@@ -429,9 +440,9 @@ Changelog is rather internal in nature. See release notes for the public overvie
   - **Addresses:** https://github.com/learningequality/kolibri-design-system/issues/379
   - **Components:** KRadioButton
   - **Breaking:** Yes
-  - **Impacts a11y:** 
+  - **Impacts a11y:**
   - **Guidance:** KRadioButton 'value' prop is deprecated. Please use the 'buttonValue' prop instead.
- 
+
   [#485]: https://github.com/learningequality/kolibri-design-system/pull/485
 
 ## Version 2.0.0
