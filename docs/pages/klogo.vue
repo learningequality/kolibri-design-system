@@ -6,11 +6,17 @@
 
       <DocsShow>
         <KLogo
+          ref="defaultLogoNoBackground"
           altText="Kolibri Logo"
           :height="150"
           width="100%"
           :maxWidth="150"
         />
+        <div style="width: 100%; text-align: center; display: none;">
+          <KButton @click="saveSVG('defaultLogoNoBackground')">
+            Save SVG
+          </KButton>
+        </div>
       </DocsShow>
       <DocsShowCode language="html">
         <KLogo
@@ -25,12 +31,18 @@
 
       <DocsShow>
         <KLogo
+          ref="defaultLogoWithBackground"
           altText="Kolibri Logo with background"
           :showBackground="true"
           :height="150"
           width="100%"
           :maxWidth="150"
         />
+        <div style="width: 100%; text-align: center; display: none;">
+          <KButton @click="saveSVG('defaultLogoWithBackground')">
+            Save SVG
+          </KButton>
+        </div>
       </DocsShow>
       <DocsShowCode language="html">
         <KLogo
@@ -68,10 +80,11 @@
         <template
           v-for="colorScheme in ['monoBlack', 'monoWhite', 'monoPrimary', 'monoSecondary', 'whiteGrey', 'blackGrey']"
         >
-          <p :key="colorScheme">
+          <p :key="`text${colorScheme}`">
             Color scheme: {{ colorScheme }}
           </p>
           <KLogo
+            :ref="`${colorScheme}LogoWithBackground`"
             :key="colorScheme"
             class="halfsquare-background"
             :colorScheme="colorScheme"
@@ -81,6 +94,14 @@
             width="100%"
             :maxWidth="150"
           />
+          <div 
+            :key="`button${colorScheme}`"
+            style="width: 100%; text-align: center; display: none;"
+          >
+            <KButton @click="saveSVG(`${colorScheme}LogoWithBackground`)">
+              Save SVG
+            </KButton>
+          </div>
         </template>
       </DocsShow>
     </DocsPageSection>
@@ -109,7 +130,39 @@
 
 <script>
 
-  export default {};
+  // Note for developers, to utilize the saveSVG method, select all of:
+  // style="width: 100%; text-align: center; display: none;"
+  // and replace with:
+  // style="width: 100%; text-align: center;"
+  // we keep this hidden for future usage, but it doesn't need to be here all the time.
+
+  export default {
+    methods: {
+      saveSVG(refName) {
+        const svgElement = this.$refs[refName].$el || this.$refs[refName][0].$el;
+        // Get the SVG data as a string
+        const svgData = svgElement.outerHTML;
+        // Create a Blob from the SVG data
+        const blob = new Blob([svgData], { type: 'image/svg+xml;charset=utf-8' });
+        // Create a URL for the Blob
+        const url = URL.createObjectURL(blob);
+
+        // Create a temporary anchor (`<a>`) element
+        const downloadLink = document.createElement('a');
+        // Set the download attribute to the desired file name
+        downloadLink.download = `${refName}.svg`;
+        // Set the href to the Blob URL
+        downloadLink.href = url;
+        // Append the anchor to the document
+        document.body.appendChild(downloadLink);
+        // Programmatically click the anchor to trigger the download
+        downloadLink.click();
+        // Clean up by revoking the Blob URL and removing the anchor from the document
+        URL.revokeObjectURL(url);
+        downloadLink.remove();
+      },
+    },
+  };
 
 </script>
 
