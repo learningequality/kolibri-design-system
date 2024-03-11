@@ -1,7 +1,7 @@
 <template>
 
   <svg
-    :class="{ 'no-background': !showBackground, animate }"
+    :class="{ animate }"
     xmlns="http://www.w3.org/2000/svg"
     role="img"
     :width="validateAndFormatUnits(width)"
@@ -15,7 +15,7 @@
     :aria-label="altText"
   >
     <title>{{ altText }}</title>
-    <use href="#background" class="background" :fill="blobColor" :mask="applyMask ? 'url(#cutout-mask)' : null" />
+    <use v-if="showBackground" href="#background" :fill="blobColor" :mask="applyMask ? 'url(#cutout-mask)' : null" />
     <use v-if="!applyMask" href="#body" :stroke="strokeColor" />
     <use v-if="!applyMask" href="#right-wing-inner" class="wing-inner" :stroke="strokeColor" />
     <use v-if="!applyMask" href="#right-wing-middle" class="wing-middle" :stroke="strokeColor" />
@@ -245,10 +245,6 @@
 
 
 <style>
-
-  .no-background .background {
-    display: none;
-  }
 
   .animate .wing-inner {
     animation: flapInner 2s 1.2s both infinite;
