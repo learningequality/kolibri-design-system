@@ -103,17 +103,12 @@
       this.$watch('elementWidth', this.throttledSetOverflowItems);
     },
     methods: {
-      getWidth(element) {
+      getSize(element) {
         if (!element) {
-          return 0;
+          return { width: 0, height: 0 };
         }
-        return element.getBoundingClientRect().width;
-      },
-      getHeigth(element) {
-        if (!element) {
-          return 0;
-        }
-        return element.getBoundingClientRect().height;
+        const { width, height } = element.getBoundingClientRect();
+        return { width, height };
       },
       /**
        * Sets the items that overflow the list, the visibility of the more button,
@@ -126,20 +121,28 @@
           return;
         }
 
-        const newMoreButtonWidth = this.getWidth(moreButtonWrapper);
+        const newMoreButtonWidth = this.getSize(moreButtonWrapper).width;
         if (this.isMoreButtonVisible && newMoreButtonWidth > 0) {
           this.moreButtonWidth = newMoreButtonWidth;
         }
 
-        let availableWidth = this.getWidth(listWrapper);
+        let availableWidth = this.getSize(listWrapper).width;
         availableWidth -= this.moreButtonWidth;
         let maxWidth = 0;
         let maxHeight = 0;
 
+        const itemsSizes = [];
+
+        for (let i = 0; i < list.children.length; i++) {
+          const item = list.children[i];
+          const itemSize = this.getSize(item);
+          itemsSizes.push(itemSize);
+        }
+
         const overflowItemsIdx = [];
         for (let i = 0; i < list.children.length; i++) {
           const item = list.children[i];
-          const itemWidth = this.getWidth(item);
+          const itemWidth = itemsSizes[i].width;
 
           // If the item dont fit in the available space or if we have already
           // overflowed items, we hide it. This means that once one item overflows,
@@ -151,7 +154,7 @@
             item.style.visibility = 'visible';
             maxWidth += itemWidth;
             availableWidth -= itemWidth;
-            const itemHeight = this.getHeigth(item);
+            const itemHeight = itemsSizes[i].height;
             if (itemHeight > maxHeight) {
               maxHeight = itemHeight;
             }
@@ -160,7 +163,7 @@
 
         // check if overflowed items would fit if the moreButton were not visible
         const overflowedWidth = overflowItemsIdx.reduce(
-          (acc, idx) => acc + this.getWidth(list.children[idx]),
+          (acc, idx) => acc + itemsSizes[idx].width,
           0
         );
         if (overflowedWidth <= this.moreButtonWidth + availableWidth) {
@@ -168,11 +171,11 @@
             const idx = overflowItemsIdx.pop();
             const item = list.children[idx];
             item.style.visibility = 'visible';
-            maxWidth += this.getWidth(item);
+            maxWidth += itemsSizes[idx].width;
           }
         }
 
-        const removedDividerWidth = this.fixDividersVisibility(overflowItemsIdx);
+        const removedDividerWidth = this.fixDividersVisibility(overflowItemsIdx, itemsSizes);
         if (removedDividerWidth) {
           maxWidth -= removedDividerWidth;
         }
@@ -188,9 +191,10 @@
        * The visible list should not end with a divider, and the overflowed items should not
        * start with a divider.
        * @param {Array} overflowItemsIdx - The indexes of the items that overflow the list
+       * @param {Array} itemsSizes - The sizes of the items in the list
        * @returns {Number} The width of the removed divider from the visible list, if any
        */
-      fixDividersVisibility(overflowItemsIdx) {
+      fixDividersVisibility(overflowItemsIdx, itemsSizes) {
         if (overflowItemsIdx.length === 0) {
           return;
         }
@@ -205,7 +209,7 @@
         if (this.isDivider(this.items[lastVisibleIdx])) {
           const dividerNode = list.children[lastVisibleIdx];
           dividerNode.style.visibility = 'hidden';
-          return this.getWidth(dividerNode);
+          return itemsSizes[lastVisibleIdx].width;
         }
       },
       /**
@@ -220,7 +224,7 @@
         if (!moreButtonWrapper) {
           return;
         }
-        this.moreButtonWidth = this.getWidth(moreButtonWrapper);
+        this.moreButtonWidth = this.getSize(moreButtonWrapper).width;
 
         this.isMoreButtonVisible = false;
         moreButtonWrapper.style.visibility = 'visible';
