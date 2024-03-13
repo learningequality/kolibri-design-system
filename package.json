@@ -1,6 +1,6 @@
 {
   "name": "kolibri-design-system",
-  "version": "4.0.0",
+  "version": "4.0.1",
   "private": false,
   "description": "The Kolibri Design System defines common design patterns and code for use in Kolibri applications",
   "license": "MIT",
@@ -74,10 +74,6 @@
     "@babel/preset-env": "7.12.17",
     "postcss-loader": "3.0.0",
     "css-loader": "3.6.0"
-  },
-  "engines": {
-    "node": "10.x",
-    "yarn": "1.x"
   },
   "browserslist": [
     "extends browserslist-config-kolibri"
