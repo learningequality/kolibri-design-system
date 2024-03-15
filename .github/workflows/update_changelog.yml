@@ -39,10 +39,16 @@ jobs:
           pr_link="[#${pr_number}]"
           pr_link_ref="[#${pr_number}]: ${{ github.event.pull_request.html_url }}"
 
-          echo "- ${pr_link}" > pr_info.txt
-          echo -e "  ${changelog}" >> pr_info.txt
-          echo "${pr_link_ref}" >> pr_info.txt
-          echo >> pr_info.txt
+          while IFS= read -r entry; do
+          if [[ $entry == *"- **Description:"* ]]; then
+              echo -e "- ${pr_link}\n"
+          fi
+          echo -e "\t${entry}"
+          if [[ $entry == *"- **Guidance:"* ]]; then
+              echo -e "\n${pr_link_ref}\n"
+          fi
+          done <<< "$changelog_section" > pr_info.txt
+
           awk '/<!-- \[DO NOT REMOVE-USED BY GH ACTION\] PASTE CHANGELOG -->/{print; system("cat pr_info.txt"); next} 1' CHANGELOG.md > tmpfile && mv tmpfile CHANGELOG.md
         
       - name: Commit updated CHANGELOG.md
