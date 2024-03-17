@@ -175,7 +175,7 @@
         </KGrid>
       </DocsShow>
       <p>
-        Note that an additional complexity not shown in the example above is that conditional styling sometimes needs to be applied using <code>KResponsiveWindowMixin</code> properties. See the source code of this page for details.
+        Note that an additional complexity not shown in the example above is that conditional styling sometimes needs to be applied using <code>useKResponsiveWindow</code> properties. See the source code of this page for details.
       </p>
       <p>
         Also note that grid containers have a <code>debug</code> property that will show helpful visual information about columns and grid items when set to <code>true</code>.
@@ -210,10 +210,13 @@
 
 <script>
 
-  import responsiveWindowMixin from '~~/lib/KResponsiveWindowMixin.js';
+  import useKResponsiveWindow from '~~/lib/composables/useKResponsiveWindow';
 
   export default {
-    mixins: [responsiveWindowMixin],
+    setup() {
+      const { windowIsLarge } = useKResponsiveWindow();
+      return { windowIsLarge };
+    },
   };
 
 </script>
