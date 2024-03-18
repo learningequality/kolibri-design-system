@@ -195,10 +195,6 @@
     vertical-align: bottom;
   }
 
-  .k-select-disabled /deep/ .ui-select__label-text.is-inline {
-    cursor: default;
-  }
-
   /* stylelint-disable csstree/validator */
 
   .k-select-disabled {
@@ -208,9 +204,5 @@
   }
 
   /* stylelint-enable */
-
-  /deep/ .ui-select__display-value {
-    line-height: 1.3;
-  }
 
 </style>

@@ -126,7 +126,7 @@
   }
 
   /* HIDES BROWSER NATIVE DATEPICKER */
-  /deep/ input[type='date'] {
+  ::v-deep input[type='date'] {
     width: 150px;
     text-align: left;
     text-transform: uppercase !important;
