@@ -33,7 +33,7 @@
     "lodash": "4.17.15",
     "popper.js": "1.14.6",
     "purecss": "0.6.2",
-    "tippy.js": "4.2.1",
+    "tippy.js": "6.3.7",
     "vue-intl": "3.1.0",
     "xstate": "4.38.3"
   },
