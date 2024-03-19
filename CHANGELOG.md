@@ -4,6 +4,17 @@ Changelog is rather internal in nature. See release notes for the public overvie
 
 ## Version 4.x.x (`release-v4` branch)
 
+- [#415]
+  - **Description:** Upgrade purecss from 0.6.2 to 2.2.0
+  - **Products impact:** Updates for base styling for all elements
+  - **Addresses:** -
+  - **Components:** -
+  - **Breaking:** -
+  - **Impacts a11y:** -
+  - **Guidance:** -
+
+[#415]: https://github.com/learningequality/kolibri-design-system/pull/415
+
 - [#569]
   - **Description:** Upgrade actions/setup-node from 3 to 4
   - **Products impact:** Dependencies
