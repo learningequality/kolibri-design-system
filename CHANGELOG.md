@@ -4,6 +4,17 @@ Changelog is rather internal in nature. See release notes for the public overvie
 
 ## Version 4.x.x (`release-v4` branch)
 
+- [#569]
+  - **Description:** Upgrade actions/setup-node from 3 to 4
+  - **Products impact:** Dependencies
+  - **Addresses:** -
+  - **Components:** -
+  - **Breaking:** -
+  - **Impacts a11y:** -
+  - **Guidance:** -
+
+[#569]: https://github.com/learningequality/kolibri-design-system/pull/569
+
 - [#576]
   - **Description:** Upgrade follow-redirects from 1.15.4 to 1.15.6
   - **Products impact:** Dependencies
