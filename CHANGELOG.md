@@ -4,6 +4,17 @@ Changelog is rather internal in nature. See release notes for the public overvie
 
 ## Version 4.x.x (`release-v4` branch)
 
+- [#553]
+  - **Description:** Upgrade ip from 1.1.5 to 1.1.9
+  - **Products impact:** Dependencies
+  - **Addresses:** -
+  - **Components:** -
+  - **Breaking:** -
+  - **Impacts a11y:** -
+  - **Guidance:** -
+
+[#553]: https://github.com/learningequality/kolibri-design-system/pull/553
+
 - [#559]
   - **Description:** Upgrade lodash from 4.17.15 to 4.17.21
   - **Products impact:** Dependencies
