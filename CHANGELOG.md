@@ -4,6 +4,17 @@ Changelog is rather internal in nature. See release notes for the public overvie
 
 ## Version 4.x.x (`release-v4` branch)
 
+- [#559]
+  - **Description:** Upgrade lodash from 4.17.15 to 4.17.21
+  - **Products impact:** Dependencies
+  - **Addresses:** -
+  - **Components:** -
+  - **Breaking:** -
+  - **Impacts a11y:** -
+  - **Guidance:** -
+
+[#559]: https://github.com/learningequality/kolibri-design-system/pull/559
+
 - [#555]
   - **Description:** Add action to notify us on Slack about GH issues comments from contributors community
   - **Products impact:** none
