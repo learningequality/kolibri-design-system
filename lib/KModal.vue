@@ -261,6 +261,8 @@
       // if modal contains KSelect, special classes & styles will be applied
       const kSelectCheck = document.querySelector('div.modal div.ui-select');
       this.containsKSelect = !!kSelectCheck;
+      this.observeContentChanges();
+      this.attachInputListeners();
     },
     updated() {
       this.updateContentSectionStyle();
@@ -310,12 +312,35 @@
           // (otherwise KSelect will be trapped inside modal if KSelect is opened a second time)
           if (this.$refs.content.clientHeight !== 0 && !this.containsKSelect) {
             // add a vertical scrollbar if content doesn't fit
-            if (this.$refs.content.scrollHeight > this.$refs.content.clientHeight) {
-              this.$refs.content.style.overflowY = 'auto';
-            }
+            this.$refs.content.style.overflowY =
+              this.$refs.content.scrollHeight > this.$refs.content.clientHeight ? 'auto' : 'hidden';
           }
         }
+        if (this.$refs.content) {
+          this.$refs.content.style.height = 'auto';
+          this.$refs.content.style.height = `${this.$refs.content.scrollHeight}px`;
+        }
       }, 50),
+      attachInputListeners() {
+        const textInputs = this.$refs.content.querySelectorAll('input[type="text"], textarea');
+        textInputs.forEach(input => {
+          input.addEventListener('input', () => {
+            this.updateContentSectionStyle();
+          });
+        });
+      },
+      observeContentChanges() {
+        const observer = new MutationObserver(() => {
+          this.updateContentSectionStyle();
+        });
+
+        observer.observe(this.$refs.content, {
+          childList: true,
+          subtree: true,
+          attributes: true,
+          characterData: true,
+        });
+      },
       emitCancelEvent() {
         if (!this.cancelDisabled) {
           /**
