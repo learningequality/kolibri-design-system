@@ -4,6 +4,17 @@ Changelog is rather internal in nature. See release notes for the public overvie
 
 ## Version 4.x.x (`release-v4` branch)
 
+- [#561]
+  - **Description:** Update KLogo for new branding guidelines
+  - **Products impact:** Enables general use of KLogo for all frontend logo usage. Changes props API for square logo presentation.
+  - **Addresses:** Updates logo to new logo, adds all permissible alternates, adds animated form.
+  - **Components:** KLogo
+  - **Breaking:** Yes
+  - **Impacts a11y:** No
+  - **Guidance:** Rendering the Kolibri logo can now be done using the KLogo component, as well as the loading animation.
+
+[#561]: https://github.com/learningequality/kolibri-design-system/pull/561
+
 - [#580]
   - **Description:** Remove use of KResponsiveWindowMixin internally
   - **Products impact:** - none
