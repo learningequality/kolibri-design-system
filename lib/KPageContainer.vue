@@ -14,11 +14,17 @@
 
 <script>
 
-  import KResponsiveWindowMixin from './KResponsiveWindowMixin';
+  import useKResponsiveWindow from './composables/useKResponsiveWindow';
 
   export default {
     name: 'KPageContainer',
-    mixins: [KResponsiveWindowMixin],
+    setup() {
+      const { windowIsSmall } = useKResponsiveWindow();
+
+      return {
+        windowIsSmall,
+      };
+    },
     props: {
       /**
        * Whether or not to disable internal container padding

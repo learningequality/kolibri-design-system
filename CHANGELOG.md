@@ -4,6 +4,17 @@ Changelog is rather internal in nature. See release notes for the public overvie
 
 ## Version 4.x.x (`release-v4` branch)
 
+- [#580]
+  - **Description:** Remove use of KResponsiveWindowMixin internally
+  - **Products impact:** - none
+  - **Addresses:** -
+  - **Components:** KDateRange, KModal, KPageContainer, KGrid, KFixedGrid, KGridItem, KFixedGridItem
+  - **Breaking:** no
+  - **Impacts a11y:** no
+  - **Guidance:** Updates all components to use the useKResponsiveWindow composable
+
+[#580]: https://github.com/learningequality/kolibri-design-system/pull/580
+
 - [#415]
   - **Description:** Upgrade purecss from 0.6.2 to 2.2.0
   - **Products impact:** Updates for base styling for all elements
