@@ -1,10 +1,16 @@
 <template>
 
+  <div>
   <UiPopover
+    v-if="trigger"
     ref="popover"
-    :z-index="99"
+    :z-index="100"
+    :trigger="trigger"
     :containFocus="true"
     :dropdownPosition="position"
+    :positionX="contextMenuPosition[0]"
+    :positionY="contextMenuPosition[1]"
+    :openOn="isContextMenu ? 'manual' : 'click'"
     :constrainToScrollParent="constrainToScrollParent"
     @close="handleClose"
     @open="handleOpen"
@@ -16,14 +22,16 @@
       @select="handleSelection" 
     />
   </UiPopover>
-
+</div>
 </template>
 
 
 <script>
 
-  import UiPopover from './keen/UiPopover';
   import UiMenu from './keen/UiMenu';
+  import UiPopover from './keen/UiPopover';
+  import { computed } from '@vue/composition-api';
+  import useKContextMenu from './composables/_useKContextMenu';
 
   /**
    * The KDropdownMenu component is used to contain multiple actions
@@ -79,6 +87,33 @@
           ].includes(val);
         },
       },
+      isContextMenu : {
+        type: Boolean,
+        default: false,
+      },
+    },
+    data() {
+      return {
+        trigger: null,
+      };
+    },
+    mounted() {
+      this.trigger = this.$el.parentElement;
+    },
+    setup(props) {
+      if (props.isContextMenu) {
+        const { clientX, clientY, isActive } = useKContextMenu();
+        const contextMenuPosition = computed(() => [clientX.value, clientY.value]);
+
+        return {
+          contextMenuPosition,
+          isContextMenuActive: isActive,
+        };
+      }
+      return {
+        contextMenuPosition: [],
+        isContextMenuActive: null,
+      };
     },
     beforeDestroy() {
       window.removeEventListener('keydown', this.handleOpenMenuNavigation, true);
@@ -151,6 +186,24 @@
           this.$refs.button.$el.focus();
         }
       },
+    },
+    watch: {
+      isContextMenuActive() {
+        if (this.isContextMenuActive) {
+          this.$nextTick(() => {
+            this.$refs.popover.open();
+          });
+        } else {
+          this.$refs.popover.close();
+        }
+      },
+      contextMenuPosition() {
+        if (this.isContextMenuActive) {
+          this.$nextTick(() => {
+            this.$refs.popover.open();
+          });
+        }
+      }
     },
   };
 

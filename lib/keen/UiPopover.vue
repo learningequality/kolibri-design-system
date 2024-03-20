@@ -81,6 +81,8 @@
         },
       },
       zIndex: Number,
+      positionX: Number,
+      positionY: Number,
     },
 
     data() {
@@ -188,9 +190,50 @@
        * @public
        */
       open() {
-        if (this.tip) {
+        if (!this.tip) {
+          return;
+        }
+        if (this.positionX || this.positionY) {
+          this.openInPosition(this.positionX, this.positionY);
+        } else {
           this.tip.show();
         }
+      },
+      openInPosition(x, y) {
+        if (!this.tip.popperInstance) {
+          this.tip.show(); // Ensure popperInstance is created
+        }
+
+        const isVerticalPlacement = ['top', 'bottom'].includes(this.position.split('-')[0]);
+        const variation = this.position.split('-')[1];
+        const size = isVerticalPlacement ? this.$el.clientWidth : this.$el.clientHeight;
+        const middle = size / 2;
+
+        const positionVariationMap = {
+          start: 0,
+          end: size,
+        };
+        let verticalIncrease;
+        let horizontalIncrease;
+        if (isVerticalPlacement) {
+          verticalIncrease = 0;
+          horizontalIncrease = variation ? positionVariationMap[variation] : middle;
+        } else {
+          verticalIncrease = variation ? positionVariationMap[variation] : middle;
+          horizontalIncrease = 0;
+        }
+
+        this.tip.popperInstance.reference.getBoundingClientRect = function getBoundingClientRect() {
+          return {
+            width: isVerticalPlacement ? size : 0,
+            height: isVerticalPlacement ? 0 : size,
+            top: y - verticalIncrease,
+            bottom: y + verticalIncrease,
+            left: x - horizontalIncrease,
+            right: x + horizontalIncrease
+          };
+        };
+        this.tip.show();
       },
 
       close(options = { returnFocus: true }) {
