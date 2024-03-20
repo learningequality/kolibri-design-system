@@ -204,6 +204,8 @@
           this.tip.show(); // Ensure popperInstance is created
         }
 
+        // This logic is similar to what tippy.js uses to position the popup near the cursor.
+        // see https://github.com/atomiks/tippyjs/blob/v4.3.5/src/createTippy.ts#L395
         const isVerticalPlacement = ['top', 'bottom'].includes(this.position.split('-')[0]);
         const variation = this.position.split('-')[1];
         const size = isVerticalPlacement ? this.$el.clientWidth : this.$el.clientHeight;
@@ -223,7 +225,7 @@
           horizontalIncrease = 0;
         }
 
-        this.tip.popperInstance.reference.getBoundingClientRect = function getBoundingClientRect() {
+        this.tip.popperInstance.reference.getBoundingClientRect = () => {
           return {
             width: isVerticalPlacement ? size : 0,
             height: isVerticalPlacement ? 0 : size,

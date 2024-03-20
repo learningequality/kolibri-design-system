@@ -87,6 +87,10 @@
           ].includes(val);
         },
       },
+      /**
+       * Whether or not the dropdown is a context menu, if true, the dropdown will open when
+       * the user right-clicks the parent element
+       */
       isContextMenu : {
         type: Boolean,
         default: false,
