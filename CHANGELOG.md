@@ -7,7 +7,7 @@ Changelog is rather internal in nature. See release notes for the public overvie
 - [#583]
   - **Description:** KDropdownMenu menu support to show context menus with `isContextMenu` prop.
   - **Products impact:** new API.
-  - **Addresses:** https://github.com/learningequality/kolibri-design-system/issues/571.
+  - **Addresses:** https://github.com/learningequality/kolibri-design-system/issues/571, https://github.com/learningequality/studio/issues/4403.
   - **Components:** KDropdownMenu.
   - **Breaking:** no.
   - **Impacts a11y:** no.
