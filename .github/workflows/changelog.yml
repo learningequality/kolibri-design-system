@@ -21,16 +21,14 @@ jobs:
       - name: Check PR Description
         id: check_description
         run: |
-          description=$(jq -r ".pull_request.body" "$GITHUB_EVENT_PATH" | awk '/## Changelog/{flag=1; next} /##/{flag=0} flag' | grep -m 1 '**Description:' | sed 's/^[[:space:]]*//;s/[[:space:]]*$//' | cut -d':' -f2- | sed 's/^\*\* //'
-          )
+          description=$(jq -r ".pull_request.body" "$GITHUB_EVENT_PATH" | awk '/## Changelog/{flag=1; next} /##/{flag=0} flag' | grep -oP '(?<=- \*\*Description:\*\* ).*' | sed 's/^[[:space:]]*//;s/[[:space:]]*$//')
           echo "$description"
           default_description="Summary of change(s)"
-          if [ "$description" != "$default_description" ]; then
+          if [ -n "$description" ] && [ "$description" != "$default_description" ]; then
             echo "containsChangelog=true" >> $GITHUB_OUTPUT
           else
-            echo "containsChangelog=false" >> $GITHUB_OUTPUT
+              echo "containsChangelog=false" >> $GITHUB_OUTPUT
           fi
-        
 
       - name: Results
         run: |
@@ -38,6 +36,6 @@ jobs:
             echo "PR contains Changelog section/ PR made by Dependabot"
             exit 0
           else
-            echo "PR does not contain Changelog section"
+            echo "Changelog section is missing or does not contain the required details"
             exit 1
           fi
