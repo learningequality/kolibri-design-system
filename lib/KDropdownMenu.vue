@@ -5,6 +5,7 @@
     :z-index="99"
     :containFocus="true"
     :dropdownPosition="position"
+    :constrainToScrollParent="constrainToScrollParent"
     @close="handleClose"
     @open="handleOpen"
   >
@@ -34,6 +35,11 @@
       UiMenu,
     },
     props: {
+       // Override default prop value
+      constrainToScrollParent: {
+        type: Boolean,
+        default: false
+      },
       /**
        * An array of options objects, with one object per dropdown item
        */
