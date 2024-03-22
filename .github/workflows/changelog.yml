@@ -12,12 +12,6 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Check if PR is from dependabot
-        id: check-dependabot
-        run: |
-          is_dependabot=$(jq -r '.pull_request.user.login' $GITHUB_EVENT_PATH)
-          echo "is_dependabot=$is_dependabot" >> $GITHUB_OUTPUT
-
       - name: Check PR Description
         id: check_description
         run: |
@@ -32,7 +26,7 @@ jobs:
 
       - name: Results
         run: |
-          if [[ "${{ steps.check_description.outputs.containsChangelog }}" == "true" || "${{ steps.check-dependabot.outputs.is_dependabot }}" == "dependabot[bot]" ]]; then
+          if [[ "${{ steps.check_description.outputs.containsChangelog }}" == "true" || "${{ github.event.pull_request.user.login }}" == "dependabot[bot]" ]]; then
             echo "PR contains Changelog section/ PR made by Dependabot"
             exit 0
           else
