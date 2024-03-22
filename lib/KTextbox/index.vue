@@ -7,6 +7,8 @@
       class="textbox"
       :label="label"
       :disabled="disabled"
+      :clearAriaLabel="clearAriaLabel"
+      :clearable="clearable"
       :invalid="showInvalidMessage"
       :error="invalidText"
       :autofocus="autofocus"
@@ -50,6 +52,10 @@
         type: String,
         required: true,
       },
+      /**
+       * Value of the aria-label for clear button
+       */
+      clearAriaLabel: { type: String, default: 'Clear' },
       /**
        * Value of the text field
        */
@@ -139,6 +145,13 @@
        * Whether to display as a multi-line text area
        */
       textArea: {
+        type: Boolean,
+        default: false,
+      },
+      /**
+       * When set to `true`, the component displays a clear button inside the input field.
+       */
+      clearable: {
         type: Boolean,
         default: false,
       },
