@@ -18,16 +18,10 @@ jobs:
         with:
           ref: ${{ github.event.pull_request.base.ref }}
 
-      - name: Check if PR is from dependabot
-        id: check-dependabot
-        run: |
-          is_dependabot=$(jq -r '.pull_request.user.login' $GITHUB_EVENT_PATH)
-          echo "is_dependabot=$is_dependabot" >> $GITHUB_OUTPUT
-        
       - name: Extract and update Changelog
         id: modify-changelog
         run: |
-          if [ "${{ steps.check-dependabot.outputs.is_dependabot }}" == "dependabot[bot]" ]; then
+          if [ "${{ github.event.pull_request.user.login }}" == "dependabot[bot]" ]; then
           changelog="- **Description:** ${{ github.event.pull_request.title }}\n  - **Products impact:** Dev Dependency upgrade\n  - **Addresses:** -\n  - **Components:** -\n  - **Breaking:** -\n  - **Impacts a11y:** -\n  - **Guidance:** -"
           else
             description=$(jq -r ".pull_request.body" "$GITHUB_EVENT_PATH")
