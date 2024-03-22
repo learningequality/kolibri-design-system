@@ -117,7 +117,10 @@
    */
   export default {
     name: 'KModal',
-    mixins: [KResponsiveWindowMixin],
+    setup() {
+      const { windowHeight, windowWidth } = useKResponsiveWindow();
+      return { windowHeight, windowWidth };
+    },
     props: {
       /**
        * The title of the modal
