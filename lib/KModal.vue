@@ -245,25 +245,24 @@
       this.lastFocus = document.activeElement;
     },
     mounted() {
-      if (nuxtServerSideRendering) {
-        return;
-      }
-      // Remove scrollbars from the <html> tag, so user's can't scroll while modal is open
-      window.document.documentElement.style['overflow'] = 'hidden';
-      this.$nextTick(() => {
-        if (this.$refs.modal && !this.$refs.modal.contains(document.activeElement)) {
-          this.focusModal();
-        }
-      });
-      window.addEventListener('focus', this.focusElementTest, true);
-      window.setTimeout(() => (this.delayedEnough = true), 500);
-
-      // if modal contains KSelect, special classes & styles will be applied
-      const kSelectCheck = document.querySelector('div.modal div.ui-select');
-      this.containsKSelect = !!kSelectCheck;
-      this.observeContentChanges();
-      this.attachInputListeners();
-    },
+  if (nuxtServerSideRendering) {
+    return;
+  }
+  // Remove scrollbars from the <html> tag, so user's can't scroll while modal is open
+  window.document.documentElement.style['overflow'] = 'hidden';
+  this.$nextTick(() => {
+    if (this.$refs.modal && !this.$refs.modal.contains(document.activeElement)) {
+      this.focusModal();
+    }
+  });
+  window.addEventListener('focus', this.focusElementTest, true);
+  window.setTimeout(() => (this.delayedEnough = true), 500);
+  
+  // if modal contains KSelect, special classes & styles will be applied
+  const kSelectCheck = document.querySelector('div.modal div.ui-select');
+  this.containsKSelect = !!kSelectCheck;
+  this.attachInputListeners();
+},
     updated() {
       this.updateContentSectionStyle();
     },
@@ -286,46 +285,48 @@
        */
       updateContentSectionStyle: debounce(function() {
         if (this.$refs.title && this.$refs.actions) {
-          if (Math.abs(this.$refs.content.scrollHeight - this.contentHeight) >= 8) {
+        // calculate of new content height based on scrollHeight.
+        const newContentHeight = this.$refs.content.scrollHeight;
+        if (Math.abs(newContentHeight - this.contentHeight) >= 8) {
             // if there's dropdown & it is opened, the new scrollHeight detected shouldn't be applied,
             // or else the modal will elongate after the dropdown content has been closed
             this.contentHeight = this.containsKSelect
-              ? this.modalContentHeight
-              : this.$refs.content.scrollHeight;
-          }
+                ? this.modalContentHeight
+                : newContentHeight;
+        }
 
-          const maxContentHeightCheck =
+        const maxContentHeightCheck =
             this.windowHeight -
             this.$refs.title.clientHeight -
             this.$refs.actions.clientHeight -
             32;
 
-          // to prevent max height from toggling between pixels
-          // we set a threshold of how many pixels the height should change before we update
-          if (Math.abs(maxContentHeightCheck - this.maxContentHeight) >= 8) {
+        // to prevent max height from toggling between pixels
+        // we set a threshold of how many pixels the height should change before we update
+        if (Math.abs(maxContentHeightCheck - this.maxContentHeight) >= 8) {
             this.maxContentHeight = maxContentHeightCheck;
             this.scrollShadow = this.maxContentHeight < this.$refs.content.scrollHeight;
-          }
+        }
 
-          // make sure that overflow-y won't be updated to 'auto' if this function is running for the first time
-          // (otherwise Firefox would add a vertical scrollbar right away) + don't apply if modal contains KSelect
-          // (otherwise KSelect will be trapped inside modal if KSelect is opened a second time)
-          if (this.$refs.content.clientHeight !== 0 && !this.containsKSelect) {
+        // make sure that overflow-y won't be updated to 'auto' if this function is running for the first time
+        // (otherwise Firefox would add a vertical scrollbar right away) + don't apply if modal contains KSelect
+        // (otherwise KSelect will be trapped inside modal if KSelect is opened a second time)
+        if (this.$refs.content.clientHeight !== 0 && !this.containsKSelect) {
             // add a vertical scrollbar if content doesn't fit
             this.$refs.content.style.overflowY =
-              this.$refs.content.scrollHeight > this.$refs.content.clientHeight ? 'auto' : 'hidden';
-          }
+                this.$refs.content.scrollHeight > this.$refs.content.clientHeight ? 'auto' : 'hidden';
         }
-        if (this.$refs.content) {
-          this.$refs.content.style.height = 'auto';
-          this.$refs.content.style.height = `${this.$refs.content.scrollHeight}px`;
-        }
+
+        if (this.contentHeight !== this.$refs.content.clientHeight) {
+            this.$refs.content.style.height = `${this.contentHeight}px`;
+            }
+      }
       }, 50),
       attachInputListeners() {
         const textInputs = this.$refs.content.querySelectorAll('input[type="text"], textarea');
         textInputs.forEach(input => {
           input.addEventListener('input', () => {
-            this.updateContentSectionStyle();
+            this.$refs.content.style.height = 'auto'; 
           });
         });
       },
