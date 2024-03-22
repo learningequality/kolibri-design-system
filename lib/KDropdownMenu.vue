@@ -35,10 +35,12 @@
       UiMenu,
     },
     props: {
-       // Override default prop value
+      /**
+       * The dropdown menu popover flips its position to avoid overflows within the parent. Setting it to false disables the flipping behavior.
+       */
       constrainToScrollParent: {
         type: Boolean,
-        default: false
+        default: true,
       },
       /**
        * An array of options objects, with one object per dropdown item
