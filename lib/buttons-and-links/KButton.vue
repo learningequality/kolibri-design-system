@@ -117,19 +117,6 @@
       };
     },
     computed: {
-      iconColor() {
-        if (this.appearance === 'basic-link') {
-          return this.hovering ? this.$themeTokens.primaryDark : this.$themeTokens.primary;
-        }
-
-        if (this.secondary) {
-          return this.appearance === 'raised-button'
-            ? this.$themeBrand.textInverted
-            : this.$themeBrand.secondary;
-        } else {
-          return this.$themeBrand.text;
-        }
-      },
       htmlTag() {
         // Necessary to allow basic links to be rendered as 'inline' instead of
         // 'inline-block': https://stackoverflow.com/a/27770128
@@ -139,12 +126,9 @@
         return 'button';
       },
       arrowStyles() {
-        if (this.secondary) {
-          return {
-            fill: this.$themeBrand.textInverted,
-          };
-        }
-        return {};
+        return {
+          fill: this.iconColor,
+        };
       },
       textStyle() {
         let styles = {};
