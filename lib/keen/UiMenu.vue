@@ -22,8 +22,8 @@
       :target="option[keys.target]"
 
       :type="option[keys.type]"
-      @click.native="selectOption(option)"
-      @keydown.enter.native="selectOption(option)"
+      @click.native="($event) => selectOption(option, $event)"
+      @keydown.enter.native="($event) => selectOption(option, $event)"
 
       @keydown.esc.native.esc="closeMenu"
       :style="[ activeOutline ]"
@@ -107,12 +107,12 @@
     },
 
     methods: {
-      selectOption(option) {
+      selectOption(option, $event) {
         if (option.disabled || option.type === 'divider') {
           return;
         }
 
-        this.$emit('select', option);
+        this.$emit('select', option, $event);
         this.closeMenu();
       },
       closeMenu() {
