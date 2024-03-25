@@ -38,7 +38,7 @@
             {{ errorMessage }}
           </span>
         </h1>
-
+  
         <!-- Stop propagation of enter key to prevent the submit event from being emitted twice -->
         <form
           class="form"
@@ -61,7 +61,7 @@
             <!-- @slot Main content of modal -->
             <slot></slot>
           </div>
-
+  
           <div
             ref="actions"
             class="actions"
@@ -95,12 +95,12 @@
       </div>
     </div>
   </transition>
-
-</template>
-
-
-<script>
-
+  
+  </template>
+  
+  
+  <script>
+  
   import debounce from 'lodash/debounce';
   import useKResponsiveWindow from './composables/useKResponsiveWindow';
 
@@ -108,10 +108,10 @@
   const SIZE_MD = 'medium';
   const SIZE_LG = 'large';
   const SIZE_STRINGS = [SIZE_SM, SIZE_MD, SIZE_LG];
-
+  
   // check for Nuxt.js SSR
   const nuxtServerSideRendering = process && process.server;
-
+  
   /**
    * Used to focus attention on a singular action/task
    */
@@ -286,40 +286,54 @@
        * If there is not enough vertical space, create a vertically scrollable area and a
        * scroll shadow
        */
-      updateContentSectionStyle: debounce(function() {
-        if (this.$refs.title && this.$refs.actions) {
-          if (Math.abs(this.$refs.content.scrollHeight - this.contentHeight) >= 8) {
-            // if there's dropdown & it is opened, the new scrollHeight detected shouldn't be applied,
-            // or else the modal will elongate after the dropdown content has been closed
-            this.contentHeight = this.containsKSelect
-              ? this.modalContentHeight
-              : this.$refs.content.scrollHeight;
+       updateContentSectionStyle: debounce(function() {
+      if (this.$refs.title && this.$refs.actions) {
+          // calculate new content height based on scrollHeight
+          const newContentHeight = this.$refs.content.scrollHeight;
+          if (Math.abs(newContentHeight - this.contentHeight) >= 8) {
+              // if there's dropdown & it is opened, the new scrollHeight detected shouldn't be applied,
+              // or else the modal will elongate after the dropdown content has been closed
+              this.contentHeight = this.containsKSelect
+                  ? this.modalContentHeight
+                  : newContentHeight;
           }
-
+  
           const maxContentHeightCheck =
-            this.windowHeight -
-            this.$refs.title.clientHeight -
-            this.$refs.actions.clientHeight -
-            32;
-
+              this.windowHeight -
+              this.$refs.title.clientHeight -
+              this.$refs.actions.clientHeight -
+              32;
+  
           // to prevent max height from toggling between pixels
           // we set a threshold of how many pixels the height should change before we update
           if (Math.abs(maxContentHeightCheck - this.maxContentHeight) >= 8) {
-            this.maxContentHeight = maxContentHeightCheck;
-            this.scrollShadow = this.maxContentHeight < this.$refs.content.scrollHeight;
+              this.maxContentHeight = maxContentHeightCheck;
+              this.scrollShadow = this.maxContentHeight < this.$refs.content.scrollHeight;
           }
-
+  
           // make sure that overflow-y won't be updated to 'auto' if this function is running for the first time
           // (otherwise Firefox would add a vertical scrollbar right away) + don't apply if modal contains KSelect
           // (otherwise KSelect will be trapped inside modal if KSelect is opened a second time)
           if (this.$refs.content.clientHeight !== 0 && !this.containsKSelect) {
-            // add a vertical scrollbar if content doesn't fit
-            if (this.$refs.content.scrollHeight > this.$refs.content.clientHeight) {
-              this.$refs.content.style.overflowY = 'auto';
-            }
+              // add a vertical scrollbar if content doesn't fit
+              this.$refs.content.style.overflowY =
+                  this.$refs.content.scrollHeight > this.$refs.content.clientHeight ? 'auto' : 'hidden';
           }
-        }
-      }, 50),
+  
+          // we only update when necessary
+          if (this.contentHeight !== this.$refs.content.clientHeight) {
+              this.$refs.content.style.height = `${this.contentHeight}px`;
+          }
+      }
+  }, 50),
+      attachInputListeners() {
+        const textInputs = this.$refs.content.querySelectorAll('input[type="text"], textarea');
+        textInputs.forEach(input => {
+          input.addEventListener('input', () => {
+            this.$refs.content.style.height = 'auto'; 
+          });
+        });
+      },
       emitCancelEvent() {
         if (!this.cancelDisabled) {
           /**
@@ -367,14 +381,14 @@
       },
     },
   };
-
-</script>
-
-
-<style lang="scss" scoped>
-
+  
+  </script>
+  
+  
+  <style lang="scss" scoped>
+  
   @import './styles/definitions';
-
+  
   .modal-overlay {
     position: fixed;
     top: 0;
@@ -386,48 +400,48 @@
     background-attachment: fixed;
     transition: opacity $core-time ease;
   }
-
+  
   // TODO: margins for stacked buttons.
   .modal {
     @extend %dropshadow-16dp;
-
+  
     position: absolute;
     top: 50%;
     left: 50%;
     margin: 0 auto;
     border-radius: $radius;
     transform: translate(-50%, -50%);
-
+  
     &:focus {
       outline: none;
     }
   }
-
+  
   .form {
     @extend %momentum-scroll;
   }
-
+  
   .modal-fade-enter-active,
   .modal-fade-leave-active {
     transition: all $core-time ease;
   }
-
+  
   .modal-fade-enter,
   .modal-fade-leave-active {
     opacity: 0;
   }
-
+  
   .title {
     padding: 24px;
     margin: 0;
     font-size: 24px;
   }
-
+  
   .content {
     padding: 0 24px;
     overflow-x: hidden;
   }
-
+  
   .scroll-shadow {
     background: linear-gradient(white 30%, hsla(0, 0%, 100%, 0)),
       linear-gradient(hsla(0, 0%, 100%, 0) 10px, white 70%) bottom,
@@ -441,7 +455,7 @@
   .contains-kselect {
     overflow: unset;
   }
-
+  
   .actions {
     padding: 24px;
     text-align: right;
@@ -454,4 +468,5 @@
     margin-left: 16px;
   }
 
-</style>
+  </style>
+  
