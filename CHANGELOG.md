@@ -31,7 +31,7 @@ Changelog is rather internal in nature. See release notes for the public overvie
   - **Impacts a11y:** no.
   - **Guidance:** -.
 
-  - [#583]
+- [#583]
   - **Description:** KDropdownMenu menu support to show a header slot.
   - **Products impact:** new API.
   - **Addresses:** - .
