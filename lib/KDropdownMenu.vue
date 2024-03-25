@@ -15,6 +15,8 @@
       @close="handleClose"
       @open="handleOpen"
     >
+      <!-- Slot to set a header to the dropdown menu -->
+      <slot name="header"></slot>
       <UiMenu 
         ref="menu" 
         :options="options" 
@@ -23,6 +25,7 @@
       />
     </UiPopover>
   </div>
+
 </template>
 
 
