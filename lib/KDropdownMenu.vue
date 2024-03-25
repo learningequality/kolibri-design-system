@@ -192,11 +192,11 @@
           this.closePopover();
         }
       },
-      handleSelection(selection) {
+      handleSelection(selection, $event) {
         /**
          * Emitted when an option is selected
          */
-        this.$emit('select', selection);
+        this.$emit('select', selection, $event);
         this.closePopover();
       },
       closePopover() {
