@@ -31,6 +31,15 @@ Changelog is rather internal in nature. See release notes for the public overvie
   - **Impacts a11y:** no.
   - **Guidance:** -.
 
+  - [#583]
+  - **Description:** KDropdownMenu menu support to show a header slot.
+  - **Products impact:** new API.
+  - **Addresses:** - .
+  - **Components:** KDropdownMenu.
+  - **Breaking:** no.
+  - **Impacts a11y:** no.
+  - **Guidance:** -.
+
 [#583]: https://github.com/learningequality/kolibri-design-system/pull/583
 
 - [#611]
