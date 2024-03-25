@@ -13,8 +13,6 @@ Changelog is rather internal in nature. See release notes for the public overvie
   - **Impacts a11y:** no.
   - **Guidance:** -.
 
-[#583]: https://github.com/learningequality/kolibri-design-system/pull/583
-
 - [#583]
   - **Description:** New `useKContextMenu` private composable
   - **Products impact:** - .
@@ -22,6 +20,15 @@ Changelog is rather internal in nature. See release notes for the public overvie
   - **Components:** - .
   - **Breaking:** - .
   - **Impacts a11y:** - .
+  - **Guidance:** -.
+
+- [#583]
+  - **Description:** Expose the event object as second argument on KDropdownMenu's select event.
+  - **Products impact:** updated API.
+  - **Addresses:** - .
+  - **Components:** KDropdownMenu.
+  - **Breaking:** no.
+  - **Impacts a11y:** no.
   - **Guidance:** -.
 
 [#583]: https://github.com/learningequality/kolibri-design-system/pull/583
