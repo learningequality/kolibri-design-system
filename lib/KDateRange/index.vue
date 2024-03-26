@@ -64,7 +64,6 @@
   import get from 'lodash/get';
   import debounce from 'lodash/debounce';
   import KModal from '../KModal';
-  import KResponsiveWindowMixin from '../KResponsiveWindowMixin';
   import KDateCalendar from './KDateCalendar';
   import KDateInput from './KDateInput';
   import { validationMachine, initialContext } from './ValidationMachine';
@@ -77,7 +76,6 @@
       KDateInput,
       KDateCalendar,
     },
-    mixins: [KResponsiveWindowMixin],
     props: {
       /**
        * Constrains the selection to after this date, disabling dates prior

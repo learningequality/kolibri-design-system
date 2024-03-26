@@ -17,7 +17,7 @@
 
 <script>
 
-  import KResponsiveWindowMixin from '../KResponsiveWindowMixin';
+  import useKResponsiveWindow from '../composables/useKResponsiveWindow';
   import Overlay from './Overlay';
   import { validateGutter } from './common';
 
@@ -27,7 +27,10 @@
   export default {
     name: 'KFixedGrid',
     components: { Overlay },
-    mixins: [KResponsiveWindowMixin],
+    setup() {
+      const { windowGutter } = useKResponsiveWindow();
+      return { windowGutter };
+    },
     props: {
       /**
        * The number of columns. Can be an integer between `2` and `12`

@@ -2,7 +2,84 @@
 
 Changelog is rather internal in nature. See release notes for the public overview and guidelines. Releases are recorded as git tags in the [Github releases](https://github.com/learningequality/kolibri-design-system/releases) page.
 
-## Upcoming version 5.x.x (`develop` branch)
+## Version 4.x.x (`release-v4` branch)
+
+- [#561]
+  - **Description:** Update KLogo for new branding guidelines
+  - **Products impact:** Enables general use of KLogo for all frontend logo usage. Changes props API for square logo presentation.
+  - **Addresses:** Updates logo to new logo, adds all permissible alternates, adds animated form.
+  - **Components:** KLogo
+  - **Breaking:** Yes
+  - **Impacts a11y:** No
+  - **Guidance:** Rendering the Kolibri logo can now be done using the KLogo component, as well as the loading animation.
+
+[#561]: https://github.com/learningequality/kolibri-design-system/pull/561
+
+- [#580]
+  - **Description:** Remove use of KResponsiveWindowMixin internally
+  - **Products impact:** - none
+  - **Addresses:** -
+  - **Components:** KDateRange, KModal, KPageContainer, KGrid, KFixedGrid, KGridItem, KFixedGridItem
+  - **Breaking:** no
+  - **Impacts a11y:** no
+  - **Guidance:** Updates all components to use the useKResponsiveWindow composable
+
+[#580]: https://github.com/learningequality/kolibri-design-system/pull/580
+
+- [#415]
+  - **Description:** Upgrade purecss from 0.6.2 to 2.2.0
+  - **Products impact:** Updates for base styling for all elements
+  - **Addresses:** -
+  - **Components:** -
+  - **Breaking:** -
+  - **Impacts a11y:** -
+  - **Guidance:** -
+
+[#415]: https://github.com/learningequality/kolibri-design-system/pull/415
+
+- [#569]
+  - **Description:** Upgrade actions/setup-node from 3 to 4
+  - **Products impact:** Dependencies
+  - **Addresses:** -
+  - **Components:** -
+  - **Breaking:** -
+  - **Impacts a11y:** -
+  - **Guidance:** -
+
+[#569]: https://github.com/learningequality/kolibri-design-system/pull/569
+
+- [#576]
+  - **Description:** Upgrade follow-redirects from 1.15.4 to 1.15.6
+  - **Products impact:** Dependencies
+  - **Addresses:** -
+  - **Components:** -
+  - **Breaking:** -
+  - **Impacts a11y:** -
+  - **Guidance:** -
+
+[#576]: https://github.com/learningequality/kolibri-design-system/pull/576
+
+- [#553]
+  - **Description:** Upgrade ip from 1.1.5 to 1.1.9
+  - **Products impact:** Dependencies
+  - **Addresses:** -
+  - **Components:** -
+  - **Breaking:** -
+  - **Impacts a11y:** -
+  - **Guidance:** -
+
+[#553]: https://github.com/learningequality/kolibri-design-system/pull/553
+
+- [#559]
+  - **Description:** Upgrade lodash from 4.17.15 to 4.17.21
+  - **Products impact:** Dependencies
+  - **Addresses:** -
+  - **Components:** -
+  - **Breaking:** -
+  - **Impacts a11y:** -
+  - **Guidance:** -
+
+[#559]: https://github.com/learningequality/kolibri-design-system/pull/559
 
 - [#555]
   - **Description:** Add action to notify us on Slack about GH issues comments from contributors community
@@ -15,7 +92,16 @@ Changelog is rather internal in nature. See release notes for the public overvie
 
 [#555]: https://github.com/learningequality/kolibri-design-system/pull/555
 
-## Version 4.x.x (`release-v4` branch)
+- [#565]
+  - **Description:** Revert adding engines
+  - **Products impact:** Dependencies
+  - **Addresses:** KDS not being installable by consumers that don't use Node 10
+  - **Components:** -
+  - **Breaking:** -
+  - **Impacts a11y:** -
+  - **Guidance:** -
+
+[#565]: https://github.com/learningequality/kolibri-design-system/pull/565
 
 - [#560]
   - **Description:** Configure dependabot to run on Wednesday

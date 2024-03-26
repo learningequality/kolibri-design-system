@@ -15,7 +15,7 @@
 
 <script>
 
-  import KResponsiveWindowMixin from '../KResponsiveWindowMixin';
+  import useKResponsiveWindow from '../composables/useKResponsiveWindow';
   import KFixedGrid from './KFixedGrid';
   import { validateGutter } from './common';
 
@@ -29,7 +29,10 @@
   export default {
     name: 'KGrid',
     components: { KFixedGrid },
-    mixins: [KResponsiveWindowMixin],
+    setup() {
+      const { windowIsSmall, windowIsMedium } = useKResponsiveWindow();
+      return { windowIsSmall, windowIsMedium };
+    },
     props: {
       /**
        * The size of column gutters in pixels. If not provided, the gutter is set to `16px`

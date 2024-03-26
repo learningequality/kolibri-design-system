@@ -10,7 +10,7 @@
 
 <script>
 
-  import KResponsiveWindowMixin from '../KResponsiveWindowMixin';
+  import useKResponsiveWindow from '../composables/useKResponsiveWindow';
   import KFixedGridItem from './KFixedGridItem';
   import { validateAlignment, validateSpan } from './common';
 
@@ -51,7 +51,10 @@
   export default {
     name: 'KGridItem',
     components: { KFixedGridItem },
-    mixins: [KResponsiveWindowMixin],
+    setup() {
+      const { windowIsSmall, windowIsMedium } = useKResponsiveWindow();
+      return { windowIsSmall, windowIsMedium };
+    },
     props: {
       /**
        * Default layout object, for all grid sizes

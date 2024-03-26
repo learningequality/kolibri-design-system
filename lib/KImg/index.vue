@@ -53,6 +53,8 @@
 
 <script>
 
+  import { validateAndFormatUnits } from './utils';
+
   const ScaleTypes = {
     CENTER_INSIDE: 'centerInside',
     CONTAIN: 'contain',
@@ -226,12 +228,12 @@
             backgroundColor,
             borderRadius,
             overflow: 'hidden',
-            height: this.validateAndFormatUnits(this.height),
-            width: this.validateAndFormatUnits(this.width),
-            maxHeight: this.validateAndFormatUnits(this.maxHeight),
-            minHeight: this.validateAndFormatUnits(this.minHeight),
-            maxWidth: this.validateAndFormatUnits(this.maxWidth),
-            minWidth: this.validateAndFormatUnits(this.minWidth),
+            height: validateAndFormatUnits(this.height),
+            width: validateAndFormatUnits(this.width),
+            maxHeight: validateAndFormatUnits(this.maxHeight),
+            minHeight: validateAndFormatUnits(this.minHeight),
+            maxWidth: validateAndFormatUnits(this.maxWidth),
+            minWidth: validateAndFormatUnits(this.minWidth),
           },
           ratioContainer: {
             display: 'block',
@@ -358,36 +360,6 @@
       }
     },
     methods: {
-      validateAndFormatUnits(propValue) {
-        if (propValue) {
-          if (!isNaN(propValue)) {
-            return `${propValue}px`;
-          } else {
-            // split numbers apart from units
-            const [, ...arr] = propValue.match(/(\d*\.?\d+)([a-zA-Z | %]*)/);
-            const validUnits = [
-              '%',
-              'cm',
-              'em',
-              'ex',
-              'ch',
-              'in',
-              'lh',
-              'mm',
-              'px',
-              'rem',
-              'rlh',
-              'vh',
-              'vw',
-            ];
-
-            // if made up of valid numbers and valid units
-            if (!isNaN(arr[0]) && validUnits.includes(arr[1])) {
-              return propValue;
-            }
-          }
-        }
-      },
       onError(event) {
         /**
          * Emitted when the image fails to load. The DOM event that triggered the error is available in the payload.

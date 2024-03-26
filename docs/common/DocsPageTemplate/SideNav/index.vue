@@ -8,7 +8,7 @@
     >
       <template if="loaded">
         <h1 class="header">
-          <file-svg src="./kolibri-logo.svg" class="logo" />
+          <KLogo altText="Design System" size="60" :showBackground="true" />
           <span class="header-text">Design System</span>
         </h1>
 
