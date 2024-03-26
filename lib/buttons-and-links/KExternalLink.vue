@@ -18,7 +18,7 @@
         v-if="icon"
         :icon="icon"
         style="top: 4px;"
-        :color="hovering ? $themeTokens.primaryDark : $themeTokens.primary"
+        :color="iconColor"
       />
     </slot>
 
@@ -33,14 +33,14 @@
         v-if="iconAfter"
         :icon="iconAfter"
         style="top: 4px;"
-        :color="hovering ? $themeTokens.primaryDark : $themeTokens.primary"
+        :color="iconColor"
       />
     </slot>
     <KIcon
       v-if="openInNewTab"
       icon="openNewTab"
       style="top: 4px;"
-      :color="hovering ? $themeTokens.primaryDark : $themeTokens.primary"
+      :color="iconColor"
     />
   </a>
 
