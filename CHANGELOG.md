@@ -15,6 +15,17 @@ Changelog is rather internal in nature. See release notes for the public overvie
 
 [#586]: https://github.com/learningequality/kolibri-design-system/pull/586
 
+- [#573]
+  - **Description:** More precise calculation of list with in KListWithOverflow.
+  - **Products impact:** bugfix.
+  - **Addresses:** -.
+  - **Components:** KListWithOverflow.
+  - **Breaking:** no.
+  - **Impacts a11y:** no.
+  - **Guidance:** -.
+
+[#573]: https://github.com/learningequality/kolibri-design-system/pull/573
+
 - [#552]
   - **Description:** New `KListWithOverflow` component.
   - **Products impact:** new API.
