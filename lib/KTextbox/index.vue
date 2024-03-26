@@ -7,6 +7,7 @@
       class="textbox"
       :label="label"
       :disabled="disabled"
+      :clearable="clearable"
       :invalid="showInvalidMessage"
       :error="invalidText"
       :autofocus="autofocus"
@@ -139,6 +140,13 @@
        * Whether to display as a multi-line text area
        */
       textArea: {
+        type: Boolean,
+        default: false,
+      },
+      /**
+       * When set to `true`, the component displays a clear button inside the input field.
+       */
+      clearable: {
         type: Boolean,
         default: false,
       },
