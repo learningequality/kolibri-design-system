@@ -34,7 +34,7 @@
     "popper.js": "1.14.6",
     "purecss": "2.2.0",
     "tippy.js": "4.2.1",
-    "vue-intl": "3.1.0",
+    "vue-intl": "6.4.29",
     "xstate": "4.38.3"
   },
   "peerDependencies": {},
