@@ -4,6 +4,17 @@ Changelog is rather internal in nature. See release notes for the public overvie
 
 ## Version 4.x.x (`release-v4` branch)
 
+- [#587]
+  - **Description:** Rebrands icons in buttons and links
+  - **Products impact:** UI
+  - **Addresses:** -
+  - **Components:** `KButton`, `KRouterLink`, `KExternalLink`
+  - **Breaking:** no
+  - **Impacts a11y:** -
+  - **Guidance:** -
+
+[#587]: https://github.com/learningequality/kolibri-design-system/pull/587
+
 - [#561]
   - **Description:** Update KLogo for new branding guidelines
   - **Products impact:** Enables general use of KLogo for all frontend logo usage. Changes props API for square logo presentation.
