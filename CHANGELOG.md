@@ -4,6 +4,17 @@ Changelog is rather internal in nature. See release notes for the public overvie
 
 ## Version 4.x.x (`release-v4` branch)
 
+- [#599]
+  - **Description:** Upgrade express from 4.18.2 to 4.19.2
+  - **Products impact:** -
+  - **Addresses:** -
+  - **Components:** -
+  - **Breaking:** -
+  - **Impacts a11y:** -
+  - **Guidance:** -
+
+[#599]: https://github.com/learningequality/kolibri-design-system/pull/599
+
 - [#587]
   - **Description:** Rebrands icons in buttons and links
   - **Products impact:** UI
