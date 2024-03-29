@@ -15,7 +15,6 @@
 
 <script>
 
-  import KResponsiveWindowMixin from '../KResponsiveWindowMixin';
   import { validateAlignment, validateSpan } from './common';
 
   /**
@@ -23,7 +22,6 @@
    */
   export default {
     name: 'KFixedGridItem',
-    mixins: [KResponsiveWindowMixin],
     props: {
       /**
        * Number of grid columns that the item should span.
