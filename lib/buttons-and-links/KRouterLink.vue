@@ -21,7 +21,7 @@
         v-if="icon"
         :icon="icon"
         style="top: 4px;"
-        :color="hovering ? $themeTokens.primaryDark : $themeTokens.primary"
+        :color="iconColor"
         data-test="icon-before"
       />
     </slot>
@@ -39,7 +39,7 @@
         v-if="iconAfter"
         :icon="iconAfter"
         style="top: 4px;"
-        :color="hovering ? $themeTokens.secondaryDark : $themeTokens.secondary"
+        :color="iconColor"
         data-test="icon-after"
       />
     </slot>

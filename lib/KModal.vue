@@ -102,7 +102,7 @@
 <script>
 
   import debounce from 'lodash/debounce';
-  import KResponsiveWindowMixin from './KResponsiveWindowMixin';
+  import useKResponsiveWindow from './composables/useKResponsiveWindow';
 
   const SIZE_SM = 'small';
   const SIZE_MD = 'medium';
@@ -117,7 +117,10 @@
    */
   export default {
     name: 'KModal',
-    mixins: [KResponsiveWindowMixin],
+    setup() {
+      const { windowHeight, windowWidth } = useKResponsiveWindow();
+      return { windowHeight, windowWidth };
+    },
     props: {
       /**
        * The title of the modal
