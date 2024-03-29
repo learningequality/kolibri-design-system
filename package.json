@@ -1,18 +1,18 @@
 {
   "name": "kolibri-design-system",
-  "version": "v1.3.0",
+  "version": "4.1.0",
   "private": false,
   "description": "The Kolibri Design System defines common design patterns and code for use in Kolibri applications",
   "license": "MIT",
   "author": "Learning Equality",
   "scripts": {
-    "dev": "npm-run-all --parallel _dev-only _lint-watch-fix _api-watch pregenerate",
+    "dev": "npm-run-all --parallel dev-only _lint-watch-fix _api-watch pregenerate",
     "generate": "yarn run pregenerate && nuxt generate",
     "lint": "kolibri-tools lint --pattern '**/*.{js,vue,scss,less,css}' -i ,'**/node_modules/**','**/.nuxt/**','**/dist/**','**/lib/KIcon/precompiled-icons/**','**/lib/keen/**','**/docs/environment.js','**/docs/jsdocs.js'",
     "lint-fix": "yarn lint -w",
     "lint-watch": "yarn lint -m",
     "pregenerate": "node utils/pregenerate.js",
-    "_dev-only": "nuxt --port 4000",
+    "dev-only": "nuxt --port 4000",
     "precompile-svgs": "node utils/precompileSvgs/index.js && yarn run pregenerate",
     "precompile-custom-svgs": "node utils/precompileSvgs/index.js --custom && yarn run pregenerate",
     "_lint-watch-fix": "yarn lint -w -m",
@@ -23,17 +23,19 @@
     "lib"
   ],
   "dependencies": {
+    "@vue/composition-api": "1.7.2",
     "aphrodite": "https://github.com/learningequality/aphrodite/",
-    "autosize": "^3.0.21",
-    "css-element-queries": "^1.2.0",
-    "frame-throttle": "^3.0.0",
-    "fuzzysearch": "^1.0.3",
-    "keen-ui": "^1.3.0",
-    "lodash": "^4.17.15",
-    "popper.js": "^1.14.6",
-    "purecss": "^0.6.2",
-    "tippy.js": "^4.2.1",
-    "vue-intl": "^3.1.0"
+    "autosize": "3.0.21",
+    "css-element-queries": "1.2.0",
+    "date-fns": "1.30.1",
+    "frame-throttle": "3.0.0",
+    "fuzzysearch": "1.0.3",
+    "lodash": "4.17.21",
+    "popper.js": "1.14.6",
+    "purecss": "2.2.0",
+    "tippy.js": "4.2.1",
+    "vue-intl": "3.1.0",
+    "xstate": "4.38.3"
   },
   "peerDependencies": {},
   "devDependencies": {
@@ -41,13 +43,14 @@
     "@mdi/svg": "^5.9.55",
     "@vuedoc/parser": "^3.4.0",
     "babel-jest": "^27.4.6",
+    "browserslist-config-kolibri": "0.16.0-dev.7",
     "chokidar-cli": "^3.0.0",
     "consola": "^2.15.3",
     "eslint-import-resolver-nuxt": "^1.0.1",
     "globby": "^6.1.0",
     "jest": "^27.4.7",
     "jest-serializer-vue": "^3.1.0",
-    "kolibri-tools": "0.15.0-dev.4",
+    "kolibri-tools": "0.15.4",
     "lockr": "^0.8.4",
     "material-design-icons": "^3.0.1",
     "mock-match-media": "^0.4.2",
@@ -62,15 +65,17 @@
     "vue-jest": "^3.0.7",
     "vue-meta": "^2.4.0",
     "vue-prism-component": "^1.1.1",
-    "vue-router": "^3.5.3",
+    "vue-router": "^3.6.5",
     "vue-simple-markdown": "^1.1.5",
     "vue-template-compiler": "2.6.14",
-    "xml-loader": "^1.2.1",
-    "date-fns": "^1.30.1"
+    "xml-loader": "^1.2.1"
   },
   "resolutions": {
     "@babel/preset-env": "7.12.17",
     "postcss-loader": "3.0.0",
     "css-loader": "3.6.0"
-  }
+  },
+  "browserslist": [
+    "extends browserslist-config-kolibri"
+  ]
 }

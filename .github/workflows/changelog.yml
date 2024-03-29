@@ -1,23 +1,34 @@
-name: Changelog is updated
-
-on: [pull_request]
-
-permissions:
-  pull-requests: read
-
+name: Check Changelog.md
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
 jobs:
   check-changelog:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: ankitjain28may/list-files-in-pr@v1.0
-        id: list-files
-        with:
-          githubToken: ${{ github.token }}
-          outputFormat: 'space-delimited'
-      - run: |
-          for file in ${{ steps.list-files.outputs.pullRequestFiles }}; do
-            if [ $file = "CHANGELOG.md" ]; then
-              exit 0
-            fi
-          done
-          exit 1
+     runs-on: ubuntu-latest
+     permissions: write-all
+     steps:
+          - uses: actions/checkout@v4
+          - name: Fetch changed files
+            id: fetch-changed-files
+            run: |
+              response=$(gh api \
+              -H "Accept: application/vnd.github+json" \
+              -H "X-GitHub-Api-Version: 2022-11-28" \
+               repos/${owner}/${REPO}/pulls/${PULL_NUMBER}/files)
+              echo "$response" | jq '.' > response.json
+              
+          
+            env:
+              GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+              owner: ${{ github.repository_owner }}
+              REPO: ${{ github.event.repository.name }}
+              PULL_NUMBER: ${{ github.event.pull_request.number }}
+          - name: Check if Changelog.md is changed
+            run: |
+              if [[ $(jq '.[].filename' response.json) == *"CHANGELOG.md"* ]]; then
+                echo "Changelog.md is changed"
+                exit 0
+              else
+                echo "Changelog.md is not changed"
+                exit 1
+              fi

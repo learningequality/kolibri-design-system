@@ -9,6 +9,7 @@
           :options="options"
           label="Who are you?"
           placeholder="Nobody"
+          style="width:300px;"
         />
         <p>Value: {{ exampleData }}</p>
       </DocsShow>
@@ -21,7 +22,7 @@
 
     <DocsPageSection title="Usage" anchor="#usage">
       <p>
-        Select dropdowns are used alongside form components such as text fields and radio selects. They can also be used to filter options in lists and tables. 
+        Select dropdowns are used alongside form components such as text fields and radio selects. They can also be used to filter options in lists and tables.
       </p>
     </DocsPageSection>
 
@@ -49,7 +50,7 @@
         Hiding is better than disabling in this case because there is no condition where it would benefit the user experience to be selectable for that object.
       </p>
       <h3>Filters</h3>
-      <p>For design guidance on using selects for filtering, see the <DocsInternalLink href="filters" text="Filters page" />.</p>
+      <p>For design guidance on using selects for filtering, see the <DocsInternalLink href="/filters" text="Filters page" />.</p>
     </DocsPageSection>
 
   </DocsPageTemplate>

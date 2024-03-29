@@ -51,14 +51,18 @@ When creating a new component, it is recommended to add a new documentation page
 
 ### (2) Preview updates in a product
 
-To see local Kolibri Design System updates reflected in a product that is using it (such as [Kolibri Learning Platform](https://github.com/learningequality/kolibri) or [Kolibri Studio](https://github.com/learningequality/studio)): 
+You can test local Kolibri Design System updates reflected in a product that is using it, such as [Kolibri Learning Platform](https://github.com/learningequality/kolibri) or [Kolibri Studio](https://github.com/learningequality/studio).
+
+For Kolibri Learning Platform, we recommend `devserver-with-kds` command. See ["Running Kolibri with local Kolibri Design System"](https://kolibri-dev.readthedocs.io/en/develop/howtos/development_with_kds.html) guide.
+
+In other products, you can use `yarn link`:
 
 1. While in the root of your local `kolibri-design-system` repository, run `yarn link`.
-2. In the root of the product where you intend to use `kolibri-design-system` run `yarn link kolibri-design-system` and then `yarn install`.
+2. In the root of a product where you intend to use `kolibri-design-system` run `yarn link kolibri-design-system` and then `yarn install`.
 
 Now, when you run the product your changes in `kolibri-design-system` will be updated live when running the product's development server.
 
-For example, to test Kolibri Design System in Kolibri Learning Platform (local `kolibri` repository):
+For example, to test Kolibri Design System in Kolibri Studio (local `studio` repository):
 
 ```bash
 # change to the Kolibri Design System repository and add it to yarn's local package registry
@@ -66,16 +70,14 @@ cd ./kolibri-design-system
 yarn link
 
 # change to the Kolibri repository and link it to the local Kolibri Design System package
-cd ../kolibri
+cd ../studio
 yarn link kolibri-design-system
 
-# re-install Kolibri dependencies
+# re-install Studio dependencies
 yarn install
 
-# run the Kolibri development server
+# run the Studio development server
 yarn run devserver
 ```
 
-Note that to be able to run the Kolibri development server, at first you need to have it set up as described in [Kolibri developer documentation](https://kolibri-dev.readthedocs.io/en/develop/getting_started.html).
-
-Now you're all set to see your changes to the Kolibri Design System working live in Kolibri!
+Now you're all set to see your changes to the Kolibri Design System working live in Studio!
