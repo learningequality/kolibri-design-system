@@ -203,6 +203,28 @@ Changelog is rather internal in nature. See release notes for the public overvie
 
 ## Version 3.x.x (`release-v3` branch)
 
+- [#586]
+  - **Description:** Adds a new prop `constrainToScrollParent ` to `KDropdownMenu` to allow overriding of its popover flipping behavior.
+  - **Products impact:** Bugfix
+  - **Addresses:** [#432](https://github.com/learningequality/kolibri-design-system/issues/432)
+  - **Components:** KDropdownMenu
+  - **Breaking:** no
+  - **Impacts a11y:**  no
+  - **Guidance:** Use the `constrainToScrollParent` prop to override the default popover flipping behavior of the `KDropdownMenu` component prop where necessary.
+
+[#586]: https://github.com/learningequality/kolibri-design-system/pull/586
+
+- [#573]
+  - **Description:** More precise calculation of list with in KListWithOverflow.
+  - **Products impact:** bugfix.
+  - **Addresses:** -.
+  - **Components:** KListWithOverflow.
+  - **Breaking:** no.
+  - **Impacts a11y:** no.
+  - **Guidance:** -.
+
+[#573]: https://github.com/learningequality/kolibri-design-system/pull/573
+
 - [#552]
   - **Description:** New `KListWithOverflow` component.
   - **Products impact:** new API.
