@@ -4,6 +4,17 @@ Changelog is rather internal in nature. See release notes for the public overvie
 
 ## Version 4.x.x (`release-v4` branch)
 
+- [#582]
+  - **Description:** Upgrade popper.js from 1.14.6 to 1.16.1
+  - **Products impact:** -
+  - **Addresses:** -
+  - **Components:** -
+  - **Breaking:** -
+  - **Impacts a11y:** -
+  - **Guidance:** -
+
+[#582]: https://github.com/learningequality/kolibri-design-system/pull/582
+
 - [#599]
   - **Description:** Upgrade express from 4.18.2 to 4.19.2
   - **Products impact:** -
