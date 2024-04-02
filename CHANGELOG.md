@@ -4,10 +4,10 @@ Changelog is rather internal in nature. See release notes for the public overvie
 
 ## Version 3.x.x (`release-v3` branch)
 
-- [#587]
+- [##603]
   - **Description:** Adds thumps down icon that is needed in Studio for search recomendation work.
   - **Products impact:** New Icon
-  - **Addresses:** [#4450)](https://github.com/learningequality/studio/issues/4450)
+  - **Addresses:** [#4450](https://github.com/learningequality/studio/issues/4450)
   - **Components:** N/A
   - **Breaking:** No
   - **Impacts a11y:**  No
