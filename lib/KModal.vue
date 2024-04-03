@@ -228,7 +228,7 @@
       contentSectionMaxHeight() {
         return {
           'max-height': `${this.maxContentHeight}px`,
-          height: `${this.contentHeight}px`,
+          height: 'auto',
         };
       },
     },
@@ -318,11 +318,6 @@
               // add a vertical scrollbar if content doesn't fit
               this.$refs.content.style.overflowY =
                   this.$refs.content.scrollHeight > this.$refs.content.clientHeight ? 'auto' : 'hidden';
-          }
-  
-          // we only update when necessary
-          if (this.contentHeight !== this.$refs.content.clientHeight) {
-              this.$refs.content.style.height = `${this.contentHeight}px`;
           }
       }
   }, 50),
