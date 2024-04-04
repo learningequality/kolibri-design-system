@@ -14,6 +14,17 @@ Changelog is rather internal in nature. See release notes for the public overvie
   - **Guidance:** 
 [#603]: https://github.com/learningequality/kolibri-design-system/pull/603
 
+- [#605]
+  - **Description:** Adds the `dropup` icon
+  - **Products impact:** New icon
+  - **Addresses:** https://github.com/learningequality/kolibri-design-system/issues/594
+  - **Components:** -
+  - **Breaking:** no
+  - **Impacts a11y:**  -
+  - **Guidance:** -
+
+[#605]: https://github.com/learningequality/kolibri-design-system/pull/605
+
 - [#586]
   - **Description:** Adds a new prop `constrainToScrollParent ` to `KDropdownMenu` to allow overriding of its popover flipping behavior.
   - **Products impact:** Bugfix
