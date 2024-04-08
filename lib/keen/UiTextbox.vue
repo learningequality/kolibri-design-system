@@ -76,7 +76,7 @@
             icon="clear"
             :color="$themeTokens.annotation"
             size="small"
-            :ariabel="clearAriaLabel"
+            :ariaLbel="clearAriaLabel"
             data-test="clearIcon"
             @click="clearText"
           />
