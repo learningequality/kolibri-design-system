@@ -4,6 +4,17 @@ Changelog is rather internal in nature. See release notes for the public overvie
 
 ## Version 4.x.x (`release-v4` branch)
 
+- [#591]
+  - **Description:** Added a clearable prop to KTextbox
+  - **Products impact:** -
+  - **Addresses:** https://github.com/learningequality/kolibri-design-system/issues/584
+  - **Components:** `KTextbox`
+  - **Breaking:** no
+  - **Impacts a11y:** no
+  - **Guidance:** -
+
+[#591]: https://github.com/learningequality/kolibri-design-system/pull/591
+
 - [#582]
   - **Description:** Upgrade popper.js from 1.14.6 to 1.16.1
   - **Products impact:** -
