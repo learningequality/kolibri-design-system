@@ -4,6 +4,17 @@ Changelog is rather internal in nature. See release notes for the public overvie
 
 ## Version 3.x.x (`release-v3` branch)
 
+- [#612]
+  - **Description:** KListWithOverflow fixes
+  - **Products impact:** bugfix.
+  - **Addresses:** - .
+  - **Components:** KListWithOverflow.
+  - **Breaking:** no.
+  - **Impacts a11y:** no.
+  - **Guidance:** - .
+
+[#612]: https://github.com/learningequality/kolibri-design-system/pull/612
+
 - [##603]
   - **Description:** Adds thumps down icon that is needed in Studio for search recomendation work.
   - **Products impact:** New Icon
