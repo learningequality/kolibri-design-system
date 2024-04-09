@@ -252,6 +252,7 @@
     display: flex;
     flex-wrap: wrap;
     position: relative;
+    align-items: center;
   }
 
   .list > * {
