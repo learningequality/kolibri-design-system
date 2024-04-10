@@ -5,7 +5,16 @@ Changelog is rather internal in nature. See release notes for the public overvie
 ## Version 3.x.x (`release-v3` branch)
 
 - [#612]
-  - **Description:** KListWithOverflow fixes
+  - **Description:** Prevent KListWithOverflow hidden elements from taking up space on the screen.
+  - **Products impact:** bugfix.
+  - **Addresses:** - .
+  - **Components:** KListWithOverflow.
+  - **Breaking:** no.
+  - **Impacts a11y:** no.
+  - **Guidance:** - .
+
+- [#612]
+  - **Description:** Scope the styles of the KListWithOverflow component.
   - **Products impact:** bugfix.
   - **Addresses:** - .
   - **Components:** KListWithOverflow.
