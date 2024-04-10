@@ -11,7 +11,7 @@
     <div
       dir="auto"
       class="k-tooltip"
-      :style="{ backgroundColor: $themeTokens.text, color: $themeTokens.textInverted, maxWidth: maxWidth ? maxWidth : 'calc(100vw - 10px)', }"
+      :style="{ backgroundColor: $themeTokens.text, color: $themeTokens.textInverted, ...styles }"
     >
       <!-- If text prop is provided, display the text -->
       <template v-if="text"> 
@@ -75,9 +75,9 @@
         type: String,
         default: null,
       },
-      maxWidth: {
-        type: String,
-        default: null,
+      styles: {
+        type: Object,
+        default: () => ({}),
       },
     },
     data() {
