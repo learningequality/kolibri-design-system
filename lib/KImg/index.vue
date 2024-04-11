@@ -53,8 +53,6 @@
 
 <script>
 
-  import { validateAndFormatUnits } from './utils';
-
   const ScaleTypes = {
     CENTER_INSIDE: 'centerInside',
     CONTAIN: 'contain',
@@ -113,48 +111,6 @@
       isDecorative: {
         type: Boolean,
         default: false,
-      },
-      /**
-       * Sets the height of the image container
-       */
-      height: {
-        type: [Number, String],
-        default: null,
-      },
-      /**
-       * Sets the width of the image container
-       */
-      width: {
-        type: [Number, String],
-        default: null,
-      },
-      /**
-       * Sets the maximum height of the image container
-       */
-      maxHeight: {
-        type: [Number, String],
-        default: null,
-      },
-      /**
-       * Sets the minimum height of the image container
-       */
-      minHeight: {
-        type: [Number, String],
-        default: null,
-      },
-      /**
-       * Sets the maximum width of the image container
-       */
-      maxWidth: {
-        type: [Number, String],
-        default: null,
-      },
-      /**
-       * 	Sets the minimum width of the image container
-       */
-      minWidth: {
-        type: [Number, String],
-        default: null,
       },
       /**
        * Sets the ratio of the width(w) to the height(h)
@@ -228,12 +184,6 @@
             backgroundColor,
             borderRadius,
             overflow: 'hidden',
-            height: validateAndFormatUnits(this.height),
-            width: validateAndFormatUnits(this.width),
-            maxHeight: validateAndFormatUnits(this.maxHeight),
-            minHeight: validateAndFormatUnits(this.minHeight),
-            maxWidth: validateAndFormatUnits(this.maxWidth),
-            minWidth: validateAndFormatUnits(this.minWidth),
           },
           ratioContainer: {
             display: 'block',
