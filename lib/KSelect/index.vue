@@ -131,6 +131,12 @@
             {{ invalidText }}
           </slot>
         </div>
+
+        <div v-else-if="showHelp" class="ui-select-feedback-text">
+          <slot name="help">
+            {{ help }}
+          </slot>
+        </div>
       </div>
     </div>
   </div>
@@ -217,6 +223,10 @@
         type: Boolean,
         default: false,
       },
+      help: {
+        type: String,
+        default: null,
+      },
       invalidText: {
         type: String,
         default: null,
@@ -299,11 +309,15 @@
       },
 
       hasFeedback() {
-        return Boolean(this.invalidText) || Boolean(this.$slots.error);
+        return Boolean(this.help) || Boolean(this.invalidText) || Boolean(this.$slots.error);
       },
 
       showError() {
         return this.invalid && (Boolean(this.invalidText) || Boolean(this.$slots.error));
+      },
+
+      showHelp() {
+        return !this.showError && (Boolean(this.help) || Boolean(this.$slots.help));
       },
 
       filteredOptions() {
@@ -988,7 +1002,7 @@
     &::-ms-clear {
       display: none;
     }
-  }  
+  }
 
   .ui-select-options {
     position: relative;
