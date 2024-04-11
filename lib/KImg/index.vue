@@ -1,7 +1,7 @@
 <template>
 
-  <span :style="rootContainerStyles">
-    <span :style="ratioContainerStyles">
+  <span :style="outerContainerStyles">
+    <span :style="innerContainerStyles">
       <img
         :src="src"
         :alt="alternativeText"
@@ -178,14 +178,14 @@
         const borderRadius = this.borderRadius ? this.borderRadius : 0;
 
         return {
-          rootContainer: {
+          outerContainer: {
             display: 'block',
             position: 'relative',
             backgroundColor,
             borderRadius,
             overflow: 'hidden',
           },
-          ratioContainer: {
+          innerContainer: {
             display: 'block',
           },
           img: {
@@ -204,8 +204,8 @@
         const scaleKind = isValidScaleType(this.scaleType) ? this.scaleType : ScaleTypes.CONTAIN;
         const scaleStyles = {
           [ScaleTypes.CONTAIN]: {
-            rootContainer: {},
-            ratioContainer: {
+            outerContainer: {},
+            innerContainer: {
               height: '100%',
               width: '100%',
             },
@@ -216,8 +216,8 @@
             },
           },
           [ScaleTypes.FIT_XY]: {
-            rootContainer: {},
-            ratioContainer: {
+            outerContainer: {},
+            innerContainer: {
               height: '100%',
               width: '100%',
             },
@@ -227,12 +227,12 @@
             },
           },
           [ScaleTypes.CENTER_INSIDE]: {
-            rootContainer: {
+            outerContainer: {
               display: 'flex',
               justifyContent: 'center',
               alignItems: 'center',
             },
-            ratioContainer: {},
+            innerContainer: {},
             img: {
               maxWidth: '100%',
               maxHeight: '100%',
@@ -248,16 +248,16 @@
       ratioStyles() {
         if (!this.aspectRatio) {
           return {
-            rootContainer: {},
-            ratioContainer: {},
+            outerContainer: {},
+            innerContainer: {},
             img: {},
           };
         }
         // https://www.sitepoint.com/maintain-image-aspect-ratios-responsive-web-design/
         const paddingTopInPercent = (this.ratio.y / this.ratio.x) * 100;
         return {
-          rootContainer: {},
-          ratioContainer: {
+          outerContainer: {},
+          innerContainer: {
             position: 'relative',
             display: 'block',
             height: 0,
@@ -278,21 +278,21 @@
           },
         };
       },
-      rootContainerStyles() {
+      outerContainerStyles() {
         // order matters
         return {
-          ...this.baseStyles.rootContainer,
-          ...this.scaleStyles.rootContainer,
-          ...this.ratioStyles.rootContainer,
+          ...this.baseStyles.outerContainer,
+          ...this.scaleStyles.outerContainer,
+          ...this.ratioStyles.outerContainer,
           ...this.appearanceOverrides,
         };
       },
-      ratioContainerStyles() {
+      innerContainerStyles() {
         // order matters
         return {
-          ...this.baseStyles.ratioContainer,
-          ...this.scaleStyles.ratioContainer,
-          ...this.ratioStyles.ratioContainer,
+          ...this.baseStyles.innerContainer,
+          ...this.scaleStyles.innerContainer,
+          ...this.ratioStyles.innerContainer,
         };
       },
       imgStyles() {
