@@ -264,6 +264,7 @@
       // if modal contains KSelect, special classes & styles will be applied
       const kSelectCheck = document.querySelector('div.modal div.ui-select');
       this.containsKSelect = !!kSelectCheck;
+      this.updateContentSectionStyle();
     },
     updated() {
       this.updateContentSectionStyle();
