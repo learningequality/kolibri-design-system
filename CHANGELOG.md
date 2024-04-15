@@ -4,6 +4,17 @@ Changelog is rather internal in nature. See release notes for the public overvie
 
 ## Version 3.x.x (`release-v3` branch)
 
+- [#611]
+  - **Description:** Adds a new `maxWidth` prop
+  -  **Products impact:** new API 
+  - **Addresses:** https://github.com/learningequality/kolibri-design-system/issues/595
+  - **Components:** KTooltip
+  - **Breaking:** no
+  - **Impacts a11y:** no
+  - **Guidance:** -
+
+[#611]: https://github.com/learningequality/kolibri-design-system/pull/611
+
 - [#612]
   - **Description:** Prevent KListWithOverflow hidden elements from taking up space on the screen.
   - **Products impact:** bugfix.
