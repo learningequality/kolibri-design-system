@@ -11,7 +11,7 @@
     <div
       dir="auto"
       class="k-tooltip"
-      :style="{ backgroundColor: $themeTokens.text, color: $themeTokens.textInverted }"
+      :style="{ backgroundColor: $themeTokens.text, color: $themeTokens.textInverted, maxWidth: maxWidth ? maxWidth : 'calc(100vw - 10px)', }"
     >
       <!-- If text prop is provided, display the text -->
       <template v-if="text"> 
@@ -75,6 +75,17 @@
         type: String,
         default: null,
       },
+      /**
+       * Maximum width of the tooltip.
+       * Accepted values follow the standard
+       * CSS max-width property format.
+       * If it's not provided, the tooltip's
+       * size fits its content.
+       */
+      maxWidth: {
+        type: String,
+        default: null,
+      },
     },
     data() {
       return {
@@ -125,7 +136,6 @@
     z-index: 24;
     width: max-content;
     min-width: 75px;
-    max-width: calc(100vw - 10px);
     padding: 8px;
     font-size: 12px;
     font-weight: normal;
