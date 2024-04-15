@@ -75,6 +75,13 @@
         type: String,
         default: null,
       },
+      /**
+       * Maximum width of the tooltip.
+       * Accepted values follow the standard
+       * CSS max-width property format.
+       * If it's not provided, the tooltip's
+       * size fits its content.
+       */
       maxWidth: {
         type: String,
         default: null,
