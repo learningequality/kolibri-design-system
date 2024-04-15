@@ -71,27 +71,6 @@
         </div>
       </DocsShow>
 
-      <h3>Dimensions</h3>
-
-      <p>
-        You can apply the most common dimensions to the image container via props such as <DocsInternalLink href="/kimg#prop:width">
-          <code>width</code>
-        </DocsInternalLink>, <DocsInternalLink href="/kimg#prop:maxHeight">
-          <code>maxHeight</code>
-        </DocsInternalLink>, and others. Values may be either numbers or strings consisting of a numeral and a valid unit. The following units are supported: <code>%, cm, em, ex, ch, in, lh, mm, px, rem, rlh, vh, vw</code>. If you don't provide a unit, <code>px</code> will be used by default.
-      </p>
-
-      <DocsShowCode language="html">
-        <KImg
-          src="hummingbird.jpg"
-          altText="A sitting hummingbird"
-          height="250.2px"
-          width="100%"
-          maxWidth="10vw"
-          :minWidth="25"
-        />
-      </DocsShowCode>
-
       <h3>Alternative text</h3>
 
       <p>
@@ -137,22 +116,18 @@
           <KImg
             src="hummingbird.jpg"
             altText="A sitting hummingbird"
-            height="200px"
-            width="100%"
-            maxWidth="500px"
             scaleType="centerInside"
+            :style="{ height: '200px', width: '100%', maxWidth: '500px' }"
           />
         </div>
       </DocsShowCode>
       <DocsShow block>
         <div>
           <KImg
-            :src="require('../assets/hummingbird CC BY-SA 4.0.jpg')"
             altText="A sitting hummingbird"
-            height="200px"
-            width="100%"
-            maxWidth="500px"
             scaleType="centerInside"
+            :src="require('../assets/hummingbird CC BY-SA 4.0.jpg')"
+            :style="{ height: '200px', width: '100%', maxWidth: '500px' }"
           />
         </div>
       </DocsShow>
@@ -166,22 +141,18 @@
           <KImg
             src="hummingbird.jpg"
             altText="A sitting hummingbird"
-            height="200px"
-            width="100%"
-            maxWidth="500px"
             scaleType="contain"
+            :style="{ height: '200px', width: '100%', maxWidth: '500px' }"
           />
         </div>
       </DocsShowCode>
       <DocsShow block>
         <div>
           <KImg
-            :src="require('../assets/hummingbird CC BY-SA 4.0.jpg')"
             altText="A sitting hummingbird"
-            height="200px"
-            width="100%"
-            maxWidth="500px"
             scaleType="contain"
+            :src="require('../assets/hummingbird CC BY-SA 4.0.jpg')"
+            :style="{ height: '200px', width: '100%', maxWidth: '500px' }"
           />
         </div>
       </DocsShow>
@@ -195,22 +166,18 @@
           <KImg
             src="hummingbird.jpg"
             altText="A sitting hummingbird"
-            height="200px"
-            width="100%"
-            maxWidth="500px"
             scaleType="fitXY"
+            :style="{ height: '200px', width: '100%', maxWidth: '500px' }"
           />
         </div>
       </DocsShowCode>
       <DocsShow block>
         <div>
           <KImg
-            :src="require('../assets/hummingbird CC BY-SA 4.0.jpg')"
             altText="A sitting hummingbird"
-            height="200px"
-            width="100%"
-            maxWidth="500px"
             scaleType="fitXY"
+            :src="require('../assets/hummingbird CC BY-SA 4.0.jpg')"
+            :style="{ height: '200px', width: '100%', maxWidth: '500px' }"
           />
         </div>
       </DocsShow>
@@ -262,7 +229,7 @@
             src=""
             isDecorative
             aspectRatio="16:9"
-            maxWidth="200"
+            :style="{ maxWidth: '200px' }"
           >
             <template #placeholder>
               <span :style="{ display: 'flex', height: '100%', justifyContent: 'center', alignItems: 'center' }">
@@ -278,7 +245,7 @@
             src=""
             isDecorative
             aspectRatio="16:9"
-            maxWidth="200"
+            :style="{ maxWidth: '200px' }"
           >
             <template #placeholder>
               <span :style="{ display: 'flex', height: '100%', justifyContent: 'center', alignItems: 'center' }">

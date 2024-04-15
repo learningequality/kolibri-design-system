@@ -128,11 +128,11 @@
 
 <script>
 
-  import { validateAndFormatUnits } from '../KImg/utils';
   // We do not retheme the Kolibri logo, so we always reference default colors here
   // rather than using the dynamic branding or themeing.
   import { defaultBrandColors } from '../styles/colorsDefault';
   import materialColors from '../styles/colorsMaterial';
+  import { validateAndFormatUnits } from './utils';
 
   const colorScheme = {
     default: {

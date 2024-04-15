@@ -4,6 +4,27 @@ Changelog is rather internal in nature. See release notes for the public overvie
 
 ## Upcoming version 5.x.x (`develop` branch)
 
+- [#615]
+  - **Description:** Removes KImg props related to dimensions: `height`, `width`, `maxHeight`, `minHeight`, `maxWidth`, `minWidth`
+  - **Products impact:** updated API
+  - **Addresses:** -
+  - **Components:** KImg
+  - **Breaking:** yes
+  - **Impacts a11y:** no
+  - **Guidance:** Use native style, for example replace `<KImg width="100%" maxWidth="500px" />` by `<KImg :style="{ width: '100%', maxWidth: '500px' }" />`.
+
+[#615]: https://github.com/learningequality/kolibri-design-system/pull/615
+
+- [#615]
+  - **Description:** Renames KImg internal classes
+  - **Products impact:** none
+  - **Addresses:** -
+  - **Components:** KImg
+  - **Breaking:** -
+  - **Impacts a11y:** -
+  - **Guidance:** -
+
+[#615]: https://github.com/learningequality/kolibri-design-system/pull/615
 
 ## Version 4.x.x (`release-v4` branch)
 
