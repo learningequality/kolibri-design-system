@@ -437,7 +437,6 @@
       .ui-textbox-label,
       .ui-textbox-textarea {
         border-bottom-color: $ui-input-border-color--hover;
-        border-bottom-width: $ui-input-border-width--active;
       }
     }
 

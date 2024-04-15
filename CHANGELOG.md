@@ -4,6 +4,28 @@ Changelog is rather internal in nature. See release notes for the public overvie
 
 ## Version 4.x.x (`release-v4` branch)
 
+- [616]
+  - **Description:** Fixes `KModal` not showing content after the initial load
+  - **Products impact:** bugfix
+  - **Addresses:** https://github.com/learningequality/kolibri/pull/11911#issuecomment-2040030433
+  - **Components:** `KModal`
+  - **Breaking:** no
+  - **Impacts a11y:** no
+  - **Guidance:** -
+
+[616]: https://github.com/learningequality/kolibri-design-system/pull/616
+
+- [616]
+  - **Description:** Fixes `KSelect`'s missing padding
+  - **Products impact:** bugfix
+  - **Addresses:** https://github.com/learningequality/kolibri/pull/11911#issuecomment-2040030433
+  - **Components:** `KSelect`
+  - **Breaking:** no
+  - **Impacts a11y:** no
+  - **Guidance:** -
+
+[616]: https://github.com/learningequality/kolibri-design-system/pull/616
+
 - [#591]
   - **Description:** Added a clearable prop to KTextbox
   - **Products impact:** -
