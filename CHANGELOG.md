@@ -269,6 +269,58 @@ Changelog is rather internal in nature. See release notes for the public overvie
 
 ## Version 3.x.x (`release-v3` branch)
 
+- [#611]
+  - **Description:** Adds a new `maxWidth` prop
+  -  **Products impact:** new API 
+  - **Addresses:** https://github.com/learningequality/kolibri-design-system/issues/595
+  - **Components:** KTooltip
+  - **Breaking:** no
+  - **Impacts a11y:** no
+  - **Guidance:** -
+
+[#611]: https://github.com/learningequality/kolibri-design-system/pull/611
+
+- [#612]
+  - **Description:** Prevent KListWithOverflow hidden elements from taking up space on the screen.
+  - **Products impact:** bugfix.
+  - **Addresses:** - .
+  - **Components:** KListWithOverflow.
+  - **Breaking:** no.
+  - **Impacts a11y:** no.
+  - **Guidance:** - .
+
+- [#612]
+  - **Description:** Scope the styles of the KListWithOverflow component.
+  - **Products impact:** bugfix.
+  - **Addresses:** - .
+  - **Components:** KListWithOverflow.
+  - **Breaking:** no.
+  - **Impacts a11y:** no.
+  - **Guidance:** - .
+
+[#612]: https://github.com/learningequality/kolibri-design-system/pull/612
+
+- [##603]
+  - **Description:** Adds thumps down icon that is needed in Studio for search recomendation work.
+  - **Products impact:** New Icon
+  - **Addresses:** [#4450](https://github.com/learningequality/studio/issues/4450)
+  - **Components:** N/A
+  - **Breaking:** No
+  - **Impacts a11y:**  No
+  - **Guidance:** 
+[#603]: https://github.com/learningequality/kolibri-design-system/pull/603
+
+- [#605]
+  - **Description:** Adds the `dropup` icon
+  - **Products impact:** New icon
+  - **Addresses:** https://github.com/learningequality/kolibri-design-system/issues/594
+  - **Components:** -
+  - **Breaking:** no
+  - **Impacts a11y:**  -
+  - **Guidance:** -
+
+[#605]: https://github.com/learningequality/kolibri-design-system/pull/605
+
 - [#586]
   - **Description:** Adds a new prop `constrainToScrollParent ` to `KDropdownMenu` to allow overriding of its popover flipping behavior.
   - **Products impact:** Bugfix
