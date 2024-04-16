@@ -154,7 +154,7 @@
   import sortby from 'lodash/sortBy';
   import UiIcon from '../keen/UiIcon';
 
-  import { looseEqual } from '../keen/helpers/util';
+  import { looseIndexOf, looseEqual } from '../keen/helpers/util';
   import { scrollIntoView, resetScroll } from '../keen/helpers/element-scroll';
   import config from '../keen/config';
   import KSelectOption from './KSelectOption.vue';
@@ -184,6 +184,9 @@
       event: 'change',
     },
     props: {
+      /**
+       * Object currently selected
+       */
       value: {
         type: Object,
         required: true,
@@ -191,6 +194,10 @@
           return isValidOption(val);
         },
       },
+      /**
+       * Array of option objects { value, label, disabled }.
+       * Disabled key is optional
+       */
       options: {
         type: Array,
         required: true,
@@ -198,26 +205,44 @@
           return areValidOptions(val);
         },
       },
+      /**
+       * Placeholder
+       */
       placeholder: {
         type: String,
         default: '',
       },
+      /**
+       * Label
+       */
       label: {
         type: String,
         default: null,
       },
+      /**
+       * Floating Label
+       */
       floatingLabel: {
         type: Boolean,
         default: true,
       },
+      /**
+       * Whether multiple options can be selected or not
+       */
       multiple: {
         type: Boolean,
         default: false,
       },
+      /**
+       * Delimiter for multiple selected options
+       */
       multipleDelimiter: {
         type: String,
         default: ', ',
       },
+      /**
+       * Text displayed if no results
+       */
       noResultsText: {
         type: String,
         default: '',
@@ -228,22 +253,38 @@
           return config.data.UiSelect.keys;
         },
       },
+      /**
+       * Whether invalid or not
+       */
       invalid: {
         type: Boolean,
         default: false,
       },
-      help: {
-        type: String,
-        default: null,
-      },
+      /**
+       * Text displayed if invalid
+       */
       invalidText: {
         type: String,
         default: null,
       },
+      /**
+       * Help text
+       */
+      help: {
+        type: String,
+        default: null,
+      },
+      /**
+       * Whether disabled or not
+       */
       disabled: {
         type: Boolean,
         default: false,
       },
+      /**
+       * Whether to turn into a clearable state
+       * when an option has been selected.
+       */
       clearable: {
         type: Boolean,
         default: false,
@@ -663,6 +704,26 @@
           return looseIndexOf(this.selection, option) > -1;
         }
         return looseEqual(this.selection, option);
+      },
+
+      updateOption(option, options = { select: true }) {
+        let value = [];
+        let updated = false;
+        const i = looseIndexOf(this.selection, option);
+
+        if (options.select && i < 0) {
+          value = this.selection.concat(option);
+          updated = true;
+        }
+
+        if (!options.select && i > -1) {
+          value = this.selection.slice(0, i).concat(this.selection.slice(i + 1));
+          updated = true;
+        }
+
+        if (updated) {
+          this.setValue(value);
+        }
       },
 
       defaultFilter(option) {
