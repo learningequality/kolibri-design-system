@@ -911,7 +911,7 @@
 
     &:hover:not(.is-disabled) {
       border-bottom-color: $ui-input-border-color--hover;
-      border-bottom-width: $ui-input-border-width--active;
+
       .ui-select-label-text {
         color: $ui-input-label-color--hover;
       }
@@ -941,6 +941,7 @@
         }
 
         &.is-floating {
+          padding-top: rem(9px);
           transform: translateY(0) scale(1);
         }
       }
@@ -1008,7 +1009,7 @@
     position: relative;
     display: block;
     width: 100%;
-    padding: 0;
+    padding: 0 10px;
     margin: 0;
     outline: none;
   }
@@ -1054,7 +1055,7 @@
 
   .ui-select-display-value {
     position: relative;
-    top: 2px;
+    top: 1px;
     flex-grow: 1;
     height: 22px; // height and top help prevent descender clipping
     overflow: hidden;

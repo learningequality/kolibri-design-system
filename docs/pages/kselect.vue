@@ -63,7 +63,7 @@
   export default {
     data() {
       return {
-        exampleData: null,
+        exampleData: {},
         options: [
           {
             label: 'Somebody',
