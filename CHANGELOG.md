@@ -15,6 +15,160 @@ Changelog is rather internal in nature. See release notes for the public overvie
 
 [#572]: https://github.com/learningequality/kolibri-design-system/pull/572
 
+- [616]
+  - **Description:** Fixes `KModal` not showing content after the initial load
+  - **Products impact:** bugfix
+  - **Addresses:** https://github.com/learningequality/kolibri/pull/11911#issuecomment-2040030433
+  - **Components:** `KModal`
+  - **Breaking:** no
+  - **Impacts a11y:** no
+  - **Guidance:** -
+
+[616]: https://github.com/learningequality/kolibri-design-system/pull/616
+
+- [616]
+  - **Description:** Fixes `KSelect`'s missing padding
+  - **Products impact:** bugfix
+  - **Addresses:** https://github.com/learningequality/kolibri/pull/11911#issuecomment-2040030433
+  - **Components:** `KSelect`
+  - **Breaking:** no
+  - **Impacts a11y:** no
+  - **Guidance:** -
+
+[616]: https://github.com/learningequality/kolibri-design-system/pull/616
+
+- [#591]
+  - **Description:** Added a clearable prop to KTextbox
+  - **Products impact:** -
+  - **Addresses:** https://github.com/learningequality/kolibri-design-system/issues/584
+  - **Components:** `KTextbox`
+  - **Breaking:** no
+  - **Impacts a11y:** no
+  - **Guidance:** -
+
+[#591]: https://github.com/learningequality/kolibri-design-system/pull/591
+
+- [#582]
+  - **Description:** Upgrade popper.js from 1.14.6 to 1.16.1
+  - **Products impact:** -
+  - **Addresses:** -
+  - **Components:** -
+  - **Breaking:** -
+  - **Impacts a11y:** -
+  - **Guidance:** -
+
+[#582]: https://github.com/learningequality/kolibri-design-system/pull/582
+
+- [#599]
+  - **Description:** Upgrade express from 4.18.2 to 4.19.2
+  - **Products impact:** -
+  - **Addresses:** -
+  - **Components:** -
+  - **Breaking:** -
+  - **Impacts a11y:** -
+  - **Guidance:** -
+
+[#599]: https://github.com/learningequality/kolibri-design-system/pull/599
+
+- [#587]
+  - **Description:** Rebrands icons in buttons and links
+  - **Products impact:** UI
+  - **Addresses:** -
+  - **Components:** `KButton`, `KRouterLink`, `KExternalLink`
+  - **Breaking:** no
+  - **Impacts a11y:** -
+  - **Guidance:** -
+
+[#587]: https://github.com/learningequality/kolibri-design-system/pull/587
+
+- [#561]
+  - **Description:** Update KLogo for new branding guidelines
+  - **Products impact:** Enables general use of KLogo for all frontend logo usage. Changes props API for square logo presentation.
+  - **Addresses:** Updates logo to new logo, adds all permissible alternates, adds animated form.
+  - **Components:** KLogo
+  - **Breaking:** Yes
+  - **Impacts a11y:** No
+  - **Guidance:** Rendering the Kolibri logo can now be done using the KLogo component, as well as the loading animation.
+
+[#561]: https://github.com/learningequality/kolibri-design-system/pull/561
+
+- [#580]
+  - **Description:** Remove use of KResponsiveWindowMixin internally
+  - **Products impact:** - none
+  - **Addresses:** -
+  - **Components:** KDateRange, KModal, KPageContainer, KGrid, KFixedGrid, KGridItem, KFixedGridItem
+  - **Breaking:** no
+  - **Impacts a11y:** no
+  - **Guidance:** Updates all components to use the useKResponsiveWindow composable
+
+[#580]: https://github.com/learningequality/kolibri-design-system/pull/580
+
+- [#415]
+  - **Description:** Upgrade purecss from 0.6.2 to 2.2.0
+  - **Products impact:** Updates for base styling for all elements
+  - **Addresses:** -
+  - **Components:** -
+  - **Breaking:** -
+  - **Impacts a11y:** -
+  - **Guidance:** -
+
+[#415]: https://github.com/learningequality/kolibri-design-system/pull/415
+
+- [#569]
+  - **Description:** Upgrade actions/setup-node from 3 to 4
+  - **Products impact:** Dependencies
+  - **Addresses:** -
+  - **Components:** -
+  - **Breaking:** -
+  - **Impacts a11y:** -
+  - **Guidance:** -
+
+[#569]: https://github.com/learningequality/kolibri-design-system/pull/569
+
+- [#576]
+  - **Description:** Upgrade follow-redirects from 1.15.4 to 1.15.6
+  - **Products impact:** Dependencies
+  - **Addresses:** -
+  - **Components:** -
+  - **Breaking:** -
+  - **Impacts a11y:** -
+  - **Guidance:** -
+
+[#576]: https://github.com/learningequality/kolibri-design-system/pull/576
+
+- [#553]
+  - **Description:** Upgrade ip from 1.1.5 to 1.1.9
+  - **Products impact:** Dependencies
+  - **Addresses:** -
+  - **Components:** -
+  - **Breaking:** -
+  - **Impacts a11y:** -
+  - **Guidance:** -
+
+[#553]: https://github.com/learningequality/kolibri-design-system/pull/553
+
+- [#559]
+  - **Description:** Upgrade lodash from 4.17.15 to 4.17.21
+  - **Products impact:** Dependencies
+  - **Addresses:** -
+  - **Components:** -
+  - **Breaking:** -
+  - **Impacts a11y:** -
+  - **Guidance:** -
+
+[#559]: https://github.com/learningequality/kolibri-design-system/pull/559
+
+- [#555]
+  - **Description:** Add action to notify us on Slack about GH issues comments from contributors community
+  - **Products impact:** none
+  - **Addresses:** -
+  - **Components:** -
+  - **Breaking:** -
+  - **Impacts a11y:** -
+  - **Guidance:** -
+
+[#555]: https://github.com/learningequality/kolibri-design-system/pull/555
+
 - [#565]
   - **Description:** Revert adding engines
   - **Products impact:** Dependencies
@@ -114,6 +268,28 @@ Changelog is rather internal in nature. See release notes for the public overvie
 [#531]: https://github.com/learningequality/kolibri-design-system/pull/531
 
 ## Version 3.x.x (`release-v3` branch)
+
+- [#586]
+  - **Description:** Adds a new prop `constrainToScrollParent ` to `KDropdownMenu` to allow overriding of its popover flipping behavior.
+  - **Products impact:** Bugfix
+  - **Addresses:** [#432](https://github.com/learningequality/kolibri-design-system/issues/432)
+  - **Components:** KDropdownMenu
+  - **Breaking:** no
+  - **Impacts a11y:**  no
+  - **Guidance:** Use the `constrainToScrollParent` prop to override the default popover flipping behavior of the `KDropdownMenu` component prop where necessary.
+
+[#586]: https://github.com/learningequality/kolibri-design-system/pull/586
+
+- [#573]
+  - **Description:** More precise calculation of list with in KListWithOverflow.
+  - **Products impact:** bugfix.
+  - **Addresses:** -.
+  - **Components:** KListWithOverflow.
+  - **Breaking:** no.
+  - **Impacts a11y:** no.
+  - **Guidance:** -.
+
+[#573]: https://github.com/learningequality/kolibri-design-system/pull/573
 
 - [#552]
   - **Description:** New `KListWithOverflow` component.
