@@ -150,8 +150,10 @@
           if (itemWidth >= availableWidth || overflowItemsIdx.length > 0) {
             overflowItemsIdx.push(i);
             item.style.visibility = 'hidden';
+            item.style.position = 'absolute';
           } else {
             item.style.visibility = 'visible';
+            item.style.position = 'unset';
             maxWidth += itemWidth;
             availableWidth -= itemWidth;
             const itemHeight = itemsSizes[i].height;
@@ -238,7 +240,7 @@
 </script>
 
 
-<style>
+<style scoped>
 
   .list-wrapper {
     display: flex;
@@ -249,6 +251,8 @@
     overflow: visible;
     display: flex;
     flex-wrap: wrap;
+    position: relative;
+    align-items: center;
   }
 
   .list > * {

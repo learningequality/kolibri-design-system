@@ -1,6 +1,6 @@
 {
   "name": "kolibri-design-system",
-  "version": "4.1.0",
+  "version": "4.2.0",
   "private": false,
   "description": "The Kolibri Design System defines common design patterns and code for use in Kolibri applications",
   "license": "MIT",
@@ -31,7 +31,7 @@
     "frame-throttle": "3.0.0",
     "fuzzysearch": "1.0.3",
     "lodash": "4.17.21",
-    "popper.js": "1.14.6",
+    "popper.js": "1.16.1",
     "purecss": "2.2.0",
     "tippy.js": "4.2.1",
     "vue-intl": "3.1.0",
