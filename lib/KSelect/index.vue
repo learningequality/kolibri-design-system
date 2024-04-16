@@ -97,6 +97,7 @@
                 :key="index"
                 :highlighted="isOptionHighlighted(option)"
                 :keys="keys"
+                :multiple="multiple"
                 :option="option"
                 :selected="isOptionSelected(option)"
 
@@ -209,6 +210,14 @@
         type: Boolean,
         default: true,
       },
+      multiple: {
+        type: Boolean,
+        default: false,
+      },
+      multipleDelimiter: {
+        type: String,
+        default: ', ',
+      },
       noResultsText: {
         type: String,
         default: '',
@@ -282,6 +291,7 @@
           { 'is-invalid': this.invalid },
           { 'is-touched': this.isTouched },
           { 'is-disabled': this.disabled },
+          { 'is-multiple': this.multiple },
           { 'has-label': this.hasLabel },
           { 'has-floating-label': this.hasFloatingLabel },
           { 'k-select-inline': this.inline },
@@ -327,6 +337,15 @@
       },
 
       displayText() {
+        if (this.multiple) {
+          if (this.selection.length > 0) {
+            return this.selection
+              .map(selection => selection[this.keys.label] || selection)
+              .join(this.multipleDelimiter);
+          }
+
+          return '';
+        }
         return this.selection ? this.selection[this.keys.label] || this.selection : '';
       },
 
@@ -502,7 +521,7 @@
 
     methods: {
       setValue(value) {
-        value = value ? value : '';
+        value = value ? value : this.multiple ? [] : '';
         this.selection = value;
 
         this.$emit('input', value);
@@ -615,7 +634,13 @@
           return;
         }
 
-        this.setValue(option);
+        const shouldSelect = this.multiple && !this.isOptionSelected(option);
+
+        if (this.multiple) {
+          this.updateOption(option, { select: shouldSelect });
+        } else {
+          this.setValue(option);
+        }
 
         this.$emit('select', option, {
           selected: !this.isOptionSelected(option),
@@ -623,7 +648,7 @@
 
         this.clearQuery();
 
-        if (options.autoClose) {
+        if (!this.multiple && options.autoClose) {
           this.closeDropdown();
         }
       },
@@ -634,6 +659,9 @@
       },
 
       isOptionSelected(option) {
+        if (this.multiple) {
+          return looseIndexOf(this.selection, option) > -1;
+        }
         return looseEqual(this.selection, option);
       },
 
@@ -718,7 +746,7 @@
       },
 
       onOpen() {
-        this.highlightedOption = this.selection;
+        this.highlightedOption = this.multiple ? null : this.selection;
         this.$nextTick(() => {
           this.$refs['dropdown'].focus();
           const selectedOption = this.$refs.optionsList.querySelector('.is-selected');
@@ -733,7 +761,7 @@
       },
 
       onClose() {
-        this.highlightedOption = this.selection;
+        this.highlightedOption = this.multiple ? null : this.selection;
       },
 
       onExternalClick(e) {
