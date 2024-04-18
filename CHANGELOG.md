@@ -4,6 +4,17 @@ Changelog is rather internal in nature. See release notes for the public overvie
 
 ## Upcoming version 5.x.x (`develop` branch)
 
+- [#549]
+  - **Description:** Internal refactor of `KSelect` as part of moving away from Keen UI where related files were renamed and some functionality that wasn't exposed for public use was removed.
+  - **Products impact:** none
+  - **Addresses:** -
+  - **Components:** -
+  - **Breaking:** no
+  - **Impacts a11y:** -
+  - **Guidance:** Thorough QA of places that use `KSelect` is recommended due to the large scope of refactor.
+
+[#549]: https://github.com/learningequality/kolibri-design-system/pull/549
+
 - [#615]
   - **Description:** Removes KImg props related to dimensions: `height`, `width`, `maxHeight`, `minHeight`, `maxWidth`, `minWidth`
   - **Products impact:** updated API
