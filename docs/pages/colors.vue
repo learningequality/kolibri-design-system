@@ -17,8 +17,8 @@
       <DocsColorBlock name="tokens.text" />
       <DocsColorBlock name="tokens.error" />
       <DocsColorBlock name="tokens.primary" />
-      <DocsColorBlock name="brand.primary.v_900" />
-      <DocsColorBlock name="brand.secondary.v_200" />
+      <DocsColorBlock name="brand.primary.v_1100" />
+      <DocsColorBlock name="brand.secondary.v_800" />
       <DocsColorBlock name="palette.grey.v_400" />
 
       <p>
@@ -117,11 +117,37 @@
       <DocsColorBlock name="tokens.primaryDark" definition>
         Default dark variant of the primary brand color. Commonly used for the hover state of interactive elements
       </DocsColorBlock>
+      <DocsColorBlock name="tokens.secondary" definition>
+        Default secondary brand color
+      </DocsColorBlock>
+      <DocsColorBlock name="tokens.secondaryDark" definition>
+        Default dark variant of the secondary brand color
+      </DocsColorBlock>
 
       <h3>UI Colors</h3>
       <DocsColorBlock name="tokens.surface" definition>
         Default background color
       </DocsColorBlock>
+      <DocsColorBlock name="tokens.appBar" definition>
+        Default app bar component color
+      </DocsColorBlock>
+      <DocsColorBlock name="tokens.appBarDark" definition>
+        Default dark color of the app bar component
+      </DocsColorBlock>
+      <DocsColorBlock name="tokens.link" definition>
+        Hyperlink text color with the application
+      </DocsColorBlock>
+      <DocsColorBlock name="tokens.fineLine" definition>
+        Used for divider lines and rules
+      </DocsColorBlock>
+      <DocsColorBlock name="tokens.loading" definition>
+        Color for loaders, spinners, and other progress indicators
+      </DocsColorBlock>
+      <DocsColorBlock name="tokens.success" definition>
+        Indicates the successful completion of an action in the application
+      </DocsColorBlock>
+
+      <h3>Text</h3>
       <DocsColorBlock name="tokens.text" definition>
         Normal text color. (Typically used on top of the <code>$themeTokens.surface</code> color)
       </DocsColorBlock>
@@ -134,20 +160,11 @@
       <DocsColorBlock name="tokens.textInverted" definition>
         Text color for creating sufficient contrast when used on dark backgrounds (such as <code>$themeTokens.primary</code>)
       </DocsColorBlock>
-      <DocsColorBlock name="tokens.loading" definition>
-        Color for loaders, spinners, and other progress indicators
-      </DocsColorBlock>
       <DocsColorBlock name="tokens.focusOutline" definition>
         Used to indicate keyboard focus
       </DocsColorBlock>
-      <DocsColorBlock name="tokens.fineLine" definition>
-        Used for divider lines and rules
-      </DocsColorBlock>
       <DocsColorBlock name="tokens.error" definition>
         Indicates an application or validation error
-      </DocsColorBlock>
-      <DocsColorBlock name="tokens.success" definition>
-        Indicates the successful completion of an action in the application
       </DocsColorBlock>
 
       <h3>Learner activity</h3>
@@ -173,27 +190,29 @@
       </DocsColorBlock>
 
       <h3>Content-related labels</h3>
-      <DocsColorBlock name="tokens.exercise" definition />
-      <DocsColorBlock name="tokens.video" definition />
-      <DocsColorBlock name="tokens.audio" definition />
-      <DocsColorBlock name="tokens.document" definition />
-      <DocsColorBlock name="tokens.html5" definition />
+      <DocsColorBlock name="tokens.practice" definition />
+      <DocsColorBlock name="tokens.watch" definition />
+      <DocsColorBlock name="tokens.listen" definition />
+      <DocsColorBlock name="tokens.read" definition />
+      <DocsColorBlock name="tokens.explore" definition />
+      <DocsColorBlock name="tokens.create" definition />
+      <DocsColorBlock name="tokens.reflect" definition />
       <DocsColorBlock name="tokens.topic" definition />
 
     </DocsPageSection>
 
     <DocsPageSection title="Scales" anchor="#scales">
       <p>
-        A color scale – sometimes called a color ramp – is an evenly-spaced ramp of shades for a particular color hue. In the Kolibri Design System, we follow <DocsExternalLink text="Google's Material convention" href="https://material.io/archive/guidelines/style/color.html" /> and segment colors into ten brightness levels, named <code>v_50</code>, <code>v_100</code>, <code>v_20</code>, … <code>v_800</code>, <code>v_900</code>:
+        A color scale – sometimes called a color ramp – is an evenly-spaced ramp of shades for a particular color hue. In the Kolibri Design System, we follow <DocsExternalLink text="Google's Material convention" href="https://material.io/archive/guidelines/style/color.html" /> and segment colors into brightness levels, named <code>v_200</code>, <code>v_400</code>, <code>v_600</code>, … <code>v_1000</code>, <code>v_1100</code>:
       </p>
-      <DocsColorBlock name="palette.blue.v_50" />
-      <DocsColorBlock name="palette.blue.v_100" />
-      <DocsColorBlock name="palette.blue.v_200" />
+      <DocsColorBlock name="palette.green.v_200" />
+      <DocsColorBlock name="palette.green.v_400" />
+      <DocsColorBlock name="palette.green.v_600" />
       <p style="margin-left: 60px">
         …
       </p>
-      <DocsColorBlock name="palette.blue.v_800" />
-      <DocsColorBlock name="palette.blue.v_900" />
+      <DocsColorBlock name="palette.green.v_1000" />
+      <DocsColorBlock name="palette.green.v_1100" />
       <p>
         Due to the inconsistent way that humans perceive color and light, computing these scales is <DocsExternalLink text="both art and science" href="https://uxplanet.org/designing-systematic-colors-b5d2605b15c" />. It should not be done by simply sliding a "brightness" setting. We used <DocsExternalLink text="materialpalettes.com" href="https://materialpalettes.com/" /> to generate the scales for our primary and secondary brand colors. The same should be done for new themes.
       </p>
@@ -202,9 +221,6 @@
     <DocsPageSection title="Brand colors" anchor="#brand">
       <p>
         Brand colors are chosen to reflect the mood, identity, or trademark of an application or an organization. The design system defines primary (dominant) and secondary (accent) branded color hues.
-      </p>
-      <p>
-        The Kolibri Design System has what we call "Kolibri Purple" as its primary and "Kolibri Teal" as its secondary, available across the full brightness scale:
       </p>
 
       <div>

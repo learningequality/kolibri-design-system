@@ -10,7 +10,7 @@
 
    BELOW: KModal targets KeenUiSelect by using div.ui-select selector
   -->
-  <div class="k-select ui-select" :class="classes">
+  <div class="ui-select" :class="classes">
     <input
       v-if="name"
       class="ui-select-hidden-input"
@@ -174,6 +174,14 @@
     return has(object, 'value') && has(object, 'label');
   }
 
+  /*
+    A customized version of a select component that was originally
+    copied from older version of Keen UI. Note that in
+    https://github.com/learningequality/kolibri-design-system/pull/549,
+    the component went through larger refactor as part of migrating away from Keen
+    and some pieces we didn't use were removed. When adding new features,
+    it may still be helpful to check out the referenced PR to see if some
+    of the removed functionality may be handy, at least as inspiration. */
   export default {
     name: 'KSelect',
     components: {
@@ -323,7 +331,7 @@
 
     computed: {
       name() {
-        return `k-select-${this._uid}`;
+        return `ui-select-${this._uid}`;
       },
       classes() {
         return [
@@ -335,8 +343,8 @@
           { 'is-multiple': this.multiple },
           { 'has-label': this.hasLabel },
           { 'has-floating-label': this.hasFloatingLabel },
-          { 'k-select-inline': this.inline },
-          { 'k-select-disabled': this.disabled },
+          { 'ui-select-inline': this.inline },
+          { 'ui-select-disabled': this.disabled },
         ];
       },
 
@@ -891,15 +899,18 @@
     display: flex;
     align-items: flex-start;
     margin-bottom: $ui-input-margin-bottom;
+    background: $md-grey-100;
+    border-bottom-color: $ui-input-border-color;
+    border-bottom-style: solid;
+    border-bottom-width: $ui-input-border-width;
+    border-radius: 2px 2px 0 0;
     outline: none;
 
     &:hover:not(.is-disabled) {
+      border-bottom-color: $ui-input-border-color--hover;
+
       .ui-select-label-text {
         color: $ui-input-label-color--hover;
-      }
-
-      .ui-select-display {
-        border-bottom-color: $ui-input-border-color--hover;
       }
 
       .ui-select-dropdown-button {
@@ -908,14 +919,9 @@
     }
 
     &.is-active:not(.is-disabled) {
-      .ui-select-display {
-        border-bottom-width: $ui-input-border-width--active;
-      }
-    }
-
-    &.is-active {
-      .ui-select-display {
-        border-bottom-width: $ui-input-border-width--active;
+      border-bottom-color: $ui-input-border-color--active;
+      .ui-icon {
+        color: $ui-input-icon-color--active;
       }
     }
 
@@ -932,6 +938,7 @@
         }
 
         &.is-floating {
+          padding-top: rem(9px);
           transform: translateY(0) scale(1);
         }
       }
@@ -946,7 +953,6 @@
     &:not(.is-multiple) {
       .ui-select-display {
         height: $ui-input-height;
-        line-height: 1;
       }
     }
 
@@ -954,17 +960,12 @@
       .ui-select-display {
         padding-top: rem-calc(4px);
         padding-bottom: rem-calc(4px);
-        line-height: 1.4;
       }
     }
 
     &.is-invalid:not(.is-disabled) {
       .ui-select-label-text {
         color: $ui-input-label-color--invalid;
-      }
-
-      .ui-select-display {
-        border-bottom-color: $ui-input-border-color--invalid;
       }
 
       .ui-select-feedback {
@@ -994,7 +995,7 @@
     position: relative;
     display: block;
     width: 100%;
-    padding: 0;
+    padding: 0 10px;
     margin: 0;
     outline: none;
   }
@@ -1020,19 +1021,17 @@
     padding: 0;
     font-size: $ui-input-text-font-size;
     font-weight: normal;
+    line-height: 1.4;
     color: $ui-input-text-color;
     cursor: pointer;
     user-select: none;
     border: 0;
-    border-bottom-color: $ui-input-border-color;
-    border-bottom-style: solid;
-    border-bottom-width: $ui-input-border-width;
     transition: border 0.1s ease;
   }
 
   .ui-select-display-value {
     position: relative;
-    top: 2px;
+    top: 1px;
     flex-grow: 1;
     height: 22px; // height and top help prevent descender clipping
     overflow: hidden;
@@ -1065,32 +1064,6 @@
     list-style-type: none;
     outline: none;
     box-shadow: 1px 2px 8px $md-grey-600;
-  }
-
-  .ui-select-search-input {
-    @include font-family-noto;
-
-    width: 100%;
-    height: $ui-input-height + rem-calc(4px);
-    padding: rem-calc(0 12px);
-    padding-left: rem-calc(40px);
-    font-size: $ui-input-text-font-size - rem-calc(1px);
-    font-weight: normal;
-    color: $ui-input-text-color;
-    cursor: auto;
-    background: none;
-    border: 0;
-    border-bottom-color: $ui-input-border-color;
-    border-bottom-style: solid;
-    border-bottom-width: $ui-input-border-width;
-    border-radius: 0;
-    outline: none;
-    transition: border 0.1s ease;
-
-    // Hide Edge and IE input clear button
-    &::-ms-clear {
-      display: none;
-    }
   }
 
   .ui-select-options {
@@ -1142,20 +1115,20 @@
     right: 0;
   }
 
-  .k-select-inline {
+  .ui-select-inline {
     display: inline-block;
     width: 150px;
     margin-right: 16px;
     vertical-align: bottom;
   }
 
-  .k-select-disabled /deep/ .ui-select__label-text.is-inline {
+  .ui-select-disabled /deep/ .ui-select__label-text.is-inline {
     cursor: default;
   }
 
   /* stylelint-disable csstree/validator */
 
-  .k-select-disabled {
+  .ui-select-disabled {
     border-bottom-color: $ui-input-text-color--disabled;
     border-bottom-style: $ui-input-border-style--disabled;
     border-bottom-width: $ui-input-border-width--active;

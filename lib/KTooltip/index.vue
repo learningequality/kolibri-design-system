@@ -11,10 +11,14 @@
     <div
       dir="auto"
       class="k-tooltip"
-      :style="{ backgroundColor: $themeTokens.text, color: $themeTokens.textInverted }"
+      :style="{ backgroundColor: $themeTokens.text, color: $themeTokens.textInverted, maxWidth: maxWidth ? maxWidth : 'calc(100vw - 10px)', }"
     >
-      <!-- @slot Text of the tooltip -->
-      <slot></slot>
+      <!-- If text prop is provided, display the text -->
+      <template v-if="text"> 
+        {{ text }} 
+      </template>
+      <!-- @slot Slot alternative to `text` prop -->
+      <slot v-else></slot>
     </div>
   </Popper>
 
@@ -63,6 +67,24 @@
       placement: {
         type: String,
         default: 'bottom',
+      },
+      /**
+       * Text of the tooltip
+       */
+      text: {
+        type: String,
+        default: null,
+      },
+      /**
+       * Maximum width of the tooltip.
+       * Accepted values follow the standard
+       * CSS max-width property format.
+       * If it's not provided, the tooltip's
+       * size fits its content.
+       */
+      maxWidth: {
+        type: String,
+        default: null,
       },
     },
     data() {
@@ -114,7 +136,6 @@
     z-index: 24;
     width: max-content;
     min-width: 75px;
-    max-width: calc(100vw - 10px);
     padding: 8px;
     font-size: 12px;
     font-weight: normal;

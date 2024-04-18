@@ -2,12 +2,469 @@
 
 Changelog is rather internal in nature. See release notes for the public overview and guidelines. Releases are recorded as git tags in the [Github releases](https://github.com/learningequality/kolibri-design-system/releases) page.
 
-## Upcoming version
+## Upcoming version 5.x.x (`develop` branch)
 
-<!-- Put all new updates into this section, please -->
+- [#615]
+  - **Description:** Removes KImg props related to dimensions: `height`, `width`, `maxHeight`, `minHeight`, `maxWidth`, `minWidth`
+  - **Products impact:** updated API
+  - **Addresses:** -
+  - **Components:** KImg
+  - **Breaking:** yes
+  - **Impacts a11y:** no
+  - **Guidance:** Use native style, for example replace `<KImg width="100%" maxWidth="500px" />` by `<KImg :style="{ width: '100%', maxWidth: '500px' }" />`.
 
+[#615]: https://github.com/learningequality/kolibri-design-system/pull/615
 
-## Version 3.0.0
+- [#615]
+  - **Description:** Renames KImg internal classes
+  - **Products impact:** none
+  - **Addresses:** -
+  - **Components:** KImg
+  - **Breaking:** -
+  - **Impacts a11y:** -
+  - **Guidance:** -
+
+[#615]: https://github.com/learningequality/kolibri-design-system/pull/615
+
+## Version 4.x.x (`release-v4` branch)
+
+- [#572]
+  - **Description:** Add `aria-checked` property to KCheckbox's `<input>` element
+  - **Products impact:** -
+  - **Addresses:** The `aria-checked` property being set properly improves a11y.
+  - **Components:** -
+  - **Breaking:** -
+  - **Impacts a11y:** yes
+  - **Guidance:** -
+
+[#572]: https://github.com/learningequality/kolibri-design-system/pull/572
+
+- [616]
+  - **Description:** Fixes `KModal` not showing content after the initial load
+  - **Products impact:** bugfix
+  - **Addresses:** https://github.com/learningequality/kolibri/pull/11911#issuecomment-2040030433
+  - **Components:** `KModal`
+  - **Breaking:** no
+  - **Impacts a11y:** no
+  - **Guidance:** -
+
+[616]: https://github.com/learningequality/kolibri-design-system/pull/616
+
+- [616]
+  - **Description:** Fixes `KSelect`'s missing padding
+  - **Products impact:** bugfix
+  - **Addresses:** https://github.com/learningequality/kolibri/pull/11911#issuecomment-2040030433
+  - **Components:** `KSelect`
+  - **Breaking:** no
+  - **Impacts a11y:** no
+  - **Guidance:** -
+
+[616]: https://github.com/learningequality/kolibri-design-system/pull/616
+
+- [#591]
+  - **Description:** Added a clearable prop to KTextbox
+  - **Products impact:** -
+  - **Addresses:** https://github.com/learningequality/kolibri-design-system/issues/584
+  - **Components:** `KTextbox`
+  - **Breaking:** no
+  - **Impacts a11y:** no
+  - **Guidance:** -
+
+[#591]: https://github.com/learningequality/kolibri-design-system/pull/591
+
+- [#582]
+  - **Description:** Upgrade popper.js from 1.14.6 to 1.16.1
+  - **Products impact:** -
+  - **Addresses:** -
+  - **Components:** -
+  - **Breaking:** -
+  - **Impacts a11y:** -
+  - **Guidance:** -
+
+[#582]: https://github.com/learningequality/kolibri-design-system/pull/582
+
+- [#599]
+  - **Description:** Upgrade express from 4.18.2 to 4.19.2
+  - **Products impact:** -
+  - **Addresses:** -
+  - **Components:** -
+  - **Breaking:** -
+  - **Impacts a11y:** -
+  - **Guidance:** -
+
+[#599]: https://github.com/learningequality/kolibri-design-system/pull/599
+
+- [#587]
+  - **Description:** Rebrands icons in buttons and links
+  - **Products impact:** UI
+  - **Addresses:** -
+  - **Components:** `KButton`, `KRouterLink`, `KExternalLink`
+  - **Breaking:** no
+  - **Impacts a11y:** -
+  - **Guidance:** -
+
+[#587]: https://github.com/learningequality/kolibri-design-system/pull/587
+
+- [#561]
+  - **Description:** Update KLogo for new branding guidelines
+  - **Products impact:** Enables general use of KLogo for all frontend logo usage. Changes props API for square logo presentation.
+  - **Addresses:** Updates logo to new logo, adds all permissible alternates, adds animated form.
+  - **Components:** KLogo
+  - **Breaking:** Yes
+  - **Impacts a11y:** No
+  - **Guidance:** Rendering the Kolibri logo can now be done using the KLogo component, as well as the loading animation.
+
+[#561]: https://github.com/learningequality/kolibri-design-system/pull/561
+
+- [#580]
+  - **Description:** Remove use of KResponsiveWindowMixin internally
+  - **Products impact:** - none
+  - **Addresses:** -
+  - **Components:** KDateRange, KModal, KPageContainer, KGrid, KFixedGrid, KGridItem, KFixedGridItem
+  - **Breaking:** no
+  - **Impacts a11y:** no
+  - **Guidance:** Updates all components to use the useKResponsiveWindow composable
+
+[#580]: https://github.com/learningequality/kolibri-design-system/pull/580
+
+- [#415]
+  - **Description:** Upgrade purecss from 0.6.2 to 2.2.0
+  - **Products impact:** Updates for base styling for all elements
+  - **Addresses:** -
+  - **Components:** -
+  - **Breaking:** -
+  - **Impacts a11y:** -
+  - **Guidance:** -
+
+[#415]: https://github.com/learningequality/kolibri-design-system/pull/415
+
+- [#569]
+  - **Description:** Upgrade actions/setup-node from 3 to 4
+  - **Products impact:** Dependencies
+  - **Addresses:** -
+  - **Components:** -
+  - **Breaking:** -
+  - **Impacts a11y:** -
+  - **Guidance:** -
+
+[#569]: https://github.com/learningequality/kolibri-design-system/pull/569
+
+- [#576]
+  - **Description:** Upgrade follow-redirects from 1.15.4 to 1.15.6
+  - **Products impact:** Dependencies
+  - **Addresses:** -
+  - **Components:** -
+  - **Breaking:** -
+  - **Impacts a11y:** -
+  - **Guidance:** -
+
+[#576]: https://github.com/learningequality/kolibri-design-system/pull/576
+
+- [#553]
+  - **Description:** Upgrade ip from 1.1.5 to 1.1.9
+  - **Products impact:** Dependencies
+  - **Addresses:** -
+  - **Components:** -
+  - **Breaking:** -
+  - **Impacts a11y:** -
+  - **Guidance:** -
+
+[#553]: https://github.com/learningequality/kolibri-design-system/pull/553
+
+- [#559]
+  - **Description:** Upgrade lodash from 4.17.15 to 4.17.21
+  - **Products impact:** Dependencies
+  - **Addresses:** -
+  - **Components:** -
+  - **Breaking:** -
+  - **Impacts a11y:** -
+  - **Guidance:** -
+
+[#559]: https://github.com/learningequality/kolibri-design-system/pull/559
+
+- [#555]
+  - **Description:** Add action to notify us on Slack about GH issues comments from contributors community
+  - **Products impact:** none
+  - **Addresses:** -
+  - **Components:** -
+  - **Breaking:** -
+  - **Impacts a11y:** -
+  - **Guidance:** -
+
+[#555]: https://github.com/learningequality/kolibri-design-system/pull/555
+
+- [#565]
+  - **Description:** Revert adding engines
+  - **Products impact:** Dependencies
+  - **Addresses:** KDS not being installable by consumers that don't use Node 10
+  - **Components:** -
+  - **Breaking:** -
+  - **Impacts a11y:** -
+  - **Guidance:** -
+
+[#565]: https://github.com/learningequality/kolibri-design-system/pull/565
+
+- [#560]
+  - **Description:** Configure dependabot to run on Wednesday
+  - **Products impact:** -
+  - **Addresses:** -
+  - **Components:** -
+  - **Breaking:** -
+  - **Impacts a11y:** -
+  - **Guidance:** -
+
+[#560]: https://github.com/learningequality/kolibri-design-system/pull/560
+
+- [#558]
+  - **Description:** Move `useKResponsiveWindow` from `/lib` to `/lib/composables`
+  - **Products impact:** Location update
+  - **Addresses:** -
+  - **Components:** `useKResponsiveWindow`
+  - **Breaking:** yes
+  - **Impacts a11y:** -
+  - **Guidance:** Update `import useKResponsiveWindow from 'kolibri-design-system/lib/useKResponsiveWindow';` from `import useKResponsiveWindow from 'kolibri-design-system/lib/composables/useKResponsiveWindow';`
+
+[#558]: https://github.com/learningequality/kolibri-design-system/pull/558
+
+- [#558]
+  - **Description:** Remove deprecated `KResponsiveWindow's` mixin documentation page in favor of a new `useKResponsiveWindow` page
+  - **Products impact:** none
+  - **Addresses:** -
+  - **Components:** `KResponsiveWindow`
+  - **Breaking:** -
+  - **Impacts a11y:** -
+  - **Guidance:** -
+
+[#558]: https://github.com/learningequality/kolibri-design-system/pull/558
+
+- [#558]
+  - **Description:** Adds engines and browserlist to package.json. Pins dependencies to exact version.
+  - **Products impact:** Dependencies
+  - **Addresses:** -
+  - **Components:** -
+  - **Breaking:** -
+  - **Impacts a11y:** -
+  - **Guidance:** -
+
+[#558]: https://github.com/learningequality/kolibri-design-system/pull/558
+
+- [#558]
+  - **Description:** Internal maintenance tasks: extract common logic to utils, move private composables to `/lib/composables` and indicate that they are private by `_` prefix in their filename. dev docs updates.
+  - **Products impact:** none
+  - **Addresses:** -
+  - **Components:** -
+  - **Breaking:** -
+  - **Impacts a11y:** -
+  - **Guidance:** -
+
+[#558]: https://github.com/learningequality/kolibri-design-system/pull/558
+
+- [#551]
+  - **Description:** Updates `brand` colors, `palette` colors, and `token`s.
+    - Breaking changes:
+      - Removed `palette` colors: `purple`, `deeppurple`, `indigo`, `brown`, `cyan`, `teal`, `lightgreen`, `lime`, `amber`, `deeporange`, `bluegrey`
+      - Removed `palette.grey` scales: `v_300`, `v_500`, `v_700`, `v_900`
+      - Removed `brand` and `palette` scales (except `palette.grey`): `v_50`,`v_100`, `v_300`, `v_500`, `v_700`, `v_900`
+      - Removed content-related tokens: `exercise`, `video`, `audio`, `document`, `html5`, `slideshow`
+      - Removed other tokens: `appBarFullscreen`, `appBarFullscreenDark`, `linkDark`
+   - Other changes:
+      - Some existing `palette` colors look differently
+      - Adds new tokens and palette
+      - Global styles: `<body>` background color changed from `grey.v_100` to lighter `grey.v_50`
+  - **Products impact:** new API, updated API, deleted API
+  - **Addresses:** - https://github.com/learningequality/kolibri-design-system/issues/545
+  - **Components:** -
+  - **Breaking:** - yes
+  - **Impacts a11y:** - no
+  - **Guidance:** - Address all breaking changes by searching for removed palette colors, scales, and tokens. Study the updated "Colors" KDS documentation page and replace them by relevant colors/scales/tokens. Also search for any hardcoded hex,rgb(a),hsl(a), or named colors (such as 'white') and theme them instead. Visually check places that use existing palette and adjust scale (you may need to increase it as many colors are lighter). You may also see if there are any minor useful updates to in regards to new tokens (e.g. replacing a `palette` color with a new `token` that describes function of the color better). If you use `generateGlobalStyles` that generates background color for `<body>` and use grey.`v_100` in some components to match the background color, you may need to update it to `grey.v_50`.
+
+[#551]: https://github.com/learningequality/kolibri-design-system/pull/551
+
+- [#531]
+  - **Description:** Remove unused `keen-ui` dependency
+  - **Products impact:** none
+  - **Addresses:** -
+  - **Components:** -
+  - **Breaking:** -
+  - **Impacts a11y:** -
+  - **Guidance:** -
+
+[#531]: https://github.com/learningequality/kolibri-design-system/pull/531
+
+## Version 3.x.x (`release-v3` branch)
+
+- [#611]
+  - **Description:** Adds a new `maxWidth` prop
+  -  **Products impact:** new API 
+  - **Addresses:** https://github.com/learningequality/kolibri-design-system/issues/595
+  - **Components:** KTooltip
+  - **Breaking:** no
+  - **Impacts a11y:** no
+  - **Guidance:** -
+
+[#611]: https://github.com/learningequality/kolibri-design-system/pull/611
+
+- [#612]
+  - **Description:** Prevent KListWithOverflow hidden elements from taking up space on the screen.
+  - **Products impact:** bugfix.
+  - **Addresses:** - .
+  - **Components:** KListWithOverflow.
+  - **Breaking:** no.
+  - **Impacts a11y:** no.
+  - **Guidance:** - .
+
+- [#612]
+  - **Description:** Scope the styles of the KListWithOverflow component.
+  - **Products impact:** bugfix.
+  - **Addresses:** - .
+  - **Components:** KListWithOverflow.
+  - **Breaking:** no.
+  - **Impacts a11y:** no.
+  - **Guidance:** - .
+
+[#612]: https://github.com/learningequality/kolibri-design-system/pull/612
+
+- [##603]
+  - **Description:** Adds thumps down icon that is needed in Studio for search recomendation work.
+  - **Products impact:** New Icon
+  - **Addresses:** [#4450](https://github.com/learningequality/studio/issues/4450)
+  - **Components:** N/A
+  - **Breaking:** No
+  - **Impacts a11y:**  No
+  - **Guidance:** 
+[#603]: https://github.com/learningequality/kolibri-design-system/pull/603
+
+- [#605]
+  - **Description:** Adds the `dropup` icon
+  - **Products impact:** New icon
+  - **Addresses:** https://github.com/learningequality/kolibri-design-system/issues/594
+  - **Components:** -
+  - **Breaking:** no
+  - **Impacts a11y:**  -
+  - **Guidance:** -
+
+[#605]: https://github.com/learningequality/kolibri-design-system/pull/605
+
+- [#586]
+  - **Description:** Adds a new prop `constrainToScrollParent ` to `KDropdownMenu` to allow overriding of its popover flipping behavior.
+  - **Products impact:** Bugfix
+  - **Addresses:** [#432](https://github.com/learningequality/kolibri-design-system/issues/432)
+  - **Components:** KDropdownMenu
+  - **Breaking:** no
+  - **Impacts a11y:**  no
+  - **Guidance:** Use the `constrainToScrollParent` prop to override the default popover flipping behavior of the `KDropdownMenu` component prop where necessary.
+
+[#586]: https://github.com/learningequality/kolibri-design-system/pull/586
+
+- [#573]
+  - **Description:** More precise calculation of list with in KListWithOverflow.
+  - **Products impact:** bugfix.
+  - **Addresses:** -.
+  - **Components:** KListWithOverflow.
+  - **Breaking:** no.
+  - **Impacts a11y:** no.
+  - **Guidance:** -.
+
+[#573]: https://github.com/learningequality/kolibri-design-system/pull/573
+
+- [#552]
+  - **Description:** New `KListWithOverflow` component.
+  - **Products impact:** new API.
+  - **Addresses:** https://github.com/learningequality/kolibri-design-system/issues/556, https://github.com/learningequality/studio/issues/3423, https://github.com/learningequality/kolibri/issues/11923.
+  - **Components:** KListWithOverflow.
+  - **Breaking:** no.
+  - **Impacts a11y:** no.
+  - **Guidance:** -.
+
+[#552]: https://github.com/learningequality/kolibri-design-system/pull/552
+
+- [#552]
+  - **Description:** New `useKResponsiveElement` private composable, `KResponsiveElementMixin` translated to this composable.
+  - **Products impact:** -.
+  - **Addresses:** -.
+  - **Components:** -.
+  - **Breaking:** no.
+  - **Impacts a11y:** no.
+  - **Guidance:** -.
+
+[#552]: https://github.com/learningequality/kolibri-design-system/pull/552
+
+- [#538]
+  - **Description:** Complete KImg implementation
+  - **Products impact:** new API
+  - **Addresses:** https://github.com/learningequality/kolibri-design-system/issues/368
+  - **Components:** KImg
+  - **Breaking:** no
+  - **Impacts a11y:** yes
+  - **Guidance:** One of the benefits of using KImg is that it throws a11y related warnings
+
+[#538]: https://github.com/learningequality/kolibri-design-system/pull/538
+
+- [#557]
+  - **Description:** Updates development documentation in regards to linking products development servers to local KDS
+  - **Products impact:** -
+  - **Addresses:** -
+  - **Components:** -
+  - **Breaking:** -
+  - **Impacts a11y:** -
+  - **Guidance:** -
+
+[#557]: https://github.com/learningequality/kolibri-design-system/pull/557
+
+- [#542]
+  - **Description:** Adds a new `sort` icon
+  - **Products impact:** New icon
+  - **Addresses:** https://github.com/learningequality/studio/issues/4426
+  - **Components:** -
+  - **Breaking:** no
+  - **Impacts a11y:** -
+  - **Guidance:** -
+
+[#542]: https://github.com/learningequality/kolibri-design-system/pull/542
+
+- [#542]
+  - **Description:** Updates documentation for icons to the new process, adds clear guidelines
+  - **Products impact:** None
+  - **Addresses:** -
+  - **Components:** -
+  - **Breaking:** -
+  - **Impacts a11y:** -
+  - **Guidance:** -
+
+[#542]: (https://github.com/learningequality/kolibri-design-system/pull/542
+
+- [#543]
+  - **Description:** Added new Icons to support Studio Usability Enhancements
+  - **Products impact:** new API
+  - **Addresses:** https://github.com/learningequality/studio/issues/3425
+  - **Components:** KIcon
+  - **Breaking:** no
+  - **Impacts a11y:** no
+  - **Guidance:** Consumers can now access these icons: activities, attribution, audience, categories, levels, rename
+
+[#543]: https://github.com/learningequality/kolibri-design-system/pull/543
+
+- [#541]
+  - **Description:** Add a GitHub Actions workflow to publish a new release on npm
+  - **Products impact:** none
+  - **Addresses:** https://github.com/learningequality/kolibri-design-system/issues/532
+  - **Components:** -
+  - **Breaking:** -
+  - **Impacts a11y:** -
+  - **Guidance:** -
+
+[#541]: https://github.com/learningequality/kolibri-design-system/pull/541
+
+- [#535]
+  - **Description:** Added text prop in the KToolTip component as an alternative to the slot
+  - **Products impact:** Choose from - bugfix
+  - **Addresses:** #221
+  - **Components:** KToolTip
+  - **Breaking:** no
+  - **Impacts a11y:** no
+  - **Guidance:** -
+
+[#535]: https://github.com/learningequality/kolibri-design-system/pull/535
 
 - [#522]
   - **Description:** Upgrades github-actions/cache dependency
@@ -26,7 +483,7 @@ Changelog is rather internal in nature. See release notes for the public overvie
   - **Addresses:** https://github.com/learningequality/kolibri-design-system/issues/512
   - **Components:** -
   - **Breaking:** no
-  - **Impacts a11y:** no  - 
+  - **Impacts a11y:** no  -
   - **Guidance:** -
 
 [#518]: https://github.com/learningequality/kolibri-design-system/pull/518
@@ -40,11 +497,11 @@ Changelog is rather internal in nature. See release notes for the public overvie
   - **Impacts a11y:** no
   - **Guidance:** ~
 
-[#521]: [https://github.com/learningequality/kolibri-design-system/pull/521]
+[#521]: https://github.com/learningequality/kolibri-design-system/pull/521
 
 - [#509]
   - **Description:** Introduces `appearanceOverrides` prop for the `KImg` component
-  - **Products impact:** new API 
+  - **Products impact:** new API
   - **Addresses:** https://github.com/learningequality/kolibri-design-system/issues/371
   - **Components:** KImg
   - **Breaking:** No
@@ -70,7 +527,7 @@ Changelog is rather internal in nature. See release notes for the public overvie
   - **Addresses:** -
   - **Components:** -
   - **Breaking:** no
-  - **Impacts a11y:** no  
+  - **Impacts a11y:** no
   - **Guidance:** -
 
 [#508]: https://github.com/learningequality/kolibri-design-system/pull/508
@@ -81,7 +538,7 @@ Changelog is rather internal in nature. See release notes for the public overvie
   - **Addresses:** https://github.com/learningequality/kolibri-design-system/issues/372
   - **Components:** KImg
   - **Breaking:** no
-  - **Impacts a11y:** yes  
+  - **Impacts a11y:** yes
   - **Guidance:** Allows the consumer to hook into the lifecycle of 'KImg' and handle the cases when the image fails to load
 
 [#502]: https://github.com/learningequality/kolibri-design-system/pull/502
@@ -91,8 +548,8 @@ Changelog is rather internal in nature. See release notes for the public overvie
   - **Products impact:** none
   - **Addresses:** https://github.com/learningequality/kolibri-design-system/issues/481
   - **Components:** -
-  - **Breaking:** 
-  - **Impacts a11y:** 
+  - **Breaking:**
+  - **Impacts a11y:**
   - **Guidance:** -
 
 [#505]: https://github.com/learningequality/kolibri-design-system/pull/505
@@ -235,9 +692,9 @@ Changelog is rather internal in nature. See release notes for the public overvie
   - **Addresses:** https://github.com/learningequality/kolibri-design-system/issues/379
   - **Components:** KRadioButton
   - **Breaking:** Yes
-  - **Impacts a11y:** 
+  - **Impacts a11y:**
   - **Guidance:** KRadioButton 'value' prop is deprecated. Please use the 'buttonValue' prop instead.
- 
+
   [#485]: https://github.com/learningequality/kolibri-design-system/pull/485
 
 ## Version 2.0.0

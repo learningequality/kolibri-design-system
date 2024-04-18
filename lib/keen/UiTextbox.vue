@@ -9,6 +9,7 @@
    functionality.
   -->
   <div class="ui-textbox" :class="classes">
+
     <div v-if="icon || $slots.icon" class="ui-textbox-icon-wrapper">
       <slot name="icon">
         <UiIcon :icon="icon" />
@@ -17,74 +18,74 @@
 
     <div class="ui-textbox-content">
       <label class="ui-textbox-label">
-        <input
-          v-if="!multiLine"
-          ref="input"
+        <div :class="['ui-input-content', inputContentClasses]">
+          <input
+            v-if="!multiLine"
+            ref="input"
+            v-autofocus="autofocus"
+            class="ui-textbox-input"
+            :autocapitalize="autocapitalize ? autocapitalize : null"
+            :autocomplete="autocomplete ? autocomplete : null"
+            :disabled="disabled"
+            :max="maxValue"
+            :maxlength="enforceMaxlength ? maxlength : null"
+            :minlength="minlength"
+            :min="minValue"
+            :name="name"
+            :number="type === 'number' ? true : null"
+            :placeholder="hasFloatingLabel ? null : placeholder"
+            :readonly="readonly" :required="required"
+            :step="stepValue"
+            :style="isActive ? { borderBottomColor: $themeTokens.primaryDark } : {}"
+            :tabindex="tabindex"
+            :type="type"
+            :value="value"
+            @blur="onBlur"
+            @change="onChange"
+            @focus="onFocus"
+            @input="updateValue($event.target.value)"
+            @keydown.enter="onKeydownEnter"
+            @keydown="onKeydown"
+          >
 
-          v-autofocus="autofocus"
-          class="ui-textbox-input"
-          :autocapitalize="autocapitalize ? autocapitalize : null"
-          :autocomplete="autocomplete ? autocomplete : null"
-          :disabled="disabled"
-          :max="maxValue"
-          :maxlength="enforceMaxlength ? maxlength : null"
-          :minlength="minlength"
-          :min="minValue"
-          :name="name"
-          :number="type === 'number' ? true : null"
-          :placeholder="hasFloatingLabel ? null : placeholder"
-          :readonly="readonly"
-          :required="required"
-          :step="stepValue"
-          :style="isActive ? { borderBottomColor: $themeTokens.primaryDark } : {}"
-          :tabindex="tabindex"
-          :type="type"
-          :value="value"
-          @blur="onBlur"
-          @change="onChange"
-          @focus="onFocus"
-          @input="updateValue($event.target.value)"
-
-          @keydown.enter="onKeydownEnter"
-          @keydown="onKeydown"
-        >
-
-        <textarea
-          v-else
-          ref="textarea"
-
-          v-autofocus="autofocus"
-          :value="value"
-          class="ui-textbox-textarea"
-          :autocapitalize="autocapitalize ? autocapitalize : null"
-          :autocomplete="autocomplete ? autocomplete : null"
-          :disabled="disabled"
-          :maxlength="enforceMaxlength ? maxlength : null"
-          :minlength="minlength"
-          :name="name"
-          :placeholder="hasFloatingLabel ? null : placeholder"
-          :readonly="readonly"
-          :required="required"
-
-          :rows="rows"
-          :style="isActive ? { borderBottomColor: $themeTokens.primaryDark } : {}"
-
-          :tabindex="tabindex"
-
-          @blur="onBlur"
-          @change="onChange"
-          @focus="onFocus"
-          @input="updateValue($event.target.value)"
-
-          @keydown.enter="onKeydownEnter"
-          @keydown="onKeydown"
-        ></textarea>
+          <textarea
+            v-else ref="textarea"
+            v-autofocus="autofocus"
+            :value="value"
+            class="ui-textbox-textarea"
+            :autocpitalize="autocapitalize ? autocapitalize : null"
+            :autocomplete="autocomplete ? autocomplete : null"
+            :disabled="disabled"
+            :maxlength="enforceMaxlength ? maxlength : null"
+            :minlength="minlength"
+            :name="name"
+            :placeholder="hasFloatingLabel ? null : placeholder"
+            :readonly="readonly"
+            :required="required"
+            :rows="rows"
+            :style="isActive ? { borderBottomColor: $themeTokens.primaryDark } : {}"
+            :tabindex="tabindex"
+            @blur="onBlur"
+            @change="onChange"
+            @focus="onFocus"
+            @input="updateValue($event.target.value)"
+            @keydown.enter="onKeydownEnter" @keydown="onKeydown"
+          ></textarea>
+          <KIconButton
+            v-if="showClearButton"
+            icon="clear"
+            :color="$themeTokens.annotation"
+            size="small"
+            :ariaLabel="clearAriaLabel"
+            data-test="clearIcon"
+            @click="clearText"
+          />
+        </div>
 
         <div
           v-if="label || $slots.default"
           class="ui-textbox-label-text"
           :class="labelClasses"
-          :style="isActive ? { color: $themeTokens.primaryDark } : {}"
         >
           <slot>{{ label }}</slot>
         </div>
@@ -123,6 +124,7 @@
 
   import autosize from 'autosize';
   import UiIcon from './UiIcon.vue';
+  import KIconButton from '../buttons-and-links/KIconButton.vue';
 
   const autofocus = {
     inserted(el, { value }) {
@@ -150,6 +152,10 @@
       value: {
         type: [String, Number],
         default: '',
+      },
+      clearAriaLabel: { 
+        type: String,
+        default: 'Clear',
       },
       icon: String,
       iconPosition: {
@@ -213,6 +219,10 @@
         type: Boolean,
         default: false,
       },
+      clearable: {
+          type: Boolean,
+          default: false,
+        },
     },
 
     data() {
@@ -225,6 +235,18 @@
     },
 
     computed: {
+      
+      showClearButton() {
+        return this.clearable && this.value && !this.disabled;
+      },
+
+      inputContentClasses() {
+        return {
+          'clear-button-padding': this.clearable,
+          'multi-line': this.multiLine,
+        };
+      },
+
       classes() {
         return [
           `ui-textbox--icon-position-${this.iconPosition}`,
@@ -321,6 +343,15 @@
         this.$emit('input', value);
       },
 
+      clearText() {
+        this.updateValue("");
+        this.$nextTick(() => {
+        this.refreshSize();  
+        this.focus();  
+      }); 
+        
+      },
+
       onChange(e) {
         this.$emit('change', this.value, e);
       },
@@ -403,21 +434,38 @@
         color: $ui-input-label-color--hover;
       }
 
-      .ui-textbox-input,
+      .ui-textbox-label,
       .ui-textbox-textarea {
         border-bottom-color: $ui-input-border-color--hover;
       }
     }
 
     &.is-active:not(.is-disabled) {
-      .ui-textbox-input,
+      .ui-textbox-label-text {
+        color: $ui-input-border-color--active;
+      }
+
+      .ui-textbox-label,
       .ui-textbox-textarea {
         border-bottom-color: $ui-input-border-color--active;
-        border-bottom-width: $ui-input-border-width--active;
       }
     }
 
-    &.has-label {
+    .ui-input-content {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      position: relative;
+    }
+
+    .ui-input-content:not(.clear-button-padding){
+          padding-right: 0;
+    }
+
+      .ui-input-content.clear-button-padding {
+          padding-right: 0.15rem;
+      }
+
+    .ui-cle &.has-label {
       .ui-textbox-icon-wrapper {
         padding-top: $ui-input-icon-margin-top--with-label;
       }
@@ -448,24 +496,28 @@
         }
       }
 
+      
+
+    
       // Fixes glitch in chrome where label and input value overlap each other
       // when webkit-autofill value has not been propagated yet (e.g. https://github.com/vuejs/vue/issues/1331)
       // The webkit-autofill value will only be propagated on first click into the viewport.
       // Before that .is-inline will be wrongly set and cause the auto filled input value and the label to overlap.
       // This fix will style the wrong .is-inline like an .is-floating in case :-webkit-autofill is set.
-      .ui-textbox-label > input:-webkit-autofill + .ui-textbox-label-text.is-inline {
+      .ui-textbox-label>input:-webkit-autofill+.ui-textbox-label-text.is-inline {
         transform: translateY(0) scale(1);
       }
     }
 
     &.is-invalid:not(.is-disabled) {
+
       .ui-textbox-label-text,
       .ui-textbox-icon-wrapper .ui-icon,
       .ui-textbox-counter {
         color: $ui-input-label-color--invalid;
       }
 
-      .ui-textbox-input,
+      .ui-textbox-label,
       .ui-textbox-textarea {
         border-bottom-color: $ui-input-border-color--invalid;
       }
@@ -475,8 +527,9 @@
       }
     }
 
-    &.is-disabled {
+    &.is-disabled{
       .ui-textbox-input,
+      .ui-textbox-label,
       .ui-textbox-textarea {
         color: $ui-input-text-color--disabled;
         border-bottom-style: $ui-input-border-style--disabled;
@@ -499,8 +552,11 @@
     width: 100%;
     padding: 4px 0 0 0;
     margin: 0;
-    background: #e9e9e9;
+    background: $md-grey-100;
     border-radius: 4px 4px 0 0;
+    border-bottom-color: $ui-input-border-color;
+    border-bottom-style: solid;
+    border-bottom-width: $ui-input-border-width;
   }
 
   .ui-textbox-icon-wrapper {
@@ -539,13 +595,15 @@
     cursor: auto;
     background: none;
     border: none;
-    border-bottom-color: $ui-input-border-color;
-    border-bottom-style: solid;
-    border-bottom-width: $ui-input-border-width;
     border-radius: 0;
     outline: none;
     transition: border 0.1s ease;
   }
+
+  .ui-textbox-textarea {
+  border:none
+  }
+
 
   .ui-textbox-input {
     height: $ui-input-height;
@@ -584,5 +642,4 @@
       margin-left: rem(8px);
     }
   }
-
 </style>
