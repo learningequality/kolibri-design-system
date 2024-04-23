@@ -206,9 +206,8 @@
         };
       },
       modalWidth() {
-        if (this.size === 'small') return '300px';
-        if (this.size === 'medium') return '450px';
-        if (this.size === 'large') return '100%';
+        if (this.size === SIZE_SM) return '300px';
+        if (this.size === SIZE_MD) return '450px';
         return `${this.size}px`;
       },
       maxModalWidth() {
