@@ -299,17 +299,6 @@
         }
       }, 50),
 
-      attachInputListeners() {
-        const textInputs = this.$refs.content.querySelectorAll('input[type="text"], textarea');
-        const handleInput = () => {
-          // Call adjustContentHeight to manage height changes
-          this.adjustContentHeight();
-        };
-        textInputs.forEach(input => {
-          input.removeEventListener('input', handleInput); // Ensure no duplicates
-          input.addEventListener('input', handleInput);
-        });
-      },
       adjustContentHeight() {
         // Manage content height adjustment here
         this.$refs.content.style.height = 'auto';
@@ -449,4 +438,5 @@
   }
 
 </style>
+
   
