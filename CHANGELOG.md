@@ -4,6 +4,17 @@ Changelog is rather internal in nature. See release notes for the public overvie
 
 ## Upcoming version 5.x.x (`develop` branch)
 
+- [#590]
+  - **Description:** Modal now resizes dynamically to adjust size based on content changes.
+  - **Products impact:** bugfix.
+  - **Addresses:**  https://github.com/learningequality/kolibri-design-system/issues/570
+  - **Components:** KModal.
+  - **Breaking:** No
+  - **Impacts a11y:** -
+  - **Guidance:** Consumers need to ensure the modal content is wrapped correctly for the resizing logic to work effectively. No additional steps required for integration.
+
+[#590]: https://github.com/learningequality/kolibri-design-system/pull/590/
+
 - [#549]
   - **Description:** Internal refactor of `KSelect` as part of moving away from Keen UI where related files were renamed and some functionality that wasn't exposed for public use was removed.
   - **Products impact:** none
