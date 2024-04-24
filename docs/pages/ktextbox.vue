@@ -5,7 +5,7 @@
       For detailed design guidance, refer to the page on <DocsInternalLink href="/textfields" text="text fields" />.
     </DocsPageSection>
 
-    <DocsPageSection title="Input Types and Features">
+    <DocsPageSection title="Usage">
       <h3>Input with Label</h3>
       <KTextbox label="Input with Label" />
       <DocsShowCode language="html">
