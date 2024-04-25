@@ -2,9 +2,18 @@
 
 Changelog is rather internal in nature. See release notes for the public overview and guidelines. Releases are recorded as git tags in the [Github releases](https://github.com/learningequality/kolibri-design-system/releases) page.
 
-
-
 ## Version 4.x.x (`release-v4` branch)
+
+- [#604]
+  - **Description:** Add more examples to `KTextbox` documentation
+  - **Products impact:** None
+  - **Addresses:** https://github.com/learningequality/kolibri-design-system/issues/596
+  - **Components:** `KTextbox` documentation
+  - **Breaking:** -
+  - **Impacts a11y:** -
+  - **Guidance:** -
+
+[#604]: https://github.com/learningequality/kolibri-design-system/pull/604
 
 - [#572]
   - **Description:** Add `aria-checked` property to KCheckbox's `<input>` element
