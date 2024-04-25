@@ -298,10 +298,6 @@
         }
       }, 50),
 
-      adjustContentHeight() {
-        // Manage content height adjustment here
-        this.$refs.content.style.height = 'auto';
-      },
       emitCancelEvent() {
         if (!this.cancelDisabled) {
           /**
@@ -438,4 +434,4 @@
 
 </style>
 
-  
+
