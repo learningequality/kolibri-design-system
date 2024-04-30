@@ -99,7 +99,7 @@
 </template>
   
 
-  <script>
+<script>
 
   import debounce from 'lodash/debounce';
   import useKResponsiveWindow from './composables/useKResponsiveWindow';
@@ -349,7 +349,7 @@
 </script>
 
 
-  <style lang="scss" scoped>
+<style lang="scss" scoped>
 
   @import './styles/definitions';
 
