@@ -5,47 +5,46 @@
       For detailed design guidance, refer to the page on <DocsInternalLink href="/textfields" text="text fields" />.
     </DocsPageSection>
 
-    <DocsPageSection title="Usage">
-      <h3>Input with Label</h3>
-      <KTextbox label="Input with Label" />
     <DocsPageSection title="Usage" anchor="#usage">
+      <h3>Input with label</h3>
+      <KTextbox label="Input with label" />
       <DocsShowCode language="html">
-        <KTextbox label="Input with Label" />
+        <KTextbox label="Input with label" />
       </DocsShowCode>
       <p>This text box includes a visible label, providing clear guidance and context to the user about the expected input.</p>
 
 
-      <h3>Valid and Invalid Input</h3>
+      <h3>Valid and invalid input</h3>
 
-      <KTextbox 
-        v-model="numericInput" 
-        label="Numbers Only" 
-        :invalid="!isNumeric(numericInput)" 
-        invalidText="Please enter a valid number." 
+      <KTextbox
+        v-model="numericInput"
+        label="Numbers only"
+        :invalid="!isNumeric(numericInput)"
+        invalidText="Please enter a valid number."
       />
 
       <DocsShowCode language="html">
-        <KTextbox 
-          v-model="numericInput" 
-          label="Numbers Only" 
-          :invalid="!isNumeric(numericInput)" 
-          invalidText="Please enter a valid number." 
+        <KTextbox
+          v-model="numericInput"
+          label="Numbers only"
+          :invalid="!isNumeric(numericInput)"
+          invalidText="Please enter a valid number."
         />
       </DocsShowCode>
 
 
       <p>This text box only accepts numeric input. If any non-numeric character is entered, it will be considered invalid.</p>
 
-      <h3>Disabled Input</h3>
-      <KTextbox label="Disabled Input" disabled />
+      <h3>Disabled input</h3>
+      <KTextbox label="Disabled input" disabled />
       <DocsShowCode language="html">
-        <KTextbox label="Disabled Input" disabled />
+        <KTextbox label="Disabled input" disabled />
       </DocsShowCode>
       <p>This text box is disabled. It cannot be edited or focused, so it will be skipped during keyboard navigation.</p>
 
 
-      <h3>Number Input</h3>
-      <KTextbox label="Number Input" type="number" :min="0" :max="100" />
+      <h3>Number input</h3>
+      <KTextbox label="Number input" type="number" :min="0" :max="100" />
 
       <DocsShowCode language="html">
 
@@ -61,11 +60,11 @@
       </p>
 
 
-      <h3>Text Area</h3>
-      <KTextbox label="Text Area" :textArea="true" />
+      <h3>Text area</h3>
+      <KTextbox label="Text area" :textArea="true" />
       <DocsShowCode language="html">
 
-        <KTextbox label="Text Area" :textArea="true" />
+        <KTextbox label="Text area" :textArea="true" />
 
       </DocsShowCode>
       <p>This is a multi-line text input area, suitable for longer text entries.</p>
