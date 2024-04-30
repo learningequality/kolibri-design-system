@@ -8,6 +8,7 @@
     <DocsPageSection title="Usage">
       <h3>Input with Label</h3>
       <KTextbox label="Input with Label" />
+    <DocsPageSection title="Usage" anchor="#usage">
       <DocsShowCode language="html">
         <KTextbox label="Input with Label" />
       </DocsShowCode>
