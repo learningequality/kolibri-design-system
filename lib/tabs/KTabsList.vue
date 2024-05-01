@@ -5,6 +5,7 @@
     role="tablist"
     :items="tabs"
     :[ariaLabelAttrName]="ariaLabelAttr"
+    ref="tabList"
   >
     <template #item="{ item: tab }">
       <!-- https://v3.router.vuejs.org/api/#example-applying-active-class-to-outer-element -->
@@ -18,6 +19,7 @@
           :id="getTabElementId(tabsId, tab.id)"
           ref="tab"
           role="tab"
+          :key="tab.id"
           :data-activeroute="isActive"
           :data-tabid="tab.id"
           :href="href"
@@ -62,7 +64,7 @@
     <template #more="{ overflowItems }">
       <KIconButton
         tooltip="More"
-        icon="optionsVertical"
+        icon="optionsHorizontal"
         :style="overflowButtonStyles(overflowItems)"
       >
         <template #menu>
@@ -170,6 +172,12 @@
           )
         );
       },
+      tabsRef() {
+        const tabList = this.$refs.tabList;
+        const tabs = tabList.$refs.tab;
+        console.log("tabs", tabs, this.$refs.tab);
+        return tabs || [];
+      },
     },
     mounted() {
       /*
@@ -182,7 +190,7 @@
        */
       if (this.useRouter) {
         this.$nextTick(() => {
-          const activeRouteTab = this.$refs.tab.find(tab => tab.dataset.activeroute);
+          const activeRouteTab = this.tabsRef.find(tab => tab.dataset.activeroute);
           if (activeRouteTab !== undefined) {
             const activeRouteTabId = activeRouteTab.dataset.tabid;
             this.emitActivate(activeRouteTabId);
@@ -225,7 +233,7 @@
       focusTab(tabIdx) {
         if (tabIdx !== undefined && tabIdx !== null) {
           this.focusedTabIdx = tabIdx;
-          this.$refs.tab[tabIdx].focus();
+          this.tabsRef[tabIdx].focus();
         }
       },
       focusFirstTab() {
@@ -253,11 +261,17 @@
         this.focusTab(activeTabIdx);
       },
       onClick(tabId, navigate, event) {
+        if (this.useRouter) {
+          this.$router.push({ name: tabId });
+        }
         this.focusedTabIdx = this.getTabIdx(tabId);
         this.emitClick(tabId);
         this.emitActivate(tabId);
         if (navigate) {
           navigate(event);
+        }
+        if (this.useRouter && !navigate) {
+
         }
       },
       onKeyUp(event) {
@@ -295,6 +309,8 @@
       },
       overflowButtonStyles(overflow) {
         return {
+          width: '38px !important',
+          height: '38px !important',
           border: this.activeSectionIsHidden(overflow)
             ? '2px solid ' + this.$themeTokens.primary
             : 'none',
