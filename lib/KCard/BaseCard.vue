@@ -7,6 +7,7 @@
     @focus="cardFocus"
     @hover="cardHover"
     @click="cardClick()"
+    @keydown.enter="cardClick()"
   >
     <component
       :is="headerLevel"
@@ -46,8 +47,12 @@
           if (!value) {
             console.error('Error: Prop headingLevel is required and can not be empty.');
             return false;
+          } else if ((value <= 6) & (value >= 2)) {
+            return true;
+          } else {
+            console.error('Error: Prop headingLevel should be a value between 2 and 6.');
+            return false;
           }
-          return true;
         },
       },
       titleLines: {
@@ -90,7 +95,7 @@
 
   <style lang="scss" scoped>
 
-  @import '~kolibri-design-system/lib/styles/definitions';
+  @import '../styles/definitions';
 
   .card {
     @extend %dropshadow-2dp;
