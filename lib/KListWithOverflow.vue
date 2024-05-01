@@ -107,7 +107,15 @@
         if (!element) {
           return { width: 0, height: 0 };
         }
-        const { width, height } = element.getBoundingClientRect();
+        let { width, height } = element.getBoundingClientRect();
+
+        const style = element.currentStyle || window.getComputedStyle(element);
+        const marginX = parseFloat(style.marginLeft) + parseFloat(style.marginRight);
+        const marginY = parseFloat(style.marginTop) + parseFloat(style.marginBottom);
+
+        width += marginX;
+        height += marginY;
+
         return { width, height };
       },
       /**
@@ -173,7 +181,9 @@
             const idx = overflowItemsIdx.pop();
             const item = list.children[idx];
             item.style.visibility = 'visible';
+            item.style.position = 'unset';
             maxWidth += itemsSizes[idx].width;
+            availableWidth -= itemsSizes[idx].width;
           }
         }
 

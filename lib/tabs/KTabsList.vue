@@ -1,15 +1,15 @@
 <template>
 
-  <div
+  <KListWithOverflow
     v-show="enablePrint || !$isPrint"
     role="tablist"
+    :items="tabs"
     :[ariaLabelAttrName]="ariaLabelAttr"
   >
-    <template v-if="useRouter">
+    <template #item="{ item: tab }">
       <!-- https://v3.router.vuejs.org/api/#example-applying-active-class-to-outer-element -->
       <router-link
-        v-for="tab in tabs"
-        :key="tab.id"
+        v-if="useRouter"
         v-slot="{ href, navigate, isActive }"
         :to="tab.to"
         custom
@@ -37,13 +37,9 @@
           </slot>
         </a>
       </router-link>
-    </template>
-
-    <template v-else>
       <button
-        v-for="tab in tabs"
+        v-else
         :id="getTabElementId(tabsId, tab.id)"
-        :key="tab.id"
         ref="tab"
         type="button"
         role="tab"
@@ -63,7 +59,21 @@
         </slot>
       </button>
     </template>
-  </div>
+    <template #more="{ overflowItems }">
+      <KIconButton
+        tooltip="More"
+        icon="optionsVertical"
+        :style="overflowButtonStyles(overflowItems)"
+      >
+        <template #menu>
+          <KDropdownMenu
+            :options="overflowItems"
+            @select="(tab) => onClick(tab.id)"
+          />
+        </template>
+      </KIconButton>
+    </template>
+  </KListWithOverflow>
 
 </template>
 
@@ -278,6 +288,17 @@
          * programatically in addition to user interaction.
          */
         this.$emit('click', tabId);
+      },
+      activeSectionIsHidden(overflow) {
+        const ids = overflow.map(i => i.id);
+        return ids.includes(this.activeTabId);
+      },
+      overflowButtonStyles(overflow) {
+        return {
+          border: this.activeSectionIsHidden(overflow)
+            ? '2px solid ' + this.$themeTokens.primary
+            : 'none',
+        };
       },
     },
   };
