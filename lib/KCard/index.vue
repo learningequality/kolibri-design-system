@@ -77,6 +77,7 @@
                   scaleType: thumbnailScaleType,
                 }"
                 style="border-radius:20px;"
+                class="spacing"
               />
               <slot v-if="!thumbnailSrc" name="thumbnailPlaceholder"></slot>
 
@@ -207,7 +208,7 @@
   <style scoped>
   
     .spacing{
-      padding: 1em;
+      margin: 1em;
     }
     .footer{
       margin-top: auto;
