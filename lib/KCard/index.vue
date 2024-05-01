@@ -71,6 +71,7 @@
                 v-if="thumbnailDisplay === 'small'"
                 :src="thumbnailSrc"
                 :height="300"
+                P
                 :width="300"
                 :isDecorative="true"
                 :appearanceOverrides="{
