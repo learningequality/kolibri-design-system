@@ -10,8 +10,6 @@
       <KImg
         v-if="layout === 'vertical' && thumbnailDisplay !== 'none'"
         :src="thumbnailSrc"
-        :height="300"
-        :width="500"
         :isDecorative="true"
         :style="KImgVerticalSmallStyle"
       />
@@ -22,8 +20,6 @@
         <KImg
           v-if="layout === 'horizontal' && thumbnailDisplay === 'large'"
           :src="thumbnailSrc"
-          :height="300"
-          :width="600"
           :isDecorative="true"
         />
         <slot v-if="!thumbnailSrc" name="thumbnailPlaceholder"></slot>
@@ -70,9 +66,6 @@
               <KImg
                 v-if="thumbnailDisplay === 'small'"
                 :src="thumbnailSrc"
-                :height="300"
-                P
-                :width="300"
                 :isDecorative="true"
                 :appearanceOverrides="{
                   scaleType: thumbnailScaleType,
@@ -126,7 +119,7 @@
         default: 2,
       },
       /**
-       * An object containing the route definition for the link. Required.
+       * An object containing the route definition for the link.
        */
       to: {
         type: Object,
