@@ -39,6 +39,28 @@ Changelog is rather internal in nature. See release notes for the public overvie
 
 ## Version 4.x.x (`release-v4` branch)
 
+- [#627]
+  - **Description:** Fix missing anchor tag and heading case in `KTextbox` documentation
+  - **Products impact:** None
+  - **Addresses:** -
+  - **Components:** `KTextbox` documentation
+  - **Breaking:** -
+  - **Impacts a11y:** -
+  - **Guidance:** -
+
+[#627]: https://github.com/learningequality/kolibri-design-system/pull/627
+
+- [#604]
+  - **Description:** Add more examples to `KTextbox` documentation
+  - **Products impact:** None
+  - **Addresses:** https://github.com/learningequality/kolibri-design-system/issues/596
+  - **Components:** `KTextbox` documentation
+  - **Breaking:** -
+  - **Impacts a11y:** -
+  - **Guidance:** -
+
+[#604]: https://github.com/learningequality/kolibri-design-system/pull/604
+
 - [#572]
   - **Description:** Add `aria-checked` property to KCheckbox's `<input>` element
   - **Products impact:** -
