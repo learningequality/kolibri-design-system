@@ -6,6 +6,7 @@
     :items="tabs"
     :[ariaLabelAttrName]="ariaLabelAttr"
     ref="tabList"
+    @updateOverflowItems="overflowTabs = $event"
   >
     <template #item="{ item: tab }">
       <!-- https://v3.router.vuejs.org/api/#example-applying-active-class-to-outer-element -->
@@ -28,6 +29,7 @@
           :aria-selected="ariaSelectedAttr(tab.id)"
           :aria-controls="ariaControlsAttr(tab.id)"
           @click="event => onClick(tab.id, navigate, event)"
+          @focus="focusedTabIdx = getTabIdx(tab.id)"
         >
           <!-- @slot Optional slot for tab labels. Exposes `tab` object and `isActive` boolean. -->
           <slot
@@ -50,6 +52,7 @@
         :aria-selected="ariaSelectedAttr(tab.id)"
         :aria-controls="ariaControlsAttr(tab.id)"
         @click="onClick(tab.id)"
+        @focus="focusedTabIdx = getTabIdx(tab.id)"
       >
         <!-- @slot Optional slot for tab labels. Exposes `tab` object and `isActive` boolean. -->
         <slot
@@ -123,7 +126,7 @@
       return {
         focusedTabIdx: 0,
         firstTabIdx: 0,
-        lastTabIdx: this.tabs && this.tabs.length ? this.tabs.length - 1 : 0,
+        overflowTabs: [],
       };
     },
     computed: {
@@ -173,10 +176,15 @@
         );
       },
       tabsRef() {
-        const tabList = this.$refs.tabList;
-        const tabs = tabList.$refs.tab;
-        console.log("tabs", tabs, this.$refs.tab);
-        return tabs || [];
+        const tabListEl = this.$refs.tabList.$el;
+        const tabs = tabListEl.querySelectorAll('.tab');
+        return Array.from(tabs);
+      },
+      lastTabIdx() {
+        if (!this.tabs || !this.tabs.length) {
+          return 0;
+        }
+        return this.tabs.length - 1 - this.overflowTabs.length;
       },
     },
     mounted() {
@@ -232,7 +240,6 @@
       },
       focusTab(tabIdx) {
         if (tabIdx !== undefined && tabIdx !== null) {
-          this.focusedTabIdx = tabIdx;
           this.tabsRef[tabIdx].focus();
         }
       },
@@ -261,17 +268,18 @@
         this.focusTab(activeTabIdx);
       },
       onClick(tabId, navigate, event) {
-        if (this.useRouter) {
-          this.$router.push({ name: tabId });
-        }
         this.focusedTabIdx = this.getTabIdx(tabId);
+        const tab = this.tabs[this.focusedTabIdx];
+        if (tab.to && !navigate) {
+          // It was clicked inside the KDropdownMenu where the router-link is not available
+          const tabRef = this.tabsRef[this.focusedTabIdx];
+          tabRef.click();
+          return;
+        }
         this.emitClick(tabId);
         this.emitActivate(tabId);
         if (navigate) {
           navigate(event);
-        }
-        if (this.useRouter && !navigate) {
-
         }
       },
       onKeyUp(event) {
@@ -282,6 +290,7 @@
           End: this.focusLastTab,
         };
         const handler = handlers[event.key];
+        console.log("handler", handler)
         if (handler) {
           event.preventDefault();
           event.stopPropagation();

@@ -86,6 +86,9 @@
           this.setOverflowItems();
         });
       },
+      overflowItems() {
+        this.$emit('updateOverflowItems', this.overflowItems);
+      },
     },
     mounted() {
       // For some reason KIconButtons takes 2 ticks to render their actual size
