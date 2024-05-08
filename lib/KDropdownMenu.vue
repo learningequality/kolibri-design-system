@@ -1,29 +1,40 @@
 <template>
 
-  <UiPopover
-    ref="popover"
-    :z-index="99"
-    :containFocus="true"
-    :dropdownPosition="position"
-    :constrainToScrollParent="constrainToScrollParent"
-    @close="handleClose"
-    @open="handleOpen"
-  >
-    <UiMenu 
-      ref="menu" 
-      :options="options" 
-      :hasIcons="hasIcons" 
-      @select="handleSelection" 
-    />
-  </UiPopover>
+  <div>
+    <UiPopover
+      v-if="trigger"
+      ref="popover"
+      :z-index="100"
+      :trigger="trigger"
+      :containFocus="true"
+      :dropdownPosition="position"
+      :positionX="contextMenuPosition[0]"
+      :positionY="contextMenuPosition[1]"
+      :openOn="isContextMenu ? 'manual' : 'click'"
+      :constrainToScrollParent="constrainToScrollParent"
+      @close="handleClose"
+      @open="handleOpen"
+    >
+      <!-- Slot to set a header to the dropdown menu -->
+      <slot name="header"></slot>
+      <UiMenu 
+        ref="menu" 
+        :options="options" 
+        :hasIcons="hasIcons" 
+        @select="handleSelection" 
+      />
+    </UiPopover>
+  </div>
 
 </template>
 
 
 <script>
 
-  import UiPopover from './keen/UiPopover';
+  import { computed } from '@vue/composition-api';
   import UiMenu from './keen/UiMenu';
+  import UiPopover from './keen/UiPopover';
+  import useKContextMenu from './composables/_useKContextMenu';
 
   /**
    * The KDropdownMenu component is used to contain multiple actions
@@ -33,6 +44,21 @@
     components: {
       UiPopover,
       UiMenu,
+    },
+    setup(props) {
+      if (props.isContextMenu) {
+        const { clientX, clientY, isActive } = useKContextMenu();
+        const contextMenuPosition = computed(() => [clientX.value, clientY.value]);
+
+        return {
+          contextMenuPosition,
+          isContextMenuActive: isActive,
+        };
+      }
+      return {
+        contextMenuPosition: [],
+        isContextMenuActive: null,
+      };
     },
     props: {
       /**
@@ -79,6 +105,40 @@
           ].includes(val);
         },
       },
+      /**
+       * Whether or not the dropdown is a context menu, if true, the dropdown will open when
+       * the user right-clicks the parent element
+       */
+      isContextMenu: {
+        type: Boolean,
+        default: false,
+      },
+    },
+    data() {
+      return {
+        trigger: null,
+      };
+    },
+    watch: {
+      isContextMenuActive() {
+        if (this.isContextMenuActive) {
+          this.$nextTick(() => {
+            this.$refs.popover.open();
+          });
+        } else {
+          this.$refs.popover.close();
+        }
+      },
+      contextMenuPosition() {
+        if (this.isContextMenuActive) {
+          this.$nextTick(() => {
+            this.$refs.popover.open();
+          });
+        }
+      },
+    },
+    mounted() {
+      this.trigger = this.$el.parentElement;
     },
     beforeDestroy() {
       window.removeEventListener('keydown', this.handleOpenMenuNavigation, true);
@@ -135,11 +195,11 @@
           this.closePopover();
         }
       },
-      handleSelection(selection) {
+      handleSelection(selection, $event) {
         /**
          * Emitted when an option is selected
          */
-        this.$emit('select', selection);
+        this.$emit('select', selection, $event);
         this.closePopover();
       },
       closePopover() {
