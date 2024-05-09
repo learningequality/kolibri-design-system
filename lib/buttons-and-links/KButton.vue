@@ -12,7 +12,7 @@
     @keyup.enter.stop.prevent="handlePressEnter"
     @mouseenter="hovering = true"
     @mouseleave="hovering = false"
-    @focus="$emit('focus')"
+    @focus="(event) => $emit('focus', event)"
   >
     <!-- @slot Slot alternative to the `icon` prop -->
     <slot name="icon"></slot>
