@@ -4,6 +4,53 @@ Changelog is rather internal in nature. See release notes for the public overvie
 
 ## Upcoming version 5.x.x (`develop` branch)
 
+- [#635]
+  - **Description:** KListWithOverflow now takes into account the margin of items to calculate available space.
+  - **Products impact:** bugfix.
+  - **Addresses:** -.
+  - **Components:** KListWithOverflow.
+  - **Breaking:** no
+  - **Impacts a11y:** no
+  - **Guidance:** -
+
+- [#635]
+  - **Description:** KListWithOverflow now emits an event `updateOverflowItems` when overflowItems are recalculated.
+  - **Products impact:** new API.
+  - **Addresses:** -.
+  - **Components:** KListWithOverflow.
+  - **Breaking:** no
+  - **Impacts a11y:** no
+  - **Guidance:** -.
+
+- [#635]
+  - **Description:** Kbutton and KIconButton now emit @focus event.
+  - **Products impact:** new API.
+  - **Addresses:** -.
+  - **Components:** KButton, KIconButton.
+  - **Breaking:** no
+  - **Impacts a11y:** no
+  - **Guidance:** -.
+
+- [#635]
+  - **Description:** KTabsList now shows a "more" button for the overflowed tabs if they dont fit in the available space.
+  - **Products impact:** updated API.
+  - **Addresses:** https://github.com/learningequality/kolibri-design-system/issues/623.
+  - **Components:** KTabsList, KTabs.
+  - **Breaking:** no
+  - **Impacts a11y:** no
+  - **Guidance:** -.
+
+- [#635]
+  - **Description:** KTabsList now receives a `tabAppearanceOverrides` prop to override styles of tab items.
+  - **Products impact:** new API.
+  - **Addresses:** .
+  - **Components:** KTabsList.
+  - **Breaking:** no
+  - **Impacts a11y:** no
+  - **Guidance:** -.  
+
+[#635]: https://github.com/learningequality/kolibri-design-system/pull/635
+
 - [#549]
   - **Description:** Internal refactor of `KSelect` as part of moving away from Keen UI where related files were renamed and some functionality that wasn't exposed for public use was removed.
   - **Products impact:** none

@@ -3,7 +3,7 @@
   <div>
     <KTabsList
       v-model="activeTabId"
-      v-bind="{ tabsId, tabs, ariaLabel, ariaLabelledBy, color, colorActive, backgroundColor, hoverBackgroundColor, appearanceOverrides, appearanceOverridesActive, enablePrint }"
+      v-bind="{ tabsId, tabs, ariaLabel, ariaLabelledBy, color, colorActive, backgroundColor, hoverBackgroundColor, appearanceOverrides, appearanceOverridesActive, tabAppearanceOverrides, enablePrint }"
     >
       <!-- provide the same `tab` slot and send its properties further up from `KTabsList` -->
       <template #tab="{ tab, isActive }">

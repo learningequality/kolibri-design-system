@@ -123,10 +123,6 @@
         type: String,
         required: true,
       },
-      tabAppearanceOverrides: {
-        type: [Object, String],
-        default: null,
-      },
     },
     data() {
       return {

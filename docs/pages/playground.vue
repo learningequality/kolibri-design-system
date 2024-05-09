@@ -31,17 +31,17 @@
 
 <script>
 
+  /*
+    Playground is a Vue component too,
+    so you can also use `data`, `methods`, etc.
+    as usual if helpful
+  */
   export default {
+    name: 'Playground',
     data() {
-      return {
-        tabs: [
-          { id: 'tabLessons', label: 'Lessons' },
-          { id: 'tabLearners', label: 'Learners' },
-          { id: 'tabGroups', label: 'Groups' },
-        ],
-        activeTabId: 'tabLessons',
-      };
+      return {};
     },
+    methods: {},
   };
 
 </script>
