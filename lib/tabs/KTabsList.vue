@@ -2,10 +2,10 @@
 
   <KListWithOverflow
     v-show="enablePrint || !$isPrint"
+    ref="tabList"
     role="tablist"
     :items="tabs"
     :[ariaLabelAttrName]="ariaLabelAttr"
-    ref="tabList"
     @updateOverflowItems="overflowTabs = $event"
   >
     <template #item="{ item: tab }">
@@ -18,9 +18,8 @@
       >
         <a
           :id="getTabElementId(tabsId, tab.id)"
-          ref="tab"
+          :ref="tabRefLabel(tab.id)"
           role="tab"
-          :key="tab.id"
           :data-activeroute="isActive"
           :data-tabid="tab.id"
           :href="href"
@@ -28,6 +27,7 @@
           :tabindex="tabIndexAttr(tab.id)"
           :aria-selected="ariaSelectedAttr(tab.id)"
           :aria-controls="ariaControlsAttr(tab.id)"
+          :style="tabAppearanceOverrides"
           @click="event => onClick(tab.id, navigate, event)"
           @focus="focusedTabIdx = getTabIdx(tab.id)"
         >
@@ -44,13 +44,14 @@
       <button
         v-else
         :id="getTabElementId(tabsId, tab.id)"
-        ref="tab"
+        :ref="tabRefLabel(tab.id)"
         type="button"
         role="tab"
         :class="classes(tab.id)"
         :tabindex="tabIndexAttr(tab.id)"
         :aria-selected="ariaSelectedAttr(tab.id)"
         :aria-controls="ariaControlsAttr(tab.id)"
+        :style="tabAppearanceOverrides"
         @click="onClick(tab.id)"
         @focus="focusedTabIdx = getTabIdx(tab.id)"
       >
@@ -68,7 +69,8 @@
       <KIconButton
         tooltip="More"
         icon="optionsHorizontal"
-        :style="overflowButtonStyles(overflowItems)"
+        :style="overflowButtonStyles()"
+        @focus="focusedTabIdx = moreButtonFocusIdx"
       >
         <template #menu>
           <KDropdownMenu
@@ -121,12 +123,17 @@
         type: String,
         required: true,
       },
+      tabAppearanceOverrides: {
+        type: [Object, String],
+        default: null,
+      },
     },
     data() {
       return {
         focusedTabIdx: 0,
         firstTabIdx: 0,
         overflowTabs: [],
+        moreButtonFocusIdx: -1,
       };
     },
     computed: {
@@ -176,15 +183,16 @@
         );
       },
       tabsRef() {
-        const tabListEl = this.$refs.tabList.$el;
-        const tabs = tabListEl.querySelectorAll('.tab');
-        return Array.from(tabs);
+        return this.tabs.map(tab => this.$refs[this.tabRefLabel(tab.id)]);
       },
       lastTabIdx() {
         if (!this.tabs || !this.tabs.length) {
           return 0;
         }
         return this.tabs.length - 1 - this.overflowTabs.length;
+      },
+      isMoreButtonFocused() {
+        return this.focusedTabIdx === this.moreButtonFocusIdx;
       },
     },
     mounted() {
@@ -218,6 +226,9 @@
           this.isTabActive(tabId) ? this.computedClassActive : this.computedClass,
         ];
       },
+      tabRefLabel(tabId) {
+        return `tab-${tabId}`;
+      },
       tabIndexAttr(tabId) {
         return this.isTabActive(tabId) ? '0' : '-1';
       },
@@ -250,13 +261,25 @@
         this.focusTab(this.lastTabIdx);
       },
       focusPreviousTab() {
-        const newFocusedTabIdx =
-          this.focusedTabIdx === this.firstTabIdx ? this.lastTabIdx : this.focusedTabIdx - 1;
+        let newFocusedTabIdx;
+        if (this.isMoreButtonFocused) {
+          newFocusedTabIdx = this.lastTabIdx;
+        } else if (this.focusedTabIdx === this.firstTabIdx) {
+          newFocusedTabIdx = this.lastTabIdx;
+        } else {
+          newFocusedTabIdx = this.focusedTabIdx - 1;
+        }
         this.focusTab(newFocusedTabIdx);
       },
       focusNextTab() {
-        const newFocusedTabIdx =
-          this.focusedTabIdx === this.lastTabIdx ? this.firstTabIdx : this.focusedTabIdx + 1;
+        let newFocusedTabIdx;
+        if (this.isMoreButtonFocused) {
+          newFocusedTabIdx = this.firstTabIdx;
+        } else if (this.focusedTabIdx === this.lastTabIdx) {
+          newFocusedTabIdx = this.firstTabIdx;
+        } else {
+          newFocusedTabIdx = this.focusedTabIdx + 1;
+        }
         this.focusTab(newFocusedTabIdx);
       },
       /**
@@ -290,7 +313,6 @@
           End: this.focusLastTab,
         };
         const handler = handlers[event.key];
-        console.log("handler", handler)
         if (handler) {
           event.preventDefault();
           event.stopPropagation();
@@ -312,17 +334,14 @@
          */
         this.$emit('click', tabId);
       },
-      activeSectionIsHidden(overflow) {
-        const ids = overflow.map(i => i.id);
-        return ids.includes(this.activeTabId);
+      activeSectionIsHidden() {
+        return this.overflowTabs.some(i => i.id === this.activeTabId);
       },
-      overflowButtonStyles(overflow) {
+      overflowButtonStyles() {
         return {
           width: '38px !important',
           height: '38px !important',
-          border: this.activeSectionIsHidden(overflow)
-            ? '2px solid ' + this.$themeTokens.primary
-            : 'none',
+          border: this.activeSectionIsHidden() ? '2px solid ' + this.$themeTokens.primary : 'none',
         };
       },
     },
