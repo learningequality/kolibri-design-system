@@ -6,26 +6,31 @@
     :titleLines="titleLines"
     :to="to"
   >
-    <div>
-      <KImg
+    <template #default>
+      <aside
         v-if="layout === 'vertical' && thumbnailDisplay !== 'none'"
-        :src="thumbnailSrc"
-        :isDecorative="true"
-        :style="KImgVerticalSmallStyle"
-      />
-      <slot v-if="!thumbnailSrc" name="thumbnailPlaceholder"></slot>
-
-      <div class="horizontal-layout-style">
-
+      >
         <KImg
-          v-if="layout === 'horizontal' && thumbnailDisplay === 'large'"
           :src="thumbnailSrc"
           :isDecorative="true"
+          :style="KImgVerticalSmallStyle"
         />
         <slot v-if="!thumbnailSrc" name="thumbnailPlaceholder"></slot>
+      </aside>
+
+      <div class="horizontal-layout-style">
+        <aside
+          v-if="layout === 'horizontal' && thumbnailDisplay === 'large'"
+        >
+          <KImg
+            :src="thumbnailSrc"
+            :isDecorative="true"
+          />
+          <slot v-if="!thumbnailSrc" name="thumbnailPlaceholder"></slot>
+        </aside>
 
         <div>
-          <div
+          <header
             v-if="thumbnailDisplay === 'none'"
             class="spacing"
           >
@@ -35,16 +40,16 @@
             <slot name="title"></slot>
             <!-- @slot  Places content below the title.. -->
             <slot name="belowTitle"></slot>
-          </div>
+          </header>
           <KGrid
             v-else
           >
             <KGridItem
               :layout12="{ span: isVerticalLayout ? 12 : 6 }"
               :layout8="{ span: isVerticalLayout ? 8 : 4 }"
-              :layout4="{ span: 4 }"
+              :layout4="{ span: isVerticalLayout ? 4 : 2 }"
             >
-              <div
+              <header
                 class="spacing"
                 :style="textColor"
               >
@@ -52,6 +57,9 @@
                 <slot name="aboveTitle"></slot>
                 <!-- @slot for the title content -->
                 <slot name="title"></slot>
+              </header>
+
+              <div>
                 <!-- @slot  Places content below the title.. -->
                 <slot name="belowTitle"></slot>
               </div>
@@ -63,27 +71,30 @@
               :layout8="{ span: 4 }"
               :layout4="{ span: 4 }"
             >
-              <KImg
+              <aside
                 v-if="thumbnailDisplay === 'small'"
-                :src="thumbnailSrc"
-                :isDecorative="true"
-                :appearanceOverrides="{
-                  scaleType: thumbnailScaleType,
-                }"
-                style="border-radius:20px;"
-                class="spacing"
-              />
-              <slot v-if="!thumbnailSrc" name="thumbnailPlaceholder"></slot>
+              >
+                <KImg
+                  :src="thumbnailSrc"
+                  :isDecorative="true"
+                  :appearanceOverrides="{
+                    scaleType: thumbnailScaleType,
+                  }"
+                  style="border-radius:13px;"
+                  class="spacing"
+                />
+                <slot v-if="!thumbnailSrc" name="thumbnailPlaceholder"></slot>
+              </aside>
 
             </KGridItem>
           </KGrid>
 
-          <div class="spacing">
+          <footer class="spacing">
             <slot name="footer"></slot>
-          </div>
+          </footer>
         </div>
       </div>
-    </div>
+    </template>
   </BaseCard>
 
 </template>
