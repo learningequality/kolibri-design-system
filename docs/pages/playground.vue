@@ -23,6 +23,7 @@
     /> -->
 
     <!-- Play around with your component here: -->
+    <h4>Vertical layout</h4>
 
     <ul style="width:40%;">
 
@@ -81,6 +82,86 @@
         :headingLevel="2"
         title="Sampling title"
         layout="vertical"
+        thumbnailDisplay="large"
+        :thumbnailSrc="require('../assets/hummingbird CC BY-SA 4.0.jpg')"
+      >
+        <template #title>
+          <div>
+            Sample text in the title slot
+          </div>
+        </template>
+        <template #aboveTitle>
+          <div>
+            This is a sample above title slot text that can cover more that 3 lines
+          </div>
+        </template>
+        <template #footer>
+          <div>
+            This is a sample footer section for the kcard
+          </div>
+        </template>
+      </KCard>
+
+    </ul>
+
+    <h4>Horizontal layout</h4>
+    <ul style="width:60%;">
+
+      <KCard
+        :to="{ name: '/' }"
+        :headingLevel="2"
+        title="Sampling title"
+        layout="horizontal"
+        thumbnailDisplay="none"
+        :thumbnailSrc="require('../assets/hummingbird CC BY-SA 4.0.jpg')"
+      >
+        <template #title>
+          <div>
+            Sample text in the title slot
+          </div>
+        </template>
+        <template #aboveTitle>
+          <div>
+            This is a sample above title slot text that can cover more that 3 lines
+          </div>
+        </template>
+        <template #footer>
+          <div>
+            This is a sample footer section for the kcard
+          </div>
+        </template>
+      </KCard>
+
+      <KCard
+        :to="{ name: '/' }"
+        :headingLevel="2"
+        title="Sampling title"
+        layout="horizontal"
+        thumbnailDisplay="small"
+        :thumbnailSrc="require('../assets/hummingbird CC BY-SA 4.0.jpg')"
+      >
+        <template #title>
+          <div>
+            Sample text in the title slot
+          </div>
+        </template>
+        <template #aboveTitle>
+          <div>
+            This is a sample above title slot text that can cover more that 3 lines
+          </div>
+        </template>
+        <template #footer>
+          <div>
+            This is a sample footer section for the kcard
+          </div>
+        </template>
+      </KCard>
+
+      <KCard
+        :to="{ name: '/' }"
+        :headingLevel="2"
+        title="Sampling title"
+        layout="horizontal"
         thumbnailDisplay="large"
         :thumbnailSrc="require('../assets/hummingbird CC BY-SA 4.0.jpg')"
       >
