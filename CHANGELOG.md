@@ -4,6 +4,17 @@ Changelog is rather internal in nature. See release notes for the public overvie
 
 ## Version 4.x.x (`release-v4` branch)
 
+- [#630]
+  - **Description:** Updates the svg for the pointsLeafActive, and removes the pointsLeafInactive (which is not used anywhere in Kolibri)
+  - **Products impact:** Kolibri (branding)
+  - **Addresses:** -
+  - **Components:** `KIcon` and documentation
+  - **Breaking:** No
+  - **Impacts a11y:** No
+  - **Guidance:** -
+
+[#630]: https://github.com/learningequality/kolibri-design-system/pull/630
+
 - [#627]
   - **Description:** Fix missing anchor tag and heading case in `KTextbox` documentation
   - **Products impact:** None
