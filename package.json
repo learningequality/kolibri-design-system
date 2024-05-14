@@ -1,6 +1,6 @@
 {
   "name": "kolibri-design-system",
-  "version": "4.2.1",
+  "version": "4.3.0",
   "private": false,
   "description": "The Kolibri Design System defines common design patterns and code for use in Kolibri applications",
   "license": "MIT",
