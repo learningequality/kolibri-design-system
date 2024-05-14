@@ -39,6 +39,17 @@ Changelog is rather internal in nature. See release notes for the public overvie
 
 ## Version 4.x.x (`release-v4` branch)
 
+- [#630]
+  - **Description:** Updates the svg for the pointsLeafActive, and removes the pointsLeafInactive (which is not used anywhere in Kolibri)
+  - **Products impact:** Kolibri (branding)
+  - **Addresses:** -
+  - **Components:** `KIcon` and documentation
+  - **Breaking:** No
+  - **Impacts a11y:** No
+  - **Guidance:** -
+
+[#630]: https://github.com/learningequality/kolibri-design-system/pull/630
+
 - [#627]
   - **Description:** Fix missing anchor tag and heading case in `KTextbox` documentation
   - **Products impact:** None
@@ -325,6 +336,44 @@ Changelog is rather internal in nature. See release notes for the public overvie
 [#531]: https://github.com/learningequality/kolibri-design-system/pull/531
 
 ## Version 3.x.x (`release-v3` branch)
+
+- [#583]
+  - **Description:** KDropdownMenu menu support to show context menus with `isContextMenu` prop.
+  - **Products impact:** new API.
+  - **Addresses:** https://github.com/learningequality/kolibri-design-system/issues/571, https://github.com/learningequality/studio/issues/4403.
+  - **Components:** KDropdownMenu.
+  - **Breaking:** no.
+  - **Impacts a11y:** no.
+  - **Guidance:** -.
+
+- [#583]
+  - **Description:** New `useKContextMenu` private composable
+  - **Products impact:** - .
+  - **Addresses:** - .
+  - **Components:** - .
+  - **Breaking:** - .
+  - **Impacts a11y:** - .
+  - **Guidance:** -.
+
+- [#583]
+  - **Description:** Expose the event object as second argument on KDropdownMenu's select event.
+  - **Products impact:** updated API.
+  - **Addresses:** - .
+  - **Components:** KDropdownMenu.
+  - **Breaking:** no.
+  - **Impacts a11y:** no.
+  - **Guidance:** -.
+
+- [#583]
+  - **Description:** KDropdownMenu menu support to show a header slot.
+  - **Products impact:** new API.
+  - **Addresses:** - .
+  - **Components:** KDropdownMenu.
+  - **Breaking:** no.
+  - **Impacts a11y:** no.
+  - **Guidance:** -.
+
+[#583]: https://github.com/learningequality/kolibri-design-system/pull/583
 
 - [#611]
   - **Description:** Adds a new `maxWidth` prop
