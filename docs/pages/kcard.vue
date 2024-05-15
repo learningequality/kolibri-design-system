@@ -16,7 +16,7 @@
         KCard supports multiple layouts for card content and thumbnails, offering flexibility in design. The available layouts include:.
       </p>
 
-      <h4>Vertical layout</h4>
+      <h3>Vertical layout</h3>
       <p>
         Vertical
         <DocsInternalLink href="/KCard#prop:layout">
@@ -24,24 +24,18 @@
         </DocsInternalLink> and no
         <DocsInternalLink href="/KCard#prop:thumbnailDisplay">
           <code> thumbnailDisplay</code>
-        </docsinternallink>
-      </p>
-      <p>
-        This <code>Kcard </code> layout solely consists of content without any accompanying thumbnail image. This layout is suitable when visual representation is not necessary or when the content itself is sufficiently descriptive or engaging without the need for an image. it focuses solely on textual or other content elements without the distraction of a thumbnail image.
+        </docsinternallink> solely consists of content without any accompanying thumbnail image. This layout is suitable when visual representation is not necessary or when the content itself is sufficiently descriptive or engaging without the need for an image.
       </p>
       <DocsShowCode language="html">
         <div>
           <KCard
             :to="{ name: '/' }"
-            :headingLevel="2"
-            title="Sampling title"
+            title="how to get started with Kolibri"
+            headingLevel="2"
             layout="verticle"
             thumbnailDisplay="none"
           >
             <template #title>
-              <div>
-                Sample text in the title slot
-              </div>
             </template>
             <template #aboveTitle>
               <div>
@@ -61,15 +55,14 @@
         <div style="max-width: 300px;">
           <KCard
             :to="{ name: '/' }"
-            :headingLevel="2"
-            title="Sampling title"
+            title="How to get started with Kolibri"
+            headingLevel="2"
             layout="vertical"
-            thumbnailDisplay="small"
-            :thumbnailSrc="require('../assets/hummingbird CC BY-SA 4.0.jpg')"
+            thumbnailDisplay="none"
           >
             <template #title>
               <div>
-                Sample text in the title slot
+                How to get started with Kolibri
               </div>
             </template>
             <template #aboveTitle>
@@ -86,60 +79,23 @@
         </div>
       </DocsShow>
 
-      <p>
+      <h5>
         Vertical
         <DocsInternalLink href="/KCard#prop:layout">
           <code>layout</code>
-        </DocsInternalLink> and small
+        </DocsInternalLink> and 
         <DocsInternalLink href="/KCard#prop:thumbnailDisplay">
-          <code> thumbnailDisplay </code>
-        </docsinternallink>
-      </p>
-      <DocsShow block>
-        <div style="max-width: 300px;">
-          <KCard
-            :to="{ name: '/' }"
-            :headingLevel="2"
-            title="Sampling title"
-            layout="vertical"
-            thumbnailDisplay="small"
-            :thumbnailSrc="require('../assets/hummingbird CC BY-SA 4.0.jpg')"
-          >
-            <template #title>
-              <div>
-                Sample text in the title slot
-              </div>
-            </template>
-            <template #aboveTitle>
-              <div>
-                This is a sample above title slot text that can cover more that 3 lines
-              </div>
-            </template>
-            <template #footer>
-              <div>
-                This is a sample footer section for the kcard
-              </div>
-            </template>
-          </KCard>
-        </div>
-      </DocsShow>
-
+          <code> thumbnailDisplay </code> 
+        </docsinternallink> small
+      </h5>
       <p>
-        Vertical
-        <DocsInternalLink href="/KCard#prop:layout">
-          <code>layout</code>
-        </DocsInternalLink> and large
-        <DocsInternalLink href="/KCard#prop:thumbnailDisplay">
-          <code> thumbnailDisplay</code>
-        </docsinternallink>
+        This layout offers a combined view of content and a thumbnail image. This provides users with both textual information
       </p>
 
       <DocsShow block>
         <div style="max-width: 300px;">
           <KCard
             :to="{ name: '/' }"
-            :headingLevel="2"
-            title="Sampling title"
             layout="vertical"
             thumbnailDisplay="large"
             :thumbnailSrc="require('../assets/hummingbird CC BY-SA 4.0.jpg')"
@@ -163,19 +119,146 @@
         </div>
       </DocsShow>
 
+      <h5>
+        Vertical
+        <DocsInternalLink href="/KCard#prop:layout">
+          <code>layout</code>
+        </DocsInternalLink> and
+        <DocsInternalLink href="/KCard#prop:thumbnailDisplay">
+          <code> thumbnailDisplay</code> 
+        </docsinternallink> large
+      </h5>
 
-      <h4>
-        For layout horizontal
-      </h4>
+      <DocsShow block>
+        <div style="max-width: 300px;">
+          <KCard
+            :to="{ name: '/' }"
+            layout="vertical"
+            thumbnailDisplay="large"
+            :thumbnailSrc="require('../assets/hummingbird CC BY-SA 4.0.jpg')"
+          >
+            <template #title>
+              <div>
+                Kolibri video tutorials to understand the Learner, Coach, and Admin features.
+              </div>
+            </template>
+            <template #aboveTitle>
+              <div>
+                This is a sample above title slot text that can cover more that 3 lines
+              </div>
+            </template>
+            <template #footer>
+              <div>
+                This is a sample footer section for the kcard
+              </div>
+            </template>
+          </KCard>
+        </div>
+      </DocsShow>
+      <h3>
+        Horizontal Layout
+      </h3>
       <p>
-        Horizontal
+        It's important to note that besides the mandatory   <DocsInternalLink href="/KCard#prop:title">
+          <code>title</code>
+        </DocsInternalLink> prop/slot, all other slots are optional. 
+        This flexibility allows for creating diverse layouts by combining different options for the <DocsInternalLink href="/KCard#prop:layout">
+          <code>layout</code>
+        </DocsInternalLink>
+        and
+        <DocsInternalLink href="/KCard#prop:thumbnailDisplay">
+          <code> thumbnailDisplay</code>
+        </DocsInternalLink>  properties. Additionally, the order of slots is not strictly enforced. For instance,
+        the  <DocsInternalLink href="/KCard#slot:title">
+          <code>title</code>
+        </DocsInternalLink> 
+        slot can take the position of the 
+        <DocsIternalLink href="/KCard#slot:aboveTitle">
+          <code>aboveTitle</code>
+        </DocsIternalLink> slot if the latter is not used.
+      </p>
+      <p>
+        The thumbnail's appearance depends on two factors: the size of the original image and the chosen
+        <DocsInternalLink href="/KImg#prop:thumnailcaletype">
+          <code>
+            thumbnailScaleType
+          </code>
+        </DocsInternalLink>
+        property.  This property controls how the image is scaled to fit the designated thumbnail area. 
+        The available scaling options are the same as those offered by the KImg component's scaleTypes property.
+      </p>
+      Here are a few examples...
+
+      <p>
+        Horizontal 
         <DocsInternalLink href="/KCard#prop:layout">
           <code> layout</code>
-        </DocsInternalLink> and no
+        </DocsInternalLink> and 
         <DocsInternalLink href="/KCard#prop:thumbnailDisplay">
           <code> thumbnailDisplay </code>
-        </docsinternallink>
+        </docsinternallink> large
       </p>
+      <DocsShowCode language="html">
+        <div>
+          <KCard
+            :to="{ name: '/' }"
+            :headingLevel="2"
+            title="How to get started with Kolibri"
+            layout="horizontal"
+            thumbnailDisplay="large"
+            :thumbnailSrc="require('../assets/hummingbird CC BY-SA 4.0.jpg')"
+          >
+            <template #title>
+              <div>
+                Sample text in the title slot
+              </div>
+            </template>
+            <template #aboveTitle>
+              <div>
+                This is a sample above title slot text that can cover more that 3 lines
+              </div>
+            </template>
+            <template #footer>
+              <div>
+                This is a sample footer section for the kcard
+              </div>
+            </template>
+          </KCard>
+        </div>
+      </DocsShowCode>
+
+      <DocsShow block>
+        <div>
+          <KCard
+            :to="{ name: '/' }"
+            :headingLevel="2"
+            title="How to get started with Kolibri"
+            layout="horizontal"
+            thumbnailDisplay="large"
+            :thumbnailSrc="require('../assets/hummingbird CC BY-SA 4.0.jpg')"
+          >
+            <template #title>
+              <div>
+                Sample text in the title slot
+              </div>
+            </template>
+            <template #aboveTitle>
+              <div>
+                This is a sample above title slot text that can cover more that 3 lines
+              </div>
+            </template>
+            <template #footer>
+              <div>
+                This is a sample footer section for the kcard
+              </div>
+            </template>
+          </KCard>
+        </div>
+      </DocsShow>
+
+
+
+
 
       <DocsShow block>
         <div>
@@ -242,23 +325,27 @@
           </KCard>
         </div>
       </DocsShow>
-
+      <h4>horizontal</h4>
       <p>
-        Horizontal
+        Vertical
         <DocsInternalLink href="/KCard#prop:layout">
           <code>layout</code>
-        </DocsInternalLink>  and large
+        </DocsInternalLink> and no
         <DocsInternalLink href="/KCard#prop:thumbnailDisplay">
-          <code> thumbnailDisplay </code>
+          <code> thumbnailDisplay</code>
         </docsinternallink>
       </p>
+      <p>
+        This <code>Kcard </code> layout solely consists of content without any accompanying thumbnail image. This layout is suitable when visual representation is not necessary or when the content itself is sufficiently descriptive or engaging without the need for an image. it focuses solely on textual or other content elements without the distraction of a thumbnail image.
+      </p>
+
       <DocsShow block>
         <div>
           <KCard
             :to="{ name: '/' }"
             :headingLevel="2"
             title="Sampling title"
-            layout="vertical"
+            layout="horizontal"
             thumbnailDisplay="large"
             :thumbnailSrc="require('../assets/hummingbird CC BY-SA 4.0.jpg')"
           >

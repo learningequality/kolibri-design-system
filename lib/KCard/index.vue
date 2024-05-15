@@ -185,7 +185,7 @@
       KImgVerticalSmallStyle() {
         if (this.thumbnailDisplay === 'small') {
           return {
-            padding: '2em',
+            padding: '1em',
           };
         } else {
           return {
