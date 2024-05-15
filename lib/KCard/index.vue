@@ -100,7 +100,7 @@
 </template>
 
 
-  <script>
+<script>
 
   import KImg from '../KImg';
   import BaseCard from './BaseCard.vue';
@@ -210,7 +210,7 @@
 </script>
 
 
-  <style scoped>
+<style scoped>
   
     .spacing{
       margin: 1em;
@@ -222,4 +222,5 @@
     .horizontal-layout-style{
       display: flex;
     }
-  </style>
+    
+</style>
