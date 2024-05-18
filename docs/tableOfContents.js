@@ -397,7 +397,7 @@ export default [
         isCode: true,
       }),
       new Page({
-        path: '/KCard',
+        path: '/kcard',
         title: 'KCard',
         isCode: true,
         keywords: layoutRelatedKeywords,
