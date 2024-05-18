@@ -19,27 +19,27 @@
           <slot v-if="!thumbnailSrc" name="thumbnailPlaceholder"></slot>
         </aside>
         <div>
-          <header v-if="thumbnailDisplay === 'none'" class="spacing">
+          <div v-if="thumbnailDisplay === 'none'" class="spacing">
             <slot v-if="!title" name="title"></slot>
             <slot name="aboveTitle"></slot>
-          </header>
+          </div>
           <KGrid v-else>
             <KGridItem
               :layout12="{ span: isVerticalLayout ? 12 : 6 }"
               :layout8="{ span: isVerticalLayout ? 8 : 4 }"
               :layout4="{ span: isVerticalLayout ? 4 : 2 }"
             >
-              <header class="spacing" :style="textColor">
+              <div class="spacing" :style="textColor">
                 <slot name="aboveTitle"></slot>
-              </header>
+              </div>
               <div>
                 <slot name="belowTitle"></slot>
               </div>
             </KGridItem>
           </KGrid>
-          <footer class="spacing">
+          <div class="spacing">
             <slot name="footer"></slot>
-          </footer>
+          </div>
         </div>
       </div>
     </template>
