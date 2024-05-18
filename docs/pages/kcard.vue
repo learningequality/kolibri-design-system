@@ -4,7 +4,7 @@
     <DocsPageSection title="Overview" anchor="#overview">
       <p>
         <code>KCard</code>
-        provides an accessible component for managing most frequently card content such as thumbnail,layouts and other customization options
+        provides an accessible component for managing most frequently card content such as thumbnail, layouts and other customization options.
       </p>
     </DocsPageSection>
 
@@ -19,10 +19,10 @@
       <h3>Vertical layout</h3>
       <p>
         Vertical
-        <DocsInternalLink href="/KCard#prop:layout">
+        <DocsInternalLink href="/kcard#prop:layout">
           <code>layout</code>
         </DocsInternalLink> and no
-        <DocsInternalLink href="/KCard#prop:thumbnailDisplay">
+        <DocsInternalLink href="/kcard#prop:thumbnailDisplay">
           <code> thumbnailDisplay</code>
         </docsinternallink> solely consists of content without any accompanying thumbnail image. This layout is suitable when visual representation is not necessary or when the content itself is sufficiently descriptive or engaging without the need for an image.
       </p>
@@ -32,7 +32,7 @@
             :to="{ name: '/' }"
             title="how to get started with Kolibri"
             headingLevel="2"
-            layout="verticle"
+            layout="vertical"
             thumbnailDisplay="none"
           >
             <template #title>
@@ -81,10 +81,10 @@
 
       <h5>
         Vertical
-        <DocsInternalLink href="/KCard#prop:layout">
+        <DocsInternalLink href="/kcard#prop:layout">
           <code>layout</code>
         </DocsInternalLink> and 
-        <DocsInternalLink href="/KCard#prop:thumbnailDisplay">
+        <DocsInternalLink href="/kcard#prop:thumbnailDisplay">
           <code> thumbnailDisplay </code> 
         </docsinternallink> small
       </h5>
@@ -121,10 +121,10 @@
 
       <h5>
         Vertical
-        <DocsInternalLink href="/KCard#prop:layout">
+        <DocsInternalLink href="/kcard#prop:layout">
           <code>layout</code>
         </DocsInternalLink> and
-        <DocsInternalLink href="/KCard#prop:thumbnailDisplay">
+        <DocsInternalLink href="/kcard#prop:thumbnailDisplay">
           <code> thumbnailDisplay</code> 
         </docsinternallink> large
       </h5>
@@ -159,21 +159,21 @@
         Horizontal Layout
       </h3>
       <p>
-        It's important to note that besides the mandatory   <DocsInternalLink href="/KCard#prop:title">
+        It's important to note that besides the mandatory   <DocsInternalLink href="/kcard#prop:title">
           <code>title</code>
         </DocsInternalLink> prop/slot, all other slots are optional. 
         This flexibility allows for creating diverse layouts by combining different options for the <DocsInternalLink href="/KCard#prop:layout">
           <code>layout</code>
         </DocsInternalLink>
         and
-        <DocsInternalLink href="/KCard#prop:thumbnailDisplay">
+        <DocsInternalLink href="/kcard#prop:thumbnailDisplay">
           <code> thumbnailDisplay</code>
         </DocsInternalLink>  properties. Additionally, the order of slots is not strictly enforced. For instance,
-        the  <DocsInternalLink href="/KCard#slot:title">
+        the  <DocsInternalLink href="/kcard#slot:title">
           <code>title</code>
         </DocsInternalLink> 
         slot can take the position of the 
-        <DocsIternalLink href="/KCard#slot:aboveTitle">
+        <DocsIternalLink href="/kcard#slot:aboveTitle">
           <code>aboveTitle</code>
         </DocsIternalLink> slot if the latter is not used.
       </p>
@@ -191,15 +191,15 @@
 
       <p>
         Horizontal 
-        <DocsInternalLink href="/KCard#prop:layout">
+        <DocsInternalLink href="/kcard#prop:layout">
           <code> layout</code>
         </DocsInternalLink> and 
-        <DocsInternalLink href="/KCard#prop:thumbnailDisplay">
+        <DocsInternalLink href="/kcard#prop:thumbnailDisplay">
           <code> thumbnailDisplay </code>
         </docsinternallink> large
       </p>
       <p>
-        in the event where <DocsInternalLink href="/KCard#prop:thumbnailDisplay">
+        in the event where <DocsInternalLink href="/kcard#prop:thumbnailDisplay">
           <code> thumbnailDisplay</code>
         </DocsInternalLink> and  <DocsInternalLink href="/KImg#prop:thumnailcaletype">
           <code>
@@ -236,10 +236,10 @@
       </DocsShowCode>
       <p>
         And if the layout is set  Horizontal
-        <DocsInternalLink href="/KCard#prop:layout">
+        <DocsInternalLink href="/kcard#prop:layout">
           <code>layout</code>
         </DocsInternalLink> and
-        <DocsInternalLink href="/KCard#prop:thumbnailDisplay">
+        <DocsInternalLink href="/kcard#prop:thumbnailDisplay">
           <code> thumbnailDisplay</code> 
         </docsinternallink>is set to small
       </p>
@@ -300,10 +300,10 @@
 
       <h4>
         Horizontal
-        <DocsInternalLink href="/KCard#prop:layout">
+        <DocsInternalLink href="/kcard#prop:layout">
           <code>layout</code>
         </DocsInternalLink> and
-        <DocsInternalLink href="/KCard#prop:thumbnailDisplay">
+        <DocsInternalLink href="/kcard#prop:thumbnailDisplay">
           <code> thumbnailDisplay</code> 
         </docsinternallink>is set to small
       </h4>
