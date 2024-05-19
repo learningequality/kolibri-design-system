@@ -33,7 +33,7 @@
         title="Sampling title"
         layout="vertical"
         thumbnailDisplay="none"
-        :thumbnailSrc="require('../assets/hummingbird CC BY-SA 4.0.jpg')"
+        :thumbnailSrc="('https://media.gettyimages.com/id/128502214/photo/classic-turn-of-the-century-american-house.jpg?s=612x612&w=gi&k=20&c=i4olPZuStzxhaUt8Py7FzUSRaub86j2UdvezcLPtThI=')"
       >
         <template #title>
           <div>
@@ -58,7 +58,7 @@
         title="Sampling title"
         layout="vertical"
         thumbnailDisplay="small"
-        :thumbnailSrc="require('../assets/hummingbird CC BY-SA 4.0.jpg')"
+        :thumbnailSrc="('https://media.gettyimages.com/id/128502214/photo/classic-turn-of-the-century-american-house.jpg?s=612x612&w=gi&k=20&c=i4olPZuStzxhaUt8Py7FzUSRaub86j2UdvezcLPtThI=')"
       >
         <template #title>
           <div>
@@ -83,7 +83,7 @@
         title="Sampling title"
         layout="vertical"
         thumbnailDisplay="large"
-        :thumbnailSrc="require('../assets/hummingbird CC BY-SA 4.0.jpg')"
+        :thumbnailSrc="('https://media.gettyimages.com/id/128502214/photo/classic-turn-of-the-century-american-house.jpg?s=612x612&w=gi&k=20&c=i4olPZuStzxhaUt8Py7FzUSRaub86j2UdvezcLPtThI=')"
       >
         <template #title>
           <div>
@@ -113,7 +113,7 @@
         title="Sampling title"
         layout="horizontal"
         thumbnailDisplay="none"
-        :thumbnailSrc="require('../assets/hummingbird CC BY-SA 4.0.jpg')"
+        :thumbnailSrc="('https://media.gettyimages.com/id/128502214/photo/classic-turn-of-the-century-american-house.jpg?s=612x612&w=gi&k=20&c=i4olPZuStzxhaUt8Py7FzUSRaub86j2UdvezcLPtThI=')"
       >
         <template #title>
           <div>
@@ -138,7 +138,7 @@
         title="Sampling title"
         layout="horizontal"
         thumbnailDisplay="small"
-        :thumbnailSrc="require('../assets/hummingbird CC BY-SA 4.0.jpg')"
+        :thumbnailSrc="('https://media.gettyimages.com/id/128502214/photo/classic-turn-of-the-century-american-house.jpg?s=612x612&w=gi&k=20&c=i4olPZuStzxhaUt8Py7FzUSRaub86j2UdvezcLPtThI=')"
       >
         <template #title>
           <div>
@@ -164,7 +164,7 @@
         layout="horizontal"
         thumbnailDisplay="large"
         title="Sampling title"
-        :thumbnailSrc="require('../assets/hummingbird CC BY-SA 4.0.jpg')"
+        :thumbnailSrc="('https://media.gettyimages.com/id/128502214/photo/classic-turn-of-the-century-american-house.jpg?s=612x612&w=gi&k=20&c=i4olPZuStzxhaUt8Py7FzUSRaub86j2UdvezcLPtThI=')"
       >
         <template #title>
           <div>

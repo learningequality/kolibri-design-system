@@ -18,6 +18,7 @@
             :isDecorative="true"
             :appearanceOverrides="{ scaleType: thumbnailScaleType }"
             class="thumbnail-image"
+            :style="imageRadius"
           />
           <slot v-if="!thumbnailSrc" name="thumbnailPlaceholder"></slot>
         </aside>
@@ -91,6 +92,10 @@
           return true;
         },
       },
+      /**
+       * Controls the display of the thumbnail image.
+       * Options: 'none' (default), 'small', or 'large'.
+       * */
       thumbnailDisplay: {
         type: String,
         required: false,
@@ -126,6 +131,30 @@
           fontSize: '16px',
           margin: '12px 0',
         };
+      },
+      imageRadius() {
+        if (this.layout === 'horizontal') {
+          if (this.thumbnailDisplay === 'large') {
+            return {
+              borderRadius: '0.5em 0 0 0.5em',
+            };
+          }
+          if (this.thumbnailDisplay === 'small') {
+            return {
+              borderRadius: '0.5em',
+            };
+          }
+          return;
+        } else {
+          if (this.thumbnailDisplay === 'large') {
+            return {
+              borderRadius: '0.5em 0.5em 0 0',
+            };
+          }
+          return {
+            borderRadius: '0',
+          };
+        }
       },
       forSmallThumbnailDisplay() {
         if (this.thumbnailDisplay === 'small') {
