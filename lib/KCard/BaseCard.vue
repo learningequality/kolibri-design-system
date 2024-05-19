@@ -20,7 +20,7 @@
           v-if="title !== null"
           :text="title"
           :maxLines="titleLines"
-          class="spacing"
+          :style="spacing"
         />
       </router-link>
     </component>
@@ -76,6 +76,12 @@
           },
         };
       },
+      spacing() {
+        return {
+          padding: '1em',
+          color: this.$themeTokens.text,
+        };
+      },
     },
     methods: {
       cardFocus(e) {
@@ -117,11 +123,6 @@
 
   .remove-list-style {
     list-style-type: none;
-  }
-
-  .spacing {
-    padding: 1em;
-    color: black;
   }
 
 </style>
