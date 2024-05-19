@@ -1,9 +1,6 @@
 <template>
 
   <BaseCard
-    :title="title"
-    :headingLevel="headingLevel"
-    :titleLines="titleLines"
     :to="to"
   >
     <template #default>
@@ -14,6 +11,7 @@
 
         <aside
           v-if="thumbnailDisplay !== 'none'"
+          :style="forSmallThumbnailDisplay"
         >
           <KImg
             :src="thumbnailSrc"
@@ -25,8 +23,24 @@
         </aside>
         <div class="spacing">
           <div>
-            <slot v-if="!title" name="title"></slot>
             <slot name="aboveTitle"></slot>
+            <component
+              :is="headerLevel"
+            >
+              <router-link
+                tabindex="-1"
+                :to="to"
+              >
+                <KTextTruncator
+                  v-if="title !== null"
+                  :text="title"
+                  :maxLines="titleLines"
+                  :style="titleStyle"
+                />
+              </router-link>
+            </component>
+            <slot v-if="!title" name="title"></slot>
+
             <slot name="belowTitle"></slot>
           </div>
           <div class="footer">
@@ -59,7 +73,7 @@
       },
       titleLines: {
         type: Number,
-        required: true,
+        required: false,
         default: 2,
       },
       to: {
@@ -101,6 +115,27 @@
           return { flexDirection: 'row-reverse' };
         } else {
           return { flexDirection: 'row' };
+        }
+      },
+      headerLevel() {
+        return 'h' + this.headingLevel;
+      },
+      titleStyle() {
+        return {
+          color: this.$themeTokens.text,
+          fontSize: '16px',
+          margin: '12px 0',
+        };
+      },
+      forSmallThumbnailDisplay() {
+        if (this.thumbnailDisplay === 'small') {
+          return {
+            margin: '1em',
+          };
+        } else {
+          return {
+            margin: '0em',
+          };
         }
       },
     },

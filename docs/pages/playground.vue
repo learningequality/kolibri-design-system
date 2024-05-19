@@ -163,6 +163,7 @@
         :headingLevel="2"
         layout="horizontal"
         thumbnailDisplay="large"
+        title="Sampling title"
         :thumbnailSrc="require('../assets/hummingbird CC BY-SA 4.0.jpg')"
       >
         <template #title>

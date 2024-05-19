@@ -9,21 +9,6 @@
     @click="cardClick()"
     @keydown.enter="cardClick()"
   >
-    <component
-      :is="headerLevel"
-    >
-      <router-link
-        tabindex="-1"
-        :to="to"
-      >
-        <KTextTruncator
-          v-if="title !== null"
-          :text="title"
-          :maxLines="titleLines"
-          :style="spacing"
-        />
-      </router-link>
-    </component>
     <slot name="default"></slot>
   </li>
 
@@ -35,51 +20,17 @@
   export default {
     name: 'BaseCard',
     props: {
-      title: {
-        type: String,
-        required: false,
-        default: null,
-      },
-      headingLevel: {
-        type: Number,
-        required: true,
-        validator(value) {
-          if (!value) {
-            console.error('Error: Prop headingLevel is required and can not be empty.');
-            return false;
-          } else if ((value <= 6) & (value >= 2)) {
-            return true;
-          } else {
-            console.error('Error: Prop headingLevel should be a value between 2 and 6.');
-            return false;
-          }
-        },
-      },
-      titleLines: {
-        type: Number,
-        required: false,
-        default: 2,
-      },
       to: {
         type: Object,
         required: true,
       },
     },
     computed: {
-      headerLevel() {
-        return 'h' + this.headingLevel;
-      },
       coreOutlineFocus() {
         return {
           ':focus': {
             ...this.$coreOutline,
           },
-        };
-      },
-      spacing() {
-        return {
-          padding: '1em',
-          color: this.$themeTokens.text,
         };
       },
     },
@@ -122,6 +73,7 @@
   }
 
   .remove-list-style {
+    margin: 1em;
     list-style-type: none;
   }
 
