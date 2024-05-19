@@ -25,6 +25,7 @@
         <div class="spacing">
           <div>
             <slot name="aboveTitle"></slot>
+            <slot v-if="!title" name="title"></slot>
             <component
               :is="headerLevel"
             >
@@ -40,7 +41,6 @@
                 />
               </router-link>
             </component>
-            <slot v-if="!title" name="title"></slot>
 
             <slot name="belowTitle"></slot>
           </div>
@@ -188,6 +188,9 @@
 
   .footer {
     margin: 12px 0;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
   }
 
 </style>
