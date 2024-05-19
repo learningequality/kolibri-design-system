@@ -25,7 +25,7 @@
     <!-- Play around with your component here: -->
     <h4>Vertical layout</h4>
 
-    <ul style="width:40%;">
+    <ul style="width:30%;">
 
       <KCard
         :to="{ name: '/' }"
@@ -147,7 +147,7 @@
         </template>
         <template #aboveTitle>
           <div>
-            This is a sample above title slot text that can cover more that 3 lines
+            This is a sample above title slot text that can cover more that 3 lines in the kcard
           </div>
         </template>
         <template #footer>
@@ -157,10 +157,10 @@
         </template>
       </KCard>
 
+
       <KCard
         :to="{ name: '/' }"
         :headingLevel="2"
-        title="Sampling title"
         layout="horizontal"
         thumbnailDisplay="large"
         :thumbnailSrc="require('../assets/hummingbird CC BY-SA 4.0.jpg')"
@@ -172,7 +172,7 @@
         </template>
         <template #aboveTitle>
           <div>
-            This is a sample above title slot text that can cover more that 3 lines
+            This is a sample above title slot text that can cover more that 3 lines in the kcard
           </div>
         </template>
         <template #footer>
@@ -181,7 +181,6 @@
           </div>
         </template>
       </KCard>
-
     </ul>
   </div>
 

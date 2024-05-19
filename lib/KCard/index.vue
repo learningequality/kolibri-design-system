@@ -7,37 +7,29 @@
     :to="to"
   >
     <template #default>
-      <div class="horizontal-layout-style" :style="wrapperStyle">
-        <aside v-if="thumbnailDisplay !== 'none'">
+      <div
+        class="horizontal-layout-style"
+        :style="wrapperStyle"
+      >
+
+        <aside
+          v-if="thumbnailDisplay !== 'none'"
+        >
           <KImg
             :src="thumbnailSrc"
             :isDecorative="true"
             :appearanceOverrides="{ scaleType: thumbnailScaleType }"
-            style="border-radius: 13px;"
-            class="spacing"
+            class="thumbnail-image"
           />
           <slot v-if="!thumbnailSrc" name="thumbnailPlaceholder"></slot>
         </aside>
-        <div>
-          <div v-if="thumbnailDisplay === 'none'" class="spacing">
+        <div class="spacing">
+          <div>
             <slot v-if="!title" name="title"></slot>
             <slot name="aboveTitle"></slot>
+            <slot name="belowTitle"></slot>
           </div>
-          <KGrid v-else>
-            <KGridItem
-              :layout12="{ span: isVerticalLayout ? 12 : 6 }"
-              :layout8="{ span: isVerticalLayout ? 8 : 4 }"
-              :layout4="{ span: isVerticalLayout ? 4 : 2 }"
-            >
-              <div class="spacing" :style="textColor">
-                <slot name="aboveTitle"></slot>
-              </div>
-              <div>
-                <slot name="belowTitle"></slot>
-              </div>
-            </KGridItem>
-          </KGrid>
-          <div class="spacing">
+          <div class="footer">
             <slot name="footer"></slot>
           </div>
         </div>
@@ -46,7 +38,6 @@
   </BaseCard>
 
 </template>
-
 
 <script>
 
@@ -80,7 +71,7 @@
         required: true,
         validator(value) {
           if (!value) {
-            console.error('Error: Prop layout is required and can not be empty.');
+            console.error('Error: Prop layout is required and cannot be empty.');
             return false;
           }
           return true;
@@ -107,19 +98,10 @@
         if (this.layout === 'vertical') {
           return { flexDirection: 'column' };
         } else if (this.layout === 'horizontal' && this.thumbnailDisplay === 'small') {
-          return { flexDirection: 'row-reverse' }; // Image on right
+          return { flexDirection: 'row-reverse' };
         } else {
-          return { flexDirection: 'row' }; // Image on left
+          return { flexDirection: 'row' };
         }
-      },
-      isVerticalLayout() {
-        return (
-          this.layout === 'vertical' ||
-          (this.layout === 'horizontal' && this.thumbnailDisplay === 'large')
-        );
-      },
-      textColor() {
-        return { color: this.$themeTokens.text };
       },
     },
   };
@@ -128,16 +110,20 @@
 
 
 <style scoped>
-  
-    .spacing{
-      margin: 1em;
-    }
-    .footer{
-      margin-top: auto;
-    }
-  
-    .horizontal-layout-style{
-      display: flex;
-    }
-    
+  .spacing {
+    margin: 1em;
+  }
+
+  .horizontal-layout-style {
+    display: flex;
+  }
+
+  .thumbnail-image {
+    width: 100%;
+  }
+
+  .footer {
+    margin: 12px 0;
+  }
+
 </style>
