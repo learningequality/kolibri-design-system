@@ -33,7 +33,8 @@
             title="how to get started with Kolibri"
             headingLevel="2"
             layout="vertical"
-            thumbnailDisplay="none"
+            thumbnailDisplay="large"
+            :thumbnailSrc="require('../assets/hummingbird CC BY-SA 4.0.jpg')"
           >
             <template #title>
             </template>
@@ -55,20 +56,29 @@
         <div style="max-width: 300px;">
           <KCard
             :to="{ name: '/' }"
-            title="How to get started with Kolibri"
+            title="How to Cut a Tablet Sleeve: 3/4 Resource Resource Resource Resource Resource"
             headingLevel="2"
             layout="vertical"
-            thumbnailDisplay="none"
+            thumbnailDisplay="large"
+            :thumbnailSrc="require('../assets/hummingbird CC BY-SA 4.0.jpg')"
           >
-            <template #title>
-              <div>
-                How to get started with Kolibri
-              </div>
-            </template>
+
             <template #aboveTitle>
               <div>
-                This is a sample above title slot text that can cover more that 3 lines
+                <KIcon
+                  icon="watchShaded"
+                />
+                Rutrum pellentesque utrum...
               </div>
+            </template>
+            <template #belowTitle>
+
+              <KIcon
+                icon="createSolid"
+              />
+              <KIcon
+                icon="watchShaded"
+              />
             </template>
             <template #footer>
               <div>
@@ -79,7 +89,7 @@
         </div>
       </DocsShow>
 
-      <h5>
+      <h3>
         Vertical
         <DocsInternalLink href="/kcard#prop:layout">
           <code>layout</code>
@@ -87,7 +97,7 @@
         <DocsInternalLink href="/kcard#prop:thumbnailDisplay">
           <code> thumbnailDisplay </code> 
         </docsinternallink> small
-      </h5>
+      </h3>
       <p>
         This layout offers a combined view of content and a thumbnail image. This provides users with both textual information
       </p>
@@ -119,7 +129,7 @@
         </div>
       </DocsShow>
 
-      <h5>
+      <h3>
         Vertical
         <DocsInternalLink href="/kcard#prop:layout">
           <code>layout</code>
@@ -127,7 +137,7 @@
         <DocsInternalLink href="/kcard#prop:thumbnailDisplay">
           <code> thumbnailDisplay</code> 
         </docsinternallink> large
-      </h5>
+      </h3>
 
       <DocsShow block>
         <div style="max-width: 300px;">
