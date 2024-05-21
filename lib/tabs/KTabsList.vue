@@ -70,6 +70,7 @@
         tooltip="More"
         icon="optionsHorizontal"
         :style="overflowButtonStyles()"
+        @focus="focusedTabIdx = moreButtonFocusIdx"
       >
         <template #menu>
           <KDropdownMenu
@@ -131,6 +132,7 @@
         focusedTabIdx: 0,
         firstTabIdx: 0,
         overflowTabs: [],
+        moreButtonFocusIdx: -1,
       };
     },
     computed: {
@@ -187,6 +189,9 @@
           return 0;
         }
         return this.tabs.length - 1 - this.overflowTabs.length;
+      },
+      isMoreButtonFocused() {
+        return this.focusedTabIdx === this.moreButtonFocusIdx;
       },
     },
     mounted() {
@@ -262,13 +267,18 @@
         let newFocusedTabIdx;
         if (this.focusedTabIdx === this.firstTabIdx) {
           newFocusedTabIdx = this.lastTabIdx;
+        } else if (this.isMoreButtonFocused) {
+          newFocusedTabIdx = this.lastTabIdx;
         } else {
           newFocusedTabIdx = this.focusedTabIdx - 1;
         }
         this.focusTab(newFocusedTabIdx);
       },
       focusNextTab() {
-        if (this.focusedTabIdx === this.lastTabIdx && this.overflowTabs.length) {
+        if (
+          (this.isMoreButtonFocused || this.focusedTabIdx === this.lastTabIdx) &&
+          this.overflowTabs.length
+        ) {
           this.focusOverflowedTab(0);
           return;
         }
