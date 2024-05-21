@@ -140,13 +140,13 @@
     mounted() {
       this.trigger = this.$el.parentElement;
     },
-    beforeDestroy() {
-      window.removeEventListener('keydown', this.handleOpenMenuNavigation, true);
-    },
     computed: {
       menuItemsRef() {
         return this.$refs.menu.$el.querySelectorAll('li');
       },
+    },
+    beforeDestroy() {
+      window.removeEventListener('keydown', this.handleOpenMenuNavigation, true);
     },
     methods: {
       handleOpen() {
@@ -204,12 +204,10 @@
         // manage rotating through the options using arrow keys
         // UP arrow: .keyCode is depricated and should used only as a fallback
         if (
-          (
-            event.key == 'ArrowUp' ||
+          (event.key == 'ArrowUp' ||
             event.keyCode == 38 ||
             event.key == 'ArrowLeft' ||
-            event.keyCode == 37
-          ) &&
+            event.keyCode == 37) &&
           popoverIsOpen
         ) {
           event.preventDefault();
@@ -222,12 +220,11 @@
           });
           // DOWN arrow
         } else if (
-          (
-            event.key == 'ArrowDown' ||
+          (event.key == 'ArrowDown' ||
             event.keyCode == 40 ||
             event.key == 'ArrowRight' ||
-            event.keyCode == 39
-          ) && popoverIsOpen
+            event.keyCode == 39) &&
+          popoverIsOpen
         ) {
           event.preventDefault();
           this.$nextTick(() => {
@@ -271,7 +268,7 @@
           const items = this.menuItemsRef;
           items[idx].focus();
         });
-      }
+      },
     },
   };
 

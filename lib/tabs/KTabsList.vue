@@ -131,7 +131,6 @@
         focusedTabIdx: 0,
         firstTabIdx: 0,
         overflowTabs: [],
-        moreButtonFocusIdx: -1,
       };
     },
     computed: {
@@ -188,9 +187,6 @@
           return 0;
         }
         return this.tabs.length - 1 - this.overflowTabs.length;
-      },
-      isMoreButtonFocused() {
-        return this.focusedTabIdx === this.moreButtonFocusIdx;
       },
     },
     mounted() {
@@ -259,10 +255,7 @@
         this.focusTab(this.lastTabIdx);
       },
       focusPreviousTab() {
-        if (
-          this.focusedTabIdx === this.firstTabIdx &&
-          this.overflowTabs.length
-        ) {
+        if (this.focusedTabIdx === this.firstTabIdx && this.overflowTabs.length) {
           this.focusOverflowedTab(this.overflowTabs.length - 1);
           return;
         }
@@ -275,10 +268,7 @@
         this.focusTab(newFocusedTabIdx);
       },
       focusNextTab() {
-        if (
-          this.focusedTabIdx === this.lastTabIdx &&
-          this.overflowTabs.length
-        ) {
+        if (this.focusedTabIdx === this.lastTabIdx && this.overflowTabs.length) {
           this.focusOverflowedTab(0);
           return;
         }
