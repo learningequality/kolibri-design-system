@@ -119,6 +119,11 @@
         trigger: null,
       };
     },
+    computed: {
+      menuItemsRef() {
+        return this.$refs.menu.$el.querySelectorAll('li');
+      },
+    },
     watch: {
       isContextMenuActive() {
         if (this.isContextMenuActive) {
@@ -139,11 +144,6 @@
     },
     mounted() {
       this.trigger = this.$el.parentElement;
-    },
-    computed: {
-      menuItemsRef() {
-        return this.$refs.menu.$el.querySelectorAll('li');
-      },
     },
     beforeDestroy() {
       window.removeEventListener('keydown', this.handleOpenMenuNavigation, true);
