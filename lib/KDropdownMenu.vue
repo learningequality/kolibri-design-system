@@ -203,7 +203,15 @@
 
         // manage rotating through the options using arrow keys
         // UP arrow: .keyCode is depricated and should used only as a fallback
-        if ((event.key == 'ArrowUp' || event.keyCode == 38) && popoverIsOpen) {
+        if (
+          (
+            event.key == 'ArrowUp' ||
+            event.keyCode == 38 ||
+            event.key == 'ArrowLeft' ||
+            event.keyCode == 37
+          ) &&
+          popoverIsOpen
+        ) {
           event.preventDefault();
           this.$nextTick(() => {
             if (prevSibling) {
@@ -213,7 +221,14 @@
             }
           });
           // DOWN arrow
-        } else if ((event.key == 'ArrowDown' || event.keyCode == 40) && popoverIsOpen) {
+        } else if (
+          (
+            event.key == 'ArrowDown' ||
+            event.keyCode == 40 ||
+            event.key == 'ArrowRight' ||
+            event.keyCode == 39
+          ) && popoverIsOpen
+        ) {
           event.preventDefault();
           this.$nextTick(() => {
             if (sibling) {

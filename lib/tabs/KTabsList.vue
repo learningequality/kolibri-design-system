@@ -73,7 +73,7 @@
       >
         <template #menu>
           <KDropdownMenu
-            ref="moreButton"
+            ref="tabsMenu"
             :options="overflowItems"
             @select="(tab) => onClick(tab.id)"
             @focusBeforeFirstElement="focusBeforeMoreButton"
@@ -211,24 +211,12 @@
           }
         });
       }
-      this.$el.addEventListener('keyup', this.onKeyUp);
-      document.addEventListener('keydown', this.preventScroll);
+      this.$el.addEventListener('keydown', this.onKeyDown);
     },
     beforeDestroy() {
-      this.$el.removeEventListener('keyup', this.onKeyUp);
-      document.removeEventListener('keydown', this.preventScroll);
+      this.$el.removeEventListener('keydown', this.onKeyDown);
     },
     methods: {
-      preventScroll(event) {
-        if (['ArrowLeft', 'ArrowRight'].includes(event.key)) {
-          if (
-            this.$el.contains(document.activeElement) ||
-            this.$refs.moreButton.$el.contains(document.activeElement)
-          ) {
-            event.preventDefault();
-          }
-        }
-      },
       classes(tabId) {
         return [
           'tab',
@@ -271,28 +259,32 @@
         this.focusTab(this.lastTabIdx);
       },
       focusPreviousTab() {
+        if (
+          this.focusedTabIdx === this.firstTabIdx &&
+          this.overflowTabs.length
+        ) {
+          this.focusOverflowedTab(this.overflowTabs.length - 1);
+          return;
+        }
         let newFocusedTabIdx;
         if (this.focusedTabIdx === this.firstTabIdx) {
-          if (this.overflowTabs.length) {
-            this.$refs.moreButton.focusItem(this.overflowTabs.length - 1);
-            return;
-          } else {
-            newFocusedTabIdx = this.lastTabIdx;
-          }
+          newFocusedTabIdx = this.lastTabIdx;
         } else {
           newFocusedTabIdx = this.focusedTabIdx - 1;
         }
         this.focusTab(newFocusedTabIdx);
       },
       focusNextTab() {
+        if (
+          this.focusedTabIdx === this.lastTabIdx &&
+          this.overflowTabs.length
+        ) {
+          this.focusOverflowedTab(0);
+          return;
+        }
         let newFocusedTabIdx;
         if (this.focusedTabIdx === this.lastTabIdx) {
-          if (this.overflowTabs.length) {
-            this.$refs.moreButton.focusItem(0);
-            return;
-          } else {
-            newFocusedTabIdx = this.firstTabIdx;
-          }
+          newFocusedTabIdx = this.firstTabIdx;
         } else {
           newFocusedTabIdx = this.focusedTabIdx + 1;
         }
@@ -312,6 +304,9 @@
       focusAfterMoreButton() {
         requestAnimationFrame(() => this.focusFirstTab());
       },
+      focusOverflowedTab(idx) {
+        this.$refs.tabsMenu.focusItem(idx);
+      },
       onClick(tabId, navigate, event) {
         this.focusedTabIdx = this.getTabIdx(tabId);
         const tab = this.tabs[this.focusedTabIdx];
@@ -327,7 +322,7 @@
           navigate(event);
         }
       },
-      onKeyUp(event) {
+      onKeyDown(event) {
         const handlers = {
           ArrowLeft: this.focusPreviousTab,
           ArrowRight: this.focusNextTab,
