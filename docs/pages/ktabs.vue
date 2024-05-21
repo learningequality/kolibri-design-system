@@ -4,7 +4,7 @@
     <DocsPageSection title="Overview" anchor="#overview">
       <p>Displays tabs:</p>
 
-      <DocsShow>
+      <DocsShow block style="max-width: 400px;">
         <KTabs
           tabsId="coachReportsTabs"
           ariaLabel="Coach reports"

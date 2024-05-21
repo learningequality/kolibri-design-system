@@ -5,7 +5,7 @@
 
       <p>Displays the tab list of a tabbed interface:</p>
 
-      <DocsShow language="html">
+      <DocsShow language="html" block style="max-width: 400px;">
         <KTabsList
           v-model="ex1activeTabId"
           tabsId="tabsIntro"
@@ -178,7 +178,7 @@
 
       <p>Using props is the most straightforward:</p>
 
-      <DocsShow language="html" dark>
+      <DocsShow language="html" dark block style="max-width: 400px;">
         <KTabsList
           v-model="ex2activeTabId"
           tabsId="tabsProps"
@@ -210,7 +210,7 @@
 
       <p>When that's not sufficient, <code>appearanceOverrides</code> and <code>appearanceOverridesActive</code> can be used, where the former complements or overrides styles common to all tabs and the latter contains styles specific to an active tab:</p>
 
-      <DocsShow language="html">
+      <DocsShow language="html" block style="max-width: 530px">
         <KTabsList
           v-model="ex3activeTabId"
           tabsId="tabsAppearanceOverrides"
@@ -254,7 +254,7 @@
 
       <p>Lastly, the <code>tab</code> slot can be used to adjust labels, for example to add icons. It's a scoped slot that exposes <code>tab</code> object and <code>isActive</code> boolean value:</p> 
 
-      <DocsShow language="html">
+      <DocsShow language="html" block style="max-width: 485px;">
         <KTabsList
           v-model="ex4activeTabId"
           tabsId="tabsSlot"
