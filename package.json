@@ -34,7 +34,6 @@
     "popper.js": "1.16.1",
     "purecss": "2.2.0",
     "tippy.js": "4.2.1",
-    "uuid": "^9.0.1",
     "vue-intl": "3.1.0",
     "xstate": "4.38.3"
   },
