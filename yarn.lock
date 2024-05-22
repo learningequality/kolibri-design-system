@@ -1364,7 +1364,7 @@
 
 "@material-icons/svg@git+https://github.com/material-icons/material-icons.git":
   version "1.0.32"
-  resolved "git+ssh://git@github.com/material-icons/material-icons.git#af0ed9c0e1276bad43c4d6ca8e8aaa283e425195"
+  resolved "https://github.com/material-icons/material-icons.git#af0ed9c0e1276bad43c4d6ca8e8aaa283e425195"
 
 "@mdi/svg@^5.9.55":
   version "5.9.55"
@@ -2848,7 +2848,7 @@ anymatch@~3.1.2:
 
 "aphrodite@https://github.com/learningequality/aphrodite/":
   version "2.2.3"
-  resolved "git+ssh://git@github.com/learningequality/aphrodite.git#fdc8d7be8912a5cf17f74ff10f124013c52c3e32"
+  resolved "https://github.com/learningequality/aphrodite.git#fdc8d7be8912a5cf17f74ff10f124013c52c3e32"
   dependencies:
     asap "^2.0.3"
     inline-style-prefixer "^4.0.2"
