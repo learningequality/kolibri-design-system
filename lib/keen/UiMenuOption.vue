@@ -21,7 +21,7 @@
           :icon="icon"
         />
  
-        <div class="ui-menu-option-text">
+        <div class="ui-menu-option-text" :style="labelStyles">
           {{ label }}
         </div>
 
@@ -70,6 +70,10 @@
         type: Boolean,
         default: false,
       },
+      isSelected: {
+        type: Boolean,
+        default: false,
+      },
     },
 
     computed: {
@@ -83,6 +87,16 @@
 
       activeStyle() {
         return this.isActive ? {...this.$coreOutline, outlineOffset: '-2px' } : {}
+      },
+      labelStyles() {
+        if (this.isSelected) {
+          return {
+            fontWeight: 'bold',
+            textDecoration: 'underline',
+            color: this.$themeTokens.primary,
+          };
+        }
+        return {};
       },
       isDivider() {
         return this.type === 'divider';

@@ -4,7 +4,7 @@
     v-show="enablePrint || !$isPrint"
     ref="tabList"
     role="tablist"
-    :items="tabs"
+    :items="tabsItems"
     :[ariaLabelAttrName]="ariaLabelAttr"
     @updateOverflowItems="overflowTabs = $event"
   >
@@ -183,6 +183,12 @@
       },
       tabsRef() {
         return this.tabs.map(tab => this.$refs[this.tabRefLabel(tab.id)]);
+      },
+      tabsItems() {
+        return this.tabs.map(tab => ({
+          ...tab,
+          isSelected: this.isTabActive(tab.id),
+        }));
       },
       lastTabIdx() {
         if (!this.tabs || !this.tabs.length) {

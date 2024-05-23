@@ -20,6 +20,7 @@
       :label="option[keys.type] === 'divider' ? null : option[keys.label] || option"
       :secondary-text="hasSecondaryText ? option[keys.secondaryText] : null"
       :target="option[keys.target]"
+      :isSelected="option[keys.isSelected]"
 
       :type="option[keys.type]"
       @click.native="($event) => selectOption(option, $event)"
@@ -80,6 +81,7 @@
             disabled: 'disabled',
             href: 'href',
             target: 'target',
+            isSelected: 'isSelected',
           };
         },
       },
