@@ -247,7 +247,7 @@
       },
       showItem(item) {
         item.style.position = 'unset';
-          item.style.visibility = 'visible';
+        item.style.visibility = 'visible';
         if (this.isAriaVisible) {
           item.style.opacity = 1;
           item.style.zIndex = 'unset';
@@ -259,7 +259,6 @@
           item.style.opacity = 0;
           item.style.zIndex = -1;
           item.style.visibility = 'visible';
-
         } else {
           item.style.visibility = 'hidden';
         }

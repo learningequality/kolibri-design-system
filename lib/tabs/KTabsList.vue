@@ -190,7 +190,7 @@
           ...tab,
           isSelected: this.isTabActive(tab.id),
           role: 'tab',
-          ariaRoleDescription: `tab ${idx + 1} of ${this.tabs.length}`
+          ariaRoleDescription: `tab ${idx + 1} of ${this.tabs.length}`,
         }));
       },
       lastTabIdx() {

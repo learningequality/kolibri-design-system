@@ -8,7 +8,7 @@
     @blur="isActive = false"
     :role="role"
     :aria-roledescription="ariaRoleDescription"
-    :aria-selected="isSelected"
+    :aria-selected="isSelected ? 'true' : 'false'"  
     :class="classes"
     :style="activeStyle"
     :href="isAnchor ? (disabled ? null : href) : null"
