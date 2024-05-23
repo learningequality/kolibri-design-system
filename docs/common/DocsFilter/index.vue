@@ -70,6 +70,7 @@
     font-size: 12px;
     border: 1px solid $border-color;
     border-radius: 4px;
+
     &::placeholder {
       color: $border-color;
     }

@@ -104,7 +104,7 @@
        * If link opens in new tab or if icon is provided, add 8px margin between the icon and the text
        */
       spanStyle() {
-        let styles = {};
+        const styles = {};
         if (this.openInNewTab || this.icon) {
           if (this.isRtl) {
             // If RTL-language, but English link, displays correct margins

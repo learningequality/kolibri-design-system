@@ -174,9 +174,9 @@
         const lastChild = menuElements[menuElements.length - 1];
         const popoverIsOpen = popover.clientWidth > 0 && popover.clientHeight > 0;
         // set current element and its siblings
-        let focusedElement = document.activeElement;
-        let sibling = focusedElement.nextElementSibling;
-        let prevSibling = focusedElement.previousElementSibling;
+        const focusedElement = document.activeElement;
+        const sibling = focusedElement.nextElementSibling;
+        const prevSibling = focusedElement.previousElementSibling;
 
         // manage rotating through the options using arrow keys
         // UP arrow: .keyCode is depricated and should used only as a fallback

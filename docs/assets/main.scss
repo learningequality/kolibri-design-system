@@ -27,6 +27,7 @@ code {
 
 a code {
   color: $link-color;
+
   &:hover {
     color: $link-hover-color;
   }
@@ -44,6 +45,7 @@ a {
 
   &:hover {
     color: $link-hover-color;
+
     svg {
       fill: $link-hover-color;
     }
@@ -70,6 +72,7 @@ html {
 html {
   box-sizing: border-box;
 }
+
 *,
 *::before,
 *::after {

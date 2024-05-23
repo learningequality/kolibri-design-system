@@ -432,8 +432,8 @@
   }
 
   .scroll-shadow {
-    background: linear-gradient(white 30%, hsla(0, 0%, 100%, 0)),
-      linear-gradient(hsla(0, 0%, 100%, 0) 10px, white 70%) bottom,
+    background: linear-gradient(white 30%, hsla(0deg, 0%, 100%, 0)),
+      linear-gradient(hsla(0deg, 0%, 100%, 0) 10px, white 70%) bottom,
       radial-gradient(at top, rgba(0, 0, 0, 0.2), transparent 70%),
       radial-gradient(at bottom, rgba(0, 0, 0, 0.2), transparent 70%) bottom;
     background-repeat: no-repeat;
@@ -448,6 +448,7 @@
   .actions {
     padding: 24px;
     text-align: right;
+
     button {
       margin: 0;
     }
