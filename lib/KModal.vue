@@ -167,6 +167,7 @@
         validator(val) {
           if (typeof val === 'string') {
             if (!SIZE_STRINGS.includes(val)) {
+              // eslint-disable-next-line no-console
               console.error(`'${val}' is not one of: ${SIZE_STRINGS}`);
               return false;
             }
@@ -234,11 +235,13 @@
     },
     created() {
       if (this.$props.cancelText && !this.$listeners.cancel) {
+        // eslint-disable-next-line no-console
         console.error(
           'A "cancelText" has been set, but there is no "cancel" listener. The "cancel" button may not work correctly.'
         );
       }
       if (this.$props.submitText && !this.$listeners.submit) {
+        // eslint-disable-next-line no-console
         console.error(
           'A "submitText" has been set, but there is no "submit" listener. The "submit" button may not work correctly.'
         );

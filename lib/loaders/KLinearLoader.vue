@@ -109,7 +109,7 @@
     animation-delay: 1s;
   }
 
-  @keyframes fadeIn {
+  @keyframes fade-in {
     from {
       opacity: 0;
     }
@@ -130,7 +130,7 @@
     transition-timing-function: ease;
     transition-duration: 0.3s;
     transition-property: height, opacity;
-    animation: fadeIn;
+    animation: fade-in;
     animation-duration: 0s;
     animation-fill-mode: backwards;
   }

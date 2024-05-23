@@ -217,7 +217,7 @@
     animation-delay: 1s;
   }
 
-  @keyframes fadeIn {
+  @keyframes fade-in {
     from {
       opacity: 0;
     }
@@ -233,7 +233,7 @@
   .ui-progress-circular {
     position: relative;
     margin: 0 auto;
-    animation: fadeIn;
+    animation: fade-in;
     animation-fill-mode: backwards;
     animation-duration: 0s;
   }

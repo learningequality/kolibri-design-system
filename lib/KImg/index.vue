@@ -378,6 +378,7 @@
         if (this.$listeners && this.$listeners.error) {
           this.$emit('error', event);
         } else {
+          // eslint-disable-next-line no-console
           console.error(event);
         }
       },

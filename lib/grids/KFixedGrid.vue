@@ -40,6 +40,7 @@
         required: true,
         validator(value) {
           if (value < 2 || value > 12) {
+            // eslint-disable-next-line no-console
             console.error(`Number of columns (${value}) must be between 2 and 12`);
             return false;
           }
