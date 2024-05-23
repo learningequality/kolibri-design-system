@@ -6,7 +6,7 @@
     supports-modality=keyboard
     @focus="isActive = true"
     @blur="isActive = false"
-    role="menu-item"
+    role="tab"
     :class="classes"
     :style="activeStyle"
     :href="isAnchor ? (disabled ? null : href) : null"
