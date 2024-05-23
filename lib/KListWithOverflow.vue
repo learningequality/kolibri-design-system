@@ -70,6 +70,10 @@
         type: [Object, String],
         default: null,
       },
+      isAriaVisible: {
+        type: Boolean,
+        default: false,
+      },
     },
     data() {
       return {
@@ -160,11 +164,9 @@
           // all the following items will be hidden.
           if (itemWidth >= availableWidth || overflowItemsIdx.length > 0) {
             overflowItemsIdx.push(i);
-            item.style.visibility = 'hidden';
-            item.style.position = 'absolute';
+            this.hideItem(item);
           } else {
-            item.style.visibility = 'visible';
-            item.style.position = 'unset';
+            this.showItem(item);
             maxWidth += itemWidth;
             availableWidth -= itemWidth;
             const itemHeight = itemsSizes[i].height;
@@ -183,8 +185,7 @@
           while (overflowItemsIdx.length > 0) {
             const idx = overflowItemsIdx.pop();
             const item = list.children[idx];
-            item.style.visibility = 'visible';
-            item.style.position = 'unset';
+            this.showItem(item);
             maxWidth += itemsSizes[idx].width;
             availableWidth -= itemsSizes[idx].width;
           }
@@ -223,7 +224,7 @@
         const lastVisibleIdx = firstOverflowedIdx - 1;
         if (this.isDivider(this.items[lastVisibleIdx])) {
           const dividerNode = list.children[lastVisibleIdx];
-          dividerNode.style.visibility = 'hidden';
+          this.hideItem(dividerNode);
           return itemsSizes[lastVisibleIdx].width;
         }
       },
@@ -243,6 +244,25 @@
 
         this.isMoreButtonVisible = false;
         moreButtonWrapper.style.visibility = 'visible';
+      },
+      showItem(item) {
+        item.style.position = 'unset';
+          item.style.visibility = 'visible';
+        if (this.isAriaVisible) {
+          item.style.opacity = 1;
+          item.style.zIndex = 'unset';
+        }
+      },
+      hideItem(item) {
+        item.style.position = 'absolute';
+        if (this.isAriaVisible) {
+          item.style.opacity = 0;
+          item.style.zIndex = -1;
+          item.style.visibility = 'visible';
+
+        } else {
+          item.style.visibility = 'hidden';
+        }
       },
       isDivider(item) {
         return typeof item === 'object' && item.type === 'divider';

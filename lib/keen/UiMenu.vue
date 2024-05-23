@@ -21,6 +21,8 @@
       :secondary-text="hasSecondaryText ? option[keys.secondaryText] : null"
       :target="option[keys.target]"
       :isSelected="option[keys.isSelected]"
+      :role="option[keys.role]"
+      :ariaRoleDescription="option[keys.ariaRoleDescription]"
 
       :type="option[keys.type]"
       @click.native="($event) => selectOption(option, $event)"
@@ -82,6 +84,8 @@
             href: 'href',
             target: 'target',
             isSelected: 'isSelected',
+            role: 'role',
+            ariaRoleDescription: 'ariaRoleDescription',
           };
         },
       },

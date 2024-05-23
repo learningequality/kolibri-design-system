@@ -4,6 +4,7 @@
     v-show="enablePrint || !$isPrint"
     ref="tabList"
     role="tablist"
+    isAriaVisible
     :items="tabsItems"
     :[ariaLabelAttrName]="ariaLabelAttr"
     @updateOverflowItems="overflowTabs = $event"
@@ -185,9 +186,11 @@
         return this.tabs.map(tab => this.$refs[this.tabRefLabel(tab.id)]);
       },
       tabsItems() {
-        return this.tabs.map(tab => ({
+        return this.tabs.map((tab, idx) => ({
           ...tab,
           isSelected: this.isTabActive(tab.id),
+          role: 'tab',
+          ariaRoleDescription: `tab ${idx + 1} of ${this.tabs.length}`
         }));
       },
       lastTabIdx() {

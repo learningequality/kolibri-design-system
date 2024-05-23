@@ -6,7 +6,9 @@
     supports-modality=keyboard
     @focus="isActive = true"
     @blur="isActive = false"
-    role="tab"
+    :role="role"
+    :aria-roledescription="ariaRoleDescription"
+    :aria-selected="isSelected"
     :class="classes"
     :style="activeStyle"
     :href="isAnchor ? (disabled ? null : href) : null"
@@ -74,6 +76,11 @@
         type: Boolean,
         default: false,
       },
+      role: {
+        type: String,
+        default: 'menu-item',
+      },
+      ariaRoleDescription: String
     },
 
     computed: {
