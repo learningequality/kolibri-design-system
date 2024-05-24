@@ -281,12 +281,14 @@
             this.$refs.title.clientHeight -
             this.$refs.actions.clientHeight -
             32;
+
           // to prevent max height from toggling between pixels
           // we set a threshold of how many pixels the height should change before we update
           if (Math.abs(maxContentHeightCheck - this.maxContentHeight) >= 8) {
             this.maxContentHeight = maxContentHeightCheck;
             this.scrollShadow = this.maxContentHeight < this.$refs.content.scrollHeight;
           }
+
           // make sure that overflow-y won't be updated to 'auto' if this function is running for the first time
           // (otherwise Firefox would add a vertical scrollbar right away) + don't apply if modal contains KSelect
           // (otherwise KSelect will be trapped inside modal if KSelect is opened a second time)
@@ -298,7 +300,6 @@
           }
         }
       }, 50),
-
       emitCancelEvent() {
         if (!this.cancelDisabled) {
           /**

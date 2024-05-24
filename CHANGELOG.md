@@ -5,13 +5,13 @@ Changelog is rather internal in nature. See release notes for the public overvie
 ## Upcoming version 5.x.x (`develop` branch)
 
 - [#590]
-  - **Description:** Modal now resizes dynamically to adjust size based on content changes.
+  - **Description:** Modal now shrinks when the content has a smaller height.
   - **Products impact:** bugfix.
   - **Addresses:**  https://github.com/learningequality/kolibri-design-system/issues/570
   - **Components:** KModal.
-  - **Breaking:** No
+  - **Breaking:** no
   - **Impacts a11y:** -
-  - **Guidance:** Consumers need to ensure the modal content is wrapped correctly for the resizing logic to work effectively. No additional steps required for integration.
+  - **Guidance:** Consumers need to ensure the modal height is still working correctly.
 
 [#590]: https://github.com/learningequality/kolibri-design-system/pull/590/
 
