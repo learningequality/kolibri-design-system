@@ -97,7 +97,7 @@
   </transition>
 
 </template>
-  
+
 
 <script>
 
@@ -208,6 +208,7 @@
       modalWidth() {
         if (this.size === SIZE_SM) return '300px';
         if (this.size === SIZE_MD) return '450px';
+        if (this.size === SIZE_LG) return '100%';
         return `${this.size}px`;
       },
       maxModalWidth() {
@@ -216,7 +217,6 @@
       contentSectionMaxHeight() {
         return {
           'max-height': `${this.maxContentHeight}px`,
-          height: 'auto',
         };
       },
     },
@@ -292,8 +292,9 @@
           // (otherwise KSelect will be trapped inside modal if KSelect is opened a second time)
           if (this.$refs.content.clientHeight !== 0 && !this.containsKSelect) {
             // add a vertical scrollbar if content doesn't fit
-            this.$refs.content.style.overflowY =
-              this.$refs.content.scrollHeight > this.$refs.content.clientHeight ? 'auto' : 'hidden';
+            if (this.$refs.content.scrollHeight > this.$refs.content.clientHeight) {
+              this.$refs.content.style.overflowY = 'auto';
+            }
           }
         }
       }, 50),
@@ -433,5 +434,3 @@
   }
 
 </style>
-
-
