@@ -46,9 +46,11 @@
           </div>
         </template>
         <template #footer>
+
           <div>
             This is a sample footer section for the kcard
           </div>
+
         </template>
       </KCard>
 
@@ -71,9 +73,11 @@
           </div>
         </template>
         <template #footer>
+
           <div>
             This is a sample footer section for the kcard
           </div>
+
         </template>
       </KCard>
 
@@ -96,9 +100,11 @@
           </div>
         </template>
         <template #footer>
+
           <div>
             This is a sample footer section for the kcard
           </div>
+
         </template>
       </KCard>
 
@@ -126,9 +132,11 @@
           </div>
         </template>
         <template #footer>
+
           <div>
             This is a sample footer section for the kcard
           </div>
+
         </template>
       </KCard>
 

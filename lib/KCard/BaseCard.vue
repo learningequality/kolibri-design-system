@@ -10,6 +10,8 @@
     @keydown.enter="cardClick()"
   >
     <slot name="default"></slot>
+    <!-- @slot Title slot-->
+    <slot name="title"></slot>
   </li>
 
 </template>
@@ -24,6 +26,11 @@
         type: Object,
         required: true,
       },
+      // title: {
+      //   type: String,
+      //   required: false,
+      //   default: null,
+      // },
     },
     computed: {
       coreOutlineFocus() {
@@ -34,6 +41,7 @@
         };
       },
     },
+
     methods: {
       cardFocus(e) {
         this.$emit('focus', e);

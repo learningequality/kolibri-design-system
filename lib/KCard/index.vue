@@ -20,11 +20,14 @@
             class="thumbnail-image"
             :style="imageRadius"
           />
+          <!-- @slot Act as image placeholder  when the image is not available or can't be loaded. -->
           <slot v-if="!thumbnailSrc" name="thumbnailPlaceholder"></slot>
         </aside>
         <div class="spacing">
           <div>
+            <!-- @slot Places content to be placed above the title. -->
             <slot name="aboveTitle"></slot>
+            <!-- @slot Optional slot section containing the title contents, should not contain a heading element. -->
             <slot v-if="!title" name="title"></slot>
             <component
               :is="headerLevel"
@@ -42,9 +45,11 @@
               </router-link>
             </component>
 
+            <!-- @slot  Places content below the title -->
             <slot name="belowTitle"></slot>
           </div>
           <div class="footer">
+            <!--@slot places content in the footer-->
             <slot name="footer"></slot>
           </div>
         </div>
@@ -63,24 +68,46 @@
     name: 'KCard',
     components: { BaseCard, KImg },
     props: {
+      /**
+       * Displays  Card title.
+       * This prop is optional and defaults to null if not provided.
+       */
       title: {
         type: String,
         required: false,
         default: null,
       },
+      /**
+       * Sets the HTML heading level (h1, h2, etc.) for the title.
+       */
       headingLevel: {
         type: Number,
         required: true,
       },
+      /**
+       * The number of lines to display for the title. Defaults to 2.
+       */
       titleLines: {
         type: Number,
         required: false,
         default: 2,
       },
+      /**
+       * An object containing the route definition for the link.
+       * Required and cannot be empty.
+
+       */
       to: {
         type: Object,
         required: true,
       },
+      /**
+       * The layout style of the hero banner. Required and cannot be empty.
+       *
+       * @validator
+       * @param {String} value - The layout value.
+       * @returns {Boolean} - True if the value is not empty, false otherwise.
+       */
       layout: {
         type: String,
         required: true,
@@ -101,11 +128,25 @@
         required: false,
         default: 'none',
       },
+      /**
+       * Sets the source for the thumbnail image.
+       * Defaults to null if not provided.
+       *
+       * @type {String}
+       * @default null
+       * */
       thumbnailSrc: {
         type: String,
         required: false,
         default: null,
       },
+      /**
+       * Sets the scale type for the thumbnail image.
+       * Options: 'centerCrop', 'centerInside', 'fitCenter', 'fitEnd', 'fitStart', 'fitXY'.
+       * Defaults to 'centerInside' if not provided.
+       * @type {String}
+       * @default 'centerInside'
+       */
       thumbnailScaleType: {
         type: String,
         required: false,
@@ -180,10 +221,11 @@
 
   .horizontal-layout-style {
     display: flex;
+    flex-direction: column;
   }
 
   .thumbnail-image {
-    width: 100%;
+    height: 100%;
   }
 
   .footer {
