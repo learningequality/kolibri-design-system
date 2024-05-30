@@ -55,6 +55,7 @@
   .component-fade-leave-active {
     transition: opacity 0.25s ease;
   }
+
   .component-fade-enter,
   .component-fade-leave-to {
     opacity: 0;

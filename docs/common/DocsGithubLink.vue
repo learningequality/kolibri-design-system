@@ -20,10 +20,12 @@
   function validator(value) {
     if (typeof value === 'string') {
       if (value.startsWith('#')) {
+        // eslint-disable-next-line no-console
         console.error(`PR or issue number '${value}' should not start with a '#'`);
         return false;
       }
       if (!value.match(/^\d+$/)) {
+        // eslint-disable-next-line no-console
         console.error(`PR or issue number '${value}' invalid`);
         return false;
       }
@@ -78,12 +80,14 @@
           return `https://github.com/learningequality/kolibri-design-system/pull/${this.pull}`;
         if (this.issue)
           return `https://github.com/learningequality/kolibri-design-system/issues/${this.issue}`;
+        // eslint-disable-next-line no-console
         console.error(`No URL, PR, or issue provided`);
         return undefined;
       },
     },
     mounted() {
       if (this.pull && this.issue) {
+        // eslint-disable-next-line no-console
         console.warn("Pass either 'pull' or 'issue', not both");
       }
     },

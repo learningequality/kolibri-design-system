@@ -167,6 +167,7 @@
         validator(val) {
           if (typeof val === 'string') {
             if (!SIZE_STRINGS.includes(val)) {
+              // eslint-disable-next-line no-console
               console.error(`'${val}' is not one of: ${SIZE_STRINGS}`);
               return false;
             }
@@ -234,11 +235,13 @@
     },
     created() {
       if (this.$props.cancelText && !this.$listeners.cancel) {
+        // eslint-disable-next-line no-console
         console.error(
           'A "cancelText" has been set, but there is no "cancel" listener. The "cancel" button may not work correctly.'
         );
       }
       if (this.$props.submitText && !this.$listeners.submit) {
+        // eslint-disable-next-line no-console
         console.error(
           'A "submitText" has been set, but there is no "submit" listener. The "submit" button may not work correctly.'
         );
@@ -429,8 +432,8 @@
   }
 
   .scroll-shadow {
-    background: linear-gradient(white 30%, hsla(0, 0%, 100%, 0)),
-      linear-gradient(hsla(0, 0%, 100%, 0) 10px, white 70%) bottom,
+    background: linear-gradient(white 30%, hsla(0deg, 0%, 100%, 0)),
+      linear-gradient(hsla(0deg, 0%, 100%, 0) 10px, white 70%) bottom,
       radial-gradient(at top, rgba(0, 0, 0, 0.2), transparent 70%),
       radial-gradient(at bottom, rgba(0, 0, 0, 0.2), transparent 70%) bottom;
     background-repeat: no-repeat;
@@ -445,6 +448,7 @@
   .actions {
     padding: 24px;
     text-align: right;
+
     button {
       margin: 0;
     }

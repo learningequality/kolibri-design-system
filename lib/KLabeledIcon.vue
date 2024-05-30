@@ -93,10 +93,10 @@
         );
       },
       labelStyle() {
-        let styles = {};
+        const styles = {};
         let margins = 0;
-        let leftLtr = this.isRtl ? 'marginRight' : 'marginLeft';
-        let rightLtr = this.isRtl ? 'marginLeft' : 'marginRight';
+        const leftLtr = this.isRtl ? 'marginRight' : 'marginLeft';
+        const rightLtr = this.isRtl ? 'marginLeft' : 'marginRight';
         // Margin for icons - use em to match parent font size
         if (this.iconAfter || this.$slots['iconAfter']) {
           styles[rightLtr] = '1.975em'; // scale with parent font size

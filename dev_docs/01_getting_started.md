@@ -4,8 +4,8 @@ The design system has two primary parts, the UI component library [`/lib`](../li
 
 ## Prerequisites
 
-- Node.js 10.x (see [Node Version Manager](https://github.com/nvm-sh/nvm))
-- Yarn 1.x
+- Node.js 18.x (see [Node Version Manager](https://github.com/nvm-sh/nvm))
+- Yarn >=1.22.22
 
 ## Troubleshooting
 

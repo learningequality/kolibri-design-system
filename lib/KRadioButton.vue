@@ -174,9 +174,11 @@
     },
     mounted() {
       if (this.buttonValue === null && this.value === null) {
+        // eslint-disable-next-line no-console
         console.error('KRadioButton: buttonValue prop is required');
       }
       if (this.buttonValue === null) {
+        // eslint-disable-next-line no-console
         console.warn(
           "KRadioButton: 'value' prop is deprecated and will be removed in a future release. Please use 'buttonValue' instead."
         );

@@ -61,6 +61,7 @@
   .description {
     font-size: 18px;
   }
+
   li {
     font-size: 14px;
     color: #616161;

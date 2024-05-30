@@ -3,6 +3,9 @@ import '@testing-library/jest-dom';
 import * as Aphrodite from 'aphrodite';
 import * as AphroditeNoImportant from 'aphrodite/no-important';
 
+// eslint-disable-next-line import/no-unresolved
+import 'mock-match-media/jest-setup';
+
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 import VueIntl from 'vue-intl';

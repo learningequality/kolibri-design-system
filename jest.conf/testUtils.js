@@ -1,4 +1,3 @@
-import 'mock-match-media/jest-setup.cjs';
 import { setMedia } from 'mock-match-media';
 
 export const resizeWindow = (width, height = 768) => {

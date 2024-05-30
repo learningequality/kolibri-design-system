@@ -4,6 +4,28 @@ Changelog is rather internal in nature. See release notes for the public overvie
 
 ## Version 4.x.x (`release-v4` branch)
 
+- [#645]
+  - **Description:** Upgrades Node.js to v18, along with Kolibri-Tools to v0.16, Jest to v29 and Nuxt to v2.15
+  - **Products impact:** none
+  - **Addresses:** #439
+  - **Components:** none
+  - **Breaking:** no
+  - **Impacts a11y:** no
+  - **Guidance:** Netlify configuration needs to be updated to use v18 as well
+
+[#645]: https://github.com/learningequality/kolibri-design-system/pull/645
+
+- [#645]
+  - **Description:** Component error handling now use `@error` listener to avoid polluting test output, nor suppressing `console.*` in tests
+  - **Products impact:** any
+  - **Addresses:** n/a
+  - **Components:** `KImg`, `KTabs`, `KTabsList`
+  - **Breaking:** yes
+  - **Impacts a11y:** no
+  - **Guidance:** The `KImg` component may now emit an `Error` object in its `@error` listener when incorrectly configured, in addition to an `UiEvent|Event` when an image fails to load. Consumers should type check the value.
+
+[#645]: https://github.com/learningequality/kolibri-design-system/pull/645
+
 - [#630]
   - **Description:** Updates the svg for the pointsLeafActive, and removes the pointsLeafInactive (which is not used anywhere in Kolibri)
   - **Products impact:** Kolibri (branding)
@@ -342,7 +364,7 @@ Changelog is rather internal in nature. See release notes for the public overvie
 
 - [#611]
   - **Description:** Adds a new `maxWidth` prop
-  -  **Products impact:** new API 
+  -  **Products impact:** new API
   - **Addresses:** https://github.com/learningequality/kolibri-design-system/issues/595
   - **Components:** KTooltip
   - **Breaking:** no
@@ -378,7 +400,7 @@ Changelog is rather internal in nature. See release notes for the public overvie
   - **Components:** N/A
   - **Breaking:** No
   - **Impacts a11y:**  No
-  - **Guidance:** 
+  - **Guidance:**
 [#603]: https://github.com/learningequality/kolibri-design-system/pull/603
 
 - [#605]

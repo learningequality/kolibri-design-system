@@ -13,7 +13,7 @@
 
 <script>
 
-  const consola = require('consola');
+  import consola from 'consola';
 
   export default {
     name: 'DocsPageSection',

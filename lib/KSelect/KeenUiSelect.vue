@@ -923,6 +923,7 @@
 
     &.is-active:not(.is-disabled) {
       border-bottom-color: $ui-input-border-color--active;
+
       .ui-icon {
         color: $ui-input-icon-color--active;
       }
@@ -972,6 +973,7 @@
 
     &.is-invalid:not(.is-disabled) {
       border-bottom-color: $ui-input-border-color--invalid;
+
       .ui-select-label-text,
       .ui-select-dropdown-button,
       .ui-select-icon-wrapper .ui-icon {
