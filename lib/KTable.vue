@@ -20,6 +20,8 @@
   </div>
 
 </template>
+
+
 <script>
 
   export default {
@@ -37,6 +39,8 @@
   };
 
 </script>
+
+
 <style scoped>
 .k-table{
     margin:20px;
