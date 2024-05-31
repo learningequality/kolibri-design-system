@@ -2,13 +2,15 @@
 
   <BaseCard
     :to="to"
+    :title="title"
+    :headingLevel="headingLevel"
+    :titleLines="titleLines"
   >
     <template #default>
       <div
         class="horizontal-layout-style"
         :style="wrapperStyle"
       >
-
         <aside
           v-if="thumbnailDisplay !== 'none'"
           :style="forSmallThumbnailDisplay"
@@ -25,32 +27,24 @@
         </aside>
         <div class="spacing">
           <div>
-            <!-- @slot Places content to be placed above the title. -->
-            <slot name="aboveTitle"></slot>
-            <!-- @slot Optional slot section containing the title contents, should not contain a heading element. -->
-            <slot v-if="!title" name="title"></slot>
-            <component
-              :is="headerLevel"
-            >
-              <router-link
-                tabindex="-1"
-                :to="to"
-              >
-                <KTextTruncator
-                  v-if="title !== null"
-                  :text="title"
-                  :maxLines="titleLines"
-                  :style="titleStyle"
-                />
-              </router-link>
-            </component>
-
-            <!-- @slot  Places content below the title -->
-            <slot name="belowTitle"></slot>
-          </div>
-          <div class="footer">
-            <!--@slot places content in the footer-->
-            <slot name="footer"></slot>
+            <div data-testid="aboveTitle">
+              <slot name="aboveTitle"></slot>
+            </div>
+            <!-- @slot Optional slot section containing the
+            title contents, should not contain a heading element. -->
+            <div class="title-slot-style">
+              <slot v-if="!title" name="title"></slot>
+            </div>
+            <div data-testid="belowTitle">
+              <!-- @slot  Places content below the title -->
+              <slot name="belowTitle"></slot>
+            </div>
+            <div class="footer">
+              <!--@slot places content in the footer-->
+              <div data-testid="footer">
+                <slot name="footer"></slot>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -163,16 +157,6 @@
           return { flexDirection: 'row' };
         }
       },
-      headerLevel() {
-        return 'h' + this.headingLevel;
-      },
-      titleStyle() {
-        return {
-          color: this.$themeTokens.text,
-          fontSize: '16px',
-          margin: '12px 0',
-        };
-      },
       imageRadius() {
         if (this.layout === 'horizontal') {
           if (this.thumbnailDisplay === 'large') {
@@ -230,9 +214,14 @@
 
   .footer {
     margin: 12px 0;
-    position: absolute;
+    /* position: absolute; */
     bottom: 0;
     width: 100%;
+  }
+
+  .title-slot-style{
+    font-weight: 700;
+    font-size: 1em;
   }
 
 </style>

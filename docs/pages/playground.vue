@@ -29,8 +29,6 @@
 
       <KCard
         :to="{ name: '/' }"
-        :headingLevel="2"
-        title="Sampling title"
         layout="vertical"
         thumbnailDisplay="none"
         :thumbnailSrc="require('../assets/hummingbird CC BY-SA 4.0.jpg')"
@@ -56,8 +54,6 @@
 
       <KCard
         :to="{ name: '/' }"
-        :headingLevel="2"
-        title="Sampling title"
         layout="vertical"
         thumbnailDisplay="small"
         :thumbnailSrc="require('../assets/hummingbird CC BY-SA 4.0.jpg')"

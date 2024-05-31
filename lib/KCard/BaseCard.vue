@@ -9,9 +9,28 @@
     @click="cardClick()"
     @keydown.enter="cardClick()"
   >
+    <component
+      :is="headerLevel"
+      v-if="title !== null"
+    >
+      <router-link
+        tabindex="-1"
+        :to="to"
+      >
+        <KTextTruncator
+          v-if="title !== null"
+          :text="title"
+          :maxLines="titleLines"
+          :style="titleStyle"
+        />
+      </router-link>
+    </component>
+
     <slot name="default"></slot>
     <!-- @slot Title slot-->
-    <slot name="title"></slot>
+    <div data-testid="title">
+      <slot name="title"></slot>
+    </div>
   </li>
 
 </template>
@@ -21,16 +40,26 @@
 
   export default {
     name: 'BaseCard',
+
     props: {
       to: {
         type: Object,
         required: true,
       },
-      // title: {
-      //   type: String,
-      //   required: false,
-      //   default: null,
-      // },
+      title: {
+        type: String,
+        required: false,
+        default: null,
+      },
+      titleLines: {
+        type: Number,
+        required: false,
+        default: 2,
+      },
+      headingLevel: {
+        type: Number,
+        required: true,
+      },
     },
     computed: {
       coreOutlineFocus() {
@@ -40,7 +69,24 @@
           },
         };
       },
+      headerLevel() {
+        return 'h' + this.headingLevel;
+      },
+      titleStyle() {
+        return {
+          color: this.$themeTokens.text,
+          fontSize: '16px',
+          margin: '12px 16px',
+        };
+      },
     },
+    // created() {
+    //   if (!this.$slots.title.length || !this.title) {
+    //     throw new Error('provide a title slots or prop for the  card');
+    //   } else {
+    //     return true;
+    //   }
+    // },
 
     methods: {
       cardFocus(e) {
