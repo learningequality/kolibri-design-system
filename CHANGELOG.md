@@ -4,6 +4,17 @@ Changelog is rather internal in nature. See release notes for the public overvie
 
 ## Version 4.x.x (`release-v4` branch)
 
+- [#648]
+  - **Description:** Updates KSelect to include guiding documentation for the events it emits
+  - **Products impact:** None
+  - **Addresses:** -
+  - **Components:** KSelect
+  - **Breaking:** no
+  - **Impacts a11y:** no
+  - **Guidance:** -
+
+[#648]: https://github.com/learningequality/kolibri-design-system/pull/648
+
 - [#604]
   - **Description:** Add more examples to `KTextbox` documentation
   - **Products impact:** None
@@ -282,7 +293,7 @@ Changelog is rather internal in nature. See release notes for the public overvie
 
 - [#611]
   - **Description:** Adds a new `maxWidth` prop
-  -  **Products impact:** new API 
+  -  **Products impact:** new API
   - **Addresses:** https://github.com/learningequality/kolibri-design-system/issues/595
   - **Components:** KTooltip
   - **Breaking:** no
@@ -318,7 +329,7 @@ Changelog is rather internal in nature. See release notes for the public overvie
   - **Components:** N/A
   - **Breaking:** No
   - **Impacts a11y:**  No
-  - **Guidance:** 
+  - **Guidance:**
 [#603]: https://github.com/learningequality/kolibri-design-system/pull/603
 
 - [#605]
