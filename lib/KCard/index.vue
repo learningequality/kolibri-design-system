@@ -193,6 +193,13 @@
         }
       },
     },
+    // mounted() {
+    //   if (!!this.$slots.title || !this.title) {
+    //     throw new Error('provide a title slots or prop for the  card');
+    //   } else {
+    //     return true;
+    //   }
+    // },
   };
 
 </script>

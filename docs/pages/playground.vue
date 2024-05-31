@@ -164,10 +164,8 @@
 
       <KCard
         :to="{ name: '/' }"
-        :headingLevel="2"
         layout="horizontal"
         thumbnailDisplay="large"
-
         :thumbnailSrc="require('../assets/hummingbird CC BY-SA 4.0.jpg')"
       >
         <template #title>

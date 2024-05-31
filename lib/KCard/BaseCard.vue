@@ -80,14 +80,6 @@
         };
       },
     },
-    // created() {
-    //   if (!this.$slots.title.length || !this.title) {
-    //     throw new Error('provide a title slots or prop for the  card');
-    //   } else {
-    //     return true;
-    //   }
-    // },
-
     methods: {
       cardFocus(e) {
         this.$emit('focus', e);

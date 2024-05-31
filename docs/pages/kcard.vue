@@ -31,7 +31,7 @@
           <KCard
             :to="{ name: '/' }"
             title="how to get started with Kolibri"
-            headingLevel="2"
+            :headingLevel="2"
             layout="vertical"
             thumbnailDisplay="large"
             :thumbnailSrc="require('../assets/hummingbird CC BY-SA 4.0.jpg')"
@@ -56,7 +56,7 @@
           <KCard
             :to="{ name: '/' }"
             title="How to Cut a Tablet Sleeve: 3/4 Resource Resource Resource Resource Resource"
-            headingLevel="2"
+            :headingLevel="2"
             layout="vertical"
             thumbnailDisplay="large"
             :thumbnailSrc="require('../assets/hummingbird CC BY-SA 4.0.jpg')"
