@@ -192,20 +192,12 @@
       return {
         lastFocus: null,
         maxContentHeight: '1000',
-        contentHeight: 0,
         containsKSelect: false,
         scrollShadow: false,
         delayedEnough: false,
       };
     },
     computed: {
-      modalContentHeight() {
-        // if modal contains KSelect, the correct value of its content.scrollHeight is overwritten by the height of the
-        // KSelect options once KSelect is opened & the modal will elongate after KSelect is closed.
-        // in that case, getBoundingClientRect().height is a better reflection of content height but during the loading
-        // state it is temporarily 0 and fallback content.scrollHeight is accurate, as KSelect has not yet been opened
-        return this.$refs.content.getBoundingClientRect().height || this.$refs.content.scrollHeight;
-      },
       modalSizeStyles() {
         return {
           'max-width': `${this.maxModalWidth - 32}px`,
@@ -220,15 +212,11 @@
         return `${this.size}px`;
       },
       maxModalWidth() {
-        if (this.windowWidth < 1000) {
-          return this.windowWidth;
-        }
-        return 1000;
+        return this.windowWidth < 1000 ? this.windowWidth : 1000;
       },
       contentSectionMaxHeight() {
         return {
           'max-height': `${this.maxContentHeight}px`,
-          height: `${this.contentHeight}px`,
         };
       },
     },
@@ -264,6 +252,7 @@
       // if modal contains KSelect, special classes & styles will be applied
       const kSelectCheck = document.querySelector('div.modal div.ui-select');
       this.containsKSelect = !!kSelectCheck;
+      this.updateContentSectionStyle();
     },
     updated() {
       this.updateContentSectionStyle();
@@ -287,14 +276,6 @@
        */
       updateContentSectionStyle: debounce(function() {
         if (this.$refs.title && this.$refs.actions) {
-          if (Math.abs(this.$refs.content.scrollHeight - this.contentHeight) >= 8) {
-            // if there's dropdown & it is opened, the new scrollHeight detected shouldn't be applied,
-            // or else the modal will elongate after the dropdown content has been closed
-            this.contentHeight = this.containsKSelect
-              ? this.modalContentHeight
-              : this.$refs.content.scrollHeight;
-          }
-
           const maxContentHeightCheck =
             this.windowHeight -
             this.$refs.title.clientHeight -

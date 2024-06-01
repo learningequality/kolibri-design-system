@@ -4,8 +4,150 @@ Changelog is rather internal in nature. See release notes for the public overvie
 
 ## Upcoming version 5.x.x (`develop` branch)
 
+- [#590]
+  - **Description:** Modal now shrinks when the content has a smaller height.
+  - **Products impact:** bugfix.
+  - **Addresses:**  https://github.com/learningequality/kolibri-design-system/issues/570
+  - **Components:** KModal.
+  - **Breaking:** no
+  - **Impacts a11y:** -
+  - **Guidance:** Consumers need to ensure the modal height is still working correctly.
+
+[#590]: https://github.com/learningequality/kolibri-design-system/pull/590/
+
+- [#549]
+  - **Description:** Internal refactor of `KSelect` as part of moving away from Keen UI where related files were renamed and some functionality that wasn't exposed for public use was removed.
+  - **Products impact:** none
+  - **Addresses:** -
+  - **Components:** -
+  - **Breaking:** no
+  - **Impacts a11y:** -
+  - **Guidance:** Thorough QA of places that use `KSelect` is recommended due to the large scope of refactor.
+
+[#549]: https://github.com/learningequality/kolibri-design-system/pull/549
+
+- [#615]
+  - **Description:** Removes KImg props related to dimensions: `height`, `width`, `maxHeight`, `minHeight`, `maxWidth`, `minWidth`
+  - **Products impact:** updated API
+  - **Addresses:** -
+  - **Components:** KImg
+  - **Breaking:** yes
+  - **Impacts a11y:** no
+  - **Guidance:** Use native style, for example replace `<KImg width="100%" maxWidth="500px" />` by `<KImg :style="{ width: '100%', maxWidth: '500px' }" />`.
+
+[#615]: https://github.com/learningequality/kolibri-design-system/pull/615
+
+- [#615]
+  - **Description:** Renames KImg internal classes
+  - **Products impact:** none
+  - **Addresses:** -
+  - **Components:** KImg
+  - **Breaking:** -
+  - **Impacts a11y:** -
+  - **Guidance:** -
+
+[#615]: https://github.com/learningequality/kolibri-design-system/pull/615
 
 ## Version 4.x.x (`release-v4` branch)
+
+- [#630]
+  - **Description:** Updates the svg for the pointsLeafActive, and removes the pointsLeafInactive (which is not used anywhere in Kolibri)
+  - **Products impact:** Kolibri (branding)
+  - **Addresses:** -
+  - **Components:** `KIcon` and documentation
+  - **Breaking:** No
+  - **Impacts a11y:** No
+  - **Guidance:** -
+
+[#630]: https://github.com/learningequality/kolibri-design-system/pull/630
+
+- [#627]
+  - **Description:** Fix missing anchor tag and heading case in `KTextbox` documentation
+  - **Products impact:** None
+  - **Addresses:** -
+  - **Components:** `KTextbox` documentation
+  - **Breaking:** -
+  - **Impacts a11y:** -
+  - **Guidance:** -
+
+[#627]: https://github.com/learningequality/kolibri-design-system/pull/627
+
+- [#604]
+  - **Description:** Add more examples to `KTextbox` documentation
+  - **Products impact:** None
+  - **Addresses:** https://github.com/learningequality/kolibri-design-system/issues/596
+  - **Components:** `KTextbox` documentation
+  - **Breaking:** -
+  - **Impacts a11y:** -
+  - **Guidance:** -
+
+[#604]: https://github.com/learningequality/kolibri-design-system/pull/604
+
+- [#572]
+  - **Description:** Add `aria-checked` property to KCheckbox's `<input>` element
+  - **Products impact:** -
+  - **Addresses:** The `aria-checked` property being set properly improves a11y.
+  - **Components:** -
+  - **Breaking:** -
+  - **Impacts a11y:** yes
+  - **Guidance:** -
+
+[#572]: https://github.com/learningequality/kolibri-design-system/pull/572
+
+- [616]
+  - **Description:** Fixes `KModal` not showing content after the initial load
+  - **Products impact:** bugfix
+  - **Addresses:** https://github.com/learningequality/kolibri/pull/11911#issuecomment-2040030433
+  - **Components:** `KModal`
+  - **Breaking:** no
+  - **Impacts a11y:** no
+  - **Guidance:** -
+
+[616]: https://github.com/learningequality/kolibri-design-system/pull/616
+
+- [616]
+  - **Description:** Fixes `KSelect`'s missing padding
+  - **Products impact:** bugfix
+  - **Addresses:** https://github.com/learningequality/kolibri/pull/11911#issuecomment-2040030433
+  - **Components:** `KSelect`
+  - **Breaking:** no
+  - **Impacts a11y:** no
+  - **Guidance:** -
+
+[616]: https://github.com/learningequality/kolibri-design-system/pull/616
+
+- [#591]
+  - **Description:** Added a clearable prop to KTextbox
+  - **Products impact:** -
+  - **Addresses:** https://github.com/learningequality/kolibri-design-system/issues/584
+  - **Components:** `KTextbox`
+  - **Breaking:** no
+  - **Impacts a11y:** no
+  - **Guidance:** -
+
+[#591]: https://github.com/learningequality/kolibri-design-system/pull/591
+
+- [#582]
+  - **Description:** Upgrade popper.js from 1.14.6 to 1.16.1
+  - **Products impact:** -
+  - **Addresses:** -
+  - **Components:** -
+  - **Breaking:** -
+  - **Impacts a11y:** -
+  - **Guidance:** -
+
+[#582]: https://github.com/learningequality/kolibri-design-system/pull/582
+
+- [#599]
+  - **Description:** Upgrade express from 4.18.2 to 4.19.2
+  - **Products impact:** -
+  - **Addresses:** -
+  - **Components:** -
+  - **Breaking:** -
+  - **Impacts a11y:** -
+  - **Guidance:** -
+
+[#599]: https://github.com/learningequality/kolibri-design-system/pull/599
 
 - [#587]
   - **Description:** Rebrands icons in buttons and links
@@ -206,6 +348,96 @@ Changelog is rather internal in nature. See release notes for the public overvie
 
 ## Version 3.x.x (`release-v3` branch)
 
+- [#583]
+  - **Description:** KDropdownMenu menu support to show context menus with `isContextMenu` prop.
+  - **Products impact:** new API.
+  - **Addresses:** https://github.com/learningequality/kolibri-design-system/issues/571, https://github.com/learningequality/studio/issues/4403.
+  - **Components:** KDropdownMenu.
+  - **Breaking:** no.
+  - **Impacts a11y:** no.
+  - **Guidance:** -.
+
+- [#583]
+  - **Description:** New `useKContextMenu` private composable
+  - **Products impact:** - .
+  - **Addresses:** - .
+  - **Components:** - .
+  - **Breaking:** - .
+  - **Impacts a11y:** - .
+  - **Guidance:** -.
+
+- [#583]
+  - **Description:** Expose the event object as second argument on KDropdownMenu's select event.
+  - **Products impact:** updated API.
+  - **Addresses:** - .
+  - **Components:** KDropdownMenu.
+  - **Breaking:** no.
+  - **Impacts a11y:** no.
+  - **Guidance:** -.
+
+- [#583]
+  - **Description:** KDropdownMenu menu support to show a header slot.
+  - **Products impact:** new API.
+  - **Addresses:** - .
+  - **Components:** KDropdownMenu.
+  - **Breaking:** no.
+  - **Impacts a11y:** no.
+  - **Guidance:** -.
+
+[#583]: https://github.com/learningequality/kolibri-design-system/pull/583
+
+- [#611]
+  - **Description:** Adds a new `maxWidth` prop
+  -  **Products impact:** new API 
+  - **Addresses:** https://github.com/learningequality/kolibri-design-system/issues/595
+  - **Components:** KTooltip
+  - **Breaking:** no
+  - **Impacts a11y:** no
+  - **Guidance:** -
+
+[#611]: https://github.com/learningequality/kolibri-design-system/pull/611
+
+- [#612]
+  - **Description:** Prevent KListWithOverflow hidden elements from taking up space on the screen.
+  - **Products impact:** bugfix.
+  - **Addresses:** - .
+  - **Components:** KListWithOverflow.
+  - **Breaking:** no.
+  - **Impacts a11y:** no.
+  - **Guidance:** - .
+
+- [#612]
+  - **Description:** Scope the styles of the KListWithOverflow component.
+  - **Products impact:** bugfix.
+  - **Addresses:** - .
+  - **Components:** KListWithOverflow.
+  - **Breaking:** no.
+  - **Impacts a11y:** no.
+  - **Guidance:** - .
+
+[#612]: https://github.com/learningequality/kolibri-design-system/pull/612
+
+- [##603]
+  - **Description:** Adds thumps down icon that is needed in Studio for search recomendation work.
+  - **Products impact:** New Icon
+  - **Addresses:** [#4450](https://github.com/learningequality/studio/issues/4450)
+  - **Components:** N/A
+  - **Breaking:** No
+  - **Impacts a11y:**  No
+  - **Guidance:** 
+[#603]: https://github.com/learningequality/kolibri-design-system/pull/603
+
+- [#605]
+  - **Description:** Adds the `dropup` icon
+  - **Products impact:** New icon
+  - **Addresses:** https://github.com/learningequality/kolibri-design-system/issues/594
+  - **Components:** -
+  - **Breaking:** no
+  - **Impacts a11y:**  -
+  - **Guidance:** -
+
+[#605]: https://github.com/learningequality/kolibri-design-system/pull/605
+
 - [#586]
   - **Description:** Adds a new prop `constrainToScrollParent ` to `KDropdownMenu` to allow overriding of its popover flipping behavior.
   - **Products impact:** Bugfix
@@ -298,7 +530,7 @@ Changelog is rather internal in nature. See release notes for the public overvie
   - **Description:** Added new Icons to support Studio Usability Enhancements
   - **Products impact:** new API
   - **Addresses:** https://github.com/learningequality/studio/issues/3425
-  - **Components:** KIcon 
+  - **Components:** KIcon
   - **Breaking:** no
   - **Impacts a11y:** no
   - **Guidance:** Consumers can now access these icons: activities, attribution, audience, categories, levels, rename
@@ -320,7 +552,7 @@ Changelog is rather internal in nature. See release notes for the public overvie
   - **Description:** Added text prop in the KToolTip component as an alternative to the slot
   - **Products impact:** Choose from - bugfix
   - **Addresses:** #221
-  - **Components:** KToolTip 
+  - **Components:** KToolTip
   - **Breaking:** no
   - **Impacts a11y:** no
   - **Guidance:** -
@@ -344,7 +576,7 @@ Changelog is rather internal in nature. See release notes for the public overvie
   - **Addresses:** https://github.com/learningequality/kolibri-design-system/issues/512
   - **Components:** -
   - **Breaking:** no
-  - **Impacts a11y:** no  - 
+  - **Impacts a11y:** no  -
   - **Guidance:** -
 
 [#518]: https://github.com/learningequality/kolibri-design-system/pull/518
@@ -362,7 +594,7 @@ Changelog is rather internal in nature. See release notes for the public overvie
 
 - [#509]
   - **Description:** Introduces `appearanceOverrides` prop for the `KImg` component
-  - **Products impact:** new API 
+  - **Products impact:** new API
   - **Addresses:** https://github.com/learningequality/kolibri-design-system/issues/371
   - **Components:** KImg
   - **Breaking:** No
@@ -388,7 +620,7 @@ Changelog is rather internal in nature. See release notes for the public overvie
   - **Addresses:** -
   - **Components:** -
   - **Breaking:** no
-  - **Impacts a11y:** no  
+  - **Impacts a11y:** no
   - **Guidance:** -
 
 [#508]: https://github.com/learningequality/kolibri-design-system/pull/508
@@ -399,7 +631,7 @@ Changelog is rather internal in nature. See release notes for the public overvie
   - **Addresses:** https://github.com/learningequality/kolibri-design-system/issues/372
   - **Components:** KImg
   - **Breaking:** no
-  - **Impacts a11y:** yes  
+  - **Impacts a11y:** yes
   - **Guidance:** Allows the consumer to hook into the lifecycle of 'KImg' and handle the cases when the image fails to load
 
 [#502]: https://github.com/learningequality/kolibri-design-system/pull/502
@@ -409,8 +641,8 @@ Changelog is rather internal in nature. See release notes for the public overvie
   - **Products impact:** none
   - **Addresses:** https://github.com/learningequality/kolibri-design-system/issues/481
   - **Components:** -
-  - **Breaking:** 
-  - **Impacts a11y:** 
+  - **Breaking:**
+  - **Impacts a11y:**
   - **Guidance:** -
 
 [#505]: https://github.com/learningequality/kolibri-design-system/pull/505
@@ -553,9 +785,9 @@ Changelog is rather internal in nature. See release notes for the public overvie
   - **Addresses:** https://github.com/learningequality/kolibri-design-system/issues/379
   - **Components:** KRadioButton
   - **Breaking:** Yes
-  - **Impacts a11y:** 
+  - **Impacts a11y:**
   - **Guidance:** KRadioButton 'value' prop is deprecated. Please use the 'buttonValue' prop instead.
- 
+
   [#485]: https://github.com/learningequality/kolibri-design-system/pull/485
 
 ## Version 2.0.0
