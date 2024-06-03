@@ -140,7 +140,6 @@
   }
 
   .remove-list-style {
-    margin: 1em;
     list-style-type: none;
   }
 
