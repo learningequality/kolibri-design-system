@@ -7,7 +7,6 @@
     @focus="cardFocus"
     @hover="cardHover"
     @click="cardClickHandler()"
-    @keydown.enter="cardClickHandler"
     @mousedown="onMouseDown"
     @mouseup="onMouseUp"
   >
@@ -29,10 +28,7 @@
     </component>
 
     <slot name="default"></slot>
-    <!-- @slot Title slot-->
-    <div data-testid="title">
-      <slot name="title"></slot>
-    </div>
+
   </li>
 
 </template>
@@ -97,11 +93,6 @@
       },
       cardClick() {
         this.$router.push(this.to);
-        },
-      cardClickHandler() {
-        if (this.allowClick) {
-          this.$refs.link.cardClick();
-        }
       },
       onMouseDown() {
         this.mouseDownTime = new Date().getTime();
@@ -110,20 +101,15 @@
         const mouseUpTime = new Date().getTime();
         if (mouseUpTime - this.mouseDownTime < 200) {
           this.allowClick = true;
-          this.$refs.link.cardClick();
+          this.cardClick();
         } else {
           this.allowClick = false;
         }
       },
-    },
-    event: {
-      focus: {
-        type: Event,
-        description: 'Emitted when the card element has received focus.',
-      },
-      hover: {
-        type: Event,
-        description: 'Emits an event when the card is hovered.',
+      cardClickHandler() {
+        if (this.allowClick) {
+          this.cardClick();
+        }
       },
     },
   };
