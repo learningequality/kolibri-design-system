@@ -1,11 +1,14 @@
 <template>
+
   <td :style="{ textAlign: align }" tabindex="0" @keydown="onKeydown">
     {{ content }}
   </td>
+
 </template>
  
 
 <script>
+
   export default {
     name: 'KTableGridItem',
     props: {
@@ -32,6 +35,7 @@
       },
     },
   };
+
 </script>
   
   
