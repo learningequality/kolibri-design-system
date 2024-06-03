@@ -1,4 +1,5 @@
 <template>
+
   <div class="k-table">
     <table>
       <caption v-if="caption">
@@ -37,159 +38,161 @@
       </tbody>
     </table>
   </div>
+
 </template>
 
 <script>
-import KTableGridItem from './KTableGridItem.vue';
 
-export default {
-  name: 'KTable',
-  components: {
-    KTableGridItem,
-  },
-  props: {
-    headers: {
-      type: Array,
-      required: true,
-      validator: function (value) {
-        return value.every(
-          (header) =>
-            ['label', 'dataType'].every((key) => key in header) &&
-            ['string', 'numeric', 'date', 'others'].includes(header.dataType)
-        );
+  import KTableGridItem from './KTableGridItem.vue';
+
+  export default {
+    name: 'KTable',
+    components: {
+      KTableGridItem,
+    },
+    props: {
+      headers: {
+        type: Array,
+        required: true,
+        validator: function(value) {
+          return value.every(
+            header =>
+              ['label', 'dataType'].every(key => key in header) &&
+              ['string', 'numeric', 'date', 'others'].includes(header.dataType)
+          );
+        },
+      },
+      rows: {
+        type: Array,
+        required: true,
+      },
+      caption: {
+        type: String,
+        required: false,
       },
     },
-    rows: {
-      type: Array,
-      required: true,
+    data() {
+      return {
+        sortKey: null,
+        sortOrder: 'asc',
+      };
     },
-    caption: {
-      type: String,
-      required: false,
-    },
-  },
-  data() {
-    return {
-      sortKey: null,
-      sortOrder: 'asc',
-    };
-  },
-  computed: {
-    sortedRows() {
-      if (this.sortKey === null) return this.rows;
+    computed: {
+      sortedRows() {
+        if (this.sortKey === null) return this.rows;
 
-      const sortedRows = [...this.rows];
-      const sortHeader = this.headers[this.sortKey];
+        const sortedRows = [...this.rows];
+        const sortHeader = this.headers[this.sortKey];
 
-      if (sortHeader.dataType === 'numeric') {
-        sortedRows.sort((a, b) => a[this.sortKey] - b[this.sortKey]);
-      } else if (sortHeader.dataType === 'string' || sortHeader.dataType === 'date') {
-        sortedRows.sort((a, b) => a[this.sortKey].localeCompare(b[this.sortKey]));
-      }
-
-      if (this.sortOrder === 'desc') {
-        sortedRows.reverse();
-      }
-
-      return sortedRows;
-    },
-  },
-  methods: {
-    handleSort(index) {
-  const clickedElement = event.target.tagName.toLowerCase();
-  if (clickedElement !== 'th' || this.headers[index].dataType === 'others') return;
-
-  if (this.sortKey === index) {
-    this.sortOrder = this.sortOrder === 'asc' ? 'desc' : 'asc';
-  } else {
-    this.sortKey = index;
-    this.sortOrder = 'asc';
-  }
-},
-    handleKeydown(event, rowIndex, cellIndex) {
-  const key = event.key;
-  const totalRows = this.rows.length;
-  const totalCols = this.headers.length;
-
-  let nextRowIndex = rowIndex;
-  let nextCellIndex = cellIndex;
-
-  switch (key) {
-    case 'ArrowUp':
-      if (rowIndex === 0) {
-        this.focusHeader(cellIndex);
-        return;
-      } else if (rowIndex > 0) {
-        nextRowIndex = rowIndex - 1;
-      } else {
-        return;
-      }
-      break;
-    case 'ArrowDown':
-      if (rowIndex === -1) {
-        nextRowIndex = 0;
-      } else {
-        nextRowIndex = (rowIndex + 1) % totalRows;
-      }
-      break;
-    case 'ArrowLeft':
-      if (rowIndex === -1) {
-        nextCellIndex = cellIndex > 0 ? cellIndex - 1 : totalCols - 1;
-      } else if (cellIndex > 0) {
-        nextCellIndex = cellIndex - 1;
-      } else {
-        nextCellIndex = totalCols - 1;
-        nextRowIndex = rowIndex > 0 ? rowIndex - 1 : -1; // Move to the header row if needed
-      }
-      break;
-    case 'ArrowRight':
-      if (rowIndex === -1) {
-        if (cellIndex < totalCols - 1) {
-          nextCellIndex = cellIndex + 1;
-        } else {
-          nextRowIndex = 0;
-          nextCellIndex = 0;
+        if (sortHeader.dataType === 'numeric') {
+          sortedRows.sort((a, b) => a[this.sortKey] - b[this.sortKey]);
+        } else if (sortHeader.dataType === 'string' || sortHeader.dataType === 'date') {
+          sortedRows.sort((a, b) => a[this.sortKey].localeCompare(b[this.sortKey]));
         }
-      } else if (cellIndex < totalCols - 1) {
-        nextCellIndex = cellIndex + 1;
-      } else {
-        nextCellIndex = 0;
-        nextRowIndex = (rowIndex + 1) % totalRows;
-      }
-      break;
-    case 'Enter':
-      this.handleSort(cellIndex);
-      break;
-    default:
-      return;
-  }
 
-  this.focusCell(nextRowIndex, nextCellIndex);
-  event.preventDefault();
-},
-      
-        
-    focusHeader(cellIndex) {
-      const nextHeader = this.$el.querySelector(`thead th:nth-child(${cellIndex + 1})`);
-      if (nextHeader) {
-        nextHeader.focus();
-      }
+        if (this.sortOrder === 'desc') {
+          sortedRows.reverse();
+        }
+
+        return sortedRows;
+      },
     },
-    focusCell(rowIndex, cellIndex) {
-      let nextCell;
-      if (rowIndex === -1) {
-        nextCell = this.$el.querySelector(`thead th:nth-child(${cellIndex + 1})`);
-      } else {
-        nextCell = this.$el.querySelector(
-          `tbody tr:nth-child(${rowIndex + 1}) td:nth-child(${cellIndex + 1})`
-        );
-      }
-      if (nextCell) {
-        nextCell.focus();
-      }
+    methods: {
+      handleSort(index) {
+        const clickedElement = event.target.tagName.toLowerCase();
+        if (clickedElement !== 'th' || this.headers[index].dataType === 'others') return;
+
+        if (this.sortKey === index) {
+          this.sortOrder = this.sortOrder === 'asc' ? 'desc' : 'asc';
+        } else {
+          this.sortKey = index;
+          this.sortOrder = 'asc';
+        }
+      },
+      handleKeydown(event, rowIndex, cellIndex) {
+        const key = event.key;
+        const totalRows = this.rows.length;
+        const totalCols = this.headers.length;
+
+        let nextRowIndex = rowIndex;
+        let nextCellIndex = cellIndex;
+
+        switch (key) {
+          case 'ArrowUp':
+            if (rowIndex === 0) {
+              this.focusHeader(cellIndex);
+              return;
+            } else if (rowIndex > 0) {
+              nextRowIndex = rowIndex - 1;
+            } else {
+              return;
+            }
+            break;
+          case 'ArrowDown':
+            if (rowIndex === -1) {
+              nextRowIndex = 0;
+            } else {
+              nextRowIndex = (rowIndex + 1) % totalRows;
+            }
+            break;
+          case 'ArrowLeft':
+            if (rowIndex === -1) {
+              nextCellIndex = cellIndex > 0 ? cellIndex - 1 : totalCols - 1;
+            } else if (cellIndex > 0) {
+              nextCellIndex = cellIndex - 1;
+            } else {
+              nextCellIndex = totalCols - 1;
+              nextRowIndex = rowIndex > 0 ? rowIndex - 1 : -1; // Move to the header row if needed
+            }
+            break;
+          case 'ArrowRight':
+            if (rowIndex === -1) {
+              if (cellIndex < totalCols - 1) {
+                nextCellIndex = cellIndex + 1;
+              } else {
+                nextRowIndex = 0;
+                nextCellIndex = 0;
+              }
+            } else if (cellIndex < totalCols - 1) {
+              nextCellIndex = cellIndex + 1;
+            } else {
+              nextCellIndex = 0;
+              nextRowIndex = (rowIndex + 1) % totalRows;
+            }
+            break;
+          case 'Enter':
+            this.handleSort(cellIndex);
+            break;
+          default:
+            return;
+        }
+
+        this.focusCell(nextRowIndex, nextCellIndex);
+        event.preventDefault();
+      },
+
+      focusHeader(cellIndex) {
+        const nextHeader = this.$el.querySelector(`thead th:nth-child(${cellIndex + 1})`);
+        if (nextHeader) {
+          nextHeader.focus();
+        }
+      },
+      focusCell(rowIndex, cellIndex) {
+        let nextCell;
+        if (rowIndex === -1) {
+          nextCell = this.$el.querySelector(`thead th:nth-child(${cellIndex + 1})`);
+        } else {
+          nextCell = this.$el.querySelector(
+            `tbody tr:nth-child(${rowIndex + 1}) td:nth-child(${cellIndex + 1})`
+          );
+        }
+        if (nextCell) {
+          nextCell.focus();
+        }
+      },
     },
-  },
-};
+  };
+
 </script>
 
 
