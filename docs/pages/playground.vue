@@ -31,6 +31,7 @@
         :to="{ name: '/' }"
         layout="vertical"
         thumbnailDisplay="none"
+        :headingLevel="2"
         :thumbnailSrc="require('../assets/hummingbird CC BY-SA 4.0.jpg')"
       >
         <template #title>
@@ -56,6 +57,7 @@
         :to="{ name: '/' }"
         layout="vertical"
         thumbnailDisplay="small"
+        :headingLevel="2"
         :thumbnailSrc="require('../assets/hummingbird CC BY-SA 4.0.jpg')"
       >
         <template #title>
@@ -166,6 +168,7 @@
         :to="{ name: '/' }"
         layout="horizontal"
         thumbnailDisplay="large"
+        :headingLevel="2"
         :thumbnailSrc="require('../assets/hummingbird CC BY-SA 4.0.jpg')"
       >
         <template #title>

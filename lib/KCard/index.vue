@@ -77,6 +77,13 @@
       headingLevel: {
         type: Number,
         required: true,
+        validator(value) {
+          if (!value) {
+            console.error('Error: Prop headingLevel is required and cannot be empty.');
+            return false;
+          }
+          return true;
+        },
       },
       /**
        * The number of lines to display for the title. Defaults to 2.
@@ -193,13 +200,13 @@
         }
       },
     },
-    // mounted() {
-    //   if (!this.$slots.title && !this.title) {
-    //     throw new Error('provide a title slots or prop for the  card');
-    //   } else {
-    //     return true;
-    //   }
-    // },
+    mounted() {
+      if (!this.$slots.title && !this.title) {
+        throw new Error('provide a title slots or prop for the  card');
+      } else {
+        return true;
+      }
+    },
   };
 
 </script>
