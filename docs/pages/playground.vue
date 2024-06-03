@@ -22,7 +22,7 @@
       ]"
     /> -->
     <KTable :headers="tableHeaders" :rows="tableRows" caption="User Information Table" />
-  
+
 
     <!-- Play around with your component here: -->
 
