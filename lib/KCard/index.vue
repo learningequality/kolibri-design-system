@@ -58,6 +58,16 @@
   import KImg from '../KImg';
   import BaseCard from './BaseCard.vue';
 
+  const ScaleTypes = {
+    CENTER_INSIDE: 'centerInside',
+    CONTAIN: 'contain',
+    FIT_XY: 'fitXY',
+  };
+
+  function isValidScaleType(value) {
+    return value && Object.values(ScaleTypes).includes(value);
+  }
+
   export default {
     name: 'KCard',
     components: { BaseCard, KImg },
@@ -143,15 +153,15 @@
       },
       /**
        * Sets the scale type for the thumbnail image.
-       * Options: 'centerCrop', 'centerInside', 'fitCenter', 'fitEnd', 'fitStart', 'fitXY'.
+       * Options: 'centerInside', 'contain', 'fitXY'.
        * Defaults to 'centerInside' if not provided.
        * @type {String}
        * @default 'centerInside'
        */
       thumbnailScaleType: {
         type: String,
-        required: false,
         default: 'centerInside',
+        validator: isValidScaleType,
       },
     },
     computed: {
