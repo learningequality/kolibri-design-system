@@ -82,7 +82,7 @@
             console.error('Error: Prop headingLevel is required and cannot be empty.');
             return false;
           } else {
-            if (value <= 6 || value >= 2) {
+            if (value <= 6 && value >= 2) {
               return true;
             } else {
               console.error('Error: Prop headingLevel must be between 1 and 6.');
@@ -118,13 +118,7 @@
       layout: {
         type: String,
         required: true,
-        validator(value) {
-          if (!value) {
-            console.error('Error: Prop layout is required and cannot be empty.');
-            return false;
-          }
-          return true;
-        },
+        default: 'horizontal',
       },
       /**
        * Controls the display of the thumbnail image.
