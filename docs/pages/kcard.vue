@@ -27,28 +27,38 @@
         </docsinternallink> solely consists of content without any accompanying thumbnail image. This layout is suitable when visual representation is not necessary or when the content itself is sufficiently descriptive or engaging without the need for an image.
       </p>
       <DocsShowCode language="html">
-        <div>
-          <KCard
-            :to="{ name: '/' }"
-            title="how to get started with Kolibri"
-            :headingLevel="2"
-            layout="vertical"
-            thumbnailDisplay="large"
-            :thumbnailSrc="require('../assets/hummingbird CC BY-SA 4.0.jpg')"
-          >
+        <KCard
+          :to="{ name: '/' }"
+          title="How to Cut a Tablet Sleeve: 3/4 Resource Resource Resource Resource Resource"
+          :headingLevel="2"
+          layout="vertical"
+          thumbnailDisplay="large"
+          :thumbnailSrc="require('../assets/hummingbird CC BY-SA 4.0.jpg')"
+        >
 
-            <template #aboveTitle>
-              <div>
-                This is a sample above title slot text that can cover more that 3 lines
-              </div>
-            </template>
-            <template #footer>
-              <div>
-                This is a sample footer section for the kcard
-              </div>
-            </template>
-          </KCard>
-        </div>
+          <template #aboveTitle>
+            <div>
+              <KIcon
+                icon="watchShaded"
+              />
+              Rutrum pellentesque utrum...
+            </div>
+          </template>
+          <template #belowTitle>
+
+            <KIcon
+              icon="createSolid"
+            />
+            <KIcon
+              icon="watchShaded"
+            />
+          </template>
+          <template #footer>
+            <div>
+              This is a sample footer section for the kcard
+            </div>
+          </template>
+        </KCard>
       </DocsShowCode>
 
       <DocsShow block>
@@ -107,6 +117,7 @@
             :to="{ name: '/' }"
             layout="vertical"
             thumbnailDisplay="large"
+            :headingLevel="2"
             :thumbnailSrc="require('../assets/hummingbird CC BY-SA 4.0.jpg')"
           >
             <template #title>
@@ -144,6 +155,7 @@
             :to="{ name: '/' }"
             layout="vertical"
             thumbnailDisplay="large"
+            :headingLevel="2"
             :thumbnailSrc="require('../assets/hummingbird CC BY-SA 4.0.jpg')"
           >
             <template #title>
@@ -182,9 +194,10 @@
           <code>title</code>
         </DocsInternalLink>
         slot can take the position of the
-        <DocsIternalLink href="/kcard#slot:aboveTitle">
+        <DocsInternalLink href="/kcard#slot:aboveTitle">
           <code>aboveTitle</code>
-        </DocsIternalLink> slot if the latter is not used.
+        </DocsInternallink>
+        slot if the latter is not used.
       </p>
       <p>
         The thumbnail's appearance depends on two factors: the size of the original image and the chosen

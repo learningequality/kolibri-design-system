@@ -82,7 +82,7 @@
         default: null,
       },
       /**
-       * Sets the HTML heading level (h1, h2, etc.) for the title.
+       * Sets the HTML heading level in range (h2 - h6) for the title .
        */
       headingLevel: {
         type: Number,
@@ -127,7 +127,6 @@
        */
       layout: {
         type: String,
-        required: true,
         default: 'horizontal',
       },
       /**
