@@ -41,6 +41,7 @@
 
 </template>
 
+
 <script>
 
   import KTableGridItem from './KTableGridItem.vue';
