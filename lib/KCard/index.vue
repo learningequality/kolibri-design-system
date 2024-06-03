@@ -28,11 +28,12 @@
         <div class="spacing">
           <div>
             <div data-testid="aboveTitle">
+              <!-- @slot Places content above the title area. -->
               <slot name="aboveTitle"></slot>
             </div>
-            <!-- @slot Optional slot section containing the
-            title contents, should not contain a heading element. -->
+
             <div class="title-slot-style">
+              <!-- @slot Optional slot section containing the title contents, should not contain a heading element. -->
               <slot v-if="!title" name="title"></slot>
             </div>
             <div data-testid="belowTitle">
@@ -40,8 +41,8 @@
               <slot name="belowTitle"></slot>
             </div>
             <div class="footer">
-              <!--@slot places content in the footer-->
               <div data-testid="footer">
+                <!--@slot Places content in the footer section-->
                 <slot name="footer"></slot>
               </div>
             </div>
@@ -73,8 +74,8 @@
     components: { BaseCard, KImg },
     props: {
       /**
-       * Displays  Card title.
-       * This prop is optional and defaults to null if not provided.
+       * Sets card title if provided. The title should be
+       * unique and descriptive to aid searching through list of links.
        */
       title: {
         type: String,
@@ -102,7 +103,7 @@
         },
       },
       /**
-       * The number of lines to display for the title. Defaults to 2.
+       * The maximum number of lines a title covers. Defaults to 2 if not specified.
        */
       titleLines: {
         type: Number,
@@ -119,7 +120,7 @@
         required: true,
       },
       /**
-       * The layout style of the hero banner. Required and cannot be empty.
+       * Controls card orientation. Required and cannot be empty.
        *
        * @validator
        * @param {String} value - The layout value.
@@ -130,8 +131,8 @@
         default: 'horizontal',
       },
       /**
-       * Controls the display of the thumbnail image.
-       * Options: 'none' (default), 'small', or 'large'.
+       * Controls how the thumbnail appears in the card.
+       * Expected Options: 'none' (default), 'small', or 'large'.
        * */
       thumbnailDisplay: {
         type: String,
@@ -139,7 +140,7 @@
         default: 'none',
       },
       /**
-       * Sets the source for the thumbnail image.
+       * Sets the thumbnail path.
        * Defaults to null if not provided.
        *
        * @type {String}
@@ -151,9 +152,8 @@
         default: null,
       },
       /**
-       * Sets the scale type for the thumbnail image.
+       * Specifies how the thumbnail scales in the card.
        * Options: 'centerInside', 'contain', 'fitXY'.
-       * Defaults to 'centerInside' if not provided.
        * @type {String}
        * @default 'centerInside'
        */
