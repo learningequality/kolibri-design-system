@@ -6,8 +6,10 @@
     data-focus="true"
     @focus="cardFocus"
     @hover="cardHover"
-    @click="cardClick()"
-    @keydown.enter="cardClick()"
+    @click="cardClickHandler()"
+    @keydown.enter="cardClickHandler"
+    @mousedown="onMouseDown"
+    @mouseup="onMouseUp"
   >
     <component
       :is="headerLevel"
@@ -61,6 +63,12 @@
         required: true,
       },
     },
+    data() {
+      return {
+        mouseDownTime: 0,
+        allowClick: false,
+      };
+    },
     computed: {
       coreOutlineFocus() {
         return {
@@ -89,6 +97,33 @@
       },
       cardClick() {
         this.$router.push(this.to);
+        },
+      cardClickHandler() {
+        if (this.allowClick) {
+          this.$refs.link.cardClick();
+        }
+      },
+      onMouseDown() {
+        this.mouseDownTime = new Date().getTime();
+      },
+      onMouseUp() {
+        const mouseUpTime = new Date().getTime();
+        if (mouseUpTime - this.mouseDownTime < 200) {
+          this.allowClick = true;
+          this.$refs.link.cardClick();
+        } else {
+          this.allowClick = false;
+        }
+      },
+    },
+    event: {
+      focus: {
+        type: Event,
+        description: 'Emitted when the card element has received focus.',
+      },
+      hover: {
+        type: Event,
+        description: 'Emits an event when the card is hovered.',
       },
     },
   };
