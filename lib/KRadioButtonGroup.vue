@@ -1,6 +1,7 @@
 <template>
 
   <div class="k-radio-button-group">
+    <!-- @slot To render the KRadioButtons -->
     <slot></slot>
   </div>
 
@@ -11,6 +12,10 @@
   export default {
     name: 'KRadioButtonGroup',
     props: {
+      /**
+       * Specifies whether the radio button group is enabled or disabled.
+       * Used to make the first radio button active when the radio group becomes enabled again after being disabled.
+       */
       enable: {
         type: Boolean,
         default: true,

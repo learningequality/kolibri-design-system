@@ -224,6 +224,7 @@
       },
       /**
        * @public
+       * Set the tabIndex value
        */
       setTabIndex(val) {
         this.tabIndex = val;
