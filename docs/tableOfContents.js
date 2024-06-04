@@ -396,6 +396,11 @@ export default [
         title: 'KListWithOverflow',
         isCode: true,
       }),
+      new Page({
+        path: '/kradiobuttongroup',
+        title: 'KRadioButtonGroup',
+        isCode: true,
+      }),
     ],
   }),
 ];
