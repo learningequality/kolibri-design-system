@@ -116,7 +116,7 @@
           <KCard
             :to="{ name: '/' }"
             layout="vertical"
-            thumbnailDisplay="large"
+            thumbnailDisplay="small"
             :headingLevel="2"
             :thumbnailSrc="require('../assets/hummingbird CC BY-SA 4.0.jpg')"
           >
@@ -154,7 +154,7 @@
           <KCard
             :to="{ name: '/' }"
             layout="vertical"
-            thumbnailDisplay="large"
+            thumbnailDisplay="small"
             :headingLevel="2"
             :thumbnailSrc="require('../assets/hummingbird CC BY-SA 4.0.jpg')"
           >
@@ -320,7 +320,7 @@
         </div>
       </DocsShow>
 
-      <h4>
+      <h5>
         Horizontal
         <DocsInternalLink href="/kcard#prop:layout">
           <code>layout</code>
@@ -328,7 +328,7 @@
         <DocsInternalLink href="/kcard#prop:thumbnailDisplay">
           <code> thumbnailDisplay</code>
         </docsinternallink>is set to small
-      </h4>
+      </h5>
       <DocsShow block>
         <div>
           <KCard

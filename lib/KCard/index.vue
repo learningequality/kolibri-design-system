@@ -121,8 +121,8 @@
       },
       /**
        * Controls card orientation. Required and cannot be empty.
+       * Expected Options: 'horizontal' (default) or 'vertical'.
        *
-       * @validator
        * @param {String} value - The layout value.
        * @returns {Boolean} - True if the value is not empty, false otherwise.
        */

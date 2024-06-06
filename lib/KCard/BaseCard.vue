@@ -5,8 +5,8 @@
     tabindex="0"
     data-focus="true"
     @focus="cardFocus"
-    @hover="cardHover"
-    @click="cardClickHandler()"
+    @mouseenter="cardHover"
+    @click="cardClickHandler"
     @mousedown="onMouseDown"
     @mouseup="onMouseUp"
   >
@@ -19,7 +19,6 @@
         :to="to"
       >
         <KTextTruncator
-          v-if="title !== null"
           :text="title"
           :maxLines="titleLines"
           :style="titleStyle"
@@ -28,11 +27,9 @@
     </component>
 
     <slot name="default"></slot>
-
   </li>
 
 </template>
-
 
 <script>
 
@@ -115,7 +112,6 @@
   };
 
 </script>
-
 
 <style lang="scss" scoped>
 
