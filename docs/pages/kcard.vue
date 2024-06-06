@@ -261,15 +261,15 @@
           </KCard>
         </div>
       </DocsShowCode>
-      <p>
-        And if the layout is set  Horizontal
+      <h3>
+        if the layout is Horizontal
         <DocsInternalLink href="/kcard#prop:layout">
           <code>layout</code>
         </DocsInternalLink> and
         <DocsInternalLink href="/kcard#prop:thumbnailDisplay">
           <code> thumbnailDisplay</code>
-        </docsinternallink>is set to large
-      </p>
+        </docsinternallink> is set to large
+      </h3>
       <DocsShow block>
         <div>
           <KCard
@@ -297,6 +297,16 @@
           </KCard>
         </div>
       </DocsShow>
+
+      <h3>
+        Horizontal
+        <DocsInternalLink href="/kcard#prop:layout">
+          <code>layout</code>
+        </DocsInternalLink> and no
+        <DocsInternalLink href="/kcard#prop:thumbnailDisplay">
+          <code> thumbnailDisplay</code>
+        </docsinternallink> is set
+      </h3>
       <DocsShow block>
         <div>
           <KCard
@@ -320,15 +330,15 @@
         </div>
       </DocsShow>
 
-      <p>
+      <h3>
         Horizontal
         <DocsInternalLink href="/kcard#prop:layout">
           <code>layout</code>
         </DocsInternalLink> and
         <DocsInternalLink href="/kcard#prop:thumbnailDisplay">
           <code> thumbnailDisplay</code>
-        </docsinternallink>is set to <small></small>
-      </p>
+        </docsinternallink>is set to small
+      </h3>
       <DocsShow block>
         <div>
           <KCard
@@ -348,8 +358,6 @@
           </KCard>
         </div>
       </DocsShow>
-
-      </p>
     </DocsPageSection>
   </DocsPageTemplate>
 
