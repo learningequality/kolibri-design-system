@@ -32,10 +32,6 @@
   /**
    * Truncates text to a certain number of lines
    * and adds an ellipsis character "…"
-   *
-   * Internet Explorer note:
-   * Depending on length of words of the text, there might
-   * be a gap between the last visible word and "…"
    */
   export default {
     name: 'KTextTruncator',
@@ -55,15 +51,6 @@
         type: Number,
         required: false,
         default: 1,
-      },
-      /**
-       * Text line height in rem.
-       * Used only for Internet Explorer fallback.
-       */
-      lineHeightIE: {
-        type: Number,
-        required: false,
-        default: 1.4,
       },
     },
     computed: {
@@ -101,47 +88,9 @@
             // needed to make line clamp work for very long word with no spaces
             overflowWrap: 'break-word',
           };
-        } else {
-          /*
-              (C)
-              Fallback for multiple lines in Internet Explorer and some older versions
-              of other browsers that don't support line clamp
-              (https://caniuse.com/mdn-css_properties_-webkit-line-clamp).
-              Calculate max height and add "..." in `::before` while covering it with
-              white rectangle defined in `::after` when text doesn't need to be truncated.
-              Adapted from https://hackingui.com/a-pure-css-solution-for-multiline-text-truncation/
-              and https://css-tricks.com/line-clampin/#the-hide-overflow-place-ellipsis-pure-css-way.
-            */
-          const ellipsisWidth = '1rem';
-          return {
-            overflow: 'hidden',
-            position: 'relative',
-            lineHeight: `${this.lineHeightIE}rem`,
-            maxHeight: `${this.maxLines * this.lineHeightIE}rem`,
-            // needed to make truncation work for very long word with no spaces
-            // `word-wrap` is a legacy name for `overflow-wrap` that needs to be used for IE
-            wordWrap: 'break-word',
-            // create space for "..."
-            paddingRight: ellipsisWidth,
-            marginRigth: `-${ellipsisWidth}`,
-            '::before': {
-              content: "'…'",
-              position: 'absolute',
-              right: 0,
-              bottom: 0,
-            },
-            // cover "..." with white rectangle when text
-            // doesn't need to be truncated
-            '::after': {
-              content: "''",
-              position: 'absolute',
-              right: 0,
-              width: ellipsisWidth,
-              height: '100%',
-              background: this.$themeTokens.surface,
-            },
-          };
         }
+          // Default return value for when neither condition is met
+        return {};
       },
     },
   };
