@@ -1,7 +1,9 @@
 <template>
 
-  <td :style="{ textAlign: align }" tabindex="0" @keydown="onKeydown">
-    {{ content }}
+  <td :style="{ textAlign: textAlign }" tabindex="0" @keydown="onKeydown">
+    <slot :content="content">
+      {{ content }}
+    </slot>
   </td>
 
 </template>
@@ -16,22 +18,27 @@
         type: [String, Number],
         required: true,
       },
-      align: {
+      dataType: {
         type: String,
-        default: 'left',
+        default: 'string',
       },
       rowIndex: {
         type: Number,
         required: true,
       },
-      cellIndex: {
+      colIndex: {
         type: Number,
         required: true,
       },
     },
+    computed: {
+      textAlign() {
+        return this.dataType === 'numeric' ? 'right' : 'left';
+      },
+    },
     methods: {
       onKeydown(event) {
-        this.$emit('keydown', event, this.rowIndex, this.cellIndex);
+        this.$emit('keydown', event, this.rowIndex, this.colIndex);
       },
     },
   };
@@ -40,14 +47,10 @@
 
 
 <style scoped>
-  td {
-    padding: 15px;
-    text-align: left;
-    border-bottom: 1px solid #eee;
-  }
-
-  td:focus {
-    outline: 2px solid #007bff;
-    outline-offset: -2px;
-  }
+td:focus {
+  outline: 2px solid #007bff;
+  outline-offset: -2px;
+  z-index: 1;
+  position: relative;
+}
 </style>
