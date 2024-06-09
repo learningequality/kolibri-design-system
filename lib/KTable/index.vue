@@ -97,13 +97,6 @@
       headers: {
         type: Array,
         required: true,
-        validator: function(value) {
-          return value.every(
-            header =>
-              ['label', 'dataType'].every(key => key in header) &&
-              ['string', 'numeric', 'date', 'others'].includes(header.dataType)
-          );
-        },
       },
       rows: {
         type: Array,
