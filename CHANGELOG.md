@@ -11,7 +11,7 @@ Changelog is rather internal in nature. See release notes for the public overvie
   - **Components:** KTextTruncator
   - **Breaking:** no
   - **Impacts a11y:** -
-  - **Guidance:** Consumers need to ensure the modal  is still working correctly.
+  - **Guidance:** Consumers need to ensure the component KTextTruncator  is still working correctly.
 
 [#652]: https://github.com/learningequality/kolibri-design-system/pull/652/
 
