@@ -72,9 +72,6 @@
             whiteSpace: 'nowrap',
           };
         }
-
-        // 54 is random number only to be able to define `supports` test condition
-        if ('CSS' in window && CSS.supports && CSS.supports('-webkit-line-clamp: 54')) {
           /*
               (B)
               For multiple lines, use line clamp in browsers that support it
@@ -87,10 +84,7 @@
             '-webkit-box-orient': 'vertical',
             // needed to make line clamp work for very long word with no spaces
             overflowWrap: 'break-word',
-          };
-        }
-          // Default return value for when neither condition is met
-        return {};
+        };
       },
     },
   };
