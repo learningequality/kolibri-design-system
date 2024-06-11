@@ -141,7 +141,6 @@
       <KCard
         :to="{ name: '/' }"
         :headingLevel="2"
-        title="Sampling title"
         layout="horizontal"
         thumbnailDisplay="small"
         :thumbnailSrc="require('../assets/hummingbird CC BY-SA 4.0.jpg')"
@@ -158,7 +157,7 @@
         </template>
         <template #footer>
           <div>
-            This is a sample footer section for the kcard
+            This is a sample footer section for the kcard This is a sample footer section for the kcard This is a sample footer section for the kcard
           </div>
         </template>
       </KCard>
