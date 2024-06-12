@@ -25,119 +25,184 @@
     <!-- Play around with your component here: -->
     <h4>Vertical layout</h4>
 
-    <ul style="width:40%;">
+    <ul style="width:30%;">
 
       <KCard
         :to="{ name: '/' }"
-        layout="vertical"
-        thumbnailDisplay="none"
         :headingLevel="2"
+        layout="horizontal"
+        thumbnailDisplay="none"
         :thumbnailSrc="require('../assets/hummingbird CC BY-SA 4.0.jpg')"
       >
         <template #title>
           <div>
-            Sample text in the title slot
+            <KTextTruncator
+              text="The Philosophy of Rick and Morty and the meaning of All life"
+              :maxLines="2"
+            />
           </div>
         </template>
         <template #aboveTitle>
           <div>
-            This is a sample above title slot text that can cover more that 3 lines
+            Rutrum pellentesque utrum...
           </div>
         </template>
         <template #footer>
-
           <div>
-            This is a sample footer section for the kcard
+            <div class="footer-top-header">
+              <span> <KIcon icon="quiz" /> Practice</span>
+              <span>Short Activity</span>
+            </div>
+            <br>
+            <div class="footer-top-header">
+              <span>
+                <progress class="" value="50" max="100"></progress>
+              </span>
+              <span>
+                <KIcon icon="schedule" class="icon-size" />
+              </span>
+              <span>
+                <KIcon icon="download" class="icon-size" />
+              </span>
+            </div>
           </div>
-
         </template>
       </KCard>
+      <br>
 
       <KCard
         :to="{ name: '/' }"
+        :headingLevel="2"
         layout="vertical"
         thumbnailDisplay="small"
-        :headingLevel="2"
         :thumbnailSrc="require('../assets/hummingbird CC BY-SA 4.0.jpg')"
       >
         <template #title>
           <div>
-            Sample text in the title slot
+            <KTextTruncator
+              text="The Philosophy of Rick and Morty and the meaning of All life"
+              :maxLines="2"
+            />
           </div>
         </template>
         <template #aboveTitle>
           <div>
-            This is a sample above title slot text that can cover more that 3 lines
+            Rutrum pellentesque utrum...
           </div>
         </template>
         <template #footer>
-
           <div>
-            This is a sample footer section for the kcard
+            <div class="footer-top-header">
+              <span> <KIcon icon="quiz" /> Practice</span>
+              <span>Short Activity</span>
+            </div>
+            <br>
+            <div class="footer-top-header">
+              <span>
+                <progress class="" value="50" max="100"></progress>
+              </span>
+              <span>
+                <KIcon icon="schedule" class="icon-size" />
+              </span>
+              <span>
+                <KIcon icon="download" class="icon-size" />
+              </span>
+            </div>
           </div>
-
         </template>
       </KCard>
 
+      <br>
       <KCard
         :to="{ name: '/' }"
         :headingLevel="2"
-        title="Sampling title"
         layout="vertical"
         thumbnailDisplay="large"
         :thumbnailSrc="require('../assets/hummingbird CC BY-SA 4.0.jpg')"
       >
         <template #title>
           <div>
-            Sample text in the title slot
+            <KTextTruncator
+              text="The Philosophy of Rick and Morty and the meaning of All life"
+              :maxLines="2"
+            />
           </div>
         </template>
         <template #aboveTitle>
           <div>
-            This is a sample above title slot text that can cover more that 3 lines
+            Rutrum pellentesque utrum...
           </div>
         </template>
         <template #footer>
-
           <div>
-            This is a sample footer section for the kcard
+            <div class="footer-top-header">
+              <span> <KIcon icon="quiz" /> Practice</span>
+              <span>Short Activity</span>
+            </div>
+            <br>
+            <div class="footer-top-header">
+              <span>
+                <progress class="" value="50" max="100"></progress>
+              </span>
+              <span>
+                <KIcon icon="schedule" class="icon-size" />
+              </span>
+              <span>
+                <KIcon icon="download" class="icon-size" />
+              </span>
+            </div>
           </div>
-
         </template>
       </KCard>
 
     </ul>
 
     <h4>Horizontal layout</h4>
-    <ul style="width:60%;">
-
+    <ul style="width:30%;">
+      <br>
       <KCard
         :to="{ name: '/' }"
         :headingLevel="2"
-        title="Sampling title"
         layout="horizontal"
         thumbnailDisplay="none"
         :thumbnailSrc="require('../assets/hummingbird CC BY-SA 4.0.jpg')"
       >
         <template #title>
           <div>
-            Sample text in the title slot
+            <KTextTruncator
+              text="The Philosophy of Rick and Morty and the meaning of All life"
+              :maxLines="2"
+            />
           </div>
         </template>
         <template #aboveTitle>
           <div>
-            This is a sample above title slot text that can cover more that 3 lines
+            Rutrum pellentesque utrum...
           </div>
         </template>
         <template #footer>
-
           <div>
-            This is a sample footer section for the kcard
+            <div class="footer-top-header">
+              <span> <KIcon icon="quiz" /> Practice</span>
+              <span>Short Activity</span>
+            </div>
+            <br>
+            <div class="footer-top-header">
+              <span>
+                <progress class="" value="50" max="100"></progress>
+              </span>
+              <span>
+                <KIcon icon="schedule" class="icon-size" />
+              </span>
+              <span>
+                <KIcon icon="download" class="icon-size" />
+              </span>
+            </div>
           </div>
-
         </template>
       </KCard>
 
+      <br>
       <KCard
         :to="{ name: '/' }"
         :headingLevel="2"
@@ -147,42 +212,76 @@
       >
         <template #title>
           <div>
-            Sample text in the title slot
+            <KTextTruncator
+              text="The Philosophy of Rick and Morty and the meaning of All life"
+              :maxLines="2"
+            />
           </div>
         </template>
         <template #aboveTitle>
           <div>
-            This is a sample above title slot text that can cover more that 3 lines in the kcard
+            Rutrum pellentesque utrum...
           </div>
         </template>
         <template #footer>
           <div>
-            This is a sample footer section for the kcard This is a sample footer section for the kcard This is a sample footer section for the kcard
+            <div class="footer-top-header">
+              <span> <KIcon icon="quiz" /> Practice</span>
+              <span>Short Activity</span>
+            </div>
+            <br>
+            <br>
+            <div class="footer-top-header">
+              <span>
+                <KIcon icon="schedule" class="icon-size" />
+              </span>
+              <span>
+                <KIcon icon="download" class="icon-size" />
+              </span>
+            </div>
           </div>
         </template>
       </KCard>
 
-
+      <br>
       <KCard
         :to="{ name: '/' }"
+        :headingLevel="2"
         layout="horizontal"
         thumbnailDisplay="large"
-        :headingLevel="2"
         :thumbnailSrc="require('../assets/hummingbird CC BY-SA 4.0.jpg')"
       >
         <template #title>
           <div>
-            Sample text in the title slot
+            <KTextTruncator
+              text="The Philosophy of Rick and Morty and the meaning of All life"
+              :maxLines="2"
+            />
           </div>
         </template>
         <template #aboveTitle>
           <div>
-            This is a sample above title slot text that can cover more that 3 lines in the kcard
+            Rutrum pellentesque utrum...
           </div>
         </template>
         <template #footer>
           <div>
-            This is a sample footer section for the kcard
+            <div class="footer-top-header">
+              <span> <KIcon icon="quiz" /> Practice</span>
+              <span>Short Activity</span>
+            </div>
+            <br>
+            <div class="footer-top-header">
+              <span>
+                <progress class="" value="50" max="100"></progress>
+              </span>
+              <span>
+                <KIcon icon="schedule" class="icon-size" />
+              </span>
+              <span>
+                <KIcon icon="download" class="icon-size" />
+              </span>
+            </div>
           </div>
         </template>
       </KCard>
@@ -212,3 +311,17 @@
   };
 
 </script>
+
+<style scoped>
+.footer-top-header{
+  display: inline-flex;
+  font-size: 14px;
+}
+
+.footer-top-header span{
+  margin-right: 20px;
+}
+.icon-size{
+  font-size:20px;
+}
+</style>
