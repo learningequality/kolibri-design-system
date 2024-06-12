@@ -28,7 +28,7 @@
           </aside>
           <div class="spacing">
             <div>
-              <div data-testid="aboveTitle">
+              <div data-testid="aboveTitle" class="above-title-style">
                 <!-- @slot Places content above the title area. -->
                 <slot name="aboveTitle"></slot>
               </div>
@@ -254,15 +254,19 @@
   }
 
   .footer {
-    margin: 12px 0;
+    /* margin: 12px 0; */
     /* position: absolute; */
     bottom: 0;
     width: 100%;
+    margin-top:auto;
   }
 
   .title-slot-style{
     font-weight: 700;
     font-size: 1em;
+  }
+  .above-title-style{
+    font-size: 12px;
   }
 
 </style>
