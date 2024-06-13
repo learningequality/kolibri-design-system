@@ -11,6 +11,8 @@
 
 <script>
 
+  import { DATA_TYPE_NUMERIC } from '../composables/useSorting';
+
   export default {
     name: 'KTableGridItem',
     props: {
@@ -33,7 +35,7 @@
     },
     computed: {
       textAlign() {
-        return this.dataType === 'numeric' ? 'right' : 'left';
+        return this.dataType === DATA_TYPE_NUMERIC ? 'right' : 'left';
       },
     },
     methods: {
