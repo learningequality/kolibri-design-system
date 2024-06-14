@@ -11,9 +11,9 @@
             v-for="(header, index) in headers"
             :key="index"
             tabindex="0"
-            :aria-sort="sortable ? getAriaSort(index) : null"
+            :aria-sort="sortable && header.dataType !== DATA_TYPE_OTHERS ? getAriaSort(index) : null"
             :class="{ sortable: sortable && header.dataType !== DATA_TYPE_OTHERS }"
-            @click="sortable ? handleSort(index) : null"
+            @click="sortable && header.dataType !== DATA_TYPE_OTHERS ? handleSort(index) : null"
             @keydown="handleKeydown($event, -1, index)"
           >
             <slot name="header" :header="header" :index="index">
@@ -54,8 +54,12 @@
 
 <script>
 
-  import { ref, computed } from '@vue/composition-api';
-  import useSorting, { SORT_ORDER_ASC, SORT_ORDER_DESC, DATA_TYPE_OTHERS } from './useSorting';
+  import { ref, computed, watch } from '@vue/composition-api';
+  import useSorting, {
+    SORT_ORDER_ASC,
+    SORT_ORDER_DESC,
+    DATA_TYPE_OTHERS,
+  } from '../composables/useSorting';
   import KTableGridItem from './KTableGridItem.vue';
 
   export default {
@@ -63,16 +67,18 @@
     components: {
       KTableGridItem,
     },
-    setup(props) {
+    setup(props, { emit }) {
       const headers = ref(props.headers);
       const rows = ref(props.rows);
       const useLocalSorting = ref(props.useLocalSorting);
 
-      const { sortKey, sortOrder, sortedRows, handleSort, getAriaSort } = useSorting(
-        headers,
-        rows,
-        useLocalSorting
-      );
+      const {
+        sortKey,
+        sortOrder,
+        sortedRows,
+        handleSort: localHandleSort,
+        getAriaSort,
+      } = useSorting(headers, rows, useLocalSorting);
 
       const finalRows = computed(() => {
         if (props.sortable) {
@@ -81,6 +87,25 @@
           return rows.value;
         }
       });
+
+      watch(
+        () => props.rows,
+        newRows => {
+          rows.value = newRows;
+        }
+      );
+
+      const handleSort = index => {
+        if (useLocalSorting.value) {
+          localHandleSort(index);
+        } else {
+          emit(
+            'changeSort',
+            index,
+            sortOrder.value === SORT_ORDER_ASC ? SORT_ORDER_DESC : SORT_ORDER_ASC
+          );
+        }
+      };
 
       return {
         sortKey,
@@ -105,7 +130,6 @@
       caption: {
         type: String,
         required: true,
-        default: 'Information',
       },
       useLocalSorting: {
         type: Boolean,
