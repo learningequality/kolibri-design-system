@@ -13,7 +13,51 @@ Changelog is rather internal in nature. See release notes for the public overvie
   - **Impacts a11y:** -
   - **Guidance:** -
 
-[#629]: https://github.com/learningequality/kolibri-design-system/pull/604
+[#629]: https://github.com/learningequality/kolibri-design-system/pull/629
+
+- [#648]
+  - **Description:** Updates KSelect to include guiding documentation for the events it emits
+  - **Products impact:** None
+  - **Addresses:** -
+  - **Components:** KSelect
+  - **Breaking:** no
+  - **Impacts a11y:** no
+  - **Guidance:** -
+
+[#648]: https://github.com/learningequality/kolibri-design-system/pull/648
+
+- [#653]
+  - **Description:** Header "Changelog" text and link updated
+  - **Products impact:** -
+  - **Addresses:** Replace the "Changelog" link with the "Release notes" link on the KDS documentation website #644
+  - **Components:** -
+  - **Breaking:** No
+  - **Impacts a11y:** No
+  - **Guidance:** -
+
+[#653]: https://github.com/learningequality/kolibri-design-system/pull/653
+
+- [#630]
+  - **Description:** Updates the svg for the pointsLeafActive, and removes the pointsLeafInactive (which is not used anywhere in Kolibri)
+  - **Products impact:** Kolibri (branding)
+  - **Addresses:** -
+  - **Components:** `KIcon` and documentation
+  - **Breaking:** No
+  - **Impacts a11y:** No
+  - **Guidance:** -
+
+[#630]: https://github.com/learningequality/kolibri-design-system/pull/630
+
+- [#627]
+  - **Description:** Fix missing anchor tag and heading case in `KTextbox` documentation
+  - **Products impact:** None
+  - **Addresses:** -
+  - **Components:** `KTextbox` documentation
+  - **Breaking:** -
+  - **Impacts a11y:** -
+  - **Guidance:** -
+
+[#627]: https://github.com/learningequality/kolibri-design-system/pull/627
 
 - [#604]
   - **Description:** Add more examples to `KTextbox` documentation
@@ -290,6 +334,44 @@ Changelog is rather internal in nature. See release notes for the public overvie
 [#531]: https://github.com/learningequality/kolibri-design-system/pull/531
 
 ## Version 3.x.x (`release-v3` branch)
+
+- [#583]
+  - **Description:** KDropdownMenu menu support to show context menus with `isContextMenu` prop.
+  - **Products impact:** new API.
+  - **Addresses:** https://github.com/learningequality/kolibri-design-system/issues/571, https://github.com/learningequality/studio/issues/4403.
+  - **Components:** KDropdownMenu.
+  - **Breaking:** no.
+  - **Impacts a11y:** no.
+  - **Guidance:** -.
+
+- [#583]
+  - **Description:** New `useKContextMenu` private composable
+  - **Products impact:** - .
+  - **Addresses:** - .
+  - **Components:** - .
+  - **Breaking:** - .
+  - **Impacts a11y:** - .
+  - **Guidance:** -.
+
+- [#583]
+  - **Description:** Expose the event object as second argument on KDropdownMenu's select event.
+  - **Products impact:** updated API.
+  - **Addresses:** - .
+  - **Components:** KDropdownMenu.
+  - **Breaking:** no.
+  - **Impacts a11y:** no.
+  - **Guidance:** -.
+
+- [#583]
+  - **Description:** KDropdownMenu menu support to show a header slot.
+  - **Products impact:** new API.
+  - **Addresses:** - .
+  - **Components:** KDropdownMenu.
+  - **Breaking:** no.
+  - **Impacts a11y:** no.
+  - **Guidance:** -.
+
+[#583]: https://github.com/learningequality/kolibri-design-system/pull/583
 
 - [#611]
   - **Description:** Adds a new `maxWidth` prop
