@@ -4,6 +4,17 @@ Changelog is rather internal in nature. See release notes for the public overvie
 
 ## Version 4.x.x (`release-v4` branch)
 
+- [#629]
+  - **Description:** Improves the contrast for highlighted text, noted in KTextbox
+  - **Products impact:** None
+  - **Addresses:** https://github.com/learningequality/kolibri-design-system/issues/629
+  - **Components:** -
+  - **Breaking:** -
+  - **Impacts a11y:** -
+  - **Guidance:** -
+
+[#629]: https://github.com/learningequality/kolibri-design-system/pull/629
+
 - [#648]
   - **Description:** Updates KSelect to include guiding documentation for the events it emits
   - **Products impact:** None
