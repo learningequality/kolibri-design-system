@@ -177,8 +177,8 @@
     methods: {
       emitBlur() {
         /**
-          * Emitted when the select loses focus
-          */
+         * Emitted when the select loses focus
+         */
         this.$emit('blur');
       },
       handleChange(newSelection) {
