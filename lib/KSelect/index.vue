@@ -18,7 +18,7 @@
     :clearText="clearText"
     :placeholder="placeholder"
     @change="handleChange"
-    @blur="$emit('blur')"
+    @blur="emitBlur"
     @select="handleSelect"
   >
     <template #display>
@@ -167,15 +167,28 @@
       selection(newSelection) {
         /* Emits new selection.*/
         if (!this.disabled) {
+          /**
+           * Emitted when the value is changed
+           */
           this.$emit('change', newSelection);
         }
       },
     },
     methods: {
+      emitBlur() {
+        /**
+         * Emitted when the select loses focus
+         */
+        this.$emit('blur');
+      },
       handleChange(newSelection) {
         this.selection = newSelection;
       },
       handleSelect(newSelection, options) {
+        /**
+         * Emitted when an option is selected by the user. Will not be emitted if the selection is
+         * changed programmatically.
+         */
         this.$emit('select', newSelection, options);
       },
     },
