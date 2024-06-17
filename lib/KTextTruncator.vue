@@ -72,18 +72,18 @@
             whiteSpace: 'nowrap',
           };
         }
-          /*
+        /*
               (B)
               For multiple lines, use line clamp in browsers that support it
               (https://developer.mozilla.org/en-US/docs/Web/CSS/-webkit-line-clamp)
             */
-          return {
-            overflow: 'hidden',
-            display: '-webkit-box',
-            '-webkit-line-clamp': `${this.maxLines}`,
-            '-webkit-box-orient': 'vertical',
-            // needed to make line clamp work for very long word with no spaces
-            overflowWrap: 'break-word',
+        return {
+          overflow: 'hidden',
+          display: '-webkit-box',
+          '-webkit-line-clamp': `${this.maxLines}`,
+          '-webkit-box-orient': 'vertical',
+          // needed to make line clamp work for very long word with no spaces
+          overflowWrap: 'break-word',
         };
       },
     },
