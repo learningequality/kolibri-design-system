@@ -9,7 +9,7 @@
     Please do not commit your local updates of this file.
   -->
   <div style="padding: 24px">
-    <!-- 
+    <!--
       Example: Uncomment lines bellow, change something
       in lib/KBreadcrumbs.vue and see the updates reflected
       on this page
@@ -123,22 +123,22 @@
         <template #title>
           <div>
             <KTextTruncator
-              text="The Philosophy of Rick and Morty and the meaning of All life"
-              :maxLines="2"
+              text="This is a sample resource title that goes to three lines and truncates at the end of the three lines This is a sample title that goes to t..."
+              :maxLines="3"
             />
           </div>
         </template>
         <template #aboveTitle>
           <div>
+            <span> <KIcon icon="coachContent" /> </span>
             Rutrum pellentesque utrum...
           </div>
         </template>
         <template #footer>
           <div>
-            <div class="footer-top-header">
-              <span> <KIcon icon="quiz" /> Practice</span>
-              <span>Short Activity</span>
-            </div>
+            <span> <KIcon icon="createSolid" /> </span>
+            <span>Short Activity</span>
+
             <br>
             <div class="footer-top-header">
               <span>
@@ -213,8 +213,8 @@
         <template #title>
           <div>
             <KTextTruncator
-              text="The Philosophy of Rick and Morty and the meaning of All life"
-              :maxLines="2"
+              text="The Philosophy of Rick and Morty and the meaning of All life The Philosophy of Rick and Morty and the meaning of All life"
+              :maxLines="3"
             />
           </div>
         </template>
@@ -226,12 +226,9 @@
         <template #footer>
           <div>
             <div class="footer-top-header">
-              <span> <KIcon icon="quiz" /> Practice</span>
-              <span>Short Activity</span>
-            </div>
-            <br>
-            <br>
-            <div class="footer-top-header">
+              <span>
+                <progress class="" value="50" max="100"></progress>
+              </span>
               <span>
                 <KIcon icon="schedule" class="icon-size" />
               </span>
@@ -267,7 +264,7 @@
         <template #footer>
           <div>
             <div class="footer-top-header">
-              <span> <KIcon icon="quiz" /> Practice</span>
+              <span> <KIcon icon="optionsVertical" /> Practice</span>
               <span>Short Activity</span>
             </div>
             <br>
