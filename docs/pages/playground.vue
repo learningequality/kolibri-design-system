@@ -114,11 +114,11 @@
           <div>
             <div class="footer-top-header">
               <span>
-                <KIcon icon="createShaded" />
+                <KIcon icon="createShaded" class="icon-size" />
                 Practice
               </span>
               <span
-                :style="{ 'background-color': $themePalette.grey.v_100 }"
+                :style="{ 'background-color': $themePalette.grey.v_100,'padding': '2px' }"
               >
                 Short Activity
               </span>
@@ -184,11 +184,11 @@
           <div>
             <div class="footer-top-header">
               <span>
-                <KIcon icon="practiceSolid" />
+                <KIcon icon="practiceSolid" class="icon-size" />
                 Practice
               </span>
               <span
-                :style="{ 'background-color': $themePalette.grey.v_100 }"
+                :style="{ 'background-color': $themePalette.grey.v_100 ,'padding': '2px' }"
               >
                 Short Activity
               </span>
@@ -263,14 +263,12 @@
         <template #footer>
           <div>
             <div class="footer-top-header">
-              <span
-                :style="{ 'background-color': $themePalette.grey.v_100 }"
-              >
-                <KIcon icon="practiceSolid" />
+              <span>
+                <KIcon icon="practiceSolid" class="icon-size" />
                 Practice
               </span>
               <span
-                :style="{ 'background-color': $themePalette.grey.v_100 }"
+                :style="{ 'background-color': $themePalette.grey.v_100 , 'padding': '2px' }"
               >
                 Short Activity
               </span>
