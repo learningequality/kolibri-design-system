@@ -4,6 +4,17 @@ Changelog is rather internal in nature. See release notes for the public overvie
 
 ## Version 4.x.x (`release-v4` branch)
 
+- [#653]
+  - **Description:** Header "Changelog" text and link updated
+  - **Products impact:** -
+  - **Addresses:** Replace the "Changelog" link with the "Release notes" link on the KDS documentation website #644
+  - **Components:** -
+  - **Breaking:** No
+  - **Impacts a11y:** No
+  - **Guidance:** -
+
+[#653]: https://github.com/learningequality/kolibri-design-system/pull/653
+
 - [#630]
   - **Description:** Updates the svg for the pointsLeafActive, and removes the pointsLeafInactive (which is not used anywhere in Kolibri)
   - **Products impact:** Kolibri (branding)
