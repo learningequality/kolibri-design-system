@@ -4,6 +4,17 @@ Changelog is rather internal in nature. See release notes for the public overvie
 
 ## Upcoming version 5.x.x (`develop` branch)
 
+- [#652]
+  - **Description:** KTextTruncator drops support for Internet Explorer 11
+  - **Products impact:** browser support update
+  - **Addresses:**  https://github.com/learningequality/kolibri-design-system/issues/643
+  - **Components:** KTextTruncator
+  - **Breaking:** yes
+  - **Impacts a11y:** -
+  - **Guidance:** To be used in newer versions of products that don't need to support IE11 (Kolibri 0.17 and higher)
+
+[#652]: https://github.com/learningequality/kolibri-design-system/pull/652/
+
 - [#590]
   - **Description:** Modal now shrinks when the content has a smaller height.
   - **Products impact:** bugfix.
