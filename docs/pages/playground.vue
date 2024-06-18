@@ -76,6 +76,7 @@
         :headingLevel="2"
         layout="vertical"
         thumbnailDisplay="small"
+        title="This is a sample lesson title that goes to two lines and truncates at the end of the two lines This is a sample title that goes"
         :thumbnailSrc="require('../assets/hummingbird CC BY-SA 4.0.jpg')"
       >
         <template #title>
@@ -155,6 +156,7 @@
         :headingLevel="2"
         layout="vertical"
         thumbnailDisplay="large"
+        title="This is a sample lesson title that goes to two lines and truncates at the end of the two lines This is a sample title that goes"
         :thumbnailSrc="require('../assets/hummingbird CC BY-SA 4.0.jpg')"
       >
         <template #title>

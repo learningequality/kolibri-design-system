@@ -1,416 +1,409 @@
 <template>
 
   <DocsPageTemplate apiDocs>
-    <DocsPageSection title="Overview" anchor="#overview">
+    <DocsPageSection title="Introduction" anchor="#introduction">
       <p>
-        <code>KCard</code>
-        provides an accessible component for managing most frequently card content such as thumbnail, layouts and other customization options.
+        The <code>KCard</code> component is a versatile and accessible base component
+        for creating various card types, including lesson cards, resource cards, and channel cards.
+        It provides slots for adding content such as titles, subtitles, and footers,
+        along with options for displaying thumbnail images and customizing the layout.
+      </p>
+
+    </DocsPageSection> <DocsPageSection title="Usage" anchor="#usage">
+      <p>
+        <code>KCard</code> is a versatile base component for creating various card types.
+        It can be configured by adding product-specific content and logic to generate distinct card components.
+        The component provides slots for adding content such as titles, subtitles, and footers,
+        along with options for displaying thumbnail images and customizing the layout.
+      </p>
+
+    </DocsPageSection>
+    <DocsPageSection title="Layouts" anchor="#layouts">
+      <p>
+        <code>KCard</code> offers two main types of layouts to accommodate different content needs: horizontal and vertical.
+      </p> 
+      <h3>Horizontal Layout</h3>
+      <p> The horizontal layout displays the thumbnail image on the left and the content on the right. </p>
+      <p> Here's an example of how to use the horizontal layout: </p>
+      <DocsShow block>
+        <div>
+          <KCard
+            :to="{ name: '/' }"
+            :headingLevel="2"
+            layout="horizontal"
+            thumbnailDisplay="large"
+            :thumbnailSrc="require('../assets/hummingbird CC BY-SA 4.0.jpg')"
+          >
+            <template #title>
+              <div>
+                <KTextTruncator
+                  text="This is a sample resource title that goes to three lines and truncates at the end of the three lines This is a sample title that goes"
+                  :maxLines="2"
+                />
+              </div>
+            </template>
+            <template #aboveTitle>
+              <KGrid>
+
+                <KGridItem
+                  :layout12="{ span: 9 }"
+                  :layout8="{ span: 6 }"
+                >
+                  <span><KIcon icon="readSolid" class="icon-size" /></span>
+                  <span
+                    :style="{ 'color': $themePalette.grey.v_400,
+                              'font-size': '1.2em' }"
+                  >Rutrum pellentesque utrum...</span>
+                </KGridItem>
+
+                <KGridItem
+                  :layout12="{ span: 3 }"
+                  :layout8="{ span: 2 }"
+                >
+                  <div style="float:right">
+                    <KIcon icon="infoOutline" class="icon-size" />
+                  </div>
+                </KGridItem>
+              </KGrid>
+            </template>
+            <template #footer>
+              <div>
+                <div class="footer-top-header">
+                  <span>
+                    <KIcon icon="practiceSolid" class="icon-size" />
+                    Practice
+                  </span>
+                  <span
+                    :style="{ 'background-color': $themePalette.grey.v_100 , 'padding': '2px' }"
+                  >
+                    Short Activity
+                  </span>
+                </div>  
+              </div>
+            </template>
+          </kcard>
+        </div>
+      </DocsShow>
+
+      <h3>Vertical Layout</h3>
+      <p> The vertical layout displays the thumbnail image above the content. </p>
+      <p> Here's an example of how to use the vertical layout: </p> 
+      <DocsShow block>
+        <div>
+          <KCard
+            :to="{ name: '/' }"
+            :headingLevel="2"
+            layout="vertical"
+            thumbnailDisplay="small"
+            :thumbnailSrc="require('../assets/hummingbird CC BY-SA 4.0.jpg')"
+          >
+            <template #title>
+              <div>
+                <KTextTruncator
+                  text="This is a sample resource title that goes to three lines and truncates at the end of the three lines This is a sample title that goes"
+                  :maxLines="2"
+                />
+              </div>
+            </template>
+            <template #aboveTitle>
+              <KGrid>
+
+                <KGridItem
+                  :layout12="{ span: 8 }"
+                  :layout8="{ span: 6 }"
+                >
+                  <span><KIcon icon="readSolid" class="icon-size" /></span>
+                  <span
+                    :style="{ 'color': $themePalette.grey.v_400,
+                              'font-size': '1.2em' }"
+                  >Rutrum pellentesque utrum...</span>
+                </KGridItem>
+
+                <KGridItem
+                  :layout12="{ span: 4 }"
+                  :layout8="{ span: 2 }"
+                >
+                  <div style="float:right">
+                    <KIcon icon="infoOutline" class="icon-size" />
+                  </div>
+                </KGridItem>
+              </KGrid>
+            </template>
+            <template #footer>
+              <div>
+                <div class="footer-top-header">
+                  <span>
+                    <KIcon icon="createShaded" class="icon-size" />
+                    Practice
+                  </span>
+                  <span
+                    :style="{ 'background-color': $themePalette.grey.v_100,'padding': '2px' }"
+                  >
+                    Short Activity
+                  </span>
+                </div>
+
+                <KGrid>
+                  <KGridItem
+                    :layout12="{ span: 8 }"
+                    :layout8="{ span: 6 }"
+                  >
+                    <progress
+                      value="20"
+                      max="100"
+                      style="height:0.5em;width:100%"
+                    ></progress>
+                  </KGridItem>
+                  <KGridItem
+                    :layout12="{ span: 4 }"
+                    :layout8="{ span: 2 }"
+                  >
+                    <div class="" style="float:right;">
+                      <KIcon icon="schedule" class="icon-size" />
+                      <KIcon icon="download" class="icon-size" />
+                    </div>
+                  </KGridItem>
+                </KGrid>
+              </div>
+            </template>
+          </kcard>
+        </div>
+      </DocsShow>
+    </DocsPageSection> 
+
+    <DocsPageSection title="Thumbnails" anchor="#thumbnails">
+      <p>
+        KCard provides options for displaying thumbnails alongside content. 
+        The <DocsInternalLink href="/kcard#prop:thumbnailDisplay">
+          <code>thumbnailDisplay</code>
+        </DocsInternalLink> prop controls whether a thumbnail is shown or hidden.
+      </p> 
+      <p>
+        The thumbnail's display options depend on two factors: the size of the original image and the chosen
+        <DocsInternalLink href="/kcard#prop:thumbnailScaleType">
+          <code>thumbnailScaleType</code>
+        </DocsInternalLink> prop. This property controls how the image is scaled to fit the designated thumbnail area. 
+        The available scaling options are the same as those offered by the KImg component's scaleTypes property.
+      </p> 
+      <p>
+        If the <DocsInternalLink href="/kcard#prop:thumbnailDisplay">
+          <code>thumbnailDisplay</code>
+        </DocsInternalLink> prop is set to "none", the thumbnail will not be displayed.
+      </p>
+      <DocsShowCode language="html">
+        <div>
+          <KCard
+            :to="{ name: '/' }"
+            :headingLevel="2"
+            layout="vertical"
+            thumbnailDisplay="none"
+          >
+            <template #title>
+              <div>
+                <KTextTruncator
+                  text="This is a sample lesson title that goes to two lines and truncates at the end of the two lines This is a sample title that goes"
+                  :maxLines="2"
+                />
+              </div>
+            </template>
+            <template #aboveTitle>
+              <div :style="{ 'color': $themePalette.grey.v_400,'font-size': '1.2em' }">
+                Class name 1
+              </div>
+            </template>
+            <template #footer>
+              <KGrid>
+                <KGridItem
+                  :layout8="{ span: 4 }"
+                  :layout12="{ span: 6 }"
+                >
+                  <KIcon
+                    icon="mastered"
+                    style="font-size:20px;margin-bottom:-5px"
+                  />
+                  <span>score 30%</span>
+                </KGridItem>
+                <KGridItem
+                  :layout8="{ span: 4 }"
+                  :layout12="{ span: 6 }"
+                >
+                  <div class="" style="float:right">
+                    <KIcon icon="optionsVertical" />
+                  </div>
+                </KGridItem>
+              </KGrid>
+            </template>
+          </KCard>
+        </div>
+      </DocsShowCode>
+      <DocsShow block>
+        <div>
+          <KCard
+            :to="{ name: '/' }"
+            :headingLevel="2"
+            layout="vertical"
+            thumbnailDisplay="none"
+          >
+            <template #title>
+              <div>
+                <KTextTruncator
+                  text="This is a sample lesson title that goes to two lines and truncates at the end of the two lines This is a sample title that goes"
+                  :maxLines="2"
+                />
+              </div>
+            </template>
+            <template #aboveTitle>
+              <div :style="{ 'color': $themePalette.grey.v_400,'font-size': '1.2em' }">
+                Class name 1
+              </div>
+            </template>
+            <template #footer>
+              <KGrid>
+                <KGridItem
+                  :layout8="{ span: 4 }"
+                  :layout12="{ span: 6 }"
+                >
+                  <KIcon
+                    icon="mastered"
+                    style="font-size:20px;margin-bottom:-5px"
+                  />
+                  <span>score 30%</span>
+                </KGridItem>
+                <KGridItem
+                  :layout8="{ span: 4 }"
+                  :layout12="{ span: 6 }"
+                >
+                  <div class="" style="float:right">
+                    <KIcon icon="optionsVertical" />
+                  </div>
+                </KGridItem>
+              </KGrid>
+            </template>
+          </KCard>
+        </div>
+      </DocsShow>
+      <p>
+        And if the <DocsInternalLink href="/kcard#prop:thumbnailDisplay">
+          <code>thumbnailDisplay</code>
+        </DocsInternalLink> prop is set to "small", the thumbnail will be displayed at a small size.
+      </p> 
+
+      <DocsShow block>
+        <div>
+          <KCard
+            :to="{ name: '/' }"
+            :headingLevel="2"
+            layout="vertical"
+            thumbnailDisplay="small"
+            :thumbnailSrc="require('../assets/hummingbird CC BY-SA 4.0.jpg')"
+          >
+            <template #title>
+              <div>
+                <KTextTruncator
+                  text="This is a sample resource title that goes to three lines and truncates at the end of the three lines This is a sample title that goes"
+                  :maxLines="2"
+                />
+              </div>
+            </template>
+            <template #aboveTitle>
+              <KGrid>
+
+                <KGridItem
+                  :layout12="{ span: 8 }"
+                  :layout8="{ span: 6 }"
+                >
+                  <span><KIcon icon="readSolid" class="icon-size" /></span>
+                  <span
+                    :style="{ 'color': $themePalette.grey.v_400,
+                              'font-size': '1.2em' }"
+                  >Rutrum pellentesque utrum...</span>
+                </KGridItem>
+
+                <KGridItem
+                  :layout12="{ span: 4 }"
+                  :layout8="{ span: 2 }"
+                >
+                  <div style="float:right">
+                    <KIcon icon="infoOutline" class="icon-size" />
+                  </div>
+                </KGridItem>
+              </KGrid>
+            </template>
+            <template #footer>
+              <div>
+                <div class="footer-top-header">
+                  <span>
+                    <KIcon icon="createShaded" class="icon-size" />
+                    Practice
+                  </span>
+                  <span
+                    :style="{ 'background-color': $themePalette.grey.v_100,'padding': '2px' }"
+                  >
+                    Short Activity
+                  </span>
+                </div>
+
+                <KGrid>
+                  <KGridItem
+                    :layout12="{ span: 8 }"
+                    :layout8="{ span: 6 }"
+                  >
+                    <progress
+                      value="20"
+                      max="100"
+                      style="height:0.5em;width:100%"
+                    ></progress>
+                  </KGridItem>
+                  <KGridItem
+                    :layout12="{ span: 4 }"
+                    :layout8="{ span: 2 }"
+                  >
+                    <div class="" style="float:right;">
+                      <KIcon icon="schedule" class="icon-size" />
+                      <KIcon icon="download" class="icon-size" />
+                    </div>
+                  </KGridItem>
+                </KGrid>
+              </div>
+            </template>
+          </kcard>
+        </div>
+      </DocsShow>
+      <p>
+        The thumbnail's display options depend on two factors: the size of the original image and the chosen
+        thumbnailScaleType prop. This property controls how the image is scaled to fit the designated thumbnail area. 
+        The available scaling options are the same as those offered by the KImg component's scaleTypes property.
+      </p>
+      <h5>
+        Thumbnail Display 
+      </h5>
+
+      <ul>
+        <li>none: No thumbnail is displayed.</li>
+        <li>small: Sets thumbnailDisplay to a small size.</li>
+        <li>large: Sets thumbnailDisplay to a large size.</li>
+      </ul>
+      <h5>
+        Thumbnail Src
+      </h5>
+      <p> The thumbnailSrc prop is used to set the source URL of the thumbnail image.</p>
+
+      <h5> humbnail Scale Type</h5>
+      <p>
+        The thumbnailScaleType prop is used to set the scaling type of the thumbnail image. ptions: 'centerInside', 'contain', 'fitXY'. 
+        The available scaling options are the same as those offered by the KImg component's scaleTypes property.
       </p>
     </DocsPageSection>
-
-
-    <DocsPageSection title="Usage" anchor="#usage">
-      <p> <code>KCard</code>  KCard is a versatile base component for creating various card types, including lesson cards, resource cards, and channel cards. It can be configured by adding product-specific content and logic to generate distinct card components. KCard provides slots for adding content such as titles, subtitles, and footers, along with options for displaying thumbnail images and customizing the layout.</p>
-      <DocsPageSection title="Layouts" anchor="#Layouts">
-        <p>
-          <code>KCard</code> offers two main types of layouts to accommodate different content needs: horizontal and vertical.
-        </p>
-
-        <h3>layouts</h3>
-        <p>
-          Vertical
-          <DocsInternalLink href="/kcard#prop:layout">
-            <code>layout</code>
-          </DocsInternalLink> and no
-          <DocsInternalLink href="/kcard#prop:thumbnailDisplay">
-            <code> thumbnailDisplay</code>
-          </docsinternallink> solely consists of content without any accompanying thumbnail image. This layout is suitable when visual representation is not necessary or when the content itself is sufficiently descriptive or engaging without the need for an image.
-        </p>
-        <DocsShowCode language="html">
-          <div>
-            <KCard
-              :to="{ name: '/' }"
-              :headingLevel="2"
-              layout="horizontal"
-              thumbnailDisplay="none"
-              :thumbnailSrc="require('../assets/hummingbird CC BY-SA 4.0.jpg')"
-            >
-              <template #title>
-                <div>
-                  <KTextTruncator
-                    text="The Philosophy of Rick and Morty and the meaning of All life"
-                    :maxLines="2"
-                  />
-                </div>
-              </template>
-              <template #aboveTitle>
-                <div>
-                  Rutrum pellentesque utrum...
-                </div>
-              </template>
-              <template #footer>
-                <div>
-                  <div class="footer-top-header">
-                    <span> <KIcon icon="quiz" /> Practice</span>
-                    <span>Short Activity</span>
-                  </div>
-                  <br>
-                  <div class="footer-top-header">
-                    <span>
-                      <progress class="" value="50" max="100"></progress>
-                    </span>
-                    <span>
-                      <KIcon icon="schedule" class="icon-size" />
-                    </span>
-                    <span>
-                      <KIcon icon="download" class="icon-size" />
-                    </span>
-                  </div>
-                </div>
-              </template>
-            </KCard>
-          </div>
-        </DocsShowCode>
-
-        <DocsShow block>
-          <div>
-
-            <KCard
-              :to="{ name: '/' }"
-              :headingLevel="2"
-              layout="horizontal"
-              thumbnailDisplay="none"
-              :thumbnailSrc="require('../assets/hummingbird CC BY-SA 4.0.jpg')"
-            >
-              <template #title>
-                <div>
-                  <KTextTruncator
-                    text="The Philosophy of Rick and Morty and the meaning of All life"
-                    :maxLines="2"
-                  />
-                </div>
-              </template>
-              <template #aboveTitle>
-                <div>
-                  Rutrum pellentesque utrum...
-                </div>
-              </template>
-              <template #footer>
-                <div>
-                  <div class="footer-top-header">
-                    <span> <KIcon icon="quiz" /> Practice</span>
-                    <span>Short Activity</span>
-                  </div>
-                  <br>
-                  <div class="footer-top-header">
-                    <span>
-                      <progress class="" value="50" max="100"></progress>
-                    </span>
-                    <span>
-                      <KIcon icon="schedule" class="icon-size" />
-                    </span>
-                    <span>
-                      <KIcon icon="download" class="icon-size" />
-                    </span>
-                  </div>
-                </div>
-              </template>
-            </KCard>
-          </div>
-        </DocsShow>
-
-        <h3>
-          Vertical
-          <DocsInternalLink href="/kcard#prop:layout">
-            <code>layout</code>
-          </DocsInternalLink> and
-          <DocsInternalLink href="/kcard#prop:thumbnailDisplay">
-            <code> thumbnailDisplay </code>
-          </docsinternallink> small
-        </h3>
-        <p>
-          This layout offers a combined view of content and a thumbnail image. This provides users with both textual information
-        </p>
-
-        <DocsShow block>
-          <div>
-            <KCard
-              :to="{ name: '/' }"
-              layout="vertical"
-              thumbnailDisplay="small"
-              :headingLevel="2"
-              :thumbnailSrc="require('../assets/hummingbird CC BY-SA 4.0.jpg')"
-            >
-              <template #title>
-                <div>
-                  Sample text in the title slot
-                </div>
-              </template>
-              <template #aboveTitle>
-                <div>
-                  This is a sample above title slot text that can cover more that 3 lines
-                </div>
-              </template>
-              <template #footer>
-                <div>
-                  This is a sample footer section for the kcard
-                </div>
-              </template>
-            </KCard>
-          </div>
-        </DocsShow>
-
-        <h3>
-          Vertical
-          <DocsInternalLink href="/kcard#prop:layout">
-            <code>layout</code>
-          </DocsInternalLink> and
-          <DocsInternalLink href="/kcard#prop:thumbnailDisplay">
-            <code> thumbnailDisplay</code>
-          </docsinternallink> large
-        </h3>
-
-        <DocsShow block>
-          <div>
-            <KCard
-              :to="{ name: '/' }"
-              layout="vertical"
-              thumbnailDisplay="large"
-              :headingLevel="2"
-              :thumbnailSrc="require('../assets/hummingbird CC BY-SA 4.0.jpg')"
-            >
-              <template #title>
-                <div>
-                  Kolibri video tutorials to understand the Learner, Coach, and Admin features.
-                </div>
-              </template>
-              <template #aboveTitle>
-                <div>
-                  This is a sample above title slot text that can cover more that 3 lines
-                </div>
-              </template>
-              <template #footer>
-                <div>
-                  This is a sample footer section for the kcard
-                </div>
-              </template>
-            </KCard>
-          </div>
-        </DocsShow>
-        <h3>
-          Horizontal Layout
-        </h3>
-        <p>
-          It's important to note that besides the mandatory   <DocsInternalLink href="/kcard#prop:title">
-            <code>title</code>
-          </DocsInternalLink> prop/slot, all other slots are optional.
-          This flexibility allows for creating diverse layouts by combining different options for the <DocsInternalLink href="/KCard#prop:layout">
-            <code>layout</code>
-          </DocsInternalLink>
-          and
-          <DocsInternalLink href="/kcard#prop:thumbnailDisplay">
-            <code> thumbnailDisplay</code>
-          </DocsInternalLink>  properties. Additionally, the order of slots is not strictly enforced. For instance,
-          the  <DocsInternalLink href="/kcard#slot:title">
-            <code>title</code>
-          </DocsInternalLink>
-          slot can take the position of the
-          <DocsInternalLink href="/kcard#slot:aboveTitle">
-            <code>aboveTitle</code>
-          </DocsInternallink>
-          slot if the latter is not used.
-        </p>
-        <p>
-          The thumbnail's appearance depends on two factors: the size of the original image and the chosen
-          <DocsInternalLink href="/KImg#prop:thumnailcaletype">
-            <code>
-              thumbnailScaleType
-            </code>
-          </DocsInternalLink>
-          property.  This property controls how the image is scaled to fit the designated thumbnail area.
-          The available scaling options are the same as those offered by the KImg component's scaleTypes property.
-        </p>
-        Here are a few examples...
-
-        <p>
-          Horizontal
-          <DocsInternalLink href="/kcard#prop:layout">
-            <code> layout</code>
-          </DocsInternalLink> and
-          <DocsInternalLink href="/kcard#prop:thumbnailDisplay">
-            <code> thumbnailDisplay </code>
-          </docsinternallink> large
-        </p>
-        <p>
-          in the event where <DocsInternalLink href="/kcard#prop:thumbnailDisplay">
-            <code> thumbnailDisplay</code>
-          </DocsInternalLink> and  <DocsInternalLink href="/KImg#prop:thumnailcaletype">
-            <code>
-              thumbnailScaleType
-            </code>
-          </DocsInternalLink> is not provided we will end something like this
-        </p>
-        <DocsShowCode language="html">
-          <div>
-            <KCard
-              :to="{ name: '/' }"
-              :headingLevel="2"
-              layout="horizontal"
-              thumbnailDisplay="large"
-              :thumbnailSrc="require('../assets/hummingbird CC BY-SA 4.0.jpg')"
-            >
-              <template #title>
-                <div>
-                  Sample text in the title slot
-                </div>
-              </template>
-              <template #aboveTitle>
-                <div>
-                  This is a sample above title slot text that can cover more that 3 lines
-                </div>
-              </template>
-              <template #belowTitle>
-                <div>
-                  This is a sample below title slot text that can cover more that 3 lines
-                </div>
-              </template>
-              <template #footer>
-                <div>
-                  This is a sample footer section for the kcard
-                </div>
-              </template>
-            </KCard>
-          </div>
-        </DocsShowCode>
-        <h3>
-          if the layout is Horizontal
-          <DocsInternalLink href="/kcard#prop:layout">
-            <code>layout</code>
-          </DocsInternalLink> and
-          <DocsInternalLink href="/kcard#prop:thumbnailDisplay">
-            <code> thumbnailDisplay</code>
-          </docsinternallink> is set to large
-        </h3>
-        <DocsShow block>
-          <div>
-            <KCard
-              :to="{ name: '/' }"
-              :headingLevel="2"
-              layout="horizontal"
-              thumbnailDisplay="large"
-              :thumbnailSrc="require('../assets/hummingbird CC BY-SA 4.0.jpg')"
-            >
-              <template #title>
-                <div>
-                  Sample text in the title slot
-                </div>
-              </template>
-              <template #aboveTitle>
-                <div>
-                  This is a sample above title slot text that can cover more that 3 lines
-                </div>
-              </template>
-              <template #footer>
-                <div>
-                  This is a sample footer section for the kcard
-                </div>
-              </template>
-            </KCard>
-          </div>
-        </DocsShow>
-
-        <h3>
-          Thumbnail Display Options
-        </h3>
-        <p>
-          KCard provides options for displaying thumbnails alongside content. The  <DocsInternalLink href="/kcard#prop:thumbnailDisplay">
-            <code>thumbnailDisplay</code>
-          </DocsInternalLink> prop controls whether a thumbnail is shown or hidden.
-        </p>
-
-        <p>
-          The thumbnail's display options depends on two factors: the size of the original image and the chosen   <DocsInternalLink href="/kcard#prop:thumbnailScaleType">
-            <code>thumbnailScaleType </code>
-          </DocsInternalLink> prop. This property controls how the image is scaled to fit the designated thumbnail area. The available scaling options are the same as those offered by the KImg component's scaleTypes property
-        </p>
-
-
-        <!-- 
-        <h3>
-          Thumbnail Display
-          <DocsInternalLink href="/kcard#prop:layout">
-            <code>layout</code>
-          </DocsInternalLink> and no
-          <DocsInternalLink href="/kcard#prop:thumbnailDisplay">
-            <code> thumbnailDisplay</code>
-          </docsinternallink> is set
-        </h3>
-        <DocsShow block>
-          <div>
-            <KCard
-              :to="{ name: '/' }"
-              :headingLevel="2"
-              title="How to get started with Kolibri"
-              layout="horizontal"
-              thumbnailDisplay="none"
-            >
-              <template #aboveTitle>
-                <div>
-                  This is a sample above title slot text that can cover more that 3 lines
-                </div>
-              </template>
-              <template #footer>
-                <div>
-                  This is a sample footer section for the kcard
-                </div>
-              </template>
-            </KCard>
-          </div>
-        </DocsShow>
-
-        <h3>
-          Horizontal
-          <DocsInternalLink href="/kcard#prop:layout">
-            <code>layout</code>
-          </DocsInternalLink> and
-          <DocsInternalLink href="/kcard#prop:thumbnailDisplay">
-            <code> thumbnailDisplay</code>
-          </docsinternallink>is set to small
-        </h3>
-        <DocsShow block>
-          <div>
-            <KCard
-              :to="{ name: '/' }"
-              :headingLevel="2"
-              title="How to get started with Kolibri"
-              layout="horizontal"
-              thumbnailDisplay="small"
-              :thumbnailSrc="require('../assets/hummingbird CC BY-SA 4.0.jpg')"
-            >
-              <template #aboveTitle>
-                <div>
-                  This is a sample above title slot text that can cover more that 3 lines
-                </div>
-              </template>
-
-            </KCard>
-          </div>
-        </DocsShow>
-        </h2>
-        </h> -->
-      </DocsPageSection>
-    </docspagesection>
   </DocsPageTemplate>
 
-</template>
 
+</template> 
 
 <script>
 
   export default {};
 
-</script>
-
+</script> 
 
 <style lang="scss" scoped>
 

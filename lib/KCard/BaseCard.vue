@@ -78,7 +78,7 @@
         return {
           color: this.$themeTokens.text,
           fontSize: '16px',
-          margin: '12px 16px',
+          margin: '0px 16px',
         };
       },
     },
