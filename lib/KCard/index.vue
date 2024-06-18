@@ -75,6 +75,7 @@
 
 </template>
 
+
 <script>
 
   import KImg from '../KImg';
