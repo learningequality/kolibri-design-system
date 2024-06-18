@@ -132,10 +132,9 @@
         default: 2,
       },
       /**
-         * An object containing the route definition for the link.
-         * Required and cannot be empty.
-
-         */
+       * An object containing the route definition for the link.
+       * Required and cannot be empty.
+       */
       to: {
         type: Object,
         required: true,
@@ -196,17 +195,24 @@
       },
       imageRadius() {
         if (this.layout === 'horizontal') {
-          // if (this.thumbnailDisplay === 'large') {
-          //   return {
-          //     borderRadius: '0.5em 0 0 0.5em',
-          //   };
-          // }
+          if (this.thumbnailDisplay === 'large') {
+            return {
+              borderRadius: '0.5em 0 0 0.5em',
+            };
+          }
           if (this.thumbnailDisplay === 'small') {
             return {
               borderRadius: '0.5em',
             };
           }
         }
+
+        if (this.layout === 'vertical' && this.thumbnailDisplay === 'large') {
+          return {
+            borderRadius: '0.5em 0.5em 0 0',
+          };
+        }
+
         return {};
       },
       forSmallThumbnailDisplay() {
@@ -217,6 +223,7 @@
         } else {
           return {
             margin: '0em',
+            width: '100%',
           };
         }
       },
@@ -252,7 +259,7 @@
   .thumbnail-image {
     height: 100%;
     min-width: 140px;
-    min-height:140px;
+    min-height:auto;
   }
 
   .footer {
