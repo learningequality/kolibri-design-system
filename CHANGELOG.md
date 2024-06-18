@@ -5,13 +5,13 @@ Changelog is rather internal in nature. See release notes for the public overvie
 ## Upcoming version 5.x.x (`develop` branch)
 
 - [#652]
-  - **Description:** Remove Internet Explorer 11 specific logic from KTextTruncator.
-  - **Products impact:** bugfix.
+  - **Description:** KTextTruncator drops support for Internet Explorer 11
+  - **Products impact:** browser support update
   - **Addresses:**  https://github.com/learningequality/kolibri-design-system/issues/643
   - **Components:** KTextTruncator
-  - **Breaking:** no
+  - **Breaking:** yes
   - **Impacts a11y:** -
-  - **Guidance:** Consumers need to ensure the component KTextTruncator  is still working correctly.
+  - **Guidance:** To be used in newer versions of products that don't need to support IE11 (Kolibri 0.17 and higher)
 
 [#652]: https://github.com/learningequality/kolibri-design-system/pull/652/
 
