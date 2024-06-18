@@ -1,6 +1,5 @@
 <template>
 
-
   <BaseCard
     :to="to"
     :title="title"
@@ -8,7 +7,7 @@
     :titleLines="titleLines"
   >
     <template #default>
-      <div class="">
+      <div>
         <div
           class="horizontal-layout-style"
           :style="wrapperStyle"
@@ -70,8 +69,6 @@
 
     </template>
   </BaseCard>
-
-    
 
 </template>
 
@@ -244,11 +241,6 @@
 <style scoped>
   .spacing {
     margin: 1em;
-  }
-  .my-card{
-    display: flex;
-    flex-wrap: wrap;
- 
   }
 
   .horizontal-layout-style {

@@ -25,7 +25,7 @@
     <!-- Play around with your component here: -->
     <h4>Vertical layout</h4>
 
-    <ul style="width:35%;">
+    <ul style="width:35%">
 
       <KCard
         :to="{ name: '/' }"
