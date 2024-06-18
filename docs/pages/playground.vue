@@ -50,6 +50,7 @@
 
 </template>
 
+
 <script>
 
   /*
@@ -131,13 +132,14 @@
 
           setTimeout(() => {
             this.updateLoadingMessage('');
-          }, 3000);
-        }, 2000); // Simulate a 2 second delay for fetching data
+          }, 5000);
+        }, 10000); // Simulate a 10 second delay for fetching data
       },
     },
   };
 
 </script>
+
 
 <style>
 #app {
@@ -175,6 +177,5 @@ h1, h2 {
   clip: rect(0, 0, 0, 0);
   white-space: nowrap;
   border-width: 0;
-  visibility: hidden;
 }
 </style>
