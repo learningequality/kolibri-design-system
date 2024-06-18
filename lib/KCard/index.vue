@@ -1,77 +1,77 @@
 <template>
 
-  <div class="my-card">
-    <BaseCard
-      :to="to"
-      :title="title"
-      :headingLevel="headingLevel"
-      :titleLines="titleLines"
-    >
-      <template #default>
-        <div class="">
-          <div
-            class="horizontal-layout-style"
-            :style="wrapperStyle"
-          >
-            <aside
-              v-if="thumbnailDisplay !== 'none'"
-              :style="forSmallThumbnailDisplay"
-            >
-              <KImg
-                :src="thumbnailSrc"
-                :isDecorative="true"
-                :appearanceOverrides="{ scaleType: thumbnailScaleType }"
-                class="thumbnail-image"
-                :style="imageRadius"
-              />
-              <!-- @slot Act as image placeholder  when the image is not available or can't be loaded. -->
-              <slot v-if="!thumbnailSrc" name="thumbnailPlaceholder"></slot>
-            </aside>
-            <div class="spacing">
-              <div>
-                <div data-testid="aboveTitle" class="above-title-style">
-                  <!-- @slot Places content above the title area. -->
-                  <slot name="aboveTitle"></slot>
-                </div>
 
-                <div class="title-slot-style">
-                  <!-- @slot Optional slot section containing the title contents, should not contain a heading element. -->
-                  <slot v-if="!title" name="title"></slot>
-                </div>
-                <div data-testid="belowTitle">
-                  <!-- @slot  Places content below the title -->
-                  <slot name="belowTitle"></slot>
-                </div>
-                <div
-                  v-if="!(layout === 'horizontal' && thumbnailDisplay === 'small')"
-                  class="footer"
-                >
-                  <div data-testid="footer">
-                    <!--@slot Places content in the footer section-->
-                    <slot name="footer"></slot>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div
-            v-if="layout === 'horizontal' &&
-              thumbnailDisplay === 'small'"
-            class="spacing"
+  <BaseCard
+    :to="to"
+    :title="title"
+    :headingLevel="headingLevel"
+    :titleLines="titleLines"
+  >
+    <template #default>
+      <div class="">
+        <div
+          class="horizontal-layout-style"
+          :style="wrapperStyle"
+        >
+          <aside
+            v-if="thumbnailDisplay !== 'none'"
+            :style="forSmallThumbnailDisplay"
           >
-            <div class="footer">
-              <div data-testid="footer">
-                <!--@slot Places content in the footer section-->
-                <slot name="footer"></slot>
+            <KImg
+              :src="thumbnailSrc"
+              :isDecorative="true"
+              :appearanceOverrides="{ scaleType: thumbnailScaleType }"
+              class="thumbnail-image"
+              :style="imageRadius"
+            />
+            <!-- @slot Act as image placeholder  when the image is not available or can't be loaded. -->
+            <slot v-if="!thumbnailSrc" name="thumbnailPlaceholder"></slot>
+          </aside>
+          <div class="spacing">
+            <div>
+              <div data-testid="aboveTitle" class="above-title-style">
+                <!-- @slot Places content above the title area. -->
+                <slot name="aboveTitle"></slot>
+              </div>
+
+              <div class="title-slot-style">
+                <!-- @slot Optional slot section containing the title contents, should not contain a heading element. -->
+                <slot v-if="!title" name="title"></slot>
+              </div>
+              <div data-testid="belowTitle">
+                <!-- @slot  Places content below the title -->
+                <slot name="belowTitle"></slot>
+              </div>
+              <div
+                v-if="!(layout === 'horizontal' && thumbnailDisplay === 'small')"
+                class="footer"
+              >
+                <div data-testid="footer">
+                  <!--@slot Places content in the footer section-->
+                  <slot name="footer"></slot>
+                </div>
               </div>
             </div>
           </div>
         </div>
+        <div
+          v-if="layout === 'horizontal' &&
+            thumbnailDisplay === 'small'"
+          class="spacing"
+        >
+          <div class="footer">
+            <div data-testid="footer">
+              <!--@slot Places content in the footer section-->
+              <slot name="footer"></slot>
+            </div>
+          </div>
+        </div>
+      </div>
 
-      </template>
-    </BaseCard>
+    </template>
+  </BaseCard>
 
-  </div>
+    
 
 </template>
 
