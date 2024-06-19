@@ -526,6 +526,9 @@
       selection(newSelection) {
         /* Emits new selection.*/
         if (!this.disabled) {
+          /**
+           * Emitted when the value is changed
+           */
           this.$emit('change', newSelection);
         }
       },
@@ -690,7 +693,10 @@
         } else {
           this.setValue(option);
         }
-
+        /**
+         * Emitted when an option is selected by the user. Will not be emitted if the selection is
+         * changed programmatically.
+         */
         this.$emit('select', option, {
           selected: !this.isOptionSelected(option),
         });
@@ -802,11 +808,17 @@
         }
 
         this.isActive = true;
+        /**
+         * Emitted when the select gets focus
+         */
         this.$emit('focus', e);
       },
 
       onBlur(e) {
         this.isActive = false;
+        /**
+         * Emitted when the select loses focus
+         */
         this.$emit('blur', e);
 
         if (this.showDropdown) {
