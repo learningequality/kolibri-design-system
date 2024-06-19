@@ -10,6 +10,18 @@ export const resizeWindow = (width, height = 768) => {
   });
 };
 
+export function takeScreenshot() {
+  const percyToken = process.env.PERCY_TOKEN;
+  const runVisualTests = process.env.TEST_TYPE === 'visual';
+  if (runVisualTests && !percyToken) {
+    /* eslint-disable no-console */
+    console.warn(
+      'Warning: Visual tests cannot be run because PERCY_TOKEN environment variable is not set.'
+    );
+  }
+  return runVisualTests && percyToken;
+}
+
 export const testAfterResize = testFunction => {
   let animationFrameId;
   const assertAfterResize = () => {

@@ -10,9 +10,22 @@ import Vue from 'vue';
 import VueRouter from 'vue-router';
 import VueIntl from 'vue-intl';
 import VueCompositionAPI from '@vue/composition-api';
+import { percySnapshot } from '@percy/puppeteer';
 import KThemePlugin from '../lib/KThemePlugin';
 
-process.env.TEST_TYPE = 'unit'; // Set the test type to unit
+process.env.TEST_TYPE = 'visual'; // Set the test type to visual
+
+if (typeof window !== 'undefined') {
+  global.matchMedia =
+    global.matchMedia ||
+    function() {
+      return {
+        matches: false,
+        addListener: function() {},
+        removeListener: function() {},
+      };
+    };
+}
 
 global.beforeEach(() => {
   return new Promise(resolve => {
@@ -30,6 +43,8 @@ global.afterEach(() => {
   });
 });
 
+global.percySnapshot = percySnapshot;
+
 // Register Vue plugins and components
 Vue.use(VueRouter);
 Vue.use(VueCompositionAPI);
@@ -40,7 +55,7 @@ Vue.config.silent = true;
 Vue.config.devtools = false;
 Vue.config.productionTip = false;
 
-Object.defineProperty(window, 'scrollTo', { value: () => {}, writable: true });
+// Object.defineProperty(window, 'scrollTo', { value: () => {}, writable: true });
 
 // Shows better NodeJS unhandled promise rejection errors
 process.on('unhandledRejection', (reason, p) => {
