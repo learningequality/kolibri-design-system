@@ -46,16 +46,31 @@
     mounted() {
       this.$nextTick(() => {
         if (this.isFirefox) {
-          this.$children.forEach((radioBtn, index) => {
-            this.radioButtons.push(radioBtn);
-            radioBtn.$el.addEventListener('keydown', this.onKeyDown);
-            radioBtn.setTabIndex(-1);
+          if (this.$children[0]._name === '<KGridItem>') {
+            this.$children.forEach(gridItem => {
+              gridItem.$children.forEach(fixedGridItem => {
+                fixedGridItem.$children.forEach(radioBtn => {
+                  this.radioButtons.push(radioBtn);
+                  radioBtn.$el.addEventListener('keydown', this.onKeyDown);
+                  radioBtn.setTabIndex(-1);
+                });
+              });
+            });
+          } else {
+            this.$children.forEach(radioBtn => {
+              this.radioButtons.push(radioBtn);
+              radioBtn.$el.addEventListener('keydown', this.onKeyDown);
+              radioBtn.setTabIndex(-1);
+            });
+          }
+
+          this.lastRadioIdx = this.radioButtons.length - 1;
+          this.radioButtons[this.focusedRadioIdx].setTabIndex(0);
+          this.radioButtons.forEach((radioBtn, index) => {
             radioBtn.$on('input', () => {
               this.handleInputChange(index);
             });
           });
-          this.lastRadioIdx = this.radioButtons.length - 1;
-          this.radioButtons[this.focusedRadioIdx].setTabIndex(0);
         }
       });
     },
@@ -108,8 +123,6 @@
       },
       focusRadio(radioIdx, event) {
         if (radioIdx !== undefined && radioIdx !== null) {
-          this.setChecked(radioIdx);
-          this.focusedRadioIdx = radioIdx;
           this.radioButtons[radioIdx].toggleCheck(event);
         }
       },
