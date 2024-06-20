@@ -5,68 +5,51 @@
     :title="title"
     :headingLevel="headingLevel"
     :titleLines="titleLines"
+    :style="{ ...wrapperStyle }"
+    class="wrapper-style"
   >
-  <template #title>
+    <template #title>
       <!-- @slot Optional slot section containing the title contents, should not contain a heading element. -->
-      <slot name="title"></slot>
+      <div class="title-slot">
+        <slot name="title"></slot>
+      </div>
     </template>
 
     <template #default>
-      <div>
-        <div
-          class="horizontal-layout-style"
-          :style="wrapperStyle"
-        >
-          <aside
-            v-if="thumbnailDisplay !== 'none'"
-            :style="forSmallThumbnailDisplay"
-          >
-            <KImg
-              :src="thumbnailSrc"
-              :isDecorative="true"
-              :appearanceOverrides="{ scaleType: thumbnailScaleType }"
-              class="thumbnail-image"
-              :style="imageRadius"
-            />
-            <!-- @slot Act as image placeholder  when the image is not available or can't be loaded. -->
-            <slot v-if="!thumbnailSrc" name="thumbnailPlaceholder"></slot>
-          </aside>
-          <div class="spacing">
-            <div>
-              <div data-testid="aboveTitle" class="above-title-style">
-                <!-- @slot Places content above the title area. -->
-                <slot name="aboveTitle"></slot>
-              </div>
-              <div data-testid="belowTitle">
-                <!-- @slot  Places content below the title -->
-                <slot name="belowTitle"></slot>
-              </div>
-              <div
-                v-if="!(layout === 'horizontal' && thumbnailDisplay === 'small')"
-                class="footer"
-              >
-                <div data-testid="footer">
-                  <!--@slot Places content in the footer section-->
-                  <slot name="footer"></slot>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div
-          v-if="layout === 'horizontal' &&
-            thumbnailDisplay === 'small'"
-          class="spacing"
-        >
-          <div class="footer">
-            <div data-testid="footer">
-              <!--@slot Places content in the footer section-->
-              <slot name="footer"></slot>
-            </div>
-          </div>
-        </div>
+      <aside
+        v-if="thumbnailDisplay !== 'none'"
+        :style="forSmallThumbnailDisplay"
+        class="card-class"
+      >
+        <KImg
+          :src="thumbnailSrc"
+          :isDecorative="true"
+          :appearanceOverrides="{ scaleType: thumbnailScaleType }"
+          class="thumbnail-image"
+          :style="imageRadius"
+        />
+        <!-- @slot Act as image placeholder  when the image is not available or can't be loaded. -->
+        <slot v-if="!thumbnailSrc" name="thumbnailPlaceholder"></slot>
+      </aside>
+      <div data-testid="aboveTitle" class="above-title-style">
+        <!-- @slot Places content above the title area. -->
+        <slot name="aboveTitle"></slot>
+      </div>
+      <div data-testid="belowTitle" class="bellow-title">
+        <!-- @slot  Places content below the title -->
+        <slot name="belowTitle"></slot>
       </div>
 
+
+      <div
+        v-if="!(layout === 'horizontal' && thumbnailDisplay === 'small')"
+        class="footer"
+      >
+        <div data-testid="footer">
+          <!--@slot Places content in the footer section-->
+          <slot name="footer"></slot>
+        </div>
+      </div>
     </template>
   </BaseCard>
 
@@ -243,10 +226,21 @@
     margin: 1em;
   }
 
-  .horizontal-layout-style {
+  .wrapper-style {
     display: flex;
     flex-direction: column;
+  }
 
+  .title-slot {
+    font-size: 16px; 
+  }
+
+  /deep/ .base-card-heading {
+    order: 3;
+  }
+
+  .card-class {
+    order: 1;
   }
 
   .thumbnail-image {
@@ -258,21 +252,19 @@
   .footer {
     /* margin: 12px 0; */
     /* position: absolute; */
-    bottom: 0;
     width: 100%;
     margin-top:auto;
+    order: 5;
   }
 
-  .title-slot-style{
-    font-weight: 700;
-    font-size: 1em;
-    max-width: 2000px
 
-
-  }
   .above-title-style{
     font-size: 12px;
-    max-width: 2000px
+    order: 1;
   }
+  .bellow-title{
+    order: 4;
+
+    }
 
 </style>

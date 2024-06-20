@@ -14,6 +14,7 @@
     <component
       :is="headerLevel"
       v-if="title || $slots.title"
+      class="base-card-heading"
     >
       <router-link
         tabindex="-1"
