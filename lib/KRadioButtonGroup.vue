@@ -46,12 +46,12 @@
     mounted() {
       this.$nextTick(() => {
         if (this.isFirefox) {
-          if (this.$children[0]._name === '<KGridItem>') {
+          if (this.$children[0].$options._componentTag === 'KGridItem') {
             this.$children.forEach(gridItem => {
               gridItem.$children.forEach(fixedGridItem => {
                 fixedGridItem.$children.forEach(radioBtn => {
                   this.radioButtons.push(radioBtn);
-                  radioBtn.$el.addEventListener('keydown', this.onKeyDown);
+                  radioBtn.$el.addEventListener('keyup', this.onKeyUp);
                   radioBtn.setTabIndex(-1);
                 });
               });
@@ -59,7 +59,7 @@
           } else {
             this.$children.forEach(radioBtn => {
               this.radioButtons.push(radioBtn);
-              radioBtn.$el.addEventListener('keydown', this.onKeyDown);
+              radioBtn.$el.addEventListener('keyup', this.onKeyUp);
               radioBtn.setTabIndex(-1);
             });
           }
@@ -76,7 +76,7 @@
     },
     beforeDestroy() {
       for (let radioBtn in this.radioButtons) {
-        radioBtn.$el.removeEventListener('keydown', this.onKeyDown);
+        radioBtn.$el.removeEventListener('keyup', this.onKeyUp);
       }
     },
     methods: {
@@ -86,7 +86,7 @@
           this.focusedRadioIdx = idx;
         }
       },
-      onKeyDown(event) {
+      onKeyUp(event) {
         const handlers = {
           ArrowLeft: this.focusPreviousRadio,
           ArrowRight: this.focusNextRadio,
