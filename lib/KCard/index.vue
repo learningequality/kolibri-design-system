@@ -6,6 +6,11 @@
     :headingLevel="headingLevel"
     :titleLines="titleLines"
   >
+  <template #title>
+      <!-- @slot Optional slot section containing the title contents, should not contain a heading element. -->
+      <slot name="title"></slot>
+    </template>
+
     <template #default>
       <div>
         <div
@@ -31,11 +36,6 @@
               <div data-testid="aboveTitle" class="above-title-style">
                 <!-- @slot Places content above the title area. -->
                 <slot name="aboveTitle"></slot>
-              </div>
-
-              <div class="title-slot-style">
-                <!-- @slot Optional slot section containing the title contents, should not contain a heading element. -->
-                <slot v-if="!title" name="title"></slot>
               </div>
               <div data-testid="belowTitle">
                 <!-- @slot  Places content below the title -->

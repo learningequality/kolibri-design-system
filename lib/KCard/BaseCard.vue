@@ -9,16 +9,19 @@
     @click="cardClickHandler"
     @mousedown="onMouseDown"
     @mouseup="onMouseUp"
+    @keyup.enter="cardClick"
   >
     <component
       :is="headerLevel"
-      v-if="title !== null"
+      v-if="title || $slots.title"
     >
       <router-link
         tabindex="-1"
         :to="to"
       >
+        <slot v-if="$slots.title" name="title"></slot>
         <KTextTruncator
+          v-else
           :text="title"
           :maxLines="titleLines"
           :style="titleStyle"
@@ -129,7 +132,7 @@
     cursor: pointer;
     border-radius: 0.5em;
     outline-offset: -1px;
-    transition: border-color $core-time ease;
+    transition: box-shadow $core-time ease;
 
     &:hover,
     &:focus {
