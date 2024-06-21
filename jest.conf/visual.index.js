@@ -12,18 +12,16 @@ const moduleNameMapper = {
 module.exports = {
   rootDir: path.resolve(__dirname, '..'),
   preset: 'jest-puppeteer',
+  testTimeout: 50000,
   moduleFileExtensions: ['js', 'json', 'vue'],
   moduleNameMapper,
-  testEnvironmentOptions: {
-    url: 'http://localhost:4000/',
-  },
   transform: {
     '^.+\\.js$': require.resolve('babel-jest'),
     '^.+\\.vue$': require.resolve('vue-jest'),
   },
   snapshotSerializers: ['jest-serializer-vue'],
   globals: {
-    URL: 'http://localhost:4000/',
+    HOST: 'http://localhost:4000/',
     'vue-jest': {
       hideStyleWarn: true,
       experimentalCSSCompile: true,

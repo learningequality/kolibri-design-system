@@ -1,6 +1,8 @@
 const { spawn } = require('child_process');
 const fetch = require('node-fetch');
 
+/* eslint-disable no-console */
+
 const serverUrl = 'http://localhost:4000';
 const serverTimeout = 360000; // 6 minutes
 
@@ -13,17 +15,20 @@ const waitForServer = async (url, timeout = 30000) => {
         return;
       }
     } catch (err) {
+      console.error('Waiting for server to respond.');
     }
     await new Promise(resolve => setTimeout(resolve, 1000));
   }
   throw new Error('Server did not start within the timeout period');
 };
 
-const killPortProcess = async (port) => {
+const killPortProcess = async port => {
   try {
     const fkill = await import('fkill');
     await fkill(`:${port}`, { force: true });
-    console.log(`Another process detected on port: ${port}. The process will be killed automatically.`);
+    console.log(
+      `Another process detected on port: ${port}. The process will be killed automatically.`
+    );
   } catch (error) {
     console.log(`Starting devserver on port: ${port}`);
   }
@@ -32,14 +37,6 @@ const killPortProcess = async (port) => {
 const startServer = () => {
   return new Promise((resolve, reject) => {
     const server = spawn('yarn', ['dev-only']);
-
-    // server.stdout.on('data', data => {
-    //   console.log(`Server: ${data}`);
-    // });
-
-    // server.stderr.on('data', data => {
-    //   console.error(`Server error: ${data}`);
-    // });
 
     server.on('close', code => {
       console.log(`Server process exited with code ${code}`);
@@ -63,8 +60,18 @@ const startServer = () => {
 const runTests = () => {
   return new Promise((resolve, reject) => {
     const tests = spawn(
-      'jest',
-      ['--config', 'jest.conf/visual.index.js', '-i', './lib/KImg/__tests__/KImg.spec.js'],
+      'npx',
+      [
+        'percy',
+        'exec',
+        '-v',
+        '--',
+        'jest',
+        '--config',
+        'jest.conf/visual.index.js',
+        '-i',
+        './lib/KImg/__tests__/KImg.spec.js',
+      ],
       { stdio: 'inherit' }
     );
 
