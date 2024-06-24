@@ -263,9 +263,9 @@
         var currDate = this.getDate(key, result);
         return (
           (this.selectedStartDate &&
-            format(this.selectedStartDate, 'DD/MM/YYYY') === format(currDate, 'DD/MM/YYYY')) ||
+            format(this.selectedStartDate, 'dd/MM/yyyy') === format(currDate, 'dd/MM/yyyy')) ||
           (this.selectedEndDate &&
-            format(this.selectedEndDate, 'DD/MM/YYYY') === format(currDate, 'DD/MM/YYYY'))
+            format(this.selectedEndDate, 'dd/MM/yyyy') === format(currDate, 'dd/MM/yyyy'))
         );
       },
       /**
@@ -282,18 +282,18 @@
           this.isValidDate(this.selectedStartDate) &&
           this.isValidDate(this.selectedEndDate) &&
           isAfter(this.selectedEndDate, this.selectedStartDate) &&
-          format(this.selectedStartDate, 'DD/MM/YYYY') !==
-            format(this.selectedEndDate, 'DD/MM/YYYY')
+          format(this.selectedStartDate, 'dd/MM/yyyy') !==
+            format(this.selectedEndDate, 'dd/MM/yyyy')
         ) {
           if (
             this.selectedStartDate &&
-            format(this.selectedStartDate, 'DD/MM/YYYY') === format(currDate, 'DD/MM/YYYY') &&
+            format(this.selectedStartDate, 'dd/MM/yyyy') === format(currDate, 'dd/MM/yyyy') &&
             !(dayInWeekIndex === 7)
           ) {
             return 'first';
           } else if (
             this.selectedEndDate &&
-            format(this.selectedEndDate, 'DD/MM/YYYY') === format(currDate, 'DD/MM/YYYY') &&
+            format(this.selectedEndDate, 'dd/MM/yyyy') === format(currDate, 'dd/MM/yyyy') &&
             !(dayInWeekIndex === 1) &&
             !(result === 1)
           ) {

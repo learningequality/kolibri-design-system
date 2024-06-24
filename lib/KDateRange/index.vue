@@ -187,10 +187,10 @@
     data() {
       return {
         dateRange: {
-          start: this.defaultStartDate ? format(this.defaultStartDate, 'YYYY-MM-DD') : null,
+          start: this.defaultStartDate ? format(this.defaultStartDate, 'yyyy-MM-dd') : null,
           end:
             this.defaultStartDate && this.defaultEndDate
-              ? format(this.defaultEndDate, 'YYYY-MM-DD')
+              ? format(this.defaultEndDate, 'yyyy-MM-dd')
               : null,
         },
         modalSize: 480,
@@ -259,7 +259,7 @@
         if (!date) {
           return null;
         }
-        return format(date, 'YYYY-MM-DD');
+        return format(date, 'yyyy-MM-dd');
       },
       /** Returns startDateInvalid message from validation machine */
       invalidStart() {

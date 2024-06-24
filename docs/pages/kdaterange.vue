@@ -57,7 +57,7 @@
           [validationConstants.START_DATE_AFTER_END_DATE]: 'Start date cannot be after end date',
           [validationConstants.FUTURE_DATE]: 'Cannot select a future date',
           [validationConstants.DATE_BEFORE_FIRST_ALLOWED]:
-            'Date must be after ' + format(this.firstAllowedDate, 'DD/MM/YYYY'),
+            'Date must be after ' + format(this.firstAllowedDate, 'dd/MM/yyyy'),
         };
       },
     },
