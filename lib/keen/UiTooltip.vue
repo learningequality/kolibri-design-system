@@ -53,7 +53,7 @@
       this.triggerEl = elementRef.resolve(this.trigger, this.$el.parentElement);
 
       if (!this.triggerEl) {
-        /* eslint-disable-next-line no-console */
+              // eslint-disable-next-line no-console
         console.error('[UiTooltip]: Trigger element not found.');
         return;
       }

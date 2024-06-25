@@ -26,7 +26,7 @@
           if (Object.keys(KolibriIcons).includes(value)) {
             return true;
           } else {
-            /* eslint-disable-next-line no-console */
+            // eslint-disable-next-line no-console
             console.error(`KIcon: No icon defined for token: ${value}`);
             return false;
           }
@@ -76,6 +76,7 @@
     },
     mounted() {
       if (KolibriIcons[this.icon].fixedColor && this.color) {
+        // eslint-disable-next-line no-console
         console.error(
           `KIcon: ${this.icon} color property will not be applied because the icon has a fixed color.`
         );

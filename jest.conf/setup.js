@@ -41,6 +41,7 @@ Object.defineProperty(window, 'scrollTo', { value: () => {}, writable: true });
 process.on('unhandledRejection', (reason, p) => {
   /* eslint-disable no-console */
   console.log('Unhandled Rejection at: Promise', p, 'reason:', reason);
+  /* eslint-disable no-console */
   console.log(reason.stack);
 });
 

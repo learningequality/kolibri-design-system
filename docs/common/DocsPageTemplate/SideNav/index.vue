@@ -55,7 +55,7 @@
         return termList(this.filterText);
       },
       visibleTableOfContents() {
-        let toc = [];
+        const toc = [];
         for (const section of tableOfContents) {
           // if the section title matches, add the entire thing
           if (matches(this.terms, section.title)) {

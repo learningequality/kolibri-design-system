@@ -101,11 +101,13 @@
       },
       validInputs() {
         if (!this.gridMetrics || !this.gridMetrics.numCols || !this.gridMetrics.gutterWidth) {
+          // eslint-disable-next-line no-console
           console.error('Grid metrics were not provided by parent');
           return false;
         }
 
         if (this.computedSpan > this.gridMetrics.numCols) {
+          // eslint-disable-next-line no-console
           console.error(
             `Item span (${this.computedSpan}) is larger than grid size (${this.gridMetrics.numCols})`
           );
