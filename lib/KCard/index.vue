@@ -5,21 +5,23 @@
     :title="title"
     :headingLevel="headingLevel"
     :titleLines="titleLines"
-    :style="{ ...wrapperStyle }"
-    class="wrapper-style"
+    :style="wrapperStyle"
   >
     <template #title>
       <!-- @slot Optional slot section containing the title contents, should not contain a heading element. -->
       <div class="title-slot">
-        <slot name="title"></slot>
+        <!-- <slot name="title"></slot> -->
       </div>
     </template>
 
     <template #default>
       <aside
         v-if="thumbnailDisplay !== 'none'"
-        :style="forSmallThumbnailDisplay"
-        class="card-class"
+        :style="{ dynamicOrder }"
+        :class="{
+          'image-class-vertical': layout === 'vertical',
+          'image-class-horizontal': (layout === 'horizontal' && thumbnailDisplay === 'small')
+        }"
       >
         <KImg
           :src="thumbnailSrc"
@@ -28,26 +30,40 @@
           class="thumbnail-image"
           :style="imageRadius"
         />
-        <!-- @slot Act as image placeholder  when the image is not available or can't be loaded. -->
         <slot v-if="!thumbnailSrc" name="thumbnailPlaceholder"></slot>
       </aside>
-      <div data-testid="aboveTitle" class="above-title-style">
-        <!-- @slot Places content above the title area. -->
-        <slot name="aboveTitle"></slot>
-      </div>
-      <div data-testid="belowTitle" class="bellow-title">
-        <!-- @slot  Places content below the title -->
-        <slot name="belowTitle"></slot>
-      </div>
+      <div class="display-inline-block">
+        <div
+          data-testid="aboveTitle"
+          class="above-title-style"
+          :class="{ 'above-title-horizontal': layout === 'horizontal' }"
+        >
+          <slot name="aboveTitle"></slot>
+        </div>
 
+        <template>
+          <div
+            :class="{ 'title-horizontal': layout === 'horizontal' }"
+            class="title-slot"
+          >
+            <slot name="title"></slot>
+          </div>
+        </template>
 
-      <div
-        v-if="!(layout === 'horizontal' && thumbnailDisplay === 'small')"
-        class="footer"
-      >
-        <div data-testid="footer">
-          <!--@slot Places content in the footer section-->
-          <slot name="footer"></slot>
+        <div
+          data-testid="belowTitle"
+          class="below-title"
+          :class="{ 'below-title-horizontal': layout === 'horizontal' }"
+        >
+          <slot name="belowTitle"></slot>
+        </div>
+        <div
+          class="footer"
+          :class="{ 'footer-horizontal': layout === 'horizontal' }"
+        >
+          <div data-testid="footer">
+            <slot name="footer"></slot>
+          </div>
         </div>
       </div>
     </template>
@@ -166,47 +182,48 @@
     },
     computed: {
       wrapperStyle() {
-        if (this.layout === 'vertical') {
-          return { flexDirection: 'column' };
-        } else if (this.layout === 'horizontal' && this.thumbnailDisplay === 'small') {
+        if (this.layout === 'horizontal') {
+          return {
+            display: 'flex',
+            flexDirection: 'row',
+          };
+        }else if (this.layout === 'horizontal' && this.thumbnailDisplay === 'small') {
           return { flexDirection: 'row-reverse' };
-        } else {
-          return { flexDirection: 'row' };
+        }else{
+          return {
+            display: 'flex',
+            flexDirection: 'column',
+          };
         }
       },
       imageRadius() {
         if (this.layout === 'horizontal') {
           if (this.thumbnailDisplay === 'large') {
-            return {
-              borderRadius: '0.5em 0 0 0.5em',
-            };
+            return { borderRadius: '0.5em 0 0 0.5em' };
           }
           if (this.thumbnailDisplay === 'small') {
-            return {
-              borderRadius: '0.5em',
-            };
+            return { borderRadius: '0.5em' };
           }
         }
-
-        if (this.layout === 'vertical' && this.thumbnailDisplay === 'large') {
-          return {
-            borderRadius: '0.5em 0.5em 0 0',
-          };
+        if (this.layout === 'vertical') {
+          if(this.thumbnailDisplay === 'large'){
+            return { borderRadius: '0.5em 0.5em 0 0' };
+          }
+          if(this.thumbnailDisplay === 'small'){
+            return { margin: '1em', };
+          }
         }
-
         return {};
       },
-      forSmallThumbnailDisplay() {
-        if (this.thumbnailDisplay === 'small') {
+      dynamicOrder() {
+        if (
+          this.layout === 'horizontal'
+          && this.thumbnailDisplay === 'small') {
           return {
-            margin: '1em',
-          };
-        } else {
-          return {
-            margin: '0em',
-            width: '100%',
+            order: 5,
           };
         }
+        return {};
       },
     },
     mounted() {
@@ -226,21 +243,14 @@
     margin: 1em;
   }
 
-  .wrapper-style {
-    display: flex;
-    flex-direction: column;
-  }
-
   .title-slot {
     font-size: 16px; 
+    font-weight: 600;
+    line-height: 1.5;
   }
 
   /deep/ .base-card-heading {
     order: 3;
-  }
-
-  .card-class {
-    order: 1;
   }
 
   .thumbnail-image {
@@ -257,14 +267,35 @@
     order: 5;
   }
 
-
   .above-title-style{
     font-size: 12px;
     order: 1;
   }
+
   .bellow-title{
     order: 4;
+  }
 
-    }
+  .display-inline-block{
+    display: inline-block;
+    margin:1em;
+  }
+  .footer-horizontal{
+    order: 8;
+  }
+  .image-class-vertical{
+    order:0;
+  }
+  .image-class-horizontal{
+    order:8;
+    padding-bottom:3em;
+    padding-left: 1em;
+    padding-right: 1em;
+    margin-top: 1em;
+  }
+
+  .title-horizontal{
+
+  }
 
 </style>
