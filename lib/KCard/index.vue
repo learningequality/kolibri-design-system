@@ -24,6 +24,7 @@
         }"
       >
         <KImg
+          v-if="thumbnailSrc"
           :src="thumbnailSrc"
           :isDecorative="true"
           :appearanceOverrides="{ scaleType: thumbnailScaleType }"
