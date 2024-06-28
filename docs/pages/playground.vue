@@ -618,16 +618,9 @@
 .demo-again{
   display: flex;
   flex-direction: row;
-} 
-.slot-above{
-  order:5;
-  
-} 
-.slot-below{
- 
-}
-.slot-footer{
-  
 }
 
+.slot-above{
+  order:5;
+} 
 </style>

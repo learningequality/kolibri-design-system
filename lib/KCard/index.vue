@@ -250,7 +250,7 @@
   }
 
   /deep/ .base-card-heading {
-    order: 3;
+    order: 2;
   }
 
   .thumbnail-image {
