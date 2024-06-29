@@ -1,10 +1,12 @@
 const { spawn } = require('child_process');
+const net = require('net');
 const fetch = require('node-fetch');
+const psTree = require('ps-tree');
 
 /* eslint-disable no-console */
 
-const serverUrl = 'http://localhost:4000';
-const serverTimeout = 360000; // 6 minutes
+const SERVER_URL = 'http://localhost:4000';
+const SERVER_TIMEOUT = 360000;
 
 const waitForServer = async (url, timeout = 30000) => {
   const start = Date.now();
@@ -22,21 +24,33 @@ const waitForServer = async (url, timeout = 30000) => {
   throw new Error('Server did not start within the timeout period');
 };
 
-const killPortProcess = async port => {
-  try {
-    const fkill = await import('fkill');
-    await fkill(`:${port}`, { force: true });
-    console.log(
-      `Another process detected on port: ${port}. The process will be killed automatically.`
-    );
-  } catch (error) {
-    console.log(`Starting devserver on port: ${port}`);
-  }
+const checkPortInUse = port => {
+  return new Promise((resolve, reject) => {
+    const server = net.createServer();
+    server.once('error', err => {
+      if (err.code === 'EADDRINUSE') {
+        reject(new Error(`Port ${port} is already in use.`));
+      } else {
+        reject(err);
+      }
+    });
+
+    server.once('listening', () => {
+      server.close();
+      resolve();
+    });
+
+    server.listen(port);
+  });
 };
 
 const startServer = () => {
   return new Promise((resolve, reject) => {
-    const server = spawn('yarn', ['dev-only']);
+    const server = spawn('yarn', ['dev-only'], { shell: true });
+
+    server.on('error', err => {
+      reject(new Error(`Failed to start server: ${err.message}`));
+    });
 
     server.on('close', code => {
       console.log(`Server process exited with code ${code}`);
@@ -45,13 +59,13 @@ const startServer = () => {
       }
     });
 
-    waitForServer(serverUrl, serverTimeout)
+    waitForServer(SERVER_URL, SERVER_TIMEOUT)
       .then(() => {
         console.log('Server is up and running');
         resolve(server);
       })
       .catch(error => {
-        server.kill();
+        server.kill('SIGINT');
         reject(error);
       });
   });
@@ -86,15 +100,39 @@ const runTests = () => {
   });
 };
 
+const stopServer = server => {
+  return new Promise((resolve, reject) => {
+    psTree(server.pid, (err, children) => {
+      if (err) {
+        return reject(err);
+      }
+      [server.pid, ...children.map(p => p.PID)].forEach(pid => {
+        try {
+          process.kill(pid, 'SIGINT');
+        } catch (e) {
+          if (e.code !== 'ESRCH') {
+            reject(e);
+          }
+        }
+      });
+      resolve();
+    });
+  });
+};
+
 const start = async () => {
+  let server;
   try {
-    await killPortProcess(4000);
-    const server = await startServer();
+    await checkPortInUse(4000);
+    server = await startServer();
     const testExitCode = await runTests();
-    server.kill();
+    await stopServer(server);
     process.exit(testExitCode);
   } catch (error) {
     console.error(error);
+    if (server) {
+      await stopServer(server);
+    }
     process.exit(1);
   }
 };

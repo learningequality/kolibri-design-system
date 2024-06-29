@@ -5,8 +5,8 @@ snapshot:
     - 1280
   minHeight: 1024
   percyCSS: ""
-  enableJavaScript: false
-  cliEnableJavaScript: true
+  enableJavaScript: false #disable Javascript by default to capture initial page state without JS-driven changes
+  cliEnableJavaScript: true #enable Javascript when running Percy through CLI, for dynamic content
   disableShadowDOM: false
 discovery:
   allowedHostnames: []

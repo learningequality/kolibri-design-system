@@ -10,7 +10,7 @@ export const resizeWindow = (width, height = 768) => {
   });
 };
 
-export function takeScreenshot() {
+export function canTakeScreenshot() {
   const percyToken = process.env.PERCY_TOKEN;
   const runVisualTests = process.env.TEST_TYPE === 'visual';
   if (runVisualTests && !percyToken) {
