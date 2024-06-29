@@ -4,6 +4,7 @@
     :class="['remove-list-style card',$computedClass(coreOutlineFocus)]"
     tabindex="0"
     data-focus="true"
+    :style="cardStyle"
     @focus="cardFocus"
     @mouseenter="cardHover"
     @click="cardClickHandler"
@@ -85,6 +86,11 @@
           margin: '0px 16px',
         };
       },
+      cardStyle() {
+        return {
+          backgroundColor: this.$themeTokens.surface,
+        }
+      }
     },
     methods: {
       cardFocus(e) {
