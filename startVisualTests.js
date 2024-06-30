@@ -84,7 +84,7 @@ const runTests = () => {
         '--config',
         'jest.conf/visual.index.js',
         '-i',
-        './lib/KImg/__tests__/KImg.spec.js',
+        './lib/buttons-and-links/__tests__/KButton.spec.js',
       ],
       { stdio: 'inherit' }
     );
