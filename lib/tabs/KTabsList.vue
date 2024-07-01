@@ -310,6 +310,9 @@
     border-top-left-radius: $radius;
     border-top-right-radius: $radius;
     transition: background-color $core-time ease;
+    // Setting vertical align here to prevent an extra space below the tabs
+    // https://stackoverflow.com/questions/23529369/why-does-x-overflowhidden-cause-extra-space-below
+    vertical-align: middle;
 
     @media print {
       min-width: 0;
