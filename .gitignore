@@ -25,6 +25,3 @@ kolibri-design-system.iml
 # env
 .envrc
 .python-version
-
-# local
-myenv

@@ -10,6 +10,7 @@ const SERVER_TIMEOUT = 360000;
 
 const waitForServer = async (url, timeout = 30000) => {
   const start = Date.now();
+  let waitingLogged = false;
   while (Date.now() - start < timeout) {
     try {
       const response = await fetch(url);
@@ -17,7 +18,10 @@ const waitForServer = async (url, timeout = 30000) => {
         return;
       }
     } catch (err) {
-      console.error('Waiting for server to respond.');
+      if (!waitingLogged) {
+        console.error('Waiting for server to respond.');
+        waitingLogged = true;
+      }
     }
     await new Promise(resolve => setTimeout(resolve, 1000));
   }
@@ -120,7 +124,16 @@ const stopServer = server => {
   });
 };
 
+const validateTestRun = () => {
+  if (!process.env.PERCY_TOKEN) {
+    throw new Error(
+      'PERCY_TOKEN environment variable is not set. Please set it to run visual tests.'
+    );
+  }
+};
+
 const start = async () => {
+  validateTestRun();
   let server;
   try {
     await checkPortInUse(4000);
