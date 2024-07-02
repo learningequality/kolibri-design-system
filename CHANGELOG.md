@@ -4,6 +4,17 @@ Changelog is rather internal in nature. See release notes for the public overvie
 
 ## Upcoming version 5.x.x (`develop` branch)
 
+- [#666]
+  - **Description:** Update `KImg`'s placeholder and letterbox area background color to a lighter shade of grey, `v_50`.
+  - **Products impact:** UI appearance update
+  - **Addresses:** -
+  - **Components:** `KImg`, `KCard`
+  - **Breaking:** no
+  - **Impacts a11y:** no
+  - **Guidance:** -
+
+[#666]: https://github.com/learningequality/kolibri-design-system/pull/666
+
 - [#652]
   - **Description:** KTextTruncator drops support for Internet Explorer 11
   - **Products impact:** browser support update
