@@ -72,6 +72,17 @@ Changelog is rather internal in nature. See release notes for the public overvie
 
 ## Version 4.x.x (`release-v4` branch)
 
+- [#673]
+  - **Description:** Remove white space below Ktabs
+  - **Products impact:** bugfix.
+  - **Addresses:** https://github.com/learningequality/kolibri/issues/12297.
+  - **Components:** KTabsList, KTabs, KTabsPanel.
+  - **Breaking:** no
+  - **Impacts a11y:**no
+  - **Guidance:** .
+
+[#673]: https://github.com/learningequality/kolibri-design-system/pull/673
+
 - [#629]
   - **Description:** Improves the contrast for highlighted text, noted in KTextbox
   - **Products impact:** None

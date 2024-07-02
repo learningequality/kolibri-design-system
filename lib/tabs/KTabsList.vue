@@ -304,6 +304,9 @@
     text-overflow: ellipsis;
     text-transform: uppercase;
     white-space: nowrap;
+    // Setting vertical align here to prevent an extra space below the tabs
+    // https://stackoverflow.com/questions/23529369/why-does-x-overflowhidden-cause-extra-space-below
+    vertical-align: middle;
     cursor: pointer;
     border-style: solid;
     border-width: 0 0 2px;
