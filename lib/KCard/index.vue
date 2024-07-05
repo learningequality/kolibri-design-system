@@ -10,7 +10,7 @@
     <template #title>
       <!-- @slot Optional slot section containing the title contents, should not contain a heading element. -->
       <div class="title-slot">
-        <!-- <slot name="title"></slot> -->
+      <!-- <slot name="title"></slot> -->
       </div>
     </template>
 
@@ -27,13 +27,13 @@
           v-if="thumbnailSrc"
           :src="thumbnailSrc"
           :isDecorative="true"
-          :appearanceOverrides="{ scaleType: thumbnailScaleType }"
+          :appearanceOverrides="{ scaleType: thumbnailScaleType, width: cardContentPartial }"
           class="thumbnail-image"
           :style="imageRadius"
         />
         <slot v-if="!thumbnailSrc" name="thumbnailPlaceholder"></slot>
       </aside>
-      <div class="display-inline-block">
+      <div class="display-inline-block" :style="cardContentPartial">
         <div
           data-testid="aboveTitle"
           class="above-title-style"
@@ -187,13 +187,15 @@
           return {
             display: 'flex',
             flexDirection: 'row',
+            width: '100%',
           };
-        }else if (this.layout === 'horizontal' && this.thumbnailDisplay === 'small') {
+        } else if (this.layout === 'horizontal' && this.thumbnailDisplay === 'small') {
           return { flexDirection: 'row-reverse' };
-        }else{
+        } else {
           return {
             display: 'flex',
             flexDirection: 'column',
+            width: '100%',
           };
         }
       },
@@ -207,24 +209,37 @@
           }
         }
         if (this.layout === 'vertical') {
-          if(this.thumbnailDisplay === 'large'){
+          if (this.thumbnailDisplay === 'large') {
             return { borderRadius: '0.5em 0.5em 0 0' };
           }
-          if(this.thumbnailDisplay === 'small'){
-            return { margin: '1em', };
+          if (this.thumbnailDisplay === 'small') {
+            return { margin: '1em' };
           }
         }
         return {};
       },
       dynamicOrder() {
-        if (
-          this.layout === 'horizontal'
-          && this.thumbnailDisplay === 'small') {
+        if (this.layout === 'horizontal') {
           return {
             order: 5,
+            width: '40%',
           };
         }
         return {};
+      },
+      cardContentPartial() {
+        if (
+          this.layout === 'horizontal' &&
+          (this.thumbnailDisplay === 'small' || this.thumbnailDisplay === 'large')
+        ) {
+          return {
+            width: '50%',
+          };
+        } else {
+          return {
+            width: 'auto',
+          };
+        }
       },
     },
     mounted() {
@@ -295,8 +310,5 @@
     margin-top: 1em;
   }
 
-  .title-horizontal{
-
-  }
 
 </style>
