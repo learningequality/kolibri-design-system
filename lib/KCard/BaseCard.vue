@@ -89,8 +89,8 @@
       cardStyle() {
         return {
           backgroundColor: this.$themeTokens.surface,
-        }
-      }
+        };
+      },
     },
     methods: {
       cardFocus(e) {
