@@ -21,11 +21,6 @@ esLintConfig.settings['import/resolver'].nuxt = {
 };
 
 // Remove linting errors for the globals defined in the jest-puppeteer package
-esLintConfig.env = {
-  ...esLintConfig.env,
-  'jest': true,
-};
-
 esLintConfig.globals = {
   ...esLintConfig.globals,
   page: true,

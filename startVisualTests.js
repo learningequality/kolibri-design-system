@@ -2,11 +2,13 @@ const { spawn } = require('child_process');
 const net = require('net');
 const fetch = require('node-fetch');
 const psTree = require('ps-tree');
+const puppeteer = require('puppeteer');
 
 /* eslint-disable no-console */
 
-const SERVER_URL = 'http://localhost:4000';
+const SERVER_URL = 'http://localhost:4000/testing-playground';
 const SERVER_TIMEOUT = 360000;
+const CHECK_ELEMENT_SELECTOR = '#testing-playground';
 
 const waitForServer = async (url, timeout = 30000) => {
   const start = Date.now();
@@ -48,6 +50,21 @@ const checkPortInUse = port => {
   });
 };
 
+const checkPageLoad = async (url, timeout = 30000) => {
+  const browser = await puppeteer.launch();
+  const page = await browser.newPage();
+
+  try {
+    await page.goto(url, { waitUntil: 'networkidle2', timeout });
+    await page.waitForSelector(CHECK_ELEMENT_SELECTOR, { timeout });
+    console.log('Page is fully loaded.');
+  } catch (error) {
+    throw new Error('Page did not load correctly.');
+  } finally {
+    await browser.close();
+  }
+};
+
 const startServer = () => {
   return new Promise((resolve, reject) => {
     const server = spawn('yarn', ['dev-only'], { shell: true });
@@ -64,8 +81,9 @@ const startServer = () => {
     });
 
     waitForServer(SERVER_URL, SERVER_TIMEOUT)
+      .then(() => checkPageLoad(SERVER_URL, SERVER_TIMEOUT))
       .then(() => {
-        console.log('Server is up and running');
+        console.log('Server and page are up and running');
         resolve(server);
       })
       .catch(error => {
