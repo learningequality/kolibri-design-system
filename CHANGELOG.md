@@ -4,6 +4,17 @@ Changelog is rather internal in nature. See release notes for the public overvie
 
 ## Upcoming version 5.x.x (`develop` branch)
 
+- [#678]
+  - **Description:** Add `previewUnavailable` icon
+  - **Products impact:** new icon
+  - **Addresses:** Support of migrating Studio icons from Vuetify to KDS
+  - **Components:** `KIcon`
+  - **Breaking:** no
+  - **Impacts a11y:** no
+  - **Guidance:** -
+
+[#678]: https://github.com/learningequality/kolibri-design-system/pull/678
+
 - [#666]
   - **Description:** Update `KImg`'s placeholder and letterbox area background color to a lighter shade of grey, `v_50`.
   - **Products impact:** UI appearance update
