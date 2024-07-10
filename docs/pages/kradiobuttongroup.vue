@@ -1,4 +1,3 @@
-
 <template>
 
   <DocsPageTemplate :apiDocs="true">
@@ -41,6 +40,7 @@
   </DocsPageTemplate>
 
 </template>
+
 
 <script>
 
