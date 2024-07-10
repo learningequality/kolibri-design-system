@@ -1,5 +1,5 @@
 const path = require('node:path');
-const fetch = require('node-fetch');
+const http = require('http');
 const puppeteer = require('puppeteer');
 
 /* eslint-disable no-console */
@@ -12,17 +12,37 @@ let setupDone = false;
 const waitForServer = async (url, timeout = 30000) => {
   const start = Date.now();
   let waitingLogged = false;
+
+  const checkServer = () => {
+    return new Promise((resolve, reject) => {
+      const req = http.get(url, res => {
+        if (res.statusCode === 200) {
+          resolve(true);
+        } else {
+          reject(new Error(`Server responded with status code: ${res.statusCode}`));
+        }
+      });
+
+      req.on('error', () => {
+        if (!waitingLogged) {
+          console.error('Waiting for server to respond.');
+          waitingLogged = true;
+        }
+        resolve(false);
+      });
+
+      req.end();
+    });
+  };
+
   while (Date.now() - start < timeout) {
     try {
-      const response = await fetch(url);
-      if (response.ok) {
+      const isServerUp = await checkServer();
+      if (isServerUp) {
         return;
       }
     } catch (err) {
-      if (!waitingLogged) {
-        console.error('Waiting for server to respond.');
-        waitingLogged = true;
-      }
+      console.error(err.message);
     }
     await new Promise(resolve => setTimeout(resolve, 1000));
   }
