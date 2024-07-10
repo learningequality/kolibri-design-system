@@ -38,7 +38,9 @@ Vue.config.silent = true;
 Vue.config.devtools = false;
 Vue.config.productionTip = false;
 
-Object.defineProperty(window, 'scrollTo', { value: () => {}, writable: true });
+if (process.env.TEST_TYPE !== 'visual' && typeof window !== 'undefined') {
+  Object.defineProperty(window, 'scrollTo', { value: () => {}, writable: true });
+}
 
 // Shows better NodeJS unhandled promise rejection errors
 process.on('unhandledRejection', (reason, p) => {
