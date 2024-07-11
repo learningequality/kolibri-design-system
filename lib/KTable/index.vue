@@ -1,6 +1,6 @@
 <template>
 
-  <div class="k-table">
+  <div class="k-table" role="grid">
     <table>
       <caption v-if="caption">
         {{ caption }}
@@ -13,6 +13,8 @@
             tabindex="0"
             :aria-sort="sortable && header.dataType !== DATA_TYPE_OTHERS ? getAriaSort(index) : null"
             :class="{ sortable: sortable && header.dataType !== DATA_TYPE_OTHERS }"
+            role="columnheader"
+            aria-colindex="index + 1"
             @click="sortable && header.dataType !== DATA_TYPE_OTHERS ? handleSort(index) : null"
             @keydown="handleKeydown($event, -1, index)"
           >
@@ -36,6 +38,8 @@
             :dataType="headers[colIndex].dataType"
             :rowIndex="rowIndex"
             :colIndex="colIndex"
+            role="gridcell"
+            aria-colindex="colIndex + 1"
             @keydown="handleKeydown($event, rowIndex, colIndex)"
           >
             <template #default="slotProps">
