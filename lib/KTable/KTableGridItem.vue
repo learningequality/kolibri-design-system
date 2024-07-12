@@ -1,6 +1,6 @@
 <template>
 
-  <td :style="{ textAlign: textAlign }" tabindex="0" @keydown="onKeydown">
+  <td :style="{ textAlign: textAlign }" tabindex="0" role="gridcell" @keydown="onKeydown">
     <slot :content="content">
       {{ content }}
     </slot>

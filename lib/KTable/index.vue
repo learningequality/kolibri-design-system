@@ -1,6 +1,6 @@
 <template>
 
-  <div class="k-table">
+  <div class="k-table" role="grid">
     <table>
       <caption v-if="caption">
         {{ caption }}
@@ -13,6 +13,8 @@
             tabindex="0"
             :aria-sort="sortable && header.dataType !== DATA_TYPE_OTHERS ? getAriaSort(index) : null"
             :class="{ sortable: sortable && header.dataType !== DATA_TYPE_OTHERS }"
+            role="columnheader"
+            aria-colindex="index + 1"
             @click="sortable && header.dataType !== DATA_TYPE_OTHERS ? handleSort(index) : null"
             @keydown="handleKeydown($event, -1, index)"
           >
@@ -36,6 +38,8 @@
             :dataType="headers[colIndex].dataType"
             :rowIndex="rowIndex"
             :colIndex="colIndex"
+            role="gridcell"
+            aria-colindex="colIndex + 1"
             @keydown="handleKeydown($event, rowIndex, colIndex)"
           >
             <template #default="slotProps">
@@ -151,25 +155,29 @@
 
         switch (key) {
           case 'ArrowUp':
-            if (rowIndex === 0) {
-              this.focusHeader(colIndex);
-              return;
-            } else if (rowIndex > 0) {
-              nextRowIndex = rowIndex - 1;
+            if (rowIndex === -1) {
+              nextRowIndex = totalRows - 1;
             } else {
-              return;
+              nextRowIndex = rowIndex - 1;
             }
             break;
           case 'ArrowDown':
             if (rowIndex === -1) {
               nextRowIndex = 0;
+            } else if (rowIndex === totalRows - 1) {
+              nextRowIndex = -1;
             } else {
               nextRowIndex = (rowIndex + 1) % totalRows;
             }
             break;
           case 'ArrowLeft':
             if (rowIndex === -1) {
-              nextColIndex = colIndex > 0 ? colIndex - 1 : totalCols - 1;
+              if (colIndex > 0) {
+                nextColIndex = colIndex - 1;
+              } else {
+                nextColIndex = totalCols - 1;
+                nextRowIndex = totalRows - 1;
+              }
             } else if (colIndex > 0) {
               nextColIndex = colIndex - 1;
             } else {
@@ -178,18 +186,16 @@
             }
             break;
           case 'ArrowRight':
-            if (rowIndex === -1) {
-              if (colIndex < totalCols - 1) {
-                nextColIndex = colIndex + 1;
-              } else {
-                nextRowIndex = 0;
+            if (colIndex === totalCols - 1) {
+              if (rowIndex === totalRows - 1) {
                 nextColIndex = 0;
+                nextRowIndex = -1;
+              } else {
+                nextColIndex = 0;
+                nextRowIndex = rowIndex + 1;
               }
-            } else if (colIndex < totalCols - 1) {
-              nextColIndex = colIndex + 1;
             } else {
-              nextColIndex = 0;
-              nextRowIndex = (rowIndex + 1) % totalRows;
+              nextColIndex = colIndex + 1;
             }
             break;
           case 'Enter':
@@ -200,15 +206,8 @@
           default:
             return;
         }
-
         this.focusCell(nextRowIndex, nextColIndex);
         event.preventDefault();
-      },
-      focusHeader(colIndex) {
-        const nextHeader = this.$el.querySelector(`thead th:nth-child(${colIndex + 1})`);
-        if (nextHeader) {
-          nextHeader.focus();
-        }
       },
       focusCell(rowIndex, colIndex) {
         let nextCell;
