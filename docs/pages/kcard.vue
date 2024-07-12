@@ -9,14 +9,6 @@
         along with options for displaying thumbnail images and customizing the layout.
       </p>
 
-    </DocsPageSection> <DocsPageSection title="Usage" anchor="#usage">
-      <p>
-        <code>KCard</code> is a versatile base component for creating various card types.
-        It can be configured by adding product-specific content and logic to generate distinct card components.
-        The component provides slots for adding content such as titles, subtitles, and footers,
-        along with options for displaying thumbnail images and customizing the layout.
-      </p>
-
     </DocsPageSection>
     <DocsPageSection title="Layouts" anchor="#layouts">
       <p>
@@ -28,7 +20,7 @@
       <DocsShow block>
         <div>
           <KCard
-            :to="{ name: '/' }"
+            :to="{ name: 'kcard' }"
             :headingLevel="2"
             layout="horizontal"
             thumbnailDisplay="large"
@@ -91,7 +83,7 @@
       <DocsShow block>
         <div>
           <KCard
-            :to="{ name: '/' }"
+            :to="{ name: 'kcard' }"
             :headingLevel="2"
             layout="vertical"
             thumbnailDisplay="small"
@@ -193,7 +185,7 @@
       <DocsShowCode language="html">
         <div>
           <KCard
-            :to="{ name: '/' }"
+            :to="{ name: 'kcard' }"
             :headingLevel="2"
             layout="vertical"
             thumbnailDisplay="none"
@@ -239,7 +231,7 @@
       <DocsShow block>
         <div>
           <KCard
-            :to="{ name: '/' }"
+            :to="{ name: 'kcard' }"
             :headingLevel="2"
             layout="vertical"
             thumbnailDisplay="none"
@@ -291,7 +283,7 @@
       <DocsShow block>
         <div>
           <KCard
-            :to="{ name: '/' }"
+            :to="{ name: 'kcard' }"
             :headingLevel="2"
             layout="vertical"
             thumbnailDisplay="small"

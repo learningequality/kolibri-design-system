@@ -10,7 +10,7 @@
     <template #title>
       <!-- @slot Optional slot section containing the title contents, should not contain a heading element. -->
       <div class="title-slot">
-      <!-- <slot name="title"></slot> -->
+        <slot name="title"></slot>
       </div>
     </template>
 
@@ -33,7 +33,7 @@
         />
         <slot v-if="!thumbnailSrc" name="thumbnailPlaceholder"></slot>
       </aside>
-      <div class="display-inline-block" :style="cardContentPartial">
+      <div class="display-inline-block" :style="{ width: cardContentPartial }">
         <div
           data-testid="aboveTitle"
           class="above-title-style"
@@ -47,7 +47,7 @@
             :class="{ 'title-horizontal': layout === 'horizontal' }"
             class="title-slot"
           >
-            <slot name="title"></slot>
+            <!-- <slot name="title"></slot> -->
           </div>
         </template>
 
@@ -77,16 +77,6 @@
 
   import KImg from '../KImg';
   import BaseCard from './BaseCard.vue';
-
-  const ScaleTypes = {
-    CENTER_INSIDE: 'centerInside',
-    CONTAIN: 'contain',
-    FIT_XY: 'fitXY',
-  };
-
-  function isValidScaleType(value) {
-    return value && Object.values(ScaleTypes).includes(value);
-  }
 
   export default {
     name: 'KCard',
@@ -178,7 +168,6 @@
       thumbnailScaleType: {
         type: String,
         default: 'centerInside',
-        validator: isValidScaleType,
       },
     },
     computed: {
@@ -213,7 +202,7 @@
             return { borderRadius: '0.5em 0.5em 0 0' };
           }
           if (this.thumbnailDisplay === 'small') {
-            return { margin: '1em' };
+            return { margin: '0em' };
           }
         }
         return {};
@@ -228,17 +217,10 @@
         return {};
       },
       cardContentPartial() {
-        if (
-          this.layout === 'horizontal' &&
-          (this.thumbnailDisplay === 'small' || this.thumbnailDisplay === 'large')
-        ) {
-          return {
-            width: '50%',
-          };
+        if (this.layout === 'horizontal' && this.thumbnailDisplay !== 'none') {
+          return 'calc(100% - 50%)';
         } else {
-          return {
-            width: 'auto',
-          };
+          return '100%';
         }
       },
     },
@@ -271,7 +253,7 @@
 
   .thumbnail-image {
     height: 100%;
-    min-width: 140px;
+    min-width: 240px;
     min-height:auto;
   }
 
