@@ -105,8 +105,13 @@
       onMouseDown() {
         this.mouseDownTime = new Date().getTime();
       },
+      // handle the mouse up event and determine whether it should be treated as a click event or not.
       onMouseUp() {
         const mouseUpTime = new Date().getTime();
+        // Calculate the time difference between the mouse button press and release.
+        // If the time difference is greater than or equal to 200 milliseconds,
+        // it means that the mouse button was pressed and held for a longer time,
+        // which is not typically interpreted as a click event.
         if (mouseUpTime - this.mouseDownTime < 200) {
           this.allowClick = true;
           this.cardClick();

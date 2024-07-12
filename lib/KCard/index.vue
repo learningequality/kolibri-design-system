@@ -219,9 +219,9 @@
       cardContentPartial() {
         if (this.layout === 'horizontal' && this.thumbnailDisplay !== 'none') {
           return 'calc(100% - 50%)';
-        } else {
+       } else {
           return '100%';
-        }
+       }
       },
     },
     mounted() {
@@ -245,6 +245,8 @@
     font-size: 16px; 
     font-weight: 600;
     line-height: 1.5;
+    order: 6;
+
   }
 
   /deep/ .base-card-heading {
@@ -262,16 +264,16 @@
     /* position: absolute; */
     width: 100%;
     margin-top:auto;
-    order: 5;
+    order: 0;
   }
 
   .above-title-style{
     font-size: 12px;
-    order: 1;
+    order: 0;
   }
 
   .bellow-title{
-    order: 4;
+    order: 0;
   }
 
   .display-inline-block{
