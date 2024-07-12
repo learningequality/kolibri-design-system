@@ -6,20 +6,22 @@
     :headingLevel="headingLevel"
     :titleLines="titleLines"
     :style="wrapperStyle"
+    :class="{ 'horizontal-layout': (layout === 'horizontal' && thumbnailDisplay !== 'none' ), 'vertical-layout': layout === 'vertical' }"
   >
     <template #title>
       <!-- @slot Optional slot section containing the title contents, should not contain a heading element. -->
-      <div class="title-slot">
+      <div
+        :style="titleSlotOrder"
+        class="title-slot"
+      >
         <slot name="title"></slot>
       </div>
     </template>
-
     <template #default>
       <aside
         v-if="thumbnailDisplay !== 'none'"
-        :style="{ dynamicOrder }"
+        :style="{ ...dynamicOrder, }"
         :class="{
-          'image-class-vertical': layout === 'vertical',
           'image-class-horizontal': (layout === 'horizontal' && thumbnailDisplay === 'small')
         }"
       >
@@ -33,38 +35,27 @@
         />
         <slot v-if="!thumbnailSrc" name="thumbnailPlaceholder"></slot>
       </aside>
-      <div class="display-inline-block" :style="{ width: cardContentPartial }">
-        <div
-          data-testid="aboveTitle"
-          class="above-title-style"
-          :class="{ 'above-title-horizontal': layout === 'horizontal' }"
-        >
-          <slot name="aboveTitle"></slot>
-        </div>
-
-        <template>
-          <div
-            :class="{ 'title-horizontal': layout === 'horizontal' }"
-            class="title-slot"
-          >
-            <!-- <slot name="title"></slot> -->
-          </div>
-        </template>
-
-        <div
-          data-testid="belowTitle"
-          class="below-title"
-          :class="{ 'below-title-horizontal': layout === 'horizontal' }"
-        >
-          <slot name="belowTitle"></slot>
-        </div>
-        <div
-          class="footer"
-          :class="{ 'footer-horizontal': layout === 'horizontal' }"
-        >
-          <div data-testid="footer">
-            <slot name="footer"></slot>
-          </div>
+      <div
+        data-testid="aboveTitle"
+        class="above-title-style"
+        :style="cardContentPartial"
+      >
+        <slot name="aboveTitle"></slot>
+      </div>
+      <div
+        data-testid="belowTitle"
+        class="below-title"
+        :style="cardContentPartial"
+      >
+        <slot name="belowTitle"></slot>
+      </div>
+      <div
+        class="footer"
+        :class="{ 'footer-horizontal': layout === 'horizontal' }"
+        :style="(layout === 'horizontal' && thumbnailDisplay === 'large') ? { ...cardContentPartial } : {}"
+      >
+        <div data-testid="footer">
+          <slot name="footer"></slot>
         </div>
       </div>
     </template>
@@ -175,23 +166,17 @@
         if (this.layout === 'horizontal') {
           return {
             display: 'flex',
-            flexDirection: 'row',
-            width: '100%',
-          };
-        } else if (this.layout === 'horizontal' && this.thumbnailDisplay === 'small') {
-          return { flexDirection: 'row-reverse' };
-        } else {
-          return {
-            display: 'flex',
             flexDirection: 'column',
             width: '100%',
+            alignItems: this.thumbnailDisplay === 'small' ? 'flex-start' : 'flex-end',
           };
         }
+        return {};
       },
       imageRadius() {
         if (this.layout === 'horizontal') {
           if (this.thumbnailDisplay === 'large') {
-            return { borderRadius: '0.5em 0 0 0.5em' };
+            return { borderRadius: '0.5em 0 0 0.5em', aligntItems: 'start' };
           }
           if (this.thumbnailDisplay === 'small') {
             return { borderRadius: '0.5em' };
@@ -202,26 +187,64 @@
             return { borderRadius: '0.5em 0.5em 0 0' };
           }
           if (this.thumbnailDisplay === 'small') {
-            return { margin: '0em' };
+            return { margin: '1em' };
           }
         }
         return {};
       },
       dynamicOrder() {
         if (this.layout === 'horizontal') {
+          if (this.thumbnailDisplay === 'small') {
+            return {
+              order: 5,
+              width: '40%',
+              right: 0,
+              position: 'absolute',
+            };
+          }
+          if (this.thumbnailDisplay === 'large') {
+            return {
+              order: 5,
+              width: '40%',
+              height: '100%',
+              left: 0,
+              position: 'absolute',
+            };
+          }
+        }
+        return {
+          order: -1,
+          position: 'absolute',
+          top: 0,
+          width: '100%',
+        };
+      },
+      titleSlotOrder() {
+        if (this.layout === 'vertical' && this.thumbnailDisplay !== 'none') {
           return {
-            order: 5,
-            width: '40%',
+            paddingTop: '140px',
+            margin: '1em',
           };
+        }
+
+        if (this.thumbnailDisplay === 'none') {
+          return { margin: '1em' };
         }
         return {};
       },
       cardContentPartial() {
-        if (this.layout === 'horizontal' && this.thumbnailDisplay !== 'none') {
-          return 'calc(100% - 50%)';
-       } else {
-          return '100%';
-       }
+        if (
+          this.layout === 'horizontal' &&
+          (this.thumbnailDisplay === 'small' || this.thumbnailDisplay === 'large')
+        ) {
+          return {
+            width: '50%',
+          };
+        } else {
+          return {
+            width: '100%',
+          };
+        }
       },
     },
     mounted() {
@@ -245,17 +268,20 @@
     font-size: 16px; 
     font-weight: 600;
     line-height: 1.5;
-    order: 6;
-
   }
 
   /deep/ .base-card-heading {
-    order: 2;
+    order: 1;
+  }
+
+  .below-title{
+    width: '100%';
+    margin: 1em;
   }
 
   .thumbnail-image {
     height: 100%;
-    min-width: 240px;
+    min-width: 140px;
     min-height:auto;
   }
 
@@ -264,16 +290,11 @@
     /* position: absolute; */
     width: 100%;
     margin-top:auto;
-    order: 0;
+    order: 5;
   }
 
   .above-title-style{
     font-size: 12px;
-    order: 0;
-  }
-
-  .bellow-title{
-    order: 0;
   }
 
   .display-inline-block{
@@ -281,10 +302,7 @@
     margin:1em;
   }
   .footer-horizontal{
-    order: 8;
-  }
-  .image-class-vertical{
-    order:0;
+    max-width:'100%';
   }
   .image-class-horizontal{
     order:8;
@@ -294,5 +312,12 @@
     margin-top: 1em;
   }
 
+  .horizontal-layout /deep/ h2 {
+    width: 50%;
+  }
+
+  .vertical-layout /deep/ h2 {
+    width: 100%;
+  }
 
 </style>
