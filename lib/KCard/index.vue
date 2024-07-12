@@ -29,7 +29,7 @@
           v-if="thumbnailSrc"
           :src="thumbnailSrc"
           :isDecorative="true"
-          :appearanceOverrides="{ scaleType: thumbnailScaleType, width: cardContentPartial }"
+          :appearanceOverrides="{ scaleType: thumbnailScaleType, width: cardPartition }"
           class="thumbnail-image"
           :style="imageRadius"
         />
@@ -38,21 +38,21 @@
       <div
         data-testid="aboveTitle"
         class="above-title-style"
-        :style="cardContentPartial"
+        :style="cardPartition"
       >
         <slot name="aboveTitle"></slot>
       </div>
       <div
         data-testid="belowTitle"
         class="below-title"
-        :style="cardContentPartial"
+        :style="cardPartition"
       >
         <slot name="belowTitle"></slot>
       </div>
       <div
         class="footer"
         :class="{ 'footer-horizontal': layout === 'horizontal' }"
-        :style="(layout === 'horizontal' && thumbnailDisplay === 'large') ? { ...cardContentPartial } : {}"
+        :style="(layout === 'horizontal' && thumbnailDisplay === 'large') ? { ...cardPartition } : {}"
       >
         <div data-testid="footer">
           <slot name="footer"></slot>
@@ -187,7 +187,7 @@
             return { borderRadius: '0.5em 0.5em 0 0' };
           }
           if (this.thumbnailDisplay === 'small') {
-            return { margin: '1em' };
+            return { marginLeft: '1em', marginRight: '.1em' };
           }
         }
         return {};
@@ -223,16 +223,23 @@
         if (this.layout === 'vertical' && this.thumbnailDisplay !== 'none') {
           return {
             paddingTop: '140px',
-            margin: '1em',
+            marginLeft: '1em',
+            marginRight: '1em',
+          };
+        }
+
+        if (this.layout === 'horizontal' && this.thumbnailDisplay === 'small') {
+          return {
+            marginLeft: '1em',
           };
         }
 
         if (this.thumbnailDisplay === 'none') {
-          return { margin: '1em' };
+          return { marginLeft: '1em', marginRight: '1em' };
         }
         return {};
       },
-      cardContentPartial() {
+      cardPartition() {
         if (
           this.layout === 'horizontal' &&
           (this.thumbnailDisplay === 'small' || this.thumbnailDisplay === 'large')
@@ -260,9 +267,6 @@
 
 
 <style scoped>
-  .spacing {
-    margin: 1em;
-  }
 
   .title-slot {
     font-size: 16px; 
@@ -276,7 +280,8 @@
 
   .below-title{
     width: '100%';
-    margin: 1em;
+    margin-left:1em;
+    margin-right:1em
   }
 
   .thumbnail-image {
@@ -286,20 +291,17 @@
   }
 
   .footer {
-    /* margin: 12px 0; */
-    /* position: absolute; */
     width: 100%;
     margin-top:auto;
+    padding-right: 1em;
+    padding-left:1em;
     order: 5;
   }
 
   .above-title-style{
     font-size: 12px;
-  }
-
-  .display-inline-block{
-    display: inline-block;
-    margin:1em;
+    padding-right: 1em;
+    padding-left:1em;
   }
   .footer-horizontal{
     max-width:'100%';

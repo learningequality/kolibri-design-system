@@ -6,36 +6,6 @@
     <!-- Play around with your component here: -->
     <!-- <h4>Vertical layout</h4> -->
 
-    <div style="display: flex;flex-direction: row;">
-      <div class="item1" style="order:1;position:absolute;padding-left:50px;padding-top:16px;">
-        title
-      </div>
-      <div class="item2" style="order:0;">
-        image
-      </div>
-      <!-- <div class="item3" style="order:1;">
-        above title
-      </div>
-      <div class="item4" style="order:3;">
-        below title
-      </div>
-      <div class="item5" style="order:4;">
-        footer
-      </div> -->
-
-      <component :is="'div'">
-        <div class="item3" style="order:2;">
-          above title
-        </div>
-        <div class="item4" style="order:3;padding-top:10px;">
-          below title
-        </div>
-        <div class="item5" style="order:4;">
-          footer
-        </div>
-      </component>
-    </div>
-
 
     <div style="padding:12px;width: 460px;">
       <KCard
