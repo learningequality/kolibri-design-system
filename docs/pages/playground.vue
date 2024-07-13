@@ -13,15 +13,8 @@
         :headingLevel="2"
         layout="vertical"
         thumbnailDisplay="none"
+        title="This is a sample resource title that goes to three lines and truncates at the end of the three lines This is a sample title that goes"
       >
-        <template #title>
-          <div>
-            <KTextTruncator
-              text="This is a sample resource title that goes to three lines and truncates at the end of the three lines This is a sample title that goes"
-              :maxLines="2"
-            />
-          </div>
-        </template>
         <template #aboveTitle>
           <KGrid>
 

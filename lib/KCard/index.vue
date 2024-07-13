@@ -14,7 +14,12 @@
         :style="titleSlotOrder"
         class="title-slot"
       >
-        <slot name="title"></slot>
+        <KTextTruncator
+          v-if="title !== null"
+          :text="title"
+          :maxLines="titleLines"
+        />
+        <slot v-else name="title"></slot>
       </div>
     </template>
     <template #default>
