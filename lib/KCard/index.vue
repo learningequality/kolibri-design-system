@@ -22,6 +22,7 @@
         v-if="thumbnailDisplay !== 'none'"
         :style="{ ...dynamicOrder, }"
         :class="{
+          'image-class-vertical': (layout === 'vertical' && thumbnailDisplay === 'small'),
           'image-class-horizontal': (layout === 'horizontal' && thumbnailDisplay === 'small')
         }"
       >
@@ -320,6 +321,11 @@
     order:8;
     padding-bottom:3em;
     padding-left: 1em;
+    padding-right: 1em;
+    margin-top: 1em;
+  }
+  .image-class-vertical{
+    order:1;
     padding-right: 1em;
     margin-top: 1em;
   }
