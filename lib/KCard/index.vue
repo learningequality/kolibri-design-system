@@ -171,6 +171,14 @@
             alignItems: this.thumbnailDisplay === 'small' ? 'flex-start' : 'flex-end',
           };
         }
+
+        if (this.layout === 'vertical') {
+          return {
+            display: 'flex',
+            flexDirection: 'column',
+            width: '100%',
+          };
+        }
         return {};
       },
       imageRadius() {
@@ -214,18 +222,19 @@
         }
         return {
           order: -1,
-          position: 'absolute',
+          // position: 'absolute',
           top: 0,
           width: '100%',
         };
       },
       titleSlotOrder() {
-        if (this.layout === 'vertical' && this.thumbnailDisplay !== 'none') {
-          return {
-            paddingTop: '140px',
-            marginLeft: '1em',
-            marginRight: '1em',
-          };
+        if (this.layout === 'vertical') {
+          if (this.thumbnailDisplay !== 'none') {
+            return {
+              marginLeft: '1em',
+              marginRight: '1em',
+            };
+          }
         }
 
         if (this.layout === 'horizontal' && this.thumbnailDisplay === 'small') {
@@ -281,7 +290,7 @@
   .below-title{
     width: '100%';
     margin-left:1em;
-    margin-right:1em
+    margin-right:1em;
   }
 
   .thumbnail-image {
@@ -302,6 +311,7 @@
     font-size: 12px;
     padding-right: 1em;
     padding-left:1em;
+    padding-top: 0.5em;
   }
   .footer-horizontal{
     max-width:'100%';
@@ -322,4 +332,8 @@
     width: 100%;
   }
 
+  .position-above-title{
+    /* position:absolute;
+    padding-top:30px; */
+  }
 </style>

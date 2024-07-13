@@ -85,6 +85,7 @@
         </template>
       </kcard>
 
+      <br>
       <KCard
         :to="{ name: '/' }"
         :headingLevel="2"
@@ -162,7 +163,7 @@
           </div>
         </template>
       </kcard>
-
+      <br>
       <KCard
         :to="{ name: '/' }"
         :headingLevel="2"
