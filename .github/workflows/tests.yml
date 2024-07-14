@@ -39,3 +39,62 @@ jobs:
         npm rebuild node-sass
     - name: Run tests
       run: yarn test
+
+  visual_tests:
+    name: Visual tests
+    needs: test
+    if: ${{ github.event_name == 'pull_request' && needs.test.result == 'success' }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Use Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18.x'
+      - name: Cache Node.js modules
+        uses: actions/cache@v4
+        with:
+          path: '**/node_modules'
+          key: ${{ runner.OS }}-node-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.OS }}-node-
+      - name: Install dependencies
+        run: |
+          yarn --frozen-lockfile
+          npm rebuild node-sass
+      - name: Run visual tests with Percy
+        env:
+          PERCY_TOKEN: ${{ secrets.PERCY_TOKEN }}
+        run: yarn test:visual
+      - name: Upload Percy results
+        id: percy-results
+        run: |
+          echo "Percy build URL: $(npx percy info | grep web_url | cut -d ' ' -f 2)"
+    
+  comment:
+    name: Comment Percy results
+    needs: visual_tests
+    if: ${{ needs.visual_tests.result == 'success' }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Post results comment
+        uses: actions/github-script@v6
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const percyUrl = `Percy build URL: ${process.env.PERCY_BUILD_URL}`;
+            const commentBody = `
+              ### Percy Visual Test Results
+              ${percyUrl}
+              **Summary:**
+              - Visual diff locations
+              - [Percy Dashboard](${percyUrl})
+              **Instructions for reviewers:**
+              - Access the Percy dashboard to review visual changes.
+              `;
+              github.issues.createComment({
+                issue_number: context.payload.pull_request.number,
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                body: commentBody
+              });
