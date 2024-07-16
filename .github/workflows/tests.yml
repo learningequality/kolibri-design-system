@@ -41,9 +41,9 @@ jobs:
       run: yarn test
 
   visual_tests:
-    name: Visual tests
+    name: Frontend Visual Tests
     needs: test
-    if: ${{ github.event_name == 'pull_request' && needs.test.result == 'success' }}
+    if: ${{ needs.test.result == 'success' }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -62,10 +62,17 @@ jobs:
         run: |
           yarn --frozen-lockfile
           npm rebuild node-sass
-      - name: Run visual tests with Percy
+      - name: Start server
+        run: |
+          yarn dev &
+          sleep 60 &&
+          curl -sSf http://localhost:4000/testing-playground
+        env:
+          SHELL: /bin/bash
+      - name: Run visual tests
+        run: yarn test:percy
         env:
           PERCY_TOKEN: ${{ secrets.PERCY_TOKEN }}
-        run: yarn test:visual
       - name: Upload Percy results
         id: percy-results
         run: |
