@@ -6,12 +6,11 @@
     tabindex="0"
     data-focus="true"
     :style="{ backgroundColor: $themeTokens.surface }"
-    @focus="cardFocus"
-    @mouseenter="cardHover"
-    @click="cardClickHandler"
+    @focus="onCardFocus"
+    @mouseenter="onCardHover"
     @mousedown="onMouseDown"
     @mouseup="onMouseUp"
-    @keyup.enter="cardClick"
+    @keyup.enter="onEnter"
   >
     <!-- Do not remove 'base-card-heading'. Referenced from KCard.  -->
     <component
@@ -19,9 +18,20 @@
       v-if="title || $slots.title"
       class="base-card-heading"
     >
+      <!--
+        Prevent router-link click event by setting empty event=""
+        (technique used by Vue community because
+        the usual ways don't work for router-link).
+        This is because <li> is supposed to take care of it.
+        Furthemore, together with 'draggable' disabled, it ensures
+        that text selection works on the title text.
+        See the custom click implementation in 'onMouseUp'. 
+      -->
       <router-link
         tabindex="-1"
         :to="to"
+        draggable="false"
+        event=""
       >
         <span
           class="k-card-title"
@@ -93,7 +103,6 @@
     data() {
       return {
         mouseDownTime: 0,
-        allowClick: false,
       };
     },
     computed: {
@@ -109,37 +118,34 @@
       },
     },
     methods: {
-      cardFocus(e) {
+      navigate() {
+        this.$router.push(this.to);
+      },
+      onCardFocus(e) {
         this.$emit('focus', e);
       },
-      cardHover(e) {
+      onCardHover(e) {
         this.$emit('hover', e);
       },
-      cardClick() {
-        this.$router.push(this.to);
+      onEnter() {
+        this.navigate();
       },
       onMouseDown() {
         this.mouseDownTime = new Date().getTime();
       },
-      // Handle the mouse up event and determine whether it should
-      // be treated as a click event or not. Used to make textual
-      // content selectable within the whole clickable card area.
+      // Make textual content selectable within the whole
+      // clickable card area
       onMouseUp() {
         const mouseUpTime = new Date().getTime();
         // Calculate the time difference between the mouse button press and release.
         // If the time difference is greater than or equal to 200 milliseconds,
         // it means that the mouse button was pressed and held for a longer time,
-        // which is not typically interpreted as a click event.
+        // which is not typically interpreted as a click event. Do not navigate
+        // in such case.
         if (mouseUpTime - this.mouseDownTime < 200) {
-          this.allowClick = true;
-          this.cardClick();
+          this.navigate();
         } else {
-          this.allowClick = false;
-        }
-      },
-      cardClickHandler() {
-        if (this.allowClick) {
-          this.cardClick();
+          return;
         }
       },
     },
