@@ -1,6 +1,6 @@
 <template>
 
-  <td :style="{ textAlign: textAlign }" tabindex="0" role="gridcell" @keydown="onKeydown">
+  <td :style="{ textAlign: textAlign, minWidth: minWidth, width: width }" tabindex="0" role="gridcell" @keydown="onKeydown">
     <slot :content="content">
       {{ content }}
     </slot>
@@ -32,6 +32,14 @@
         type: Number,
         required: true,
       },
+      minWidth: {
+        type: String,
+        default: 'auto',
+      },
+      width: {
+        type: String,
+        default: 'auto',
+      },
     },
     computed: {
       textAlign() {
@@ -49,6 +57,11 @@
 
 
 <style scoped>
+td {
+  word-wrap: break-word; 
+  white-space: normal; 
+}
+
 td:focus {
   outline: 2px solid #007bff;
   outline-offset: -2px;

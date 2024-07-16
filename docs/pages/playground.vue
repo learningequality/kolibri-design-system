@@ -22,12 +22,12 @@
     </KTable>
 
     <!-- Backend Sorting Table Example -->
-    <h2>Backend Sorting Table</h2>
+    <h2>Backend Sorting Table(with Custom Widths)</h2>
     <div ref="loadingArea" role="status" aria-live="polite" class="sr-only">
       {{ loadingMessage }}
     </div>
     <KTable
-      :headers="headers"
+      :headers="headersWithCustomWidths"
       :rows="backendRows"
       caption="Backend Sorting Table"
       :useLocalSorting="false"
@@ -54,10 +54,10 @@
 <script>
 
   /*
-           Playground is a Vue component too,
-           so you can also use `data`, `methods`, etc.
-           as usual if helpful
-         */
+             Playground is a Vue component too,
+             so you can also use `data`, `methods`, etc.
+             as usual if helpful
+           */
   import { ref } from '@vue/composition-api';
   import KTable from '../../lib/KTable';
 
@@ -96,6 +96,13 @@
           { label: 'Joined', dataType: 'date' },
           { label: 'Misc', dataType: 'others' },
         ],
+        headersWithCustomWidths: [
+          { label: 'Name', dataType: 'string', minWidth: '20px', width: '2%' },
+          { label: 'Age', dataType: 'numeric', minWidth: '100px', width: '33%' },
+          { label: 'City', dataType: 'string', minWidth: '200px', width: '25%' },
+          { label: 'Joined', dataType: 'date', minWidth: '150px', width: '20%' },
+          { label: 'Misc', dataType: 'others', minWidth: '100px', width: '20%' },
+        ],
         rows: [
           ['John Doe', 28, 'New York', '2022-01-15T00:00:00Z', 'N/A'],
           ['Jane Smith', 34, 'Los Angeles', '2021-12-22T00:00:00Z', 'N/A'],
@@ -132,8 +139,8 @@
 
           setTimeout(() => {
             this.updateLoadingMessage('');
-          }, 5000);
-        }, 10000); // Simulate a 10 second delay for fetching data
+          }, 3000);
+        }, 2000); // Simulate a 2 second delay for fetching data
       },
     },
   };
@@ -177,5 +184,6 @@ h1, h2 {
   clip: rect(0, 0, 0, 0);
   white-space: nowrap;
   border-width: 0;
+  visibility: hidden;
 }
 </style>

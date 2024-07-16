@@ -13,6 +13,7 @@
             tabindex="0"
             :aria-sort="sortable && header.dataType !== DATA_TYPE_OTHERS ? getAriaSort(index) : null"
             :class="{ sortable: sortable && header.dataType !== DATA_TYPE_OTHERS }"
+            :style="getHeaderStyle(header)"
             role="columnheader"
             aria-colindex="index + 1"
             @click="sortable && header.dataType !== DATA_TYPE_OTHERS ? handleSort(index) : null"
@@ -22,8 +23,8 @@
               {{ header.label }}
             </slot>
             <span v-if="sortable && header.dataType !== DATA_TYPE_OTHERS" class="sort-icon">
-              <span v-if="sortKey === index && sortOrder === SORT_ORDER_ASC"><KIcon icon="dropup" /></span>
-              <span v-else-if="sortKey === index && sortOrder === SORT_ORDER_DESC"><KIcon icon="dropdown" /></span>
+              <span v-if="sortKey === index && sortOrder === SORT_ORDER_ASC">⬆️</span>
+              <span v-else-if="sortKey === index && sortOrder === SORT_ORDER_DESC">⬇️</span>
               <span v-else>⬍</span>
             </span>
           </th>
@@ -36,6 +37,8 @@
             :key="colIndex"
             :content="col"
             :dataType="headers[colIndex].dataType"
+            :minWidth="headers[colIndex].minWidth"
+            :width="headers[colIndex].width"
             :rowIndex="rowIndex"
             :colIndex="colIndex"
             role="gridcell"
@@ -100,6 +103,9 @@
       );
 
       const handleSort = index => {
+        if (headers.value[index].dataType === DATA_TYPE_OTHERS) {
+          return;
+        }
         if (useLocalSorting.value) {
           localHandleSort(index);
         } else {
@@ -111,6 +117,13 @@
         }
       };
 
+      const getHeaderStyle = header => {
+        const style = {};
+        if (header.minWidth) style.minWidth = header.minWidth;
+        if (header.width) style.width = header.width;
+        return style;
+      };
+
       return {
         sortKey,
         sortOrder,
@@ -120,6 +133,7 @@
         SORT_ORDER_ASC,
         SORT_ORDER_DESC,
         DATA_TYPE_OTHERS,
+        getHeaderStyle,
       };
     },
     props: {
@@ -206,6 +220,7 @@
           default:
             return;
         }
+
         this.focusCell(nextRowIndex, nextColIndex);
         event.preventDefault();
       },
@@ -231,18 +246,21 @@
 <style scoped>
 .k-table {
   margin: 20px;
+  overflow: auto; 
+  max-height: 400px; 
+  max-width: 100%; 
 }
 
 .k-table table {
   width: 100%;
-  border: 2px solid #ccc;
+  border: none;
   border-collapse: collapse;
 }
 
 .k-table th,
 .k-table td {
   padding: 10px;
-  border: none;
+  border: none; 
 }
 
 .k-table th {
