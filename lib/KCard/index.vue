@@ -8,19 +8,11 @@
     :style="wrapperStyle"
     :class="{ 'horizontal-layout': (layout === 'horizontal' && thumbnailDisplay !== 'none' ), 'vertical-layout': layout === 'vertical' }"
   >
-    <template #title>
+    <template v-if="$slots.title" #title>
       <!-- @slot Optional slot section containing the title contents, should not contain a heading element. -->
-      <div
-        :style="titleSlotOrder"
-        class="title-slot"
-      >
-        <KTextTruncator
-          v-if="title !== null"
-          :text="title"
-          :maxLines="titleLines"
-        />
-        <slot v-else name="title"></slot>
-      </div>
+      <span :style="titleSlotOrder">
+        <slot name="title"></slot>
+      </span>
     </template>
     <template #default>
       <aside
@@ -282,12 +274,6 @@
 
 
 <style scoped>
-
-  .title-slot {
-    font-size: 16px; 
-    font-weight: 600;
-    line-height: 1.5;
-  }
 
   /deep/ .base-card-heading {
     order: 1;

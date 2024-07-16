@@ -1,10 +1,10 @@
 <template>
 
   <li
-    :class="['remove-list-style card',$computedClass(coreOutlineFocus)]"
+    :class="['k-card', $computedClass(coreOutlineFocus)]"
     tabindex="0"
     data-focus="true"
-    :style="cardStyle"
+    :style="{ backgroundColor: $themeTokens.surface }"
     @focus="cardFocus"
     @mouseenter="cardHover"
     @click="cardClickHandler"
@@ -12,6 +12,7 @@
     @mouseup="onMouseUp"
     @keyup.enter="cardClick"
   >
+    <!-- Do not remove 'base-card-heading'. Referenced from KCard.  -->
     <component
       :is="headerLevel"
       v-if="title || $slots.title"
@@ -21,13 +22,17 @@
         tabindex="-1"
         :to="to"
       >
-        <slot v-if="$slots.title" name="title"></slot>
-        <KTextTruncator
-          v-else
-          :text="title"
-          :maxLines="titleLines"
-          :style="titleStyle"
-        />
+        <span
+          class="k-card-title"
+          :style="{ color: $themeTokens.text }"
+        >
+          <slot v-if="$slots.title" name="title"></slot>
+          <KTextTruncator
+            v-else
+            :text="title"
+            :maxLines="titleLines"
+          />
+        </span>
       </router-link>
     </component>
 
@@ -79,17 +84,6 @@
       headerLevel() {
         return 'h' + this.headingLevel;
       },
-      titleStyle() {
-        return {
-          color: this.$themeTokens.text,
-          fontSize: '16px',
-        };
-      },
-      cardStyle() {
-        return {
-          backgroundColor: this.$themeTokens.surface,
-        };
-      },
     },
     methods: {
       cardFocus(e) {
@@ -133,13 +127,14 @@
 
   @import '../styles/definitions';
 
-  .card {
+  .k-card {
     @extend %dropshadow-2dp;
 
     position: relative;
     display: block;
     text-align: left;
     text-decoration: none;
+    list-style-type: none;
     cursor: pointer;
     border-radius: 0.5em;
     outline-offset: -1px;
@@ -151,8 +146,10 @@
     }
   }
 
-  .remove-list-style {
-    list-style-type: none;
+  .k-card-title {
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 1.5;
   }
 
 </style>
