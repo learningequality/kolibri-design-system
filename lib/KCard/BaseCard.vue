@@ -1,5 +1,6 @@
 <template>
 
+  <!-- see trackInputModality  for [data-focus=true] -->
   <li
     :class="['k-card', $computedClass(coreOutlineFocus)]"
     tabindex="0"
@@ -44,6 +45,28 @@
 
 <script>
 
+  /* 
+    BaseCard is a base building block for KCard. Its main purpose
+    is to ensure that no matter of how we change KCard styles, slots,
+    layouts, etc. we never break basic a11y-related markup criteria.
+
+    Long story short, all cards need to have the following HTML output 
+    (even though the title may not be the first element visually).
+
+    <li>
+      <h[2-6]>
+        <a href="/resource">Resource title</a>
+      </h[2-6]>
+
+      all other content
+    </li> 
+
+    BaseCard protect this structure by the way it places its default slot.
+    It also takes care of properly showing the focus ring and related.
+
+    See the specification and https://inclusive-components.design/cards/
+    for more details.
+  */
   export default {
     name: 'BaseCard',
 
@@ -98,7 +121,9 @@
       onMouseDown() {
         this.mouseDownTime = new Date().getTime();
       },
-      // handle the mouse up event and determine whether it should be treated as a click event or not.
+      // Handle the mouse up event and determine whether it should
+      // be treated as a click event or not. Used to make textual
+      // content selectable within the whole clickable card area.
       onMouseUp() {
         const mouseUpTime = new Date().getTime();
         // Calculate the time difference between the mouse button press and release.
