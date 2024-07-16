@@ -16,8 +16,9 @@
     "precompile-svgs": "node utils/precompileSvgs/index.js && yarn run pregenerate",
     "precompile-custom-svgs": "node utils/precompileSvgs/index.js --custom && yarn run pregenerate",
     "_lint-watch-fix": "yarn lint -w -m",
+    "test:percy": "PERCY_LOGLEVEL=error npx percy exec -v -- jest --config jest.conf/visual.index.js -i ./lib/buttons-and-links/__tests__/KButton.spec.js",
     "test": "jest --config=jest.conf/index.js",
-    "test:visual": "JEST_PUPPETEER_CONFIG=./jest-puppeteer.config.js node startVisualTests.js",
+    "test:visual": "concurrently --kill-others --success first --names \"SERVER,TEST\" -c \"bgCyan.bold,bgYellow.bold\" \"yarn dev-only > /dev/null 2>&1\" \"yarn test:percy\"",
     "_api-watch": "chokidar \"**/lib/**\" -c \"node utils/extractApi.js\""
   },
   "files": [
@@ -48,6 +49,7 @@
     "babel-jest": "^29.7.0",
     "browserslist-config-kolibri": "0.16.0-dev.7",
     "chokidar-cli": "^3.0.0",
+    "concurrently": "^8.2.2",
     "consola": "^2.15.3",
     "eslint-import-resolver-nuxt": "^1.0.1",
     "globby": "^6.1.0",
@@ -63,7 +65,6 @@
     "npm-run-all": "^4.1.5",
     "nuxt": "2.15.8",
     "prismjs": "^1.27.0",
-    "ps-tree": "^1.2.0",
     "puppeteer": "^22.11.0",
     "raw-loader": "0.5.1",
     "sass-loader": "^10.5.2",
