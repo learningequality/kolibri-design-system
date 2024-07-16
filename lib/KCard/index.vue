@@ -86,19 +86,6 @@
       headingLevel: {
         type: Number,
         required: true,
-        validator(value) {
-          if (!value) {
-            console.error('Error: Prop headingLevel is required and cannot be empty.');
-            return false;
-          } else {
-            if (value <= 6 && value >= 2) {
-              return true;
-            } else {
-              console.error('Error: Prop headingLevel must be between 1 and 6.');
-              return false;
-            }
-          }
-        },
       },
       /**
        * The maximum number of lines a title covers. Defaults to 2 if not specified.
@@ -260,13 +247,6 @@
           };
         }
       },
-    },
-    mounted() {
-      if (!this.$slots.title && !this.title) {
-        throw new Error('provide a title slots or prop for the  card');
-      } else {
-        return true;
-      }
     },
   };
 

@@ -14,7 +14,7 @@
   >
     <!-- Do not remove 'base-card-heading'. Referenced from KCard.  -->
     <component
-      :is="headerLevel"
+      :is="headingElement"
       v-if="title || $slots.title"
       class="base-card-heading"
     >
@@ -71,8 +71,9 @@
       all other content
     </li> 
 
-    BaseCard protect this structure by the way it places its default slot.
-    It also takes care of properly showing the focus ring and related.
+    BaseCard protect this structure by the way it places its default slot
+    as well as some validation logic. It also takes care of properly showing
+    the focus ring and related.
 
     See the specification and https://inclusive-components.design/cards/
     for more details.
@@ -98,6 +99,14 @@
       headingLevel: {
         type: Number,
         required: true,
+        validator(value) {
+          if (value <= 6 && value >= 2) {
+            return true;
+          } else {
+            console.error(`[KCard] 'headingLevel' must be between 2 and 6.`);
+            return false;
+          }
+        },
       },
     },
     data() {
@@ -113,9 +122,14 @@
           },
         };
       },
-      headerLevel() {
-        return 'h' + this.headingLevel;
+      headingElement() {
+        return this.headingLevel ? 'h' + this.headingLevel : null;
       },
+    },
+    mounted() {
+      if (!this.$slots.title && !this.title) {
+        console.error(`[KCard] provide title via 'title' slot or prop`);
+      }
     },
     methods: {
       navigate() {
