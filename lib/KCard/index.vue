@@ -35,7 +35,7 @@
         -->
         <span
           v-if="$slots.thumbnailPlaceholder"
-          class="thumbnailPlaceholder"
+          class="thumbnail-placeholder"
         >
           <!-- @slot Places content to the thumbnail placeholder area. -->
           <slot name="thumbnailPlaceholder"></slot>
@@ -320,7 +320,7 @@
     overflow: hidden; /* (1) */
   }
 
-  .thumbnailPlaceholder {
+  .thumbnail-placeholder {
     position: absolute;
     top: 0;
     right: 0;
