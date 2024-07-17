@@ -1,6 +1,7 @@
 import { setMedia } from 'mock-match-media';
 
 const percySnapshot = require('@percy/puppeteer');
+const TESTING_PLAYGROUND_URL = 'http://localhost:4000/testing-playground';
 
 export const resizeWindow = (width, height = 768) => {
   window.innerWidth = width;
@@ -65,6 +66,11 @@ export function describeUnit(name, fn) {
 
 export function describeVisual(name, fn) {
   if (process.env.TEST_TYPE == 'visual') {
-    describe(name, fn);
+    describe(name, () => {
+      beforeAll(async () => {
+        await page.goto(TESTING_PLAYGROUND_URL, { waitUntil: 'networkidle2' });
+      });
+      fn();
+    });
   }
 }
