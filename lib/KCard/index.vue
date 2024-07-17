@@ -14,19 +14,32 @@
     </template>
     <template #default>
       <div class="thumbnail">
+        <!-- 
+          Render KImg even if thumbnailSrc is not provided since in that case
+          KImg takes care of showing the gray placeholder area.
+        -->
         <KImg
-          v-if="thumbnailSrc"
           :src="thumbnailSrc"
           :scaleType="thumbnailScaleType"
           :aspectRatio="thumbnailAspectRatio"
           :isDecorative="true"
           :appearanceOverrides="thumbnailStyles"
-        >
-          <template #placehoder>
-            <slot v-if="!thumbnailSrc" name="thumbnailPlaceholder"></slot>
+        />
+        <!--
+          This is a duplicate of the same slot in KImg. I didn't find a way to utilize
+          KImg's placeholder slot from here, likely because this part of code is nested
+          in one slot already
 
-          </template>
-        </KImg>
+          Show it even when thumbnail source is provided - then the placeholder serves
+          as progressive loading experience.
+        -->
+        <span
+          v-if="$slots.thumbnailPlaceholder"
+          class="thumbnailPlaceholder"
+        >
+          <!-- @slot Places content to the thumbnail placeholder area. -->
+          <slot name="thumbnailPlaceholder"></slot>
+        </span>
       </div>
       <div
         data-test="aboveTitle"
@@ -270,7 +283,7 @@
   /************* Common styles **************/
 
   .k-card {
-    position: relative;
+    position: relative; /* basis for absolute positioning of thumbnail images */
     display: flex;
     flex-direction: column;
     flex-wrap: nowrap;
@@ -279,6 +292,7 @@
   }
 
   .thumbnail {
+    position: relative; /* basis for absolute positioning of 'thumbnailPlaceholder' slot content */
     order: 1;
   }
 
@@ -304,6 +318,15 @@
     min-height: 58px; /* (2) */
     margin: auto $spacer $spacer;
     overflow: hidden; /* (1) */
+  }
+
+  .thumbnailPlaceholder {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 0; /* <img> in KImg with z-index 1 should cover the placeholder after loaded */
   }
 
   /************* Layout-specific styles *************/

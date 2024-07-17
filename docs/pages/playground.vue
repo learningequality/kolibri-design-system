@@ -191,9 +191,14 @@
         :headingLevel="2"
         layout="vertical"
         thumbnailDisplay="large"
-        :thumbnailSrc="require('../assets/hummingbird CC BY-SA 4.0.jpg')"
+        thumbnailSrc=""
         title="This is a sample resource title This is a sample resource title This is a sample resource title This is a sample resource title This is a sample resource title This is a sample resource title This is a sample resource title This is a sample resource title This is a sample resource title This is a sample resource title"
       >
+        <template #thumbnailPlaceholder>
+          <span :style="{ display: 'flex', height: '100%', justifyContent: 'center', alignItems: 'center' }">
+            <KIcon icon="readSolid" :style="{ fontSize: '40px' }" />
+          </span>
+        </template>
         <template #aboveTitle>
           <KGrid>
 
@@ -413,9 +418,13 @@
         :headingLevel="2"
         layout="vertical"
         thumbnailDisplay="small"
-        :thumbnailSrc="require('../assets/hummingbird CC BY-SA 4.0.jpg')"
         title="This is a sample resource title This is a sample resource title This is a sample resource title This is a sample resource title This is a sample resource title This is a sample resource title This is a sample resource title This is a sample resource title This is a sample resource title This is a sample resource title"
       >
+        <template #thumbnailPlaceholder>
+          <span :style="{ display: 'flex', height: '100%', justifyContent: 'center', alignItems: 'center' }">
+            <KIcon icon="readSolid" :style="{ fontSize: '40px' }" />
+          </span>
+        </template>
         <template #aboveTitle>
           <KGrid>
 
@@ -634,9 +643,13 @@
         :headingLevel="2"
         layout="horizontal"
         thumbnailDisplay="large"
-        :thumbnailSrc="require('../assets/hummingbird CC BY-SA 4.0.jpg')"
         title="This is a sample resource title This is a sample resource title This is a sample resource title This is a sample resource title This is a sample resource title This is a sample resource title This is a sample resource title This is a sample resource title This is a sample resource title This is a sample resource title"
       >
+        <template #thumbnailPlaceholder>
+          <span :style="{ display: 'flex', height: '100%', justifyContent: 'center', alignItems: 'center' }">
+            <KIcon icon="readSolid" :style="{ fontSize: '40px' }" />
+          </span>
+        </template>
         <template #aboveTitle>
           <KGrid>
 
@@ -857,9 +870,13 @@
         :headingLevel="2"
         layout="horizontal"
         thumbnailDisplay="small"
-        :thumbnailSrc="require('../assets/hummingbird CC BY-SA 4.0.jpg')"
         title="This is a sample resource title This is a sample resource title This is a sample resource title This is a sample resource title This is a sample resource title This is a sample resource title This is a sample resource title This is a sample resource title This is a sample resource title This is a sample resource title"
       >
+        <template #thumbnailPlaceholder>
+          <span :style="{ display: 'flex', height: '100%', justifyContent: 'center', alignItems: 'center' }">
+            <KIcon icon="readSolid" :style="{ fontSize: '40px' }" />
+          </span>
+        </template>
         <template #aboveTitle>
           <KGrid>
 
