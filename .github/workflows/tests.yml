@@ -77,17 +77,11 @@ jobs:
           yarn test:percy 2>&1 | tee test-output.log
         env:
           PERCY_TOKEN: ${{ secrets.PERCY_TOKEN }}
-
       - name: Extract Percy build URL
         id: extract-url
         run: |
           url=$(grep -o 'https://percy.io/[a-zA-Z0-9/_-]*' test-output.log | tail -1)
-          echo "PERCY_BUILD_URL=$url" >> $GITHUB_ENV
           echo "percy_url=$url" >> $GITHUB_OUTPUT
-          echo "Percy build URL: $url"
-      - name: Check extracted Percy URL
-        run: |
-          echo "Extracted Percy URL: ${{ steps.extract-url.outputs.percy_url }}"
     
   comment:
     name: Comment Percy results
@@ -95,14 +89,10 @@ jobs:
     if: ${{ needs.visual_tests.result == 'success' }}
     runs-on: ubuntu-latest
     steps:
-      - name: Check Percy URL
-        run: | 
-          echo "Percy URL: ${{ needs.visual_tests.outputs.percy_url }}"
       - name: Post results comment
         uses: thollander/actions-comment-pull-request@v2
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          PERCY_BUILD_URL: ${{ env.PERCY_BUILD_URL }}
         with:
           message: |
             ### Percy Visual Test Results
