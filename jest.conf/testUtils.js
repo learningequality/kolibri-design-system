@@ -1,6 +1,7 @@
 import { setMedia } from 'mock-match-media';
 
 const percySnapshot = require('@percy/puppeteer');
+
 const TESTING_PLAYGROUND_URL = 'http://localhost:4000/testing-playground';
 
 export const resizeWindow = (width, height = 768) => {

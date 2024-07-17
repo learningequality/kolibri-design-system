@@ -30,7 +30,8 @@ esLintConfig.globals = {
   jestPuppeteer: true,
   describe: "readonly",
   describeUnit: "readonly",
-  describeVisual: "readonly"
+  describeVisual: "readonly",
+  beforeAll: "readonly"
 };
 
 module.exports = esLintConfig;
