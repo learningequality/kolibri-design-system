@@ -2,7 +2,7 @@
 
   <!-- see trackInputModality  for [data-focus=true] -->
   <li
-    :class="['k-card', $computedClass(coreOutlineFocus)]"
+    :class="['base-card', $computedClass(coreOutlineFocus)]"
     tabindex="0"
     data-focus="true"
     :style="{ backgroundColor: $themeTokens.surface }"
@@ -12,11 +12,10 @@
     @mouseup="onMouseUp"
     @keyup.enter="onEnter"
   >
-    <!-- Do not remove 'base-card-heading'. Referenced from KCard.  -->
     <component
       :is="headingElement"
       v-if="title || $slots.title"
-      class="base-card-heading"
+      :style="headingStyles"
     >
       <!--
         Prevent router-link click event by setting empty event=""
@@ -34,7 +33,7 @@
         event=""
       >
         <span
-          class="k-card-title"
+          class="base-card-title"
           :style="{ color: $themeTokens.text }"
         >
           <slot v-if="$slots.title" name="title"></slot>
@@ -108,6 +107,11 @@
           }
         },
       },
+      headingStyles: {
+        required: false,
+        type: Object,
+        default: () => {},
+      },
     },
     data() {
       return {
@@ -172,7 +176,7 @@
 
   @import '../styles/definitions';
 
-  .k-card {
+  .base-card {
     @extend %dropshadow-2dp;
 
     position: relative;
@@ -191,7 +195,7 @@
     }
   }
 
-  .k-card-title {
+  .base-card-title {
     font-size: 16px;
     font-weight: 600;
     line-height: 1.5;
