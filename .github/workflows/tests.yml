@@ -43,8 +43,10 @@ jobs:
   visual_tests:
     name: Frontend Visual Tests
     needs: test
-    if: ${{ needs.test.result == 'success' }}
+    if: ${{ github.event_name == 'pull_request' && needs.test.result == 'success' }}
     runs-on: ubuntu-latest
+    outputs:
+      percy_url: ${{ steps.extract-url.outputs.percy_url }}
     steps:
       - uses: actions/checkout@v4
       - name: Use Node.js
@@ -70,13 +72,22 @@ jobs:
         env:
           SHELL: /bin/bash
       - name: Run visual tests
-        run: yarn test:percy
+        id: run-visual-tests
+        run: |
+          yarn test:percy 2>&1 | tee test-output.log
         env:
           PERCY_TOKEN: ${{ secrets.PERCY_TOKEN }}
-      - name: Upload Percy results
-        id: percy-results
+
+      - name: Extract Percy build URL
+        id: extract-url
         run: |
-          echo "Percy build URL: $(npx percy info | grep web_url | cut -d ' ' -f 2)"
+          url=$(grep -o 'https://percy.io/[a-zA-Z0-9/_-]*' test-output.log | tail -1)
+          echo "PERCY_BUILD_URL=$url" >> $GITHUB_ENV
+          echo "percy_url=$url" >> $GITHUB_OUTPUT
+          echo "Percy build URL: $url"
+      - name: Check extracted Percy URL
+        run: |
+          echo "Extracted Percy URL: ${{ steps.extract-url.outputs.percy_url }}"
     
   comment:
     name: Comment Percy results
@@ -84,24 +95,26 @@ jobs:
     if: ${{ needs.visual_tests.result == 'success' }}
     runs-on: ubuntu-latest
     steps:
+      - name: Check Percy URL
+        run: | 
+          echo "Percy URL: ${{ needs.visual_tests.outputs.percy_url }}"
       - name: Post results comment
-        uses: actions/github-script@v6
+        uses: thollander/actions-comment-pull-request@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PERCY_BUILD_URL: ${{ env.PERCY_BUILD_URL }}
         with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          script: |
-            const percyUrl = `Percy build URL: ${process.env.PERCY_BUILD_URL}`;
-            const commentBody = `
-              ### Percy Visual Test Results
-              ${percyUrl}
-              **Summary:**
-              - Visual diff locations
-              - [Percy Dashboard](${percyUrl})
-              **Instructions for reviewers:**
-              - Access the Percy dashboard to review visual changes.
-              `;
-              github.issues.createComment({
-                issue_number: context.payload.pull_request.number,
-                owner: context.repo.owner,
-                repo: context.repo.repo,
-                body: commentBody
-              });
+          message: |
+            ### Percy Visual Test Results
+            **Percy Dashboard:** [View Detailed Report](${{ needs.visual_tests.outputs.percy_url }})
+            
+            **Environment:**
+            - **Node.js Version:** 18.x
+            - **OS:** Ubuntu-latest
+
+            **Instructions for Reviewers:**
+            - Click on the [Percy Dashboard](${{ needs.visual_tests.outputs.percy_url }}) link to view detailed visual diffs.
+            - Review the visual changes highlighted in the report.
+            - Approve or request changes based on the visual differences.
+          comment_tag: execution
+          mode: recreate
