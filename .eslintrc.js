@@ -20,7 +20,7 @@ esLintConfig.settings['import/resolver'].nuxt = {
   nuxtSrcDir: 'docs',
 };
 
-// Remove linting errors for the globals defined in the jest-puppeteer package
+// Remove linting errors for the globals defined in the jest-puppeteer package and testUtils
 esLintConfig.globals = {
   ...esLintConfig.globals,
   page: true,
@@ -28,6 +28,9 @@ esLintConfig.globals = {
   context: true,
   puppeteerConfig: true,
   jestPuppeteer: true,
+  describe: "readonly",
+  describeUnit: "readonly",
+  describeVisual: "readonly"
 };
 
 module.exports = esLintConfig;
