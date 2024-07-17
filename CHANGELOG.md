@@ -4,7 +4,6 @@ Changelog is rather internal in nature. See release notes for the public overvie
 
 ## Upcoming version 5.x.x (`develop` branch)
 
-
 [#625]
   - **Description:** Initial implementation of `KCard` component
   - **Products impact:** New Component
@@ -14,6 +13,28 @@ Changelog is rather internal in nature. See release notes for the public overvie
   - **Impacts a11y:**  Yes
   - **Guidance:**
 [#625]: https://github.com/learningequality/kolibri-design-system/pull/625
+
+- [#678]
+  - **Description:** Add `previewUnavailable` icon
+  - **Products impact:** new icon
+  - **Addresses:** Support of migrating Studio icons from Vuetify to KDS
+  - **Components:** `KIcon`
+  - **Breaking:** no
+  - **Impacts a11y:** no
+  - **Guidance:** -
+
+[#678]: https://github.com/learningequality/kolibri-design-system/pull/678
+
+- [#666]
+  - **Description:** Update `KImg`'s placeholder and letterbox area background color to a lighter shade of grey, `v_50`.
+  - **Products impact:** UI appearance update
+  - **Addresses:** -
+  - **Components:** `KImg`, `KCard`
+  - **Breaking:** no
+  - **Impacts a11y:** no
+  - **Guidance:** -
+
+[#666]: https://github.com/learningequality/kolibri-design-system/pull/666
 
 - [#652]
   - **Description:** KTextTruncator drops support for Internet Explorer 11
@@ -71,6 +92,17 @@ Changelog is rather internal in nature. See release notes for the public overvie
 [#615]: https://github.com/learningequality/kolibri-design-system/pull/615
 
 ## Version 4.x.x (`release-v4` branch)
+
+- [#673]
+  - **Description:** Remove white space below Ktabs
+  - **Products impact:** bugfix.
+  - **Addresses:** https://github.com/learningequality/kolibri/issues/12297.
+  - **Components:** KTabsList, KTabs, KTabsPanel.
+  - **Breaking:** no
+  - **Impacts a11y:**no
+  - **Guidance:** .
+
+[#673]: https://github.com/learningequality/kolibri-design-system/pull/673
 
 - [#629]
   - **Description:** Improves the contrast for highlighted text, noted in KTextbox
