@@ -123,7 +123,7 @@
         };
       },
       headingElement() {
-        return this.headingLevel ? 'h' + this.headingLevel : null;
+        return this.headingLevel ? 'h' + this.headingLevel : undefined;
       },
     },
     mounted() {

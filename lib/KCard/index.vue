@@ -34,14 +34,14 @@
         <slot v-if="!thumbnailSrc" name="thumbnailPlaceholder"></slot>
       </aside>
       <div
-        data-testid="aboveTitle"
+        data-test="aboveTitle"
         class="above-title-style"
         :style="cardPartition"
       >
         <slot name="aboveTitle"></slot>
       </div>
       <div
-        data-testid="belowTitle"
+        data-test="belowTitle"
         class="below-title"
         :style="cardPartition"
       >
@@ -52,7 +52,7 @@
         :class="{ 'footer-horizontal': layout === 'horizontal' }"
         :style="(layout === 'horizontal' && thumbnailDisplay === 'large') ? { ...cardPartition } : {}"
       >
-        <div data-testid="footer">
+        <div data-test="footer">
           <slot name="footer"></slot>
         </div>
       </div>
