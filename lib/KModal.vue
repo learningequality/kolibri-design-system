@@ -1,6 +1,6 @@
 <template>
 
-  <component :is="teleportWrapper" to="body">
+  <component :is="wrapper" v-bind="wrapperProps">
     <!-- Accessibility properties for the overlay -->
     <transition name="modal-fade" appear>
       <div
@@ -197,9 +197,9 @@
         required: false,
       },
       /**
-       * Whether or not the modal should be teleported to the body
+       * Whether or not the modal should be teleported to the root of the document
        */
-      appendToBody: {
+      appendToRoot: {
         type: Boolean,
         default: false,
       },
@@ -247,8 +247,11 @@
           height: `${this.contentHeight}px`,
         };
       },
-      teleportWrapper() {
-        return this.appendToBody ? 'Teleport' : 'div';
+      wrapper() {
+        return this.appendToRoot ? 'Teleport' : 'div';
+      },
+      wrapperProps() {
+        return this.appendToRoot ? { to: 'body' } : {};
       },
     },
     created() {

@@ -6,7 +6,7 @@ Changelog is rather internal in nature. See release notes for the public overvie
 
 
 - [#680]
-  - **Description:** Adds boolean `appendToBody` prop to teleport the modal to the body element if true.
+  - **Description:** Adds boolean `appendToRoot` prop to teleport the modal to the body element if true.
   - **Products impact:** new API.
   - **Addresses:** https://github.com/learningequality/kolibri/issues/12447.
   - **Components:** KModal.
