@@ -108,6 +108,18 @@
           ['Jane Smith', 34, 'Los Angeles', '2021-12-22T00:00:00Z', 'N/A'],
           ['Samuel Green', 22, 'Chicago', '2023-03-10T00:00:00Z', 'N/A'],
           ['Alice Johnson', 30, 'Houston', '2020-07-18T00:00:00Z', 'N/A'],
+          ['John Doe', 28, 'New York', '2022-01-15T00:00:00Z', 'N/A'],
+          ['Jane Smith', 34, 'Los Angeles', '2021-12-22T00:00:00Z', 'N/A'],
+          ['Samuel Green', 22, 'Chicago', '2023-03-10T00:00:00Z', 'N/A'],
+          ['Alice Johnson', 30, 'Houston', '2020-07-18T00:00:00Z', 'N/A'],
+          ['John Doe', 28, 'New York', '2022-01-15T00:00:00Z', 'N/A'],
+          ['Jane Smith', 34, 'Los Angeles', '2021-12-22T00:00:00Z', 'N/A'],
+          ['Samuel Green', 22, 'Chicago', '2023-03-10T00:00:00Z', 'N/A'],
+          ['Alice Johnson', 30, 'Houston', '2020-07-18T00:00:00Z', 'N/A'],
+          ['John Doe', 28, 'New York', '2022-01-15T00:00:00Z', 'N/A'],
+          ['Jane Smith', 34, 'Los Angeles', '2021-12-22T00:00:00Z', 'N/A'],
+          ['Samuel Green', 22, 'Chicago', '2023-03-10T00:00:00Z', 'N/A'],
+          ['Alice Johnson', 30, 'Houston', '2020-07-18T00:00:00Z', 'N/A'],
         ],
         backendRows: [
           ['John Doe', 28, 'New York', '2022-01-15T00:00:00Z', 'N/A'],
@@ -172,6 +184,7 @@ h1, h2 {
   align-items: center;
   justify-content: center;
   font-size: 1.5em;
+  z-index: 5;
 }
 
 .sr-only {

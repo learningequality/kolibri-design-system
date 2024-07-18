@@ -1,7 +1,7 @@
 <template>
 
-  <div class="k-table" role="grid">
-    <table>
+  <div class="k-table-wrapper">
+    <table class="k-table" role="grid">
       <caption v-if="caption">
         {{ caption }}
       </caption>
@@ -12,7 +12,11 @@
             :key="index"
             tabindex="0"
             :aria-sort="sortable && header.dataType !== DATA_TYPE_OTHERS ? getAriaSort(index) : null"
-            :class="{ sortable: sortable && header.dataType !== DATA_TYPE_OTHERS }"
+            :class="{
+              sortable: sortable && header.dataType !== DATA_TYPE_OTHERS,
+              'sticky-header': true,
+              'sticky-column': index === 0
+            }"
             :style="getHeaderStyle(header)"
             role="columnheader"
             aria-colindex="index + 1"
@@ -41,6 +45,10 @@
             :width="headers[colIndex].width"
             :rowIndex="rowIndex"
             :colIndex="colIndex"
+            :class="{
+              'sticky-column': colIndex === 0,
+
+            }"
             role="gridcell"
             aria-colindex="colIndex + 1"
             @keydown="handleKeydown($event, rowIndex, colIndex)"
@@ -140,6 +148,13 @@
       headers: {
         type: Array,
         required: true,
+        validator: function(value) {
+          return value.every(
+            header =>
+              ['label', 'dataType'].every(key => key in header) &&
+              ['string', 'numeric', 'date', 'others'].includes(header.dataType)
+          );
+        },
       },
       rows: {
         type: Array,
@@ -235,6 +250,7 @@
         }
         if (nextCell) {
           nextCell.focus();
+          nextCell.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'nearest' });
         }
       },
     },
@@ -244,38 +260,45 @@
 
 
 <style scoped>
-.k-table {
-  margin: 20px;
-  overflow: auto; 
-  max-height: 400px; 
-  max-width: 100%; 
-}
-
-.k-table table {
-  width: 100%;
-  border: none;
-  border-collapse: collapse;
-}
-
-.k-table th,
-.k-table td {
-  padding: 10px;
-  border: none; 
-}
-
-.k-table th {
-  cursor: pointer;
-}
-
-.k-table th.sortable {
-  cursor: pointer;
-}
-
-.k-table td:focus,
-.k-table th:focus {
-  outline: 2px solid #007bff;
-  outline-offset: -2px;
-  z-index: 1;
+.k-table-wrapper {
+  overflow: auto;
   position: relative;
+  height:300px;
 }
+
+.k-table {
+  border-collapse: collapse;
+  width: 100%;
+  
+}
+
+th,
+td {
+  padding: 8px;
+  position: relative;
+  z-index: auto;
+}
+
+.sticky-header {
+  position: sticky;
+  top: 0;
+  background-color: #f8f9fa;
+  z-index: 3; 
+}
+
+.sticky-column {
+  position: sticky;
+  left: 0;
+  background-color: #f8f9fa;
+  z-index: 2; 
+}
+
+th.sticky-header.sticky-column,
+td.sticky-header.sticky-column {
+  z-index: 4; 
+}
+.sortable {
+  cursor: pointer;
+}
+
 </style>
