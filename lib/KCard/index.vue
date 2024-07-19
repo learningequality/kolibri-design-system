@@ -169,7 +169,7 @@
       */
       stylesAndClasses() {
         /* In px. Needs to be the same as $spacer variable in styles part */
-        const SPACER = '12';
+        const SPACER = 12;
 
         const headingCommonStyles = {
           order: 3,
