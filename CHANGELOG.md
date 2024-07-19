@@ -4,6 +4,16 @@ Changelog is rather internal in nature. See release notes for the public overvie
 
 ## Upcoming version 5.x.x (`develop` branch)
 
+[#625]
+  - **Description:** Initial implementation of `KCard` component
+  - **Products impact:** New Component
+  - **Addresses:** [#530](https://github.com/learningequality/kolibri-design-system/issues/530)
+  - **Components:** KCard
+  - **Breaking:** No
+  - **Impacts a11y:**  Yes
+  - **Guidance:**
+[#625]: https://github.com/learningequality/kolibri-design-system/pull/625
+
 - [#678]
   - **Description:** Add `previewUnavailable` icon
   - **Products impact:** new icon
