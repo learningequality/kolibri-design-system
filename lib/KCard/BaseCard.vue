@@ -151,10 +151,10 @@
       onMouseDown() {
         this.mouseDownTime = new Date().getTime();
       },
-      // Make textual content selectable within the whole
-      // clickable card area
       onMouseUp() {
         const mouseUpTime = new Date().getTime();
+        // Make textual content selectable within the whole clickable card area.
+        //
         // Calculate the time difference between the mouse button press and release.
         // If the time difference is greater than or equal to 200 milliseconds,
         // it means that the mouse button was pressed and held for a longer time,
