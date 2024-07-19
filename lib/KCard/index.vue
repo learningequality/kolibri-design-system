@@ -358,7 +358,7 @@
     height: 240px; /* (1) */
 
     .thumbnail {
-      position: absolute !important; /* 'important' to override KImg's position relative */
+      position: absolute;
       left: 0;
       width: 40%;
       height: 100%;
@@ -376,7 +376,7 @@
     height: 220px; /* (1) */
 
     .thumbnail {
-      position: absolute !important; /* 'important' to override KImg's position relative */
+      position: absolute;
       top: $spacer;
       right: $spacer;
       width: 30%; /* square dimension achieved via KImgs's aspect-ratio 1:1 */
