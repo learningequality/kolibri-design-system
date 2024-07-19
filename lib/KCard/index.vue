@@ -45,18 +45,21 @@
         data-test="aboveTitle"
         class="above-title"
       >
+        <!-- @slot Places content to the area above the title. -->
         <slot name="aboveTitle"></slot>
       </div>
       <div
         data-test="belowTitle"
         class="below-title"
       >
+        <!-- @slot Places content to the area below the title. -->
         <slot name="belowTitle"></slot>
       </div>
       <div
         data-test="footer"
         class="footer"
       >
+        <!-- @slot Places content to the footer area. -->
         <slot name="footer"></slot>
       </div>
     </template>
