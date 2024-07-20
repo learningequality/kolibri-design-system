@@ -11,7 +11,6 @@ import VueRouter from 'vue-router';
 import VueIntl from 'vue-intl';
 import VueCompositionAPI from '@vue/composition-api';
 import KThemePlugin from '../lib/KThemePlugin';
-import { describeUnit, describeVisual } from './testUtils';
 
 global.beforeEach(() => {
   return new Promise(resolve => {
@@ -56,6 +55,3 @@ global.flushPromises = function flushPromises() {
     setImmediate(resolve);
   });
 };
-
-global.describeUnit = describeUnit;
-global.describeVisual = describeVisual;
