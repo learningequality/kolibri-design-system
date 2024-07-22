@@ -19,7 +19,7 @@
             }"
             :style="getHeaderStyle(header)"
             role="columnheader"
-            aria-colindex="index + 1"
+            :aria-colindex="index + 1"
             @click="sortable && header.dataType !== DATA_TYPE_OTHERS ? handleSort(index) : null"
             @keydown="handleKeydown($event, -1, index)"
           >
@@ -35,7 +35,13 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="(row, rowIndex) in finalRows" :key="rowIndex">
+        <tr
+          v-for="(row, rowIndex) in finalRows"
+          :key="rowIndex"
+          :class="{ 'highlight-row': hoveredRowIndex === rowIndex || focusedRowIndex === rowIndex }"
+          @mouseover="handleRowMouseOver(rowIndex)"
+          @mouseleave="handleRowMouseLeave"
+        >
           <KTableGridItem
             v-for="(col, colIndex) in row"
             :key="colIndex"
@@ -47,7 +53,7 @@
             :colIndex="colIndex"
             :class="{
               'sticky-column': colIndex === 0,
-
+              'highlight-cell': (hoveredRowIndex === rowIndex || focusedRowIndex === rowIndex) && colIndex === 0
             }"
             role="gridcell"
             aria-colindex="colIndex + 1"
@@ -86,6 +92,8 @@
       const headers = ref(props.headers);
       const rows = ref(props.rows);
       const useLocalSorting = ref(props.useLocalSorting);
+      const hoveredRowIndex = ref(null);
+      const focusedRowIndex = ref(null);
 
       const {
         sortKey,
@@ -142,6 +150,8 @@
         SORT_ORDER_DESC,
         DATA_TYPE_OTHERS,
         getHeaderStyle,
+        hoveredRowIndex,
+        focusedRowIndex,
       };
     },
     props: {
@@ -237,6 +247,7 @@
         }
 
         this.focusCell(nextRowIndex, nextColIndex);
+        this.focusedRowIndex = nextRowIndex === -1 ? null : nextRowIndex;
         event.preventDefault();
       },
       focusCell(rowIndex, colIndex) {
@@ -251,7 +262,22 @@
         if (nextCell) {
           nextCell.focus();
           nextCell.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'nearest' });
+          if (rowIndex !== -1) {
+            const tableWrapper = this.$el.closest('.k-table-wrapper');
+            const headerHeight = this.$el.querySelector('thead').offsetHeight;
+            const wrapperRect = tableWrapper.getBoundingClientRect();
+            const cellRect = nextCell.getBoundingClientRect();
+            if (cellRect.top < wrapperRect.top + headerHeight) {
+              tableWrapper.scrollTop -= wrapperRect.top + headerHeight - cellRect.top;
+            }
+          }
         }
+      },
+      handleRowMouseOver(rowIndex) {
+        this.hoveredRowIndex = rowIndex;
+      },
+      handleRowMouseLeave() {
+        this.hoveredRowIndex = null;
       },
     },
   };
@@ -269,7 +295,6 @@
 .k-table {
   border-collapse: collapse;
   width: 100%;
-  
 }
 
 th,
@@ -283,22 +308,37 @@ td {
   position: sticky;
   top: 0;
   background-color: #f8f9fa;
-  z-index: 3; 
+  z-index: 3;
 }
 
 .sticky-column {
   position: sticky;
   left: 0;
   background-color: #f8f9fa;
-  z-index: 2; 
+  z-index: 2;
 }
 
 th.sticky-header.sticky-column,
 td.sticky-header.sticky-column {
-  z-index: 4; 
+  z-index: 4;
 }
+
 .sortable {
   cursor: pointer;
 }
 
+.highlight-row {
+  background-color: #f0f0f0;
+}
+
+.highlight-cell {
+  background-color: #f0f0f0;
+}
+
+th:focus {
+  outline: 2px solid #007bff;
+  outline-offset: -2px;
+  z-index: 1;
+  position: relative;
+}
 </style>
