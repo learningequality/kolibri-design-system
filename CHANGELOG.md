@@ -4,6 +4,27 @@ Changelog is rather internal in nature. See release notes for the public overvie
 
 ## Version 4.x.x (`release-v4` branch)
 
+
+- [#680]
+  - **Description:** Adds boolean `appendToRoot` prop to teleport the modal to the body element if true.
+  - **Products impact:** new API.
+  - **Addresses:** https://github.com/learningequality/kolibri/issues/12447.
+  - **Components:** KModal.
+  - **Breaking:** no
+  - **Impacts a11y:** no
+  - **Guidance:** 
+
+- [#680]
+  - **Description:** Fixes the calculation of overflowed items when changes in the size of the list item slots occur.
+  - **Products impact:** bugfix.
+  - **Addresses:** https://github.com/learningequality/kolibri/issues/12447.
+  - **Components:** KListWithOverflow.
+  - **Breaking:** no
+  - **Impacts a11y:** no
+  - **Guidance:** 
+
+[#680]: https://github.com/learningequality/kolibri-design-system/pull/680
+
 - [#673]
   - **Description:** Remove white space below Ktabs
   - **Products impact:** bugfix.

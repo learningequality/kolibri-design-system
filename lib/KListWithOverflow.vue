@@ -101,6 +101,17 @@
       // avoids sharing it across multiple instances, ensuring each component has its own function.
       this.throttledSetOverflowItems = throttle(this.setOverflowItems, 100);
       this.$watch('elementWidth', this.throttledSetOverflowItems);
+
+      // Add resize observer to watch inner list items size changes
+      if (typeof window !== 'undefined' && window.ResizeObserver) {
+        this.resizeObserver = new ResizeObserver(this.throttledSetOverflowItems);
+        this.resizeObserver.observe(this.$refs.list);
+      }
+    },
+    beforeUnmount() {
+      if (this.resizeObserver) {
+        this.resizeObserver.disconnect();
+      }
     },
     methods: {
       getSize(element) {
