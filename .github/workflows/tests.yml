@@ -64,17 +64,12 @@ jobs:
         run: |
           yarn --frozen-lockfile
           npm rebuild node-sass
-      - name: Start server
+      - name: Extract jsdocs and environment info 
         run: |
-          yarn dev &
-          sleep 60 &&
-          curl -sSf http://localhost:4000/testing-playground
-        env:
-          SHELL: /bin/bash
+          yarn pregenerate
       - name: Run visual tests
-        id: run-visual-tests
         run: |
-          yarn test:percy 2>&1 | tee test-output.log
+          yarn test:visual 2>&1 | tee test-output.log
         env:
           PERCY_TOKEN: ${{ secrets.PERCY_TOKEN }}
       - name: Extract Percy build URL
