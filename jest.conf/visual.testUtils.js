@@ -1,10 +1,11 @@
 import percySnapshot from '@percy/puppeteer';
 
 export async function renderComponent(component, props) {
-  const initialState = await page.evaluate(() => {
+  const beforeRenderState = await page.evaluate(() => {
     const testing_playground = document.querySelector('#testing-playground');
     return testing_playground ? testing_playground.innerHTML : '';
   });
+
   await page.evaluate(
     ({ component, props }) => {
       window.postMessage(
@@ -20,18 +21,21 @@ export async function renderComponent(component, props) {
   );
   await page.waitForSelector('#testing-playground');
 
+  // Wait until the innerHTML of the testing playground changes, indicating that the component has been rendered.
   await page.waitForFunction(
     initialState => {
       const testing_playground = document.querySelector('#testing-playground');
       return testing_playground && testing_playground.innerHTML !== initialState;
     },
     {},
-    initialState
+    beforeRenderState
   );
+
+  // Check if the component has been rendered by comparing the initial state with the current state.
   const isComponentRendered = await page.evaluate(initialState => {
     const testing_playground = document.querySelector('#testing-playground');
     return testing_playground && testing_playground.innerHTML !== initialState;
-  }, initialState);
+  }, beforeRenderState);
 
   global.expect(isComponentRendered).toBe(true);
 }
