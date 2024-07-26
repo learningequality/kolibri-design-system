@@ -28,6 +28,15 @@ global.afterEach(() => {
   });
 });
 
+// Configure special test blocks for visual tests
+global.describe.visual = (name, fn) => {
+  global.describe(`[Visual] ${name}`, fn);
+};
+
+global.it.visual = (name, fn) => {
+  global.it(`[Visual] ${name}`, fn);
+};
+
 // Register Vue plugins and components
 Vue.use(VueRouter);
 Vue.use(VueCompositionAPI);
