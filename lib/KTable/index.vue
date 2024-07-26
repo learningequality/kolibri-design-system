@@ -29,7 +29,7 @@
             <span v-if="sortable && header.dataType !== DATA_TYPE_OTHERS" class="sort-icon">
               <span v-if="sortKey === index && sortOrder === SORT_ORDER_ASC"><KIcon icon="dropup" /></span>
               <span v-else-if="sortKey === index && sortOrder === SORT_ORDER_DESC"><KIcon icon="dropdown" /></span>
-              <span v-else>⬍</span>
+              <span v-else><KIcon icon="sortColumn" /></span>
             </span>
           </th>
         </tr>
