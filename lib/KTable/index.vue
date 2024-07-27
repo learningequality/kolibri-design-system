@@ -15,7 +15,8 @@
             :class="{
               sortable: sortable && header.dataType !== DATA_TYPE_OTHERS,
               'sticky-header': true,
-              'sticky-column': index === 0
+              'sticky-column': index === 0,
+              'highlight-header': focusedColIndex === index
             }"
             :style="getHeaderStyle(header)"
             role="columnheader"
@@ -56,7 +57,7 @@
               'highlight-cell': (hoveredRowIndex === rowIndex || focusedRowIndex === rowIndex) && colIndex === 0
             }"
             role="gridcell"
-            aria-colindex="colIndex + 1"
+            :aria-colindex="colIndex + 1"
             @keydown="handleKeydown($event, rowIndex, colIndex)"
           >
             <template #default="slotProps">
@@ -92,9 +93,6 @@
       const headers = ref(props.headers);
       const rows = ref(props.rows);
       const useLocalSorting = ref(props.useLocalSorting);
-      const hoveredRowIndex = ref(null);
-      const focusedRowIndex = ref(null);
-
       const {
         sortKey,
         sortOrder,
@@ -150,8 +148,6 @@
         SORT_ORDER_DESC,
         DATA_TYPE_OTHERS,
         getHeaderStyle,
-        hoveredRowIndex,
-        focusedRowIndex,
       };
     },
     props: {
@@ -182,6 +178,13 @@
         type: Boolean,
         default: true,
       },
+    },
+    data() {
+      return {
+        focusedRowIndex: null,
+        focusedColIndex: null,
+        hoveredRowIndex: null,
+      };
     },
     methods: {
       handleKeydown(event, rowIndex, colIndex) {
@@ -248,6 +251,10 @@
 
         this.focusCell(nextRowIndex, nextColIndex);
         this.focusedRowIndex = nextRowIndex === -1 ? null : nextRowIndex;
+        this.focusedColIndex = nextColIndex;
+
+        this.highlightHeader(nextColIndex);
+
         event.preventDefault();
       },
       focusCell(rowIndex, colIndex) {
@@ -259,6 +266,9 @@
             `tbody tr:nth-child(${rowIndex + 1}) td:nth-child(${colIndex + 1})`
           );
         }
+        /* Ensured the focused cell is smoothly scrolled into view.
+           Adjusted the scroll position to account for the height of the sticky header
+           to prevent the focused cell from being overlapped by the header. */
         if (nextCell) {
           nextCell.focus();
           nextCell.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'nearest' });
@@ -279,6 +289,12 @@
       handleRowMouseLeave() {
         this.hoveredRowIndex = null;
       },
+      highlightHeader(colIndex) {
+        const headers = this.$el.querySelectorAll('thead th');
+        headers.forEach((header, index) => {
+          header.classList.toggle('highlight-header', index === colIndex);
+        });
+      },
     },
   };
 
@@ -289,7 +305,7 @@
 .k-table-wrapper {
   overflow: auto;
   position: relative;
-  height:300px;
+  height: 300px;
 }
 
 .k-table {
@@ -333,6 +349,10 @@ td.sticky-header.sticky-column {
 
 .highlight-cell {
   background-color: #f0f0f0;
+}
+
+.highlight-header {
+  background-color: #f0f0f0; 
 }
 
 th:focus {
