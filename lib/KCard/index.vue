@@ -5,7 +5,7 @@
     :title="title"
     :headingLevel="headingLevel"
     :titleLines="titleLines"
-    :class="['k-card', rootClass]"
+    :class="['k-card', rootClass, thumbnailAlignClass]"
     :headingStyles="headingStyles"
   >
     <template v-if="$slots.title" #title>
@@ -167,6 +167,19 @@
         type: String,
         default: 'centerInside',
       },
+      /**
+       * Controls the alignment of the thumbnail area in horizontal layouts.
+       * Only applies to horizontal layouts with 'small' or 'large' thumbnail display.
+       * Ignored in other layouts.
+       * @type {String}
+       * @values 'left', 'right'
+       * @default 'left'
+       */
+      thumbnailAlign: {
+      type: String,
+      default: 'left',
+      validator: (value) => ['left', 'right'].includes(value)
+       },
     },
     computed: {
       rootClass() {
@@ -183,6 +196,13 @@
       },
       thumbnailStyles() {
         return this.stylesAndClasses.thumbnailStyles;
+      },
+
+      thumbnailAlignClass() {
+        if (this.layout === 'horizontal' && this.thumbnailDisplay === 'large') {
+          return `thumbnail-align-${this.thumbnailAlign}`;
+        }
+        return '';
       },
       /*
           Returns dynamic classes and few style-like data that CSS was cumbersome/impossible to use for ,or are in need of using theme, grouped by all possible combinations of layouts.
@@ -377,24 +397,49 @@
       margin: $spacer $spacer 0;
     }
   }
-
   .horizontal-with-large-thumbnail {
-    align-items: flex-end;
-    height: 240px; /* (1) */
+  align-items: flex-end;
+  height: 240px; /* (1) */
+  position: relative;
 
+  .thumbnail {
+    position: absolute;
+    width: 40%;
+    height: 100%;
+  }
+
+  .above-title,
+  .below-title,
+  .footer {
+    width: calc(60% - 2 * #{$spacer}); /* same as heading width defined in script */
+  }
+
+  &.thumbnail-align-left {
     .thumbnail {
-      position: absolute;
       left: 0;
-      width: 40%;
-      height: 100%;
     }
 
     .above-title,
     .below-title,
     .footer {
-      width: calc(60% - 2 * #{$spacer}); /* same as heading width defined in script */
+      margin-left: calc(40% + #{$spacer});
+      margin-right: $spacer;
     }
   }
+
+  &.thumbnail-align-right {
+    .thumbnail {
+      right: 0;
+    }
+
+    .above-title,
+    .below-title,
+    .footer {
+      margin-left: $spacer;
+      margin-right: calc(40% + #{$spacer});
+    }
+  }
+}
 
   .horizontal-with-small-thumbnail {
     align-items: flex-start;
