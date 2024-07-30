@@ -72,6 +72,26 @@
 
   import BaseCard from './BaseCard.vue';
 
+  const Layouts = {
+    HORIZONTAL: 'horizontal',
+    VERTICAL: 'vertical'
+  };
+
+  const Thumbnail_Displays = {
+    NONE: 'none',
+    SMALL: 'small',
+    LARGE: 'large'
+  };
+
+  function cardValidator(allowedValues, propName) {
+  return function(value) {
+    if (!Object.values(allowedValues).includes(value)) {
+      throw new Error(`Invalid ${propName} value: '${value}'. Allowed values are: ${Object.values(allowedValues).join(', ')}`);
+    }
+    return true;
+  }
+}
+
   export default {
     name: 'KCard',
     components: { BaseCard },
@@ -107,19 +127,20 @@
        * @param {String} value - The layout value.
        * @returns {Boolean} - True if the value is not empty, false otherwise.
        */
-      layout: {
-        type: String,
-        default: 'horizontal',
+       layout: {
+      type: String,
+      default:  Layouts .HORIZONTAL,
+      validator: cardValidator(Layouts, 'layout')
       },
       /**
        * Controls how the thumbnail appears in the card.
        * Expected Options: 'none' (default), 'small', or 'large'.
        * */
-      thumbnailDisplay: {
-        type: String,
-        required: false,
-        default: 'none',
-      },
+       thumbnailDisplay: {
+      type: String,
+      default: Thumbnail_Displays.NONE,
+      validator: cardValidator(Thumbnail_Displays, 'thumbnailDisplay')
+    },
       /**
        * Sets the thumbnail path.
        * Defaults to null if not provided.
