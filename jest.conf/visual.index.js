@@ -94,6 +94,7 @@ module.exports = async () => {
       preset: 'jest-puppeteer',
       testTimeout: 50000,
       moduleFileExtensions: ['js', 'json', 'vue'],
+      testNamePattern: '\\[Visual\\]',
       moduleNameMapper: {
         '\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga|css)$': path.resolve(
           __dirname,
