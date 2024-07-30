@@ -65,7 +65,7 @@ const checkPageLoad = async (url, timeout = 30000) => {
 };
 
 const validatePercyToken = () => {
-  console.log("envs", Object.keys(process.env));
+  console.log("Percy token", process.env.PERCY_TOKEN);
   if (!process.env.PERCY_TOKEN) {
     throw new Error(
       'PERCY_TOKEN environment variable is not set. Please set it to run visual tests.'
