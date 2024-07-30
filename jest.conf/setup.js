@@ -11,7 +11,6 @@ import VueRouter from 'vue-router';
 import VueIntl from 'vue-intl';
 import VueCompositionAPI from '@vue/composition-api';
 import KThemePlugin from '../lib/KThemePlugin';
-import { describeUnit, describeVisual } from './testUtils';
 
 global.beforeEach(() => {
   return new Promise(resolve => {
@@ -28,6 +27,15 @@ global.afterEach(() => {
     return process.nextTick(resolve);
   });
 });
+
+// Configure special test blocks for visual tests
+global.describe.visual = (name, fn) => {
+  global.describe(`[Visual] ${name}`, fn);
+};
+
+global.it.visual = (name, fn) => {
+  global.it(`[Visual] ${name}`, fn);
+};
 
 // Register Vue plugins and components
 Vue.use(VueRouter);
@@ -56,6 +64,3 @@ global.flushPromises = function flushPromises() {
     setImmediate(resolve);
   });
 };
-
-global.describeUnit = describeUnit;
-global.describeVisual = describeVisual;
