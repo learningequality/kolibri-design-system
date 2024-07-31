@@ -176,10 +176,10 @@
        * @default 'left'
        */
       thumbnailAlign: {
-      type: String,
-      default: 'left',
-      validator: (value) => ['left', 'right'].includes(value)
-       },
+        type: String,
+        default: 'left',
+        validator: value => ['left', 'right'].includes(value),
+      },
     },
     computed: {
       rootClass() {
@@ -266,8 +266,11 @@
             },
           };
         }
-        if (this.layout === 'horizontal' && this.thumbnailDisplay === 'large'
-        && this.thumbnailAlign === 'right') {
+        if (
+          this.layout === 'horizontal' &&
+          this.thumbnailDisplay === 'large' &&
+          this.thumbnailAlign === 'right'
+        ) {
           return {
             rootClass: 'horizontal-with-large-thumbnail-and-right-alignment',
             titleLines: 2,
@@ -339,10 +342,10 @@
   $spacer: 24px;
 
   /*
-      Just couple of comments that are referenced from several places:
-      - (1) Intentionally fixed. Cards on the same row of a grid should have the same overall height and their sections too should have the same height so that information is placed consistently. As documented, consumers need to ensure that contents provided via slots fits well or is truncated.
-      - (2) Solves issues with fixed height in a flex item
-    */
+        Just couple of comments that are referenced from several places:
+        - (1) Intentionally fixed. Cards on the same row of a grid should have the same overall height and their sections too should have the same height so that information is placed consistently. As documented, consumers need to ensure that contents provided via slots fits well or is truncated.
+        - (2) Solves issues with fixed height in a flex item
+      */
 
   /************* Common styles **************/
 
@@ -414,48 +417,48 @@
     }
   }
   .horizontal-with-large-thumbnail {
-  align-items: flex-end;
-  height: 240px; /* (1) */
-  position: relative;
+    position: relative;
+    align-items: flex-end;
+    height: 240px; /* (1) */
 
-  .thumbnail {
-    position: absolute;
-    width: 40%;
-    height: 100%;
-  }
-
-  .above-title,
-  .below-title,
-  .footer {
-    width: calc(60% - 2 * #{$spacer}); /* same as heading width defined in script */
-  }
-
-  &.thumbnail-align-left {
     .thumbnail {
-      left: 0;
+      position: absolute;
+      width: 40%;
+      height: 100%;
     }
 
     .above-title,
     .below-title,
     .footer {
-      margin-left: calc(40% + #{$spacer});
-      margin-right: $spacer;
-    }
-  }
-
-  &.thumbnail-align-right {
-    .thumbnail {
-      right: 0;
+      width: calc(60% - 2 * #{$spacer}); /* same as heading width defined in script */
     }
 
-    .above-title,
-    .below-title,
-    .footer {
-      margin-left: $spacer;
-      margin-right: calc(40% + #{$spacer});
+    &.thumbnail-align-left {
+      .thumbnail {
+        left: 0;
+      }
+
+      .above-title,
+      .below-title,
+      .footer {
+        margin-right: $spacer;
+        margin-left: calc(40% + #{$spacer});
+      }
+    }
+
+    &.thumbnail-align-right {
+      .thumbnail {
+        right: 0;
+      }
+
+      .above-title,
+      .below-title,
+      .footer {
+        margin-right: calc(40% + #{$spacer});
+        margin-left: $spacer;
+      }
     }
   }
-}
 
   .horizontal-with-small-thumbnail {
     align-items: flex-start;
@@ -485,9 +488,9 @@
 
     .thumbnail {
       position: absolute;
+      right: 0;
       width: 35%;
       min-width: 80px;
-      right: 0;
       height: 100%;
     }
 
