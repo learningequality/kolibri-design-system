@@ -266,6 +266,22 @@
             },
           };
         }
+        if (this.layout === 'horizontal' && this.thumbnailDisplay === 'large'
+        && this.thumbnailAlign === 'right') {
+          return {
+            rootClass: 'horizontal-with-large-thumbnail-and-right-alignment',
+            titleLines: 2,
+            thumbnailAspectRatio: '1:1',
+            headingStyles: {
+              ...headingCommonStyles,
+              width: `calc(70% - ${SPACER * 3}px)` /* same as slots width defined in styles */,
+            },
+            thumbnailStyles: {
+              ...thumbnailCommonStyles,
+              borderRadius: '0 8px 8px 0',
+            },
+          };
+        }
         if (this.layout === 'horizontal' && this.thumbnailDisplay === 'large') {
           return {
             rootClass: 'horizontal-with-large-thumbnail',
@@ -460,6 +476,25 @@
 
     .footer {
       width: calc(100% - 2 * #{$spacer});
+    }
+  }
+
+  .horizontal-with-large-thumbnail-and-right-alignment {
+    align-items: flex-start;
+    height: 220px; /* (1) */
+
+    .thumbnail {
+      position: absolute;
+      width: 30%;
+      min-width: 80px;
+      right: 0;
+      height: 100%;
+    }
+
+    .above-title,
+    .below-title,
+    .footer {
+      width: calc(60% - 2 * #{$spacer});
     }
   }
 
