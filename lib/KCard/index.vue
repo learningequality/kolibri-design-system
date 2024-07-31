@@ -485,7 +485,7 @@
 
     .thumbnail {
       position: absolute;
-      width: 30%;
+      width: 35%;
       min-width: 80px;
       right: 0;
       height: 100%;
