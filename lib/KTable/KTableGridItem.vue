@@ -48,7 +48,18 @@
     },
     methods: {
       onKeydown(event) {
-        this.$emit('keydown', event, this.rowIndex, this.colIndex);
+        // Check if the focused element is a button or actionable item
+        const focusedElement = event.target;
+        if (
+          event.key === 'Enter' &&
+          (focusedElement.tagName === 'BUTTON' ||
+            focusedElement.tagName === 'A' ||
+            focusedElement.hasAttribute('role'))
+        ) {
+          focusedElement.click();
+        } else {
+          this.$emit('keydown', event, this.rowIndex, this.colIndex);
+        }
       },
     },
   };
