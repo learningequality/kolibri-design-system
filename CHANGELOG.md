@@ -15,6 +15,26 @@ Changelog is rather internal in nature. See release notes for the public overvie
 
 [#687]: https://github.com/learningequality/kolibri-design-system/pull/687
 
+[#707]
+  - **Description:** Card Validations
+  - **Products impact:**  
+  - **Addresses:** [#695](https://github.com/learningequality/kolibri-design-system/issues/695)
+  - **Components:** `KCard`
+  - **Breaking:** No
+  - **Impacts a11y:**  No
+  - **Guidance:**
+ [#707] https://github.com/learningequality/kolibri-design-system/pull/707
+
+[#709]
+  - **Description:**  Update spaces to the latest design`KCard` 
+  - **Products impact:**  Card updates 
+  - **Addresses:** [#704](https://github.com/learningequality/kolibri-design-system/issues/704)
+  - **Components:** `KCard` 
+  - **Breaking:** N0
+  - **Impacts a11y:** No
+  - **Guidance:**
+ [#709] https://github.com/learningequality/kolibri-design-system/pull/709
+
 [#625]
   - **Description:** Initial implementation of `KCard` component
   - **Products impact:** New Component
@@ -103,6 +123,27 @@ Changelog is rather internal in nature. See release notes for the public overvie
 [#615]: https://github.com/learningequality/kolibri-design-system/pull/615
 
 ## Version 4.x.x (`release-v4` branch)
+
+
+- [#680]
+  - **Description:** Adds boolean `appendToRoot` prop to teleport the modal to the body element if true.
+  - **Products impact:** new API.
+  - **Addresses:** https://github.com/learningequality/kolibri/issues/12447.
+  - **Components:** KModal.
+  - **Breaking:** no
+  - **Impacts a11y:** no
+  - **Guidance:** 
+
+- [#680]
+  - **Description:** Fixes the calculation of overflowed items when changes in the size of the list item slots occur.
+  - **Products impact:** bugfix.
+  - **Addresses:** https://github.com/learningequality/kolibri/issues/12447.
+  - **Components:** KListWithOverflow.
+  - **Breaking:** no
+  - **Impacts a11y:** no
+  - **Guidance:** 
+
+[#680]: https://github.com/learningequality/kolibri-design-system/pull/680
 
 - [#673]
   - **Description:** Remove white space below Ktabs

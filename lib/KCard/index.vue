@@ -72,6 +72,30 @@
 
   import BaseCard from './BaseCard.vue';
 
+  const Layouts = {
+    HORIZONTAL: 'horizontal',
+    VERTICAL: 'vertical',
+  };
+
+  const Thumbnail_Displays = {
+    NONE: 'none',
+    SMALL: 'small',
+    LARGE: 'large',
+  };
+
+  function cardValidator(allowedValues, propName) {
+    return function(value) {
+      if (!Object.values(allowedValues).includes(value)) {
+        throw new Error(
+          `Invalid ${propName} value: '${value}'. Allowed values are: ${Object.values(
+            allowedValues
+          ).join(', ')}`
+        );
+      }
+      return true;
+    };
+  }
+
   export default {
     name: 'KCard',
     components: { BaseCard },
@@ -110,6 +134,7 @@
       layout: {
         type: String,
         default: 'horizontal',
+        validator: cardValidator(Layouts, 'layout'),
       },
       /**
        * Controls how the thumbnail appears in the card.
@@ -117,8 +142,8 @@
        * */
       thumbnailDisplay: {
         type: String,
-        required: false,
         default: 'none',
+        validator: cardValidator(Thumbnail_Displays, 'thumbnailDisplay'),
       },
       /**
        * Sets the thumbnail path.
@@ -160,16 +185,16 @@
         return this.stylesAndClasses.thumbnailStyles;
       },
       /*
-        Returns dynamic classes and few style-like data that CSS was cumbersome/impossible to use for ,or are in need of using theme, grouped by all possible combinations of layouts.
+          Returns dynamic classes and few style-like data that CSS was cumbersome/impossible to use for ,or are in need of using theme, grouped by all possible combinations of layouts.
 
-        New styles and classes are meant to be added to this single-source-of-truth object so
-        that we can easily locate all styling being applied to a particular layout
+          New styles and classes are meant to be added to this single-source-of-truth object so
+          that we can easily locate all styling being applied to a particular layout
 
-        Could be further simplified by using solely dynamic styles, but that would have detrimental effects on our auto RTL machinery and we would need to take care manually of more places. 
-      */
+          Could be further simplified by using solely dynamic styles, but that would have detrimental effects on our auto RTL machinery and we would need to take care manually of more places. 
+        */
       stylesAndClasses() {
         /* In px. Needs to be the same as $spacer variable in styles part */
-        const SPACER = 12;
+        const SPACER = 24;
 
         const headingCommonStyles = {
           order: 3,
@@ -275,7 +300,7 @@
 <style lang="scss" scoped>
 
   /* Needs to be the same as SPACER constant in JavaScript part */
-  $spacer: 12px;
+  $spacer: 24px;
 
   /*
       Just couple of comments that are referenced from several places:
