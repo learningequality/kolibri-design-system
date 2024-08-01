@@ -57,7 +57,7 @@
     </DocsPageSection>
 
     <DocsPageSection title="Demo" anchor="#demo">
-      <p>Send messages below and turn on your screen reader or observe the content of <code>&lt;div id="k-live-region"&gt;</code> in the browser console.</p>
+      <p>Send messages below and turn on your screen reader. You could also observe the content of <code>&lt;div id="k-live-region"&gt;</code> in the browser console, but note that an announcement will be visible for just a very brief moment.</p>
 
       <DocsShow language="html">
         <KTextbox label="Polite message" :value="politeMessageInput" @input="updatePoliteMessage" />
