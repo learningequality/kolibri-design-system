@@ -3,7 +3,7 @@
   <DocsPageTemplate apiDocs>
 
     <DocsPageSection title="Overview" anchor="#overview">
-      <p>A composable that offers <code>sendPoliteMessage</code> and <code>sendAssertiveMessage</code> functions that send polite and assertive messages to their corresponding ARIA live regions.</p>
+      <p>A composable that offers <code>sendPoliteMessage</code> and <code>sendAssertiveMessage</code> functions that send polite and assertive messages to their corresponding <DocsExternalLink href="https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/ARIA_Live_Regions" text="ARIA live regions" />.</p>
     </DocsPageSection>
 
     <DocsPageSection title="When to use live regions" anchor="#usage">
