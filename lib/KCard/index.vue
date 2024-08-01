@@ -74,23 +74,27 @@
 
   const Layouts = {
     HORIZONTAL: 'horizontal',
-    VERTICAL: 'vertical'
+    VERTICAL: 'vertical',
   };
 
   const Thumbnail_Displays = {
     NONE: 'none',
     SMALL: 'small',
-    LARGE: 'large'
+    LARGE: 'large',
   };
 
   function cardValidator(allowedValues, propName) {
-  return function(value) {
-    if (!Object.values(allowedValues).includes(value)) {
-      throw new Error(`Invalid ${propName} value: '${value}'. Allowed values are: ${Object.values(allowedValues).join(', ')}`);
-    }
-    return true;
+    return function(value) {
+      if (!Object.values(allowedValues).includes(value)) {
+        throw new Error(
+          `Invalid ${propName} value: '${value}'. Allowed values are: ${Object.values(
+            allowedValues
+          ).join(', ')}`
+        );
+      }
+      return true;
+    };
   }
-}
 
   export default {
     name: 'KCard',
@@ -127,20 +131,20 @@
        * @param {String} value - The layout value.
        * @returns {Boolean} - True if the value is not empty, false otherwise.
        */
-       layout: {
-      type: String,
-      default:  Layouts .HORIZONTAL,
-      validator: cardValidator(Layouts, 'layout')
+      layout: {
+        type: String,
+        default: 'horizontal',
+        validator: cardValidator(Layouts, 'layout'),
       },
       /**
        * Controls how the thumbnail appears in the card.
        * Expected Options: 'none' (default), 'small', or 'large'.
        * */
-       thumbnailDisplay: {
-      type: String,
-      default: Thumbnail_Displays.NONE,
-      validator: cardValidator(Thumbnail_Displays, 'thumbnailDisplay')
-    },
+      thumbnailDisplay: {
+        type: String,
+        default: 'none',
+        validator: cardValidator(Thumbnail_Displays, 'thumbnailDisplay'),
+      },
       /**
        * Sets the thumbnail path.
        * Defaults to null if not provided.
@@ -181,13 +185,13 @@
         return this.stylesAndClasses.thumbnailStyles;
       },
       /*
-        Returns dynamic classes and few style-like data that CSS was cumbersome/impossible to use for ,or are in need of using theme, grouped by all possible combinations of layouts.
+          Returns dynamic classes and few style-like data that CSS was cumbersome/impossible to use for ,or are in need of using theme, grouped by all possible combinations of layouts.
 
-        New styles and classes are meant to be added to this single-source-of-truth object so
-        that we can easily locate all styling being applied to a particular layout
+          New styles and classes are meant to be added to this single-source-of-truth object so
+          that we can easily locate all styling being applied to a particular layout
 
-        Could be further simplified by using solely dynamic styles, but that would have detrimental effects on our auto RTL machinery and we would need to take care manually of more places. 
-      */
+          Could be further simplified by using solely dynamic styles, but that would have detrimental effects on our auto RTL machinery and we would need to take care manually of more places. 
+        */
       stylesAndClasses() {
         /* In px. Needs to be the same as $spacer variable in styles part */
         const SPACER = 24;
