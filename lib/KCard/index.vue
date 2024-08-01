@@ -34,7 +34,7 @@
           as progressive loading experience.
         -->
         <span
-          v-if="$slots.thumbnailPlaceholder && !thumbnailSrc"
+          v-if="$slots.thumbnailPlaceholder"
           class="thumbnail-placeholder"
         >
           <!-- @slot Places content to the thumbnail placeholder area. -->
