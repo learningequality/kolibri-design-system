@@ -77,7 +77,7 @@
     <DocsPageSection title="Related" anchor="#related">
       <ul>
         <li>
-          <DocsInternalLink href="/installation#initialize-dom" text="KDS installation step" /> that attaches live regions to an application's DOM
+          <DocsInternalLink href="/installation#install-plugin" text="KDS installation step" /> that attaches live regions to an application's DOM
         </li>
       </ul>
     </DocsPageSection>
