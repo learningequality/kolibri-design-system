@@ -54,10 +54,10 @@
 <script>
 
   /*
-             Playground is a Vue component too,
-             so you can also use `data`, `methods`, etc.
-             as usual if helpful
-           */
+               Playground is a Vue component too,
+               so you can also use `data`, `methods`, etc.
+               as usual if helpful
+             */
   import { ref } from '@vue/composition-api';
   import KTable from '../../lib/KTable';
 
@@ -108,18 +108,19 @@
           ['Jane Smith', 34, 'Los Angeles', '2021-12-22T00:00:00Z', 'N/A'],
           ['Samuel Green', 22, 'Chicago', '2023-03-10T00:00:00Z', 'N/A'],
           ['Alice Johnson', 30, 'Houston', '2020-07-18T00:00:00Z', 'N/A'],
-          ['John Doe', 28, 'New York', '2022-01-15T00:00:00Z', 'N/A'],
-          ['Jane Smith', 34, 'Los Angeles', '2021-12-22T00:00:00Z', 'N/A'],
-          ['Samuel Green', 22, 'Chicago', '2023-03-10T00:00:00Z', 'N/A'],
-          ['Alice Johnson', 30, 'Houston', '2020-07-18T00:00:00Z', 'N/A'],
-          ['John Doe', 28, 'New York', '2022-01-15T00:00:00Z', 'N/A'],
-          ['Jane Smith', 34, 'Los Angeles', '2021-12-22T00:00:00Z', 'N/A'],
-          ['Samuel Green', 22, 'Chicago', '2023-03-10T00:00:00Z', 'N/A'],
-          ['Alice Johnson', 30, 'Houston', '2020-07-18T00:00:00Z', 'N/A'],
-          ['John Doe', 28, 'New York', '2022-01-15T00:00:00Z', 'N/A'],
-          ['Jane Smith', 34, 'Los Angeles', '2021-12-22T00:00:00Z', 'N/A'],
-          ['Samuel Green', 22, 'Chicago', '2023-03-10T00:00:00Z', 'N/A'],
-          ['Alice Johnson', 30, 'Houston', '2020-07-18T00:00:00Z', 'N/A'],
+          ['Michael Brown', 45, 'Phoenix', '2019-11-05T00:00:00Z', 'N/A'],
+          ['Emily Davis', 27, 'Philadelphia', '2021-08-14T00:00:00Z', 'N/A'],
+          ['Christopher Wilson', 33, 'San Antonio', '2022-04-22T00:00:00Z', 'N/A'],
+          ['Jessica Martinez', 29, 'San Diego', '2020-09-30T00:00:00Z', 'N/A'],
+          ['Daniel Anderson', 40, 'Dallas', '2018-06-25T00:00:00Z', 'N/A'],
+          ['Laura Thomas', 31, 'San Jose', '2021-03-18T00:00:00Z', 'N/A'],
+          ['Matthew Jackson', 26, 'Austin', '2022-07-12T00:00:00Z', 'N/A'],
+          ['Sarah White', 35, 'Fort Worth', '2020-02-27T00:00:00Z', 'N/A'],
+          ['David Harris', 38, 'Columbus', '2019-10-19T00:00:00Z', 'N/A'],
+          ['Sophia Clark', 24, 'Charlotte', '2023-01-05T00:00:00Z', 'N/A'],
+          ['James Lewis', 32, 'San Francisco', '2021-05-23T00:00:00Z', 'N/A'],
+          ['Olivia Robinson', 28, 'Indianapolis', '2022-11-11T00:00:00Z', 'N/A'],
+          ['Benjamin Walker', 37, 'Seattle', '2020-12-03T00:00:00Z', 'N/A'],
         ],
         backendRows: [
           ['John Doe', 28, 'New York', '2022-01-15T00:00:00Z', 'N/A'],

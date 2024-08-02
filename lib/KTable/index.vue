@@ -291,10 +291,13 @@
       handleRowMouseLeave() {
         this.hoveredRowIndex = null;
       },
+      setHighlightHeader(header, highlight) {
+        header.style.backgroundColor = highlight ? this.$themePalette.grey.v_50 : '';
+      },
       highlightHeader(colIndex) {
         const headers = this.$el.querySelectorAll('thead th');
         headers.forEach((header, index) => {
-          header.classList.toggle('highlight-header', index === colIndex);
+          this.setHighlightHeader(header, index === colIndex);
         });
       },
     },
@@ -343,11 +346,6 @@ td.sticky-header.sticky-column {
 .sortable {
   cursor: pointer;
 }
-
-.highlight-header {
-  background-color: #f0f0f0; 
-}
-
 th:focus {
   outline: 2px solid #007bff;
   outline-offset: -2px;
