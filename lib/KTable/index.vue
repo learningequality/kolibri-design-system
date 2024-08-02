@@ -16,9 +16,10 @@
               sortable: sortable && header.dataType !== DATA_TYPE_OTHERS,
               'sticky-header': true,
               'sticky-column': index === 0,
-              'highlight-header': focusedColIndex === index
             }"
-            :style="getHeaderStyle(header)"
+            :style="[getHeaderStyle(header),
+                     index === 0 ? { backgroundColor: $themePalette.white } : {} ,
+                     focusedColIndex === index ? { backgroundColor: $themePalette.grey.v_50 } : {}]"
             role="columnheader"
             :aria-colindex="index + 1"
             @click="sortable && header.dataType !== DATA_TYPE_OTHERS ? handleSort(index) : null"
@@ -39,7 +40,7 @@
         <tr
           v-for="(row, rowIndex) in finalRows"
           :key="rowIndex"
-          :class="{ 'highlight-row': hoveredRowIndex === rowIndex || focusedRowIndex === rowIndex }"
+          :style="hoveredRowIndex === rowIndex || focusedRowIndex === rowIndex ? { backgroundColor: $themePalette.grey.v_50 } : {}"
           @mouseover="handleRowMouseOver(rowIndex)"
           @mouseleave="handleRowMouseLeave"
         >
@@ -54,8 +55,9 @@
             :colIndex="colIndex"
             :class="{
               'sticky-column': colIndex === 0,
-              'highlight-cell': (hoveredRowIndex === rowIndex || focusedRowIndex === rowIndex) && colIndex === 0
             }"
+            :style="[colIndex === 0 ? { backgroundColor: $themePalette.white } : {},(hoveredRowIndex === rowIndex || focusedRowIndex === rowIndex) && colIndex === 0 ? { backgroundColor: $themePalette.grey.v_50 } : {}
+            ]"
             role="gridcell"
             :aria-colindex="colIndex + 1"
             @keydown="handleKeydown($event, rowIndex, colIndex)"
@@ -323,14 +325,13 @@ td {
 .sticky-header {
   position: sticky;
   top: 0;
-  background-color: #f8f9fa;
+  background-color: #ffffff;
   z-index: 3;
 }
 
 .sticky-column {
   position: sticky;
   left: 0;
-  background-color: #f8f9fa;
   z-index: 2;
 }
 
@@ -341,14 +342,6 @@ td.sticky-header.sticky-column {
 
 .sortable {
   cursor: pointer;
-}
-
-.highlight-row {
-  background-color: #f0f0f0;
-}
-
-.highlight-cell {
-  background-color: #f0f0f0;
 }
 
 .highlight-header {
