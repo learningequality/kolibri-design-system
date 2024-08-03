@@ -1,6 +1,12 @@
 <template>
 
-  <td :style="{ textAlign: textAlign, minWidth: minWidth, width: width }" tabindex="0" role="gridcell" @keydown="onKeydown">
+  <td
+    :class="$computedClass(coreOutlineFocus)"
+    :style="{ textAlign: textAlign, minWidth: minWidth, width: width }"
+    tabindex="0"
+    role="gridcell"
+    @keydown="onKeydown"
+  >
     <slot :content="content">
       {{ content }}
     </slot>
@@ -42,6 +48,14 @@
       },
     },
     computed: {
+      coreOutlineFocus() {
+        return {
+          ':focus': {
+            ...this.$coreOutline,
+            outlineOffset: '-2px',
+          },
+        };
+      },
       textAlign() {
         return this.dataType === DATA_TYPE_NUMERIC ? 'right' : 'left';
       },
@@ -73,10 +87,5 @@ td {
   white-space: normal; 
 }
 
-td:focus {
-  outline: 2px solid #007bff;
-  outline-offset: -2px;
-  z-index: 1;
-  position: relative;
-}
+
 </style>

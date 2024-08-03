@@ -13,6 +13,7 @@
             tabindex="0"
             :aria-sort="sortable && header.dataType !== DATA_TYPE_OTHERS ? getAriaSort(index) : null"
             :class="{
+              [$computedClass(coreOutlineFocus)]: true,
               sortable: sortable && header.dataType !== DATA_TYPE_OTHERS,
               'sticky-header': true,
               'sticky-column': index === 0,
@@ -63,7 +64,7 @@
             @keydown="handleKeydown($event, rowIndex, colIndex)"
           >
             <template #default="slotProps">
-              <slot name="cell" :content="slotProps.content" :rowIndex="rowIndex" :colIndex="colIndex">
+              <slot name="cell" :content="slotProps.content" :rowIndex="rowIndex" :colIndex="colIndex" :row="row">
                 {{ slotProps.content }}
               </slot>
             </template>
@@ -188,6 +189,16 @@
         hoveredRowIndex: null,
       };
     },
+    computed: {
+      coreOutlineFocus() {
+        return {
+          ':focus': {
+            ...this.$coreOutline,
+            outlineOffset: '-2px',
+          },
+        };
+      },
+    },
     methods: {
       handleKeydown(event, rowIndex, colIndex) {
         const key = event.key;
@@ -247,6 +258,15 @@
               this.handleSort(colIndex);
             }
             break;
+          case 'Tab': //To handle focused row and highlight header state for tab key as well
+            if (event.shiftKey) {
+              nextColIndex = colIndex > 0 ? colIndex - 1 : totalCols - 1;
+              nextRowIndex = colIndex > 0 ? rowIndex : rowIndex - 1;
+            } else {
+              nextColIndex = (colIndex + 1) % totalCols;
+              nextRowIndex = colIndex === totalCols - 1 ? rowIndex + 1 : rowIndex;
+            }
+            break;
           default:
             return;
         }
@@ -274,13 +294,25 @@
         if (nextCell) {
           nextCell.focus();
           nextCell.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'nearest' });
+
+          // Adjust scroll position to account for sticky header height
           if (rowIndex !== -1) {
             const tableWrapper = this.$el.closest('.k-table-wrapper');
             const headerHeight = this.$el.querySelector('thead').offsetHeight;
             const wrapperRect = tableWrapper.getBoundingClientRect();
             const cellRect = nextCell.getBoundingClientRect();
+
+            // Adjust for vertical scrolling if the cell is hidden behind the sticky header
             if (cellRect.top < wrapperRect.top + headerHeight) {
               tableWrapper.scrollTop -= wrapperRect.top + headerHeight - cellRect.top;
+            }
+
+            // Adjust for horizontal scrolling if the cell is hidden behind the sticky column
+            const stickyColumnWidth = this.$el.querySelector('.sticky-column').offsetWidth;
+            if (cellRect.left < wrapperRect.left + stickyColumnWidth) {
+              tableWrapper.scrollLeft -= wrapperRect.left + stickyColumnWidth - cellRect.left;
+            } else if (cellRect.right > wrapperRect.right) {
+              tableWrapper.scrollLeft += cellRect.right - wrapperRect.right;
             }
           }
         }
@@ -347,8 +379,6 @@ td.sticky-header.sticky-column {
   cursor: pointer;
 }
 th:focus {
-  outline: 2px solid #007bff;
-  outline-offset: -2px;
   z-index: 1;
   position: relative;
 }
