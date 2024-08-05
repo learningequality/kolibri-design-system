@@ -4,6 +4,17 @@ Changelog is rather internal in nature. See release notes for the public overvie
 
 ## Upcoming version 5.x.x (`develop` branch)
 
+ [#688]
+  - **Description:**  Update`KCard` styling 
+  - **Products impact:**  Card updates 
+  - **Addresses:** 
+  - **Components:** `KCard` 
+  - **Breaking:** N0
+  - **Impacts a11y:** No
+  - **Guidance:**
+ [#688] https://github.com/learningequality/kolibri-design-system/pull/688
+
+
 [#707]
   - **Description:** Card Validations
   - **Products impact:**  
