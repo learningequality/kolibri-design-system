@@ -288,33 +288,10 @@
             `tbody tr:nth-child(${rowIndex + 1}) td:nth-child(${colIndex + 1})`
           );
         }
-        /* Ensured the focused cell is smoothly scrolled into view.
-           Adjusted the scroll position to account for the height of the sticky header
-           to prevent the focused cell from being overlapped by the header. */
+        // Ensured the focused cell is smoothly scrolled into view.
         if (nextCell) {
           nextCell.focus();
           nextCell.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'nearest' });
-
-          // Adjust scroll position to account for sticky header height
-          if (rowIndex !== -1) {
-            const tableWrapper = this.$el.closest('.k-table-wrapper');
-            const headerHeight = this.$el.querySelector('thead').offsetHeight;
-            const wrapperRect = tableWrapper.getBoundingClientRect();
-            const cellRect = nextCell.getBoundingClientRect();
-
-            // Adjust for vertical scrolling if the cell is hidden behind the sticky header
-            if (cellRect.top < wrapperRect.top + headerHeight) {
-              tableWrapper.scrollTop -= wrapperRect.top + headerHeight - cellRect.top;
-            }
-
-            // Adjust for horizontal scrolling if the cell is hidden behind the sticky column
-            const stickyColumnWidth = this.$el.querySelector('.sticky-column').offsetWidth;
-            if (cellRect.left < wrapperRect.left + stickyColumnWidth) {
-              tableWrapper.scrollLeft -= wrapperRect.left + stickyColumnWidth - cellRect.left;
-            } else if (cellRect.right > wrapperRect.right) {
-              tableWrapper.scrollLeft += cellRect.right - wrapperRect.right;
-            }
-          }
         }
       },
       handleRowMouseOver(rowIndex) {
@@ -324,7 +301,9 @@
         this.hoveredRowIndex = null;
       },
       setHighlightHeader(header, highlight) {
-        header.style.backgroundColor = highlight ? this.$themePalette.grey.v_50 : '';
+        header.style.backgroundColor = highlight
+          ? this.$themePalette.grey.v_50
+          : this.$themePalette.white;
       },
       highlightHeader(colIndex) {
         const headers = this.$el.querySelectorAll('thead th');
@@ -342,12 +321,13 @@
 .k-table-wrapper {
   overflow: auto;
   position: relative;
-  height: 300px;
+  height:300px;
 }
 
 .k-table {
   border-collapse: collapse;
   width: 100%;
+  
 }
 
 th,
@@ -360,26 +340,21 @@ td {
 .sticky-header {
   position: sticky;
   top: 0;
-  background-color: #ffffff;
-  z-index: 3;
+  z-index: 3; 
 }
 
 .sticky-column {
   position: sticky;
   left: 0;
-  z-index: 2;
+  z-index: 2; 
 }
 
 th.sticky-header.sticky-column,
 td.sticky-header.sticky-column {
-  z-index: 4;
+  z-index: 4; 
 }
-
 .sortable {
   cursor: pointer;
 }
-th:focus {
-  z-index: 1;
-  position: relative;
-}
+
 </style>
