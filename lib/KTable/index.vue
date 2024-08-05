@@ -19,7 +19,7 @@
               'sticky-column': index === 0,
             }"
             :style="[getHeaderStyle(header),
-                     index === 0 ? { backgroundColor: $themePalette.white } : {} ,
+                     { backgroundColor: $themePalette.white } ,
                      focusedColIndex === index ? { backgroundColor: $themePalette.grey.v_50 } : {}]"
             role="columnheader"
             :aria-colindex="index + 1"
