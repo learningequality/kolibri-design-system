@@ -14,6 +14,16 @@ Changelog is rather internal in nature. See release notes for the public overvie
   - **Guidance:** Find all polite and live regions (or roles) in an application. Remove them and instead use `useKLiveRegion.sendPoliteMessage` and `useKLiveRegion.sendAssertiveMessage` to update the live regions that KDS inserted to document body during installation.
 
 [#687]: https://github.com/learningequality/kolibri-design-system/pull/687
+ [#688]
+  - **Description:**  Update`KCard` styling 
+  - **Products impact:**  Card updates 
+  - **Addresses:** 
+  - **Components:** `KCard` 
+  - **Breaking:** N0
+  - **Impacts a11y:** No
+  - **Guidance:**
+ [#688] https://github.com/learningequality/kolibri-design-system/pull/688
+
 
 [#707]
   - **Description:** Card Validations

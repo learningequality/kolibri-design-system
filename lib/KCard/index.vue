@@ -334,8 +334,8 @@
 
   .below-title {
     order: 4;
-    height: 18px; /* (1) */
-    min-height: 18px; /* (2) */
+    height: 26px; /* (1) */
+    min-height: 26px; /* (2) */
     margin: 0 $spacer $spacer;
     overflow: hidden; /* (1) */
   }
