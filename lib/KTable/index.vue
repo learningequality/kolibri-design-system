@@ -1,7 +1,7 @@
 <template>
 
-  <div class="k-table" role="grid">
-    <table>
+  <div class="k-table-wrapper">
+    <table class="k-table" role="grid">
       <caption v-if="caption">
         {{ caption }}
       </caption>
@@ -12,9 +12,17 @@
             :key="index"
             tabindex="0"
             :aria-sort="sortable && header.dataType !== DATA_TYPE_OTHERS ? getAriaSort(index) : null"
-            :class="{ sortable: sortable && header.dataType !== DATA_TYPE_OTHERS }"
+            :class="{
+              [$computedClass(coreOutlineFocus)]: true,
+              sortable: sortable && header.dataType !== DATA_TYPE_OTHERS,
+              'sticky-header': true,
+              'sticky-column': index === 0,
+            }"
+            :style="[getHeaderStyle(header),
+                     { backgroundColor: $themePalette.white } ,
+                     focusedColIndex === index ? { backgroundColor: $themePalette.grey.v_50 } : {}]"
             role="columnheader"
-            aria-colindex="index + 1"
+            :aria-colindex="index + 1"
             @click="sortable && header.dataType !== DATA_TYPE_OTHERS ? handleSort(index) : null"
             @keydown="handleKeydown($event, -1, index)"
           >
@@ -24,26 +32,39 @@
             <span v-if="sortable && header.dataType !== DATA_TYPE_OTHERS" class="sort-icon">
               <span v-if="sortKey === index && sortOrder === SORT_ORDER_ASC"><KIcon icon="dropup" /></span>
               <span v-else-if="sortKey === index && sortOrder === SORT_ORDER_DESC"><KIcon icon="dropdown" /></span>
-              <span v-else>⬍</span>
+              <span v-else><KIcon icon="sortColumn" /></span>
             </span>
           </th>
         </tr>
       </thead>
       <tbody>
-        <tr v-for="(row, rowIndex) in finalRows" :key="rowIndex">
+        <tr
+          v-for="(row, rowIndex) in finalRows"
+          :key="rowIndex"
+          :style="hoveredRowIndex === rowIndex || focusedRowIndex === rowIndex ? { backgroundColor: $themePalette.grey.v_50 } : {}"
+          @mouseover="handleRowMouseOver(rowIndex)"
+          @mouseleave="handleRowMouseLeave"
+        >
           <KTableGridItem
             v-for="(col, colIndex) in row"
             :key="colIndex"
             :content="col"
             :dataType="headers[colIndex].dataType"
+            :minWidth="headers[colIndex].minWidth"
+            :width="headers[colIndex].width"
             :rowIndex="rowIndex"
             :colIndex="colIndex"
+            :class="{
+              'sticky-column': colIndex === 0,
+            }"
+            :style="[colIndex === 0 ? { backgroundColor: $themePalette.white } : {},(hoveredRowIndex === rowIndex || focusedRowIndex === rowIndex) && colIndex === 0 ? { backgroundColor: $themePalette.grey.v_50 } : {}
+            ]"
             role="gridcell"
-            aria-colindex="colIndex + 1"
+            :aria-colindex="colIndex + 1"
             @keydown="handleKeydown($event, rowIndex, colIndex)"
           >
             <template #default="slotProps">
-              <slot name="cell" :content="slotProps.content" :rowIndex="rowIndex" :colIndex="colIndex">
+              <slot name="cell" :content="slotProps.content" :rowIndex="rowIndex" :colIndex="colIndex" :row="row">
                 {{ slotProps.content }}
               </slot>
             </template>
@@ -75,7 +96,6 @@
       const headers = ref(props.headers);
       const rows = ref(props.rows);
       const useLocalSorting = ref(props.useLocalSorting);
-
       const {
         sortKey,
         sortOrder,
@@ -100,6 +120,9 @@
       );
 
       const handleSort = index => {
+        if (headers.value[index].dataType === DATA_TYPE_OTHERS) {
+          return;
+        }
         if (useLocalSorting.value) {
           localHandleSort(index);
         } else {
@@ -111,6 +134,13 @@
         }
       };
 
+      const getHeaderStyle = header => {
+        const style = {};
+        if (header.minWidth) style.minWidth = header.minWidth;
+        if (header.width) style.width = header.width;
+        return style;
+      };
+
       return {
         sortKey,
         sortOrder,
@@ -120,12 +150,20 @@
         SORT_ORDER_ASC,
         SORT_ORDER_DESC,
         DATA_TYPE_OTHERS,
+        getHeaderStyle,
       };
     },
     props: {
       headers: {
         type: Array,
         required: true,
+        validator: function(value) {
+          return value.every(
+            header =>
+              ['label', 'dataType'].every(key => key in header) &&
+              ['string', 'numeric', 'date', 'others'].includes(header.dataType)
+          );
+        },
       },
       rows: {
         type: Array,
@@ -142,6 +180,23 @@
       sortable: {
         type: Boolean,
         default: true,
+      },
+    },
+    data() {
+      return {
+        focusedRowIndex: null,
+        focusedColIndex: null,
+        hoveredRowIndex: null,
+      };
+    },
+    computed: {
+      coreOutlineFocus() {
+        return {
+          ':focus': {
+            ...this.$coreOutline,
+            outlineOffset: '-2px',
+          },
+        };
       },
     },
     methods: {
@@ -203,10 +258,25 @@
               this.handleSort(colIndex);
             }
             break;
+          case 'Tab': //To handle focused row and highlight header state for tab key as well
+            if (event.shiftKey) {
+              nextColIndex = colIndex > 0 ? colIndex - 1 : totalCols - 1;
+              nextRowIndex = colIndex > 0 ? rowIndex : rowIndex - 1;
+            } else {
+              nextColIndex = (colIndex + 1) % totalCols;
+              nextRowIndex = colIndex === totalCols - 1 ? rowIndex + 1 : rowIndex;
+            }
+            break;
           default:
             return;
         }
+
         this.focusCell(nextRowIndex, nextColIndex);
+        this.focusedRowIndex = nextRowIndex === -1 ? null : nextRowIndex;
+        this.focusedColIndex = nextColIndex;
+
+        this.highlightHeader(nextColIndex);
+
         event.preventDefault();
       },
       focusCell(rowIndex, colIndex) {
@@ -218,9 +288,28 @@
             `tbody tr:nth-child(${rowIndex + 1}) td:nth-child(${colIndex + 1})`
           );
         }
+        // Ensured the focused cell is smoothly scrolled into view.
         if (nextCell) {
           nextCell.focus();
+          nextCell.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'nearest' });
         }
+      },
+      handleRowMouseOver(rowIndex) {
+        this.hoveredRowIndex = rowIndex;
+      },
+      handleRowMouseLeave() {
+        this.hoveredRowIndex = null;
+      },
+      setHighlightHeader(header, highlight) {
+        header.style.backgroundColor = highlight
+          ? this.$themePalette.grey.v_50
+          : this.$themePalette.white;
+      },
+      highlightHeader(colIndex) {
+        const headers = this.$el.querySelectorAll('thead th');
+        headers.forEach((header, index) => {
+          this.setHighlightHeader(header, index === colIndex);
+        });
       },
     },
   };
@@ -229,35 +318,43 @@
 
 
 <style scoped>
-.k-table {
-  margin: 20px;
-}
-
-.k-table table {
-  width: 100%;
-  border: 2px solid #ccc;
-  border-collapse: collapse;
-}
-
-.k-table th,
-.k-table td {
-  padding: 10px;
-  border: none;
-}
-
-.k-table th {
-  cursor: pointer;
-}
-
-.k-table th.sortable {
-  cursor: pointer;
-}
-
-.k-table td:focus,
-.k-table th:focus {
-  outline: 2px solid #007bff;
-  outline-offset: -2px;
-  z-index: 1;
+.k-table-wrapper {
+  overflow: auto;
   position: relative;
+  height:300px;
 }
+
+.k-table {
+  border-collapse: collapse;
+  width: 100%;
+  
+}
+
+th,
+td {
+  padding: 8px;
+  position: relative;
+  z-index: auto;
+}
+
+.sticky-header {
+  position: sticky;
+  top: 0;
+  z-index: 3; 
+}
+
+.sticky-column {
+  position: sticky;
+  left: 0;
+  z-index: 2; 
+}
+
+th.sticky-header.sticky-column,
+td.sticky-header.sticky-column {
+  z-index: 4; 
+}
+.sortable {
+  cursor: pointer;
+}
+
 </style>
