@@ -35,6 +35,17 @@ Changelog is rather internal in nature. See release notes for the public overvie
   - **Guidance:**
  [#707] https://github.com/learningequality/kolibri-design-system/pull/707
 
+ [#706]
+  - **Description:** Add new alignment options to `KCard` 
+  - **Products impact:**  new alignment 
+  - **Addresses:** [#701](https://github.com/learningequality/kolibri-design-system/issues/701)
+  - **Components:** `KCard` 
+  - **Breaking:** N0
+  - **Impacts a11y:** No
+  - **Guidance:**
+[#706]: https://github.com/learningequality/kolibri-design-system/pull/706
+
+
 [#709]
   - **Description:**  Update spaces to the latest design`KCard` 
   - **Products impact:**  Card updates 
