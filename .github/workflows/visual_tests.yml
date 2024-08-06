@@ -1,0 +1,80 @@
+name: Percy Visual Tests
+
+on: [pull_request_target]
+
+jobs:
+  pre_job:
+    name: Path match check
+    runs-on: ubuntu-latest
+    # Map a step output to a job output
+    outputs:
+      should_skip: ${{ steps.skip_check.outputs.should_skip }}
+    steps:
+      - id: skip_check
+        uses: fkirc/skip-duplicate-actions@master
+        with:
+          github_token: ${{ github.token }}
+          paths: '["**.vue", "**.js", "yarn.lock"]'
+
+  visual_tests:
+    name: Frontend Visual Tests
+    needs: pre_job
+    if: ${{ needs.pre_job.outputs.should_skip != 'true' }}
+    runs-on: ubuntu-latest
+    environment: percy_tests
+    outputs:
+      percy_url: ${{ steps.extract-url.outputs.percy_url }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Use Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18.x'
+      - name: Cache Node.js modules
+        uses: actions/cache@v4
+        with:
+          path: '**/node_modules'
+          key: ${{ runner.OS }}-node-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.OS }}-node-
+      - name: Install dependencies
+        run: |
+          yarn --frozen-lockfile
+          npm rebuild node-sass
+      - name: Extract jsdocs and environment info 
+        run: yarn pregenerate
+      - name: Run visual tests
+        run: yarn test:visual 2>&1 | tee test-output.log
+        env:
+          PERCY_TOKEN: ${{ secrets.PERCY_TOKEN }}
+      - name: Extract Percy build URL
+        id: extract-url
+        run: |
+          url=$(grep -o 'https://percy.io/[a-zA-Z0-9/_-]*' test-output.log | tail -1)
+          echo "percy_url=$url" >> $GITHUB_OUTPUT
+    
+  comment:
+    name: Comment Percy results
+    needs: visual_tests
+    if: ${{ needs.visual_tests.result == 'success' }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Post results comment
+        uses: thollander/actions-comment-pull-request@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          message: |
+            ### Percy Visual Test Results
+            **Percy Dashboard:** [View Detailed Report](${{ needs.visual_tests.outputs.percy_url }})
+            
+            **Environment:**
+            - **Node.js Version:** 18.x
+            - **OS:** Ubuntu-latest
+
+            **Instructions for Reviewers:**
+            - Click on the [Percy Dashboard](${{ needs.visual_tests.outputs.percy_url }}) link to view detailed visual diffs.
+            - Review the visual changes highlighted in the report.
+            - Approve or request changes based on the visual differences.
+          comment_tag: execution
+          mode: recreate
