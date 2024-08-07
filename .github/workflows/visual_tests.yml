@@ -25,7 +25,10 @@ jobs:
     outputs:
       percy_url: ${{ steps.extract-url.outputs.percy_url }}
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout code from PR
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
       - name: Use Node.js
         uses: actions/setup-node@v4
         with:
