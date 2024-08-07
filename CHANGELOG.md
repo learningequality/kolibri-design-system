@@ -5,6 +5,17 @@ Changelog is rather internal in nature. See release notes for the public overvie
 ## Version 4.x.x (`release-v4` branch)
 
 
+- [#717]
+  - **Description:** Fix ResizeOserver errors when KListWithOverflow resize very quickly.
+  - **Products impact:** bugfix.
+  - **Addresses:** Sentry error.
+  - **Components:** KListWithOverflow.
+  - **Breaking:** no.
+  - **Impacts a11y:** no.
+  - **Guidance:** -.
+
+[#717]: https://github.com/learningequality/kolibri-design-system/pull/717
+
 - [#680]
   - **Description:** Adds boolean `appendToRoot` prop to teleport the modal to the body element if true.
   - **Products impact:** new API.
