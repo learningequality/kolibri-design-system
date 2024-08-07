@@ -185,6 +185,12 @@
       }
     },
     methods: {
+      /**
+       * Toggles the check state of the radio button.
+       *
+       * @public
+       * @param {Event} event - The event object.
+       */
       toggleCheck(event) {
         if (!this.disabled) {
           this.focus();
@@ -224,7 +230,7 @@
       },
       /**
        * @public
-       * Set the tabIndex value
+       * Sets `tab-index` on input
        */
       setTabIndex(val) {
         this.tabIndex = val;

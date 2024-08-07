@@ -12,22 +12,13 @@
 
   export default {
     name: 'KRadioButtonGroup',
-    props: {
-      /**
-       * Specifies whether the radio button group is enabled or disabled.
-       * Used to make the first radio button active when the radio group becomes enabled again after being disabled.
-       */
-      enable: {
-        type: Boolean,
-        default: true,
-      },
-    },
     data() {
       return {
         radioButtons: [],
         focusedRadioIdx: 0,
         firstRadioIdx: 0,
         lastRadioIdx: 0,
+        radioBtnIdx: 0,
       };
     },
     computed: {
@@ -35,51 +26,23 @@
         return navigator.userAgent.toLowerCase().indexOf('firefox') > -1;
       },
     },
-    watch: {
-      // To focus on the first radio button when radio group enables again
-      enable(newVal, oldVal) {
-        if (newVal && !oldVal && this.radioButtons.length > 0) {
-          this.setChecked(0);
-          this.focusedRadioIdx = 0;
-        }
-      },
-    },
     mounted() {
+      if (!this.isFirefox) {
+        return;
+      }
       this.$nextTick(() => {
-        if (this.isFirefox) {
-          if (this.$children[0].$options._componentTag === 'KGridItem') {
-            this.$children.forEach(gridItem => {
-              gridItem.$children.forEach(fixedGridItem => {
-                fixedGridItem.$children.forEach(radioBtn => {
-                  this.radioButtons.push(radioBtn);
-                  radioBtn.$el.addEventListener('keyup', this.onKeyUp);
-                  radioBtn.setTabIndex(-1);
-                });
-              });
-            });
-          } else {
-            this.$children.forEach(radioBtn => {
-              this.radioButtons.push(radioBtn);
-              radioBtn.$el.addEventListener('keyup', this.onKeyUp);
-              radioBtn.setTabIndex(-1);
-            });
-          }
+        const KRadioButtonGroupChildren = this.$children;
+        this.queryAndAddRadioBtns(KRadioButtonGroupChildren);
 
-          this.lastRadioIdx = this.radioButtons.length - 1;
-          this.radioButtons[this.focusedRadioIdx].setTabIndex(0);
-          this.radioButtons.forEach((radioBtn, index) => {
-            radioBtn.$on('input', () => {
-              this.handleInputChange(index);
-            });
-          });
-        }
+        this.$el.addEventListener('keyup', this.onKeyUp);
+
+        this.lastRadioIdx = this.radioButtons.length - 1;
+
+        const firstRadioButton = this.radioButtons[this.focusedRadioIdx];
+        firstRadioButton.setTabIndex(0);
       });
     },
-    beforeDestroy() {
-      for (let radioBtn in this.radioButtons) {
-        radioBtn.$el.removeEventListener('keyup', this.onKeyUp);
-      }
-    },
+
     methods: {
       handleInputChange(idx) {
         if (this.isFirefox) {
@@ -87,18 +50,40 @@
           this.focusedRadioIdx = idx;
         }
       },
+      queryAndAddRadioBtns(children) {
+        if (children[0].$options._componentTag === 'KRadioButton') {
+          for (let i = 0; i < children.length; i++) {
+            const radioBtnVueComp = children[i];
+            this.radioButtons.push(radioBtnVueComp);
+            radioBtnVueComp.setTabIndex(-1);
+            (btnIndex => {
+              radioBtnVueComp.$on('input', () => {
+                this.handleInputChange(btnIndex);
+              });
+            })(this.radioBtnIdx);
+
+            this.radioBtnIdx += 1;
+          }
+          return;
+        }
+        this.queryAndAddRadioBtns(children[0].$children);
+        if (children.length > 1) this.queryAndAddRadioBtns(children[1].$children);
+        return;
+      },
       onKeyUp(event) {
-        const handlers = {
-          ArrowLeft: this.focusPreviousRadio,
-          ArrowRight: this.focusNextRadio,
-          ArrowUp: this.focusPreviousRadio,
-          ArrowDown: this.focusNextRadio,
-        };
-        const handler = handlers[event.key];
-        if (handler) {
-          event.preventDefault();
-          event.stopPropagation();
-          handler(event);
+        if (event.target.className === 'k-radio-button-input') {
+          const handlers = {
+            ArrowLeft: this.focusPreviousRadio,
+            ArrowRight: this.focusNextRadio,
+            ArrowUp: this.focusPreviousRadio,
+            ArrowDown: this.focusNextRadio,
+          };
+          const handler = handlers[event.key];
+          if (handler) {
+            event.preventDefault();
+            event.stopPropagation();
+            handler(event);
+          }
         }
       },
       focusPreviousRadio(event) {
