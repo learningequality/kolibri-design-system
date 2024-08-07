@@ -41,6 +41,8 @@ jobs:
         run: |
           yarn --frozen-lockfile
           npm rebuild node-sass
+      - name: Download Chromium
+        run: npx puppeteer browsers install chrome
       - name: Extract jsdocs and environment info 
         run: yarn pregenerate
       - name: Run visual tests
