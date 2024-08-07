@@ -83,6 +83,11 @@
     LARGE: 'large',
   };
 
+  const thumbnailAlign = {
+    LEFT: 'left',
+    RIGHT: 'right',
+  };
+
   function cardValidator(allowedValues, propName) {
     return function(value) {
       if (!Object.values(allowedValues).includes(value)) {
@@ -177,8 +182,8 @@
        */
       thumbnailAlign: {
         type: String,
-        default: 'left',
-        validator: value => ['left', 'right'].includes(value),
+        default: thumbnailAlign.LEFT,
+        validator: value => [thumbnailAlign.LEFT, thumbnailAlign.RIGHT].includes(value),
       },
     },
     computed: {
