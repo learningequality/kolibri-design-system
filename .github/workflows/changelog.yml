@@ -2,7 +2,7 @@ name: Check PR for Changelog
 
 on:
   pull_request:
-    types: [opened, edited, reopened]
+    types: [opened, synchronize, edited, reopened]
 
 jobs:
   check-description:
