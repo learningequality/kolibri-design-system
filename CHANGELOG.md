@@ -4,6 +4,79 @@ Changelog is rather internal in nature. See release notes for the public overvie
 
 ## Upcoming version 5.x.x (`develop` branch)
 
+- [#687]
+  - **Description:** Adds logic that inserts ARIA live assertive and polite regions to an application's document body during KDS initialization and documents this on the new "Installation" page. Relatedly adds `useKLiveRegion` composable with public methods for updating the live regions with assertive and polite messages. 
+  - **Products impact:** new API
+  - **Addresses:** https://github.com/learningequality/kolibri-design-system/issues/668
+  - **Components:** `useKLiveRegion`
+  - **Breaking:** No
+  - **Impacts a11y:** Yes. It will fix several places utilizing live regions that don't work in our applications at all. Furthemore, it follows the recommended practices that will fix major a11y issues with live regions we're having.
+  - **Guidance:** Find all polite and live regions (or roles) in an application. Remove them and instead use `useKLiveRegion.sendPoliteMessage` and `useKLiveRegion.sendAssertiveMessage` to update the live regions that KDS inserted to document body during installation.
+
+[#687]: https://github.com/learningequality/kolibri-design-system/pull/687
+ [#688]
+  - **Description:**  Update`KCard` styling 
+  - **Products impact:**  Card updates 
+  - **Addresses:** 
+  - **Components:** `KCard` 
+  - **Breaking:** N0
+  - **Impacts a11y:** No
+  - **Guidance:**
+ [#688] https://github.com/learningequality/kolibri-design-system/pull/688
+
+
+[#707]
+  - **Description:** Card Validations
+  - **Products impact:**  
+  - **Addresses:** [#695](https://github.com/learningequality/kolibri-design-system/issues/695)
+  - **Components:** `KCard`
+  - **Breaking:** No
+  - **Impacts a11y:**  No
+  - **Guidance:**
+ [#707] https://github.com/learningequality/kolibri-design-system/pull/707
+
+[#709]
+  - **Description:**  Update spaces to the latest design`KCard` 
+  - **Products impact:**  Card updates 
+  - **Addresses:** [#704](https://github.com/learningequality/kolibri-design-system/issues/704)
+  - **Components:** `KCard` 
+  - **Breaking:** N0
+  - **Impacts a11y:** No
+  - **Guidance:**
+ [#709] https://github.com/learningequality/kolibri-design-system/pull/709
+
+[#625]
+  - **Description:** Initial implementation of `KCard` component
+  - **Products impact:** New Component
+  - **Addresses:** [#530](https://github.com/learningequality/kolibri-design-system/issues/530)
+  - **Components:** KCard
+  - **Breaking:** No
+  - **Impacts a11y:**  Yes
+  - **Guidance:**
+[#625]: https://github.com/learningequality/kolibri-design-system/pull/625
+
+- [#678]
+  - **Description:** Add `previewUnavailable` icon
+  - **Products impact:** new icon
+  - **Addresses:** Support of migrating Studio icons from Vuetify to KDS
+  - **Components:** `KIcon`
+  - **Breaking:** no
+  - **Impacts a11y:** no
+  - **Guidance:** -
+
+[#678]: https://github.com/learningequality/kolibri-design-system/pull/678
+
+- [#666]
+  - **Description:** Update `KImg`'s placeholder and letterbox area background color to a lighter shade of grey, `v_50`.
+  - **Products impact:** UI appearance update
+  - **Addresses:** -
+  - **Components:** `KImg`, `KCard`
+  - **Breaking:** no
+  - **Impacts a11y:** no
+  - **Guidance:** -
+
+[#666]: https://github.com/learningequality/kolibri-design-system/pull/666
+
 - [#652]
   - **Description:** KTextTruncator drops support for Internet Explorer 11
   - **Products impact:** browser support update
@@ -60,6 +133,38 @@ Changelog is rather internal in nature. See release notes for the public overvie
 [#615]: https://github.com/learningequality/kolibri-design-system/pull/615
 
 ## Version 4.x.x (`release-v4` branch)
+
+
+- [#680]
+  - **Description:** Adds boolean `appendToRoot` prop to teleport the modal to the body element if true.
+  - **Products impact:** new API.
+  - **Addresses:** https://github.com/learningequality/kolibri/issues/12447.
+  - **Components:** KModal.
+  - **Breaking:** no
+  - **Impacts a11y:** no
+  - **Guidance:** 
+
+- [#680]
+  - **Description:** Fixes the calculation of overflowed items when changes in the size of the list item slots occur.
+  - **Products impact:** bugfix.
+  - **Addresses:** https://github.com/learningequality/kolibri/issues/12447.
+  - **Components:** KListWithOverflow.
+  - **Breaking:** no
+  - **Impacts a11y:** no
+  - **Guidance:** 
+
+[#680]: https://github.com/learningequality/kolibri-design-system/pull/680
+
+- [#673]
+  - **Description:** Remove white space below Ktabs
+  - **Products impact:** bugfix.
+  - **Addresses:** https://github.com/learningequality/kolibri/issues/12297.
+  - **Components:** KTabsList, KTabs, KTabsPanel.
+  - **Breaking:** no
+  - **Impacts a11y:**no
+  - **Guidance:** .
+
+[#673]: https://github.com/learningequality/kolibri-design-system/pull/673
 
 - [#629]
   - **Description:** Improves the contrast for highlighted text, noted in KTextbox

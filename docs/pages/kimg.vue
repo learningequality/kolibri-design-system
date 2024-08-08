@@ -308,13 +308,3 @@
   export default {};
 
 </script>
-
-
-<style lang="scss" scoped>
-
-  em {
-    font-style: normal;
-    font-weight: bold;
-  }
-
-</style>

@@ -1,106 +1,109 @@
 <template>
 
-  <!-- Accessibility properties for the overlay -->
-  <transition name="modal-fade" appear>
-    <div
-      id="modal-window"
-      ref="modal-overlay"
-      class="modal-overlay"
-      @keyup.esc.stop="emitCancelEvent"
-      @keyup.enter="handleEnter"
-    >
-      <!-- KeenUiSelect targets modal by using div.modal selector -->
+  <component :is="wrapper" v-bind="wrapperProps">
+    <!-- Accessibility properties for the overlay -->
+    <transition name="modal-fade" appear>
       <div
-        ref="modal"
-        class="modal"
-        :tabindex="0"
-        role="dialog"
-        aria-labelledby="modal-title"
-        :style="[
-          modalSizeStyles,
-          { background: $themeTokens.surface },
-          containsKSelect ? { overflowY: 'unset' } : { overflowY: 'auto' }
-        ]"
+        id="modal-window"
+        ref="modal-overlay"
+        class="modal-overlay"
+        @keyup.esc.stop="emitCancelEvent"
+        @keyup.enter="handleEnter"
       >
-
-        <!-- Modal Title -->
-        <h1
-          id="modal-title"
-          ref="title"
-          class="title"
+        <!-- KeenUiSelect targets modal by using div.modal selector -->
+        <div
+          ref="modal"
+          class="modal"
+          :tabindex="0"
+          role="dialog"
+          aria-labelledby="modal-title"
+          :style="[
+            modalSizeStyles,
+            { background: $themeTokens.surface },
+            containsKSelect ? { overflowY: 'unset' } : { overflowY: 'auto' }
+          ]"
         >
-          {{ title }}
-          <!-- Accessible error reporting per @radina -->
-          <span
-            v-if="hasError"
-            class="visuallyhidden"
-          >
-            {{ errorMessage }}
-          </span>
-        </h1>
 
-        <!-- Stop propagation of enter key to prevent the submit event from being emitted twice -->
-        <form
-          class="form"
-          @submit.prevent="emitSubmitEvent"
-          @keyup.enter.stop
-        >
-          <!-- Wrapper for main content -->
-          <div
-            ref="content"
-            class="content"
-            :style="[ contentSectionMaxHeight, scrollShadow ? {
-              borderTop: `1px solid ${$themeTokens.fineLine}`,
-              borderBottom: `1px solid ${$themeTokens.fineLine}`,
-            } : {} ]"
-            :class="{
-              'scroll-shadow': scrollShadow,
-              'contains-kselect': containsKSelect
-            }"
+          <!-- Modal Title -->
+          <h1
+            id="modal-title"
+            ref="title"
+            class="title"
           >
-            <!-- @slot Main content of modal -->
-            <slot></slot>
-          </div>
-
-          <div
-            ref="actions"
-            class="actions"
-          >
-            <!-- @slot Alternative buttons and actions below main content -->
-            <slot
-              v-if="$slots.actions"
-              name="actions"
+            {{ title }}
+            <!-- Accessible error reporting per @radina -->
+            <span
+              v-if="hasError"
+              class="visuallyhidden"
             >
-            </slot>
-            <template v-else>
-              <KButton
-                v-if="cancelText"
-                name="cancel"
-                :text="cancelText"
-                appearance="flat-button"
-                :disabled="cancelDisabled || $attrs.disabled"
-                @click="emitCancelEvent"
-              />
-              <KButton
-                v-if="submitText"
-                name="submit"
-                :text="submitText"
-                :primary="true"
-                :disabled="submitDisabled || $attrs.disabled"
-                type="submit"
-              />
-            </template>
-          </div>
-        </form>
+              {{ errorMessage }}
+            </span>
+          </h1>
+
+          <!-- Stop propagation of enter key to prevent the submit event from being emitted twice -->
+          <form
+            class="form"
+            @submit.prevent="emitSubmitEvent"
+            @keyup.enter.stop
+          >
+            <!-- Wrapper for main content -->
+            <div
+              ref="content"
+              class="content"
+              :style="[ contentSectionMaxHeight, scrollShadow ? {
+                borderTop: `1px solid ${$themeTokens.fineLine}`,
+                borderBottom: `1px solid ${$themeTokens.fineLine}`,
+              } : {} ]"
+              :class="{
+                'scroll-shadow': scrollShadow,
+                'contains-kselect': containsKSelect
+              }"
+            >
+              <!-- @slot Main content of modal -->
+              <slot></slot>
+            </div>
+
+            <div
+              ref="actions"
+              class="actions"
+            >
+              <!-- @slot Alternative buttons and actions below main content -->
+              <slot
+                v-if="$slots.actions"
+                name="actions"
+              >
+              </slot>
+              <template v-else>
+                <KButton
+                  v-if="cancelText"
+                  name="cancel"
+                  :text="cancelText"
+                  appearance="flat-button"
+                  :disabled="cancelDisabled || $attrs.disabled"
+                  @click="emitCancelEvent"
+                />
+                <KButton
+                  v-if="submitText"
+                  name="submit"
+                  :text="submitText"
+                  :primary="true"
+                  :disabled="submitDisabled || $attrs.disabled"
+                  type="submit"
+                />
+              </template>
+            </div>
+          </form>
+        </div>
       </div>
-    </div>
-  </transition>
+    </transition>
+  </component>
 
 </template>
 
 
 <script>
 
+  import Teleport from 'vue2-teleport';
   import debounce from 'lodash/debounce';
   import useKResponsiveWindow from './composables/useKResponsiveWindow';
 
@@ -117,6 +120,9 @@
    */
   export default {
     name: 'KModal',
+    components: {
+      Teleport,
+    },
     setup() {
       const { windowHeight, windowWidth } = useKResponsiveWindow();
       return { windowHeight, windowWidth };
@@ -182,10 +188,20 @@
         type: Boolean,
         default: false,
       },
+      /**
+       * Error message to be displayed in title
+       */
       errorMessage: {
         type: String,
         default: null,
         required: false,
+      },
+      /**
+       * Whether or not the modal should be teleported to the root of the document
+       */
+      appendToRoot: {
+        type: Boolean,
+        default: false,
       },
     },
     data() {
@@ -218,6 +234,12 @@
         return {
           'max-height': `${this.maxContentHeight}px`,
         };
+      },
+      wrapper() {
+        return this.appendToRoot ? 'Teleport' : 'div';
+      },
+      wrapperProps() {
+        return this.appendToRoot ? { to: 'body' } : {};
       },
     },
     created() {
