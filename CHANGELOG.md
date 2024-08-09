@@ -4,6 +4,16 @@ Changelog is rather internal in nature. See release notes for the public overvie
 
 ## Upcoming version 5.x.x (`develop` branch)
 
+- [719]
+  - **Description:** Removes KResponsiveWindowMixin.
+  - **Products impact:** removed API.
+  - **Addresses:** https://github.com/learningequality/kolibri-design-system/issues/679.
+  - **Components:** KResponsiveWindowMixin.
+  - **Breaking:** yes.
+  - **Impacts a11y:** no.
+  - **Guidance:** Replace any use of KResponsiveWindowMixin with the new composable useKResponsiveWindow.
+
+[719]: https://github.com/learningequality/kolibri-design-system/pull/719
 - [#687]
   - **Description:** Adds logic that inserts ARIA live assertive and polite regions to an application's document body during KDS initialization and documents this on the new "Installation" page. Relatedly adds `useKLiveRegion` composable with public methods for updating the live regions with assertive and polite messages. 
   - **Products impact:** new API
