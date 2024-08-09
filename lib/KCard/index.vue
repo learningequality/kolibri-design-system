@@ -182,8 +182,8 @@
        */
       thumbnailAlign: {
         type: String,
-        default: thumbnailAlign.LEFT,
-        validator: value => [thumbnailAlign.LEFT, thumbnailAlign.RIGHT].includes(value),
+        default: 'left',
+        validator: cardValidator(thumbnailAlign,'thumbnailAlign'),
       },
     },
     computed: {
@@ -271,25 +271,25 @@
             },
           };
         }
-        if (
-          this.layout === 'horizontal' &&
-          this.thumbnailDisplay === 'large' &&
-          this.thumbnailAlign === 'right'
-        ) {
-          return {
-            rootClass: 'horizontal-with-large-thumbnail-and-right-alignment',
-            titleLines: 2,
-            thumbnailAspectRatio: '1:1',
-            headingStyles: {
-              ...headingCommonStyles,
-              width: `calc(70% - ${SPACER * 3}px)` /* same as slots width defined in styles */,
-            },
-            thumbnailStyles: {
-              ...thumbnailCommonStyles,
-              borderRadius: '0 8px 8px 0',
-            },
-          };
-        }
+        // if (
+        //   this.layout === 'horizontal' &&
+        //   this.thumbnailDisplay === 'large' &&
+        //   this.thumbnailAlign === 'right'
+        // ) {
+        //   return {
+        //     rootClass: 'horizontal-with-large-thumbnail-and-right-alignment',
+        //     titleLines: 2,
+        //     thumbnailAspectRatio: '1:1',
+        //     headingStyles: {
+        //       ...headingCommonStyles,
+        //       width: `calc(70% - ${SPACER * 3}px)` /* same as slots width defined in styles */,
+        //     },
+        //     thumbnailStyles: {
+        //       ...thumbnailCommonStyles,
+        //       borderRadius: '0 8px 8px 0',
+        //     },
+        //   };
+        // }
         if (this.layout === 'horizontal' && this.thumbnailDisplay === 'large') {
           return {
             rootClass: 'horizontal-with-large-thumbnail',
@@ -487,23 +487,23 @@
     }
   }
 
-  .horizontal-with-large-thumbnail-and-right-alignment {
-    align-items: flex-start;
-    height: 220px; /* (1) */
+  // .horizontal-with-large-thumbnail-and-right-alignment {
+  //   align-items: flex-start;
+  //   height: 220px; /* (1) */
 
-    .thumbnail {
-      position: absolute;
-      right: 0;
-      width: 35%;
-      min-width: 80px;
-      height: 100%;
-    }
+  //   .thumbnail {
+  //     position: absolute;
+  //     right: 0;
+  //     width: 35%;
+  //     min-width: 80px;
+  //     height: 100%;
+  //   }
 
-    .above-title,
-    .below-title,
-    .footer {
-      width: calc(60% - 2 * #{$spacer});
-    }
-  }
+  //   .above-title,
+  //   .below-title,
+  //   .footer {
+  //     width: calc(60% - 2 * #{$spacer});
+  //   }
+  // }
 
 </style>
