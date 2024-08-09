@@ -64,22 +64,50 @@ jobs:
     if: ${{ needs.visual_tests.result == 'success' }}
     runs-on: ubuntu-latest
     steps:
-      - name: Post results comment
-        uses: thollander/actions-comment-pull-request@v2
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          message: |
-            ### Percy Visual Test Results
+      - name: Define comment body
+        run: |
+            echo "### Percy Visual Test Results
+        
             **Percy Dashboard:** [View Detailed Report](${{ needs.visual_tests.outputs.percy_url }})
             
             **Environment:**
             - **Node.js Version:** 18.x
             - **OS:** Ubuntu-latest
-
+            
             **Instructions for Reviewers:**
             - Click on the [Percy Dashboard](${{ needs.visual_tests.outputs.percy_url }}) link to view detailed visual diffs.
             - Review the visual changes highlighted in the report.
-            - Approve or request changes based on the visual differences.
-          comment_tag: execution
-          mode: recreate
+            - Approve or request changes based on the visual differences." > comment_body.md
+        
+      - name: Create or update comment
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const fs = require('fs');
+            const commentBody = fs.readFileSync('comment_body.md', 'utf8');
+            
+            const { data: comments } = await github.rest.issues.listComments({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number
+            });
+            
+            const comment = comments.find(comment => comment.body.includes('### Percy Visual Test Results'));
+      
+            if (comment) {
+              await github.rest.issues.updateComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                comment_id: comment.id,
+                body: commentBody
+              });
+            } else {
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: context.issue.number,
+                body: commentBody
+              });
+            }
+              
