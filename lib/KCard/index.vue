@@ -83,7 +83,7 @@
     LARGE: 'large',
   };
 
-  const thumbnailAlign = {
+  const thumbnailAlignOptions = {
     LEFT: 'left',
     RIGHT: 'right',
   };
@@ -183,7 +183,7 @@
       thumbnailAlign: {
         type: String,
         default: 'left',
-        validator: cardValidator(thumbnailAlign,'thumbnailAlign'),
+        validator: cardValidator(thumbnailAlignOptions,'thumbnailAlign'),
       },
     },
     computed: {
