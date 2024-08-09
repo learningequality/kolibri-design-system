@@ -24,7 +24,7 @@
         We should aim to allow zooming up to 200%, and down to 480x600 px in both profile and landscape. The app should always remain functional in all extreme screen sizes. Depending on the context, we may want to put additional effort into creating custom layouts optimized for particular screen sizes. For example, we should put additional effort into optimizing the mobile Learner experience, while for administrators this might not be as critical.
       </p>
       <p>
-        When designing and building layouts, we use the breakpoints defined by Material Design. These are exposed in our app by the <code>responsiveWindow</code> Vue component mixin. We should never use CSS media queries. See the <DocsInternalLink href="/layout" text="See the Layout page" /> for more information.
+        When designing and building layouts, we use the breakpoints defined by Material Design. These are exposed in our app by the <DocsLibraryLink component="useKResponsiveWindow" /> composable. We should never use CSS media queries. See the <DocsInternalLink href="/layout" text="See the Layout page" /> for more information.
       </p>
     </DocsPageSection>
 
