@@ -204,7 +204,9 @@
       },
 
       thumbnailAlignClass() {
-        if (this.layout === 'horizontal' && this.thumbnailDisplay === 'large') {
+        if (this.layout === 'horizontal' &&
+          (this.thumbnailDisplay === 'large' || this.thumbnailDisplay === 'small' )
+        ) {
           return `thumbnail-align-${this.thumbnailAlign}`;
         }
         return '';
@@ -229,6 +231,11 @@
           width: '100%',
           height: '100%',
         };
+
+        const titleAlignStyle = {
+          marginLeft:this.thumbnailAlign === thumbnailAlignOptions.LEFT ? `40%` : `${SPACER}px`,
+          marginRight: this.thumbnailAlign === thumbnailAlignOptions.RIGHT ? `calc(40% + ${SPACER}px)` : `${SPACER}px`,
+        }
 
         if (this.layout === 'vertical' && this.thumbnailDisplay === 'large') {
           return {
@@ -271,25 +278,7 @@
             },
           };
         }
-        // if (
-        //   this.layout === 'horizontal' &&
-        //   this.thumbnailDisplay === 'large' &&
-        //   this.thumbnailAlign === 'right'
-        // ) {
-        //   return {
-        //     rootClass: 'horizontal-with-large-thumbnail-and-right-alignment',
-        //     titleLines: 2,
-        //     thumbnailAspectRatio: '1:1',
-        //     headingStyles: {
-        //       ...headingCommonStyles,
-        //       width: `calc(70% - ${SPACER * 3}px)` /* same as slots width defined in styles */,
-        //     },
-        //     thumbnailStyles: {
-        //       ...thumbnailCommonStyles,
-        //       borderRadius: '0 8px 8px 0',
-        //     },
-        //   };
-        // }
+
         if (this.layout === 'horizontal' && this.thumbnailDisplay === 'large') {
           return {
             rootClass: 'horizontal-with-large-thumbnail',
@@ -297,6 +286,7 @@
             thumbnailAspectRatio: undefined,
             headingStyles: {
               ...headingCommonStyles,
+              ...titleAlignStyle,
               width: `calc(60% - ${SPACER * 2}px)` /* same as slots width defined in styles */,
             },
             thumbnailStyles: {
@@ -312,6 +302,7 @@
             thumbnailAspectRatio: '1:1',
             headingStyles: {
               ...headingCommonStyles,
+              ...titleAlignStyle,
               width: `calc(70% - ${SPACER * 3}px)` /* same as slots width defined in styles */,
             },
             thumbnailStyles: {
@@ -485,25 +476,26 @@
     .footer {
       width: calc(100% - 2 * #{$spacer});
     }
+
+    &.thumbnail-align-left {
+      .thumbnail {
+        left: $spacer;
+        top: $spacer;
+      }
+      .above-title,
+      .below-title,
+      .footer {
+        margin-right: $spacer;
+        margin-left: 40%;
+      }
+    }
+
+    &.thumbnail-align-right {
+      .thumbnail {
+        top: $spacer;
+        right: $spacer;
+      }
+    }
   }
-
-  // .horizontal-with-large-thumbnail-and-right-alignment {
-  //   align-items: flex-start;
-  //   height: 220px; /* (1) */
-
-  //   .thumbnail {
-  //     position: absolute;
-  //     right: 0;
-  //     width: 35%;
-  //     min-width: 80px;
-  //     height: 100%;
-  //   }
-
-  //   .above-title,
-  //   .below-title,
-  //   .footer {
-  //     width: calc(60% - 2 * #{$spacer});
-  //   }
-  // }
 
 </style>
