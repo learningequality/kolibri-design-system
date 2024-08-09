@@ -263,7 +263,7 @@
         }
         if (this.layout === 'vertical' && this.thumbnailDisplay === 'none') {
           return {
-            rootClass: 'vertical-with-no-thumbnail',
+            rootClass: undefined,
             thumbnailAlignClass:undefined,
             titleLines: 2,
             thumbnailAspectRatio: undefined,
@@ -312,15 +312,12 @@
         }
         if (this.layout === 'horizontal' && this.thumbnailDisplay === 'none') {
           return {
-            rootClass: 'horizontal-with-no-thumbnail',
+            rootClass: undefined,
             thumbnailAlignClass:undefined,
             titleLines: 2,
             thumbnailAspectRatio: undefined,
             headingStyles: {
               ...headingCommonStyles,
-            },
-            thumbnailStyles: {
-              ...thumbnailCommonStyles,
             },
           };
         }

@@ -22,7 +22,7 @@
           <KCard
             :to="{ name: 'kcard' }"
             :headingLevel="2"
-            layout="horizontal"
+            layout="vertical"
             thumbnailDisplay="none"
             
             :thumbnailSrc="require('../assets/hummingbird CC BY-SA 4.0.jpg')"
