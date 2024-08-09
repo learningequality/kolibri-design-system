@@ -23,8 +23,8 @@
             :to="{ name: 'kcard' }"
             :headingLevel="2"
             layout="horizontal"
-            thumbnailDisplay="large"
-            thumbnailAlign="right"
+            thumbnailDisplay="none"
+            
             :thumbnailSrc="require('../assets/hummingbird CC BY-SA 4.0.jpg')"
           >
             <template #title>

@@ -202,14 +202,8 @@
       thumbnailStyles() {
         return this.stylesAndClasses.thumbnailStyles;
       },
-
       thumbnailAlignClass() {
-        if (this.layout === 'horizontal' &&
-          (this.thumbnailDisplay === 'large' || this.thumbnailDisplay === 'small' )
-        ) {
-          return `thumbnail-align-${this.thumbnailAlign}`;
-        }
-        return '';
+        return this.stylesAndClasses.thumbnailAlignClass;
       },
       /*
           Returns dynamic classes and few style-like data that CSS was cumbersome/impossible to use for ,or are in need of using theme, grouped by all possible combinations of layouts.
@@ -240,6 +234,7 @@
         if (this.layout === 'vertical' && this.thumbnailDisplay === 'large') {
           return {
             rootClass: 'vertical-with-large-thumbnail',
+            thumbnailAlignClass:undefined,
             titleLines: 3,
             thumbnailAspectRatio: undefined,
             headingStyles: {
@@ -254,6 +249,7 @@
         if (this.layout === 'vertical' && this.thumbnailDisplay === 'small') {
           return {
             rootClass: 'vertical-with-small-thumbnail',
+            thumbnailAlignClass:undefined,
             titleLines: 3,
             thumbnailAspectRatio: undefined,
             headingStyles: {
@@ -268,6 +264,7 @@
         if (this.layout === 'vertical' && this.thumbnailDisplay === 'none') {
           return {
             rootClass: 'vertical-with-no-thumbnail',
+            thumbnailAlignClass:undefined,
             titleLines: 2,
             thumbnailAspectRatio: undefined,
             headingStyles: {
@@ -282,6 +279,7 @@
         if (this.layout === 'horizontal' && this.thumbnailDisplay === 'large') {
           return {
             rootClass: 'horizontal-with-large-thumbnail',
+            thumbnailAlignClass:`thumbnail-align-${this.thumbnailAlign}`,
             titleLines: 3,
             thumbnailAspectRatio: undefined,
             headingStyles: {
@@ -298,6 +296,7 @@
         if (this.layout === 'horizontal' && this.thumbnailDisplay === 'small') {
           return {
             rootClass: 'horizontal-with-small-thumbnail',
+            thumbnailAlignClass:`thumbnail-align-${this.thumbnailAlign}`,
             titleLines: 2,
             thumbnailAspectRatio: '1:1',
             headingStyles: {
@@ -314,6 +313,7 @@
         if (this.layout === 'horizontal' && this.thumbnailDisplay === 'none') {
           return {
             rootClass: 'horizontal-with-no-thumbnail',
+            thumbnailAlignClass:undefined,
             titleLines: 2,
             thumbnailAspectRatio: undefined,
             headingStyles: {
