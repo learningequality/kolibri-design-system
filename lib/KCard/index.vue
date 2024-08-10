@@ -183,7 +183,7 @@
       thumbnailAlign: {
         type: String,
         default: 'left',
-        validator: cardValidator(thumbnailAlignOptions,'thumbnailAlign'),
+        validator: cardValidator(thumbnailAlignOptions, 'thumbnailAlign'),
       },
     },
     computed: {
@@ -227,14 +227,17 @@
         };
 
         const titleAlignStyle = {
-          marginLeft:this.thumbnailAlign === thumbnailAlignOptions.LEFT ? `40%` : `${SPACER}px`,
-          marginRight: this.thumbnailAlign === thumbnailAlignOptions.RIGHT ? `calc(40% + ${SPACER}px)` : `${SPACER}px`,
-        }
+          marginLeft: this.thumbnailAlign === thumbnailAlignOptions.LEFT ? `40%` : `${SPACER}px`,
+          marginRight:
+            this.thumbnailAlign === thumbnailAlignOptions.RIGHT
+              ? `calc(40% + ${SPACER}px)`
+              : `${SPACER}px`,
+        };
 
         if (this.layout === 'vertical' && this.thumbnailDisplay === 'large') {
           return {
             rootClass: 'vertical-with-large-thumbnail',
-            thumbnailAlignClass:undefined,
+            thumbnailAlignClass: undefined,
             titleLines: 3,
             thumbnailAspectRatio: undefined,
             headingStyles: {
@@ -249,7 +252,7 @@
         if (this.layout === 'vertical' && this.thumbnailDisplay === 'small') {
           return {
             rootClass: 'vertical-with-small-thumbnail',
-            thumbnailAlignClass:undefined,
+            thumbnailAlignClass: undefined,
             titleLines: 3,
             thumbnailAspectRatio: undefined,
             headingStyles: {
@@ -264,7 +267,7 @@
         if (this.layout === 'vertical' && this.thumbnailDisplay === 'none') {
           return {
             rootClass: undefined,
-            thumbnailAlignClass:undefined,
+            thumbnailAlignClass: undefined,
             titleLines: 2,
             thumbnailAspectRatio: undefined,
             headingStyles: {
@@ -279,7 +282,7 @@
         if (this.layout === 'horizontal' && this.thumbnailDisplay === 'large') {
           return {
             rootClass: 'horizontal-with-large-thumbnail',
-            thumbnailAlignClass:`thumbnail-align-${this.thumbnailAlign}`,
+            thumbnailAlignClass: `thumbnail-align-${this.thumbnailAlign}`,
             titleLines: 3,
             thumbnailAspectRatio: undefined,
             headingStyles: {
@@ -296,7 +299,7 @@
         if (this.layout === 'horizontal' && this.thumbnailDisplay === 'small') {
           return {
             rootClass: 'horizontal-with-small-thumbnail',
-            thumbnailAlignClass:`thumbnail-align-${this.thumbnailAlign}`,
+            thumbnailAlignClass: `thumbnail-align-${this.thumbnailAlign}`,
             titleLines: 2,
             thumbnailAspectRatio: '1:1',
             headingStyles: {
@@ -313,7 +316,7 @@
         if (this.layout === 'horizontal' && this.thumbnailDisplay === 'none') {
           return {
             rootClass: undefined,
-            thumbnailAlignClass:undefined,
+            thumbnailAlignClass: undefined,
             titleLines: 2,
             thumbnailAspectRatio: undefined,
             headingStyles: {
@@ -476,8 +479,8 @@
 
     &.thumbnail-align-left {
       .thumbnail {
-        left: $spacer;
         top: $spacer;
+        left: $spacer;
       }
       .above-title,
       .below-title,
