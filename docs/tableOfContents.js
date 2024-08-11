@@ -195,6 +195,12 @@ export default [
           'loading',
         ],
       }),
+      new Page({
+        path: '/usesorting',
+        title: 'useSorting',
+        isCode: true,
+        keywords: [...compositionRelatedKeywords, 'sort'],
+      }),
     ],
   }),
   new Section({
