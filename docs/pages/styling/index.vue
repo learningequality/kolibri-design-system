@@ -22,7 +22,7 @@
         The design system provides a set of reusable style constants, snippets, and dynamic values.
       </p>
       <p>
-        Constants are made available as <DocsExternalLink text="SCSS variables" href="https://sass-lang.com/documentation/variables" /> and snippets are made available as <DocsExternalLink text="SCSS placeholder selectors" href="https://sass-lang.com/documentation/style-rules/placeholder-selectors" />. For example, we provide a constant called <code>$radius</code> (defined as <code>4px</code>) and a placeholder selector called <code>%dropshadow-2dp</code> which creates a 4dp drop shadow. These can be used to style an element by importing the definitions file:
+        Constants are made available as <DocsExternalLink text="SCSS variables" href="https://sass-lang.com/documentation/variables" /> and snippets are made available as <DocsExternalLink text="SCSS placeholder selectors" href="https://sass-lang.com/documentation/style-rules/placeholder-selectors" />. For example, we provide a constant called <code>$radius</code> (defined as <code>4px</code>) and a placeholder selector called <code>%dropshadow-2dp</code> which creates a 2dp drop shadow. These can be used to style an element by importing the definitions file:
       </p>
       <p>
         Use these by importing the design system's <code>definitions.scss</code> file. For example, this HTML and SCSS in a Vue template:
@@ -38,7 +38,7 @@
         @import '~kolibri-design-system/lib/styles/definitions'
 
         .box {
-          @extend %dropshadow-4dp;
+          @extend %dropshadow-2dp;
 
           border-radius: $radius;
           text-align: center;
@@ -47,7 +47,7 @@
       <!-- eslint-enable -->
       <p>can help easily reproduce styles like:</p>
       <DocsShow>
-        <div class="box">
+        <div class="box box-2dp">
           Hello!
         </div>
       </DocsShow>
@@ -85,27 +85,46 @@
         In the real world, the shadow an object casts is often a physical manifestation of its elevation.
       </p>
       <p>
-        The design system provides a set of pre-defined <DocsExternalLink text="SCSS placeholder selectors" href="https://sass-lang.com/documentation/style-rules/placeholder-selectors" /> which allow consistent application of realistic-looking shadows which map to a range of elevations from 1dp to 24dp.
+        The design system provides a set of pre-defined <DocsExternalLink text="SCSS placeholder selectors" href="https://sass-lang.com/documentation/style-rules/placeholder-selectors" /> which allow consistent application of realistic-looking shadows: 1dp, 2dp, and 6dp:
       </p>
-      <p>For example:</p>
+
       <DocsShow>
-        <div class="box">
-          4dp
+        <div class="box box-1dp">
+          1dp
         </div>
-        <div class="box more-shadow">
-          12dp
+        <div class="box box-2dp">
+          2dp
+        </div>
+        <div class="box box-6dp">
+          6dp
         </div>
       </DocsShow>
+
+      <p>Follow the guidance below to decide what depth to use for a drop shadow:</p>
+      <dl>
+        <dt>1dp</dt><dd>containers, panels, controls</dd>
+        <dt>2dp</dt><dd>cards, app bars, buttons, menu, tooltips, snackbars</span></dd>
+        <dt>6dp</dt><dd>modals, card hover</dd>
+      </dl>
+
       <p>
-        can be achieved by with the dropshadow helpers.
+        This can be achieved by with the dropshadow helpers:
       </p>
       <!-- eslint-disable -->
       <!-- prevent prettier from changing indentation -->
       <DocsShowCode language="css">
         @import '~kolibri-design-system/lib/styles/definitions'
 
-        .more-shadow {
-          @extend %dropshadow-12dp;
+        .box-1dp {
+          @extend %dropshadow-1dp;
+        }
+
+        .box-2dp {
+          @extend %dropshadow-2dp;
+        }
+
+        .box-6dp {
+          @extend %dropshadow-6dp;
         }
       </DocsShowCode>
       <!-- eslint-enable -->
@@ -155,7 +174,7 @@
         @import '~kolibri-design-system/lib/styles/definitions'
 
         .ease:hover {
-          @extend %dropshadow-8dp;
+          @extend %dropshadow-6dp;
           @extend %md-standard-func;
 
           cursor: pointer;
@@ -182,11 +201,13 @@
 
   @import '~~/lib/styles/definitions';
 
-  .box {
-    @extend %dropshadow-4dp;
+  dt {
+    font-weight: bold;
+  }
 
+  .box {
     display: inline-block;
-    min-width: 150px;
+    min-width: 80px;
     padding: 8px;
     margin: 32px;
     font-size: smaller;
@@ -194,18 +215,26 @@
     border-radius: $radius;
   }
 
-  .more-shadow {
-    @extend %dropshadow-12dp;
+  .box-1dp {
+    @extend %dropshadow-1dp;
+  }
+
+  .box-2dp {
+    @extend %dropshadow-2dp;
+  }
+
+  .box-6dp {
+    @extend %dropshadow-6dp;
   }
 
   .immediate:hover {
-    @extend %dropshadow-8dp;
+    @extend %dropshadow-6dp;
 
     cursor: pointer;
   }
 
   .ease:hover {
-    @extend %dropshadow-8dp;
+    @extend %dropshadow-6dp;
     @extend %md-standard-func;
 
     cursor: pointer;
