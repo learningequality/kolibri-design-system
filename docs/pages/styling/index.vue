@@ -103,7 +103,7 @@
       <p>Follow the guidance below to decide what depth to use for a drop shadow:</p>
       <dl>
         <dt>1dp</dt><dd>containers, panels, controls</dd>
-        <dt>2dp</dt><dd>cards, app bars, buttons, menu, tooltips, snackbars</span></dd>
+        <dt>2dp</dt><dd>cards, app bars, buttons, menu, tooltips, snackbars</dd>
         <dt>6dp</dt><dd>modals, card hover</dd>
       </dl>
 
