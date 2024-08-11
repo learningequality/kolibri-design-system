@@ -4,6 +4,51 @@ Changelog is rather internal in nature. See release notes for the public overvie
 
 ## Upcoming version 5.x.x (`develop` branch)
 
+- [#722]
+  - **Description:** Inserts the teleport root element to an application's document body during KDS initialization.
+  - **Products impact:** KDS initialization
+  - **Addresses:** -
+  - **Components:** -
+  - **Breaking:** no
+  - **Impacts a11y:** no
+  - **Guidance:** Remove any custom teleportation logic and use new KDS components and props instead.
+
+[#722]: https://github.com/learningequality/kolibri-design-system/pull/722
+
+
+- [#722]
+  - **Description:** Adds new `KTeleport` component
+  - **Products impact:** New API
+  - **Addresses:** -
+  - **Components:**  `KTeleport` 
+  - **Breaking:** no
+  - **Impacts a11y:** no
+  - **Guidance:** -
+
+[#722]: https://github.com/learningequality/kolibri-design-system/pull/722
+
+- [#722]
+  - **Description:** Adds new prop, `appendToRoot`, to `KTooltip`
+  - **Products impact:** New API
+  - **Addresses:** -
+  - **Components:**  `KTooltip` 
+  - **Breaking:** no
+  - **Impacts a11y:** no
+  - **Guidance:** -
+
+[#722]: https://github.com/learningequality/kolibri-design-system/pull/722
+
+- [#722]
+  - **Description:** Makes the `sidebar` icon flip in RTL languages
+  - **Products impact:** Bugfix
+  - **Addresses:** -
+  - **Components:**  Icons
+  - **Breaking:** no
+  - **Impacts a11y:** yes
+  - **Guidance:** -
+
+[#722]: https://github.com/learningequality/kolibri-design-system/pull/722
+
 - [#687]
   - **Description:** Adds logic that inserts ARIA live assertive and polite regions to an application's document body during KDS initialization and documents this on the new "Installation" page. Relatedly adds `useKLiveRegion` composable with public methods for updating the live regions with assertive and polite messages. 
   - **Products impact:** new API
