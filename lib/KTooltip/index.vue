@@ -6,6 +6,7 @@
     :disabled="disabled"
     :visibleArrow="false"
     :options="options"
+    :appendToEl="appendToEl"
     trigger="hover"
   >
     <div
@@ -28,6 +29,7 @@
 <script>
 
   import isArray from 'lodash/isArray';
+  import _useTeleportRootEl from '../composables/_useTeleportRootEl';
   import Popper from './Popper';
 
   /**
@@ -37,6 +39,11 @@
     name: 'KTooltip',
     components: {
       Popper,
+    },
+    setup(props) {
+      const { getTeleportRootEl } = _useTeleportRootEl();
+      const appendToEl = props.appendToRoot ? getTeleportRootEl() : null;
+      return { appendToEl };
     },
     props: {
       /**
@@ -85,6 +92,15 @@
       maxWidth: {
         type: String,
         default: null,
+      },
+      /**
+       * Whether or not the tooltip should be teleported
+       * to the root of the document
+       */
+      // eslint-disable-next-line kolibri/vue-no-unused-properties
+      appendToRoot: {
+        type: Boolean,
+        default: false,
       },
     },
     data() {

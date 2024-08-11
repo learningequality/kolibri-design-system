@@ -400,6 +400,11 @@ export default [
         keywords: tabsRelatedKeywords,
       }),
       new Page({
+        path: '/kteleport',
+        title: 'KTeleport',
+        isCode: true,
+      }),
+      new Page({
         path: '/ktransition',
         title: 'KTransition',
         isCode: true,

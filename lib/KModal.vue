@@ -1,6 +1,6 @@
 <template>
 
-  <component :is="wrapper" v-bind="wrapperProps">
+  <component :is="wrapper">
     <!-- Accessibility properties for the overlay -->
     <transition name="modal-fade" appear>
       <div
@@ -103,7 +103,6 @@
 
 <script>
 
-  import Teleport from 'vue2-teleport';
   import debounce from 'lodash/debounce';
   import useKResponsiveWindow from './composables/useKResponsiveWindow';
 
@@ -120,9 +119,6 @@
    */
   export default {
     name: 'KModal',
-    components: {
-      Teleport,
-    },
     setup() {
       const { windowHeight, windowWidth } = useKResponsiveWindow();
       return { windowHeight, windowWidth };
@@ -236,10 +232,7 @@
         };
       },
       wrapper() {
-        return this.appendToRoot ? 'Teleport' : 'div';
-      },
-      wrapperProps() {
-        return this.appendToRoot ? { to: 'body' } : {};
+        return this.appendToRoot ? 'KTeleport' : 'div';
       },
     },
     created() {
