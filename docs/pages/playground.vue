@@ -1,29 +1,51 @@
 <template>
 
-  <!--
-    Playground: A private page for components development
-    *****************************************************
-    Place a component you're working on here and see it
-    live on http://localhost:4000/playground
+  <div id="app">
+    <h1>KTable Component Example</h1>
 
-    Please do not commit your local updates of this file.
-  -->
-  <div style="padding: 24px">
-    <!-- 
-      Example: Uncomment lines bellow, change something
-      in lib/KBreadcrumbs.vue and see the updates reflected
-      on this page
-    -->
-    <!-- <KBreadcrumbs
-      :items="[
-        { text: 'Global Digital Library', link: { path: '#' } },
-        { text: 'English', link: { path: '#' } },
-        { text: 'Level 2 ', link: { path: '#' } },
-      ]"
-    /> -->
+    <!-- Local Sorting Table Example -->
+    <h2>Local Sorting Table</h2>
+    <KTable
+      :headers="headers"
+      :rows="rows"
+      caption="Local Sorting Table"
+      :useLocalSorting="true"
+      sortable
+    >
+      <template #header="{ header, index }">
+        <span>{{ header.label }} (Local)</span>
+      </template>
+      <template #cell="{ content, rowIndex, colIndex }">
+        <span v-if="colIndex === 1">{{ content }} years old</span>
+        <span v-else>{{ content }}</span>
+      </template>
+    </KTable>
 
-    <!-- Play around with your component here: -->
+    <!-- Backend Sorting Table Example -->
+    <h2>Backend Sorting Table(with Custom Widths)</h2>
+    <div ref="loadingArea" role="status" aria-live="polite" class="sr-only">
+      {{ loadingMessage }}
+    </div>
+    <KTable
+      :headers="headersWithCustomWidths"
+      :rows="backendRows"
+      caption="Backend Sorting Table"
+      :useLocalSorting="false"
+      sortable
+      @changeSort="changeSortHandler"
+    >
+      <template #header="{ header, index }">
+        <span>{{ header.label }} (Backend)</span>
+      </template>
+      <template #cell="{ content, rowIndex, colIndex }">
+        <span v-if="colIndex === 2">{{ content }} (City)</span>
+        <span v-else>{{ content }}</span>
+      </template>
+    </KTable>
 
+    <div v-if="isLoading" class="loading-overlay">
+      Data is loading. Please wait...
+    </div>
   </div>
 
 </template>
@@ -32,16 +54,149 @@
 <script>
 
   /*
-    Playground is a Vue component too,
-    so you can also use `data`, `methods`, etc.
-    as usual if helpful
-  */
+               Playground is a Vue component too,
+               so you can also use `data`, `methods`, etc.
+               as usual if helpful
+             */
+  import { ref } from '@vue/composition-api';
+  import KTable from '../../lib/KTable';
+
   export default {
     name: 'Playground',
-    data() {
-      return {};
+    components: {
+      KTable,
     },
-    methods: {},
+    setup() {
+      const loadingArea = ref(null);
+      const isLoading = ref(false);
+      const loadingMessage = ref('');
+
+      const updateLoadingMessage = message => {
+        loadingMessage.value = message;
+        if (loadingArea.value) {
+          loadingArea.value.setAttribute('aria-live', 'off'); // Temporarily disable live region
+          void loadingArea.value.offsetWidth; // Force reflow
+          loadingArea.value.setAttribute('aria-live', 'polite'); // Re-enable live region
+        }
+      };
+
+      return {
+        loadingArea,
+        isLoading,
+        loadingMessage,
+        updateLoadingMessage,
+      };
+    },
+    data() {
+      return {
+        headers: [
+          { label: 'Name', dataType: 'string' },
+          { label: 'Age', dataType: 'numeric' },
+          { label: 'City', dataType: 'string' },
+          { label: 'Joined', dataType: 'date' },
+          { label: 'Misc', dataType: 'others' },
+        ],
+        headersWithCustomWidths: [
+          { label: 'Name', dataType: 'string', minWidth: '20px', width: '2%' },
+          { label: 'Age', dataType: 'numeric', minWidth: '100px', width: '33%' },
+          { label: 'City', dataType: 'string', minWidth: '200px', width: '25%' },
+          { label: 'Joined', dataType: 'date', minWidth: '150px', width: '20%' },
+          { label: 'Misc', dataType: 'others', minWidth: '100px', width: '20%' },
+        ],
+        rows: [
+          ['John Doe', 28, 'New York', '2022-01-15T00:00:00Z', 'N/A'],
+          ['Jane Smith', 34, 'Los Angeles', '2021-12-22T00:00:00Z', 'N/A'],
+          ['Samuel Green', 22, 'Chicago', '2023-03-10T00:00:00Z', 'N/A'],
+          ['Alice Johnson', 30, 'Houston', '2020-07-18T00:00:00Z', 'N/A'],
+          ['Michael Brown', 45, 'Phoenix', '2019-11-05T00:00:00Z', 'N/A'],
+          ['Emily Davis', 27, 'Philadelphia', '2021-08-14T00:00:00Z', 'N/A'],
+          ['Christopher Wilson', 33, 'San Antonio', '2022-04-22T00:00:00Z', 'N/A'],
+          ['Jessica Martinez', 29, 'San Diego', '2020-09-30T00:00:00Z', 'N/A'],
+          ['Daniel Anderson', 40, 'Dallas', '2018-06-25T00:00:00Z', 'N/A'],
+          ['Laura Thomas', 31, 'San Jose', '2021-03-18T00:00:00Z', 'N/A'],
+          ['Matthew Jackson', 26, 'Austin', '2022-07-12T00:00:00Z', 'N/A'],
+          ['Sarah White', 35, 'Fort Worth', '2020-02-27T00:00:00Z', 'N/A'],
+          ['David Harris', 38, 'Columbus', '2019-10-19T00:00:00Z', 'N/A'],
+          ['Sophia Clark', 24, 'Charlotte', '2023-01-05T00:00:00Z', 'N/A'],
+          ['James Lewis', 32, 'San Francisco', '2021-05-23T00:00:00Z', 'N/A'],
+          ['Olivia Robinson', 28, 'Indianapolis', '2022-11-11T00:00:00Z', 'N/A'],
+          ['Benjamin Walker', 37, 'Seattle', '2020-12-03T00:00:00Z', 'N/A'],
+        ],
+        backendRows: [
+          ['John Doe', 28, 'New York', '2022-01-15T00:00:00Z', 'N/A'],
+          ['Jane Smith', 34, 'Los Angeles', '2021-12-22T00:00:00Z', 'N/A'],
+          ['Samuel Green', 22, 'Chicago', '2023-03-10T00:00:00Z', 'N/A'],
+          ['Alice Johnson', 30, 'Houston', '2020-07-18T00:00:00Z', 'N/A'],
+        ],
+      };
+    },
+    methods: {
+      async changeSortHandler(index, sortOrder) {
+        this.isLoading = true;
+        this.updateLoadingMessage('Data is loading. Please wait...');
+
+        this.$nextTick(() => {
+          if (this.$refs.loadingArea) {
+            this.$refs.loadingArea.focus();
+          }
+        });
+
+        // Simulate fetching sorted data from backend
+        console.log('Fetching sorted data from backend for column:', index, 'order:', sortOrder);
+
+        setTimeout(() => {
+          // For demo purposes, we just reverse the rows
+          this.backendRows = [...this.backendRows].reverse();
+          this.isLoading = false;
+          this.updateLoadingMessage('Data loaded successfully.');
+
+          setTimeout(() => {
+            this.updateLoadingMessage('');
+          }, 5000);
+        }, 10000); // Simulate a 10 second delay for fetching data
+      },
+    },
   };
 
 </script>
+
+
+<style>
+#app {
+  font-family: Avenir, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  margin-top: 60px;
+}
+
+h1, h2 {
+  margin: 20px 0;
+}
+
+.loading-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5em;
+  z-index: 5;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+</style>

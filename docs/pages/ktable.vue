@@ -1,0 +1,5 @@
+<template>
+
+  <DocsPageTemplate apiDocs />
+
+</template>

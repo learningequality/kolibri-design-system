@@ -322,6 +322,11 @@ export default [
         keywords: ['button'],
       }),
       new Page({
+        path: '/ktable',
+        title: 'KTable',
+        isCode: true,
+      }),
+      new Page({
         path: '/kgrid',
         title: 'KGrid',
         isCode: true,
