@@ -4,6 +4,29 @@ Changelog is rather internal in nature. See release notes for the public overvie
 
 ## Upcoming version 5.x.x (`develop` branch)
 
+- [#723]
+  - **Description:** Updates $core-time value from 0.25s to 0.15s
+  - **Products impact:** User experience - faster transitions
+  - **Addresses:** Updates KDS to the latest guidance from the design team
+  - **Components:** `KButton`, `KExternalLink`, `KRouterLink`, `KModal`, `KCard`, `KIcon`, `KTabsList`, `KTabs`, and places in consumers that imports `$core-time`
+  - **Breaking:** no
+  - **Impacts a11y:** no
+  - **Guidance:** -
+
+[#723]: https://github.com/learningequality/kolibri-design-system/pull/723
+
+
+- [#723]
+  - **Description:** Updates drop shadows documentation to the latest guidance from the design team
+  - **Products impact:** -
+  - **Addresses:** Updates KDS to the latest guidance from the design team
+  - **Components:** -
+  - **Breaking:** no
+  - **Impacts a11y:** no
+  - **Guidance:** -
+
+[#723]: https://github.com/learningequality/kolibri-design-system/pull/723
+
 - [#687]
   - **Description:** Adds logic that inserts ARIA live assertive and polite regions to an application's document body during KDS initialization and documents this on the new "Installation" page. Relatedly adds `useKLiveRegion` composable with public methods for updating the live regions with assertive and polite messages. 
   - **Products impact:** new API
