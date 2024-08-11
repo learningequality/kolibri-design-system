@@ -4,6 +4,80 @@ Changelog is rather internal in nature. See release notes for the public overvie
 
 ## Upcoming version 5.x.x (`develop` branch)
 
+[#707]
+  - **Description:** Card Validations
+  - **Products impact:**  
+  - **Addresses:** [#695](https://github.com/learningequality/kolibri-design-system/issues/695)
+  - **Components:** `KCard`
+  - **Breaking:** No
+  - **Impacts a11y:**  No
+  - **Guidance:**
+ [#707] https://github.com/learningequality/kolibri-design-system/pull/707
+
+[#709]
+  - **Description:**  Update spaces to the latest design`KCard` 
+  - **Products impact:**  Card updates 
+  - **Addresses:** [#704](https://github.com/learningequality/kolibri-design-system/issues/704)
+  - **Components:** `KCard` 
+  - **Breaking:** N0
+  - **Impacts a11y:** No
+  - **Guidance:**
+ [#709] https://github.com/learningequality/kolibri-design-system/pull/709
+
+[#625]
+  - **Description:** Initial implementation of `KCard` component
+  - **Products impact:** New Component
+  - **Addresses:** [#530](https://github.com/learningequality/kolibri-design-system/issues/530)
+  - **Components:** KCard
+  - **Breaking:** No
+  - **Impacts a11y:**  Yes
+  - **Guidance:**
+[#625]: https://github.com/learningequality/kolibri-design-system/pull/625
+
+- [#678]
+  - **Description:** Add `previewUnavailable` icon
+  - **Products impact:** new icon
+  - **Addresses:** Support of migrating Studio icons from Vuetify to KDS
+  - **Components:** `KIcon`
+  - **Breaking:** no
+  - **Impacts a11y:** no
+  - **Guidance:** -
+
+[#678]: https://github.com/learningequality/kolibri-design-system/pull/678
+
+- [#666]
+  - **Description:** Update `KImg`'s placeholder and letterbox area background color to a lighter shade of grey, `v_50`.
+  - **Products impact:** UI appearance update
+  - **Addresses:** -
+  - **Components:** `KImg`, `KCard`
+  - **Breaking:** no
+  - **Impacts a11y:** no
+  - **Guidance:** -
+
+[#666]: https://github.com/learningequality/kolibri-design-system/pull/666
+
+- [#652]
+  - **Description:** KTextTruncator drops support for Internet Explorer 11
+  - **Products impact:** browser support update
+  - **Addresses:**  https://github.com/learningequality/kolibri-design-system/issues/643
+  - **Components:** KTextTruncator
+  - **Breaking:** yes
+  - **Impacts a11y:** -
+  - **Guidance:** To be used in newer versions of products that don't need to support IE11 (Kolibri 0.17 and higher)
+
+[#652]: https://github.com/learningequality/kolibri-design-system/pull/652/
+
+- [#590]
+  - **Description:** Modal now shrinks when the content has a smaller height.
+  - **Products impact:** bugfix.
+  - **Addresses:**  https://github.com/learningequality/kolibri-design-system/issues/570
+  - **Components:** KModal.
+  - **Breaking:** no
+  - **Impacts a11y:** -
+  - **Guidance:** Consumers need to ensure the modal height is still working correctly.
+
+[#590]: https://github.com/learningequality/kolibri-design-system/pull/590/
+
 - [#549]
   - **Description:** Internal refactor of `KSelect` as part of moving away from Keen UI where related files were renamed and some functionality that wasn't exposed for public use was removed.
   - **Products impact:** none
@@ -38,6 +112,71 @@ Changelog is rather internal in nature. See release notes for the public overvie
 [#615]: https://github.com/learningequality/kolibri-design-system/pull/615
 
 ## Version 4.x.x (`release-v4` branch)
+
+
+- [#680]
+  - **Description:** Adds boolean `appendToRoot` prop to teleport the modal to the body element if true.
+  - **Products impact:** new API.
+  - **Addresses:** https://github.com/learningequality/kolibri/issues/12447.
+  - **Components:** KModal.
+  - **Breaking:** no
+  - **Impacts a11y:** no
+  - **Guidance:** 
+
+- [#680]
+  - **Description:** Fixes the calculation of overflowed items when changes in the size of the list item slots occur.
+  - **Products impact:** bugfix.
+  - **Addresses:** https://github.com/learningequality/kolibri/issues/12447.
+  - **Components:** KListWithOverflow.
+  - **Breaking:** no
+  - **Impacts a11y:** no
+  - **Guidance:** 
+
+[#680]: https://github.com/learningequality/kolibri-design-system/pull/680
+
+- [#673]
+  - **Description:** Remove white space below Ktabs
+  - **Products impact:** bugfix.
+  - **Addresses:** https://github.com/learningequality/kolibri/issues/12297.
+  - **Components:** KTabsList, KTabs, KTabsPanel.
+  - **Breaking:** no
+  - **Impacts a11y:**no
+  - **Guidance:** .
+
+[#673]: https://github.com/learningequality/kolibri-design-system/pull/673
+
+- [#629]
+  - **Description:** Improves the contrast for highlighted text, noted in KTextbox
+  - **Products impact:** None
+  - **Addresses:** https://github.com/learningequality/kolibri-design-system/issues/629
+  - **Components:** -
+  - **Breaking:** -
+  - **Impacts a11y:** -
+  - **Guidance:** -
+
+[#629]: https://github.com/learningequality/kolibri-design-system/pull/629
+
+- [#648]
+  - **Description:** Updates KSelect to include guiding documentation for the events it emits
+  - **Products impact:** None
+  - **Addresses:** -
+  - **Components:** KSelect
+  - **Breaking:** no
+  - **Impacts a11y:** no
+  - **Guidance:** -
+
+[#648]: https://github.com/learningequality/kolibri-design-system/pull/648
+
+- [#653]
+  - **Description:** Header "Changelog" text and link updated
+  - **Products impact:** -
+  - **Addresses:** Replace the "Changelog" link with the "Release notes" link on the KDS documentation website #644
+  - **Components:** -
+  - **Breaking:** No
+  - **Impacts a11y:** No
+  - **Guidance:** -
+
+[#653]: https://github.com/learningequality/kolibri-design-system/pull/653
 
 - [#630]
   - **Description:** Updates the svg for the pointsLeafActive, and removes the pointsLeafInactive (which is not used anywhere in Kolibri)
@@ -377,7 +516,7 @@ Changelog is rather internal in nature. See release notes for the public overvie
 
 - [#611]
   - **Description:** Adds a new `maxWidth` prop
-  -  **Products impact:** new API 
+  -  **Products impact:** new API
   - **Addresses:** https://github.com/learningequality/kolibri-design-system/issues/595
   - **Components:** KTooltip
   - **Breaking:** no
@@ -413,7 +552,7 @@ Changelog is rather internal in nature. See release notes for the public overvie
   - **Components:** N/A
   - **Breaking:** No
   - **Impacts a11y:**  No
-  - **Guidance:** 
+  - **Guidance:**
 [#603]: https://github.com/learningequality/kolibri-design-system/pull/603
 
 - [#605]

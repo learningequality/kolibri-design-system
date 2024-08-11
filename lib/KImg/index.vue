@@ -141,7 +141,7 @@
        * (3) a progressive loading experience as the colored background
        * is displayed while an image is loading.
        *
-       * Its default value is `$themePalette.grey.v_200`.
+       * Its default value is `$themePalette.grey.v_50`.
        */
       backgroundColor: {
         type: String,
@@ -174,7 +174,7 @@
       baseStyles() {
         const backgroundColor = this.backgroundColor
           ? this.backgroundColor
-          : this.$themePalette.grey.v_200;
+          : this.$themePalette.grey.v_50;
         const borderRadius = this.borderRadius ? this.borderRadius : 0;
 
         return {

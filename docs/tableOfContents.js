@@ -401,6 +401,12 @@ export default [
         title: 'KListWithOverflow',
         isCode: true,
       }),
+      new Page({
+        path: '/kcard',
+        title: 'KCard',
+        isCode: true,
+        keywords: layoutRelatedKeywords,
+      }),
     ],
   }),
 ];
