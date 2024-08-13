@@ -55,3 +55,4 @@ The guidelines referenced above should be sufficient for the most common tasks. 
 - [How to update the documentation website](./04_how_to_update_docs.md)
 - [Icons](./05_icons.md)
 - [Miscellaneous](./06_misc.md)
+- [Visual Testing](./07_visual_testing_guide.md)

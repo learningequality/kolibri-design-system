@@ -75,7 +75,7 @@ KDS has a visual testing system that allows you to take snapshots of how KDS Com
       await click('button');
      ```
 
-     Here, *'button'* is the CSS selector for the component. You can pass different selectors to the functions used to simulate user interaction as per requirement.
+     Here, *'button'* is the CSS selector for the component. You can pass different selectors to the functions, exposed by [`visual.testUtils.js`](../jest.conf/visual.testUtils.js), to simulate user interaction as per requirement.
 
 ## Implementation details
 
