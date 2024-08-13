@@ -215,7 +215,7 @@
         */
       stylesAndClasses() {
         /* In px. Needs to be the same as $spacer variable in styles part */
-        const SPACER = 24;
+        const SPACER = 12;
 
         const headingCommonStyles = {
           order: 3,
@@ -335,7 +335,7 @@
 <style lang="scss" scoped>
 
   /* Needs to be the same as SPACER constant in JavaScript part */
-  $spacer: 24px;
+  $spacer: 12px;
 
   /*
         Just couple of comments that are referenced from several places:
@@ -369,9 +369,8 @@
 
   .below-title {
     order: 4;
-    height: 26px; /* (1) */
     min-height: 26px; /* (2) */
-    margin: 0 $spacer $spacer;
+    margin: 0 $spacer  0 $spacer;
     overflow: hidden; /* (1) */
   }
 
@@ -483,8 +482,8 @@
         left: $spacer;
       }
       .above-title,
-      .below-title,
-      .footer {
+      .below-title
+      {
         margin-right: $spacer;
         margin-left: 40%;
       }
