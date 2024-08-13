@@ -195,12 +195,6 @@ export default [
           'loading',
         ],
       }),
-      new Page({
-        path: '/usesorting',
-        title: 'useSorting',
-        isCode: true,
-        keywords: [...compositionRelatedKeywords, 'sort'],
-      }),
     ],
   }),
   new Section({
@@ -330,11 +324,6 @@ export default [
       new Page({
         path: '/ktable',
         title: 'KTable',
-        isCode: true,
-      }),
-      new Page({
-        path: '/ktablegriditem',
-        title: 'KTableGridItem',
         isCode: true,
       }),
       new Page({
