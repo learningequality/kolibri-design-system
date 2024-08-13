@@ -185,13 +185,18 @@
         default: 'left',
         validator: cardValidator(thumbnailAlignOptions, 'thumbnailAlign'),
       },
+      titleLines: {
+        type: Number,
+        required: false,
+        default: 2,
+      },
     },
     computed: {
       rootClass() {
         return this.stylesAndClasses.rootClass;
       },
-      titleLines() {
-        return this.stylesAndClasses.titleLines;
+      titleLine() {
+        return this.stylesAndClasses.titleLine;
       },
       thumbnailAspectRatio() {
         return this.stylesAndClasses.thumbnailAspectRatio;
@@ -238,7 +243,7 @@
           return {
             rootClass: 'vertical-with-large-thumbnail',
             thumbnailAlignClass: undefined,
-            titleLines: 3,
+            titleLine: this.titleLines,
             thumbnailAspectRatio: undefined,
             headingStyles: {
               ...headingCommonStyles,
@@ -253,7 +258,7 @@
           return {
             rootClass: 'vertical-with-small-thumbnail',
             thumbnailAlignClass: undefined,
-            titleLines: 3,
+            titleLine: this.titleLines,
             thumbnailAspectRatio: undefined,
             headingStyles: {
               ...headingCommonStyles,
@@ -268,7 +273,7 @@
           return {
             rootClass: undefined,
             thumbnailAlignClass: undefined,
-            titleLines: 2,
+            titleLine: this.titleLines,
             thumbnailAspectRatio: undefined,
             headingStyles: {
               ...headingCommonStyles,
@@ -283,7 +288,7 @@
           return {
             rootClass: 'horizontal-with-large-thumbnail',
             thumbnailAlignClass: `thumbnail-align-${this.thumbnailAlign}`,
-            titleLines: 3,
+            titleLine: this.titleLines,
             thumbnailAspectRatio: undefined,
             headingStyles: {
               ...headingCommonStyles,
@@ -300,7 +305,7 @@
           return {
             rootClass: 'horizontal-with-small-thumbnail',
             thumbnailAlignClass: `thumbnail-align-${this.thumbnailAlign}`,
-            titleLines: 2,
+            titleLine: this.titleLines,
             thumbnailAspectRatio: '1:1',
             headingStyles: {
               ...headingCommonStyles,
@@ -317,7 +322,7 @@
           return {
             rootClass: undefined,
             thumbnailAlignClass: undefined,
-            titleLines: 2,
+            titleLine: this.titleLines,
             thumbnailAspectRatio: undefined,
             headingStyles: {
               ...headingCommonStyles,
