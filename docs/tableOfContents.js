@@ -333,6 +333,11 @@ export default [
         isCode: true,
       }),
       new Page({
+        path: '/ktablegriditem',
+        title: 'KTableGridItem',
+        isCode: true,
+      }),
+      new Page({
         path: '/kgrid',
         title: 'KGrid',
         isCode: true,

@@ -19,6 +19,7 @@
               'sticky-column': index === 0,
             }"
             :style="[getHeaderStyle(header),
+                     { color: $themePalette.grey.v_800 },
                      { backgroundColor: $themePalette.white } ,
                      focusedColIndex === index ? { backgroundColor: $themePalette.grey.v_50 } : {}]"
             role="columnheader"
@@ -26,13 +27,16 @@
             @click="sortable && header.dataType !== DATA_TYPE_OTHERS ? handleSort(index) : null"
             @keydown="handleKeydown($event, -1, index)"
           >
+            <!-- Scoped slot for customizing the content of each header cell. Receives the following slot props:
+              - `header`: The current header object.
+              - `index`: The index of the current header.-->
             <slot name="header" :header="header" :index="index">
               {{ header.label }}
             </slot>
             <span v-if="sortable && header.dataType !== DATA_TYPE_OTHERS" class="sort-icon">
-              <span v-if="sortKey === index && sortOrder === SORT_ORDER_ASC"><KIcon icon="dropup" /></span>
-              <span v-else-if="sortKey === index && sortOrder === SORT_ORDER_DESC"><KIcon icon="dropdown" /></span>
-              <span v-else><KIcon icon="sortColumn" /></span>
+              <span v-if="sortKey === index && sortOrder === SORT_ORDER_ASC"><KIcon icon="dropup" :color="$themePalette.grey.v_800" /></span>
+              <span v-else-if="sortKey === index && sortOrder === SORT_ORDER_DESC"><KIcon icon="dropdown" :color="$themePalette.grey.v_800" /></span>
+              <span v-else><KIcon icon="sortColumn" :color="$themePalette.grey.v_800" /></span>
             </span>
           </th>
         </tr>
@@ -64,6 +68,11 @@
             @keydown="handleKeydown($event, rowIndex, colIndex)"
           >
             <template #default="slotProps">
+
+              <!-- - Scoped slot for customizing the content of each data cell. Receives the following slot props:
+                   - `content`: The content of the current cell.
+                   - `rowIndex`: The index of the current row.
+                   - `colIndex`: The index of the current column.-->
               <slot name="cell" :content="slotProps.content" :rowIndex="rowIndex" :colIndex="colIndex" :row="row">
                 {{ slotProps.content }}
               </slot>
@@ -154,6 +163,10 @@
       };
     },
     props: {
+      /**
+       * An array of objects representing the headers of the table. Each header should have a label and a dataType.
+       * The dataType can be one of 'string', 'numeric', 'date', or 'others'. MinWidth and width are optional.
+       */
       headers: {
         type: Array,
         required: true,
@@ -165,18 +178,30 @@
           );
         },
       },
+      /**
+       * An array of arrays representing the rows of the table. Each row should have the same number of elements as the headers array.
+       */
       rows: {
         type: Array,
         required: true,
       },
+      /**
+       * The caption of the table
+       */
       caption: {
         type: String,
         required: true,
       },
+      /**
+       * Enables or disables local sorting of the table data.
+       */
       useLocalSorting: {
         type: Boolean,
         default: false,
       },
+      /**
+       * Enables or disables sorting functionality for the table headers.
+       */
       sortable: {
         type: Boolean,
         default: true,
