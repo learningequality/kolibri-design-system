@@ -1,10 +1,5 @@
-const fs = require('fs');
-const path = require('path');
-
-async function generateComment(github, context) {
-    const percyUrl = context.outputs.percy_url;
-    
-    return `
+async function generateComment(percyUrl) {
+  return `
 ### Percy Visual Test Results
 
 **Percy Dashboard:** [View Detailed Report](${percyUrl})

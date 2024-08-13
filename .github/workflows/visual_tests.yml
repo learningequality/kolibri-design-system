@@ -64,13 +64,18 @@ jobs:
     if: ${{ needs.visual_tests.result == 'success' }}
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout code from PR
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
       - name: Define comment body
         id: comment-text
         uses: actions/github-script@v7
         with:
           script: |
+            const percyUrl = "${{ needs.visual_tests.outputs.percy_url }}";
             const utils = require('./.github/githubUtils.js');
-            return await utils.generateComment(github, context);
+            return await utils.generateComment(percyUrl);
       - name: Find existing comment
         id: find-comment
         uses: actions/github-script@v7
