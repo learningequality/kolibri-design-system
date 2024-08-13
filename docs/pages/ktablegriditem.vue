@@ -7,6 +7,6 @@
       </p>
     </DocsPageSection>
   </DocsPageTemplate>
-  
+
 </template>
   

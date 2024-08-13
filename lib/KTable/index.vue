@@ -19,7 +19,7 @@
               'sticky-column': index === 0,
             }"
             :style="[getHeaderStyle(header),
-                     { color: $themePalette.grey.v_800 },
+                     sortKey === index ? { color: $themeBrand.primary.v_1000 } : { color: $themePalette.grey.v_800 },
                      { backgroundColor: $themePalette.white } ,
                      focusedColIndex === index ? { backgroundColor: $themePalette.grey.v_50 } : {}]"
             role="columnheader"
@@ -34,8 +34,8 @@
               {{ header.label }}
             </slot>
             <span v-if="sortable && header.dataType !== DATA_TYPE_OTHERS" class="sort-icon">
-              <span v-if="sortKey === index && sortOrder === SORT_ORDER_ASC"><KIcon icon="dropup" :color="$themePalette.grey.v_800" /></span>
-              <span v-else-if="sortKey === index && sortOrder === SORT_ORDER_DESC"><KIcon icon="dropdown" :color="$themePalette.grey.v_800" /></span>
+              <span v-if="sortKey === index && sortOrder === SORT_ORDER_ASC"><KIcon icon="dropup" :color="sortKey === index ? $themeBrand.primary.v_1100 : $themePalette.grey.v_800 " /></span>
+              <span v-else-if="sortKey === index && sortOrder === SORT_ORDER_DESC"><KIcon icon="dropdown" :color="sortKey === index ? $themeBrand.primary.v_1100 : $themePalette.grey.v_800 " /></span>
               <span v-else><KIcon icon="sortColumn" :color="$themePalette.grey.v_800" /></span>
             </span>
           </th>
