@@ -4,7 +4,7 @@
     :to="to"
     :title="title"
     :headingLevel="headingLevel"
-    :titleLines="titleLines"
+    :titleLines="titleLine"
     :class="['k-card', rootClass, thumbnailAlignClass]"
     :headingStyles="headingStyles"
   >
@@ -375,7 +375,7 @@
   .below-title {
     order: 4;
     min-height: 26px; /* (2) */
-    margin: 0 $spacer  0 $spacer;
+    margin: 0 $spacer 0 $spacer;
     overflow: hidden; /* (1) */
   }
 
@@ -487,8 +487,7 @@
         left: $spacer;
       }
       .above-title,
-      .below-title
-      {
+      .below-title {
         margin-right: $spacer;
         margin-left: 40%;
       }

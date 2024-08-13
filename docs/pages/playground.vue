@@ -716,7 +716,9 @@
 
 </script>
 
+
 <style scoped lang="scss">
+
   ul {
     display: flex;
     flex-direction: row;
@@ -760,4 +762,5 @@
     margin-left: 300px;
     font-size: 20px;
   }
+
 </style>
