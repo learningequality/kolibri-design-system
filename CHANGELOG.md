@@ -4,6 +4,17 @@ Changelog is rather internal in nature. See release notes for the public overvie
 
 ## Upcoming version 5.x.x (`develop` branch)
 
+- [719]
+  - **Description:** Removes KResponsiveWindowMixin.
+  - **Products impact:** removed API.
+  - **Addresses:** https://github.com/learningequality/kolibri-design-system/issues/679.
+  - **Components:** KResponsiveWindowMixin.
+  - **Breaking:** yes.
+  - **Impacts a11y:** no.
+  - **Guidance:** Replace any use of KResponsiveWindowMixin with the new composable useKResponsiveWindow.
+
+[719]: https://github.com/learningequality/kolibri-design-system/pull/719
+
 - [#718]
   - **Description:** This pull request resolves failing `KDateCalendar` component tests that occurred on the last day of the month in open pull requests by setting dates manually in the tests. Additionally, the `KDateCalendar` is updated to show the month of the `lastAllowedDate` property.
   - **Products impact:** none
@@ -34,7 +45,6 @@ Changelog is rather internal in nature. See release notes for the public overvie
   - **Impacts a11y:** No
   - **Guidance:**
  [#688] https://github.com/learningequality/kolibri-design-system/pull/688
-
 
 [#707]
   - **Description:** Card Validations
