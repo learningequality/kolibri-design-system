@@ -13,6 +13,38 @@ Changelog is rather internal in nature. See release notes for the public overvie
   - **Impacts a11y:**  Yes
   - **Guidance:**
 [#727] https://github.com/learningequality/kolibri-design-system/pull/727
+
+- [#718]
+  - **Description:** This pull request resolves failing `KDateCalendar` component tests that occurred on the last day of the month in open pull requests by setting dates manually in the tests. Additionally, the `KDateCalendar` is updated to show the month of the `lastAllowedDate` property.
+  - **Products impact:** none
+  - **Addresses:** https://github.com/learningequality/kolibri-design-system/issues/713
+  - **Components:** -
+  - **Breaking:** no
+  - **Impacts a11y:** -
+  - **Guidance:** -
+
+[#718]: https://github.com/learningequality/kolibri-design-system/pull/718
+
+- [#687]
+  - **Description:** Adds logic that inserts ARIA live assertive and polite regions to an application's document body during KDS initialization and documents this on the new "Installation" page. Relatedly adds `useKLiveRegion` composable with public methods for updating the live regions with assertive and polite messages. 
+  - **Products impact:** new API
+  - **Addresses:** https://github.com/learningequality/kolibri-design-system/issues/668
+  - **Components:** `useKLiveRegion`
+  - **Breaking:** No
+  - **Impacts a11y:** Yes. It will fix several places utilizing live regions that don't work in our applications at all. Furthemore, it follows the recommended practices that will fix major a11y issues with live regions we're having.
+  - **Guidance:** Find all polite and live regions (or roles) in an application. Remove them and instead use `useKLiveRegion.sendPoliteMessage` and `useKLiveRegion.sendAssertiveMessage` to update the live regions that KDS inserted to document body during installation.
+
+[#687]: https://github.com/learningequality/kolibri-design-system/pull/687
+ [#688]
+  - **Description:**  Update`KCard` styling 
+  - **Products impact:**  Card updates 
+  - **Addresses:** 
+  - **Components:** `KCard` 
+  - **Breaking:** N0
+  - **Impacts a11y:** No
+  - **Guidance:**
+ [#688] https://github.com/learningequality/kolibri-design-system/pull/688
+
 [#707]
   - **Description:** Card Validations
   - **Products impact:**  

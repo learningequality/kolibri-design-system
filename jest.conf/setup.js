@@ -50,3 +50,31 @@ global.flushPromises = function flushPromises() {
     setImmediate(resolve);
   });
 };
+
+function removeWhitespaceFromHtml(htmlString) {
+  // https://stackoverflow.com/a/33108909
+  return htmlString.replace(/>\s+|\s+</g, function(m) {
+    return m.trim();
+  });
+}
+
+global.expect.extend({
+  // check that document.body.innerHTML includes html string
+
+  toBeInDom(received) {
+    const pass = removeWhitespaceFromHtml(document.body.innerHTML).includes(
+      removeWhitespaceFromHtml(received)
+    );
+    if (pass) {
+      return {
+        message: () => `expected ${received} not to be in the document body`,
+        pass: true,
+      };
+    } else {
+      return {
+        message: () => `expected ${received} to be in the document body`,
+        pass: false,
+      };
+    }
+  },
+});

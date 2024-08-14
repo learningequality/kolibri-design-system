@@ -69,6 +69,10 @@ export default [
         title: 'Home',
       }),
       new Page({
+        path: '/installation',
+        title: 'Installation',
+      }),
+      new Page({
         path: '/principles',
         title: 'Design principles',
       }),
@@ -179,6 +183,21 @@ export default [
         title: 'useKResponsiveWindow',
         isCode: true,
         keywords: [...compositionRelatedKeywords, 'responsive', 'window', 'breakpoint'],
+      }),
+      new Page({
+        path: '/usekliveregion',
+        title: 'useKLiveRegion',
+        isCode: true,
+        keywords: [
+          ...compositionRelatedKeywords,
+          'a11y',
+          'live',
+          'region',
+          'aria',
+          'polite',
+          'assertive',
+          'message',
+        ],
       }),
       new Page({
         path: '/usekshow',
