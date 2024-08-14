@@ -7,30 +7,31 @@
       </p>
     </DocsPageSection>
     <DocsPageSection title="Usage" anchor="#usage">
-      <!-- Frontend Sorting Example-->
-      <h3>Table with Frontend Sorting</h3>
+      <!--Non-Sortable Table-->
+      <h3>Table without Sorting functionality</h3>
       <p>
-        The <code>KTable</code> can be used with local sorting functionality, allowing you to sort data on the client side without the need for server requests. This example demonstrates a table with local sorting enabled.
+        This is an example to show how <code>KTable</code> can be used without any sorting functionality, for a simple table.
       </p>
+      <!-- eslint-disable -->
       <DocsShowCode language="html">
         <KTable
           :headers="headers"
           :rows="rows"
-          caption="Local Sorting Table"
-          :useLocalSorting="true"
-          sortable
+          caption="Non Sortable Table"
+          :sortable="false"
         >
+
           <template #header="{ header, index }">
-            <span>{{ header.label }} (Backend)</span>
+            <span>{ header.label } (Backend)</span>
           </template>
           <template #cell="{ content, rowIndex, colIndex }">
-            <span v-if="colIndex === 2">{{ content }} (City)</span>
-            <span v-else>{{ content }}</span>
+            <span v-if="colIndex === 2">{ content } (City)</span>
+            <span v-else>{ content }</span>
           </template>
         </KTable>
 
       </DocsShowCode>
-      <!-- eslint-disable -->
+
   <DocsShowCode language="javascript">
     data() {
       return {
@@ -40,14 +41,79 @@
           { label: 'City', dataType: 'string' },
         ],
         rows: [
-          ['John Doe', 28, 'New York', '2022-01-15T00:00:00Z', 'N/A'],
-          ['Jane Smith', 34, 'Los Angeles', '2021-12-22T00:00:00Z', 'N/A'],
-          ['Samuel Green', 22, 'Chicago', '2023-03-10T00:00:00Z', 'N/A'],
+        ['John Doe', 28, 'New York'],
+          ['Jane Smith', 34, 'Los Angeles'],
+          ['Samuel Green', 22, 'Chicago'],
+          ['Alice Johnson', 30, 'Houston'],
+          ['Michael Brown', 45, 'Phoenix'],
+          ['Emily Davis', 27, 'Philadelphia'],
         ]
       };
     },
   </DocsShowCode>
-  <!-- eslint-enable -->
+
+      <DocsShow block>
+        <KTable
+          :headers="headers"
+          :rows="rows"
+          caption="Non Sortable Table"
+          :sortable="false"
+        >
+          <template #header="{ header, index }">
+            <span>{{ header.label }} (Backend)</span>
+          </template>
+          <template #cell="{ content, rowIndex, colIndex }">
+            <span v-if="colIndex === 2">{{ content }} (City)</span>
+            <span v-else>{{ content }}</span>
+          </template>
+        </KTable>
+      </DocsShow>
+       <!-- eslint-enable -->
+      <!-- Frontend Sorting Example-->
+      <h3>Table with Frontend Sorting</h3>
+      <p>
+        The <code>KTable</code> can be used with local sorting functionality, allowing you to sort data on the client side without the need for server requests. This example demonstrates a table with local sorting enabled.
+      </p>
+      <!-- eslint-disable -->
+      <DocsShowCode language="html">
+        <KTable
+          :headers="headers"
+          :rows="rows"
+          caption="Local Sorting Table"
+          :useLocalSorting="true"
+          sortable
+        >
+
+          <template #header="{ header, index }">
+            <span>{ header.label } (Backend)</span>
+          </template>
+          <template #cell="{ content, rowIndex, colIndex }">
+            <span v-if="colIndex === 2">{ content } (City)</span>
+            <span v-else>{ content }</span>
+          </template>
+        </KTable>
+
+      </DocsShowCode>
+
+  <DocsShowCode language="javascript">
+    data() {
+      return {
+        headers: [
+          { label: 'Name', dataType: 'string' },
+          { label: 'Age', dataType: 'numeric' },
+          { label: 'City', dataType: 'string' },
+        ],
+        rows: [
+        ['John Doe', 28, 'New York'],
+          ['Jane Smith', 34, 'Los Angeles'],
+          ['Samuel Green', 22, 'Chicago'],
+          ['Alice Johnson', 30, 'Houston'],
+          ['Michael Brown', 45, 'Phoenix'],
+          ['Emily Davis', 27, 'Philadelphia'],
+        ]
+      };
+    },
+  </DocsShowCode>
       <DocsShow block>
         <KTable
           :headers="headers"
@@ -64,6 +130,7 @@
             <span v-else>{{ content }}</span>
           </template>
         </KTable>
+          <!-- eslint-enable -->
       </DocsShow>
 
     </DocsPageSection>
@@ -73,21 +140,28 @@
 
 </template>
 
-export default {
-  name: 'DocsKTable',
-  data() {
-    return {
-      headers: [
-        { label: 'Name', dataType: 'string' },
-        { label: 'Age', dataType: 'numeric' },
-        { label: 'City', dataType: 'string' },
-      ],
-      rows: [
-        ['John Doe', 28, 'New York', '2022-01-15T00:00:00Z', 'N/A'],
-        ['Jane Smith', 34, 'Los Angeles', '2021-12-22T00:00:00Z', 'N/A'],
-        ['Samuel Green', 22, 'Chicago', '2023-03-10T00:00:00Z', 'N/A'],
-      ]
-    };
-  }
-};
 
+<script>
+
+  export default {
+    name: 'DocsKTable',
+    data() {
+      return {
+        headers: [
+          { label: 'Name', dataType: 'string' },
+          { label: 'Age', dataType: 'numeric' },
+          { label: 'City', dataType: 'string' },
+        ],
+        rows: [
+          ['John Doe', 28, 'New York'],
+          ['Jane Smith', 34, 'Los Angeles'],
+          ['Samuel Green', 22, 'Chicago'],
+          ['Alice Johnson', 30, 'Houston'],
+          ['Michael Brown', 45, 'Phoenix'],
+          ['Emily Davis', 27, 'Philadelphia'],
+        ],
+      };
+    },
+  };
+
+</script>

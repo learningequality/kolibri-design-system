@@ -2,7 +2,7 @@
 
   <div id="app">
     <h1>KTable Component Example</h1>
-
+    <!-- eslint-disable -->
     <!-- Local Sorting Table Example -->
     <h2>Local Sorting Table</h2>
     <KTable
@@ -42,10 +42,18 @@
         <span v-else>{{ content }}</span>
       </template>
     </KTable>
-
+  
     <div v-if="isLoading" class="loading-overlay">
       Data is loading. Please wait...
     </div>
+    <h2>Non Sortable Table</h2>
+    <KTable
+      :headers="headers"
+      :rows="rows"
+      caption="Non Sortable Table"
+      :sortable="false"
+    />
+
   </div>
 
 </template>

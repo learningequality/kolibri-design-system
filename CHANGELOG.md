@@ -4,6 +4,15 @@ Changelog is rather internal in nature. See release notes for the public overvie
 
 ## Upcoming version 5.x.x (`develop` branch)
 
+[#727]
+  - **Description:** Initial implementation of `KTable` component
+  - **Products impact:** New Component
+  - **Addresses:** [#328](https://github.com/learningequality/kolibri-design-system/issues/328)
+  - **Components:** KTable
+  - **Breaking:** No
+  - **Impacts a11y:**  Yes
+  - **Guidance:**
+[#727] https://github.com/learningequality/kolibri-design-system/pull/727
 [#707]
   - **Description:** Card Validations
   - **Products impact:**  

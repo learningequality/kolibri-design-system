@@ -27,9 +27,8 @@
             @click="sortable && header.dataType !== DATA_TYPE_OTHERS ? handleSort(index) : null"
             @keydown="handleKeydown($event, -1, index)"
           >
-            <!-- Scoped slot for customizing the content of each header cell. Receives the following slot props:
-              - `header`: The current header object.
-              - `index`: The index of the current header.-->
+            <!--@slot Scoped slot for customizing the content of each header cell. Receives the following slot props - `header`: The current header object & `index`: The index of the current header.-->
+
             <slot name="header" :header="header" :index="index">
               {{ header.label }}
             </slot>
@@ -69,10 +68,7 @@
           >
             <template #default="slotProps">
 
-              <!-- - Scoped slot for customizing the content of each data cell. Receives the following slot props:
-                   - `content`: The content of the current cell.
-                   - `rowIndex`: The index of the current row.
-                   - `colIndex`: The index of the current column.-->
+              <!-- @slot Scoped slot for customizing the content of each data cell. Receives the following slot props - `content`: The content of the current cell,`rowIndex`: The index of the current row & `colIndex`: The index of the current column.-->
               <slot name="cell" :content="slotProps.content" :rowIndex="rowIndex" :colIndex="colIndex" :row="row">
                 {{ slotProps.content }}
               </slot>
@@ -162,6 +158,7 @@
         getHeaderStyle,
       };
     },
+    /* eslint-disable kolibri/vue-no-unused-properties */
     props: {
       /**
        * An array of objects representing the headers of the table. Each header should have a label and a dataType.
