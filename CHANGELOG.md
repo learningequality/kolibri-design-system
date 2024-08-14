@@ -14,6 +14,18 @@ Changelog is rather internal in nature. See release notes for the public overvie
   - **Guidance:** Replace any use of KResponsiveWindowMixin with the new composable useKResponsiveWindow.
 
 [719]: https://github.com/learningequality/kolibri-design-system/pull/719
+
+- [#718]
+  - **Description:** This pull request resolves failing `KDateCalendar` component tests that occurred on the last day of the month in open pull requests by setting dates manually in the tests. Additionally, the `KDateCalendar` is updated to show the month of the `lastAllowedDate` property.
+  - **Products impact:** none
+  - **Addresses:** https://github.com/learningequality/kolibri-design-system/issues/713
+  - **Components:** -
+  - **Breaking:** no
+  - **Impacts a11y:** -
+  - **Guidance:** -
+
+[#718]: https://github.com/learningequality/kolibri-design-system/pull/718
+
 - [#687]
   - **Description:** Adds logic that inserts ARIA live assertive and polite regions to an application's document body during KDS initialization and documents this on the new "Installation" page. Relatedly adds `useKLiveRegion` composable with public methods for updating the live regions with assertive and polite messages. 
   - **Products impact:** new API
@@ -33,7 +45,6 @@ Changelog is rather internal in nature. See release notes for the public overvie
   - **Impacts a11y:** No
   - **Guidance:**
  [#688] https://github.com/learningequality/kolibri-design-system/pull/688
-
 
 [#707]
   - **Description:** Card Validations
