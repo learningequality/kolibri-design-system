@@ -5,7 +5,7 @@
     :title="title"
     :headingLevel="headingLevel"
     :titleLines="titleLines"
-    :class="['k-card', rootClass]"
+    :class="['k-card', rootClass, thumbnailAlignClass]"
     :headingStyles="headingStyles"
   >
     <template v-if="$slots.title" #title>
@@ -81,6 +81,11 @@
     NONE: 'none',
     SMALL: 'small',
     LARGE: 'large',
+  };
+
+  const thumbnailAlignOptions = {
+    LEFT: 'left',
+    RIGHT: 'right',
   };
 
   function cardValidator(allowedValues, propName) {
@@ -167,13 +172,33 @@
         type: String,
         default: 'centerInside',
       },
+      /**
+       * Controls the alignment of the thumbnail area in horizontal layouts.
+       * Only applies to horizontal layouts with 'small' or 'large' thumbnail display.
+       * Ignored in other layouts.
+       * @type {String}
+       * @values 'left', 'right'
+       * @default 'left'
+       */
+      thumbnailAlign: {
+        type: String,
+        default: 'left',
+        validator: cardValidator(thumbnailAlignOptions, 'thumbnailAlign'),
+      },
+      /**
+       * Specifies the number of lines allowed for the title before truncation occurs.
+       * @type {number}
+       * @default 2
+       */
+      titleLines: {
+        type: Number,
+        required: false,
+        default: 2,
+      },
     },
     computed: {
       rootClass() {
         return this.stylesAndClasses.rootClass;
-      },
-      titleLines() {
-        return this.stylesAndClasses.titleLines;
       },
       thumbnailAspectRatio() {
         return this.stylesAndClasses.thumbnailAspectRatio;
@@ -183,6 +208,9 @@
       },
       thumbnailStyles() {
         return this.stylesAndClasses.thumbnailStyles;
+      },
+      thumbnailAlignClass() {
+        return this.stylesAndClasses.thumbnailAlignClass;
       },
       /*
           Returns dynamic classes and few style-like data that CSS was cumbersome/impossible to use for ,or are in need of using theme, grouped by all possible combinations of layouts.
@@ -208,7 +236,7 @@
         if (this.layout === 'vertical' && this.thumbnailDisplay === 'large') {
           return {
             rootClass: 'vertical-with-large-thumbnail',
-            titleLines: 3,
+            thumbnailAlignClass: undefined,
             thumbnailAspectRatio: undefined,
             headingStyles: {
               ...headingCommonStyles,
@@ -222,7 +250,7 @@
         if (this.layout === 'vertical' && this.thumbnailDisplay === 'small') {
           return {
             rootClass: 'vertical-with-small-thumbnail',
-            titleLines: 3,
+            thumbnailAlignClass: undefined,
             thumbnailAspectRatio: undefined,
             headingStyles: {
               ...headingCommonStyles,
@@ -235,8 +263,8 @@
         }
         if (this.layout === 'vertical' && this.thumbnailDisplay === 'none') {
           return {
-            rootClass: 'vertical-with-no-thumbnail',
-            titleLines: 2,
+            rootClass: undefined,
+            thumbnailAlignClass: undefined,
             thumbnailAspectRatio: undefined,
             headingStyles: {
               ...headingCommonStyles,
@@ -246,10 +274,11 @@
             },
           };
         }
+
         if (this.layout === 'horizontal' && this.thumbnailDisplay === 'large') {
           return {
             rootClass: 'horizontal-with-large-thumbnail',
-            titleLines: 3,
+            thumbnailAlignClass: `thumbnail-align-${this.thumbnailAlign}`,
             thumbnailAspectRatio: undefined,
             headingStyles: {
               ...headingCommonStyles,
@@ -264,7 +293,7 @@
         if (this.layout === 'horizontal' && this.thumbnailDisplay === 'small') {
           return {
             rootClass: 'horizontal-with-small-thumbnail',
-            titleLines: 2,
+            thumbnailAlignClass: `thumbnail-align-${this.thumbnailAlign}`,
             thumbnailAspectRatio: '1:1',
             headingStyles: {
               ...headingCommonStyles,
@@ -278,14 +307,11 @@
         }
         if (this.layout === 'horizontal' && this.thumbnailDisplay === 'none') {
           return {
-            rootClass: 'horizontal-with-no-thumbnail',
-            titleLines: 2,
+            rootClass: undefined,
+            thumbnailAlignClass: undefined,
             thumbnailAspectRatio: undefined,
             headingStyles: {
               ...headingCommonStyles,
-            },
-            thumbnailStyles: {
-              ...thumbnailCommonStyles,
             },
           };
         }
@@ -303,10 +329,10 @@
   $spacer: 24px;
 
   /*
-      Just couple of comments that are referenced from several places:
-      - (1) Intentionally fixed. Cards on the same row of a grid should have the same overall height and their sections too should have the same height so that information is placed consistently. As documented, consumers need to ensure that contents provided via slots fits well or is truncated.
-      - (2) Solves issues with fixed height in a flex item
-    */
+        Just couple of comments that are referenced from several places:
+        - (1) Intentionally fixed. Cards on the same row of a grid should have the same overall height and their sections too should have the same height so that information is placed consistently. As documented, consumers need to ensure that contents provided via slots fits well or is truncated.
+        - (2) Solves issues with fixed height in a flex item
+      */
 
   /************* Common styles **************/
 
@@ -334,9 +360,8 @@
 
   .below-title {
     order: 4;
-    height: 26px; /* (1) */
     min-height: 26px; /* (2) */
-    margin: 0 $spacer $spacer;
+    margin: 0 $spacer 0 $spacer;
     overflow: hidden; /* (1) */
   }
 
@@ -377,14 +402,12 @@
       margin: $spacer $spacer 0;
     }
   }
-
   .horizontal-with-large-thumbnail {
-    align-items: flex-end;
+    position: relative;
     height: 240px; /* (1) */
 
     .thumbnail {
       position: absolute;
-      left: 0;
       width: 40%;
       height: 100%;
     }
@@ -394,16 +417,40 @@
     .footer {
       width: calc(60% - 2 * #{$spacer}); /* same as heading width defined in script */
     }
+
+    &.thumbnail-align-left {
+      align-items: flex-end;
+      .thumbnail {
+        left: 0;
+      }
+
+      .above-title,
+      .below-title,
+      .footer {
+        margin-right: $spacer;
+      }
+    }
+
+    &.thumbnail-align-right {
+      align-items: flex-start;
+      .thumbnail {
+        right: 0;
+      }
+
+      .above-title,
+      .below-title,
+      .footer {
+        margin-left: $spacer;
+      }
+    }
   }
 
   .horizontal-with-small-thumbnail {
-    align-items: flex-start;
     height: 220px; /* (1) */
 
     .thumbnail {
       position: absolute;
       top: $spacer;
-      right: $spacer;
       width: 30%; /* square dimension achieved via KImgs's aspect-ratio 1:1 */
       min-width: 80px;
     }
@@ -415,6 +462,20 @@
 
     .footer {
       width: calc(100% - 2 * #{$spacer});
+    }
+
+    &.thumbnail-align-left {
+      align-items: flex-end;
+      .thumbnail {
+        left: $spacer;
+      }
+    }
+
+    &.thumbnail-align-right {
+      align-items: flex-start;
+      .thumbnail {
+        right: $spacer;
+      }
     }
   }
 
