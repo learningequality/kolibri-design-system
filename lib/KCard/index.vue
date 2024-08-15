@@ -4,7 +4,7 @@
     :to="to"
     :title="title"
     :headingLevel="headingLevel"
-    :titleLines="titleLine"
+    :titleLines="titleLines"
     :class="['k-card', rootClass, thumbnailAlignClass]"
     :headingStyles="headingStyles"
   >
@@ -195,9 +195,6 @@
       rootClass() {
         return this.stylesAndClasses.rootClass;
       },
-      titleLine() {
-        return this.stylesAndClasses.titleLine;
-      },
       thumbnailAspectRatio() {
         return this.stylesAndClasses.thumbnailAspectRatio;
       },
@@ -305,7 +302,6 @@
           return {
             rootClass: 'horizontal-with-small-thumbnail',
             thumbnailAlignClass: `thumbnail-align-${this.thumbnailAlign}`,
-            titleLine: this.titleLines,
             thumbnailAspectRatio: '1:1',
             headingStyles: {
               ...headingCommonStyles,
@@ -322,7 +318,6 @@
           return {
             rootClass: undefined,
             thumbnailAlignClass: undefined,
-            titleLine: this.titleLines,
             thumbnailAspectRatio: undefined,
             headingStyles: {
               ...headingCommonStyles,
@@ -418,7 +413,6 @@
   }
   .horizontal-with-large-thumbnail {
     position: relative;
-    align-items: flex-end;
     height: 240px; /* (1) */
 
     .thumbnail {
@@ -434,6 +428,7 @@
     }
 
     &.thumbnail-align-left {
+      align-items: flex-end;
       .thumbnail {
         left: 0;
       }
@@ -447,6 +442,7 @@
     }
 
     &.thumbnail-align-right {
+      align-items: flex-start;
       .thumbnail {
         right: 0;
       }
@@ -454,20 +450,17 @@
       .above-title,
       .below-title,
       .footer {
-        margin-right: calc(40% + #{$spacer});
         margin-left: $spacer;
       }
     }
   }
 
   .horizontal-with-small-thumbnail {
-    align-items: flex-start;
     height: 220px; /* (1) */
 
     .thumbnail {
       position: absolute;
       top: $spacer;
-      right: $spacer;
       width: 30%; /* square dimension achieved via KImgs's aspect-ratio 1:1 */
       min-width: 80px;
     }
@@ -482,20 +475,19 @@
     }
 
     &.thumbnail-align-left {
+      align-items: flex-end;
       .thumbnail {
-        top: $spacer;
         left: $spacer;
       }
       .above-title,
       .below-title {
-        margin-right: $spacer;
         margin-left: 40%;
       }
     }
 
     &.thumbnail-align-right {
+      align-items: flex-start;
       .thumbnail {
-        top: $spacer;
         right: $spacer;
       }
     }

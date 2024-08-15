@@ -598,7 +598,7 @@
         </template>
       </KCard>
 
-      <KCard
+       <KCard
         class="card"
         :to="{ name: '/' }"
         :headingLevel="2"
@@ -649,7 +649,7 @@
             </KGrid>
           </div>
         </template>
-      </KCard>
+      </KCard> 
 
       <KCard
         class="card"
@@ -657,7 +657,7 @@
         :headingLevel="1"
         layout="horizontal"
         thumbnailDisplay="small"
-        thumbnailAlign="right"
+        thumbnailAlign="left"
         title="This is a sample resource title This is a sample resource title This is a sample resource title This is a sample resource title This is a sample resource title This is a sample resource title This is a sample resource title This is a sample resource title This is a sample resource title This is a sample resource title"
       >
         <template #thumbnailPlaceholder>
@@ -692,7 +692,7 @@
         <template #belowTitle>
           <span>Below title below title below title below title below title below title below title below title below title below title below title below title below title</span>
         </template>
-      </KCard>
+      </KCard> 
     </ul>
   </div>
 
