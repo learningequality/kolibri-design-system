@@ -8,14 +8,16 @@
   -->
   <div id="testing-playground" style="padding: 24px">
     <component :is="component" v-bind="componentProps">
-      <!-- Render default slot if provided -->
-      <template v-if="slots.default">
-        <!-- eslint-disable-next-line vue/no-v-html -->
-        <span v-html="slots.default"></span>
-      </template>
-      <!-- Render named slots passed to the component -->
-      <template v-for="(slot, name) in namedSlots" #[name]>
-        <component :is="slot.content" v-bind="slot.props" :key="name" />
+      <!-- Render slots if provided -->
+      <template v-for="(slot, name) in slots">
+        <!-- eslint-disable vue/no-v-html -->
+        <component
+          :is="slot.element"
+          v-if="slot.element"
+          v-bind="slot.elementProps"
+          :key="name"
+          v-html="slot.innerHTML"
+        />
       </template>
     </component>
   </div>
@@ -47,18 +49,6 @@
          */
         slots: {},
       };
-    },
-
-    /**
-     * Computed property that filters out the default slot from the slots object,
-     * returning only the named slots.
-     */
-    computed: {
-      namedSlots() {
-        // eslint-disable-next-line no-unused-vars
-        const { default: defaultSlot, ...rest } = this.slots;
-        return rest;
-      },
     },
 
     /**
