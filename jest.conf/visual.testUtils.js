@@ -5,9 +5,9 @@ import percySnapshot from '@percy/puppeteer';
  *
  * @param {string} component - The name of the Vue component to render.
  * @param {Object} props - The props to pass to the component.
- * @param {Object} [slots={}] - An object representing the slots to pass to the component. 
+ * @param {Object} [slots={}] - An object representing the slots to pass to the component.
  * The structure of the `slots` object should be as follows:
- * 
+ *
  * Example:
  * {
  *   default: {
@@ -69,12 +69,12 @@ export async function renderComponent(component, props, slots = {}) {
  * Captures a visual snapshot of the current state of the page using Percy.
  *
  * @param {string} name - The name of the snapshot.
- * @param {Object} [options={}] - Additional options to customize the snapshot. 
+ * @param {Object} [options={}] - Additional options to customize the snapshot.
  * This can include options such as `widths`, `minHeight`, and some other Percy specific options.
- * 
+ *
  * For a full list of available options, refer to the Percy documentation:
  * @see https://www.browserstack.com/docs/percy/take-percy-snapshots/snapshots-via-scripts#per-snapshot-configuration
-  */
+ */
 export async function takeSnapshot(name, options = {}) {
   if (process.env.TEST_TYPE == 'visual') {
     await percySnapshot(page, name, options);
