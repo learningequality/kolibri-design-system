@@ -1,6 +1,6 @@
 <template>
 
-  <div class="k-table-wrapper">
+  <div ref="tableWrapper" class="k-table-wrapper">
     <table class="k-table" role="grid">
       <caption v-if="caption">
         {{ caption }}
@@ -290,6 +290,7 @@
                 const row = cell.parentElement;
                 const rowIndex = Array.from(row.parentElement.children).indexOf(row);
                 const colIndex = Array.from(row.children).indexOf(cell);
+                this.focusCell(rowIndex, colIndex);
                 this.focusedRowIndex = rowIndex === -1 ? null : rowIndex;
                 this.focusedColIndex = colIndex;
                 this.highlightHeader(colIndex);
@@ -305,8 +306,35 @@
         this.focusedColIndex = nextColIndex;
 
         this.highlightHeader(nextColIndex);
+        const cell = this.$el.querySelector(
+          `tbody tr:nth-child(${nextRowIndex + 1}) td:nth-child(${nextColIndex + 1})`
+        );
+        this.scrollCellIntoView(cell);
 
         event.preventDefault();
+      },
+      scrollCellIntoView(cell) {
+        if (cell) {
+          cell.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'nearest' });
+
+          // Adjust scroll position to account for sticky headers
+          const stickyHeader = this.$el.querySelector('.sticky-header');
+          const stickyColumn = this.$el.querySelector('.sticky-column');
+          const tableWrapper = this.$refs.tableWrapper;
+
+          const stickyHeaderHeight = stickyHeader ? stickyHeader.offsetHeight : 0;
+          const stickyColumnWidth = stickyColumn ? stickyColumn.offsetWidth : 0;
+
+          const cellRect = cell.getBoundingClientRect();
+          const wrapperRect = tableWrapper.getBoundingClientRect();
+
+          if (cellRect.top < wrapperRect.top + stickyHeaderHeight) {
+            tableWrapper.scrollTop -= wrapperRect.top + stickyHeaderHeight - cellRect.top;
+          }
+          if (cellRect.left < wrapperRect.left + stickyColumnWidth) {
+            tableWrapper.scrollLeft -= wrapperRect.left + stickyColumnWidth - cellRect.left;
+          }
+        }
       },
       focusCell(rowIndex, colIndex) {
         let nextCell;
