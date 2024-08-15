@@ -222,7 +222,7 @@
         */
       stylesAndClasses() {
         /* In px. Needs to be the same as $spacer variable in styles part */
-        const SPACER = 12;
+        const SPACER = 24;
 
         const headingCommonStyles = {
           order: 3,
@@ -231,14 +231,6 @@
         const thumbnailCommonStyles = {
           width: '100%',
           height: '100%',
-        };
-
-        const titleAlignStyle = {
-          marginLeft: this.thumbnailAlign === thumbnailAlignOptions.LEFT ? `40%` : `${SPACER}px`,
-          marginRight:
-            this.thumbnailAlign === thumbnailAlignOptions.RIGHT
-              ? `calc(40% + ${SPACER}px)`
-              : `${SPACER}px`,
         };
 
         if (this.layout === 'vertical' && this.thumbnailDisplay === 'large') {
@@ -290,7 +282,6 @@
             thumbnailAspectRatio: undefined,
             headingStyles: {
               ...headingCommonStyles,
-              ...titleAlignStyle,
               width: `calc(60% - ${SPACER * 2}px)` /* same as slots width defined in styles */,
             },
             thumbnailStyles: {
@@ -306,7 +297,6 @@
             thumbnailAspectRatio: '1:1',
             headingStyles: {
               ...headingCommonStyles,
-              ...titleAlignStyle,
               width: `calc(70% - ${SPACER * 3}px)` /* same as slots width defined in styles */,
             },
             thumbnailStyles: {
@@ -336,7 +326,7 @@
 <style lang="scss" scoped>
 
   /* Needs to be the same as SPACER constant in JavaScript part */
-  $spacer: 12px;
+  $spacer: 24px;
 
   /*
         Just couple of comments that are referenced from several places:
@@ -438,7 +428,6 @@
       .below-title,
       .footer {
         margin-right: $spacer;
-        margin-left: calc(40% + #{$spacer});
       }
     }
 
@@ -479,10 +468,6 @@
       align-items: flex-end;
       .thumbnail {
         left: $spacer;
-      }
-      .above-title,
-      .below-title {
-        margin-left: 40%;
       }
     }
 
