@@ -1,5 +1,29 @@
 import percySnapshot from '@percy/puppeteer';
 
+/**
+ * Renders a Vue component within the VisualTestingPlayground.
+ *
+ * @param {string} component - The name of the Vue component to render.
+ * @param {Object} props - The props to pass to the component.
+ * @param {Object} [slots={}] - An object representing the slots to pass to the component. 
+ * The structure of the `slots` object should be as follows:
+ * 
+ * Example:
+ * {
+ *   default: {
+ *     element: "div", // or any Vue component like KIcon
+ *     elementProps: { class: "some-class" },
+ *     innerHTML: "<div> Some nested <a>content</a> </div>"
+ *   },
+ *   menu: {
+ *     element: "KDropdownMenu", // named slot content as a Vue component
+ *     elementProps: { options: ['Option 1', 'Option 2'] },
+ *   }
+ * }
+ *
+ * `default` is for the default slot content, which can be raw HTML or another component.
+ * Other keys correspond to named slots.
+ */
 export async function renderComponent(component, props, slots = {}) {
   const beforeRenderState = await page.evaluate(() => {
     const testing_playground = document.querySelector('#testing-playground');
@@ -41,6 +65,16 @@ export async function renderComponent(component, props, slots = {}) {
   global.expect(isComponentRendered).toBe(true);
 }
 
+/**
+ * Captures a visual snapshot of the current state of the page using Percy.
+ *
+ * @param {string} name - The name of the snapshot.
+ * @param {Object} [options={}] - Additional options to customize the snapshot. 
+ * This can include options such as `widths`, `minHeight`, and some other Percy specific options.
+ * 
+ * For a full list of available options, refer to the Percy documentation:
+ * @see https://www.browserstack.com/docs/percy/take-percy-snapshots/snapshots-via-scripts#per-snapshot-configuration
+  */
 export async function takeSnapshot(name, options = {}) {
   if (process.env.TEST_TYPE == 'visual') {
     await percySnapshot(page, name, options);
