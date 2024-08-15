@@ -42,7 +42,7 @@
         <span v-else>{{ content }}</span>
       </template>
     </KTable>
-  
+
     <div v-if="isLoading" class="loading-overlay">
       Data is loading. Please wait...
     </div>

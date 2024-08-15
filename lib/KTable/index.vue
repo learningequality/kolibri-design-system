@@ -280,15 +280,22 @@
               this.handleSort(colIndex);
             }
             break;
-          case 'Tab': //To handle focused row and highlight header state for tab key as well
-            if (event.shiftKey) {
-              nextColIndex = colIndex > 0 ? colIndex - 1 : totalCols - 1;
-              nextRowIndex = colIndex > 0 ? rowIndex : rowIndex - 1;
-            } else {
-              nextColIndex = (colIndex + 1) % totalCols;
-              nextRowIndex = colIndex === totalCols - 1 ? rowIndex + 1 : rowIndex;
-            }
-            break;
+          case 'Tab':
+            // Allow default tab behavior but update focusedRowIndex and focusedColIndex
+            setTimeout(() => {
+              // To allow default tab navigation to complete before updating focusedRowIndex and focusedColIndex
+              const activeElement = document.activeElement;
+              const cell = activeElement.closest('td, th');
+              if (cell) {
+                const row = cell.parentElement;
+                const rowIndex = Array.from(row.parentElement.children).indexOf(row);
+                const colIndex = Array.from(row.children).indexOf(cell);
+                this.focusedRowIndex = rowIndex === -1 ? null : rowIndex;
+                this.focusedColIndex = colIndex;
+                this.highlightHeader(colIndex);
+              }
+            }, 0);
+            return;
           default:
             return;
         }
