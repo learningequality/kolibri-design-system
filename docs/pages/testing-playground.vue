@@ -69,7 +69,7 @@
     methods: {
       /**
        * Handles messages received from the test runner to render a specified component.
-       * @param {MessageEvent} event - The message event containing the component and its props.
+       * @param {MessageEvent} event -  The message event containing the component and its props.
        */
       handleMessage(event) {
         if (event.data.type === 'RENDER_COMPONENT') {
