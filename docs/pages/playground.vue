@@ -598,7 +598,7 @@
         </template>
       </KCard>
 
-       <KCard
+      <KCard
         class="card"
         :to="{ name: '/' }"
         :headingLevel="2"

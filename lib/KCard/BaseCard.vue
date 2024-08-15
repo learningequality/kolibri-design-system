@@ -39,7 +39,6 @@
           <slot 
             v-if="$slots.title"
             name="title"
-            :titleLines="titleLines"
           ></slot>
           <KTextTruncator
             v-else

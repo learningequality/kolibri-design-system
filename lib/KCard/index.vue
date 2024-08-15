@@ -185,6 +185,11 @@
         default: 'left',
         validator: cardValidator(thumbnailAlignOptions, 'thumbnailAlign'),
       },
+      /**
+       * Specifies the number of lines allowed for the title before truncation occurs.
+       * @type {number}
+       * @default 2
+       */
       titleLines: {
         type: Number,
         required: false,
@@ -240,7 +245,6 @@
           return {
             rootClass: 'vertical-with-large-thumbnail',
             thumbnailAlignClass: undefined,
-            titleLine: this.titleLines,
             thumbnailAspectRatio: undefined,
             headingStyles: {
               ...headingCommonStyles,
@@ -255,7 +259,6 @@
           return {
             rootClass: 'vertical-with-small-thumbnail',
             thumbnailAlignClass: undefined,
-            titleLine: this.titleLines,
             thumbnailAspectRatio: undefined,
             headingStyles: {
               ...headingCommonStyles,
@@ -270,7 +273,6 @@
           return {
             rootClass: undefined,
             thumbnailAlignClass: undefined,
-            titleLine: this.titleLines,
             thumbnailAspectRatio: undefined,
             headingStyles: {
               ...headingCommonStyles,
@@ -285,7 +287,6 @@
           return {
             rootClass: 'horizontal-with-large-thumbnail',
             thumbnailAlignClass: `thumbnail-align-${this.thumbnailAlign}`,
-            titleLine: this.titleLines,
             thumbnailAspectRatio: undefined,
             headingStyles: {
               ...headingCommonStyles,
