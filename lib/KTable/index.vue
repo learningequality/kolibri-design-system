@@ -222,6 +222,11 @@
       },
     },
     methods: {
+      getCell(rowIndex, colIndex) {
+        const rowSelector = rowIndex === -1 ? 'thead' : `tbody tr:nth-child(${rowIndex + 1})`;
+        const colSelector = `td:nth-child(${colIndex + 1}), th:nth-child(${colIndex + 1})`;
+        return this.$el.querySelector(`${rowSelector} ${colSelector}`);
+      },
       handleKeydown(event, rowIndex, colIndex) {
         const key = event.key;
         const totalRows = this.rows.length;
@@ -229,7 +234,21 @@
 
         let nextRowIndex = rowIndex;
         let nextColIndex = colIndex;
-
+        // Identify all focusable elements inside the current cell
+        const currentCell = this.getCell(rowIndex, colIndex);
+        const focusableElements = currentCell
+          ? Array.from(
+              currentCell.querySelectorAll(
+                'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+              )
+            )
+          : [];
+        const focusedElementIndex = focusableElements.indexOf(document.activeElement);
+        // Debugging: Log focusable elements within the current cell
+        console.log('Curr',currentCell);
+        console.log('Focusable elements:', focusableElements);
+        console.log('Current focused element:', document.activeElement);
+        console.log('Focused element index:', focusedElementIndex);
         switch (key) {
           case 'ArrowUp':
             if (rowIndex === -1) {
@@ -281,7 +300,70 @@
             }
             break;
           case 'Tab':
-            return;
+            if (focusableElements.length > 0) {
+              if (!event.shiftKey) {
+                if (focusedElementIndex < focusableElements.length - 1) {
+                  focusableElements[focusedElementIndex + 1].focus();
+                  event.preventDefault();
+                  return;
+                } else {
+                  if (colIndex < totalCols - 1) {
+                    nextColIndex = colIndex + 1;
+                  } else if (rowIndex < totalRows - 1) {
+                    nextColIndex = 0;
+                    nextRowIndex = rowIndex + 1;
+                  } else {
+                    nextColIndex = 0;
+                    nextRowIndex = -1;
+                  }
+                }
+              } else {
+                if (focusedElementIndex > 0) {
+                  focusableElements[focusedElementIndex - 1].focus();
+                  event.preventDefault();
+                  return;
+                } else {
+                  if (colIndex > 0) {
+                    nextColIndex = colIndex - 1;
+                  } else if (rowIndex > 0) {
+                    nextColIndex = totalCols - 1;
+                    nextRowIndex = rowIndex - 1;
+                  } else {
+                    nextColIndex = totalCols - 1;
+                    nextRowIndex = totalRows - 1;
+                  }
+                }
+              }
+            } else {
+              if (!event.shiftKey) {
+                if (colIndex < totalCols - 1) {
+                  nextColIndex = colIndex + 1;
+                } else if (rowIndex < totalRows - 1) {
+                  nextColIndex = 0;
+                  nextRowIndex = rowIndex + 1;
+                } else {
+                  nextColIndex = 0;
+                  nextRowIndex = -1;
+                }
+              } else {
+                if (colIndex > 0) {
+                  nextColIndex = colIndex - 1;
+                } else if (rowIndex > 0) {
+                  nextColIndex = totalCols - 1;
+                  nextRowIndex = rowIndex - 1;
+                } else {
+                  nextColIndex = totalCols - 1;
+                  nextRowIndex = totalRows - 1;
+                }
+              }
+            }
+            this.focusCell(nextRowIndex, nextColIndex);
+            this.focusedRowIndex = nextRowIndex === -1 ? null : nextRowIndex;
+            this.focusedColIndex = nextColIndex;
+            this.highlightHeader(nextColIndex);
+            event.preventDefault(); // Prevent default Tab behavior
+            break;
+
           default:
             return;
         }
@@ -328,11 +410,11 @@
         }
         // Ensured the focused cell is smoothly scrolled into view.
         if (nextCell) {
-    nextCell.focus();
-    this.scrollCellIntoView(nextCell); 
-  }
+          nextCell.focus();
+          this.scrollCellIntoView(nextCell);
+        }
       },
-      
+
       handleRowMouseOver(rowIndex) {
         this.hoveredRowIndex = rowIndex;
       },
