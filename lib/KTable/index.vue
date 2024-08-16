@@ -222,11 +222,6 @@
       },
     },
     methods: {
-      getCell(rowIndex, colIndex) {
-        const rowSelector = rowIndex === -1 ? 'thead' : `tbody tr:nth-child(${rowIndex + 1})`;
-        const colSelector = `td:nth-child(${colIndex + 1}), th:nth-child(${colIndex + 1})`;
-        return this.$el.querySelector(`${rowSelector} ${colSelector}`);
-      },
       handleKeydown(event, rowIndex, colIndex) {
         const key = event.key;
         const totalRows = this.rows.length;
@@ -244,11 +239,6 @@
             )
           : [];
         const focusedElementIndex = focusableElements.indexOf(document.activeElement);
-        // Debugging: Log focusable elements within the current cell
-        console.log('Curr',currentCell);
-        console.log('Focusable elements:', focusableElements);
-        console.log('Current focused element:', document.activeElement);
-        console.log('Focused element index:', focusedElementIndex);
         switch (key) {
           case 'ArrowUp':
             if (rowIndex === -1) {
@@ -318,8 +308,8 @@
                   }
                 }
               } else {
-                if (focusedElementIndex > 0) {
-                  focusableElements[focusedElementIndex - 1].focus();
+                if (focusedElementIndex < focusableElements.length - 1) {
+                  focusableElements[focusedElementIndex + 1].focus();
                   event.preventDefault();
                   return;
                 } else {
@@ -375,6 +365,15 @@
         this.highlightHeader(nextColIndex);
 
         event.preventDefault();
+      },
+      getCell(rowIndex, colIndex) {
+        if (rowIndex === -1) {
+          return this.$el.querySelector(`thead th:nth-child(${colIndex + 1})`);
+        } else {
+          return this.$el.querySelector(
+            `tbody tr:nth-child(${rowIndex + 1}) td:nth-child(${colIndex + 1})`
+          );
+        }
       },
       scrollCellIntoView(cell) {
         if (cell) {

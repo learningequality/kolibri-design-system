@@ -17,6 +17,7 @@
       </template>
       <template #cell="{ content, rowIndex, colIndex }">
         <span v-if="colIndex === 1">{{ content }} years old</span>
+        <span v-else-if="colIndex === 4"><KButton>Test</KButton></span>
         <span v-else>{{ content }}</span>
       </template>
     </KTable>
