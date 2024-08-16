@@ -281,21 +281,6 @@
             }
             break;
           case 'Tab':
-            // Allow default tab behavior but update focusedRowIndex and focusedColIndex
-            setTimeout(() => {
-              // To allow default tab navigation to complete before updating focusedRowIndex and focusedColIndex
-              const activeElement = document.activeElement;
-              const cell = activeElement.closest('td, th');
-              if (cell) {
-                const row = cell.parentElement;
-                const rowIndex = Array.from(row.parentElement.children).indexOf(row);
-                const colIndex = Array.from(row.children).indexOf(cell);
-                this.focusCell(rowIndex, colIndex);
-                this.focusedRowIndex = rowIndex === -1 ? null : rowIndex;
-                this.focusedColIndex = colIndex;
-                this.highlightHeader(colIndex);
-              }
-            }, 0);
             return;
           default:
             return;
