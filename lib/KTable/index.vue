@@ -306,10 +306,6 @@
         this.focusedColIndex = nextColIndex;
 
         this.highlightHeader(nextColIndex);
-        const cell = this.$el.querySelector(
-          `tbody tr:nth-child(${nextRowIndex + 1}) td:nth-child(${nextColIndex + 1})`
-        );
-        this.scrollCellIntoView(cell);
 
         event.preventDefault();
       },
@@ -347,10 +343,11 @@
         }
         // Ensured the focused cell is smoothly scrolled into view.
         if (nextCell) {
-          nextCell.focus();
-          nextCell.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'nearest' });
-        }
+    nextCell.focus();
+    this.scrollCellIntoView(nextCell); 
+  }
       },
+      
       handleRowMouseOver(rowIndex) {
         this.hoveredRowIndex = rowIndex;
       },
