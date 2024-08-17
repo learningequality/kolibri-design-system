@@ -46,14 +46,22 @@
     methods: {
       handleInputChange(idx) {
         if (this.isFirefox) {
-          this.setChecked(idx);
+          this.focusRadio(idx);
           this.focusedRadioIdx = idx;
         }
       },
+      /**
+       * Recursively traverses the children of KRadioButtonGroup to find KRadioButton components.
+       * Sets a tabIndex attribute on each KRadioButton and adds it to an array to enable navigation
+       * between radio buttons using arrow keys in Firefox Browser.
+       *
+       * @param {Array<object>} children - An array of objects where each object represents a child component of KRadioButtonGroup.
+       * @returns {void}
+       */
       queryAndAddRadioBtns(children) {
-        if (children[0].$options._componentTag === 'KRadioButton') {
-          for (let i = 0; i < children.length; i++) {
-            const radioBtnVueComp = children[i];
+        for (const child of children) {
+          if (child.$options._componentTag === 'KRadioButton') {
+            const radioBtnVueComp = child;
             this.radioButtons.push(radioBtnVueComp);
             radioBtnVueComp.setTabIndex(-1);
             (btnIndex => {
@@ -61,13 +69,11 @@
                 this.handleInputChange(btnIndex);
               });
             })(this.radioBtnIdx);
-
             this.radioBtnIdx += 1;
+          } else if (child.$children && Array.isArray(child.$children)) {
+            this.queryAndAddRadioBtns(child.$children);
           }
-          return;
         }
-        this.queryAndAddRadioBtns(children[0].$children);
-        if (children.length > 1) this.queryAndAddRadioBtns(children[1].$children);
         return;
       },
       onKeyUp(event) {
@@ -91,23 +97,23 @@
           this.focusedRadioIdx === this.firstRadioIdx
             ? this.lastRadioIdx
             : this.focusedRadioIdx - 1;
-        this.focusRadio(newFocusedRadioIdx, event);
+        this.setChecked(newFocusedRadioIdx, event);
       },
       focusNextRadio(event) {
         const newFocusedRadioIdx =
           this.focusedRadioIdx === this.lastRadioIdx
             ? this.firstRadioIdx
             : this.focusedRadioIdx + 1;
-        this.focusRadio(newFocusedRadioIdx, event);
+        this.setChecked(newFocusedRadioIdx, event);
       },
-      setChecked(radioIdx) {
+      focusRadio(radioIdx) {
         for (let i = 0; i < this.radioButtons.length; i++) {
           const radioBtn = this.radioButtons[i];
           radioBtn.setTabIndex(-1);
         }
         this.radioButtons[radioIdx].setTabIndex(0);
       },
-      focusRadio(radioIdx, event) {
+      setChecked(radioIdx, event) {
         if (radioIdx !== undefined && radioIdx !== null) {
           this.radioButtons[radioIdx].toggleCheck(event);
         }
