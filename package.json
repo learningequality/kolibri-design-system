@@ -1,8 +1,12 @@
 {
   "name": "kolibri-design-system",
-  "version": "5.0.0-rc0",
+  "version": "5.0.0-rc1",
   "private": false,
   "description": "The Kolibri Design System defines common design patterns and code for use in Kolibri applications",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/learningequality/kolibri-design-system.git"
+  },
   "license": "MIT",
   "author": "Learning Equality",
   "scripts": {
@@ -35,6 +39,7 @@
     "purecss": "2.2.0",
     "tippy.js": "4.2.1",
     "vue-intl": "3.1.0",
+    "vue2-teleport": "1.1.4",
     "xstate": "4.38.3"
   },
   "peerDependencies": {},
