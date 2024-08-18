@@ -65,7 +65,7 @@
 
           <li
             v-else
-            :key="index"
+            :key= " index"
             class="breadcrumb-visible-item-last breadcrumbs-visible-item"
           >
             <span
@@ -102,7 +102,7 @@
           <li
             v-else
             :ref="`crumb${index}`"
-            :key="index"
+            :key=" index"
             class="breadcrumb-visible-item-last breadcrumbs-visible-item"
           >
             <span
@@ -318,7 +318,7 @@
   }
 
   .breadcrumbs-dropdown {
-    @extend %dropshadow-8dp;
+    @extend %dropshadow-2dp;
 
     position: absolute;
     z-index: 8;

@@ -93,7 +93,7 @@
 
   .ui-snackbar {
     @include font-family-noto;
-
+    @extend %dropshadow-1dp;
     display: inline-flex;
     align-items: center;
     min-width: rem(288px);
@@ -102,7 +102,7 @@
     padding: rem(14px 24px);
     background-color: $ui-snackbar-background-color;
     border-radius: $ui-default-border-radius;
-    box-shadow: 0 1px 3px rgba(black, 0.12), 0 1px 2px rgba(black, 0.24);
+    //box-shadow: 0 1px 3px rgba(black, 0.12), 0 1px 2px rgba(black, 0.24);
   }
 
   .ui-snackbar-message {

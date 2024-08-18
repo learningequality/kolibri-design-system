@@ -1,0 +1,1123 @@
+# Query: dro
+# ContextLines: 1
+
+350 results - 39 files
+
+CHANGELOG.md:
+   112  - [#652]
+   113:   - **Description:** KTextTruncator drops support for Internet Explorer 11
+   114    - **Products impact:** browser support update
+
+   532  - [#583]
+   533:   - **Description:** KDropdownMenu menu support to show context menus with `isContextMenu` prop.
+   534    - **Products impact:** new API.
+   535    - **Addresses:** https://github.com/learningequality/kolibri-design-system/issues/571, https://github.com/learningequality/studio/issues/4403.
+   536:   - **Components:** KDropdownMenu.
+   537    - **Breaking:** no.
+
+   550  - [#583]
+   551:   - **Description:** Expose the event object as second argument on KDropdownMenu's select event.
+   552    - **Products impact:** updated API.
+   553    - **Addresses:** - .
+   554:   - **Components:** KDropdownMenu.
+   555    - **Breaking:** no.
+
+   559  - [#583]
+   560:   - **Description:** KDropdownMenu menu support to show a header slot.
+   561    - **Products impact:** new API.
+   562    - **Addresses:** - .
+   563:   - **Components:** KDropdownMenu.
+   564    - **Breaking:** no.
+
+   611  - [#605]
+   612:   - **Description:** Adds the `dropup` icon
+   613    - **Products impact:** New icon
+
+   622  - [#586]
+   623:   - **Description:** Adds a new prop `constrainToScrollParent ` to `KDropdownMenu` to allow overriding of its popover flipping behavior.
+   624    - **Products impact:** Bugfix
+   625    - **Addresses:** [#432](https://github.com/learningequality/kolibri-design-system/issues/432)
+   626:   - **Components:** KDropdownMenu
+   627    - **Breaking:** no
+   628    - **Impacts a11y:**  no
+   629:   - **Guidance:** Use the `constrainToScrollParent` prop to override the default popover flipping behavior of the `KDropdownMenu` component prop where necessary.
+   630  
+
+   831  - [#493]
+   832:   - **Description:** Changed the value of z-index of KDropdownMenu to 99.
+   833    - **Products impact:** Bugfix
+   834    - **Addresses:** https://github.com/learningequality/kolibri-design-system/issues/486
+   835:   - **Components:** KDropdownMenu
+   836    - **Breaking:** No
+
+   919  - [#497]
+   920:   - **Description:** KDropdownMenu now emits a @tab event when the user hits the [Tab] key and a @close event when the menu is closed programmatically. Additionally, a new icon for Expand All was added and can be used just like any other icon with the "expandAll" name.
+   921    - **Products impact:** updated API
+   922    - **Addresses:** -
+   923:   - **Components:** KDropdownMenu
+   924    - **Breaking:** No
+
+  1318  - [#387]
+  1319:   - **Description:** Fix `KDropdownMenu` causing the window to scroll to the top on the menu button click
+  1320    - **Products impact:** bugfix
+  1321    - **Addresses:** https://github.com/learningequality/kolibri/pull/9833#issuecomment-1322303903
+  1322:   - **Components:** `KDropdownMenu`
+  1323    - **Breaking:** no
+
+  1351  - [#402]
+  1352:   - **Description:** Fixes partially hidden `KSelect`'s dropdown menu when there is not enough space below the button. The menu will now show above the button in such a scenario.
+  1353    - **Products impact:** bugfix
+
+  1362  - [#378]
+  1363:   - **Description:** Fix `KDropdownMenu` not showing after its refactor in [#346] by adding missing template tags to `KButton`
+  1364    - **Products impact:** bugfix
+  1365    - **Addresses:** https://github.com/learningequality/kolibri/issues/9754
+  1366:   - **Components:** `KDropdownMenu`, `KButton`
+  1367    - **Breaking:** no
+
+  1505  - [#361]
+  1506:   - **Description:** Fixes 'Property or method "disabled" is not defined on the instance but referenced during render.' raised by `KDropdownMenu`. Related to updates introduced in [#346].
+  1507    - **Products impact:** bugfix
+  1508    - **Addresses:** -
+  1509:   - **Components:** `KDropdownMenu`
+  1510    - **Breaking:** no
+
+  1516  - [#361]
+  1517:   - **Description:** `KButton` exposes `hasDropdown` prop which will show the dropdown arrow icon in a button. Related to updates introduced in [#346].
+  1518    - **Products impact:** updated API
+
+  1538  - [#346]
+  1539:   - **Description:** `KDropdownMenu` has a new prop `hasIcons` which controls whether or not the options display an icon.
+  1540    - **Products impact:** new API
+  1541    - **Addresses:** -
+  1542:   - **Components:** `KDropdownMenu`
+  1543    - **Breaking:** no
+
+  1549  - [#346]
+  1550:   - **Description:** `KDropdownMenu` no longer contains a button. All props related to buttons were removed from `KDropdownMenu`, namely `text`, `appearance`, and `disabled`. `KButton` and `KIconButton` has a new `#menu` slot in which `KDropdownMenu` can be placed.
+  1551    - **Products impact:** updated API
+  1552    - **Addresses:** https://github.com/learningequality/kolibri-design-system/issues/164
+  1553:   - **Components:** `KDropdownMenu`
+  1554    - **Breaking:** yes
+  1555    - **Impacts a11y:** no
+  1556:   - **Guidance:** Place `KDropdownMenu` into `KButton`'s or `KIconButton`'s `menu` slot and move `text`, `appearance`, and `disabled` props from `KDropdownMenu` to `KButton`/`KIconButton`. See [an example in the documentation](https://develop--kolibri-design-system.netlify.app/buttons/#dropdowns). Visit "Props" and "Slots" sections of these components' documentation pages for more details.
+  1557  
+
+  1685  - [#194] - Filters pattern page for:
+  1686:   - Dropdown menus
+  1687:   - Text input dropdowns
+  1688    - Text filters
+
+  1713  - [#199] - `KCheckbox` - Updated label display if both slot and label are given
+  1714: - [#180] - `KDropdownMenu` - Removed need to hit tab twice when using keyboard to open dropdown
+  1715  - [#145] - `KIconButton` - Fixed distortion occurring with resized windows by adding `minWidth`
+
+  1775  - [#110] - `email`, `sidebar`, and `add` icons
+  1776: - [#252] - `a11y`, `alternativeRoute`, `disconnected`, `forwardRounded`, and `restart` icons
+  1777  - [#104] - Support for exporting icons to reStructuredText user documentation
+
+yarn.lock:
+   7316    resolved "https://registry.yarnpkg.com/is-alphanumerical/-/is-alphanumerical-1.0.4.tgz#7eb9a2431f855f6b1ef1a78e326df515696c4dbf"
+   7317:   integrity sha512-UzoZUr+XfVz3t3v4KyGEniVL9BDRoQtY7tOyrRybkVNjDFWyo1yhXNGrrBTQxp3ib9BLAWs7k2YKBQsFRkZG9A==
+   7318    dependencies:
+
+  13411    resolved "https://registry.yarnpkg.com/strip-indent/-/strip-indent-3.0.0.tgz#c32e1cee940b6b3432c771bc2c54bcce73cd3001"
+  13412:   integrity sha512-laJTa3Jb+VQpaC6DseHhF7dXVqHTfJPCRDaEbid/drOhgitgYku/letMUqOXFoWV0zIIUbjpdH2t+tYj4bQMRQ==
+  13413    dependencies:
+
+  15038    resolved "https://registry.yarnpkg.com/whatwg-url/-/whatwg-url-7.1.0.tgz#c2c492f1eca612988efd3d2266be1b9fc6170d06"
+  15039:   integrity sha512-WUu7Rg1DroM7oQvGWfOiAK21n74Gg+T4elXEQYkOhtyLeWiJFoOGLXPKI/9gzIie9CtwVLm8wtw6YJdKyxSjeg==
+  15040    dependencies:
+
+docs/rstIconReplacements.txt:
+  52  .. |dragVertical| replace:: :raw-html:`<span class="design-system-icon"><svg viewBox="0 0 24 24" role="presentation" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24"><path d="M11 18c0 1.1-.9 2-2 2s-2-.9-2-2 .9-2 2-2 2 .9 2 2zm-2-8c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0-6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm6 4c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"/></svg></span>`
+  53: .. |dropdown| replace:: :raw-html:`<span class="design-system-icon"><svg viewBox="0 0 24 24" role="presentation" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24"><path d="M7 10l5 5 5-5z"/></svg></span>`
+  54: .. |dropup| replace:: :raw-html:`<span class="design-system-icon"><svg role="presentation" focusable="false" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24"><path d="M280-400l200-200 200 200H280z"/></svg></span>`
+  55  .. |edit| replace:: :raw-html:`<span class="design-system-icon"><svg viewBox="0 0 24 24" role="presentation" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24"><path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04a.996.996 0 000-1.41l-2.34-2.34a.996.996 0 00-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/></svg></span>`
+
+  66  .. |financialLiteracyResource| replace:: :raw-html:`<span class="design-system-icon"><svg role="presentation" focusable="false" width="24" height="24" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg"><g clip-path="url(#clip0_6280:84308)"><path d="M23.25 22.017c2.31 0 4.183-2.239 4.183-5 0-2.762-1.873-5-4.183-5-2.31 0-4.183 2.238-4.183 5 0 2.761 1.873 5 4.183 5zM16.583 20.633h-5v3.334h5v-3.334zM34.917 10.617h-5v3.333h5v-3.333z"/><path d="M33.333 35.2H0V13.45h3.333v18.417h30V35.2z"/><path d="M36.667 8.683V25.35H9.833V8.683h26.834zM40 5.35H6.5v23.333H40V5.35z"/></g><defs><clipPath id="clip0_6280:84308"><path fill="#fff" d="M0 0h40v40H0z"/></clipPath></defs></svg></span>`
+  67: .. |forwardRounded| replace:: :raw-html:`<span class="design-system-icon"><svg viewBox="0 0 24 24" role="presentation" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24"><path d="M12 8V6.41c0-.89 1.08-1.34 1.71-.71l5.59 5.59c.39.39.39 1.02 0 1.41l-5.59 5.59c-.63.63-1.71.19-1.71-.7V16H5c-.55 0-1-.45-1-1V9c0-.55.45-1 1-1h7z"/></svg></span>`
+  68  .. |forward| replace:: :raw-html:`<span class="design-system-icon"><svg viewBox="0 0 24 24" role="presentation" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24"><path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/></svg></span>`
+
+docs/tableOfContents.js:
+  254        new Page({
+  255:         path: '/kdropdownmenu',
+  256:         title: 'KDropdownMenu',
+  257          isCode: true,
+
+docs/pages/buttons.vue:
+  134  
+  135:     <DocsPageSection title="Dropdowns" anchor="#dropdowns">
+  136        <p>
+  137:         Buttons can also have drop-down menus. 
+  138        </p>
+  139        <p> 
+  140:         <code>KDropdownMenu</code> component can be added using <code>#menu</code> slot in either a <code>KButton</code> or a <code>KIconButton</code>. 
+  141        </p>
+
+  149            >
+  150:             <KDropdownMenu
+  151                style="margin-right: 16px;"
+
+  158            <KIconButton
+  159:             tooltip="Dropdown options"
+  160              icon="optionsHorizontal"
+
+  164              <template #menu>
+  165:               <KDropdownMenu
+  166                  style="margin-right: 16px;"
+
+  176        </DocsShow>
+  177:       <p>For more guidance, see the <DocsLibraryLink component="KDropdownMenu" /> component.</p>
+  178      </DocsPageSection>
+
+docs/pages/kbreadcrumbs.vue:
+  20        <div>
+  21:         Breadcrumbs take the full width of their container. When there is not enough space available, items that can't be displayed will automatically collapse into the drop-down and visible items might also get truncated:
+  22  
+
+docs/pages/kbutton.vue:
+  39          <li><DocsLibraryLink component="KButtonGroup" /> is used for button layout</li>
+  40:         <li><DocsLibraryLink component="KDropdownMenu" /> and <DocsInternalLink text="Buttons and links" href="/buttons" /> have more detail about adding a menu of options to a button component</li>
+  41        </ul>
+
+docs/pages/kdropdownmenu.vue:
+   6        <p>
+   7:         Implements a dropdown set of options, based on <DocsExternalLink text="Keen's UI Menu" href="https://josephuspaye.github.io/Keen-UI/#/ui-menu" />. See these docs to understand the current implementation of the options object array.
+   8        </p>
+
+  12        <p>
+  13:         Please see the <DocsInternalLink href="/buttons#dropdowns" text="Dropdown section of the Buttons and links page" /> on the buttons page for more details about how to use with a button, and a code example.
+  14        </p>
+
+  18        <p>
+  19:         This component can be also used to create a context menu, which is a dropdown menu that appears when a user right-clicks on an element.
+  20        </p>
+
+  25          </p>
+  26:         <KDropdownMenu
+  27            isContextMenu
+
+  39          </p>
+  40:         <KDropdownMenu
+  41            isContextMenu
+
+  55            <p> ... </p>
+  56:           <KDropdownMenu
+  57              isContextMenu
+
+docs/pages/kiconbutton.vue:
+  27          <li><DocsLibraryLink component="KButtonGroup" /> is used for button layout</li>
+  28:         <li><DocsLibraryLink component="KDropdownMenu" /> and <DocsInternalLink text="Buttons and links" href="/buttons" /> have more detail about adding a menu of options to a button component</li>
+  29        </ul>
+
+docs/pages/klistwithoverflow.vue:
+   31                  <template #menu>
+   32:                   <KDropdownMenu
+   33                      :options="overflowItems"
+
+   62                  <template #menu>
+   63:                   <KDropdownMenu
+   64                      :options="overflowItems"
+
+   92                <template #menu>
+   93:                 <KDropdownMenu
+   94                    :options="overflowItems"
+
+  139                  <template #menu>
+  140:                   <KDropdownMenu
+  141                      :options="overflowItems"
+
+docs/pages/kselect.vue:
+  16        <p>
+  17:         A select dropdown component that allows users to select an item from a range of options.
+  18          The options are specified with a value and a label for that value to display to the user.
+
+  24        <p>
+  25:         Select dropdowns are used alongside form components such as text fields and radio selects. They can also be used to filter options in lists and tables.
+  26        </p>
+
+docs/pages/filters/index.vue:
+  12        <h3>
+  13:         Dropdown menus
+  14        </h3>
+  15        <p>
+  16:         Use dropdown menu filters when you would like users to filter by one criteria at a time and when there are less than 10 options to select from. 
+  17        </p>
+  18:       <img class="img-med" src="./dropdown-menu.png">
+  19        <p>
+  20:         Dropdown menu filters use the <DocsInternalLink text="menu" href="/menus" /> component and are usually left-aligned at the top of a list or table. The label should specify what type of information is being filtered.
+  21        </p>
+  22:       <h3>Text input dropdowns</h3>
+  23:       <img class="img-med" src="./text-input-dropdown.png">
+  24        <p>
+  25:         Text input dropdowns use the <DocsInternalLink text="text field" href="/textfields" /> component. They allow the user to select from a list of options and quickly filter down from many options by inputting text. Use this component when there are at least 10 options to select from.
+  26        </p>
+
+  78        <p>
+  79:         If selecting a filter option would result in “0 results” being shown, that option should be hidden from the dropdown, hide the filter option. If all filter options in a dropdown would always result in “0 results,” hide the entire filter.
+  80        </p>
+  81        <p>
+  82:         If one or more filters have already been applied, and combining remaining filter options would show “0 results,” those remaining filters should be disabled. If all potential remaining selections in a filter dropdown/section will show “0 results,” disable the entire filter section until the current filter sections are cleared.
+  83        </p>
+
+  93        <p>
+  94:         Text filters and dropdown filters should be aligned in the same row when placed above data tables.
+  95        </p>
+
+docs/pages/menus/index.vue:
+    6  
+    7:       <p>Menus allow users to make a selection from a list of options. We use two types of menus: <em>Dropdown</em> and <em>Filter</em>.</p>
+    8  
+    9        <h3>
+   10:         Dropdown menu
+   11        </h3>
+
+   16        <DocsShow>
+   17:         <img class="modal-img" src="./dropdown-menu.png">
+   18        </DocsShow>
+
+  104        </ul>
+  105:       <h3>Dropdown menu</h3>
+  106        <ul>
+
+docs/pages/modals/index.vue:
+  52          <li>Radio</li>
+  53:         <li>Select dropdown</li>
+  54          <li>List with vertical scrollbar</li>
+
+  97        <p>
+  98:         The scrim is the semi-translucent backdrop which covers the rest of the page. It should be <code>rgba(0,0,0,0.7)</code>.
+  99        </p>
+
+docs/pages/styling/index.vue:
+   24        <p>
+   25:         Constants are made available as <DocsExternalLink text="SCSS variables" href="https://sass-lang.com/documentation/variables" /> and snippets are made available as <DocsExternalLink text="SCSS placeholder selectors" href="https://sass-lang.com/documentation/style-rules/placeholder-selectors" />. For example, we provide a constant called <code>$radius</code> (defined as <code>4px</code>) and a placeholder selector called <code>%dropshadow-2dp</code> which creates a 2dp drop shadow. These can be used to style an element by importing the definitions file:
+   26        </p>
+
+   40          .box {
+   41:           @extend %dropshadow-2dp;
+   42  
+
+   82  
+   83:       <h3>Drop shadows</h3>
+   84        <p>
+
+   99        <p>
+  100:         can be achieved by with the dropshadow helpers.
+  101        </p>
+
+  107          .more-shadow {
+  108:           @extend %dropshadow-2dp;
+  109          }
+
+  157          .ease:hover {
+  158:           @extend %dropshadow-6dp;
+  159            @extend %md-standard-func;
+
+  185    .box {
+  186:     @extend %dropshadow-2dp;
+  187  
+
+  197    .more-shadow {
+  198:     @extend %dropshadow-2dp;
+  199    }
+
+  201    .immediate:hover {
+  202:     @extend %dropshadow-6dp;
+  203  
+
+  207    .ease:hover {
+  208:     @extend %dropshadow-6dp;
+  209      @extend %md-standard-func;
+
+docs/pages/textfields/index.vue:
+    6        <p>
+    7:         Text fields allow users to enter or edit text within forms and modals. They also support multiple text formats including email and numbers. Additionally, they can trigger the appearance of dropdown menus.
+    8        </p>
+
+  100          <p class="do-dont">
+  101:           Include a dropdown icon to indicate the presence of a nested menu component
+  102          </p>
+
+  109          <p class="do-dont">
+  110:           Include an icon signifier to the left of the label to indicates a theme or category of the dropdown menu options
+  111          </p>
+
+  164          <p class="do-dont">
+  165:           Prompt autocomplete suggestions to help users navigate lengthy dropdown menus
+  166          </p>
+
+lib/KBreadcrumbs.vue:
+    9          v-show="collapsedCrumbs.length"
+   10:         class="breadcrumbs-dropdown-wrapper"
+   11        >
+
+   13            size="small"
+   14:           :icon="showDropdown ? 'chevronUp' : 'chevronDown'"
+   15            appearance="raised-button"
+   16:           @click="showDropdown = !showDropdown"
+   17          />
+   18          <div
+   19:           v-if="showDropdown"
+   20:           class="breadcrumbs-dropdown"
+   21            :style="{ background: $themeTokens.surface }"
+   22          >
+   23:           <ol class="breadcrumbs-dropdown-items">
+   24              <li
+
+   26                :key="index"
+   27:               class="breadcrumbs-dropdown-item"
+   28              >
+
+  131  
+  132:   const DROPDOWN_BTN_WIDTH = 55;
+  133    const DEFAULT_LAST_BREADCRUMB_MAX_WIDTH = 300;
+
+  181        crumbs: [],
+  182:       showDropdown: false,
+  183        lastBreadcrumbMaxWidth: `${DEFAULT_LAST_BREADCRUMB_MAX_WIDTH}px`,
+
+  235              let lastCrumbWidth = Math.ceil(tempCrumbs.pop().ref[0].getBoundingClientRect().width);
+  236:             let remainingWidth = this.parentWidth - DROPDOWN_BTN_WIDTH - lastCrumbWidth;
+  237              let trackingIndex = this.crumbs.length - 2;
+
+  309  
+  310:   .breadcrumbs-dropdown-wrapper {
+  311      display: inline-block;
+
+  319  
+  320:   .breadcrumbs-dropdown {
+  321:     @extend %dropshadow-2dp;
+  322  
+
+  329  
+  330:   .breadcrumbs-dropdown-items {
+  331      padding: 0;
+
+  335  
+  336:   .breadcrumbs-dropdown-item {
+  337      display: block;
+
+  354      .breadcrumbs-collapsed & {
+  355:       // account for dropdown button width
+  356        width: calc(100% - 55px);
+
+lib/KDropdownMenu.vue:
+    9        :containFocus="true"
+   10:       :dropdownPosition="position"
+   11        :positionX="contextMenuPosition[0]"
+
+   17      >
+   18:       <!-- Slot to set a header to the dropdown menu -->
+   19        <slot name="header"></slot>
+
+   39    /**
+   40:    * The KDropdownMenu component is used to contain multiple actions
+   41     */
+   42    export default {
+   43:     name: 'KDropdownMenu',
+   44      components: {
+
+   64        /**
+   65:        * The dropdown menu popover flips its position to avoid overflows within the parent. Setting it to false disables the flipping behavior.
+   66         */
+
+   71        /**
+   72:        * An array of options objects, with one object per dropdown item
+   73         */
+
+   85        /**
+   86:        * The position of the dropdown relative to the button
+   87         */
+
+  108        /**
+  109:        * Whether or not the dropdown is a context menu, if true, the dropdown will open when
+  110         * the user right-clicks the parent element
+
+lib/KModal.vue:
+  393    .modal {
+  394:     @extend %dropshadow-6dp;
+  395  
+
+lib/KPageContainer.vue:
+  61    .page-container {
+  62:     @extend %dropshadow-1dp;
+  63  
+
+lib/KThemePlugin.js:
+    9  import KDateRange from './KDateRange';
+   10: import KDropdownMenu from './KDropdownMenu';
+   11  import KEmptyPlaceholder from './KEmptyPlaceholder';
+
+  124    Vue.component('KDateRange', KDateRange);
+  125:   Vue.component('KDropdownMenu', KDropdownMenu);
+  126    Vue.component('KEmptyPlaceholder', KEmptyPlaceholder);
+
+lib/buttons-and-links/KButton.vue:
+   24      />
+   25:     <!-- @slot Pass sub-components into the button, typically `KDropdownMenu` -->
+   26      <slot name="menu"></slot>
+
+   43  
+   44:     <!-- Dropdown arrow icon -->
+   45      <KIcon
+   46:       v-if="hasDropdown"
+   47:       icon="dropdown"
+   48:       class="dropdown-arrow"
+   49        :style="arrowStyles"
+   50:       data-test="dropdownIcon"
+   51        style="width: 24px; height: 24px;"
+
+   92        /**
+   93:        * Adds a dropdown arrow
+   94         */
+   95:       hasDropdown: {
+   96          type: Boolean,
+
+  191  
+  192:   .dropdown-arrow {
+  193      position: relative;
+
+lib/buttons-and-links/KIconButton.vue:
+  23      <KIcon :icon="icon" :color="color" :style="iconStyles" />
+  24:     <!-- @slot Pass sub-components into the button, typically `KDropdownMenu` -->
+  25      <slot name="menu"></slot>
+
+lib/buttons-and-links/__tests__/KButton.spec.js:
+  21      });
+  22:     it('should render a dropdown icon when hasDropdown is true', () => {
+  23        const wrapper = shallowMount(KButton, {
+  24          propsData: {
+  25:           hasDropdown: true,
+  26          },
+  27        });
+  28:       expect(wrapper.find('[data-test="dropdownIcon"]').exists()).toBe(true);
+  29      });
+
+lib/KCard/BaseCard.vue:
+  182    .base-card {
+  183:     @extend %dropshadow-2dp;
+  184  
+
+  196      &:focus {
+  197:       @extend %dropshadow-6dp;
+  198      }
+
+lib/keen/UiAutocomplete.vue:
+   51            @keydown.enter="selectHighlighted(highlightedIndex, $event)"
+   52:           @keydown.esc="closeDropdown"
+   53:           @keydown.tab="closeDropdown"
+   54  
+
+   57  
+   58:         <ul v-show="showDropdown" class="ui-autocomplete__suggestions">
+   59            <UiAutocompleteSuggestion
+
+  212          isTouched: false,
+  213:         showDropdown: false,
+  214          highlightedIndex: -1,
+
+  288          if (this.isActive && this.valueLength >= this.minChars) {
+  289:           this.openDropdown();
+  290          }
+
+  335          this.$nextTick(() => {
+  336:           this.closeDropdown();
+  337            this.$refs.input.focus();
+
+  356          if (this.showOnUpDown) {
+  357:           this.openDropdown();
+  358          }
+
+  367        selectHighlighted(index, e) {
+  368:         if (this.showDropdown && this.$refs.suggestions.length > 0) {
+  369            e.preventDefault();
+
+  377  
+  378:       openDropdown() {
+  379:         if (!this.showDropdown) {
+  380:           this.showDropdown = true;
+  381:           this.$emit('dropdown-open');
+  382          }
+
+  384  
+  385:       closeDropdown() {
+  386:         if (this.showDropdown) {
+  387            this.$nextTick(() => {
+  388:             this.showDropdown = false;
+  389              this.highlightedIndex = -1;
+  390:             this.$emit('dropdown-close');
+  391            });
+
+  418        onExternalClick(e) {
+  419:         if (!this.$el.contains(e.target) && this.showDropdown) {
+  420:           this.closeDropdown();
+  421          }
+
+  603      position: absolute;
+  604:     z-index: $z-index-dropdown;
+  605      display: block;
+
+lib/keen/UiAutocompleteSuggestion.vue:
+  73      font-family: inherit;
+  74:     font-size: $ui-dropdown-item-font-size;
+  75      cursor: pointer;
+
+lib/keen/UiButton.vue:
+   23        <UiIcon
+   24:         v-if="hasDropdown && iconPosition !== 'right'"
+   25:         class="ui-button__dropdown-icon"
+   26        >
+
+   47      <UiPopover
+   48:       v-if="hasDropdown"
+   49:       ref="dropdown"
+   50  
+   51        contain-focus
+   52:       :append-to-body="appendDropdownToBody"
+   53:       :constrain-to-scroll-parent="constrainDropdownToScrollParent"
+   54:       :position="dropdownPosition"
+   55  
+   56:       :open-on="openDropdownOn"
+   57:       @close="onDropdownClose"
+   58  
+   59:       @open="onDropdownOpen"
+   60      >
+   61:       <slot name="dropdown"></slot>
+   62      </UiPopover>
+
+  120        },
+  121:       hasDropdown: {
+  122          type: Boolean,
+
+  124        },
+  125:       dropdownPosition: {
+  126          type: String,
+
+  128        },
+  129:       appendDropdownToBody: {
+  130          type: Boolean,
+
+  132        },
+  133:       constrainDropdownToScrollParent: {
+  134          type: Boolean,
+
+  136        },
+  137:       openDropdownOn: {
+  138          type: String,
+
+  160            { 'is-disabled': this.disabled || this.loading },
+  161:           { 'has-dropdown': this.hasDropdown },
+  162          ];
+
+  182  
+  183:       onDropdownOpen() {
+  184:         this.$emit('dropdown-open');
+  185        },
+  186  
+  187:       onDropdownClose() {
+  188:         this.$emit('dropdown-close');
+  189        },
+  190  
+  191:       openDropdown() {
+  192:         if (this.$refs.dropdown) {
+  193:           this.$refs.dropdown.open();
+  194          }
+
+  196  
+  197:       closeDropdown() {
+  198:         if (this.$refs.dropdown) {
+  199:           this.$refs.dropdown.close();
+  200          }
+
+  202  
+  203:       toggleDropdown() {
+  204:         if (this.$refs.dropdown) {
+  205:           this.$refs.dropdown.toggle();
+  206          }
+
+  298  
+  299:   .ui-button__dropdown-icon {
+  300      margin-right: rem(-6px);
+
+  368  
+  369:     .ui-button__dropdown-icon {
+  370        margin-right: rem(-4px);
+
+  391  
+  392:     .ui-button__dropdown-icon {
+  393        margin-left: rem(4px);
+
+  418        &:hover:not(.is-disabled),
+  419:       &.has-dropdown-open {
+  420          background-color: darken($md-grey-200, 7.5%);
+
+  427        .ui-button__icon,
+  428:       .ui-button__dropdown-icon {
+  429          color: $secondary-text-color;
+
+  448        &:hover:not(.is-disabled),
+  449:       &.has-dropdown-open {
+  450          background-color: darken($brand-primary-color, 10%);
+
+  457        &:hover:not(.is-disabled),
+  458:       &.has-dropdown-open {
+  459          background-color: darken($brand-accent-color, 10%);
+
+  466        &:hover:not(.is-disabled),
+  467:       &.has-dropdown-open {
+  468          background-color: darken($md-green, 10%);
+
+  475        &:hover:not(.is-disabled),
+  476:       &.has-dropdown-open {
+  477          background-color: darken($md-orange, 10%);
+
+  484        &:hover:not(.is-disabled),
+  485:       &.has-dropdown-open {
+  486          background-color: darken($md-red, 10%);
+
+  497        &:hover:not(.is-disabled),
+  498:       &.has-dropdown-open {
+  499          background-color: $md-grey-200;
+
+  514        &:hover:not(.is-disabled),
+  515:       &.has-dropdown-open {
+  516          background-color: rgba($brand-primary-color, 0.12);
+
+  527        &:hover:not(.is-disabled),
+  528:       &.has-dropdown-open {
+  529          background-color: rgba($brand-accent-color, 0.12);
+
+  540        &:hover:not(.is-disabled),
+  541:       &.has-dropdown-open {
+  542          background-color: rgba($md-green-600, 0.12);
+
+  553        &:hover:not(.is-disabled),
+  554:       &.has-dropdown-open {
+  555          background-color: rgba($md-orange, 0.12);
+
+  566        &:hover:not(.is-disabled),
+  567:       &.has-dropdown-open {
+  568          background-color: rgba($md-red, 0.12);
+
+lib/keen/UiIconButton.vue:
+   47      <UiPopover
+   48:       v-if="hasDropdown"
+   49:       ref="dropdown"
+   50  
+   51        constain-focus
+   52:       :append-to-body="appendDropdownToBody"
+   53:       :constrain-to-scroll-parent="constrainDropdownToScrollParent"
+   54:       :position="dropdownPosition"
+   55  
+   56:       :open-on="openDropdownOn"
+   57:       @close="onDropdownClose"
+   58  
+   59:       @open="onDropdownOpen"
+   60      >
+   61:       <slot name="dropdown"></slot>
+   62      </UiPopover>
+
+  112        },
+  113:       hasDropdown: {
+  114          type: Boolean,
+
+  116        },
+  117:       dropdownPosition: {
+  118          type: String,
+
+  120        },
+  121:       appendDropdownToBody: {
+  122          type: Boolean,
+
+  124        },
+  125:       constrainDropdownToScrollParent: {
+  126          type: Boolean,
+
+  128        },
+  129:       openDropdownOn: {
+  130          type: String,
+
+  150            { 'is-disabled': this.disabled || this.loading },
+  151:           { 'has-dropdown': this.hasDropdown },
+  152          ];
+
+  165            };
+  166:           if (this.dropdownOpen) {
+  167              style[':hover:not(.is-disabled)'] = {
+
+  208  
+  209:       onDropdownOpen() {
+  210:         this.$emit('dropdown-open');
+  211        },
+  212  
+  213:       onDropdownClose() {
+  214:         this.$emit('dropdown-close');
+  215        },
+
+  218         */
+  219:       openDropdown() {
+  220:         if (this.$refs.dropdown) {
+  221:           this.$refs.dropdown.open();
+  222          }
+
+  226         */
+  227:       closeDropdown() {
+  228:         if (this.$refs.dropdown) {
+  229:           this.$refs.dropdown.close();
+  230          }
+
+  234         */
+  235:       toggleDropdown() {
+  236:         if (this.$refs.dropdown) {
+  237:           this.$refs.dropdown.toggle();
+  238          }
+
+  394      &:hover:not(.is-disabled),
+  395:     &.has-dropdown-open {
+  396        background-color: rgba(black, 0.1);
+
+  421        &:hover:not(.is-disabled),
+  422:       &.has-dropdown-open {
+  423          background-color: darken($md-grey-200, 7.5%);
+
+  442        &:hover:not(.is-disabled),
+  443:       &.has-dropdown-open {
+  444          background-color: darken($brand-primary-color, 10%);
+
+  455        &:hover:not(.is-disabled),
+  456:       &.has-dropdown-open {
+  457          background-color: darken($brand-accent-color, 10%);
+
+  468        &:hover:not(.is-disabled),
+  469:       &.has-dropdown-open {
+  470          background-color: darken($md-green, 10%);
+
+  481        &:hover:not(.is-disabled),
+  482:       &.has-dropdown-open {
+  483          background-color: darken($md-orange, 10%);
+
+  494        &:hover:not(.is-disabled),
+  495:       &.has-dropdown-open {
+  496          background-color: darken($md-red, 10%);
+
+  509        &:hover:not(.is-disabled),
+  510:       &.has-dropdown-open,
+  511        &.has-focus-ring:focus,
+
+  516        &:hover:not(.is-disabled),
+  517:       &.has-dropdown-open {
+  518          background-color: rgba(black, 0.1);
+
+  529        &:hover:not(.is-disabled),
+  530:       &.has-dropdown-open {
+  531          background-color: rgba($brand-primary-color, 0.12);
+
+  542        &:hover:not(.is-disabled),
+  543:       &.has-dropdown-open {
+  544          background-color: rgba($brand-accent-color, 0.12);
+
+  555        &:hover:not(.is-disabled),
+  556:       &.has-dropdown-open {
+  557          background-color: rgba($md-green-600, 0.12);
+
+  568        &:hover:not(.is-disabled),
+  569:       &.has-dropdown-open {
+  570          background-color: rgba($md-orange, 0.12);
+
+  581        &:hover:not(.is-disabled),
+  582:       &.has-dropdown-open {
+  583          background-color: rgba($md-red, 0.12);
+
+lib/keen/UiMenuOption.vue:
+  122        min-height: rem(40px);
+  123:       font-size: $ui-dropdown-item-font-size;
+  124        font-weight: normal;
+
+lib/keen/UiPopover.vue:
+  267  
+  268:         classlist.add(this.triggerEl, 'has-dropdown-open');
+  269  
+
+  279  
+  280:         classlist.remove(this.triggerEl, 'has-dropdown-open');
+  281  
+
+lib/keen/UiTextbox.vue:
+  4     This component was forked from the  library in order to handle
+  5:    dynamic styling of the drop down text color.
+  6  
+
+lib/keen/UiTooltip.vue:
+   61        const options = {
+   62:         // `animateFill: true` makes the backdrop animate, making the fade look like a shift-away
+   63          animateFill: this.animation !== 'fade',
+
+  126  
+  127:     .tippy-backdrop {
+  128        background-color: rgba($md-grey-900, 0.9);
+
+lib/keen/styles/variables.scss:
+   67  
+   68: // Input buttons (dropdown button icon, clear input button icon)
+   69  $ui-input-button-color: $secondary-text-color !default;
+
+   95  // ================================================
+   96: // Dropdowns (UiAutocomplete, UiPopover, UiMenu, UiSelect)
+   97  // ================================================
+   98  
+   99: $ui-dropdown-item-font-size: rem(15px) !default;
+  100  $ui-menu-item-hover-color: #eeeeee; // rgba(black, 0.1);
+
+  132  $z-index-modal: $z-index-level-4 !default;
+  133: $z-index-dropdown: $z-index-level-5 !default;
+  134  $z-index-tooltip: $z-index-level-6 !default;
+
+lib/KIcon/iconDefinitions.js:
+   28    menu: { icon: require('./precompiled-icons/material-icons/menu/baseline.vue').default },
+   29:   dropdown: {
+   30:     icon: require('./precompiled-icons/material-icons/arrow_drop_down/baseline.vue').default,
+   31    },
+   32:   dropup: {
+   33:     icon: require('./precompiled-icons/le/dropup.vue').default,
+   34    },
+
+   42    },
+   43:   forwardRounded: {
+   44      icon: require('./precompiled-icons/material-icons/forward/round.vue').default,
+
+  431    mediaLiteracyResource: {
+  432:     icon: require('./precompiled-icons/material-icons/phone_android/baseline.vue').default,
+  433      resourceCategory: true,
+
+lib/KSelect/index.vue:
+    30  
+    31:         @click="toggleDropdown"
+    32          @focus="onFocus"
+    33:         @keydown.enter.prevent="openDropdown"
+    34:         @keydown.space.prevent="openDropdown"
+    35          @keydown.tab="onBlur"
+
+    59  
+    60:           <UiIcon v-if="!clearableState" class="ui-select-dropdown-button">
+    61              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M6.984 9.984h10.03L12 15z" /></svg>
+
+    75            <div
+    76:             v-show="showDropdown"
+    77:             ref="dropdown"
+    78:             class="ui-select-dropdown"
+    79:             :style="{ color: $themeTokens.primary, backgroundColor: $themeTokens.surface, bottom: dropdownButtonBottom }"
+    80              tabindex="-1"
+
+    82              @keydown.space.prevent.stop="selectHighlighted"
+    83:             @keydown.esc.prevent="closeDropdown()"
+    84              @keydown.tab="onBlur"
+
+   319          highlightedOption: null,
+   320:         showDropdown: false,
+   321          initialValue: JSON.stringify(this.value),
+
+   324          scrollableAncestor: null,
+   325:         dropdownButtonBottom: 'auto',
+   326:         maxDropdownHeight: 256,
+   327          // workaround for Keen-ui not displaying floating labels for empty objects
+
+   499  
+   500:       showDropdown() {
+   501:         if (this.showDropdown) {
+   502            this.onOpen();
+   503:           this.$emit('dropdown-open');
+   504          } else {
+   505            this.onClose();
+   506:           this.$emit('dropdown-close');
+   507          }
+
+   660          this.highlightedOption = option;
+   661:         this.openDropdown();
+   662  
+
+   706          if (!this.multiple && options.autoClose) {
+   707:           this.closeDropdown();
+   708          }
+
+   757  
+   758:       toggleDropdown() {
+   759:         // if called on dropdown inside modal, dropdown will generally render above input/placeholder when opened,
+   760:         // rather than below it: we want to render dropdown above input only in cases where there isn't enough
+   761:         // space available beneath input, but when dropdown extends outside a modal the func doesn't work as intended
+   762          if (!this.isInsideModal) this.calculateSpaceBelow();
+   763  
+   764:         this[this.showDropdown ? 'closeDropdown' : 'openDropdown']();
+   765        },
+   766  
+   767:       openDropdown() {
+   768          if (this.disabled || this.clearableState) {
+
+   775  
+   776:         this.showDropdown = true;
+   777          // IE: clicking label doesn't focus the select element
+
+   783  
+   784:       closeDropdown(options = { autoBlur: false }) {
+   785:         this.showDropdown = false;
+   786          this.query = '';
+
+   799        onMouseover(option) {
+   800:         if (this.showDropdown) {
+   801            this.highlightOption(option, { autoScroll: false });
+
+   823  
+   824:         if (this.showDropdown) {
+   825:           this.closeDropdown({ autoBlur: true });
+   826          }
+
+   831          this.$nextTick(() => {
+   832:           this.$refs['dropdown'].focus();
+   833            const selectedOption = this.$refs.optionsList.querySelector('.is-selected');
+
+   849          if (!this.$el.contains(e.target)) {
+   850:           if (this.showDropdown) {
+   851:             this.closeDropdown({ autoBlur: true });
+   852            } else if (this.isActive) {
+
+   885          // Check if there is enough space below element
+   886:         // and update the "dropdownButtonBottom" data property accordingly
+   887          const notEnoughSpaceBelow =
+   888:           buttonPosition > this.maxDropdownHeight &&
+   889            this.scrollableAncestor.offsetHeight - buttonPosition <
+   890:             buttonHeight + this.maxDropdownHeight;
+   891  
+   892:         this.dropdownButtonBottom = notEnoughSpaceBelow ? buttonHeight + 'px' : 'auto';
+   893        },
+
+   927  
+   928:       .ui-select-dropdown-button {
+   929          color: $ui-input-button-color--hover;
+
+   959      &.has-label {
+   960:       .ui-select-dropdown-button {
+   961          top: $ui-input-button-margin-top--with-label;
+
+   993  
+   994:       .ui-select-dropdown-button,
+   995        .ui-select-display-value.is-placeholder {
+
+  1059  
+  1060:   .ui-select-dropdown-button {
+  1061      margin-right: rem-calc(-4px);
+
+  1066  
+  1067:   .ui-select-dropdown {
+  1068      position: absolute;
+  1069:     z-index: $z-index-dropdown;
+  1070      display: block;
+
+lib/KSelect/KSelectOption.vue:
+  129      align-items: center;
+  130:     font-size: $ui-dropdown-item-font-size;
+  131      cursor: pointer;
+
+lib/KTooltip/index.vue:
+  132    .k-tooltip {
+  133:     @extend %dropshadow-1dp;
+  134  
+
+lib/styles/definitions.scss:
+   58  
+   59: // dropshadows from Angular Material via https://stackoverflow.com/a/39199702
+   60  
+   61: %dropshadow-1dp {
+   62    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2), 0 1px 1px 0 rgba(0, 0, 0, 0.14),
+
+   65  
+   66: %dropshadow-2dp {
+   67    box-shadow: 0 1px 5px 0 rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.14),
+
+   69  }
+   70: %dropshadow-3dp {
+   71    box-shadow: 0 1px 8px 0 rgba(0, 0, 0, 0.2), 0 3px 4px 0 rgba(0, 0, 0, 0.14),
+
+   73  }
+   74: %dropshadow-4dp {
+   75    box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.2), 0 4px 5px 0 rgba(0, 0, 0, 0.14),
+
+   77  }
+   78: %dropshadow-5dp {
+   79    box-shadow: 0 3px 5px -1px rgba(0, 0, 0, 0.2), 0 5px 8px 0 rgba(0, 0, 0, 0.14),
+
+   81  }
+   82: %dropshadow-6dp {
+   83    box-shadow: 0 3px 5px -1px rgba(0, 0, 0, 0.2), 0 6px 10px 0 rgba(0, 0, 0, 0.14),
+
+   85  }
+   86: %dropshadow-7dp {
+   87    box-shadow: 0 4px 5px -2px rgba(0, 0, 0, 0.2), 0 7px 10px 1px rgba(0, 0, 0, 0.14),
+
+   89  }
+   90: %dropshadow-8dp {
+   91    box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2), 0 8px 10px 1px rgba(0, 0, 0, 0.14),
+
+   93  }
+   94: %dropshadow-9dp {
+   95    box-shadow: 0 5px 6px -3px rgba(0, 0, 0, 0.2), 0 9px 12px 1px rgba(0, 0, 0, 0.14),
+
+   97  }
+   98: %dropshadow-10dp {
+   99    box-shadow: 0 6px 6px -3px rgba(0, 0, 0, 0.2), 0 10px 14px 1px rgba(0, 0, 0, 0.14),
+
+  101  }
+  102: %dropshadow-11dp {
+  103    box-shadow: 0 6px 7px -4px rgba(0, 0, 0, 0.2), 0 11px 15px 1px rgba(0, 0, 0, 0.14),
+
+  105  }
+  106: %dropshadow-12dp {
+  107    box-shadow: 0 7px 8px -4px rgba(0, 0, 0, 0.2), 0 12px 17px 2px rgba(0, 0, 0, 0.14),
+
+  109  }
+  110: %dropshadow-13dp {
+  111    box-shadow: 0 7px 8px -4px rgba(0, 0, 0, 0.2), 0 13px 19px 2px rgba(0, 0, 0, 0.14),
+
+  113  }
+  114: %dropshadow-14dp {
+  115    box-shadow: 0 7px 9px -4px rgba(0, 0, 0, 0.2), 0 14px 21px 2px rgba(0, 0, 0, 0.14),
+
+  117  }
+  118: %dropshadow-15dp {
+  119    box-shadow: 0 8px 9px -5px rgba(0, 0, 0, 0.2), 0 15px 22px 2px rgba(0, 0, 0, 0.14),
+
+  121  }
+  122: %dropshadow-16dp {
+  123    box-shadow: 0 8px 10px -5px rgba(0, 0, 0, 0.2), 0 16px 24px 2px rgba(0, 0, 0, 0.14),
+
+  125  }
+  126: %dropshadow-17dp {
+  127    box-shadow: 0 8px 11px -5px rgba(0, 0, 0, 0.2), 0 17px 26px 2px rgba(0, 0, 0, 0.14),
+
+  129  }
+  130: %dropshadow-18dp {
+  131    box-shadow: 0 9px 11px -5px rgba(0, 0, 0, 0.2), 0 18px 28px 2px rgba(0, 0, 0, 0.14),
+
+  133  }
+  134: %dropshadow-19dp {
+  135    box-shadow: 0 9px 12px -6px rgba(0, 0, 0, 0.2), 0 19px 29px 2px rgba(0, 0, 0, 0.14),
+
+  137  }
+  138: %dropshadow-20dp {
+  139    box-shadow: 0 10px 13px -6px rgba(0, 0, 0, 0.2), 0 20px 31px 3px rgba(0, 0, 0, 0.14),
+
+  141  }
+  142: %dropshadow-21dp {
+  143    box-shadow: 0 10px 13px -6px rgba(0, 0, 0, 0.2), 0 21px 33px 3px rgba(0, 0, 0, 0.14),
+
+  145  }
+  146: %dropshadow-22dp {
+  147    box-shadow: 0 10px 14px -6px rgba(0, 0, 0, 0.2), 0 22px 35px 3px rgba(0, 0, 0, 0.14),
+
+  149  }
+  150: %dropshadow-23dp {
+  151    box-shadow: 0 11px 14px -7px rgba(0, 0, 0, 0.2), 0 23px 36px 3px rgba(0, 0, 0, 0.14),
+
+  153  }
+  154: %dropshadow-24dp {
+  155    box-shadow: 0 11px 15px -7px rgba(0, 0, 0, 0.2), 0 24px 38px 3px rgba(0, 0, 0, 0.14),
