@@ -303,8 +303,8 @@
                     nextColIndex = 0;
                     nextRowIndex = rowIndex + 1;
                   } else {
-                    nextColIndex = 0;
-                    nextRowIndex = -1;
+                    // Allow default behavior when reaching the last cell
+                    return;
                   }
                 }
               } else {
@@ -319,8 +319,8 @@
                     nextColIndex = totalCols - 1;
                     nextRowIndex = rowIndex - 1;
                   } else {
-                    nextColIndex = totalCols - 1;
-                    nextRowIndex = totalRows - 1;
+                    // Allow default behavior when reaching the first cell
+                    return;
                   }
                 }
               }
@@ -332,8 +332,8 @@
                   nextColIndex = 0;
                   nextRowIndex = rowIndex + 1;
                 } else {
-                  nextColIndex = 0;
-                  nextRowIndex = -1;
+                  // Allow default behavior when reaching the last cell
+                  return;
                 }
               } else {
                 if (colIndex > 0) {
@@ -342,16 +342,16 @@
                   nextColIndex = totalCols - 1;
                   nextRowIndex = rowIndex - 1;
                 } else {
-                  nextColIndex = totalCols - 1;
-                  nextRowIndex = totalRows - 1;
+                  // Allow default behavior when reaching the first cell
+                  return;
                 }
               }
             }
-            this.focusCell(nextRowIndex, nextColIndex);
+            this.focusCell(nextRowIndex, nextColIndex, true);
             this.focusedRowIndex = nextRowIndex === -1 ? null : nextRowIndex;
             this.focusedColIndex = nextColIndex;
             this.highlightHeader(nextColIndex);
-            event.preventDefault(); // Prevent default Tab behavior
+            event.preventDefault(); // Prevent default Tab behavior within the table
             break;
 
           default:
