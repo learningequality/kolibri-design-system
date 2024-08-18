@@ -16,7 +16,7 @@
     "precompile-svgs": "node utils/precompileSvgs/index.js && yarn run pregenerate",
     "precompile-custom-svgs": "node utils/precompileSvgs/index.js --custom && yarn run pregenerate",
     "_lint-watch-fix": "yarn lint -w -m",
-    "test:percy": "PERCY_LOGLEVEL=info npx percy exec -v -- jest --config jest.conf/visual.index.js -i ./lib/buttons-and-links/__tests__/KButton.spec.js",
+    "test:percy": "PERCY_LOGLEVEL=info npx percy exec -v -- jest --config jest.conf/visual.index.js",
     "test": "jest --config=jest.conf/index.js",
     "test:visual": "concurrently --kill-others --success first --names \"SERVER,TEST\" -c \"bgCyan.bold,bgYellow.bold\" \"yarn dev-only > /dev/null 2>&1\" \"yarn test:percy\"",
     "_api-watch": "chokidar \"**/lib/**\" -c \"node utils/extractApi.js\""
