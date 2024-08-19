@@ -318,7 +318,7 @@
   }
 
   .breadcrumbs-dropdown {
-    @extend %-2dp;
+    @extend %dropshadow-2dp;
 
     position: absolute;
     z-index: 8;
