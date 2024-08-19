@@ -130,7 +130,7 @@
   @import '../styles/definitions';
 
   .k-tooltip {
-    @extend %w-1dp;
+    @extend %dropshadow-1dp;
 
     position: absolute;
     z-index: 24;
