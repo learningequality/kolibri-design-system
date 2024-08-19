@@ -211,28 +211,28 @@
       preserveAboveTitle: {
         type: Boolean,
         default: false,
+      },
+      /**
+       * When true, preserves the space for the belowTitle slot even when it's empty.
+       * When false, removes the space entirely if the slot is empty.
+       * @type {Boolean}
+       * @default false
+       */
+      preserveBelowTitle: {
+        type: Boolean,
+        default: false,
+      },
+      /**
+       * When true, preserves the space for the footer slot even when it's empty.
+       * When false, removes the space entirely if the slot is empty.
+       * @type {Boolean}
+       * @default false
+       */
+      preserveFooter: {
+        type: Boolean,
+        default: false,
+      },
     },
-    /**
-     * When true, preserves the space for the belowTitle slot even when it's empty.
-     * When false, removes the space entirely if the slot is empty.
-     * @type {Boolean}
-     * @default false
-     */
-    preserveBelowTitle: {
-      type: Boolean,
-      default: false,
-    },
-    /**
-     * When true, preserves the space for the footer slot even when it's empty.
-     * When false, removes the space entirely if the slot is empty.
-     * @type {Boolean}
-     * @default false
-     */
-    preserveFooter: {
-      type: Boolean,
-      default: false,
-    },
-  },
     computed: {
       rootClass() {
         return this.stylesAndClasses.rootClass;
