@@ -7,6 +7,9 @@
     :titleLines="titleLines"
     :class="['k-card', rootClass, thumbnailAlignClass]"
     :headingStyles="headingStyles"
+    :preserveAboveTitle="preserveAboveTitle"
+    :preserveBelowTitle="preserveBelowTitle"
+    :preserveFooter="preserveFooter"
   >
     <template v-if="$slots.title" #title>
       <!-- @slot Optional slot section containing the title contents, should not contain a heading element. -->
@@ -42,6 +45,7 @@
         </span>
       </div>
       <div
+        v-if="$slots.aboveTitle || preserveAboveTitle"
         data-test="aboveTitle"
         class="above-title"
       >
@@ -49,6 +53,7 @@
         <slot name="aboveTitle"></slot>
       </div>
       <div
+        v-if="$slots.belowTitle || preserveBelowTitle"
         data-test="belowTitle"
         class="below-title"
       >
@@ -56,8 +61,10 @@
         <slot name="belowTitle"></slot>
       </div>
       <div
+        v-if="$slots.footer || preserveFooter"
+        v-show="$slots.footer || preserveFooter"
         data-test="footer"
-        class="footer"
+        :class="['footer', { 'footer--empty': preserveFooter && !$slots.footer }]"
       >
         <!-- @slot Places content to the footer area. -->
         <slot name="footer"></slot>
@@ -195,7 +202,41 @@
         required: false,
         default: 2,
       },
+
+      /**
+       * Preserves the aboveTitle slot area even if it is empty.
+       * When true, preserves the space for the aboveTitle slot even when it's empty.
+       * When false, removes the space entirely if the slot is empty.
+       * @type {Boolean}
+       * @default false
+       */
+      preserveAboveTitle: {
+        type: Boolean,
+        default: false,
     },
+    /**
+     * Preserves the belowTitle slot area even if it is empty.
+     * When true, preserves the space for the belowTitle slot even when it's empty.
+     * When false, removes the space entirely if the slot is empty.
+     * @type {Boolean}
+     * @default false
+     */
+    preserveBelowTitle: {
+      type: Boolean,
+      default: false,
+    },
+    /**
+     * Preserves the footer slot area even if it is empty.
+     * When true, preserves the space for the footer slot even when it's empty.
+     * When false, removes the space entirely if the slot is empty.
+     * @type {Boolean}
+     * @default false
+     */
+    preserveFooter: {
+      type: Boolean,
+      default: false,
+    },
+  },
     computed: {
       rootClass() {
         return this.stylesAndClasses.rootClass;
@@ -371,6 +412,9 @@
     min-height: 58px; /* (2) */
     margin: auto $spacer $spacer;
     overflow: hidden; /* (1) */
+  }
+  .footer--empty {
+    height: 40px; /* (1) */
   }
 
   .thumbnail-placeholder {

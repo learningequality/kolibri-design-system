@@ -17,38 +17,16 @@
         :headingLevel="2"
         layout="vertical"
         thumbnailDisplay="small"
+        preserveAboveTitle
+        preserveFooter
         :thumbnailSrc="require('../assets/hummingbird CC BY-SA 4.0.jpg')"
         title="This is a sample resource title This is a sample resource title This is a sample resource title This is a sample resource title This is a sample resource title This is a sample resource title This is a sample resource title This is a sample resource title This is a sample resource title This is a sample resource title"
       >
-        <template #aboveTitle>
-          <KGrid>
-
-            <KGridItem
-              :layout12="{ span: 8 }"
-              :layout8="{ span: 6 }"
-            >
-              <span><KIcon icon="readSolid" :style="{ 'font-size': '14px' }" /></span>
-              <span
-                :style="{ 'color': $themePalette.grey.v_400,
-                          'font-size': '12px' }"
-              >Rutrum pellentesque utrum...</span>
-            </KGridItem>
-
-            <KGridItem
-              :layout12="{ span: 4 }"
-              :layout8="{ span: 2 }"
-            >
-              <div style="float:right">
-                <KIcon icon="infoOutline" class="icon-size" />
-              </div>
-            </KGridItem>
-          </KGrid>
-        </template>
         <template #belowTitle>
           <span>Below title below title below title below title below title below title below title below title below title below title below title below title below title</span>
         </template>
 
-        <template #footer>
+        <!-- <template #footer>
           <div>
             <div class="footer-top-header">
               <span>
@@ -84,7 +62,7 @@
               </KGridItem>
             </KGrid>
           </div>
-        </template>
+        </template> -->
       </KCard>
 
       <KCard
