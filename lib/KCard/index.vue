@@ -204,7 +204,6 @@
       },
 
       /**
-       * Preserves the aboveTitle slot area even if it is empty.
        * When true, preserves the space for the aboveTitle slot even when it's empty.
        * When false, removes the space entirely if the slot is empty.
        * @type {Boolean}
@@ -215,7 +214,6 @@
         default: false,
     },
     /**
-     * Preserves the belowTitle slot area even if it is empty.
      * When true, preserves the space for the belowTitle slot even when it's empty.
      * When false, removes the space entirely if the slot is empty.
      * @type {Boolean}
@@ -226,7 +224,6 @@
       default: false,
     },
     /**
-     * Preserves the footer slot area even if it is empty.
      * When true, preserves the space for the footer slot even when it's empty.
      * When false, removes the space entirely if the slot is empty.
      * @type {Boolean}
