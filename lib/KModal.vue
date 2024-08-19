@@ -391,7 +391,7 @@
 
   // TODO: margins for stacked buttons.
   .modal {
-    @extend %-16dp;
+    @extend %dropshadow-6dp;
 
     position: absolute;
     top: 50%;
