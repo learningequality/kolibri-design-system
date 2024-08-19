@@ -283,7 +283,7 @@
 
 
 <style lang="scss" scoped>
-
+  @import '~kolibri-design-system/lib/styles/definitions';
   @import './styles/definitions';
   $crumb-max-width: 300px;
 

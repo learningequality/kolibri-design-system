@@ -84,7 +84,7 @@
 <style lang="scss" scoped>
 
   /* stylelint-disable */
-
+  
   @import '../styles/definitions';
   @import './styles/imports';
 

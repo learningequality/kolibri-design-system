@@ -211,7 +211,7 @@
 </script>
 
 <style lang="scss">
-
+  @import '~kolibri-design-system/lib/styles/definitions';
   @import './styles/imports';
 
   .ui-button {
@@ -261,13 +261,13 @@
     }
 
     &.is-raised {
-      @extend %boxshadow-2dp;
+      @extend %dropshadow-2dp;
       //box-shadow: 0 0 2px rgba(black, 0.12), 0 2px 2px rgba(black, 0.2);
       transition: box-shadow 0.3s ease;
 
       &.has-focus-ring:focus,
       body[modality='keyboard'] &:focus {
-        @extend %boxshadow-2dp;
+        @extend %dropshadow-2dp;
         //box-shadow: 0 0 5px rgba(black, 0.22), 0 3px 6px rgba(black, 0.3);
       }
     }

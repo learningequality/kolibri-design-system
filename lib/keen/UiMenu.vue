@@ -127,7 +127,7 @@
 <style lang="scss">
 
   /* stylelint-disable */
-
+  @import '~kolibri-design-system/lib/styles/definitions';
   @import './styles/imports';
 
   .ui-menu {
@@ -145,7 +145,7 @@
     outline: none;
 
     &.is-raised {
-      @extend %boxshadow-2dp;
+      @extend %dropshadow-2dp;
       border: none;
 
      // box-shadow: 0 2px 4px -1px rgba(black, 0.2), 0 4px 5px 0 rgba(black, 0.14),
