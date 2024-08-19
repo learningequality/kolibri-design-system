@@ -38,7 +38,7 @@
         @import '~kolibri-design-system/lib/styles/definitions'
 
         .box {
-          @extend %dropshadow-4dp;
+          @extend %dropshadow-2dp;
 
           border-radius: $radius;
           text-align: center;
@@ -105,7 +105,7 @@
         @import '~kolibri-design-system/lib/styles/definitions'
 
         .more-shadow {
-          @extend %dropshadow-12dp;
+          @extend %dropshadow-6dp;
         }
       </DocsShowCode>
       <!-- eslint-enable -->
@@ -155,7 +155,7 @@
         @import '~kolibri-design-system/lib/styles/definitions'
 
         .ease:hover {
-          @extend %dropshadow-8dp;
+          @extend %dropshadow-6dp;
           @extend %md-standard-func;
 
           cursor: pointer;
@@ -183,7 +183,7 @@
   @import '~~/lib/styles/definitions';
 
   .box {
-    @extend %dropshadow-4dp;
+    @extend %dropshadow-2dp;
 
     display: inline-block;
     min-width: 150px;
@@ -195,17 +195,17 @@
   }
 
   .more-shadow {
-    @extend %dropshadow-12dp;
+    @extend %dropshadow-6dp;
   }
 
   .immediate:hover {
-    @extend %dropshadow-8dp;
+    @extend %dropshadow-6dp;
 
     cursor: pointer;
   }
 
   .ease:hover {
-    @extend %dropshadow-8dp;
+    @extend %dropshadow-6dp;
     @extend %md-standard-func;
 
     cursor: pointer;
