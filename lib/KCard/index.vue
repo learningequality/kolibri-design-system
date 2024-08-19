@@ -62,7 +62,6 @@
       </div>
       <div
         v-if="$slots.footer || preserveFooter"
-        v-show="$slots.footer || preserveFooter"
         data-test="footer"
         :class="['footer', { 'footer--empty': preserveFooter && !$slots.footer }]"
       >

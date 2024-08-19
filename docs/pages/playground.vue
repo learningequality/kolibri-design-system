@@ -17,8 +17,7 @@
         :headingLevel="2"
         layout="vertical"
         thumbnailDisplay="small"
-        preserveAboveTitle
-        preserveFooter
+        :preserveFooter="true"
         :thumbnailSrc="require('../assets/hummingbird CC BY-SA 4.0.jpg')"
         title="This is a sample resource title This is a sample resource title This is a sample resource title This is a sample resource title This is a sample resource title This is a sample resource title This is a sample resource title This is a sample resource title This is a sample resource title This is a sample resource title"
       >
@@ -26,7 +25,7 @@
           <span>Below title below title below title below title below title below title below title below title below title below title below title below title below title</span>
         </template>
 
-        <!-- <template #footer>
+        <template #footer>
           <div>
             <div class="footer-top-header">
               <span>
@@ -62,7 +61,7 @@
               </KGridItem>
             </KGrid>
           </div>
-        </template> -->
+        </template> 
       </KCard>
 
       <KCard
