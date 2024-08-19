@@ -125,7 +125,7 @@
 </script>
 
 <style lang="scss">
-  @import '~kolibri-design-system/lib/styles/definitions';
+  @import '../styles/definitions';
   @import './styles/imports';
 
   $ui-toolbar-font-size: rem(18px) !default;

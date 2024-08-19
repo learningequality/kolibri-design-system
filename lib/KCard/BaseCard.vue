@@ -176,7 +176,7 @@
 
 
 <style lang="scss" scoped>
-  @import '~kolibri-design-system/lib/styles/definitions';
+  @import '../styles/definitions';
   @import '../styles/definitions';
 
   .base-card {

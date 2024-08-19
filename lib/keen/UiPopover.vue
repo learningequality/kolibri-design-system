@@ -350,7 +350,7 @@
 <style lang="scss">
 
   /* stylelint-disable */
-  @import '~kolibri-design-system/lib/styles/definitions';
+  @import '../styles/definitions';
   @import './styles/imports';
   //@import './styles/tippy/tippy';
 
