@@ -4,6 +4,16 @@ Changelog is rather internal in nature. See release notes for the public overvie
 
 ## Upcoming version 5.x.x (`develop` branch)
 
+   [#705]
+  - **Description:**  Update`KCard`  updates: Add preserveAboveTitle prop for flexible aboveTitle slot management.
+  - **Products impact:**  Card updates 
+  - **Addresses:** https://github.com/learningequality/kolibri-design-system/issues/702
+  - **Components:** `KCard` 
+  - **Breaking:** N0
+  - **Impacts a11y:** No
+  - **Guidance:**
+ [#705] https://github.com/learningequality/kolibri-design-system/pull/705
+
 - [719]
   - **Description:** Removes KResponsiveWindowMixin.
   - **Products impact:** removed API.
