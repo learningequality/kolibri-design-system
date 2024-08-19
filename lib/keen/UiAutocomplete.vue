@@ -600,6 +600,7 @@
   }
 
   .ui-autocomplete__suggestions {
+    @extend %dropshadow-1dp;
     position: absolute;
     z-index: $z-index-dropdown;
     display: block;
@@ -610,7 +611,7 @@
     color: $primary-text-color;
     list-style-type: none;
     background-color: white;
-    box-shadow: 1px 2px 8px $md-grey-600;
+    //box-shadow: 1px 2px 8px $md-grey-600;
   }
 
   .ui-autocomplete__feedback {

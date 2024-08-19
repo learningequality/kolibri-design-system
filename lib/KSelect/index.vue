@@ -1065,6 +1065,7 @@
   }
 
   .ui-select-dropdown {
+    @extend %boxshadow-2dp;
     position: absolute;
     z-index: $z-index-dropdown;
     display: block;
@@ -1075,7 +1076,7 @@
     margin-bottom: rem-calc(8px);
     list-style-type: none;
     outline: none;
-    box-shadow: 1px 2px 8px $md-grey-600;
+    //box-shadow: 1px 2px 8px $md-grey-600;
   }
 
   .ui-select-options {

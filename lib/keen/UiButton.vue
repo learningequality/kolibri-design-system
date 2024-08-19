@@ -261,12 +261,14 @@
     }
 
     &.is-raised {
-      box-shadow: 0 0 2px rgba(black, 0.12), 0 2px 2px rgba(black, 0.2);
+      @extend %boxshadow-2dp;
+      //box-shadow: 0 0 2px rgba(black, 0.12), 0 2px 2px rgba(black, 0.2);
       transition: box-shadow 0.3s ease;
 
       &.has-focus-ring:focus,
       body[modality='keyboard'] &:focus {
-        box-shadow: 0 0 5px rgba(black, 0.22), 0 3px 6px rgba(black, 0.3);
+        @extend %boxshadow-2dp;
+        //box-shadow: 0 0 5px rgba(black, 0.22), 0 3px 6px rgba(black, 0.3);
       }
     }
 
