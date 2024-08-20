@@ -5,6 +5,17 @@ Changelog is rather internal in nature. See release notes for the public overvie
 ## Version 4.x.x (`release-v4` branch)
 
 
+- [#737]
+  - **Description:** Bump KDS version to 4.4.1.
+  - **Products impact:** -.
+  - **Addresses:** -.
+  - **Components:** -.
+  - **Breaking:** -.
+  - **Impacts a11y:** -.
+  - **Guidance:** -.
+
+[#737]: https://github.com/learningequality/kolibri-design-system/pull/737
+
 - [#717]
   - **Description:** Fix ResizeOserver errors when KListWithOverflow resize very quickly.
   - **Products impact:** bugfix.
