@@ -5,7 +5,7 @@ Changelog is rather internal in nature. See release notes for the public overvie
 ## Upcoming version 5.x.x (`develop` branch)
 
    [#705]
-  - **Description:**  Update`KCard`  updates: Add preserveAboveTitle prop for flexible aboveTitle slot management.
+  - **Description:**  Update`KCard`  updates: Adds 'preserveAboveTitle`, `preserveBelowTitle`, `preserveFooter` prop for flexible  slot management.
   - **Products impact:**  Card updates 
   - **Addresses:** https://github.com/learningequality/kolibri-design-system/issues/702
   - **Components:** `KCard` 

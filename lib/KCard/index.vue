@@ -7,9 +7,6 @@
     :titleLines="titleLines"
     :class="['k-card', rootClass, thumbnailAlignClass]"
     :headingStyles="headingStyles"
-    :preserveAboveTitle="preserveAboveTitle"
-    :preserveBelowTitle="preserveBelowTitle"
-    :preserveFooter="preserveFooter"
   >
     <template v-if="$slots.title" #title>
       <!-- @slot Optional slot section containing the title contents, should not contain a heading element. -->
@@ -63,7 +60,7 @@
       <div
         v-if="$slots.footer || preserveFooter"
         data-test="footer"
-        :class="['footer', { 'footer--empty': preserveFooter && !$slots.footer }]"
+        class="footer"
       >
         <!-- @slot Places content to the footer area. -->
         <slot name="footer"></slot>
@@ -408,9 +405,6 @@
     min-height: 58px; /* (2) */
     margin: auto $spacer $spacer;
     overflow: hidden; /* (1) */
-  }
-  .footer--empty {
-    height: 40px; /* (1) */
   }
 
   .thumbnail-placeholder {
