@@ -7,7 +7,19 @@
     Please do not modify the contents of this file.
   -->
   <div id="testing-playground" style="padding: 24px">
-    <component :is="component" v-bind="componentProps" />
+    <component :is="component" v-bind="componentProps">
+      <!-- Render slots if provided -->
+      <template v-for="(slot, name) in slots">
+        <!-- eslint-disable vue/no-v-html -->
+        <component
+          :is="slot.element"
+          v-if="slot.element"
+          v-bind="slot.elementProps"
+          :key="name"
+          v-html="slot.innerHTML"
+        />
+      </template>
+    </component>
   </div>
 
 </template>
@@ -32,6 +44,10 @@
          * @type {Object} The props to be passed to the dynamically rendered component.
          */
         componentProps: {},
+        /**
+         * @type {Object} The slots to be passed to the dynamically rendered component.
+         */
+        slots: {},
       };
     },
 
@@ -53,12 +69,13 @@
     methods: {
       /**
        * Handles messages received from the test runner to render a specified component.
-       * @param {MessageEvent} event - The message event containing the component and its props.
+       * @param {MessageEvent} event -  The message event containing the component and its props.
        */
       handleMessage(event) {
         if (event.data.type === 'RENDER_COMPONENT') {
           this.component = event.data.component;
           this.componentProps = event.data.props;
+          this.slots = event.data.slots || {};
         }
       },
     },
