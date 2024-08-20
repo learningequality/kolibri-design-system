@@ -85,7 +85,7 @@
         <KTable
           :headers="headers"
           :rows="rows"
-          caption="Local Sorting Table"
+          caption="Table with built-in sorting"
           :useLocalSorting="true"
           sortable
         >
