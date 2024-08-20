@@ -3,7 +3,13 @@
   <DocsPageTemplate apiDocs>
     <DocsPageSection title="Overview" anchor="#overview">
       <p>
-        The <code>KTable</code> component is a flexible and customizable table component designed to handle a variety of data presentation needs within our application. It supports advanced features such as local sorting, sticky headers, keyboard navigation, and dynamic column resizing, making it suitable for both simple and complex data tables. 
+        The <code>KTable</code> component is an accessible and customizable table component designed to handle a variety of data presentation needs. The component is suitable for both simple and complex data tables. It offers:
+        <ul>
+          <li>Built-in sorting as well as integration with externally sorted data</li>
+          <li>Keyboard navigation</li>
+          <li>Dynamic column resizing</li>
+          <li>Sticky headers</li>
+        </ul>
       </p>
     </DocsPageSection>
     <DocsPageSection title="Usage" anchor="#usage">
