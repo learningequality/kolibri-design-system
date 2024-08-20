@@ -62,7 +62,7 @@
         <KTable
           :headers="headers"
           :rows="rows"
-          caption="Non Sortable Table"
+          caption="Non-sortable table"
           :sortable="false"
         >
           <template #header="{ header, index }">
