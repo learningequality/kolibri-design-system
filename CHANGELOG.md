@@ -4,7 +4,18 @@ Changelog is rather internal in nature. See release notes for the public overvie
 
 ## Upcoming version 5.x.x (`develop` branch)
 
-   [#705]
+- [#738]
+  - **Description:** Bump KDS version to 5.0.0-rc2.
+  - **Products impact:** -.
+  - **Addresses:** -.
+  - **Components:** -.
+  - **Breaking:** -.
+  - **Impacts a11y:** -.
+  - **Guidance:** -.
+
+[#738]: https://github.com/learningequality/kolibri-design-system/pull/738
+
+- [705]
   - **Description:**  Update`KCard`  updates: Adds 'preserveAboveTitle`, `preserveBelowTitle`, `preserveFooter` prop for flexible  slot management.
   - **Products impact:**  Card updates 
   - **Addresses:** https://github.com/learningequality/kolibri-design-system/issues/702
@@ -12,7 +23,8 @@ Changelog is rather internal in nature. See release notes for the public overvie
   - **Breaking:** N0
   - **Impacts a11y:** No
   - **Guidance:**
- [#705] https://github.com/learningequality/kolibri-design-system/pull/705
+
+[705]: https://github.com/learningequality/kolibri-design-system/pull/705
 
 - [719]
   - **Description:** Removes KResponsiveWindowMixin.
@@ -46,7 +58,8 @@ Changelog is rather internal in nature. See release notes for the public overvie
   - **Guidance:** Find all polite and live regions (or roles) in an application. Remove them and instead use `useKLiveRegion.sendPoliteMessage` and `useKLiveRegion.sendAssertiveMessage` to update the live regions that KDS inserted to document body during installation.
 
 [#687]: https://github.com/learningequality/kolibri-design-system/pull/687
- [#688]
+
+- [#688]
   - **Description:**  Update`KCard` styling 
   - **Products impact:**  Card updates 
   - **Addresses:** 
@@ -54,9 +67,10 @@ Changelog is rather internal in nature. See release notes for the public overvie
   - **Breaking:** N0
   - **Impacts a11y:** No
   - **Guidance:**
- [#688] https://github.com/learningequality/kolibri-design-system/pull/688
 
-[#707]
+[#688]: https://github.com/learningequality/kolibri-design-system/pull/688
+
+- [#707]
   - **Description:** Card Validations
   - **Products impact:**  
   - **Addresses:** [#695](https://github.com/learningequality/kolibri-design-system/issues/695)
@@ -64,9 +78,10 @@ Changelog is rather internal in nature. See release notes for the public overvie
   - **Breaking:** No
   - **Impacts a11y:**  No
   - **Guidance:**
- [#707] https://github.com/learningequality/kolibri-design-system/pull/707
 
- [#706]
+[#707]: https://github.com/learningequality/kolibri-design-system/pull/707
+
+- [#706]
   - **Description:** Add new alignment options to `KCard` 
   - **Products impact:**  new alignment 
   - **Addresses:** [#701](https://github.com/learningequality/kolibri-design-system/issues/701)
@@ -74,10 +89,11 @@ Changelog is rather internal in nature. See release notes for the public overvie
   - **Breaking:** N0
   - **Impacts a11y:** No
   - **Guidance:**
+
 [#706]: https://github.com/learningequality/kolibri-design-system/pull/706
 
 
-[#709]
+- [#709]
   - **Description:**  Update spaces to the latest design`KCard` 
   - **Products impact:**  Card updates 
   - **Addresses:** [#704](https://github.com/learningequality/kolibri-design-system/issues/704)
@@ -85,9 +101,10 @@ Changelog is rather internal in nature. See release notes for the public overvie
   - **Breaking:** N0
   - **Impacts a11y:** No
   - **Guidance:**
- [#709] https://github.com/learningequality/kolibri-design-system/pull/709
 
-[#625]
+[#709]: https://github.com/learningequality/kolibri-design-system/pull/709
+
+- [#625]
   - **Description:** Initial implementation of `KCard` component
   - **Products impact:** New Component
   - **Addresses:** [#530](https://github.com/learningequality/kolibri-design-system/issues/530)
@@ -95,6 +112,7 @@ Changelog is rather internal in nature. See release notes for the public overvie
   - **Breaking:** No
   - **Impacts a11y:**  Yes
   - **Guidance:**
+
 [#625]: https://github.com/learningequality/kolibri-design-system/pull/625
 
 - [#678]
@@ -176,6 +194,28 @@ Changelog is rather internal in nature. See release notes for the public overvie
 
 ## Version 4.x.x (`release-v4` branch)
 
+
+- [#737]
+  - **Description:** Bump KDS version to 4.4.1.
+  - **Products impact:** -.
+  - **Addresses:** -.
+  - **Components:** -.
+  - **Breaking:** -.
+  - **Impacts a11y:** -.
+  - **Guidance:** -.
+
+[#737]: https://github.com/learningequality/kolibri-design-system/pull/737
+
+- [#717]
+  - **Description:** Fix ResizeOserver errors when KListWithOverflow resize very quickly.
+  - **Products impact:** bugfix.
+  - **Addresses:** Sentry error.
+  - **Components:** KListWithOverflow.
+  - **Breaking:** no.
+  - **Impacts a11y:** no.
+  - **Guidance:** -.
+
+[#717]: https://github.com/learningequality/kolibri-design-system/pull/717
 
 - [#680]
   - **Description:** Adds boolean `appendToRoot` prop to teleport the modal to the body element if true.
