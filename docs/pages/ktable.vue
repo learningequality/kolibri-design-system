@@ -14,7 +14,7 @@
     </DocsPageSection>
     <DocsPageSection title="Usage" anchor="#usage">
       <!--Non-Sortable Table-->
-      <h3>Table without Sorting functionality</h3>
+      <h3>Table without sorting functionality</h3>
       <p>
         This is an example to show how <code>KTable</code> can be used without any sorting functionality, for a simple table.
       </p>
