@@ -24,6 +24,15 @@ Changelog is rather internal in nature. See release notes for the public overvie
   - **Guidance:**
  [#688] https://github.com/learningequality/kolibri-design-system/pull/688
 
+[#728]
+  - **Description:** [add the description of your PR  here]
+  - **Products impact:**  None 
+  - **Addresses:** https://github.com/learningequality/kolibri-design-system/issues/726
+  - **Components:**  
+  - **Breaking:** N0
+  - **Impacts a11y:** No
+  - **Guidance:**
+  [#728]https://github.com/learningequality/kolibri-design-system/pull/728
 
 [#707]
   - **Description:** Card Validations
