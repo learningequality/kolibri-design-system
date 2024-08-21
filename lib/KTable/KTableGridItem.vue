@@ -58,7 +58,14 @@
         };
       },
       textAlign() {
-        return this.dataType === DATA_TYPE_NUMERIC ? 'right' : 'left';
+        const alignLtr = this.dataType === DATA_TYPE_NUMERIC ? 'right' : 'left';
+        if (this.isRtl && alignLtr === 'right') {
+          return 'left';
+        }
+        if (this.isRtl && alignLtr === 'left') {
+          return 'right';
+        }
+        return alignLtr;
       },
     },
     methods: {
