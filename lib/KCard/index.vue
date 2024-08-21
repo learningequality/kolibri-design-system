@@ -42,6 +42,7 @@
         </span>
       </div>
       <div
+        v-if="$slots.aboveTitle || preserveAboveTitle"
         data-test="aboveTitle"
         class="above-title"
       >
@@ -49,6 +50,7 @@
         <slot name="aboveTitle"></slot>
       </div>
       <div
+        v-if="$slots.belowTitle || preserveBelowTitle"
         data-test="belowTitle"
         class="below-title"
       >
@@ -56,6 +58,7 @@
         <slot name="belowTitle"></slot>
       </div>
       <div
+        v-if="$slots.footer || preserveFooter"
         data-test="footer"
         class="footer"
       >
@@ -194,6 +197,37 @@
         type: Number,
         required: false,
         default: 2,
+      },
+
+      /**
+       * When true, preserves the space for the aboveTitle slot even when it's empty.
+       * When false, removes the space entirely if the slot is empty.
+       * @type {Boolean}
+       * @default false
+       */
+      preserveAboveTitle: {
+        type: Boolean,
+        default: false,
+      },
+      /**
+       * When true, preserves the space for the belowTitle slot even when it's empty.
+       * When false, removes the space entirely if the slot is empty.
+       * @type {Boolean}
+       * @default false
+       */
+      preserveBelowTitle: {
+        type: Boolean,
+        default: false,
+      },
+      /**
+       * When true, preserves the space for the footer slot even when it's empty.
+       * When false, removes the space entirely if the slot is empty.
+       * @type {Boolean}
+       * @default false
+       */
+      preserveFooter: {
+        type: Boolean,
+        default: false,
       },
     },
     computed: {
