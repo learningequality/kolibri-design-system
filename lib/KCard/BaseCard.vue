@@ -36,7 +36,10 @@
           class="base-card-title"
           :style="{ color: $themeTokens.text }"
         >
-          <slot v-if="$slots.title" name="title"></slot>
+          <slot 
+            v-if="$slots.title"
+            name="title"
+          ></slot>
           <KTextTruncator
             v-else
             :text="title"
