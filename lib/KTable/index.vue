@@ -28,7 +28,7 @@
             @click="sortable && header.dataType !== DATA_TYPE_OTHERS ? handleSort(index) : null"
             @keydown="handleKeydown($event, -1, index)"
           >
-            <!--@slot Scoped slot for customizing the content of each header cell. Receives the following slot props - `header`: The current header object & `index`: The index of the current header.-->
+            <!--@slot Scoped slot for customizing the content of each header cell. Provides a header object `header` and its column index `colIndex`.-->
 
             <slot name="header" :header="header" :index="index">
               {{ header.label }}
@@ -70,7 +70,7 @@
           >
             <template #default="slotProps">
 
-              <!-- @slot Scoped slot for customizing the content of each data cell. Receives the following slot props - `content`: The content of the current cell,`rowIndex`: The index of the current row & `colIndex`: The index of the current column.-->
+              <!--@slot Scoped slot for customizing the content of each data cell. Provides the content of a data cell `content`, its row index `rowIndex`, its column index `colIndex`, and the corresponding whole row object `row`.-->
               <slot name="cell" :content="slotProps.content" :rowIndex="rowIndex" :colIndex="colIndex" :row="row">
                 {{ slotProps.content }}
               </slot>
@@ -159,8 +159,7 @@
     /* eslint-disable kolibri/vue-no-unused-properties */
     props: {
       /**
-       * An array of objects representing the headers of the table. Each header should have a label and a dataType.
-       * The dataType can be one of 'string', 'numeric', 'date', or 'others'. MinWidth and width are optional.
+       * An array of objects `{ label, dataType, minWidth, width }`representing the headers of the table. The `dataType` can be one of `'string'`, `'numeric'`, `'date'`, or `'others'`. `label` and `dataType` are required. `minWidth` and `width` are optional.
        */
       headers: {
         type: Array,
@@ -220,6 +219,15 @@
       },
     },
     methods: {
+      /**
+       * Takes care of
+       *  - keyboard navigation focus trap
+       *  - the arrow keys navigation flow
+       *  - the tab keys navigation flow
+       *  - access to focusable elements within a cell via tab and shift tab keys
+       *  - triggering sort on the enter key
+       *  - header highlight
+       */
       handleKeydown(event, rowIndex, colIndex) {
         const key = event.key;
         const totalRows = this.rows.length;
@@ -290,6 +298,7 @@
           case 'Tab':
             if (focusableElements.length > 0) {
               if (!event.shiftKey) {
+                // if navigating between more focusable elements within the cell
                 if (focusedElementIndex < focusableElements.length - 1) {
                   focusableElements[focusedElementIndex + 1].focus();
                   event.preventDefault();
@@ -307,6 +316,7 @@
                 }
               } else {
                 if (focusedElementIndex < focusableElements.length - 1) {
+                  // if navigating between more focusable elements within the cell
                   focusableElements[focusedElementIndex + 1].focus();
                   event.preventDefault();
                   return;
@@ -345,11 +355,7 @@
                 }
               }
             }
-            this.focusCell(nextRowIndex, nextColIndex, true);
-            this.focusedRowIndex = nextRowIndex === -1 ? null : nextRowIndex;
-            this.focusedColIndex = nextColIndex;
-            this.highlightHeader(nextColIndex);
-            event.preventDefault(); // Prevent default Tab behavior within the table
+
             break;
 
           default:

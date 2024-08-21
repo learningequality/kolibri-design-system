@@ -63,12 +63,11 @@
     },
     methods: {
       onKeydown(event) {
-        // Ensures that clickable elements within a table cell, such as buttons and links, can be clicked with ENTER key. 
+        // Ensures that clickable elements within a table cell, such as buttons and links, can be clicked with ENTER key.
         const focusedElement = event.target;
         if (
           event.key === 'Enter' &&
-          (focusedElement.tagName === 'BUTTON' ||
-            focusedElement.tagName === 'A')
+          (focusedElement.tagName === 'BUTTON' || focusedElement.tagName === 'A')
         ) {
           focusedElement.click();
         } else {
