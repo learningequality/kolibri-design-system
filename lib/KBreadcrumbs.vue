@@ -283,7 +283,7 @@
 
 
 <style lang="scss" scoped>
-  
+
   @import './styles/definitions';
   $crumb-max-width: 300px;
 

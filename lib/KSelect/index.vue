@@ -1066,6 +1066,7 @@
 
   .ui-select-dropdown {
     @extend %dropshadow-2dp;
+
     position: absolute;
     z-index: $z-index-dropdown;
     display: block;

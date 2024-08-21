@@ -181,7 +181,6 @@
 <style lang="scss" scoped>
 
   @import '~~/lib/styles/definitions';
-  
 
   .box {
     @extend %dropshadow-2dp;

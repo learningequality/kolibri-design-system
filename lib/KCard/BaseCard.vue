@@ -176,7 +176,7 @@
 
 
 <style lang="scss" scoped>
-  
+
   @import '../styles/definitions';
 
   .base-card {
