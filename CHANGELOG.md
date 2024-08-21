@@ -3,7 +3,14 @@
 Changelog is rather internal in nature. See release notes for the public overview and guidelines. Releases are recorded as git tags in the [Github releases](https://github.com/learningequality/kolibri-design-system/releases) page.
 
 ## Upcoming version 5.x.x (`develop` branch)
-
+-[736]
+- **Description:** this pull request replaces the `dropshadows` component of the files according to the latest guidelines
+- **Products impact:** none
+- **Addresses:** https://github.com/learningequality/kolibri-design-system/issues/724 
+- **Components:** -
+- **Breaking:** no
+- **Impacts a11y:** no
+- **Guidance:** -
 
 
 - [719]
