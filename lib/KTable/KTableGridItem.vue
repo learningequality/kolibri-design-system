@@ -18,7 +18,7 @@
 
 <script>
 
-  import { DATA_TYPE_NUMERIC } from '../composables/useSorting';
+  import { DATA_TYPE_NUMERIC } from './useSorting';
 
   export default {
     name: 'KTableGridItem',

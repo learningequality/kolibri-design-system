@@ -87,11 +87,7 @@
 <script>
 
   import { ref, computed, watch } from '@vue/composition-api';
-  import useSorting, {
-    SORT_ORDER_ASC,
-    SORT_ORDER_DESC,
-    DATA_TYPE_OTHERS,
-  } from '../composables/useSorting';
+  import useSorting, { SORT_ORDER_ASC, SORT_ORDER_DESC, DATA_TYPE_OTHERS } from './useSorting';
   import KTableGridItem from './KTableGridItem.vue';
 
   export default {
