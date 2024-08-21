@@ -4,37 +4,8 @@
 
     <DocsPageSection title="Overview" anchor="#overview">
       <p>
-        Allows movement between radio buttons inside a radio group using arrow keys in FireFox.
+        Ensures <code>KRadioButton</code> groups are accessible in all supported browsers. Refer to <DocsLibraryLink component="KRadioButton" /> for more.
       </p>
-      <DocsShow>
-        <KRadioButtonGroup>
-          <KRadioButton
-            v-model="exampleValue"
-            label="Option A"
-            value="val-a"
-          />
-          <KRadioButton
-            v-model="exampleValue"
-            label="Option B"
-            value="val-b"
-          />
-          <KRadioButton
-            v-model="exampleValue"
-            label="Option C"
-            description="This one is special!"
-            buttonValue="val-c"
-          />
-          <KRadioButton
-            v-model="exampleValue"
-            label="Truncated label. Adjusting your browser window size to see this in action."
-            buttonValue="val-d"
-            truncateLabel
-          />
-        </KRadioButtonGroup>
-        <p>
-          Current value: {{ exampleValue }}
-        </p>
-      </DocsShow>
     </DocsPageSection>
 
   </DocsPageTemplate>

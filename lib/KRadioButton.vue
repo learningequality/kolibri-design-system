@@ -72,7 +72,9 @@
   };
 
   /**
-   * Used to display all options
+   * Used to display radio buttons.
+   *
+   * To be used within `KRadioButtonGroup`.
    */
   export default {
     name: 'KRadioButton',

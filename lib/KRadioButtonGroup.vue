@@ -1,7 +1,7 @@
 <template>
 
   <div class="k-radio-button-group">
-    <!-- @slot To render the KRadioButtons -->
+    <!-- @slot For `KRadioButton`s -->
     <slot></slot>
   </div>
 
@@ -10,6 +10,15 @@
 
 <script>
 
+  /**
+   * Supposed to wrap a `KRadioButton` group.
+   *
+   * Ensures radio button groups are accessible
+   * in all supported browsers by:
+   *   - Allows movement between radio buttons inside
+   *     a radio group using arrow keys in Firefox
+   *     (https://github.com/learningequality/kolibri/issues/10491)
+   */
   export default {
     name: 'KRadioButtonGroup',
     data() {
