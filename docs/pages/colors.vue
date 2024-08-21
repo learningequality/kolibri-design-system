@@ -97,10 +97,18 @@
       <p>You can apply darken utilities <code>$darken1</code>, <code>$darken2</code>, and <code>$darken3</code> to palette colors and tokens to achieve their darker shades. They are available on every Vue component.</p>
 
       <DocsShowCode language="html">
-        <div :style="{ backgroundColor: $themePalette.red.v_1100 }"></div>
-        <div :style="{ backgroundColor: $darken1($themePalette.red.v_1100) }"></div>
-        <div :style="{ backgroundColor: $darken2($themePalette.red.v_1100) }"></div>
-        <div :style="{ backgroundColor: $darken3($themePalette.red.v_1100) }"></div>
+        <div :style="{ backgroundColor: $themePalette.red.v_1100 }">
+          base
+        </div>
+        <div :style="{ backgroundColor: $darken1($themePalette.red.v_1100) }">
+          $darken1
+        </div>
+        <div :style="{ backgroundColor: $darken2($themePalette.red.v_1100) }">
+          $darken2
+        </div>
+        <div :style="{ backgroundColor: $darken3($themePalette.red.v_1100) }">
+          $darken3
+        </div>
       </DocsShowCode>
       <DocsShow>
         <div class="darken-block" :style="{ backgroundColor: $themePalette.red.v_1100 }">
