@@ -92,7 +92,40 @@
         <li><code>palette</code> refers to <code>$themePalette</code></li>
       </ul>
 
+      <h3>Darken utilities</h3>
 
+      <p>You can apply darken utilities <code>$darken1</code>, <code>$darken2</code>, and <code>$darken3</code> to palette colors and tokens to achieve their darker shades. They are available on every Vue component.</p>
+
+      <DocsShowCode language="html">
+        <div :style="{ backgroundColor: $themePalette.red.v_1100 }">
+          base
+        </div>
+        <div :style="{ backgroundColor: $darken1($themePalette.red.v_1100) }">
+          $darken1
+        </div>
+        <div :style="{ backgroundColor: $darken2($themePalette.red.v_1100) }">
+          $darken2
+        </div>
+        <div :style="{ backgroundColor: $darken3($themePalette.red.v_1100) }">
+          $darken3
+        </div>
+      </DocsShowCode>
+      <DocsShow>
+        <div class="darken-block" :style="{ backgroundColor: $themePalette.red.v_1100 }">
+          <code>base</code>
+        </div>
+        <div class="darken-block" :style="{ backgroundColor: $darken1($themePalette.red.v_1100) }">
+          <code>$darken1</code>
+        </div>
+        <div class="darken-block" :style="{ backgroundColor: $darken2($themePalette.red.v_1100) }">
+          <code>$darken2</code>
+        </div>
+        <div class="darken-block" :style="{ backgroundColor: $darken3($themePalette.red.v_1100) }">
+          <code>$darken3</code>
+        </div>
+      </DocsShow>
+
+      <p>These utilities shouldn't be overused. Always check if there is a shade in the palette available that can be used instead.</p>
     </DocsPageSection>
 
 
@@ -321,6 +354,19 @@
   .palette-block {
     display: inline-block;
     width: 350px;
+  }
+
+  .darken-block {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 140px;
+    height: 140px;
+
+    code {
+      padding: 4px;
+      background-color: rgba(255, 255, 255, 0.8);
+    }
   }
 
 </style>

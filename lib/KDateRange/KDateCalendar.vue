@@ -157,8 +157,9 @@
         },
         numOfDays: 7,
         isFirstChoice: this.selectedStartDate == null ? true : false,
-        activeMonth: new Date().getMonth() - 1 == -1 ? 11 : new Date().getMonth() - 1,
-        activeYearStart: new Date().getFullYear(),
+        activeMonth:
+          this.lastAllowedDate.getMonth() - 1 == -1 ? 11 : this.lastAllowedDate.getMonth() - 1,
+        activeYearStart: this.lastAllowedDate.getFullYear(),
       };
     },
     computed: {
