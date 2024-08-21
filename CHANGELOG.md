@@ -4,6 +4,28 @@ Changelog is rather internal in nature. See release notes for the public overvie
 
 ## Upcoming version 5.x.x (`develop` branch)
 
+- [#723]
+  - **Description:** Updates $core-time value from 0.25s to 0.15s
+  - **Products impact:** User experience - faster transitions
+  - **Addresses:** Updates KDS to the latest guidance from the design team
+  - **Components:** `KButton`, `KExternalLink`, `KRouterLink`, `KModal`, `KCard`, `KIcon`, `KTabsList`, `KTabs`, and places in consumers that imports `$core-time`
+  - **Breaking:** no
+  - **Impacts a11y:** no
+  - **Guidance:** -
+
+[#723]: https://github.com/learningequality/kolibri-design-system/pull/723
+
+
+- [#723]
+  - **Description:** Updates drop shadows documentation to the latest guidance from the design team
+  - **Products impact:** -
+  - **Addresses:** Updates KDS to the latest guidance from the design team
+  - **Components:** -
+  - **Breaking:** no
+  - **Impacts a11y:** no
+  - **Guidance:** -
+
+[#723]: https://github.com/learningequality/kolibri-design-system/pull/723
 - [#728]
   - **Description:** Adds `$darken_` utility functions for darkening palette colors and ensures compatibility with Node.js v10 by pinning the `color` package version to `3.2.1`.
   - **Products impact:** Kolibri Design System
