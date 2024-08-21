@@ -69,6 +69,7 @@ KDS has a visual testing system that allows you to take snapshots of how KDS Com
        });
      });
      ```
+     Note that the `widths` parameter passed to the `takeSnaphot` function is a part of Percy CLI's snapshot options. For a full list of available options, refer the [Percy documentation](https://www.browserstack.com/docs/percy/take-percy-snapshots/snapshots-via-scripts#per-snapshot-configuration).
 
    - For rendering complex commponents, refer to the following:
 
