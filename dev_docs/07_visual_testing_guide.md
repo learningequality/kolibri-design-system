@@ -52,7 +52,7 @@ KDS has a visual testing system that allows you to take snapshots of how KDS Com
      import { renderComponent, takeSnapshot } from './visual.testUtils';
      ```
 
-     You can also import and use the utility functions for managing component's visual states as needed. Different utility functions available are:
+     You can import and use the utility functions for managing component's visual states as needed. Different utility functions available are:
 
       - `renderComponent(component, props, slots)`: Renders the specified component with given props and slots in the visual testing playground.
       - `takeSnapshot(name, options)`: Takes a Percy snapshot with the given name and options.
@@ -96,7 +96,10 @@ KDS has a visual testing system that allows you to take snapshots of how KDS Com
 
           This approach ensures that all necessary child components and slots are correctly set up and rendered.
 
-   - Make sure to use `describe.visual` or `it.visual` instead of the default notations for writing test blocks containing visual tests so as to prevent any unexpected behavior. These custom blocks add a [Visual] tag to the test name whose presence or absence are then checked using a regex pattern based on the type of tests executed. This implementation helps us to determine which test blocks should be executed by Jest and which ones should be skipped.
+   - Make sure to use `describe.visual` or `it.visual` instead of the default notations for writing test blocks containing visual tests so as to prevent any unexpected behavior. These custom blocks add a `[Visual]` tag to the test name whose presence or absence are then checked using a regex pattern based on the type of tests executed. 
+      - Anything inside these blocks will not be executed when running unit tests. The default `describe` and `it` blocks can be used inside a parent `describe.visual` block, which itelf can be placed within a `describe` block as its parent (as `describe` blocks just group the tests placed within them). 
+      - In simple terms, any test block with a `[Visual]` tag will be executed when running visual tests, regardless of the type of test blocks used within it, and will be ignored when running unit tests. Using `describe.visual` or `it.visual` automatically appends this tag to the test name.
+      - This implementation helps determine which test blocks should be executed by Jest and which ones should be skipped.
 
 3. **Simulate User Interactions**:
    - Use the custom commands to simulate user interactions. For example, to simulate the *'click'* user event, you can do something like:
