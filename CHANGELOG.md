@@ -16,6 +16,18 @@ Changelog is rather internal in nature. See release notes for the public overvie
   - **Guidance:**
 [#727] https://github.com/learningequality/kolibri-design-system/pull/727
 
+- [#728]
+  - **Description:** Adds `$darken_` utility functions for darkening palette colors and ensures compatibility with Node.js v10 by pinning the `color` package version to `3.2.1`.
+  - **Products impact:** Kolibri Design System
+  - **Addresses:** https://github.com/learningequality/kolibri-design-system/issues/726
+  - **Components:** Styling utilities (`$darken1(hexColorValue)`,`$darken2(hexColorValue)` and `$darken3(hexColorValue)` functions)
+  - **Breaking:** no
+  - **Impacts a11y:** no
+  - **Guidance:** Ensure to install the exact `color` version specified in `package.json` to maintain compatibility with Node.js v10.
+
+[#728]: https://github.com/learningequality/kolibri-design-system/pull/728
+
+
 - [#738]
   - **Description:** Bump KDS version to 5.0.0-rc2.
   - **Products impact:** -.
