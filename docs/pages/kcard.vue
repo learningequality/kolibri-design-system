@@ -24,6 +24,7 @@
             :headingLevel="2"
             layout="horizontal"
             thumbnailDisplay="large"
+            thumbnailAlign="right"
             :thumbnailSrc="require('../assets/hummingbird CC BY-SA 4.0.jpg')"
           >
             <template #title>
@@ -71,6 +72,73 @@
                     Short Activity
                   </span>
                 </div>  
+              </div>
+            </template>
+          </kcard>
+        </div>
+      </DocsShow>
+      <p>
+        In this layout, the thumbnail image can displayed on either left or right side of the card using
+        the <DocsInternalLink href="/kcard#prop:thumbnailAlign">
+          <code>thumbnailAlign</code>
+        </DocsInternalLink> prop.
+      </p>
+      <p> Here's an example of usage of the thumbnailAlign: </p>
+      <DocsShow block>
+        <div>
+          <KCard
+            :to="{ name: 'kcard' }"
+            :headingLevel="2"
+            layout="horizontal"
+            thumbnailDisplay="large"
+            thumbnailAlign="left"
+            :thumbnailSrc="require('../assets/hummingbird CC BY-SA 4.0.jpg')"
+          >
+            <template #title>
+              <div>
+                <KTextTruncator
+                  text="This is a sample resource title that goes to three lines and truncates at the end of the three lines This is a sample title that goes"
+                  :maxLines="2"
+                />
+              </div>
+            </template>
+            <template #aboveTitle>
+              <KGrid>
+
+                <KGridItem
+                  :layout12="{ span: 9 }"
+                  :layout8="{ span: 6 }"
+                >
+                  <span><KIcon icon="readSolid" class="icon-size" /></span>
+                  <span
+                    :style="{ 'color': $themePalette.grey.v_400,
+                              'font-size': '1.2em' }"
+                  >Rutrum pellentesque utrum...</span>
+                </KGridItem>
+
+                <KGridItem
+                  :layout12="{ span: 3 }"
+                  :layout8="{ span: 2 }"
+                >
+                  <div style="float:right">
+                    <KIcon icon="infoOutline" class="icon-size" />
+                  </div>
+                </KGridItem>
+              </KGrid>
+            </template>
+            <template #footer>
+              <div>
+                <div class="footer-top-header">
+                  <span>
+                    <KIcon icon="practiceSolid" class="icon-size" />
+                    Practice
+                  </span>
+                  <span
+                    :style="{ 'background-color': $themePalette.grey.v_100 , 'padding': '2px' }"
+                  >
+                    Short Activity
+                  </span>
+                </div>
               </div>
             </template>
           </kcard>
