@@ -23,6 +23,7 @@
                      { backgroundColor: $themePalette.white } ,
                      focusedColIndex === index ? { backgroundColor: $themePalette.grey.v_50 } : {}]"
             role="columnheader"
+            data-focus="true"
             :aria-colindex="index + 1"
             @click="sortable && header.dataType !== DATA_TYPE_OTHERS ? handleSort(index) : null"
             @keydown="handleKeydown($event, -1, index)"
@@ -62,6 +63,7 @@
             }"
             :style="[colIndex === 0 ? { backgroundColor: $themePalette.white } : {},(hoveredRowIndex === rowIndex || focusedRowIndex === rowIndex) && colIndex === 0 ? { backgroundColor: $themePalette.grey.v_50 } : {}
             ]"
+            data-focus="true"
             role="gridcell"
             :aria-colindex="colIndex + 1"
             @keydown="handleKeydown($event, rowIndex, colIndex)"

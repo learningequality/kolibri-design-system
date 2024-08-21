@@ -4,6 +4,7 @@
     :class="$computedClass(coreOutlineFocus)"
     :style="{ textAlign: textAlign, minWidth: minWidth, width: width }"
     tabindex="0"
+    data-focus="true"
     role="gridcell"
     @keydown="onKeydown"
   >
