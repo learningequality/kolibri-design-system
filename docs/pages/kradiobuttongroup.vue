@@ -11,16 +11,3 @@
   </DocsPageTemplate>
 
 </template>
-
-
-<script>
-
-  export default {
-    data() {
-      return {
-        exampleValue: 'val-b',
-      };
-    },
-  };
-
-</script>

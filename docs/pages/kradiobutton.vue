@@ -8,33 +8,6 @@
     </DocsPageSection>
 
     <DocsPageSection title="Usage" anchor="#usage">
-      <DocsShowCode lang="html">
-        <KRadioButtonGroup>
-          <KRadioButton
-            v-model="exampleValue"
-            label="Option A"
-            value="val-a"
-          />
-          <KRadioButton
-            v-model="exampleValue"
-            label="Option B"
-            value="val-b"
-          />
-          <KRadioButton
-            v-model="exampleValue"
-            label="Option C"
-            description="This one is special!"
-            buttonValue="val-c"
-          />
-          <KRadioButton
-            v-model="exampleValue"
-            label="Truncated label. Adjusting your browser window size to see this in action."
-            buttonValue="val-d"
-            truncateLabel
-          />
-        </KRadioButtonGroup>
-      </DocsShowCode>
-
       <DocsShow>
         <KRadioButtonGroup>
           <KRadioButton
@@ -65,7 +38,32 @@
         </p>
       </DocsShow>
 
-      </docsshowcode>
+      <DocsShowCode lang="html">
+        <KRadioButtonGroup>
+          <KRadioButton
+            v-model="exampleValue"
+            label="Option A"
+            value="val-a"
+          />
+          <KRadioButton
+            v-model="exampleValue"
+            label="Option B"
+            value="val-b"
+          />
+          <KRadioButton
+            v-model="exampleValue"
+            label="Option C"
+            description="This one is special!"
+            buttonValue="val-c"
+          />
+          <KRadioButton
+            v-model="exampleValue"
+            label="Truncated label. Adjusting your browser window size to see this in action."
+            buttonValue="val-d"
+            truncateLabel
+          />
+        </KRadioButtonGroup>
+      </DocsShowCode>
     </DocsPageSection>
 
     <DocsPageSection title="Layout" anchor="#layout">
