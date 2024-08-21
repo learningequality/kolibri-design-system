@@ -13,12 +13,12 @@
           <KRadioButton
             v-model="exampleValue"
             label="Option A"
-            value="val-a"
+            buttonValue="val-a"
           />
           <KRadioButton
             v-model="exampleValue"
             label="Option B"
-            value="val-b"
+            buttonValue="val-b"
           />
           <KRadioButton
             v-model="exampleValue"
@@ -38,17 +38,17 @@
         </p>
       </DocsShow>
 
-      <DocsShowCode lang="html">
+      <DocsShowCode language="html">
         <KRadioButtonGroup>
           <KRadioButton
             v-model="exampleValue"
             label="Option A"
-            value="val-a"
+            buttonValue="val-a"
           />
           <KRadioButton
             v-model="exampleValue"
             label="Option B"
-            value="val-b"
+            butonValue="val-b"
           />
           <KRadioButton
             v-model="exampleValue"
@@ -62,6 +62,81 @@
             buttonValue="val-d"
             truncateLabel
           />
+        </KRadioButtonGroup>
+      </DocsShowCode>
+
+      <h3>With grid layout</h3>
+
+      <p>It is possible to use radio buttons together with grid layout components such as <DocsLibraryLink component="KGrid" /> or <DocsLibraryLink component="KFixedGrid" />. For example: </p>
+
+      <DocsShow>
+
+        <KRadioButtonGroup>
+          <KFixedGrid :numCols="2">
+            <KFixedGridItem :span="1">
+              <KRadioButton
+                v-model="exampleValue"
+                label="Option A"
+                buttonValue="val-a"
+              />
+              <KRadioButton
+                v-model="exampleValue"
+                label="Option B"
+                buttonValue="val-b"
+              />
+            </KFixedGridItem>
+            <KFixedGridItem :span="1">
+              <KRadioButton
+                v-model="exampleValue"
+                label="Option C"
+                description="This one is special!"
+                buttonValue="val-c"
+              />
+              <KRadioButton
+                v-model="exampleValue"
+                label="Truncated label. Adjusting your browser window size to see this in action."
+                buttonValue="val-d"
+                truncateLabel
+              />
+            </KFixedGridItem>
+          </KFixedGrid>
+        </KRadioButtonGroup>
+
+        <p>
+          Current value: {{ exampleValue }}
+        </p>
+      </DocsShow>
+
+      <DocsShowCode language="html">
+        <KRadioButtonGroup>
+          <KFixedGrid :numCols="2">
+            <KFixedGridItem :span="1">
+              <KRadioButton
+                v-model="exampleValue"
+                label="Option A"
+                buttonValue="val-a"
+              />
+              <KRadioButton
+                v-model="exampleValue"
+                label="Option B"
+                buttonValue="val-b"
+              />
+            </KFixedGridItem>
+            <KFixedGridItem :span="1">
+              <KRadioButton
+                v-model="exampleValue"
+                label="Option C"
+                description="This one is special!"
+                buttonValue="val-c"
+              />
+              <KRadioButton
+                v-model="exampleValue"
+                label="Truncated label. Adjusting your browser window size to see this in action."
+                buttonValue="val-d"
+                truncateLabel
+              />
+            </KFixedGridItem>
+          </KFixedGrid>
         </KRadioButtonGroup>
       </DocsShowCode>
     </DocsPageSection>
