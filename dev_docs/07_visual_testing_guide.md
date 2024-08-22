@@ -4,7 +4,7 @@ KDS has a visual testing system that allows you to take snapshots of how KDS Com
 
 ## Prerequisites
 
-- Make sure that your Node version is > 18.x with all the requirements (listed in package.json) installed.
+- Make sure that your Node version is >= 18.x with all the requirements (listed in package.json) installed.
 - Ensure that you declare the `PERCY_TOKEN` environment variable when running visual tests locally.
 - You should not have anything running on `port:4000` as the visual testing server utilizes that port to run the tests.
 
