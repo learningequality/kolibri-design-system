@@ -16,7 +16,7 @@
       <!--Non-Sortable Table-->
       <h3>Table without sorting functionality</h3>
       <p>
-        This is an example to show how <code>KTable</code> can be used without any sorting functionality, for a simple table.
+        This is an example to show how <code>KTable</code> can be used without any sorting functionality, for a simple table. Use of slots is optional.
       </p>
       <!-- eslint-disable -->
       <DocsShowCode language="html">
@@ -78,7 +78,7 @@
       <!-- Frontend Sorting Example-->
       <h3>Table with Frontend Sorting</h3>
       <p>
-        The <code>KTable</code> can be used with local sorting functionality, allowing you to sort data on the client side without the need for server requests. This example demonstrates a table with local sorting enabled.
+        The <code>KTable</code> can be used with local sorting functionality, allowing you to sort data on the client side without the need for server requests. There are 4 permissible data types - <code>string</code>,<code>numeric</code>,<code>date</code> and <code>others</code>. Columns declared with <code>others</code> data type are not sortable. This example demonstrates a table with local sorting enabled.
       </p>
       <!-- eslint-disable -->
       <DocsShowCode language="html">
@@ -88,16 +88,7 @@
           caption="Table with built-in sorting"
           :useLocalSorting="true"
           sortable
-        >
-
-          <template #header="{ header, index }">
-            <span>{ header.label } (Backend)</span>
-          </template>
-          <template #cell="{ content, rowIndex, colIndex }">
-            <span v-if="colIndex === 2">{ content } (City)</span>
-            <span v-else>{ content }</span>
-          </template>
-        </KTable>
+        />
 
       </DocsShowCode>
 
@@ -127,15 +118,7 @@
           caption="Local Sorting Table"
           :useLocalSorting="true"
           sortable
-        >
-          <template #header="{ header, index }">
-            <span>{{ header.label }} (Backend)</span>
-          </template>
-          <template #cell="{ content, rowIndex, colIndex }">
-            <span v-if="colIndex === 2">{{ content }} (City)</span>
-            <span v-else>{{ content }}</span>
-          </template>
-        </KTable>
+        />
           <!-- eslint-enable -->
       </DocsShow>
 
