@@ -45,7 +45,7 @@
         <tr
           v-for="(row, rowIndex) in finalRows"
           :key="rowIndex"
-          :style="hoveredRowIndex === rowIndex || focusedRowIndex === rowIndex ? { backgroundColor: $themePalette.grey.v_50 } : {}"
+          :style="getRowStyle(rowIndex)"
           @mouseover="handleRowMouseOver(rowIndex)"
           @mouseleave="handleRowMouseLeave"
         >
@@ -61,8 +61,7 @@
             :class="{
               'sticky-column': colIndex === 0,
             }"
-            :style="[colIndex === 0 ? { backgroundColor: $themePalette.white } : {},(hoveredRowIndex === rowIndex || focusedRowIndex === rowIndex) && colIndex === 0 ? { backgroundColor: $themePalette.grey.v_50 } : {}
-            ]"
+            :style="getCellStyle(rowIndex, colIndex)"
             data-focus="true"
             role="gridcell"
             :aria-colindex="colIndex + 1"
@@ -215,6 +214,28 @@
             ...this.$coreOutline,
             outlineOffset: '-2px',
           },
+        };
+      },
+      getRowStyle() {
+        return rowIndex => {
+          return this.hoveredRowIndex === rowIndex || this.focusedRowIndex === rowIndex
+            ? { backgroundColor: this.$themePalette.grey.v_50 }
+            : {};
+        };
+      },
+      getCellStyle() {
+        return (rowIndex, colIndex) => {
+          const styles = [];
+          if (colIndex === 0) {
+            styles.push({ backgroundColor: this.$themePalette.white });
+          }
+          if (
+            (this.hoveredRowIndex === rowIndex || this.focusedRowIndex === rowIndex) &&
+            colIndex === 0
+          ) {
+            styles.push({ backgroundColor: this.$themePalette.grey.v_50 });
+          }
+          return styles;
         };
       },
     },
