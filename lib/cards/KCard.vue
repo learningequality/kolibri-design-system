@@ -1,6 +1,7 @@
 <template>
 
   <BaseCard
+    ref="baseCard"
     :to="to"
     :title="title"
     :headingLevel="headingLevel"
@@ -362,6 +363,16 @@
         }
         return {};
       },
+    },
+    mounted() {
+      // TODO: Cover with a test or two since this is quite a specific
+      // way that will cover all that is needed, compared to other possible
+      // implementations (e.g. needs to fail on <ul><div><li> etc.)
+      this.$nextTick(() => {
+        if (this.$refs.baseCard.$el.parentElement.tagName !== 'UL') {
+          console.error('[KCard] KCard (<li>) needs to be a direct child of KCardGrid (<ul>).');
+        }
+      });
     },
   };
 
