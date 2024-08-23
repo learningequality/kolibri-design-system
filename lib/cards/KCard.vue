@@ -73,7 +73,7 @@
 
 <script>
 
-  import BaseCard from './BaseCard.vue';
+  import BaseCard from './BaseCard';
 
   const Layouts = {
     HORIZONTAL: 'horizontal',
