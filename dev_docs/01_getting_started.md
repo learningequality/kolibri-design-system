@@ -52,6 +52,7 @@ You're now ready to code!
 - If you'd like to update the component library, continue to [How to update the component library](./03_how_to_update_library.md).
 
 The guidelines referenced above should be sufficient for the most common tasks. There are a few additional developer documentation pages available. However, these pages contain information that is more internal in nature or related to specialized tasks:
+- [Visual Testing](./07_visual_testing_guide.md)
 - [How to update the documentation website](./04_how_to_update_docs.md)
 - [Icons](./05_icons.md)
 - [Miscellaneous](./06_misc.md)
