@@ -16,7 +16,7 @@
     </template>
     <template #default>
       <div
-        v-if="thumbnailDisplay !== Thumbnail_Displays.NONE"
+        v-if="thumbnailDisplay !== ThumbnailDisplays.NONE"
         class="thumbnail"
       >
         <!-- 
@@ -87,13 +87,13 @@
     VERTICAL: 'vertical',
   };
 
-  const Thumbnail_Displays = {
+  const ThumbnailDisplays = {
     NONE: 'none',
     SMALL: 'small',
     LARGE: 'large',
   };
 
-  const thumbnailAlignOptions = {
+  const ThumbnailAlignOptions = {
     LEFT: 'left',
     RIGHT: 'right',
   };
@@ -166,7 +166,7 @@
       thumbnailDisplay: {
         type: String,
         default: 'none',
-        validator: cardValidator(Thumbnail_Displays, 'thumbnailDisplay'),
+        validator: cardValidator(ThumbnailDisplays, 'thumbnailDisplay'),
       },
       /**
        * Sets the thumbnail path.
@@ -201,7 +201,7 @@
       thumbnailAlign: {
         type: String,
         default: 'left',
-        validator: cardValidator(thumbnailAlignOptions, 'thumbnailAlign'),
+        validator: cardValidator(ThumbnailAlignOptions, 'thumbnailAlign'),
       },
       /**
        * Specifies the number of lines allowed for the title before truncation occurs.
@@ -247,7 +247,7 @@
     },
     data() {
       return {
-        Thumbnail_Displays,
+        ThumbnailDisplays,
       };
     },
     computed: {
