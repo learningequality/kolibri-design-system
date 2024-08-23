@@ -150,9 +150,6 @@
       /**
        * Controls card orientation. Required and cannot be empty.
        * Expected Options: 'horizontal' (default) or 'vertical'.
-       *
-       * @param {String} value - The layout value.
-       * @returns {Boolean} - True if the value is not empty, false otherwise.
        */
       layout: {
         type: String,
@@ -171,9 +168,6 @@
       /**
        * Sets the thumbnail path.
        * Defaults to null if not provided.
-       *
-       * @type {String}
-       * @default null
        * */
       thumbnailSrc: {
         type: String,
@@ -183,8 +177,6 @@
       /**
        * Specifies how the thumbnail scales in the card.
        * Options: 'centerInside', 'contain', 'fitXY'.
-       * @type {String}
-       * @default 'centerInside'
        */
       thumbnailScaleType: {
         type: String,
@@ -194,9 +186,6 @@
        * Controls the alignment of the thumbnail area in horizontal layouts.
        * Only applies to horizontal layouts with 'small' or 'large' thumbnail display.
        * Ignored in other layouts.
-       * @type {String}
-       * @values 'left', 'right'
-       * @default 'left'
        */
       thumbnailAlign: {
         type: String,
@@ -205,8 +194,6 @@
       },
       /**
        * Specifies the number of lines allowed for the title before truncation occurs.
-       * @type {number}
-       * @default 2
        */
       titleLines: {
         type: Number,
@@ -217,8 +204,6 @@
       /**
        * When true, preserves the space for the aboveTitle slot even when it's empty.
        * When false, removes the space entirely if the slot is empty.
-       * @type {Boolean}
-       * @default false
        */
       preserveAboveTitle: {
         type: Boolean,
@@ -227,8 +212,6 @@
       /**
        * When true, preserves the space for the belowTitle slot even when it's empty.
        * When false, removes the space entirely if the slot is empty.
-       * @type {Boolean}
-       * @default false
        */
       preserveBelowTitle: {
         type: Boolean,
@@ -237,8 +220,6 @@
       /**
        * When true, preserves the space for the footer slot even when it's empty.
        * When false, removes the space entirely if the slot is empty.
-       * @type {Boolean}
-       * @default false
        */
       preserveFooter: {
         type: Boolean,
