@@ -6,6 +6,7 @@
     :headingLevel="headingLevel"
     :titleLines="titleLines"
     :class="['k-card', rootClass, thumbnailAlignClass]"
+    :style="cardGridStyle"
     :headingStyles="headingStyles"
   >
     <template v-if="$slots.title" #title>
@@ -73,6 +74,8 @@
 
 <script>
 
+  import { inject } from '@vue/composition-api';
+
   import BaseCard from './BaseCard';
 
   const Layouts = {
@@ -107,6 +110,14 @@
   export default {
     name: 'KCard',
     components: { BaseCard },
+    setup() {
+      // provided by `KCardGrid`
+      const cardGridStyle = inject('cardGridStyle');
+
+      return {
+        cardGridStyle,
+      };
+    },
     props: {
       /**
        * Sets card title if provided. The title should be
@@ -362,12 +373,6 @@
   /* Needs to be the same as SPACER constant in JavaScript part */
   $spacer: 24px;
 
-  /*
-        Just couple of comments that are referenced from several places:
-        - (1) Intentionally fixed. Cards on the same row of a grid should have the same overall height and their sections too should have the same height so that information is placed consistently. As documented, consumers need to ensure that contents provided via slots fits well or is truncated.
-        - (2) Solves issues with fixed height in a flex item
-      */
-
   /************* Common styles **************/
 
   .k-card {
@@ -386,25 +391,17 @@
 
   .above-title {
     order: 2;
-    height: 24px; /* (1) */
-    min-height: 24px; /* (2) */
     margin: $spacer $spacer 0;
-    overflow: hidden; /* (1) */
   }
 
   .below-title {
     order: 4;
-    min-height: 26px; /* (2) */
     margin: 0 $spacer 0 $spacer;
-    overflow: hidden; /* (1) */
   }
 
   .footer {
     order: 5;
-    height: 58px; /* (1) */
-    min-height: 58px; /* (2) */
     margin: auto $spacer $spacer;
-    overflow: hidden; /* (1) */
   }
 
   .thumbnail-placeholder {
@@ -419,11 +416,9 @@
   /************* Layout-specific styles *************/
 
   .vertical-with-large-thumbnail {
-    height: 480px; /* (1) */
-
     .thumbnail {
       height: 45%;
-      min-height: 45%; /* (2) */
+      min-height: 45%; // solves issues with fixed height in a flex item
     }
   }
 
@@ -436,9 +431,9 @@
       margin: $spacer $spacer 0;
     }
   }
+
   .horizontal-with-large-thumbnail {
     position: relative;
-    height: 240px; /* (1) */
 
     .thumbnail {
       position: absolute;
@@ -480,8 +475,6 @@
   }
 
   .horizontal-with-small-thumbnail {
-    height: 220px; /* (1) */
-
     .thumbnail {
       position: absolute;
       top: $spacer;
