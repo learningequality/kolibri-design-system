@@ -380,6 +380,7 @@
     flex-direction: column;
     flex-wrap: nowrap;
     width: 100%;
+    padding-bottom: $spacer;
     font-size: 12px;
   }
 
@@ -400,7 +401,8 @@
 
   .footer {
     order: 5;
-    margin: auto $spacer $spacer;
+    padding-top: $spacer;
+    margin: auto $spacer 0 $spacer;
   }
 
   .thumbnail-placeholder {
