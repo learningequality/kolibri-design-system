@@ -25,7 +25,7 @@
             role="columnheader"
             data-focus="true"
             :aria-colindex="index + 1"
-            @click="sortable && header.dataType !== DATA_TYPE_OTHERS ? handleSort(index) : null"
+            @click="sortable ? handleSort(index) : null"
             @keydown="handleKeydown($event, -1, index)"
           >
             <!--@slot Scoped slot for customizing the content of each header cell. Provides a header object `header` and its column index `colIndex`.-->
