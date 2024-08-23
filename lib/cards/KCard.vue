@@ -376,7 +376,6 @@
   /************* Common styles **************/
 
   .k-card {
-    position: relative; /* basis for absolute positioning of thumbnail images */
     display: flex;
     flex-direction: column;
     flex-wrap: nowrap;
@@ -449,6 +448,7 @@
 
     &.thumbnail-align-left {
       align-items: flex-end;
+
       .thumbnail {
         left: 0;
       }
@@ -462,6 +462,7 @@
 
     &.thumbnail-align-right {
       align-items: flex-start;
+
       .thumbnail {
         right: 0;
       }
@@ -475,6 +476,8 @@
   }
 
   .horizontal-with-small-thumbnail {
+    position: relative;
+
     .thumbnail {
       position: absolute;
       top: $spacer;
@@ -493,6 +496,7 @@
 
     &.thumbnail-align-left {
       align-items: flex-end;
+
       .thumbnail {
         left: $spacer;
       }
@@ -500,6 +504,7 @@
 
     &.thumbnail-align-right {
       align-items: flex-start;
+
       .thumbnail {
         right: $spacer;
       }
