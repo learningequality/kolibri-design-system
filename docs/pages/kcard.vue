@@ -126,7 +126,7 @@
             :to="{ name: 'kcard' }"
             :headingLevel="2"
             layout="vertical"
-            thumbnailDisplay="small"
+            thumbnailDisplay="large"
             :thumbnailSrc="require('../assets/hummingbird CC BY-SA 4.0.jpg')"
           >
             <template #title>
