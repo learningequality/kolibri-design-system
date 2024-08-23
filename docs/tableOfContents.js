@@ -60,6 +60,7 @@ const textRelatedKeywords = ['text', 'area', 'field', 'box'];
 const layoutRelatedKeywords = ['grid', 'layout', 'container', 'page'];
 const tabsRelatedKeywords = ['tab', 'tabs', 'panel', 'tablist', 'tabpanel'];
 const compositionRelatedKeywords = ['composable', 'composition'];
+const cardRelatedKeywords = ['grid', 'card', 'cardgrid'];
 
 export default [
   new Section({
@@ -419,7 +420,13 @@ export default [
         path: '/kcard',
         title: 'KCard',
         isCode: true,
-        keywords: layoutRelatedKeywords,
+        keywords: cardRelatedKeywords,
+      }),
+      new Page({
+        path: '/kcardgrid',
+        title: 'KCardGrid',
+        isCode: true,
+        keywords: cardRelatedKeywords,
       }),
     ],
   }),
