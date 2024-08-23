@@ -6,7 +6,7 @@
     layout="vertical"
     :thumbnailDisplay="thumbnailDisplay"
     :thumbnailAlign="thumbnailAlign"
-    :thumbnailSrc="require('../../assets/hummingbird CC BY-SA 4.0.jpg')"
+    :thumbnailSrc="require('../../assets/hummingbird-small-cc-by-sa-4.jpg')"
     title="This is a sample resource title This is a sample resource title This is a sample resource title This is a sample resource title This is a sample resource title This is a sample resource title This is a sample resource title This is a sample resource title This is a sample resource title This is a sample resource title"
   >
     <template v-if="thumbnailDisplay !== 'none'" #aboveTitle>
