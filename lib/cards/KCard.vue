@@ -6,10 +6,14 @@
     :title="title"
     :headingLevel="headingLevel"
     :titleLines="titleLines"
-    :class="['k-card', rootClass, thumbnailAlignClass]"
-    :style="cardGridStyle"
+    :class="['k-card', rootClass, thumbnailAlignClass]"    
     :headingStyles="headingStyles"
   >
+    <template v-if="$slots.checkbox" #checkbox>
+      <!-- @slot Optional slot for KCheckbox -->
+      <slot name="checkbox"></slot>
+    </template>
+
     <template v-if="$slots.title" #title>
       <!-- @slot Optional slot section containing the title contents, should not contain a heading element. -->
       <slot name="title"></slot>
@@ -78,8 +82,6 @@
 
 <script>
 
-  import { inject } from '@vue/composition-api';
-
   import BaseCard from './BaseCard';
 
   const Layouts = {
@@ -114,14 +116,6 @@
   export default {
     name: 'KCard',
     components: { BaseCard },
-    setup() {
-      // provided by `KCardGrid`
-      const cardGridStyle = inject('cardGridStyle');
-
-      return {
-        cardGridStyle,
-      };
-    },
     props: {
       /**
        * Sets card title if provided. The title should be
@@ -244,6 +238,7 @@
       thumbnailStyles() {
         return this.stylesAndClasses.thumbnailStyles;
       },
+
       thumbnailAlignClass() {
         return this.stylesAndClasses.thumbnailAlignClass;
       },
@@ -352,16 +347,6 @@
         }
         return {};
       },
-    },
-    mounted() {
-      // TODO: Cover with a test or two since this is quite a specific
-      // way that will cover all that is needed, compared to other possible
-      // implementations (e.g. needs to fail on <ul><div><li> etc.)
-      this.$nextTick(() => {
-        if (this.$refs.baseCard.$el.parentElement.tagName !== 'UL') {
-          console.error('[KCard] KCard (<li>) needs to be a direct child of KCardGrid (<ul>).');
-        }
-      });
     },
   };
 

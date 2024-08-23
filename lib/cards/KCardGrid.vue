@@ -4,7 +4,7 @@
     class="k-card-grid"
     :style="gridStyle"
   >
-    <!-- @slot Slot for `KCard`s -->
+    <!-- @slot Slot for `KCardGridItem`s -->
     <slot></slot>
   </ul>
 
@@ -33,7 +33,7 @@
 
       const gridStyle = ref({});
       // grid-related card style to be injected from `KCard`
-      const cardStyle = ref({});
+      const gridItemStyle = ref({});
 
       watch(
         currentLevelConfig,
@@ -44,7 +44,7 @@
             'column-gap': columnGap,
             'row-gap': rowGap,
           };
-          cardStyle.value = {
+          gridItemStyle.value = {
             // remove all column gaps widths from the available width and then divide by the number of columns to get the card/column width
             'flex-basis': `calc((100% - ${columns - 1} * ${columnGap}) / ${columns})`,
             height: rowHeight,
@@ -55,8 +55,8 @@
         }
       );
 
-      // provide to `KCard`
-      provide('cardGridStyle', cardStyle);
+      // provide to `KCardGridItem`
+      provide('gridItemStyle', gridItemStyle);
 
       return {
         gridStyle,

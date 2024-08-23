@@ -1,16 +1,15 @@
 <template>
 
   <!-- see trackInputModality  for [data-focus=true] -->
-  <li
-    :class="['base-card', $computedClass(coreOutlineFocus)]"
-    tabindex="0"
-    data-focus="true"
+  <!-- 'click' gets triggered on keyup.enter from KCardGridItem -->
+  <div
+    :class="['base-card']"
     :style="{ backgroundColor: $themeTokens.surface }"
     @focus="onCardFocus"
     @mouseenter="onCardHover"
     @mousedown="onMouseDown"
     @mouseup="onMouseUp"
-    @keyup.enter="onEnter"
+    @click="onClick"
   >
     <component
       :is="headingElement"
@@ -50,7 +49,7 @@
     </component>
 
     <slot name="default"></slot>
-  </li>
+  </div>
 
 </template>
 
@@ -122,13 +121,6 @@
       };
     },
     computed: {
-      coreOutlineFocus() {
-        return {
-          ':focus': {
-            ...this.$coreOutline,
-          },
-        };
-      },
       headingElement() {
         return this.headingLevel ? 'h' + this.headingLevel : undefined;
       },
@@ -148,7 +140,7 @@
       onCardHover(e) {
         this.$emit('hover', e);
       },
-      onEnter() {
+      onClick() {
         this.navigate();
       },
       onMouseDown() {

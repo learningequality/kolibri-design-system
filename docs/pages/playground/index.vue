@@ -1,16 +1,37 @@
 <template>
 
   <div :style="{ margin: '40px' }">
+    <h2>Grid with one column and checkboxes</h2>
+    <KCardGrid
+      :columns="1"
+      :style="{ 'max-width': '1400px' }"
+    >
+      <KCardGridItem
+        v-for="i in 8"
+        :key="i"
+      >
+        <template #checkbox>
+          <KCheckbox :checked="false" />
+        </template>
+        <PlaygroundHorizontalCard
+          thumbnailAlign="right"
+        />
+      </KCardGridItem>
+    </KCardGrid>
+
     <h2>Default '1-2' grid, horizontal cards, large thumbnail on the left</h2>
     <KCardGrid
       layout="1-2"
       :style="{ 'max-width': '1400px' }"
     >
-      <PlaygroundHorizontalCard
+      <KCardGridItem
         v-for="i in 8"
         :key="i"
-        thumbnailAlign="left"
-      />
+      >
+        <PlaygroundHorizontalCard
+          thumbnailAlign="left"
+        />
+      </KCardGridItem>
     </KCardGrid>
 
     <h2>Default '1-2' grid, horizontal cards, large thumbnail on the right</h2>
@@ -18,11 +39,14 @@
       layout="1-2"
       :style="{ 'max-width': '1400px' }"
     >
-      <PlaygroundHorizontalCard
+      <KCardGridItem
         v-for="i in 8"
         :key="i"
-        thumbnailAlign="right"
-      />
+      >
+        <PlaygroundHorizontalCard
+          thumbnailAlign="right"
+        />
+      </KCardGridItem>
     </KCardGrid>
 
     <h2>Default '1-2' grid, horizontal cards, small thumbnail on the right</h2>
@@ -30,12 +54,15 @@
       layout="1-2"
       :style="{ 'max-width': '1400px' }"
     >
-      <PlaygroundHorizontalCard
+      <KCardGridItem
         v-for="i in 8"
         :key="i"
-        thumbnailDisplay="small"
-        thumbnailAlign="right"
-      />
+      >
+        <PlaygroundHorizontalCard
+          thumbnailDisplay="small"
+          thumbnailAlign="right"
+        />
+      </KCardGridItem>
     </KCardGrid>
 
     <h2>Default '1-2-3' grid, horizontal cards, small thumbnail on the left</h2>
@@ -43,12 +70,15 @@
       layout="1-2"
       :style="{ 'max-width': '1400px' }"
     >
-      <PlaygroundHorizontalCard
+      <KCardGridItem
         v-for="i in 8"
         :key="i"
-        thumbnailDisplay="small"
-        thumbnailAlign="left"
-      />
+      >
+        <PlaygroundHorizontalCard
+          thumbnailDisplay="small"
+          thumbnailAlign="left"
+        />
+      </KCardGridItem>
     </KCardGrid>
 
     <h2>Default '1-2-3' grid, vertical cards, small thumbnail</h2>
@@ -56,11 +86,14 @@
       layout="1-2-3"
       :style="{ 'max-width': '1400px' }"
     >
-      <PlaygroundVerticalCard
+      <KCardGridItem
         v-for="i in 8"
         :key="i"
-        thumbnailDisplay="small"
-      />
+      >
+        <PlaygroundVerticalCard
+          thumbnailDisplay="small"
+        />
+      </KCardGridItem>
     </KCardGrid>
 
     <h2>Default '1-2' grid, vertical cards, large thumbnail</h2>
@@ -68,11 +101,14 @@
       layout="1-2"
       :style="{ 'max-width': '1400px' }"
     >
-      <PlaygroundVerticalCard
+      <KCardGridItem
         v-for="i in 8"
         :key="i"
-        thumbnailDisplay="large"
-      />
+      >
+        <PlaygroundVerticalCard
+          thumbnailDisplay="large"
+        />
+      </KCardGridItem>
     </KCardGrid>
 
     <h2>Layout configuration overriden via props</h2>
@@ -82,11 +118,14 @@
       :layoutConfig="layoutConfig1"
       :style="{ 'max-width': '1400px' }"
     >
-      <PlaygroundVerticalCard
+      <KCardGridItem
         v-for="i in 8"
         :key="i"
-        thumbnailDisplay="large"
-      />
+      >
+        <PlaygroundVerticalCard
+          thumbnailDisplay="large"
+        />
+      </KCardGridItem>
     </KCardGrid>
 
     <h2>Default '1-2-3' grid, no thumbnail</h2>
@@ -94,16 +133,18 @@
       layout="1-2-3"
       :style="{ 'max-width': '1400px' }"
     >
-      <PlaygroundVerticalCard
+      <KCardGridItem
         v-for="i in 8"
         :key="i"
-        thumbnailDisplay="none"
-      />
+      >
+        <PlaygroundVerticalCard
+          thumbnailDisplay="none"
+        />
+      </KCardGridItem>
     </KCardGrid>
 
-    <hr>
-
     <!-- playing with techniques -->
+
     <!-- <div class="card card-before">
       <div class="content content-before">
         <h2>Card - before</h2>
@@ -118,7 +159,8 @@
         <p>Card content card content card content card content card content card content</p>
       </div>
       <div class="thumbnail thumbnail-after"></div>
-    </div> -->
+    </div>
+  -->
   </div>
 
 </template>

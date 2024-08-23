@@ -9,6 +9,9 @@
     :thumbnailSrc="require('../../assets/hummingbird-large-cc-by-sa-4.jpg')"
     title="This is a sample resource title This is a sample resource title This is a sample resource title This is a sample resource title This is a sample resource title This is a sample resource title This is a sample resource title This is a sample resource title This is a sample resource title This is a sample resource title"
   >
+    <template v-if="$slots.checkbox" #checkbox>
+      <slot name="checkbox"></slot>
+    </template>
     <template #aboveTitle>
       <KGrid>
 
