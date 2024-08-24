@@ -189,7 +189,7 @@
   $k-switch-height: 32px !default;
   $k-switch-thumb-size: 20px !default;
   $k-switch-thumb-color: #f5f5f5 !default;
-  $k-switch-track-width: 34px !default;
+  $k-switch-track-width: 34px !de fault;
   $k-switch-track-height: 14px !default;
 
   .k-switch {

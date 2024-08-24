@@ -915,7 +915,7 @@
     border-bottom-color: $ui-input-border-color;
     border-bottom-style: solid;
     border-bottom-width: $ui-input-border-width;
-    border-radius: 2px 2px 0 0;
+    border-radius: 0 2px 0 0;
     outline: none;
 
     &:hover:not(.is-disabled) {
