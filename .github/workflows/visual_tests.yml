@@ -1,0 +1,109 @@
+name: Percy Visual Tests
+
+on: [pull_request_target]
+
+jobs:
+  pre_job:
+    name: Path match check
+    runs-on: ubuntu-latest
+    # Map a step output to a job output
+    outputs:
+      should_skip: ${{ steps.skip_check.outputs.should_skip }}
+    steps:
+      - id: skip_check
+        uses: fkirc/skip-duplicate-actions@master
+        with:
+          github_token: ${{ github.token }}
+          paths: '["**.vue", "**.js", "**.css", "**.scss", "yarn.lock"]'
+
+  visual_tests:
+    name: Frontend Visual Tests
+    needs: pre_job
+    if: ${{ needs.pre_job.outputs.should_skip != 'true' }}
+    runs-on: ubuntu-latest
+    environment: percy_tests
+    outputs:
+      percy_url: ${{ steps.extract-url.outputs.percy_url }}
+    steps:
+      - name: Checkout code from PR
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+      - name: Use Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18.x'
+      - name: Cache Node.js modules
+        uses: actions/cache@v4
+        with:
+          path: '**/node_modules'
+          key: ${{ runner.OS }}-node-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.OS }}-node-
+      - name: Install dependencies
+        run: |
+          yarn --frozen-lockfile
+          npm rebuild node-sass
+      - name: Download Chromium
+        run: npx puppeteer browsers install chrome
+      - name: Extract jsdocs and environment info 
+        run: yarn pregenerate
+      - name: Run visual tests
+        run: yarn test:visual 2>&1 | tee test-output.log
+        env:
+          PERCY_TOKEN: ${{ secrets.PERCY_TOKEN }}
+      - name: Extract Percy build URL
+        id: extract-url
+        run: |
+          url=$(grep -o 'https://percy.io/[a-zA-Z0-9/_-]*' test-output.log | tail -1)
+          echo "percy_url=$url" >> $GITHUB_OUTPUT
+    
+  comment:
+    name: Comment Percy results
+    needs: visual_tests
+    if: ${{ needs.visual_tests.result == 'success' }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code from PR
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+      - name: Define comment body
+        id: comment-text
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const percyUrl = "${{ needs.visual_tests.outputs.percy_url }}";
+            const utils = require('./.github/githubUtils.js');
+            return await utils.generateComment(percyUrl);
+      - name: Find existing comment
+        id: find-comment
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const utils = require('./.github/githubUtils.js');
+            return await utils.findComment(github, context, context.issue.number);
+      - name: Create build comment
+        if: ${{!steps.find-comment.outputs.result}}
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+              github.rest.issues.createComment({
+                issue_number: context.issue.number,
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                body: ${{ steps.comment-text.outputs.result }}
+              })
+      - name: Update build comment
+        if: ${{steps.find-comment.outputs.result}}
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+              github.rest.issues.updateComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                comment_id: ${{steps.find-comment.outputs.result}},
+                body: ${{ steps.comment-text.outputs.result }}
+              })
