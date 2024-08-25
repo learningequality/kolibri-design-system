@@ -9,6 +9,7 @@
         <tr>
           <th
             v-for="(header, index) in headers"
+            :ref="'header-' + index"
             :key="index"
             tabindex="0"
             :aria-sort="sortable && header.dataType !== DATA_TYPE_OTHERS ? getAriaSort(index) : null"
@@ -51,6 +52,7 @@
         >
           <KTableGridItem
             v-for="(col, colIndex) in row"
+            :ref="'cell-' + rowIndex + '-' + colIndex"
             :key="colIndex"
             :content="col"
             :dataType="headers[colIndex].dataType"
@@ -256,16 +258,7 @@
 
         let nextRowIndex = rowIndex;
         let nextColIndex = colIndex;
-        // Identify all focusable elements inside the current cell
-        const currentCell = this.getCell(rowIndex, colIndex);
-        const focusableElements = currentCell
-          ? Array.from(
-              currentCell.querySelectorAll(
-                'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
-              )
-            )
-          : [];
-        const focusedElementIndex = focusableElements.indexOf(document.activeElement);
+
         switch (key) {
           case 'ArrowUp':
             if (rowIndex === -1) {
@@ -316,7 +309,24 @@
               this.handleSort(colIndex);
             }
             break;
-          case 'Tab':
+          case 'Tab': {
+            // Identify all focusable elements inside the current cell
+            const currentCell = this.getCell(rowIndex, colIndex);
+
+            // Collect focusable elements using native DOM methods
+            const focusableElements = [];
+
+            if (currentCell) {
+              const buttons = currentCell.getElementsByTagName('button');
+              const links = currentCell.getElementsByTagName('a');
+              const inputs = currentCell.getElementsByTagName('input');
+              const selects = currentCell.getElementsByTagName('select');
+              const textareas = currentCell.getElementsByTagName('textarea');
+
+              focusableElements.push(...buttons, ...links, ...inputs, ...selects, ...textareas);
+            }
+
+            const focusedElementIndex = focusableElements.indexOf(document.activeElement);
             if (focusableElements.length > 0) {
               if (!event.shiftKey) {
                 // if navigating between more focusable elements within the cell
@@ -378,6 +388,7 @@
             }
 
             break;
+          }
 
           default:
             return;
@@ -393,11 +404,9 @@
       },
       getCell(rowIndex, colIndex) {
         if (rowIndex === -1) {
-          return this.$el.querySelector(`thead th:nth-child(${colIndex + 1})`);
+          return this.$refs[`header-${colIndex}`][0];
         } else {
-          return this.$el.querySelector(
-            `tbody tr:nth-child(${rowIndex + 1}) td:nth-child(${colIndex + 1})`
-          );
+          return this.$refs[`cell-${rowIndex}-${colIndex}`][0].$el;
         }
       },
       scrollCellIntoView(cell) {
@@ -426,11 +435,9 @@
       focusCell(rowIndex, colIndex) {
         let nextCell;
         if (rowIndex === -1) {
-          nextCell = this.$el.querySelector(`thead th:nth-child(${colIndex + 1})`);
+          nextCell = this.$refs[`header-${colIndex}`][0];
         } else {
-          nextCell = this.$el.querySelector(
-            `tbody tr:nth-child(${rowIndex + 1}) td:nth-child(${colIndex + 1})`
-          );
+          nextCell = this.$refs[`cell-${rowIndex}-${colIndex}`][0].$el;
         }
         // Ensured the focused cell is smoothly scrolled into view.
         if (nextCell) {
