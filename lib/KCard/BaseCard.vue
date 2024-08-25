@@ -183,7 +183,6 @@
     @extend %dropshadow-2dp;
 
     position: relative;
-    display: block;
     text-align: left;
     text-decoration: none;
     list-style-type: none;

@@ -13,12 +13,13 @@
       <slot name="title"></slot>
     </template>
     <template #default>
-      <div class="thumbnail">
+      <div :class="isThumbnailPresent ? 'thumbnail' : null">
         <!-- 
           Render KImg even if thumbnailSrc is not provided since in that case
           KImg takes care of showing the gray placeholder area.
         -->
         <KImg
+          v-if="thumbnailSrc"
           :src="thumbnailSrc"
           :scaleType="thumbnailScaleType"
           :aspectRatio="thumbnailAspectRatio"
@@ -34,7 +35,7 @@
           as progressive loading experience.
         -->
         <span
-          v-if="$slots.thumbnailPlaceholder"
+          v-if="$slots.thumbnailPlaceholder && !thumbnailSrc"
           class="thumbnail-placeholder"
         >
           <!-- @slot Places content to the thumbnail placeholder area. -->
@@ -350,6 +351,9 @@
         }
         return {};
       },
+      isThumbnailPresent(){
+        return this.thumbnailSrc || this.$slots.thumbnailPlaceholder;
+      }
     },
   };
 
@@ -378,7 +382,7 @@
     font-size: 12px;
   }
 
-  .thumbnail {
+  .thumbnail{
     position: relative; /* basis for absolute positioning of 'thumbnailPlaceholder' slot content */
     order: 1;
   }
@@ -407,7 +411,7 @@
   }
 
   .thumbnail-placeholder {
-    position: absolute;
+    position: relative;
     top: 0;
     right: 0;
     bottom: 0;
@@ -418,7 +422,7 @@
   /************* Layout-specific styles *************/
 
   .vertical-with-large-thumbnail {
-    height: 480px; /* (1) */
+    height: auto; /* (1) */
 
     .thumbnail {
       height: 45%;
