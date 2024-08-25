@@ -6,7 +6,7 @@
         {{ caption }}
       </caption>
       <thead>
-        <tr>
+        <tr ref="stickyHeader">
           <th
             v-for="(header, index) in headers"
             :ref="'header-' + index"
@@ -414,8 +414,8 @@
           cell.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'nearest' });
 
           // Adjust scroll position to account for sticky headers
-          const stickyHeader = this.$el.querySelector('.sticky-header');
-          const stickyColumn = this.$el.querySelector('.sticky-column');
+          const stickyHeader = this.$refs.stickyHeader;
+          const stickyColumn = this.$refs['header-0'][0];
           const tableWrapper = this.$refs.tableWrapper;
 
           const stickyHeaderHeight = stickyHeader ? stickyHeader.offsetHeight : 0;
