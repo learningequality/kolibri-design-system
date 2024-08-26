@@ -4,6 +4,17 @@ Changelog is rather internal in nature. See release notes for the public overvie
 
 ## Upcoming version 5.x.x (`develop` branch)
 
+- [#741]
+  - **Description:** Removed the border-radius on align left.
+  - **Products impact:** -.
+  - **Addresses:** -.
+  - **Components:** -.
+  - **Breaking:** no -.
+  - **Impacts a11y:** no -.
+  - **Guidance:** - Removed the border-radius on align left.
+
+[#741]: https://github.com/learningequality/kolibri-design-system/pull/751
+
 - [#650]
   - **Description:** Add `KRadioButtonGroup` component to fix keyboard navigation in radio button groups in Firefox 
   - **Products impact:** New API
