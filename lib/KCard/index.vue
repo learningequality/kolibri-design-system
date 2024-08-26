@@ -320,7 +320,6 @@
             },
             thumbnailStyles: {
               ...thumbnailCommonStyles,
-              borderRadius: '8px 0 0 8px',
             },
           };
         }
