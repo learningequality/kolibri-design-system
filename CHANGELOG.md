@@ -4,6 +4,18 @@ Changelog is rather internal in nature. See release notes for the public overvie
 
 ## Upcoming version 5.x.x (`develop` branch)
 
+- [#650]
+  - **Description:** Add `KRadioButtonGroup` component to fix keyboard navigation in radio button groups in Firefox 
+  - **Products impact:** New API
+  - **Addresses:** https://github.com/learningequality/kolibri/issues/10491
+  - **Components:** `KRadioButtonGroup`
+  - **Breaking:** no
+  - **Impacts a11y:** yes
+  - **Guidance:** Make sure that all `KRadioButton`s are wrapped in `KRadioButtonGroup`
+
+[#650]: https://github.com/learningequality/kolibri-design-system/pull/650
+
+
 - [#723]
   - **Description:** Updates $core-time value from 0.25s to 0.15s
   - **Products impact:** User experience - faster transitions

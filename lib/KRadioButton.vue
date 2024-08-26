@@ -8,6 +8,7 @@
           ref="input"
           v-autofocus="autofocus"
           type="radio"
+          :tabindex="tabIndex"
           class="k-radio-button-input"
           :checked="isChecked"
           :value="buttonValue !== null ? buttonValue : value"
@@ -71,7 +72,9 @@
   };
 
   /**
-   * Used to display all options
+   * Used to display radio buttons.
+   *
+   * To be used within `KRadioButtonGroup`.
    */
   export default {
     name: 'KRadioButton',
@@ -148,6 +151,7 @@
     },
     data: () => ({
       active: false,
+      tabIndex: 0,
     }),
     computed: {
       isChecked() {
@@ -183,6 +187,12 @@
       }
     },
     methods: {
+      /**
+       * Toggles the check state of the radio button.
+       *
+       * @public
+       * @param {Event} event - The event object.
+       */
       toggleCheck(event) {
         if (!this.disabled) {
           this.focus();
@@ -219,6 +229,13 @@
          * Emits blur event, useful for validation
          */
         this.$emit('blur');
+      },
+      /**
+       * @public
+       * Sets `tab-index` on input
+       */
+      setTabIndex(val) {
+        this.tabIndex = val;
       },
     },
   };
