@@ -5,7 +5,7 @@ Changelog is rather internal in nature. See release notes for the public overvie
 ## Upcoming version 5.x.x (`develop` branch)
 
 - [#722]
-  - **Description:** Inserts the teleport root element to an application's document body during KDS initialization.
+  - **Description:** Inserts the overlay container element `#k-overlay` to an application's document body during KDS initialization.
   - **Products impact:** KDS initialization
   - **Addresses:** -
   - **Components:** -
@@ -17,10 +17,10 @@ Changelog is rather internal in nature. See release notes for the public overvie
 
 
 - [#722]
-  - **Description:** Adds new `KTeleport` component
+  - **Description:** Adds new `KOverlay` component
   - **Products impact:** New API
   - **Addresses:** -
-  - **Components:**  `KTeleport` 
+  - **Components:**  `KOverlay` 
   - **Breaking:** no
   - **Impacts a11y:** no
   - **Guidance:** -
@@ -28,7 +28,7 @@ Changelog is rather internal in nature. See release notes for the public overvie
 [#722]: https://github.com/learningequality/kolibri-design-system/pull/722
 
 - [#722]
-  - **Description:** Adds new prop, `appendToRoot`, to `KTooltip`
+  - **Description:** Adds new prop, `appendToOverlay`, to `KTooltip`
   - **Products impact:** New API
   - **Addresses:** -
   - **Components:**  `KTooltip` 

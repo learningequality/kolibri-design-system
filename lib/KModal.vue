@@ -232,7 +232,7 @@
         };
       },
       wrapper() {
-        return this.appendToRoot ? 'KTeleport' : 'div';
+        return this.appendToRoot ? 'KOverlay' : 'div';
       },
     },
     created() {

@@ -400,8 +400,8 @@ export default [
         keywords: tabsRelatedKeywords,
       }),
       new Page({
-        path: '/kteleport',
-        title: 'KTeleport',
+        path: '/koverlay',
+        title: 'KOverlay',
         isCode: true,
       }),
       new Page({

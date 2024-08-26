@@ -7,8 +7,8 @@
 
     LE customizations
      - Allow for appending to a chosen element rather than to body,
-       typically to the teleport root element. 'appendToBody' prop changed
-       to 'appendToEl' and related changes.
+       typically to the overlay container element #k-overlay.
+       'appendToBody' prop changedto 'appendToEl' and related changes.
   -->
 
 

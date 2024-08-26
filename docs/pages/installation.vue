@@ -24,8 +24,8 @@
         <li>Installs <code>$themeBrand</code>, <code>$themeTokens</code> <code>$themePalette</code>, and <code>$computedClass</code> helpers on all Vue instances (see <DocsInternalLink href="/colors/#usage" text="Colors" />).</li>
         <li>Provides <code>$coreOutline</code>, <code>$inputModality</code>, <code>$mediaType</code>, and <code>$isPrint</code> computed properties as well as <code>$print</code> method to all Vue instances.</li>
         <li>Globally registers all KDS Vue components.</li>
-        <li>Inserts assertive and polite ARIA live regions <code>#k-live-region</code> to your application's document body (see <DocsInternalLink href="/usekliveregion" text="useKLiveRegion" />).</li>
-        <li>Inserts the teleport root element <code>#k-teleport</code> to your application's document body (see <DocsLibraryLink component="KTeleport" /> or search for <code>appendToRoot</code> prop on components).</li>
+        <li>Inserts assertive and polite ARIA live regions <code>#k-live-region</code> to an application's document body (see <DocsInternalLink href="/usekliveregion" text="useKLiveRegion" />).</li>
+        <li>Inserts the overlay container element <code>#k-overlay</code> to an application's document body (see <DocsLibraryLink component="KOverlay" /> or search for <code>appendToOverlay</code> prop on components).</li>
       </ul>
     </DocsPageSection>
 

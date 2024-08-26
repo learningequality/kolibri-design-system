@@ -29,7 +29,7 @@
 <script>
 
   import isArray from 'lodash/isArray';
-  import _useTeleportRootEl from '../composables/_useTeleportRootEl';
+  import _useOverlay from '../composables/_useOverlay';
   import Popper from './Popper';
 
   /**
@@ -40,9 +40,10 @@
     components: {
       Popper,
     },
+
     setup(props) {
-      const { getTeleportRootEl } = _useTeleportRootEl();
-      const appendToEl = props.appendToRoot ? getTeleportRootEl() : null;
+      const { getOverlayEl } = _useOverlay();
+      const appendToEl = props.appendToOverlay ? getOverlayEl() : null;
       return { appendToEl };
     },
     props: {
@@ -94,11 +95,11 @@
         default: null,
       },
       /**
-       * Whether or not the tooltip should be teleported
-       * to the root of the document
+       * Whether or not the tooltip should be moved
+       * to the overlay container element #k-overlay
        */
       // eslint-disable-next-line kolibri/vue-no-unused-properties
-      appendToRoot: {
+      appendToOverlay: {
         type: Boolean,
         default: false,
       },
