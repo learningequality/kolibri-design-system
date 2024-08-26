@@ -266,21 +266,20 @@
           width: '100%',
           height: '100%',
         };
-
         if (this.layout === 'vertical' && this.thumbnailDisplay === 'large') {
-          return {
-            rootClass: 'vertical-with-large-thumbnail',
-            thumbnailAlignClass: undefined,
-            thumbnailAspectRatio: undefined,
-            headingStyles: {
-              ...headingCommonStyles,
-            },
-            thumbnailStyles: {
-              ...thumbnailCommonStyles,
-              borderRadius: '8px 8px 0 0',
-            },
-          };
-        }
+        return {
+          rootClass: 'vertical-with-large-thumbnail',
+          thumbnailAlignClass: undefined,
+          thumbnailAspectRatio: undefined,
+          headingStyles: {
+            ...headingCommonStyles,
+          },
+          thumbnailStyles: {
+            ...thumbnailCommonStyles,
+            borderRadius: '8px 8px 0 0',
+          },
+        };
+}
         if (this.layout === 'vertical' && this.thumbnailDisplay === 'small') {
           return {
             rootClass: 'vertical-with-small-thumbnail',
@@ -316,11 +315,11 @@
             thumbnailAspectRatio: undefined,
             headingStyles: {
               ...headingCommonStyles,
-              width: `calc(60% - ${SPACER * 2}px)` /* same as slots width defined in styles */,
+              width: `calc(60% - ${SPACER * 2}px)`, // same as slots width defined in styles
             },
             thumbnailStyles: {
               ...thumbnailCommonStyles,
-              borderRadius: '0 8px 8px 0',
+              borderRadius: this.thumbnailAlign === 'right' ? '0 8px 8px 0' : '8px 0 0 8px',
             },
           };
         }
