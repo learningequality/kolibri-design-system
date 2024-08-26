@@ -4,6 +4,17 @@ Changelog is rather internal in nature. See release notes for the public overvie
 
 ## Upcoming version 5.x.x (`develop` branch)
 
+- [#741]
+  - **Description:** KCard: Removed the border-radius on align left.
+  - **Products impact:** -.
+  - **Addresses:** https://github.com/learningequality/kolibri-design-system/issues/741.
+  - **Components:**  `Kcard`.
+  - **Breaking:** no.
+  - **Impacts a11y:** no.
+  - **Guidance:** -.
+
+[#741]: https://github.com/learningequality/kolibri-design-system/pull/741
+
 - [#723]
   - **Description:** Updates $core-time value from 0.25s to 0.15s
   - **Products impact:** User experience - faster transitions
