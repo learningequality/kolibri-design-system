@@ -37,6 +37,7 @@
     "fuzzysearch": "1.0.3",
     "lodash": "4.17.21",
     "popper.js": "1.16.1",
+    "pre-commit": "^1.2.2",
     "purecss": "2.2.0",
     "tippy.js": "4.2.1",
     "vue-intl": "3.1.0",

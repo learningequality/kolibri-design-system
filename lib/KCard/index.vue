@@ -320,10 +320,11 @@
             },
             thumbnailStyles: {
               ...thumbnailCommonStyles,
-              borderRadius: '8px 0 0 8px',
+              borderRadius: this.thumbnailAlign === 'right' ? '0 8px 8px 0' : '8px 0 0 8px',
             },
           };
         }
+
         if (this.layout === 'horizontal' && this.thumbnailDisplay === 'small') {
           return {
             rootClass: 'horizontal-with-small-thumbnail',
