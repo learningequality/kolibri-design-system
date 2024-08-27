@@ -4,6 +4,17 @@ Changelog is rather internal in nature. See release notes for the public overvie
 
 ## Upcoming version 5.x.x (`develop` branch)
 
+- [#753]
+  - **Description:** Bump KDS version to 5.0.0-rc3.
+  - **Products impact:** -.
+  - **Addresses:** -.
+  - **Components:** -.
+  - **Breaking:** -.
+  - **Impacts a11y:** -.
+  - **Guidance:** -.
+
+[#753]: https://github.com/learningequality/kolibri-design-system/pull/753
+
 - [#754]
   - **Description:** Removed the border-radius on align left.
   - **Products impact:** bugfix.
@@ -49,6 +60,7 @@ Changelog is rather internal in nature. See release notes for the public overvie
   - **Guidance:** -
 
 [#723]: https://github.com/learningequality/kolibri-design-system/pull/723
+
 - [#728]
   - **Description:** Adds `$darken_` utility functions for darkening palette colors and ensures compatibility with Node.js v10 by pinning the `color` package version to `3.2.1`.
   - **Products impact:** Kolibri Design System
