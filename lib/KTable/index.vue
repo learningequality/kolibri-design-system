@@ -2,7 +2,7 @@
 
   <div ref="tableWrapper" class="k-table-wrapper" :style="tableWrapperStyle">
     <table class="k-table" role="grid">
-      <caption v-if="caption">
+      <caption v-if="caption" class="visuallyhidden">
         {{ caption }}
       </caption>
       <thead>
