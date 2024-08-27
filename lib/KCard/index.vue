@@ -351,9 +351,9 @@
         }
         return {};
       },
-      isThumbnailPresent(){
+      isThumbnailPresent() {
         return this.thumbnailSrc || this.$slots.thumbnailPlaceholder;
-      }
+      },
     },
   };
 
@@ -382,7 +382,7 @@
     font-size: 12px;
   }
 
-  .thumbnail{
+  .thumbnail {
     position: relative; /* basis for absolute positioning of 'thumbnailPlaceholder' slot content */
     order: 1;
   }
