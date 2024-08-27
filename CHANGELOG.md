@@ -11,7 +11,7 @@ Changelog is rather internal in nature. See release notes for the public overvie
   - **Components:** -.
   - **Breaking:** no -.
   - **Impacts a11y:** no -.
-  - **Guidance:** - Removed the border-radius on align left.
+  - **Guidance:** -
 
 [#741]: https://github.com/learningequality/kolibri-design-system/pull/751
 
