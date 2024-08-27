@@ -4,16 +4,16 @@ Changelog is rather internal in nature. See release notes for the public overvie
 
 ## Upcoming version 5.x.x (`develop` branch)
 
-- [#741]
-  - **Description:** Removed the border-radius on align left.
-  - **Products impact:** -.
-  - **Addresses:** -.
-  - **Components:** -.
+- [#754]
+  - **Description:** Fixed the border-radius on align left.
+  - **Products impact:** bugfix.
+  - **Addresses:**  https://github.com/learningequality/kolibri-design-system/issues/741.
+  - **Components:** KCard .
   - **Breaking:** no -.
   - **Impacts a11y:** no -.
-  - **Guidance:** - Removed the border-radius on align left.
+  - **Guidance:** - 
 
-[#741]: https://github.com/learningequality/kolibri-design-system/pull/751
+[#754]: https://github.com/learningequality/kolibri-design-system/pull/754
 
 
 
