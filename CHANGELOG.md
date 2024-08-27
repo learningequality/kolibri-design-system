@@ -4,7 +4,7 @@ Changelog is rather internal in nature. See release notes for the public overvie
 
 ## Upcoming version 5.x.x (`develop` branch)
 
-- [#741]
+- [#754]
   - **Description:** Removed the border-radius on align left.
   - **Products impact:** bugfix.
   - **Addresses:** https://github.com/learningequality/kolibri-design-system/issues/741
