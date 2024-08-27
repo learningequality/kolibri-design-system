@@ -603,7 +603,7 @@
                 Short Activity
               </span>
             </div>
-  
+
             <KGrid>
               <KGridItem
                 :layout12="{ span: 8 }"
@@ -681,6 +681,7 @@
       </KCard>
     </ul>
   </div>
+
 </template>
 
 
