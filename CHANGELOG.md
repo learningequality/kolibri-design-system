@@ -6,7 +6,7 @@ Changelog is rather internal in nature. See release notes for the public overvie
 
 - [#741]
   - **Description:** Removed the border-radius on align left.
-  - **Products impact:** -.
+  - **Products impact:** bugfix.
   - **Addresses:** -.
   - **Components:** -.
   - **Breaking:** no -.
