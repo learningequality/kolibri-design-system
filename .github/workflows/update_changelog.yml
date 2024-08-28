@@ -55,7 +55,7 @@ jobs:
           with open("CHANGELOG.md", "r") as f:
               current_changelog = f.read()
 
-          new_changelog = current_changelog.replace("<!-- [DO NOT REMOVE-USED BY GH ACTION] PASTE CHANGELOG -->", final_changelog)
+          new_changelog = current_changelog.replace("<!-- [DO NOT REMOVE-USED BY GH ACTION] PASTE CHANGELOG -->", final_changelog, 1)
 
           with open("CHANGELOG.md", "w") as f:
               f.write(new_changelog)
