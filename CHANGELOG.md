@@ -7,6 +7,19 @@ Changelog is rather internal in nature. See release notes for the public overvie
 <!-- [DO NOT REMOVE-USED BY GH ACTION] PASTE CHANGELOG -->
 
 
+- [#739]
+  - **Description:** Bump elliptic from 6.5.4 to 6.5.7
+  - **Products impact:** Dev Dependency upgrade
+  - **Addresses:** -
+  - **Components:** -
+  - **Breaking:** -
+  - **Impacts a11y:** -
+  - **Guidance:** -
+
+[#739]: https://github.com/learningequality/kolibri-design-system/pull/739
+
+
+
 - [#660]
   - **Description:** Bump pug from 3.0.2 to 3.0.3
   - **Products impact:** Dev Dependency upgrade
