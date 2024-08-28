@@ -4,7 +4,38 @@ Changelog is rather internal in nature. See release notes for the public overvie
 
 ## Upcoming version 5.x.x (`develop` branch)
 
+- [#753]
+  - **Description:** Bump KDS version to 5.0.0-rc3.
+  - **Products impact:** -.
+  - **Addresses:** -.
+  - **Components:** -.
+  - **Breaking:** -.
+  - **Impacts a11y:** -.
+  - **Guidance:** -.
 
+[#753]: https://github.com/learningequality/kolibri-design-system/pull/753
+
+- [#754]
+  - **Description:** Removed the border-radius on align left.
+  - **Products impact:** bugfix.
+  - **Addresses:** https://github.com/learningequality/kolibri-design-system/issues/741
+  - **Components:** `KCard`
+  - **Breaking:** no -.
+  - **Impacts a11y:** no -.
+  - **Guidance:** -
+
+[#741]: https://github.com/learningequality/kolibri-design-system/pull/751
+
+- [#650]
+  - **Description:** Add `KRadioButtonGroup` component to fix keyboard navigation in radio button groups in Firefox 
+  - **Products impact:** New API
+  - **Addresses:** https://github.com/learningequality/kolibri/issues/10491
+  - **Components:** `KRadioButtonGroup`
+  - **Breaking:** no
+  - **Impacts a11y:** yes
+  - **Guidance:** Make sure that all `KRadioButton`s are wrapped in `KRadioButtonGroup`
+
+[#650]: https://github.com/learningequality/kolibri-design-system/pull/650
 
 
 [#727]

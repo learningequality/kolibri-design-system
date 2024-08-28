@@ -247,13 +247,13 @@
         return this.stylesAndClasses.thumbnailAlignClass;
       },
       /*
-          Returns dynamic classes and few style-like data that CSS was cumbersome/impossible to use for ,or are in need of using theme, grouped by all possible combinations of layouts.
+            Returns dynamic classes and few style-like data that CSS was cumbersome/impossible to use for ,or are in need of using theme, grouped by all possible combinations of layouts.
 
-          New styles and classes are meant to be added to this single-source-of-truth object so
-          that we can easily locate all styling being applied to a particular layout
+            New styles and classes are meant to be added to this single-source-of-truth object so
+            that we can easily locate all styling being applied to a particular layout
 
-          Could be further simplified by using solely dynamic styles, but that would have detrimental effects on our auto RTL machinery and we would need to take care manually of more places. 
-        */
+            Could be further simplified by using solely dynamic styles, but that would have detrimental effects on our auto RTL machinery and we would need to take care manually of more places. 
+          */
       stylesAndClasses() {
         /* In px. Needs to be the same as $spacer variable in styles part */
         const SPACER = 24;
@@ -266,7 +266,6 @@
           width: '100%',
           height: '100%',
         };
-
         if (this.layout === 'vertical' && this.thumbnailDisplay === 'large') {
           return {
             rootClass: 'vertical-with-large-thumbnail',
@@ -316,11 +315,11 @@
             thumbnailAspectRatio: undefined,
             headingStyles: {
               ...headingCommonStyles,
-              width: `calc(60% - ${SPACER * 2}px)` /* same as slots width defined in styles */,
+              width: `calc(60% - ${SPACER * 2}px)`, // same as slots width defined in styles
             },
             thumbnailStyles: {
               ...thumbnailCommonStyles,
-              borderRadius: '8px 0 0 8px',
+              borderRadius: this.thumbnailAlign === 'right' ? '0 8px 8px 0' : '8px 0 0 8px',
             },
           };
         }
