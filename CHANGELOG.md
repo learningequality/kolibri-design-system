@@ -7,6 +7,19 @@ Changelog is rather internal in nature. See release notes for the public overvie
 <!-- [DO NOT REMOVE-USED BY GH ACTION] PASTE CHANGELOG -->
 
 
+- [#626]
+  - **Description:** Bump slackapi/slack-github-action from 1.25.0 to 1.26.0
+  - **Products impact:** Dev Dependency upgrade
+  - **Addresses:** -
+  - **Components:** -
+  - **Breaking:** -
+  - **Impacts a11y:** -
+  - **Guidance:** -
+
+[#626]: https://github.com/learningequality/kolibri-design-system/pull/626
+
+
+
 - [#739]
   - **Description:** Bump elliptic from 6.5.4 to 6.5.7
   - **Products impact:** Dev Dependency upgrade
