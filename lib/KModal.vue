@@ -193,9 +193,10 @@
         required: false,
       },
       /**
-       * Whether or not the modal should be teleported to the root of the document
+       * Whether or not the modal should be moved
+       * to the overlay container element #k-overlay
        */
-      appendToRoot: {
+      appendToOverlay: {
         type: Boolean,
         default: false,
       },
@@ -232,7 +233,7 @@
         };
       },
       wrapper() {
-        return this.appendToRoot ? 'KOverlay' : 'div';
+        return this.appendToOverlay ? 'KOverlay' : 'div';
       },
     },
     created() {

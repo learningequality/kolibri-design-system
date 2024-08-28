@@ -28,6 +28,17 @@ Changelog is rather internal in nature. See release notes for the public overvie
 [#722]: https://github.com/learningequality/kolibri-design-system/pull/722
 
 - [#722]
+  - **Description:** Renames `KModal`'s `appendToRoot` prop to `appendToOverlay`
+  - **Products impact:** Updated API
+  - **Addresses:** -
+  - **Components:**  `KModal` 
+  - **Breaking:** yes
+  - **Impacts a11y:** no
+  - **Guidance:** Rename `KModal`'s `appendToRoot` prop to `appendToOverlay`
+
+[#722]: https://github.com/learningequality/kolibri-design-system/pull/722
+
+- [#722]
   - **Description:** Adds new prop, `appendToOverlay`, to `KTooltip`
   - **Products impact:** New API
   - **Addresses:** -
