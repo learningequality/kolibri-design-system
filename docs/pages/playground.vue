@@ -9,6 +9,7 @@
       :headers="headers"
       :rows="rows"
       caption="Local Sorting Table"
+      :style="{height: '300px'}"
       :useLocalSorting="true"
       sortable
     >

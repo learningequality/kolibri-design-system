@@ -1,6 +1,6 @@
 <template>
 
-  <div ref="tableWrapper" class="k-table-wrapper" :style="tableWrapperStyle">
+  <div ref="tableWrapper" class="k-table-wrapper">
     <table class="k-table" role="grid">
       <caption v-if="caption" class="visuallyhidden">
         {{ caption }}
@@ -144,12 +144,6 @@
         if (header.width) style.width = header.width;
         return style;
       };
-      const tableWrapperStyle = computed(() => {
-        return {
-          height: props.height,
-        };
-      });
-
       return {
         sortKey,
         sortOrder,
@@ -160,7 +154,6 @@
         SORT_ORDER_DESC,
         DATA_TYPE_OTHERS,
         getHeaderStyle,
-        tableWrapperStyle,
       };
     },
     /* eslint-disable kolibri/vue-no-unused-properties */
@@ -486,6 +479,7 @@
 .k-table-wrapper {
   overflow: auto;
   position: relative;
+  height:auto;
 }
 
 .k-table {
