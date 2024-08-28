@@ -1,7 +1,7 @@
 <template>
 
   <Teleport :to="overlayElSelector">
-    <!-- @slot Content to be moved to the overlay container element #k-overlay -->
+    <!-- @slot Content to be moved to the overlay container element `#k-overlay` -->
     <slot></slot>
   </Teleport>
 

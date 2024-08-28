@@ -194,7 +194,7 @@
       },
       /**
        * Whether or not the modal should be moved
-       * to the overlay container element #k-overlay
+       * to the overlay container element `#k-overlay`
        */
       appendToOverlay: {
         type: Boolean,

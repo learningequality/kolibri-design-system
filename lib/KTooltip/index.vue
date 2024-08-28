@@ -96,7 +96,7 @@
       },
       /**
        * Whether or not the tooltip should be moved
-       * to the overlay container element #k-overlay
+       * to the overlay container element `#k-overlay`
        */
       // eslint-disable-next-line kolibri/vue-no-unused-properties
       appendToOverlay: {
