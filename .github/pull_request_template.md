@@ -12,6 +12,7 @@ Addresses #*PR# HERE*
 <!-- Insert images here if applicable -->
 
 ## Changelog
+<!-- [DO NOT REMOVE-USED BY GH ACTION] CHANGELOG START -->
 
 <!--
   - Fill in the changelog item(s) below. If there are more groups of closely
@@ -30,6 +31,7 @@ Addresses #*PR# HERE*
   - **Impacts a11y:** Does this change improve a11y or adds new features that can be used to improve it? Choose from: yes / no
   - **Guidance:** Why and how to introduce this update to a consumer? Required for breaking changes, appreciated for changes with a11y impact, and welcomed for non-breaking changes when relevant.
 
+<!-- [DO NOT REMOVE-USED BY GH ACTION] CHANGELOG END -->
 
 ## Steps to test
 

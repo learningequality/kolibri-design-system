@@ -4,6 +4,8 @@ Changelog is rather internal in nature. See release notes for the public overvie
 
 ## Upcoming version 5.x.x (`develop` branch)
 
+<!-- [DO NOT REMOVE-USED BY GH ACTION] PASTE CHANGELOG -->
+
 - [#753]
   - **Description:** Bump KDS version to 5.0.0-rc3.
   - **Products impact:** -.
