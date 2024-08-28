@@ -13,11 +13,10 @@
       <slot name="title"></slot>
     </template>
     <template #default>
-      <div :class="isThumbnailPresent ? 'thumbnail' : null">
-        <!-- 
-          Render KImg even if thumbnailSrc is not provided since in that case
-          KImg takes care of showing the gray placeholder area.
-        -->
+      <div
+        v-if="thumbnailDisplay !== 'none'"
+        class="thumbnail"
+      >
         <KImg
           v-if="thumbnailSrc"
           :src="thumbnailSrc"
@@ -35,7 +34,7 @@
           as progressive loading experience.
         -->
         <span
-          v-if="$slots.thumbnailPlaceholder && !thumbnailSrc"
+          v-if="$slots.thumbnailPlaceholder"
           class="thumbnail-placeholder"
         >
           <!-- @slot Places content to the thumbnail placeholder area. -->
@@ -351,9 +350,6 @@
         }
         return {};
       },
-      isThumbnailPresent() {
-        return this.thumbnailSrc || this.$slots.thumbnailPlaceholder;
-      },
     },
   };
 
@@ -411,7 +407,7 @@
   }
 
   .thumbnail-placeholder {
-    position: relative;
+    position: absolute;
     top: 0;
     right: 0;
     bottom: 0;
