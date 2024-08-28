@@ -231,6 +231,7 @@
   }
 
   .divider-wrapper {
+    align-self: stretch;
     padding: 8px 12px;
   }
 
