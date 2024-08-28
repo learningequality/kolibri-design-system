@@ -148,8 +148,7 @@
       @extend %dropshadow-2dp;
       border: none;
 
-     // box-shadow: 0 2px 4px -1px rgba(black, 0.2), 0 4px 5px 0 rgba(black, 0.14),
-       // 0 1px 10px 0 rgba(black, 0.12);
+  
     }
 
     &.has-secondary-text {

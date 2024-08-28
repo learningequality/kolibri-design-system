@@ -611,7 +611,7 @@
     color: $primary-text-color;
     list-style-type: none;
     background-color: white;
-    //box-shadow: 1px 2px 8px $md-grey-600;
+   
   }
 
   .ui-autocomplete__feedback {
