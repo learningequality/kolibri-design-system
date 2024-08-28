@@ -4,6 +4,7 @@ Changelog is rather internal in nature. See release notes for the public overvie
 
 ## Version 4.x.x (`release-v4` branch)
 
+<!-- [DO NOT REMOVE-USED BY GH ACTION] PASTE CHANGELOG -->
 
 - [#737]
   - **Description:** Bump KDS version to 4.4.1.
