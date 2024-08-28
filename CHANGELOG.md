@@ -6,6 +6,19 @@ Changelog is rather internal in nature. See release notes for the public overvie
 
 <!-- [DO NOT REMOVE-USED BY GH ACTION] PASTE CHANGELOG -->
 
+
+- [#660]
+  - **Description:** Bump pug from 3.0.2 to 3.0.3
+  - **Products impact:** Dev Dependency upgrade
+  - **Addresses:** -
+  - **Components:** -
+  - **Breaking:** -
+  - **Impacts a11y:** -
+  - **Guidance:** -
+
+[#660]: https://github.com/learningequality/kolibri-design-system/pull/660
+
+
 - [547]
   - **Description:** Automates changelog update process in the pull requests by adding two GitHub actions: (1) to check for the presence of changelog items(s) in the pull request description, (2) to paste the item(s) to CHANGELOG.md after the PR merged.
   - **Products impact:** none
