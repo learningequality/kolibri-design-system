@@ -95,8 +95,12 @@
       },
       dataValue: { default: null }, // eslint-disable-line
       /* An HTML element the tooltip should be appended to */
+      // 'type: HTMLElement' breaks the documentation build (??)
+      // 'type: Object' causes 'Invalid prop: type check failed for prop
+      //        "appendToEl". Expected Object, got HTMLDivElement' warning
+      //        in consumers
       appendToEl: {
-        type: HTMLElement,
+        type: null,
         default: null,
       },
       visibleArrow: {
