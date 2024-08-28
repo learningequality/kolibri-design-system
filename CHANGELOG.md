@@ -4,6 +4,19 @@ Changelog is rather internal in nature. See release notes for the public overvie
 
 ## Upcoming version 5.x.x (`develop` branch)
 
+<!-- [DO NOT REMOVE-USED BY GH ACTION] PASTE CHANGELOG -->
+
+- [547]
+  - **Description:** Automates changelog update process in the pull requests by adding two GitHub actions: (1) to check for the presence of changelog items(s) in the pull request description, (2) to paste the item(s) to CHANGELOG.md after the PR merged.
+  - **Products impact:** none
+  - **Addresses:** https://github.com/learningequality/kolibri-design-system/issues/533
+  - **Components:** -
+  - **Breaking:** -
+  - **Impacts a11y:** -
+  - **Guidance:** -
+
+[547]: https://github.com/learningequality/kolibri-design-system/pull/547
+
 - [#753]
   - **Description:** Bump KDS version to 5.0.0-rc3.
   - **Products impact:** -.

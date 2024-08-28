@@ -1,0 +1,77 @@
+name: Update Changelog.md
+
+on:
+  pull_request_target:
+    types:
+      - closed
+
+jobs:
+  update-changelog:
+    if: github.event.pull_request.merged == true
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.base.ref }}
+          fetch-depth: 0
+          # Prevent later git operations from reusing the same authentication
+          persist-credentials: false
+
+      - name: Extract and update Changelog
+        id: modify-changelog
+        shell: python
+        run: |
+          import re
+          if "${{ github.event.pull_request.user.login }}" == "dependabot[bot]":
+              changelog = "  - **Description:** ${{ github.event.pull_request.title }}\n  - **Products impact:** Dev Dependency upgrade\n  - **Addresses:** -\n  - **Components:** -\n  - **Breaking:** -\n  - **Impacts a11y:** -\n  - **Guidance:** -"
+          else:
+              description = """${{ github.event.pull_request.body }}"""
+              capture = re.compile("<!-- \[DO NOT REMOVE-USED BY GH ACTION\] CHANGELOG START -->\s+<!--(\n|.)+?(?=- \*\*Description)(?P<body>(\n|.)+?(?=<!-- \[DO NOT REMOVE-USED BY GH ACTION\] CHANGELOG END -->))")
+              match = capture.search(description)
+              changelog = match.groupdict()["body"].strip()
+
+          final_changelog = "<!-- [DO NOT REMOVE-USED BY GH ACTION] PASTE CHANGELOG -->\n\n"
+
+          pr_number = "${{ github.event.pull_request.number }}"
+          pr_link = "[#{}]".format(pr_number)
+          pr_link_ref = pr_link + ": ${{ github.event.pull_request.html_url }}"
+
+          for changeline in changelog.splitlines():
+              changeline = changeline.strip()
+              if not changeline:
+                  continue
+
+              if changeline.startswith("- **Description:**"):
+                  final_changelog += "\n" + "- " + pr_link + "\n"
+
+              final_changelog += "  " + changeline + "\n"
+
+              if changeline.startswith("- **Guidance:**"):
+                  final_changelog += "\n" + pr_link_ref + "\n"
+
+          with open("CHANGELOG.md", "r") as f:
+              current_changelog = f.read()
+
+          new_changelog = current_changelog.replace("<!-- [DO NOT REMOVE-USED BY GH ACTION] PASTE CHANGELOG -->", final_changelog, 1)
+
+          with open("CHANGELOG.md", "w") as f:
+              f.write(new_changelog)
+      - uses: tibdex/github-app-token@v1
+        id: generate-token
+        with:
+          app_id: ${{ secrets.LE_BOT_APP_ID }}
+          private_key: ${{ secrets.LE_BOT_PRIVATE_KEY }}
+      - name: Commit updated CHANGELOG.md
+        run: |
+          git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git add CHANGELOG.md
+          git commit -m "Update CHANGELOG.md for PR #${{ github.event.pull_request.number }}"
+      - name: Push changes
+        uses: ad-m/github-push-action@v0.8.0
+        with:
+          github_token: ${{ steps.generate-token.outputs.token }}
+          branch: ${{ github.event.pull_request.base.ref }}
