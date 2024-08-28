@@ -96,7 +96,7 @@
       dataValue: { default: null }, // eslint-disable-line
       /* An HTML element the tooltip should be appended to */
       appendToEl: {
-        type: Object,
+        type: HTMLElement,
         default: null,
       },
       visibleArrow: {
