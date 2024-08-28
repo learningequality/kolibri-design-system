@@ -5,7 +5,8 @@
       <p>
         The <code>KTable</code> component is an accessible and customizable table component designed to handle a variety of data presentation needs. The component is suitable for both simple and complex data tables. It offers:
         <ul>
-          <li>Built-in sorting as well as integration with externally sorted data</li>
+          <li>Offers built-in sorting by default</li>
+          <li>Integrates with already sorted data</li>
           <li>Keyboard navigation</li>
           <li>Dynamic column resizing</li>
           <li>Sticky headers</li>

@@ -1,7 +1,7 @@
 <template>
 
   <div ref="tableWrapper" class="k-table-wrapper">
-    <table class="k-table" role="grid">
+    <table v-if="!isTableEmpty" class="k-table" role="grid">
       <caption v-if="caption" class="visuallyhidden">
         {{ caption }}
       </caption>
@@ -80,6 +80,9 @@
         </tr>
       </tbody>
     </table>
+    <div v-else class="empty-message">
+      {{ emptyMessage }}
+    </div>
   </div>
 
 </template>
@@ -115,6 +118,7 @@
           return rows.value;
         }
       });
+      const isTableEmpty = computed(() => finalRows.value.length === 0);
 
       watch(
         () => props.rows,
@@ -154,6 +158,7 @@
         SORT_ORDER_DESC,
         DATA_TYPE_OTHERS,
         getHeaderStyle,
+        isTableEmpty,
       };
     },
     /* eslint-disable kolibri/vue-no-unused-properties */
@@ -201,11 +206,11 @@
         default: true,
       },
       /**
-       * Sets the height of the table. Default is `auto`.
+       * The message to display when the table is empty.
        */
-      height: {
+      emptyMessage: {
         type: String,
-        default: 'auto',
+        default: 'No data available',
       },
     },
     data() {
