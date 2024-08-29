@@ -17,7 +17,7 @@
       <!--Non-Sortable Table-->
       <h3>Table without sorting functionality</h3>
       <p>
-        This is an example to show how <code>KTable</code> can be used without any sorting functionality, for a simple table. Use of slots is optional.
+        This is an example to show how <code>KTable</code> can be used without any sorting functionality, as a simple table. Use of slots is optional.
       </p>
       <!-- eslint-disable -->
       <DocsShowCode language="html">
@@ -25,7 +25,6 @@
           :headers="headers"
           :rows="rows"
           caption="Non Sortable Table"
-          :sortable="false"
         >
 
           <template #header="{ header, index }">
@@ -64,7 +63,6 @@
           :headers="headers"
           :rows="rows"
           caption="Non-sortable table"
-          :sortable="false"
         >
           <template #header="{ header, index }">
             <span>{{ header.label }} (Backend)</span>
@@ -77,9 +75,9 @@
       </DocsShow>
        <!-- eslint-enable -->
       <!-- Frontend Sorting Example-->
-      <h3>Table with Frontend Sorting</h3>
+      <h3>Table with Default Sorting</h3>
       <p>
-        The <code>KTable</code> can be used with local sorting functionality, allowing you to sort data on the client side without the need for server requests. There are 4 permissible data types - <code>string</code>,<code>numeric</code>,<code>date</code> and <code>others</code>. Columns declared with <code>others</code> data type are not sortable. This example demonstrates a table with local sorting enabled.
+        The <code>KTable</code> can be used with default sorting functionality, allowing you to sort data on the client side without the need for server requests. There are 4 permissible data types - <code>string</code>,<code>numeric</code>,<code>date</code> and <code>others</code>. Columns declared with <code>others</code> data type are not sortable. This example demonstrates a table with default sorting enabled.
       </p>
       <!-- eslint-disable -->
       <DocsShowCode language="html">
@@ -87,7 +85,6 @@
           :headers="headers"
           :rows="rows"
           caption="Table with built-in sorting"
-          :useLocalSorting="true"
           sortable
         />
 
@@ -117,7 +114,6 @@
           :headers="headers"
           :rows="rows"
           caption="Local Sorting Table"
-          :useLocalSorting="true"
           sortable
         />
           <!-- eslint-enable -->
