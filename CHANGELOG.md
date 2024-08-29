@@ -4,7 +4,90 @@ Changelog is rather internal in nature. See release notes for the public overvie
 
 ## Upcoming version 5.x.x (`develop` branch)
 
+<!-- [DO NOT REMOVE-USED BY GH ACTION] PASTE CHANGELOG -->
 
+
+- [#626]
+  - **Description:** Bump slackapi/slack-github-action from 1.25.0 to 1.26.0
+  - **Products impact:** Dev Dependency upgrade
+  - **Addresses:** -
+  - **Components:** -
+  - **Breaking:** -
+  - **Impacts a11y:** -
+  - **Guidance:** -
+
+[#626]: https://github.com/learningequality/kolibri-design-system/pull/626
+
+
+
+- [#739]
+  - **Description:** Bump elliptic from 6.5.4 to 6.5.7
+  - **Products impact:** Dev Dependency upgrade
+  - **Addresses:** -
+  - **Components:** -
+  - **Breaking:** -
+  - **Impacts a11y:** -
+  - **Guidance:** -
+
+[#739]: https://github.com/learningequality/kolibri-design-system/pull/739
+
+
+
+- [#660]
+  - **Description:** Bump pug from 3.0.2 to 3.0.3
+  - **Products impact:** Dev Dependency upgrade
+  - **Addresses:** -
+  - **Components:** -
+  - **Breaking:** -
+  - **Impacts a11y:** -
+  - **Guidance:** -
+
+[#660]: https://github.com/learningequality/kolibri-design-system/pull/660
+
+
+- [547]
+  - **Description:** Automates changelog update process in the pull requests by adding two GitHub actions: (1) to check for the presence of changelog items(s) in the pull request description, (2) to paste the item(s) to CHANGELOG.md after the PR merged.
+  - **Products impact:** none
+  - **Addresses:** https://github.com/learningequality/kolibri-design-system/issues/533
+  - **Components:** -
+  - **Breaking:** -
+  - **Impacts a11y:** -
+  - **Guidance:** -
+
+[547]: https://github.com/learningequality/kolibri-design-system/pull/547
+
+- [#753]
+  - **Description:** Bump KDS version to 5.0.0-rc3.
+  - **Products impact:** -.
+  - **Addresses:** -.
+  - **Components:** -.
+  - **Breaking:** -.
+  - **Impacts a11y:** -.
+  - **Guidance:** -.
+
+[#753]: https://github.com/learningequality/kolibri-design-system/pull/753
+
+- [#754]
+  - **Description:** Removed the border-radius on align left.
+  - **Products impact:** bugfix.
+  - **Addresses:** https://github.com/learningequality/kolibri-design-system/issues/741
+  - **Components:** `KCard`
+  - **Breaking:** no -.
+  - **Impacts a11y:** no -.
+  - **Guidance:** -
+
+[#741]: https://github.com/learningequality/kolibri-design-system/pull/751
+
+- [#650]
+  - **Description:** Add `KRadioButtonGroup` component to fix keyboard navigation in radio button groups in Firefox 
+  - **Products impact:** New API
+  - **Addresses:** https://github.com/learningequality/kolibri/issues/10491
+  - **Components:** `KRadioButtonGroup`
+  - **Breaking:** no
+  - **Impacts a11y:** yes
+  - **Guidance:** Make sure that all `KRadioButton`s are wrapped in `KRadioButtonGroup`
+
+[#650]: https://github.com/learningequality/kolibri-design-system/pull/650
 
 
 - [#723]
@@ -29,6 +112,7 @@ Changelog is rather internal in nature. See release notes for the public overvie
   - **Guidance:** -
 
 [#723]: https://github.com/learningequality/kolibri-design-system/pull/723
+
 - [#728]
   - **Description:** Adds `$darken_` utility functions for darkening palette colors and ensures compatibility with Node.js v10 by pinning the `color` package version to `3.2.1`.
   - **Products impact:** Kolibri Design System

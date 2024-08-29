@@ -12,6 +12,7 @@ Addresses #*PR# HERE*
 <!-- Insert images here if applicable -->
 
 ## Changelog
+<!-- [DO NOT REMOVE-USED BY GH ACTION] CHANGELOG START -->
 
 <!--
   - Fill in the changelog item(s) below. If there are more groups of closely
@@ -22,7 +23,6 @@ Addresses #*PR# HERE*
     items in CHANGELOG.md as examples
  -->
 
-- [#PR no]
   - **Description:** Summary of change(s)
   - **Products impact:** Choose from - none (for internal updates) / bugfix / new API / updated API / removed API. If it's 'none', use "-" for all items below to indicate they are not relevant.
   - **Addresses:** Link(s) to GH issue(s) addressed. Include KDS links as well as links to related issues in a consumer product repository too.
@@ -31,7 +31,7 @@ Addresses #*PR# HERE*
   - **Impacts a11y:** Does this change improve a11y or adds new features that can be used to improve it? Choose from: yes / no
   - **Guidance:** Why and how to introduce this update to a consumer? Required for breaking changes, appreciated for changes with a11y impact, and welcomed for non-breaking changes when relevant.
 
-[#PR no]: PR link
+<!-- [DO NOT REMOVE-USED BY GH ACTION] CHANGELOG END -->
 
 ## Steps to test
 

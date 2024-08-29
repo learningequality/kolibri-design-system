@@ -416,6 +416,11 @@ export default [
         isCode: true,
       }),
       new Page({
+        path: '/kradiobuttongroup',
+        title: 'KRadioButtonGroup',
+        isCode: true,
+      }),
+      new Page({
         path: '/kcard',
         title: 'KCard',
         isCode: true,
