@@ -10,7 +10,6 @@
       :rows="rows"
       caption="Local Sorting Table"
       :style="{height: '300px'}"
-      :useLocalSorting="true"
       sortable
     >
       <template #header="{ header, index }">
@@ -32,8 +31,8 @@
       :headers="headersWithCustomWidths"
       :rows="backendRows"
       caption="Backend Sorting Table"
-      :useLocalSorting="false"
       sortable
+      disableDefaultSorting
       @changeSort="changeSortHandler"
     >
       <template #header="{ header, index }">
@@ -53,7 +52,6 @@
       :headers="headers"
       :rows="rows"
       caption="Non Sortable Table"
-      :sortable="false"
     />
 
   </div>

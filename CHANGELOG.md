@@ -37,18 +37,6 @@ Changelog is rather internal in nature. See release notes for the public overvie
 
 [#650]: https://github.com/learningequality/kolibri-design-system/pull/650
 
-
-[#727]
-  - **Description:** Initial implementation of `KTable` component
-  - **Products impact:** New Component
-  - **Addresses:** [#328](https://github.com/learningequality/kolibri-design-system/issues/328)
-  - **Components:** KTable
-  - **Breaking:** No
-  - **Impacts a11y:**  Yes
-  - **Guidance:**
-[#727] https://github.com/learningequality/kolibri-design-system/pull/727
-
-
 - [#723]
   - **Description:** Updates $core-time value from 0.25s to 0.15s
   - **Products impact:** User experience - faster transitions

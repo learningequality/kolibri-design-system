@@ -102,7 +102,7 @@
     setup(props, { emit }) {
       const headers = ref(props.headers);
       const rows = ref(props.rows);
-      const useLocalSorting = ref(props.useLocalSorting);
+      const useLocalSorting = ref(props.sortable && !props.disableDefaultSorting);
       const {
         sortKey,
         sortOrder,
@@ -112,8 +112,8 @@
       } = useSorting(headers, rows, useLocalSorting);
 
       const finalRows = computed(() => {
-        if (props.sortable) {
-          return useLocalSorting.value ? sortedRows.value : rows.value;
+        if (props.sortable && !props.disableDefaultSorting) {
+          return sortedRows.value;
         } else {
           return rows.value;
         }
@@ -191,10 +191,11 @@
         type: String,
         required: true,
       },
+
       /**
-       * Enables or disables local sorting of the table data.
+       * Disables the default sorting when sortable is true. Facilitates integration with externally sorted data.
        */
-      useLocalSorting: {
+      disableDefaultSorting: {
         type: Boolean,
         default: false,
       },
@@ -203,7 +204,7 @@
        */
       sortable: {
         type: Boolean,
-        default: true,
+        default: false,
       },
       /**
        * The message to display when the table is empty.
