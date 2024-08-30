@@ -6,6 +6,16 @@ Changelog is rather internal in nature. See release notes for the public overvie
 
 <!-- [DO NOT REMOVE-USED BY GH ACTION] PASTE CHANGELOG -->
 
+- [#762]
+  - **Description:**  Updates dropshadows to the latest design guidelines
+  - **Products impact:**  Visual
+  - **Addresses:** https://github.com/learningequality/kolibri-design-system/issues/724
+  - **Components:** All components with dropshadows
+  - **Breaking:**  no
+  - **Impacts a11y:**  no
+  - **Guidance:** -
+
+[#762]: https://github.com/learningequality/kolibri-design-system/pull/762
 
 - [#722]
   - **Description:** Inserts the overlay container element `#k-overlay` to an application's document body during KDS initialization.
