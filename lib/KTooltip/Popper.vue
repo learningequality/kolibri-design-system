@@ -4,6 +4,11 @@
     Vendored from https://github.com/RobinCK/vue-popper/
     pending
     https://github.com/RobinCK/vue-popper/pull/73
+
+    LE customizations
+     - Allow for appending to a chosen element rather than to body,
+       typically to the overlay container element #k-overlay.
+       'appendToBody' prop changedto 'appendToEl' and related changes.
   -->
 
 
@@ -89,9 +94,14 @@
         default: false,
       },
       dataValue: { default: null }, // eslint-disable-line
-      appendToBody: {
-        type: Boolean,
-        default: false,
+      /* An HTML element the tooltip should be appended to */
+      // 'type: HTMLElement' breaks the documentation build (??)
+      // 'type: Object' causes 'Invalid prop: type check failed for prop
+      //        "appendToEl". Expected Object, got HTMLDivElement' warning
+      //        in consumers
+      appendToEl: {
+        type: null,
+        default: null,
       },
       visibleArrow: {
         type: Boolean,
@@ -155,7 +165,7 @@
 
     created() {
       this.appendedArrow = false;
-      this.appendedToBody = false;
+      this.isAppendedToEl = false;
       this.popperOptions = Object.assign(this.popperOptions, this.options);
     },
 
@@ -210,9 +220,9 @@
           this.popperJS = null;
         }
 
-        if (this.appendedToBody) {
-          this.appendedToBody = false;
-          document.body.removeChild(this.popper.parentElement);
+        if (this.isAppendedToEl) {
+          this.isAppendedToEl = false;
+          this.appendToEl.removeChild(this.popper.parentElement);
         }
       },
 
@@ -222,9 +232,9 @@
             this.appendArrow(this.popper);
           }
 
-          if (this.appendToBody && !this.appendedToBody) {
-            this.appendedToBody = true;
-            document.body.appendChild(this.popper.parentElement);
+          if (this.appendToEl && !this.isAppendedToEl) {
+            this.isAppendedToEl = true;
+            this.appendToEl.appendChild(this.popper.parentElement);
           }
 
           if (this.popperJS && this.popperJS.destroy) {

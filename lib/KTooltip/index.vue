@@ -6,6 +6,7 @@
     :disabled="disabled"
     :visibleArrow="false"
     :options="options"
+    :appendToEl="appendToEl"
     trigger="hover"
   >
     <div
@@ -28,6 +29,7 @@
 <script>
 
   import isArray from 'lodash/isArray';
+  import _useOverlay from '../composables/_useOverlay';
   import Popper from './Popper';
 
   /**
@@ -37,6 +39,12 @@
     name: 'KTooltip',
     components: {
       Popper,
+    },
+
+    setup(props) {
+      const { getOverlayEl } = _useOverlay();
+      const appendToEl = props.appendToOverlay ? getOverlayEl() : null;
+      return { appendToEl };
     },
     props: {
       /**
@@ -85,6 +93,15 @@
       maxWidth: {
         type: String,
         default: null,
+      },
+      /**
+       * Whether or not the tooltip should be moved
+       * to the overlay container element `#k-overlay`
+       */
+      // eslint-disable-next-line kolibri/vue-no-unused-properties
+      appendToOverlay: {
+        type: Boolean,
+        default: false,
       },
     },
     data() {

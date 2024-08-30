@@ -77,7 +77,7 @@
     <DocsPageSection title="Related" anchor="#related">
       <ul>
         <li>
-          <DocsInternalLink href="/installation#install-plugin" text="KDS installation step" /> that attaches live regions to an application's DOM
+          <DocsInternalLink href="/installation#install-plugin" text="KDS installation step" /> that attaches live regions to an application's document body
         </li>
       </ul>
     </DocsPageSection>
@@ -93,7 +93,7 @@
 
   export default {
     setup() {
-      const { _mountLiveRegion, sendPoliteMessage, sendAssertiveMessage } = useKLiveRegion();
+      const { sendPoliteMessage, sendAssertiveMessage } = useKLiveRegion();
 
       const politeMessageInput = ref('Polite hello');
       const updatePoliteMessage = message => {
@@ -106,7 +106,6 @@
       };
 
       return {
-        _mountLiveRegion,
         updatePoliteMessage,
         politeMessageInput,
         updateAssertiveMessage,
@@ -114,9 +113,6 @@
         sendPoliteMessage,
         sendAssertiveMessage,
       };
-    },
-    mounted() {
-      this._mountLiveRegion(this.$root.$el);
     },
   };
 
