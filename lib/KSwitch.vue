@@ -185,6 +185,7 @@
 
 
 <style lang="scss">
+
   @import './styles/definitions';
   $k-switch-height: 32px !default;
   $k-switch-thumb-size: 20px !default;
@@ -255,6 +256,7 @@
 
   .k-switch-thumb {
     @extend %dropshadow-1dp;
+
     position: absolute;
     z-index: 1;
     width: $k-switch-thumb-size;
