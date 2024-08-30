@@ -84,7 +84,7 @@
 <style lang="scss" scoped>
 
   /* stylelint-disable */
-
+  
   @import '../styles/definitions';
   @import './styles/imports';
 
@@ -92,6 +92,7 @@
   $ui-snackbar-font-size: rem(14px) !default;
 
   .ui-snackbar {
+    @extend  %dropshadow-2dp;
     @include font-family-noto;
 
     display: inline-flex;
@@ -102,7 +103,6 @@
     padding: rem(14px 24px);
     background-color: $ui-snackbar-background-color;
     border-radius: $ui-default-border-radius;
-    box-shadow: 0 1px 3px rgba(black, 0.12), 0 1px 2px rgba(black, 0.24);
   }
 
   .ui-snackbar-message {
