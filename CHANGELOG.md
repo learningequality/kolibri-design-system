@@ -59,6 +59,58 @@ Changelog is rather internal in nature. See release notes for the public overvie
   - **Guidance:** -
 
 [#722]: https://github.com/learningequality/kolibri-design-system/pull/722
+<!-- [DO NOT REMOVE-USED BY GH ACTION] PASTE CHANGELOG -->
+
+
+- [#626]
+  - **Description:** Bump slackapi/slack-github-action from 1.25.0 to 1.26.0
+  - **Products impact:** Dev Dependency upgrade
+  - **Addresses:** -
+  - **Components:** -
+  - **Breaking:** -
+  - **Impacts a11y:** -
+  - **Guidance:** -
+
+[#626]: https://github.com/learningequality/kolibri-design-system/pull/626
+
+
+
+- [#739]
+  - **Description:** Bump elliptic from 6.5.4 to 6.5.7
+  - **Products impact:** Dev Dependency upgrade
+  - **Addresses:** -
+  - **Components:** -
+  - **Breaking:** -
+  - **Impacts a11y:** -
+  - **Guidance:** -
+
+[#739]: https://github.com/learningequality/kolibri-design-system/pull/739
+
+
+
+- [#660]
+  - **Description:** Bump pug from 3.0.2 to 3.0.3
+  - **Products impact:** Dev Dependency upgrade
+  - **Addresses:** -
+  - **Components:** -
+  - **Breaking:** -
+  - **Impacts a11y:** -
+  - **Guidance:** -
+
+[#660]: https://github.com/learningequality/kolibri-design-system/pull/660
+
+
+- [547]
+  - **Description:** Automates changelog update process in the pull requests by adding two GitHub actions: (1) to check for the presence of changelog items(s) in the pull request description, (2) to paste the item(s) to CHANGELOG.md after the PR merged.
+  - **Products impact:** none
+  - **Addresses:** https://github.com/learningequality/kolibri-design-system/issues/533
+  - **Components:** -
+  - **Breaking:** -
+  - **Impacts a11y:** -
+  - **Guidance:** -
+
+[547]: https://github.com/learningequality/kolibri-design-system/pull/547
+
 - [#753]
   - **Description:** Bump KDS version to 5.0.0-rc3.
   - **Products impact:** -.
