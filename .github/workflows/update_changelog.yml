@@ -29,7 +29,7 @@ jobs:
               changelog = "  - **Description:** ${{ github.event.pull_request.title }}\n  - **Products impact:** Dev Dependency upgrade\n  - **Addresses:** -\n  - **Components:** -\n  - **Breaking:** -\n  - **Impacts a11y:** -\n  - **Guidance:** -"
           else:
               description = """${{ github.event.pull_request.body }}"""
-              capture = re.compile("<!-- \[DO NOT REMOVE-USED BY GH ACTION\] CHANGELOG START -->\s+<!--(\n|.)+?(?=- \*\*Description)(?P<body>(\n|.)+?(?=<!-- \[DO NOT REMOVE-USED BY GH ACTION\] CHANGELOG END -->))")
+              capture = re.compile("<!-- \[DO NOT REMOVE-USED BY GH ACTION\] CHANGELOG START -->(\n|.)+?(?=- \*\*Description)(?P<body>(\n|.)+?(?=<!-- \[DO NOT REMOVE-USED BY GH ACTION\] CHANGELOG END -->))")
               match = capture.search(description)
               changelog = match.groupdict()["body"].strip()
 
