@@ -4,61 +4,6 @@ Changelog is rather internal in nature. See release notes for the public overvie
 
 ## Upcoming version 5.x.x (`develop` branch)
 
-- [#722]
-  - **Description:** Inserts the overlay container element `#k-overlay` to an application's document body during KDS initialization.
-  - **Products impact:** KDS initialization
-  - **Addresses:** -
-  - **Components:** -
-  - **Breaking:** no
-  - **Impacts a11y:** no
-  - **Guidance:** Remove any custom teleportation logic and use new KDS components and props instead.
-
-[#722]: https://github.com/learningequality/kolibri-design-system/pull/722
-
-
-- [#722]
-  - **Description:** Adds new `KOverlay` component
-  - **Products impact:** New API
-  - **Addresses:** -
-  - **Components:**  `KOverlay` 
-  - **Breaking:** no
-  - **Impacts a11y:** no
-  - **Guidance:** -
-
-[#722]: https://github.com/learningequality/kolibri-design-system/pull/722
-
-- [#722]
-  - **Description:** Renames `KModal`'s `appendToRoot` prop to `appendToOverlay`
-  - **Products impact:** Updated API
-  - **Addresses:** -
-  - **Components:**  `KModal` 
-  - **Breaking:** yes
-  - **Impacts a11y:** no
-  - **Guidance:** Rename `KModal`'s `appendToRoot` prop to `appendToOverlay`
-
-[#722]: https://github.com/learningequality/kolibri-design-system/pull/722
-
-- [#722]
-  - **Description:** Adds new prop, `appendToOverlay`, to `KTooltip`
-  - **Products impact:** New API
-  - **Addresses:** -
-  - **Components:**  `KTooltip` 
-  - **Breaking:** no
-  - **Impacts a11y:** no
-  - **Guidance:** -
-
-[#722]: https://github.com/learningequality/kolibri-design-system/pull/722
-
-- [#722]
-  - **Description:** Makes the `sidebar` icon flip in RTL languages
-  - **Products impact:** Bugfix
-  - **Addresses:** -
-  - **Components:**  Icons
-  - **Breaking:** no
-  - **Impacts a11y:** yes
-  - **Guidance:** -
-
-[#722]: https://github.com/learningequality/kolibri-design-system/pull/722
 <!-- [DO NOT REMOVE-USED BY GH ACTION] PASTE CHANGELOG -->
 
 
