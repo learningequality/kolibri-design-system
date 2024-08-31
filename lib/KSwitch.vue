@@ -186,6 +186,7 @@
 
 <style lang="scss">
 
+  @import './styles/definitions';
   $k-switch-height: 32px !default;
   $k-switch-thumb-size: 20px !default;
   $k-switch-thumb-color: #f5f5f5 !default;
@@ -254,13 +255,14 @@
   }
 
   .k-switch-thumb {
+    @extend %dropshadow-1dp;
+
     position: absolute;
     z-index: 1;
     width: $k-switch-thumb-size;
     height: $k-switch-thumb-size;
     background-color: $k-switch-thumb-color;
     border-radius: 50%;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
     transition-timing-function: ease;
     transition-duration: 0.2s;
     transition-property: background-color, transform;
