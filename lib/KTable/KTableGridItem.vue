@@ -24,7 +24,7 @@
     name: 'KTableGridItem',
     props: {
       content: {
-        type: [String, Number],
+        type: [String, Number, Boolean, Object, Array],
         required: true,
       },
       dataType: {
