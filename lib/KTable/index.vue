@@ -112,12 +112,13 @@
       } = useSorting(headers, rows, useLocalSorting);
 
       const finalRows = computed(() => {
-        if (props.sortable && !props.disableDefaultSorting) {
-          return sortedRows.value;
+        if (props.sortable) {
+          return useLocalSorting.value ? sortedRows.value : rows.value;
         } else {
           return rows.value;
         }
       });
+
       const isTableEmpty = computed(() => finalRows.value.length === 0);
 
       watch(
