@@ -1,88 +1,89 @@
 <template>
 
   <div ref="tableWrapper" class="k-table-wrapper">
-    <table v-if="!isTableEmpty" class="k-table" role="grid">
-      <caption v-if="caption" class="visuallyhidden">
-        {{ caption }}
-      </caption>
-      <thead>
-        <tr ref="stickyHeader">
-          <th
-            v-for="(header, index) in headers"
-            :ref="'header-' + index"
-            :key="index"
-            tabindex="0"
-            :aria-sort="sortable && header.dataType !== DATA_TYPE_OTHERS ? getAriaSort(index) : null"
-            :class="{
-              [$computedClass(coreOutlineFocus)]: true,
-              sortable: sortable && header.dataType !== DATA_TYPE_OTHERS,
-              'sticky-header': true,
-              'sticky-column': index === 0,
-            }"
-            :style="[getHeaderStyle(header),
-                     sortKey === index ? { color: $themeBrand.primary.v_1000 } : { color: $themePalette.grey.v_800 },
-                     { backgroundColor: $themePalette.white } ,
-                     focusedColIndex === index ? { backgroundColor: $themePalette.grey.v_50 } : {}]"
-            role="columnheader"
-            data-focus="true"
-            :aria-colindex="index + 1"
-            @click="sortable ? handleSort(index) : null"
-            @keydown="handleKeydown($event, -1, index)"
-          >
-            <!--@slot Scoped slot for customizing the content of each header cell. Provides a header object `header` and its column index `colIndex`.-->
-
-            <slot name="header" :header="header" :index="index">
-              {{ header.label }}
-            </slot>
-            <span v-if="sortable && header.dataType !== DATA_TYPE_OTHERS" class="sort-icon">
-              <span v-if="sortKey === index && sortOrder === SORT_ORDER_ASC"><KIcon icon="dropup" :color="sortKey === index ? $themeBrand.primary.v_1100 : $themePalette.grey.v_800 " /></span>
-              <span v-else-if="sortKey === index && sortOrder === SORT_ORDER_DESC"><KIcon icon="dropdown" :color="sortKey === index ? $themeBrand.primary.v_1100 : $themePalette.grey.v_800 " /></span>
-              <span v-else><KIcon icon="sortColumn" :color="$themePalette.grey.v_800" /></span>
-            </span>
-          </th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr
-          v-for="(row, rowIndex) in finalRows"
-          :key="rowIndex"
-          :style="getRowStyle(rowIndex)"
-          @mouseover="handleRowMouseOver(rowIndex)"
-          @mouseleave="handleRowMouseLeave"
-        >
-          <KTableGridItem
-            v-for="(col, colIndex) in row"
-            :ref="'cell-' + rowIndex + '-' + colIndex"
-            :key="colIndex"
-            :content="col"
-            :dataType="headers[colIndex].dataType"
-            :minWidth="headers[colIndex].minWidth"
-            :width="headers[colIndex].width"
-            :rowIndex="rowIndex"
-            :colIndex="colIndex"
-            :class="{
-              'sticky-column': colIndex === 0,
-            }"
-            :style="getCellStyle(rowIndex, colIndex)"
-            data-focus="true"
-            role="gridcell"
-            :aria-colindex="colIndex + 1"
-            @keydown="handleKeydown($event, rowIndex, colIndex)"
-          >
-            <template #default="slotProps">
-
-              <!--@slot Scoped slot for customizing the content of each data cell. Provides the content of a data cell `content`, its row index `rowIndex`, its column index `colIndex`, and the corresponding whole row object `row`.-->
-              <slot name="cell" :content="slotProps.content" :rowIndex="rowIndex" :colIndex="colIndex" :row="row">
-                {{ slotProps.content }}
+    <template v-if="dataLoading">
+      <p><KCircularLoader /></p>
+    </template>
+    <template v-else>
+      <table v-if="!isTableEmpty" class="k-table" role="grid">
+        <caption v-if="caption" class="visuallyhidden">
+          {{ caption }}
+        </caption>
+        <thead>
+          <tr ref="stickyHeader">
+            <th
+              v-for="(header, index) in headers"
+              :ref="'header-' + index"
+              :key="index"
+              tabindex="0"
+              :aria-sort="sortable && header.dataType !== DATA_TYPE_OTHERS ? getAriaSort(index) : null"
+              :class="{
+                [$computedClass(coreOutlineFocus)]: true,
+                sortable: sortable && header.dataType !== DATA_TYPE_OTHERS,
+                'sticky-header': true,
+                'sticky-column': index === 0,
+              }"
+              :style="[getHeaderStyle(header),
+                       sortKey === index ? { color: $themeBrand.primary.v_1000 } : { color: $themePalette.grey.v_800 },
+                       { backgroundColor: $themePalette.white } ,
+                       focusedColIndex === index ? { backgroundColor: $themePalette.grey.v_50 } : {}]"
+              role="columnheader"
+              data-focus="true"
+              :aria-colindex="index + 1"
+              @click="sortable ? handleSort(index) : null"
+              @keydown="handleKeydown($event, -1, index)"
+            >
+              <slot name="header" :header="header" :index="index">
+                {{ header.label }}
               </slot>
-            </template>
-          </KTableGridItem>
-        </tr>
-      </tbody>
-    </table>
-    <div v-else class="empty-message">
-      {{ emptyMessage }}
-    </div>
+              <span v-if="sortable && header.dataType !== DATA_TYPE_OTHERS" class="sort-icon">
+                <span v-if="sortKey === index && sortOrder === SORT_ORDER_ASC"><KIcon icon="dropup" :color="sortKey === index ? $themeBrand.primary.v_1100 : $themePalette.grey.v_800 " /></span>
+                <span v-else-if="sortKey === index && sortOrder === SORT_ORDER_DESC"><KIcon icon="dropdown" :color="sortKey === index ? $themeBrand.primary.v_1100 : $themePalette.grey.v_800 " /></span>
+                <span v-else><KIcon icon="sortColumn" :color="$themePalette.grey.v_800" /></span>
+              </span>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr
+            v-for="(row, rowIndex) in finalRows"
+            :key="rowIndex"
+            :style="getRowStyle(rowIndex)"
+            @mouseover="handleRowMouseOver(rowIndex)"
+            @mouseleave="handleRowMouseLeave"
+          >
+            <KTableGridItem
+              v-for="(col, colIndex) in row"
+              :ref="'cell-' + rowIndex + '-' + colIndex"
+              :key="colIndex"
+              :content="col"
+              :dataType="headers[colIndex].dataType"
+              :minWidth="headers[colIndex].minWidth"
+              :width="headers[colIndex].width"
+              :rowIndex="rowIndex"
+              :colIndex="colIndex"
+              :class="{
+                'sticky-column': colIndex === 0,
+              }"
+              :style="getCellStyle(rowIndex, colIndex)"
+              data-focus="true"
+              role="gridcell"
+              :aria-colindex="colIndex + 1"
+              @keydown="handleKeydown($event, rowIndex, colIndex)"
+            >
+              <template #default="slotProps">
+                <slot name="cell" :content="slotProps.content" :rowIndex="rowIndex" :colIndex="colIndex" :row="row">
+                  {{ slotProps.content }}
+                </slot>
+              </template>
+            </KTableGridItem>
+          </tr>
+        </tbody>
+      </table>
+      <div v-else class="empty-message">
+        {{ emptyMessage }}
+      </div>
+    </template>
   </div>
 
 </template>
@@ -213,6 +214,13 @@
       emptyMessage: {
         type: String,
         default: 'No data available',
+      },
+      /**
+       * Indicates whether the data is currently being loaded.
+       */
+      dataLoading: {
+        type: Boolean,
+        default: false,
       },
     },
     data() {
