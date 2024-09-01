@@ -479,9 +479,12 @@
           : this.$themePalette.white;
       },
       highlightHeader(colIndex) {
-        const headers = this.$el.querySelectorAll('thead th');
-        headers.forEach((header, index) => {
-          this.setHighlightHeader(header, index === colIndex);
+        const headers = this.$refs;
+        Object.keys(headers).forEach(refKey => {
+          if (refKey.startsWith('header-')) {
+            const index = parseInt(refKey.split('-')[1], 10);
+            this.setHighlightHeader(headers[refKey][0], index === colIndex);
+          }
         });
       },
     },
