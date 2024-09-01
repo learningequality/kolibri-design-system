@@ -16,17 +16,17 @@
               :ref="'header-' + index"
               :key="index"
               tabindex="0"
-              :aria-sort="sortable && header.dataType !== DATA_TYPE_OTHERS ? getAriaSort(index) : null"
+              :aria-sort="isColumnSortable(index) ? getAriaSort(index) : null"
               :class="{
                 [$computedClass(coreOutlineFocus)]: true,
-                sortable: sortable && header.dataType !== DATA_TYPE_OTHERS,
+                sortable: isColumnSortable(index),
                 'sticky-header': true,
                 'sticky-column': index === 0,
               }"
               :style="[getHeaderStyle(header),
-                       sortKey === index ? { color: $themeBrand.primary.v_1000 } : { color: $themePalette.grey.v_800 },
+                       isColumnSortActive(index) ? { color: $themeBrand.primary.v_1000 } : { color: $themePalette.grey.v_800 },
                        { backgroundColor: $themePalette.white } ,
-                       focusedColIndex === index ? { backgroundColor: $themePalette.grey.v_50 } : {}]"
+                       isColumnFocused(index) ? { backgroundColor: $themePalette.grey.v_50 } : {}]"
               role="columnheader"
               data-focus="true"
               :aria-colindex="index + 1"
@@ -36,9 +36,9 @@
               <slot name="header" :header="header" :index="index">
                 {{ header.label }}
               </slot>
-              <span v-if="sortable && header.dataType !== DATA_TYPE_OTHERS" class="sort-icon">
-                <span v-if="sortKey === index && sortOrder === SORT_ORDER_ASC"><KIcon icon="dropup" :color="sortKey === index ? $themeBrand.primary.v_1100 : $themePalette.grey.v_800 " /></span>
-                <span v-else-if="sortKey === index && sortOrder === SORT_ORDER_DESC"><KIcon icon="dropdown" :color="sortKey === index ? $themeBrand.primary.v_1100 : $themePalette.grey.v_800 " /></span>
+              <span v-if="isColumnSortable(index)" class="sort-icon">
+                <span v-if="isColumnSortActive(index) && sortOrder === SORT_ORDER_ASC"><KIcon icon="dropup" :color="isColumnSortActive(index) ? $themeBrand.primary.v_1100 : $themePalette.grey.v_800 " /></span>
+                <span v-else-if="isColumnSortActive(index) && sortOrder === SORT_ORDER_DESC"><KIcon icon="dropdown" :color="isColumnSortActive(index) ? $themeBrand.primary.v_1100 : $themePalette.grey.v_800 " /></span>
                 <span v-else><KIcon icon="sortColumn" :color="$themePalette.grey.v_800" /></span>
               </span>
             </th>
@@ -87,8 +87,6 @@
   </div>
 
 </template>
-
-
 <script>
 
   import { ref, computed, watch } from '@vue/composition-api';
@@ -260,6 +258,18 @@
           }
           return styles;
         };
+      },
+      isColumnSortActive() {
+        return colIndex => this.sortKey === colIndex;
+      },
+      isSortableColumn() {
+        return colIndex => this.headers[colIndex].dataType !== DATA_TYPE_OTHERS;
+      },
+      isColumnFocused() {
+        return colIndex => this.focusedColIndex === colIndex;
+      },
+      isColumnSortable() {
+        return colIndex => this.sortable && this.headers[colIndex].dataType !== DATA_TYPE_OTHERS;
       },
     },
     methods: {
