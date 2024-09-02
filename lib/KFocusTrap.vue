@@ -19,7 +19,7 @@
   </div>
 
 </template>
-  
+
 
 <script>
 
