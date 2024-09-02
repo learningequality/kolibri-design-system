@@ -20,8 +20,8 @@
 
 </template>
   
-  
-  <script>
+
+<script>
 
   /**
    * This component ensures that focus moves between the first element
