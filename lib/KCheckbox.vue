@@ -14,8 +14,8 @@
           type="checkbox"
           class="k-checkbox-input"
           :aria-checked="ariaChecked"
-          :checked="isCurrentlyChecked"
-          :indeterminate.prop="isCurrentlyIndeterminate"
+          :checked="checked"
+          :indeterminate.prop="indeterminate"
           :disabled="disabled"
           @click.stop="toggleCheck"
           @focus="isActive = true"
@@ -24,13 +24,13 @@
         >
 
         <KIcon
-          v-if="isCurrentlyIndeterminate"
+          v-if="indeterminate"
           :style="notBlank"
           class="checkbox-icon"
           icon="indeterminateCheck"
         />
         <KIcon
-          v-else-if="!isCurrentlyIndeterminate && isCurrentlyChecked"
+          v-else-if="!indeterminate && checked"
           :style="[ notBlank, activeOutline ]"
           class="checkbox-icon"
           icon="checked"
@@ -122,13 +122,11 @@
       },
     },
     data: () => ({
-      isCurrentlyChecked: false,
-      isCurrentlyIndeterminate: false,
       isActive: false,
     }),
     computed: {
       ariaChecked() {
-        return this.isCurrentlyIndeterminate ? 'mixed' : this.isCurrentlyChecked ? 'true' : 'false';
+        return this.indeterminate ? 'mixed' : this.checked ? 'true' : 'false';
       },
       id() {
         return `k-checkbox-${this._uid}`;
@@ -152,28 +150,14 @@
         };
       },
     },
-    watch: {
-      checked(newCheckedState) {
-        this.isCurrentlyChecked = newCheckedState;
-      },
-      indeterminate(newIndeterminateState) {
-        this.isCurrentlyIndeterminate = newIndeterminateState;
-      },
-    },
-    created() {
-      this.isCurrentlyChecked = this.checked;
-      this.isCurrentlyIndeterminate = this.indeterminate;
-    },
     methods: {
       toggleCheck(event) {
         if (!this.disabled) {
-          this.isCurrentlyChecked = !this.isCurrentlyChecked;
           this.$refs.kCheckboxInput.focus();
-          this.isCurrentlyIndeterminate = false;
           /**
            * Emits change event
            */
-          this.$emit('change', this.isCurrentlyChecked, event);
+          this.$emit('change', !this.checked, event);
         }
       },
       markInactive() {
