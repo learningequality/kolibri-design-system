@@ -6,6 +6,19 @@ Changelog is rather internal in nature. See release notes for the public overvie
 
 <!-- [DO NOT REMOVE-USED BY GH ACTION] PASTE CHANGELOG -->
 
+
+- [#765]
+  - **Description:** Fixes update changelog workflow to avoid expecting a comment after the invisible comment `<!-- [DO NOT REMOVE-USED BY GH ACTION] CHANGELOG START -->`.
+  - **Products impact:** none.
+  - **Addresses:** -
+  - **Components:** -
+  - **Breaking:** -
+  - **Impacts a11y:** -
+  - **Guidance:** -
+
+[#765]: https://github.com/learningequality/kolibri-design-system/pull/765
+
+
 - [#762]
   - **Description:**  Updates dropshadows to the latest design guidelines
   - **Products impact:**  Visual
