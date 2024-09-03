@@ -7,6 +7,19 @@ Changelog is rather internal in nature. See release notes for the public overvie
 <!-- [DO NOT REMOVE-USED BY GH ACTION] PASTE CHANGELOG -->
 
 
+- [#766]
+  - **Description:** Bump KDS version to 5.0.0-rc4
+  - **Products impact:** -.
+  - **Addresses:** -.
+  - **Components:** -.
+  - **Breaking:** -.
+  - **Impacts a11y:** -.
+  - **Guidance:** -.
+
+[#766]: https://github.com/learningequality/kolibri-design-system/pull/766
+
+
+
 - [#765]
   - **Description:** Fixes update changelog workflow to avoid expecting a comment after the invisible comment `<!-- [DO NOT REMOVE-USED BY GH ACTION] CHANGELOG START -->`.
   - **Products impact:** none.
