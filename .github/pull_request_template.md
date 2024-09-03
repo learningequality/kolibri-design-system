@@ -63,9 +63,5 @@ Addresses #*PR# HERE*
 - [ ] Are all UI components LTR and RTL compliant (if applicable)?
 - [ ] _Add other things to check for here_
 
-## After review
-
-- [ ] The changelog item has been pasted to the `CHANGELOG.md`
-
 ## Comments
 <!-- Any additional notes you'd like to add -->
