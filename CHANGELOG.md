@@ -6,6 +6,17 @@ Changelog is rather internal in nature. See release notes for the public overvie
 
 <!-- [DO NOT REMOVE-USED BY GH ACTION] PASTE CHANGELOG -->
 
+- [#767]
+  - **Description:** Bump KDS version to 4.5.0.
+  - **Products impact:** -.
+  - **Addresses:** -.
+  - **Components:** -.
+  - **Breaking:** -.
+  - **Impacts a11y:** -.
+  - **Guidance:** -.
+
+[#767]: https://github.com/learningequality/kolibri-design-system/pull/767
+
 - [#744]
   - **Description:** Removes internal state management for checked & indeterminate in KCheckbox.
   - **Products impact:** Updated API
@@ -14,6 +25,7 @@ Changelog is rather internal in nature. See release notes for the public overvie
   - **Breaking:** No
   - **Impacts a11y:** No
   - **Guidance:** If you use KCheckbox, it is your responsibility to handle the `change` event and update whether or not the given `checked` and `indeterminate` props reflect the reality that you expect.
+
 [#744]: https://github.com/learningequality/kolibri-design-system/pull/744
 
 - [#737]
