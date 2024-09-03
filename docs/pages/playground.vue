@@ -73,17 +73,8 @@
         :headingLevel="2"
         layout="vertical"
         thumbnailDisplay="small"
-        :preserveFooter="true"
         title="This is a sample resource title This is a sample resource title This is a sample resource title This is a sample resource title This is a sample resource title This is a sample resource title This is a sample resource title This is a sample resource title This is a sample resource title This is a sample resource title"
       >
-
-        <template #thumbnailPlaceholder>
-          <div>
-            <div style="text-align: center;">
-              <KIcon icon="readSolid" class="icon-placeholder" />
-            </div>
-          </div>
-        </template>
         <template #belowTitle>
           <span>Below title below title below title below title below title below title below title below title below title below title below title below title below title</span>
         </template>
