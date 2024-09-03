@@ -31,7 +31,7 @@
    * allowing for flexible use from parent components.
    */
   export default {
-    name: 'FocusTrap',
+    name: 'KFocusTrap',
     props: {
       disabled: {
         type: Boolean,
