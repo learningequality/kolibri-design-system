@@ -17,8 +17,11 @@
         v-if="thumbnailDisplay !== 'none'"
         class="thumbnail"
       >
+        <!-- 
+          Render KImg even if thumbnailSrc is not provided since in that case
+          KImg takes care of showing the gray placeholder area.
+        -->
         <KImg
-          v-if="thumbnailSrc"
           :src="thumbnailSrc"
           :scaleType="thumbnailScaleType"
           :aspectRatio="thumbnailAspectRatio"
