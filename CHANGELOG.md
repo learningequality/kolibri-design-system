@@ -217,7 +217,6 @@ Changelog is rather internal in nature. See release notes for the public overvie
 
 [#728]: https://github.com/learningequality/kolibri-design-system/pull/728
 
-
 - [#738]
   - **Description:** Bump KDS version to 5.0.0-rc2.
   - **Products impact:** -.
@@ -239,7 +238,6 @@ Changelog is rather internal in nature. See release notes for the public overvie
   - **Guidance:**
 
 [705]: https://github.com/learningequality/kolibri-design-system/pull/705
-
 
 - [719]
   - **Description:** Removes KResponsiveWindowMixin.
