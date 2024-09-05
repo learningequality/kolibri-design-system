@@ -33,7 +33,7 @@
               @click="sortable ? handleSort(index) : null"
               @keydown="handleKeydown($event, -1, index)"
             >
-              <slot name="header" :header="header" :index="index">
+              <slot name="header" :header="header" :colindex="index">
                 {{ header.label }}
               </slot>
               <span v-if="isColumnSortable(index)" class="sort-icon">
@@ -164,7 +164,7 @@
     /* eslint-disable kolibri/vue-no-unused-properties */
     props: {
       /**
-       * An array of objects `{ label, dataType, minWidth, width }`representing the headers of the table. The `dataType` can be one of `'string'`, `'numeric'`, `'date'`, or `'others'`. `label` and `dataType` are required. `minWidth` and `width` are optional.
+       * An array of objects `{ label, dataType, minWidth, width }`representing the headers of the table. The `dataType` can be one of `'string'`, `'number'`, `'date'`, or `'undefined'`. `label` and `dataType` are required. `minWidth` and `width` are optional.
        */
       headers: {
         type: Array,
@@ -173,7 +173,7 @@
           return value.every(
             header =>
               ['label', 'dataType'].every(key => key in header) &&
-              ['string', 'numeric', 'date', 'others'].includes(header.dataType)
+              ['string', 'number', 'date', 'undefined'].includes(header.dataType)
           );
         },
       },

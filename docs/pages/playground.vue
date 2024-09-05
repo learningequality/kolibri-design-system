@@ -12,7 +12,7 @@
       :style="{height: '300px'}"
       sortable
     >
-      <template #header="{ header, index }">
+      <template #header="{ header, colindex }">
         <span>{{ header.label }} (Local)</span>
       </template>
       <template #cell="{ content, rowIndex, colIndex }">
@@ -35,7 +35,7 @@
       disableDefaultSorting
       @changeSort="changeSortHandler"
     >
-      <template #header="{ header, index }">
+      <template #header="{ header, colindex }">
         <span>{{ header.label }} (Backend)</span>
       </template>
       <template #cell="{ content, rowIndex, colIndex }">
@@ -99,17 +99,17 @@
       return {
         headers: [
           { label: 'Name', dataType: 'string' },
-          { label: 'Age', dataType: 'numeric' },
+          { label: 'Age', dataType: 'number' },
           { label: 'City', dataType: 'string' },
           { label: 'Joined', dataType: 'date' },
-          { label: 'Misc', dataType: 'others' },
+          { label: 'Misc', dataType: 'undefined' },
         ],
         headersWithCustomWidths: [
           { label: 'Name', dataType: 'string', minWidth: '20px', width: '2%' },
-          { label: 'Age', dataType: 'numeric', minWidth: '100px', width: '33%' },
+          { label: 'Age', dataType: 'number', minWidth: '100px', width: '33%' },
           { label: 'City', dataType: 'string', minWidth: '200px', width: '25%' },
           { label: 'Joined', dataType: 'date', minWidth: '150px', width: '20%' },
-          { label: 'Misc', dataType: 'others', minWidth: '100px', width: '20%' },
+          { label: 'Misc', dataType: 'undefined', minWidth: '100px', width: '20%' },
         ],
         rows: [
           ['John Doe', 28, 'New York', '2022-01-15T00:00:00Z', 'N/A'],
