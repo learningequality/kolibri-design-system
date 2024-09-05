@@ -26,7 +26,8 @@
               :style="[getHeaderStyle(header),
                        isColumnSortActive(index) ? { color: $themeBrand.primary.v_1000 } : { color: $themePalette.grey.v_800 },
                        { backgroundColor: $themePalette.white } ,
-                       isColumnFocused(index) ? { backgroundColor: $themePalette.grey.v_50 } : {}]"
+                       isColumnFocused(index) ? { backgroundColor: $themePalette.grey.v_50 } : {},
+                       { textAlign: getTextAlign(header.dataType) }]"
               role="columnheader"
               data-focus="true"
               :aria-colindex="index + 1"
@@ -90,7 +91,12 @@
 <script>
 
   import { ref, computed, watch } from '@vue/composition-api';
-  import useSorting, { SORT_ORDER_ASC, SORT_ORDER_DESC, DATA_TYPE_OTHERS } from './useSorting';
+  import useSorting, {
+    SORT_ORDER_ASC,
+    SORT_ORDER_DESC,
+    DATA_TYPE_OTHERS,
+    DATA_TYPE_NUMERIC,
+  } from './useSorting';
   import KTableGridItem from './KTableGridItem.vue';
 
   export default {
@@ -496,6 +502,16 @@
             this.setHighlightHeader(headers[refKey][0], index === colIndex);
           }
         });
+      },
+      getTextAlign(dataType) {
+        const alignLtr = dataType === DATA_TYPE_NUMERIC ? 'right' : 'left';
+        if (this.isRtl && alignLtr === 'right') {
+          return 'left';
+        }
+        if (this.isRtl && alignLtr === 'left') {
+          return 'right';
+        }
+        return alignLtr;
       },
     },
   };
