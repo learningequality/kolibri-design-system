@@ -4,6 +4,151 @@ Changelog is rather internal in nature. See release notes for the public overvie
 
 ## Upcoming version 5.x.x (`develop` branch)
 
+<!-- [DO NOT REMOVE-USED BY GH ACTION] PASTE CHANGELOG -->
+
+
+- [#766]
+  - **Description:** Bump KDS version to 5.0.0-rc4
+  - **Products impact:** -.
+  - **Addresses:** -.
+  - **Components:** -.
+  - **Breaking:** -.
+  - **Impacts a11y:** -.
+  - **Guidance:** -.
+
+[#766]: https://github.com/learningequality/kolibri-design-system/pull/766
+
+
+
+- [#765]
+  - **Description:** Fixes update changelog workflow to avoid expecting a comment after the invisible comment `<!-- [DO NOT REMOVE-USED BY GH ACTION] CHANGELOG START -->`.
+  - **Products impact:** none.
+  - **Addresses:** -
+  - **Components:** -
+  - **Breaking:** -
+  - **Impacts a11y:** -
+  - **Guidance:** -
+
+[#765]: https://github.com/learningequality/kolibri-design-system/pull/765
+
+
+- [#762]
+  - **Description:**  Updates dropshadows to the latest design guidelines
+  - **Products impact:**  Visual
+  - **Addresses:** https://github.com/learningequality/kolibri-design-system/issues/724
+  - **Components:** All components with dropshadows
+  - **Breaking:**  no
+  - **Impacts a11y:**  no
+  - **Guidance:** -
+
+[#762]: https://github.com/learningequality/kolibri-design-system/pull/762
+
+- [#722]
+  - **Description:** Inserts the overlay container element `#k-overlay` to an application's document body during KDS initialization.
+  - **Products impact:** KDS initialization
+  - **Addresses:** -
+  - **Components:** -
+  - **Breaking:** no
+  - **Impacts a11y:** no
+  - **Guidance:** Remove any custom teleportation logic and use new KDS components and props instead.
+
+[#722]: https://github.com/learningequality/kolibri-design-system/pull/722
+
+- [#722]
+  - **Description:** Adds new `KOverlay` component
+  - **Products impact:** New API
+  - **Addresses:** -
+  - **Components:**  `KOverlay`
+  - **Breaking:** no
+  - **Impacts a11y:** no
+  - **Guidance:** -
+
+[#722]: https://github.com/learningequality/kolibri-design-system/pull/722
+
+- [#722]
+  - **Description:** Renames `KModal`'s `appendToRoot` prop to `appendToOverlay`
+  - **Products impact:** Updated API
+  - **Addresses:** -
+  - **Components:**  `KModal`
+  - **Breaking:** yes
+  - **Impacts a11y:** no
+  - **Guidance:** Rename `KModal`'s `appendToRoot` prop to `appendToOverlay`
+
+[#722]: https://github.com/learningequality/kolibri-design-system/pull/722
+
+- [#722]
+  - **Description:** Adds new prop, `appendToOverlay`, to `KTooltip`
+  - **Products impact:** New API
+  - **Addresses:** -
+  - **Components:**  `KTooltip`
+  - **Breaking:** no
+  - **Impacts a11y:** no
+  - **Guidance:** -
+
+[#722]: https://github.com/learningequality/kolibri-design-system/pull/722
+
+- [#722]
+  - **Description:** Makes the `sidebar` icon flip in RTL languages
+  - **Products impact:** Bugfix
+  - **Addresses:** -
+  - **Components:**  Icons
+  - **Breaking:** no
+  - **Impacts a11y:** yes
+  - **Guidance:** -
+
+[#722]: https://github.com/learningequality/kolibri-design-system/pull/722
+
+
+
+- [#626]
+  - **Description:** Bump slackapi/slack-github-action from 1.25.0 to 1.26.0
+  - **Products impact:** Dev Dependency upgrade
+  - **Addresses:** -
+  - **Components:** -
+  - **Breaking:** -
+  - **Impacts a11y:** -
+  - **Guidance:** -
+
+[#626]: https://github.com/learningequality/kolibri-design-system/pull/626
+
+
+
+- [#739]
+  - **Description:** Bump elliptic from 6.5.4 to 6.5.7
+  - **Products impact:** Dev Dependency upgrade
+  - **Addresses:** -
+  - **Components:** -
+  - **Breaking:** -
+  - **Impacts a11y:** -
+  - **Guidance:** -
+
+[#739]: https://github.com/learningequality/kolibri-design-system/pull/739
+
+
+
+- [#660]
+  - **Description:** Bump pug from 3.0.2 to 3.0.3
+  - **Products impact:** Dev Dependency upgrade
+  - **Addresses:** -
+  - **Components:** -
+  - **Breaking:** -
+  - **Impacts a11y:** -
+  - **Guidance:** -
+
+[#660]: https://github.com/learningequality/kolibri-design-system/pull/660
+
+
+- [547]
+  - **Description:** Automates changelog update process in the pull requests by adding two GitHub actions: (1) to check for the presence of changelog items(s) in the pull request description, (2) to paste the item(s) to CHANGELOG.md after the PR merged.
+  - **Products impact:** none
+  - **Addresses:** https://github.com/learningequality/kolibri-design-system/issues/533
+  - **Components:** -
+  - **Breaking:** -
+  - **Impacts a11y:** -
+  - **Guidance:** -
+
+[547]: https://github.com/learningequality/kolibri-design-system/pull/547
+
 - [#753]
   - **Description:** Bump KDS version to 5.0.0-rc3.
   - **Products impact:** -.
@@ -264,6 +409,29 @@ Changelog is rather internal in nature. See release notes for the public overvie
 
 ## Version 4.x.x (`release-v4` branch)
 
+<!-- [DO NOT REMOVE-USED BY GH ACTION] PASTE CHANGELOG -->
+
+- [#767]
+  - **Description:** Bump KDS version to 4.5.0.
+  - **Products impact:** -.
+  - **Addresses:** -.
+  - **Components:** -.
+  - **Breaking:** -.
+  - **Impacts a11y:** -.
+  - **Guidance:** -.
+
+[#767]: https://github.com/learningequality/kolibri-design-system/pull/767
+
+- [#744]
+  - **Description:** Removes internal state management for checked & indeterminate in KCheckbox.
+  - **Products impact:** Updated API
+  - **Addresses:** https://github.com/learningequality/studio/issues/4636
+  - **Components:** KCheckbox
+  - **Breaking:** No
+  - **Impacts a11y:** No
+  - **Guidance:** If you use KCheckbox, it is your responsibility to handle the `change` event and update whether or not the given `checked` and `indeterminate` props reflect the reality that you expect.
+
+[#744]: https://github.com/learningequality/kolibri-design-system/pull/744
 
 - [#737]
   - **Description:** Bump KDS version to 4.4.1.

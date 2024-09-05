@@ -125,7 +125,7 @@
 </script>
 
 <style lang="scss">
-
+  @import '../styles/definitions';
   @import './styles/imports';
 
   $ui-toolbar-font-size: rem(18px) !default;
@@ -144,7 +144,7 @@
     font-size: $ui-toolbar-font-size;
 
     &.is-raised {
-      box-shadow: 0 0 2px rgba(black, 0.12), 0 2px 2px rgba(black, 0.2);
+      @extend %dropshadow-2dp;
     }
 
     &:not(.is-raised).ui-toolbar--type-default {

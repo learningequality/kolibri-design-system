@@ -1,6 +1,6 @@
 <template>
 
-  <component :is="wrapper" v-bind="wrapperProps">
+  <component :is="wrapper">
     <!-- Accessibility properties for the overlay -->
     <transition name="modal-fade" appear>
       <div
@@ -103,7 +103,6 @@
 
 <script>
 
-  import Teleport from 'vue2-teleport';
   import debounce from 'lodash/debounce';
   import useKResponsiveWindow from './composables/useKResponsiveWindow';
 
@@ -120,9 +119,6 @@
    */
   export default {
     name: 'KModal',
-    components: {
-      Teleport,
-    },
     setup() {
       const { windowHeight, windowWidth } = useKResponsiveWindow();
       return { windowHeight, windowWidth };
@@ -197,9 +193,10 @@
         required: false,
       },
       /**
-       * Whether or not the modal should be teleported to the root of the document
+       * Whether or not the modal should be moved
+       * to the overlay container element `#k-overlay`
        */
-      appendToRoot: {
+      appendToOverlay: {
         type: Boolean,
         default: false,
       },
@@ -236,10 +233,7 @@
         };
       },
       wrapper() {
-        return this.appendToRoot ? 'Teleport' : 'div';
-      },
-      wrapperProps() {
-        return this.appendToRoot ? { to: 'body' } : {};
+        return this.appendToOverlay ? 'KOverlay' : 'div';
       },
     },
     created() {
@@ -391,7 +385,7 @@
 
   // TODO: margins for stacked buttons.
   .modal {
-    @extend %dropshadow-16dp;
+    @extend %dropshadow-6dp;
 
     position: absolute;
     top: 50%;
