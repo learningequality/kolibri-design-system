@@ -4,16 +4,6 @@ Changelog is rather internal in nature. See release notes for the public overvie
 
 ## Upcoming version 5.x.x (`develop` branch)
 
- [#625]
-  - **Description:**  Update`KCard` to complete vertical/horizontal layouts with no thumbnail
-  - **Products impact:**  Card updates 
-  - **Addresses:** https://github.com/learningequality/kolibri-design-system/pull/752
-  - **Components:** `KCard` 
-  - **Breaking:** N0
-  - **Impacts a11y:** No
-  - **Guidance:**
-
-[#752]https://github.com/learningequality/kolibri-design-system/pull/752
 
 - [#754]
   - **Description:** Removed the border-radius on align left.
