@@ -14,7 +14,7 @@
     </template>
     <template #default>
       <div
-        v-if="thumbnailDisplay !== 'none'"
+        v-if="thumbnailDisplay !== Thumbnail_Displays.NONE"
         class="thumbnail"
       >
         <!-- 
@@ -232,6 +232,11 @@
         type: Boolean,
         default: false,
       },
+    },
+    data(){
+      return {
+        Thumbnail_Displays
+      }
     },
     computed: {
       rootClass() {
