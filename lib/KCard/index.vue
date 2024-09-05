@@ -233,10 +233,10 @@
         default: false,
       },
     },
-    data(){
+    data() {
       return {
-        Thumbnail_Displays
-      }
+        Thumbnail_Displays,
+      };
     },
     computed: {
       rootClass() {
