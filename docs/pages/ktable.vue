@@ -73,13 +73,13 @@
           </template>
         </KTable>
       </DocsShow>
-       <!-- eslint-enable -->
+
       <!-- Frontend Sorting Example-->
       <h3>Table with Default Sorting</h3>
       <p>
         The <code>KTable</code> can be used with default sorting functionality, allowing you to sort data on the client side without the need for server requests. There are 4 permissible data types - <code>string</code>,<code>number</code>,<code>date</code> and <code>undefined</code>. Columns declared with <code>undefined</code> data type are not sortable. This example demonstrates a table with default sorting enabled.
       </p>
-      <!-- eslint-disable -->
+    
       <DocsShowCode language="html">
         <KTable
           :headers="headers"
