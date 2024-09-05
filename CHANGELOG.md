@@ -182,6 +182,7 @@ Changelog is rather internal in nature. See release notes for the public overvie
 
 [#650]: https://github.com/learningequality/kolibri-design-system/pull/650
 
+
 - [#723]
   - **Description:** Updates $core-time value from 0.25s to 0.15s
   - **Products impact:** User experience - faster transitions
@@ -250,7 +251,6 @@ Changelog is rather internal in nature. See release notes for the public overvie
   - **Guidance:** Replace any use of KResponsiveWindowMixin with the new composable useKResponsiveWindow.
 
 [719]: https://github.com/learningequality/kolibri-design-system/pull/719
-
 
 - [#718]
   - **Description:** This pull request resolves failing `KDateCalendar` component tests that occurred on the last day of the month in open pull requests by setting dates manually in the tests. Additionally, the `KDateCalendar` is updated to show the month of the `lastAllowedDate` property.
