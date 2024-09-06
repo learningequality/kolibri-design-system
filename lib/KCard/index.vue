@@ -1,82 +1,116 @@
 <template>
 
-  <BaseCard
-    :to="to"
-    :title="title"
-    :headingLevel="headingLevel"
-    :titleLines="titleLines"
-    :class="['k-card', rootClass, thumbnailAlignClass]"
-    :headingStyles="headingStyles"
+  <!-- see trackInputModality  for [data-focus=true] -->
+  <li
+    :class="['k-card', $computedClass(coreOutlineFocus), rootClass, thumbnailAlignClass]"
+    :style="{ backgroundColor: $themeTokens.surface }"
+    tabindex="0"
+    data-focus="true"
+    @focus="onCardFocus"
+    @mouseenter="onCardHover"
+    @mousedown="onMouseDown"
+    @mouseup="onMouseUp"
+    @keyup.enter="onEnter"
   >
-    <template v-if="$slots.title" #title>
-      <!-- @slot Optional slot section containing the title contents, should not contain a heading element. -->
-      <slot name="title"></slot>
-    </template>
-    <template #default>
-      <div
-        v-if="thumbnailDisplay !== Thumbnail_Displays.NONE"
-        class="thumbnail"
+    <component
+      :is="headingElement"
+      v-if="title || $slots.title"
+      :style="headingStyles"
+    >
+      <!--
+        Prevent router-link click event by setting empty event=""
+        (technique used by Vue community because
+        the usual ways don't work for router-link).
+        This is because <li> is supposed to take care of it.
+        Furthemore, together with 'draggable' disabled, it ensures
+        that text selection works on the title text.
+        See the custom click implementation in 'onMouseUp'. 
+      -->
+      <router-link
+        tabindex="-1"
+        :to="to"
+        draggable="false"
+        event=""
       >
-        <!-- 
-          Render KImg even if thumbnailSrc is not provided since in that case
-          KImg takes care of showing the gray placeholder area.
-        -->
-        <KImg
-          :src="thumbnailSrc"
-          :scaleType="thumbnailScaleType"
-          :aspectRatio="thumbnailAspectRatio"
-          :isDecorative="true"
-          :appearanceOverrides="thumbnailStyles"
-        />
-        <!--
-          This is a duplicate of the same slot in KImg. I didn't find a way to utilize
-          KImg's placeholder slot from here, likely because this part of code is nested
-          in one slot already
-
-          Show it even when thumbnail source is provided - then the placeholder serves
-          as progressive loading experience.
-        -->
         <span
-          v-if="$slots.thumbnailPlaceholder"
-          class="thumbnail-placeholder"
+          class="base-card-title"
+          :style="{ color: $themeTokens.text }"
         >
-          <!-- @slot Places content to the thumbnail placeholder area. -->
-          <slot name="thumbnailPlaceholder"></slot>
+          <!-- @slot Optional slot section containing the title contents, should not contain a heading element. -->
+          <slot 
+            v-if="$slots.title"
+            name="title"
+          ></slot>
+          <KTextTruncator
+            v-else
+            :text="title"
+            :maxLines="titleLines"
+          />
         </span>
-      </div>
-      <div
-        v-if="$slots.aboveTitle || preserveAboveTitle"
-        data-test="aboveTitle"
-        class="above-title"
+      </router-link>
+    </component>
+
+    <div
+      v-if="thumbnailDisplay !== Thumbnail_Displays.NONE"
+      class="thumbnail"
+    >
+      <!-- 
+        Render KImg even if thumbnailSrc is not provided since in that case
+        KImg takes care of showing the gray placeholder area.
+      -->
+      <KImg
+        :src="thumbnailSrc"
+        :scaleType="thumbnailScaleType"
+        :aspectRatio="thumbnailAspectRatio"
+        :isDecorative="true"
+        :appearanceOverrides="thumbnailStyles"
+      />
+      <!--
+        This is a duplicate of the same slot in KImg. I didn't find a way to utilize
+        KImg's placeholder slot from here, likely because this part of code is nested
+        in one slot already
+
+        Show it even when thumbnail source is provided - then the placeholder serves
+        as progressive loading experience.
+      -->
+      <span
+        v-if="$slots.thumbnailPlaceholder"
+        class="thumbnail-placeholder"
       >
-        <!-- @slot Places content to the area above the title. -->
-        <slot name="aboveTitle"></slot>
-      </div>
-      <div
-        v-if="$slots.belowTitle || preserveBelowTitle"
-        data-test="belowTitle"
-        class="below-title"
-      >
-        <!-- @slot Places content to the area below the title. -->
-        <slot name="belowTitle"></slot>
-      </div>
-      <div
-        v-if="$slots.footer || preserveFooter"
-        data-test="footer"
-        class="footer"
-      >
-        <!-- @slot Places content to the footer area. -->
-        <slot name="footer"></slot>
-      </div>
-    </template>
-  </BaseCard>
+        <!-- @slot Places content to the thumbnail placeholder area. -->
+        <slot name="thumbnailPlaceholder"></slot>
+      </span>
+    </div>
+    <div
+      v-if="$slots.aboveTitle || preserveAboveTitle"
+      data-test="aboveTitle"
+      class="above-title"
+    >
+      <!-- @slot Places content to the area above the title. -->
+      <slot name="aboveTitle"></slot>
+    </div>
+    <div
+      v-if="$slots.belowTitle || preserveBelowTitle"
+      data-test="belowTitle"
+      class="below-title"
+    >
+      <!-- @slot Places content to the area below the title. -->
+      <slot name="belowTitle"></slot>
+    </div>
+    <div
+      v-if="$slots.footer || preserveFooter"
+      data-test="footer"
+      class="footer"
+    >
+      <!-- @slot Places content to the footer area. -->
+      <slot name="footer"></slot>
+    </div>
+  </li>
 
 </template>
 
 
 <script>
-
-  import BaseCard from './BaseCard.vue';
 
   const Layouts = {
     HORIZONTAL: 'horizontal',
@@ -109,7 +143,6 @@
 
   export default {
     name: 'KCard',
-    components: { BaseCard },
     props: {
       /**
        * Sets card title if provided. The title should be
@@ -126,6 +159,14 @@
       headingLevel: {
         type: Number,
         required: true,
+        validator(value) {
+          if (value <= 6 && value >= 2) {
+            return true;
+          } else {
+            console.error(`[KCard] 'headingLevel' must be between 2 and 6.`);
+            return false;
+          }
+        },
       },
       /**
        * An object containing the route definition for the link.
@@ -235,10 +276,21 @@
     },
     data() {
       return {
+        mouseDownTime: 0,
         Thumbnail_Displays,
       };
     },
     computed: {
+      coreOutlineFocus() {
+        return {
+          ':focus': {
+            ...this.$coreOutline,
+          },
+        };
+      },
+      headingElement() {
+        return this.headingLevel ? 'h' + this.headingLevel : undefined;
+      },
       rootClass() {
         return this.stylesAndClasses.rootClass;
       },
@@ -255,13 +307,13 @@
         return this.stylesAndClasses.thumbnailAlignClass;
       },
       /*
-            Returns dynamic classes and few style-like data that CSS was cumbersome/impossible to use for ,or are in need of using theme, grouped by all possible combinations of layouts.
+        Returns dynamic classes and few style-like data that CSS was cumbersome/impossible to use for ,or are in need of using theme, grouped by all possible combinations of layouts.
 
-            New styles and classes are meant to be added to this single-source-of-truth object so
-            that we can easily locate all styling being applied to a particular layout
+        New styles and classes are meant to be added to this single-source-of-truth object so
+        that we can easily locate all styling being applied to a particular layout
 
-            Could be further simplified by using solely dynamic styles, but that would have detrimental effects on our auto RTL machinery and we would need to take care manually of more places. 
-          */
+        Could be further simplified by using solely dynamic styles, but that would have detrimental effects on our auto RTL machinery and we would need to take care manually of more places. 
+      */
       stylesAndClasses() {
         /* In px. Needs to be the same as $spacer variable in styles part */
         const SPACER = 24;
@@ -359,12 +411,51 @@
         return {};
       },
     },
+    mounted() {
+      if (!this.$slots.title && !this.title) {
+        console.error(`[KCard] provide title via 'title' slot or prop`);
+      }
+    },
+    methods: {
+      navigate() {
+        this.$router.push(this.to);
+      },
+      onCardFocus(e) {
+        this.$emit('focus', e);
+      },
+      onCardHover(e) {
+        this.$emit('hover', e);
+      },
+      onEnter() {
+        this.navigate();
+      },
+      onMouseDown() {
+        this.mouseDownTime = new Date().getTime();
+      },
+      onMouseUp() {
+        const mouseUpTime = new Date().getTime();
+        // Make textual content selectable within the whole clickable card area.
+        //
+        // Calculate the time difference between the mouse button press and release.
+        // If the time difference is greater than or equal to 200 milliseconds,
+        // it means that the mouse button was pressed and held for a longer time,
+        // which is not typically interpreted as a click event. Do not navigate
+        // in such case.
+        if (mouseUpTime - this.mouseDownTime < 200) {
+          this.navigate();
+        } else {
+          return;
+        }
+      },
+    },
   };
 
 </script>
 
 
 <style lang="scss" scoped>
+
+  @import '../styles/definitions';
 
   /* Needs to be the same as SPACER constant in JavaScript part */
   $spacer: 24px;
@@ -378,12 +469,32 @@
   /************* Common styles **************/
 
   .k-card {
+    @extend %dropshadow-2dp;
+
     position: relative; /* basis for absolute positioning of thumbnail images */
     display: flex;
     flex-direction: column;
     flex-wrap: nowrap;
     width: 100%;
     font-size: 12px;
+    text-align: left;
+    text-decoration: none;
+    list-style-type: none;
+    cursor: pointer;
+    border-radius: 0.5em;
+    outline-offset: -1px;
+    transition: box-shadow $core-time ease;
+
+    &:hover,
+    &:focus {
+      @extend %dropshadow-6dp;
+    }
+  }
+
+  .title {
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 1.5;
   }
 
   .thumbnail {
