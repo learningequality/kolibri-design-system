@@ -19,6 +19,7 @@
         :is="headingElement"
         v-if="title || $slots.title"
         class="heading"
+        :style="{ color: $themeTokens.text }"
       >
         <!--
           Prevent router-link click event by setting empty event=""
@@ -33,23 +34,17 @@
           tabindex="-1"
           :to="to"
           draggable="false"
-          event=""
         >
-          <span
-            class="base-card-title"
-            :style="{ color: $themeTokens.text }"
-          >
-            <!-- @slot Optional slot section containing the title contents, should not contain a heading element. -->
-            <slot 
-              v-if="$slots.title"
-              name="title"
-            ></slot>
-            <KTextTruncator
-              v-else
-              :text="title"
-              :maxLines="titleLines"
-            />
-          </span>
+          <!-- @slot Optional slot section containing the title contents, should not contain a heading element. -->
+          <slot 
+            v-if="$slots.title"
+            name="title"
+          ></slot>
+          <KTextTruncator
+            v-else
+            :text="title"
+            :maxLines="titleLines"
+          />
         </router-link>
       </component>
 
@@ -467,12 +462,14 @@
   .heading {
     order: 3;
     margin: $spacer $spacer calc(#{$spacer} / 2) $spacer;
-  }
-
-  .title {
     font-size: 16px;
     font-weight: 600;
     line-height: 1.5;
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
   }
 
   .thumbnail {
