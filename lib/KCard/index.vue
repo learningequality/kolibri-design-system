@@ -144,16 +144,17 @@
     name: 'KCard',
     props: {
       /**
-       * Sets card title if provided. The title should be
-       * unique and descriptive to aid searching through list of links.
+       * A regular Vue route object that defines
+       * where the card click should navigate.
        */
-      title: {
-        type: String,
-        required: false,
-        default: null,
+      to: {
+        type: Object,
+        required: true,
       },
       /**
-       * Sets the HTML heading level in range (h2 - h6) for the title .
+       * Sets the HTML heading level in range (h2 - h6) for the title.
+       * Ensure that the heading level is correct within a particular
+       * context of a page where cards are displayed.
        */
       headingLevel: {
         type: Number,
@@ -168,19 +169,27 @@
         },
       },
       /**
-       * An object containing the route definition for the link.
-       * Required and cannot be empty.
+       * Sets card title if provided. The title should be
+       * unique within a grid and descriptive to aid screenreader
+       * navigation.
        */
-      to: {
-        type: Object,
-        required: true,
+      title: {
+        type: String,
+        required: false,
+        default: null,
       },
       /**
-       * Controls card orientation. Required and cannot be empty.
-       * Expected Options: 'horizontal' (default) or 'vertical'.
-       *
-       * @param {String} value - The layout value.
-       * @returns {Boolean} - True if the value is not empty, false otherwise.
+       * Specifies the number of lines allowed
+       * for the titlebefore truncation occurs.
+       */
+      titleLines: {
+        type: Number,
+        required: false,
+        default: 2,
+      },
+      /**
+       * Controls content orientation.
+       * Options: `'horizontal'`, `'vertical'`.
        */
       layout: {
         type: String,
@@ -189,7 +198,7 @@
       },
       /**
        * Controls how the thumbnail appears in the card.
-       * Expected Options: 'none' (default), 'small', or 'large'.
+       * Options: `'none'`, `'small'`, or `'large'`.
        * */
       thumbnailDisplay: {
         type: String,
@@ -197,12 +206,8 @@
         validator: cardValidator(ThumbnailDisplays, 'thumbnailDisplay'),
       },
       /**
-       * Sets the thumbnail path.
-       * Defaults to null if not provided.
-       *
-       * @type {String}
-       * @default null
-       * */
+       * Sets the thumbnail source path.
+       **/
       thumbnailSrc: {
         type: String,
         required: false,
@@ -210,21 +215,16 @@
       },
       /**
        * Specifies how the thumbnail scales in the card.
-       * Options: 'centerInside', 'contain', 'fitXY'.
-       * @type {String}
-       * @default 'centerInside'
+       * Options: `'centerInside'`, `'contain'`, `'fitXY'`.
        */
       thumbnailScaleType: {
         type: String,
         default: 'centerInside',
       },
       /**
-       * Controls the alignment of the thumbnail area in horizontal layouts.
-       * Only applies to horizontal layouts with 'small' or 'large' thumbnail display.
-       * Ignored in other layouts.
-       * @type {String}
-       * @values 'left', 'right'
-       * @default 'left'
+       * Controls the alignment of the thumbnail area
+       * in horizontal layouts. with `'small'` or `'large'` thumbnails
+       * Options: `'left'`, `'right'`
        */
       thumbnailAlign: {
         type: String,
@@ -232,41 +232,30 @@
         validator: cardValidator(ThumbnailAlignOptions, 'thumbnailAlign'),
       },
       /**
-       * Specifies the number of lines allowed for the title before truncation occurs.
-       * @type {number}
-       * @default 2
-       */
-      titleLines: {
-        type: Number,
-        required: false,
-        default: 2,
-      },
-
-      /**
-       * When true, preserves the space for the aboveTitle slot even when it's empty.
-       * When false, removes the space entirely if the slot is empty.
-       * @type {Boolean}
-       * @default false
+       * If `aboveTitle` slot is empty, this controls whether
+       * its space is preserved or not. Typically used to achieve
+       * consistent vertical alignment of information when there
+       * are multiple cards on the same grid row.
        */
       preserveAboveTitle: {
         type: Boolean,
         default: false,
       },
       /**
-       * When true, preserves the space for the belowTitle slot even when it's empty.
-       * When false, removes the space entirely if the slot is empty.
-       * @type {Boolean}
-       * @default false
+       * If `belowTitle` slot is empty, this controls whether
+       * its space is preserved or not. Typically used to achieve
+       * consistent vertical alignment of information when there
+       * are multiple cards on the same grid row.
        */
       preserveBelowTitle: {
         type: Boolean,
         default: false,
       },
       /**
-       * When true, preserves the space for the footer slot even when it's empty.
-       * When false, removes the space entirely if the slot is empty.
-       * @type {Boolean}
-       * @default false
+       * If `footer` slot is empty, this controls whether
+       * its space is preserved or not. Typically used to achieve
+       * consistent vertical alignment of information when there
+       * are multiple cards on the same grid row.
        */
       preserveFooter: {
         type: Boolean,
@@ -303,12 +292,13 @@
         return this.stylesAndClasses.thumbnailAlignClass;
       },
       /*
-        Returns dynamic classes and few style-like data that CSS was cumbersome/impossible to use for ,or are in need of using theme, grouped by all possible combinations of layouts.
+        A source-of-truth that organizes styles and classes by layout combinations
+        to aid understanding of what is applied exactly to each layout.
 
-        New styles and classes are meant to be added to this single-source-of-truth object so
-        that we can easily locate all styling being applied to a particular layout
-
-        Could be further simplified by using solely dynamic styles, but that would have detrimental effects on our auto RTL machinery and we would need to take care manually of more places. 
+        Alongside other configurations, contains dynamic styles that <style>
+        can't handle. Whenever possible, prioritize using <style> over dynamic styles
+        since our RTL framework can't pick dynamic styles. Make sure to use 'isRtl'
+        when adding dynamic styles related to alignment.
       */
       stylesAndClasses() {
         const thumbnailCommonStyles = {
