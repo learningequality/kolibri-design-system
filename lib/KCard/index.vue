@@ -418,12 +418,6 @@
 
   $spacer: 24px;
 
-  /*
-        Just couple of comments that are referenced from several places:
-        - (1) Intentionally fixed. Cards on the same row of a grid should have the same overall height and their sections too should have the same height so that information is placed consistently. As documented, consumers need to ensure that contents provided via slots fits well or is truncated.
-        - (2) Solves issues with fixed height in a flex item
-      */
-
   /************* Common styles **************/
 
   .card-area {
@@ -434,6 +428,7 @@
     flex-direction: column;
     flex-wrap: nowrap;
     width: 100%;
+    height: auto;
     font-size: 12px;
     text-align: left;
     text-decoration: none;
@@ -469,25 +464,17 @@
 
   .above-title {
     order: 2;
-    height: 24px; /* (1) */
-    min-height: 24px; /* (2) */
     margin: $spacer $spacer 0;
-    overflow: hidden; /* (1) */
   }
 
   .below-title {
     order: 4;
-    min-height: 26px; /* (2) */
     margin: 0 $spacer 0 $spacer;
-    overflow: hidden; /* (1) */
   }
 
   .footer {
     order: 5;
-    height: 58px; /* (1) */
-    min-height: 58px; /* (2) */
     margin: auto $spacer $spacer;
-    overflow: hidden; /* (1) */
   }
 
   .thumbnail-placeholder {
@@ -502,11 +489,9 @@
   /************* Layout-specific styles *************/
 
   .vertical-with-large-thumbnail {
-    height: auto; /* (1) */
-
     .thumbnail {
       height: 45%;
-      min-height: 45%; /* (2) */
+      min-height: 45%;
     }
   }
 
@@ -519,9 +504,9 @@
       margin: $spacer $spacer 0;
     }
   }
+
   .horizontal-with-large-thumbnail {
     position: relative;
-    height: 240px; /* (1) */
 
     .thumbnail {
       position: absolute;
@@ -538,6 +523,7 @@
 
     &.thumbnail-align-left {
       align-items: flex-end;
+
       .thumbnail {
         left: 0;
       }
@@ -551,6 +537,7 @@
 
     &.thumbnail-align-right {
       align-items: flex-start;
+
       .thumbnail {
         right: 0;
       }
@@ -564,8 +551,6 @@
   }
 
   .horizontal-with-small-thumbnail {
-    height: 220px; /* (1) */
-
     .thumbnail {
       position: absolute;
       top: $spacer;
