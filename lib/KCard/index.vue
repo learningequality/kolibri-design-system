@@ -18,7 +18,7 @@
       <component
         :is="headingElement"
         v-if="title || $slots.title"
-        :style="headingStyles"
+        class="heading"
       >
         <!--
           Prevent router-link click event by setting empty event=""
@@ -301,9 +301,6 @@
       thumbnailAspectRatio() {
         return this.stylesAndClasses.thumbnailAspectRatio;
       },
-      headingStyles() {
-        return this.stylesAndClasses.headingStyles;
-      },
       thumbnailStyles() {
         return this.stylesAndClasses.thumbnailStyles;
       },
@@ -319,13 +316,6 @@
         Could be further simplified by using solely dynamic styles, but that would have detrimental effects on our auto RTL machinery and we would need to take care manually of more places. 
       */
       stylesAndClasses() {
-        /* In px. Needs to be the same as $spacer variable in styles part */
-        const SPACER = 24;
-
-        const headingCommonStyles = {
-          order: 3,
-          margin: `${SPACER}px ${SPACER}px ${SPACER / 2}px ${SPACER}px`,
-        };
         const thumbnailCommonStyles = {
           width: '100%',
           height: '100%',
@@ -335,9 +325,6 @@
             layoutClass: 'vertical-with-large-thumbnail',
             thumbnailAlignClass: undefined,
             thumbnailAspectRatio: undefined,
-            headingStyles: {
-              ...headingCommonStyles,
-            },
             thumbnailStyles: {
               ...thumbnailCommonStyles,
               borderRadius: '8px 8px 0 0',
@@ -349,9 +336,6 @@
             layoutClass: 'vertical-with-small-thumbnail',
             thumbnailAlignClass: undefined,
             thumbnailAspectRatio: undefined,
-            headingStyles: {
-              ...headingCommonStyles,
-            },
             thumbnailStyles: {
               ...thumbnailCommonStyles,
               borderRadius: '4px',
@@ -363,9 +347,6 @@
             layoutClass: undefined,
             thumbnailAlignClass: undefined,
             thumbnailAspectRatio: undefined,
-            headingStyles: {
-              ...headingCommonStyles,
-            },
             thumbnailStyles: {
               ...thumbnailCommonStyles,
             },
@@ -377,10 +358,6 @@
             layoutClass: 'horizontal-with-large-thumbnail',
             thumbnailAlignClass: `thumbnail-align-${this.thumbnailAlign}`,
             thumbnailAspectRatio: undefined,
-            headingStyles: {
-              ...headingCommonStyles,
-              width: `calc(60% - ${SPACER * 2}px)`, // same as slots width defined in styles
-            },
             thumbnailStyles: {
               ...thumbnailCommonStyles,
               borderRadius: this.thumbnailAlign === 'right' ? '0 8px 8px 0' : '8px 0 0 8px',
@@ -392,10 +369,6 @@
             layoutClass: 'horizontal-with-small-thumbnail',
             thumbnailAlignClass: `thumbnail-align-${this.thumbnailAlign}`,
             thumbnailAspectRatio: '1:1',
-            headingStyles: {
-              ...headingCommonStyles,
-              width: `calc(70% - ${SPACER * 3}px)` /* same as slots width defined in styles */,
-            },
             thumbnailStyles: {
               ...thumbnailCommonStyles,
               borderRadius: '8px',
@@ -407,9 +380,6 @@
             layoutClass: undefined,
             thumbnailAlignClass: undefined,
             thumbnailAspectRatio: undefined,
-            headingStyles: {
-              ...headingCommonStyles,
-            },
           };
         }
         return {};
@@ -461,7 +431,6 @@
 
   @import '../styles/definitions';
 
-  /* Needs to be the same as SPACER constant in JavaScript part */
   $spacer: 24px;
 
   /*
@@ -493,6 +462,11 @@
     &:focus {
       @extend %dropshadow-6dp;
     }
+  }
+
+  .heading {
+    order: 3;
+    margin: $spacer $spacer calc(#{$spacer} / 2) $spacer;
   }
 
   .title {
@@ -568,10 +542,11 @@
       height: 100%;
     }
 
+    .heading,
     .above-title,
     .below-title,
     .footer {
-      width: calc(60% - 2 * #{$spacer}); /* same as heading width defined in script */
+      width: calc(60% - 2 * #{$spacer});
     }
 
     &.thumbnail-align-left {
@@ -611,9 +586,10 @@
       min-width: 80px;
     }
 
+    .heading,
     .above-title,
     .below-title {
-      width: calc(70% - 3 * #{$spacer}); /* same as heading width defined in script */
+      width: calc(70% - 3 * #{$spacer});
     }
 
     .footer {
