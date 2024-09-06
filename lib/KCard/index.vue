@@ -2,108 +2,112 @@
 
   <!-- see trackInputModality  for [data-focus=true] -->
   <li
-    :class="['k-card', $computedClass(coreOutlineFocus), layoutClass, thumbnailAlignClass]"
-    :style="{ backgroundColor: $themeTokens.surface }"
     tabindex="0"
     data-focus="true"
-    @focus="onCardFocus"
-    @mouseenter="onCardHover"
+    :class="$computedClass(coreOutlineFocus)"
+    @focus="onFocus"
+    @mouseenter="onHover"
     @mousedown="onMouseDown"
     @mouseup="onMouseUp"
     @keyup.enter="onEnter"
   >
-    <component
-      :is="headingElement"
-      v-if="title || $slots.title"
-      :style="headingStyles"
+    <div
+      :class="['card-area', layoutClass, thumbnailAlignClass]"
+      :style="{ backgroundColor: $themeTokens.surface }"
     >
-      <!--
-        Prevent router-link click event by setting empty event=""
-        (technique used by Vue community because
-        the usual ways don't work for router-link).
-        This is because <li> is supposed to take care of it.
-        Furthemore, together with 'draggable' disabled, it ensures
-        that text selection works on the title text.
-        See the custom click implementation in 'onMouseUp'. 
-      -->
-      <router-link
-        tabindex="-1"
-        :to="to"
-        draggable="false"
-        event=""
+      <component
+        :is="headingElement"
+        v-if="title || $slots.title"
+        :style="headingStyles"
       >
-        <span
-          class="base-card-title"
-          :style="{ color: $themeTokens.text }"
+        <!--
+          Prevent router-link click event by setting empty event=""
+          (technique used by Vue community because
+          the usual ways don't work for router-link).
+          This is because <li> is supposed to take care of it.
+          Furthemore, together with 'draggable' disabled, it ensures
+          that text selection works on the title text.
+          See the custom click implementation in 'onMouseUp'. 
+        -->
+        <router-link
+          tabindex="-1"
+          :to="to"
+          draggable="false"
+          event=""
         >
-          <!-- @slot Optional slot section containing the title contents, should not contain a heading element. -->
-          <slot 
-            v-if="$slots.title"
-            name="title"
-          ></slot>
-          <KTextTruncator
-            v-else
-            :text="title"
-            :maxLines="titleLines"
-          />
-        </span>
-      </router-link>
-    </component>
+          <span
+            class="base-card-title"
+            :style="{ color: $themeTokens.text }"
+          >
+            <!-- @slot Optional slot section containing the title contents, should not contain a heading element. -->
+            <slot 
+              v-if="$slots.title"
+              name="title"
+            ></slot>
+            <KTextTruncator
+              v-else
+              :text="title"
+              :maxLines="titleLines"
+            />
+          </span>
+        </router-link>
+      </component>
 
-    <div
-      v-if="thumbnailDisplay !== Thumbnail_Displays.NONE"
-      class="thumbnail"
-    >
-      <!-- 
-        Render KImg even if thumbnailSrc is not provided since in that case
-        KImg takes care of showing the gray placeholder area.
-      -->
-      <KImg
-        :src="thumbnailSrc"
-        :scaleType="thumbnailScaleType"
-        :aspectRatio="thumbnailAspectRatio"
-        :isDecorative="true"
-        :appearanceOverrides="thumbnailStyles"
-      />
-      <!--
-        This is a duplicate of the same slot in KImg. I didn't find a way to utilize
-        KImg's placeholder slot from here, likely because this part of code is nested
-        in one slot already
-
-        Show it even when thumbnail source is provided - then the placeholder serves
-        as progressive loading experience.
-      -->
-      <span
-        v-if="$slots.thumbnailPlaceholder"
-        class="thumbnail-placeholder"
+      <div
+        v-if="thumbnailDisplay !== Thumbnail_Displays.NONE"
+        class="thumbnail"
       >
-        <!-- @slot Places content to the thumbnail placeholder area. -->
-        <slot name="thumbnailPlaceholder"></slot>
-      </span>
-    </div>
-    <div
-      v-if="$slots.aboveTitle || preserveAboveTitle"
-      data-test="aboveTitle"
-      class="above-title"
-    >
-      <!-- @slot Places content to the area above the title. -->
-      <slot name="aboveTitle"></slot>
-    </div>
-    <div
-      v-if="$slots.belowTitle || preserveBelowTitle"
-      data-test="belowTitle"
-      class="below-title"
-    >
-      <!-- @slot Places content to the area below the title. -->
-      <slot name="belowTitle"></slot>
-    </div>
-    <div
-      v-if="$slots.footer || preserveFooter"
-      data-test="footer"
-      class="footer"
-    >
-      <!-- @slot Places content to the footer area. -->
-      <slot name="footer"></slot>
+        <!-- 
+          Render KImg even if thumbnailSrc is not provided since in that case
+          KImg takes care of showing the gray placeholder area.
+        -->
+        <KImg
+          :src="thumbnailSrc"
+          :scaleType="thumbnailScaleType"
+          :aspectRatio="thumbnailAspectRatio"
+          :isDecorative="true"
+          :appearanceOverrides="thumbnailStyles"
+        />
+        <!--
+          This is a duplicate of the same slot in KImg. I didn't find a way to utilize
+          KImg's placeholder slot from here, likely because this part of code is nested
+          in one slot already
+
+          Show it even when thumbnail source is provided - then the placeholder serves
+          as progressive loading experience.
+        -->
+        <span
+          v-if="$slots.thumbnailPlaceholder"
+          class="thumbnail-placeholder"
+        >
+          <!-- @slot Places content to the thumbnail placeholder area. -->
+          <slot name="thumbnailPlaceholder"></slot>
+        </span>
+      </div>
+      <div
+        v-if="$slots.aboveTitle || preserveAboveTitle"
+        data-test="aboveTitle"
+        class="above-title"
+      >
+        <!-- @slot Places content to the area above the title. -->
+        <slot name="aboveTitle"></slot>
+      </div>
+      <div
+        v-if="$slots.belowTitle || preserveBelowTitle"
+        data-test="belowTitle"
+        class="below-title"
+      >
+        <!-- @slot Places content to the area below the title. -->
+        <slot name="belowTitle"></slot>
+      </div>
+      <div
+        v-if="$slots.footer || preserveFooter"
+        data-test="footer"
+        class="footer"
+      >
+        <!-- @slot Places content to the footer area. -->
+        <slot name="footer"></slot>
+      </div>
     </div>
   </li>
 
@@ -420,10 +424,10 @@
       navigate() {
         this.$router.push(this.to);
       },
-      onCardFocus(e) {
+      onFocus(e) {
         this.$emit('focus', e);
       },
-      onCardHover(e) {
+      onHover(e) {
         this.$emit('hover', e);
       },
       onEnter() {
@@ -468,7 +472,7 @@
 
   /************* Common styles **************/
 
-  .k-card {
+  .card-area {
     @extend %dropshadow-2dp;
 
     position: relative; /* basis for absolute positioning of thumbnail images */
