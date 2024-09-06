@@ -2,7 +2,7 @@
 
   <!-- see trackInputModality  for [data-focus=true] -->
   <li
-    :class="['k-card', $computedClass(coreOutlineFocus), rootClass, thumbnailAlignClass]"
+    :class="['k-card', $computedClass(coreOutlineFocus), layoutClass, thumbnailAlignClass]"
     :style="{ backgroundColor: $themeTokens.surface }"
     tabindex="0"
     data-focus="true"
@@ -291,8 +291,8 @@
       headingElement() {
         return this.headingLevel ? 'h' + this.headingLevel : undefined;
       },
-      rootClass() {
-        return this.stylesAndClasses.rootClass;
+      layoutClass() {
+        return this.stylesAndClasses.layoutClass;
       },
       thumbnailAspectRatio() {
         return this.stylesAndClasses.thumbnailAspectRatio;
@@ -328,7 +328,7 @@
         };
         if (this.layout === 'vertical' && this.thumbnailDisplay === 'large') {
           return {
-            rootClass: 'vertical-with-large-thumbnail',
+            layoutClass: 'vertical-with-large-thumbnail',
             thumbnailAlignClass: undefined,
             thumbnailAspectRatio: undefined,
             headingStyles: {
@@ -342,7 +342,7 @@
         }
         if (this.layout === 'vertical' && this.thumbnailDisplay === 'small') {
           return {
-            rootClass: 'vertical-with-small-thumbnail',
+            layoutClass: 'vertical-with-small-thumbnail',
             thumbnailAlignClass: undefined,
             thumbnailAspectRatio: undefined,
             headingStyles: {
@@ -356,7 +356,7 @@
         }
         if (this.layout === 'vertical' && this.thumbnailDisplay === 'none') {
           return {
-            rootClass: undefined,
+            layoutClass: undefined,
             thumbnailAlignClass: undefined,
             thumbnailAspectRatio: undefined,
             headingStyles: {
@@ -370,7 +370,7 @@
 
         if (this.layout === 'horizontal' && this.thumbnailDisplay === 'large') {
           return {
-            rootClass: 'horizontal-with-large-thumbnail',
+            layoutClass: 'horizontal-with-large-thumbnail',
             thumbnailAlignClass: `thumbnail-align-${this.thumbnailAlign}`,
             thumbnailAspectRatio: undefined,
             headingStyles: {
@@ -385,7 +385,7 @@
         }
         if (this.layout === 'horizontal' && this.thumbnailDisplay === 'small') {
           return {
-            rootClass: 'horizontal-with-small-thumbnail',
+            layoutClass: 'horizontal-with-small-thumbnail',
             thumbnailAlignClass: `thumbnail-align-${this.thumbnailAlign}`,
             thumbnailAspectRatio: '1:1',
             headingStyles: {
@@ -400,7 +400,7 @@
         }
         if (this.layout === 'horizontal' && this.thumbnailDisplay === 'none') {
           return {
-            rootClass: undefined,
+            layoutClass: undefined,
             thumbnailAlignClass: undefined,
             thumbnailAspectRatio: undefined,
             headingStyles: {
