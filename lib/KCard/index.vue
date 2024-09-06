@@ -506,8 +506,6 @@
   }
 
   .horizontal-with-large-thumbnail {
-    position: relative;
-
     .thumbnail {
       position: absolute;
       width: 40%;
@@ -570,6 +568,7 @@
 
     &.thumbnail-align-left {
       align-items: flex-end;
+
       .thumbnail {
         left: $spacer;
       }
@@ -577,6 +576,7 @@
 
     &.thumbnail-align-right {
       align-items: flex-start;
+
       .thumbnail {
         right: $spacer;
       }
