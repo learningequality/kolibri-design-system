@@ -552,8 +552,9 @@
     .thumbnail {
       position: absolute;
       top: $spacer;
-      width: 30%; /* square dimension achieved via KImgs's aspect-ratio 1:1 */
-      min-width: 80px;
+      width: 35%; /* square dimension achieved via KImgs's aspect-ratio 1:1 */
+      min-width: 100px;
+      max-width: 120px;
     }
 
     .heading,
