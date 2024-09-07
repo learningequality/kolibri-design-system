@@ -34,7 +34,8 @@
               @click="sortable ? handleSort(index) : null"
               @keydown="handleKeydown($event, -1, index)"
             >
-              <slot name="header" :header="header" :colindex="index">
+              <!--@slot Scoped slot for customizing the content of each header cell. Provides a header object `header` and its column index `colIndex`.-->
+              <slot name="header" :header="header" :colIndex="index">
                 {{ header.label }}
               </slot>
               <span v-if="isColumnSortable(index)" class="sort-icon">
@@ -63,6 +64,7 @@
               :width="headers[colIndex].width"
               :rowIndex="rowIndex"
               :colIndex="colIndex"
+              :textAlign="getTextAlign(headers[colIndex].dataType)"
               :class="{
                 'sticky-column': colIndex === 0,
               }"
@@ -73,6 +75,7 @@
               @keydown="handleKeydown($event, rowIndex, colIndex)"
             >
               <template #default="slotProps">
+                <!--@slot Scoped slot for customizing the content of each data cell. Provides the content of a data cell `content`, its row index `rowIndex`, its column index `colIndex`, and the corresponding whole row object `row`.-->
                 <slot name="cell" :content="slotProps.content" :rowIndex="rowIndex" :colIndex="colIndex" :row="row">
                   {{ slotProps.content }}
                 </slot>

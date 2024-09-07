@@ -27,7 +27,7 @@
           caption="Non Sortable Table"
         >
 
-          <template #header="{ header, index }">
+          <template #header="{ header, colIndex }">
             <span>{ header.label } (Backend)</span>
           </template>
           <template #cell="{ content, rowIndex, colIndex }">
@@ -64,7 +64,7 @@
           :rows="rows"
           caption="Non-sortable table"
         >
-          <template #header="{ header, index }">
+          <template #header="{ header, colIndex }">
             <span>{{ header.label }} (Backend)</span>
           </template>
           <template #cell="{ content, rowIndex, colIndex }">
@@ -79,7 +79,7 @@
       <p>
         The <code>KTable</code> can be used with default sorting functionality, allowing you to sort data on the client side without the need for server requests. There are 4 permissible data types - <code>string</code>,<code>number</code>,<code>date</code> and <code>undefined</code>. Columns declared with <code>undefined</code> data type are not sortable. This example demonstrates a table with default sorting enabled.
       </p>
-    
+
       <DocsShowCode language="html">
         <KTable
           :headers="headers"

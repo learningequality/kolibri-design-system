@@ -18,18 +18,12 @@
 
 <script>
 
-  import { DATA_TYPE_NUMERIC } from './useSorting';
-
   export default {
     name: 'KTableGridItem',
     props: {
       content: {
         type: [String, Number, Boolean, Object, Array],
         required: true,
-      },
-      dataType: {
-        type: String,
-        default: 'string',
       },
       rowIndex: {
         type: Number,
@@ -47,6 +41,10 @@
         type: String,
         default: 'auto',
       },
+      textAlign: {
+        type: String,
+        required: true,
+      },
     },
     computed: {
       coreOutlineFocus() {
@@ -56,16 +54,6 @@
             outlineOffset: '-2px',
           },
         };
-      },
-      textAlign() {
-        const alignLtr = this.dataType === DATA_TYPE_NUMERIC ? 'right' : 'left';
-        if (this.isRtl && alignLtr === 'right') {
-          return 'left';
-        }
-        if (this.isRtl && alignLtr === 'left') {
-          return 'right';
-        }
-        return alignLtr;
       },
     },
     methods: {
