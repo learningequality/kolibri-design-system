@@ -4,7 +4,7 @@
   <li
     tabindex="0"
     data-focus="true"
-    :class="$computedClass(coreOutlineFocus)"
+    :class="['k-card', $computedClass(coreOutlineFocus)]"
     @focus="onFocus"
     @mouseenter="onHover"
     @mousedown="onMouseDown"
@@ -419,6 +419,13 @@
   $spacer: 24px;
 
   /************* Common styles **************/
+
+  .k-card {
+    display: block;
+    padding: 0;
+    margin: 0;
+    list-style-type: none;
+  }
 
   .card-area {
     @extend %dropshadow-2dp;
