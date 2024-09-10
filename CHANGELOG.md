@@ -6,7 +6,6 @@ Changelog is rather internal in nature. See release notes for the public overvie
 
 <!-- [DO NOT REMOVE-USED BY GH ACTION] PASTE CHANGELOG -->
 
-
 - [#727]
   - **Description:** Initial implementation of `KTable` component
   - **Products impact:** New Component
@@ -17,8 +16,6 @@ Changelog is rather internal in nature. See release notes for the public overvie
   - **Guidance:**
 
 [#727]: https://github.com/learningequality/kolibri-design-system/pull/727
-
-
 
 - [#766]
   - **Description:** Bump KDS version to 5.0.0-rc4
@@ -31,8 +28,6 @@ Changelog is rather internal in nature. See release notes for the public overvie
 
 [#766]: https://github.com/learningequality/kolibri-design-system/pull/766
 
-
-
 - [#765]
   - **Description:** Fixes update changelog workflow to avoid expecting a comment after the invisible comment `<!-- [DO NOT REMOVE-USED BY GH ACTION] CHANGELOG START -->`.
   - **Products impact:** none.
@@ -43,7 +38,6 @@ Changelog is rather internal in nature. See release notes for the public overvie
   - **Guidance:** -
 
 [#765]: https://github.com/learningequality/kolibri-design-system/pull/765
-
 
 - [#762]
   - **Description:**  Updates dropshadows to the latest design guidelines
