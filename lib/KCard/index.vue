@@ -420,7 +420,7 @@
 
   @import '../styles/definitions';
 
-  $spacer: 24px;
+  $spacer: 16px;
 
   /************* Common styles **************/
 
