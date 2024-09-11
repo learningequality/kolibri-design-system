@@ -13,7 +13,10 @@
       <slot name="title"></slot>
     </template>
     <template #default>
-      <div class="thumbnail">
+      <div
+        v-if="thumbnailDisplay !== Thumbnail_Displays.NONE"
+        class="thumbnail"
+      >
         <!-- 
           Render KImg even if thumbnailSrc is not provided since in that case
           KImg takes care of showing the gray placeholder area.
@@ -230,6 +233,11 @@
         default: false,
       },
     },
+    data() {
+      return {
+        Thumbnail_Displays,
+      };
+    },
     computed: {
       rootClass() {
         return this.stylesAndClasses.rootClass;
@@ -418,7 +426,7 @@
   /************* Layout-specific styles *************/
 
   .vertical-with-large-thumbnail {
-    height: 480px; /* (1) */
+    height: auto; /* (1) */
 
     .thumbnail {
       height: 45%;
