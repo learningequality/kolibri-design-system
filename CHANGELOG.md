@@ -7,6 +7,19 @@ Changelog is rather internal in nature. See release notes for the public overvie
 <!-- [DO NOT REMOVE-USED BY GH ACTION] PASTE CHANGELOG -->
 
 
+- [#752]
+  - **Description:**  Update`KCard` to complete vertical/horizontal layouts with no thumbnail
+  - **Products impact:**  Card updates
+  - **Addresses:** https://github.com/learningequality/kolibri-design-system/pull/752
+  - **Components:** `KCard`
+  - **Breaking:** N0
+  - **Impacts a11y:** No
+  - **Guidance:**
+
+[#752]: https://github.com/learningequality/kolibri-design-system/pull/752
+
+
+
 - [#776]
   - **Description:** Bump KDS version to 5.0.0-rc5
   - **Products impact:** -.
