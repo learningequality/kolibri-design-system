@@ -1,6 +1,10 @@
 <template>
 
   <!-- see trackInputModality  for [data-focus=true] -->
+  <!--
+    do not use @onmouseup but rather @click
+    to allow for @click.stop on buttons and similar
+    rendered within a card via its slots -->
   <li
     tabindex="0"
     data-focus="true"
@@ -8,7 +12,7 @@
     @focus="onFocus"
     @mouseenter="onHover"
     @mousedown="onMouseDown"
-    @mouseup="onMouseUp"
+    @click="onClick"
     @keyup.enter="onEnter"
   >
     <div
@@ -28,7 +32,7 @@
           This is because <li> is supposed to take care of it.
           Furthemore, together with 'draggable' disabled, it ensures
           that text selection works on the title text.
-          See the custom click implementation in 'onMouseUp'. 
+          See the custom click implementation in 'onClick'. 
         -->
         <router-link
           tabindex="-1"
@@ -391,7 +395,7 @@
       onMouseDown() {
         this.mouseDownTime = new Date().getTime();
       },
-      onMouseUp() {
+      onClick() {
         const mouseUpTime = new Date().getTime();
         // Make textual content selectable within the whole clickable card area.
         //
