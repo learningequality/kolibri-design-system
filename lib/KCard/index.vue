@@ -26,15 +26,19 @@
         :style="{ color: $themeTokens.text }"
       >
         <!--
-          Prevent router-link click event by setting empty event=""
+          `event=""` prevents router-link click event
           (technique used by Vue community because
           the usual ways don't work for router-link).
-          This is because <li> is supposed to take care of it.
-          Furthemore, together with 'draggable' disabled, it ensures
-          that text selection works on the title text.
-          See the custom click implementation in 'onClick'. 
+          This is to
+            - (1) prevent double navigation (the wrapping
+                  <li> is supposed to take care of navigation)
+            - (2) together with the `draggable` disabled, 
+                  ensures that text selection works on
+                  the title text (see the feature for allowing
+                  selecting card's content in `onClick`)
         -->
         <router-link
+          event=""
           tabindex="-1"
           :to="to"
           draggable="false"
