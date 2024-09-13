@@ -7,6 +7,63 @@ Changelog is rather internal in nature. See release notes for the public overvie
 <!-- [DO NOT REMOVE-USED BY GH ACTION] PASTE CHANGELOG -->
 
 
+- [#774]
+  - **Description:**  Merges `KCard` and `BaseCard`
+  - **Products impact:** none
+  - **Addresses:** Unblocks several issues for the upcoming features regarding the addition of checkboxes and `KCardGrid`
+  - **Components:** `KCard`
+  - **Breaking:** no
+  - **Impacts a11y:** -
+  - **Guidance:** -
+
+[#774]: https://github.com/learningequality/kolibri-design-system/pull/774
+
+- [#774]
+  - **Description:**  Updates `KCard` internal structure and style
+  - **Products impact:** This introduces temporary regressions in `KCard` related to removing its control of its height that will instead be controlled by `KCardGrid`. However, `KCard` is required to be always used within `KCardGrid` anyways so ultimately this will be of no real impact. Will be completed by `KCardGrid` soon.
+  - **Addresses:**  Prepares `KCard` for the upcoming features regarding the addition of checkboxes and `KCardGrid`
+  - **Components:** `KCard`
+  - **Breaking:** no
+  - **Impacts a11y:** -
+  - **Guidance:** -
+
+[#774]: https://github.com/learningequality/kolibri-design-system/pull/774
+
+- [#774]
+  - **Description:**  Fixes the thumbnail overflowing in the horizontal layout with small thumbnail and aligns this layout more closely to the designs.
+  - **Products impact:** bugfix
+  - **Addresses:** https://github.com/learningequality/kolibri-design-system/issues/773
+  - **Components:** `KCard`
+  - **Breaking:** no
+  - **Impacts a11y:** -
+  - **Guidance:** -
+
+[#774]: https://github.com/learningequality/kolibri-design-system/pull/774
+
+- [#774]
+  - **Description:**   Fix click.stop not working on interactive elements rendered within the card via its slots.
+  - **Products impact:** bugfix
+  - **Addresses:** -
+  - **Components:** `KCard`
+  - **Breaking:** no
+  - **Impacts a11y:** -
+  - **Guidance:** -
+
+[#774]: https://github.com/learningequality/kolibri-design-system/pull/774
+
+- [#774]
+  - **Description:**   Aligns padding to the designs
+  - **Products impact:** Visual update
+  - **Addresses:** -
+  - **Components:** `KCard`
+  - **Breaking:** no
+  - **Impacts a11y:** -
+  - **Guidance:** -
+
+[#774]: https://github.com/learningequality/kolibri-design-system/pull/774
+
+
+
 - [#752]
   - **Description:**  Update`KCard` to complete vertical/horizontal layouts with no thumbnail
   - **Products impact:**  Card updates
