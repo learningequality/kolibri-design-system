@@ -187,8 +187,7 @@
         default: null,
       },
       /**
-       * Specifies the number of lines allowed
-       * for the titlebefore truncation occurs.
+       * Truncates title to this number of lines.
        */
       titleLines: {
         type: Number,
