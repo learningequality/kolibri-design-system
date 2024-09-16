@@ -36,7 +36,7 @@
       </div>
 
       <label
-        dir="auto"
+        :dir="labelDir"
         class="k-radio-button-label"
         :for="id"
         :class="{ 'visuallyhidden': !showLabel }"
@@ -95,6 +95,14 @@
       showLabel: {
         type: Boolean,
         default: true,
+      },
+      /**
+       * RTL dir of the text label
+       * Options: 'auto', 'ltr', 'rtl', null.
+       */
+      labelDir: {
+        type: String,
+        default: 'auto',
       },
       /**
        * Component `data` with which to associate this radio button and its siblings
