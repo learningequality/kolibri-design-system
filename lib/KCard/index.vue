@@ -65,22 +65,23 @@
           KImg takes care of showing the gray placeholder area.
         -->
         <KImg
+          data-test="thumbnail-img"
           :src="thumbnailSrc"
           :scaleType="thumbnailScaleType"
           :aspectRatio="thumbnailAspectRatio"
           :isDecorative="true"
           :appearanceOverrides="thumbnailStyles"
+          @load="isThumbnailImageLoaded = true"
+          @error="isThumbnailImageLoaded = false"
         />
         <!--
-          This is a duplicate of the same slot in KImg. I didn't find a way to utilize
-          KImg's placeholder slot from here, likely because this part of code is nested
-          in one slot already
-
-          Show it even when thumbnail source is provided - then the placeholder serves
-          as progressive loading experience.
+          Show the placeholder element even when a thumbnail source is available.
+          This serves as progressive loading experience - on slower networks,
+          users can at least see the placeholder until the image is loaded
+          successfully.
         -->
         <span
-          v-if="$slots.thumbnailPlaceholder"
+          v-if="!disableThumbnailPlaceholder"
           class="thumbnail-placeholder"
         >
           <!-- @slot Places content to the thumbnail placeholder area. -->
@@ -273,6 +274,7 @@
       return {
         mouseDownTime: 0,
         ThumbnailDisplays,
+        isThumbnailImageLoaded: false,
       };
     },
     computed: {
@@ -282,6 +284,29 @@
             ...this.$coreOutline,
           },
         };
+      },
+      /**
+       * Disable the thumbnail placeholder element when
+       * there is no thumbnail area or the placeholder element
+       * is not provided.
+       *
+       * Furthermore, hide it after the thumbnail image
+       * is successfully loaded. Otherwise in some scenarios,
+       * such as when there is a large placeholder element
+       * and a small thumbnail image, some parts of the placeholder
+       * element may be visible behind the image after it has been
+       * successfully loaded.
+       *
+       * However, do not hide the placeholder element while
+       * the image is still loading to ensure progressive
+       * loading experience on slower networks.
+       */
+      disableThumbnailPlaceholder() {
+        return (
+          this.thumbnailDisplay === this.ThumbnailDisplays.NONE ||
+          !this.$slots.thumbnailPlaceholder ||
+          this.isThumbnailImageLoaded
+        );
       },
       hasAboveTitleArea() {
         return this.$slots.aboveTitle || this.preserveAboveTitle;
