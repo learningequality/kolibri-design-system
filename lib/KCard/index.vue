@@ -578,9 +578,11 @@
   }
 
   .horizontal-with-large-thumbnail {
+    $thumbnail-width: 40%;
+
     .thumbnail {
       position: absolute;
-      width: 40%;
+      width: $thumbnail-width;
       height: 100%;
     }
 
@@ -588,7 +590,7 @@
     .above-title,
     .below-title,
     .footer {
-      width: calc(60% - 2 * #{$spacer});
+      width: calc(100% - #{$thumbnail-width} - 2 * #{$spacer});
     }
 
     &.thumbnail-align-left {
@@ -609,10 +611,12 @@
   }
 
   .horizontal-with-small-thumbnail {
+    $thumbnail-width: 35%;
+
     .thumbnail {
       position: absolute;
       top: $spacer;
-      width: 35%; /* square dimension achieved via KImgs's aspect-ratio 1:1 */
+      width: $thumbnail-width; /* square dimension achieved via KImgs's aspect-ratio 1:1 */
       min-width: 100px;
       max-width: 120px;
     }
@@ -620,7 +624,7 @@
     .heading,
     .above-title,
     .below-title {
-      width: calc(70% - 3 * #{$spacer});
+      width: calc(100% - #{$thumbnail-width} - 3 * #{$spacer});
     }
 
     .footer {
