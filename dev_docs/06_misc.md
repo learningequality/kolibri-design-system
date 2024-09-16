@@ -33,7 +33,7 @@ The documentation site itself intentionally does _not_ conform to the design sys
 1. The user-interface of the site (links, buttons, headers, etc) is intentionally built _without_ depending on the Kolibri shared UI library. This helps ensure as we update the UI library, we only need to update content and examples in the documentation, not the implementation of the documentation.
 2. From a design perspective, it's important that the documentation site looks and feels sufficiently distinct from the design patterns it describes, so that users do not mistakenly immitate it. Instead, users should focus on the patterns that are explicitly documented.
 
-From a coding perspective this means that references to `~~/lib` code should in general only appear in `~/pages/` as illustrations of the shared UI library. However, we might decide on a case-by-case basis to have occasional exceptions to this rule. For example, we currently use `~~/lib/KResponsiveElementMixin` inside `~/common/Header` because it would be excessive to duplicate that functionality.
+From a coding perspective this means that references to `~~/lib` code should in general only appear in `~/pages/` as illustrations of the shared UI library. However, we might decide on a case-by-case basis to have occasional exceptions to this rule.
 
 ## Routing
 

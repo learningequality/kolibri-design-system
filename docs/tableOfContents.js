@@ -185,6 +185,12 @@ export default [
         keywords: [...compositionRelatedKeywords, 'responsive', 'window', 'breakpoint'],
       }),
       new Page({
+        path: '/usekresponsiveelement',
+        title: 'useKResponsiveElement',
+        isCode: true,
+        keywords: [...compositionRelatedKeywords, 'responsive', 'element', 'breakpoint'],
+      }),
+      new Page({
         path: '/usekliveregion',
         title: 'useKLiveRegion',
         isCode: true,
@@ -379,12 +385,6 @@ export default [
         path: '/kbreadcrumbs',
         title: 'KBreadcrumbs',
         isCode: true,
-      }),
-      new Page({
-        path: '/kresponsiveelement',
-        title: 'KResponsiveElement',
-        isCode: true,
-        keywords: ['responsive', 'mixin', 'breakpoint', 'element'],
       }),
       new Page({
         path: '/ktabs',
