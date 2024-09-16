@@ -45,7 +45,7 @@
       </div>
 
       <label
-        dir="auto"
+        :dir="labelDir"
         class="k-checkbox-label"
         :for="id"
         :class="{ 'visuallyhidden': !showLabel }"
@@ -83,6 +83,14 @@
       label: {
         type: String,
         default: null,
+      },
+      /**
+       * RTL dir of the text label
+       * Options: 'auto', 'ltr', 'rtl', null.
+       */
+      labelDir: {
+        type: String,
+        default: 'auto',
       },
       /**
        * Whether or not to show the label
