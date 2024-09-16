@@ -177,9 +177,9 @@
         <DocsAnchorTarget anchor="#a11y" />
       </h3>
 
-      <p><code>KCard</code> has robust built-in accessibility and when used correctly as documented, it will ensure semantic structure, good screen reader experience, as well as support for right-to-left languages regarding its layouts.</p>
+      <p><code>KCard</code> together with <code>KCardGrid</code>  have robust built-in accessibility. For the parts they are responsible for, they ensure good semantic structure, screen reader experience, as well as support for right-to-left languages.</p>
 
-      <p>However, it is always necessary to make sure that cards built on top of <code>KCard</code> are fully accessible. This is the case particularly for inner content of slots as <code>KCard</code> doesn't have control over them. <em>Always test and consider what's expected experience of the final card as a whole.</em></p>
+      <p>However, it is always necessary to make sure that cards built on top of <code>KCard</code> are fully accessible. This is the case particularly for inner content of slots as <code>KCard</code> doesn't have control over them. See <DocsInternalLink text="Interactive elements" href="#interactive-elements" /> for one such example. here are innumerable kinds of content that can be provided via the slots. <em>Always test and consider what's the expected experience of every final card as a whole.</em></p>
 
       <h3>
         Navigation
@@ -440,6 +440,8 @@
 
       <p>When interactive elements, such as buttons, are provided to a card via one of its slots, <code>.stop</code> event modifier needs to be applied to their <code>@click</code> event to prevent the card from navigating away when clicked.</p>
 
+      <p>Even though this applies to all content provided via slots, it is important to consider accessibility particularly when adding interactive elements to cards. For example in the following, <code>ariaLabel</code> is applied to the bookmark icon button so that screenreader users can understand its purpose. And in a production environemnt, some more work would need to be done to communicate the bookmark toggled state. Always assess on a case-by-case basis.</p>
+
       <DocsShow block>
         <KCardGrid layout="1-1-1">
           <DocsKCard
@@ -450,6 +452,7 @@
           >
             <template #footer>
               <KIconButton
+                ariaLabel="Bookmark resource"
                 :icon="isBookmarked1 ? 'bookmark' : 'bookmarkEmpty'"
                 @click.stop="isBookmarked1 = !isBookmarked1"
               />
@@ -464,6 +467,7 @@
           <KCard ...>
             <template #footer>
               <KIconButton
+                ariaLabel="Bookmark resource"
                 :icon="isBookmarked ? 'bookmark' : 'bookmarkEmpty'"
                 @click.stop="isBookmarked = !isBookmarked"
               />
@@ -480,7 +484,7 @@
 
       <p>Selection controls such as checkbox or radio button can be displayed next to the card's main area via the <DocsInternalLink text="select" href="#slot:select" /> slot.</p>
 
-      <p><em>Always use <span :style="{ fontStyle: 'italic' }">"Select '[card title]'"</span> as a label for selection controls</em>. Use <code>visuallyhidden</code> to hide the label visually but allow screen readers to detect it.</p>
+      <p><em>Always use <span :style="{ fontStyle: 'italic' }">"Select '[card title]'"</span> as a label for selection controls. Use the <code>visuallyhidden</code> class to hide the label visually but allow screen readers to detect it.</em></p>
 
       <p><code>KCard</code> takes care of the remaining aspects of accessible experience, such as semantic structure and focus order.</p>
 
@@ -508,6 +512,7 @@
             </template>
             <template #footer>
               <KIconButton
+                ariaLabel="Bookmark resource"
                 :icon="isBookmarked2 ? 'bookmark' : 'bookmarkEmpty'"
                 @click.stop="isBookmarked2 = !isBookmarked2"
               />
@@ -532,6 +537,7 @@
             </template>
             <template #footer>
               <KIconButton
+                ariaLabel="Bookmark resource"
                 :icon="isBookmarked3 ? 'bookmark' : 'bookmarkEmpty'"
                 @click.stop="isBookmarked3 = !isBookmarked3"
               />
