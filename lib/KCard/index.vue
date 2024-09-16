@@ -1,15 +1,12 @@
 <template>
 
-  <!-- see trackInputModality  for [data-focus=true] -->
   <!--
     do not use @onmouseup but rather @click
     to allow for @click.stop on buttons and similar
     rendered within a card via its slots -->
   <li
-    tabindex="0"
-    data-focus="true"
-    :class="['k-card', $slots.select ? 'with-selection-controls' : undefined, $computedClass(coreOutlineFocus)]"
-    :style="gridItemStyle"
+    :class="['k-card', $slots.select ? 'with-selection-controls' : undefined]"
+    :style="[gridItemStyle, focusStyle]"
     @focus="onFocus"
     @mouseenter="onHover"
     @mousedown="onMouseDown"
@@ -40,9 +37,11 @@
         -->
         <router-link
           event=""
-          tabindex="-1"
           :to="to"
           draggable="false"
+          class="link"
+          @focus.native="onLinkFocus"
+          @blur.native="onLinkBlur"
         >
           <!-- @slot Optional slot section containing the title contents, should not contain a heading element. -->
           <slot 
@@ -300,15 +299,12 @@
         mouseDownTime: 0,
         ThumbnailDisplays,
         isThumbnailImageLoaded: false,
+        isLinkFocused: false,
       };
     },
     computed: {
-      coreOutlineFocus() {
-        return {
-          ':focus': {
-            ...this.$coreOutline,
-          },
-        };
+      focusStyle() {
+        return this.isLinkFocused ? this.$coreOutline : {};
       },
       /**
        * Disable the thumbnail placeholder element when
@@ -468,6 +464,12 @@
       }
     },
     methods: {
+      onLinkFocus() {
+        this.isLinkFocused = true;
+      },
+      onLinkBlur() {
+        this.isLinkFocused = false;
+      },
       navigate() {
         this.$router.push(this.to);
       },
@@ -593,6 +595,11 @@
     bottom: 0;
     left: 0;
     z-index: 0; /* <img> in KImg with z-index 1 should cover the placeholder after loaded */
+  }
+
+  .link {
+    text-decoration: none;
+    outline: none; // the focus ring is moved to the whole <li>
   }
 
   /************* Manage spaces *************/
