@@ -3,7 +3,7 @@
   <KCard
     :to="{ name: '/' }"
     :headingLevel="2"
-    layout="horizontal"
+    orientation="horizontal"
     :thumbnailDisplay="thumbnailDisplay"
     :thumbnailAlign="thumbnailAlign"
     :thumbnailSrc="require('../../assets/hummingbird-large-cc-by-sa-4.jpg')"

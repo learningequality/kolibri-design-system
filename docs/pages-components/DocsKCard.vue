@@ -3,7 +3,7 @@
   <KCard
     :to="{ path: '/test-url' }"
     :headingLevel="headingLevel"
-    :layout="layout"
+    :orientation="orientation"
     :thumbnailDisplay="thumbnailDisplay"
     :thumbnailAlign="thumbnailAlign"
     :thumbnailSrc="thumbnailSrc === null ? null : require('../assets/hummingbird-large-cc-by-sa-4.jpg')"
@@ -107,7 +107,7 @@
         type: String,
         default: undefined,
       },
-      layout: {
+      orientation: {
         required: false,
         type: String,
         default: 'vertical',

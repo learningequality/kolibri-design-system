@@ -123,7 +123,7 @@
 
   import { inject } from '@vue/composition-api';
 
-  const Layouts = {
+  const Orientations = {
     HORIZONTAL: 'horizontal',
     VERTICAL: 'vertical',
   };
@@ -207,13 +207,13 @@
         default: 2,
       },
       /**
-       * Controls content orientation.
+       * Controls card orientation.
        * Options: `'horizontal'`, `'vertical'`.
        */
-      layout: {
+      orientation: {
         type: String,
         default: 'horizontal',
-        validator: cardValidator(Layouts, 'layout'),
+        validator: cardValidator(Orientations, 'orientation'),
       },
       /**
        * Controls how the thumbnail appears in the card.
@@ -242,7 +242,7 @@
       },
       /**
        * Controls the alignment of the thumbnail area
-       * in horizontal layouts. with `'small'` or `'large'` thumbnails
+       * in horizontal card orientation.
        * Options: `'left'`, `'right'`
        */
       thumbnailAlign: {
@@ -359,7 +359,7 @@
           this.hasBelowTitleArea ? 'with-below-title' : undefined,
         ];
 
-        if (this.layout === 'vertical' && this.thumbnailDisplay === 'large') {
+        if (this.orientation === 'vertical' && this.thumbnailDisplay === 'large') {
           return {
             cardAreaClasses: [...cardAreaCommonClasses, 'vertical-with-large-thumbnail'],
             thumbnailAspectRatio: undefined,
@@ -370,7 +370,7 @@
           };
         }
 
-        if (this.layout === 'vertical' && this.thumbnailDisplay === 'small') {
+        if (this.orientation === 'vertical' && this.thumbnailDisplay === 'small') {
           return {
             cardAreaClasses: [...cardAreaCommonClasses, 'vertical-with-small-thumbnail'],
             thumbnailAspectRatio: undefined,
@@ -381,7 +381,7 @@
           };
         }
 
-        if (this.layout === 'vertical' && this.thumbnailDisplay === 'none') {
+        if (this.orientation === 'vertical' && this.thumbnailDisplay === 'none') {
           return {
             cardAreaClasses: [...cardAreaCommonClasses, 'vertical-with-none-thumbnail'],
             thumbnailAspectRatio: undefined,
@@ -389,7 +389,7 @@
           };
         }
 
-        if (this.layout === 'horizontal' && this.thumbnailDisplay === 'large') {
+        if (this.orientation === 'horizontal' && this.thumbnailDisplay === 'large') {
           return {
             cardAreaClasses: [
               ...cardAreaCommonClasses,
@@ -404,7 +404,7 @@
           };
         }
 
-        if (this.layout === 'horizontal' && this.thumbnailDisplay === 'small') {
+        if (this.orientation === 'horizontal' && this.thumbnailDisplay === 'small') {
           return {
             cardAreaClasses: [
               ...cardAreaCommonClasses,
@@ -419,7 +419,7 @@
           };
         }
 
-        if (this.layout === 'horizontal' && this.thumbnailDisplay === 'none') {
+        if (this.orientation === 'horizontal' && this.thumbnailDisplay === 'none') {
           return {
             cardAreaClasses: [...cardAreaCommonClasses, 'horizontal-with-none-thumbnail'],
             thumbnailAspectRatio: undefined,

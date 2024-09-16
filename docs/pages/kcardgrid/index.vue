@@ -87,7 +87,7 @@
             v-for="i in 2"
             :key="i"
             :headingLevel="5"
-            layout="horizontal"
+            orientation="horizontal"
             :prependTitle="`(${i})`"
           />
         </KCardGrid>
@@ -418,7 +418,7 @@
             v-for="i in 2"
             :key="i"
             :headingLevel="4"
-            :layout="windowBreakpoint < 4 ? 'vertical' : 'horizontal'"
+            :orientation="windowBreakpoint < 4 ? 'vertical' : 'horizontal'"
             :prependTitle="`(${i})`"
           />
         </KCardGrid>
@@ -442,7 +442,7 @@
         <KCardGrid layout="1-2-2">
           <KCard
             v-for="i in 2"
-            :layout="windowBreakpoint < 4 ? 'vertical' : 'horizontal'"
+            :orientation="windowBreakpoint < 4 ? 'vertical' : 'horizontal'"
             ...
           />
         </KCardGrid>

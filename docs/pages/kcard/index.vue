@@ -10,7 +10,7 @@
         <KCardGrid layout="1-1-1">
           <DocsKCard
             :headingLevel="3"
-            :layout="windowBreakpoint > 2 ? 'horizontal' : 'vertical'"
+            :orientation="windowBreakpoint > 2 ? 'horizontal' : 'vertical'"
             thumbnailDisplay="large"
             thumbnailAlign="right"
             prependTitle="(2)"
@@ -210,22 +210,22 @@
         <DocsAnchorTarget anchor="#layouts" />
       </h3>
 
-      <p><code>KCard</code> offers two main orientation types: horizontal and vertical. In addition, it provides several ways to configure whether a thumbnail area is displayed, its size and alignment. These are the main building blocks for achieving a wide variety of card layouts.</p>
+      <p><code>KCard</code> offers two main orientations: horizontal and vertical. In addition, it provides several ways to configure whether a thumbnail area is displayed, its size and alignment. These are the main building blocks for achieving a wide variety of card layouts.</p>
 
-      <p>By combining the <DocsInternalLink text="layout" href="#prop:layout" code />, <DocsInternalLink text="thumbnailDisplay" href="#prop:thumbnailDisplay" code /> and <DocsInternalLink text="thumbnailAlign" href="#prop:thumbnailAlign" code /> props, cards like this can be created:</p>
+      <p>By combining the <DocsInternalLink text="orientation" href="#prop:orientation" code />, <DocsInternalLink text="thumbnailDisplay" href="#prop:thumbnailDisplay" code /> and <DocsInternalLink text="thumbnailAlign" href="#prop:thumbnailAlign" code /> props, cards like this can be created:</p>
 
       <DocsShow block>
         <KCardGrid layout="1-2-2">
           <DocsKCard
             :headingLevel="4"
-            layout="horizontal"
+            orientation="horizontal"
             thumbnailDisplay="large"
             thumbnailAlign="left"
             prependTitle="(1)"
           />
           <DocsKCard
             :headingLevel="4"
-            layout="horizontal"
+            orientation="horizontal"
             thumbnailDisplay="small"
             thumbnailAlign="right"
             prependTitle="(2)"
@@ -237,20 +237,20 @@
         <KCardGrid layout="1-2-3">
           <DocsKCard
             :headingLevel="4"
-            layout="vertical"
+            orientation="vertical"
             thumbnailDisplay="large"
             prependTitle="(1)"
           />
           <DocsKCard
             :headingLevel="4"
-            layout="vertical"
+            orientation="vertical"
             thumbnailDisplay="small"
             prependTitle="(2)"
             showMenuInFooter
           />
           <DocsKCard
             :headingLevel="4"
-            layout="vertical"
+            orientation="vertical"
             thumbnailDisplay="none"
             hideFooter
             prependTitle="(3)"
@@ -263,13 +263,13 @@
         <KCardGrid ...>
           <KCard
             ...
-            layout="horizontal"
+            orientation="horizontal"
             thumbnailDisplay="large"
             thumbnailAlign="left"
           />
           <KCard
              ...
-            layout="horizontal"
+            orientation="horizontal"
             thumbnailDisplay="small"
             thumbnailAlign="right"
           />
@@ -278,17 +278,17 @@
         <KCardGrid ...>
           <KCard
             ...
-            layout="vertical"
+            orientation="vertical"
             thumbnailDisplay="large"
           />
           <KCard
             ...
-            layout="vertical"
+            orientation="vertical"
             thumbnailDisplay="small"
           />
           <KCard
             ...
-            layout="vertical"
+            orientation="vertical"
             thumbnailDisplay="none"
           />
         </KCardGrid>
@@ -300,7 +300,7 @@
         <DocsAnchorTarget anchor="#content-slots" />
       </h3>
 
-      <p>Use the <DocsInternalLink text="aboveTitle" href="#slot:aboveTitle" code />, <DocsInternalLink text="belowTitle" href="#slot:belowTitle" code />, and <DocsInternalLink text="footer" href="#slot:footer" code /> slots to add content to your card. <code>KCard</code> will organizing these areas within the card based on a chosen layout. Apply custom styling to the inner content of slots to achieve desired effects.</p>
+      <p>Use the <DocsInternalLink text="aboveTitle" href="#slot:aboveTitle" code />, <DocsInternalLink text="belowTitle" href="#slot:belowTitle" code />, and <DocsInternalLink text="footer" href="#slot:footer" code /> slots to add content to your card. <code>KCard</code> will organizing these areas within the card based on its layout. Apply custom styling to the inner content of slots to achieve desired effects.</p>
 
       <DocsShow block>
         <KCardGrid layout="1-1-1">
@@ -368,7 +368,7 @@
       <p><code>KCard</code> provides several ways to display thumbnails. If and how the thumbnail area is displayed depends on the following factors:</p>
 
       <ul>
-        <li>The <DocsInternalLink text="layout" href="#prop:layout" code /> prop determines whether the thumbnail area is displayed above other content or if it is displayed next to it.</li>
+        <li>The <DocsInternalLink text="orientation" href="#prop:orientation" code /> prop determines whether the thumbnail area is displayed above other content or if it is displayed next to it.</li>
         <li>The <DocsInternalLink text="thumbnailDisplay" href="#prop:thumbnailDisplay" code /> prop controls whether the thumbnail area is shown and what is its size</li>
         <li>The <DocsInternalLink text="thumbnailAlignment" href="#prop:thumbnailAlignment" code /> prop controls what side is the thumbnail area displayed when in card's horizontal orientation</li>
       </ul>
@@ -393,7 +393,7 @@
         <KCardGrid layout="1-1-1">
           <DocsKCard
             :headingLevel="4"
-            :layout="windowBreakpoint > 2 ? 'horizontal' : 'vertical'"
+            :orientation="windowBreakpoint > 2 ? 'horizontal' : 'vertical'"
             thumbnailDisplay="large"
             thumbnailAlign="right"
             :thumbnailSrc="null"
@@ -444,7 +444,7 @@
         <KCardGrid layout="1-1-1">
           <DocsKCard
             :headingLevel="4"
-            :layout="windowBreakpoint > 2 ? 'horizontal' : 'vertical'"
+            :orientation="windowBreakpoint > 2 ? 'horizontal' : 'vertical'"
             thumbnailDisplay="large"
             thumbnailAlign="right"
           >
