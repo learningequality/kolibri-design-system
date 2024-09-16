@@ -483,7 +483,7 @@
 
   .below-title {
     order: 4;
-    margin: 0 $spacer 0 $spacer;
+    margin: 0 $spacer calc(#{$spacer} / 2) $spacer;
   }
 
   .footer {
