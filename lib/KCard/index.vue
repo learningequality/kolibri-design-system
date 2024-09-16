@@ -440,9 +440,15 @@
         this.$router.push(this.to);
       },
       onFocus(e) {
+        /**
+         * Emitted when a card gets focus
+         */
         this.$emit('focus', e);
       },
       onHover(e) {
+        /**
+         * Emitted when a card is hovered
+         */
         this.$emit('hover', e);
       },
       onEnter() {

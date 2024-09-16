@@ -99,7 +99,9 @@
         />
       </DocsShowCode>
 
-      <h3>Scaling</h3>
+      <h3 id="scaling">
+        Scaling
+      </h3>
 
       <p>
         The <DocsInternalLink href="/kimg#prop:scaleType">
