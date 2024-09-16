@@ -25,7 +25,7 @@
             layout="horizontal"
             thumbnailDisplay="large"
             thumbnailAlign="right"
-            :thumbnailSrc="require('../assets/hummingbird CC BY-SA 4.0.jpg')"
+            :thumbnailSrc="require('../assets/hummingbird-small-cc-by-sa-4.jpg')"
           >
             <template #title>
               <div>
@@ -92,7 +92,7 @@
             layout="horizontal"
             thumbnailDisplay="large"
             thumbnailAlign="left"
-            :thumbnailSrc="require('../assets/hummingbird CC BY-SA 4.0.jpg')"
+            :thumbnailSrc="require('../assets/hummingbird-small-cc-by-sa-4.jpg')"
           >
             <template #title>
               <div>
@@ -155,7 +155,7 @@
             :headingLevel="2"
             layout="vertical"
             thumbnailDisplay="small"
-            :thumbnailSrc="require('../assets/hummingbird CC BY-SA 4.0.jpg')"
+            :thumbnailSrc="require('../assets/hummingbird-small-cc-by-sa-4.jpg')"
           >
             <template #title>
               <div>
@@ -355,7 +355,7 @@
             :headingLevel="2"
             layout="vertical"
             thumbnailDisplay="small"
-            :thumbnailSrc="require('../assets/hummingbird CC BY-SA 4.0.jpg')"
+            :thumbnailSrc="require('../assets/hummingbird-small-cc-by-sa-4.jpg')"
           >
             <template #title>
               <div>
