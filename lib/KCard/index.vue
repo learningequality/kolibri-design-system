@@ -359,7 +359,10 @@
           this.hasBelowTitleArea ? 'with-below-title' : undefined,
         ];
 
-        if (this.orientation === 'vertical' && this.thumbnailDisplay === 'large') {
+        if (
+          this.orientation === Orientations.VERTICAL &&
+          this.thumbnailDisplay === ThumbnailDisplays.LARGE
+        ) {
           return {
             cardAreaClasses: [...cardAreaCommonClasses, 'vertical-with-large-thumbnail'],
             thumbnailAspectRatio: undefined,
@@ -370,7 +373,10 @@
           };
         }
 
-        if (this.orientation === 'vertical' && this.thumbnailDisplay === 'small') {
+        if (
+          this.orientation === Orientations.VERTICAL &&
+          this.thumbnailDisplay === ThumbnailDisplays.SMALL
+        ) {
           return {
             cardAreaClasses: [...cardAreaCommonClasses, 'vertical-with-small-thumbnail'],
             thumbnailAspectRatio: undefined,
@@ -381,7 +387,10 @@
           };
         }
 
-        if (this.orientation === 'vertical' && this.thumbnailDisplay === 'none') {
+        if (
+          this.orientation === Orientations.VERTICAL &&
+          this.thumbnailDisplay === ThumbnailDisplays.NONE
+        ) {
           return {
             cardAreaClasses: [...cardAreaCommonClasses, 'vertical-with-none-thumbnail'],
             thumbnailAspectRatio: undefined,
@@ -389,7 +398,10 @@
           };
         }
 
-        if (this.orientation === 'horizontal' && this.thumbnailDisplay === 'large') {
+        if (
+          this.orientation === Orientations.HORIZONTAL &&
+          this.thumbnailDisplay === ThumbnailDisplays.LARGE
+        ) {
           return {
             cardAreaClasses: [
               ...cardAreaCommonClasses,
@@ -404,7 +416,10 @@
           };
         }
 
-        if (this.orientation === 'horizontal' && this.thumbnailDisplay === 'small') {
+        if (
+          this.orientation === Orientations.HORIZONTAL &&
+          this.thumbnailDisplay === ThumbnailDisplays.SMALL
+        ) {
           return {
             cardAreaClasses: [
               ...cardAreaCommonClasses,
@@ -419,7 +434,10 @@
           };
         }
 
-        if (this.orientation === 'horizontal' && this.thumbnailDisplay === 'none') {
+        if (
+          this.orientation === Orientations.HORIZONTAL &&
+          this.thumbnailDisplay === ThumbnailDisplays.NONE
+        ) {
           return {
             cardAreaClasses: [...cardAreaCommonClasses, 'horizontal-with-none-thumbnail'],
             thumbnailAspectRatio: undefined,
