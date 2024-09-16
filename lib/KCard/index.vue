@@ -16,7 +16,7 @@
     @keyup.enter="onEnter"
   >
     <div
-      :class="['card-area', layoutClass, thumbnailAlignClass]"
+      :class="['card-area', ...cardAreaClasses ]"
       :style="{ backgroundColor: $themeTokens.surface }"
     >
       <component
@@ -88,7 +88,7 @@
         </span>
       </div>
       <div
-        v-if="$slots.aboveTitle || preserveAboveTitle"
+        v-if="hasAboveTitleArea"
         data-test="aboveTitle"
         class="above-title"
       >
@@ -96,7 +96,7 @@
         <slot name="aboveTitle"></slot>
       </div>
       <div
-        v-if="$slots.belowTitle || preserveBelowTitle"
+        v-if="hasBelowTitleArea"
         data-test="belowTitle"
         class="below-title"
       >
@@ -104,7 +104,7 @@
         <slot name="belowTitle"></slot>
       </div>
       <div
-        v-if="$slots.footer || preserveFooter"
+        v-if="hasFooterArea"
         data-test="footer"
         class="footer"
       >
@@ -283,20 +283,26 @@
           },
         };
       },
+      hasAboveTitleArea() {
+        return this.$slots.aboveTitle || this.preserveAboveTitle;
+      },
+      hasBelowTitleArea() {
+        return this.$slots.belowTitle || this.preserveBelowTitle;
+      },
+      hasFooterArea() {
+        return this.$slots.footer || this.preserveFooter;
+      },
       headingElement() {
         return this.headingLevel ? 'h' + this.headingLevel : undefined;
       },
-      layoutClass() {
-        return this.stylesAndClasses.layoutClass;
+      cardAreaClasses() {
+        return this.stylesAndClasses.cardAreaClasses;
       },
       thumbnailAspectRatio() {
         return this.stylesAndClasses.thumbnailAspectRatio;
       },
       thumbnailStyles() {
         return this.stylesAndClasses.thumbnailStyles;
-      },
-      thumbnailAlignClass() {
-        return this.stylesAndClasses.thumbnailAlignClass;
       },
       /*
         A source-of-truth that organizes styles and classes by layout combinations
@@ -312,10 +318,14 @@
           width: '100%',
           height: '100%',
         };
+        const cardAreaCommonClasses = [
+          this.hasAboveTitleArea ? 'with-above-title' : 'without-above-title',
+          this.hasBelowTitleArea ? 'with-below-title' : undefined,
+        ];
+
         if (this.layout === 'vertical' && this.thumbnailDisplay === 'large') {
           return {
-            layoutClass: 'vertical-with-large-thumbnail',
-            thumbnailAlignClass: undefined,
+            cardAreaClasses: [...cardAreaCommonClasses, 'vertical-with-large-thumbnail'],
             thumbnailAspectRatio: undefined,
             thumbnailStyles: {
               ...thumbnailCommonStyles,
@@ -323,10 +333,10 @@
             },
           };
         }
+
         if (this.layout === 'vertical' && this.thumbnailDisplay === 'small') {
           return {
-            layoutClass: 'vertical-with-small-thumbnail',
-            thumbnailAlignClass: undefined,
+            cardAreaClasses: [...cardAreaCommonClasses, 'vertical-with-small-thumbnail'],
             thumbnailAspectRatio: undefined,
             thumbnailStyles: {
               ...thumbnailCommonStyles,
@@ -334,21 +344,22 @@
             },
           };
         }
+
         if (this.layout === 'vertical' && this.thumbnailDisplay === 'none') {
           return {
-            layoutClass: undefined,
-            thumbnailAlignClass: undefined,
+            cardAreaClasses: [...cardAreaCommonClasses, 'vertical-with-none-thumbnail'],
             thumbnailAspectRatio: undefined,
-            thumbnailStyles: {
-              ...thumbnailCommonStyles,
-            },
+            thumbnailStyles: undefined,
           };
         }
 
         if (this.layout === 'horizontal' && this.thumbnailDisplay === 'large') {
           return {
-            layoutClass: 'horizontal-with-large-thumbnail',
-            thumbnailAlignClass: `thumbnail-align-${this.thumbnailAlign}`,
+            cardAreaClasses: [
+              ...cardAreaCommonClasses,
+              'horizontal-with-large-thumbnail',
+              `thumbnail-align-${this.thumbnailAlign}`,
+            ],
             thumbnailAspectRatio: undefined,
             thumbnailStyles: {
               ...thumbnailCommonStyles,
@@ -356,10 +367,14 @@
             },
           };
         }
+
         if (this.layout === 'horizontal' && this.thumbnailDisplay === 'small') {
           return {
-            layoutClass: 'horizontal-with-small-thumbnail',
-            thumbnailAlignClass: `thumbnail-align-${this.thumbnailAlign}`,
+            cardAreaClasses: [
+              ...cardAreaCommonClasses,
+              'horizontal-with-small-thumbnail',
+              `thumbnail-align-${this.thumbnailAlign}`,
+            ],
             thumbnailAspectRatio: '1:1',
             thumbnailStyles: {
               ...thumbnailCommonStyles,
@@ -367,13 +382,15 @@
             },
           };
         }
+
         if (this.layout === 'horizontal' && this.thumbnailDisplay === 'none') {
           return {
-            layoutClass: undefined,
-            thumbnailAlignClass: undefined,
+            cardAreaClasses: [...cardAreaCommonClasses, 'horizontal-with-none-thumbnail'],
             thumbnailAspectRatio: undefined,
+            thumbnailStyles: undefined,
           };
         }
+
         return {};
       },
     },
@@ -460,7 +477,6 @@
 
   .heading {
     order: 3;
-    margin: $spacer $spacer calc(#{$spacer} / 2) $spacer;
     font-size: 16px;
     font-weight: 600;
     line-height: 1.5;
@@ -478,17 +494,14 @@
 
   .above-title {
     order: 2;
-    margin: $spacer $spacer 0;
   }
 
   .below-title {
     order: 4;
-    margin: 0 $spacer calc(#{$spacer} / 2) $spacer;
   }
 
   .footer {
     order: 5;
-    margin: auto $spacer $spacer;
   }
 
   .thumbnail-placeholder {
@@ -499,6 +512,51 @@
     left: 0;
     z-index: 0; /* <img> in KImg with z-index 1 should cover the placeholder after loaded */
   }
+
+  /************* Manage spaces *************/
+
+  .heading,
+  .above-title,
+  .below-title,
+  .footer {
+    padding: 0;
+    margin-top: 0;
+    margin-right: $spacer;
+    margin-bottom: $spacer;
+    margin-left: $spacer;
+  }
+
+  // when the 'aboveTitle' area is present,
+  // apply top margin to it and also set smaller
+  // margin between the area and the heading...
+  .with-above-title {
+    .above-title {
+      margin-top: $spacer;
+      margin-bottom: calc(#{$spacer} / 2);
+    }
+  }
+
+  // ...and when the 'aboveTitle' area is not present,
+  // instead apply the top margin to the heading
+  .without-above-title {
+    .heading {
+      margin-top: $spacer;
+    }
+  }
+
+  // if there's the 'belowTitle' area present,
+  // override the heading's margin to smaller one
+  .with-below-title {
+    .heading {
+      margin-bottom: calc(#{$spacer} / 2);
+    }
+  }
+
+  /* stylelint-disable no-duplicate-selectors */
+  .footer {
+    margin-top: auto; // push footer to the bottom
+  }
+  /* stylelint-enable no-duplicate-selectors */
 
   /************* Layout-specific styles *************/
 
@@ -539,12 +597,6 @@
       .thumbnail {
         left: 0;
       }
-
-      .above-title,
-      .below-title,
-      .footer {
-        margin-right: $spacer;
-      }
     }
 
     &.thumbnail-align-right {
@@ -552,12 +604,6 @@
 
       .thumbnail {
         right: 0;
-      }
-
-      .above-title,
-      .below-title,
-      .footer {
-        margin-left: $spacer;
       }
     }
   }
