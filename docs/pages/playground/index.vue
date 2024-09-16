@@ -1,103 +1,29 @@
 <template>
 
-  <div :style="{ margin: '40px' }">
-    <h2>Default '1-1-1' grid, horizontal cards, large thumbnail on the right</h2>
-    <KCardGrid
-      layout="1-1-1"
-      :style="{ 'max-width': '1400px' }"
-    >
-      <PlaygroundHorizontalCard
-        v-for="i in 8"
-        :key="i"
-        thumbnailAlign="right"
-      />
-    </KCardGrid>
+  <!--
+    Playground: A private page for components development
+    *****************************************************
+    Place a component you're working on here and see it
+    live on http://localhost:4000/playground
 
-    <h2>Default '1-2-2' grid, horizontal cards, large thumbnail on the left</h2>
-    <KCardGrid
-      layout="1-2-2"
-      :style="{ 'max-width': '1400px' }"
-    >
-      <PlaygroundHorizontalCard
-        v-for="i in 8"
-        :key="i"
-        thumbnailAlign="left"
-      />
-    </KCardGrid>
+    Please do not commit your local updates of this file.
+  -->
+  <div style="padding: 24px">
+    <!-- 
+      Example: Uncomment lines bellow, change something
+      in lib/KBreadcrumbs.vue and see the updates reflected
+      on this page
+    -->
+    <!-- <KBreadcrumbs
+      :items="[
+        { text: 'Global Digital Library', link: { path: '#' } },
+        { text: 'English', link: { path: '#' } },
+        { text: 'Level 2 ', link: { path: '#' } },
+      ]"
+    /> -->
 
-    <h2>Default '1-2-2' grid, horizontal cards, large thumbnail on the right</h2>
-    <KCardGrid
-      layout="1-2-2"
-      :style="{ 'max-width': '1400px' }"
-    >
-      <PlaygroundHorizontalCard
-        v-for="i in 8"
-        :key="i"
-        thumbnailAlign="right"
-      />
-    </KCardGrid>
+    <!-- Play around with your component here: -->
 
-    <h2>Default '1-2-2' grid, horizontal cards, small thumbnail on the right</h2>
-    <KCardGrid
-      layout="1-2-2"
-      :style="{ 'max-width': '1400px' }"
-    >
-      <PlaygroundHorizontalCard
-        v-for="i in 8"
-        :key="i"
-        thumbnailDisplay="small"
-        thumbnailAlign="right"
-      />
-    </KCardGrid>
-
-    <h2>Default '1-2-3' grid, horizontal cards, small thumbnail on the left</h2>
-    <KCardGrid
-      layout="1-2-3"
-      :style="{ 'max-width': '1400px' }"
-    >
-      <PlaygroundHorizontalCard
-        v-for="i in 8"
-        :key="i"
-        thumbnailDisplay="small"
-        thumbnailAlign="left"
-      />
-    </KCardGrid>
-
-    <h2>Default '1-2-3' grid, vertical cards, small thumbnail</h2>
-    <KCardGrid
-      layout="1-2-3"
-      :style="{ 'max-width': '1400px' }"
-    >
-      <PlaygroundVerticalCard
-        v-for="i in 8"
-        :key="i"
-        thumbnailDisplay="small"
-      />
-    </KCardGrid>
-
-    <h2>Default '1-2-2' grid, vertical cards, large thumbnail</h2>
-    <KCardGrid
-      layout="1-2-2"
-      :style="{ 'max-width': '1400px' }"
-    >
-      <PlaygroundVerticalCard
-        v-for="i in 8"
-        :key="i"
-        thumbnailDisplay="large"
-      />
-    </KCardGrid>
-
-    <h2>Default '1-2-3' grid, no thumbnail</h2>
-    <KCardGrid
-      layout="1-2-3"
-      :style="{ 'max-width': '1400px' }"
-    >
-      <PlaygroundVerticalCard
-        v-for="i in 8"
-        :key="i"
-        thumbnailDisplay="none"
-      />
-    </KCardGrid>
   </div>
 
 </template>
@@ -105,27 +31,17 @@
 
 <script>
 
-  import PlaygroundVerticalCard from './PlaygroundVerticalCard';
-  import PlaygroundHorizontalCard from './PlaygroundHorizontalCard';
-
+  /*
+    Playground is a Vue component too,
+    so you can also use `data`, `methods`, etc.
+    as usual if helpful
+  */
   export default {
     name: 'Playground',
-    components: {
-      PlaygroundVerticalCard,
-      PlaygroundHorizontalCard,
-    },
     data() {
       return {};
     },
+    methods: {},
   };
 
 </script>
-
-
-<style scoped lang="scss">
-
-  h2 {
-    margin-top: 50px;
-  }
-
-</style>
