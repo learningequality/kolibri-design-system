@@ -52,7 +52,7 @@
           <KTextTruncator
             v-else
             :text="title"
-            :maxLines="titleLines"
+            :maxLines="titleMaxLines"
           />
         </router-link>
       </component>
@@ -201,7 +201,7 @@
       /**
        * Truncates title to this number of lines.
        */
-      titleLines: {
+      titleMaxLines: {
         type: Number,
         required: false,
         default: 2,

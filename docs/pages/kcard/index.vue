@@ -166,7 +166,7 @@
 
       <p>Then, use the <DocsInternalLink text="title" href="#prop:title" code /> prop to provide the card's title. Each card title within a card grid should be unique.</p>
 
-      <p>The <DocsInternalLink text="titleLines" href="#prop:titleLines" code /> prop can be used to truncate the title to this number of lines.</p>
+      <p>The <DocsInternalLink text="titleMaxLines" href="#prop:titleMaxLines" code /> prop can be used to truncate the title to this number of lines.</p>
 
       <p>Alternatively, when the title needs to be further customized, use the <DocsInternalLink text="title" href="#slot:title" code /> slot. When using this slot, only provide title's content. Do not wrap the title in the heading element as card already takes care of it and providing it via this slot would result in duplicate headings.</p>
 
