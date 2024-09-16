@@ -8,7 +8,7 @@
   <li
     tabindex="0"
     data-focus="true"
-    :class="['k-card', $computedClass(coreOutlineFocus)]"
+    :class="['k-card', $slots.select ? 'with-selection-controls' : undefined, $computedClass(coreOutlineFocus)]"
     :style="gridItemStyle"
     @focus="onFocus"
     @mouseenter="onHover"
@@ -113,6 +113,20 @@
         <!-- @slot Places content to the footer area. -->
         <slot name="footer"></slot>
       </div>
+    </div>
+    <!--
+      .stop modifier on keyup.enter and click events
+      to ensure that navigation doesn't occur when
+      a selection control is pressed or clicked
+    -->
+    <div
+      v-if="$slots.select"
+      class="selection-control"
+      @keyup.enter.stop
+      @click.stop
+    >
+      <!-- @slot For selection controls such as checkbox or radio button -->
+      <slot name="select"></slot>
     </div>
   </li>
 
@@ -513,6 +527,16 @@
     text-decoration: none;
     list-style-type: none;
     cursor: pointer;
+
+    &.with-selection-controls {
+      display: flex;
+      flex-direction: row-reverse;
+      align-items: center;
+
+      .selection-control {
+        margin-right: 20px;
+      }
+    }
   }
 
   .card-area {

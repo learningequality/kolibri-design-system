@@ -83,6 +83,10 @@
         </KFixedGrid>
       </div>
     </template>
+
+    <template v-if="$slots.select" #select>
+      <slot name="select"></slot>
+    </template>
   </KCard>
 
 </template>

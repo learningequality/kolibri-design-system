@@ -50,7 +50,7 @@
           { text: 'Content slots', href: '#content-slots' },
           { text: 'Thumbnails', href: '#thumbnails' },
           { text: 'Interactive elements', href: '#interactive-elements' },
-          { text: 'Selection controls (TBD)', href: '#selection-controls' }
+          { text: 'Selection controls', href: '#selection-controls' }
         ]"
       />
 
@@ -450,8 +450,8 @@
           >
             <template #footer>
               <KIconButton
-                :icon="isBookmarked ? 'bookmark' : 'bookmarkEmpty'"
-                @click.stop="isBookmarked = !isBookmarked"
+                :icon="isBookmarked1 ? 'bookmark' : 'bookmarkEmpty'"
+                @click.stop="isBookmarked1 = !isBookmarked1"
               />
             </template>
           </DocsKCard>
@@ -478,13 +478,96 @@
         <DocsAnchorTarget anchor="#selection-controls" />
       </h3>
 
-      <p>Selection controls such as checkbox or radio button can be displayed next to the card's main area via (TBD) slot.</p>
+      <p>Selection controls such as checkbox or radio button can be displayed next to the card's main area via the <DocsInternalLink text="select" href="#slot:select" /> slot.</p>
 
-      <p><em>Always use <span :style="{ fontStyle: 'italic' }">"Select [card title]"</span> as a label for selection controls</em>. This is all that is required to ensure accessible experience as <code>KCard</code> takes care of all remaining aspects.</p>
+      <p><em>Always use <span :style="{ fontStyle: 'italic' }">"Select '[card title]'"</span> as a label for selection controls</em>. Use <code>visuallyhidden</code> to hide the label visually but allow screen readers to detect it.</p>
 
-      <p>Handling the selection state is not <code>KCard</code>'s responsibility .</p>
+      <p><code>KCard</code> takes care of the remaining aspects of accessible experience, such as semantic structure and focus order.</p>
 
-      <p>(TBD live example with code)</p>
+      <p>If there are other interactive elements in a card, a selection control receives the focus as last in the keyboard navigation order.</p>
+
+      <p>Handling the selection state is not <code>KCard</code>'s responsibility.</p>
+
+      <DocsShow block :style="{ maxWidth: '800px' }">
+        <KCardGrid layout="1-1-1">
+          <DocsCard
+            :to="{ path: '/kcard' }"
+            :headingLevel="4"
+            :orientation="windowBreakpoint > 2 ? 'horizontal' : 'vertical'"
+            thumbnailDisplay="large"
+            thumbnailAlign="right"
+            title="First card"
+          >
+            <template #select>
+              <KCheckbox
+                :checked="isFirstCardChecked"
+                @change="isFirstCardChecked = !isFirstCardChecked"
+              >
+                <span class="visuallyhidden">Select 'First card'</span>
+              </KCheckbox>
+            </template>
+            <template #footer>
+              <KIconButton
+                :icon="isBookmarked2 ? 'bookmark' : 'bookmarkEmpty'"
+                @click.stop="isBookmarked2 = !isBookmarked2"
+              />
+            </template>
+          </DocsCard>
+
+          <DocsCard
+            :to="{ path: '/kcard' }"
+            :headingLevel="4"
+            :orientation="windowBreakpoint > 2 ? 'horizontal' : 'vertical'"
+            thumbnailDisplay="large"
+            thumbnailAlign="right"
+            title="Second card"
+          >
+            <template #select>
+              <KCheckbox
+                :checked="isSecondCardChecked"
+                @change="isSecondCardChecked = !isSecondCardChecked"
+              >
+                <span class="visuallyhidden">Select 'Second card'</span>
+              </KCheckbox>
+            </template>
+            <template #footer>
+              <KIconButton
+                :icon="isBookmarked3 ? 'bookmark' : 'bookmarkEmpty'"
+                @click.stop="isBookmarked3 = !isBookmarked3"
+              />
+            </template>
+          </DocsCard>
+        </KCardGrid>
+      </DocsShow>
+
+
+      <!-- eslint-disable -->
+      <DocsShowCode language="html">
+        <KCardGrid ...>
+          <KCard ...>
+            <template #select>
+              <KCheckbox
+                :checked="..."
+                @change="..."
+              >
+                <span class="visuallyhidden">Select 'First card'</span>
+              </KCheckbox>
+            </template>
+          </KCard>
+
+          <KCard ...>
+            <template #select>
+              <KCheckbox
+                :checked="..."
+                @change="..."
+              >
+                <span class="visuallyhidden">Select 'Second card'</span>
+              </KCheckbox>
+            </template>
+          </KCard>
+        </KCardGrid>
+      </DocsShowCode>
+      <!-- eslint-enable -->
     </DocsPageSection>
 
     <DocsPageSection title="Related" anchor="#related">
@@ -518,7 +601,11 @@
     },
     data() {
       return {
-        isBookmarked: false,
+        isBookmarked1: false,
+        isBookmarked2: false,
+        isBookmarked3: false,
+        isFirstCardChecked: false,
+        isSecondCardChecked: false,
       };
     },
   };
