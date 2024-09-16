@@ -9,6 +9,7 @@
     tabindex="0"
     data-focus="true"
     :class="['k-card', $computedClass(coreOutlineFocus)]"
+    :style="gridItemStyle"
     @focus="onFocus"
     @mouseenter="onHover"
     @mousedown="onMouseDown"
@@ -120,6 +121,8 @@
 
 <script>
 
+  import { inject } from '@vue/composition-api';
+
   const Layouts = {
     HORIZONTAL: 'horizontal',
     VERTICAL: 'vertical',
@@ -151,6 +154,14 @@
 
   export default {
     name: 'KCard',
+    setup() {
+      // provided by `KCardGrid`
+      const gridItemStyle = inject('gridItemStyle');
+
+      return {
+        gridItemStyle,
+      };
+    },
     props: {
       /**
        * A regular Vue route object that defines
@@ -470,10 +481,14 @@
   /************* Common styles **************/
 
   .k-card {
-    display: block;
+    width: 100%;
     padding: 0;
     margin: 0;
+    font-size: 12px;
+    text-align: left;
+    text-decoration: none;
     list-style-type: none;
+    cursor: pointer;
   }
 
   .card-area {
@@ -483,13 +498,7 @@
     display: flex;
     flex-direction: column;
     flex-wrap: nowrap;
-    width: 100%;
-    height: auto;
-    font-size: 12px;
-    text-align: left;
-    text-decoration: none;
-    list-style-type: none;
-    cursor: pointer;
+    height: 100%;
     border-radius: 0.5em;
     outline-offset: -1px;
     transition: box-shadow $core-time ease;
@@ -587,8 +596,7 @@
 
   .vertical-with-large-thumbnail {
     .thumbnail {
-      height: 45%;
-      min-height: 45%;
+      height: 180px;
     }
   }
 
@@ -598,6 +606,7 @@
     /* stylelint-enable scss/at-extend-no-missing-placeholder */
 
     .thumbnail {
+      height: calc(180px - #{$spacer});
       margin: $spacer $spacer 0;
     }
   }
