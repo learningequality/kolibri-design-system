@@ -490,7 +490,7 @@
 
       <DocsShow block :style="{ maxWidth: '800px' }">
         <KCardGrid layout="1-1-1">
-          <DocsCard
+          <DocsKCard
             :to="{ path: '/kcard' }"
             :headingLevel="4"
             :orientation="windowBreakpoint > 2 ? 'horizontal' : 'vertical'"
@@ -512,9 +512,9 @@
                 @click.stop="isBookmarked2 = !isBookmarked2"
               />
             </template>
-          </DocsCard>
+          </DocsKCard>
 
-          <DocsCard
+          <DocsKCard
             :to="{ path: '/kcard' }"
             :headingLevel="4"
             :orientation="windowBreakpoint > 2 ? 'horizontal' : 'vertical'"
@@ -536,7 +536,7 @@
                 @click.stop="isBookmarked3 = !isBookmarked3"
               />
             </template>
-          </DocsCard>
+          </DocsKCard>
         </KCardGrid>
       </DocsShow>
 
