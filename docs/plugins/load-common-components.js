@@ -11,7 +11,10 @@ import DocsPageTemplate from '~/common/DocsPageTemplate';
 import DocsDoNot from '~/common/DocsDoNot';
 import DocsShow from '~/common/DocsShow';
 import DocsShowCode from '~/common/DocsShowCode';
+import DocsToggleContent from '~/common/DocsToggleContent';
 import DocsFilter from '~/common/DocsFilter';
+import DocsTable from '~/common/DocsTable';
+import DocsSubNav from '~/common/DocsSubNav';
 
 Vue.component('DocsPageTemplate', DocsPageTemplate);
 Vue.component('DocsPageSection', DocsPageSection);
@@ -24,5 +27,8 @@ Vue.component('DocsShow', DocsShow);
 Vue.component('DocsShowCode', DocsShowCode);
 Vue.component('DocsDoNot', DocsDoNot);
 Vue.component('DocsFilter', DocsFilter);
+Vue.component('DocsToggleContent', DocsToggleContent);
+Vue.component('DocsTable', DocsTable);
+Vue.component('DocsSubNav', DocsSubNav);
 
 Vue.use(VueSimpleMarkdown);
