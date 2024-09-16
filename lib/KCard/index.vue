@@ -611,14 +611,45 @@
   }
 
   .horizontal-with-small-thumbnail {
-    $thumbnail-width: 35%;
+    $thumbnail-width: null;
+
+    /*
+      Coordinates space taken by the thumbnail area and the content area
+      next to it more intelligently in browsers that support `clamp()` by:
+
+      - Instead of defining 'width', 'min-width', and 'max-width' separately,
+        `clamp()` is used with the goal to have the actual thumbnail width
+        saved in the single `$thumbnail-width` value.
+
+      - The `$thumbnail-width` value is then referenced when calculating
+        the remaining space for the content area, ensuring the precise
+        distribution of space.
+
+      Resolves some issues related to unprecise calculations, most importantly
+      this removes the area of empty space between the thumbnail and content areas
+      in some card's sizes, wasting space that can be used for card's textual content.
+    */
+    @mixin clamp-with-fallback($min, $preferred, $max) {
+      // fallback for browsers that don't support 'clamp()'
+      $thumbnail-width: $preferred;
+
+      width: $thumbnail-width;
+      min-width: $min;
+      max-width: $max;
+
+      // clamp(1px, 1%, 1px) only used for testing support
+      @supports (width: clamp(1px, 1%, 1px)) {
+        $thumbnail-width: clamp(#{$min}, #{$preferred}, #{$max});
+
+        width: $thumbnail-width;
+      }
+    }
 
     .thumbnail {
+      @include clamp-with-fallback(100px, 35%, 120px);
+
       position: absolute;
       top: $spacer;
-      width: $thumbnail-width; /* square dimension achieved via KImgs's aspect-ratio 1:1 */
-      min-width: 100px;
-      max-width: 120px;
     }
 
     .heading,
