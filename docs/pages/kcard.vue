@@ -307,7 +307,7 @@
           <KCard
             :to="{ path: '/test-url' }"
             :headingLevel="4"
-            :thumbnailSrc="require('../../assets/hummingbird-large-cc-by-sa-4.jpg')"
+            :thumbnailSrc="require('../assets/hummingbird-large-cc-by-sa-4.jpg')"
             thumbnailDisplay="large"
             title="Learn everything about hummingbirds: their habitats, feeding patterns, and stunning flight abilities"
           >
@@ -587,8 +587,8 @@
 
 <script>
 
-  import useKResponsiveWindow from '../../../lib/composables/useKResponsiveWindow';
-  import DocsKCard from '../../pages-components/DocsKCard';
+  import useKResponsiveWindow from '../../lib/composables/useKResponsiveWindow';
+  import DocsKCard from '../pages-components/DocsKCard';
 
   export default {
     components: {

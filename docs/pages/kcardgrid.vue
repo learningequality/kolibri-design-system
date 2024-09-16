@@ -544,8 +544,8 @@
 
 <script>
 
-  import useKResponsiveWindow from '../../../lib/composables/useKResponsiveWindow';
-  import DocsKCard from '../../pages-components/DocsKCard';
+  import useKResponsiveWindow from '../../lib/composables/useKResponsiveWindow';
+  import DocsKCard from '../pages-components/DocsKCard';
 
   export default {
     components: {
