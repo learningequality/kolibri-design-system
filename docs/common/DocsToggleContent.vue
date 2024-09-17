@@ -28,7 +28,8 @@
        */
       showText: {
         type: String,
-        required: true,
+        required: false,
+        default: 'Show more',
       },
       /**
        * Label for the toggle button
@@ -36,7 +37,8 @@
        */
       hideText: {
         type: String,
-        required: true,
+        required: false,
+        default: 'Hide',
       },
     },
     data() {

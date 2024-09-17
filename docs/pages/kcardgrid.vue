@@ -4,27 +4,27 @@
     <DocsPageSection title="Overview" anchor="#overview">
       <p>Displays a grid of cards <DocsLibraryLink component="KCard" />.</p>
 
-      <p><code>KCardGrid</code> offers several base layouts corresponding to the most commonly used grids, as well as advanced configuration via <code>useKCardGrid</code> (TBD) that allows to customize a base layout or even completely override it.</p>
+      <p><code>KCardGrid</code> provides base layouts for the most common grids in our ecosystem, as well as advanced configuration via <code>useKCardGrid</code> (TBD), allowing customization or complete override of base layouts.</p>
 
-      <p>Grid behavior is based on the <DocsInternalLink text="window breakpoint system" href="/layout#responsiveness" />. <code>KCardGrid</code> decides how many cards per row to display based on a chosen layout and a current window breakpoint level.</p>
+      <p>Grid behavior is based on the <DocsInternalLink text="window breakpoint system" href="/layout#responsiveness" />. <code>KCardGrid</code> determines how many cards per row to display based on its layout and a current window breakpoint.</p>
 
-      <p><code>KCardGrid</code> doesn't control the organization of inner card content, such as orientation, thumbnail size, etc. See <DocsLibraryLink component="KCard" /> to learn more.</p>
+      <p><code>KCardGrid</code> doesn't manage inner card content. This is <DocsLibraryLink component="KCard" />'s responsibility.</p>
     </DocsPageSection>
 
     <DocsPageSection title="Guidelines" anchor="#guidelines">
       <ul>
         <li>
-          <code>KCardGrid</code> has to be a direct parent of <DocsLibraryLink component="KCard" /> (see <DocsInternalLink text="KCard and KCardGrid" href="/kcard#k-card-and-grid" />)
+          <code>KCardGrid</code> must be a direct parent of <DocsLibraryLink component="KCard" /> (<DocsInternalLink text="KCard: KCard and KCardGrid" href="/kcard#k-card-and-grid" />)
         </li>
         <li>
-          Do not set width on cards. Instead, use <code>KCardGrid</code> base layouts and customization options.
+          Avoid setting explicit card widths. Rely on <code>KCardGrid</code> layouts and customization options.
         </li>
         <li>
-          Ensure robust content tolerance and consistent alignment (see <DocsInternalLink text="Card height, content tolerance and  alignment" href="#card-height-and-alignment" />)
+          Ensure robust content tolerance and consistent content alignment (<DocsInternalLink text="Card height, content tolerance and  alignment" href="#card-height-and-alignment" />)
         </li>
       </ul>
 
-      <p>Also follow <DocsInternalLink text="KCard's guidelines" href="/kcard#guidelines" />.</p>
+      <p>Also follow <DocsInternalLink text="KCard guidelines" href="/kcard#guidelines" />.</p>
     </DocsPageSection>
 
     <DocsPageSection title="Usage" anchor="#usage">
