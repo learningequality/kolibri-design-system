@@ -7,6 +7,19 @@ Changelog is rather internal in nature. See release notes for the public overvie
 <!-- [DO NOT REMOVE-USED BY GH ACTION] PASTE CHANGELOG -->
 
 
+- [#781]
+  - **Description:**  Adds warning in KRadioButton if it is not nested inside a KradioButtonGroup.
+  - **Products impact:** none
+  - **Addresses:** #761
+  - **Components:** KRadioButton
+  - **Breaking:** no
+  - **Impacts a11y:** -
+  - **Guidance:** -
+
+[#781]: https://github.com/learningequality/kolibri-design-system/pull/781
+
+
+
 - [#774]
   - **Description:**  Merges `KCard` and `BaseCard`
   - **Products impact:** none
