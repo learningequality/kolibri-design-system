@@ -185,6 +185,9 @@
           "KRadioButton: 'value' prop is deprecated and will be removed in a future release. Please use 'buttonValue' instead."
         );
       }
+      if (process.env.NODE_ENV !== 'production') {
+        this.checkForKRadioButtonGroup();
+      }
     },
     methods: {
       /**
@@ -236,6 +239,18 @@
        */
       setTabIndex(val) {
         this.tabIndex = val;
+      },
+
+      checkForKRadioButtonGroup() {
+        let parent = this.$parent;
+        while (parent) {
+          if (parent.$options.name === 'KRadioButtonGroup') {
+            return; // Found KRadioButtonGroup, no warning needed
+          }
+          parent = parent.$parent;
+        }
+        // If we get here, no KRadioButtonGroup was found
+        console.warn('KRadioButton should be nested inside a KRadioButtonGroup component.');
       },
     },
   };
