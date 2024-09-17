@@ -18,7 +18,6 @@
         <KIcon
           :style="{ fontSize: '48px' }"
           icon="readSolid"
-          :color="$themePalette.grey.v_800"
         />
       </span>
     </template>

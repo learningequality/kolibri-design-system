@@ -4,9 +4,11 @@
     <DocsPageSection title="Overview" anchor="#overview">
       <p>Displays a grid of cards <DocsLibraryLink component="KCard" />.</p>
 
-      <p><code>KCardGrid</code> provides base layouts for the most common grids in our ecosystem, as well as advanced configuration via <code>useKCardGrid</code> (TBD), allowing customization or complete override of base layouts.</p>
+      <p><code>KCardGrid</code> provides base layouts for the most common grids in our ecosystem, as well as advanced configuration via <code>useKCardGrid</code> (TBD), allowing customization or complete override of the base layouts.</p>
 
-      <p>Grid behavior is based on the <DocsInternalLink text="window breakpoint system" href="/layout#responsiveness" />. <code>KCardGrid</code> determines how many cards per row to display based on its layout and a current window breakpoint.</p>
+      <p>Together with <code>KCard</code>, it ensures accessible navigation within card lists, such as announcing only their titles when using the tab key to avoid overwhelming screen reader outputs.</p>
+
+      <p>Grid's visual behavior is based on the <DocsInternalLink text="window breakpoint system" href="/layout#responsiveness" />. <code>KCardGrid</code> determines how many cards per row to display based on its layout and a current window breakpoint.</p>
 
       <p><code>KCardGrid</code> doesn't manage inner card content. This is <DocsLibraryLink component="KCard" />'s responsibility.</p>
     </DocsPageSection>
@@ -17,14 +19,18 @@
           <code>KCardGrid</code> must be a direct parent of <DocsLibraryLink component="KCard" /> (<DocsInternalLink text="KCard: KCard and KCardGrid" href="/kcard#k-card-and-grid" />)
         </li>
         <li>
-          Avoid setting explicit card widths. Rely on <code>KCardGrid</code> layouts and customization options.
+          Avoid setting  card widths. Rely on <code>KCardGrid</code> layouts and customization options (<DocsInternalLink text="Base layouts" href="#base-layouts" />, <DocsInternalLink text="Layout customization" href="#layout-customization" />)
+        </li>
+        <li>
+          Avoid setting card heights. Instead, set heights on card sections, use text truncation, or limit content in other ways (<DocsInternalLink text="Card height, content tolerance and  alignment" href="#card-height-and-alignment" />)
         </li>
         <li>
           Ensure robust content tolerance and consistent content alignment (<DocsInternalLink text="Card height, content tolerance and  alignment" href="#card-height-and-alignment" />)
         </li>
+        <li>Preview cards on all screen sizes  (<DocsInternalLink text="Fine-tuning responsiveness" href="#fine-tuning-responsiveness" />)</li>
       </ul>
 
-      <p>Also follow <DocsInternalLink text="KCard guidelines" href="/kcard#guidelines" />.</p>
+      <p>Also follow <DocsInternalLink text="KCard guidelines" href="/kcard#guidelines" /></p>
     </DocsPageSection>
 
     <DocsPageSection title="Usage" anchor="#usage">
@@ -43,13 +49,13 @@
         <DocsAnchorTarget anchor="#base-layouts" />
       </h3>
 
-      <p>There are three base layouts available, <code>'1-1-1'</code>, <code>'1-2-2'</code>, and <code>'1-2-3'</code>. They define how many cards per row are displayed on each of the <DocsInternalLink text="window breakpoint levels" href="/layout#responsiveness" />.</p>
+      <p>Three base layouts are available: <code>'1-1-1'</code>, <code>'1-2-2'</code>, and <code>'1-2-3'</code>. They determine the number of cards per row for each <DocsInternalLink text="window breakpoint level" href="/layout#responsiveness" />.</p>
 
       <h4>
         '1-1-1' grid
         <DocsAnchorTarget anchor="#1-1-1-grid" />
       </h4>
-      <p>Displays a grid with 1 card per row on all screen sizes. <DocsToggleButton contentId="more-1-1-1-grid" showText="Show full definition" hideText="Hide full definition" /></p>
+      <p>Displays a grid with 1 card per row on every screen size. <DocsToggleButton contentId="more-1-1-1-grid" showText="Show full definition" hideText="Hide full definition" /></p>
 
       <DocsToggleContent id="more-1-1-1-grid">
         <DocsTable>
@@ -216,18 +222,18 @@
         <DocsAnchorTarget anchor="#layout-customization" />
       </h3>
 
-      <p>Base layouts can be customized or even completely overriden. See <code>useKCardGrid</code> (TBD link its docs as soon as it's implemented).</p>
+      <p>Base layouts can be customized or even completely overriden. Refer to <code>useKCardGrid</code> (TBD).</p>
 
       <h3>
         Card height, content tolerance and  alignment
         <DocsAnchorTarget anchor="#card-height-and-alignment" />
       </h3>
 
-      <p>Cards displayed within <code>KCardGrid</code> stretch to fit their content. Therefore, a grid row height corresponds to the height of the tallest card in the row.</p>
+      <p>Cards displayed in <code>KCardGrid</code> stretch to fit their content, making a grid row height match its tallest card.</p>
 
-      <p><em>Setting a fixed height on cards is discouraged.</em> However, card overall height can still be precisely controlled by techniques such as setting the fixed height on its sections, using text truncation, or other ways of limiting the amount of content.</p>
+      <p><em>Setting height on cards is discouraged. Instead, manage card height by setting height on its sections, using text truncation, or other ways to limit content.</em></p>
 
-      <p>Such approaches ensure robust content tolerance and limit  unreasonable card heights or unexpected overflows. Furthemore, they allow to achieve consistent vertical alignment of card sections on a grid row. This is particularly important when dealing with unknown lenghts or amounts of content displayed in cards.</p>
+      <p>Such techniques ensure content tolerance, prevent excessive card heights, and keep vertical alignment of card sections consistent on a grid row. This is especially important when dealing with unknown lenghts or amounts of content displayed in cards.</p>
 
       <p>Consider the following:</p>
 
@@ -333,8 +339,6 @@
         </KCardGrid>
       </DocsShow>
 
-      The structure of cards in the grid above is:
-
       <!-- eslint-disable -->
       <DocsShowCode language="html">
         <KCardGrid ...>
@@ -384,24 +388,24 @@
       </DocsShowCode>
       <!-- eslint-enable -->
 
-      <p>Here,</p>
+      <p>Here:</p>
       <ul>
-        <li>Fixed height is set on content of the <DocsInternalLink text="aboveTitle" href="#slot:aboveTitle" code /> slot. The <code>KCard</code>'s <DocsInternalLink href="/kcard#prop:preserveAboveTitle" text="preserveAboveTitle" code /> prop is used to make the slot area present even if it has no content. This results in consistent vertical space taken by this area no matter its content, creating the consistent alignment of all cards' titles.</li>
-        <li>Similarly, fixed height is set on the <DocsInternalLink text="title" href="#slot:title" code /> slot and the title is truncated.</li>
-        <li>The <DocsInternalLink text="belowTitle" href="#slot:belowTitle" code /> slot's content is truncated.</li>
-        <li>The number of pills in the footer is sliced to a reasonable amount</li>
+        <li>Height is set on <code>KCard</code>'s <DocsInternalLink text="aboveTitle" href="/kcard#slot:aboveTitle" code /> slot content, and its <DocsInternalLink href="/kcard#prop:preserveAboveTitle" text="preserveAboveTitle" code /> prop keeps the slot area even without content. This results in consistent alignment of all cards' titles on a grid row.</li>
+        <li>Similarly, height is set on the <DocsInternalLink text="title" href="/kcard#slot:title" code /> slot, and the title is truncated.</li>
+        <li>The <DocsInternalLink text="belowTitle" href="/kcard#slot:belowTitle" code /> slot's content is truncated.</li>
+        <li>The number of pills in the <DocsInternalLink text="footer" href="/kcard#slot:footer" code /> slot is limited to a reasonable amount.</li>
       </ul>
 
       <p>See other <code>KCard</code>'s <code>preserve...</code> <DocsInternalLink href="/kcard#props" text="props" />.</p>
 
-      <p>This example only demonstrate the most common patterns. Other techniques can be used as long as they result in robust content tolerance.</p>
+      <p>This example only demonstrates the most common patterns. Other techniques can be used as long as they result in robust content tolerance.</p>
 
       <h3>
         Fine-tuning responsiveness
         <DocsAnchorTarget anchor="#fine-tuning-responsiveness" />
       </h3>
 
-      <p>The grid configuration can be further combined with <code>KCard</code>'s configuration to achieve even better user experience. One typical example is changing <code>KCard</code>'s horizontal orientation to the vertical one on smaller screens. This provides more suitable organization of content within a card when there is less space:</p>
+      <p>Grid configuration can be combined with <code>KCard</code>'s settings to further improve responsive experience. A common pattern is switching <code>KCard</code>'s horizontal orientation to vertical for smaller screens to organize content more effectively in limited space:</p>
 
       <DocsShow block>
         <KCardGrid layout="1-2-2">
@@ -440,9 +444,7 @@
       </DocsShowCode>
       <!-- eslint-enable -->
 
-      <p>Here, on smaller screens, <code>KCardGrid</code> ensures that just 1 card per row is displayed and <code>KCard</code> takes care of organizing its content vertically.</p>
-
-      <p>The same technique can be used to configure the content provided to <code>KCard</code> via its slots. For example, in the following, some of the metadata pills are hidden on smaller screens:</p>
+      <p>This technique also works for adjusting <code>KCard</code> slots content. In the following example, some metadata pills are hidden on smaller screens:</p>
 
       <DocsShow block>
         <KCardGrid layout="1-2-2">
@@ -476,11 +478,6 @@
                   >
                     Ecology
                   </span>
-                  <span
-                    :style="{ 'background-color': $themePalette.grey.v_50 }"
-                  >
-                    Ornithology
-                  </span>
                 </template>
               </div>
             </template>
@@ -496,12 +493,11 @@
             ...
           >
             <template #footer>
-              <span>Read</span>
-              <span>Short Activity</span>
+              <span ...>Read</span>
+              <span ...>Short Activity</span>
               <template v-if="windowBreakpoint > 3">
-                <span>Biology</span>
-                <span>Ecology</span>
-                <span>Ornithology</span>
+                <span ...>Biology</span>
+                <span ...>Ecology</span>
               </template>
             </template>
           </KCard>
@@ -514,8 +510,7 @@
         <DocsAnchorTarget anchor="#loading-state" />
       </h3>
 
-      <p>When in loading state, <code>KCardGrid</code> displays card skeletons...(TBD)</p>
-      <!-- TODO: Also link KCard-Usage-Thumbnail-Placeholder -->
+      <p>When cards are loading, <code>KCardGrid</code> displays skeleton cards...(TBD)</p>
     </DocsPageSection>
 
     <DocsPageSection title="Related" anchor="#related">
