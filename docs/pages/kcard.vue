@@ -60,9 +60,9 @@
         <DocsAnchorTarget anchor="#k-card-and-grid" />
       </h3>
 
-      <p><code>KCard</code> must always be used as a direct child of <DocsLibraryLink component="KCardGrid" /> to ensure proper semantics and accessibility. Read <DocsLibraryLink component="KCardGrid" /> to see how these components work together.</p>
+      <p><code>KCard</code> must always be used as a direct child of <DocsLibraryLink component="KCardGrid" /> to ensure proper semantics and accessibility. Read <DocsLibraryLink component="KCardGrid" /> to see how these components work together. <DocsToggleButton contentId="more-card-and-grid" /></p>
 
-      <DocsToggleContent>
+      <DocsToggleContent id="more-card-and-grid">
         <DocsDoNot>
           <template #do>
             <span>Always use <code>KCardGrid</code>, even for a single card</span>
@@ -145,9 +145,9 @@
         <DocsAnchorTarget anchor="#title" />
       </h3>
 
-      <p>First, use the <DocsInternalLink text="headingLevel" href="#prop:headingLevel" code /> prop to set the appropriate heading level (<code>2-6</code>) based on the surrounding context.</p>
+      <p>First, use the <DocsInternalLink text="headingLevel" href="#prop:headingLevel" code /> prop to set the appropriate heading level (<code>2-6</code>) based on the surrounding context. <DocsToggleButton contentId="more-heading-level" /></p>
 
-      <DocsToggleContent>
+      <DocsToggleContent id="more-heading-level">
         <p>Examples:</p>
         <ul>
           <li>If a page with cards has an <code>h1</code> and no subsections, set <DocsInternalLink text="headingLevel" href="#prop:headingLevel" code /> to <code>2</code> to render card titles as <code>h2</code>.</li>
@@ -160,9 +160,9 @@
 
       <p>The <DocsInternalLink text="titleMaxLines" href="#prop:titleMaxLines" code /> prop can be used to truncate the title to a set number of lines.</p>
 
-      <p>For more customization, the <DocsInternalLink text="title" href="#slot:title" code /> slot can be used. Provide only the title text to the slot without wrapping it in a heading element to avoid duplicate headings in the markup output.</p>
+      <p>For more customization, the <DocsInternalLink text="title" href="#slot:title" code /> slot can be used. Provide only the title text to the slot without wrapping it in a heading element to avoid duplicate headings in the markup output. <DocsToggleButton contentId="more-title-slot" /></p>
 
-      <DocsToggleContent>
+      <DocsToggleContent id="more-title-slot">
         <DocsDoNot>
           <template #do>
             <!-- eslint-disable -->

@@ -32,7 +32,7 @@ Links:
 
 Content:
 
-* `<DocsToggleContent />` - toggles visibility of content
+* `<DocsToggleButton />` with `<DocsToggleContent />` - toggles visibility of content
 * `<DocsTable />` - for showing styled table
 
 Illustration:

@@ -1,13 +1,7 @@
 <template>
 
-  <div class="wrapper">
-    <button class="toggle" @click="show = !show">
-      <span v-if="show">{{ hideText }}<KIcon icon="dropup" /></span>
-      <span v-else>{{ showText }}<KIcon icon="dropdown" /></span>
-    </button>
-    <div v-show="show" class="content">
-      <slot></slot>
-    </div>
+  <div class="content">
+    <slot></slot>
   </div>
 
 </template>
@@ -16,36 +10,17 @@
 <script>
 
   /**
-   * Toggles visibility of content
-   * provided via the default slot
+   * `DocsToggleButton` toggles the visibility
+   * of content provided via the default slot
+   * of its corresponding `DocsToggleContent`
+   *
+   * These two components are linked with `id`
+   * set on the `DocsToggleContent`. This `id`
+   * is then provided to `DocsToggleButton`
+   * via its `contentId` prop.
    */
   export default {
     name: 'DocsToggleContent',
-    props: {
-      /**
-       * Label for the toggle button
-       * for showing the content
-       */
-      showText: {
-        type: String,
-        required: false,
-        default: 'Show more',
-      },
-      /**
-       * Label for the toggle button
-       * for hiding the content
-       */
-      hideText: {
-        type: String,
-        required: false,
-        default: 'Hide',
-      },
-    },
-    data() {
-      return {
-        show: false,
-      };
-    },
   };
 
 </script>
@@ -55,33 +30,8 @@
 
   @import '~/assets/definitions';
 
-  .wrapper {
-    margin: 12px 0;
-  }
-
-  .toggle {
-    display: inline-block; // prevents trailing spaces
-    color: $link-color;
-    text-decoration: underline;
-    cursor: pointer;
-    background: none;
-    border: 0;
-    transition: $basic-transition;
-
-    svg {
-      fill: $link-color !important;
-      transition: $basic-transition;
-    }
-
-    &:hover {
-      color: $link-hover-color;
-      svg {
-        fill: $link-hover-color;
-      }
-    }
-  }
-
   .content {
+    display: none;
     padding: 16px 24px;
     margin: 12px 0;
     border: 1px solid $border-color;

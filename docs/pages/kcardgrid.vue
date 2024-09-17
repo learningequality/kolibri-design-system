@@ -49,12 +49,9 @@
         '1-1-1' grid
         <DocsAnchorTarget anchor="#1-1-1-grid" />
       </h4>
-      <p>Displays a grid with 1 card per row on all screen sizes.</p>
+      <p>Displays a grid with 1 card per row on all screen sizes. <DocsToggleButton contentId="more-1-1-1-grid" showText="Show full definition" hideText="Hide full definition" /></p>
 
-      <DocsToggleContent
-        showText="Show full definition"
-        hideText="Hide full definition"
-      >
+      <DocsToggleContent id="more-1-1-1-grid">
         <DocsTable>
           <tr>
             <th></th>
@@ -108,12 +105,9 @@
         '1-2-2' grid
         <DocsAnchorTarget anchor="#1-2-2-grid" />
       </h4>
-      <p>Displays a grid with 1 card per row on smaller screens, and 2 cards per row on medium and larger screens.</p>
+      <p>Displays a grid with 1 card per row on smaller screens, and 2 cards per row on medium and larger screens. <DocsToggleButton contentId="more-1-2-2-grid" showText="Show full definition" hideText="Hide full definition" /></p>
 
-      <DocsToggleContent
-        showText="Show full definition"
-        hideText="Hide full definition"
-      >
+      <DocsToggleContent id="more-1-2-2-grid">
         <DocsTable>
           <tr>
             <th></th>
@@ -166,12 +160,9 @@
         '1-2-3' grid
         <DocsAnchorTarget anchor="#1-2-3-grid" />
       </h4>
-      <p>Displays a grid with 1 card per row on smaller screens, 2 cards per row on medium screens, and 3 cards per row on larger screens.</p>
+      <p>Displays a grid with 1 card per row on smaller screens, 2 cards per row on medium screens, and 3 cards per row on larger screens. <DocsToggleButton contentId="more-1-2-3-grid" showText="Show full definition" hideText="Hide full definition" /></p>
 
-      <DocsToggleContent
-        showText="Show full definition"
-        hideText="Hide full definition"
-      >
+      <DocsToggleContent id="more-1-2-3-grid">
         <DocsTable>
           <tr>
             <th></th>
