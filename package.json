@@ -1,6 +1,6 @@
 {
   "name": "kolibri-design-system",
-  "version": "5.0.0-rc5",
+  "version": "5.0.0-rc6",
   "private": false,
   "description": "The Kolibri Design System defines common design patterns and code for use in Kolibri applications",
   "repository": {

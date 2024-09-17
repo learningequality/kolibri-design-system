@@ -512,6 +512,17 @@ Changelog is rather internal in nature. See release notes for the public overvie
 
 <!-- [DO NOT REMOVE-USED BY GH ACTION] PASTE CHANGELOG -->
 
+- [#784]
+  - **Description:** Adds `labelDir` prop to control rtl direction of label.
+  - **Products impact:** new API.
+  - **Addresses:** https://github.com/learningequality/studio/issues/4728.
+  - **Components:** KCheckbox, KRadioButton.
+  - **Breaking:** no
+  - **Impacts a11y:** no.
+  - **Guidance:** -.
+
+[#784]: https://github.com/learningequality/kolibri-design-system/pull/784
+
 - [#767]
   - **Description:** Bump KDS version to 4.5.0.
   - **Products impact:** -.
