@@ -177,7 +177,7 @@
     },
     props: {
       /**
-       * A regular Vue route object that defines
+       * A Vue route object that defines
        * where the card click should navigate.
        */
       to: {
@@ -185,9 +185,7 @@
         required: true,
       },
       /**
-       * Sets the HTML heading level in range (h2 - h6) for the title.
-       * Ensure that the heading level is correct within a particular
-       * context of a page where cards are displayed.
+       * HTML heading level in range (h2 - h6) for the title
        */
       headingLevel: {
         type: Number,
@@ -202,9 +200,7 @@
         },
       },
       /**
-       * Sets card title if provided. The title should be
-       * unique within a grid and descriptive to aid screenreader
-       * navigation.
+       * Card title
        */
       title: {
         type: String,
@@ -212,7 +208,7 @@
         default: null,
       },
       /**
-       * Truncates title to this number of lines.
+       * Truncates title lines
        */
       titleMaxLines: {
         type: Number,
@@ -229,7 +225,7 @@
         validator: cardValidator(Orientations, 'orientation'),
       },
       /**
-       * Controls how the thumbnail appears in the card.
+       * Controls if and how the thumbnail appears in the card.
        * Options: `'none'`, `'small'`, or `'large'`.
        * */
       thumbnailDisplay: {
@@ -238,7 +234,7 @@
         validator: cardValidator(ThumbnailDisplays, 'thumbnailDisplay'),
       },
       /**
-       * Sets the thumbnail source path.
+       * Thumbnail source path.
        **/
       thumbnailSrc: {
         type: String,
@@ -264,30 +260,24 @@
         validator: cardValidator(ThumbnailAlignOptions, 'thumbnailAlign'),
       },
       /**
-       * If `aboveTitle` slot is empty, this controls whether
-       * its space is preserved or not. Typically used to achieve
-       * consistent vertical alignment of information when there
-       * are multiple cards on the same grid row.
+       * If `aboveTitle` slot is empty, controls
+       * whether its space is preserved or not.
        */
       preserveAboveTitle: {
         type: Boolean,
         default: false,
       },
       /**
-       * If `belowTitle` slot is empty, this controls whether
-       * its space is preserved or not. Typically used to achieve
-       * consistent vertical alignment of information when there
-       * are multiple cards on the same grid row.
+       * If `belowTitle` slot is empty, controls
+       * whether its space is preserved or not.
        */
       preserveBelowTitle: {
         type: Boolean,
         default: false,
       },
       /**
-       * If `footer` slot is empty, this controls whether
-       * its space is preserved or not. Typically used to achieve
-       * consistent vertical alignment of information when there
-       * are multiple cards on the same grid row.
+       * If `footer` slot is empty, controls
+       * whether its space is preserved or not.
        */
       preserveFooter: {
         type: Boolean,
