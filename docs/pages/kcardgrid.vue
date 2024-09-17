@@ -229,7 +229,7 @@
         <DocsAnchorTarget anchor="#card-height-and-alignment" />
       </h3>
 
-      <p>Cards displayed in <code>KCardGrid</code> stretch to fit their content, making a grid row height match its tallest card.</p>
+      <p>Cards displayed in <code>KCardGrid</code> stretch vertically to fit their content, making a grid row height match its tallest card.</p>
 
       <p><em>Setting height on cards is discouraged. Instead, manage card height by setting height on its sections, using text truncation, or other ways to limit content.</em></p>
 
