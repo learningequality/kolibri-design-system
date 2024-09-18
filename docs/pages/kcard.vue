@@ -19,9 +19,7 @@
         </KCardGrid>
       </DocsShow>
 
-      <p>It is inteded for use with <code>KCardGrid</code>.</p>
-
-      <p>Below is an overview of <code>KCard</code>'s features and best practices focused on its inner content. To learn more about card grids and related <code>KCard</code> features, see <DocsLibraryLink component="KCardGrid" />.</p>
+      <p>It is inteded for use with <code>KCardGrid</code>. Below is an overview of <code>KCard</code>'s features and best practices focused on its inner content. To learn more about card grids and related <code>KCard</code> features, see <DocsLibraryLink component="KCardGrid" />.</p>
     </DocsPageSection>
 
     <DocsPageSection title="Guidelines" anchor="#guidelines">

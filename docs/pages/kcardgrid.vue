@@ -231,11 +231,7 @@
 
       <p>Cards displayed in <code>KCardGrid</code> stretch vertically to fit their content, making a grid row height match its tallest card.</p>
 
-      <p><em>Setting height on cards is discouraged. Instead, manage card height by setting height on its sections, using text truncation, or other ways to limit content.</em></p>
-
-      <p>Such techniques ensure content tolerance, prevent excessive card heights, and keep vertical alignment of card sections consistent on a grid row. This is especially important when dealing with unknown lenghts or amounts of content displayed in cards.</p>
-
-      <p>Consider the following:</p>
+      <p><em>Setting height on cards is discouraged. Instead, manage card height by setting height on its sections, using text truncation, or other ways to limit content.</em> Such techniques ensure content tolerance, prevent excessive card heights, and keep vertical alignment of card sections consistent on a grid row. This is especially important when dealing with unknown lenghts or amounts of content displayed in cards. Consider:</p>
 
       <DocsShow language="html">
         <KCardGrid layout="1-2-3">
