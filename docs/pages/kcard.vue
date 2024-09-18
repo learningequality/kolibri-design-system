@@ -240,7 +240,67 @@
         <DocsAnchorTarget anchor="#layout" />
       </h3>
 
-      <p><code>KCard</code> has two orientations: horizontal and vertical. It is also possible to configure whether a thumbnail area is displayed, its size and alignment. By combining <code>orientation</code>, <code>thumbnailDisplay</code> and <code>thumbnailAlign</code> props, diverse card layouts can be created:</p>
+      <p><code>KCard</code> has two orientations: horizontal and vertical. It is also possible to configure whether a thumbnail area is displayed, its size and alignment. By combining <code>orientation</code>, <code>thumbnailDisplay</code> and <code>thumbnailAlign</code> props, the following card layouts can be achieved to organize diverse kinds of content:</p>
+
+      <DocsShow block>
+        <KCardGrid layout="1-2-3">
+          <DocsKCard
+            :headingLevel="4"
+            orientation="vertical"
+            thumbnailDisplay="large"
+            prependTitle="(1)"
+          >
+            <template #aboveTitle>
+              <KLabeledIcon icon="readSolid" label="Read" />
+            </template>
+            <template #footer>
+              <div class="pills">
+                <span
+                  :style="{ 'background-color': $themePalette.grey.v_50 }"
+                >
+                  Short Activity
+                </span>
+                <span
+                  :style="{ 'background-color': $themePalette.grey.v_50 }"
+                >
+                  Biology
+                </span>
+              </div>
+            </template>
+          </DocsKCard>
+          <DocsKCard
+            :headingLevel="4"
+            orientation="vertical"
+            thumbnailDisplay="large"
+            :thumbnailSrc="null"
+            prependTitle="(2)"
+          >
+            <template #aboveTitle>
+              <KLabeledIcon icon="readSolid" label="Read" />
+            </template>
+            <template #footer>
+              <div class="pills">
+                <span
+                  :style="{ 'background-color': $themePalette.grey.v_50 }"
+                >
+                  Short Activity
+                </span>
+              </div>
+            </template>
+          </DocsKCard>
+          <DocsKCard
+            :headingLevel="4"
+            orientation="vertical"
+            thumbnailDisplay="small"
+            prependTitle="(3)"
+            hideFooter
+          >
+            <template #aboveTitle>
+              <KLabeledIcon icon="readSolid" label="Read" />
+            </template>
+          </DocsKCard>
+        </KCardGrid>
+      </DocsShow>
 
       <DocsShow block>
         <KCardGrid layout="1-2-2">
@@ -248,6 +308,7 @@
             :headingLevel="4"
             orientation="horizontal"
             thumbnailDisplay="large"
+            :thumbnailSrc="null"
             thumbnailAlign="left"
             prependTitle="(1)"
           />
@@ -261,33 +322,56 @@
           />
         </KCardGrid>
       </DocsShow>
+
       <DocsShow block>
         <KCardGrid layout="1-2-3">
           <DocsKCard
             :headingLevel="4"
             orientation="vertical"
-            thumbnailDisplay="large"
+            thumbnailDisplay="none"
             prependTitle="(1)"
           />
           <DocsKCard
             :headingLevel="4"
             orientation="vertical"
-            thumbnailDisplay="small"
+            thumbnailDisplay="none"
             prependTitle="(2)"
-            showMenuInFooter
-          />
+            showProgressInFooter
+          >
+            <template #footer>
+              <span></span>
+            </template>
+          </DocsKCard>
           <DocsKCard
             :headingLevel="4"
             orientation="vertical"
             thumbnailDisplay="none"
-            hideFooter
             prependTitle="(3)"
+            showMenuInFooter
           />
         </KCardGrid>
       </DocsShow>
 
       <!-- eslint-disable -->
       <DocsShowCode language="html">
+        <KCardGrid ...>
+          <KCard
+            ...
+            orientation="vertical"
+            thumbnailDisplay="large"
+          />
+          <KCard
+            ...
+            orientation="vertical"
+            thumbnailDisplay="large"
+          />
+          <KCard
+            ...
+            orientation="vertical"
+            thumbnailDisplay="small"
+          />
+        </KCardGrid>
+
         <KCardGrid ...>
           <KCard
             ...
@@ -306,16 +390,7 @@
         <KCardGrid ...>
           <KCard
             ...
-            orientation="vertical"
-            thumbnailDisplay="large"
-          />
-          <KCard
-            ...
-            orientation="vertical"
-            thumbnailDisplay="small"
-          />
-          <KCard
-            ...
+            v-for="i in 3"
             orientation="vertical"
             thumbnailDisplay="none"
           />
@@ -640,3 +715,18 @@
   };
 
 </script>
+
+
+<style lang="scss" scoped>
+
+  .pills {
+    margin-left: -6px;
+
+    span {
+      display: inline-block;
+      padding: 6px 8px;
+      margin: 6px;
+    }
+  }
+
+</style>
