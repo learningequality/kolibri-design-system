@@ -19,7 +19,7 @@
         </KCardGrid>
       </DocsShow>
 
-      <p>It is inteded for use with <DocsLibraryLink component="KCardGrid" />.</p>
+      <p>It is inteded for use with <code>KCardGrid</code>.</p>
 
       <p>Below is an overview of <code>KCard</code>'s features and best practices focused on its inner content. To learn more about card grids and related <code>KCard</code> features, see <DocsLibraryLink component="KCardGrid" />.</p>
     </DocsPageSection>
@@ -27,7 +27,7 @@
     <DocsPageSection title="Guidelines" anchor="#guidelines">
       <ul>
         <li>
-          Use <code>KCard</code> within <DocsLibraryLink component="KCardGrid" /> as its direct child (<DocsInternalLink text="KCard and KCardGrid" href="#k-card-and-grid" />)
+          Use <code>KCard</code> within <code>KCardGrid</code> as its direct child (<DocsInternalLink text="KCard and KCardGrid" href="#k-card-and-grid" />)
         </li>
         <li>Set a correct heading level (<DocsInternalLink text="Title" href="#title" />)</li>
         <li>Ensure each card title is unique within a card grid (<DocsInternalLink text="Title" href="#title" />)</li>
@@ -61,7 +61,7 @@
         <DocsAnchorTarget anchor="#k-card-and-grid" />
       </h3>
 
-      <p><em><code>KCard</code> must always be used within <DocsLibraryLink component="KCardGrid" /> as its direct child</em> to ensure proper semantics and accessibility. Read <DocsLibraryLink component="KCardGrid" /> to see how these components work together. <DocsToggleButton contentId="more-card-and-grid" /></p>
+      <p><em><code>KCard</code> must always be used within <code>KCardGrid</code> as its direct child</em> to ensure proper semantics and accessibility. Refer to <DocsLibraryLink component="KCardGrid" /> to see how these components work together. <DocsToggleButton contentId="more-card-and-grid" /></p>
 
       <DocsToggleContent id="more-card-and-grid">
         <DocsDoNot>
@@ -146,22 +146,20 @@
         <DocsAnchorTarget anchor="#title" />
       </h3>
 
-      <p>First, <em>use the <DocsInternalLink text="headingLevel" href="#prop:headingLevel" code /> prop to set the appropriate heading level (<code>2-6</code>) based on the surrounding context.</em> <DocsToggleButton contentId="more-heading-level" /></p>
+      <p><em>Use the <code>title</code> prop to assign an unique title to each card in a grid, and the <code>headingLevel</code> prop to set the heading level on it. The level needs to correspond to the surrounding context.</em> <DocsToggleButton contentId="more-heading-level" /></p>
 
       <DocsToggleContent id="more-heading-level">
         <p>Examples:</p>
         <ul>
-          <li>If a page with cards has an <code>h1</code> and no subsections, set <DocsInternalLink text="headingLevel" href="#prop:headingLevel" code /> to <code>2</code> to render card titles as <code>h2</code>.</li>
+          <li>If a page with cards has an <code>h1</code> and no subsections, set <code>headingLevel</code> to <code>2</code> to render card titles as <code>h2</code>.</li>
 
-          <li>If there's an <code>h2</code> subsection with cards, set <DocsInternalLink text="headingLevel" href="#prop:headingLevel" code /> to <code>3</code> to render card titles as <code>h3</code>.</li>
+          <li>If there's an <code>h2</code> subsection with cards, set <code>headingLevel</code> to <code>3</code> to render card titles as <code>h3</code>.</li>
         </ul>
       </DocsToggleContent>
 
-      <p>Then, <em>use the <DocsInternalLink text="title" href="#prop:title" code /> prop to assign an unique title to each card in a grid.</em></p>
+      <p>The <code>titleMaxLines</code> prop can be used to truncate the title to a set number of lines.</p>
 
-      <p>The <DocsInternalLink text="titleMaxLines" href="#prop:titleMaxLines" code /> prop can be used to truncate the title to a set number of lines.</p>
-
-      <p>For more customization, the <DocsInternalLink text="title" href="#slot:title" code /> slot can be used. Provide only the title text to the slot without wrapping it in a heading element to avoid duplicate headings in the markup output. <DocsToggleButton contentId="more-title-slot" /></p>
+      <p>For more customization, the <code>title</code> slot can be used. Provide only a title text to the slot without wrapping it in a heading element to avoid duplicate headings in the markup output. <DocsToggleButton contentId="more-title-slot" /></p>
 
       <DocsToggleContent id="more-title-slot">
         <DocsDoNot>
@@ -218,7 +216,7 @@
         <DocsAnchorTarget anchor="#navigation" />
       </h3>
 
-      <p><code>KCard</code>'s entire area is clickable, navigating to a target provided via the <DocsInternalLink text="to" href="#prop:to" /> prop as a regular Vue route object. <DocsToggleButton contentId="more-navigation" /></p>
+      <p><code>KCard</code>'s entire area is clickable, navigating to a target provided via the <code>to</code> prop as a regular Vue route object. <DocsToggleButton contentId="more-navigation" /></p>
 
       <DocsToggleContent id="more-navigation">
         <!-- eslint-disable -->
@@ -244,7 +242,7 @@
         <DocsAnchorTarget anchor="#layout" />
       </h3>
 
-      <p><code>KCard</code> has two orientations: horizontal and vertical. It is also possible to configure whether a thumbnail area is displayed, its size and alignment. By combining the <DocsInternalLink text="orientation" href="#prop:orientation" code />, <DocsInternalLink text="thumbnailDisplay" href="#prop:thumbnailDisplay" code /> and <DocsInternalLink text="thumbnailAlign" href="#prop:thumbnailAlign" code /> props, diverse card layouts can be created:</p>
+      <p><code>KCard</code> has two orientations: horizontal and vertical. It is also possible to configure whether a thumbnail area is displayed, its size and alignment. By combining <code>orientation</code>, <code>thumbnailDisplay</code> and <code>thumbnailAlign</code> props, diverse card layouts can be created:</p>
 
       <DocsShow block>
         <KCardGrid layout="1-2-2">
@@ -332,14 +330,14 @@
         <DocsAnchorTarget anchor="#responsiveness" />
       </h3>
 
-      <p>To a large extent, <DocsLibraryLink component="KCardGrid" /> takes care of responsiveness. Depending on a chosen card layout, <code>KCard</code>'s inner area can be further adjusted to offer even better experience. Refer to <DocsInternalLink text="KCardGrid: Fine-tuning responsiveness" href="/kcardgrid#fine-tuning-responsiveness" />.</p>
+      <p>To a large extent, <code>KCardGrid</code> takes care of responsiveness. Depending on a chosen card layout, <code>KCard</code>'s inner area can be further adjusted to offer even better experience. Refer to <DocsInternalLink text="KCardGrid: Fine-tuning responsiveness" href="/kcardgrid#fine-tuning-responsiveness" />.</p>
 
       <h3>
         Content slots
         <DocsAnchorTarget anchor="#content-slots" />
       </h3>
 
-      <p>Use <DocsInternalLink text="aboveTitle" href="#slot:aboveTitle" code />, <DocsInternalLink text="belowTitle" href="#slot:belowTitle" code />, and <DocsInternalLink text="footer" href="#slot:footer" code /> slots to add content to a card. <code>KCard</code> will organize these areas according to its <DocsInternalLink text="layout configuration" href="#layout" />. Apply custom styling to the inner content of slots to achieve desired effects.</p>
+      <p>Use <code>aboveTitle</code>, <code>belowTitle</code>, and <code>footer</code> slots to add content to a card. <code>KCard</code> will organize these areas according to its <DocsInternalLink text="layout configuration" href="#layout" />. Apply custom styling to the inner content of slots to achieve desired effects.</p>
 
       <DocsShow block>
         <KCardGrid layout="1-1-1">
@@ -399,7 +397,7 @@
       </DocsShowCode>
       <!-- eslint-enable -->
 
-      <p>The <DocsInternalLink text="title" href="#slot:title" code /> slot is available as an alternative to the <DocsInternalLink text="title" href="#prop:title" code /> prop. See <DocsInternalLink text="Title" href="#title" />.</p>
+      <p>The <code>title</code> slot is available as an alternative to the <code>title</code> prop. See <DocsInternalLink text="Title" href="#title" />.</p>
 
       <h3>
         Thumbnail
@@ -409,12 +407,12 @@
       <p><code>KCard</code> offers multiple ways to display thumbnails, depending on these factors:</p>
 
       <ul>
-        <li>The <DocsInternalLink text="orientation" href="#prop:orientation" code /> prop decides if the thumbnail area appears above or beside other content.</li>
-        <li>The <DocsInternalLink text="thumbnailDisplay" href="#prop:thumbnailDisplay" code /> prop manages the thumbnail's visibility and size.</li>
-        <li>The <DocsInternalLink text="thumbnailAlignment" href="#prop:thumbnailAlignment" code /> prop sets which side the thumbnail appears on in horizontal orientation.</li>
+        <li>The <code>orientation</code> prop decides if the thumbnail area appears above or beside other content.</li>
+        <li>The <code>thumbnailDisplay</code> prop manages the thumbnail's visibility and size.</li>
+        <li>The <code>thumbnailAlignment</code> prop sets which side the thumbnail appears on in horizontal orientation.</li>
       </ul>
 
-      <p>Visit <DocsInternalLink text="Layout" href="#layout" /> to see how these options can be combined to create different card layouts.</p>
+      <p>See <DocsInternalLink text="Layout" href="#layout" /> to see how these options can be combined to create different card layouts.</p>
 
       <h4>
         Placeholder
@@ -423,7 +421,7 @@
 
       <p>When <code>KCard</code> is set to display the thumbnail, the thumbnail area acts as a placeholder if the image is missing, fails to load, or is still loading. In such cases, a light gray background is shown in place of the image.</p>
 
-      <p>Use the <DocsInternalLink text="thumbnailPlaceholder" href="#slot:thumbnailPlaceholder" code /> slot to add a placeholder element, such as an icon, to this area. <em>Provide a placeholder element even if a thumbnail image is available.</em> This serves as a progressive loading experience where the placeholder element is displayed until the image is loaded, and is particularly important on slower networks.</p>
+      <p>Use the <code>thumbnailPlaceholder</code> slot to add a placeholder element, such as an icon, to this area. <em>Provide a placeholder element even if a thumbnail image is available.</em> This serves as a progressive loading experience where the placeholder element is displayed until the image is loaded, and is particularly important on slower networks.</p>
 
       <DocsShow block>
         <KCardGrid layout="1-1-1">
@@ -459,9 +457,11 @@
         <DocsAnchorTarget anchor="#thumbnail-image-scaling" />
       </h4>
 
-      <p>The <DocsInternalLink text="thumbnailScaleType" href="#prop:thumbnailScaleType" code /> prop determines how a thumbnail image is scaled to fit the thumbnail area. The available options are the same as <code>KImg</code>'s <DocsInternalLink text="scaling options" href="/kimg#scaling" code />.</p>
+      <p>The <code>thumbnailScaleType</code> prop determines how a thumbnail image is scaled to fit the thumbnail area. The available options are the same as <code>KImg</code>'s scaling options.</p>
 
-      <p><em>If a thumbnail image's quality and ratio are unknown, which is often the case in our cards, it's best to use the default value  <code>'centerInside'</code></em> since it never distorts the image or impairs its quality. See <DocsInternalLink text="KImg's scaling guidance" href="/kimg#scaling" />.</p>
+      <p><em>If a thumbnail image's quality and ratio are unknown, which is often the case in our cards, it's best to use the default value  <code>'centerInside'</code></em> since it never distorts the image or impairs its quality.</p>
+
+      <p>See <DocsInternalLink text="KImg's scaling guidance" href="/kimg#scaling" />.</p>
 
       <h3>
         Interactive elements
@@ -512,13 +512,11 @@
         <DocsAnchorTarget anchor="#selection-controls" />
       </h3>
 
-      <p>Selection controls like checkboxes or radio buttons can be placed next to the card's main area via the <DocsInternalLink text="select" href="#slot:select" /> slot.</p>
+      <p>Selection controls like checkboxes or radio buttons can be placed next to the card's main area via the <code>select</code> slot.</p>
 
       <p><em>Use <span :style="{ fontStyle: 'italic' }">"Select '[card title]'"</span> as label and hide it with the <code>visuallyhidden</code> class to keep the label available for screen readers.</em></p>
 
-      <p><code>KCard</code> handles all remaining accessibility aspects, including semantics and focus order.</p>
-
-      <p>If there are other interactive elements in a card, a selection control will receive focus last in the keyboard navigation order.</p>
+      <p><code>KCard</code> handles all remaining accessibility aspects, including semantics and focus order. If there are other interactive elements in a card, a selection control will receive focus last in the keyboard navigation order.</p>
 
       <p>Managing the selection state is not <code>KCard</code>'s responsibility.</p>
 

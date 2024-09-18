@@ -10,13 +10,13 @@
 
       <p>Grid's visual behavior is based on the <DocsInternalLink text="window breakpoint system" href="/layout#responsiveness" />. <code>KCardGrid</code> determines how many cards per row to display based on its layout and a current window breakpoint.</p>
 
-      <p><code>KCardGrid</code> doesn't manage inner card content. This is <DocsLibraryLink component="KCard" />'s responsibility.</p>
+      <p><code>KCardGrid</code> doesn't manage inner card content. This is <code>KCardGrid</code>'s responsibility.</p>
     </DocsPageSection>
 
     <DocsPageSection title="Guidelines" anchor="#guidelines">
       <ul>
         <li>
-          <code>KCardGrid</code> must be a direct parent of <DocsLibraryLink component="KCard" /> (<DocsInternalLink text="KCard: KCard and KCardGrid" href="/kcard#k-card-and-grid" />)
+          <code>KCardGrid</code> must be a direct parent of <code>KCard</code> (<DocsInternalLink text="KCard: KCard and KCardGrid" href="/kcard#k-card-and-grid" />)
         </li>
         <li>
           Avoid setting  card widths. Rely on <code>KCardGrid</code> layouts and customization options (<DocsInternalLink text="Base layouts" href="#base-layouts" />, <DocsInternalLink text="Layout customization" href="#layout-customization" />)
@@ -30,7 +30,7 @@
         <li>Preview cards on all screen sizes  (<DocsInternalLink text="Fine-tuning responsiveness" href="#fine-tuning-responsiveness" />)</li>
       </ul>
 
-      <p>Also follow <DocsInternalLink text="KCard guidelines" href="/kcard#guidelines" /></p>
+      <p>Also follow <DocsInternalLink text="KCard guidelines" href="/kcard#guidelines" />.</p>
     </DocsPageSection>
 
     <DocsPageSection title="Usage" anchor="#usage">
@@ -388,17 +388,15 @@
       </DocsShowCode>
       <!-- eslint-enable -->
 
-      <p>Here:</p>
+      <p>Here, <code>KCard</code> has the following adjustments related to its visual output in the grid:</p>
       <ul>
-        <li>Height is set on <code>KCard</code>'s <DocsInternalLink text="aboveTitle" href="/kcard#slot:aboveTitle" code /> slot content, and its <DocsInternalLink href="/kcard#prop:preserveAboveTitle" text="preserveAboveTitle" code /> prop keeps the slot area even without content. This results in consistent alignment of all cards' titles on a grid row.</li>
-        <li>Similarly, height is set on the <DocsInternalLink text="title" href="/kcard#slot:title" code /> slot, and the title is truncated.</li>
-        <li>The <DocsInternalLink text="belowTitle" href="/kcard#slot:belowTitle" code /> slot's content is truncated.</li>
-        <li>The number of pills in the <DocsInternalLink text="footer" href="/kcard#slot:footer" code /> slot is limited to a reasonable amount.</li>
+        <li>Height is set on its <code>aboveTitle</code> slot content, and its <code>preserveAboveTitle</code> prop keeps the slot area even without content. This results in consistent alignment of all cards' titles on a grid row.</li>
+        <li>Similarly, height is set on its <code>title</code> slot, and the title is truncated.</li>
+        <li>Its <code>belowTitle</code> slot's content is truncated.</li>
+        <li>The number of pills in its <code>footer</code> slot is limited to a reasonable amount.</li>
       </ul>
 
-      <p>See other <code>KCard</code>'s <code>preserve...</code> <DocsInternalLink href="/kcard#props" text="props" />.</p>
-
-      <p>This example only demonstrates the most common patterns. Other techniques can be used as long as they result in robust content tolerance.</p>
+      <p><code>KCard</code> offers other <code>preserve...</code> props corresponding to its slots.</p>
 
       <h3>
         Fine-tuning responsiveness
