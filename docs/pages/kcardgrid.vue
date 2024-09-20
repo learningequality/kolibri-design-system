@@ -10,7 +10,7 @@
 
       <p>Grid's visual behavior is based on the <DocsInternalLink text="window breakpoint system" href="/layout#responsiveness" />. <code>KCardGrid</code> determines how many cards per row to display based on its layout and a current window breakpoint.</p>
 
-      <p><code>KCardGrid</code> doesn't manage inner card content. This is <code>KCardGrid</code>'s responsibility.</p>
+      <p><code>KCardGrid</code> doesn't manage inner card content. This is <code>KCard</code>'s responsibility.</p>
     </DocsPageSection>
 
     <DocsPageSection title="Guidelines" anchor="#guidelines">
