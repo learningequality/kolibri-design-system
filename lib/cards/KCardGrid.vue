@@ -65,17 +65,7 @@
     props: {
       /**
        * Sets the base grid layout.
-       *
        * Options: `'1-1-1'`, `'1-2-2'`, and `'1-2-3'`.
-       *
-       * `'1-1-1'` grid shows 1 card per row on all screen sizes.
-       *
-       * `'1-2-2'` grid shows 1 card per row on smaller screens
-       * and 2 cards per row on medium and larger screens.
-       *
-       * `'1-2-3'` grid shows 1 card per row on smaller screens,
-       * 2 cards per row on medium screens, and 3 cards per row
-       * on larger screens.
        */
       // eslint-disable-next-line kolibri/vue-no-unused-properties
       layout: {
