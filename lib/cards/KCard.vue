@@ -169,6 +169,7 @@
     name: 'KCard',
     setup() {
       // provided by `KCardGrid`
+      // controls the width and layout of `KCard` items in the grid
       const gridItemStyle = inject('gridItemStyle');
 
       return {

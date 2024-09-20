@@ -55,6 +55,7 @@
       );
 
       // provide to `KCard`
+      // controls the width and layout of `KCard` items in the grid
       provide('gridItemStyle', gridItemStyle);
 
       return {
