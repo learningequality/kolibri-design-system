@@ -513,12 +513,10 @@
         <KCardGrid ...>
           <KCard ...>
             <template #thumbnailPlaceholder>
-              <span :style="{ display: 'flex', height: '100%', justifyContent: 'center', alignItems: 'center' }">
-                <KIcon
-                  :style="{ fontSize: '48px' }"
-                  icon="readSolid"
-                />
-              </span>
+              <KIcon
+                :style="{ fontSize: '48px' }"
+                icon="readSolid"
+              />
             </template>
           </KCard>
         </KCardGrid>

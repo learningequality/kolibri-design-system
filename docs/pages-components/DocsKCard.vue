@@ -14,12 +14,10 @@
       <slot name="thumbnailPlaceholder"></slot>
     </template>
     <template v-else #thumbnailPlaceholder>
-      <span :style="{ height: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center' }">
-        <KIcon
-          :style="{ fontSize: '48px' }"
-          icon="readSolid"
-        />
-      </span>
+      <KIcon
+        :style="{ fontSize: '48px' }"
+        icon="readSolid"
+      />
     </template>
 
     <template v-if="$slots.aboveTitle" #aboveTitle>

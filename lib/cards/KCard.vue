@@ -587,6 +587,10 @@
     bottom: 0;
     left: 0;
     z-index: 0; /* <img> in KImg with z-index 1 should cover the placeholder after loaded */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
   }
 
   .link {
