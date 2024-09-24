@@ -68,6 +68,7 @@
 
   .toggle {
     display: inline-block; // prevents trailing spaces
+    font-weight: bold;
     color: $link-color;
     text-decoration: underline;
     cursor: pointer;
