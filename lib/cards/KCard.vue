@@ -100,6 +100,7 @@
         v-if="hasBelowTitleArea"
         data-test="belowTitle"
         class="below-title"
+        :style="{ color: $themeTokens.annotation }"
       >
         <!-- @slot Places content to the area below the title. -->
         <slot name="belowTitle"></slot>
