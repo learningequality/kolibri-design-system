@@ -161,6 +161,9 @@
           itemsSizes.push(itemSize);
         }
 
+        if (this.overflowDirection === 'start') {
+              itemsSizes.reverse();
+        }
         const indexSequence = [...Array(list.children.length).keys()];
         const directionIndexes =
           this.overflowDirection === 'start' ? indexSequence.reverse() : indexSequence;
