@@ -251,11 +251,7 @@
             prependTitle="(1)"
           >
             <template #aboveTitle>
-              <KLabeledIcon
-                icon="readSolid"
-              >
-                <span :style="{ 'color': $themeTokens.annotation }">Read</span>
-              </KLabeledIcon>
+              <KLabeledIcon icon="readSolid" label="Read" />
             </template>
             <template #footer>
               <div class="pills" :style="{ 'color': $themeTokens.annotation }">
