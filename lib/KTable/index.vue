@@ -547,18 +547,18 @@ td {
 .sticky-header {
   position: sticky;
   top: 0;
-  z-index: 3; 
+  z-index: 2; 
 }
 
 .sticky-column {
   position: sticky;
   left: 0;
-  z-index: 2; 
+  z-index: 1; 
 }
 
 th.sticky-header.sticky-column,
 td.sticky-header.sticky-column {
-  z-index: 4; 
+  z-index: 3; 
 }
 .sortable {
   cursor: pointer;
