@@ -203,14 +203,12 @@
 
     <DocsPageSection title="Scales" anchor="#scales">
       <p>
-        A color scale – sometimes called a color ramp – is an evenly-spaced ramp of shades for a particular color hue. In the Kolibri Design System, we follow <DocsExternalLink text="Google's Material convention" href="https://material.io/archive/guidelines/style/color.html" /> and segment colors into brightness levels, named <code>v_100</code>, <code>v_200</code>, <code>v_300</code>, … <code>v_500</code>, <code>v_600</code>:
+        A color scale – sometimes called a color ramp – is an evenly-spaced ramp of shades for a particular color hue. In the Kolibri Design System, we follow <DocsExternalLink text="Google's Material convention" href="https://material.io/archive/guidelines/style/color.html" /> and segment colors into brightness levels, named <code>v_100</code>, <code>v_200</code>, <code>v_300</code>, <code>v_400</code>, <code>v_500</code>, <code>v_600</code>:
       </p>
       <DocsColorBlock name="palette.green.v_100" />
       <DocsColorBlock name="palette.green.v_200" />
       <DocsColorBlock name="palette.green.v_300" />
-      <p style="margin-left: 60px">
-        …
-      </p>
+      <DocsColorBlock name="palette.green.v_400" />
       <DocsColorBlock name="palette.green.v_500" />
       <DocsColorBlock name="palette.green.v_600" />
       <p>

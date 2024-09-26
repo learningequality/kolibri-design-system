@@ -95,7 +95,7 @@
         </li>
         <li>
           Option text hover color:
-          <DocsInternalLink code text="palette.grey.v_200" href="/colors#palette-grey-v_100" />
+          <DocsInternalLink code text="palette.grey.v_200" href="/colors#palette-grey-v_200" />
         </li>
         <li>
           Iconography color:
