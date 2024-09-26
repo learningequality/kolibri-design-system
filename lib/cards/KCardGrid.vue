@@ -46,7 +46,8 @@
           };
           gridItemStyle.value = {
             // remove all column gaps widths from the available width and then divide by the number of cards per row to get a single card width
-            'flex-basis': `calc((100% - ${cardsPerRow - 1} * ${columnGap}) / ${cardsPerRow})`,
+            // do not use `flex-basis` to avoid rounding errors causing incorrect display on some screen sizes
+            width: `calc((100% - ${cardsPerRow - 1} * ${columnGap}) / ${cardsPerRow})`,
           };
         },
         {
