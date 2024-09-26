@@ -43,11 +43,11 @@
     </template>
     <template v-else-if="!hideFooter" #footer>
       <div class="footer-wrapper">
-        <div class="pills">
+        <div class="pills" :style="{ 'color': $themeTokens.annotation }">
           <span
             :style="{ 'background-color': $themePalette.grey.v_50 }"
           >
-            <KIcon icon="readSolid" :style="{ fontSize: '14px' }" />
+            <KIcon icon="readSolid" :style="{ fontSize: '13px', position: 'relative', top: '3px' }" />
             Read
           </span>
           <span
@@ -172,12 +172,13 @@
   }
 
   .pills {
-    margin-left: -6px;
+    margin-left: -4px;
 
     span {
       display: inline-block;
-      padding: 6px 8px;
-      margin: 6px;
+      padding: 4px 8px;
+      margin: 4px;
+      border-radius: 4px;
     }
   }
 

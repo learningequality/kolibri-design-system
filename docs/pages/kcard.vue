@@ -254,7 +254,7 @@
               <KLabeledIcon icon="readSolid" label="Read" />
             </template>
             <template #footer>
-              <div class="pills">
+              <div class="pills" :style="{ 'color': $themeTokens.annotation }">
                 <span
                   :style="{ 'background-color': $themePalette.grey.v_50 }"
                 >
@@ -279,7 +279,7 @@
               <KLabeledIcon icon="readSolid" label="Read" />
             </template>
             <template #footer>
-              <div class="pills">
+              <div class="pills" :style="{ 'color': $themeTokens.annotation }">
                 <span
                   :style="{ 'background-color': $themePalette.grey.v_50 }"
                 >
@@ -718,12 +718,13 @@
 <style lang="scss" scoped>
 
   .pills {
-    margin-left: -6px;
+    margin-left: -4px;
 
     span {
       display: inline-block;
-      padding: 6px 8px;
-      margin: 6px;
+      padding: 4px 8px;
+      margin: 4px;
+      border-radius: 4px;
     }
   }
 
