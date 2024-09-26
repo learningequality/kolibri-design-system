@@ -1,6 +1,6 @@
 <template>
 
-  <DocsShow :block="block" :padding="false">
+  <DocsShow :block="block" :padding="false" class="docs-show-code">
     <!-- Note that slot contents are HTML-escaped using webpack-loader.js -->
     <PrismComponent :language="language">
       <slot></slot>
@@ -54,7 +54,7 @@
   }
 
   pre[class*='language-'] {
-    padding: 8px 24px;
+    padding: 24px;
     margin: 0;
   }
 
