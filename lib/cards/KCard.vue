@@ -607,7 +607,7 @@
     padding: 0;
     margin-top: 0;
     margin-right: $spacer;
-    margin-bottom: $spacer;
+    margin-bottom: calc(#{$spacer} / 2);
     margin-left: $spacer;
   }
 
