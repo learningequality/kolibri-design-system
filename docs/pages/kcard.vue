@@ -415,7 +415,7 @@
       <DocsShow block>
         <KCardGrid layout="1-1-1">
           <KCard
-            :to="{ path: '/test-url' }"
+            :to="{ path: '#guidelines' }"
             :headingLevel="4"
             :thumbnailSrc="require('../assets/hummingbird-large-cc-by-sa-4.jpg')"
             thumbnailDisplay="large"
@@ -594,7 +594,7 @@
       <DocsShow block :style="{ maxWidth: '800px' }">
         <KCardGrid layout="1-1-1">
           <DocsKCard
-            :to="{ path: '/kcard' }"
+            :to="{ path: '#guidelines' }"
             :headingLevel="4"
             :orientation="windowBreakpoint > 2 ? 'horizontal' : 'vertical'"
             thumbnailDisplay="large"
@@ -619,7 +619,7 @@
           </DocsKCard>
 
           <DocsKCard
-            :to="{ path: '/kcard' }"
+            :to="{ path: '#guidelines' }"
             :headingLevel="4"
             :orientation="windowBreakpoint > 2 ? 'horizontal' : 'vertical'"
             thumbnailDisplay="large"

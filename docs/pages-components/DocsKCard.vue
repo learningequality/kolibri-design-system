@@ -1,7 +1,7 @@
 <template>
 
   <KCard
-    :to="{ path: '/test-url' }"
+    :to="{ path: '#guidelines' }"
     :headingLevel="headingLevel"
     :orientation="orientation"
     :thumbnailDisplay="thumbnailDisplay"
