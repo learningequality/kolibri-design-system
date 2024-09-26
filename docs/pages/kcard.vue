@@ -251,7 +251,11 @@
             prependTitle="(1)"
           >
             <template #aboveTitle>
-              <KLabeledIcon icon="readSolid" label="Read" />
+              <KLabeledIcon
+                icon="readSolid"
+              >
+                <span :style="{ 'color': $themeTokens.annotation }">Read</span>
+              </KLabeledIcon>
             </template>
             <template #footer>
               <div class="pills" :style="{ 'color': $themeTokens.annotation }">
@@ -431,14 +435,14 @@
               />
             </template>
             <template #footer>
-              <div :style="{ marginLeft: '-8px' }">
+              <div class="pills" :style="{ 'color': $themeTokens.annotation }">
                 <span
-                  :style="{ display: 'inline-block', 'backgroundColor': $themePalette.grey.v_50, padding: '8px 6px', margin: '8px' }"
+                  :style="{ 'backgroundColor': $themePalette.grey.v_50 }"
                 >
                   Short Activity
                 </span>
                 <span
-                  :style="{ display: 'inline-block', 'backgroundColor': $themePalette.grey.v_50, padding: '8px 6px', margin: '8px' }"
+                  :style="{ 'backgroundColor': $themePalette.grey.v_50 }"
                 >
                   Biology
                 </span>
