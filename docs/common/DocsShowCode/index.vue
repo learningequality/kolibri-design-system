@@ -1,6 +1,6 @@
 <template>
 
-  <DocsShow :block="block" :padding="false" class="docs-show-code">
+  <DocsShow :block="block" :padding="false">
     <!-- Note that slot contents are HTML-escaped using webpack-loader.js -->
     <PrismComponent :language="language">
       <slot></slot>
