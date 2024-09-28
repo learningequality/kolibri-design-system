@@ -28,6 +28,7 @@
     <div
       ref="moreButtonWrapper"
       class="more-button-wrapper"
+      :class="{ 'start-button': overflowDirection === 'start' }"
     >
       <!-- @slot Slot responsible of rendering the "see more" button. This slot receives as prop a list `overflowItems` with items that dont fit into the visible list.-->
       <slot
@@ -70,12 +71,20 @@
         type: [Object, String],
         default: null,
       },
+      overflowDirection: {
+        type: String,
+        default: 'end',
+        validator(value) {
+          return ['start', 'end'].includes(value);
+        },
+      },
     },
     data() {
       return {
         mounted: false,
         overflowItems: [],
         // default to true just to measure its width at first render
+        visibleItems: [],
         isMoreButtonVisible: true,
         moreButtonWidth: 0,
       };
@@ -152,21 +161,24 @@
           itemsSizes.push(itemSize);
         }
 
-        const overflowItemsIdx = [];
-        for (let i = 0; i < list.children.length; i++) {
-          const item = list.children[i];
-          const itemWidth = itemsSizes[i].width;
+        if (this.overflowDirection === 'start') {
+              itemsSizes.reverse();
+        }
+        const indexSequence = [...Array(list.children.length).keys()];
+        const directionIndexes =
+          this.overflowDirection === 'start' ? indexSequence.reverse() : indexSequence;
 
-          // If the item dont fit in the available space or if we have already
-          // overflowed items, we hide it. This means that once one item overflows,
-          // all the following items will be hidden.
+        const overflowItemsIdx = [];
+
+        directionIndexes.forEach((i) => {
+          const itemWidth = itemsSizes[i].width;
           if (itemWidth >= availableWidth || overflowItemsIdx.length > 0) {
             overflowItemsIdx.push(i);
-            item.style.visibility = 'hidden';
-            item.style.position = 'absolute';
+            list.children[i].style.visibility = 'hidden';
+            list.children[i].style.position = 'absolute';
           } else {
-            item.style.visibility = 'visible';
-            item.style.position = 'unset';
+            list.children[i].style.visibility = 'visible';
+            list.children[i].style.position = 'unset';
             maxWidth += itemWidth;
             availableWidth -= itemWidth;
             const itemHeight = itemsSizes[i].height;
@@ -174,7 +186,7 @@
               maxHeight = itemHeight;
             }
           }
-        }
+        });
 
         // check if overflowed items would fit if the moreButton were not visible
         const overflowedWidth = overflowItemsIdx.reduce(
@@ -195,11 +207,17 @@
           maxWidth -= removedDividerWidth;
         }
 
-        maxWidth = Math.ceil(maxWidth);
-        this.overflowItems = overflowItemsIdx.map(idx => this.items[idx]);
+        this.overflowItems = overflowItemsIdx.map((idx) => this.items[idx]);
         this.isMoreButtonVisible = overflowItemsIdx.length > 0;
-        list.style.maxWidth = `${maxWidth}px`;
+        list.style.maxWidth = `${Math.ceil(maxWidth)}px`;
         list.style.maxHeight = `${maxHeight}px`;
+
+        this.setVisibleItems(directionIndexes, overflowItemsIdx);
+      },
+      setVisibleItems(directionIndexes, overflowItemsIdx) {
+        // Set the visible items based on overflow logic
+        const visibleIndexes = directionIndexes.filter((idx) => !overflowItemsIdx.includes(idx));
+        this.visibleItems = visibleIndexes.map((idx) => this.items[idx]);
       },
       /**
        * Fixes the visibility of the dividers that are shown and hidden when the list overflows.
@@ -275,6 +293,9 @@
 
   .more-button-wrapper {
     visibility: hidden;
+  }
+  .more-button-wrapper.start-button {
+    order: -1; /* Puts the more button at the start */
   }
 
 </style>
