@@ -115,7 +115,6 @@ Changelog is rather internal in nature. See release notes for the public overvie
 [#752]: https://github.com/learningequality/kolibri-design-system/pull/752
 
 
-
 - [#776]
   - **Description:** Bump KDS version to 5.0.0-rc5
   - **Products impact:** -.

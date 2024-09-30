@@ -104,7 +104,7 @@
           <DocsInternalLink text="Layout: Responsiveness" href="/layout#responsiveness" /> has an overview of breakpoints
         </li>
         <li>
-          See <DocsLibraryLink component="KResponsiveElement" /> if you need a component's size reactive information rather than that of the window
+          See <DocsLibraryLink component="useKResponsiveElement" /> if you need a component's size reactive information rather than that of the window
         </li>
       </ul>
     </DocsPageSection>

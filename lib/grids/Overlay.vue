@@ -25,15 +25,16 @@
 
 <script>
 
-  import KResponsiveElementMixin from '../KResponsiveElementMixin';
+  import useKResponsiveElement from '../composables/useKResponsiveElement';
   import useKResponsiveWindow from '../composables/useKResponsiveWindow';
 
   export default {
     name: 'Overlay',
-    mixins: [KResponsiveElementMixin],
     setup() {
       const { windowWidth, windowHeight } = useKResponsiveWindow();
-      return { windowWidth, windowHeight };
+      const { elementWidth } = useKResponsiveElement();
+
+      return { windowWidth, windowHeight, elementWidth };
     },
     props: {
       cols: {
