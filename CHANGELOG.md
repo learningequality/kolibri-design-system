@@ -7,6 +7,41 @@ Changelog is rather internal in nature. See release notes for the public overvie
 <!-- [DO NOT REMOVE-USED BY GH ACTION] PASTE CHANGELOG -->
 
 
+- [#783]
+  - **Description:** Removes KResponsiveElementMixin.
+  - **Products impact:** removed API.
+  - **Addresses:** https://github.com/learningequality/kolibri-design-system/issues/711.
+  - **Components:** KResponsiveElementMixin.
+  - **Breaking:** yes.
+  - **Impacts a11y:** no.
+  - **Guidance:** Replace any use of `KResponsiveElementMixin` with the new composable `useKResponsiveElement`.
+
+[#783]: https://github.com/learningequality/kolibri-design-system/pull/783
+
+- [#783]
+  - **Description:** Adds new useKResponsiveElement composable.
+  - **Products impact:** new API.
+  - **Addresses:** https://github.com/learningequality/kolibri-design-system/issues/711.
+  - **Components:** -.
+  - **Breaking:** no.
+  - **Impacts a11y:** no.
+  - **Guidance:** -.
+
+[#783]: https://github.com/learningequality/kolibri-design-system/pull/783
+
+- [#783]
+  - **Description:** Remove use of KResponsiveElementMixin internally
+  - **Products impact:** - none
+  - **Addresses:** https://github.com/learningequality/kolibri-design-system/issues/711.
+  - **Components:** KBreadcrumbs, KFixedGrid.
+  - **Breaking:** no
+  - **Impacts a11y:** no
+  - **Guidance:** -.
+
+[#783]: https://github.com/learningequality/kolibri-design-system/pull/783
+
+
+
 - [#780]
   - **Description:** Updated documentation for KTable
   - **Products impact:** None
