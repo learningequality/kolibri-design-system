@@ -7,6 +7,118 @@ Changelog is rather internal in nature. See release notes for the public overvie
 <!-- [DO NOT REMOVE-USED BY GH ACTION] PASTE CHANGELOG -->
 
 
+- [#785]
+  - **Description:** Renames `KCard`'s `titleLines` prop to `titleMaxLines`
+  - **Products impact:** updated API
+  - **Addresses:** -
+  - **Components:** `KCard`
+  - **Breaking:** yes
+  - **Impacts a11y:** no
+  - **Guidance:** Rename the prop
+
+[#785]: https://github.com/learningequality/kolibri-design-system/pull/785
+
+- [#785]
+  - **Description:** Renames `KCard`'s `layout` prop to `orientation`
+  - **Products impact:** updated API
+  - **Addresses:** -
+  - **Components:** `KCard`
+  - **Breaking:** yes
+  - **Impacts a11y:** no
+  - **Guidance:** Rename the prop
+
+[#785]: https://github.com/learningequality/kolibri-design-system/pull/785
+
+- [#785]
+  - **Description:** Adds support to `KCard` for selection controls such as checkboxes
+  - **Products impact:** new API
+  - **Addresses:** -
+  - **Components:** `KCard`
+  - **Breaking:** no
+  - **Impacts a11y:** yes
+  - **Guidance:** -
+
+[#785]: https://github.com/learningequality/kolibri-design-system/pull/785
+
+- [#785]
+  - **Description:** Improves spaces display in `KCard`
+  - **Products impact:** visual update
+  - **Addresses:** -
+  - **Components:** `KCard`
+  - **Breaking:** no
+  - **Impacts a11y:** no
+  - **Guidance:** -
+
+[#785]: https://github.com/learningequality/kolibri-design-system/pull/785
+
+- [#785]
+  - **Description:** Hides `KCard` placeholder element after the thumbnail image is loaded
+  - **Products impact:** bugfix
+  - **Addresses:** Resolves issue when parts of the placeholder element was visible behind a small thumbnail image
+  - **Components:** `KCard`
+  - **Breaking:** no
+  - **Impacts a11y:** no
+  - **Guidance:** -
+
+[#785]: https://github.com/learningequality/kolibri-design-system/pull/785
+
+- [#785]
+  - **Description:** Updates `KCard` to make screen readers announce only card titles when navigating the grid with TAB key
+  - **Products impact:** bugfix
+  - **Addresses:** Resolves unexpected behavior when overwhelming amounts of information was announced when navigating the card list with TAB
+  - **Components:** `KCard`
+  - **Breaking:** no
+  - **Impacts a11y:** no
+  - **Guidance:** -
+
+[#785]: https://github.com/learningequality/kolibri-design-system/pull/785
+
+- [#785]
+  - **Description:** Introduces `KCardGrid` (with internal related `KCard` updates)
+  - **Products impact:** new API
+  - **Addresses:** https://github.com/learningequality/kolibri-design-system/issues/697, https://github.com/learningequality/kolibri-design-system/issues/703
+  - **Components:** `KCardGrid`
+  - **Breaking:** no
+  - **Impacts a11y:** no
+  - **Guidance:** -
+
+[#785]: https://github.com/learningequality/kolibri-design-system/pull/785
+
+- [#785]
+  - **Description:** Adds detailed guidance to `KCard` and `KCardGrid` documentation pages
+  - **Products impact:** none
+  - **Addresses:** https://github.com/learningequality/kolibri-design-system/issues/264, https://github.com/learningequality/kolibri-design-system/issues/696
+  - **Components:** `KCard`, `KCardGrid`
+  - **Breaking:** no
+  - **Impacts a11y:** no
+  - **Guidance:** -
+
+[#785]: https://github.com/learningequality/kolibri-design-system/pull/785
+
+- [#785]
+  - **Description:** Adds new documentation components: `DocsSubNav`, `DocsToggleButton`, `DocsToggleContent`, `DocsTable`
+  - **Products impact:** none
+  - **Addresses:** Helps with organizing larger amounts of guidance on documentation pages
+  - **Components:** -
+  - **Breaking:** no
+  - **Impacts a11y:** no
+  - **Guidance:** -
+
+[#785]: https://github.com/learningequality/kolibri-design-system/pull/785
+
+- [#785]
+  - **Description:** Slightly increases the width of the main documentation area
+  - **Products impact:** none
+  - **Addresses:** Helps to better demonstrate components requiring more space on documentation pages, such as card grids
+  - **Components:** -
+  - **Breaking:** no
+  - **Impacts a11y:** no
+  - **Guidance:** -
+
+[#785]: https://github.com/learningequality/kolibri-design-system/pull/785
+
+
+
 - [#783]
   - **Description:** Removes KResponsiveElementMixin.
   - **Products impact:** removed API.
