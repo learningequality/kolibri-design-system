@@ -7,6 +7,19 @@ Changelog is rather internal in nature. See release notes for the public overvie
 <!-- [DO NOT REMOVE-USED BY GH ACTION] PASTE CHANGELOG -->
 
 
+- [#792]
+  - **Description:** Bump KDS version to 5.0.0-rc7.
+  - **Products impact:** -.
+  - **Addresses:** -.
+  - **Components:** -.
+  - **Breaking:** -.
+  - **Impacts a11y:** -.
+  - **Guidance:** -.
+
+[#792]: https://github.com/learningequality/kolibri-design-system/pull/792
+
+
+
 - [#785]
   - **Description:** Renames `KCard`'s `titleLines` prop to `titleMaxLines`
   - **Products impact:** updated API
