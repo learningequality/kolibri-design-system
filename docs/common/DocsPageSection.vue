@@ -36,7 +36,7 @@
     },
     computed: {
       style() {
-        return this.fullwidth ? {} : { maxWidth: '700px' };
+        return this.fullwidth ? {} : { maxWidth: '900px' };
       },
     },
     mounted() {

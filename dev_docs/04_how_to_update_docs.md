@@ -19,6 +19,10 @@ Layout:
 * `<DocsPageTemplate />` - the main page template used by all pages
 * `<DocsPageSection />` - sections within the page template with auto-generated anchor links
 
+Navigation:
+
+* `<DocsSubNav />` - for showing sub-navigation as a list of links
+
 Links:
 
 * `<DocsAnchorTarget />` - for creating anchor link targets
@@ -26,12 +30,21 @@ Links:
 * `<DocsInternalLink />` - links to pages within the design system
 * `<DocsLibraryLink />` - links to library components with `<code>` formatting
 
+Content:
+
+* `<DocsToggleButton />` with `<DocsToggleContent />` - toggles visibility of content
+* `<DocsTable />` - for showing styled table
+
 Illustration:
 
-* `<DocsShow />` - for showing a component
+* `<DocsShow />` - for showing live examples
+* `<DocsShowCode />` - for showing code
 * `<DocsDoNot />` - for showing side-by-side "Do" and "Do not" illustrations
 * `<DocsColorBlock />` - for showing a theme color
 * `<DocsIconBlock />` - for showing an icon
+
+
+
 
 All Kolibri shared components (for example `KButton`) are also available to be used within content. However, this should be limited to using them for _examples of usage_ only.
 

@@ -39,7 +39,7 @@
       <DocsShow>
         <span>
           <KImg
-            :src="require('../assets/hummingbird CC BY-SA 4.0.jpg')"
+            :src="require('../assets/hummingbird-small-cc-by-sa-4.jpg')"
             altText="A sitting hummingbird"
           />
         </span>
@@ -65,7 +65,7 @@
       <DocsShow block>
         <div>
           <KImg
-            :src="require('../assets/hummingbird CC BY-SA 4.0.jpg')"
+            :src="require('../assets/hummingbird-small-cc-by-sa-4.jpg')"
             altText="A sitting hummingbird"
           />
         </div>
@@ -99,7 +99,9 @@
         />
       </DocsShowCode>
 
-      <h3>Scaling</h3>
+      <h3 id="scaling">
+        Scaling
+      </h3>
 
       <p>
         The <DocsInternalLink href="/kimg#prop:scaleType">
@@ -126,7 +128,7 @@
           <KImg
             altText="A sitting hummingbird"
             scaleType="centerInside"
-            :src="require('../assets/hummingbird CC BY-SA 4.0.jpg')"
+            :src="require('../assets/hummingbird-small-cc-by-sa-4.jpg')"
             :style="{ height: '200px', width: '100%', maxWidth: '500px' }"
           />
         </div>
@@ -151,7 +153,7 @@
           <KImg
             altText="A sitting hummingbird"
             scaleType="contain"
-            :src="require('../assets/hummingbird CC BY-SA 4.0.jpg')"
+            :src="require('../assets/hummingbird-small-cc-by-sa-4.jpg')"
             :style="{ height: '200px', width: '100%', maxWidth: '500px' }"
           />
         </div>
@@ -176,7 +178,7 @@
           <KImg
             altText="A sitting hummingbird"
             scaleType="fitXY"
-            :src="require('../assets/hummingbird CC BY-SA 4.0.jpg')"
+            :src="require('../assets/hummingbird-small-cc-by-sa-4.jpg')"
             :style="{ height: '200px', width: '100%', maxWidth: '500px' }"
           />
         </div>
@@ -205,7 +207,7 @@
       <DocsShow block>
         <div>
           <KImg
-            :src="require('../assets/hummingbird CC BY-SA 4.0.jpg')"
+            :src="require('../assets/hummingbird-small-cc-by-sa-4.jpg')"
             altText="A sitting hummingbird"
             aspectRatio="4:3"
           />
@@ -284,7 +286,7 @@
       </DocsShowCode>
       <DocsShow>
         <KImg
-          :src="require('../assets/hummingbird CC BY-SA 4.0.jpg')"
+          :src="require('../assets/hummingbird-small-cc-by-sa-4.jpg')"
           altText="A sitting hummingbird"
         >
           <template #topLeft>
