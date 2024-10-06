@@ -30,13 +30,13 @@
     name: 'KCardGrid',
 
     setup(props) {
-      const { currentLevelConfig } = useResponsiveGridLayout(props);
+      const { currentBreakpointConfig } = useResponsiveGridLayout(props);
 
       const gridStyle = ref({});
       const gridItemStyle = ref({});
 
       watch(
-        currentLevelConfig,
+        currentBreakpointConfig,
         newValue => {
           const { cardsPerRow, columnGap, rowGap } = newValue;
 
