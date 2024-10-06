@@ -55,7 +55,7 @@
   import { watch, ref, provide } from '@vue/composition-api';
 
   import { LAYOUT_1_1_1, LAYOUT_1_2_2, LAYOUT_1_2_3 } from './gridBaseLayouts';
-  import useResponsiveGridLayout from './useResponsiveGridLayout';
+  import useGridLayout from './useGridLayout';
   import useGridLoading from './useGridLoading';
   import SkeletonCard from './SkeletonCard';
 
@@ -68,7 +68,7 @@
       SkeletonCard,
     },
     setup(props) {
-      const { currentBreakpointConfig, windowBreakpoint } = useResponsiveGridLayout(props);
+      const { currentBreakpointConfig, windowBreakpoint } = useGridLayout(props);
       const {
         finishedMounting,
         isLoading,
