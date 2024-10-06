@@ -4,7 +4,7 @@
     <DocsPageSection title="Overview" anchor="#overview">
       <p>Displays a grid of cards <DocsLibraryLink component="KCard" />.</p>
 
-      <p><code>KCardGrid</code> provides base layouts for the most common grids in our ecosystem, as well as advanced configuration via <code>useKCardGrid</code> (TBD), allowing customization or complete override of the base layouts.</p>
+      <p><code>KCardGrid</code> provides base layouts for the most common grids in our ecosystem, as well as customization or complete override of the base layouts.</p>
 
       <p>Together with <code>KCard</code>, it ensures accessible navigation within card lists, such as announcing only their titles when using the tab key to avoid overwhelming screen reader outputs.</p>
 
@@ -37,7 +37,7 @@
       <DocsSubNav
         :items="[
           { text: 'Base layouts', href: '#base-layouts' },
-          { text: 'Layout customization (TBD)', href: '#layout-customization' },
+          { text: 'Layout customization', href: '#layout-customization' },
           { text: 'Card height, content tolerance and  alignment', href: '#card-height-and-alignment' },
           { text: 'Fine-tuning responsiveness', href: '#fine-tuning-responsiveness' },
           { text: 'Loading state (TBD)', href: '#loading-state' },
@@ -222,7 +222,70 @@
         <DocsAnchorTarget anchor="#layout-customization" />
       </h3>
 
-      <p>Base layouts can be customized or even completely overriden. Refer to <code>useKCardGrid</code> (TBD).</p>
+      <p>Base layouts can be customized or even completely overriden via the <code>layoutOverride</code> prop. <code>layoutOverride</code> takes an array of objects <code>{ breakpoints, cardsPerRow, columnGap, rowGap }</code>, where:</p>
+
+      <ul>
+        <li><code>breakpoints</code> is an array of <code>0-7</code> values corresponding to the <DocsInternalLink text="window breakpoint levels" href="/layout#responsiveness" /></li>
+        <li><code>cardsPerRow</code> overrides the number of cards per row for specified <code>breakpoints</code></li>
+        <li><code>columnGap</code>/<code>rowGap</code> overrides grid column/row gaps for specified <code>breakpoints</code></li>
+      </ul>
+
+      <p>For example:</p>
+
+      <DocsShow block>
+        <KCardGrid
+          layout="1-2-3"
+          :layoutOverride="layoutOverride"
+        >
+          <DocsKCard
+            v-for="i in 6"
+            :key="i"
+            :headingLevel="6"
+            :prependTitle="`(${i})`"
+            hideFooter
+          />
+        </KCardGrid>
+      </DocsShow>
+
+      <!-- eslint-disable -->
+      <DocsShowCode language="html">
+        <KCardGrid
+          layout="1-2-3"
+          :layoutOverride="layoutOverride"
+        >
+          <KCard
+            v-for="i in 6"
+            :key="i"
+            ...
+          />
+        </KCardGrid>
+      </DocsShowCode>
+      <!-- eslint-enable -->
+
+      <!-- eslint-disable -->
+      <DocsShowCode language="javascript">
+        export default {
+          ...
+          data() {
+            return {
+              layoutOverride: [
+                {
+                  breakpoints: [0, 1],
+                  columnGap: '20px',
+                  rowGap: '20px',
+                },
+                {
+                  breakpoints: [4, 5, 6, 7],
+                  cardsPerRow: 4,
+                },
+              ],
+            };
+          },
+        };
+      </DocsShowCode>
+      <!-- eslint-enable -->
+
+      <p>Here, the base <code>1-2-3</code> layout is overriden partially. Column and row gaps are decreased to <code>20px</code> on breakpoints <code>0-1</code>, and the number of cards per row is increased to 4 on breakpoints <code>4-7</code>.</p>
 
       <h3>
         Card height, content tolerance and  alignment
@@ -536,7 +599,19 @@
       return { windowBreakpoint };
     },
     data() {
-      return {};
+      return {
+        layoutOverride: [
+          {
+            breakpoints: [0, 1],
+            columnGap: '20px',
+            rowGap: '20px',
+          },
+          {
+            breakpoints: [4, 5, 6, 7],
+            cardsPerRow: 4,
+          },
+        ],
+      };
     },
     computed: {
       slicedPills() {

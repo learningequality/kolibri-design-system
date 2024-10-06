@@ -20,11 +20,6 @@
 
   /**
    * Displays a grid of cards `KCard`.
-   *
-   * Offers default behavior corresponding to the most
-   * commonly used grids, as well as advance configuration
-   * via `useKCardGrid` to customize a base grid layout
-   * or even completely override it.
    */
   export default {
     name: 'KCardGrid',
@@ -38,6 +33,10 @@
       watch(
         currentBreakpointConfig,
         newValue => {
+          if (!newValue) {
+            return;
+          }
+
           const { cardsPerRow, columnGap, rowGap } = newValue;
 
           gridStyle.value = {
@@ -77,6 +76,17 @@
           return [LAYOUT_1_1_1, LAYOUT_1_2_2, LAYOUT_1_2_3].includes(value);
         },
       },
+      // eslint-enable-next-line kolibri/vue-no-unused-properties
+      /**
+       * Overrides the base grid `layout` for chosen breakpoints levels
+       */
+      // eslint-disable-next-line kolibri/vue-no-unused-properties
+      layoutOverride: {
+        type: Array,
+        required: false,
+        default: null,
+      },
+      // eslint-enable-next-line kolibri/vue-no-unused-properties
     },
   };
 
