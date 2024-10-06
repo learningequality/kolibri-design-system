@@ -548,11 +548,6 @@
     font-size: 16px;
     font-weight: 600;
     line-height: 1.5;
-
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
   }
 
   .thumbnail {
@@ -588,6 +583,7 @@
   .link {
     display: inline-block; // allows title placeholder in the skeleton card
     width: 100%; // allows title placeholder in the skeleton card
+    color: inherit;
     text-decoration: none;
     outline: none; // the focus ring is moved to the whole <li>
   }
