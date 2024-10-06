@@ -689,21 +689,21 @@
     $thumbnail-width: null;
 
     /*
-        Coordinates space taken by the thumbnail area and the content area
-        next to it more intelligently in browsers that support `clamp()` by:
+      Coordinates space taken by the thumbnail area and the content area
+      next to it more intelligently in browsers that support `clamp()` by:
 
-        - Instead of defining 'width', 'min-width', and 'max-width' separately,
-          `clamp()` is used with the goal to have the actual thumbnail width
-          saved in the single `$thumbnail-width` value.
+      - Instead of defining 'width', 'min-width', and 'max-width' separately,
+        `clamp()` is used with the goal to have the actual thumbnail width
+        saved in the single `$thumbnail-width` value.
 
-        - The `$thumbnail-width` value is then referenced when calculating
-          the remaining space for the content area, ensuring the precise
-          distribution of space.
+      - The `$thumbnail-width` value is then referenced when calculating
+        the remaining space for the content area, ensuring the precise
+        distribution of space.
 
-        Resolves some issues related to unprecise calculations, most importantly
-        this removes the area of empty space between the thumbnail and content areas
-        in some card's sizes, wasting space that can be used for card's textual content.
-      */
+      Resolves some issues related to unprecise calculations, most importantly
+      this removes the area of empty space between the thumbnail and content areas
+      in some card's sizes, wasting space that can be used for card's textual content.
+    */
     @mixin clamp-with-fallback($min, $preferred, $max) {
       // fallback for browsers that don't support 'clamp()'
       $thumbnail-width: $preferred;
