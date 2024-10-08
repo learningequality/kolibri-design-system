@@ -6,11 +6,10 @@
     :appearance="appearance"
     :appearanceOverrides="appearanceOverrides"
     :type="buttonType"
-    :aria-label="ariaLabel"
+    :aria-label="computedAriaLabel"
     text=""
     v-on="$listeners"
   >
-    <!-- if no "position" is passed as a prop, defaults to bottom, as previously -->
     <UiTooltip
       v-if="tooltip"
       :zIndex="24"
@@ -19,14 +18,11 @@
     >
       {{ tooltip }}
     </UiTooltip>
-    <!-- UiIconButton used flexbox - 7px is the magic centering number -->
     <KIcon :icon="icon" :color="color" :style="iconStyles" />
-    <!-- @slot Pass sub-components into the button, typically `KDropdownMenu` -->
     <slot name="menu"></slot>
   </KButton>
 
 </template>
-
 
 <script>
 
@@ -36,65 +32,38 @@
     name: 'KIconButton',
     components: { UiTooltip },
     props: {
-      /**
-       * Name of icon to display
-       */
       icon: {
         type: String,
         required: true,
       },
-      /**
-       * Button appearance: `'raised-button'` or `'flat-button'`
-       */
       appearance: {
         type: String,
         default: 'flat-button',
       },
-      /**
-       * Optional hex or rgb[a] color for the button background
-       */
       color: {
         type: String,
         default: null,
       },
-      /**
-       * Whether or not button is disabled
-       */
       disabled: {
         type: Boolean,
         default: false,
       },
-      /**
-       * HTML button `type` attribute (e.g. `'submit'`, `'reset'`)
-       */
       buttonType: {
         type: String,
         default: 'button',
       },
-      /**
-       * Button size: `'mini'`, `'small'`, `'regular'`, or `'large'`
-       */
       size: {
         type: String,
         default: 'regular',
       },
-      /**
-       * `aria-label` attribute
-       */
       ariaLabel: {
         type: String,
-        default: null, // https://github.com/learningequality/kolibri-design-system/issues/168
+        default: null,
       },
-      /**
-       * Tooltip label
-       */
       tooltip: {
         type: String,
-        default: null, // https://github.com/learningequality/kolibri-design-system/issues/168
+        default: null,
       },
-      /**
-       * Tooltip position: `'top', 'right', 'bottom', 'left'`
-       */
       tooltipPosition: {
         type: String,
         default: 'bottom',
@@ -106,11 +75,8 @@
           this.appearance === 'flat-button' ? { backgroundColor: 'rgba(0,0,0,.1)' } : {};
         return {
           ...this.sizeStyles,
-          // Circle
           borderRadius: '50%',
-          // Added minWidth to prevent squished/oval effect
           minWidth: '32px',
-          // Remove minHeight & padding
           minHeight: '0px',
           padding: '0',
           ':hover': hover,
@@ -139,10 +105,12 @@
             return { ...sizes, top: '7px' };
         }
       },
+      computedAriaLabel() {
+        return this.ariaLabel || this.tooltip;
+      },
     },
   };
 
 </script>
-
 
 <style lang="scss" scoped></style>
