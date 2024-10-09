@@ -6,7 +6,7 @@
     :appearance="appearance"
     :appearanceOverrides="appearanceOverrides"
     :type="buttonType"
-    :aria-label="ariaLabel"
+    :aria-label="computedAriaLabel"
     text=""
     v-on="$listeners"
   >
@@ -138,6 +138,9 @@
           default:
             return { ...sizes, top: '7px' };
         }
+      },
+      computedAriaLabel() {
+        return this.ariaLabel || this.tooltip;
       },
     },
   };
