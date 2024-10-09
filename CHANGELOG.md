@@ -7,6 +7,19 @@ Changelog is rather internal in nature. See release notes for the public overvie
 <!-- [DO NOT REMOVE-USED BY GH ACTION] PASTE CHANGELOG -->
 
 
+- [#798]
+  - **Description:**  Adds custom computed property `computedAriaLabel` that dynamically sets the `ariaLabel` for `KIconButton` based on the `tooltip` prop when `ariaLabel` is not provided.
+  - **Products impact:** none
+  - **Addresses:** #793
+  - **Components:** `KIconButton`
+  - **Breaking:** no
+  - **Impacts a11y:** Improves accessibility in places where we have tooltips but no aria- label attribute set for `KIconbutton`.
+  - **Guidance:** -
+
+[#798]: https://github.com/learningequality/kolibri-design-system/pull/798
+
+
+
 - [#792]
   - **Description:** Bump KDS version to 5.0.0-rc7.
   - **Products impact:** -.
