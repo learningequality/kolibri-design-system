@@ -7,6 +7,7 @@
         :alt="alternativeText"
         :style="imgStyles"
         @error="onError"
+        @load="onLoad" 
       >
       <span
         v-if="$slots.placeholder"
@@ -312,9 +313,15 @@
     methods: {
       onError(event) {
         /**
-         * Emitted when the image fails to load. The DOM event that triggered the error is available in the payload.
+         * Emitted when the image fails to load. The DOM event  is available in the payload.
          */
         this.$emit('error', event);
+      },
+      onLoad(event) {
+        /**
+         * Emitted when the image loads successfully. The DOM event is available in the payload.
+         */
+        this.$emit('load', event);
       },
     },
   };

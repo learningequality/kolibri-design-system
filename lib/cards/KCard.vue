@@ -1,14 +1,12 @@
 <template>
 
-  <!-- see trackInputModality  for [data-focus=true] -->
   <!--
     do not use @onmouseup but rather @click
     to allow for @click.stop on buttons and similar
     rendered within a card via its slots -->
   <li
-    tabindex="0"
-    data-focus="true"
-    :class="['k-card', $computedClass(coreOutlineFocus)]"
+    :class="['k-card', $slots.select ? 'with-selection-controls' : undefined]"
+    :style="[gridItemStyle, focusStyle]"
     @focus="onFocus"
     @mouseenter="onHover"
     @mousedown="onMouseDown"
@@ -16,7 +14,7 @@
     @keyup.enter="onEnter"
   >
     <div
-      :class="['card-area', layoutClass, thumbnailAlignClass]"
+      :class="['card-area', ...cardAreaClasses ]"
       :style="{ backgroundColor: $themeTokens.surface }"
     >
       <component
@@ -39,9 +37,11 @@
         -->
         <router-link
           event=""
-          tabindex="-1"
           :to="to"
           draggable="false"
+          class="link"
+          @focus.native="onLinkFocus"
+          @blur.native="onLinkBlur"
         >
           <!-- @slot Optional slot section containing the title contents, should not contain a heading element. -->
           <slot 
@@ -51,7 +51,7 @@
           <KTextTruncator
             v-else
             :text="title"
-            :maxLines="titleLines"
+            :maxLines="titleMaxLines"
           />
         </router-link>
       </component>
@@ -65,22 +65,23 @@
           KImg takes care of showing the gray placeholder area.
         -->
         <KImg
+          data-test="thumbnail-img"
           :src="thumbnailSrc"
           :scaleType="thumbnailScaleType"
           :aspectRatio="thumbnailAspectRatio"
           :isDecorative="true"
           :appearanceOverrides="thumbnailStyles"
+          @load="isThumbnailImageLoaded = true"
+          @error="isThumbnailImageLoaded = false"
         />
         <!--
-          This is a duplicate of the same slot in KImg. I didn't find a way to utilize
-          KImg's placeholder slot from here, likely because this part of code is nested
-          in one slot already
-
-          Show it even when thumbnail source is provided - then the placeholder serves
-          as progressive loading experience.
+          Show the placeholder element even when a thumbnail source is available.
+          This serves as progressive loading experience - on slower networks,
+          users can at least see the placeholder until the image is loaded
+          successfully.
         -->
         <span
-          v-if="$slots.thumbnailPlaceholder"
+          v-if="!disableThumbnailPlaceholder"
           class="thumbnail-placeholder"
         >
           <!-- @slot Places content to the thumbnail placeholder area. -->
@@ -88,7 +89,7 @@
         </span>
       </div>
       <div
-        v-if="$slots.aboveTitle || preserveAboveTitle"
+        v-if="hasAboveTitleArea"
         data-test="aboveTitle"
         class="above-title"
       >
@@ -96,21 +97,36 @@
         <slot name="aboveTitle"></slot>
       </div>
       <div
-        v-if="$slots.belowTitle || preserveBelowTitle"
+        v-if="hasBelowTitleArea"
         data-test="belowTitle"
         class="below-title"
+        :style="{ color: $themeTokens.annotation }"
       >
         <!-- @slot Places content to the area below the title. -->
         <slot name="belowTitle"></slot>
       </div>
       <div
-        v-if="$slots.footer || preserveFooter"
+        v-if="hasFooterArea"
         data-test="footer"
         class="footer"
       >
         <!-- @slot Places content to the footer area. -->
         <slot name="footer"></slot>
       </div>
+    </div>
+    <!--
+      .stop modifier on keyup.enter and click events
+      to ensure that navigation doesn't occur when
+      a selection control is pressed or clicked
+    -->
+    <div
+      v-if="$slots.select"
+      class="selection-control"
+      @keyup.enter.stop
+      @click.stop
+    >
+      <!-- @slot For selection controls such as checkbox or radio button -->
+      <slot name="select"></slot>
     </div>
   </li>
 
@@ -119,7 +135,9 @@
 
 <script>
 
-  const Layouts = {
+  import { inject } from '@vue/composition-api';
+
+  const Orientations = {
     HORIZONTAL: 'horizontal',
     VERTICAL: 'vertical',
   };
@@ -150,9 +168,18 @@
 
   export default {
     name: 'KCard',
+    setup() {
+      // provided by `KCardGrid`
+      // controls the width and layout of `KCard` items in the grid
+      const gridItemStyle = inject('gridItemStyle');
+
+      return {
+        gridItemStyle,
+      };
+    },
     props: {
       /**
-       * A regular Vue route object that defines
+       * A Vue route object that defines
        * where the card click should navigate.
        */
       to: {
@@ -160,9 +187,7 @@
         required: true,
       },
       /**
-       * Sets the HTML heading level in range (h2 - h6) for the title.
-       * Ensure that the heading level is correct within a particular
-       * context of a page where cards are displayed.
+       * HTML heading level in range (h2 - h6) for the title
        */
       headingLevel: {
         type: Number,
@@ -177,9 +202,7 @@
         },
       },
       /**
-       * Sets card title if provided. The title should be
-       * unique within a grid and descriptive to aid screenreader
-       * navigation.
+       * Card title
        */
       title: {
         type: String,
@@ -187,24 +210,24 @@
         default: null,
       },
       /**
-       * Truncates title to this number of lines.
+       * Truncates title lines
        */
-      titleLines: {
+      titleMaxLines: {
         type: Number,
         required: false,
         default: 2,
       },
       /**
-       * Controls content orientation.
+       * Controls card orientation.
        * Options: `'horizontal'`, `'vertical'`.
        */
-      layout: {
+      orientation: {
         type: String,
         default: 'horizontal',
-        validator: cardValidator(Layouts, 'layout'),
+        validator: cardValidator(Orientations, 'orientation'),
       },
       /**
-       * Controls how the thumbnail appears in the card.
+       * Controls if and how the thumbnail appears in the card.
        * Options: `'none'`, `'small'`, or `'large'`.
        * */
       thumbnailDisplay: {
@@ -213,7 +236,7 @@
         validator: cardValidator(ThumbnailDisplays, 'thumbnailDisplay'),
       },
       /**
-       * Sets the thumbnail source path.
+       * Thumbnail source path.
        **/
       thumbnailSrc: {
         type: String,
@@ -230,7 +253,7 @@
       },
       /**
        * Controls the alignment of the thumbnail area
-       * in horizontal layouts. with `'small'` or `'large'` thumbnails
+       * in horizontal card orientation.
        * Options: `'left'`, `'right'`
        */
       thumbnailAlign: {
@@ -239,30 +262,24 @@
         validator: cardValidator(ThumbnailAlignOptions, 'thumbnailAlign'),
       },
       /**
-       * If `aboveTitle` slot is empty, this controls whether
-       * its space is preserved or not. Typically used to achieve
-       * consistent vertical alignment of information when there
-       * are multiple cards on the same grid row.
+       * If `aboveTitle` slot is empty, controls
+       * whether its space is preserved or not.
        */
       preserveAboveTitle: {
         type: Boolean,
         default: false,
       },
       /**
-       * If `belowTitle` slot is empty, this controls whether
-       * its space is preserved or not. Typically used to achieve
-       * consistent vertical alignment of information when there
-       * are multiple cards on the same grid row.
+       * If `belowTitle` slot is empty, controls
+       * whether its space is preserved or not.
        */
       preserveBelowTitle: {
         type: Boolean,
         default: false,
       },
       /**
-       * If `footer` slot is empty, this controls whether
-       * its space is preserved or not. Typically used to achieve
-       * consistent vertical alignment of information when there
-       * are multiple cards on the same grid row.
+       * If `footer` slot is empty, controls
+       * whether its space is preserved or not.
        */
       preserveFooter: {
         type: Boolean,
@@ -273,30 +290,57 @@
       return {
         mouseDownTime: 0,
         ThumbnailDisplays,
+        isThumbnailImageLoaded: false,
+        isLinkFocused: false,
       };
     },
     computed: {
-      coreOutlineFocus() {
-        return {
-          ':focus': {
-            ...this.$coreOutline,
-          },
-        };
+      focusStyle() {
+        return this.isLinkFocused ? this.$coreOutline : {};
+      },
+      /**
+       * Disable the thumbnail placeholder element when
+       * there is no thumbnail area or the placeholder element
+       * is not provided.
+       *
+       * Furthermore, hide it after the thumbnail image
+       * is successfully loaded. Otherwise in some scenarios,
+       * such as when there is a large placeholder element
+       * and a small thumbnail image, some parts of the placeholder
+       * element may be visible behind the image after it has been
+       * successfully loaded.
+       *
+       * However, do not hide the placeholder element while
+       * the image is still loading to ensure progressive
+       * loading experience on slower networks.
+       */
+      disableThumbnailPlaceholder() {
+        return (
+          this.thumbnailDisplay === this.ThumbnailDisplays.NONE ||
+          !this.$slots.thumbnailPlaceholder ||
+          this.isThumbnailImageLoaded
+        );
+      },
+      hasAboveTitleArea() {
+        return this.$slots.aboveTitle || this.preserveAboveTitle;
+      },
+      hasBelowTitleArea() {
+        return this.$slots.belowTitle || this.preserveBelowTitle;
+      },
+      hasFooterArea() {
+        return this.$slots.footer || this.preserveFooter;
       },
       headingElement() {
         return this.headingLevel ? 'h' + this.headingLevel : undefined;
       },
-      layoutClass() {
-        return this.stylesAndClasses.layoutClass;
+      cardAreaClasses() {
+        return this.stylesAndClasses.cardAreaClasses;
       },
       thumbnailAspectRatio() {
         return this.stylesAndClasses.thumbnailAspectRatio;
       },
       thumbnailStyles() {
         return this.stylesAndClasses.thumbnailStyles;
-      },
-      thumbnailAlignClass() {
-        return this.stylesAndClasses.thumbnailAlignClass;
       },
       /*
         A source-of-truth that organizes styles and classes by layout combinations
@@ -312,10 +356,17 @@
           width: '100%',
           height: '100%',
         };
-        if (this.layout === 'vertical' && this.thumbnailDisplay === 'large') {
+        const cardAreaCommonClasses = [
+          this.hasAboveTitleArea ? 'with-above-title' : 'without-above-title',
+          this.hasBelowTitleArea ? 'with-below-title' : undefined,
+        ];
+
+        if (
+          this.orientation === Orientations.VERTICAL &&
+          this.thumbnailDisplay === ThumbnailDisplays.LARGE
+        ) {
           return {
-            layoutClass: 'vertical-with-large-thumbnail',
-            thumbnailAlignClass: undefined,
+            cardAreaClasses: [...cardAreaCommonClasses, 'vertical-with-large-thumbnail'],
             thumbnailAspectRatio: undefined,
             thumbnailStyles: {
               ...thumbnailCommonStyles,
@@ -323,10 +374,13 @@
             },
           };
         }
-        if (this.layout === 'vertical' && this.thumbnailDisplay === 'small') {
+
+        if (
+          this.orientation === Orientations.VERTICAL &&
+          this.thumbnailDisplay === ThumbnailDisplays.SMALL
+        ) {
           return {
-            layoutClass: 'vertical-with-small-thumbnail',
-            thumbnailAlignClass: undefined,
+            cardAreaClasses: [...cardAreaCommonClasses, 'vertical-with-small-thumbnail'],
             thumbnailAspectRatio: undefined,
             thumbnailStyles: {
               ...thumbnailCommonStyles,
@@ -334,21 +388,28 @@
             },
           };
         }
-        if (this.layout === 'vertical' && this.thumbnailDisplay === 'none') {
+
+        if (
+          this.orientation === Orientations.VERTICAL &&
+          this.thumbnailDisplay === ThumbnailDisplays.NONE
+        ) {
           return {
-            layoutClass: undefined,
-            thumbnailAlignClass: undefined,
+            cardAreaClasses: [...cardAreaCommonClasses, 'vertical-with-none-thumbnail'],
             thumbnailAspectRatio: undefined,
-            thumbnailStyles: {
-              ...thumbnailCommonStyles,
-            },
+            thumbnailStyles: undefined,
           };
         }
 
-        if (this.layout === 'horizontal' && this.thumbnailDisplay === 'large') {
+        if (
+          this.orientation === Orientations.HORIZONTAL &&
+          this.thumbnailDisplay === ThumbnailDisplays.LARGE
+        ) {
           return {
-            layoutClass: 'horizontal-with-large-thumbnail',
-            thumbnailAlignClass: `thumbnail-align-${this.thumbnailAlign}`,
+            cardAreaClasses: [
+              ...cardAreaCommonClasses,
+              'horizontal-with-large-thumbnail',
+              `thumbnail-align-${this.thumbnailAlign}`,
+            ],
             thumbnailAspectRatio: undefined,
             thumbnailStyles: {
               ...thumbnailCommonStyles,
@@ -356,10 +417,17 @@
             },
           };
         }
-        if (this.layout === 'horizontal' && this.thumbnailDisplay === 'small') {
+
+        if (
+          this.orientation === Orientations.HORIZONTAL &&
+          this.thumbnailDisplay === ThumbnailDisplays.SMALL
+        ) {
           return {
-            layoutClass: 'horizontal-with-small-thumbnail',
-            thumbnailAlignClass: `thumbnail-align-${this.thumbnailAlign}`,
+            cardAreaClasses: [
+              ...cardAreaCommonClasses,
+              'horizontal-with-small-thumbnail',
+              `thumbnail-align-${this.thumbnailAlign}`,
+            ],
             thumbnailAspectRatio: '1:1',
             thumbnailStyles: {
               ...thumbnailCommonStyles,
@@ -367,13 +435,18 @@
             },
           };
         }
-        if (this.layout === 'horizontal' && this.thumbnailDisplay === 'none') {
+
+        if (
+          this.orientation === Orientations.HORIZONTAL &&
+          this.thumbnailDisplay === ThumbnailDisplays.NONE
+        ) {
           return {
-            layoutClass: undefined,
-            thumbnailAlignClass: undefined,
+            cardAreaClasses: [...cardAreaCommonClasses, 'horizontal-with-none-thumbnail'],
             thumbnailAspectRatio: undefined,
+            thumbnailStyles: undefined,
           };
         }
+
         return {};
       },
     },
@@ -383,13 +456,25 @@
       }
     },
     methods: {
+      onLinkFocus() {
+        this.isLinkFocused = true;
+      },
+      onLinkBlur() {
+        this.isLinkFocused = false;
+      },
       navigate() {
         this.$router.push(this.to);
       },
       onFocus(e) {
+        /**
+         * Emitted when a card gets focus
+         */
         this.$emit('focus', e);
       },
       onHover(e) {
+        /**
+         * Emitted when a card is hovered
+         */
         this.$emit('hover', e);
       },
       onEnter() {
@@ -428,10 +513,24 @@
   /************* Common styles **************/
 
   .k-card {
-    display: block;
+    width: 100%;
     padding: 0;
     margin: 0;
+    font-size: 12px;
+    text-align: left;
+    text-decoration: none;
     list-style-type: none;
+    cursor: pointer;
+
+    &.with-selection-controls {
+      display: flex;
+      flex-direction: row-reverse;
+      align-items: center;
+
+      .selection-control {
+        margin-right: 20px;
+      }
+    }
   }
 
   .card-area {
@@ -441,13 +540,7 @@
     display: flex;
     flex-direction: column;
     flex-wrap: nowrap;
-    width: 100%;
-    height: auto;
-    font-size: 12px;
-    text-align: left;
-    text-decoration: none;
-    list-style-type: none;
-    cursor: pointer;
+    height: 100%;
     border-radius: 0.5em;
     outline-offset: -1px;
     transition: box-shadow $core-time ease;
@@ -460,7 +553,6 @@
 
   .heading {
     order: 3;
-    margin: $spacer $spacer calc(#{$spacer} / 2) $spacer;
     font-size: 16px;
     font-weight: 600;
     line-height: 1.5;
@@ -478,17 +570,14 @@
 
   .above-title {
     order: 2;
-    margin: $spacer $spacer 0;
   }
 
   .below-title {
     order: 4;
-    margin: 0 $spacer 0 $spacer;
   }
 
   .footer {
     order: 5;
-    margin: auto $spacer $spacer;
   }
 
   .thumbnail-placeholder {
@@ -498,14 +587,67 @@
     bottom: 0;
     left: 0;
     z-index: 0; /* <img> in KImg with z-index 1 should cover the placeholder after loaded */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
   }
+
+  .link {
+    text-decoration: none;
+    outline: none; // the focus ring is moved to the whole <li>
+  }
+
+  /************* Manage spaces *************/
+
+  .heading,
+  .above-title,
+  .below-title,
+  .footer {
+    padding: 0;
+    margin-top: 0;
+    margin-right: $spacer;
+    margin-bottom: calc(#{$spacer} / 2);
+    margin-left: $spacer;
+  }
+
+  // when the 'aboveTitle' area is present,
+  // apply top margin to it and also set smaller
+  // margin between the area and the heading...
+  .with-above-title {
+    .above-title {
+      margin-top: $spacer;
+      margin-bottom: calc(#{$spacer} / 2);
+    }
+  }
+
+  // ...and when the 'aboveTitle' area is not present,
+  // instead apply the top margin to the heading
+  .without-above-title {
+    .heading {
+      margin-top: $spacer;
+    }
+  }
+
+  // if there's the 'belowTitle' area present,
+  // override the heading's margin to smaller one
+  .with-below-title {
+    .heading {
+      margin-bottom: calc(#{$spacer} / 2);
+    }
+  }
+
+  /* stylelint-disable no-duplicate-selectors */
+  .footer {
+    margin-top: auto; // push footer to the bottom
+  }
+  /* stylelint-enable no-duplicate-selectors */
 
   /************* Layout-specific styles *************/
 
   .vertical-with-large-thumbnail {
     .thumbnail {
-      height: 45%;
-      min-height: 45%;
+      height: 180px;
     }
   }
 
@@ -515,14 +657,17 @@
     /* stylelint-enable scss/at-extend-no-missing-placeholder */
 
     .thumbnail {
+      height: calc(180px - #{$spacer});
       margin: $spacer $spacer 0;
     }
   }
 
   .horizontal-with-large-thumbnail {
+    $thumbnail-width: 40%;
+
     .thumbnail {
       position: absolute;
-      width: 40%;
+      width: $thumbnail-width;
       height: 100%;
     }
 
@@ -530,7 +675,7 @@
     .above-title,
     .below-title,
     .footer {
-      width: calc(60% - 2 * #{$spacer});
+      width: calc(100% - #{$thumbnail-width} - 2 * #{$spacer});
     }
 
     &.thumbnail-align-left {
@@ -538,12 +683,6 @@
 
       .thumbnail {
         left: 0;
-      }
-
-      .above-title,
-      .below-title,
-      .footer {
-        margin-right: $spacer;
       }
     }
 
@@ -553,28 +692,55 @@
       .thumbnail {
         right: 0;
       }
-
-      .above-title,
-      .below-title,
-      .footer {
-        margin-left: $spacer;
-      }
     }
   }
 
   .horizontal-with-small-thumbnail {
+    $thumbnail-width: null;
+
+    /*
+      Coordinates space taken by the thumbnail area and the content area
+      next to it more intelligently in browsers that support `clamp()` by:
+
+      - Instead of defining 'width', 'min-width', and 'max-width' separately,
+        `clamp()` is used with the goal to have the actual thumbnail width
+        saved in the single `$thumbnail-width` value.
+
+      - The `$thumbnail-width` value is then referenced when calculating
+        the remaining space for the content area, ensuring the precise
+        distribution of space.
+
+      Resolves some issues related to unprecise calculations, most importantly
+      this removes the area of empty space between the thumbnail and content areas
+      in some card's sizes, wasting space that can be used for card's textual content.
+    */
+    @mixin clamp-with-fallback($min, $preferred, $max) {
+      // fallback for browsers that don't support 'clamp()'
+      $thumbnail-width: $preferred;
+
+      width: $thumbnail-width;
+      min-width: $min;
+      max-width: $max;
+
+      // clamp(1px, 1%, 1px) only used for testing support
+      @supports (width: clamp(1px, 1%, 1px)) {
+        $thumbnail-width: clamp(#{$min}, #{$preferred}, #{$max});
+
+        width: $thumbnail-width;
+      }
+    }
+
     .thumbnail {
+      @include clamp-with-fallback(100px, 35%, 120px);
+
       position: absolute;
       top: $spacer;
-      width: 35%; /* square dimension achieved via KImgs's aspect-ratio 1:1 */
-      min-width: 100px;
-      max-width: 120px;
     }
 
     .heading,
     .above-title,
     .below-title {
-      width: calc(70% - 3 * #{$spacer});
+      width: calc(100% - #{$thumbnail-width} - 3 * #{$spacer});
     }
 
     .footer {

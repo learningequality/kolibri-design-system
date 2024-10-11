@@ -54,7 +54,7 @@
   }
 
   pre[class*='language-'] {
-    padding: 8px 24px;
+    padding: 24px;
     margin: 0;
   }
 

@@ -60,6 +60,7 @@ const textRelatedKeywords = ['text', 'area', 'field', 'box'];
 const layoutRelatedKeywords = ['grid', 'layout', 'container', 'page'];
 const tabsRelatedKeywords = ['tab', 'tabs', 'panel', 'tablist', 'tabpanel'];
 const compositionRelatedKeywords = ['composable', 'composition'];
+const cardRelatedKeywords = ['grid', 'card', 'cardgrid'];
 
 export default [
   new Section({
@@ -183,6 +184,12 @@ export default [
         title: 'useKResponsiveWindow',
         isCode: true,
         keywords: [...compositionRelatedKeywords, 'responsive', 'window', 'breakpoint'],
+      }),
+      new Page({
+        path: '/usekresponsiveelement',
+        title: 'useKResponsiveElement',
+        isCode: true,
+        keywords: [...compositionRelatedKeywords, 'responsive', 'element', 'breakpoint'],
       }),
       new Page({
         path: '/usekliveregion',
@@ -381,12 +388,6 @@ export default [
         isCode: true,
       }),
       new Page({
-        path: '/kresponsiveelement',
-        title: 'KResponsiveElement',
-        isCode: true,
-        keywords: ['responsive', 'mixin', 'breakpoint', 'element'],
-      }),
-      new Page({
         path: '/ktabs',
         title: 'KTabs',
         isCode: true,
@@ -434,7 +435,13 @@ export default [
         path: '/kcard',
         title: 'KCard',
         isCode: true,
-        keywords: layoutRelatedKeywords,
+        keywords: cardRelatedKeywords,
+      }),
+      new Page({
+        path: '/kcardgrid',
+        title: 'KCardGrid',
+        isCode: true,
+        keywords: cardRelatedKeywords,
       }),
     ],
   }),

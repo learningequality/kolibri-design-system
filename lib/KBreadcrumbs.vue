@@ -127,7 +127,7 @@
   import throttle from 'lodash/throttle';
   import every from 'lodash/every';
   import keys from 'lodash/keys';
-  import KResponsiveElementMixin from './KResponsiveElementMixin';
+  import useKResponsiveElement from './composables/useKResponsiveElement';
 
   const DROPDOWN_BTN_WIDTH = 55;
   const DEFAULT_LAST_BREADCRUMB_MAX_WIDTH = 300;
@@ -142,8 +142,11 @@
    */
   export default {
     name: 'KBreadcrumbs',
-    mixins: [KResponsiveElementMixin],
     inheritAttrs: false,
+    setup() {
+      const { elementWidth } = useKResponsiveElement();
+      return { elementWidth };
+    },
     props: {
       /**
        * An array of objects, each with a `text` attribute (String) and a

@@ -47,7 +47,7 @@
 <style lang="scss" scoped>
 
   .show {
-    margin: 8px;
+    margin: 16px 0;
     border: 1px solid #dedede;
     border-radius: 4px;
   }

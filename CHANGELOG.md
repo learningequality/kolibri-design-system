@@ -7,6 +7,218 @@ Changelog is rather internal in nature. See release notes for the public overvie
 <!-- [DO NOT REMOVE-USED BY GH ACTION] PASTE CHANGELOG -->
 
 
+- [#798]
+  - **Description:**  Adds custom computed property `computedAriaLabel` that dynamically sets the `ariaLabel` for `KIconButton` based on the `tooltip` prop when `ariaLabel` is not provided.
+  - **Products impact:** none
+  - **Addresses:** #793
+  - **Components:** `KIconButton`
+  - **Breaking:** no
+  - **Impacts a11y:** Improves accessibility in places where we have tooltips but no aria- label attribute set for `KIconbutton`.
+  - **Guidance:** -
+
+[#798]: https://github.com/learningequality/kolibri-design-system/pull/798
+
+
+
+- [#792]
+  - **Description:** Bump KDS version to 5.0.0-rc7.
+  - **Products impact:** -.
+  - **Addresses:** -.
+  - **Components:** -.
+  - **Breaking:** -.
+  - **Impacts a11y:** -.
+  - **Guidance:** -.
+
+[#792]: https://github.com/learningequality/kolibri-design-system/pull/792
+
+
+
+- [#785]
+  - **Description:** Renames `KCard`'s `titleLines` prop to `titleMaxLines`
+  - **Products impact:** updated API
+  - **Addresses:** -
+  - **Components:** `KCard`
+  - **Breaking:** yes
+  - **Impacts a11y:** no
+  - **Guidance:** Rename the prop
+
+[#785]: https://github.com/learningequality/kolibri-design-system/pull/785
+
+- [#785]
+  - **Description:** Renames `KCard`'s `layout` prop to `orientation`
+  - **Products impact:** updated API
+  - **Addresses:** -
+  - **Components:** `KCard`
+  - **Breaking:** yes
+  - **Impacts a11y:** no
+  - **Guidance:** Rename the prop
+
+[#785]: https://github.com/learningequality/kolibri-design-system/pull/785
+
+- [#785]
+  - **Description:** Adds support to `KCard` for selection controls such as checkboxes
+  - **Products impact:** new API
+  - **Addresses:** -
+  - **Components:** `KCard`
+  - **Breaking:** no
+  - **Impacts a11y:** yes
+  - **Guidance:** -
+
+[#785]: https://github.com/learningequality/kolibri-design-system/pull/785
+
+- [#785]
+  - **Description:** Improves spaces display in `KCard`
+  - **Products impact:** visual update
+  - **Addresses:** -
+  - **Components:** `KCard`
+  - **Breaking:** no
+  - **Impacts a11y:** no
+  - **Guidance:** -
+
+[#785]: https://github.com/learningequality/kolibri-design-system/pull/785
+
+- [#785]
+  - **Description:** Hides `KCard` placeholder element after the thumbnail image is loaded
+  - **Products impact:** bugfix
+  - **Addresses:** Resolves issue when parts of the placeholder element was visible behind a small thumbnail image
+  - **Components:** `KCard`
+  - **Breaking:** no
+  - **Impacts a11y:** no
+  - **Guidance:** -
+
+[#785]: https://github.com/learningequality/kolibri-design-system/pull/785
+
+- [#785]
+  - **Description:** Updates `KCard` to make screen readers announce only card titles when navigating the grid with TAB key
+  - **Products impact:** bugfix
+  - **Addresses:** Resolves unexpected behavior when overwhelming amounts of information was announced when navigating the card list with TAB
+  - **Components:** `KCard`
+  - **Breaking:** no
+  - **Impacts a11y:** no
+  - **Guidance:** -
+
+[#785]: https://github.com/learningequality/kolibri-design-system/pull/785
+
+- [#785]
+  - **Description:** Introduces `KCardGrid` (with internal related `KCard` updates)
+  - **Products impact:** new API
+  - **Addresses:** https://github.com/learningequality/kolibri-design-system/issues/697, https://github.com/learningequality/kolibri-design-system/issues/703
+  - **Components:** `KCardGrid`
+  - **Breaking:** no
+  - **Impacts a11y:** no
+  - **Guidance:** -
+
+[#785]: https://github.com/learningequality/kolibri-design-system/pull/785
+
+- [#785]
+  - **Description:** Adds detailed guidance to `KCard` and `KCardGrid` documentation pages
+  - **Products impact:** none
+  - **Addresses:** https://github.com/learningequality/kolibri-design-system/issues/264, https://github.com/learningequality/kolibri-design-system/issues/696
+  - **Components:** `KCard`, `KCardGrid`
+  - **Breaking:** no
+  - **Impacts a11y:** no
+  - **Guidance:** -
+
+[#785]: https://github.com/learningequality/kolibri-design-system/pull/785
+
+- [#785]
+  - **Description:** Adds new documentation components: `DocsSubNav`, `DocsToggleButton`, `DocsToggleContent`, `DocsTable`
+  - **Products impact:** none
+  - **Addresses:** Helps with organizing larger amounts of guidance on documentation pages
+  - **Components:** -
+  - **Breaking:** no
+  - **Impacts a11y:** no
+  - **Guidance:** -
+
+[#785]: https://github.com/learningequality/kolibri-design-system/pull/785
+
+- [#785]
+  - **Description:** Slightly increases the width of the main documentation area
+  - **Products impact:** none
+  - **Addresses:** Helps to better demonstrate components requiring more space on documentation pages, such as card grids
+  - **Components:** -
+  - **Breaking:** no
+  - **Impacts a11y:** no
+  - **Guidance:** -
+
+[#785]: https://github.com/learningequality/kolibri-design-system/pull/785
+
+
+
+- [#783]
+  - **Description:** Removes KResponsiveElementMixin.
+  - **Products impact:** removed API.
+  - **Addresses:** https://github.com/learningequality/kolibri-design-system/issues/711.
+  - **Components:** KResponsiveElementMixin.
+  - **Breaking:** yes.
+  - **Impacts a11y:** no.
+  - **Guidance:** Replace any use of `KResponsiveElementMixin` with the new composable `useKResponsiveElement`.
+
+[#783]: https://github.com/learningequality/kolibri-design-system/pull/783
+
+- [#783]
+  - **Description:** Adds new useKResponsiveElement composable.
+  - **Products impact:** new API.
+  - **Addresses:** https://github.com/learningequality/kolibri-design-system/issues/711.
+  - **Components:** -.
+  - **Breaking:** no.
+  - **Impacts a11y:** no.
+  - **Guidance:** -.
+
+[#783]: https://github.com/learningequality/kolibri-design-system/pull/783
+
+- [#783]
+  - **Description:** Remove use of KResponsiveElementMixin internally
+  - **Products impact:** - none
+  - **Addresses:** https://github.com/learningequality/kolibri-design-system/issues/711.
+  - **Components:** KBreadcrumbs, KFixedGrid.
+  - **Breaking:** no
+  - **Impacts a11y:** no
+  - **Guidance:** -.
+
+[#783]: https://github.com/learningequality/kolibri-design-system/pull/783
+
+
+
+- [#780]
+  - **Description:** Updated documentation for KTable
+  - **Products impact:** None
+  - **Addresses:**
+  - **Components:** KTable
+  - **Breaking:** No
+  - **Impacts a11y:** No
+  - **Guidance:**
+
+[#780]: https://github.com/learningequality/kolibri-design-system/pull/780
+
+
+
+- [#787]
+  - **Description:** Bump KDS version to 5.0.0-rc6
+  - **Products impact:** -.
+  - **Addresses:** -.
+  - **Components:** -.
+  - **Breaking:** -.
+  - **Impacts a11y:** -.
+  - **Guidance:** -.
+
+[#787]: https://github.com/learningequality/kolibri-design-system/pull/787
+
+
+
+- [#781]
+  - **Description:**  Adds warning in KRadioButton if it is not nested inside a KradioButtonGroup.
+  - **Products impact:** none
+  - **Addresses:** #761
+  - **Components:** KRadioButton
+  - **Breaking:** no
+  - **Impacts a11y:** -
+  - **Guidance:** -
+
+[#781]: https://github.com/learningequality/kolibri-design-system/pull/781
+
+
+
 - [#774]
   - **Description:**  Merges `KCard` and `BaseCard`
   - **Products impact:** none
@@ -74,7 +286,6 @@ Changelog is rather internal in nature. See release notes for the public overvie
   - **Guidance:**
 
 [#752]: https://github.com/learningequality/kolibri-design-system/pull/752
-
 
 
 - [#776]
@@ -498,6 +709,17 @@ Changelog is rather internal in nature. See release notes for the public overvie
 ## Version 4.x.x (`release-v4` branch)
 
 <!-- [DO NOT REMOVE-USED BY GH ACTION] PASTE CHANGELOG -->
+
+- [#784]
+  - **Description:** Adds `labelDir` prop to control rtl direction of label.
+  - **Products impact:** new API.
+  - **Addresses:** https://github.com/learningequality/studio/issues/4728.
+  - **Components:** KCheckbox, KRadioButton.
+  - **Breaking:** no
+  - **Impacts a11y:** no.
+  - **Guidance:** -.
+
+[#784]: https://github.com/learningequality/kolibri-design-system/pull/784
 
 - [#767]
   - **Description:** Bump KDS version to 4.5.0.
