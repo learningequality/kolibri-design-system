@@ -1,58 +1,60 @@
 <template>
 
-  <KModal
-    :cancelText="cancelText"
-    :title="title"
-    :submitText="submitText"
-    :size="modalSize"
-    :submitDisabled="disabled"
-    data-test="dateRangeModal"
-    @submit="onSubmit"
-    @cancel="$emit('cancel')"
-  >
-    <div>
-      <!-- @slot Description of modal -->
-      <slot name="description">
-        <p id="modal-description" ref="description" class="description">
-          {{ description }}
-        </p>
-      </slot>
-      <div class="date-inputs">
-        <div class="left-input">
-          <KDateInput
-            :value="dateRange.start"
-            inputRef="dateStartRangeInput"
-            :errorMessage="invalidStartErrorMessage"
-            :legendText="startDateLegendText"
-            data-test="startDate"
-            @updateDate="debouncedSetStartDate"
-          />
-        </div>
-        <div class="right-input">
-          <KDateInput
-            :value="dateRange.end"
-            inputRef="dateEndRangeInput"
-            :errorMessage="invalidEndErrorMessage"
-            :legendText="endDateLegendText"
-            data-test="endDate"
-            @updateDate="debouncedSetEndDate"
-          />
-        </div>
-      </div>
+  <KFocusTrap>
+    <KModal
+      :cancelText="cancelText"
+      :title="title"
+      :submitText="submitText"
+      :size="modalSize"
+      :submitDisabled="disabled"
+      data-test="dateRangeModal"
+      @submit="onSubmit"
+      @cancel="$emit('cancel')"
+    >
       <div>
-        <KDateCalendar
-          :firstAllowedDate="firstAllowedDate"
-          :lastAllowedDate="lastAllowedDate"
-          :selectedStartDate="createDate(dateRange.start)"
-          :selectedEndDate="createDate(dateRange.end)"
-          :previousMonthText="previousMonthText"
-          :nextMonthText="nextMonthText"
-          v-bind.sync="dateRange"
-          @updateSelectedDates="setSelectedDatesFromCalendar"
-        />
+        <!-- @slot Description of modal -->
+        <slot name="description">
+          <p id="modal-description" ref="description" class="description">
+            {{ description }}
+          </p>
+        </slot>
+        <div class="date-inputs">
+          <div class="left-input">
+            <KDateInput
+              :value="dateRange.start"
+              inputRef="dateStartRangeInput"
+              :errorMessage="invalidStartErrorMessage"
+              :legendText="startDateLegendText"
+              data-test="startDate"
+              @updateDate="debouncedSetStartDate"
+            />
+          </div>
+          <div class="right-input">
+            <KDateInput
+              :value="dateRange.end"
+              inputRef="dateEndRangeInput"
+              :errorMessage="invalidEndErrorMessage"
+              :legendText="endDateLegendText"
+              data-test="endDate"
+              @updateDate="debouncedSetEndDate"
+            />
+          </div>
+        </div>
+        <div>
+          <KDateCalendar
+            :firstAllowedDate="firstAllowedDate"
+            :lastAllowedDate="lastAllowedDate"
+            :selectedStartDate="createDate(dateRange.start)"
+            :selectedEndDate="createDate(dateRange.end)"
+            :previousMonthText="previousMonthText"
+            :nextMonthText="nextMonthText"
+            v-bind.sync="dateRange"
+            @updateSelectedDates="setSelectedDatesFromCalendar"
+          />
+        </div>
       </div>
-    </div>
-  </KModal>
+    </KModal>
+  </KFocusTrap>
 
 </template>
 
@@ -64,6 +66,7 @@
   import get from 'lodash/get';
   import debounce from 'lodash/debounce';
   import KModal from '../KModal';
+  import KFocusTrap from '../KFocusTrap.vue';
   import KDateCalendar from './KDateCalendar';
   import KDateInput from './KDateInput';
   import { validationMachine, initialContext } from './ValidationMachine';
@@ -75,6 +78,7 @@
       KModal,
       KDateInput,
       KDateCalendar,
+      KFocusTrap,
     },
     props: {
       /**
