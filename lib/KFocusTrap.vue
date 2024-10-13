@@ -35,6 +35,8 @@
   export default {
     name: 'KFocusTrap',
     props: {
+      /**
+       * Disables the focus trap when set to `true`. Focus will behave normally.
        * @type {Boolean}
        * @default false
        */
