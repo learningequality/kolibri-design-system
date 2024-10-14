@@ -45,14 +45,14 @@
       <div class="footer-wrapper">
         <div class="pills" :style="{ 'color': $themeTokens.annotation }">
           <span
-            :style="{ 'background-color': $themePalette.grey.v_50 }"
+            :style="{ 'background-color': $themePalette.grey.v_100 }"
           >
             <KIcon icon="readSolid" :style="{ fontSize: '13px', position: 'relative', top: '3px' }" />
             Read
           </span>
           <span
             v-if="!showMenuInFooter"
-            :style="{ 'background-color': $themePalette.grey.v_50 }"
+            :style="{ 'background-color': $themePalette.grey.v_100 }"
           >
             Short Activity
           </span>

@@ -97,30 +97,30 @@
       <p>You can apply darken utilities <code>$darken1</code>, <code>$darken2</code>, and <code>$darken3</code> to palette colors and tokens to achieve their darker shades. They are available on every Vue component.</p>
 
       <DocsShowCode language="html">
-        <div :style="{ backgroundColor: $themePalette.red.v_1100 }">
+        <div :style="{ backgroundColor: $themePalette.red.v_600 }">
           base
         </div>
-        <div :style="{ backgroundColor: $darken1($themePalette.red.v_1100) }">
+        <div :style="{ backgroundColor: $darken1($themePalette.red.v_600) }">
           $darken1
         </div>
-        <div :style="{ backgroundColor: $darken2($themePalette.red.v_1100) }">
+        <div :style="{ backgroundColor: $darken2($themePalette.red.v_600) }">
           $darken2
         </div>
-        <div :style="{ backgroundColor: $darken3($themePalette.red.v_1100) }">
+        <div :style="{ backgroundColor: $darken3($themePalette.red.v_600) }">
           $darken3
         </div>
       </DocsShowCode>
       <DocsShow>
-        <div class="darken-block" :style="{ backgroundColor: $themePalette.red.v_1100 }">
+        <div class="darken-block" :style="{ backgroundColor: $themePalette.red.v_600 }">
           <code>base</code>
         </div>
-        <div class="darken-block" :style="{ backgroundColor: $darken1($themePalette.red.v_1100) }">
+        <div class="darken-block" :style="{ backgroundColor: $darken1($themePalette.red.v_600) }">
           <code>$darken1</code>
         </div>
-        <div class="darken-block" :style="{ backgroundColor: $darken2($themePalette.red.v_1100) }">
+        <div class="darken-block" :style="{ backgroundColor: $darken2($themePalette.red.v_600) }">
           <code>$darken2</code>
         </div>
-        <div class="darken-block" :style="{ backgroundColor: $darken3($themePalette.red.v_1100) }">
+        <div class="darken-block" :style="{ backgroundColor: $darken3($themePalette.red.v_600) }">
           <code>$darken3</code>
         </div>
       </DocsShow>
