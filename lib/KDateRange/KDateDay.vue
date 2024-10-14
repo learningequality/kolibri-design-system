@@ -69,9 +69,9 @@
       inRangeStyle() {
         return this.isInRange
           ? {
-              backgroundColor: this.$themeBrand.primary.v_200,
+              backgroundColor: this.$themeBrand.primary.v_100,
               ':hover': {
-                backgroundColor: this.$themePalette.grey.v_200,
+                backgroundColor: this.$themePalette.grey.v_300,
               },
             }
           : {};
@@ -79,7 +79,7 @@
       selectedStyle() {
         return this.isSelected
           ? {
-              backgroundColor: this.$themeBrand.primary.v_1000,
+              backgroundColor: this.$themeBrand.primary.v_500,
               color: this.$themePalette.white + '!important',
             }
           : {};

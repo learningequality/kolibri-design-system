@@ -17,8 +17,8 @@
       <DocsColorBlock name="tokens.text" />
       <DocsColorBlock name="tokens.error" />
       <DocsColorBlock name="tokens.primary" />
-      <DocsColorBlock name="brand.primary.v_1100" />
-      <DocsColorBlock name="brand.secondary.v_800" />
+      <DocsColorBlock name="brand.primary.v_600" />
+      <DocsColorBlock name="brand.secondary.v_400" />
       <DocsColorBlock name="palette.grey.v_400" />
 
       <p>
@@ -236,16 +236,14 @@
 
     <DocsPageSection title="Scales" anchor="#scales">
       <p>
-        A color scale – sometimes called a color ramp – is an evenly-spaced ramp of shades for a particular color hue. In the Kolibri Design System, we follow <DocsExternalLink text="Google's Material convention" href="https://material.io/archive/guidelines/style/color.html" /> and segment colors into brightness levels, named <code>v_200</code>, <code>v_400</code>, <code>v_600</code>, … <code>v_1000</code>, <code>v_1100</code>:
+        A color scale – sometimes called a color ramp – is an evenly-spaced ramp of shades for a particular color hue. In the Kolibri Design System, we follow <DocsExternalLink text="Google's Material convention" href="https://material.io/archive/guidelines/style/color.html" /> and segment colors into brightness levels, named <code>v_100</code>, <code>v_200</code>, <code>v_300</code>, <code>v_400</code>, <code>v_500</code>, <code>v_600</code>:
       </p>
+      <DocsColorBlock name="palette.green.v_100" />
       <DocsColorBlock name="palette.green.v_200" />
+      <DocsColorBlock name="palette.green.v_300" />
       <DocsColorBlock name="palette.green.v_400" />
+      <DocsColorBlock name="palette.green.v_500" />
       <DocsColorBlock name="palette.green.v_600" />
-      <p style="margin-left: 60px">
-        …
-      </p>
-      <DocsColorBlock name="palette.green.v_1000" />
-      <DocsColorBlock name="palette.green.v_1100" />
       <p>
         Due to the inconsistent way that humans perceive color and light, computing these scales is <DocsExternalLink text="both art and science" href="https://uxplanet.org/designing-systematic-colors-b5d2605b15c" />. It should not be done by simply sliding a "brightness" setting. We used <DocsExternalLink text="materialpalettes.com" href="https://materialpalettes.com/" /> to generate the scales for our primary and secondary brand colors. The same should be done for new themes.
       </p>
