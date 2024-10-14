@@ -36,7 +36,7 @@
     <DocsPageSection title="Specifications" anchor="#specifications">
 
       <ul>
-        <li>Progress track uses palette.grey.v_100</li>
+        <li>Progress track uses palette.grey.v_200</li>
         <li>Progress indicator uses palette.grey.v_800</li>
         <li>Progress track height is 4px</li>
         <li>Include a 2px corner radius</li>

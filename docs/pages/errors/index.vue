@@ -140,7 +140,7 @@
         For operations that imply risky permanent data loss, use modals for the user to confirm they really intend to remove that data. Be sure to clearly explain the consequences.
       </p>
       <p>
-        For conditions which partially block or interrupt the user experience, use a warning icon with <code>palette.orange.v_400</code> and informative language of the consequences under the current condition.
+        For conditions which partially block or interrupt the user experience, use a warning icon with <code>palette.orange.v_200</code> and informative language of the consequences under the current condition.
       </p>
       <img src="./warning.png">
       <h3>

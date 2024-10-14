@@ -710,8 +710,41 @@ Changelog is rather internal in nature. See release notes for the public overvie
 
 <!-- [DO NOT REMOVE-USED BY GH ACTION] PASTE CHANGELOG -->
 
+- [#791]
+  - **Description:** Bump KDS version to 4.6.0.
+  - **Products impact:** -.
+  - **Addresses:** -.
+  - **Components:** -.
+  - **Breaking:** -.
+  - **Impacts a11y:** -.
+  - **Guidance:** -.
+
+[#791]: https://github.com/learningequality/kolibri-design-system/pull/791
+
+- [#782]
+  - **Description:** Update Theme Tokens to the latest specs to comply material design specifications.
+  - **Products impact:** Updated API.
+  - **Addresses:** https://github.com/learningequality/kolibri-design-system/issues/775.
+  - **Components:** -.
+  - **Breaking:** yes.
+  - **Impacts a11y:** no.
+  - **Guidance:** Please update all `v_*` theme tokens using the mapping posted in https://github.com/learningequality/kolibri-design-system/issues/775.
+
+[#782]: https://github.com/learningequality/kolibri-design-system/pull/782
+
+- [#786]
+  - **Description:** Bump KDS version to 4.5.1.
+  - **Products impact:** -.
+  - **Addresses:** -.
+  - **Components:** -.
+  - **Breaking:** -.
+  - **Impacts a11y:** -.
+  - **Guidance:** -.
+
+[#786]: https://github.com/learningequality/kolibri-design-system/pull/786
+
 - [#784]
-  - **Description:** Adds `labelDir` prop to control rtl direction of label.
+  - **Description:** Add `labelDir` prop to control rtl direction of label.
   - **Products impact:** new API.
   - **Addresses:** https://github.com/learningequality/studio/issues/4728.
   - **Components:** KCheckbox, KRadioButton.

@@ -256,12 +256,12 @@
             <template #footer>
               <div class="pills" :style="{ 'color': $themeTokens.annotation }">
                 <span
-                  :style="{ 'background-color': $themePalette.grey.v_50 }"
+                  :style="{ 'background-color': $themePalette.grey.v_100 }"
                 >
                   Short Activity
                 </span>
                 <span
-                  :style="{ 'background-color': $themePalette.grey.v_50 }"
+                  :style="{ 'background-color': $themePalette.grey.v_100 }"
                 >
                   Biology
                 </span>
@@ -281,7 +281,7 @@
             <template #footer>
               <div class="pills" :style="{ 'color': $themeTokens.annotation }">
                 <span
-                  :style="{ 'background-color': $themePalette.grey.v_50 }"
+                  :style="{ 'background-color': $themePalette.grey.v_100 }"
                 >
                   Short Activity
                 </span>
@@ -433,12 +433,12 @@
             <template #footer>
               <div class="pills" :style="{ 'color': $themeTokens.annotation }">
                 <span
-                  :style="{ 'backgroundColor': $themePalette.grey.v_50 }"
+                  :style="{ 'backgroundColor': $themePalette.grey.v_100 }"
                 >
                   Short Activity
                 </span>
                 <span
-                  :style="{ 'backgroundColor': $themePalette.grey.v_50 }"
+                  :style="{ 'backgroundColor': $themePalette.grey.v_100 }"
                 >
                   Biology
                 </span>

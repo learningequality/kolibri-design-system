@@ -35,7 +35,7 @@
         return {
           display: this.block ? 'block' : 'inline-block',
           padding: this.padding ? '8px 24px' : null,
-          backgroundColor: this.dark ? this.$themePalette.grey.v_500 : undefined,
+          backgroundColor: this.dark ? this.$themePalette.grey.v_700 : undefined,
         };
       },
     },

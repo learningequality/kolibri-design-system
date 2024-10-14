@@ -24,9 +24,9 @@
                 'sticky-column': index === 0,
               }"
               :style="[getHeaderStyle(header),
-                       isColumnSortActive(index) ? { color: $themeBrand.primary.v_1000 } : { color: $themePalette.grey.v_800 },
+                       isColumnSortActive(index) ? { color: $themeBrand.primary.v_500 } : { color: $themePalette.grey.v_800 },
                        { backgroundColor: $themePalette.white } ,
-                       isColumnFocused(index) ? { backgroundColor: $themePalette.grey.v_50 } : {},
+                       isColumnFocused(index) ? { backgroundColor: $themePalette.grey.v_100 } : {},
                        { textAlign: getTextAlign(header.dataType) }]"
               role="columnheader"
               data-focus="true"
@@ -39,8 +39,8 @@
                 {{ header.label }}
               </slot>
               <span v-if="isColumnSortable(index)" class="sort-icon">
-                <span v-if="isColumnSortActive(index) && sortOrder === SORT_ORDER_ASC"><KIcon icon="dropup" :color="isColumnSortActive(index) ? $themeBrand.primary.v_1100 : $themePalette.grey.v_800 " /></span>
-                <span v-else-if="isColumnSortActive(index) && sortOrder === SORT_ORDER_DESC"><KIcon icon="dropdown" :color="isColumnSortActive(index) ? $themeBrand.primary.v_1100 : $themePalette.grey.v_800 " /></span>
+                <span v-if="isColumnSortActive(index) && sortOrder === SORT_ORDER_ASC"><KIcon icon="dropup" :color="isColumnSortActive(index) ? $themeBrand.primary.v_600 : $themePalette.grey.v_800 " /></span>
+                <span v-else-if="isColumnSortActive(index) && sortOrder === SORT_ORDER_DESC"><KIcon icon="dropdown" :color="isColumnSortActive(index) ? $themeBrand.primary.v_600 : $themePalette.grey.v_800 " /></span>
                 <span v-else><KIcon icon="sortColumn" :color="$themePalette.grey.v_800" /></span>
               </span>
             </th>
@@ -251,7 +251,7 @@
       getRowStyle() {
         return rowIndex => {
           return this.hoveredRowIndex === rowIndex || this.focusedRowIndex === rowIndex
-            ? { backgroundColor: this.$themePalette.grey.v_50 }
+            ? { backgroundColor: this.$themePalette.grey.v_100 }
             : {};
         };
       },
@@ -265,7 +265,7 @@
             (this.hoveredRowIndex === rowIndex || this.focusedRowIndex === rowIndex) &&
             colIndex === 0
           ) {
-            styles.push({ backgroundColor: this.$themePalette.grey.v_50 });
+            styles.push({ backgroundColor: this.$themePalette.grey.v_100 });
           }
           return styles;
         };
@@ -496,7 +496,7 @@
       },
       setHighlightHeader(header, highlight) {
         header.style.backgroundColor = highlight
-          ? this.$themePalette.grey.v_50
+          ? this.$themePalette.grey.v_100
           : this.$themePalette.white;
       },
       highlightHeader(colIndex) {

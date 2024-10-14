@@ -136,8 +136,8 @@
 
   const colorScheme = {
     default: {
-      blobColor: defaultBrandColors.secondary.v_1000,
-      strokeColor: defaultBrandColors.primary.v_1000,
+      blobColor: defaultBrandColors.secondary.v_500,
+      strokeColor: defaultBrandColors.primary.v_500,
     },
     monoBlack: {
       blobColor: materialColors.black,
@@ -146,17 +146,17 @@
       blobColor: materialColors.white,
     },
     monoPrimary: {
-      blobColor: defaultBrandColors.primary.v_1000,
+      blobColor: defaultBrandColors.primary.v_500,
     },
     monoSecondary: {
-      blobColor: defaultBrandColors.secondary.v_1000,
+      blobColor: defaultBrandColors.secondary.v_500,
     },
     whiteGrey: {
-      blobColor: materialColors.grey.v_200,
+      blobColor: materialColors.grey.v_300,
       strokeColor: materialColors.white,
     },
     blackGrey: {
-      blobColor: materialColors.grey.v_200,
+      blobColor: materialColors.grey.v_300,
       strokeColor: materialColors.black,
     },
   };
