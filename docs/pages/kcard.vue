@@ -744,7 +744,6 @@
         skeletonsConfig1: [
           {
             breakpoints: [0, 1, 2, 3, 4, 5, 6, 7],
-            count: 1,
             orientation: 'vertical',
             thumbnailDisplay: 'large',
             height: '490px',
@@ -763,7 +762,6 @@
         skeletonsConfig2: [
           {
             breakpoints: [0, 1, 2, 3, 4, 5, 6, 7],
-            count: 3,
             orientation: 'vertical',
             thumbnailDisplay: 'large',
             height: '490px',
@@ -776,7 +774,6 @@
         skeletonsConfig3: [
           {
             breakpoints: [0, 1, 2, 3, 4, 5, 6, 7],
-            count: 2,
             orientation: 'horizontal',
             thumbnailDisplay: 'large',
             thumbnailAlign: 'left',
@@ -790,7 +787,6 @@
         skeletonsConfig4: [
           {
             breakpoints: [0, 1, 2, 3, 4, 5, 6, 7],
-            count: 3,
             height: '290px',
           },
           {
@@ -801,7 +797,6 @@
         skeletonsConfig5: [
           {
             breakpoints: [0, 1, 2, 3, 4, 5, 6, 7],
-            count: 1,
             orientation: 'horizontal',
             thumbnailDisplay: 'large',
             thumbnailAlign: 'left',
@@ -815,7 +810,6 @@
         skeletonsConfig6: [
           {
             breakpoints: [0, 1, 2, 3, 4, 5, 6, 7],
-            count: 1,
             orientation: 'vertical',
             thumbnailDisplay: 'large',
             height: '460px',
@@ -834,7 +828,6 @@
         skeletonsConfig7: [
           {
             breakpoints: [0, 1, 2, 3, 4, 5, 6, 7],
-            count: 1,
             orientation: 'vertical',
             thumbnailDisplay: 'large',
             height: '460px',
@@ -853,7 +846,6 @@
         skeletonsConfig8: [
           {
             breakpoints: [0, 1, 2, 3, 4, 5, 6, 7],
-            count: 2,
             orientation: 'vertical',
             thumbnailDisplay: 'large',
             height: '400px',

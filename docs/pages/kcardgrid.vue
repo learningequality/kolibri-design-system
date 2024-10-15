@@ -602,6 +602,10 @@
 
       <p>Use the buttons in the example below to preview.</p>
 
+      <h4>Number of loading skeletons <DocsAnchorTarget anchor="#loading-state-skeletons-count" /></h4>
+
+      <p>By default, the number of loading skeletons corresponds to the number of cards in a single grid row if it were full. This behavior can be overridden via the <code>count</code> attribute (below), however do not override it unless indicated in the designs.</p>
+
       <h4>Loading skeletons configuration</h4>
 
       <p>Use the <code>skeletonsConfig</code> prop to configure skeleton cards to match the expected visual output of loaded cards on all screen sizes. Preview the layout and height of cards with loaded data and adjust <code>skeletonsConfig</code> accordingly.</p>
@@ -610,8 +614,8 @@
 
       <ul>
         <li><code>breakpoints</code> is an array of <code>0-7</code> values corresponding to the <DocsInternalLink text="window breakpoint levels" href="/layout#responsiveness" />. All other attributes in the same object take effect on these breakpoints.</li>
-        <li><code>count</code> sets the number of skeleton cards for the specified breakpoints.</li>
-        <li><code>height</code> sets the height of skeleton cards for the specified breakpoints.  </li>
+        <li><code>count</code> sets the number of skeleton cards for the specified breakpoints. See <DocsInternalLink text="Number of loading skeletons" href="#loading-state-skeletons-count" />.</li>
+        <li><code>height</code> sets the height of skeleton cards for the specified breakpoints.</li>
         <li><code>orientation</code> sets the orientation of skeleton cards for the specified breakpoints. Corresponds to <DocsInternalLink text="KCard's orientation" href="/kcard#prop:orientation" code />.</li>
         <li><code>thumbnailDisplay</code> sets the thumbnail display of skeleton cards for the specified breakpoints. Corresponds to <DocsInternalLink text="KCard's thumbnailDisplay" href="/kcard#prop:thumbnailDisplay" code />.</li>
         <li><code>thumbnailAlign</code> sets the thumbnail alignment of skeleton cards for the specified breakpoints. Corresponds to <DocsInternalLink text="KCard's thumbnailAlign" href="/kcard#prop:thumbnailAlign" code />.</li>
@@ -680,7 +684,6 @@
               skeletonsConfig: [
                 {
                   breakpoints: [0, 1, 2, 3, 4, 5, 6, 7],
-                  count: 3,
                   thumbnailDisplay: 'large'
                 },
                 {
@@ -701,7 +704,7 @@
       </DocsShowCode>
       <!-- eslint-enable -->
 
-      <p>Here, 3 skeleton cards are shown across all breakpoints. Their height is <code>400px</code> with vertical orientation on breakpoints <code>0-3</code>, and <code>220px</code> with horizontal orientation on breakpoints <code>4-7</code>. This makes skeleton cards resemble loaded cards at all breakpoints, creating a smooth transition for users during data loading.<DocsToggleButton contentId="more-loading-state" /></p>
+      <p>Here, the height of loading skeleton cards is <code>400px</code> with vertical orientation on breakpoints <code>0-3</code>, and <code>220px</code> with horizontal orientation on breakpoints <code>4-7</code>. This makes skeleton cards resemble loaded cards at all breakpoints, creating a smooth transition for users during data loading.<DocsToggleButton contentId="more-loading-state" /></p>
 
       <DocsToggleContent id="more-loading-state">
         <p>Simplify <code>skeletonsConfig</code> by taking a bottom-up approach. Begin with a base setup for all breakpoints and override only where needed. For example, the above configuration can be written as:</p>
@@ -715,7 +718,6 @@
               skeletonsConfig: [
                 {
                   breakpoints: [0, 1, 2, 3, 4, 5, 6, 7],
-                  count: 3,
                   height: '400px',
                   orientation: 'vertical',
                   thumbnailDisplay: 'large',
@@ -772,7 +774,6 @@
         skeletonsConfig1: [
           {
             breakpoints: [0, 1, 2, 3, 4, 5, 6, 7],
-            count: 2,
             orientation: 'horizontal',
             thumbnailDisplay: 'large',
             thumbnailAlign: 'left',
@@ -786,7 +787,6 @@
         skeletonsConfig2: [
           {
             breakpoints: [0, 1, 2, 3, 4, 5, 6, 7],
-            count: 3,
             orientation: 'vertical',
             thumbnailDisplay: 'large',
             height: '470px',
@@ -803,7 +803,6 @@
         skeletonsConfig3: [
           {
             breakpoints: [0, 1, 2, 3, 4, 5, 6, 7],
-            count: 5,
             orientation: 'vertical',
             thumbnailDisplay: 'large',
             height: '470px',
@@ -820,7 +819,6 @@
         skeletonsConfig4: [
           {
             breakpoints: [0, 1, 2, 3, 4, 5, 6, 7],
-            count: 6,
             orientation: 'vertical',
             thumbnailDisplay: 'large',
             height: '360px',
@@ -829,7 +827,6 @@
         skeletonsConfig5: [
           {
             breakpoints: [0, 1, 2, 3, 4, 5, 6, 7],
-            count: 3,
             orientation: 'vertical',
             thumbnailDisplay: 'large',
             height: '420px',
@@ -842,7 +839,6 @@
         skeletonsConfig6: [
           {
             breakpoints: [0, 1, 2, 3, 4, 5, 6, 7],
-            count: 2,
             orientation: 'vertical',
             thumbnailDisplay: 'large',
             height: '440px',
@@ -857,7 +853,6 @@
         skeletonsConfig7: [
           {
             breakpoints: [0, 1, 2, 3, 4, 5, 6, 7],
-            count: 2,
             orientation: 'vertical',
             thumbnailDisplay: 'large',
             height: '430px',
@@ -870,7 +865,6 @@
         skeletonsConfig8: [
           {
             breakpoints: [0, 1, 2, 3, 4, 5, 6, 7],
-            count: 3,
             orientation: 'vertical',
             thumbnailDisplay: 'large',
             height: '400px',
