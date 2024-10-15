@@ -593,11 +593,11 @@
         <DocsAnchorTarget anchor="#loading-state" />
       </h3>
 
-      <p>While data is loading, <code>KCardGrid</code> shows loading skeleton cards. Use the <code>loading</code> prop to toggle the loading state. <code>KCardGrid</code> optimizes the loading experience by:</p>
+      <p>While data is loading, <code>KCardGrid</code> shows loading skeleton cards. Use the <code>loading</code> prop to toggle the loading state. Note that <code>KCardGrid</code> internal optimizations may affect how closely the visual loading experience matches the <code>loading</code> value:</p>
 
       <ul>
-        <li>The loading skeletons are not displayed for short loading times (&lt; 1s)</li>
-        <li>When the loading skeletons are displayed, they are visible for at least 1s</li>
+        <li>The loading skeletons won't be displayed for short loading times (&lt; 1s)</li>
+        <li>When the loading skeletons are displayed, they will be visible for at least 1s</li>
       </ul>
 
       <p>Use the buttons in the example below to preview.</p>
@@ -684,40 +684,6 @@
               skeletonsConfig: [
                 {
                   breakpoints: [0, 1, 2, 3, 4, 5, 6, 7],
-                  thumbnailDisplay: 'large'
-                },
-                {
-                  breakpoints: [0, 1, 2, 3],
-                  height: '400px',
-                  orientation: 'vertical',
-                },
-                {
-                  breakpoints: [4, 5, 6, 7],
-                  height: '220px',
-                  orientation: 'horizontal',
-                  thumbnailAlign: 'left'
-                }
-              ],
-            };
-          },
-        };
-      </DocsShowCode>
-      <!-- eslint-enable -->
-
-      <p>Here, the height of loading skeleton cards is <code>400px</code> with vertical orientation on breakpoints <code>0-3</code>, and <code>220px</code> with horizontal orientation on breakpoints <code>4-7</code>. This makes skeleton cards resemble loaded cards at all breakpoints, creating a smooth transition for users during data loading.<DocsToggleButton contentId="more-loading-state" /></p>
-
-      <DocsToggleContent id="more-loading-state">
-        <p>Simplify <code>skeletonsConfig</code> by taking a bottom-up approach. Begin with a base setup for all breakpoints and override only where needed. For example, the above configuration can be written as:</p>
-
-        <!-- eslint-disable -->
-      <DocsShowCode language="javascript">
-        export default {
-          ...
-          data() {
-            return {
-              skeletonsConfig: [
-                {
-                  breakpoints: [0, 1, 2, 3, 4, 5, 6, 7],
                   height: '400px',
                   orientation: 'vertical',
                   thumbnailDisplay: 'large',
@@ -734,9 +700,10 @@
         };
       </DocsShowCode>
       <!-- eslint-enable -->
-      </DocsToggleContent>
 
-      <p>To get a sense of what can be achieved, reload this page and the <code>KCard</code> page to preview the loading state in all examples.</p>
+      <p>Here, the height of loading skeleton cards is <code>400px</code> with vertical orientation on breakpoints <code>0-3</code>, and <code>220px</code> with horizontal orientation on breakpoints <code>4-7</code>. This makes skeleton cards resemble loaded cards at all breakpoints, creating a smooth transition for users during data loading. Note the bottom-up approach where we begin with a base setup for all breakpoints and gradually override on higher breakpoints. This simplifies the configuration object.</p>
+
+      <p>To get a sense of what skeleton layouts can be achieved, reload this page and the <code>KCard</code> page to preview the loading state in all examples.</p>
     </DocsPageSection>
 
     <DocsPageSection title="Related" anchor="#related">
