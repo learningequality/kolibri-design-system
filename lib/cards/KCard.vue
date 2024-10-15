@@ -71,17 +71,10 @@
           :aspectRatio="thumbnailAspectRatio"
           :isDecorative="true"
           :appearanceOverrides="thumbnailStyles"
-          @load="isThumbnailImageLoaded = true"
-          @error="isThumbnailImageLoaded = false"
+          @error="onThumbnailError"
         />
-        <!--
-          Show the placeholder element even when a thumbnail source is available.
-          This serves as progressive loading experience - on slower networks,
-          users can at least see the placeholder until the image is loaded
-          successfully.
-        -->
         <span
-          v-if="!disableThumbnailPlaceholder"
+          v-if="!thumbnailSrc || thumbnailError"
           class="thumbnail-placeholder"
         >
           <!-- @slot Places content to the thumbnail placeholder area. -->
@@ -285,41 +278,28 @@
         type: Boolean,
         default: false,
       },
+      /**
+       * Private. Do not use.
+       */
+      // Disables validations and functionality
+      // that shouldn't be present when card
+      // used as loading skeleton via `SkeletonCard`
+      isSkeleton: {
+        type: Boolean,
+        default: false,
+      },
     },
     data() {
       return {
         mouseDownTime: 0,
         ThumbnailDisplays,
-        isThumbnailImageLoaded: false,
         isLinkFocused: false,
+        thumbnailError: false,
       };
     },
     computed: {
       focusStyle() {
         return this.isLinkFocused ? this.$coreOutline : {};
-      },
-      /**
-       * Disable the thumbnail placeholder element when
-       * there is no thumbnail area or the placeholder element
-       * is not provided.
-       *
-       * Furthermore, hide it after the thumbnail image
-       * is successfully loaded. Otherwise in some scenarios,
-       * such as when there is a large placeholder element
-       * and a small thumbnail image, some parts of the placeholder
-       * element may be visible behind the image after it has been
-       * successfully loaded.
-       *
-       * However, do not hide the placeholder element while
-       * the image is still loading to ensure progressive
-       * loading experience on slower networks.
-       */
-      disableThumbnailPlaceholder() {
-        return (
-          this.thumbnailDisplay === this.ThumbnailDisplays.NONE ||
-          !this.$slots.thumbnailPlaceholder ||
-          this.isThumbnailImageLoaded
-        );
       },
       hasAboveTitleArea() {
         return this.$slots.aboveTitle || this.preserveAboveTitle;
@@ -457,12 +437,21 @@
     },
     methods: {
       onLinkFocus() {
+        if (this.isSkeleton) {
+          return;
+        }
         this.isLinkFocused = true;
       },
       onLinkBlur() {
         this.isLinkFocused = false;
       },
+      onThumbnailError() {
+        this.thumbnailError = true;
+      },
       navigate() {
+        if (this.isSkeleton) {
+          return;
+        }
         this.$router.push(this.to);
       },
       onFocus(e) {
@@ -484,6 +473,9 @@
         this.mouseDownTime = new Date().getTime();
       },
       onClick() {
+        if (this.isSkeleton) {
+          return;
+        }
         const mouseUpTime = new Date().getTime();
         // Make textual content selectable within the whole clickable card area.
         //
@@ -556,11 +548,6 @@
     font-size: 16px;
     font-weight: 600;
     line-height: 1.5;
-
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
   }
 
   .thumbnail {
@@ -594,6 +581,9 @@
   }
 
   .link {
+    display: inline-block; // allows title placeholder in the skeleton card
+    width: 100%; // allows title placeholder in the skeleton card
+    color: inherit;
     text-decoration: none;
     outline: none; // the focus ring is moved to the whole <li>
   }
