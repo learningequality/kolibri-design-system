@@ -116,6 +116,7 @@
 
     position: relative;
     overflow: hidden; // contain animation style within card area
+    border-radius: 0.5em; // prevents sharp corner, should match inner card area border radius in KCard
   }
 
   .skeleton-card::before {
