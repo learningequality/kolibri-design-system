@@ -127,7 +127,7 @@
     height: 100%;
     content: '';
     background: linear-gradient(270deg, rgba(255, 255, 255, 0.6) 0%, rgba(255, 255, 255, 0) 100%);
-    animation: loading 1.8s infinite ease-in-out;
+    animation: loading 1.5s infinite ease-in-out;
   }
 
 </style>

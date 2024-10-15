@@ -593,9 +593,18 @@
         <DocsAnchorTarget anchor="#loading-state" />
       </h3>
 
-      <p>While data is loading, <code>KCardGrid</code> shows loading skeleton cards. Use the <code>loading</code> prop to toggle the loading state. <code>KCardGrid</code> ensures a minimum display time for the loading state to prevent a jarring user experience when data loads quickly.</p>
+      <p>While data is loading, <code>KCardGrid</code> shows loading skeleton cards. Use the <code>loading</code> prop to toggle the loading state. <code>KCardGrid</code> optimizes the loading experience by:</p>
 
-      <p>Use the <code>skeletonsConfig</code> prop to configure skeleton cards to match the expected visual output of loaded cards on all screen sizes. For easier development, enable the <code>debug</code> prop to display the current breakpoint in the top left corner of the grid. Preview the layout and height of cards with loaded data and adjust <code>skeletonsConfig</code> accordingly.</p>
+      <ul>
+        <li>The loading skeletons are not displayed for short loading times (&lt; 1s)</li>
+        <li>When the loading skeletons are displayed, they are visible for at least 1s</li>
+      </ul>
+
+      <p>Use the buttons in the example below to preview.</p>
+
+      <h4>Loading skeletons configuration</h4>
+
+      <p>Use the <code>skeletonsConfig</code> prop to configure skeleton cards to match the expected visual output of loaded cards on all screen sizes. Preview the layout and height of cards with loaded data and adjust <code>skeletonsConfig</code> accordingly.</p>
 
       <p><code>skeletonsConfig</code> takes an array of objects <code>{ breakpoints, count, height, orientation, thumbnailDisplay, thumbnailAlign }</code>, where:</p>
 
@@ -608,15 +617,21 @@
         <li><code>thumbnailAlign</code> sets the thumbnail alignment of skeleton cards for the specified breakpoints. Corresponds to <DocsInternalLink text="KCard's thumbnailAlign" href="/kcard#prop:thumbnailAlign" code />.</li>
       </ul>
 
-      <p>For example:</p>
+      <p>For easier development, enable the <code>debug</code> prop to display the current breakpoint in the top left corner of the grid. Use the button in the example below to preview the debug mode.</p>
 
       <div :style="{ display: 'flex', justifyContent: 'flex-end' }">
         <KButtonGroup>
+          <KButton primary @click="load500">
+            Load (0.5 s)
+          </KButton>
+          <KButton primary @click="load1200">
+            Load (1.2 s)
+          </KButton>
+          <KButton primary @click="load4000">
+            Load (4 s)
+          </KButton>
           <KButton @click="debug = !debug">
             Debug: {{ debug ? 'On' : 'Off' }}
-          </KButton>
-          <KButton primary @click="reload">
-            Reload
           </KButton>
         </KButtonGroup>
       </div>
@@ -888,14 +903,26 @@
     mounted() {
       setTimeout(() => {
         this.loading = false;
-      }, 500);
+      }, 3000);
     },
     methods: {
-      reload() {
+      load500() {
         this.loading = true;
         setTimeout(() => {
           this.loading = false;
         }, 500);
+      },
+      load1200() {
+        this.loading = true;
+        setTimeout(() => {
+          this.loading = false;
+        }, 1200);
+      },
+      load4000() {
+        this.loading = true;
+        setTimeout(() => {
+          this.loading = false;
+        }, 4000);
       },
     },
   };

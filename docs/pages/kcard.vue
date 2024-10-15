@@ -874,7 +874,7 @@
     mounted() {
       setTimeout(() => {
         this.loading = false;
-      }, 500);
+      }, 3000);
     },
   };
 

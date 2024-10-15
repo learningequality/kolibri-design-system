@@ -1,16 +1,7 @@
 <template>
 
-  <!--
-      Avoid displaying anything until mounting is complete
-      to prevent flashes of unstyled content. Otherwise, cards
-      or skeletons would show to users with wrong dimensions
-      and then would be resized to expected appearance,
-      creating jarring UX. It is rather some kind of global
-      page-level loader that should handle the loading state
-      before the grid is ready to render.
-    -->
   <div
-    v-if="finishedMounting"
+    v-if="showGrid"
     class="card-grid"
   >
     <transition name="fade" mode="out-in" appear>
@@ -70,7 +61,7 @@
     setup(props) {
       const { currentBreakpointConfig, windowBreakpoint } = useGridLayout(props);
       const {
-        finishedMounting,
+        showGrid,
         isLoading,
         skeletonCount,
         skeletonHeight,
@@ -114,7 +105,7 @@
         windowBreakpoint,
         gridStyle,
         isLoading,
-        finishedMounting,
+        showGrid,
         skeletonCount,
         skeletonHeight,
         skeletonOrientation,
