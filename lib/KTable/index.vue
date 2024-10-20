@@ -298,142 +298,20 @@
         const totalRows = this.rows.length;
         const totalCols = this.headers.length;
 
-        let nextRowIndex = rowIndex;
-        let nextColIndex = colIndex;
+        let { nextRowIndex, nextColIndex } = this.getNextIndexes(
+          key,
+          rowIndex,
+          colIndex,
+          totalRows,
+          totalCols
+        );
 
-        switch (key) {
-          case 'ArrowUp':
-            if (rowIndex === -1) {
-              nextRowIndex = totalRows - 1;
-            } else {
-              nextRowIndex = rowIndex - 1;
-            }
-            break;
-          case 'ArrowDown':
-            if (rowIndex === -1) {
-              nextRowIndex = 0;
-            } else if (rowIndex === totalRows - 1) {
-              nextRowIndex = -1;
-            } else {
-              nextRowIndex = (rowIndex + 1) % totalRows;
-            }
-            break;
-          case 'ArrowLeft':
-            if (rowIndex === -1) {
-              if (colIndex > 0) {
-                nextColIndex = colIndex - 1;
-              } else {
-                nextColIndex = totalCols - 1;
-                nextRowIndex = totalRows - 1;
-              }
-            } else if (colIndex > 0) {
-              nextColIndex = colIndex - 1;
-            } else {
-              nextColIndex = totalCols - 1;
-              nextRowIndex = rowIndex > 0 ? rowIndex - 1 : -1;
-            }
-            break;
-          case 'ArrowRight':
-            if (colIndex === totalCols - 1) {
-              if (rowIndex === totalRows - 1) {
-                nextColIndex = 0;
-                nextRowIndex = -1;
-              } else {
-                nextColIndex = 0;
-                nextRowIndex = rowIndex + 1;
-              }
-            } else {
-              nextColIndex = colIndex + 1;
-            }
-            break;
-          case 'Enter':
-            if (rowIndex === -1 && this.sortable) {
-              this.handleSort(colIndex);
-            }
-            break;
-          case 'Tab': {
-            // Identify all focusable elements inside the current cell
-            const currentCell = this.getCell(rowIndex, colIndex);
-
-            // Collect focusable elements using native DOM methods
-            const focusableElements = [];
-
-            if (currentCell) {
-              const buttons = currentCell.getElementsByTagName('button');
-              const links = currentCell.getElementsByTagName('a');
-              const inputs = currentCell.getElementsByTagName('input');
-              const selects = currentCell.getElementsByTagName('select');
-              const textareas = currentCell.getElementsByTagName('textarea');
-
-              focusableElements.push(...buttons, ...links, ...inputs, ...selects, ...textareas);
-            }
-
-            const focusedElementIndex = focusableElements.indexOf(document.activeElement);
-            if (focusableElements.length > 0) {
-              if (!event.shiftKey) {
-                // if navigating between more focusable elements within the cell
-                if (focusedElementIndex < focusableElements.length - 1) {
-                  focusableElements[focusedElementIndex + 1].focus();
-                  event.preventDefault();
-                  return;
-                } else {
-                  if (colIndex < totalCols - 1) {
-                    nextColIndex = colIndex + 1;
-                  } else if (rowIndex < totalRows - 1) {
-                    nextColIndex = 0;
-                    nextRowIndex = rowIndex + 1;
-                  } else {
-                    // Allow default behavior when reaching the last cell
-                    return;
-                  }
-                }
-              } else {
-                if (focusedElementIndex < focusableElements.length - 1) {
-                  // if navigating between more focusable elements within the cell
-                  focusableElements[focusedElementIndex + 1].focus();
-                  event.preventDefault();
-                  return;
-                } else {
-                  if (colIndex > 0) {
-                    nextColIndex = colIndex - 1;
-                  } else if (rowIndex > 0) {
-                    nextColIndex = totalCols - 1;
-                    nextRowIndex = rowIndex - 1;
-                  } else {
-                    // Allow default behavior when reaching the first cell
-                    return;
-                  }
-                }
-              }
-            } else {
-              if (!event.shiftKey) {
-                if (colIndex < totalCols - 1) {
-                  nextColIndex = colIndex + 1;
-                } else if (rowIndex < totalRows - 1) {
-                  nextColIndex = 0;
-                  nextRowIndex = rowIndex + 1;
-                } else {
-                  // Allow default behavior when reaching the last cell
-                  return;
-                }
-              } else {
-                if (colIndex > 0) {
-                  nextColIndex = colIndex - 1;
-                } else if (rowIndex > 0) {
-                  nextColIndex = totalCols - 1;
-                  nextRowIndex = rowIndex - 1;
-                } else {
-                  // Allow default behavior when reaching the first cell
-                  return;
-                }
-              }
-            }
-
-            break;
-          }
-
-          default:
+        if (key === 'Enter' && rowIndex === -1 && this.sortable) {
+          this.handleSort(colIndex);
+        } else if (key === 'Tab') {
+          if (this.handleTabKey(event, rowIndex, colIndex)) {
             return;
+          }
         }
 
         this.focusCell(nextRowIndex, nextColIndex);
@@ -444,6 +322,140 @@
 
         event.preventDefault();
       },
+
+      getNextIndexes(key, rowIndex, colIndex, totalRows, totalCols) {
+        const lastRowIndex = totalRows - 1;
+        const lastColIndex = totalCols - 1;
+        let nextRowIndex = rowIndex;
+        let nextColIndex = colIndex;
+
+        switch (key) {
+          case 'ArrowUp':
+            nextRowIndex = rowIndex === -1 ? lastRowIndex : rowIndex - 1;
+            break;
+          case 'ArrowDown':
+            nextRowIndex = rowIndex === -1 ? 0 : rowIndex === lastRowIndex ? -1 : rowIndex + 1;
+            break;
+          case 'ArrowLeft':
+            if (rowIndex === -1) {
+              nextColIndex = colIndex > 0 ? colIndex - 1 : lastColIndex;
+              nextRowIndex = colIndex === 0 ? lastRowIndex : -1;
+            } else {
+              nextColIndex = colIndex > 0 ? colIndex - 1 : lastColIndex;
+              nextRowIndex = colIndex === 0 ? (rowIndex > 0 ? rowIndex - 1 : -1) : rowIndex;
+            }
+            break;
+          case 'ArrowRight':
+            if (colIndex === lastColIndex) {
+              nextColIndex = 0;
+              nextRowIndex = rowIndex === lastRowIndex ? -1 : rowIndex + 1;
+            } else {
+              nextColIndex = colIndex + 1;
+            }
+            break;
+        }
+        return { nextRowIndex, nextColIndex };
+      },
+
+      handleTabKey(event, rowIndex, colIndex) {
+        const currentCell = this.getCell(rowIndex, colIndex);
+
+        if (!currentCell) return false;
+
+        const focusableElements = this.getFocusableElements(currentCell);
+        const focusedElementIndex = focusableElements.indexOf(document.activeElement);
+
+        if (focusableElements.length > 0) {
+          if (!event.shiftKey) {
+            if (focusedElementIndex < focusableElements.length - 1) {
+              focusableElements[focusedElementIndex + 1].focus();
+              event.preventDefault();
+              return true;
+            }
+          } else {
+            if (focusedElementIndex > 0) {
+              focusableElements[focusedElementIndex - 1].focus();
+              event.preventDefault();
+              return true;
+            }
+          }
+        }
+
+        const totalRows = this.rows.length;
+        const totalCols = this.headers.length;
+        let nextRowIndex = rowIndex;
+        let nextColIndex = colIndex;
+
+        if (!event.shiftKey) {
+          // Mimic ArrowRight key
+          if (colIndex === totalCols - 1) {
+            nextColIndex = 0;
+            nextRowIndex = rowIndex === totalRows - 1 ? -1 : rowIndex + 1;
+          } else {
+            nextColIndex = colIndex + 1;
+          }
+        } else {
+          // Mimic ArrowLeft key
+          if (colIndex === 0) {
+            if (rowIndex === -1) {
+              // Move to the last cell if the first cell is focused
+              nextColIndex = totalCols - 1;
+              nextRowIndex = totalRows - 1;
+            } else {
+              nextColIndex = totalCols - 1;
+              nextRowIndex = rowIndex > 0 ? rowIndex - 1 : -1;
+            }
+          } else {
+            nextColIndex = colIndex - 1;
+          }
+        }
+
+        this.focusCell(nextRowIndex, nextColIndex);
+        event.preventDefault();
+        return true;
+      },
+
+      moveToNextCell(rowIndex, colIndex) {
+        const totalRows = this.rows.length;
+        const totalCols = this.headers.length;
+
+        let nextRowIndex = rowIndex;
+        let nextColIndex = colIndex;
+
+        if (colIndex < totalCols - 1) {
+          nextColIndex = colIndex + 1;
+        } else if (rowIndex < totalRows - 1) {
+          nextColIndex = 0;
+          nextRowIndex = rowIndex + 1;
+        }
+
+        this.focusCell(nextRowIndex, nextColIndex);
+      },
+
+      moveToPreviousCell(rowIndex, colIndex) {
+        const totalRows = this.rows.length;
+        const totalCols = this.headers.length;
+
+        let nextRowIndex = rowIndex;
+        let nextColIndex = colIndex;
+
+        if (colIndex > 0) {
+          nextColIndex = colIndex - 1;
+        } else if (rowIndex > 0) {
+          nextColIndex = totalCols - 1;
+          nextRowIndex = rowIndex - 1;
+        }
+
+        this.focusCell(nextRowIndex, nextColIndex);
+      },
+
+      getFocusableElements(cell) {
+        const focusableSelectors = ['button', 'a', 'input', 'select', 'textarea'];
+        return focusableSelectors.flatMap(selector =>
+          Array.from(cell.getElementsByTagName(selector))
+        );
+      },
+      //My code ends here
       getCell(rowIndex, colIndex) {
         if (rowIndex === -1) {
           return this.$refs[`header-${colIndex}`][0];
