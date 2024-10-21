@@ -128,7 +128,7 @@
           : this.$themeTokens.surface;
         const hoverBackgroundColor = this.hoverBackgroundColor
           ? this.hoverBackgroundColor
-          : this.$themeBrand.primary.v_200;
+          : this.$themeBrand.primary.v_100;
         return {
           color,
           backgroundColor,

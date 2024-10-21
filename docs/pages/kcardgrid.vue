@@ -263,7 +263,7 @@
                 <span
                   v-for="(pill, i) in slicedPills"
                   :key="i"
-                  :style="{ 'background-color': $themePalette.grey.v_50 }"
+                  :style="{ 'background-color': $themePalette.grey.v_100 }"
                 >
                   {{ pill }}
                 </span>
@@ -325,7 +325,7 @@
                 <span
                   v-for="(pill, i) in slicedPills"
                   :key="i"
-                  :style="{ 'background-color': $themePalette.grey.v_50 }"
+                  :style="{ 'background-color': $themePalette.grey.v_100 }"
                 >
                   {{ pill }}
                 </span>
@@ -451,24 +451,24 @@
             <template #footer>
               <div class="pills" :style="{ 'color': $themeTokens.annotation }">
                 <span
-                  :style="{ 'background-color': $themePalette.grey.v_50 }"
+                  :style="{ 'background-color': $themePalette.grey.v_100 }"
                 >
                   <KIcon icon="readSolid" :style="{ fontSize: '13px', position: 'relative', top: '3px' }" />
                   Read
                 </span>
                 <span
-                  :style="{ 'background-color': $themePalette.grey.v_50 }"
+                  :style="{ 'background-color': $themePalette.grey.v_100 }"
                 >
                   Short Activity
                 </span>
                 <template v-if="windowBreakpoint > 3">
                   <span
-                    :style="{ 'background-color': $themePalette.grey.v_50 }"
+                    :style="{ 'background-color': $themePalette.grey.v_100 }"
                   >
                     Biology
                   </span>
                   <span
-                    :style="{ 'background-color': $themePalette.grey.v_50 }"
+                    :style="{ 'background-color': $themePalette.grey.v_100 }"
                   >
                     Ecology
                   </span>

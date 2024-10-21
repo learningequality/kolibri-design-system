@@ -31,7 +31,7 @@
             :style="[
               (selectionOrder(weekIndex, dayInWeekIndex, 'first', activeMonthDay, activeMonthDate) === 'first') ||
                 (selectionOrder(weekIndex, dayInWeekIndex, 'first', activeMonthDay, activeMonthDate) === 'second') ?
-                  { backgroundColor: $themeBrand.primary.v_200 } : {}
+                  { backgroundColor: $themeBrand.primary.v_100 } : {}
             ]"
             :class="[{
               'calendar-days--disabled': isDateDisabled(weekIndex, dayInWeekIndex, activeMonthDay, activeMonthDate) || isDateDisabledLeft(weekIndex, dayInWeekIndex, activeMonthDay),
@@ -64,7 +64,7 @@
             :style="[
               (selectionOrder(weekIndex, dayInWeekIndex, 'second', nextActiveMonthDay, nextActiveMonthDate) === 'first') ||
                 (selectionOrder(weekIndex, dayInWeekIndex, 'second', nextActiveMonthDay, nextActiveMonthDate) === 'second') ?
-                  { backgroundColor: $themeBrand.primary.v_200 } : {}
+                  { backgroundColor: $themeBrand.primary.v_100 } : {}
             ]"
             :class="[{
               'calendar-days--disabled': isDateDisabled(weekIndex, dayInWeekIndex, nextActiveMonthDay, nextActiveMonthDate) || isDateDisabledRight(weekIndex, dayInWeekIndex, nextActiveMonthDay),
