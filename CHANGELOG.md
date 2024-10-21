@@ -7,6 +7,19 @@ Changelog is rather internal in nature. See release notes for the public overvie
 <!-- [DO NOT REMOVE-USED BY GH ACTION] PASTE CHANGELOG -->
 
 
+- [#800]
+  - **Description:** Merges v4.6.0 into develop
+  - **Products impact:** -.
+  - **Addresses:** -.
+  - **Components:** -.
+  - **Breaking:** -
+  - **Impacts a11y:** -
+  - **Guidance:** -.
+
+[#800]: https://github.com/learningequality/kolibri-design-system/pull/800
+
+
+
 - [#798]
   - **Description:**  Adds custom computed property `computedAriaLabel` that dynamically sets the `ariaLabel` for `KIconButton` based on the `tooltip` prop when `ariaLabel` is not provided.
   - **Products impact:** none
