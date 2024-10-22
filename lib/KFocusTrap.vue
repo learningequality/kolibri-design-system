@@ -9,8 +9,10 @@
       @focus="handleFirstTrapFocus"
     ></div>
 
-    <!-- Default slot where the focusable content will be rendered -->
-    <slot></slot>
+    <!--@slot Default slot where the focusable content will be rendered -->
+    <slot>
+     
+    </slot>
 
     <!-- Focus trap ending point. If not disabled, focuses this last when tabbing. -->
     <div
@@ -76,16 +78,18 @@
         e.stopPropagation();
         this.focusFirstEl();
       },
-      /**
-       * Emits an event to notify the parent component to focus the first element.
-       */
+
       focusFirstEl() {
+        /**
+         * Emits an event to notify the parent component to focus the first element.
+         */
         this.$emit('shouldFocusFirstEl');
       },
-      /**
-       * Emits an event to notify the parent component to focus the last element.
-       */
+
       focusLastEl() {
+        /**
+         * Emits an event to notify the parent component to focus the last element.
+         */
         this.$emit('shouldFocusLastEl');
       },
       /**
