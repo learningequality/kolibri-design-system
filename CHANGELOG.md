@@ -7,6 +7,16 @@ Changelog is rather internal in nature. See release notes for the public overvie
 <!-- [DO NOT REMOVE-USED BY GH ACTION] PASTE CHANGELOG -->
 
 
+- [#803]
+  - **Description:** Adds the option to get back to the unsorted state after sorting a KTable column, making it flow to be unsorted->ascending -> descending -> unsorted.
+  - Products impact: updated API
+  - Addresses: https://github.com/learningequality/kolibri-design-system/issues/797
+  - Components: KTable
+  - Breaking: no
+  - Impacts : Adds flexibility in how users can interact with the table, especially when sorting is not desired or needs to be reset.
+
+
+
 - [#800]
   - **Description:** Merges v4.6.0 into develop
   - **Products impact:** -.
