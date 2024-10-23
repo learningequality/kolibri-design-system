@@ -411,43 +411,12 @@
         }
 
         this.focusCell(nextRowIndex, nextColIndex);
+        this.focusedRowIndex = nextRowIndex === -1 ? null : nextRowIndex;
+        this.focusedColIndex = nextColIndex;
+        this.highlightHeader(nextColIndex);
         event.preventDefault();
         return true;
       },
-
-      // moveToNextCell(rowIndex, colIndex) {
-      //   const totalRows = this.rows.length;
-      //   const totalCols = this.headers.length;
-
-      //   let nextRowIndex = rowIndex;
-      //   let nextColIndex = colIndex;
-
-      //   if (colIndex < totalCols - 1) {
-      //     nextColIndex = colIndex + 1;
-      //   } else if (rowIndex < totalRows - 1) {
-      //     nextColIndex = 0;
-      //     nextRowIndex = rowIndex + 1;
-      //   }
-
-      //   this.focusCell(nextRowIndex, nextColIndex);
-      // },
-
-      // moveToPreviousCell(rowIndex, colIndex) {
-      //   const totalRows = this.rows.length;
-      //   const totalCols = this.headers.length;
-
-      //   let nextRowIndex = rowIndex;
-      //   let nextColIndex = colIndex;
-
-      //   if (colIndex > 0) {
-      //     nextColIndex = colIndex - 1;
-      //   } else if (rowIndex > 0) {
-      //     nextColIndex = totalCols - 1;
-      //     nextRowIndex = rowIndex - 1;
-      //   }
-
-      //   this.focusCell(nextRowIndex, nextColIndex);
-      // },
 
       getFocusableElements(cell) {
         const focusableSelectors = ['button', 'a', 'input', 'select', 'textarea'];
