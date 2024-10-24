@@ -11,7 +11,7 @@
 
     <!--@slot Default slot where the focusable content will be rendered -->
     <slot>
-     
+
     </slot>
 
     <!-- Focus trap ending point. If not disabled, focuses this last when tabbing. -->
