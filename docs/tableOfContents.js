@@ -443,6 +443,11 @@ export default [
         isCode: true,
         keywords: cardRelatedKeywords,
       }),
+      new Page({
+        path: '/kfocustrap',
+        title: 'KFocusTrap',
+        isCode: true,
+      }),
     ],
   }),
 ];
