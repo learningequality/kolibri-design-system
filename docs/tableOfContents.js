@@ -448,6 +448,11 @@ export default [
         title: 'KFocusTrap',
         isCode: true,
       }),
+      new Page({
+        path: '/kskeletonloader',
+        title: 'KSkeletonLoader',
+        isCode: true,
+      }),
     ],
   }),
 ];
