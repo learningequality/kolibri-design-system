@@ -60,7 +60,7 @@
 <script>
 
   import { format, startOfDay, startOfToday } from 'date-fns';
-  import { interpret } from 'xstate';
+  import { createActor } from 'xstate';
   import get from 'lodash/get';
   import debounce from 'lodash/debounce';
   import KModal from '../KModal';
@@ -219,13 +219,14 @@
         lastAllowedDate: this.lastAllowedDate,
         firstAllowedDate: this.firstAllowedDate,
       };
-      this.validationMachine = interpret(
-        validationMachine.withContext({ ...initialContext, ...currentContext })
-      );
-      this.validationMachine.start();
+
+
+      this.validationActor = createActor(validationMachine, {
+        input: { ...initialContext, ...currentContext }
+      }).start();
 
       /** On every transition of the machine, we will revalidate and update our messages */
-      this.validationMachine.onTransition(() => {
+      this.validationActor.subscribe((state) => {
         this.getInvalidStartErrorMessage();
         this.getInvalidEndErrorMessage();
       });
@@ -246,10 +247,11 @@
           start: this.getDateString(dates['start']),
           end: this.getDateString(dates['end']),
         };
-        this.validationMachine.send('REVALIDATE', {
+        this.validationActor.send({
+          type: 'REVALIDATE',
           startDate: this.dateRange.start,
           endDate: this.dateRange.end,
-        });
+        });        
       },
       /** Checks if dateStr is equal to the placeholder. If so, submit should be disabled */
       isPlaceholder(dateStr) {
@@ -261,13 +263,13 @@
         }
         return format(date, 'YYYY-MM-DD');
       },
-      /** Returns startDateInvalid message from validation machine */
+       /** Returns startDateInvalid message from validation actor */
       invalidStart() {
-        return this.validationMachine._state.context.startDateInvalid;
+        return this.validationActor.getSnapshot().context.startDateInvalid;
       },
-      /** Returns endDateInvalid message from validation machine */
+      /** Returns endDateInvalid message from validation actor */
       invalidEnd() {
-        return this.validationMachine._state.context.endDateInvalid;
+        return this.validationActor.getSnapshot().context.endDateInvalid;
       },
       /**
        *  Maps the value of invalidStart to validationConstants
@@ -296,14 +298,25 @@
       /** Updates start date with input from textbox */
       setStartDate(newVal) {
         this.dateRange = { start: newVal, end: null };
-        this.validationMachine.send('REVALIDATE', { startDate: newVal, endDate: null });
+        this.validationActor.send({
+        type: 'REVALIDATE',
+        startDate: newVal,
+        endDate: null
+      });        
       },
       /** Updates end date with input from textbox */
       setEndDate(newVal) {
         this.dateRange = { start: this.dateRange.start, end: newVal };
-        this.validationMachine.send('REVALIDATE', { endDate: newVal });
+        this.validationActor.send({
+        type: 'REVALIDATE',
+        endDate: newVal
+      });
       },
     },
+    beforeUnmount() {
+      // Cleanup actor when component is destroyed
+      this.validationActor?.stop();
+    },    
   };
 
 </script>
