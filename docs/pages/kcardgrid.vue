@@ -84,8 +84,23 @@
           </tr>
         </DocsTable>
       </DocsToggleContent>
+      <DocsExample>
 
-      <DocsShow block>
+          <template #code>
+            <DocsShowCode language="html">
+              <KCardGrid layout="1-1-1">
+                <KCard
+                  v-for="i in 2"
+                  :key="i"
+                  :headingLevel="5"
+                  orientation="horizontal"
+                  :prependTitle="`(${i})`"
+                />
+              </KCardGrid>
+            </DocsShowCode>
+          </template>
+<DocsShow block>
+
         <KCardGrid
           layout="1-1-1"
           :skeletonsConfig="skeletonsConfig1"
@@ -99,18 +114,13 @@
             :prependTitle="`(${i})`"
           />
         </KCardGrid>
-      </DocsShow>
 
-      <!-- eslint-disable -->
-      <DocsShowCode language="html">
-        <KCardGrid layout="1-1-1">
-          <KCard
-            v-for="i in 2"
-            ...
-          />
-        </KCardGrid>
-      </DocsShowCode>
-      <!-- eslint-enable -->
+</DocsShow>
+
+      </DocsExample>
+
+
+
 
       <h4>
         '1-2-2' grid
@@ -145,31 +155,35 @@
         </DocsTable>
       </DocsToggleContent>
 
-      <DocsShow block>
-        <KCardGrid
-          layout="1-2-2"
-          :skeletonsConfig="skeletonsConfig2"
-          :loading="loading"  
-        >
-          <DocsKCard
-            v-for="i in 3"
-            :key="i"
-            :headingLevel="5"
-            :prependTitle="`(${i})`"
-          />
-        </KCardGrid>
-      </DocsShow>
+      <DocsExample>
+        <template #code>
+          <!-- eslint-disable -->
+          <DocsShowCode language="html">
+            <KCardGrid layout="1-2-2">
+              <KCard
+                v-for="i in 3"
+                ...
+              />
+            </KCardGrid>
+          </DocsShowCode>
+          <!-- eslint-enable -->
+        </template>
 
-      <!-- eslint-disable -->
-      <DocsShowCode language="html">
-        <KCardGrid layout="1-2-2">
-          <KCard
-            v-for="i in 3"
-            ...
-          />
-        </KCardGrid>
-      </DocsShowCode>
-      <!-- eslint-enable -->
+        <DocsShow block>
+          <KCardGrid
+            layout="1-2-2"
+            :skeletonsConfig="skeletonsConfig2"
+            :loading="loading"
+          >
+            <DocsKCard
+              v-for="i in 3"
+              :key="i"
+              :headingLevel="5"
+              :prependTitle="`(${i})`"
+            />
+          </KCardGrid>
+        </DocsShow>
+      </DocsExample>
 
       <h4>
         '1-2-3' grid
@@ -204,31 +218,35 @@
         </DocsTable>
       </DocsToggleContent>
 
-      <DocsShow block>
-        <KCardGrid
-          layout="1-2-3"
-          :skeletonsConfig="skeletonsConfig3"
-          :loading="loading"
-        >
-          <DocsKCard
-            v-for="i in 5"
-            :key="i"
-            :headingLevel="5"
-            :prependTitle="`(${i})`"
-          />
-        </KCardGrid>
-      </DocsShow>
+      <DocsExample>
+        <template #code>
+          <!-- eslint-disable -->
+          <DocsShowCode language="html">
+            <KCardGrid layout="1-2-3">
+              <KCard
+                v-for="i in 5"
+                ...
+              />
+            </KCardGrid>
+          </DocsShowCode>
+          <!-- eslint-enable -->
+        </template>
 
-      <!-- eslint-disable -->
-      <DocsShowCode language="html">
-        <KCardGrid layout="1-2-3">
-          <KCard
-            v-for="i in 5"
-            ...
-          />
-        </KCardGrid>
-      </DocsShowCode>
-      <!-- eslint-enable -->
+        <DocsShow block>
+          <KCardGrid
+            layout="1-2-3"
+            :skeletonsConfig="skeletonsConfig3"
+            :loading="loading"
+          >
+            <DocsKCard
+              v-for="i in 5"
+              :key="i"
+              :headingLevel="5"
+              :prependTitle="`(${i})`"
+            />
+          </KCardGrid>
+        </DocsShow>
+      </DocsExample>
 
       <h3>
         Layout customization
@@ -245,59 +263,63 @@
 
       <p>For example:</p>
 
-      <DocsShow block>
-        <KCardGrid
-          layout="1-2-3"
-          :layoutOverride="layoutOverride"
-          :skeletonsConfig="skeletonsConfig4"
-          :loading="loading"
-        >
-          <DocsKCard
-            v-for="i in 6"
-            :key="i"
-            :headingLevel="6"
-            :prependTitle="`(${i})`"
-            hideFooter
-          />
-        </KCardGrid>
-      </DocsShow>
+      <DocsExample>
+        <template #code>
+          <!-- eslint-disable -->
+          <DocsShowCode language="html">
+            <KCardGrid
+              layout="1-2-3"
+              :layoutOverride="layoutOverride"
+            >
+              <KCard
+                v-for="i in 6"
+                ...
+              />
+            </KCardGrid>
+          </DocsShowCode>
+          <!-- eslint-enable -->
 
-      <!-- eslint-disable -->
-      <DocsShowCode language="html">
-        <KCardGrid
-          layout="1-2-3"
-          :layoutOverride="layoutOverride"
-        >
-          <KCard
-            v-for="i in 6"
-            ...
-          />
-        </KCardGrid>
-      </DocsShowCode>
-      <!-- eslint-enable -->
-
-      <!-- eslint-disable -->
-      <DocsShowCode language="javascript">
-        export default {
-          ...
-          data() {
-            return {
-              layoutOverride: [
-                {
-                  breakpoints: [0, 1],
-                  columnGap: '20px',
-                  rowGap: '20px',
-                },
-                {
-                  breakpoints: [4, 5, 6, 7],
-                  cardsPerRow: 4,
-                },
-              ],
+          <!-- eslint-disable -->
+          <DocsShowCode language="javascript">
+            export default {
+              ...
+              data() {
+                return {
+                  layoutOverride: [
+                    {
+                      breakpoints: [0, 1],
+                      columnGap: '20px',
+                      rowGap: '20px',
+                    },
+                    {
+                      breakpoints: [4, 5, 6, 7],
+                      cardsPerRow: 4,
+                    },
+                  ],
+                };
+              },
             };
-          },
-        };
-      </DocsShowCode>
-      <!-- eslint-enable -->
+          </DocsShowCode>
+          <!-- eslint-enable -->
+        </template>
+
+        <DocsShow block>
+          <KCardGrid
+            layout="1-2-3"
+            :layoutOverride="layoutOverride"
+            :skeletonsConfig="skeletonsConfig4"
+            :loading="loading"
+          >
+            <DocsKCard
+              v-for="i in 6"
+              :key="i"
+              :headingLevel="6"
+              :prependTitle="`(${i})`"
+              hideFooter
+            />
+          </KCardGrid>
+        </DocsShow>
+      </DocsExample>
 
       <p>Here, the base <code>1-2-3</code> layout is overriden partially. Column and row gaps are decreased to <code>20px</code> on breakpoints <code>0-1</code>, and the number of cards per row is increased to 4 on breakpoints <code>4-7</code>.</p>
 
@@ -310,160 +332,168 @@
 
       <p><em>Setting height on cards is discouraged. Instead, manage height bottom-up, for example by setting height on card sections, using text truncation, or other ways to limit its inner content.</em> Such approaches ensure content tolerance, prevent from unexpected overflows or excessive height, and keep vertical alignment of card sections consistent on a grid row. This is especially important when dealing with unknown lenghts or amounts of content displayed in cards. Consider:</p>
 
-      <DocsShow block>
-        <KCardGrid
-          layout="1-2-3"
-          :skeletonsConfig="skeletonsConfig5"
-          :loading="loading"  
-        >
-          <DocsKCard
-            :headingLevel="4"
-            preserveAboveTitle
-          >
-            <template #aboveTitle>
-              <div :style="{ height: '24px' }">
-                <KLabeledIcon icon="readSolid" label="Read" />
-              </div>
-            </template>
-            <template #title>
-              <div :style="{ height: '52px' }">
-                <KTextTruncator
-                  :maxLines="2"
-                  text="(1) Learn everything about hummingbirds: their habitats, feeding patterns, and stunning flight abilities"
-                />
-              </div>
-            </template>
-            <template #belowTitle>
-              <KTextTruncator
-                :maxLines="4"
-                text="Short description"
-              />
-            </template>
-            <template #footer>
-              <div class="pills" :style="{ 'color': $themeTokens.annotation }">
-                <span
-                  v-for="(pill, i) in slicedPills"
-                  :key="i"
-                  :style="{ 'background-color': $themePalette.grey.v_100 }"
-                >
-                  {{ pill }}
-                </span>
-              </div>
-            </template>
-          </DocsKCard>
 
-          <DocsKCard
-            :headingLevel="4"
-            preserveAboveTitle
-          >
-            <template #aboveTitle>
-              <div :style="{ height: '24px' }">
-                <KLabeledIcon icon="readSolid" label="Read" />
-              </div>
-            </template>
-            <template #title>
-              <div :style="{ height: '52px' }">
-                <KTextTruncator
-                  :maxLines="2"
-                  text="(2) Short title"
-                />
-              </div>
-            </template>
-            <template #belowTitle>
-              <KTextTruncator
-                :maxLines="4"
-                text="Discover how hummingbirds play a big role in nature despite their small size. Find out more about their beauty, how they help plants grow, and where they live. "
-              />
-            </template>
-            <template #footer>
-              <div></div>
-            </template>
-          </DocsKCard>
-
-          <DocsKCard
-            :headingLevel="4"
-            preserveAboveTitle
-          >
-            <template #aboveTitle>
-              <div :style="{ height: '24px' }"></div>
-            </template>
-            <template #title>
-              <div :style="{ height: '52px' }">
-                <KTextTruncator
-                  :maxLines="2"
-                  text="(3) Learn everything about hummingbirds: their habitats, feeding patterns, and stunning flight abilities"
-                />
-              </div>
-            </template>
-            <template #belowTitle>
-              <KTextTruncator
-                :maxLines="4"
-                text="Discover how hummingbirds play a big role in nature despite their small size. Find out more about their beauty, how they help plants grow, and where they live. "
-              />
-            </template>
-            <template #footer>
-              <div class="pills" :style="{ 'color': $themeTokens.annotation }">
-                <span
-                  v-for="(pill, i) in slicedPills"
-                  :key="i"
-                  :style="{ 'background-color': $themePalette.grey.v_100 }"
-                >
-                  {{ pill }}
-                </span>
-              </div>
-            </template>
-          </DocsKCard>
-        </KCardGrid>
-      </DocsShow>
-
-      <!-- eslint-disable -->
-      <DocsShowCode language="html">
-        <KCardGrid ...>
-          <KCard
-            ...
-            preserveAboveTitle
-          >
-            <template #aboveTitle>
-              <div :style="{ height: '24px' }">
+      <DocsExample>
+        <template #code>
+          <!-- eslint-disable -->
+          <DocsShowCode language="html">
+            <KCardGrid ...>
+              <KCard
                 ...
-              </div>
-            </template>
-            <template #title>
-              <div :style="{ height: '52px' }">
-                <KTextTruncator
-                  :maxLines="2"
-                  :text="..."
-                />
-              </div>
-            </template>
-            <template #belowTitle>
-              <KTextTruncator
-                :maxLines="4"
-                :text="..."
-              />
-            </template>
-            <template #footer>
-              <span v-for="pill in slicedPills">
-                ...
-              </span>
-            </template>
-          </KCard>
-        </KCardGrid>
-      </DocsShowCode>
-      <!-- eslint-enable -->
+                preserveAboveTitle
+              >
+                <template #aboveTitle>
+                  <div :style="{ height: '24px' }">
+                    ...
+                  </div>
+                </template>
+                <template #title>
+                  <div :style="{ height: '52px' }">
+                    <KTextTruncator
+                      :maxLines="2"
+                      :text="..."
+                    />
+                  </div>
+                </template>
+                <template #belowTitle>
+                  <KTextTruncator
+                    :maxLines="4"
+                    :text="..."
+                  />
+                </template>
+                <template #footer>
+                  <span v-for="pill in slicedPills">
+                    ...
+                  </span>
+                </template>
+              </KCard>
+            </KCardGrid>
+          </DocsShowCode>
+          <!-- eslint-enable -->
 
-      <!-- eslint-disable -->
-      <DocsShowCode language="javascript">
-        export default {
-          ...
-          computed: {
-            slicedPills() {
-              return pills.slice(0, 2);
-            },
-          },
-        };
-      </DocsShowCode>
-      <!-- eslint-enable -->
+          <!-- eslint-disable -->
+          <DocsShowCode language="javascript">
+            export default {
+              ...
+              computed: {
+                slicedPills() {
+                  return pills.slice(0, 2);
+                },
+              },
+            };
+          </DocsShowCode>
+          <!-- eslint-enable -->
+        </template>
+
+        <DocsShow block>
+          <KCardGrid
+            layout="1-2-3"
+            :skeletonsConfig="skeletonsConfig5"
+            :loading="loading"
+          >
+            <DocsKCard
+              :headingLevel="4"
+              preserveAboveTitle
+            >
+              <template #aboveTitle>
+                <div :style="{ height: '24px' }">
+                  <KLabeledIcon icon="readSolid" label="Read" />
+                </div>
+              </template>
+              <template #title>
+                <div :style="{ height: '52px' }">
+                  <KTextTruncator
+                    :maxLines="2"
+                    text="(1) Learn everything about hummingbirds: their habitats, feeding patterns, and stunning flight abilities"
+                  />
+                </div>
+              </template>
+              <template #belowTitle>
+                <KTextTruncator
+                  :maxLines="4"
+                  text="Short description"
+                />
+              </template>
+              <template #footer>
+                <div class="pills" :style="{ 'color': $themeTokens.annotation }">
+                  <span
+                    v-for="(pill, i) in slicedPills"
+                    :key="i"
+                    :style="{ 'background-color': $themePalette.grey.v_100 }"
+                  >
+                    {{ pill }}
+                  </span>
+                </div>
+              </template>
+            </DocsKCard>
+
+            <DocsKCard
+              :headingLevel="4"
+              preserveAboveTitle
+            >
+              <template #aboveTitle>
+                <div :style="{ height: '24px' }">
+                  <KLabeledIcon icon="readSolid" label="Read" />
+                </div>
+              </template>
+              <template #title>
+                <div :style="{ height: '52px' }">
+                  <KTextTruncator
+                    :maxLines="2"
+                    text="(2) Short title"
+                  />
+                </div>
+              </template>
+              <template #belowTitle>
+                <KTextTruncator
+                  :maxLines="4"
+                  text="Discover how hummingbirds play a big role in nature despite their small size. Find out more about their beauty, how they help plants grow, and where they live. "
+                />
+              </template>
+              <template #footer>
+                <div></div>
+              </template>
+            </DocsKCard>
+
+            <DocsKCard
+              :headingLevel="4"
+              preserveAboveTitle
+            >
+              <template #aboveTitle>
+                <div :style="{ height: '24px' }"></div>
+              </template>
+              <template #title>
+                <div :style="{ height: '52px' }">
+                  <KTextTruncator
+                    :maxLines="2"
+                    text="(3) Learn everything about hummingbirds: their habitats, feeding patterns, and stunning flight abilities"
+                  />
+                </div>
+              </template>
+              <template #belowTitle>
+                <KTextTruncator
+                  :maxLines="4"
+                  text="Discover how hummingbirds play a big role in nature despite their small size. Find out more about their beauty, how they help plants grow, and where they live. "
+                />
+              </template>
+              <template #footer>
+                <div class="pills" :style="{ 'color': $themeTokens.annotation }">
+                  <span
+                    v-for="(pill, i) in slicedPills"
+                    :key="i"
+                    :style="{ 'background-color': $themePalette.grey.v_100 }"
+                  >
+                    {{ pill }}
+                  </span>
+                </div>
+              </template>
+            </DocsKCard>
+          </KCardGrid>
+        </DocsShow>
+      </DocsExample>
+
+
+
 
       <p>Here, <code>KCard</code> has the following adjustments related to its visual output in the grid:</p>
       <ul>
@@ -482,112 +512,119 @@
 
       <p>Grid configuration can be combined with <code>KCard</code>'s settings to further improve responsive experience. A common pattern is switching <code>KCard</code>'s horizontal orientation to vertical for smaller screens to organize content more effectively in limited space:</p>
 
-      <DocsShow block>
-        <KCardGrid
-          layout="1-2-2"
-          :skeletonsConfig="skeletonsConfig6"
-          :loading="loading"  
-        >
-          <DocsKCard
-            v-for="i in 2"
-            :key="i"
-            :headingLevel="4"
-            :orientation="windowBreakpoint < 4 ? 'vertical' : 'horizontal'"
-            :prependTitle="`(${i})`"
-          />
-        </KCardGrid>
-      </DocsShow>
+      <DocsExample>
+        <template #code>
+          <!-- eslint-disable -->
+          <DocsShowCode language="javascript">
+            import useKResponsiveWindow from 'kolibri-design-system/lib/composables/useKResponsiveWindow';
 
-      <!-- eslint-disable -->
-      <DocsShowCode language="javascript">
-        import useKResponsiveWindow from 'kolibri-design-system/lib/composables/useKResponsiveWindow';
+            export default {
+              setup() {
+                const { windowBreakpoint } = useKResponsiveWindow();
+                return { windowBreakpoint };
+              },
+            };
+          </DocsShowCode>
+          <!-- eslint-enable -->
 
-        export default {
-          setup() {
-            const { windowBreakpoint } = useKResponsiveWindow();
-            return { windowBreakpoint };
-          },
-        };
-      </DocsShowCode>
-      <!-- eslint-enable -->
+          <!-- eslint-disable -->
+          <DocsShowCode language="html">
+            <KCardGrid layout="1-2-2">
+              <KCard
+                v-for="i in 2"
+                :orientation="windowBreakpoint < 4 ? 'vertical' : 'horizontal'"
+                ...
+              />
+            </KCardGrid>
+          </DocsShowCode>
+          <!-- eslint-enable -->
+        </template>
 
-      <!-- eslint-disable -->
-      <DocsShowCode language="html">
-        <KCardGrid layout="1-2-2">
-          <KCard
-            v-for="i in 2"
-            :orientation="windowBreakpoint < 4 ? 'vertical' : 'horizontal'"
-            ...
-          />
-        </KCardGrid>
-      </DocsShowCode>
-      <!-- eslint-enable -->
+        <DocsShow block>
+          <KCardGrid
+            layout="1-2-2"
+            :skeletonsConfig="skeletonsConfig6"
+            :loading="loading"
+          >
+            <DocsKCard
+              v-for="i in 2"
+              :key="i"
+              :headingLevel="4"
+              :orientation="windowBreakpoint < 4 ? 'vertical' : 'horizontal'"
+              :prependTitle="`(${i})`"
+            />
+          </KCardGrid>
+        </DocsShow>
+      </DocsExample>
 
       <p>This technique also works for adjusting <code>KCard</code> slots content. In the following example, some metadata pills are hidden on smaller screens:</p>
 
-      <DocsShow block>
-        <KCardGrid
-          layout="1-2-2"
-          :skeletonsConfig="skeletonsConfig7"
-          :loading="loading"  
-        >
-          <DocsKCard
-            v-for="i in 2"
-            :key="i"
-            :headingLevel="4"
-            :prependTitle="`(${i})`"
-          >
-            <template #footer>
-              <div class="pills" :style="{ 'color': $themeTokens.annotation }">
-                <span
-                  :style="{ 'background-color': $themePalette.grey.v_100 }"
-                >
-                  <KIcon icon="readSolid" :style="{ fontSize: '13px', position: 'relative', top: '3px' }" />
-                  Read
-                </span>
-                <span
-                  :style="{ 'background-color': $themePalette.grey.v_100 }"
-                >
-                  Short Activity
-                </span>
-                <template v-if="windowBreakpoint > 3">
-                  <span
-                    :style="{ 'background-color': $themePalette.grey.v_100 }"
-                  >
-                    Biology
-                  </span>
-                  <span
-                    :style="{ 'background-color': $themePalette.grey.v_100 }"
-                  >
-                    Ecology
-                  </span>
+      <DocsExample>
+        <template #code>
+          <!-- eslint-disable -->
+          <DocsShowCode language="html">
+            <KCardGrid layout="1-2-2">
+              <KCard
+                v-for="i in 2"
+                ...
+              >
+                <template #footer>
+                  <span ...>Read</span>
+                  <span ...>Short Activity</span>
+                  <template v-if="windowBreakpoint > 3">
+                    <span ...>Biology</span>
+                    <span ...>Ecology</span>
+                  </template>
                 </template>
-              </div>
-            </template>
-          </DocsKCard>
-        </KCardGrid>
-      </DocsShow>
+              </KCard>
+            </KCardGrid>
+          </DocsShowCode>
+          <!-- eslint-enable -->
+        </template>
 
-      <!-- eslint-disable -->
-      <DocsShowCode language="html">
-        <KCardGrid layout="1-2-2">
-          <KCard
-            v-for="i in 2"
-            ...
+        <DocsShow block>
+          <KCardGrid
+            layout="1-2-2"
+            :skeletonsConfig="skeletonsConfig7"
+            :loading="loading"
           >
-            <template #footer>
-              <span ...>Read</span>
-              <span ...>Short Activity</span>
-              <template v-if="windowBreakpoint > 3">
-                <span ...>Biology</span>
-                <span ...>Ecology</span>
+            <DocsKCard
+              v-for="i in 2"
+              :key="i"
+              :headingLevel="4"
+              :prependTitle="`(${i})`"
+            >
+              <template #footer>
+                <div class="pills" :style="{ 'color': $themeTokens.annotation }">
+                  <span
+                    :style="{ 'background-color': $themePalette.grey.v_100 }"
+                  >
+                    <KIcon icon="readSolid" :style="{ fontSize: '13px', position: 'relative', top: '3px' }" />
+                    Read
+                  </span>
+                  <span
+                    :style="{ 'background-color': $themePalette.grey.v_100 }"
+                  >
+                    Short Activity
+                  </span>
+                  <template v-if="windowBreakpoint > 3">
+                    <span
+                      :style="{ 'background-color': $themePalette.grey.v_100 }"
+                    >
+                      Biology
+                    </span>
+                    <span
+                      :style="{ 'background-color': $themePalette.grey.v_100 }"
+                    >
+                      Ecology
+                    </span>
+                  </template>
+                </div>
               </template>
-            </template>
-          </KCard>
-        </KCardGrid>
-      </DocsShowCode>
-      <!-- eslint-enable -->
-
+            </DocsKCard>
+          </KCardGrid>
+        </DocsShow>
+      </DocsExample>
       <h3>
         Loading state
         <DocsAnchorTarget anchor="#loading-state" />
@@ -640,67 +677,70 @@
         </KButtonGroup>
       </div>
 
-      <DocsShow block>
-        <KCardGrid
-          layout="1-2-2"
-          :skeletonsConfig="skeletonsConfig8"
-          :loading="loading"
-          :debug="debug"
-        >
-          <DocsKCard
-            v-for="i in 3"
-            :key="i"
-            :headingLevel="4"
-            :orientation="windowBreakpoint < 4 ? 'vertical' : 'horizontal'"
-            :prependTitle="`(${i})`"
-          />
-        </KCardGrid>
-      </DocsShow>
+      <DocsExample>
+        <template #code>
+          <!-- eslint-disable -->
+          <DocsShowCode language="html">
+            <KCardGrid
+              layout="1-2-2"
+              :skeletonsConfig="skeletonsConfig"
+              :loading="loading"
+            >
+              <KCard
+                v-for="i in 3"
+                :orientation="windowBreakpoint < 4 ? 'vertical' : 'horizontal'"
+                thumbnailDisplay="large"
+                thumbnailAlign="left"
+                ...
+              />
+            </KCard>
+          </DocsShowCode>
+          <!-- eslint-enable -->
 
-      <!-- eslint-disable -->
-      <DocsShowCode language="html">
-        <KCardGrid
-          layout="1-2-2"
-          :skeletonsConfig="skeletonsConfig"
-          :loading="loading"
-        >
-          <KCard
-            v-for="i in 3"
-            :orientation="windowBreakpoint < 4 ? 'vertical' : 'horizontal'"
-            thumbnailDisplay="large"
-            thumbnailAlign="left"
-            ...
-          />
-        </KCardGrid>
-      </DocsShowCode>
-      <!-- eslint-enable -->
-
-      <!-- eslint-disable -->
-      <DocsShowCode language="javascript">
-        export default {
-          ...
-          data() {
-            return {
-              skeletonsConfig: [
-                {
-                  breakpoints: [0, 1, 2, 3, 4, 5, 6, 7],
-                  height: '400px',
-                  orientation: 'vertical',
-                  thumbnailDisplay: 'large',
-                  thumbnailAlign: 'left'
-                },
-                {
-                  breakpoints: [4, 5, 6, 7],
-                  height: '220px',
-                  orientation: 'horizontal'
-                }
-              ],
+          <!-- eslint-disable -->
+          <DocsShowCode language="javascript">
+            export default {
+              ...
+              data() {
+                return {
+                  skeletonsConfig: [
+                    {
+                      breakpoints: [0, 1, 2, 3, 4, 5, 6, 7],
+                      height: '400px',
+                      orientation: 'vertical',
+                      thumbnailDisplay: 'large',
+                      thumbnailAlign: 'left'
+                    },
+                    {
+                      breakpoints: [4, 5, 6, 7],
+                      height: '220px',
+                      orientation: 'horizontal'
+                    }
+                  ],
+                };
+              },
             };
-          },
-        };
-      </DocsShowCode>
-      <!-- eslint-enable -->
+          </DocsShowCode>
+          <!-- eslint-enable -->
+        </template>
 
+        <DocsShow block>
+          <KCardGrid
+            layout="1-2-2"
+            :skeletonsConfig="skeletonsConfig8"
+            :loading="loading"
+            :debug="debug"
+          >
+            <DocsKCard
+              v-for="i in 3"
+              :key="i"
+              :headingLevel="4"
+              :orientation="windowBreakpoint < 4 ? 'vertical' : 'horizontal'"
+              :prependTitle="`(${i})`"
+            />
+          </KCardGrid>
+        </DocsShow>
+      </DocsExample>
       <p>Here, the height of loading skeleton cards is <code>400px</code> with vertical orientation on breakpoints <code>0-3</code>, and <code>220px</code> with horizontal orientation on breakpoints <code>4-7</code>. This makes skeleton cards resemble loaded cards at all breakpoints, creating a smooth transition for users during data loading. Note the bottom-up approach where we begin with a base setup for all breakpoints and gradually override on higher breakpoints. This simplifies the configuration object.</p>
 
       <p>To get a sense of what skeleton layouts can be achieved, reload this page and the <code>KCard</code> page to preview the loading state in all examples.</p>
@@ -725,10 +765,12 @@
 
   import useKResponsiveWindow from '../../lib/composables/useKResponsiveWindow';
   import DocsKCard from '../pages-components/DocsKCard';
+  import DocsExample from '../common/DocsExample'; // Corrected the import typo
 
   export default {
     components: {
       DocsKCard,
+      DocsExample,
     },
     setup() {
       const { windowBreakpoint } = useKResponsiveWindow();
@@ -737,7 +779,7 @@
     data() {
       return {
         debug: false,
-        loading: true,
+      loading: true, // Your loading state
         skeletonsConfig1: [
           {
             breakpoints: [0, 1, 2, 3, 4, 5, 6, 7],
@@ -873,6 +915,7 @@
           this.loading = false;
         }, 500);
       },
+
       load1200() {
         this.loading = true;
         setTimeout(() => {
