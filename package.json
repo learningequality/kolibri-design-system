@@ -36,7 +36,7 @@
     "popper.js": "1.16.1",
     "purecss": "2.2.0",
     "tippy.js": "4.3.5",
-    "vue": "2",
+    "vue": "3",
     "vue-intl": "3.1.0",
     "vue2-teleport": "1.1.4",
     "xstate": "4.38.3"
