@@ -5,6 +5,19 @@
     class="list-wrapper"
     :style="appearanceOverrides"
   >
+    <!-- Render More Button Before List for 'start' Direction -->
+    <div
+      v-if="overflowDirection === 'start'"
+      ref="moreButtonWrapper"
+      class="more-button-wrapper"
+    >
+      <slot
+        v-if="isMoreButtonVisible"
+        name="more"
+        :overflowItems="overflowItems"
+      ></slot>
+    </div>
+
     <div
       ref="list"
       class="list"
@@ -15,9 +28,8 @@
           v-if="isDivider(item)"
           name="divider"
           :divider="item"
-        >
-        </slot>
-        <!-- @slot Slot responsible of rendering each item in the visible list -->
+        ></slot>
+        <!-- Item Slot -->
         <slot
           v-else
           name="item"
@@ -25,7 +37,10 @@
         ></slot>
       </template>
     </div>
+
+    <!-- Render More Button After List for 'end' Direction -->
     <div
+      v-if="overflowDirection === 'end'"
       ref="moreButtonWrapper"
       class="more-button-wrapper"
     >
@@ -71,6 +86,13 @@
       appearanceOverrides: {
         type: [Object, String],
         default: null,
+      },
+      overflowDirection: {
+        type: String,
+        default: 'end',
+        validator(value) {
+          return ['start', 'end'].includes(value);
+        },
       },
     },
     data() {
@@ -131,6 +153,8 @@
        */
       setOverflowItems() {
         const { list, listWrapper, moreButtonWrapper } = this.$refs;
+
+        // Exit early if necessary refs are not available
         if (!this.mounted || !listWrapper || !list) {
           this.overflowItems = [];
           return;
@@ -153,15 +177,13 @@
           const itemSize = this.getSize(item);
           itemsSizes.push(itemSize);
         }
-
+        const indexSequence = [...Array(list.children.length).keys()];
+        const directionIndexes =
+          this.overflowDirection === 'start' ? indexSequence.reverse() : indexSequence;
         const overflowItemsIdx = [];
-        for (let i = 0; i < list.children.length; i++) {
-          const item = list.children[i];
+        directionIndexes.forEach(i => {
           const itemWidth = itemsSizes[i].width;
-
-          // If the item dont fit in the available space or if we have already
-          // overflowed items, we hide it. This means that once one item overflows,
-          // all the following items will be hidden.
+          const item = list.children[i];
           if (itemWidth >= availableWidth || overflowItemsIdx.length > 0) {
             overflowItemsIdx.push(i);
             item.style.visibility = 'hidden';
@@ -176,7 +198,7 @@
               maxHeight = itemHeight;
             }
           }
-        }
+        });
 
         // check if overflowed items would fit if the moreButton were not visible
         const overflowedWidth = overflowItemsIdx.reduce(
@@ -203,6 +225,7 @@
         list.style.maxWidth = `${maxWidth}px`;
         list.style.maxHeight = `${maxHeight}px`;
       },
+
       /**
        * Fixes the visibility of the dividers that are shown and hidden when the list overflows.
        * The visible list should not end with a divider, and the overflowed items should not
@@ -256,10 +279,9 @@
 
 
 <style scoped>
-
   .list-wrapper {
     display: flex;
-    justify-content: space-between;
+     justify-content:flex-start;
     width: 100%;
   }
 
@@ -277,7 +299,14 @@
   }
 
   .more-button-wrapper {
-    visibility: hidden;
+    visibility: visible;
+  }
+
+  /* When the 'start-button' class is added, position visually at the start */
+  .more-button-wrapper.start-button {
+  order:-1;
+    z-index: 1; /* Ensure it's in front if needed */
   }
 
 </style>
+
