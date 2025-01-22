@@ -57,6 +57,13 @@ export default {
         test: /rstIconReplacements.txt/,
         loader: 'raw-loader',
       });
+
+      config.module.rules.push({
+        resourceQuery: /raw/,
+        loader: 'raw-loader',
+        include: /examples/,
+      });
+
       config.devtool = 'source-map';
     },
     cssSourceMap: true,
