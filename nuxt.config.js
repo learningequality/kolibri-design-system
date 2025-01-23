@@ -58,10 +58,12 @@ export default {
         loader: 'raw-loader',
       });
 
+      // Allow raw files of `.vue` file from `/docs/examples` directory
+      // to be imported as strings with `?raw` query
       config.module.rules.push({
         resourceQuery: /raw/,
         loader: 'raw-loader',
-        include: /examples/,
+        test: /examples\/.*\.vue$/,
       });
 
       config.devtool = 'source-map';
