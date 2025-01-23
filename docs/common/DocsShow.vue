@@ -83,10 +83,10 @@
         };
       },
     },
-    async created() {
+    created() {
       if (this.loadExample) {
-        await this.loadComponentContent();
-        await this.importComponent();
+        this.loadComponentContent();
+        this.importComponent();
       }
     },
     methods: {
@@ -115,14 +115,14 @@
         }
       },
       /*
-        * Parses the content of the component file into separate code blocks for template, script, and style.
-        * @param {string} content - The content of the component file
-        * @returns {Array} An array of code blocks
-      */
+       * Parses the content of the component file into separate code blocks for template, script, and style.
+       * @param {string} content - The content of the component file
+       * @returns {Array} An array of code blocks
+       */
       parseTemplate(content) {
         const codeBlocks = [];
 
-        const applyRegex = (target) => {
+        const applyRegex = target => {
           const pattern = new RegExp(`(<${target}(\\s[^>]*)?>)([\\w\\W]*)(<\\/${target}>)`, 'g');
           const parsed = pattern.exec(content);
 
@@ -134,7 +134,7 @@
           return parsed[3].trim();
         };
 
-        const template = applyRegex('template')
+        const template = applyRegex('template');
         if (template) {
           codeBlocks.push({
             language: 'html',
@@ -142,7 +142,7 @@
           });
         }
 
-        const script = applyRegex('script')
+        const script = applyRegex('script');
         if (script) {
           codeBlocks.push({
             language: 'javascript',
@@ -150,7 +150,7 @@
           });
         }
 
-        const style = applyRegex('style')
+        const style = applyRegex('style');
         if (style) {
           codeBlocks.push({
             language: 'scss',
