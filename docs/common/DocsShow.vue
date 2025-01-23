@@ -114,27 +114,47 @@
           throw new Error(`Failed to import component: ${error}`);
         }
       },
+      /*
+        * Parses the content of the component file into separate code blocks for template, script, and style.
+        * @param {string} content - The content of the component file
+        * @returns {Array} An array of code blocks
+      */
       parseTemplate(content) {
         const codeBlocks = [];
-        const template = content.match(/<template>([\s\S]*?)<\/template>/);
+
+        const applyRegex = (target) => {
+          const pattern = new RegExp(`(<${target}(\\s[^>]*)?>)([\\w\\W]*)(<\\/${target}>)`, 'g');
+          const parsed = pattern.exec(content);
+
+          if (!parsed) {
+            return null;
+          }
+
+          // Extract the content between the first opening and the last closing tags
+          return parsed[3].trim();
+        };
+
+        const template = applyRegex('template')
         if (template) {
           codeBlocks.push({
             language: 'html',
-            content: template[1].trim(),
+            content: template,
           });
         }
-        const script = content.match(/<script>([\s\S]*?)<\/script>/);
+
+        const script = applyRegex('script')
         if (script) {
           codeBlocks.push({
             language: 'javascript',
-            content: script[1].trim(),
+            content: script,
           });
         }
-        const style = content.match(/<style[\s\S]*?>([\s\S]*?)<\/style>/);
+
+        const style = applyRegex('style')
         if (style) {
           codeBlocks.push({
             language: 'scss',
-            content: style[1].trim(),
+            content: style[1],
           });
         }
         return codeBlocks;
