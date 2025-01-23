@@ -154,7 +154,7 @@
         if (style) {
           codeBlocks.push({
             language: 'scss',
-            content: style[1],
+            content: style,
           });
         }
         return codeBlocks;
