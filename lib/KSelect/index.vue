@@ -978,7 +978,7 @@
       border-bottom-color: inherit;
 
       .ui-icon {
-        color: $ui-input-icon-color--active;
+        color: inherit;
       }
     }
 

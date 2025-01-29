@@ -3,6 +3,7 @@
   <div
     class="k-toolbar"
     :class="classes"
+    :style="toolbarStyles"
   >
     <div class="k-toolbar-left">
       <div
@@ -119,7 +120,12 @@
           { 'is-raised': this.raised },
         ];
       },
-
+      toolbarStyles() {
+        if (this.type === 'colored') {
+          return { backgroundColor: this.$themeBrand.primary.v_600 };
+        }
+        return {};
+      },
       progressColor() {
         return this.textColor === 'black' ? 'primary' : 'white';
       },
@@ -227,10 +233,6 @@
 
   .k-toolbar--type-default {
     background-color: white;
-  }
-
-  .k-toolbar--type-colored {
-    background-color: $brand-primary-color;
   }
 
   .k-toolbar--type-clear {

@@ -158,12 +158,7 @@
 
     &.is-selected {
       font-weight: 500;
-      color: $brand-primary-color;
       background-color: rgba(black, 0.05);
-
-      .ui-select-option-checkbox {
-        color: $brand-primary-color;
-      }
     }
 
     &.is-highlighted:not(.is-disabled) {
