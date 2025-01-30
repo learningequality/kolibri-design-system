@@ -50,7 +50,7 @@ const waitForServer = async (url, timeout = 30000) => {
 };
 
 const checkPageLoad = async (url, timeout = 30000) => {
-  const browser = await puppeteer.launch();
+  const browser = await puppeteer.launch({ args: ['--no-sandbox', '--disable-setuid-sandbox'] });
   const page = await browser.newPage();
 
   try {
