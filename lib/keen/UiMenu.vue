@@ -8,6 +8,7 @@
     lazy
 
     :class="classes"
+    :style="getWidth"
   >
     <UiMenuOption
       v-for="(option, index) in options"
@@ -59,6 +60,10 @@
         type: Boolean,
         default: false,
       },
+      maxWidth: {
+        type: [Number,String],
+        default: null,
+      },
       iconProps: Object,
       hasSecondaryText: {
         type: Boolean,
@@ -100,6 +105,15 @@
           'has-icons': this.hasIcons,
           'has-secondary-text': this.hasSecondaryText,
         };
+      },
+      getWidth() {
+        if (this.maxWidth){
+          return {
+            maxWidth: this.maxWidth && 
+              (typeof this.maxWidth === 'number' ? `${this.maxWidth}px` : this.maxWidth)
+          };
+        }
+        return {};
       },
       activeOutline() {
         return this.isActive ? this.$coreOutline : {};

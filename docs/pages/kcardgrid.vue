@@ -163,32 +163,36 @@
         </DocsTable>
       </DocsToggleContent>
 
-      <DocsShow block>
-        <KCardGrid
-          layout="1-1-1"
-          :skeletonsConfig="skeletonsConfig1"
-          :loading="loading"
-        >
-          <DocsKCard
-            v-for="i in 2"
-            :key="i"
-            :headingLevel="5"
-            orientation="horizontal"
-            :prependTitle="`(${i})`"
-          />
-        </KCardGrid>
-      </DocsShow>
+      <DocsExample>
+        <DocsShow block>
+          <KCardGrid
+            layout="1-1-1"
+            :skeletonsConfig="skeletonsConfig1"
+            :loading="loading"
+          >
+            <DocsKCard
+              v-for="i in 2"
+              :key="i"
+              :headingLevel="5"
+              orientation="horizontal"
+              :prependTitle="`(${i})`"
+            />
+          </KCardGrid>
+        </DocsShow>
 
-      <!-- eslint-disable -->
-      <DocsShowCode language="html">
-        <KCardGrid layout="1-1-1">
-          <KCard
-            v-for="i in 2"
-            ...
-          />
-        </KCardGrid>
-      </DocsShowCode>
-      <!-- eslint-enable -->
+        <template #code>
+          <!-- eslint-disable -->
+          <DocsShowCode language="html">
+            <KCardGrid layout="1-1-1">
+              <KCard
+                v-for="i in 2"
+                ...
+              />
+            </KCardGrid>
+          </DocsShowCode>
+          <!-- eslint-enable -->
+        </template>
+      </DocsExample>
 
       <h4>
         '1-2-2' grid
