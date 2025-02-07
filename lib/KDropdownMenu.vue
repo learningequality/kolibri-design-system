@@ -21,7 +21,6 @@
         ref="menu"
         :options="options"
         :hasIcons="hasIcons"
-        :maxWidth="maxWidth"
         @select="handleSelection"
       />
     </UiPopover>
@@ -83,11 +82,6 @@
       hasIcons: {
         type: Boolean,
         default: false,
-      },
-      /** Maximum width for the dropdown menu*/
-      maxWidth: {
-        type: [Number, String],
-        default: null,
       },
       /**
        * The position of the dropdown relative to the button

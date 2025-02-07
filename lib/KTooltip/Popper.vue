@@ -9,7 +9,6 @@
      - Allow for appending to a chosen element rather than to body,
        typically to the overlay container element #k-overlay.
        'appendToBody' prop changedto 'appendToEl' and related changes.
-     - Add 'closeOnScroll' prop to close the popper on scroll.
   -->
 
   <span>
@@ -34,7 +33,6 @@
 
 <script>
 
-  import debounce from 'lodash/debounce';
   import Popper from 'popper.js';
 
   function on(element, event, handler) {
@@ -117,10 +115,6 @@
         default() {
           return {};
         },
-      },
-      closeOnScroll: {
-        type: Boolean,
-        default: false,
       },
     },
 
@@ -207,41 +201,13 @@
         }
       },
 
-      /**
-       * @public
-       */
       doShow() {
         this.showPopper = true;
       },
 
-      /**
-       * @public
-       */
       doClose() {
         this.showPopper = false;
       },
-
-      // Debouncing as we don't need to check this on every scroll event on a
-      // "scroll session", just the first one, and although very unlikely, the last one
-      doCloseOnScroll: debounce(
-        function (event) {
-          const popperEl = this.$refs.popper;
-          if (
-            !popperEl ||
-            // ignore scrolls inside the popper
-            this.elementContains(popperEl, event.target) ||
-            // ignore scrolls unrelated to the popper reference, just from the ancestors
-            !this.elementContains(event.target, this.referenceElm)
-          ) {
-            return;
-          }
-
-          this.doClose();
-        },
-        100,
-        // check as soon as the event is triggered
-        { leading: true },
-      ),
 
       doDestroy() {
         if (this.showPopper) {
@@ -256,9 +222,6 @@
         if (this.isAppendedToEl) {
           this.isAppendedToEl = false;
           this.appendToEl.removeChild(this.popper.parentElement);
-        }
-        if (this.closeOnScroll) {
-          document.removeEventListener('scroll', this.doCloseOnScroll, true);
         }
       },
 
@@ -296,10 +259,6 @@
           };
 
           this.popperJS = new Popper(this.referenceElm, this.popper, this.popperOptions);
-
-          if (this.closeOnScroll) {
-            document.addEventListener('scroll', this.doCloseOnScroll, true);
-          }
         });
       },
 

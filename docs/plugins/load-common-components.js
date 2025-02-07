@@ -1,7 +1,6 @@
 import Vue from 'vue';
 
 import VueSimpleMarkdown from 'vue-simple-markdown';
-import DocsExample from '~/common/DocsExample';
 import DocsExternalLink from '~/common/DocsExternalLink';
 import DocsGithubLink from '~/common/DocsGithubLink';
 import DocsInternalLink from '~/common/DocsInternalLink';
@@ -18,7 +17,6 @@ import DocsFilter from '~/common/DocsFilter';
 import DocsTable from '~/common/DocsTable';
 import DocsSubNav from '~/common/DocsSubNav';
 
-Vue.component('DocsExample', DocsExample);
 Vue.component('DocsPageTemplate', DocsPageTemplate);
 Vue.component('DocsPageSection', DocsPageSection);
 Vue.component('DocsLibraryLink', DocsLibraryLink);

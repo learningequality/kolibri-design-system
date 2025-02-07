@@ -7,6 +7,8 @@
    The formatting has been changed to match our linters. We may eventually
    want to simply consolidate it with our component and remove any unused
    functionality.
+
+   BELOW: KModal targets KeenUiSelect by using div.ui-select selector
   -->
   <div
     class="ui-select"
@@ -26,15 +28,14 @@
         class="ui-select-label"
         :class="$computedClass({ ':focus': $coreOutline })"
         :tabindex="disabled ? null : '0'"
+        @click="toggleDropdown"
         @focus="onFocus"
-        @blur="selectBlur"
-        @keydown.enter.prevent="onEnterSpace"
-        @keydown.space.prevent="onEnterSpace"
+        @keydown.enter.prevent="openDropdown"
+        @keydown.space.prevent="openDropdown"
         @keydown.tab="onBlur"
         @keydown.up.prevent="highlightPreviousOption"
         @keydown.down.prevent="highlightNextOption"
         @keydown.self="highlightQuickMatch"
-        @keydown.esc.prevent="closeDropdown()"
       >
         <div
           v-if="label || $slots.default"
@@ -89,21 +90,10 @@
             @click.stop="setValue()"
           />
         </div>
-        <Popper
-          v-if="appendToEl"
-          ref="dropdownPopper"
-          closeOnScroll
-          transition="ui-select-transition-fade"
-          trigger="click"
-          :appendToEl="appendToEl"
-          :reference="$refs.label"
-          :visibleArrow="false"
-          :options="dropdownPopperOptions"
-          :disabled="disabled"
-          @show="onOpen"
-          @hide="onClose"
-        >
+
+        <transition name="ui-select-transition-fade">
           <div
+            v-show="showDropdown"
             ref="dropdown"
             class="ui-select-dropdown"
             :style="{
@@ -111,6 +101,14 @@
               backgroundColor: $themeTokens.surface,
               bottom: dropdownButtonBottom,
             }"
+            tabindex="-1"
+            @keydown.enter.prevent.stop="selectHighlighted"
+            @keydown.space.prevent.stop="selectHighlighted"
+            @keydown.esc.prevent="closeDropdown()"
+            @keydown.tab="onBlur"
+            @keydown.up.prevent.stop="highlightPreviousOption"
+            @keydown.down.prevent.stop="highlightNextOption"
+            @keydown.self="highlightQuickMatch"
           >
             <ul
               ref="optionsList"
@@ -131,7 +129,7 @@
                 @mouseover.native.stop="onMouseover(option)"
               >
                 <!-- @slot Optional slot to override the display of
-                the option in the options dropdown -->
+                 the option in the options dropdown -->
                 <slot
                   name="option"
                   :highlighted="isOptionHighlighted(option)"
@@ -152,7 +150,7 @@
               </div>
             </ul>
           </div>
-        </Popper>
+        </transition>
       </div>
 
       <div
@@ -189,18 +187,14 @@
 
   import has from 'lodash/has';
   import isObject from 'lodash/isObject';
-  import throttle from 'lodash/throttle';
   import fuzzysearch from 'fuzzysearch';
   import startswith from 'lodash/startsWith';
   import sortby from 'lodash/sortBy';
-  import { onMounted, ref } from 'vue';
   import UiIcon from '../keen/UiIcon';
 
   import { looseIndexOf, looseEqual } from '../keen/helpers/util';
   import { scrollIntoView, resetScroll } from '../keen/helpers/element-scroll';
   import config from '../keen/config';
-  import Popper from '../_Popper.vue';
-  import _useOverlay from '../composables/_useOverlay';
   import KSelectOption from './KSelectOption.vue';
 
   function areValidOptions(array) {
@@ -231,21 +225,6 @@
     components: {
       UiIcon,
       KSelectOption,
-      Popper,
-    },
-    setup() {
-      const { getOverlayEl } = _useOverlay();
-      const appendToEl = ref(null);
-
-      onMounted(() => {
-        const overlayEl = getOverlayEl();
-        // set appendToEl on mounted to avoid SSR issues, and to wait for the component
-        // to be mounted before rendering the popper component, as it needs
-        // the reference to be rendered first
-        appendToEl.value = overlayEl;
-      });
-
-      return { appendToEl };
     },
     model: {
       event: 'change',
@@ -375,16 +354,19 @@
         default: false,
       },
     },
+
     data() {
       return {
         query: '',
+        isInsideModal: false,
         isActive: false,
         isTouched: false,
         highlightedOption: null,
-        isDropdownOpen: false,
+        showDropdown: false,
         initialValue: JSON.stringify(this.value),
         quickMatchString: '',
         quickMatchTimeout: null,
+        scrollableAncestor: null,
         dropdownButtonBottom: 'auto',
         maxDropdownHeight: 256,
         // workaround for Keen-ui not displaying floating labels for empty objects
@@ -471,30 +453,6 @@
         }
 
         return this.filteredOptions.length === 0;
-      },
-
-      dropdownPopperOptions() {
-        return {
-          placement: 'bottom-start',
-          modifiers: {
-            applyStyle: {
-              enabled: true,
-              fn: throttle(data => {
-                // Set the width of the dropdown to match the width of the label
-                data.styles.width = `${data.offsets.reference.width}px`;
-                Object.assign(data.instance.popper.style, data.styles);
-                return data;
-              }, 50),
-            },
-            preventOverflow: {
-              enabled: true,
-              // Set boundaries to be the viewport so that the dropdown is not cut off
-              // by the parent container, and can calculate the flip behavior having the
-              // viewport as reference
-              boundariesElement: 'viewport',
-            },
-          },
-        };
       },
 
       submittedValue() {
@@ -586,6 +544,23 @@
         this.highlightedOption = this.filteredOptions[0];
         resetScroll(this.$refs.optionsList);
       },
+
+      showDropdown() {
+        if (this.showDropdown) {
+          this.onOpen();
+          /**
+           * Emit on opening dropdown
+           */
+          this.$emit('dropdown-open');
+        } else {
+          this.onClose();
+          /**
+           * Emit on closing dropdown
+           */
+          this.$emit('dropdown-close');
+        }
+      },
+
       query() {
         /**
          * Emits whenever the query value changes.
@@ -620,6 +595,37 @@
       if (!this.selection || this.selection === '') {
         this.setValue(null);
       }
+    },
+
+    mounted() {
+      document.addEventListener('click', this.onExternalClick);
+      // Find nearest scrollable ancestor
+      this.scrollableAncestor = this.$el;
+      while (
+        (this.scrollableAncestor &&
+          this.scrollableAncestor.clientHeight < this.scrollableAncestor.scrollHeight) ||
+        !/auto|scroll/.test(window.getComputedStyle(this.scrollableAncestor).overflowY)
+      ) {
+        if (!this.scrollableAncestor.parentNode) {
+          break;
+        }
+        this.scrollableAncestor = this.scrollableAncestor.parentNode;
+
+        // Stop if we reach the body-- tagName is likely uppercase
+        if (/body/i.test(this.scrollableAncestor.tagName)) {
+          break;
+        }
+      }
+
+      // look for KSelects nested within modals
+      const allSelects = document.querySelectorAll('div.modal div.ui-select');
+      // create array from a nodelist [IE does not support Array.from()]
+      const allSelectsArr = Array.prototype.slice.call(allSelects);
+      this.isInsideModal = allSelectsArr.includes(this.$el);
+    },
+
+    beforeDestroy() {
+      document.removeEventListener('click', this.onExternalClick);
     },
 
     methods: {
@@ -690,6 +696,7 @@
         }
 
         this.highlightedOption = option;
+        this.openDropdown();
 
         if (options.autoScroll) {
           const index = this.filteredOptions.findIndex(option =>
@@ -786,25 +793,51 @@
         this.query = '';
       },
 
-      onEnterSpace() {
-        if (this.isDropdownOpen) {
-          this.selectHighlighted();
-        } else {
-          this.$refs.label.click();
-        }
+      toggleDropdown() {
+        // if called on dropdown inside modal,
+        // dropdown will generally render above input/placeholder when opened, rather than below it.
+        // We want to render dropdown above input only in cases where there isn't enough space
+        // available beneath input, but when dropdown extends outside a modal
+        // the func doesn't work as intended
+        if (!this.isInsideModal) this.calculateSpaceBelow();
+
+        this[this.showDropdown ? 'closeDropdown' : 'openDropdown']();
       },
 
-      async closeDropdown(options = { autoBlur: false }) {
-        this.$refs.dropdownPopper.doClose();
-        if (!options.autoBlur) {
-          await this.$nextTick();
-          this.$refs.label.focus();
+      openDropdown() {
+        if (this.disabled || this.clearableState) {
+          return;
+        }
+
+        if (this.highlightedIndex === -1) {
+          this.highlightNextOption();
+        }
+
+        this.showDropdown = true;
+        // IE: clicking label doesn't focus the select element
+        // to set isActive to true
+        if (!this.isActive) {
           this.isActive = true;
         }
       },
 
+      closeDropdown(options = { autoBlur: false }) {
+        this.showDropdown = false;
+        this.query = '';
+        if (!this.isTouched) {
+          this.isTouched = true;
+          this.$emit('touch');
+        }
+
+        if (options.autoBlur) {
+          this.isActive = false;
+        } else {
+          this.$refs.label.focus();
+        }
+      },
+
       onMouseover(option) {
-        if (this.isDropdownOpen) {
+        if (this.showDropdown) {
           this.highlightOption(option, { autoScroll: false });
         }
       },
@@ -821,14 +854,6 @@
         this.$emit('focus', e);
       },
 
-      selectBlur() {
-        // A diffent blur (other than the `onBlur` method) is needed for the label
-        // to prevent the dropdown from closing
-        if (!this.isDropdownOpen) {
-          this.isActive = false;
-        }
-      },
-
       onBlur(e) {
         this.isActive = false;
         /**
@@ -836,18 +861,12 @@
          */
         this.$emit('blur', e);
 
-        if (this.isDropdownOpen) {
+        if (this.showDropdown) {
           this.closeDropdown({ autoBlur: true });
         }
       },
 
       onOpen() {
-        if (this.highlightedIndex === -1) {
-          this.highlightNextOption();
-        }
-
-        this.isActive = true;
-
         this.highlightedOption = this.multiple ? null : this.selection;
         this.$nextTick(() => {
           this.$refs['dropdown'].focus();
@@ -860,25 +879,23 @@
             );
           }
         });
-        this.isDropdownOpen = true;
-        this.$emit('dropdown-open');
       },
 
       onClose() {
-        this.isActive = false;
-        this.query = '';
-        if (!this.isTouched) {
-          this.isTouched = true;
-          this.$emit('touch');
-        }
-
         this.highlightedOption = this.multiple ? null : this.selection;
-        this.isDropdownOpen = false;
-        this.$emit('dropdown-close');
       },
 
-      async scrollOptionIntoView(optionEl) {
-        await this.$nextTick();
+      onExternalClick(e) {
+        if (!this.$el.contains(e.target)) {
+          if (this.showDropdown) {
+            this.closeDropdown({ autoBlur: true });
+          } else if (this.isActive) {
+            this.isActive = false;
+          }
+        }
+      },
+
+      scrollOptionIntoView(optionEl) {
         scrollIntoView(optionEl, {
           container: this.$refs.optionsList,
           marginTop: 180,
@@ -898,6 +915,22 @@
 
       resetTouched(options = { touched: false }) {
         this.isTouched = options.touched;
+      },
+      calculateSpaceBelow() {
+        // Get the height of element
+        const buttonHeight = this.$el.getBoundingClientRect().height;
+
+        // Get the position of the element relative to the viewport
+        const buttonPosition = this.$el.getBoundingClientRect().top;
+
+        // Check if there is enough space below element
+        // and update the "dropdownButtonBottom" data property accordingly
+        const notEnoughSpaceBelow =
+          buttonPosition > this.maxDropdownHeight &&
+          this.scrollableAncestor.offsetHeight - buttonPosition <
+          buttonHeight + this.maxDropdownHeight;
+
+        this.dropdownButtonBottom = notEnoughSpaceBelow ? buttonHeight + 'px' : 'auto';
       },
     },
   };
@@ -995,8 +1028,6 @@
     }
 
     &.is-disabled {
-      pointer-events: none;
-
       .ui-select-display {
         color: $ui-input-text-color--disabled;
         cursor: default;
@@ -1082,7 +1113,12 @@
 
     position: absolute;
     z-index: $z-index-dropdown;
-    margin-top: 2px;
+    display: block;
+    width: 100%;
+    min-width: rem-calc(180px);
+    padding: 0;
+    margin: 0;
+    margin-bottom: rem-calc(8px);
     list-style-type: none;
     outline: none;
   }

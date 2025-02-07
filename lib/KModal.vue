@@ -2,11 +2,11 @@
 
   <component :is="wrapper">
     <!-- Accessibility properties for the overlay -->
-    <KFocusTrap>
-      <transition
-        name="modal-fade"
-        appear
-      >
+    <transition
+      name="modal-fade"
+      appear
+    >
+      <KFocusTrap>
         <div
           id="modal-window"
           ref="modal-overlay"
@@ -14,13 +14,18 @@
           @keyup.esc.stop="emitCancelEvent"
           @keyup.enter="handleEnter"
         >
+          <!-- KeenUiSelect targets modal by using div.modal selector -->
           <div
             ref="modal"
             class="modal"
             :tabindex="0"
             role="dialog"
             aria-labelledby="modal-title"
-            :style="modalStyles"
+            :style="[
+              modalSizeStyles,
+              { background: $themeTokens.surface },
+              containsKSelect ? { overflowY: 'unset' } : { overflowY: 'auto' },
+            ]"
           >
             <!-- Modal Title -->
             <h1
@@ -60,6 +65,7 @@
                 ]"
                 :class="{
                   'scroll-shadow': scrollShadow,
+                  'contains-kselect': containsKSelect,
                 }"
               >
                 <!-- @slot Main content of modal -->
@@ -98,8 +104,8 @@
             </form>
           </div>
         </div>
-      </transition>
-    </KFocusTrap>
+      </KFocusTrap>
+    </transition>
   </component>
 
 </template>
@@ -210,18 +216,17 @@
       return {
         lastFocus: null,
         maxContentHeight: '1000',
+        containsKSelect: false,
         scrollShadow: false,
         delayedEnough: false,
       };
     },
     computed: {
-      modalStyles() {
+      modalSizeStyles() {
         return {
           'max-width': `${this.maxModalWidth - 32}px`,
           'max-height': `${this.windowHeight - 32}px`,
           width: this.modalWidth,
-          background: this.$themeTokens.surface,
-          overflowY: 'auto',
         };
       },
       modalWidth() {
@@ -273,6 +278,9 @@
       window.addEventListener('focus', this.focusElementTest, true);
       window.setTimeout(() => (this.delayedEnough = true), 500);
 
+      // if modal contains KSelect, special classes & styles will be applied
+      const kSelectCheck = document.querySelector('div.modal div.ui-select');
+      this.containsKSelect = !!kSelectCheck;
       this.updateContentSectionStyle();
     },
     updated() {
@@ -312,7 +320,9 @@
 
           // make sure that overflow-y won't be updated to 'auto' if this function is running
           // for the first time (otherwise Firefox would add a vertical scrollbar right away)
-          if (this.$refs.content.clientHeight !== 0) {
+          // + don't apply if modal contains KSelect
+          // (otherwise KSelect will be trapped inside modal if KSelect is opened a second time)
+          if (this.$refs.content.clientHeight !== 0 && !this.containsKSelect) {
             // add a vertical scrollbar if content doesn't fit
             if (this.$refs.content.scrollHeight > this.$refs.content.clientHeight) {
               this.$refs.content.style.overflowY = 'auto';
@@ -362,12 +372,7 @@
         }
         // focus has escaped the modal - put it back!
         if (!this.$refs.modal.contains(target)) {
-          this.$nextTick(() => {
-            // flush any pending DOM/focus updates to prevent infinite recursion
-            // from two components fighting over focus
-            // https://github.com/learningequality/studio/issues/4772
-            this.focusModal();
-          });
+          this.focusModal();
         }
       },
     },
@@ -446,6 +451,10 @@
       100% 20px,
       100% 10px,
       100% 10px;
+  }
+
+  .contains-kselect {
+    overflow: unset;
   }
 
   .actions {
