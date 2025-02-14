@@ -17,13 +17,13 @@
       anchor="#usage"
     >
       <h3>Input with label</h3>
-      <KTextbox label="Input with label" />
+      <KTextbox label="Input with label" type="text" />
       <DocsShowCode language="html">
-        <KTextbox label="Input with label" />
+        <KTextbox label="Input with label" type="text" />
       </DocsShowCode>
       <p>
-        This text box includes a visible label, providing clear guidance and context to the user
-        about the expected input.
+        This text box accepts general text input. By default, the input type is text
+        unless otherwise specified.
       </p>
 
       <h3>Valid and invalid input</h3>
@@ -45,8 +45,10 @@
       </DocsShowCode>
 
       <p>
-        This text box only accepts numeric input. If any non-numeric character is entered, it will
-        be considered invalid.
+        This text box only accepts numeric input. The <code>type="number"</code> attribute ensures that non-numeric characters cannot be entered.
+      </p>
+      <p>
+        <strong>Note:</strong> Validation should still be handled programmatically using the <code>invalid</code> and <code>invalidText</code> props.
       </p>
 
       <h3>Disabled input</h3>
@@ -90,11 +92,15 @@
         however, it is recommended to use them for accessibility purposes while using the invalid
         and invalidText props to handle validation as needed.
       </p>
+      <p>
+        <strong>Note:</strong> Users can still enter non-numeric characters in some browsers, so validation using <code>:invalid</code> and <code>invalidText</code> is recommended.
+      </p>
 
       <h3>Text area</h3>
       <KTextbox
         label="Text area"
         :textArea="true"
+        type="text"
       />
       <DocsShowCode language="html">
         <KTextbox

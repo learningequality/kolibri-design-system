@@ -7,7 +7,8 @@
     >
       <p>
         <code>KImg</code> displays an image and provides functionality to manipulate it such as
-        setting its dimensions, aspect ratio, scaling, letterboxing, and more.
+        setting its dimensions, aspect ratio, scaling, letterboxing, and more. Additionally, 
+        it supports displaying a text label on top of the image using the new <code>textOverlay</code> prop.
       </p>
     </DocsPageSection>
 
@@ -38,7 +39,8 @@
         This is in more detail illustrated in the examples below, where the original image
         dimensions are 200×114 px.
       </p>
-
+      
+      <!-- Rendering in inline and block elements section --> 
       <h3>Rendering within inline and block elements</h3>
 
       <h4>Inline</h4>
@@ -48,6 +50,7 @@
         default.
       </p>
 
+      <!-- Example of inline rendering -->
       <DocsShowCode language="html">
         <span>
           <KImg
@@ -73,6 +76,7 @@
         <DocsInternalLink href="/kimg#prop:scaleType"> scale type </DocsInternalLink> by default.
       </p>
 
+      <!-- Example of block rendering -->
       <DocsShowCode language="html">
         <div>
           <KImg
@@ -90,6 +94,7 @@
         </div>
       </DocsShow>
 
+      <!-- Alternative text section explaining accessibility -->
       <h3>Alternative text</h3>
 
       <p>
@@ -103,6 +108,7 @@
         </DocsInternalLink>.
       </p>
 
+      <!-- Example of alternative text -->
       <DocsShowCode language="html">
         <KImg
           src="hummingbird.jpg"
@@ -118,6 +124,7 @@
         assistive technologies.
       </p>
 
+      <!-- Example for decorative image without alt text -->
       <DocsShowCode language="html">
         <KImg
           src="hummingbird.jpg"
@@ -141,6 +148,7 @@
         <em>never distorts an image or impairs its quality.</em>
       </p>
 
+      <!-- Example for 'centerInside' scaling -->
       <DocsShowCode language="html">
         <div>
           <KImg
@@ -171,6 +179,7 @@
         <em>may impair an image's quality by enlarging it above its original size</em>.
       </p>
 
+      <!-- Example for 'contain' scaling -->
       <DocsShowCode language="html">
         <div>
           <KImg
@@ -201,6 +210,7 @@
           aspect ratio.</em>
       </p>
 
+      <!--Example for 'fitXY' scaling -->
       <DocsShowCode language="html">
         <div>
           <KImg
