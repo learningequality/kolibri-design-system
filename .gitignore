@@ -23,7 +23,7 @@ docs/jsdocs.js
 kolibri-design-system.iml
 
 # dev playground
-docs/pages/playground.vue
+docs/pages/playground/index.vue
 
 # env
 .envrc

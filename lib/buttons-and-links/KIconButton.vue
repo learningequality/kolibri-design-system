@@ -26,7 +26,9 @@
       :style="iconStyles"
     />
     <!-- @slot Pass sub-components into the button, typically `KDropdownMenu` -->
-    <slot name="menu"></slot>
+    <template #menu>
+      <slot name="menu"></slot>
+    </template>
   </KButton>
 
 </template>

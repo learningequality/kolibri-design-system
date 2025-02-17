@@ -235,9 +235,10 @@
   .ui-progress-circular {
     position: relative;
     margin: 0 auto;
+    overflow: hidden;
     animation: fade-in;
-    animation-fill-mode: backwards;
     animation-duration: 0s;
+    animation-fill-mode: backwards;
   }
 
   .ui-progress-circular-determinate {

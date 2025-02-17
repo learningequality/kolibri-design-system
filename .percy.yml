@@ -1,0 +1,19 @@
+version: 2
+snapshot:
+  widths:
+    - 375
+    - 1280
+  minHeight: 1024
+  percyCSS: ""
+  enableJavaScript: false #disable Javascript by default to capture initial page state without JS-driven changes
+  cliEnableJavaScript: true #enable Javascript when running Percy through CLI, for dynamic content
+  disableShadowDOM: false
+discovery:
+  allowedHostnames: []
+  disallowedHostnames: []
+  networkIdleTimeout: 100
+  captureMockedServiceWorker: false
+upload:
+  files: "**/*.{png,jpg,jpeg}"
+  ignore: ""
+  stripExtensions: false

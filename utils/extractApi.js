@@ -1,7 +1,7 @@
 const path = require('node:path');
 const fs = require('node:fs');
 const docGenAPI = require('vue-docgen-api');
-const globby = require('globby');
+const glob = require('glob');
 const consola = require('consola');
 
 /***********************************/
@@ -21,7 +21,7 @@ function notTest(filePath) {
 
 async function writeApi() {
   const componentFolder = path.resolve('./lib/');
-  const simpleFiles = await globby('**/K*.{vue,js}', { cwd: componentFolder });
+  const simpleFiles = Array.from(glob.sync('**/K*.{vue,js}', { cwd: componentFolder }));
   const output = {};
 
   for (const filename of simpleFiles.filter(notTest)) {
@@ -34,7 +34,7 @@ async function writeApi() {
     }
   }
 
-  const complexFiles = await globby('**/K*/index.{vue,js}', { cwd: componentFolder });
+  const complexFiles = Array.from(glob.sync('**/K*/index.{vue,js}', { cwd: componentFolder }));
 
   for (const filename of complexFiles.filter(notTest)) {
     const filepath = path.resolve(componentFolder, filename);

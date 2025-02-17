@@ -243,14 +243,14 @@
        * default value of selected start date
        */
       selectedStartDate: {
-        type: [Date, null],
+        type: Date,
         default: null,
       },
       /**
        * default value of selected end date
        */
       selectedEndDate: {
-        type: [Date, null],
+        type: Date,
         default: null,
       },
       /**
@@ -276,7 +276,6 @@
           end: this.selectedStartDate && this.selectedEndDate ? this.selectedEndDate : null,
         },
         numOfDays: 7,
-        isFirstChoice: this.selectedStartDate == null ? true : false,
         activeMonth:
           this.lastAllowedDate.getMonth() - 1 == -1 ? 11 : this.lastAllowedDate.getMonth() - 1,
         activeYearStart: this.lastAllowedDate.getFullYear(),
@@ -319,6 +318,21 @@
         }
         return this.activeYearStart;
       },
+      isFirstChoice() {
+        // True if there is no start date OR if there is an end date
+        // False if there is a start date but no end date
+        return !this.dateRange.start || !!this.dateRange.end;
+      },
+    },
+    watch: {
+      // Update local dateRange.start whenever selectedStartDate is set
+      selectedStartDate(newVal) {
+        this.dateRange.start = newVal;
+      },
+      // Update local dateRange.end whenever selectedEndDate is set
+      selectedEndDate(newVal) {
+        this.dateRange.end = newVal;
+      },
     },
     created() {
       if (this.activeMonth === 11) this.activeYearStart = this.activeYearStart - 1;
@@ -345,7 +359,6 @@
       getNewDateRange(result, activeMonth, activeYear) {
         const resultDate = new Date(activeYear, activeMonth, result);
         if (!this.isFirstChoice && resultDate < this.dateRange.start) {
-          this.isFirstChoice = false;
           return { start: resultDate };
         }
         const newData = {};
@@ -355,8 +368,6 @@
         } else {
           newData.end = null;
         }
-        // toggle first choice
-        this.isFirstChoice = !this.isFirstChoice;
         newData[key] = resultDate;
         return newData;
       },
