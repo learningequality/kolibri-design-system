@@ -430,11 +430,9 @@
           case 'ArrowUp':
             nextRowIndex = rowIndex === -1 ? lastRowIndex : rowIndex - 1;
             break;
-
           case 'ArrowDown':
             nextRowIndex = rowIndex === -1 ? 0 : rowIndex === lastRowIndex ? -1 : rowIndex + 1;
             break;
-
           case 'ArrowLeft':
             if (rowIndex === -1) {
               nextColIndex = colIndex > 0 ? colIndex - 1 : lastColIndex;
@@ -444,7 +442,6 @@
               nextRowIndex = colIndex === 0 ? (rowIndex > 0 ? rowIndex - 1 : -1) : rowIndex;
             }
             break;
-
           case 'ArrowRight':
             if (colIndex === lastColIndex) {
               nextColIndex = 0;
@@ -473,9 +470,9 @@
         } else {
           // If there is a next cell in the table, focus on the same
           // Else allow default behaviour
-          const nextCellCoords = this.getNextCellCoordinates(rowIndex, colIndex);
-          if (nextCellCoords.nextColIndex) {
-            this.updateFocusState(nextCellCoords.nextRowIndex, nextCellCoords.nextColIndex, true);
+          const [nextRowIndex, nextColIndex] = this.getNextCellCoordinates(rowIndex, colIndex);
+          if (nextColIndex) {
+            this.updateFocusState(nextRowIndex, nextColIndex, true);
             event.preventDefault();
           }
         }
@@ -490,11 +487,11 @@
           focusableElements[focusedIndex - 1].focus();
           event.preventDefault();
         } else {
-          const prevCellCoords = this.getPreviousCellCoordinates(rowIndex, colIndex);
+          const [prevRowIndex, prevColIndex] = this.getPreviousCellCoordinates(rowIndex, colIndex);
           // If there is a previous cell, shift focus to same
           // Otherwise allow default behaviour
-          if (prevCellCoords.prevColIndex) {
-            const prevCell = this.getCell(prevCellCoords.prevRowIndex, prevCellCoords.prevColIndex);
+          if (prevRowIndex) {
+            const prevCell = this.getCell(prevRowIndex, prevColIndex);
             const prevFocusableElements = this.getFocusableElements(prevCell);
             prevFocusableElements[prevFocusableElements.length - 1].focus();
             this.updateFocusState(prevCell.prevRowIndex, prevCell.prevColIndex, false);
@@ -554,7 +551,7 @@
       },
       /*
        * Returns the coordinates of the next cell in the tab navigation order.
-       * Returns `{ nextColIndex, nextRowIndex}` if the cell is available,
+       * Returns `[nextRowIndex, nextColIndex]` if the cell is available,
        * else sets both the values to null
        */
       getNextCellCoordinates(rowIndex, colIndex) {
@@ -576,11 +573,11 @@
             nextColIndex = null;
           }
         }
-        return { nextColIndex, nextRowIndex };
+        return [nextRowIndex, nextColIndex];
       },
       /*
        * Returns the coordinates of the previous cell based on the tab navigation order.
-       * Returns `{ nextColIndex, nextRowIndex }` if cell is available, else sets
+       * Returns `[prevRowIndex, prevColIndex]` if cell is available, else sets
        * both of the values to null.
        */
       getPreviousCellCoordinates(rowIndex, colIndex) {
@@ -601,10 +598,8 @@
             prevRowIndex = null;
             prevColIndex = null;
           }
-
-          return { prevColIndex: null, prevRowIndex: null };
         }
-        return { prevColIndex, prevRowIndex };
+        return [prevRowIndex, prevColIndex];
       },
       getCell(rowIndex, colIndex) {
         if (rowIndex === -1) {
