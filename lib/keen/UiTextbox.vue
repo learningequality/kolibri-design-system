@@ -233,9 +233,9 @@
         default: false,
       },
       clearable: {
-          type: Boolean,
-          default: false,
-        },
+        type: Boolean,
+        default: false,
+      },
     },
 
     data() {
@@ -364,9 +364,9 @@
       clearText() {
         this.updateValue("");
         this.$nextTick(() => {
-        this.refreshSize();  
-        this.focus();  
-      }); 
+          this.refreshSize();  
+          this.focus();  
+        }); 
         
       },
 
@@ -646,4 +646,5 @@
       margin-left: rem(8px);
     }
   }
+
 </style>

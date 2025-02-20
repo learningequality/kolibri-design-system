@@ -23,6 +23,9 @@
         <UiIcon
           v-show="!disabled && valueLength > 0"
           class="ui-autocomplete__clear-button"
+          :class="$computedClass({
+            ':hover': { color: $themePalette.black }
+          })"
           :style="{ color: $themePalette.grey.v_700 }"
           title="Clear"
 
@@ -597,12 +600,7 @@
     top: $ui-input-button-margin-top;
     right: 0;
     font-size: $ui-input-button-size;
-    
     cursor: pointer;
-
-    &:hover {
-      color: $ui-input-button-color--hover;
-    }
   }
 
   .ui-autocomplete__suggestions {

@@ -1,7 +1,7 @@
 <template>
 
   <transition name="ui-progress-linear--transition-fade">
-    <div class="ui-progress-linear" :class="classes">
+    <div class="ui-progress-linear" :class="classes" :style="{ backgroundColor: progressBarColor }">
       <div
         v-if="type === 'determinate'"
         class="ui-progress-linear__progress-bar is-determinate"
@@ -52,7 +52,11 @@
       classes() {
         return [`ui-progress-linear--color-${this.color}`, `ui-progress-linear--type-${this.type}`];
       },
-
+      progressBarColor() {
+    if (this.color === "primary") {
+      return this.$themeBrand?.primary?.v_600;
+    }
+  },
       moderatedProgress() {
         if (this.progress < 0) {
           return 0;

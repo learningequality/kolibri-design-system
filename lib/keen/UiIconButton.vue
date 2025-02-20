@@ -34,7 +34,9 @@
       </slot>
     </div>
 
-    <div class="ui-icon-button-focus-ring"></div>
+    <div 
+      class="ui-icon-button-focus-ring"
+    ></div>
     <KCircularLoader
       v-show="loading"
 
@@ -170,10 +172,16 @@
           }
           return style;
         } else if (this.primaryColor && !this.primaryType) {
-          return {
+          const style = {
             color: this.$themeTokens.primary,
             fill: this.$themeTokens.primary,
           };
+          if (this.dropdownOpen) {
+            style[':hover:not(.is-disabled)'] = {
+              backgroundColor: this.$darken1(this.$themeBrand.primary.v_600)
+            }
+          }
+          style['--focus-ring-bg'] =this.$darken2(this.$themeBrand.primary.v_600)
         }
 
         return {};
@@ -436,18 +444,7 @@
       color: white;
     }
 
-    &.ui-icon-button--color-primary {
-      background-color: $brand-primary-color;
-
-      &:hover:not(.is-disabled),
-      &.has-dropdown-open {
-        background-color: darken($brand-primary-color, 10%);
-      }
-
-      .ui-icon-button-focus-ring {
-        background-color: darken($brand-primary-color, 12%);
-      }
-    }
+    
 
     &.ui-icon-button--color-accent {
       background-color: $brand-accent-color;
@@ -523,18 +520,6 @@
       }
     }
 
-    &.ui-icon-button--color-primary {
-      color: $brand-primary-color;
-
-      &:hover:not(.is-disabled),
-      &.has-dropdown-open {
-        background-color: rgba($brand-primary-color, 0.12);
-      }
-
-      .ui-icon-button-focus-ring {
-        background-color: rgba($brand-primary-color, 0.26);
-      }
-    }
 
     &.ui-icon-button--color-accent {
       color: $brand-accent-color;

@@ -24,12 +24,11 @@
           class="ui-progress-circular__determinate-path"
           fill="transparent"
           stroke-dashoffset="0"
-
           :cx="size / 2"
           :cy="size / 2"
           :r="radius"
           :stroke-dasharray="strokeDashArray"
-          :style="{ 'stroke-dashoffset': strokeDashOffset, 'stroke-width': calculatedStroke }"
+          :style="{ ...strokeColor,'stroke-dashoffset': strokeDashOffset, 'stroke-width': calculatedStroke }"
         />
       </svg>
 
@@ -45,6 +44,7 @@
       >
         <circle
           class="ui-progress-circular__indeterminate-path"
+          :style=strokeColor
           cx="50"
           cy="50"
           fill="none"
@@ -99,7 +99,13 @@
           `ui-progress-circular--type-${this.type}`,
         ];
       },
-
+      strokeColor(){
+        if(this.color === 'primary' || this.color === 'multi-color'){
+          return {
+            stroke :this.$themeBrand.primary.v_600
+          }
+        }
+      },
       strokeDashArray() {
         const circumference = 2 * Math.PI * this.radius;
 
@@ -195,22 +201,13 @@
   // ================================================
 
   .ui-progress-circular--color-multi-color {
-    .ui-progress-circular__determinate-path {
-      stroke: $brand-primary-color;
-    }
-
     .ui-progress-circular__indeterminate-path {
       animation: ui-progress-circular-color $ui-progress-indeterminate-color-duration ease-in-out
         infinite;
     }
   }
 
-  .ui-progress-circular--color-primary {
-    .ui-progress-circular__determinate-path,
-    .ui-progress-circular__indeterminate-path {
-      stroke: $brand-primary-color;
-    }
-  }
+ 
 
   .ui-progress-circular--color-accent {
     .ui-progress-circular__determinate-path,

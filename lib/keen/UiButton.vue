@@ -5,6 +5,7 @@
 
     class="ui-button"
     :class="classes"
+    :style="{ backgroundColor: buttonColor }"
     :disabled="disabled || loading"
     :href="isAnchor ? (disabled ? null : href) : null"
     :type="isAnchor ? null : buttonType"
@@ -173,7 +174,13 @@
 
         return 'white';
       },
+      buttonColor(){
+        if(this.color === 'primary' && this.type === 'primary'){
+          return this.$themeBrand?.primary?.v_600;
+        }
+      }
     },
+
 
     methods: {
       onClick(e) {
@@ -443,8 +450,6 @@
     }
 
     &.ui-button--color-primary {
-      background-color: $brand-primary-color;
-
       &:hover:not(.is-disabled),
       &.has-dropdown-open {
         background-color: darken($brand-primary-color, 10%);
