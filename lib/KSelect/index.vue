@@ -402,12 +402,12 @@
           ...this.classes,
           ...this.$computedClass({
             '&:hover:not(:active) .ui-select-dropdown-button': {
-              color: this.$themePalette.black
+              color: this.$themePalette.black,
             },
             '& .ui-select-dropdown-button': {
-              color: this.$themePalette.grey.v_700
-            }
-          })
+              color: this.$themePalette.grey.v_700,
+            },
+          }),
         };
       },
       labelClasses() {
