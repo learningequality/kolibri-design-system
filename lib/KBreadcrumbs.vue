@@ -1,15 +1,19 @@
 <template>
 
-  <div class="breadcrumbs">
+  <nav class="breadcrumbs">
     <KListWithOverflow
       overflowDirection="start"
       :items="preparedCrumbs"
     >
       <!-- Render individual breadcrumb items -->
-      <template #item="{ item,index }">
-        <li>
+      <template #item="{ item, index }">
+        <li 
+          ref="breadcrumbItems"
+          :style="{ maxWidth: index === preparedCrumbs.length - 1 ? 
+            lastBreadcrumbMaxWidth : 'none' }" 
+        >
           <KRouterLink
-            v-if="item.link"
+            v-if="item.link && index !== preparedCrumbs.length  - 1"
             :text="item.text"
             :to="item.link"
             dir="auto"
@@ -18,7 +22,8 @@
             <template #default="{ text }">
               <span
                 class="breadcrumbs-crumb-text"
-                :style="{ maxWidth: index === items.length - 1 ? lastBreadcrumbMaxWidth : 'none' }"
+                :style="{ maxWidth: index === preparedCrumbs.length - 1 ? 
+                  lastBreadcrumbMaxWidth : 'none' }"
                 dir="auto"
                 :title="text"
               >{{ text }}</span>
@@ -26,13 +31,13 @@
           </KRouterLink>
           <span
             v-else
+            :ref="getBreadcrumbRef(index)"
             class="breadcrumbs-crumb-text"
-            :style="{ maxWidth: index === items.length - 1 ? lastBreadcrumbMaxWidth : 'none' }"
+            :style="{ maxWidth: getBreadcrumbRef(index) ? lastBreadcrumbMaxWidth : 'none' }"
             dir="auto"
             :title="item.text"
           >{{ item.text }}</span>
         </li>
-        
       </template>
 
       <template #divider>
@@ -44,47 +49,54 @@
       </template>
 
       <template #more="{ overflowItems }">
-        <KIconButton
-          size="small"
-          icon="chevronDown"
-          appearance="raised-button"
-        >
-          <template #menu>
-            <KDropdownMenu
-              :options="
-                overflowItems
-                  .filter(item => item.type !== 'divider')
-                  .map(item => ({
-                    label: item.text,
-                    link: item.link ? item.link : null,
-                  }))
-              "
-            >
-              <template #option="{ option }">
-                <template v-if="option.link">
-                  <a
-                    :href="option.link"
-                    :style="{ color: $themeTokens.primary }"
-                    class="dropdown-link"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    {{ option.label }}
-                  </a>
+        <div style="display: flex; align-items: center; gap:4px">
+          <KIconButton
+            size="small"
+            icon="chevronDown"
+            appearance="raised-button"
+          >
+            <template #menu>
+              <KDropdownMenu
+                :options="
+                  overflowItems
+                    .filter(item => item.type !== 'divider')
+                    .map(item => ({
+                      label: item.text,
+                      link: item.link ? item.link : null,
+                    }))
+                "
+              >
+                <template #option="{ option }">
+                  <template v-if="option.link">
+                    <a
+                      :href="option.link"
+                      :style="{ color: $themeTokens.primary }"
+                      class="dropdown-link"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      {{ option.label }}
+                    </a>
+                  </template>
+                  <template v-else>
+                    <span
+                      :style="{ color: $themeTokens.text }"
+                      class="dropdown-text"
+                    >{{ option.label }}</span>
+                  </template>
                 </template>
-                <template v-else>
-                  <span
-                    :style="{ color: $themeTokens.text }"
-                    class="dropdown-text"
-                  >{{ option.label }}</span>
-                </template>
-              </template>
-            </KDropdownMenu>
-          </template>
-        </KIconButton>
+              </KDropdownMenu>
+            </template>
+          </KIconButton>
+          <span
+            :style="{ color: $themeTokens.text }"
+            class="breadcrumbs-divider"
+          >›
+          </span>
+        </div>
       </template>
     </KListWithOverflow>
-  </div>
+  </nav>
 
 </template>
 
@@ -127,17 +139,21 @@
       });
     },
     methods: {
+      getBreadcrumbRef(index) {
+        return index === this.preparedCrumbs.length - 1 ? "lastBreadcrumb" : null;
+      },
       updateLastBreadcrumbWidth() {
         this.$nextTick(() => {
-          const lastBreadcrumb = this.$refs.lastBreadcrumb;
+          const lastBreadcrumb = this.$refs.lastBreadcrumb?.[0];
           if (lastBreadcrumb) {
             const lastBreadcrumbWidth = lastBreadcrumb.getBoundingClientRect().width;
-            const availableWidth = this.$el.offsetWidth - DROPDOWN_BTN_WIDTH; 
+            const availableWidth = this.$el.offsetWidth - DROPDOWN_BTN_WIDTH;
             this.lastBreadcrumbMaxWidth = `${Math.min(lastBreadcrumbWidth, availableWidth)}px`;
           }
         });
-      }
-    }
+      },
+      
+    },
   };
 
 </script>

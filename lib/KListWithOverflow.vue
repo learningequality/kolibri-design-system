@@ -22,7 +22,7 @@
       ref="list"
       class="list"
     >
-      <template v-for="item in items">
+      <template v-for="(item,index) in items">
         <!-- @slot Slot for rendering divider items -->
         <slot
           v-if="isDivider(item)"
@@ -34,6 +34,7 @@
           v-else
           name="item"
           :item="item"
+          :index="index"
         ></slot>
       </template>
     </div>
@@ -94,6 +95,11 @@
           return ['start', 'end'].includes(value);
         },
       },
+      /* listElement: {
+        type: String,
+        default: 'ul',
+        validator: value => ['ul', 'ol'].includes(value),
+      },*/
     },
     data() {
       return {
@@ -248,18 +254,21 @@
         }
 
         const { list } = this.$refs;
+
+        const [firstOverflowedIdx] = overflowItemsIdx;
+        if (this.isDivider(this.items[firstOverflowedIdx])) {
+          overflowItemsIdx.shift();
+        }
+
         if (this.overflowDirection === 'start') {
-          const [firstOverflowedIdx] = overflowItemsIdx;
-          const OverflowedIdx = list.children.length - 1 - firstOverflowedIdx;
-          if (this.isDivider(this.items[OverflowedIdx])) {
-            overflowItemsIdx.shift();
+          const firstVisibleIdx = firstOverflowedIdx + 1;
+          if (this.isDivider(this.items[firstVisibleIdx])) {
+            const dividerNode = list.children[firstVisibleIdx];
+            dividerNode.style.visibility = 'hidden';
+            dividerNode.style.position = 'absolute';
+            return itemsSizes[firstVisibleIdx].width;
           }
         } else {
-          const [firstOverflowedIdx] = overflowItemsIdx;
-          if (this.isDivider(this.items[firstOverflowedIdx])) {
-            overflowItemsIdx.shift();
-          }
-
           const lastVisibleIdx = firstOverflowedIdx - 1;
           if (this.isDivider(this.items[lastVisibleIdx])) {
             const dividerNode = list.children[lastVisibleIdx];
