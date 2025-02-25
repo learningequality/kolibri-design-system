@@ -82,14 +82,16 @@
       <h3>Assertive message</h3>
 
       <p>
-        Sending an assertive message updates the text content of 
+        Sending an assertive message updates the text content of
         <code>aria-live="assertive"</code> region.
         <em>Use this only for messages that require immediate attention, such as critical errors or
           messages, as it interrupts the user's current activity.</em>
       </p>
-      <strong>Note:</strong> For errors or updates needing user action, place related elements (e.g., buttons) right after the notification in the DOM so screen reader users can act on them quickly.
-          
-    <p>Send assertive messages with <code>sendAssertiveMessage(message)</code>:</p>
+      <strong>Note:</strong> For errors or updates needing user action, place related elements
+      (e.g., buttons) right after the notification in the DOM so screen reader users can act on them
+      quickly.
+
+      <p>Send assertive messages with <code>sendAssertiveMessage(message)</code>:</p>
 
       <!-- eslint-disable -->
       <!-- prettier-ignore -->
@@ -185,4 +187,3 @@
   };
 
 </script>
-
