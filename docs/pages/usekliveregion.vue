@@ -7,8 +7,8 @@
     >
       <p>
         A composable that offers <code>sendPoliteMessage</code> and
-        <code>sendAssertiveMessage</code>
-        functions that send polite and assertive messages to their corresponding
+        <code>sendAssertiveMessage</code> functions that send polite and assertive messages to their
+        corresponding
         <DocsExternalLink
           href="https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/ARIA_Live_Regions"
           text="ARIA live regions"
@@ -48,19 +48,23 @@
         <code>sendPoliteMessage</code> or <code>sendAssertiveMessage</code> from any place in your
         application.
       </p>
+
       <p>
         These two methods are also used internally from some KDS components to provide a11y out of
         the box. Always check that you don't send messages to announce updates that are already
-        being announced from KDS to prevent duplicate announcements.
+        being announced from KDS to prevent from duplicate announcements.
       </p>
 
       <h3>Polite message</h3>
+
       <p>
         Sending a polite message updates the text content of <code>aria-live="polite"</code> region.
-        <em>Use it to send messages that can wait to be announced until the user is idle. This should
-          typically be the most commonly used method.</em>
+        <em>Use it to send messages that can wait to be announced until the user is idle. This
+          message should typically be the most commonly used.</em>
       </p>
+
       <p>Send polite messages with <code>sendPoliteMessage(message)</code>:</p>
+
       <!-- eslint-disable -->
       <!-- prettier-ignore -->
       <DocsShowCode language="javascript">
@@ -76,13 +80,17 @@
       <!-- eslint-enable -->
 
       <h3>Assertive message</h3>
+
       <p>
-        Sending an assertive message updates the text content of
+        Sending an assertive message updates the text content of 
         <code>aria-live="assertive"</code> region.
-        <em>Use it only for messages that require immediate attention, such as critical errors or
-          warnings, because it interrupts the user's current activity.</em>
+        <em>Use this only for messages that require immediate attention, such as critical errors or
+          messages, as it interrupts the user's current activity.</em>
       </p>
-      <p>Send assertive messages with <code>sendAssertiveMessage(message)</code>:</p>
+      <strong>Note:</strong> For errors or updates needing user action, place related elements (e.g., buttons) right after the notification in the DOM so screen reader users can act on them quickly.
+          
+    <p>Send assertive messages with <code>sendAssertiveMessage(message)</code>:</p>
+
       <!-- eslint-disable -->
       <!-- prettier-ignore -->
       <DocsShowCode language="javascript">
@@ -91,71 +99,11 @@
         export default {
           setup() {
             const { sendAssertiveMessage } = useKLiveRegion();
-            sendAssertiveMessage('Assertive message');
+            sendPoliteMessage('Assertive message');
           }
         };
       </DocsShowCode>
       <!-- eslint-enable -->
-    </DocsPageSection>
-
-    <!-- New Section: Enhanced Guidance on Polite vs. Assertive -->
-    <DocsPageSection
-      title="Polite vs. Assertive Guidelines"
-      anchor="#polite-assertive"
-    >
-      <p>
-        It is essential to choose the appropriate live region type based on the urgency of the
-        message:
-      </p>
-      <ul>
-        <li>
-          <strong>Polite (<code>aria-live="polite"</code>):</strong> Suitable for routine
-          notifications, status updates, confirmations, or other non-urgent information. The screen
-          reader will announce the message once it is idle.
-        </li>
-        <li>
-          <strong>Assertive (<code>aria-live="assertive"</code>):</strong> Use only for urgent
-          messages such as errors or critical warnings. These messages interrupt current screen
-          reader activity immediately.
-        </li>
-      </ul>
-      <p>
-        <em>Note:</em> Overusing assertive messages can create a disruptive experience. Always
-        consider if a polite update may suffice.
-      </p>
-    </DocsPageSection>
-
-    <!-- New Section: Focus Management Guidance -->
-    <DocsPageSection
-      title="Focus Management for Assertive Notifications"
-      anchor="#focus-management"
-    >
-      <p>
-        When an assertive message is used to announce an error or a critical update that requires
-        user interaction, ensure that any related actionable elements (such as buttons or form
-        fields) are placed immediately after the notification in the DOM.
-      </p>
-      <p>
-        This practice allows screen reader users to quickly navigate to the element that enables
-        them to address the issue.
-      </p>
-      <p><strong>Example:</strong></p>
-      <!-- eslint-disable -->
-      <!-- prettier-ignore -->
-      <DocsShowCode language="html">
-        <!-- Assertive alert followed immediately by an actionable button -->
-        <div aria-live="assertive" role="alert" style="margin-bottom: 1rem;">
-          Error: Unable to save changes.
-        </div>
-        <button type="button">
-          Retry
-        </button>
-      </DocsShowCode>
-      <!-- eslint-enable -->
-      <p>
-        In this example, once the screen reader announces the error, the user can immediately focus
-        on the "Retry" button to take corrective action.
-      </p>
     </DocsPageSection>
 
     <DocsPageSection
@@ -163,10 +111,11 @@
       anchor="#demo"
     >
       <p>
-        Send messages below and turn on your screen reader. You can also inspect the content of
-        <code>&lt;div id="k-live-region"&gt;</code> in the browser console, though the announcement
-        is visible only briefly.
+        Send messages below and turn on your screen reader. You could also observe the content of
+        <code>&lt;div id="k-live-region"&gt;</code> in the browser console, but note that an
+        announcement will be visible for just a very brief moment.
       </p>
+
       <DocsShow language="html">
         <KTextbox
           label="Polite message"
@@ -175,6 +124,7 @@
         />
         <KButton @click="sendPoliteMessage(politeMessageInput)"> Send </KButton>
       </DocsShow>
+
       <DocsShow language="html">
         <KTextbox
           label="Assertive message"
@@ -195,7 +145,7 @@
             href="/installation#install-plugin"
             text="KDS installation step"
           />
-          that attaches live regions to an application's document body.
+          that attaches live regions to an application's document body
         </li>
       </ul>
     </DocsPageSection>
@@ -235,3 +185,4 @@
   };
 
 </script>
+
