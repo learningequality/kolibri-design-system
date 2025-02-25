@@ -22,7 +22,7 @@
       ref="list"
       class="list"
     >
-      <template v-for="(item,index) in items">
+      <template v-for="(item, index) in items">
         <!-- @slot Slot for rendering divider items -->
         <slot
           v-if="isDivider(item)"
@@ -95,11 +95,10 @@
           return ['start', 'end'].includes(value);
         },
       },
-      /* listElement: {
-        type: String,
-        default: 'ul',
-        validator: value => ['ul', 'ol'].includes(value),
-      },*/
+      showAtLeastOne: {
+        type: Boolean,
+        default: false,
+      },
     },
     data() {
       return {
@@ -165,7 +164,7 @@
        * Sets the items that overflow the list, the visibility of the more button,
        * and overrides the `visibility` of the list DOM elements that overflow the list.
        */
-      setOverflowItems() {
+      /*setOverflowItems() {
         const { list, listWrapper, moreButtonWrapper } = this.$refs;
 
         if (!this.mounted || !listWrapper || !list) {
@@ -236,6 +235,78 @@
         maxWidth = Math.ceil(maxWidth);
         this.overflowItems = overflowItemsIdx.map(idx => this.items[idx]);
         this.isMoreButtonVisible = overflowItemsIdx.length > 0;
+        list.style.maxWidth = `${maxWidth}px`;
+        list.style.maxHeight = `${maxHeight}px`;
+      },*/
+      setOverflowItems() {
+        const { list, listWrapper, moreButtonWrapper } = this.$refs;
+
+        if (!this.mounted || !listWrapper || !list) {
+          this.overflowItems = [];
+          return;
+        }
+
+        const newMoreButtonWidth = this.getSize(moreButtonWrapper).width;
+        if (this.isMoreButtonVisible && newMoreButtonWidth > 0) {
+          this.moreButtonWidth = newMoreButtonWidth;
+        }
+
+        let availableWidth = this.getSize(listWrapper).width;
+        availableWidth -= this.moreButtonWidth;
+        let maxWidth = 0;
+        let maxHeight = 0;
+
+        const itemsSizes = [];
+        for (let i = 0; i < list.children.length; i++) {
+          const item = list.children[i];
+          const itemSize = this.getSize(item);
+          itemsSizes.push(itemSize);
+        }
+
+        const indexSequence = [...Array(list.children.length).keys()];
+        const directionIndexes =
+          this.overflowDirection === 'start' ? indexSequence.reverse() : indexSequence;
+        const overflowItemsIdx = [];
+
+        directionIndexes.forEach(i => {
+          const itemWidth = itemsSizes[i].width;
+          const item = list.children[i];
+
+          if (itemWidth >= availableWidth || overflowItemsIdx.length > 0) {
+            overflowItemsIdx.push(i);
+            item.style.visibility = 'hidden';
+            item.style.position = 'absolute';
+          } else {
+            item.style.visibility = 'visible';
+            item.style.position = 'unset';
+            maxWidth += itemWidth;
+            availableWidth -= itemWidth;
+            const itemHeight = itemsSizes[i].height;
+            if (itemHeight > maxHeight) {
+              maxHeight = itemHeight;
+            }
+          }
+        });
+
+        if (this.showAtLeastOne && overflowItemsIdx.length === itemsSizes.length) {
+          const lastItemIdx = directionIndexes[directionIndexes.length - 1];
+          const lastItem = list.children[lastItemIdx];
+
+          lastItem.style.visibility = 'visible';
+          lastItem.style.position = 'unset';
+
+          // Remove last item from overflow list (so it stays visible)
+          this.overflowItems = overflowItemsIdx.slice(0, -1).map(idx => this.items[idx]);
+        } else {
+          this.overflowItems = overflowItemsIdx.map(idx => this.items[idx]);
+        }
+        const removedDividerWidth = this.fixDividersVisibility(overflowItemsIdx, itemsSizes);
+        if (removedDividerWidth) {
+          maxWidth -= removedDividerWidth;
+        }
+
+        maxWidth = Math.ceil(maxWidth);
+        this.isMoreButtonVisible = this.overflowItems.length > 0;
         list.style.maxWidth = `${maxWidth}px`;
         list.style.maxHeight = `${maxHeight}px`;
       },

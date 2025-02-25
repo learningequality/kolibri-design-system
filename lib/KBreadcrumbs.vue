@@ -4,16 +4,18 @@
     <KListWithOverflow
       overflowDirection="start"
       :items="preparedCrumbs"
+      :showSingleItem="true"
     >
       <!-- Render individual breadcrumb items -->
       <template #item="{ item, index }">
-        <li 
+        <li
           ref="breadcrumbItems"
-          :style="{ maxWidth: index === preparedCrumbs.length - 1 ? 
-            lastBreadcrumbMaxWidth : 'none' }" 
+          :style="{
+            maxWidth: index === preparedCrumbs.length - 1 ? lastBreadcrumbMaxWidth : 'none',
+          }"
         >
           <KRouterLink
-            v-if="item.link && index !== preparedCrumbs.length  - 1"
+            v-if="item.link && index !== preparedCrumbs.length - 1"
             :text="item.text"
             :to="item.link"
             dir="auto"
@@ -22,8 +24,9 @@
             <template #default="{ text }">
               <span
                 class="breadcrumbs-crumb-text"
-                :style="{ maxWidth: index === preparedCrumbs.length - 1 ? 
-                  lastBreadcrumbMaxWidth : 'none' }"
+                :style="{
+                  maxWidth: index === preparedCrumbs.length - 1 ? lastBreadcrumbMaxWidth : 'none',
+                }"
                 dir="auto"
                 :title="text"
               >{{ text }}</span>
@@ -49,7 +52,7 @@
       </template>
 
       <template #more="{ overflowItems }">
-        <div style="display: flex; align-items: center; gap:4px">
+        <div style="display: flex; gap: 4px; align-items: center">
           <KIconButton
             size="small"
             icon="chevronDown"
@@ -140,10 +143,15 @@
     },
     methods: {
       getBreadcrumbRef(index) {
-        return index === this.preparedCrumbs.length - 1 ? "lastBreadcrumb" : null;
+        return index === this.preparedCrumbs.length - 1 ? 'lastBreadcrumb' : null;
       },
       updateLastBreadcrumbWidth() {
         this.$nextTick(() => {
+          if (this.showSingleItem) {
+            this.lastBreadcrumbMaxWidth = 'none';
+            return;
+          }
+
           const lastBreadcrumb = this.$refs.lastBreadcrumb?.[0];
           if (lastBreadcrumb) {
             const lastBreadcrumbWidth = lastBreadcrumb.getBoundingClientRect().width;
@@ -152,7 +160,6 @@
           }
         });
       },
-      
     },
   };
 
