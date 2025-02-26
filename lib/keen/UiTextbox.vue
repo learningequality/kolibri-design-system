@@ -596,6 +596,7 @@
     margin: 0;
     font-size: $ui-input-text-font-size;
     font-weight: normal;
+    color: $ui-input-text-color;
     cursor: auto;
     background: none;
     border: none;

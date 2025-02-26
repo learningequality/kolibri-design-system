@@ -12,7 +12,7 @@
   -->
   <div
     class="ui-select"
-    :class="computedSelectClasses"
+    :class="classes"
     :style="{
       'border-bottom-color':
         isActive && !disabled ? $themeBrand.primary.v_600 : $themePalette.grey.v_700,
@@ -53,7 +53,7 @@
 
         <div
           class="ui-select-display"
-          :style="[activeBorderStyle, { color: $themePalette.black }]"
+          :style="[activeBorderStyle]"
         >
           <div
             class="ui-select-display-value"
@@ -74,7 +74,6 @@
           <UiIcon
             v-if="!clearableState"
             class="ui-select-dropdown-button"
-            :style="{ color: $themePalette.black }"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -396,19 +395,6 @@
           { 'ui-select-inline': this.inline },
           { 'ui-select-disabled': this.disabled },
         ];
-      },
-      computedSelectClasses() {
-        return {
-          ...this.classes,
-          ...this.$computedClass({
-            '&:hover:not(:active) .ui-select-dropdown-button': {
-              color: this.$themePalette.black,
-            },
-            '& .ui-select-dropdown-button': {
-              color: this.$themePalette.grey.v_700,
-            },
-          }),
-        };
       },
       labelClasses() {
         return {
@@ -981,6 +967,9 @@
       .ui-select-label-text {
         color: $ui-input-label-color--hover;
       }
+      .ui-select-dropdown-button {
+        color: $ui-input-button-color--hover;
+      }
     }
 
     &.is-active:not(.is-disabled) {
@@ -1089,6 +1078,7 @@
     font-size: $ui-input-text-font-size;
     font-weight: normal;
     line-height: 1.4;
+    color: $ui-input-text-color;
     cursor: pointer;
     user-select: none;
     border: 0;

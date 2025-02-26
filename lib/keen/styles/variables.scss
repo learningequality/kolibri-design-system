@@ -42,6 +42,7 @@ $ui-input-label-margin-bottom: 0 !default;
 $ui-input-label-top--inline: rem(23px) !default;
 
 // Input text
+$ui-input-text-color: $primary-text-color !default;
 $ui-input-text-font-size: rem(16px) !default;
 $ui-input-text-color--disabled: $disabled-text-color !default;
 
@@ -60,6 +61,7 @@ $ui-input-icon-margin-top: rem(4px) !default;
 $ui-input-icon-margin-top--with-label: rem(24px) !default;
 
 // Input buttons (dropdown button icon, clear input button icon)
+$ui-input-button-color--hover: $primary-text-color !default;
 $ui-input-button-opacity--disabled: 0.6 !default;
 $ui-input-button-size: rem(24px) !default;
 $ui-input-button-margin-top: rem(7px) !default;
