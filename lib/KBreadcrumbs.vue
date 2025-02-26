@@ -4,12 +4,13 @@
     <KListWithOverflow
       overflowDirection="start"
       :items="preparedCrumbs"
-      :showSingleItem="true"
+      :showAtLeastOne="true"
     >
       <!-- Render individual breadcrumb items -->
       <template #item="{ item, index }">
         <li
           ref="breadcrumbItems"
+          :key="index"
           :style="{
             maxWidth: index === preparedCrumbs.length - 1 ? lastBreadcrumbMaxWidth : 'none',
           }"

@@ -296,7 +296,7 @@
           lastItem.style.position = 'unset';
 
           // Remove last item from overflow list (so it stays visible)
-          this.overflowItems = overflowItemsIdx.slice(0, -1).map(idx => this.items[idx]);
+          this.overflowItems = overflowItemsIdx.slice(-1,1).map(idx => this.items[idx]);
         } else {
           this.overflowItems = overflowItemsIdx.map(idx => this.items[idx]);
         }
