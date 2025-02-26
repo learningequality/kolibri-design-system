@@ -74,6 +74,7 @@
           <UiIcon
             v-if="!clearableState"
             class="ui-select-dropdown-button"
+            :style="{ activeColorStyle }"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -967,6 +968,7 @@
       .ui-select-label-text {
         color: $ui-input-label-color--hover;
       }
+
       .ui-select-dropdown-button {
         color: $ui-input-button-color--hover;
       }

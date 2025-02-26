@@ -30,10 +30,7 @@
             ref="input"
             v-autofocus="autofocus"
             class="ui-textbox-input"
-            :style="{
-              color: $themeBrand.primary.v_600,
-              ...(isActive ? { borderBottomColor: $themeTokens.primaryDark } : {})
-            }"
+            :style="isActive ? { borderBottomColor: $themeTokens.primaryDark } : {}"
             :autocapitalize="autocapitalize ? autocapitalize : null"
             :autocomplete="autocomplete ? autocomplete : null"
             :disabled="disabled"
@@ -62,10 +59,7 @@
             v-autofocus="autofocus"
             :value="value"
             class="ui-textbox-textarea"
-            :style="{
-              color: $themeBrand.primary.v_600,
-              ...(isActive ? { borderBottomColor: $themeTokens.primaryDark } : {})
-            }"
+            :style="isActive ? { borderBottomColor: $themeTokens.primaryDark } : {}"
             :autocpitalize="autocapitalize ? autocapitalize : null"
             :autocomplete="autocomplete ? autocomplete : null"
             :disabled="disabled"
@@ -283,7 +277,7 @@
       labelStyles() {
         return {
           color: this.isActive && !this.isDisabled
-            ? this.$themePalette.primary.v_600 : this.$themePalette.grey.v_700
+            ? this.$themeBrand.primary.v_600 : this.$themePalette.grey.v_700
         };
       },
       hasLabel() {
