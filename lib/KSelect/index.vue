@@ -45,7 +45,9 @@
           v-if="label || $slots.default"
           class="ui-select-label-text"
           :class="labelClasses"
-          :style="{ ...activeColorStyle, color: $themePalette.grey.v_700 }"
+          :style="{
+            color: isActive  ? $themeTokens.primary : $themePalette.grey.v_700,
+          }"
         >
           <!-- @slot Optional slot as alternative to `label` prop -->
           <slot>{{ label }}</slot>
