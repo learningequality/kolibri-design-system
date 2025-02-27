@@ -46,7 +46,7 @@
           class="ui-select-label-text"
           :class="labelClasses"
           :style="{
-            color: isActive  ? $themeTokens.primary : $themePalette.grey.v_700,
+            color: isActive ? $themeTokens.primary : $themePalette.grey.v_700,
           }"
         >
           <!-- @slot Optional slot as alternative to `label` prop -->
