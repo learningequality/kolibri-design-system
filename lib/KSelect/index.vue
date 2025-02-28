@@ -965,14 +965,14 @@
     outline: none;
 
     &:hover:not(.is-disabled) {
-      border-bottom-color: $ui-input-border-color--hover;
+      border-bottom-color: $ui-input-border-color--hover !important;
 
       .ui-select-label-text {
         color: $ui-input-label-color--hover;
       }
 
       .ui-select-dropdown-button {
-        color: $ui-input-button-color--hover;
+        color: $ui-input-button-color--hover !important;
       }
     }
 

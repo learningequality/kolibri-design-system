@@ -443,12 +443,12 @@
 
     &:hover:not(.is-disabled) {
       .ui-textbox-label-text {
-        color: $ui-input-label-color--hover;
+        color: $ui-input-label-color--hover !important;
       }
 
       .ui-textbox-label,
       .ui-textbox-textarea {
-        border-bottom-color: $ui-input-border-color--hover;
+        border-bottom-color: $ui-input-border-color--hover !important;
       }
     }
 
