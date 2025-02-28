@@ -76,7 +76,7 @@
           <UiIcon
             v-if="!clearableState"
             class="ui-select-dropdown-button"
-            :style="{ color : isActive ? this.$themeTokens.primary : this.$themePalette.grey.v_700}"
+            :style="{ color: isActive ? $themeTokens.primary : $themePalette.grey.v_700 }"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
