@@ -76,7 +76,7 @@
           <UiIcon
             v-if="!clearableState"
             class="ui-select-dropdown-button"
-            :style="{ activeColorStyle }"
+            :style="activeColorStyle"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"

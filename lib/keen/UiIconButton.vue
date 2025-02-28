@@ -182,6 +182,7 @@
             }
           }
           style['--focus-ring-bg'] =this.$darken2(this.$themeBrand.primary.v_600)
+          return style;
         }
 
         return {};
