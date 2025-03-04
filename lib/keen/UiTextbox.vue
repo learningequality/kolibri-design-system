@@ -21,8 +21,7 @@
 
     <div class="ui-textbox-content">
       <label class="ui-textbox-label"
-             :style="{ 'border-bottom-color': isActive ? 
-               $themeBrand.primary.v_600 : $themePalette.grey.v_700 }"
+             :style="labelBorderStyles"
       >
         <div :class="['ui-input-content', inputContentClasses]">
           <input
@@ -92,7 +91,7 @@
           v-if="label || $slots.default"
           class="ui-textbox-label-text"
           :class="labelClasses"
-          :style="labelStyles"
+          :style="labelTextStyles"
         >
           <slot>{{ label }}</slot>
         </div>
@@ -274,10 +273,16 @@
           'is-floating': this.hasFloatingLabel && !this.isLabelInline,
         };
       },
-      labelStyles() {
+      labelTextStyles() {
         return {
           color: this.isActive && !this.isDisabled
-            ? this.$themeBrand.primary.v_600 : this.$themePalette.grey.v_700
+            ? `${this.$themeBrand.primary.v_600} !important` : this.$themePalette.grey.v_700
+        };
+      },
+      labelBorderStyles() {
+        return {
+          'border-bottom-color': this.isActive && !this.isDisabled
+            ? `${this.$themeBrand.primary.v_600} !important` : this.$themePalette.grey.v_700
         };
       },
       hasLabel() {

@@ -13,10 +13,7 @@
   <div
     class="ui-select"
     :class="classes"
-    :style="{
-      'border-bottom-color':
-        isActive && !disabled ? $themeBrand.primary.v_600 : $themePalette.grey.v_700,
-    }"
+    :style="borderStyle"
   >
     <input
       v-if="name"
@@ -45,9 +42,7 @@
           v-if="label || $slots.default"
           class="ui-select-label-text"
           :class="labelClasses"
-          :style="{
-            color: isActive ? $themeTokens.primary : $themePalette.grey.v_700,
-          }"
+          :style="LabelTextStyle"
         >
           <!-- @slot Optional slot as alternative to `label` prop -->
           <slot>{{ label }}</slot>
@@ -55,7 +50,7 @@
 
         <div
           class="ui-select-display"
-          :style="[activeBorderStyle]"
+          :style="activeBorderStyle"
         >
           <div
             class="ui-select-display-value"
@@ -76,7 +71,7 @@
           <UiIcon
             v-if="!clearableState"
             class="ui-select-dropdown-button"
-            :style="{ color: isActive ? $themeTokens.primary : $themePalette.grey.v_700 }"
+            :style=" computedIconStyle"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -516,7 +511,7 @@
       activeColorStyle() {
         if (this.isActive) {
           return {
-            color: this.$themeTokens.primary,
+            color: `${this.$themeTokens.primary} !important`,
           };
         }
 
@@ -525,7 +520,7 @@
       activeBorderStyle() {
         if (this.isActive && !this.clearableState) {
           return {
-            borderBottomColor: this.$themeTokens.primary,
+            borderBottomColor: `${this.$themeTokens.primary} !important`,
           };
         } else if (this.clearableState) {
           return {
@@ -535,11 +530,29 @@
 
         return {};
       },
+      borderStyle(){
+        return{
+          'border-bottom-color':
+            this.isActive && !this.disabled ? `${this.$themeBrand.primary.v_600} !important` : this.$themePalette.grey.v_700,
+        }
+      },
       clearableState() {
         return (
           this.clearable && this.selection && Object.keys(this.selection).length && !this.disabled
         );
       },
+      computedIconStyle() {
+        return {
+          color: this.isActive 
+            ? `${this.$themeTokens.primary} !important`
+            : `${this.$themePalette.grey.v_700} `,
+        };
+      },
+      LabelTextStyle(){
+        return {
+          color: this.isActive ? this.$themeTokens.primary : `${this.$themePalette.grey.v_700} !important`,
+        }
+      }
     },
 
     watch: {
@@ -976,13 +989,7 @@
       }
     }
 
-    &.is-active:not(.is-disabled) {
-      border-bottom-color: inherit;
-
-      .ui-icon {
-        color: inherit;
-      }
-    }
+   
 
     &.has-floating-label {
       .ui-select-label-text {
@@ -991,7 +998,6 @@
         display: table;
 
         &.is-inline {
-          color: inherit; // So the hover styles don't override it
           cursor: pointer;
           transform: translateY($ui-input-label-top--inline) scale(1.1);
         }
