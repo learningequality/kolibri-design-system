@@ -87,9 +87,9 @@
         <em>Use this only for messages that require immediate attention, such as critical errors or
           messages, as it interrupts the user's current activity.</em>
       </p>
-      <strong>Note:</strong> For errors or updates that need immediate user action, make sure that
+      <p>For errors or updates that need immediate user action, make sure that
       related elements (e.g., buttons) are <strong>in focus</strong> right after the message has
-      been read by the screen reader, so users can act on them.
+      been read by the screen reader, so users can act on them.</p>
 
       <p>Send assertive messages with <code>sendAssertiveMessage(message)</code>:</p>
 
