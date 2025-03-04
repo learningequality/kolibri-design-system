@@ -299,8 +299,19 @@
       },
       /** Updates start date with input from textbox */
       setStartDate(newVal) {
-        this.dateRange = { start: newVal, end: null };
-        this.validationMachine.send('REVALIDATE', { startDate: newVal, endDate: null });
+        // If new start date is later than the current end date, end date should be null
+        const start = this.createDate(newVal);
+        const end = this.createDate(this.dateRange.end);
+        const startAfterEnd = end && start > end;
+        // Update date range and send dates to validation machine
+        this.dateRange = {
+          start: newVal,
+          end: startAfterEnd ? null : this.dateRange.end,
+        };
+        this.validationMachine.send('REVALIDATE', {
+          startDate: newVal,
+          endDate: startAfterEnd ? null : this.dateRange.end,
+        });
       },
       /** Updates end date with input from textbox */
       setEndDate(newVal) {

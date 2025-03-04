@@ -57,6 +57,13 @@ export default {
         test: /rstIconReplacements.txt/,
         loader: 'raw-loader',
       });
+      // Allow raw files of `.vue` file from `/docs/examples` directory
+      // to be imported as strings with `?raw` query
+      config.module.rules.push({
+        resourceQuery: /raw/,
+        loader: 'raw-loader',
+        test: /examples\/.*\.vue$/,
+      });
       config.devtool = 'source-map';
     },
     cssSourceMap: true,

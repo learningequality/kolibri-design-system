@@ -8,6 +8,11 @@
     >
       <template if="loaded">
         <h1 class="header">
+          <KIconButton
+            icon="close"
+            class="close-icon"
+            @click="closeSideNav"
+          />
           <KLogo
             altText="Design System"
             size="60"
@@ -119,6 +124,9 @@
       throttleHandleScroll: throttle(function handleScroll() {
         window.sessionStorage.setItem('nav-scroll', this.$refs.links.scrollTop);
       }, 100),
+      closeSideNav() {
+        this.$emit('update-side-nav', false);
+      },
     },
   };
 
@@ -166,6 +174,7 @@
     left: 0;
     z-index: 100;
     width: $nav-width;
+    transition: transform 0.3s ease;
   }
 
   .sidenav {
@@ -183,6 +192,16 @@
 
   .nav-links {
     margin-top: 16px;
+  }
+
+  .close-icon {
+    display: none !important;
+  }
+
+  @media (max-width: 768px) {
+    .close-icon {
+      display: block !important;
+    }
   }
 
 </style>

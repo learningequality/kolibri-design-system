@@ -6,6 +6,11 @@
   >
     <div>
       <h1 class="header-text">
+        <KIconButton
+          icon="menu"
+          class="menu"
+          @click="toggleSideNav"
+        />
         <span :class="{ code: codeStyle }">{{ title }}</span>
         <a
           href="#"
@@ -90,6 +95,9 @@
       updateHighlight() {
         this.highlighed = ['', '#'].includes(window.location.hash);
       },
+      toggleSideNav() {
+        this.$emit('update-side-nav', true); // Emit value to parent
+      },
     },
   };
 
@@ -144,6 +152,10 @@
     font-weight: 400;
   }
 
+  .header-text > * {
+    vertical-align: middle;
+  }
+
   .icon-link {
     width: 14px;
     height: 14px;
@@ -155,6 +167,16 @@
   .highlighed {
     fill: $header-color;
     transform: scale(1.25);
+  }
+
+  .menu {
+    display: none !important;
+  }
+
+  @media (max-width: 768px) {
+    .menu {
+      display: inline-block !important;
+    }
   }
 
 </style>

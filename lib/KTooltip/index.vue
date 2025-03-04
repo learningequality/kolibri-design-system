@@ -34,8 +34,7 @@
 
   import isArray from 'lodash/isArray';
   import _useOverlay from '../composables/_useOverlay';
-  import Popper from './Popper';
-
+  import Popper from '../_Popper';
   /**
    * Used to create a tooltip.
    */

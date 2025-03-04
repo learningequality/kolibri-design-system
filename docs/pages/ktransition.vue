@@ -72,6 +72,19 @@
           </KTransition>
         </DocsShow>
       </section>
+
+      <section>
+        <h3><code>component-vertical-slide-out-in</code></h3>
+        <p>
+          Suitable when need to reduce vertical jarring effect during the entrance/exit of a
+          component.
+        </p>
+
+        <DocsExample
+          exampleId="vertical-slide"
+          loadExample="KTransition/VerticalSlide.vue"
+        />
+      </section>
     </DocsPageSection>
 
     <DocsPageSection

@@ -27,6 +27,15 @@ global.afterEach(() => {
   });
 });
 
+// Configure special test blocks for visual tests
+global.describe.visual = (name, fn) => {
+  global.describe(`[Visual] ${name}`, fn);
+};
+
+global.it.visual = (name, fn) => {
+  global.it(`[Visual] ${name}`, fn);
+};
+
 // Register Vue plugins and components
 Vue.use(VueRouter);
 Vue.use(KThemePlugin);
@@ -36,7 +45,9 @@ Vue.config.silent = true;
 Vue.config.devtools = false;
 Vue.config.productionTip = false;
 
-Object.defineProperty(window, 'scrollTo', { value: () => {}, writable: true });
+if (process.env.VISUAL_TESTING !== 'true' && typeof window !== 'undefined') {
+  Object.defineProperty(window, 'scrollTo', { value: () => {}, writable: true });
+}
 
 // Shows better NodeJS unhandled promise rejection errors
 process.on('unhandledRejection', (reason, p) => {
