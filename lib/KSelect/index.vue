@@ -71,7 +71,7 @@
           <UiIcon
             v-if="!clearableState"
             class="ui-select-dropdown-button"
-            :style=" computedIconStyle"
+            :style="computedIconStyle"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -530,11 +530,13 @@
 
         return {};
       },
-      borderStyle(){
-        return{
+      borderStyle() {
+        return {
           'border-bottom-color':
-            this.isActive && !this.disabled ? `${this.$themeBrand.primary.v_600} !important` : this.$themePalette.grey.v_700,
-        }
+            this.isActive && !this.disabled
+              ? `${this.$themeBrand.primary.v_600} !important`
+              : this.$themePalette.grey.v_700,
+        };
       },
       clearableState() {
         return (
@@ -543,16 +545,18 @@
       },
       computedIconStyle() {
         return {
-          color: this.isActive 
+          color: this.isActive
             ? `${this.$themeTokens.primary} !important`
             : `${this.$themePalette.grey.v_700} `,
         };
       },
-      LabelTextStyle(){
+      LabelTextStyle() {
         return {
-          color: this.isActive ? this.$themeTokens.primary : `${this.$themePalette.grey.v_700} !important`,
-        }
-      }
+          color: this.isActive
+            ? this.$themeTokens.primary
+            : `${this.$themePalette.grey.v_700} !important`,
+        };
+      },
     },
 
     watch: {
@@ -988,8 +992,6 @@
         color: $ui-input-button-color--hover !important;
       }
     }
-
-   
 
     &.has-floating-label {
       .ui-select-label-text {
