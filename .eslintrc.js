@@ -18,11 +18,29 @@ esLintConfig.overrides.push({
   rules: nuxtDocsRules,
 });
 
+const nuxtExampleOverrides = {
+  files: ['docs/examples/**/*.vue'],
+  rules: {
+    // Allow console.log in examples
+    'no-console': 0,
+  }
+};
+esLintConfig.overrides.push(nuxtExampleOverrides);
 
 // Allow nuxt resources to be found
 esLintConfig.settings['import/resolver'].nuxt = {
   extensions: ['.js', '.vue'],
   nuxtSrcDir: 'docs',
+};
+
+// Remove linting errors for the globals defined in the jest-puppeteer package and testUtils
+esLintConfig.globals = {
+  ...esLintConfig.globals,
+  page: true,
+  browser: true,
+  context: true,
+  puppeteerConfig: true,
+  jestPuppeteer: true,
 };
 
 module.exports = esLintConfig;

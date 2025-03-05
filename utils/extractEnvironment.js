@@ -30,6 +30,7 @@ function getEnvironmentInfo() {
     return env;
   }
 
+  env.pull_request = true;
   // BRANCH might be something like `pull/79/head`
   const reMatch = /^(pull\/\d+)\/head$/.exec(process.env.BRANCH);
   if (reMatch) {

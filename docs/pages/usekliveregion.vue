@@ -84,8 +84,13 @@
       <p>
         Sending an assertive message updates the text content of
         <code>aria-live="assertive"</code> region.
-        <em>It should be used with caution because it disrupts the user's flow. Use it only to send
-          messages that require immediate attention, such as errors.</em>
+        <em>Use this only for messages that require immediate attention, such as critical errors or
+          messages, as it interrupts the user's current activity.</em>
+      </p>
+      <p>
+        For errors or updates that need immediate user action, make sure that related elements
+        (e.g., buttons) are <strong>in focus</strong> right after the message has been read by the
+        screen reader, so users can act on them.
       </p>
 
       <p>Send assertive messages with <code>sendAssertiveMessage(message)</code>:</p>

@@ -33,7 +33,7 @@ The documentation development server can be used to visually test components upd
 
 **Playground page**
 
-Open [/docs/pages/playground.vue](../docs/pages/playground.vue) and add a component you're working on there. Then, as you're developing, you will see it update live at http://localhost:4000/playground. See an example in the playground file.
+Open [/docs/pages/playground/index.vue](../docs/pages/playground/index.vue) and add a component you're working on there. Then, as you're developing, you will see it update live at http://localhost:4000/playground. See an example in the playground file.
 
 If you are working on a new component, make sure to register it first in `KThemePlugin` as described in the "How to add a new component" section above in order to make it available on the playground page.
 
@@ -43,7 +43,7 @@ Please do not commit any updates to the playground file as it's meant as your lo
 
 The majority of existing components have documentation pages that often show live components in different states. One example of this can be seen on the `KBreadcrumbs` component documentation page at http://localhost:4000/kbreadcrumbs. The documentation page source code is located in [`/docs/pages/kbreadcrumbs.vue`](../docs/pages/kbreadcrumbs.vue).
 
-You can find links to documentation pages for existing components on the documentation website in the "Code library components" section at the bottom of the side navigation. 
+You can find links to documentation pages for existing components on the documentation website in the "Code library components" section at the bottom of the side navigation.
 
 If there is already a documentation page for a component, please ensure that any new updates don't break examples on the page. Additionally, you may also consider adding new examples to the documentation if applicable. See [How to update the documentation website](./04_how_to_update_docs.md) to find out more about updating documentation content. You can also review existing documentation pages in the [`/docs/pages`](../docs/pages) directory to familiarize yourself with the source code for the documentation.
 

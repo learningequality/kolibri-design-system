@@ -1,13 +1,25 @@
 <template>
 
   <div class="content-wrapper">
-    <SideNav />
+    <SideNav
+      :class="{ show: isSideNavVisible, 'side-nav': true }"
+      @update-side-nav="handleSideNavUpdate"
+    />
+
+    <div
+      v-if="isSideNavVisible"
+      class="overlay"
+      @click="handleSideNavUpdate(false)"
+    ></div>
+
     <Header
       :sections="pageSections"
       :title="page.title"
       :codeStyle="page.isCode"
       class="floating-header"
+      @update-side-nav="handleSideNavUpdate"
     />
+
     <div class="border">
       <!-- second header used as a spacer -->
       <Header
@@ -81,6 +93,11 @@
         default: false,
       },
     },
+    data() {
+      return {
+        isSideNavVisible: false, // Track state received from child
+      };
+    },
     computed: {
       page() {
         let path = this.$route.path;
@@ -152,6 +169,11 @@
         return sections;
       },
     },
+    methods: {
+      handleSideNavUpdate(visible) {
+        this.isSideNavVisible = visible; // Update parent state
+      },
+    },
     head() {
       return {
         title: this.fullTitle,
@@ -165,17 +187,45 @@
 <style lang="scss" scoped>
 
   @import '~/assets/definitions';
+  @import '../../../lib/styles/definitions';
 
   .floating-header {
     position: fixed;
     top: 0;
     right: 0;
     left: $nav-width;
-    z-index: 100;
+    z-index: 95;
+  }
+
+  @media screen and (max-width: 768px) {
+    .floating-header {
+      left: 0;
+    }
+  }
+
+  .side-nav {
+    transform: translateX(0);
+    @extend %dropshadow-2dp;
+  }
+
+  @media (max-width: 768px) {
+    .side-nav {
+      transform: translateX(-100%);
+    }
+
+    .side-nav.show {
+      transform: translateX(0);
+    }
   }
 
   .content-wrapper {
     margin-left: $nav-width;
+  }
+
+  @media (max-width: 768px) {
+    .content-wrapper {
+      margin-left: 0;
+    }
   }
 
   .border {
@@ -186,6 +236,18 @@
     padding-right: 32px;
     padding-bottom: 400px;
     padding-left: 32px;
+  }
+
+  .overlay {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 98;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
   }
 
 </style>

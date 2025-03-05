@@ -11,10 +11,16 @@
 
   const TransitionKinds = {
     COMPONENT_FADE_OUT_IN: 'component-fade-out-in',
+    COMPONENT_VERTICAL_SLIDE_OUT_IN: 'component-vertical-slide-out-in',
   };
+
   const TransitionAttrs = {
     [TransitionKinds.COMPONENT_FADE_OUT_IN]: {
       name: 'component-fade',
+      mode: 'out-in',
+    },
+    [TransitionKinds.COMPONENT_VERTICAL_SLIDE_OUT_IN]: {
+      name: 'component-vertical-slide',
       mode: 'out-in',
     },
   };
@@ -59,6 +65,18 @@
   .component-fade-enter,
   .component-fade-leave-to {
     opacity: 0;
+  }
+
+  /********* component-vertical-slide **********/
+  .component-vertical-slide-enter-active,
+  .component-vertical-slide-leave-active {
+    transition: all 0.3s ease;
+  }
+
+  .component-vertical-slide-enter,
+  .component-vertical-slide-leave-to {
+    opacity: 0;
+    transform: translateY(-50%);
   }
 
 </style>

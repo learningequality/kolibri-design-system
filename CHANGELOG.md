@@ -7,6 +7,508 @@ Changelog is rather internal in nature. See release notes for the public overvie
 <!-- [DO NOT REMOVE-USED BY GH ACTION] PASTE CHANGELOG -->
 
 
+- [#945]
+  - **Description:** Add automated workflow for managing community contribution labels when issues are assigned/unassigned to external contributors
+  - **Products impact:** none
+  - **Addresses:** learningequality/kolibri#12923
+  - **Components:** -
+  - **Breaking:** no
+  - **Impacts a11y:** no
+  - **Guidance:** -
+
+[#945]: https://github.com/learningequality/kolibri-design-system/pull/945
+
+
+
+- [#948]
+  - **Description:** Updates contact information in the contributing guidelines
+  - **Products impact:** none
+  - **Addresses:** -
+  - **Components:** -
+  - **Breaking:** -
+  - **Impacts a11y:** -
+  - **Guidance:** -
+
+[#948]: https://github.com/learningequality/kolibri-design-system/pull/948
+
+
+
+- [#943]
+  - **Description:** Bumps KDS version to 5.0.1
+  - **Products impact:** -
+  - **Addresses:** -.
+  - **Components:** -.
+  - **Breaking:** no
+  - **Impacts a11y:** no
+  - **Guidance:** -.
+
+[#943]: https://github.com/learningequality/kolibri-design-system/pull/943
+
+
+
+- [#942]
+  - **Description:** Match the hover background color of flat-button KButton to that of KIconButton
+  - **Products impact:** bugfix
+  - **Addresses:** -
+  - **Components:** KButton.
+  - **Breaking:** no
+  - **Impacts a11y:** no
+  - **Guidance:**
+
+[#942]: https://github.com/learningequality/kolibri-design-system/pull/942
+
+
+
+- [#918]
+  - **Description:** Adds dynamic loading of component examples in `DocsExample`
+  - **Products impact:** new API
+  - **Addresses:** https://github.com/learningequality/kolibri-design-system/issues/845
+  - **Components:** -
+  - **Breaking:** no
+  - **Impacts a11y:** no
+  - **Guidance:** -
+
+[#918]: https://github.com/learningequality/kolibri-design-system/pull/918
+
+- [#918]
+  - **Description:** Adds new transition: `component-vertical-slide-out-in` in KTransition suitable when need to reduce vertical jarring effect during the entrance/exit of a
+component
+  - **Products impact:** new API
+  - **Addresses:** https://github.com/learningequality/kolibri-design-system/issues/845
+  - **Components:** KTransition
+  - **Breaking:** no
+  - **Impacts a11y:** no
+  - **Guidance:** -
+
+[#918]: https://github.com/learningequality/kolibri-design-system/pull/918
+
+- [#918]
+  - **Description:** Adds new Icon: `github`
+  - **Products impact:** new icon
+  - **Addresses:** https://github.com/learningequality/kolibri-design-system/issues/845
+  - **Components:** KIcon
+  - **Breaking:** no
+  - **Impacts a11y:** no
+  - **Guidance:** -
+
+[#918]: https://github.com/learningequality/kolibri-design-system/pull/918
+
+- [#918]
+  - **Description:** Adds new required prop for `DocsExample` component: `exampleId`
+  - **Products impact:** new API
+  - **Addresses:** https://github.com/learningequality/kolibri-design-system/issues/845
+  - **Components:** -
+  - **Breaking:** no
+  - **Impacts a11y:** no
+  - **Guidance:** -
+
+[#918]: https://github.com/learningequality/kolibri-design-system/pull/918
+
+
+- [#935]
+  - **Description:** Add visual test for KIconButton component
+  - **Products impact:** None
+  - **Addresses:**  https://github.com/learningequality/kolibri-design-system/issues/927
+  - **Components:** None
+  - **Breaking:** No
+  - **Impacts a11y:** No
+  - **Guidance:**  Not required
+
+[#935]: https://github.com/learningequality/kolibri-design-system/pull/935
+
+
+
+- [#911]
+  - **Description:** Bump the github group with 2 updates
+  - **Products impact:** Dev Dependency upgrade
+  - **Addresses:** -
+  - **Components:** -
+  - **Breaking:** -
+  - **Impacts a11y:** -
+  - **Guidance:** -
+
+[#911]: https://github.com/learningequality/kolibri-design-system/pull/911
+
+
+
+- [#939]
+  - **Description:** Fixed KIcon alignment in KButton and KLabeledIcon to ensure vertical centering.
+  - **Products impact:** Kolibri
+  - **Addresses:** Issue #931
+  - **Components:** KButton and KLabeledIcon
+  - **Breaking:** Will this change break something in a consumer? Choose from: yes / no
+  - **Impacts a11y:** no
+  - **Guidance:** This update improves the visual alignment of KIcon within KButton and KLabeledIcon, ensuring a consistent and centered appearance.
+
+[#939]: https://github.com/learningequality/kolibri-design-system/pull/939
+
+
+
+- [#876]
+  - **Description:** Bump color from 3.2.1 to 4.2.3
+  - **Products impact:** Dev Dependency upgrade
+  - **Addresses:** -
+  - **Components:** -
+  - **Breaking:** -
+  - **Impacts a11y:** -
+  - **Guidance:** -
+
+[#876]: https://github.com/learningequality/kolibri-design-system/pull/876
+
+
+
+- [#888]
+  - **Description:** Updates KDateRange logic so that end date is cleared only if start date is after end date; users can now set start date via keyboard, then select end date using the calendar view.
+  - **Products impact:** none
+  - **Addresses:** https://github.com/learningequality/kolibri-design-system/issues/817
+  - **Components:** -
+  - **Breaking:** no
+  - **Impacts a11y:** -
+  - **Guidance:** -
+
+[#888]: https://github.com/learningequality/kolibri-design-system/pull/888
+
+
+
+- [#917]
+  - **Description:** Added the missing usage section for the KTextTruncator component in the documentation
+  - **Products impact:** none
+  - **Addresses:** https://github.com/learningequality/kolibri-design-system/issues/899
+  - **Components:** -
+  - **Breaking:** -
+  - **Impacts a11y:** -
+  - **Guidance:** -
+
+[#917]: https://github.com/learningequality/kolibri-design-system/pull/917
+
+
+
+- [#856]
+  - **Description:** Adds aria-haspopup and aria-expanded attributes to KButton when used with dropdown menus to improve screen reader feedback
+  - **Products impact:** Anhancement
+  - **Addresses:** https://github.com/learningequality/kolibri-design-system/issues/832
+  - **Components:** KButton
+  - **Breaking:** no
+  - **Impacts a11y:** yes
+  - **Guidance:** WNo changes required for existing implementations. The ARIA attributes are automatically added when KButton is used with dropdown menus through the menu slot.
+
+[#856]: https://github.com/learningequality/kolibri-design-system/pull/856
+
+
+
+- [#840]
+  - **Description:** Corrected **Shift+Tab** navigation behavior to follow the expected reverse order of focusable elements within cells.
+  - **Products impact:** bugfix
+  - **Addresses:** #837 #804
+  - **Components:** KTable
+  - **Breaking:** no
+  - **Impacts a11y:** yes
+  - **Guidance:** No special guidance required for consumers.
+
+[#840]: https://github.com/learningequality/kolibri-design-system/pull/840
+
+
+
+- [#932]
+  - **Description:** Fix the action not updating some data in the contributions tracking sheet
+  - **Products impact:** none
+  - **Addresses:** -
+  - **Components:** -
+  - **Breaking:** -
+  - **Impacts a11y:** -
+  - **Guidance:** -
+
+[#932]: https://github.com/learningequality/kolibri-design-system/pull/932
+
+
+
+- [#910]
+  - **Description:** Pinned Node.js (18.20.6) and Yarn (1.22.22) versions using Volta.
+  - **Products impact:** none (internal updates).
+  - **Addresses:** Compatibility issues with Node.js and Yarn versions across contributors' environments.
+  - **Components:** Documentation updates for KDS setup.
+  - **Breaking:** no.
+  - **Impacts a11y:** no.
+  - **Guidance:** Developers need to install Volta if not already installed and ensure they follow the updated setup instructions in the documentation.
+
+[#910]: https://github.com/learningequality/kolibri-design-system/pull/910
+
+
+
+- [#929]
+  - **Description:** Bumps KDS version to 5.0.0
+  - **Products impact:** -
+  - **Addresses:** -.
+  - **Components:** -.
+  - **Breaking:** no
+  - **Impacts a11y:** no
+  - **Guidance:** -.
+
+[#929]: https://github.com/learningequality/kolibri-design-system/pull/929
+
+
+
+- [#919]
+  - **Description:** Additional category icons are now available
+  - **Products impact:** -
+  - **Addresses:** -
+  - **Components:** KIcon
+  - **Breaking:** No
+  - **Impacts a11y:** No
+  - **Guidance:** New icons can now be used
+
+[#919]: https://github.com/learningequality/kolibri-design-system/pull/919
+
+
+
+- [#923]
+  - **Description:** Fixes glob query in extrac api script.
+  - **Products impact:** bugfix.
+  - **Addresses:** -.
+  - **Components:** Docs.
+  - **Breaking:** no
+  - **Impacts a11y:** no
+  - **Guidance:** .
+
+[#923]: https://github.com/learningequality/kolibri-design-system/pull/923
+
+
+
+- [#922]
+  - **Description:** Fixes playground path in dev docs and gitignore
+  - **Products impact:** internal docs.
+  - **Addresses:** -.
+  - **Components:** -.
+  - **Breaking:** -
+  - **Impacts a11y:** -
+  - **Guidance:** -.
+
+[#922]: https://github.com/learningequality/kolibri-design-system/pull/922
+
+
+
+- [#873]
+  - **Description:**  Implemented `DocsExample` component with toggle functionality for switching between an example and its code snippet in the KDS documentation.
+  - **Products impact:** none
+  - **Addresses:** https://github.com/learningequality/kolibri-design-system/issues/826
+  - **Components:** -
+  - **Breaking:** no
+  - **Impacts a11y:** no
+  - **Guidance:** -
+
+[#873]: https://github.com/learningequality/kolibri-design-system/pull/873
+
+
+
+- [#916]
+  - **Description:** Fixes the no usable sandbox error observed in visual test workflow after merging of visual testing PR.
+  - **Products impact:** bugfix
+  - **Addresses:** -
+  - **Components:** -
+  - **Breaking:** -
+  - **Impacts a11y:** -
+  - **Guidance:** -
+
+[#916]: https://github.com/learningequality/kolibri-design-system/pull/916
+
+
+
+- [#901]
+  - **Description:** Integrates visual testing setup to KDS.
+  - **Products impact:** -
+  - **Addresses:** -
+  - **Components:** -
+  - **Breaking:** -
+  - **Impacts a11y:** -
+  - **Guidance:** -
+
+[#901]: https://github.com/learningequality/kolibri-design-system/pull/901
+
+
+
+- [#804]
+  - **Description:** Refactored `handleKeydown` method into smaller, modular methods for handling different key events. Ensured that the `Tab` key mimics the functionality of the `ArrowRight` key, and the `Shift+Tab` key mimics the functionality of the `ArrowLeft` key. \
+  - **Products impact:** none
+  - **Addresses:** #795
+  - **Components:** `KTable `
+  - **Breaking:** no
+  - **Impacts a11y:** yes
+  - **Guidance:** No special guidance required for consumers.
+
+[#804]: https://github.com/learningequality/kolibri-design-system/pull/804
+
+
+
+- [#870]
+  - **Description:** remove text truncation for the download button
+  - **Products impact:** Choose from - none
+  - **Addresses:** https://github.com/learningequality/kolibri/issues/5557
+  - **Components:** KDropdownMenu,UiMenu
+  - **Breaking:** no
+  - **Impacts a11y:** yes
+  - **Guidance:** -
+
+[#870]: https://github.com/learningequality/kolibri-design-system/pull/870
+
+
+
+- [#907]
+  - **Description:** Skip sync projects job if the owner is not LearningEquality
+  - **Products impact:**  -.
+  - **Addresses:** https://github.com/learningequality/kolibri-design-system/issues/906.
+  - **Components:** -.
+  - **Breaking:** -
+  - **Impacts a11y:** -
+  - **Guidance:** -.
+
+[#907]: https://github.com/learningequality/kolibri-design-system/pull/907
+
+
+
+- [#903]
+  - **Description:** Fixes infinite recursive error when KModal request the focus.
+  - **Products impact:** bugfix.
+  - **Addresses:** https://github.com/learningequality/studio/issues/4772, https://github.com/learningequality/kolibri-design-system/issues/228.
+  - **Components:** KModal.
+  - **Breaking:** no
+  - **Impacts a11y:** no
+  - **Guidance:** .
+
+[#903]: https://github.com/learningequality/kolibri-design-system/pull/903
+
+
+
+- [#862]
+  - **Description:** Improves docs mobile responsiveness by adding a menu hamburguer to open docs sidenav on mobile devices.
+  - **Products impact:** bugfix
+  - **Addresses:** N/A
+  - **Components:** KDS Docs: SideNav, Header
+  - **Breaking:** no
+  - **Impacts a11y:** no
+  - **Guidance:**
+
+[#862]: https://github.com/learningequality/kolibri-design-system/pull/862
+  - The new toggle functionality allows users to show and hide the side navigation bar, with a close button to close it manually.
+  - The overlay provides a better user experience by dimming the content when the sidebar is open in mobile view.
+  - No breaking changes were introduced, so this update can be safely merged into existing applications.
+
+
+
+- [#904]
+  - **Description:** Transform project numbers to int in the Sync KDS Roadmap Project Statuses workflow.
+  - **Products impact:** -.
+  - **Addresses:** -.
+  - **Components:** -.
+  - **Breaking:** no
+  - **Impacts a11y:** no
+  - **Guidance:** -
+
+[#904]: https://github.com/learningequality/kolibri-design-system/pull/904
+
+
+
+- [#882]
+  - **Description:** Adds Adds two workflows to keep KDS Roadmap statuses updated
+  - **Products impact:** none.
+  - **Addresses:** -.
+  - **Components:** -.
+  - **Breaking:** no
+  - **Impacts a11y:** no
+  - **Guidance:** -.
+
+[#882]: https://github.com/learningequality/kolibri-design-system/pull/882
+
+
+
+- [#898]
+  - **Description:** Fixes KModal backdrop entrance transition not being smooth.
+  - **Products impact : bugfix .
+  - **Addresses:** https://github.com/learningequality/kolibri-design-system/issues/848.
+  - **Components:** KModal
+  - **Breaking:** no
+  - **Impacts a11y:** no
+  - **Guidance:** -.
+
+[#898]: https://github.com/learningequality/kolibri-design-system/pull/898
+
+
+
+- [#823]
+  - **Description:** Bump globby from 6.1.0 to 14.0.2
+  - **Products impact:** Dev Dependency upgrade
+  - **Addresses:** -
+  - **Components:** -
+  - **Breaking:** -
+  - **Impacts a11y:** -
+  - **Guidance:** -
+
+[#823]: https://github.com/learningequality/kolibri-design-system/pull/823
+
+
+
+- [#877]
+  - **Description:** Teleport KSelect dropdown to the Overlay layer using Popper.
+  - **Products impact:** bugfix.
+  - **Addresses:**https://github.com/learningequality/kolibri-design-system/issues/324, https://github.com/learningequality/kolibri-design-system/issues/690.
+  - **Components:** KSelect.
+  - **Breaking:** no
+  - **Impacts a11y:** no
+  - **Guidance:** -.
+
+[#877]: https://github.com/learningequality/kolibri-design-system/pull/877
+
+- [#877]
+  - **Description:** Removes internal KModal calculations to modify its content height if it had a KSelect inside.
+  - **Products impact:** bugfix.
+  - **Addresses:**https://github.com/learningequality/kolibri-design-system/issues/324.
+  - **Components:** KModal.
+  - **Breaking:** no
+  - **Impacts a11y:** no
+  - **Guidance:** -.
+
+[#877]: https://github.com/learningequality/kolibri-design-system/pull/877
+
+
+
+- [#879]
+  - **Description:** Adds logic to mount overlay layer if it needed when we call getOverlayEl.
+  - **Products impact:** bugfix.
+  - **Addresses:** https://github.com/learningequality/kolibri-design-system/issues/878.
+  - **Components:** useKOverlay.
+  - **Breaking:** no
+  - **Impacts a11y:** no
+  - **Guidance:** -.
+
+[#879]: https://github.com/learningequality/kolibri-design-system/pull/879
+
+
+
+- [#893]
+  - **Description:** Bump kds version to 5.0.0-rc12.
+  - **Products impact:** -.
+  - **Addresses:** -.
+  - **Components:** -.
+  - **Breaking:** -.
+  - **Impacts a11y:** -.
+  - **Guidance:** -.
+
+[#893]: https://github.com/learningequality/kolibri-design-system/pull/893
+
+
+
+- [#887]
+  - **Description:** Added `margin-top: 16px` and `margin-bottom: 16px` to the empty table message to ensure consistent spacing with the table header and data rows.
+  - **Products impact:** bugfix
+  - **Addresses:** -  #881
+  - **Components:** KTable
+  - **Breaking:** no
+  - **Impacts a11y:** no
+  - **Guidance:**
+
+[#887]: https://github.com/learningequality/kolibri-design-system/pull/887
+
+
+
 - [#847]
   - **Description:** Improvement of the Table of Contents filter to work properly with browsers' command.
   - **Products impact:** Updated API
@@ -1077,7 +1579,7 @@ Changelog is rather internal in nature. See release notes for the public overvie
 [#741]: https://github.com/learningequality/kolibri-design-system/pull/751
 
 - [#650]
-  - **Description:** Add `KRadioButtonGroup` component to fix keyboard navigation in radio button groups in Firefox 
+  - **Description:** Add `KRadioButtonGroup` component to fix keyboard navigation in radio button groups in Firefox
   - **Products impact:** New API
   - **Addresses:** https://github.com/learningequality/kolibri/issues/10491
   - **Components:** `KRadioButtonGroup`
@@ -1135,9 +1637,9 @@ Changelog is rather internal in nature. See release notes for the public overvie
 
 - [705]
   - **Description:**  Update`KCard`  updates: Adds 'preserveAboveTitle`, `preserveBelowTitle`, `preserveFooter` prop for flexible  slot management.
-  - **Products impact:**  Card updates 
+  - **Products impact:**  Card updates
   - **Addresses:** https://github.com/learningequality/kolibri-design-system/issues/702
-  - **Components:** `KCard` 
+  - **Components:** `KCard`
   - **Breaking:** N0
   - **Impacts a11y:** No
   - **Guidance:**
@@ -1167,7 +1669,7 @@ Changelog is rather internal in nature. See release notes for the public overvie
 [#718]: https://github.com/learningequality/kolibri-design-system/pull/718
 
 - [#687]
-  - **Description:** Adds logic that inserts ARIA live assertive and polite regions to an application's document body during KDS initialization and documents this on the new "Installation" page. Relatedly adds `useKLiveRegion` composable with public methods for updating the live regions with assertive and polite messages. 
+  - **Description:** Adds logic that inserts ARIA live assertive and polite regions to an application's document body during KDS initialization and documents this on the new "Installation" page. Relatedly adds `useKLiveRegion` composable with public methods for updating the live regions with assertive and polite messages.
   - **Products impact:** new API
   - **Addresses:** https://github.com/learningequality/kolibri-design-system/issues/668
   - **Components:** `useKLiveRegion`
@@ -1178,10 +1680,10 @@ Changelog is rather internal in nature. See release notes for the public overvie
 [#687]: https://github.com/learningequality/kolibri-design-system/pull/687
 
 - [#688]
-  - **Description:**  Update`KCard` styling 
-  - **Products impact:**  Card updates 
-  - **Addresses:** 
-  - **Components:** `KCard` 
+  - **Description:**  Update`KCard` styling
+  - **Products impact:**  Card updates
+  - **Addresses:**
+  - **Components:** `KCard`
   - **Breaking:** N0
   - **Impacts a11y:** No
   - **Guidance:**
@@ -1190,7 +1692,7 @@ Changelog is rather internal in nature. See release notes for the public overvie
 
 - [#707]
   - **Description:** Card Validations
-  - **Products impact:**  
+  - **Products impact:**
   - **Addresses:** [#695](https://github.com/learningequality/kolibri-design-system/issues/695)
   - **Components:** `KCard`
   - **Breaking:** No
@@ -1200,10 +1702,10 @@ Changelog is rather internal in nature. See release notes for the public overvie
 [#707]: https://github.com/learningequality/kolibri-design-system/pull/707
 
 - [#706]
-  - **Description:** Add new alignment options to `KCard` 
-  - **Products impact:**  new alignment 
+  - **Description:** Add new alignment options to `KCard`
+  - **Products impact:**  new alignment
   - **Addresses:** [#701](https://github.com/learningequality/kolibri-design-system/issues/701)
-  - **Components:** `KCard` 
+  - **Components:** `KCard`
   - **Breaking:** N0
   - **Impacts a11y:** No
   - **Guidance:**
@@ -1212,10 +1714,10 @@ Changelog is rather internal in nature. See release notes for the public overvie
 
 
 - [#709]
-  - **Description:**  Update spaces to the latest design`KCard` 
-  - **Products impact:**  Card updates 
+  - **Description:**  Update spaces to the latest design`KCard`
+  - **Products impact:**  Card updates
   - **Addresses:** [#704](https://github.com/learningequality/kolibri-design-system/issues/704)
-  - **Components:** `KCard` 
+  - **Components:** `KCard`
   - **Breaking:** N0
   - **Impacts a11y:** No
   - **Guidance:**
@@ -1409,7 +1911,7 @@ Changelog is rather internal in nature. See release notes for the public overvie
   - **Components:** KModal.
   - **Breaking:** no
   - **Impacts a11y:** no
-  - **Guidance:** 
+  - **Guidance:**
 
 - [#680]
   - **Description:** Fixes the calculation of overflowed items when changes in the size of the list item slots occur.
@@ -1418,7 +1920,7 @@ Changelog is rather internal in nature. See release notes for the public overvie
   - **Components:** KListWithOverflow.
   - **Breaking:** no
   - **Impacts a11y:** no
-  - **Guidance:** 
+  - **Guidance:**
 
 [#680]: https://github.com/learningequality/kolibri-design-system/pull/680
 

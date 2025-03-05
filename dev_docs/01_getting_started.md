@@ -4,8 +4,7 @@ The design system has two primary parts, the UI component library [`/lib`](../li
 
 ## Prerequisites
 
-- Node.js 18.x (see [Node Version Manager](https://github.com/nvm-sh/nvm))
-- Yarn >=1.22.22
+The project requires `Node 18.X` as the runtime and `Yarn >= 1.22.X` as the package manager. We make use of [`Volta`](https://docs.volta.sh/guide/getting-started) to manage the same automatically. Please make sure you have volta installed and your shell configured to use volta.
 
 ## Troubleshooting
 
@@ -43,7 +42,7 @@ yarn lint-fix    # run the linter and auto-formatter once
 yarn lint-watch  # run the linter in watch mode, without the auto-formatter
 ```
 
-You're now ready to code! 
+You're now ready to code!
 
 ## Next steps
 
@@ -52,6 +51,8 @@ You're now ready to code!
 - If you'd like to update the component library, continue to [How to update the component library](./03_how_to_update_library.md).
 
 The guidelines referenced above should be sufficient for the most common tasks. There are a few additional developer documentation pages available. However, these pages contain information that is more internal in nature or related to specialized tasks:
+
+- [Visual Testing](./07_visual_testing_guide.md)
 - [How to update the documentation website](./04_how_to_update_docs.md)
 - [Icons](./05_icons.md)
 - [Miscellaneous](./06_misc.md)
