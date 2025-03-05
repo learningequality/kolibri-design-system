@@ -11,7 +11,10 @@
   <div
     class="ui-select"
     :class="classes"
-    :style="borderStyle"
+    :style="{
+      'border-bottom-color':
+        isActive && !disabled ? $themeBrand.primary.v_600 : $themePalette.grey.v_700,
+    }"
   >
     <input
       v-if="name"
@@ -41,7 +44,9 @@
           v-if="label || $slots.default"
           class="ui-select-label-text"
           :class="labelClasses"
-          :style="LabelTextStyle"
+          :style="{
+            color: isActive ? $themeTokens.primary : $themePalette.grey.v_700,
+          }"
         >
           <!-- @slot Optional slot as alternative to `label` prop -->
           <slot>{{ label }}</slot>
@@ -70,7 +75,7 @@
           <UiIcon
             v-if="!clearableState"
             class="ui-select-dropdown-button"
-            :style="computedIconStyle"
+            :style="{ color: isActive ? $themeTokens.primary : $themePalette.grey.v_700 }"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -553,7 +558,7 @@
       activeColorStyle() {
         if (this.isActive) {
           return {
-            color: `${this.$themeTokens.primary} !important`,
+            color: this.$themeTokens.primary,
           };
         }
 
@@ -562,7 +567,7 @@
       activeBorderStyle() {
         if (this.isActive && !this.clearableState) {
           return {
-            borderBottomColor: `${this.$themeTokens.primary} !important`,
+            borderBottomColor: this.$themeTokens.primary,
           };
         } else if (this.clearableState) {
           return {
@@ -576,7 +581,7 @@
         return {
           'border-bottom-color':
             this.isActive && !this.disabled
-              ? `${this.$themeBrand.primary.v_600} !important`
+              ? this.$themeBrand.primary.v_600
               : this.$themePalette.grey.v_700,
         };
       },
@@ -584,20 +589,6 @@
         return (
           this.clearable && this.selection && Object.keys(this.selection).length && !this.disabled
         );
-      },
-      computedIconStyle() {
-        return {
-          color: this.isActive
-            ? `${this.$themeTokens.primary} !important`
-            : `${this.$themePalette.grey.v_700} `,
-        };
-      },
-      LabelTextStyle() {
-        return {
-          color: this.isActive
-            ? this.$themeTokens.primary
-            : `${this.$themePalette.grey.v_700} !important`,
-        };
       },
     },
 
@@ -948,11 +939,11 @@
     border-radius: 2px 2px 0 0;
     outline: none;
 
-    &:hover:not(.is-disabled) {
+    &:hover:not(.is-disabled, .is-active) {
       border-bottom-color: $ui-input-border-color--hover !important;
 
       .ui-select-label-text {
-        color: $ui-input-label-color--hover;
+        color: $ui-input-label-color--hover !important;
       }
 
       .ui-select-dropdown-button {

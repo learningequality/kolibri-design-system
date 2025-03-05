@@ -91,7 +91,7 @@
           v-if="label || $slots.default"
           class="ui-textbox-label-text"
           :class="labelClasses"
-          :style="labelTextStyles"
+          :style="labelStyles"
         >
           <slot>{{ label }}</slot>
         </div>
@@ -277,16 +277,16 @@
           'is-floating': this.hasFloatingLabel && !this.isLabelInline,
         };
       },
-      labelTextStyles() {
+      labelStyles() {
         return {
           color: this.isActive && !this.isDisabled
-            ? `${this.$themeBrand.primary.v_600} !important` : this.$themePalette.grey.v_700
+            ? this.$themeBrand.primary.v_600 : this.$themePalette.grey.v_700
         };
       },
       labelBorderStyles() {
         return {
           'border-bottom-color': this.isActive && !this.isDisabled
-            ? `${this.$themeBrand.primary.v_600} !important` : this.$themePalette.grey.v_700
+            ? this.$themeBrand.primary.v_600 : this.$themePalette.grey.v_700
         };
       },
       hasLabel() {
@@ -450,7 +450,7 @@
     align-items: flex-start;
     margin-bottom: $ui-input-margin-bottom;
 
-    &:hover:not(.is-disabled) {
+    &:hover:not(.is-disabled):not(.is-active){
       .ui-textbox-label-text {
         color: $ui-input-label-color--hover !important;
       }
