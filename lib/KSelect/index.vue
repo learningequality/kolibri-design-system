@@ -577,14 +577,6 @@
 
         return {};
       },
-      borderStyle() {
-        return {
-          'border-bottom-color':
-            this.isActive && !this.disabled
-              ? this.$themeBrand.primary.v_600
-              : this.$themePalette.grey.v_700,
-        };
-      },
       clearableState() {
         return (
           this.clearable && this.selection && Object.keys(this.selection).length && !this.disabled
