@@ -930,7 +930,7 @@
     border-bottom-width: $ui-input-border-width;
     border-radius: 2px 2px 0 0;
     outline: none;
-
+    /* stylelint-disable */
     &:hover:not(.is-disabled):not(.is-active) {
       border-bottom-color: $ui-input-border-color--hover !important;
 
