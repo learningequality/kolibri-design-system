@@ -931,7 +931,7 @@
     border-radius: 2px 2px 0 0;
     outline: none;
 
-    &:hover:not(.is-disabled, .is-active) {
+    &:hover:not(.is-disabled):not(.is-active){
       border-bottom-color: $ui-input-border-color--hover !important;
 
       .ui-select-label-text {
