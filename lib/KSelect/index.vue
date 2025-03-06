@@ -11,10 +11,7 @@
   <div
     class="ui-select"
     :class="classes"
-    :style="{
-      'border-bottom-color':
-        isActive && !disabled ? $themeBrand.primary.v_600 : $themePalette.grey.v_700,
-    }"
+    :style="borderStyle"
   >
     <input
       v-if="name"
@@ -577,6 +574,13 @@
 
         return {};
       },
+      borderStyle(){
+        return{
+          'border-bottom-color':
+            this.isActive && !this.disabled ?
+              this.$themeBrand.primary.v_600 : this.$themePalette.grey.v_700,
+        }
+      },
       clearableState() {
         return (
           this.clearable && this.selection && Object.keys(this.selection).length && !this.disabled
@@ -931,7 +935,7 @@
     border-radius: 2px 2px 0 0;
     outline: none;
 
-    &:hover:not(.is-disabled):not(.is-active){
+    &:hover:not(.is-disabled):not(.is-active) {
       border-bottom-color: $ui-input-border-color--hover !important;
 
       .ui-select-label-text {
