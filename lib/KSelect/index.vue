@@ -11,7 +11,10 @@
   <div
     class="ui-select"
     :class="classes"
-    :style="borderStyle"
+    :style="{
+      'border-bottom-color':
+        isActive && !disabled ? $themeBrand.primary.v_600 : $themePalette.grey.v_700,
+    }"
   >
     <input
       v-if="name"
@@ -573,13 +576,6 @@
         }
 
         return {};
-      },
-      borderStyle(){
-        return{
-          'border-bottom-color':
-            this.isActive && !this.disabled ?
-              this.$themeBrand.primary.v_600 : this.$themePalette.grey.v_700,
-        }
       },
       clearableState() {
         return (
