@@ -45,11 +45,11 @@
           >
             <KIcon
               icon="readSolid"
-              style=" position: relative; top: 2px; margin-right: 4px;font-size: 13px"
+              style="position: relative; top: 2px; margin-right: 4px; font-size: 13px"
             />
             Read
           </span>
-          <span style=" font-size: 14px;color: #616161"> Short Activity </span>
+          <span style="font-size: 14px; color: #616161"> Short Activity </span>
         </div>
       </template>
     </DocsKCard>
