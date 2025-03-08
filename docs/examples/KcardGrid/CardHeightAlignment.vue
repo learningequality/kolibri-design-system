@@ -34,11 +34,16 @@
       <template #footer>
         <div style="margin-top: 10px; color: #616161">
           <span
-            style=" padding: 4px 8px; margin-right: 8px;background-color: #dddddd; border-radius: 4px"
+            style="
+  padding: 4px 8px;
+  margin-right: 8px;
+  background-color: #dddddd;
+  border-radius: 4px;
+            "
           >
             Biology
           </span>
-          <span style=" padding: 4px 8px;background-color: #dddddd; border-radius: 4px">
+          <span style="padding: 4px 8px; background-color: #dddddd; border-radius: 4px">
             Short Activity
           </span>
         </div>
@@ -102,11 +107,16 @@
       <template #footer>
         <div style="margin-top: 10px; color: #616161">
           <span
-            style=" padding: 4px 8px; margin-right: 8px;background-color: #dddddd; border-radius: 4px"
+            style="
+  padding: 4px 8px;
+  margin-right: 8px;
+  background-color: #dddddd;
+  border-radius: 4px;
+            "
           >
             Short Activity
           </span>
-          <span style=" padding: 4px 8px;background-color: #dddddd; border-radius: 4px">
+          <span style="padding: 4px 8px; background-color: #dddddd; border-radius: 4px">
             Biology
           </span>
         </div>

@@ -33,7 +33,7 @@
           >
             <KIcon
               icon="readSolid"
-              style=" position: relative; top: 2px; margin-right: 4px;font-size: 13px"
+              style="position: relative; top: 2px; margin-right: 4px; font-size: 13px"
             />
             Read
           </span>
