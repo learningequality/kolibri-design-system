@@ -108,3 +108,4 @@ export const scrollToPos = async (selector, scrollOptions) => {
 export const waitFor = async selector => {
   await page.locator(selector).wait();
 };
+
