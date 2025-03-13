@@ -149,11 +149,7 @@
       this.trigger = this.$el.parentElement;
       this.trigger.setAttribute('aria-haspopup', 'menu');
       this.trigger.setAttribute('aria-expanded', false);
-<<<<<<< HEAD
-    },
-=======
-      },
->>>>>>> d6339922e (ensure changes are kept in renamed vue file)
+    },      
     beforeDestroy() {
       window.removeEventListener('keydown', this.handleOpenMenuNavigation, true);
     },
