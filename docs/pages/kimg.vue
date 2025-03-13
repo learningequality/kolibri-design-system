@@ -48,6 +48,8 @@
         default.
       </p>
 
+      <!-- Can't use DocsExample as the same renders the -->
+      <!-- example in a block element by default -->
       <DocsShowCode language="html">
         <span>
           <KImg
@@ -73,22 +75,19 @@
         <DocsInternalLink href="/kimg#prop:scaleType"> scale type </DocsInternalLink> by default.
       </p>
 
-      <DocsShowCode language="html">
-        <div>
-          <KImg
-            src="hummingbird.jpg"
-            altText="A sitting hummingbird"
-          />
-        </div>
-      </DocsShowCode>
-      <DocsShow block>
-        <div>
-          <KImg
-            :src="require('../assets/hummingbird-small-cc-by-sa-4.jpg')"
-            altText="A sitting hummingbird"
-          />
-        </div>
-      </DocsShow>
+      <DocsExample
+        loadExample="KImg/Base"
+        exampleId="base"
+      >
+        <template #html>
+          <DocsShowCode language="html">
+            <KImg
+              src="hummingbird.jpg"
+              altText="A sitting hummingbird"
+            />
+          </DocsShowCode>
+        </template>
+      </DocsExample>
 
       <h3>Alternative text</h3>
 
