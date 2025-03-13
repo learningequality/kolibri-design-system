@@ -81,10 +81,12 @@
       >
         <template #html>
           <DocsShowCode language="html">
-            <KImg
-              src="hummingbird.jpg"
-              altText="A sitting hummingbird"
-            />
+            <div>
+              <KImg
+                src="hummingbird.jpg"
+                altText="A sitting hummingbird"
+              />
+            </div>
           </DocsShowCode>
         </template>
       </DocsExample>
@@ -140,26 +142,23 @@
         <em>never distorts an image or impairs its quality.</em>
       </p>
 
-      <DocsShowCode language="html">
-        <div>
-          <KImg
-            src="hummingbird.jpg"
-            altText="A sitting hummingbird"
-            scaleType="centerInside"
-            :style="{ height: '200px', width: '100%', maxWidth: '500px' }"
-          />
-        </div>
-      </DocsShowCode>
-      <DocsShow block>
-        <div>
-          <KImg
-            altText="A sitting hummingbird"
-            scaleType="centerInside"
-            :src="require('../assets/hummingbird-small-cc-by-sa-4.jpg')"
-            :style="{ height: '200px', width: '100%', maxWidth: '500px' }"
-          />
-        </div>
-      </DocsShow>
+      <DocsExample
+        loadExample="KImg/FitCenterInside"
+        exampleId="fit-center-inside"
+      >
+        <template #html>
+          <DocsShowCode language="html">
+            <div>
+              <KImg
+                src="hummingbird.jpg"
+                altText="A sitting hummingbird"
+                scaleType="centerInside"
+                :style="{ height: '200px', width: '100%', maxWidth: '500px' }"
+              />
+            </div>
+          </DocsShowCode>
+        </template>
+      </DocsExample>
 
       <h4><code style="font-weight: bold">'contain'</code> scale type</h4>
 
@@ -170,26 +169,23 @@
         <em>may impair an image's quality by enlarging it above its original size</em>.
       </p>
 
-      <DocsShowCode language="html">
-        <div>
-          <KImg
-            src="hummingbird.jpg"
-            altText="A sitting hummingbird"
-            scaleType="contain"
-            :style="{ height: '200px', width: '100%', maxWidth: '500px' }"
-          />
-        </div>
-      </DocsShowCode>
-      <DocsShow block>
-        <div>
-          <KImg
-            altText="A sitting hummingbird"
-            scaleType="contain"
-            :src="require('../assets/hummingbird-small-cc-by-sa-4.jpg')"
-            :style="{ height: '200px', width: '100%', maxWidth: '500px' }"
-          />
-        </div>
-      </DocsShow>
+      <DocsExample
+        loadExample="KImg/FitContain"
+        exampleId="fit-contain"
+      >
+        <template #html>
+          <DocsShowCode language="html">
+            <div>
+              <KImg
+                src="hummingbird.jpg"
+                altText="A sitting hummingbird"
+                scaleType="contain"
+                :style="{ height: '200px', width: '100%', maxWidth: '500px' }"
+              />
+            </div>
+          </DocsShowCode>
+        </template>
+      </DocsExample>
 
       <h4><code style="font-weight: bold">'fitXY'</code> scale type</h4>
 
@@ -200,26 +196,23 @@
           aspect ratio.</em>
       </p>
 
-      <DocsShowCode language="html">
-        <div>
-          <KImg
-            src="hummingbird.jpg"
-            altText="A sitting hummingbird"
-            scaleType="fitXY"
-            :style="{ height: '200px', width: '100%', maxWidth: '500px' }"
-          />
-        </div>
-      </DocsShowCode>
-      <DocsShow block>
-        <div>
-          <KImg
-            altText="A sitting hummingbird"
-            scaleType="fitXY"
-            :src="require('../assets/hummingbird-small-cc-by-sa-4.jpg')"
-            :style="{ height: '200px', width: '100%', maxWidth: '500px' }"
-          />
-        </div>
-      </DocsShow>
+      <DocsExample
+        loadExample="KImg/FitXY"
+        exampleId="fit-xy"
+      >
+        <template #html>
+          <DocsShowCode language="html">
+            <div>
+              <KImg
+                src="hummingbird.jpg"
+                altText="A sitting hummingbird"
+                scaleType="fitXY"
+                :style="{ height: '200px', width: '100%', maxWidth: '500px' }"
+              />
+            </div>
+          </DocsShowCode>
+        </template>
+      </DocsExample>
 
       <h3>Aspect ratio</h3>
 
@@ -238,24 +231,22 @@
         has width by setting it explicitly or by using a block element.
       </p>
 
-      <DocsShowCode language="html">
-        <div>
-          <KImg
-            src="hummingbird.jpg"
-            altText="A sitting hummingbird"
-            aspectRatio="4:3"
-          />
-        </div>
-      </DocsShowCode>
-      <DocsShow block>
-        <div>
-          <KImg
-            :src="require('../assets/hummingbird-small-cc-by-sa-4.jpg')"
-            altText="A sitting hummingbird"
-            aspectRatio="4:3"
-          />
-        </div>
-      </DocsShow>
+      <DocsExample
+        loadExample="KImg/AspectRatio"
+        exampleId="aspect-ratio"
+      >
+        <template #html>
+          <DocsShowCode language="html">
+            <div>
+              <KImg
+                src="hummingbird.jpg"
+                altText="A sitting hummingbird"
+                aspectRatio="4:3"
+              />
+            </div>
+          </DocsShowCode>
+        </template>
+      </DocsExample>
 
       <h3>Placeholder area</h3>
 
@@ -273,52 +264,10 @@
         slot to place content in the area.
       </p>
 
-      <DocsShowCode language="html">
-        <div>
-          <KImg
-            src=""
-            isDecorative
-            aspectRatio="16:9"
-            :style="{ maxWidth: '200px' }"
-          >
-            <template #placeholder>
-              <span
-                :style="{
-                  display: 'flex',
-                  height: '100%',
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                }"
-              >
-                <KIcon icon="readSolid" />
-              </span>
-            </template>
-          </KImg>
-        </div>
-      </DocsShowCode>
-      <DocsShow block>
-        <div>
-          <KImg
-            src=""
-            isDecorative
-            aspectRatio="16:9"
-            :style="{ maxWidth: '200px' }"
-          >
-            <template #placeholder>
-              <span
-                :style="{
-                  display: 'flex',
-                  height: '100%',
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                }"
-              >
-                <KIcon icon="readSolid" />
-              </span>
-            </template>
-          </KImg>
-        </div>
-      </DocsShow>
+      <DocsExample
+        loadExample="KImg/Placeholder"
+        exampleId="placeholder"
+      />
 
       <h3>Displaying content on top of an image</h3>
 
@@ -339,6 +288,9 @@
         slots to place content on top of the image container.
       </p>
 
+      <!-- Can't use DocsExample to render this example -->
+      <!-- as the same renders the example into a block element -->
+      <!-- by default -->
       <DocsShowCode language="html">
         <KImg
           src="hummingbird.jpg"
@@ -358,6 +310,7 @@
           </template>
         </KImg>
       </DocsShowCode>
+
       <DocsShow>
         <KImg
           :src="require('../assets/hummingbird-small-cc-by-sa-4.jpg')"
