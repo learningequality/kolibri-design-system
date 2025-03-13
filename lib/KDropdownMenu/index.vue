@@ -33,9 +33,9 @@
 <script>
 
   import { computed } from 'vue';
-  import UiMenu from './keen/UiMenu';
-  import UiPopover from './keen/UiPopover';
-  import useKContextMenu from './composables/_useKContextMenu';
+  import UiMenu from '../keen/UiMenu';
+  import UiPopover from '../keen/UiPopover';
+  import useKContextMenu from '../composables/_useKContextMenu';
 
   /**
    * The KDropdownMenu component is used to contain multiple actions
