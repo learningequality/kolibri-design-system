@@ -1,5 +1,4 @@
 <template>
-
   <KCardGrid
     layout="1-2-3"
     :loading="loading"
@@ -10,15 +9,12 @@
       preserveAboveTitle
     >
       <template #aboveTitle>
-        <div style="height: 24px">
-          <KLabeledIcon
-            icon="readSolid"
-            label="Read"
-          />
+        <div class="aboveTitle">
+          <KLabeledIcon icon="readSolid" label="Read" />
         </div>
       </template>
       <template #title>
-        <div style="height: 52px">
+        <div class="titleArea">
           <KTextTruncator
             :maxLines="2"
             text="(1) Learn everything about hummingbirds: their habitats, feeding patterns, and stunning flight abilities"
@@ -32,20 +28,9 @@
         />
       </template>
       <template #footer>
-        <div style="margin-top: 10px; color: #616161">
-          <span
-            style="
-  padding: 4px 8px;
-  margin-right: 8px;
-  background-color: #dddddd;
-  border-radius: 4px;
-            "
-          >
-            Biology
-          </span>
-          <span style="padding: 4px 8px; background-color: #dddddd; border-radius: 4px">
-            Short Activity
-          </span>
+        <div class="footerContainer">
+          <span class="pill">Biology</span>
+          <span class="pill">Short Activity</span>
         </div>
       </template>
     </DocsKCard>
@@ -56,15 +41,12 @@
       preserveAboveTitle
     >
       <template #aboveTitle>
-        <div style="height: 24px">
-          <KLabeledIcon
-            icon="readSolid"
-            label="Read"
-          />
+        <div class="aboveTitle">
+          <KLabeledIcon icon="readSolid" label="Read" />
         </div>
       </template>
       <template #title>
-        <div style="height: 52px">
+        <div class="titleArea">
           <KTextTruncator
             :maxLines="2"
             text="(2) Short title"
@@ -78,7 +60,7 @@
         />
       </template>
       <template #footer>
-        <div style="margin-top: 10px"></div>
+        <div class="footerEmpty"></div>
       </template>
     </DocsKCard>
 
@@ -88,10 +70,10 @@
       preserveAboveTitle
     >
       <template #aboveTitle>
-        <div style="height: 24px"></div>
+        <div class="aboveTitle"></div>
       </template>
       <template #title>
-        <div style="height: 52px">
+        <div class="titleArea">
           <KTextTruncator
             :maxLines="2"
             text="(3) Learn everything about hummingbirds: their habitats, feeding patterns, and stunning flight abilities"
@@ -105,47 +87,48 @@
         />
       </template>
       <template #footer>
-        <div style="margin-top: 10px; color: #616161">
-          <span
-            style="
-  padding: 4px 8px;
-  margin-right: 8px;
-  background-color: #dddddd;
-  border-radius: 4px;
-            "
-          >
-            Short Activity
-          </span>
-          <span style="padding: 4px 8px; background-color: #dddddd; border-radius: 4px">
-            Biology
-          </span>
+        <div class="footerContainer">
+          <span class="pill">Short Activity</span>
+          <span class="pill">Biology</span>
         </div>
       </template>
     </DocsKCard>
   </KCardGrid>
-
 </template>
 
-
 <script>
-
-  import KLabeledIcon from '../../../lib/KLabeledIcon.vue';
-  import KTextTruncator from '../../../lib/KTextTruncator.vue';
-  import DocsKCard from '../../pages-components/DocsKCard.vue';
-
-  export default {
-    name: 'CardHeightAlignmentExample',
-    components: { KLabeledIcon, KTextTruncator, DocsKCard },
-    data() {
-      return {
-        loading: true,
-      };
-    },
-    mounted() {
-      setTimeout(() => {
-        this.loading = false;
-      }, 3000);
-    },
-  };
-
+export default {
+  data() {
+    return {
+      loading: true,
+    };
+  },
+  mounted() {
+    setTimeout(() => {
+      this.loading = false;
+    }, 3000);
+  },
+};
 </script>
+
+<style scoped>
+.aboveTitle {
+  height: 24px;
+}
+.titleArea {
+  height: 52px;
+}
+.footerContainer {
+  margin-top: 10px;
+  color: #616161;
+}
+.footerEmpty {
+  margin-top: 10px;
+}
+.pill {
+  padding: 4px 8px;
+  margin-right: 8px;
+  background-color: #dddddd;
+  border-radius: 4px;
+}
+</style>
