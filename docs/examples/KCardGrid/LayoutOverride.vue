@@ -1,4 +1,5 @@
 <template>
+
   <KCardGrid
     layout="1-2-3"
     :layoutOverride="layoutOverride"
@@ -12,7 +13,7 @@
       orientation="vertical"
     >
       <template #title>
-        <div class="titleArea">
+        <div class="title-area">
           <KTextTruncator
             :maxLines="2"
             :text="`(${i}) Learn everything about hummingbirds: their habitats, feeding patterns, and stunning flight abilities`"
@@ -24,8 +25,8 @@
         <img
           src="/api/placeholder/400/300"
           alt="Hummingbird on a branch"
-          class="hummingbirdImg"
-        />
+          class="hummingbird-img"
+        >
       </template>
 
       <template #belowTitle>
@@ -36,47 +37,55 @@
       </template>
     </DocsKCard>
   </KCardGrid>
+
 </template>
 
+
 <script>
-export default {
-  data() {
-    return {
-      loading: true,
-      layoutOverride: [
-        {
-          breakpoints: [0, 1],
-          columnGap: '20px',
-          rowGap: '20px',
-        },
-        {
-          breakpoints: [4, 5, 6, 7],
-          cardsPerRow: 4,
-        },
-      ],
-      skeletonsConfig: [
-        {
-          breakpoints: [0, 1, 2, 3, 4, 5, 6, 7],
-          orientation: 'vertical',
-          thumbnailDisplay: 'large',
-        },
-      ],
-    };
-  },
-  mounted() {
-    setTimeout(() => {
-      this.loading = false;
-    }, 3000);
-  },
-};
+
+  export default {
+    data() {
+      return {
+        loading: true,
+        layoutOverride: [
+          {
+            breakpoints: [0, 1],
+            columnGap: '20px',
+            rowGap: '20px',
+          },
+          {
+            breakpoints: [4, 5, 6, 7],
+            cardsPerRow: 4,
+          },
+        ],
+        skeletonsConfig: [
+          {
+            breakpoints: [0, 1, 2, 3, 4, 5, 6, 7],
+            orientation: 'vertical',
+            thumbnailDisplay: 'large',
+          },
+        ],
+      };
+    },
+    mounted() {
+      setTimeout(() => {
+        this.loading = false;
+      }, 3000);
+    },
+  };
+
 </script>
 
+
 <style scoped>
-.titleArea {
-  height: 52px;
-}
-.hummingbirdImg {
-  width: 100%;
-  object-fit: cover;
-}
+
+  .title-area {
+    height: 52px;
+  }
+
+  .hummingbird-img {
+    width: 100%;
+    object-fit: cover;
+  }
+
 </style>

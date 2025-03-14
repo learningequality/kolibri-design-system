@@ -1,4 +1,5 @@
 <template>
+
   <KCardGrid
     layout="1-2-3"
     :loading="loading"
@@ -9,12 +10,15 @@
       preserveAboveTitle
     >
       <template #aboveTitle>
-        <div class="aboveTitle">
-          <KLabeledIcon icon="readSolid" label="Read" />
+        <div class="above-title">
+          <KLabeledIcon
+            icon="readSolid"
+            label="Read"
+          />
         </div>
       </template>
       <template #title>
-        <div class="titleArea">
+        <div class="title-area">
           <KTextTruncator
             :maxLines="2"
             text="(1) Learn everything about hummingbirds: their habitats, feeding patterns, and stunning flight abilities"
@@ -28,7 +32,7 @@
         />
       </template>
       <template #footer>
-        <div class="footerContainer">
+        <div class="footer-container">
           <span class="pill">Biology</span>
           <span class="pill">Short Activity</span>
         </div>
@@ -41,12 +45,15 @@
       preserveAboveTitle
     >
       <template #aboveTitle>
-        <div class="aboveTitle">
-          <KLabeledIcon icon="readSolid" label="Read" />
+        <div class="above-title">
+          <KLabeledIcon
+            icon="readSolid"
+            label="Read"
+          />
         </div>
       </template>
       <template #title>
-        <div class="titleArea">
+        <div class="title-area">
           <KTextTruncator
             :maxLines="2"
             text="(2) Short title"
@@ -60,7 +67,7 @@
         />
       </template>
       <template #footer>
-        <div class="footerEmpty"></div>
+        <div class="footer-empty"></div>
       </template>
     </DocsKCard>
 
@@ -70,10 +77,10 @@
       preserveAboveTitle
     >
       <template #aboveTitle>
-        <div class="aboveTitle"></div>
+        <div class="above-title"></div>
       </template>
       <template #title>
-        <div class="titleArea">
+        <div class="title-area">
           <KTextTruncator
             :maxLines="2"
             text="(3) Learn everything about hummingbirds: their habitats, feeding patterns, and stunning flight abilities"
@@ -87,48 +94,59 @@
         />
       </template>
       <template #footer>
-        <div class="footerContainer">
+        <div class="footer-container">
           <span class="pill">Short Activity</span>
           <span class="pill">Biology</span>
         </div>
       </template>
     </DocsKCard>
   </KCardGrid>
+
 </template>
 
+
 <script>
-export default {
-  data() {
-    return {
-      loading: true,
-    };
-  },
-  mounted() {
-    setTimeout(() => {
-      this.loading = false;
-    }, 3000);
-  },
-};
+
+  export default {
+    data() {
+      return {
+        loading: true,
+      };
+    },
+    mounted() {
+      setTimeout(() => {
+        this.loading = false;
+      }, 3000);
+    },
+  };
+
 </script>
 
+
 <style scoped>
-.aboveTitle {
-  height: 24px;
-}
-.titleArea {
-  height: 52px;
-}
-.footerContainer {
-  margin-top: 10px;
-  color: #616161;
-}
-.footerEmpty {
-  margin-top: 10px;
-}
-.pill {
-  padding: 4px 8px;
-  margin-right: 8px;
-  background-color: #dddddd;
-  border-radius: 4px;
-}
+
+  .above-title {
+    height: 24px;
+  }
+
+  .title-area {
+    height: 52px;
+  }
+
+  .footer-container {
+    margin-top: 10px;
+    color: #616161;
+  }
+
+  .footer-empty {
+    margin-top: 10px;
+  }
+
+  .pill {
+    padding: 4px 8px;
+    margin-right: 8px;
+    background-color: #dddddd;
+    border-radius: 4px;
+  }
+
 </style>
