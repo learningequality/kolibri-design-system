@@ -1,3 +1,9 @@
+const plugins = ['~/plugins/load-common-components.js', '~/plugins/load-lib-components.js'];
+
+if (process.env.VISUAL_TESTING === 'true') {
+  plugins.push('~~/jest.conf/visual.load-test-components.js');
+}
+
 export default {
   mode: 'universal',
   head: {
@@ -15,7 +21,7 @@ export default {
     ],
   },
   srcDir: './docs/',
-  plugins: ['~/plugins/load-common-components.js', '~/plugins/load-lib-components.js'],
+  plugins: plugins,
   css: ['normalize.css/normalize.css', '~/assets/main'],
   modulesDir: ['node_modules', 'docs'], // allow custom DocsShowCode loader to be found
   build: {

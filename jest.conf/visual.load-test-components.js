@@ -5,3 +5,6 @@ import KDropdownMenuTest from '~~/lib/KDropdownMenu/__tests__/components/KDropdo
 
 Vue.component('KButtonWithDropdownTest', KButtonWithDropdownTest);
 Vue.component('KDropdownMenuTest', KDropdownMenuTest);
+
+
+

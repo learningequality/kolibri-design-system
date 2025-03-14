@@ -7,6 +7,84 @@ Changelog is rather internal in nature. See release notes for the public overvie
 <!-- [DO NOT REMOVE-USED BY GH ACTION] PASTE CHANGELOG -->
 
 
+- [#897]
+  - **Description:** MIgrated test from enzyme to Vue testing library
+  - **Products impact:**  none
+  - **Addresses:** https://github.com/learningequality/kolibri-design-system/issues/510
+  - **Components:** none
+  - **Breaking:** no
+  - **Impacts a11y:** no
+  - **Guidance:** -
+
+[#897]: https://github.com/learningequality/kolibri-design-system/pull/897
+
+
+
+- [#937]
+  - **Description:** Allow object component rendering and unmount previoius component on render
+  - **Products impact:** internal
+  - **Addresses:** .
+  - **Components:** .
+  - **Breaking:**
+  - **Impacts a11y:**
+  - **Guidance:**
+
+[#937]: https://github.com/learningequality/kolibri-design-system/pull/937
+
+
+
+- [#959]
+  - **Description:** Bump axios from 1.7.9 to 1.8.2
+  - **Products impact:** Dev Dependency upgrade
+  - **Addresses:** -
+  - **Components:** -
+  - **Breaking:** -
+  - **Impacts a11y:** -
+  - **Guidance:** -
+
+[#959]: https://github.com/learningequality/kolibri-design-system/pull/959
+
+
+
+- [#912]
+  - **Description:** Bump tibdex/github-app-token from 1 to 2
+  - **Products impact:** Dev Dependency upgrade
+  - **Addresses:** -
+  - **Components:** -
+  - **Breaking:** -
+  - **Impacts a11y:** -
+  - **Guidance:** -
+
+[#912]: https://github.com/learningequality/kolibri-design-system/pull/912
+
+
+
+- [#928]
+  - **Description:** Bump @babel/core from 7.26.0 to 7.26.7 in the babel group
+  - **Products impact:** Dev Dependency upgrade
+  - **Addresses:** -
+  - **Components:** -
+  - **Breaking:** -
+  - **Impacts a11y:** -
+  - **Guidance:** -
+
+[#928]: https://github.com/learningequality/kolibri-design-system/pull/928
+
+
+
+- [#957]
+  - **Description:** Bump prismjs from 1.29.0 to 1.30.0
+  - **Products impact:** Dev Dependency upgrade
+  - **Addresses:** -
+  - **Components:** -
+  - **Breaking:** -
+  - **Impacts a11y:** -
+  - **Guidance:** -
+
+[#957]: https://github.com/learningequality/kolibri-design-system/pull/957
+
+
+
 - [#954]
   - **Description:** Updates visual tests workflow skip paths just to run on chnges on the lib/ folder and the visual testing config files.
   - **Products impact:** -.
