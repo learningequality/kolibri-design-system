@@ -1,19 +1,17 @@
 <template>
 
-  <div>
-    <KImg
-      src=""
-      isDecorative
-      aspectRatio="16:9"
-      :style="{ maxWidth: '200px' }"
-    >
-      <template #placeholder>
-        <span class="placeholder">
-          <KIcon icon="readSolid" />
-        </span>
-      </template>
-    </KImg>
-  </div>
+  <KImg
+    src=""
+    isDecorative
+    aspectRatio="16:9"
+    :style="{ maxWidth: '200px' }"
+  >
+    <template #placeholder>
+      <span class="placeholder">
+        <KIcon icon="readSolid" />
+      </span>
+    </template>
+  </KImg>
 
 </template>
 
