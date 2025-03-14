@@ -17,6 +17,7 @@
 
   import Prism from 'prismjs';
   import 'prismjs/themes/prism.css';
+  import 'prismjs/components/prism-scss';
   import 'prismjs/plugins/normalize-whitespace/prism-normalize-whitespace';
   import PrismComponent from 'vue-prism-component';
 
