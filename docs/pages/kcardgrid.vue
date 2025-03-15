@@ -841,5 +841,3 @@
 <style scoped>
   /* Additional doc page styles if needed */
 </style>
-
-
