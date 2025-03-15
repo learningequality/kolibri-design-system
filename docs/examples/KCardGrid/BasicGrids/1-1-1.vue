@@ -8,7 +8,7 @@
       orientation="horizontal"
     >
       <template #title>
-        <div class="title-area">
+        <div :style="{ height: '52px' }">
           <KTextTruncator
             :maxLines="2"
             :text="`(${i}) Learn everything about hummingbirds: their habitats, feeding patterns, and stunning flight abilities`"
@@ -20,7 +20,7 @@
         <img
           src="/api/placeholder/400/300"
           alt="Hummingbird on a branch"
-          class="hummingbird-img"
+          style="width: 100%; max-width: 250px; object-fit: cover"
         >
       </template>
 
@@ -32,60 +32,29 @@
       </template>
 
       <template #footer>
-        <div class="footer-container">
-          <span class="read-badge">
+        <div style="margin-top: 10px">
+          <span
+            style="
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 8px;
+  margin-right: 8px;
+  font-size: 14px;
+  color: #616161;
+  background-color: #dddddd;
+  border-radius: 4px;
+            "
+          >
             <KIcon
               icon="readSolid"
-              class="icon-adjust"
+              style="position: relative; top: 2px; margin-right: 4px; font-size: 13px"
             />
             Read
           </span>
-          <span class="short-activity">Short Activity</span>
+          <span style="font-size: 14px; color: #616161">Short Activity</span>
         </div>
       </template>
     </DocsKCard>
   </KCardGrid>
 
 </template>
-
-
-<style scoped>
-
-  .title-area {
-    height: 52px;
-  }
-
-  .hummingbird-img {
-    width: 100%;
-    max-width: 250px;
-    object-fit: cover;
-  }
-
-  .footer-container {
-    margin-top: 10px;
-  }
-
-  .read-badge {
-    display: inline-flex;
-    align-items: center;
-    padding: 4px 8px;
-    margin-right: 8px;
-    font-size: 14px;
-    color: #616161;
-    background-color: #dddddd;
-    border-radius: 4px;
-  }
-
-  .icon-adjust {
-    position: relative;
-    top: 2px;
-    margin-right: 4px;
-    font-size: 13px;
-  }
-
-  .short-activity {
-    font-size: 14px;
-    color: #616161;
-  }
-
-</style>

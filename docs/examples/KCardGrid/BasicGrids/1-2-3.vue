@@ -12,7 +12,7 @@
       orientation="vertical"
     >
       <template #title>
-        <div class="title-area">
+        <div :style="{ height: '52px' }">
           <KTextTruncator
             :maxLines="2"
             :text="`(${i}) Learn everything about hummingbirds: their habitats, feeding patterns, and stunning flight abilities`"
@@ -32,7 +32,7 @@
           <span class="read-badge">
             <KIcon
               icon="readSolid"
-              class="icon-adjust"
+              :style="{ position: 'relative', top: '2px', marginRight: '4px', fontSize: '13px' }"
             />
             Read
           </span>
@@ -81,10 +81,6 @@
 
 <style scoped>
 
-  .title-area {
-    height: 52px;
-  }
-
   .footer-container {
     margin-top: 10px;
   }
@@ -98,13 +94,6 @@
     color: #616161;
     background-color: #dddddd;
     border-radius: 4px;
-  }
-
-  .icon-adjust {
-    position: relative;
-    top: 2px;
-    margin-right: 4px;
-    font-size: 13px;
   }
 
   .short-activity {
