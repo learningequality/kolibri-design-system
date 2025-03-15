@@ -12,7 +12,7 @@
       orientation="vertical"
     >
       <template #title>
-        <div class="title-area">
+        <div :style="{ height: '52px' }">
           <KTextTruncator
             :maxLines="2"
             :text="`(${i}) Learn everything about hummingbirds: their habitats, feeding patterns, and stunning flight abilities`"
@@ -25,7 +25,7 @@
           <span class="read-pill">
             <KIcon
               icon="readSolid"
-              class="icon-adjust"
+              :style="{ position: 'relative', top: '2px', marginRight: '4px', fontSize: '13px' }"
             />
             Read
           </span>
@@ -80,42 +80,14 @@
 
 <style scoped>
 
-  .title-area {
-    height: 52px;
-  }
-
   .footer-container {
     margin-top: 10px;
   }
 
-  .read-pill {
-    display: inline-flex;
-    align-items: center;
-    padding: 4px 8px;
-    margin-right: 8px;
-    font-size: 14px;
-    color: #616161;
-    background-color: #dddddd;
-    border-radius: 4px;
-  }
-
-  .icon-adjust {
-    position: relative;
-    top: 2px;
-    margin-right: 4px;
-    font-size: 13px;
-  }
-
-  .activity-pill {
-    padding: 4px 8px;
-    margin-right: 8px;
-    font-size: 14px;
-    color: #616161;
-    background-color: #dddddd;
-    border-radius: 4px;
-  }
-
-  .biology-pill {
+  .read-pill,
+  .activity-pill,
+  .biology-pill,
+  .ecology-pill {
     padding: 4px 8px;
     margin-right: 8px;
     font-size: 14px;
@@ -125,11 +97,7 @@
   }
 
   .ecology-pill {
-    padding: 4px 8px;
-    font-size: 14px;
-    color: #616161;
-    background-color: #dddddd;
-    border-radius: 4px;
+    margin-right: 0; /* Remove margin for the last pill */
   }
 
 </style>

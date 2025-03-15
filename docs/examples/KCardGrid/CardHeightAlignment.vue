@@ -10,7 +10,7 @@
       preserveAboveTitle
     >
       <template #aboveTitle>
-        <div class="above-title">
+        <div :style="{ height: '24px' }">
           <KLabeledIcon
             icon="readSolid"
             label="Read"
@@ -18,7 +18,7 @@
         </div>
       </template>
       <template #title>
-        <div class="title-area">
+        <div :style="{ height: '52px' }">
           <KTextTruncator
             :maxLines="2"
             text="(1) Learn everything about hummingbirds: their habitats, feeding patterns, and stunning flight abilities"
@@ -45,7 +45,7 @@
       preserveAboveTitle
     >
       <template #aboveTitle>
-        <div class="above-title">
+        <div :style="{ height: '24px' }">
           <KLabeledIcon
             icon="readSolid"
             label="Read"
@@ -53,7 +53,7 @@
         </div>
       </template>
       <template #title>
-        <div class="title-area">
+        <div :style="{ height: '52px' }">
           <KTextTruncator
             :maxLines="2"
             text="(2) Short title"
@@ -67,7 +67,7 @@
         />
       </template>
       <template #footer>
-        <div class="footer-empty"></div>
+        <div :style="{ marginTop: '10px' }"></div>
       </template>
     </DocsKCard>
 
@@ -77,10 +77,10 @@
       preserveAboveTitle
     >
       <template #aboveTitle>
-        <div class="above-title"></div>
+        <div :style="{ height: '24px' }"></div>
       </template>
       <template #title>
-        <div class="title-area">
+        <div :style="{ height: '52px' }">
           <KTextTruncator
             :maxLines="2"
             text="(3) Learn everything about hummingbirds: their habitats, feeding patterns, and stunning flight abilities"
@@ -125,21 +125,9 @@
 
 <style scoped>
 
-  .above-title {
-    height: 24px;
-  }
-
-  .title-area {
-    height: 52px;
-  }
-
   .footer-container {
     margin-top: 10px;
     color: #616161;
-  }
-
-  .footer-empty {
-    margin-top: 10px;
   }
 
   .pill {
