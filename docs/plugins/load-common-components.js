@@ -1,8 +1,6 @@
 import Vue from 'vue';
 
 import VueSimpleMarkdown from 'vue-simple-markdown';
-import KIcon from '../../lib/KIcon/index.vue';
-import KTextTruncator from '../../lib/KTextTruncator.vue';
 import DocsExample from '~/common/DocsExample';
 import DocsExternalLink from '~/common/DocsExternalLink';
 import DocsGithubLink from '~/common/DocsGithubLink';
@@ -37,8 +35,6 @@ Vue.component('DocsToggleContent', DocsToggleContent);
 Vue.component('DocsToggleButton', DocsToggleButton);
 Vue.component('DocsTable', DocsTable);
 Vue.component('DocsSubNav', DocsSubNav);
-Vue.component('KIcon', KIcon);
-Vue.component('KTextTruncator', KTextTruncator);
 Vue.component('DocsKCard', DocsKCard);
 
 Vue.use(VueSimpleMarkdown);
