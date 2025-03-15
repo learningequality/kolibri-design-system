@@ -1,5 +1,4 @@
 <template>
-
   <DocsPageTemplate apiDocs>
     <!-- Overview Section -->
     <DocsPageSection
@@ -178,10 +177,16 @@
         </template>
         <template #javascript>
           <DocsShowCode language="javascript">
-            {` /* eslint-disable */ import DocsKCard from '../../../pages-components/DocsKCard.vue';
-            import KIcon from '../../../../lib/KIcon/index.vue'; import KTextTruncator from
-            '../../../../lib/KTextTruncator.vue'; export default { name: 'Grid111Example',
-            components: { DocsKCard, KIcon, KTextTruncator, }, }; /* eslint-enable */ `}
+            <!-- eslint-disable-next-line -->
+            import DocsKCard from '../../../pages-components/DocsKCard.vue';
+            <!-- eslint-disable-next-line -->
+            import KIcon from '../../../../lib/KIcon/index.vue';
+            <!-- eslint-disable-next-line -->
+            import KTextTruncator from '../../../../lib/KTextTruncator.vue';
+            export default {
+              name: 'Grid111Example',
+              components: { DocsKCard, KIcon, KTextTruncator },
+            };
           </DocsShowCode>
         </template>
       </DocsExample>
@@ -243,14 +248,31 @@
         </template>
         <template #javascript>
           <DocsShowCode language="javascript">
-            {` /* eslint-disable */ import DocsKCard from '../../../pages-components/DocsKCard.vue';
-            import KIcon from '../../../lib/KIcon.vue'; import KTextTruncator from
-            '../../../lib/KTextTruncator.vue'; export default { name: 'Grid122Example', components:
-            { DocsKCard, KIcon, KTextTruncator }, data() { return { loading: true, skeletonsConfig2:
-            [ { breakpoints: [0,1,2,3,4,5,6,7], orientation: 'vertical', thumbnailDisplay: 'large',
-            height: '470px', }, { breakpoints: [2,3], height: '430px', }, { breakpoints: [4,5,6,7],
-            height: '360px', }, ], }; }, mounted() { setTimeout(() => { this.loading = false; },
-            3000); }, }; /* eslint-enable */ `}
+            <!-- eslint-disable-next-line -->
+            import DocsKCard from '../../../pages-components/DocsKCard.vue';
+            <!-- eslint-disable-next-line -->
+            import KIcon from '../../../lib/KIcon.vue';
+            <!-- eslint-disable-next-line -->
+            import KTextTruncator from '../../../lib/KTextTruncator.vue';
+            export default {
+              name: 'Grid122Example',
+              components: { DocsKCard, KIcon, KTextTruncator },
+              data() {
+                return {
+                  loading: true,
+                  skeletonsConfig2: [
+                    { breakpoints: [0,1,2,3,4,5,6,7], orientation: 'vertical', thumbnailDisplay: 'large', height: '470px' },
+                    { breakpoints: [2,3], height: '430px' },
+                    { breakpoints: [4,5,6,7], height: '360px' },
+                  ],
+                };
+              },
+              mounted() {
+                setTimeout(() => {
+                  this.loading = false;
+                }, 3000);
+              },
+            };
           </DocsShowCode>
         </template>
       </DocsExample>
@@ -312,14 +334,31 @@
         </template>
         <template #javascript>
           <DocsShowCode language="javascript">
-            {` /* eslint-disable */ import DocsKCard from '../../../pages-components/DocsKCard.vue';
-            import KIcon from '../../../lib/KIcon.vue'; import KTextTruncator from
-            '../../../lib/KTextTruncator.vue'; export default { name: 'Grid123Example', components:
-            { DocsKCard, KIcon, KTextTruncator }, data() { return { loading: true, skeletonsConfig3:
-            [ { breakpoints: [0,1,2,3,4,5,6,7], orientation: 'vertical', thumbnailDisplay: 'large',
-            height: '470px', }, { breakpoints: [2,3], height: '430px', }, { breakpoints: [4,5,6,7],
-            height: '390px', }, ], }; }, mounted() { setTimeout(() => { this.loading = false; },
-            3000); }, }; /* eslint-enable */ `}
+            <!-- eslint-disable-next-line -->
+            import DocsKCard from '../../../pages-components/DocsKCard.vue';
+            <!-- eslint-disable-next-line -->
+            import KIcon from '../../../lib/KIcon.vue';
+            <!-- eslint-disable-next-line -->
+            import KTextTruncator from '../../../lib/KTextTruncator.vue';
+            export default {
+              name: 'Grid123Example',
+              components: { DocsKCard, KIcon, KTextTruncator },
+              data() {
+                return {
+                  loading: true,
+                  skeletonsConfig3: [
+                    { breakpoints: [0,1,2,3,4,5,6,7], orientation: 'vertical', thumbnailDisplay: 'large', height: '470px' },
+                    { breakpoints: [2,3], height: '430px' },
+                    { breakpoints: [4,5,6,7], height: '390px' },
+                  ],
+                };
+              },
+              mounted() {
+                setTimeout(() => {
+                  this.loading = false;
+                }, 3000);
+              },
+            };
           </DocsShowCode>
         </template>
       </DocsExample>
@@ -372,14 +411,31 @@
         </template>
         <template #javascript>
           <DocsShowCode language="javascript">
-            {` /* eslint-disable */ import DocsKCard from '../../pages-components/DocsKCard.vue';
-            import KTextTruncator from '../../lib/KTextTruncator.vue'; export default { name:
-            'LayoutOverrideExample', components: { DocsKCard, KTextTruncator }, data() { return {
-            loading: true, layoutOverride: [ { breakpoints: [0,1], columnGap: '20px', rowGap:
-            '20px', }, { breakpoints: [4,5,6,7], cardsPerRow: 4, }, ], skeletonsConfig: [ {
-            breakpoints: [0,1,2,3,4,5,6,7], orientation: 'vertical', thumbnailDisplay: 'large', },
-            ], }; }, mounted() { setTimeout(() => { this.loading = false; }, 3000); }, }; /*
-            eslint-enable */ `}
+            <!-- eslint-disable-next-line -->
+            import DocsKCard from '../../pages-components/DocsKCard.vue';
+            <!-- eslint-disable-next-line -->
+            import KTextTruncator from '../../lib/KTextTruncator.vue';
+            export default {
+              name: 'LayoutOverrideExample',
+              components: { DocsKCard, KTextTruncator },
+              data() {
+                return {
+                  loading: true,
+                  layoutOverride: [
+                    { breakpoints: [0,1], columnGap: '20px', rowGap: '20px' },
+                    { breakpoints: [4,5,6,7], cardsPerRow: 4 },
+                  ],
+                  skeletonsConfig: [
+                    { breakpoints: [0,1,2,3,4,5,6,7], orientation: 'vertical', thumbnailDisplay: 'large' },
+                  ],
+                };
+              },
+              mounted() {
+                setTimeout(() => {
+                  this.loading = false;
+                }, 3000);
+              },
+            };
           </DocsShowCode>
         </template>
       </DocsExample>
@@ -422,12 +478,24 @@
         </template>
         <template #javascript>
           <DocsShowCode language="javascript">
-            {` /* eslint-disable */ import KLabeledIcon from '../../../lib/KLabeledIcon.vue'; import
-            KTextTruncator from '../../../lib/KTextTruncator.vue'; import DocsKCard from
-            '../../pages-components/DocsKCard.vue'; export default { name:
-            'CardHeightAlignmentExample', components: { KLabeledIcon, KTextTruncator, DocsKCard },
-            data() { return { loading: true }; }, mounted() { setTimeout(() => { this.loading =
-            false; }, 3000); }, }; /* eslint-enable */ `}
+            <!-- eslint-disable-next-line -->
+            import KLabeledIcon from '../../../lib/KLabeledIcon.vue';
+            <!-- eslint-disable-next-line -->
+            import KTextTruncator from '../../../lib/KTextTruncator.vue';
+            <!-- eslint-disable-next-line -->
+            import DocsKCard from '../../pages-components/DocsKCard.vue';
+            export default {
+              name: 'CardHeightAlignmentExample',
+              components: { KLabeledIcon, KTextTruncator, DocsKCard },
+              data() {
+                return { loading: true };
+              },
+              mounted() {
+                setTimeout(() => {
+                  this.loading = false;
+                }, 3000);
+              },
+            };
           </DocsShowCode>
         </template>
       </DocsExample>
@@ -482,14 +550,30 @@
         </template>
         <template #javascript>
           <DocsShowCode language="javascript">
-            {` /* eslint-disable */ import useKResponsiveWindow from
-            '../../../lib/composables/useKResponsiveWindow'; import DocsKCard from
-            '../../pages-components/DocsKCard.vue'; import KTextTruncator from
-            '../../../lib/KTextTruncator.vue'; import KIcon from '../../../lib/KIcon.vue'; export
-            default { name: 'ResponsiveOrientationExample', components: { DocsKCard, KTextTruncator,
-            KIcon }, setup() { const { windowBreakpoint } = useKResponsiveWindow(); return {
-            windowBreakpoint }; }, data() { return { loading: true }; }, mounted() { setTimeout(()
-            => { this.loading = false; }, 3000); }, }; /* eslint-enable */ `}
+            <!-- eslint-disable-next-line -->
+            import useKResponsiveWindow from '../../../lib/composables/useKResponsiveWindow';
+            <!-- eslint-disable-next-line -->
+            import DocsKCard from '../../pages-components/DocsKCard.vue';
+            <!-- eslint-disable-next-line -->
+            import KTextTruncator from '../../../lib/KTextTruncator.vue';
+            <!-- eslint-disable-next-line -->
+            import KIcon from '../../../lib/KIcon.vue';
+            export default {
+              name: 'ResponsiveOrientationExample',
+              components: { DocsKCard, KTextTruncator, KIcon },
+              setup() {
+                const { windowBreakpoint } = useKResponsiveWindow();
+                return { windowBreakpoint };
+              },
+              data() {
+                return { loading: true };
+              },
+              mounted() {
+                setTimeout(() => {
+                  this.loading = false;
+                }, 3000);
+              },
+            };
           </DocsShowCode>
         </template>
       </DocsExample>
@@ -514,16 +598,36 @@
         </template>
         <template #javascript>
           <DocsShowCode language="javascript">
-            {` /* eslint-disable */ import useKResponsiveWindow from
-            '../../../lib/composables/useKResponsiveWindow'; import DocsKCard from
-            '../../pages-components/DocsKCard.vue'; import KIcon from '../../../lib/KIcon.vue';
-            import KTextTruncator from '../../../lib/KTextTruncator.vue'; export default { name:
-            'ResponsiveFooterExample', components: { DocsKCard, KIcon, KTextTruncator }, setup() {
-            const { windowBreakpoint } = useKResponsiveWindow(); return { windowBreakpoint }; },
-            data() { return { loading: true, skeletonsConfig: [ { breakpoints: [0,1,2,3,4,5,6,7],
-            orientation: 'vertical', thumbnailDisplay: 'large', height: '430px', }, { breakpoints:
-            [4,5,6,7], height: '370px', }, ], }; }, mounted() { setTimeout(() => { this.loading =
-            false; }, 3000); }, }; /* eslint-enable */ `}
+            <!-- eslint-disable-next-line -->
+            import useKResponsiveWindow from '../../../lib/composables/useKResponsiveWindow';
+            <!-- eslint-disable-next-line -->
+            import DocsKCard from '../../pages-components/DocsKCard.vue';
+            <!-- eslint-disable-next-line -->
+            import KIcon from '../../../lib/KIcon.vue';
+            <!-- eslint-disable-next-line -->
+            import KTextTruncator from '../../../lib/KTextTruncator.vue';
+            export default {
+              name: 'ResponsiveFooterExample',
+              components: { DocsKCard, KIcon, KTextTruncator },
+              setup() {
+                const { windowBreakpoint } = useKResponsiveWindow();
+                return { windowBreakpoint };
+              },
+              data() {
+                return {
+                  loading: true,
+                  skeletonsConfig: [
+                    { breakpoints: [0,1,2,3,4,5,6,7], orientation: 'vertical', thumbnailDisplay: 'large', height: '430px' },
+                    { breakpoints: [4,5,6,7], height: '370px' },
+                  ],
+                };
+              },
+              mounted() {
+                setTimeout(() => {
+                  this.loading = false;
+                }, 3000);
+              },
+            };
           </DocsShowCode>
         </template>
       </DocsExample>
@@ -632,20 +736,57 @@
         </template>
         <template #javascript>
           <DocsShowCode language="javascript">
-            {` /* eslint-disable */ import useKResponsiveWindow from
-            '../../../lib/composables/useKResponsiveWindow'; import DocsKCard from
-            '../../pages-components/DocsKCard.vue'; import KTextTruncator from
-            '../../../lib/KTextTruncator.vue'; import KIcon from '../../../lib/KIcon.vue'; export
-            default { name: 'LoadingStateExample', components: { DocsKCard, KTextTruncator, KIcon },
-            setup() { const { windowBreakpoint } = useKResponsiveWindow(); return { windowBreakpoint
-            }; }, data() { return { loading: true, debug: false, skeletonsConfig: [ { breakpoints:
-            [0,1,2,3,4,5,6,7], orientation: 'vertical', thumbnailDisplay: 'large', height: '400px',
-            }, { breakpoints: [4,5,6,7], height: '220px', orientation: 'horizontal', thumbnailAlign:
-            'left', }, ], }; }, mounted() { setTimeout(() => { this.loading = false; }, 3000); },
-            methods: { load500() { this.loading = true; setTimeout(() => { this.loading = false; },
-            500); }, load1200() { this.loading = true; setTimeout(() => { this.loading = false; },
-            1200); }, load4000() { this.loading = true; setTimeout(() => { this.loading = false; },
-            4000); }, }, }; /* eslint-enable */ `}
+            <!-- eslint-disable-next-line -->
+            import useKResponsiveWindow from '../../../lib/composables/useKResponsiveWindow';
+            <!-- eslint-disable-next-line -->
+            import DocsKCard from '../../pages-components/DocsKCard.vue';
+            <!-- eslint-disable-next-line -->
+            import KTextTruncator from '../../../lib/KTextTruncator.vue';
+            <!-- eslint-disable-next-line -->
+            import KIcon from '../../../lib/KIcon.vue';
+            export default {
+              name: 'LoadingStateExample',
+              components: { DocsKCard, KTextTruncator, KIcon },
+              setup() {
+                const { windowBreakpoint } = useKResponsiveWindow();
+                return { windowBreakpoint };
+              },
+              data() {
+                return {
+                  loading: true,
+                  debug: false,
+                  skeletonsConfig: [
+                    { breakpoints: [0,1,2,3,4,5,6,7], orientation: 'vertical', thumbnailDisplay: 'large', height: '400px' },
+                    { breakpoints: [4,5,6,7], height: '220px', orientation: 'horizontal', thumbnailAlign: 'left' },
+                  ],
+                };
+              },
+              mounted() {
+                setTimeout(() => {
+                  this.loading = false;
+                }, 3000);
+              },
+              methods: {
+                load500() {
+                  this.loading = true;
+                  setTimeout(() => {
+                    this.loading = false;
+                  }, 500);
+                },
+                load1200() {
+                  this.loading = true;
+                  setTimeout(() => {
+                    this.loading = false;
+                  }, 1200);
+                },
+                load4000() {
+                  this.loading = true;
+                  setTimeout(() => {
+                    this.loading = false;
+                  }, 4000);
+                },
+              },
+            };
           </DocsShowCode>
         </template>
       </DocsExample>
@@ -683,12 +824,9 @@
       </ul>
     </DocsPageSection>
   </DocsPageTemplate>
-
 </template>
 
-
 <script>
-
   import useKResponsiveWindow from '../../lib/composables/useKResponsiveWindow';
 
   export default {
@@ -698,12 +836,10 @@
       return { windowBreakpoint };
     },
   };
-
 </script>
 
-
 <style scoped>
-
   /* Additional doc page styles if needed */
-
 </style>
+
+
