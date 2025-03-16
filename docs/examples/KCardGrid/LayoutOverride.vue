@@ -13,19 +13,16 @@
       orientation="vertical"
     >
       <template #title>
-        <div class="title-area">
-          <KTextTruncator
-            :maxLines="2"
-            :text="`(${i}) Learn everything about hummingbirds: their habitats, feeding patterns, and stunning flight abilities`"
-          />
-        </div>
+        <KTextTruncator
+          :maxLines="2"
+          :text="`(${i}) Learn everything about hummingbirds: their habitats, feeding patterns, and stunning flight abilities`"
+        />
       </template>
 
       <template #media>
         <img
           src="/api/placeholder/400/300"
           alt="Hummingbird on a branch"
-          class="hummingbird-img"
         >
       </template>
 
@@ -75,17 +72,3 @@
   };
 
 </script>
-
-
-<style scoped>
-
-  .title-area {
-    height: 52px;
-  }
-
-  .hummingbird-img {
-    width: 100%;
-    object-fit: cover;
-  }
-
-</style>

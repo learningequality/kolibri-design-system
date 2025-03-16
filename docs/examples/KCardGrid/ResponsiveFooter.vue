@@ -21,20 +21,18 @@
       </template>
 
       <template #footer>
-        <div class="footer-container">
-          <span class="read-pill">
-            <KIcon
-              icon="readSolid"
-              :style="{ position: 'relative', top: '2px', marginRight: '4px', fontSize: '13px' }"
-            />
-            Read
-          </span>
-          <span class="activity-pill">Short Activity</span>
-          <template v-if="windowBreakpoint > 3">
-            <span class="biology-pill">Biology</span>
-            <span class="ecology-pill">Ecology</span>
-          </template>
-        </div>
+        <span class="read-pill">
+          <KIcon
+            icon="readSolid"
+            :style="{ position: 'relative', top: '2px', marginRight: '4px', fontSize: '13px' }"
+          />
+          Read
+        </span>
+        <span class="activity-pill">Short Activity</span>
+        <template v-if="windowBreakpoint > 3">
+          <span class="biology-pill">Biology</span>
+          <span class="ecology-pill">Ecology</span>
+        </template>
       </template>
     </DocsKCard>
   </KCardGrid>
@@ -80,10 +78,6 @@
 
 <style scoped>
 
-  .footer-container {
-    margin-top: 10px;
-  }
-
   .read-pill,
   .activity-pill,
   .biology-pill,
@@ -97,7 +91,7 @@
   }
 
   .ecology-pill {
-    margin-right: 0; /* Remove margin for the last pill */
+    margin-right: 0;
   }
 
 </style>

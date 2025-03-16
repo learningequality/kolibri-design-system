@@ -94,10 +94,8 @@
         />
       </template>
       <template #footer>
-        <div class="footer-container">
-          <span class="pill">Short Activity</span>
-          <span class="pill">Biology</span>
-        </div>
+        <span class="pill">Short Activity</span>
+        <span class="pill">Biology</span>
       </template>
     </DocsKCard>
   </KCardGrid>
@@ -124,11 +122,6 @@
 
 
 <style scoped>
-
-  .footer-container {
-    margin-top: 10px;
-    color: #616161;
-  }
 
   .pill {
     padding: 4px 8px;
