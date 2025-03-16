@@ -28,16 +28,11 @@
       </template>
 
       <template #footer>
-        <div class="footer-container">
-          <span class="read-badge">
-            <KIcon
-              icon="readSolid"
-              :style="{ position: 'relative', top: '2px', marginRight: '4px', fontSize: '13px' }"
-            />
-            Read
-          </span>
-          <span class="short-activity">Short Activity</span>
-        </div>
+        <span class="pill">
+          <KIcon icon="readSolid" />
+          Read
+        </span>
+        <span class="pill">Short Activity</span>
       </template>
     </DocsKCard>
   </KCardGrid>
@@ -81,24 +76,19 @@
 
 <style scoped>
 
-  .footer-container {
-    margin-top: 10px;
+  .card-img {
+    width: 100%;
+    max-width: 250px;
+    object-fit: cover;
   }
 
-  .read-badge {
+  .pill {
     display: inline-flex;
-    align-items: center;
     padding: 4px 8px;
     margin-right: 8px;
-    font-size: 14px;
     color: #616161;
     background-color: #dddddd;
     border-radius: 4px;
-  }
-
-  .short-activity {
-    font-size: 14px;
-    color: #616161;
   }
 
 </style>

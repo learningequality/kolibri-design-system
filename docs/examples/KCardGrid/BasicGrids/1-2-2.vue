@@ -11,13 +11,19 @@
       :headingLevel="5"
       orientation="vertical"
     >
+      <template #media>
+        <img
+          src="/api/placeholder/400/300"
+          alt="Hummingbird on a branch"
+          class="card-img"
+        >
+      </template>
+
       <template #title>
-        <div class="title-area">
-          <KTextTruncator
-            :maxLines="2"
-            :text="`(${i}) Learn everything about hummingbirds: their habitats, feeding patterns, and stunning flight abilities`"
-          />
-        </div>
+        <KTextTruncator
+          :maxLines="2"
+          :text="`(${i}) Learn everything about hummingbirds: their habitats, feeding patterns, and stunning flight abilities`"
+        />
       </template>
 
       <template #belowTitle>
@@ -28,16 +34,11 @@
       </template>
 
       <template #footer>
-        <div class="footer-container">
-          <span class="read-badge">
-            <KIcon
-              icon="readSolid"
-              class="icon-adjust"
-            />
-            Read
-          </span>
-          <span class="short-activity">Short Activity</span>
-        </div>
+        <span class="pill">
+          <KIcon icon="readSolid" />
+          Read
+        </span>
+        <span class="pill">Short Activity</span>
       </template>
     </DocsKCard>
   </KCardGrid>
@@ -50,29 +51,15 @@
   export default {
     data() {
       return {
-        loading: true,
+        loading: false,
         skeletonsConfig: [
           {
             breakpoints: [0, 1, 2, 3, 4, 5, 6, 7],
             orientation: 'vertical',
             thumbnailDisplay: 'large',
-            height: '470px',
-          },
-          {
-            breakpoints: [2, 3],
-            height: '430px',
-          },
-          {
-            breakpoints: [4, 5, 6, 7],
-            height: '360px',
           },
         ],
       };
-    },
-    mounted() {
-      setTimeout(() => {
-        this.loading = false;
-      }, 3000);
     },
   };
 
@@ -81,35 +68,19 @@
 
 <style scoped>
 
-  .title-area {
-    height: 52px;
+  .card-img {
+    width: 100%;
+    max-width: 250px;
+    object-fit: cover;
   }
 
-  .footer-container {
-    margin-top: 10px;
-  }
-
-  .read-badge {
+  .pill {
     display: inline-flex;
-    align-items: center;
     padding: 4px 8px;
     margin-right: 8px;
-    font-size: 14px;
     color: #616161;
     background-color: #dddddd;
     border-radius: 4px;
-  }
-
-  .icon-adjust {
-    position: relative;
-    top: 2px;
-    margin-right: 4px;
-    font-size: 13px;
-  }
-
-  .short-activity {
-    font-size: 14px;
-    color: #616161;
   }
 
 </style>
