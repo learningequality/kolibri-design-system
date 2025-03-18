@@ -83,6 +83,7 @@
         <DocsExample
           exampleId="vertical-slide"
           loadExample="KTransition/VerticalSlide.vue"
+          block
         />
       </section>
     </DocsPageSection>

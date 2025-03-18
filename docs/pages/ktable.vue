@@ -33,6 +33,7 @@
       <DocsExample
         loadExample="KTable/Base.vue"
         exampleId="base"
+        block
       />
 
       <!-- Frontend Sorting Example-->
@@ -52,6 +53,7 @@
       <DocsExample
         loadExample="KTable/Sortable.vue"
         exampleId="sortable"
+        block
       />
 
       <!--Table showing use of slots-->
@@ -65,6 +67,7 @@
       <DocsExample
         loadExample="KTable/Slots.vue"
         exampleId="slots"
+        block
       />
 
       <!--Table with custom column widths-->
@@ -80,6 +83,7 @@
       <DocsExample
         loadExample="KTable/CustomWidth.vue"
         exampleId="custom-width"
+        block
       />
 
       <!--Table with default sort-->
@@ -105,6 +109,7 @@
       <DocsExample
         loadExample="KTable/DefaultSort.vue"
         exampleId="default-sort"
+        block
       />
 
       <!-- Disable built-in sorting -->
@@ -129,6 +134,7 @@
       <DocsExample
         loadExample="KTable/DisableBuiltinSort.vue"
         exampleId="disable-builtin-sort"
+        block
       />
     </DocsPageSection>
   </DocsPageTemplate>

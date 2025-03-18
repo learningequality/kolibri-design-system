@@ -48,24 +48,21 @@
         default.
       </p>
 
-      <!-- Can't use DocsExample as the same renders the -->
-      <!-- example in a block element by default -->
-      <DocsShowCode language="html">
-        <span>
-          <KImg
-            src="hummingbird.jpg"
-            altText="A sitting hummingbird"
-          />
-        </span>
-      </DocsShowCode>
-      <DocsShow>
-        <span>
-          <KImg
-            :src="require('../assets/hummingbird-small-cc-by-sa-4.jpg')"
-            altText="A sitting hummingbird"
-          />
-        </span>
-      </DocsShow>
+      <DocsExample
+        loadExample="KImg/Base.vue"
+        exampleId="base-inline"
+      >
+        <template #html>
+          <DocsShowCode language="html">
+            <span>
+              <KImg
+                src="hummingbird.jpg"
+                altText="A sitting hummingbird"
+              />
+            </span>
+          </DocsShowCode>
+        </template>
+      </DocsExample>
 
       <h4>Block</h4>
 
@@ -76,8 +73,9 @@
       </p>
 
       <DocsExample
-        loadExample="KImg/Base"
-        exampleId="base"
+        loadExample="KImg/Base.vue"
+        exampleId="base-block"
+        block
       >
         <template #html>
           <DocsShowCode language="html">
