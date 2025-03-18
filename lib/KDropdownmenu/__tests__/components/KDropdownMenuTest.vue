@@ -1,4 +1,5 @@
 <template>
+
   <div class="kdropdown-test-container">
     <!-- KDropdownMenu with header slot -->
     <div class="test-case">
@@ -13,16 +14,23 @@
       </KButton>
     </div>
   </div>
+
 </template>
 
+
 <script>
-export default {
-  name: 'KDropdownMenuTest',
-};
+
+  export default {
+    name: 'KDropdownMenuTest',
+  };
+
 </script>
 
+
 <style scoped>
-.kdropdown-test-container {
-  padding: 20px;
-}
+
+  .kdropdown-test-container {
+    padding: 20px;
+  }
+
 </style>
