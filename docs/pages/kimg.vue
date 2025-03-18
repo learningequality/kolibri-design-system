@@ -49,7 +49,7 @@
       </p>
 
       <DocsExample
-        loadExample="KImg/Base.vue"
+        loadExample="KImg/Base"
         exampleId="base-inline"
       >
         <template #html>
@@ -73,7 +73,7 @@
       </p>
 
       <DocsExample
-        loadExample="KImg/Base.vue"
+        loadExample="KImg/Base"
         exampleId="base-block"
         block
       >
@@ -269,6 +269,7 @@
       <DocsExample
         loadExample="KImg/Placeholder"
         exampleId="placeholder"
+        block
       />
 
       <h3>Displaying content on top of an image</h3>
