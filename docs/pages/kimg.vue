@@ -143,6 +143,7 @@
       <DocsExample
         loadExample="KImg/FitCenterInside"
         exampleId="fit-center-inside"
+        block
       >
         <template #html>
           <DocsShowCode language="html">
@@ -170,6 +171,7 @@
       <DocsExample
         loadExample="KImg/FitContain"
         exampleId="fit-contain"
+        block
       >
         <template #html>
           <DocsShowCode language="html">
@@ -197,6 +199,7 @@
       <DocsExample
         loadExample="KImg/FitXY"
         exampleId="fit-xy"
+        block
       >
         <template #html>
           <DocsShowCode language="html">
@@ -232,6 +235,7 @@
       <DocsExample
         loadExample="KImg/AspectRatio"
         exampleId="aspect-ratio"
+        block
       >
         <template #html>
           <DocsShowCode language="html">
@@ -286,56 +290,24 @@
         slots to place content on top of the image container.
       </p>
 
-      <!-- Can't use DocsExample to render this example -->
-      <!-- as the same renders the example into a block element -->
-      <!-- by default -->
-      <DocsShowCode language="html">
-        <KImg
-          src="hummingbird.jpg"
-          altText="A sitting hummingbird"
-        >
-          <template #topLeft>
-            <span
-              :style="{
-                display: 'inline-block',
-                margin: '8px',
-                padding: '2px',
-                backgroundColor: 'white',
-              }"
+      <DocsExample
+        loadExample="KImg/ContentOnTop"
+        exampleId="content-on-top"
+      >
+        <template #html>
+          <DocsShowCode language="html">
+            <KImg
+              src="hummingbird.jpg"
+              altText="A sitting hummingbird"
             >
-              Top left
-            </span>
-          </template>
-        </KImg>
-      </DocsShowCode>
-
-      <DocsShow>
-        <KImg
-          :src="require('../assets/hummingbird-small-cc-by-sa-4.jpg')"
-          altText="A sitting hummingbird"
-        >
-          <template #topLeft>
-            <span
-              :style="{
-                display: 'inline-block',
-                margin: '8px',
-                padding: '2px',
-                backgroundColor: 'white',
-              }"
-            >
-              Top left
-            </span>
-          </template>
-        </KImg>
-      </DocsShow>
+              <template #topLeft>
+                <span class="label"> Top left </span>
+              </template>
+            </KImg>
+          </DocsShowCode>
+        </template>
+      </DocsExample>
     </DocsPageSection>
   </DocsPageTemplate>
 
 </template>
-
-
-<script>
-
-  export default {};
-
-</script>
