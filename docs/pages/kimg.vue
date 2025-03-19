@@ -39,6 +39,41 @@
         dimensions are 200×114 px.
       </p>
 
+      <h3>Alternative text</h3>
+
+      <p>
+        Unless an image is
+        <DocsExternalLink
+          text="decorative"
+          href="https://www.w3.org/WAI/tutorials/images/decorative/"
+        />, you need to provide alternative text via
+        <DocsInternalLink href="/kimg#prop:altText">
+          <code>altText</code>
+        </DocsInternalLink>.
+      </p>
+
+      <DocsShowCode language="html">
+        <KImg
+          src="hummingbird.jpg"
+          altText="A sitting hummingbird"
+        />
+      </DocsShowCode>
+
+      <p>
+        If it's meant to be decorative, indicate it by using
+        <DocsInternalLink href="/kimg#prop:isDecorative">
+          <code>isDecorative</code>
+        </DocsInternalLink>. Alternative text won't be required in this case and the image will be hidden from
+        assistive technologies.
+      </p>
+
+      <DocsShowCode language="html">
+        <KImg
+          src="hummingbird.jpg"
+          isDecorative
+        />
+      </DocsShowCode>
+
       <h3>Loading</h3>
 
       <p>
@@ -100,41 +135,6 @@
           </DocsShowCode>
         </template>
       </DocsExample>
-
-      <h3>Alternative text</h3>
-
-      <p>
-        Unless an image is
-        <DocsExternalLink
-          text="decorative"
-          href="https://www.w3.org/WAI/tutorials/images/decorative/"
-        />, you need to provide alternative text via
-        <DocsInternalLink href="/kimg#prop:altText">
-          <code>altText</code>
-        </DocsInternalLink>.
-      </p>
-
-      <DocsShowCode language="html">
-        <KImg
-          src="hummingbird.jpg"
-          altText="A sitting hummingbird"
-        />
-      </DocsShowCode>
-
-      <p>
-        If it's meant to be decorative, indicate it by using
-        <DocsInternalLink href="/kimg#prop:isDecorative">
-          <code>isDecorative</code>
-        </DocsInternalLink>. Alternative text won't be required in this case and the image will be hidden from
-        assistive technologies.
-      </p>
-
-      <DocsShowCode language="html">
-        <KImg
-          src="hummingbird.jpg"
-          isDecorative
-        />
-      </DocsShowCode>
 
       <h3 id="scaling">Scaling</h3>
 
