@@ -39,6 +39,18 @@
         dimensions are 200×114 px.
       </p>
 
+      <h3>Loading</h3>
+
+      <p>
+        <code>KImg</code> always loads
+        <DocsExternalLink
+          text="lazily"
+          href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/img#lazy"
+        />. <em>Make sure to explicitly set the width and height as accurately as possible</em> to
+        prevent layout shifts and inaccurate browser calculations, which may cause the image to not
+        display when it enters the viewport.
+      </p>
+
       <h3>Rendering within inline and block elements</h3>
 
       <h4>Inline</h4>

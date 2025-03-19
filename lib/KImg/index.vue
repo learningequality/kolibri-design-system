@@ -6,6 +6,7 @@
         :src="src"
         :alt="alternativeText"
         :style="imgStyles"
+        loading="lazy"
         @error="onError"
         @load="onLoad"
       >
