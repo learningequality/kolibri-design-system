@@ -22,7 +22,7 @@
       >
         <KCardGrid
           layout="1-1-1"
-          :skeletonsConfig="skeletonsConfig1"
+          :skeletonsConfig="skeletonsConfig"
           :loading="loading"
         >
           <DocsKCard
@@ -242,57 +242,34 @@
         customize the title.
       </p>
 
-      <DocsShow
+      <DocsExample
+        loadExample="KCard/Title.vue"
+        exampleId="kcard-title"
         block
-        :style="{ maxWidth: '600px' }"
       >
-        <KCardGrid
-          layout="1-1-1"
-          :skeletonsConfig="skeletonsConfig9"
-          :loading="loading"
-        >
-          <DocsKCard
-            :headingLevel="3"
-            orientation="horizontal"
-            thumbnailDisplay="small"
-            thumbnailAlign="right"
-            prependTitle="(1)"
-            hideFooter
-          >
-            <template #title="{ titleText }">
-              <KLabeledIcon icon="readSolid">
-                <KTextTruncator
-                  :text="titleText"
-                  :maxLines="1"
-                />
-              </KLabeledIcon>
+        <template #html>
+          <DocsShowCode language="html">
+            <template>
+              <KCardGrid>
+                <KCard
+                  :headingLevel="3"
+                  title="(1) Learn everything about hummingbirds: their habitats, feeding patterns, and stunning flight abilities"
+                  ...
+                >
+                  <template #title="{ titleText }">
+                    <KLabeledIcon icon="readSolid">
+                      <KTextTruncator
+                        :text="titleText"
+                        :maxLines="1"
+                      />
+                    </KLabeledIcon>
+                  </template>
+                </KCard>
+              </KCardGrid>
             </template>
-          </DocsKCard>
-        </KCardGrid>
-      </DocsShow>
-
-      <!-- eslint-disable -->
-      <DocsShowCode language="html">
-        <template>
-          <KCardGrid>
-            <KCard
-              :headingLevel="3"
-              title="(1) Learn everything about hummingbirds: their habitats, feeding patterns, and stunning flight abilities"
-              ...
-            >
-              <template #title="{ titleText }">
-                <KLabeledIcon icon="readSolid">
-                  <KTextTruncator
-                    :text="titleText"
-                    :maxLines="1"
-                  />
-                </KLabeledIcon>
-              </template>
-            </KCard>
-          </KCardGrid>
+          </DocsShowCode>
         </template>
-      </DocsShowCode>
-      <!-- eslint-enable -->
+      </DocsExample>
 
       <p>
         <em>Do not use a heading element within the <code>title</code> slot to avoid duplicate
@@ -439,180 +416,94 @@
         diverse kinds of content:
       </p>
 
-      <DocsShow block>
-        <KCardGrid
-          layout="1-2-3"
-          :skeletonsConfig="skeletonsConfig2"
-          :loading="loading"
+      <DocsShow
+        block
+        :style="{ width: '100%', maxWidth: 'none' }"
+      >
+        <h4>Layout 1: Vertical with Large and Small Thumbnails</h4>
+        <DocsExample
+          loadExample="KCard/Layout1.vue"
+          exampleId="kcard-layout"
         >
-          <DocsKCard
-            :headingLevel="4"
-            orientation="vertical"
-            thumbnailDisplay="large"
-            prependTitle="(1)"
-          >
-            <template #aboveTitle>
-              <KLabeledIcon
-                icon="readSolid"
-                label="Read"
-              />
-            </template>
-            <template #footer>
-              <div
-                class="pills"
-                :style="{ color: $themeTokens.annotation }"
-              >
-                <span :style="{ 'background-color': $themePalette.grey.v_100 }">
-                  Short Activity
-                </span>
-                <span :style="{ 'background-color': $themePalette.grey.v_100 }"> Biology </span>
-              </div>
-            </template>
-          </DocsKCard>
-          <DocsKCard
-            :headingLevel="4"
-            orientation="vertical"
-            thumbnailDisplay="large"
-            :thumbnailSrc="null"
-            prependTitle="(2)"
-          >
-            <template #aboveTitle>
-              <KLabeledIcon
-                icon="readSolid"
-                label="Read"
-              />
-            </template>
-            <template #footer>
-              <div
-                class="pills"
-                :style="{ color: $themeTokens.annotation }"
-              >
-                <span :style="{ 'background-color': $themePalette.grey.v_100 }">
-                  Short Activity
-                </span>
-              </div>
-            </template>
-          </DocsKCard>
-          <DocsKCard
-            :headingLevel="4"
-            orientation="vertical"
-            thumbnailDisplay="small"
-            prependTitle="(3)"
-            hideFooter
-          >
-            <template #aboveTitle>
-              <KLabeledIcon
-                icon="readSolid"
-                label="Read"
-              />
-            </template>
-          </DocsKCard>
-        </KCardGrid>
-      </DocsShow>
+          <template #html>
+            <!-- eslint-disable -->
 
-      <DocsShow block>
-        <KCardGrid
-          layout="1-2-2"
-          :skeletonsConfig="skeletonsConfig3"
-          :loading="loading"
+            <DocsShowCode language="html">
+              <KCardGrid ...>
+                <KCard
+                  ...
+                  orientation="vertical"
+                  thumbnailDisplay="large"
+                />
+                <KCard
+                  ...
+                  orientation="vertical"
+                  thumbnailDisplay="large"
+                />
+                <KCard
+                  ...
+                  orientation="vertical"
+                  thumbnailDisplay="small"
+                />
+              </KCardGrid>
+            </DocsShowCode>
+
+            <!-- eslint-enable -->
+          </template>
+        </DocsExample>
+
+        <h4>Layout 2: Horizontal with Large and Small Thumbnails</h4>
+        <DocsExample
+          loadExample="KCard/Layout2.vue"
+          exampleId="kcard-layout"
         >
-          <DocsKCard
-            :headingLevel="4"
-            orientation="horizontal"
-            thumbnailDisplay="large"
-            :thumbnailSrc="null"
-            thumbnailAlign="left"
-            prependTitle="(1)"
-          />
-          <DocsKCard
-            :headingLevel="4"
-            orientation="horizontal"
-            thumbnailDisplay="small"
-            thumbnailAlign="right"
-            prependTitle="(2)"
-            showProgressInFooter
-          />
-        </KCardGrid>
-      </DocsShow>
+          <template #html>
+            <!-- eslint-disable -->
 
-      <DocsShow block>
-        <KCardGrid
-          layout="1-2-3"
-          :skeletonsConfig="skeletonsConfig4"
-          :loading="loading"
+            <DocsShowCode language="html">
+              <KCardGrid ...>
+                <KCard
+                  ...
+                  orientation="horizontal"
+                  thumbnailDisplay="large"
+                  thumbnailAlign="left"
+                />
+                <KCard
+                  ...
+                  orientation="horizontal"
+                  thumbnailDisplay="small"
+                  thumbnailAlign="right"
+                />
+              </KCardGrid>
+            </DocsShowCode>
+
+            <!-- eslint-enable -->
+          </template>
+        </DocsExample>
+
+        <h4>Layout 3: Vertical without Thumbnails</h4>
+        <DocsExample
+          loadExample="KCard/Layout3.vue"
+          exampleId="kcard-layout"
         >
-          <DocsKCard
-            :headingLevel="4"
-            orientation="vertical"
-            thumbnailDisplay="none"
-            prependTitle="(1)"
-          />
-          <DocsKCard
-            :headingLevel="4"
-            orientation="vertical"
-            thumbnailDisplay="none"
-            prependTitle="(2)"
-            showProgressInFooter
-          >
-            <template #footer>
-              <span></span>
-            </template>
-          </DocsKCard>
-          <DocsKCard
-            :headingLevel="4"
-            orientation="vertical"
-            thumbnailDisplay="none"
-            prependTitle="(3)"
-            showMenuInFooter
-          />
-        </KCardGrid>
+          <template #html>
+            <!-- eslint-disable -->
+
+            <DocsShowCode language="html">
+              <KCardGrid ...>
+                <KCard
+                  ...
+                  v-for="i in 3"
+                  orientation="vertical"
+                  thumbnailDisplay="none"
+                />
+              </KCardGrid>
+            </DocsShowCode>
+
+            <!-- eslint-enable -->
+          </template>
+        </DocsExample>
       </DocsShow>
-
-      <!-- eslint-disable -->
-      <DocsShowCode language="html">
-        <KCardGrid ...>
-          <KCard
-            ...
-            orientation="vertical"
-            thumbnailDisplay="large"
-          />
-          <KCard
-            ...
-            orientation="vertical"
-            thumbnailDisplay="large"
-          />
-          <KCard
-            ...
-            orientation="vertical"
-            thumbnailDisplay="small"
-          />
-        </KCardGrid>
-
-        <KCardGrid ...>
-          <KCard
-            ...
-            orientation="horizontal"
-            thumbnailDisplay="large"
-            thumbnailAlign="left"
-          />
-          <KCard
-            ...
-            orientation="horizontal"
-            thumbnailDisplay="small"
-            thumbnailAlign="right"
-          />
-        </KCardGrid>
-
-        <KCardGrid ...>
-          <KCard
-            ...
-            v-for="i in 3"
-            orientation="vertical"
-            thumbnailDisplay="none"
-          />
-        </KCardGrid>
-      </DocsShowCode>
-      <!-- eslint-enable -->
 
       <h3>
         Responsiveness
@@ -643,68 +534,37 @@
         />. Apply custom styling to the inner content of slots to achieve desired effects.
       </p>
 
-      <DocsShow block>
-        <KCardGrid
-          layout="1-1-1"
-          :skeletonsConfig="skeletonsConfig5"
-          :loading="loading"
-        >
-          <KCard
-            :to="{ path: '#guidelines' }"
-            :headingLevel="4"
-            :thumbnailSrc="require('../assets/hummingbird-large-cc-by-sa-4.jpg')"
-            thumbnailDisplay="large"
-            title="Learn everything about hummingbirds: their habitats, feeding patterns, and stunning flight abilities"
-          >
-            <template #aboveTitle>
-              <KLabeledIcon
-                icon="readSolid"
-                label="Read"
-              />
-            </template>
-            <template #belowTitle>
-              <KTextTruncator
-                text="Discover how hummingbirds play a big role in nature despite their small size. Find out more about their beauty, how they help plants grow, and where they live."
-                :maxLines="5"
-              />
-            </template>
-            <template #footer>
-              <div
-                class="pills"
-                :style="{ color: $themeTokens.annotation }"
-              >
-                <span :style="{ backgroundColor: $themePalette.grey.v_100 }"> Short Activity </span>
-                <span :style="{ backgroundColor: $themePalette.grey.v_100 }"> Biology </span>
-              </div>
-            </template>
-          </KCard>
-        </KCardGrid>
-      </DocsShow>
-
-      <!-- eslint-disable -->
-      <DocsShowCode language="html">
-        <KCardGrid ...>
-          <KCard ...>
-            <template #aboveTitle>
-              <KLabeledIcon
-                icon="readSolid"
-                label="Read"
-              />
-            </template>
-            <template #belowTitle>
-              <KTextTruncator
-                text="Discover how hummingbirds play a big role in nature despite their small size. Find out more about their beauty, how they help plants grow, and where they live."
-                :maxLines="5"
-              />
-            </template>
-            <template #footer>
-              <span :style="{ ... }">Short Activity</span>
-              <span :style="{ ... }">Biology</span>
-            </template>
-          </KCard>
-        </KCardGrid>
-      </DocsShowCode>
-      <!-- eslint-enable -->
+      <DocsExample
+        loadExample="KCard/ContentSlots.vue"
+        exampleId="kcard-content-slots"
+        block
+      >
+        <template #html>
+          <!-- eslint-disable -->
+          <DocsShowCode language="html">
+            <KCardGrid ...>
+              <KCard ...>
+                <template #aboveTitle>
+                  <KLabeledIcon
+                    icon="readSolid"
+                    label="Read"
+                  />
+                </template>
+                <template #belowTitle>
+                  <KTextTruncator
+                    text="Discover how hummingbirds play a big role in nature despite their small size. Find out more about their beauty, how they help plants grow, and where they live."
+                    :maxLines="5"
+                  />
+                </template>
+                <template #footer>
+                  <span :style="{ ... }">Short Activity</span>
+                  <span :style="{ ... }">Biology</span>
+                </template>
+              </KCard>
+            </KCardGrid>
+          </DocsShowCode>
+        </template>
+      </DocsExample>
 
       <p>
         The <code>title</code> slot is available as an alternative to the <code>title</code> prop.
@@ -762,37 +622,28 @@
         <em>Provide a placeholder element even if a thumbnail image is available.</em> It serves as
         fallback content if the image fails to load unexpectedly.
       </p>
-
-      <DocsShow block>
-        <KCardGrid
-          layout="1-1-1"
-          :skeletonsConfig="skeletonsConfig6"
-          :loading="loading"
-        >
-          <DocsKCard
-            :headingLevel="4"
-            :orientation="windowBreakpoint > 2 ? 'horizontal' : 'vertical'"
-            thumbnailDisplay="large"
-            thumbnailAlign="right"
-            :thumbnailSrc="null"
-          />
-        </KCardGrid>
-      </DocsShow>
-
-      <!-- eslint-disable -->
-      <DocsShowCode language="html">
-        <KCardGrid ...>
-          <KCard ...>
-            <template #thumbnailPlaceholder>
-              <KIcon
-                :style="{ fontSize: '48px' }"
-                icon="readSolid"
-              />
-            </template>
-          </KCard>
-        </KCardGrid>
-      </DocsShowCode>
-      <!-- eslint-enable -->
+      <DocsExample
+        loadExample="KCard/Placeholder.vue"
+        exampleId="kcard-placeholder"
+        block
+      >
+        <template #html>
+          <!-- eslint-disable -->
+          <DocsShowCode language="html">
+            <KCardGrid ...>
+              <KCard ...>
+                <template #thumbnailPlaceholder>
+                  <KIcon
+                    :style="{ fontSize: '48px' }"
+                    icon="readSolid"
+                  />
+                </template>
+              </KCard>
+            </KCardGrid>
+          </DocsShowCode>
+          <!-- eslint-enable -->
+        </template>
+      </DocsExample>
 
       <h4>
         Image scaling
@@ -841,44 +692,29 @@
         needed to indicate the bookmark's toggled state. Always assess on a case-by-case basis.
       </p>
 
-      <DocsShow block>
-        <KCardGrid
-          layout="1-1-1"
-          :skeletonsConfig="skeletonsConfig7"
-          :loading="loading"
-        >
-          <DocsKCard
-            :headingLevel="4"
-            :orientation="windowBreakpoint > 2 ? 'horizontal' : 'vertical'"
-            thumbnailDisplay="large"
-            thumbnailAlign="right"
-          >
-            <template #footer>
-              <KIconButton
-                ariaLabel="Bookmark resource"
-                :icon="isBookmarked1 ? 'bookmark' : 'bookmarkEmpty'"
-                @click.stop="isBookmarked1 = !isBookmarked1"
-              />
-            </template>
-          </DocsKCard>
-        </KCardGrid>
-      </DocsShow>
-
-      <!-- eslint-disable -->
-      <DocsShowCode language="html">
-        <KCardGrid ...>
-          <KCard ...>
-            <template #footer>
-              <KIconButton
-                ariaLabel="Bookmark resource"
-                :icon="isBookmarked ? 'bookmark' : 'bookmarkEmpty'"
-                @click.stop="isBookmarked = !isBookmarked"
-              />
-            </template>
-          </KCard>
-        </KCardGrid>
-      </DocsShowCode>
-      <!-- eslint-enable -->
+      <DocsExample
+        loadExample="KCard/InteractiveElements.vue"
+        exampleId="kcard-interactive-elements"
+        block
+      >
+        <template #html>
+          <!-- eslint-disable -->
+          <DocsShowCode language="html">
+            <KCardGrid ...>
+              <KCard ...>
+                <template #footer>
+                  <KIconButton
+                    ariaLabel="Bookmark resource"
+                    :icon="isBookmarked ? 'bookmark' : 'bookmarkEmpty'"
+                    @click.stop="isBookmarked = !isBookmarked"
+                  />
+                </template>
+              </KCard>
+            </KCardGrid>
+          </DocsShowCode>
+          <!-- eslint-enable -->
+        </template>
+      </DocsExample>
 
       <h3>
         Selection controls
@@ -904,94 +740,41 @@
 
       <p>Managing the selection state is not <code>KCard</code>'s responsibility.</p>
 
-      <DocsShow
+      <DocsExample
+        loadExample="KCard/SelectionControls.vue"
+        exampleId="kcard-selection-controls"
         block
-        :style="{ maxWidth: '800px' }"
       >
-        <KCardGrid
-          layout="1-1-1"
-          :skeletonsConfig="skeletonsConfig8"
-          :loading="loading"
-        >
-          <DocsKCard
-            :to="{ path: '#guidelines' }"
-            :headingLevel="4"
-            :orientation="windowBreakpoint > 2 ? 'horizontal' : 'vertical'"
-            thumbnailDisplay="large"
-            thumbnailAlign="right"
-            title="First card"
-          >
-            <template #select>
-              <KCheckbox
-                :checked="isFirstCardChecked"
-                @change="isFirstCardChecked = !isFirstCardChecked"
-              >
-                <span class="visuallyhidden">Select 'First card'</span>
-              </KCheckbox>
-            </template>
-            <template #footer>
-              <KIconButton
-                ariaLabel="Bookmark resource"
-                :icon="isBookmarked2 ? 'bookmark' : 'bookmarkEmpty'"
-                @click.stop="isBookmarked2 = !isBookmarked2"
-              />
-            </template>
-          </DocsKCard>
+        <template #html>
+          <!-- eslint-disable -->
+          <DocsShowCode language="html">
+            <KCardGrid ...>
+              <KCard ...>
+                <template #select>
+                  <KCheckbox
+                    :checked="..."
+                    @change="..."
+                  >
+                    <span class="visuallyhidden">Select 'First card'</span>
+                  </KCheckbox>
+                </template>
+              </KCard>
 
-          <DocsKCard
-            :to="{ path: '#guidelines' }"
-            :headingLevel="4"
-            :orientation="windowBreakpoint > 2 ? 'horizontal' : 'vertical'"
-            thumbnailDisplay="large"
-            thumbnailAlign="right"
-            title="Second card"
-          >
-            <template #select>
-              <KCheckbox
-                :checked="isSecondCardChecked"
-                @change="isSecondCardChecked = !isSecondCardChecked"
-              >
-                <span class="visuallyhidden">Select 'Second card'</span>
-              </KCheckbox>
-            </template>
-            <template #footer>
-              <KIconButton
-                ariaLabel="Bookmark resource"
-                :icon="isBookmarked3 ? 'bookmark' : 'bookmarkEmpty'"
-                @click.stop="isBookmarked3 = !isBookmarked3"
-              />
-            </template>
-          </DocsKCard>
-        </KCardGrid>
-      </DocsShow>
-
-      <!-- eslint-disable -->
-      <DocsShowCode language="html">
-        <KCardGrid ...>
-          <KCard ...>
-            <template #select>
-              <KCheckbox
-                :checked="..."
-                @change="..."
-              >
-                <span class="visuallyhidden">Select 'First card'</span>
-              </KCheckbox>
-            </template>
-          </KCard>
-
-          <KCard ...>
-            <template #select>
-              <KCheckbox
-                :checked="..."
-                @change="..."
-              >
-                <span class="visuallyhidden">Select 'Second card'</span>
-              </KCheckbox>
-            </template>
-          </KCard>
-        </KCardGrid>
-      </DocsShowCode>
-      <!-- eslint-enable -->
+              <KCard ...>
+                <template #select>
+                  <KCheckbox
+                    :checked="..."
+                    @change="..."
+                  >
+                    <span class="visuallyhidden">Select 'Second card'</span>
+                  </KCheckbox>
+                </template>
+              </KCard>
+            </KCardGrid>
+          </DocsShowCode>
+          <!-- eslint-enable -->
+        </template>
+      </DocsExample>
     </DocsPageSection>
 
     <DocsPageSection
@@ -1012,26 +795,16 @@
 <script>
 
   import useKResponsiveWindow from '../../lib/composables/useKResponsiveWindow';
-  import DocsKCard from '../pages-components/DocsKCard';
 
   export default {
-    components: {
-      DocsKCard,
-    },
-
     setup() {
       const { windowBreakpoint } = useKResponsiveWindow();
       return { windowBreakpoint };
     },
     data() {
       return {
-        isBookmarked1: false,
-        isBookmarked2: false,
-        isBookmarked3: false,
-        isFirstCardChecked: false,
-        isSecondCardChecked: false,
         loading: true,
-        skeletonsConfig1: [
+        skeletonsConfig: [
           {
             breakpoints: [0, 1, 2, 3, 4, 5, 6, 7],
             orientation: 'vertical',
@@ -1049,117 +822,6 @@
             height: '220px',
           },
         ],
-        skeletonsConfig2: [
-          {
-            breakpoints: [0, 1, 2, 3, 4, 5, 6, 7],
-            orientation: 'vertical',
-            thumbnailDisplay: 'large',
-            height: '490px',
-          },
-          {
-            breakpoints: [3, 4, 5, 6, 7],
-            height: '420px',
-          },
-        ],
-        skeletonsConfig3: [
-          {
-            breakpoints: [0, 1, 2, 3, 4, 5, 6, 7],
-            orientation: 'horizontal',
-            thumbnailDisplay: 'large',
-            thumbnailAlign: 'left',
-            height: '310px',
-          },
-          {
-            breakpoints: [4, 5, 6, 7],
-            height: '240px',
-          },
-        ],
-        skeletonsConfig4: [
-          {
-            breakpoints: [0, 1, 2, 3, 4, 5, 6, 7],
-            height: '290px',
-          },
-          {
-            breakpoints: [4, 5, 6, 7],
-            height: '225px',
-          },
-        ],
-        skeletonsConfig5: [
-          {
-            breakpoints: [0, 1, 2, 3, 4, 5, 6, 7],
-            orientation: 'horizontal',
-            thumbnailDisplay: 'large',
-            thumbnailAlign: 'left',
-            height: '300px',
-          },
-          {
-            breakpoints: [3, 4, 5, 6, 7],
-            height: '190px',
-          },
-        ],
-        skeletonsConfig6: [
-          {
-            breakpoints: [0, 1, 2, 3, 4, 5, 6, 7],
-            orientation: 'vertical',
-            thumbnailDisplay: 'large',
-            height: '460px',
-          },
-          {
-            breakpoints: [2],
-            height: '390px',
-          },
-          {
-            breakpoints: [3, 4, 5, 6, 7],
-            orientation: 'horizontal',
-            thumbnailAlign: 'right',
-            height: '170px',
-          },
-        ],
-        skeletonsConfig7: [
-          {
-            breakpoints: [0, 1, 2, 3, 4, 5, 6, 7],
-            orientation: 'vertical',
-            thumbnailDisplay: 'large',
-            height: '460px',
-          },
-          {
-            breakpoints: [2],
-            height: '390px',
-          },
-          {
-            breakpoints: [3, 4, 5, 6, 7],
-            orientation: 'horizontal',
-            thumbnailAlign: 'right',
-            height: '170px',
-          },
-        ],
-        skeletonsConfig8: [
-          {
-            breakpoints: [0, 1, 2, 3, 4, 5, 6, 7],
-            orientation: 'vertical',
-            thumbnailDisplay: 'large',
-            height: '400px',
-          },
-          {
-            breakpoints: [2],
-            height: '380px',
-          },
-          {
-            breakpoints: [3, 4, 5, 6, 7],
-            orientation: 'horizontal',
-            thumbnailAlign: 'right',
-            height: '180px',
-          },
-        ],
-        skeletonsConfig9: [
-          {
-            breakpoints: [0, 1, 2, 3, 4, 5, 6, 7],
-            orientation: 'horizontal',
-            thumbnailDisplay: 'small',
-            thumbnailAlign: 'right',
-            height: '130px',
-          },
-        ],
       };
     },
     mounted() {
@@ -1170,19 +832,3 @@
   };
 
 </script>
-
-
-<style lang="scss" scoped>
-
-  .pills {
-    margin-left: -4px;
-
-    span {
-      display: inline-block;
-      padding: 4px 8px;
-      margin: 4px;
-      border-radius: 4px;
-    }
-  }
-
-</style>

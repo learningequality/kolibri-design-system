@@ -1,6 +1,7 @@
 import Vue from 'vue';
 
 import VueSimpleMarkdown from 'vue-simple-markdown';
+import DocsKCard from '../pages-components/DocsKCard';
 import DocsExample from '~/common/DocsExample';
 import DocsExternalLink from '~/common/DocsExternalLink';
 import DocsGithubLink from '~/common/DocsGithubLink';
