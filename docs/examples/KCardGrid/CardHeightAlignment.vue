@@ -2,9 +2,9 @@
 
   <KCardGrid
     layout="1-2-3"
+    :skeletonsConfig="skeletonsConfig5"
     :loading="loading"
   >
-    <!-- Card 1 -->
     <DocsKCard
       :headingLevel="4"
       preserveAboveTitle
@@ -32,14 +32,21 @@
         />
       </template>
       <template #footer>
-        <div class="footer-container">
-          <span class="pill">Biology</span>
-          <span class="pill">Short Activity</span>
+        <div
+          class="pills"
+          :style="{ color: $themeTokens.annotation }"
+        >
+          <span
+            v-for="(pill, i) in slicedPills"
+            :key="i"
+            :style="{ 'background-color': $themePalette.grey.v_100 }"
+          >
+            {{ pill }}
+          </span>
         </div>
       </template>
     </DocsKCard>
 
-    <!-- Card 2 -->
     <DocsKCard
       :headingLevel="4"
       preserveAboveTitle
@@ -63,15 +70,14 @@
       <template #belowTitle>
         <KTextTruncator
           :maxLines="4"
-          text="Discover how hummingbirds play a big role in nature despite their small size. Find out more about their beauty, how they help plants grow, and where they live."
+          text="Discover how hummingbirds play a big role in nature despite their small size. Find out more about their beauty, how they help plants grow, and where they live. "
         />
       </template>
       <template #footer>
-        <div :style="{ marginTop: '10px' }"></div>
+        <div></div>
       </template>
     </DocsKCard>
 
-    <!-- Card 3 -->
     <DocsKCard
       :headingLevel="4"
       preserveAboveTitle
@@ -90,12 +96,22 @@
       <template #belowTitle>
         <KTextTruncator
           :maxLines="4"
-          text="Discover how hummingbirds play a big role in nature despite their small size. Find out more about their beauty, how they help plants grow, and where they live."
+          text="Discover how hummingbirds play a big role in nature despite their small size. Find out more about their beauty, how they help plants grow, and where they live. "
         />
       </template>
       <template #footer>
-        <span class="pill">Short Activity</span>
-        <span class="pill">Biology</span>
+        <div
+          class="pills"
+          :style="{ color: $themeTokens.annotation }"
+        >
+          <span
+            v-for="(pill, i) in slicedPills"
+            :key="i"
+            :style="{ 'background-color': $themePalette.grey.v_100 }"
+          >
+            {{ pill }}
+          </span>
+        </div>
       </template>
     </DocsKCard>
   </KCardGrid>
@@ -119,15 +135,3 @@
   };
 
 </script>
-
-
-<style scoped>
-
-  .pill {
-    padding: 4px 8px;
-    margin-right: 8px;
-    background-color: #dddddd;
-    border-radius: 4px;
-  }
-
-</style>

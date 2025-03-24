@@ -9,30 +9,10 @@
     <DocsKCard
       v-for="i in 6"
       :key="i"
-      :headingLevel="4"
-      orientation="vertical"
-    >
-      <template #title>
-        <KTextTruncator
-          :maxLines="2"
-          :text="`(${i}) Learn everything about hummingbirds: their habitats, feeding patterns, and stunning flight abilities`"
-        />
-      </template>
-
-      <template #media>
-        <img
-          src="/api/placeholder/400/300"
-          alt="Hummingbird on a branch"
-        >
-      </template>
-
-      <template #belowTitle>
-        <p>
-          Discover how hummingbirds play a big role in nature despite their small size. Find out
-          more about their beauty, how they help plants grow, and where they live.
-        </p>
-      </template>
-    </DocsKCard>
+      :headingLevel="6"
+      :prependTitle="`(${i})`"
+      hideFooter
+    />
   </KCardGrid>
 
 </template>

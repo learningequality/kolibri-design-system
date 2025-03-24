@@ -1,7 +1,7 @@
 <template>
 
   <div>
-    <div class="button-container">
+    <div :style="{ display: 'flex', justifyContent: 'flex-end' }">
       <KButtonGroup>
         <KButton
           primary
@@ -21,13 +21,12 @@
         >
           Load (4 s)
         </KButton>
-        <KButton @click="debug = !debug">Debug: {{ debug ? 'On' : 'Off' }}</KButton>
+        <KButton @click="debug = !debug"> Debug: {{ debug ? 'On' : 'Off' }} </KButton>
       </KButtonGroup>
     </div>
-
     <KCardGrid
       layout="1-2-2"
-      :skeletonsConfig="skeletonsConfig"
+      :skeletonsConfig="skeletonsConfig8"
       :loading="loading"
       :debug="debug"
     >
@@ -35,40 +34,9 @@
         v-for="i in 3"
         :key="i"
         :headingLevel="4"
-        orientation="vertical"
-      >
-        <template #title>
-          <div :style="{ height: '52px' }">
-            <KTextTruncator
-              :maxLines="2"
-              :text="`(${i}) Learn everything about hummingbirds: their habitats, feeding patterns, and stunning flight abilities`"
-            />
-          </div>
-        </template>
-
-        <template #media>
-          <img
-            src="/api/placeholder/400/300"
-            alt="Hummingbird on a branch"
-            style="width: 100%; max-width: 200px; object-fit: cover"
-          >
-        </template>
-
-        <template #belowTitle>
-          <p>
-            Discover how hummingbirds play a big role in nature despite their small size. Find out
-            more about their beauty, how they help plants grow, and where they live.
-          </p>
-        </template>
-
-        <template #footer>
-          <span class="pill">
-            <KIcon icon="readSolid" />
-            Read
-          </span>
-          <span class="pill">Short Activity</span>
-        </template>
-      </DocsKCard>
+        :orientation="windowBreakpoint < 4 ? 'vertical' : 'horizontal'"
+        :prependTitle="`(${i})`"
+      />
     </KCardGrid>
   </div>
 
@@ -132,23 +100,3 @@
   };
 
 </script>
-
-
-<style scoped>
-
-  .button-container {
-    display: flex;
-    justify-content: flex-end;
-    margin-bottom: 12px;
-  }
-
-  .pill {
-    display: inline-flex;
-    padding: 4px 8px;
-    margin-right: 8px;
-    color: #616161;
-    background-color: #dddddd;
-    border-radius: 4px;
-  }
-
-</style>

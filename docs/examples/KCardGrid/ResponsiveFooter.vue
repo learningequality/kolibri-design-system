@@ -9,30 +9,26 @@
       v-for="i in 2"
       :key="i"
       :headingLevel="4"
-      orientation="vertical"
+      :prependTitle="`(${i})`"
     >
-      <template #title>
-        <div :style="{ height: '52px' }">
-          <KTextTruncator
-            :maxLines="2"
-            :text="`(${i}) Learn everything about hummingbirds: their habitats, feeding patterns, and stunning flight abilities`"
-          />
-        </div>
-      </template>
-
       <template #footer>
-        <span class="read-pill">
-          <KIcon
-            icon="readSolid"
-            :style="{ position: 'relative', top: '2px', marginRight: '4px', fontSize: '13px' }"
-          />
-          Read
-        </span>
-        <span class="activity-pill">Short Activity</span>
-        <template v-if="windowBreakpoint > 3">
-          <span class="biology-pill">Biology</span>
-          <span class="ecology-pill">Ecology</span>
-        </template>
+        <div
+          class="pills"
+          :style="{ color: $themeTokens.annotation }"
+        >
+          <span>
+            <KIcon
+              icon="readSolid"
+              :style="{ fontSize: '13px', position: 'relative', top: '3px' }"
+            />
+            Read
+          </span>
+          <span> Short Activity </span>
+          <template v-if="windowBreakpoint > 3">
+            <span> Biology </span>
+            <span> Ecology </span>
+          </template>
+        </div>
       </template>
     </DocsKCard>
   </KCardGrid>
@@ -76,22 +72,18 @@
 </script>
 
 
-<style scoped>
+<style lang="scss" scoped>
 
-  .read-pill,
-  .activity-pill,
-  .biology-pill,
-  .ecology-pill {
-    padding: 4px 8px;
-    margin-right: 8px;
-    font-size: 14px;
-    color: #616161;
-    background-color: #dddddd;
-    border-radius: 4px;
-  }
+  .pills {
+    margin-left: -4px;
 
-  .ecology-pill {
-    margin-right: 0;
+    span {
+      display: inline-block;
+      padding: 4px 8px;
+      margin: 4px;
+      background-color: #dddddd;
+      border-radius: 4px;
+    }
   }
 
 </style>
