@@ -17,6 +17,7 @@ import DocsToggleButton from '~/common/DocsToggleButton';
 import DocsFilter from '~/common/DocsFilter';
 import DocsTable from '~/common/DocsTable';
 import DocsSubNav from '~/common/DocsSubNav';
+import DocsKCard from '~/pages-components/DocsKCard.vue';
 
 Vue.component('DocsExample', DocsExample);
 Vue.component('DocsPageTemplate', DocsPageTemplate);
@@ -34,5 +35,6 @@ Vue.component('DocsToggleContent', DocsToggleContent);
 Vue.component('DocsToggleButton', DocsToggleButton);
 Vue.component('DocsTable', DocsTable);
 Vue.component('DocsSubNav', DocsSubNav);
+Vue.component('DocsKCard', DocsKCard);
 
 Vue.use(VueSimpleMarkdown);

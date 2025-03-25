@@ -24,7 +24,7 @@
           text="window breakpoint system"
           href="/layout#responsiveness"
         />. <code>KCardGrid</code> determines how many cards per row to display based on its layout
-        and a current window breakpoint.
+        and the current window breakpoint.
       </p>
 
       <p>
@@ -57,14 +57,14 @@
         </li>
         <li>
           Avoid setting card heights. Instead, set heights on card sections, use text truncation, or
-          limit content in other ways (<DocsInternalLink
-            text="Card height, content tolerance and  alignment"
+          limit content (<DocsInternalLink
+            text="Card height, content tolerance and alignment"
             href="#card-height-and-alignment"
           />)
         </li>
         <li>
           Ensure robust content tolerance and consistent content alignment (<DocsInternalLink
-            text="Card height, content tolerance and  alignment"
+            text="Card height, content tolerance and alignment"
             href="#card-height-and-alignment"
           />)
         </li>
@@ -101,7 +101,7 @@
           { text: 'Base layouts', href: '#base-layouts' },
           { text: 'Layout customization', href: '#layout-customization' },
           {
-            text: 'Card height, content tolerance and  alignment',
+            text: 'Card height, content tolerance and alignment',
             href: '#card-height-and-alignment',
           },
           { text: 'Fine-tuning responsiveness', href: '#fine-tuning-responsiveness' },
@@ -115,8 +115,9 @@
       </h3>
 
       <p>
-        Three base layouts are available: <code>'1-1-1'</code>, <code>'1-2-2'</code>, and
-        <code>'1-2-3'</code>. They determine the number of cards per row for each
+        Three base layouts are available:
+        <code>'1-1-1'</code>, <code>'1-2-2'</code>, and <code>'1-2-3'</code>. They determine the
+        number of cards per row for each
         <DocsInternalLink
           text="window breakpoint level"
           href="/layout#responsiveness"
@@ -163,23 +164,11 @@
         </DocsTable>
       </DocsToggleContent>
 
-      <DocsExample exampleId="1-1-1-grid">
-        <DocsShow block>
-          <KCardGrid
-            layout="1-1-1"
-            :skeletonsConfig="skeletonsConfig1"
-            :loading="loading"
-          >
-            <DocsKCard
-              v-for="i in 2"
-              :key="i"
-              :headingLevel="5"
-              orientation="horizontal"
-              :prependTitle="`(${i})`"
-            />
-          </KCardGrid>
-        </DocsShow>
-
+      <DocsExample
+        exampleId="1-1-1-grid"
+        loadExample="KCardGrid/BasicGrids/1-1-1.vue"
+        block
+      >
         <template #html>
           <!-- eslint-disable -->
           <DocsShowCode language="html">
@@ -235,39 +224,32 @@
         </DocsTable>
       </DocsToggleContent>
 
-      <DocsShow block>
-        <KCardGrid
-          layout="1-2-2"
-          :skeletonsConfig="skeletonsConfig2"
-          :loading="loading"
-        >
-          <DocsKCard
-            v-for="i in 3"
-            :key="i"
-            :headingLevel="5"
-            :prependTitle="`(${i})`"
-          />
-        </KCardGrid>
-      </DocsShow>
-
-      <!-- eslint-disable -->
-      <DocsShowCode language="html">
-        <KCardGrid layout="1-2-2">
-          <KCard
-            v-for="i in 3"
-            ...
-          />
-        </KCardGrid>
-      </DocsShowCode>
-      <!-- eslint-enable -->
+      <DocsExample
+        exampleId="1-2-2-grid"
+        loadExample="KCardGrid/BasicGrids/1-2-2.vue"
+        block
+      >
+        <template #html>
+          <!-- eslint-disable -->
+          <DocsShowCode language="html">
+            <KCardGrid layout="1-2-2">
+              <KCard
+                v-for="i in 3"
+                ...
+              />
+            </KCardGrid>
+          </DocsShowCode>
+          <!-- eslint-enable -->
+        </template>
+      </DocsExample>
 
       <h4>
         '1-2-3' grid
         <DocsAnchorTarget anchor="#1-2-3-grid" />
       </h4>
       <p>
-        Displays a grid with 1 card per row on smaller screens, 2 cards per row on medium screens,
-        and 3 cards per row on larger screens.
+        Displays a grid with 1 card per row on smaller screens, 2 on medium, and 3 on larger
+        screens.
         <DocsToggleButton
           contentId="more-1-2-3-grid"
           showText="Show full definition"
@@ -302,31 +284,24 @@
         </DocsTable>
       </DocsToggleContent>
 
-      <DocsShow block>
-        <KCardGrid
-          layout="1-2-3"
-          :skeletonsConfig="skeletonsConfig3"
-          :loading="loading"
-        >
-          <DocsKCard
-            v-for="i in 5"
-            :key="i"
-            :headingLevel="5"
-            :prependTitle="`(${i})`"
-          />
-        </KCardGrid>
-      </DocsShow>
-
-      <!-- eslint-disable -->
-      <DocsShowCode language="html">
-        <KCardGrid layout="1-2-3">
-          <KCard
-            v-for="i in 5"
-            ...
-          />
-        </KCardGrid>
-      </DocsShowCode>
-      <!-- eslint-enable -->
+      <DocsExample
+        exampleId="1-2-3-grid"
+        loadExample="KCardGrid/BasicGrids/1-2-3.vue"
+        block
+      >
+        <template #html>
+          <!-- eslint-disable -->
+          <DocsShowCode language="html">
+            <KCardGrid layout="1-2-3">
+              <KCard
+                v-for="i in 5"
+                ...
+              />
+            </KCardGrid>
+          </DocsShowCode>
+          <!-- eslint-enable -->
+        </template>
+      </DocsExample>
 
       <h3>
         Layout customization
@@ -334,7 +309,7 @@
       </h3>
 
       <p>
-        Base layouts can be customized or even completely overriden via the
+        Base layouts can be customized or even completely overridden via the
         <code>layoutOverride</code> prop. <code>layoutOverride</code> takes an array of objects
         <code>{ breakpoints, cardsPerRow, columnGap, rowGap }</code>, where:
       </p>
@@ -359,63 +334,55 @@
 
       <p>For example:</p>
 
-      <DocsShow block>
-        <KCardGrid
-          layout="1-2-3"
-          :layoutOverride="layoutOverride"
-          :skeletonsConfig="skeletonsConfig4"
-          :loading="loading"
-        >
-          <DocsKCard
-            v-for="i in 6"
-            :key="i"
-            :headingLevel="6"
-            :prependTitle="`(${i})`"
-            hideFooter
-          />
-        </KCardGrid>
-      </DocsShow>
+      <DocsExample
+        exampleId="custom-layout"
+        loadExample="KCardGrid/LayoutOverride.vue"
+        block
+      >
+        <template #html>
+          <!-- eslint-disable -->
+          <DocsShowCode language="html">
+            <KCardGrid
+              layout="1-2-3"
+              :layoutOverride="layoutOverride"
+            >
+              <KCard
+                v-for="i in 6"
+                ...
+              />
+            </KCardGrid>
+          </DocsShowCode>
+          <!-- eslint-enable -->
+        </template>
 
-      <!-- eslint-disable -->
-      <DocsShowCode language="html">
-        <KCardGrid
-          layout="1-2-3"
-          :layoutOverride="layoutOverride"
-        >
-          <KCard
-            v-for="i in 6"
+        <template #javascript>
+          <!-- prettier-ignore -->
+          <DocsShowCode language="javascript">
+            export default {
             ...
-          />
-        </KCardGrid>
-      </DocsShowCode>
-      <!-- eslint-enable -->
-
-      <!-- eslint-disable -->
-      <!-- prettier-ignore -->
-      <DocsShowCode language="javascript">
-        export default {
-          ...
-          data() {
+            data() {
             return {
-              layoutOverride: [
-                {
-                  breakpoints: [0, 1],
-                  columnGap: '20px',
-                  rowGap: '20px',
-                },
-                {
-                  breakpoints: [4, 5, 6, 7],
-                  cardsPerRow: 4,
-                },
-              ],
+            layoutOverride: [
+            {
+            breakpoints: [0, 1],
+            columnGap: '20px',
+            rowGap: '20px',
+            },
+            {
+            breakpoints: [4, 5, 6, 7],
+            cardsPerRow: 4,
+            },
+            ],
             };
-          },
-        };
-      </DocsShowCode>
-      <!-- eslint-enable -->
+            },
+            };
+          </DocsShowCode>
+          <!-- eslint-enable -->
+        </template>
+      </DocsExample>
 
       <p>
-        Here, the base <code>1-2-3</code> layout is overriden partially. Column and row gaps are
+        Here, the base <code>1-2-3</code> layout is partially overridden. Column and row gaps are
         decreased to <code>20px</code> on breakpoints <code>0-1</code>, and the number of cards per
         row is increased to 4 on breakpoints <code>4-7</code>.
       </p>
@@ -434,193 +401,75 @@
         <em>Setting height on cards is discouraged. Instead, manage height bottom-up, for example by
           setting height on card sections, using text truncation, or other ways to limit its inner
           content.</em>
-        Such approaches ensure content tolerance, prevent from unexpected overflows or excessive
-        height, and keep vertical alignment of card sections consistent on a grid row. This is
-        especially important when dealing with unknown lenghts or amounts of content displayed in
-        cards. Consider:
+        Such approaches ensure content tolerance, prevent unexpected overflows or excessive height,
+        and keep vertical alignment of card sections consistent on a grid row. Consider:
       </p>
 
-      <DocsShow block>
-        <KCardGrid
-          layout="1-2-3"
-          :skeletonsConfig="skeletonsConfig5"
-          :loading="loading"
-        >
-          <DocsKCard
-            :headingLevel="4"
-            preserveAboveTitle
-          >
-            <template #aboveTitle>
-              <div :style="{ height: '24px' }">
-                <KLabeledIcon
-                  icon="readSolid"
-                  label="Read"
-                />
-              </div>
-            </template>
-            <template #title>
-              <div :style="{ height: '52px' }">
-                <KTextTruncator
-                  :maxLines="2"
-                  text="(1) Learn everything about hummingbirds: their habitats, feeding patterns, and stunning flight abilities"
-                />
-              </div>
-            </template>
-            <template #belowTitle>
-              <KTextTruncator
-                :maxLines="4"
-                text="Short description"
-              />
-            </template>
-            <template #footer>
-              <div
-                class="pills"
-                :style="{ color: $themeTokens.annotation }"
+      <DocsExample
+        exampleId="card-height-alignment"
+        loadExample="KCardGrid/CardHeightAlignment.vue"
+        block
+      >
+        <template #html>
+          <!-- eslint-disable -->
+          <DocsShowCode language="html">
+            <KCardGrid ...>
+              <KCard
+                ...
+                preserveAboveTitle
               >
-                <span
-                  v-for="(pill, i) in slicedPills"
-                  :key="i"
-                  :style="{ 'background-color': $themePalette.grey.v_100 }"
-                >
-                  {{ pill }}
-                </span>
-              </div>
-            </template>
-          </DocsKCard>
+                <template #aboveTitle>
+                  <div :style="{ height: '24px' }">...</div>
+                </template>
+                <template #title>
+                  <div :style="{ height: '52px' }">
+                    <KTextTruncator
+                      :maxLines="2"
+                      :text="..."
+                    />
+                  </div>
+                </template>
+                <template #belowTitle>
+                  <KTextTruncator
+                    :maxLines="4"
+                    :text="..."
+                  />
+                </template>
+                <template #footer>
+                  <span v-for="pill in slicedPills"> ... </span>
+                </template>
+              </KCard>
+            </KCardGrid>
+          </DocsShowCode>
+          <!-- eslint-enable -->
+        </template>
 
-          <DocsKCard
-            :headingLevel="4"
-            preserveAboveTitle
-          >
-            <template #aboveTitle>
-              <div :style="{ height: '24px' }">
-                <KLabeledIcon
-                  icon="readSolid"
-                  label="Read"
-                />
-              </div>
-            </template>
-            <template #title>
-              <div :style="{ height: '52px' }">
-                <KTextTruncator
-                  :maxLines="2"
-                  text="(2) Short title"
-                />
-              </div>
-            </template>
-            <template #belowTitle>
-              <KTextTruncator
-                :maxLines="4"
-                text="Discover how hummingbirds play a big role in nature despite their small size. Find out more about their beauty, how they help plants grow, and where they live. "
-              />
-            </template>
-            <template #footer>
-              <div></div>
-            </template>
-          </DocsKCard>
-
-          <DocsKCard
-            :headingLevel="4"
-            preserveAboveTitle
-          >
-            <template #aboveTitle>
-              <div :style="{ height: '24px' }"></div>
-            </template>
-            <template #title>
-              <div :style="{ height: '52px' }">
-                <KTextTruncator
-                  :maxLines="2"
-                  text="(3) Learn everything about hummingbirds: their habitats, feeding patterns, and stunning flight abilities"
-                />
-              </div>
-            </template>
-            <template #belowTitle>
-              <KTextTruncator
-                :maxLines="4"
-                text="Discover how hummingbirds play a big role in nature despite their small size. Find out more about their beauty, how they help plants grow, and where they live. "
-              />
-            </template>
-            <template #footer>
-              <div
-                class="pills"
-                :style="{ color: $themeTokens.annotation }"
-              >
-                <span
-                  v-for="(pill, i) in slicedPills"
-                  :key="i"
-                  :style="{ 'background-color': $themePalette.grey.v_100 }"
-                >
-                  {{ pill }}
-                </span>
-              </div>
-            </template>
-          </DocsKCard>
-        </KCardGrid>
-      </DocsShow>
-
-      <!-- eslint-disable -->
-      <DocsShowCode language="html">
-        <KCardGrid ...>
-          <KCard
+        <template #javascript>
+          <!-- prettier-ignore -->
+          <DocsShowCode language="javascript">
+            export default {
             ...
-            preserveAboveTitle
-          >
-            <template #aboveTitle>
-              <div :style="{ height: '24px' }">...</div>
-            </template>
-            <template #title>
-              <div :style="{ height: '52px' }">
-                <KTextTruncator
-                  :maxLines="2"
-                  :text="..."
-                />
-              </div>
-            </template>
-            <template #belowTitle>
-              <KTextTruncator
-                :maxLines="4"
-                :text="..."
-              />
-            </template>
-            <template #footer>
-              <span v-for="pill in slicedPills"> ... </span>
-            </template>
-          </KCard>
-        </KCardGrid>
-      </DocsShowCode>
-      <!-- eslint-enable -->
-
-      <!-- eslint-disable -->
-      <!-- prettier-ignore -->
-      <DocsShowCode language="javascript">
-        export default {
-          ...
-          computed: {
+            computed: {
             slicedPills() {
-              return pills.slice(0, 2);
+            return pills.slice(0, 2);
             },
-          },
-        };
-      </DocsShowCode>
-      <!-- eslint-enable -->
+            },
+            };
+          </DocsShowCode>
+          <!-- eslint-enable -->
+        </template>
+      </DocsExample>
 
-      <p>
-        Here, <code>KCard</code> has the following adjustments related to its visual output in the
-        grid:
-      </p>
+      <p>Here, <code>KCard</code> has the following adjustments:</p>
+
       <ul>
         <li>
           Height is set on its <code>aboveTitle</code> slot content, and its
-          <code>preserveAboveTitle</code> prop keeps the slot area even without content. This
-          results in consistent alignment of all cards' titles on a grid row.
+          <code>preserveAboveTitle</code> prop keeps the slot even without content.
         </li>
-        <li>
-          Similarly, height is set on its <code>title</code> slot, and the title is truncated.
-        </li>
-        <li>Its <code>belowTitle</code> slot's content is truncated.</li>
-        <li>
-          The number of pills in its <code>footer</code> slot is limited to a reasonable amount.
-        </li>
+        <li>Height is set on its <code>title</code> slot, and the title is truncated.</li>
+        <li>The <code>belowTitle</code> slot's content is truncated.</li>
+        <li>The number of pills in its <code>footer</code> is limited.</li>
       </ul>
 
       <p>
@@ -639,109 +488,90 @@
         space:
       </p>
 
-      <DocsShow block>
-        <KCardGrid
-          layout="1-2-2"
-          :skeletonsConfig="skeletonsConfig6"
-          :loading="loading"
-        >
-          <DocsKCard
-            v-for="i in 2"
-            :key="i"
-            :headingLevel="4"
-            :orientation="windowBreakpoint < 4 ? 'vertical' : 'horizontal'"
-            :prependTitle="`(${i})`"
-          />
-        </KCardGrid>
-      </DocsShow>
+      <DocsExample
+        exampleId="responsive-orientation"
+        loadExample="KCardGrid/ResponsiveOrientation.vue"
+        block
+      >
+        <template #html>
+          <!-- eslint-disable -->
+          <DocsShowCode language="html">
+            <KCardGrid layout="1-2-2">
+              <KCard
+                v-for="i in 2"
+                :orientation="windowBreakpoint < 4 ? 'vertical' : 'horizontal'"
+                ...
+              />
+            </KCardGrid>
+          </DocsShowCode>
+          <!-- eslint-enable -->
+        </template>
 
-      <!-- eslint-disable -->
-      <!-- prettier-ignore -->
-      <DocsShowCode language="javascript">
-        import useKResponsiveWindow from 'kolibri-design-system/lib/composables/useKResponsiveWindow';
-
-        export default {
-          setup() {
+        <template #javascript>
+          <!-- prettier-ignore -->
+          <DocsShowCode language="javascript">
+            import useKResponsiveWindow from 'kolibri-design-system/lib/composables/useKResponsiveWindow';
+            export default {
+            setup() {
             const { windowBreakpoint } = useKResponsiveWindow();
             return { windowBreakpoint };
-          },
-        };
-      </DocsShowCode>
-      <!-- eslint-enable -->
-
-      <!-- eslint-disable -->
-      <DocsShowCode language="html">
-        <KCardGrid layout="1-2-2">
-          <KCard
-            v-for="i in 2"
-            :orientation="windowBreakpoint < 4 ? 'vertical' : 'horizontal'"
-            ...
-          />
-        </KCardGrid>
-      </DocsShowCode>
-      <!-- eslint-enable -->
+            },
+            data() { ... }
+            };
+          </DocsShowCode>
+          <!-- eslint-enable -->
+        </template>
+      </DocsExample>
 
       <p>
         This technique also works for adjusting <code>KCard</code> slots content. In the following
         example, some metadata pills are hidden on smaller screens:
       </p>
 
-      <DocsShow block>
-        <KCardGrid
-          layout="1-2-2"
-          :skeletonsConfig="skeletonsConfig7"
-          :loading="loading"
-        >
-          <DocsKCard
-            v-for="i in 2"
-            :key="i"
-            :headingLevel="4"
-            :prependTitle="`(${i})`"
-          >
-            <template #footer>
-              <div
-                class="pills"
-                :style="{ color: $themeTokens.annotation }"
+      <DocsExample
+        exampleId="responsive-footer"
+        loadExample="KCardGrid/ResponsiveFooter.vue"
+        block
+      >
+        <template #html>
+          <!-- eslint-disable -->
+          <DocsShowCode language="html">
+            <KCardGrid layout="1-2-2">
+              <KCard
+                v-for="i in 2"
+                ...
               >
-                <span :style="{ 'background-color': $themePalette.grey.v_100 }">
-                  <KIcon
-                    icon="readSolid"
-                    :style="{ fontSize: '13px', position: 'relative', top: '3px' }"
-                  />
-                  Read
-                </span>
-                <span :style="{ 'background-color': $themePalette.grey.v_100 }">
-                  Short Activity
-                </span>
-                <template v-if="windowBreakpoint > 3">
-                  <span :style="{ 'background-color': $themePalette.grey.v_100 }"> Biology </span>
-                  <span :style="{ 'background-color': $themePalette.grey.v_100 }"> Ecology </span>
+                <template #footer>
+                  <span>
+                    <KIcon ...> Read </KIcon>
+                  </span>
+                  <span> Short Activity </span>
+                  <template v-if="windowBreakpoint > 3">
+                    <span> Biology </span>
+                    <span> Ecology </span>
+                  </template>
                 </template>
-              </div>
-            </template>
-          </DocsKCard>
-        </KCardGrid>
-      </DocsShow>
+              </KCard>
+            </KCardGrid>
+          </DocsShowCode>
+          <!-- eslint-enable -->
+        </template>
 
-      <!-- eslint-disable -->
-      <DocsShowCode language="html">
-        <KCardGrid layout="1-2-2">
-          <KCard
-            v-for="i in 2"
-            ...
-          >
-            <template #footer>
-              <span ...>Read</span>
-              <span ...>Short Activity</span>
-              <template v-if="windowBreakpoint > 3">
-                <span ...>Biology</span>
-                <span ...>Ecology</span>
-              </template>
-            </template>
-          </KCard>
-        </KCardGrid>
-      </DocsShowCode>
-      <!-- eslint-enable -->
+        <template #javascript>
+          <!-- prettier-ignore -->
+          <DocsShowCode language="javascript">
+            import useKResponsiveWindow from 'kolibri-design-system/lib/composables/useKResponsiveWindow';
+            export default {
+            setup() {
+            const { windowBreakpoint } = useKResponsiveWindow();
+            return { windowBreakpoint };
+            },
+            data() {...}
+            };
+          </DocsShowCode>
+          <!-- eslint-enable -->
+        </template>
+      </DocsExample>
 
       <h3>
         Loading state
@@ -750,41 +580,29 @@
 
       <p>
         While data is loading, <code>KCardGrid</code> shows loading skeleton cards. Use the
-        <code>loading</code> prop to toggle the loading state. Note that
-        <code>KCardGrid</code> internal optimizations may affect how closely the visual loading
-        experience matches the <code>loading</code> value:
+        <code>loading</code> prop to toggle the state. Note that internal optimizations may affect
+        how closely the visual loading experience matches <code>loading</code>.
       </p>
 
       <ul>
         <li>The loading skeletons won't be displayed for short loading times (&lt; 1s)</li>
-        <li>When the loading skeletons are displayed, they will be visible for at least 1s</li>
+        <li>When displayed, they will be visible for at least 1s</li>
       </ul>
-
       <p>Use the buttons in the example below to preview.</p>
-
-      <h4>
-        Number of loading skeletons <DocsAnchorTarget anchor="#loading-state-skeletons-count" />
-      </h4>
-
       <p>
-        By default, the number of loading skeletons corresponds to the number of cards in a single
-        grid row if it were full. This behavior can be overridden via the
-        <code>count</code> attribute (below), however do not override it unless indicated in the
-        designs.
-      </p>
-
-      <h4>Loading skeletons configuration</h4>
-
-      <p>
-        Use the <code>skeletonsConfig</code> prop to configure skeleton cards to match the expected
-        visual output of loaded cards on all screen sizes. Preview the layout and height of cards
-        with loaded data and adjust <code>skeletonsConfig</code> accordingly.
+        <strong>Number of loading skeletons</strong><br >
+        By default, the number corresponds to the number of cards in a full row. This behavior can
+        be overridden via the <code>count</code> attribute.
       </p>
 
       <p>
-        <code>skeletonsConfig</code> takes an array of objects
-        <code>{ breakpoints, count, height, orientation, thumbnailDisplay, thumbnailAlign }</code>,
-        where:
+        <strong>Loading skeletons configuration</strong><br >
+        Use the <code>skeletonsConfig</code> prop to configure skeleton cards.
+      </p>
+
+      <p>
+        <code>skeletonsConfig</code> takes an array of objects { breakpoints, count, height,
+        orientation, thumbnailDisplay, thumbnailAlign }.
       </p>
 
       <ul>
@@ -793,152 +611,102 @@
           <DocsInternalLink
             text="window breakpoint levels"
             href="/layout#responsiveness"
-          />. All other attributes in the same object take effect on these breakpoints.
-        </li>
-        <li>
-          <code>count</code> sets the number of skeleton cards for the specified breakpoints. See
-          <DocsInternalLink
-            text="Number of loading skeletons"
-            href="#loading-state-skeletons-count"
           />.
         </li>
+        <li><code>count</code> sets the number of skeleton cards.</li>
+        <li><code>height</code> sets the height of skeleton cards.</li>
         <li>
-          <code>height</code> sets the height of skeleton cards for the specified breakpoints.
-        </li>
-        <li>
-          <code>orientation</code> sets the orientation of skeleton cards for the specified
-          breakpoints. Corresponds to
+          <code>orientation</code> sets the orientation of skeleton cards (see
           <DocsInternalLink
             text="KCard's orientation"
             href="/kcard#prop:orientation"
             code
-          />.
+          />).
         </li>
         <li>
-          <code>thumbnailDisplay</code> sets the thumbnail display of skeleton cards for the
-          specified breakpoints. Corresponds to
+          <code>thumbnailDisplay</code> sets the thumbnail display (see
           <DocsInternalLink
             text="KCard's thumbnailDisplay"
             href="/kcard#prop:thumbnailDisplay"
             code
-          />.
+          />).
         </li>
         <li>
-          <code>thumbnailAlign</code> sets the thumbnail alignment of skeleton cards for the
-          specified breakpoints. Corresponds to
+          <code>thumbnailAlign</code> sets the thumbnail alignment (see
           <DocsInternalLink
             text="KCard's thumbnailAlign"
             href="/kcard#prop:thumbnailAlign"
             code
-          />.
+          />).
         </li>
       </ul>
 
       <p>
-        For easier development, enable the <code>debug</code> prop to display the current breakpoint
-        in the top left corner of the grid. Use the button in the example below to preview the debug
-        mode.
+        For easier development, enable the <code>debug</code> prop to display the current
+        breakpoint.
       </p>
 
-      <div :style="{ display: 'flex', justifyContent: 'flex-end' }">
-        <KButtonGroup>
-          <KButton
-            primary
-            @click="load500"
-          >
-            Load (0.5 s)
-          </KButton>
-          <KButton
-            primary
-            @click="load1200"
-          >
-            Load (1.2 s)
-          </KButton>
-          <KButton
-            primary
-            @click="load4000"
-          >
-            Load (4 s)
-          </KButton>
-          <KButton @click="debug = !debug"> Debug: {{ debug ? 'On' : 'Off' }} </KButton>
-        </KButtonGroup>
-      </div>
+      <DocsExample
+        exampleId="loading-state"
+        loadExample="KCardGrid/LoadingState.vue"
+        block
+      >
+        <template #html>
+          <!-- eslint-disable -->
+          <DocsShowCode language="html">
+            <KCardGrid
+              layout="1-2-2"
+              :skeletonsConfig="skeletonsConfig"
+              :loading="loading"
+            >
+              <KCard
+                v-for="i in 3"
+                :orientation="windowBreakpoint < 4 ? 'vertical' : 'horizontal'"
+                thumbnailDisplay="large"
+                thumbnailAlign="left"
+                ...
+              />
+            </KCardGrid>
+          </DocsShowCode>
+          <!-- eslint-enable -->
+        </template>
 
-      <DocsShow block>
-        <KCardGrid
-          layout="1-2-2"
-          :skeletonsConfig="skeletonsConfig8"
-          :loading="loading"
-          :debug="debug"
-        >
-          <DocsKCard
-            v-for="i in 3"
-            :key="i"
-            :headingLevel="4"
-            :orientation="windowBreakpoint < 4 ? 'vertical' : 'horizontal'"
-            :prependTitle="`(${i})`"
-          />
-        </KCardGrid>
-      </DocsShow>
-
-      <!-- eslint-disable -->
-      <DocsShowCode language="html">
-        <KCardGrid
-          layout="1-2-2"
-          :skeletonsConfig="skeletonsConfig"
-          :loading="loading"
-        >
-          <KCard
-            v-for="i in 3"
-            :orientation="windowBreakpoint < 4 ? 'vertical' : 'horizontal'"
-            thumbnailDisplay="large"
-            thumbnailAlign="left"
+        <template #javascript>
+          <!-- prettier-ignore -->
+          <DocsShowCode language="javascript">
+            import useKResponsiveWindow from 'kolibri-design-system/lib/composables/useKResponsiveWindow';
+            export default {
             ...
-          />
-        </KCardGrid>
-      </DocsShowCode>
-      <!-- eslint-enable -->
-
-      <!-- eslint-disable -->
-      <!-- prettier-ignore -->
-      <DocsShowCode language="javascript">
-        export default {
-          ...
-          data() {
+            data() {
             return {
-              skeletonsConfig: [
-                {
-                  breakpoints: [0, 1, 2, 3, 4, 5, 6, 7],
-                  height: '400px',
-                  orientation: 'vertical',
-                  thumbnailDisplay: 'large',
-                  thumbnailAlign: 'left'
-                },
-                {
-                  breakpoints: [4, 5, 6, 7],
-                  height: '220px',
-                  orientation: 'horizontal'
-                }
-              ],
+            skeletonsConfig: [
+            {
+            breakpoints: [0, 1, 2, 3, 4, 5, 6, 7],
+            height: '400px',
+            orientation: 'vertical',
+            thumbnailDisplay: 'large',
+            thumbnailAlign: 'left'
+            },
+            {
+            breakpoints: [4, 5, 6, 7],
+            height: '220px',
+            orientation: 'horizontal'
+            }
+            ],
             };
-          },
-        };
-      </DocsShowCode>
-      <!-- eslint-enable -->
+            },
+            };
+          </DocsShowCode>
+          <!-- eslint-enable -->
+        </template>
+      </DocsExample>
 
       <p>
-        Here, the height of loading skeleton cards is <code>400px</code> with vertical orientation
-        on breakpoints <code>0-3</code>, and <code>220px</code> with horizontal orientation on
-        breakpoints <code>4-7</code>. This makes skeleton cards resemble loaded cards at all
-        breakpoints, creating a smooth transition for users during data loading. Note the bottom-up
-        approach where we begin with a base setup for all breakpoints and gradually override on
-        higher breakpoints. This simplifies the configuration object.
+        Here, the skeleton cards use a base height of <code>400px</code> on breakpoints
+        <code>0-3</code> and <code>220px</code> on breakpoints <code>4-7</code>.
       </p>
 
-      <p>
-        To get a sense of what skeleton layouts can be achieved, reload this page and the
-        <code>KCard</code> page to preview the loading state in all examples.
-      </p>
+      <p>To see skeleton layouts, reload this page and the <code>KCard</code> page.</p>
     </DocsPageSection>
 
     <DocsPageSection
@@ -966,170 +734,7 @@
 
 <script>
 
-  import useKResponsiveWindow from '../../lib/composables/useKResponsiveWindow';
-  import DocsKCard from '../pages-components/DocsKCard';
-
-  export default {
-    components: {
-      DocsKCard,
-    },
-    setup() {
-      const { windowBreakpoint } = useKResponsiveWindow();
-      return { windowBreakpoint };
-    },
-    data() {
-      return {
-        debug: false,
-        loading: true,
-        skeletonsConfig1: [
-          {
-            breakpoints: [0, 1, 2, 3, 4, 5, 6, 7],
-            orientation: 'horizontal',
-            thumbnailDisplay: 'large',
-            thumbnailAlign: 'left',
-            height: '250px',
-          },
-          {
-            breakpoints: [3, 4, 5, 6, 7],
-            height: '180px',
-          },
-        ],
-        skeletonsConfig2: [
-          {
-            breakpoints: [0, 1, 2, 3, 4, 5, 6, 7],
-            orientation: 'vertical',
-            thumbnailDisplay: 'large',
-            height: '470px',
-          },
-          {
-            breakpoints: [2, 3],
-            height: '430px',
-          },
-          {
-            breakpoints: [4, 5, 6, 7],
-            height: '360px',
-          },
-        ],
-        skeletonsConfig3: [
-          {
-            breakpoints: [0, 1, 2, 3, 4, 5, 6, 7],
-            orientation: 'vertical',
-            thumbnailDisplay: 'large',
-            height: '470px',
-          },
-          {
-            breakpoints: [2, 3],
-            height: '430px',
-          },
-          {
-            breakpoints: [4, 5, 6, 7],
-            height: '390px',
-          },
-        ],
-        skeletonsConfig4: [
-          {
-            breakpoints: [0, 1, 2, 3, 4, 5, 6, 7],
-            orientation: 'vertical',
-            thumbnailDisplay: 'large',
-            height: '360px',
-          },
-        ],
-        skeletonsConfig5: [
-          {
-            breakpoints: [0, 1, 2, 3, 4, 5, 6, 7],
-            orientation: 'vertical',
-            thumbnailDisplay: 'large',
-            height: '420px',
-          },
-          {
-            breakpoints: [3, 4, 5, 6, 7],
-            height: '390px',
-          },
-        ],
-        skeletonsConfig6: [
-          {
-            breakpoints: [0, 1, 2, 3, 4, 5, 6, 7],
-            orientation: 'vertical',
-            thumbnailDisplay: 'large',
-            height: '440px',
-          },
-          {
-            breakpoints: [4, 5, 6, 7],
-            height: '220px',
-            orientation: 'horizontal',
-            thumbnailAlign: 'left',
-          },
-        ],
-        skeletonsConfig7: [
-          {
-            breakpoints: [0, 1, 2, 3, 4, 5, 6, 7],
-            orientation: 'vertical',
-            thumbnailDisplay: 'large',
-            height: '430px',
-          },
-          {
-            breakpoints: [4, 5, 6, 7],
-            height: '370px',
-          },
-        ],
-        skeletonsConfig8: [
-          {
-            breakpoints: [0, 1, 2, 3, 4, 5, 6, 7],
-            orientation: 'vertical',
-            thumbnailDisplay: 'large',
-            height: '400px',
-          },
-          {
-            breakpoints: [4, 5, 6, 7],
-            height: '220px',
-            orientation: 'horizontal',
-            thumbnailAlign: 'left',
-          },
-        ],
-        layoutOverride: [
-          {
-            breakpoints: [0, 1],
-            columnGap: '20px',
-            rowGap: '20px',
-          },
-          {
-            breakpoints: [4, 5, 6, 7],
-            cardsPerRow: 4,
-          },
-        ],
-      };
-    },
-    computed: {
-      slicedPills() {
-        return ['Short Activity', 'Biology', 'Ecology', 'Ornithology'].slice(0, 2);
-      },
-    },
-    mounted() {
-      setTimeout(() => {
-        this.loading = false;
-      }, 3000);
-    },
-    methods: {
-      load500() {
-        this.loading = true;
-        setTimeout(() => {
-          this.loading = false;
-        }, 500);
-      },
-      load1200() {
-        this.loading = true;
-        setTimeout(() => {
-          this.loading = false;
-        }, 1200);
-      },
-      load4000() {
-        this.loading = true;
-        setTimeout(() => {
-          this.loading = false;
-        }, 4000);
-      },
-    },
-  };
+  export default {};
 
 </script>
 
