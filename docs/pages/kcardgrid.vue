@@ -356,25 +356,26 @@
         </template>
 
         <template #javascript>
+          <!-- eslint-disable -->
           <!-- prettier-ignore -->
           <DocsShowCode language="javascript">
             export default {
-            ...
-            data() {
-            return {
-            layoutOverride: [
-            {
-            breakpoints: [0, 1],
-            columnGap: '20px',
-            rowGap: '20px',
-            },
-            {
-            breakpoints: [4, 5, 6, 7],
-            cardsPerRow: 4,
-            },
-            ],
-            };
-            },
+              ...
+              data() {
+                return {
+                  layoutOverride: [
+                    {
+                      breakpoints: [0, 1],
+                      columnGap: '20px',
+                      rowGap: '20px',
+                    },
+                    {
+                      breakpoints: [4, 5, 6, 7],
+                      cardsPerRow: 4,
+                    },
+                  ],
+                };
+              },
             };
           </DocsShowCode>
           <!-- eslint-enable -->
@@ -445,15 +446,16 @@
         </template>
 
         <template #javascript>
+          <!-- eslint-disable -->
           <!-- prettier-ignore -->
           <DocsShowCode language="javascript">
             export default {
-            ...
-            computed: {
-            slicedPills() {
-            return pills.slice(0, 2);
-            },
-            },
+              ...
+              computed: {
+                slicedPills() {
+                  return pills.slice(0, 2);
+                },
+              },
             };
           </DocsShowCode>
           <!-- eslint-enable -->
@@ -508,15 +510,16 @@
         </template>
 
         <template #javascript>
+          <!-- eslint-disable -->
           <!-- prettier-ignore -->
           <DocsShowCode language="javascript">
             import useKResponsiveWindow from 'kolibri-design-system/lib/composables/useKResponsiveWindow';
             export default {
-            setup() {
-            const { windowBreakpoint } = useKResponsiveWindow();
-            return { windowBreakpoint };
-            },
-            data() { ... }
+              setup() {
+                const { windowBreakpoint } = useKResponsiveWindow();
+                return { windowBreakpoint };
+              },
+              data() { ... }
             };
           </DocsShowCode>
           <!-- eslint-enable -->
@@ -558,15 +561,16 @@
         </template>
 
         <template #javascript>
+          <!-- eslint-disable -->
           <!-- prettier-ignore -->
           <DocsShowCode language="javascript">
             import useKResponsiveWindow from 'kolibri-design-system/lib/composables/useKResponsiveWindow';
             export default {
-            setup() {
-            const { windowBreakpoint } = useKResponsiveWindow();
-            return { windowBreakpoint };
-            },
-            data() {...}
+              setup() {
+                const { windowBreakpoint } = useKResponsiveWindow();
+                return { windowBreakpoint };
+              },
+              data() {...}
             };
           </DocsShowCode>
           <!-- eslint-enable -->
@@ -672,29 +676,30 @@
         </template>
 
         <template #javascript>
+          <!-- eslint-disable -->
           <!-- prettier-ignore -->
           <DocsShowCode language="javascript">
             import useKResponsiveWindow from 'kolibri-design-system/lib/composables/useKResponsiveWindow';
             export default {
-            ...
-            data() {
-            return {
-            skeletonsConfig: [
-            {
-            breakpoints: [0, 1, 2, 3, 4, 5, 6, 7],
-            height: '400px',
-            orientation: 'vertical',
-            thumbnailDisplay: 'large',
-            thumbnailAlign: 'left'
-            },
-            {
-            breakpoints: [4, 5, 6, 7],
-            height: '220px',
-            orientation: 'horizontal'
-            }
-            ],
-            };
-            },
+              ...
+              data() {
+                return {
+                  skeletonsConfig: [
+                    {
+                      breakpoints: [0, 1, 2, 3, 4, 5, 6, 7],
+                      height: '400px',
+                      orientation: 'vertical',
+                      thumbnailDisplay: 'large',
+                      thumbnailAlign: 'left'
+                    },
+                    {
+                      breakpoints: [4, 5, 6, 7],
+                      height: '220px',
+                      orientation: 'horizontal'
+                    }
+                  ],
+                };
+              },
             };
           </DocsShowCode>
           <!-- eslint-enable -->
