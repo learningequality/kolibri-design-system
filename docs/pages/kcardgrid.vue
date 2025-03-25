@@ -24,7 +24,7 @@
           text="window breakpoint system"
           href="/layout#responsiveness"
         />. <code>KCardGrid</code> determines how many cards per row to display based on its layout
-        and the current window breakpoint.
+        and a current window breakpoint.
       </p>
 
       <p>
@@ -57,7 +57,7 @@
         </li>
         <li>
           Avoid setting card heights. Instead, set heights on card sections, use text truncation, or
-          limit content (<DocsInternalLink
+          limit content in other ways (<DocsInternalLink
             text="Card height, content tolerance and alignment"
             href="#card-height-and-alignment"
           />)
@@ -248,8 +248,8 @@
         <DocsAnchorTarget anchor="#1-2-3-grid" />
       </h4>
       <p>
-        Displays a grid with 1 card per row on smaller screens, 2 on medium, and 3 on larger
-        screens.
+        Displays a grid with 1 card per row on smaller screens, 2 cards per row on medium screens,
+        and 3 cards per row on larger screens.
         <DocsToggleButton
           contentId="more-1-2-3-grid"
           showText="Show full definition"
