@@ -403,7 +403,9 @@
           setting height on card sections, using text truncation, or other ways to limit its inner
           content.</em>
         Such approaches ensure content tolerance, prevent unexpected overflows or excessive height,
-        and keep vertical alignment of card sections consistent on a grid row. Consider:
+        and keep vertical alignment of card sections consistent on a grid row. This is especially
+        important when dealing with unknown lenghts or amounts of content displayed in cards.
+        Consider:
       </p>
 
       <DocsExample
@@ -467,11 +469,16 @@
       <ul>
         <li>
           Height is set on its <code>aboveTitle</code> slot content, and its
-          <code>preserveAboveTitle</code> prop keeps the slot even without content.
+          <code>preserveAboveTitle</code> prop keeps the slot even without content. This results in
+          consistent alignment of all cards' titles on a grid row.
         </li>
-        <li>Height is set on its <code>title</code> slot, and the title is truncated.</li>
-        <li>The <code>belowTitle</code> slot's content is truncated.</li>
-        <li>The number of pills in its <code>footer</code> is limited.</li>
+        <li>
+          Similarly, height is set on its <code>title</code> slot, and the title is truncated.
+        </li>
+        <li>Its <code>belowTitle</code> slot's content is truncated.</li>
+        <li>
+          The number of pills in its <code>footer</code> slot is limited to a reasonable amount.
+        </li>
       </ul>
 
       <p>
@@ -584,29 +591,39 @@
 
       <p>
         While data is loading, <code>KCardGrid</code> shows loading skeleton cards. Use the
-        <code>loading</code> prop to toggle the state. Note that internal optimizations may affect
-        how closely the visual loading experience matches <code>loading</code>.
+        <code>loading</code> prop to toggle the state. Note that <code>KCardGrid</code> internal
+        optimizations may affect how closely the visual loading experience matches the
+        <code>loading</code> value:
       </p>
-
       <ul>
         <li>The loading skeletons won't be displayed for short loading times (&lt; 1s)</li>
-        <li>When displayed, they will be visible for at least 1s</li>
+        <li>When the loading skeletons are displayed, they will be visible for at least 1s</li>
       </ul>
       <p>Use the buttons in the example below to preview.</p>
+
+      <h4>
+        Number of loading skeletons <DocsAnchorTarget anchor="#loading-state-skeletons-count" />
+      </h4>
+
       <p>
-        <strong>Number of loading skeletons</strong><br >
-        By default, the number corresponds to the number of cards in a full row. This behavior can
-        be overridden via the <code>count</code> attribute.
+        By default, the number of loading skeletons corresponds to the number of cards in a single
+        grid row if it were full. This behavior can be overridden via the
+        <code>count</code> attribute (below), however do not override it unless indicated in the
+        designs.
+      </p>
+
+      <h4>Loading skeletons configuration</h4>
+
+      <p>
+        Use the <code>skeletonsConfig</code> prop to configure skeleton cards to match the expected
+        visual output of loaded cards on all screen sizes. Preview the layout and height of cards
+        with loaded data and adjust <code>skeletonsConfig</code> accordingly.
       </p>
 
       <p>
-        <strong>Loading skeletons configuration</strong><br >
-        Use the <code>skeletonsConfig</code> prop to configure skeleton cards.
-      </p>
-
-      <p>
-        <code>skeletonsConfig</code> takes an array of objects { breakpoints, count, height,
-        orientation, thumbnailDisplay, thumbnailAlign }.
+        <code>skeletonsConfig</code> takes an array of objects
+        <code>{ breakpoints, count, height, orientation, thumbnailDisplay, thumbnailAlign }</code>,
+        where:
       </p>
 
       <ul>
@@ -615,39 +632,51 @@
           <DocsInternalLink
             text="window breakpoint levels"
             href="/layout#responsiveness"
+          />. All other attributes in the same object take effect on these breakpoints.
+        </li>
+        <li>
+          <code>count</code> sets the number of skeleton cards for the specified breakpoints. See
+          <DocsInternalLink
+            text="Number of loading skeletons"
+            href="#loading-state-skeletons-count"
           />.
         </li>
-        <li><code>count</code> sets the number of skeleton cards.</li>
-        <li><code>height</code> sets the height of skeleton cards.</li>
         <li>
-          <code>orientation</code> sets the orientation of skeleton cards (see
+          <code>height</code> sets the height of skeleton cards for the specified breakpoints.
+        </li>
+        <li>
+          <code>orientation</code> sets the orientation of skeleton cards for the specified
+          breakpoints. Corresponds to
           <DocsInternalLink
             text="KCard's orientation"
             href="/kcard#prop:orientation"
             code
-          />).
+          />.
         </li>
         <li>
-          <code>thumbnailDisplay</code> sets the thumbnail display (see
+          <code>thumbnailDisplay</code> sets the thumbnail display of skeleton cards for the
+          specified breakpoints. Corresponds to
           <DocsInternalLink
             text="KCard's thumbnailDisplay"
             href="/kcard#prop:thumbnailDisplay"
             code
-          />).
+          />.
         </li>
         <li>
-          <code>thumbnailAlign</code> sets the thumbnail alignment (see
+          <code>thumbnailAlign</code> sets the thumbnail alignment of skeleton cards for the
+          specified breakpoints. Corresponds to
           <DocsInternalLink
             text="KCard's thumbnailAlign"
             href="/kcard#prop:thumbnailAlign"
             code
-          />).
+          />.
         </li>
       </ul>
 
       <p>
-        For easier development, enable the <code>debug</code> prop to display the current
-        breakpoint.
+        For easier development, enable the <code>debug</code> prop to display the current breakpoint
+        in the top left corner of the grid. Use the button in the example below to preview the debug
+        mode.
       </p>
 
       <DocsExample
@@ -707,11 +736,18 @@
       </DocsExample>
 
       <p>
-        Here, the skeleton cards use a base height of <code>400px</code> on breakpoints
-        <code>0-3</code> and <code>220px</code> on breakpoints <code>4-7</code>.
+        Here, the height of loading skeleton cards is <code>400px</code> with vertical orientation
+        on breakpoints <code>0-3</code>, and <code>220px</code> with horizontal orientation on
+        breakpoints <code>4-7</code>. This makes skeleton cards resemble loaded cards at all
+        breakpoints, creating a smooth transition for users during data loading. Note the bottom-up
+        approach where we begin with a base setup for all breakpoints and gradually override on
+        higher breakpoints. This simplifies the configuration object.
       </p>
 
-      <p>To see skeleton layouts, reload this page and the <code>KCard</code> page.</p>
+      <p>
+        To get a sense of what skeleton layouts can be achieved, reload this page and the
+        <code>KCard</code> page to preview the loading state in all examples.
+      </p>
     </DocsPageSection>
 
     <DocsPageSection
