@@ -1,7 +1,7 @@
 <template>
 
   <div>
-    <div :style="{ display: 'flex', justifyContent: 'flex-end' }">
+    <div :style="{ display: 'flex', justifyContent: 'flex-end', marginBottom: '17px' }">
       <KButtonGroup>
         <KButton
           primary
