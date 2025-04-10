@@ -1,3 +1,32 @@
+/**
+ * KModal component
+ *
+ * A modal dialog component that can be used to show content in an overlay.
+ *
+ * ## Usage
+ * vue
+ * <template>
+ *   <KModal :visible="isModalVisible" @close="isModalVisible = false">
+ *     <p>This is the modal content</p>
+ *   </KModal>
+ *   <button @click="isModalVisible = true">Open Modal</button>
+ * </template>
+ *
+ * <script>
+ * import KModal from './KModal.vue'
+ *
+ * export default {
+ *   components: { KModal },
+ *   data() {
+ *     return {
+ *       isModalVisible: false,
+ *     };
+ *   },
+ * };
+ * </script>
+ * 
+ */
+
 <template>
 
   <component :is="wrapper">
