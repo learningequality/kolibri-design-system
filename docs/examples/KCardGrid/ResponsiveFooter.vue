@@ -13,20 +13,63 @@
     >
       <template #footer>
         <div
-          class="pills"
-          :style="{ color: $themeTokens.annotation }"
+          :style="{
+            marginLeft: '-4px',
+            color: $themeTokens.annotation,
+          }"
         >
-          <span>
+          <span
+            :style="{
+              display: 'inline-block',
+              padding: '4px 8px',
+              margin: '4px',
+              borderRadius: '4px',
+              backgroundColor: $themePalette.grey.v_100,
+            }"
+          >
             <KIcon
               icon="readSolid"
               :style="{ fontSize: '13px', position: 'relative', top: '3px' }"
             />
             Read
           </span>
-          <span> Short Activity </span>
+
+          <span
+            :style="{
+              display: 'inline-block',
+              padding: '4px 8px',
+              margin: '4px',
+              borderRadius: '4px',
+              backgroundColor: $themePalette.grey.v_100,
+            }"
+          >
+            Short Activity
+          </span>
+
           <template v-if="windowBreakpoint > 3">
-            <span> Biology </span>
-            <span> Ecology </span>
+            <span
+              :style="{
+                display: 'inline-block',
+                padding: '4px 8px',
+                margin: '4px',
+                borderRadius: '4px',
+                backgroundColor: $themePalette.grey.v_100,
+              }"
+            >
+              Biology
+            </span>
+
+            <span
+              :style="{
+                display: 'inline-block',
+                padding: '4px 8px',
+                margin: '4px',
+                borderRadius: '4px',
+                backgroundColor: $themePalette.grey.v_100,
+              }"
+            >
+              Ecology
+            </span>
           </template>
         </div>
       </template>
@@ -70,20 +113,3 @@
   };
 
 </script>
-
-
-<style lang="scss" scoped>
-
-  .pills {
-    margin-left: -4px;
-
-    span {
-      display: inline-block;
-      padding: 4px 8px;
-      margin: 4px;
-      background-color: #dddddd;
-      border-radius: 4px;
-    }
-  }
-
-</style>

@@ -552,13 +552,11 @@
                 ...
               >
                 <template #footer>
-                  <span>
-                    <KIcon ...> Read </KIcon>
-                  </span>
-                  <span> Short Activity </span>
+                  <span ...>Read</span>
+                  <span ...>Short Activity</span>
                   <template v-if="windowBreakpoint > 3">
-                    <span> Biology </span>
-                    <span> Ecology </span>
+                    <span ...>Biology</span>
+                    <span ...>Ecology</span>
                   </template>
                 </template>
               </KCard>
