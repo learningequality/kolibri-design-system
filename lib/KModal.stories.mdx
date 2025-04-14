@@ -1,0 +1,51 @@
+import { Meta, Story, Preview } from '@storybook/addon-docs';
+import KModal from './KModal.vue';
+
+<Meta title="Components/KModal" component={KModal} />
+
+# KModal
+
+KModal is a component used to present a modal dialog box that overlays the current view and disables interaction with the main UI until dismissed.
+
+## Usage
+
+<Preview>
+  <Story name="Default KModal">
+    {{
+      components: { KModal },
+      data() {
+        return {
+          show: true,
+        };
+      },
+      template: `
+        <KModal v-if="show" @close="show = false">
+          <template #header>
+            <h3>Modal Header</h3>
+          </template>
+
+          <template #default>
+            <p>This is the main content of the modal.</p>
+          </template>
+
+          <template #footer>
+            <button @click="show = false">Close</button>
+          </template>
+        </KModal>
+      `,
+    }}
+  </Story>
+</Preview>
+
+## Props
+
+| Name      | Type    | Description                               |
+|-----------|---------|-------------------------------------------|
+| value     | Boolean | Controls visibility of the modal          |
+| hideTitle | Boolean | Hides the modal header if set to true   |
+
+## Events
+
+| Event | Description                        |
+|-------|------------------------------------|
+| close | Emitted when the modal is closed   |
