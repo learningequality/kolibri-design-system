@@ -7,7 +7,7 @@
     :thumbnailDisplay="thumbnailDisplay"
     :thumbnailAlign="thumbnailAlign"
     :thumbnailSrc="
-      thumbnailSrc === null ? null : require('../assets/hummingbird-large-cc-by-sa-4.jpg')
+      thumbnailSrc === null ? null : require('~/assets/hummingbird-large-cc-by-sa-4.jpg')
     "
     :title="cardTitle"
   >

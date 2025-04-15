@@ -1,29 +1,27 @@
 <template>
 
-  <div class="card-container">
-    <KCardGrid
-      layout="1-2-2"
-      :skeletonsConfig="skeletonsConfig3"
-      :loading="loading"
-    >
-      <DocsKCard
-        :headingLevel="4"
-        orientation="horizontal"
-        thumbnailDisplay="large"
-        :thumbnailSrc="null"
-        thumbnailAlign="left"
-        prependTitle="(1)"
-      />
-      <DocsKCard
-        :headingLevel="4"
-        orientation="horizontal"
-        thumbnailDisplay="small"
-        thumbnailAlign="right"
-        prependTitle="(2)"
-        showProgressInFooter
-      />
-    </KCardGrid>
-  </div>
+  <KCardGrid
+    layout="1-2-2"
+    :skeletonsConfig="skeletonsConfig3"
+    :loading="loading"
+  >
+    <DocsKCard
+      :headingLevel="4"
+      orientation="horizontal"
+      thumbnailDisplay="large"
+      :thumbnailSrc="null"
+      thumbnailAlign="left"
+      prependTitle="(1)"
+    />
+    <DocsKCard
+      :headingLevel="4"
+      orientation="horizontal"
+      thumbnailDisplay="small"
+      thumbnailAlign="right"
+      prependTitle="(2)"
+      showProgressInFooter
+    />
+  </KCardGrid>
 
 </template>
 
@@ -59,14 +57,6 @@
 
 
 <style scoped>
-
-  .card-container {
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
-    padding: 20px;
-    margin: 20px;
-  }
 
   .pills {
     margin-left: -4px;
