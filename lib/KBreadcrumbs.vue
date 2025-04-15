@@ -17,21 +17,17 @@
         >
           <KRouterLink
             v-if="item.link && index !== preparedCrumbs.length - 1"
-            :text="item.text"
             :to="item.link"
-            dir="auto"
-            :title="item.text"
           >
-            <template #default="{ text }">
-              <span
-                class="breadcrumbs-crumb-text"
-                :style="{
-                  maxWidth: index === preparedCrumbs.length - 1 ? lastBreadcrumbMaxWidth : 'none',
-                }"
-                dir="auto"
-                :title="text"
-              >{{ text }}</span>
-            </template>
+            <span
+              class="breadcrumbs-crumb-text"
+              :style="{
+                maxWidth: index === preparedCrumbs.length - 1 ? lastBreadcrumbMaxWidth : 'none',
+              }"
+              dir="auto"
+            >
+              {{ item.text }}
+            </span>
           </KRouterLink>
           <span
             v-else
