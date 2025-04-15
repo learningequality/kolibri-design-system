@@ -5,7 +5,7 @@
     :skeletonsConfig="skeletonsConfig5"
     :loading="loading"
   >
-    <DocsKCard
+    <Card
       :headingLevel="4"
       preserveAboveTitle
     >
@@ -45,9 +45,9 @@
           </span>
         </div>
       </template>
-    </DocsKCard>
+    </Card>
 
-    <DocsKCard
+    <Card
       :headingLevel="4"
       preserveAboveTitle
     >
@@ -76,9 +76,9 @@
       <template #footer>
         <div></div>
       </template>
-    </DocsKCard>
+    </Card>
 
-    <DocsKCard
+    <Card
       :headingLevel="4"
       preserveAboveTitle
     >
@@ -113,7 +113,7 @@
           </span>
         </div>
       </template>
-    </DocsKCard>
+    </Card>
   </KCardGrid>
 
 </template>

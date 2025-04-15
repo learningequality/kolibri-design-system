@@ -5,7 +5,7 @@
     :skeletonsConfig="skeletonsConfig"
     :loading="loading"
   >
-    <DocsKCard
+    <Card
       :headingLevel="4"
       :orientation="windowBreakpoint > 2 ? 'horizontal' : 'vertical'"
       thumbnailDisplay="large"

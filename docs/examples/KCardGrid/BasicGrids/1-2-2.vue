@@ -5,7 +5,7 @@
     :skeletonsConfig="skeletonsConfig"
     :loading="loading"
   >
-    <DocsKCard
+    <Card
       v-for="i in 3"
       :key="i"
       :headingLevel="5"

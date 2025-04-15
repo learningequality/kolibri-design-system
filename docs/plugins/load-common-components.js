@@ -35,6 +35,6 @@ Vue.component('DocsToggleContent', DocsToggleContent);
 Vue.component('DocsToggleButton', DocsToggleButton);
 Vue.component('DocsTable', DocsTable);
 Vue.component('DocsSubNav', DocsSubNav);
-Vue.component('DocsKCard', Card);
+Vue.component('Card', Card);
 
 Vue.use(VueSimpleMarkdown);

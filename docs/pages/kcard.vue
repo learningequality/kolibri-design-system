@@ -25,7 +25,7 @@
           :skeletonsConfig="skeletonsConfig"
           :loading="loading"
         >
-          <DocsKCard
+          <Card
             :headingLevel="3"
             :orientation="windowBreakpoint > 2 ? 'horizontal' : 'vertical'"
             thumbnailDisplay="large"
@@ -416,94 +416,89 @@
         diverse kinds of content:
       </p>
 
-      <DocsShow
-        block
-        :style="{ width: '100%', maxWidth: 'none' }"
+      <h4>Layout 1: Vertical with Large and Small Thumbnails</h4>
+      <DocsExample
+        loadExample="KCard/Layout1.vue"
+        exampleId="kcard-layout"
       >
-        <h4>Layout 1: Vertical with Large and Small Thumbnails</h4>
-        <DocsExample
-          loadExample="KCard/Layout1.vue"
-          exampleId="kcard-layout"
-        >
-          <template #html>
-            <!-- eslint-disable -->
+        <template #html>
+          <!-- eslint-disable -->
 
-            <DocsShowCode language="html">
-              <KCardGrid ...>
-                <KCard
-                  ...
-                  orientation="vertical"
-                  thumbnailDisplay="large"
-                />
-                <KCard
-                  ...
-                  orientation="vertical"
-                  thumbnailDisplay="large"
-                />
-                <KCard
-                  ...
-                  orientation="vertical"
-                  thumbnailDisplay="small"
-                />
-              </KCardGrid>
-            </DocsShowCode>
+          <DocsShowCode language="html">
+            <KCardGrid ...>
+              <KCard
+                ...
+                orientation="vertical"
+                thumbnailDisplay="large"
+              />
+              <KCard
+                ...
+                orientation="vertical"
+                thumbnailDisplay="large"
+              />
+              <KCard
+                ...
+                orientation="vertical"
+                thumbnailDisplay="small"
+              />
+            </KCardGrid>
+          </DocsShowCode>
 
-            <!-- eslint-enable -->
-          </template>
-        </DocsExample>
+          <!-- eslint-enable -->
+        </template>
+      </DocsExample>
 
-        <h4>Layout 2: Horizontal with Large and Small Thumbnails</h4>
-        <DocsExample
-          loadExample="KCard/Layout2.vue"
-          exampleId="kcard-layout"
-        >
-          <template #html>
-            <!-- eslint-disable -->
+      <h4>Layout 2: Horizontal with Large and Small Thumbnails</h4>
+      <DocsExample
+        loadExample="KCard/Layout2.vue"
+        exampleId="kcard-layout"
+      >
+        <template #html>
+          <!-- eslint-disable -->
 
-            <DocsShowCode language="html">
-              <KCardGrid ...>
-                <KCard
-                  ...
-                  orientation="horizontal"
-                  thumbnailDisplay="large"
-                  thumbnailAlign="left"
-                />
-                <KCard
-                  ...
-                  orientation="horizontal"
-                  thumbnailDisplay="small"
-                  thumbnailAlign="right"
-                />
-              </KCardGrid>
-            </DocsShowCode>
+          <DocsShowCode language="html">
+            <KCardGrid ...>
+              <KCard
+                ...
+                orientation="horizontal"
+                thumbnailDisplay="large"
+                thumbnailAlign="left"
+              />
+              <KCard
+                ...
+                orientation="horizontal"
+                thumbnailDisplay="small"
+                thumbnailAlign="right"
+              />
+            </KCardGrid>
+          </DocsShowCode>
 
-            <!-- eslint-enable -->
-          </template>
-        </DocsExample>
+          <!-- eslint-enable -->
+        </template>
+      </DocsExample>
 
-        <h4>Layout 3: Vertical without Thumbnails</h4>
-        <DocsExample
-          loadExample="KCard/Layout3.vue"
-          exampleId="kcard-layout"
-        >
-          <template #html>
-            <!-- eslint-disable -->
+      <h4>Layout 3: Vertical without Thumbnails</h4>
+      <DocsExample
+        loadExample="KCard/Layout3.vue"
+        exampleId="kcard-layout"
+      >
+        <template #html>
+          <!-- eslint-disable -->
 
-            <DocsShowCode language="html">
-              <KCardGrid ...>
-                <KCard
-                  ...
-                  v-for="i in 3"
-                  orientation="vertical"
-                  thumbnailDisplay="none"
-                />
-              </KCardGrid>
-            </DocsShowCode>
+          <DocsShowCode language="html">
+            <KCardGrid ...>
+              <KCard
+                ...
+                v-for="i in 3"
+                orientation="vertical"
+                thumbnailDisplay="none"
+              />
+            </KCardGrid>
+          </DocsShowCode>
 
-            <!-- eslint-enable -->
-          </template>
-        </DocsExample>
-      </DocsShow>
+          <!-- eslint-enable -->
+        </template>
+      </DocsExample>
 
       <h3>
         Responsiveness

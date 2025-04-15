@@ -5,7 +5,7 @@
     :skeletonsConfig="skeletonsConfig"
     :loading="loading"
   >
-    <DocsKCard
+    <Card
       :headingLevel="4"
       orientation="vertical"
       thumbnailDisplay="large"
@@ -26,8 +26,8 @@
           <span :style="{ 'background-color': $themePalette.grey.v_100 }"> Biology </span>
         </div>
       </template>
-    </DocsKCard>
-    <DocsKCard
+    </Card>
+    <Card
       :headingLevel="4"
       orientation="vertical"
       thumbnailDisplay="large"
@@ -48,8 +48,8 @@
           <span :style="{ 'background-color': $themePalette.grey.v_100 }"> Short Activity </span>
         </div>
       </template>
-    </DocsKCard>
-    <DocsKCard
+    </Card>
+    <Card
       :headingLevel="4"
       orientation="vertical"
       thumbnailDisplay="small"
@@ -62,7 +62,7 @@
           label="Read"
         />
       </template>
-    </DocsKCard>
+    </Card>
   </KCardGrid>
 
 </template>

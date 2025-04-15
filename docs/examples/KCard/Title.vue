@@ -5,7 +5,7 @@
     :skeletonsConfig="skeletonsConfig"
     :loading="loading"
   >
-    <DocsKCard
+    <Card
       :headingLevel="3"
       orientation="horizontal"
       thumbnailDisplay="small"
@@ -21,7 +21,7 @@
           />
         </KLabeledIcon>
       </template>
-    </DocsKCard>
+    </Card>
   </KCardGrid>
 
 </template>

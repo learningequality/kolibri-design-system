@@ -30,7 +30,7 @@
       :loading="loading"
       :debug="debug"
     >
-      <DocsKCard
+      <Card
         v-for="i in 3"
         :key="i"
         :headingLevel="4"

@@ -2,10 +2,10 @@
 
   <KCardGrid
     layout="1-2-2"
-    :skeletonsConfig="skeletonsConfig3"
+    :skeletonsConfig="skeletonsConfig"
     :loading="loading"
   >
-    <DocsKCard
+    <Card
       :headingLevel="4"
       orientation="horizontal"
       thumbnailDisplay="large"
@@ -13,7 +13,7 @@
       thumbnailAlign="left"
       prependTitle="(1)"
     />
-    <DocsKCard
+    <Card
       :headingLevel="4"
       orientation="horizontal"
       thumbnailDisplay="small"

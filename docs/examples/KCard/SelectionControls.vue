@@ -5,7 +5,7 @@
     :skeletonsConfig="skeletonsConfig"
     :loading="loading"
   >
-    <DocsKCard
+    <Card
       :to="{ path: '#guidelines' }"
       :headingLevel="4"
       :orientation="windowBreakpoint > 2 ? 'horizontal' : 'vertical'"
@@ -28,9 +28,9 @@
           @click.stop="isBookmarked1 = !isBookmarked1"
         />
       </template>
-    </DocsKCard>
+    </Card>
 
-    <DocsKCard
+    <Card
       :to="{ path: '#guidelines' }"
       :headingLevel="4"
       :orientation="windowBreakpoint > 2 ? 'horizontal' : 'vertical'"
@@ -53,7 +53,7 @@
           @click.stop="isBookmarked2 = !isBookmarked2"
         />
       </template>
-    </DocsKCard>
+    </Card>
   </KCardGrid>
 
 </template>

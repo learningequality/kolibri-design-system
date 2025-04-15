@@ -2,16 +2,16 @@
 
   <KCardGrid
     layout="1-2-3"
-    :skeletonsConfig="skeletonsConfig4"
+    :skeletonsConfig="skeletonsConfig"
     :loading="loading"
   >
-    <DocsKCard
+    <Card
       :headingLevel="4"
       orientation="vertical"
       thumbnailDisplay="none"
       prependTitle="(1)"
     />
-    <DocsKCard
+    <Card
       :headingLevel="4"
       orientation="vertical"
       thumbnailDisplay="none"
@@ -21,8 +21,8 @@
       <template #footer>
         <span></span>
       </template>
-    </DocsKCard>
-    <DocsKCard
+    </Card>
+    <Card
       :headingLevel="4"
       orientation="vertical"
       thumbnailDisplay="none"
