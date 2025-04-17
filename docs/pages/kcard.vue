@@ -419,6 +419,7 @@
       <DocsExample
         loadExample="KCard/Layout1.vue"
         exampleId="kcard-layout"
+        block
       >
         <template #html>
           <!-- eslint-disable -->
@@ -450,6 +451,7 @@
       <DocsExample
         loadExample="KCard/Layout2.vue"
         exampleId="kcard-layout"
+        block
       >
         <template #html>
           <!-- eslint-disable -->
@@ -478,6 +480,7 @@
       <DocsExample
         loadExample="KCard/Layout3.vue"
         exampleId="kcard-layout"
+        block
       >
         <template #html>
           <!-- eslint-disable -->
