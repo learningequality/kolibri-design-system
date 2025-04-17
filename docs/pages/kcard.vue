@@ -416,7 +416,6 @@
         diverse kinds of content:
       </p>
 
-      <h4>Layout 1: Vertical with Large and Small Thumbnails</h4>
       <DocsExample
         loadExample="KCard/Layout1.vue"
         exampleId="kcard-layout"
@@ -448,7 +447,6 @@
         </template>
       </DocsExample>
 
-      <h4>Layout 2: Horizontal with Large and Small Thumbnails</h4>
       <DocsExample
         loadExample="KCard/Layout2.vue"
         exampleId="kcard-layout"
@@ -477,7 +475,6 @@
         </template>
       </DocsExample>
 
-      <h4>Layout 3: Vertical without Thumbnails</h4>
       <DocsExample
         loadExample="KCard/Layout3.vue"
         exampleId="kcard-layout"
