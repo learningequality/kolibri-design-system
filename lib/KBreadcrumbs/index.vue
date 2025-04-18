@@ -152,7 +152,7 @@
   import throttle from 'lodash/throttle';
   import every from 'lodash/every';
   import keys from 'lodash/keys';
-  import useKResponsiveElement from './composables/useKResponsiveElement';
+  import useKResponsiveElement from '../composables/useKResponsiveElement';
 
   const DROPDOWN_BTN_WIDTH = 55;
   const DEFAULT_LAST_BREADCRUMB_MAX_WIDTH = 300;
@@ -313,7 +313,7 @@
 
 <style lang="scss" scoped>
 
-  @import './styles/definitions';
+  @import '../styles/definitions';
   $crumb-max-width: 300px;
 
   .breadcrumbs {
