@@ -123,6 +123,11 @@
         default: false,
         required: false,
       },
+      /**
+       * Its purpose is to dynamically control the set of documentation tabs rendered
+       * @type {Array}
+       * @example ['template', 'script', 'style']
+       */
       docTabs: {
         type: Array,
         required: false,
