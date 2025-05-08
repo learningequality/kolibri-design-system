@@ -5,7 +5,6 @@
     :class="{ 'k-checkbox-disabled': disabled }"
     @click="toggleCheck"
   >
-    <div class="tr">
       <div class="k-checkbox">
         <input
           :id="id"
@@ -64,7 +63,6 @@
           {{ description }}
         </div>
       </label>
-    </div>
   </div>
 
 </template>
@@ -194,18 +192,13 @@
   $checkbox-height: 24px;
 
   .k-checkbox-container {
-    display: table;
+    display: flex;
     margin-top: 8px;
     margin-bottom: 8px;
   }
 
-  .tr {
-    display: table-row;
-  }
-
   .k-checkbox {
     position: relative;
-    display: table-cell;
     width: $checkbox-height;
     height: $checkbox-height;
     vertical-align: top;
@@ -222,7 +215,6 @@
   }
 
   .k-checkbox-label {
-    display: table-cell;
     padding-left: 8px;
     line-height: 24px;
     cursor: pointer;
