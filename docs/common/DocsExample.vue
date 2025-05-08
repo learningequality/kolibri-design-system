@@ -123,6 +123,13 @@
         default: false,
         required: false,
       },
+      docTabs: {
+        type: Array,
+        required: false,
+        default() {
+          return ['template', 'script', 'style'];
+        },
+      },
     },
     data() {
       return {
@@ -140,7 +147,7 @@
         const tabList = [];
 
         const templateContent = this.applyRegex(this.content, 'template');
-        if (this.$slots.html || templateContent) {
+        if ((this.$slots.html || templateContent) && this.docTabs.includes('template')) {
           tabList.push({
             id: 'html-codeblock',
             label: 'Template',
@@ -150,7 +157,7 @@
         }
 
         const scriptContent = this.applyRegex(this.content, 'script');
-        if (this.$slots.javascript || scriptContent) {
+        if ((this.$slots.javascript || scriptContent) && this.docTabs.includes('script')) {
           tabList.push({
             id: 'js-codeblock',
             label: 'Script',
@@ -160,7 +167,7 @@
         }
 
         const styleContent = this.applyRegex(this.content, 'style');
-        if (this.$slots.scss || styleContent) {
+        if ((this.$slots.scss || styleContent) && this.docTabs.includes('style')) {
           tabList.push({
             id: 'scss-codeblock',
             label: 'Style',
