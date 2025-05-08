@@ -7,6 +7,19 @@ Changelog is rather internal in nature. See release notes for the public overvie
 <!-- [DO NOT REMOVE-USED BY GH ACTION] PASTE CHANGELOG -->
 
 
+- [#999]
+  - **Description:** Changed default grid gap to 24px instead of 30px of KCardGrid.
+  - **Products impact:** KDS, Studio, Kolibri
+  - **Addresses:**  issue #[996](https://github.com/learningequality/kolibri-design-system/issues/996) and one related PR in kolibri #[13344](https://github.com/learningequality/kolibri/pull/13344/)
+  - **Components:** KCardGrid
+  - **Breaking:** no
+  - **Impacts a11y:** no
+  - **Guidance:** none
+
+[#999]: https://github.com/learningequality/kolibri-design-system/pull/999
+
+
+
 - [#975]
   - **Description:** Updated KCard documentation to use the DocsExample component and migrated example code into separate Vue files in the KCard directory. Cleaned up unnecessary script in KCard.vue.
   - **Products impact:** none
