@@ -20,7 +20,7 @@
             :to="item.link"
             :text="item.text"
           >
-            <template #text="{ text }">
+            <template #item="{ item }">
               <span
                 class="breadcrumbs-crumb-text"
                 :style="{
@@ -28,7 +28,7 @@
                 }"
                 dir="auto"
               >
-                {{ text }}
+                {{ item.text }}
               </span>
             </template>
           </KRouterLink>

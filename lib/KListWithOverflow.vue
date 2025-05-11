@@ -99,6 +99,13 @@
         type: Boolean,
         default: false,
       },
+      /*listElement: {
+        type:String,
+        default :" ",
+        validator(value){
+          return ['', 'ol', 'ul'].includes(value);
+        }
+      }*/
     },
     data() {
       return {
@@ -196,6 +203,9 @@
         directionIndexes.forEach(i => {
           const itemWidth = itemsSizes[i].width;
           const item = list.children[i];
+          // If the item dont fit in the available space or if we have already
+          // overflowed items, we hide it. This means that once one item overflows,
+          // all the following items will be hidden.
           if (itemWidth >= availableWidth || overflowItemsIdx.length > 0) {
             overflowItemsIdx.push(i);
             item.style.visibility = 'hidden';
@@ -224,6 +234,7 @@
             item.style.visibility = 'visible';
             item.style.position = 'unset';
             maxWidth += itemsSizes[idx].width;
+            maxHeight = Math.max(maxHeight, itemsSizes[idx].height); 
           }
         }
         if (this.showAtLeastOne && overflowItemsIdx.length === itemsSizes.length) {
@@ -333,7 +344,7 @@
   }
 
   .more-button-wrapper {
-    visibility: visible;
+    visibility: hidden;
   }
 
 </style>
