@@ -90,7 +90,7 @@
       },
       overflowDirection: {
         type: String,
-        default: 'start',
+        default: 'end',
         validator(value) {
           return ['start', 'end'].includes(value);
         },
