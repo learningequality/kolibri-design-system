@@ -1,44 +1,46 @@
 <template>
 
-  <div
-    v-if="showGrid"
-    class="k-card-grid"
-  >
-    <transition
-      name="fade"
-      mode="out-in"
-      appear
-    >
-      <ul
-        v-if="isLoading"
-        key="loading"
-        :style="gridStyle"
-      >
-        <SkeletonCard
-          v-for="i in skeletonCount"
-          :key="i"
-          :height="skeletonHeight"
-          :orientation="skeletonOrientation"
-          :thumbnailDisplay="skeletonThumbnailDisplay"
-          :thumbnailAlign="skeletonThumbnailAlign"
-        />
-      </ul>
-      <ul
-        v-else
-        key="loaded"
-        :style="gridStyle"
-      >
-        <!-- @slot Slot for `KCard`s -->
-        <slot></slot>
-      </ul>
-    </transition>
-
+  <div>
     <div
-      v-if="debug"
-      class="k-debug"
+      v-if="showGrid"
+      class="k-card-grid"
     >
-      <div>DEBUG</div>
-      <div>breakpoint: {{ windowBreakpoint }}</div>
+      <transition
+        name="fade"
+        mode="out-in"
+        appear
+      >
+        <ul
+          v-if="isLoading"
+          key="loading"
+          :style="gridStyle"
+        >
+          <SkeletonCard
+            v-for="i in skeletonCount"
+            :key="i"
+            :height="skeletonHeight"
+            :orientation="skeletonOrientation"
+            :thumbnailDisplay="skeletonThumbnailDisplay"
+            :thumbnailAlign="skeletonThumbnailAlign"
+          />
+        </ul>
+        <ul
+          v-else
+          key="loaded"
+          :style="gridStyle"
+        >
+          <!-- @slot Slot for `KCard`s -->
+          <slot></slot>
+        </ul>
+      </transition>
+
+      <div
+        v-if="debug"
+        class="k-debug"
+      >
+        <div>DEBUG</div>
+        <div>breakpoint: {{ windowBreakpoint }}</div>
+      </div>
     </div>
   </div>
 
@@ -52,6 +54,7 @@
   import { LAYOUT_1_1_1, LAYOUT_1_2_2, LAYOUT_1_2_3 } from './gridBaseLayouts';
   import useGridLayout from './useGridLayout';
   import useGridLoading from './useGridLoading';
+  import useGridMetrics from './useGridMetrics';
   import SkeletonCard from './SkeletonCard';
 
   /**
@@ -63,6 +66,9 @@
       SkeletonCard,
     },
     setup(props) {
+      if (props.syncCardsMetrics) {
+        useGridMetrics();
+      }
       const { currentBreakpointConfig, windowBreakpoint } = useGridLayout(props);
       const {
         showGrid,
@@ -169,6 +175,17 @@
       debug: {
         type: Boolean,
         default: false,
+      },
+      /**
+       * Enables the `syncCardsMetrics` feature.
+       * This feature is used to synchronize the metrics of
+       * cards in the grid, e.g. when you have some cards with
+       * a select control and some without it, this will make that
+       * all cards have the same space for the select control.
+       */
+      syncCardsMetrics: {
+        type: Boolean,
+        default: true,
       },
     },
   };

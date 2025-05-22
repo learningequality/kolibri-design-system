@@ -8,9 +8,11 @@
     role="gridcell"
     @keydown="onKeydown"
   >
-    <slot :content="content">
-      {{ content }}
-    </slot>
+    <div class="cell-content">
+      <slot :content="content">
+        {{ content }}
+      </slot>
+    </div>
   </td>
 
 </template>
@@ -78,8 +80,8 @@
 
 <style scoped>
 
-  td {
-    word-wrap: break-word;
+  .cell-content {
+    word-break: break-word;
     white-space: normal;
   }
 

@@ -5,7 +5,7 @@
     to allow for @click.stop on buttons and similar
     rendered within a card via its slots -->
   <li
-    :class="['k-card', $slots.select ? 'k-with-selection-controls' : undefined]"
+    :class="['k-card', haveSelectionControl ? 'k-with-selection-controls' : undefined]"
     :style="[gridItemStyle, focusStyle]"
     @focus="onFocus"
     @mouseenter="onHover"
@@ -170,8 +170,9 @@
       a selection control is pressed or clicked
     -->
     <div
-      v-if="$slots.select"
+      ref="selectionControl"
       class="k-selection-control"
+      :style="{ minWidth: `${selectionControlWidth || 0}px` }"
       @keyup.enter.stop
       @click.stop
     >
@@ -185,7 +186,8 @@
 
 <script>
 
-  import { inject } from 'vue';
+  import { computed, getCurrentInstance, inject } from 'vue';
+  import { useCardMetrics } from './useGridMetrics';
 
   const Orientations = {
     HORIZONTAL: 'horizontal',
@@ -223,8 +225,30 @@
       // controls the width and layout of `KCard` items in the grid
       const gridItemStyle = inject('gridItemStyle');
 
+      const instance = getCurrentInstance();
+      const { selectionControlWidth } = useCardMetrics({
+        getMetrics: () => {
+          const selectionControlRef = instance.proxy.$refs.selectionControl;
+          const selectionControlWidth = selectionControlRef?.getBoundingClientRect().width || 0;
+          return {
+            selectionControlWidth,
+          };
+        },
+      });
+
+      const haveSelectionControl = computed(() => {
+        // If selectionControlWidth is null, it means that the styles sync is not enabled
+        // so lets just rely on the presence of the select slot
+        if (selectionControlWidth.value === null) {
+          return Boolean(instance.proxy.$slots.select);
+        }
+        return selectionControlWidth.value > 0;
+      });
+
       return {
         gridItemStyle,
+        haveSelectionControl,
+        selectionControlWidth,
       };
     },
     props: {
@@ -557,6 +581,9 @@
   /************* Common styles **************/
 
   .k-card {
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
     width: 100%;
     padding: 0;
     margin: 0;
@@ -567,10 +594,6 @@
     cursor: pointer;
 
     &.k-with-selection-controls {
-      display: flex;
-      flex-direction: row-reverse;
-      align-items: center;
-
       .k-selection-control {
         margin-right: 20px;
       }

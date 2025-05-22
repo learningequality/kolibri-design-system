@@ -124,7 +124,7 @@
         required: false,
       },
       /**
-       * If true, hides the template (HTML) code block from the code viewer.
+       * Flag to optionally hide the Template tab of a code sample.
        * @type {Boolean}
        * @default false
        */
@@ -134,7 +134,7 @@
         required: false,
       },
       /**
-       * If true, hides the script (JavaScript) code block from the code viewer.
+       * Flag to optionally hide the Script tab of a code sample.
        * @type {Boolean}
        * @default false
        */
@@ -144,7 +144,7 @@
         required: false,
       },
       /**
-       * If true, hides the style (SCSS) code block from the code viewer.
+       * Flag to optionally hide the Style tab of code sample.
        * @type {Boolean}
        * @default false
        */
