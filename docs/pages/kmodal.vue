@@ -38,8 +38,8 @@
         <DocsAnchorTarget anchor="#submit-form" />
       </h3>
       <p>
-        Modal with checkbox, submit, and cancel buttons <br>
-        Check the checkbox to enable the submit button <br>
+        Modal with checkbox, submit, and cancel buttons <br >
+        Check the checkbox to enable the submit button <br >
         To discard the changes, click cancel
       </p>
       <DocsExample
