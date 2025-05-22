@@ -45,7 +45,7 @@
               This is to
                 - (1) prevent double navigation (the wrapping
                       <li> is supposed to take care of navigation)
-                - (2) together with the `draggable` disabled, 
+                - (2) together with the `draggable` disabled,
                       ensures that text selection works on
                       the title text (see the feature for allowing
                       selecting card's content in `onClick`)
@@ -61,7 +61,7 @@
               @blur.native="onTitleBlur"
             >
               <span aria-hidden="true">
-                <!-- @slot A scoped slot via which the `title` can be customized. 
+                <!-- @slot A scoped slot via which the `title` can be customized.
                  Provides the `titleText` attribute.-->
                 <slot
                   v-if="$scopedSlots.title"
@@ -92,7 +92,7 @@
               @blur="onTitleBlur"
             >
               <span aria-hidden="true">
-                <!-- @slot A scoped slot via which the `title` can be customized. 
+                <!-- @slot A scoped slot via which the `title` can be customized.
                  Provides the `titleText` attribute. -->
                 <slot
                   v-if="$scopedSlots.title"
@@ -132,7 +132,7 @@
           v-if="thumbnailDisplay !== ThumbnailDisplays.NONE"
           class="k-thumbnail"
         >
-          <!-- 
+          <!--
             Render KImg even if thumbnailSrc is not provided since in that case
             KImg takes care of showing the gray placeholder area.
           -->
@@ -584,6 +584,7 @@
     flex-direction: column;
     justify-content: space-between; // push footer to the bottom of the card
     width: 100%;
+    min-width: 0;
     height: 100%;
     border-radius: 0.5em;
     outline-offset: -1px;

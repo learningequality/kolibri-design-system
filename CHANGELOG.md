@@ -7,6 +7,58 @@ Changelog is rather internal in nature. See release notes for the public overvie
 <!-- [DO NOT REMOVE-USED BY GH ACTION] PASTE CHANGELOG -->
 
 
+- [#1023]
+  - **Description:** Adds a `min-width: 0` to k card area to prevent text overflow issues within KCards with checkboxes.
+  - **Products impact:** bugfix.
+  - **Addresses:** https://github.com/learningequality/kolibri-design-system/issues/958.
+  - **Components:**  KCard.
+  - **Breaking:** no
+  - **Impacts a11y:** no
+  - **Guidance:** -.
+
+[#1023]: https://github.com/learningequality/kolibri-design-system/pull/1023
+
+
+
+- [#1016]
+  - **Description:** Adds clarifications regarding registering KDS components in `visual.load-test-components.js` to the visual testing development docs.
+  - **Products impact:** none.
+  - **Addresses:** -.
+  - **Components:** -.
+  - **Breaking:** no.
+  - **Impacts a11y:** no.
+  - **Guidance:** -.
+
+[#1016]: https://github.com/learningequality/kolibri-design-system/pull/1016
+
+
+
+- [#1026]
+  - **Description:** Wraps ResizeObserver callback in `useKResponsiveElement` with requestAnimationFrame to avoid possible resize observer issues.
+  - **Products impact:** none.
+  - **Addresses:** https://github.com/learningequality/kolibri-design-system/issues/960.
+  - **Components:** -.
+  - **Breaking:** no
+  - **Impacts a11y:** no
+  - **Guidance:** .
+
+[#1026]: https://github.com/learningequality/kolibri-design-system/pull/1026
+
+
+
+- [#1017]
+  - **Description:** added visual tests for the KCheckbox component and the KCheckbox component file has been renamed from KCheckbox.vue to KCheckbox/index.vue to better organize the component structure.
+  - **Products impact:** none
+  - **Addresses:** [[Visual testing]: Add visual tests for KCheckbox](https://github.com/learningequality/kolibri-design-system/issues/925)
+  - **Components:** KCheckbox
+  - **Breaking:** no
+  - **Impacts a11y:** no
+  - **Guidance:** Visual test is implemented in separate test file
+
+[#1017]: https://github.com/learningequality/kolibri-design-system/pull/1017
+
+
+
 - [#999]
   - **Description:** Changed default grid gap to 24px instead of 30px of KCardGrid.
   - **Products impact:** KDS, Studio, Kolibri

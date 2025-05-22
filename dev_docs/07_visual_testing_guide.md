@@ -77,6 +77,8 @@ You can write the visual tests alongside the unit tests, i.e. in the same test f
      });
      ```
 
+    The components we can render with `renderComponentForVisualTest` are the ones that are already registered for the KDS Docs nuxt server, that means, the KDS components that are exposed in [KThemePlugin](../lib/KThemePlugin.js), and the docs common components that are registered in the [load-common-components.js file](../docs/plugins/load-common-components.js). If you need to use a component that is not registered here, you can refer to the **Example involving more complex component structures** point below.
+
      Note that the `widths` parameter passed to the `takeSnaphot` function is a part of Percy CLI's snapshot options. For a full list of available options, refer the [Percy documentation](https://www.browserstack.com/docs/percy/take-percy-snapshots/snapshots-via-scripts#per-snapshot-configuration).
 
    - For rendering complex commponents, refer to the following:
@@ -124,6 +126,8 @@ You can write the visual tests alongside the unit tests, i.e. in the same test f
          ```
 
          This approach ensures that all necessary child components and slots are correctly set up and rendered.
+
+         **Note:** You don't need to do this for KDS components that are already registered in our KThemePlugin or the docs common components that are registered in the [load-common-components.js file](../docs/plugins/load-common-components.js) as they are already available for rendering in the visual testing playground.
 
    - Make sure to use `describe.visual` or `it.visual` instead of the default notations for writing test blocks containing visual tests so as to prevent any unexpected behavior. These custom blocks add a `[Visual]` tag to the test name whose presence or absence are then checked using a regex pattern based on the type of tests executed.
      - Anything inside these blocks will not be executed when running unit tests. The default `describe` and `it` blocks can be used inside a parent `describe.visual` block, which itelf can be placed within a `describe` block as its parent (as `describe` blocks just group the tests placed within them).
