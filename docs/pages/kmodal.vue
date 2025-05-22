@@ -17,29 +17,30 @@
     >
       <DocsSubNav
         :items="[
-          { text: 'Dialog Box with Description', href: '#dialog-box' },
-          { text: 'Submit Form Dialog Box', href: '#submit-form' },
-          { text: 'Modal with Different Sizes', href: '#modal-sizes' },
+          { text: 'Dialog box with description', href: '#dialog-box' },
+          { text: 'Submit form dialog box', href: '#submit-form' },
+          { text: 'Modal with different sizes', href: '#modal-sizes' },
         ]"
       />
 
       <h3>
-        Dialog Box with Description
+        Dialog box with description
         <DocsAnchorTarget anchor="#dialog-box" />
       </h3>
-      <p>To show message information, warnings, or notifications to the user.</p>
+      <p>To show message information, warnings, or notifications to the user</p>
       <DocsExample
         loadExample="KModal/KModal.vue"
         exampleId="example-one"
       />
 
       <h3>
-        Submit Form Dialog Box
+        Submit form dialog box
         <DocsAnchorTarget anchor="#submit-form" />
       </h3>
       <p>
-        Modal with checkbox, submit, and cancel buttons. Check the checkbox to enable the submit
-        button. <br >To discard the changes, click cancel.
+        Modal with checkbox, submit, and cancel buttons <br>
+        Check the checkbox to enable the submit button <br>
+        To discard the changes, click cancel
       </p>
       <DocsExample
         loadExample="KModal/ModalWithSubmit&Cancel.vue"
@@ -47,10 +48,10 @@
       />
 
       <h3>
-        Modal with Different Sizes
+        Modal with different sizes
         <DocsAnchorTarget anchor="#modal-sizes" />
       </h3>
-      <p>We have three different modals.</p>
+      <p>You have three different modals.</p>
       <DocsExample
         loadExample="KModal/ModalWithDifferentSizes.vue"
         exampleId="modal-sizes"
