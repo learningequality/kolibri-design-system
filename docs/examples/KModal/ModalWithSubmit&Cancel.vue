@@ -1,13 +1,13 @@
 <template>
 
   <div>
-    <KButton @click="openModal">Click Me</KButton>
+    <KButton @click="openModal">Open modal</KButton>
     <p v-if="showMessage">Successfully submitted the Form</p>
     <KModal
       v-if="showModal"
       :appendToOverlay="true"
       size="medium"
-      title="Submit Form"
+      title="Submit form"
       submitText="Submit"
       :submitDisabled="!enableSubmit"
       cancelText="Cancel"
@@ -18,7 +18,7 @@
         <p>Check the below check box to enable the submit button</p>
         <KCheckbox
           :checked="enableSubmit"
-          label="Enable Submit"
+          label="Enable submit"
           @change="triggerCheckBox"
         />
       </template>

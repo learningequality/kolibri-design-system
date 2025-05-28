@@ -20,6 +20,7 @@
           { text: 'Dialog box with description', href: '#dialog-box' },
           { text: 'Submit form dialog box', href: '#submit-form' },
           { text: 'Modal with different sizes', href: '#modal-sizes' },
+          { text: 'Modal with precised sizes', href: '#modal-dynamic-size' },
         ]"
       />
 
@@ -27,10 +28,10 @@
         Dialog box with description
         <DocsAnchorTarget anchor="#dialog-box" />
       </h3>
-      <p>To show message information, warnings, or notifications to the user</p>
+      <p>To show information, warnings, or notifications.</p>
       <DocsExample
-        loadExample="KModal/KModal.vue"
-        exampleId="example-one"
+        loadExample="KModal/ModalWithDescription.vue"
+        exampleId="dialog-box"
       />
 
       <h3>
@@ -44,19 +45,29 @@
       </p>
       <DocsExample
         loadExample="KModal/ModalWithSubmit&Cancel.vue"
-        exampleId="#submit-form"
+        exampleId="submit-form"
       />
 
       <h3>
         Modal with different sizes
         <DocsAnchorTarget anchor="#modal-sizes" />
       </h3>
-      <p>You have three different modals.</p>
+      <p>There are three predefined modal sizes.</p>
       <DocsExample
         loadExample="KModal/ModalWithDifferentSizes.vue"
         exampleId="modal-sizes"
         :hideStyle="true"
         block
+      />
+
+      <h3>
+        Modal with precised sizes
+        <DocsAnchorTarget anchor="#modal-dynamic-size" />
+      </h3>
+      <p>Modal with 600px width</p>
+      <DocsExample
+        loadExample="KModal/ModalWithDynamicWidth.vue"
+        exampleId="modal-dynamic-size"
       />
     </DocsPageSection>
   </DocsPageTemplate>
