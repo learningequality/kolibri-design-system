@@ -57,7 +57,7 @@
       />
 
       <h3>
-        Modal with precised sizes
+        Modal with precise size
         <DocsAnchorTarget anchor="#modal-dynamic-size" />
       </h3>
       <p>Modal with 600px width</p>
