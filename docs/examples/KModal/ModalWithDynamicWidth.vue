@@ -6,7 +6,7 @@
       v-if="showModal"
       :appendToOverlay="true"
       size="600"
-      :title="`Modal with precised size`"
+      :title="`Modal with precise size`"
     >
       <template>
         {{ `Modal with 600px size` }}

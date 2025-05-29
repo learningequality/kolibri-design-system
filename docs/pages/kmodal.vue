@@ -19,8 +19,8 @@
         :items="[
           { text: 'Dialog box with description', href: '#dialog-box' },
           { text: 'Modal with enabled / disabled submit', href: '#submit-form' },
-          { text: 'Modal with different sizes', href: '#modal-sizes' },
-          { text: 'Modal with precised sizes', href: '#modal-dynamic-size' },
+          { text: 'Modal with predefined sizes', href: '#modal-sizes' },
+          { text: 'Modal with precise sizes', href: '#modal-dynamic-size' },
         ]"
       />
 
@@ -40,12 +40,12 @@
       </h3>
       <p>Modal with checkbox, submit, and cancel buttons</p>
       <DocsExample
-        loadExample="KModal/ModalWithSubmit&Cancel.vue"
+        loadExample="KModal/ModalWithSubmitCancel.vue"
         exampleId="submit-form"
       />
 
       <h3>
-        Modal with different sizes
+        Modal with predefined sizes
         <DocsAnchorTarget anchor="#modal-sizes" />
       </h3>
       <p>There are three predefined modal sizes.</p>
