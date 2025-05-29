@@ -1,12 +1,12 @@
 <template>
 
-  <svg viewBox="0 0 24 24" role="presentation" focusable="false" width="23" height="24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12.675 7.5l-3.52 3.52h9.115v1.96H9.154l3.52 3.52-1.384 1.385L5.405 12l5.885-5.885L12.675 7.5z" fill="#333"/><path fill-rule="evenodd" clip-rule="evenodd" d="M11.79 2.02c5.512 0 9.98 4.469 9.98 9.98 0 5.512-4.468 9.98-9.98 9.98-5.511 0-9.98-4.468-9.98-9.98 0-5.511 4.469-9.98 9.98-9.98zm0 1.96a8.02 8.02 0 100 16.04 8.02 8.02 0 000-16.04z" fill="#333"/></svg>
+  <svg viewBox="0 0 24 24" role="presentation" focusable="false" width="23" height="24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12.675 7.5l-3.52 3.52h9.115v1.96H9.154l3.52 3.52-1.384 1.385L5.405 12l5.885-5.885L12.675 7.5z" fill="#000"/><path fill-rule="evenodd" clip-rule="evenodd" d="M11.79 2.02c5.512 0 9.98 4.469 9.98 9.98 0 5.512-4.468 9.98-9.98 9.98-5.511 0-9.98-4.468-9.98-9.98 0-5.511 4.469-9.98 9.98-9.98zm0 1.96a8.02 8.02 0 100 16.04 8.02 8.02 0 000-16.04z" fill="#000"/></svg>
 
 </template>
 
 
 <script>
 
-  export default {"name":"icon-18d4d570ce18a02b8640864f60aa2f26"}
+  export default {"name":"icon-6cf808aa244f3102b969bba30a25c2dd"}
 
 </script>
