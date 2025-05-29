@@ -35,12 +35,10 @@
       />
 
       <h3>
-        Modal with enabled / disabled submit 
+        Modal with enabled / disabled submit
         <DocsAnchorTarget anchor="#submit-form" />
       </h3>
-      <p>
-        Modal with checkbox, submit, and cancel buttons <br >
-      </p>
+      <p>Modal with checkbox, submit, and cancel buttons</p>
       <DocsExample
         loadExample="KModal/ModalWithSubmit&Cancel.vue"
         exampleId="submit-form"
