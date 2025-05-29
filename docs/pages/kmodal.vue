@@ -18,7 +18,7 @@
       <DocsSubNav
         :items="[
           { text: 'Dialog box with description', href: '#dialog-box' },
-          { text: 'Submit form dialog box', href: '#submit-form' },
+          { text: 'Modal with enabled / disabled submit', href: '#submit-form' },
           { text: 'Modal with different sizes', href: '#modal-sizes' },
           { text: 'Modal with precised sizes', href: '#modal-dynamic-size' },
         ]"
@@ -35,13 +35,11 @@
       />
 
       <h3>
-        Submit form dialog box
+        Modal with enabled / disabled submit 
         <DocsAnchorTarget anchor="#submit-form" />
       </h3>
       <p>
         Modal with checkbox, submit, and cancel buttons <br >
-        Check the checkbox to enable the submit button <br >
-        To discard the changes, click cancel
       </p>
       <DocsExample
         loadExample="KModal/ModalWithSubmit&Cancel.vue"

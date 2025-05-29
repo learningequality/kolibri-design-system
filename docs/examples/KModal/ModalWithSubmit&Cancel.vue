@@ -2,7 +2,7 @@
 
   <div>
     <KButton @click="openModal">Open modal</KButton>
-    <p v-if="showMessage">Successfully submitted the Form</p>
+    <p v-if="showMessage">Successfully submitted the form</p>
     <KModal
       v-if="showModal"
       :appendToOverlay="true"
