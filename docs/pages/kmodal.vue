@@ -20,7 +20,7 @@
           { text: 'Dialog box with description', href: '#dialog-box' },
           { text: 'Modal with enabled / disabled submit', href: '#submit-form' },
           { text: 'Modal with predefined sizes', href: '#modal-sizes' },
-          { text: 'Modal with precise sizes', href: '#modal-dynamic-size' },
+          { text: 'Modal with precise size', href: '#modal-dynamic-size' },
         ]"
       />
 
