@@ -6,6 +6,7 @@
       v-model="currentText"
       class="textbox"
       :label="label"
+      :readonly="readonly"
       :disabled="disabled"
       :clearAriaLabel="clearAriaLabel"
       :clearable="clearable"
@@ -89,6 +90,14 @@
        * Whether or not the field is disabled
        */
       disabled: {
+        type: Boolean,
+        default: false,
+      },
+      /**
+       * Makes the input field non-editable.
+       * Still allowing to focus and copy the content
+       */
+      readonly: {
         type: Boolean,
         default: false,
       },
