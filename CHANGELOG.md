@@ -7,6 +7,19 @@ Changelog is rather internal in nature. See release notes for the public overvie
 <!-- [DO NOT REMOVE-USED BY GH ACTION] PASTE CHANGELOG -->
 
 
+- [#1024]
+  - **Description:** Added a Usage section to the KModal documentation.
+  - **Products impact:** None
+  - **Addresses:** [#921](https://github.com/learningequality/kolibri-design-system/issues/921)
+  - **Components:** -
+  - **Breaking:** No
+  - **Impacts a11y:** No
+  - **Guidance:** None
+
+[#1024]: https://github.com/learningequality/kolibri-design-system/pull/1024
+
+
+
 - [#1025]
   - **Description:** Adds visual tests for KLogo.
   - **Products impact:** None
