@@ -266,6 +266,7 @@
           { 'is-multi-line': this.multiLine },
           { 'has-counter': this.maxlength },
           { 'is-disabled': this.disabled },
+          { 'is-readonly': this.readonly},
           { 'has-label': this.hasLabel },
           { 'has-floating-label': this.hasFloatingLabel },
         ];
@@ -539,7 +540,7 @@
       }
     }
 
-    &.is-disabled{
+    &.is-disabled, &.is-readonly{
       .ui-textbox-input,
       .ui-textbox-label,
       .ui-textbox-textarea {
