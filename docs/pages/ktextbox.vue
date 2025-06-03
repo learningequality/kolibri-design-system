@@ -67,14 +67,14 @@
 
       <h3>Readonly input</h3>
       <KTextbox
-        label="Readonly input"
-        value="Readonly input"
+        label="Token"
+        value="123456789"
         readonly
       />
       <DocsShowCode language="html">
         <KTextbox
-          label="Readonly input"
-          value="Readonly input"
+          label="Token"
+          value="123456789"
           readonly
         />
       </DocsShowCode>
