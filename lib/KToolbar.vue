@@ -65,7 +65,7 @@
   import UiProgressLinear from './keen/UiProgressLinear.vue';
 
   export default {
-    name: 'UiToolbar',
+    name: 'KToolbar',
 
     components: {
       UiIconButton,
