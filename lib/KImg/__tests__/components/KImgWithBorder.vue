@@ -5,7 +5,7 @@
     altText="A sitting hummingbird"
     borderRadius="8px"
   />
-  
+
 </template>
 
 

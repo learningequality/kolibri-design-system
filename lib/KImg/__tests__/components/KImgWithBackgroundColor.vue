@@ -8,7 +8,7 @@
     borderRadius="8px"
     backgroundColor="#6060a3"
   />
-  
+
 </template>
 
 
