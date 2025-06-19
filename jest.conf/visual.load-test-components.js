@@ -11,8 +11,8 @@ import KImgPlaceholderTest from '~~/docs/examples/KImg/Placeholder.vue';
 import KImgFitXYTest from '~~/docs/examples/KImg/FitXY.vue';
 import KImgFitCenterTest from '~~/docs/examples/KImg/FitCenterInside.vue';
 import KImgFitContainTest from '~~/docs/examples/KImg/FitContain.vue';
-import KImgWithBorder from '~~/lib/KImg/__tests__/components/KImgWithBorder.vue';
-import KImgWithBackgroundColor from '~~/lib/KImg/__tests__/components/KImgWithBackgroundColor.vue';
+import KImgWithBorderTest from '~~/lib/KImg/__tests__/components/KImgWithBorder.vue';
+import KImgWithBackgroundColorTest from '~~/lib/KImg/__tests__/components/KImgWithBackgroundColor.vue';
 
 Vue.component('KCheckboxSlotTest', KCheckboxSlotTest);
 Vue.component('KButtonWithDropdownTest', KButtonWithDropdownTest);
@@ -25,5 +25,5 @@ Vue.component('KImgPlaceholderTest', KImgPlaceholderTest);
 Vue.component('KImgFitXYTest', KImgFitXYTest);
 Vue.component('KImgFitContainTest', KImgFitContainTest);
 Vue.component('KImgFitCenterTest', KImgFitCenterTest);
-Vue.component('KImgWithBorder', KImgWithBorder);
-Vue.component('KImgWithBackgroundColor', KImgWithBackgroundColor);
+Vue.component('KImgWithBorder', KImgWithBorderTest);
+Vue.component('KImgWithBackgroundColor', KImgWithBackgroundColorTest);
