@@ -25,5 +25,5 @@ Vue.component('KImgPlaceholderTest', KImgPlaceholderTest);
 Vue.component('KImgFitXYTest', KImgFitXYTest);
 Vue.component('KImgFitContainTest', KImgFitContainTest);
 Vue.component('KImgFitCenterTest', KImgFitCenterTest);
-Vue.component('KImgWithBorder', KImgWithBorderTest);
-Vue.component('KImgWithBackgroundColor', KImgWithBackgroundColorTest);
+Vue.component('KImgWithBorderTest', KImgWithBorderTest);
+Vue.component('KImgWithBackgroundColorTest', KImgWithBackgroundColorTest);
