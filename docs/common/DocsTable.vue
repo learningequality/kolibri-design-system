@@ -21,7 +21,7 @@
 
 <style lang="scss" scoped>
 
-  @import '~/assets/definitions';
+  @use '~/assets/definitions' as *;
 
   table {
     border-collapse: collapse;

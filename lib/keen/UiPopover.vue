@@ -357,9 +357,9 @@
 
   /* stylelint-disable */
 
-  @import '../styles/definitions';
-  @import './styles/imports';
-  //@import './styles/tippy/tippy';
+  @use '../styles/definitions' as *;
+  @use './styles/imports' as *;
+  //@use './styles/tippy/tippy' as *;
 
   .ui-popover {
     &.is-raised {

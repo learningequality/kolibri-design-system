@@ -313,7 +313,7 @@
 
 <style lang="scss" scoped>
 
-  @import '../styles/definitions';
+  @use '../styles/definitions' as *;
   $crumb-max-width: 300px;
 
   .breadcrumbs {

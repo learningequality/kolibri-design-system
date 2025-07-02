@@ -449,8 +449,8 @@
 
 <style lang="scss">
 
-  @import './styles/imports';
-  @import '../styles/definitions';
+  @use './styles/imports' as *;
+  @use '../styles/definitions' as *;
 
   .ui-autocomplete {
     position: relative;

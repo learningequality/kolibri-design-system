@@ -1,5 +1,5 @@
-@import '~/assets/definitions';
-@import '../../lib/styles/common';
+@use '~/assets/definitions' as *;
+@use '../../lib/styles/common';
 
 code {
   padding-right: 0.25em;

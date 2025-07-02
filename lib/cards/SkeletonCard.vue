@@ -105,7 +105,7 @@
 
 <style lang="scss" scoped>
 
-  @import '../styles/definitions';
+  @use '../styles/definitions' as *;
 
   @keyframes loading {
     0% {

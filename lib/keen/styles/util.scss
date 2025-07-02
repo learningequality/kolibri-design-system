@@ -1,6 +1,13 @@
 // Adapted from Foundation
 // (https://github.com/zurb/foundation-sites/blob/c7a6f44da00b7c17b8d5d2da6e15cfb4e1aac8b4/scss/util/_unit.scss)
 
+@use 'sass:math';
+@use 'sass:list';
+@use 'sass:meta';
+
+// Use a sensible default for base font size if not provided
+$base-font-size: 100% !default; // typically 16px in most browsers
+
 // Removes the unit (e.g. px, em, rem) from a value, returning the number only.
 @function strip-unit($num) {
   @return $num / ($num * 0 + 1);

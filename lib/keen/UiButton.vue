@@ -218,8 +218,8 @@
 </script>
 
 <style lang="scss">
-  @import '../styles/definitions';
-  @import './styles/imports';
+  @use '../styles/definitions' as *;
+  @use './styles/imports' as *;
 
   .ui-button {
     position: relative;

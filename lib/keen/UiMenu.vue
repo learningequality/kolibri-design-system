@@ -142,8 +142,8 @@
 
   /* stylelint-disable */
 
-  @import '../styles/definitions';
-  @import './styles/imports';
+  @use '../styles/definitions' as *;
+  @use './styles/imports' as *;
 
   .ui-menu {
     min-width: rem(168px);

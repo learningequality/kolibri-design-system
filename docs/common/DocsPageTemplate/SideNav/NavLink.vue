@@ -55,7 +55,7 @@
 
 <style lang="scss" scoped>
 
-  @import '~/assets/definitions';
+  @use '~/assets/definitions' as *;
 
   .block {
     display: block;

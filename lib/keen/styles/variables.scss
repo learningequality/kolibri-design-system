@@ -1,5 +1,6 @@
 // The Material Design color palette
-@import 'md-colors';
+@use 'md-colors' as *;
+@use 'util' as *;
 
 // The UI font stack
 $font-stack: inherit;

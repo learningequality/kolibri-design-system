@@ -135,7 +135,7 @@
 
 <style lang="scss" scoped>
 
-  @import '~/assets/definitions';
+  @use '~/assets/definitions' as *;
 
   .header {
     margin-top: 24px;

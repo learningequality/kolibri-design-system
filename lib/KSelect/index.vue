@@ -927,8 +927,8 @@
 
 <style lang="scss" scoped>
 
-  @import '../styles/definitions';
-  @import '../keen/styles/imports';
+  @use '../styles/definitions' as *;
+  @use '../keen/styles/imports' as *;
 
   /* stylelint-disable csstree/validator */
 

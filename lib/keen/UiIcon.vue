@@ -53,7 +53,7 @@
 
 <style lang="scss">
 
-  @import './styles/imports';
+  @use './styles/imports' as *;
 
   /* stylelint-disable */
 

@@ -64,7 +64,7 @@
       <p>Import KDS styles in the main application stylesheet:</p>
 
       <DocsShowCode language="scss">
-        @import '~kolibri-design-system/lib/styles/common';
+        @use '~kolibri-design-system/lib/styles/common';
       </DocsShowCode>
 
       This globally registers styles needed for components to display correctly and also exposes

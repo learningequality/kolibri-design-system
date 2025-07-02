@@ -1,4 +1,4 @@
-@import '../styles/definitions';
+@use '../styles/definitions' as *;
 
 $transition: color $core-time ease,
   background-color $core-time ease,

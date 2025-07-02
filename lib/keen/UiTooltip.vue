@@ -107,12 +107,12 @@
 
 <style lang="scss">
 
-  @import './styles/imports';
+  @use './styles/imports' as *;
 
   /* stylelint-disable */
 
   /* Not to be pulled in unless necessary
-  @import './styles/tippy/tippy';
+  @use './styles/tippy/tippy' as *;
   */
 
   .ui-tooltip-theme {

@@ -132,6 +132,6 @@
 
 <style lang="scss" scoped>
 
-  @import './buttons';
+  @use './buttons' as *;
 
 </style>

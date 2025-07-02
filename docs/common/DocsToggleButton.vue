@@ -67,7 +67,7 @@
 
 <style lang="scss" scoped>
 
-  @import '~/assets/definitions';
+  @use '~/assets/definitions' as *;
 
   .toggle {
     display: inline-block; // prevents trailing spaces

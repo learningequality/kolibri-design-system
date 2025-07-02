@@ -200,7 +200,7 @@
 
 <style lang="scss">
 
-  @import './styles/definitions';
+  @use './styles/definitions' as *;
   $k-switch-height: 32px !default;
   $k-switch-thumb-size: 20px !default;
   $k-switch-thumb-color: #f5f5f5 !default;

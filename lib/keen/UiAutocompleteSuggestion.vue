@@ -66,7 +66,7 @@
 
 <style lang="scss">
 
-  @import './styles/imports';
+  @use './styles/imports' as *;
 
   .ui-autocomplete-suggestion {
     padding: rem(8px 12px);

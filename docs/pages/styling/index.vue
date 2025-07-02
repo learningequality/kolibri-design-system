@@ -72,7 +72,7 @@
       <!-- eslint-disable -->
       <!-- prettier-ignore -->
       <DocsShowCode language="css">
-        @import '~kolibri-design-system/lib/styles/definitions'
+        @use '~kolibri-design-system/lib/styles/definitions' as *;
 
         .box {
           @extend %dropshadow-2dp;
@@ -183,7 +183,7 @@
       <!-- eslint-disable -->
       <!-- prettier-ignore -->
       <DocsShowCode language="css">
-        @import '~kolibri-design-system/lib/styles/definitions'
+        @use '~kolibri-design-system/lib/styles/definitions' as *;
 
         .box-1dp {
           @extend %dropshadow-1dp;
@@ -265,7 +265,7 @@
       <!-- eslint-disable -->
       <!-- prettier-ignore -->
       <DocsShowCode language="css">
-        @import '~kolibri-design-system/lib/styles/definitions'
+        @use '~kolibri-design-system/lib/styles/definitions' as *;
 
         .ease:hover {
           @extend %dropshadow-6dp;
@@ -295,7 +295,7 @@
 
 <style lang="scss" scoped>
 
-  @import '~~/lib/styles/definitions';
+  @use '~~/lib/styles/definitions' as *;
 
   dt {
     font-weight: bold;
