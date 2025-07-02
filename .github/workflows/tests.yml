@@ -34,8 +34,6 @@ jobs:
         restore-keys: |
           ${{ runner.OS }}-node-
     - name: Install dependencies
-      run: |
-        yarn --frozen-lockfile
-        npm rebuild node-sass
+      run: yarn --frozen-lockfile
     - name: Run tests
       run: yarn test
