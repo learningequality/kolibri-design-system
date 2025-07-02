@@ -39,6 +39,13 @@ export default {
         },
       },
     },
+    loaders: {
+      scss: {
+        sassOptions: {
+          silenceDeprecations: ['legacy-js-api'], // Suppress specific deprecation warnings
+        },
+      },
+    },
     extend(config) {
       // handles <mat-svg/>, <ion-svg/>, <iconic-svg/>, and <file-svg/> svg inlining
       config.module.rules.push({
