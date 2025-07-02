@@ -261,7 +261,7 @@
 
   .k-switch-track {
     position: absolute;
-    top: (($k-switch-thumb-size - $k-switch-track-height) / 2);
+    top: calc(($k-switch-thumb-size - $k-switch-track-height) / 2);
     width: $k-switch-track-width;
     height: $k-switch-track-height;
     background-color: #cccccc;
