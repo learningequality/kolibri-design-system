@@ -39,7 +39,7 @@ $base-font-size: 100% !default; // typically 16px in most browsers
   }
 
   @for $i from 1 through $count {
-    $rem-values: append($rem-values, to-rem(nth($values, $i), $base));
+    $rem-values: list.append($rem-values, to-rem(list.nth($values, $i), $base));
   }
 
   @return $rem-values;
