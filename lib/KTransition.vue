@@ -76,7 +76,7 @@
   .component-vertical-slide-enter,
   .component-vertical-slide-leave-to {
     opacity: 0;
-    transform: translateY(-50%);
+    transform: translateY(-10px);
   }
 
 </style>
