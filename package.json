@@ -75,7 +75,7 @@
     "mock-match-media": "^0.4.3",
     "node-sass": "^9.0.0",
     "normalize.css": "^8.0.1",
-    "nuxt": "2.18.1",
+    "nuxt": "4.0.0",
     "prismjs": "^1.27.0",
     "puppeteer": "^22.11.0",
     "raw-loader": "^4.0.2",
