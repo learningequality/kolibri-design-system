@@ -220,10 +220,10 @@
 
   .content-wrapper {
     margin-left: $nav-width;
-  }
 
-  @media (max-width: 768px) {
-    .content-wrapper {
+    @media (max-width: 768px) {
+      width: 100%;
+      max-width: 100%;
       margin-left: 0;
     }
   }
@@ -236,6 +236,12 @@
     padding-right: 32px;
     padding-bottom: 400px;
     padding-left: 32px;
+    @media (max-width: 768px) {
+      width: 100%;
+      max-width: 100%;
+      padding: 0 16px 200px;
+      overflow-x: hidden;
+    }
   }
 
   .overlay {

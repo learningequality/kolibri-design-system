@@ -7,6 +7,112 @@ Changelog is rather internal in nature. See release notes for the public overvie
 <!-- [DO NOT REMOVE-USED BY GH ACTION] PASTE CHANGELOG -->
 
 
+- [#1072]
+  - **Description:** Update workflow that handles contributor comments to the latest version
+  - **Products impact:** none
+  - **Addresses:** -
+  - **Components:** -
+  - **Breaking:** -
+  - **Impacts a11y:** -
+  - **Guidance:** -
+
+[#1072]: https://github.com/learningequality/kolibri-design-system/pull/1072
+
+
+
+- [#1071]
+  - **Description:** Fix `KTransition` in `component-vertical-slide-out-in` mode moving from/to too high
+  - **Products impact:** bugfix
+  - **Addresses:** [studio conversation](https://github.com/learningequality/studio/pull/5162#discussion_r2197304969)
+  - **Components:** KTransition
+  - **Breaking:** no
+  - **Impacts a11y:** no
+  - **Guidance:** -
+
+[#1071]: https://github.com/learningequality/kolibri-design-system/pull/1071
+
+
+
+- [#1068]
+  - **Description:** Add `expand` icon
+  - **Products impact:** new icon
+  - **Addresses:** https://github.com/learningequality/kolibri/issues/13504
+  - **Components:** `KIcon`
+  - **Breaking:** no
+  - **Impacts a11y:** no
+  - **Guidance:** -
+
+[#1068]: https://github.com/learningequality/kolibri-design-system/pull/1068
+
+
+
+- [#1051]
+  - **Description:** Bump @babel/core from 7.26.10 to 7.27.4 in the babel group
+  - **Products impact:** Dev Dependency upgrade
+  - **Addresses:** -
+  - **Components:** -
+  - **Breaking:** -
+  - **Impacts a11y:** -
+  - **Guidance:** -
+
+[#1051]: https://github.com/learningequality/kolibri-design-system/pull/1051
+
+
+
+- [#1018]
+  - **Description:** At Sizes less than `768px`
+  - Set the content-wrapper width to 100%
+  - Made props table and other lower sections to `overflow-scroll`
+  - **Products impact:** KDS.
+  - **Addresses:** #940
+  - **Components:** DocsPageTemplate, DocsPageSection
+  - **Breaking:** No
+  - **Impacts a11y:** No
+  - **Guidance:** Investigate the responsiveness of component pages at screen sizes less than 768px
+
+[#1018]: https://github.com/learningequality/kolibri-design-system/pull/1018
+
+
+
+- [#1038]
+  - **Description:** Adds visual tests for KImg.
+  - **Products impact:** None
+  - **Addresses:** [#1009](https://github.com/learningequality/kolibri-design-system/issues/1009)
+  - **Components:** No
+  - **Breaking:** No
+  - **Impacts a11y:** No
+  - **Guidance:** None
+
+[#1038]: https://github.com/learningequality/kolibri-design-system/pull/1038
+
+
+
+- [#1048]
+  - **Description:** Bump jest from 29.7.0 to 30.0.0
+  - **Products impact:** Dev Dependency upgrade
+  - **Addresses:** -
+  - **Components:** -
+  - **Breaking:** -
+  - **Impacts a11y:** -
+  - **Guidance:** -
+
+[#1048]: https://github.com/learningequality/kolibri-design-system/pull/1048
+
+
+
+- [#1042]
+  - **Description:** Bump tar-fs from 3.0.8 to 3.0.9
+  - **Products impact:** Dev Dependency upgrade
+  - **Addresses:** -
+  - **Components:** -
+  - **Breaking:** -
+  - **Impacts a11y:** -
+  - **Guidance:** -
+
+[#1042]: https://github.com/learningequality/kolibri-design-system/pull/1042
+
+
+
 - [#961]
   - **Description:** Enhanced the test coverage for KTable
   - **Products impact:** none

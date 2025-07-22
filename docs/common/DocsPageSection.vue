@@ -67,5 +67,10 @@
     margin-top: 32px;
     border-top: 1px solid #dedede;
   }
+  @media (max-width: 768px) {
+    .section-wrapper {
+      overflow-x: scroll;
+    }
+  }
 
 </style>
