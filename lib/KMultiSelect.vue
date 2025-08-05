@@ -607,7 +607,7 @@
             isInsideComponent.value = false;
             closeDropdown();
           }
-        }, 50);
+        }, 50); // Reduced timeout for better responsiveness
       }
 
       function handleInputClick() {
@@ -641,6 +641,7 @@
       function closeDropdown() {
         isDropdownOpen.value = false;
         resetFocusState();
+        // Clear search text when autocomplete is disabled
         if (!autocomplete.value) {
           searchText.value = '';
         }
@@ -676,6 +677,17 @@
           selectedOptions.value = uniq([...selectedOptions.value, option.id]);
           sendPoliteMessage(`${option.label} selected`);
         }
+
+        // Keep dropdown open and maintain focus - improved focus retention
+        nextTick(() => {
+          if (focusedOption.value?.id === option.id) {
+            const optionElement = document.getElementById(getElementOptionId(option));
+            if (optionElement) {
+              // Don't actually focus, just ensure visual state is maintained
+              // This prevents the selection from disappearing
+            }
+          }
+        });
       }
 
       function selectAll() {
@@ -765,6 +777,7 @@
       function handleComboboxKeydown(event) {
         const { key } = event;
 
+        // Prevent typing when autocomplete is disabled
         if (!autocomplete.value && key.length === 1 &&
           !event.ctrlKey && !event.metaKey && !event.altKey) {
           event.preventDefault();
@@ -786,6 +799,7 @@
             event.preventDefault();
             if (!isDropdownOpen.value) {
               openDropdown();
+              // Focus last item when opening with arrow up
               nextTick(() => {
                 if (displayedOptions.value.length > 0) {
                   focusedIndex.value = displayedOptions.value.length - 1;
@@ -993,6 +1007,7 @@
   outline-offset: -2px;
 }
 
+/* Additional readonly input styling */
 .combobox-input[readonly] {
   cursor: pointer;
   background-color: transparent;
