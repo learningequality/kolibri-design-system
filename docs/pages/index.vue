@@ -5,7 +5,7 @@
     <KMultiSelect
       v-model="selectedItems"
       :options="options"
-      autocomplete
+      autocomplete=true
       clearable
       placeholder="Pick some fruits…"
     />
