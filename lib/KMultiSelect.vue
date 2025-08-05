@@ -111,6 +111,7 @@
           :aria-required="required ? 'true' : 'false'"
           :aria-invalid="invalid ? 'true' : 'false'"
           :disabled="disabled"
+          :readonly="!autocomplete"
           @input="handleInput"
           @keydown="handleComboboxKeydown"
           @focus="handleInputFocus"
@@ -226,14 +227,14 @@
           </li>
 
           <li
-            v-for="(option, index) in filteredOptions"
+            v-for="(option, index) in displayedOptions"
             :id="getElementOptionId(option)"
             :key="option.id"
             :ref="el => { if (el) optionRefs[index] = el }"
             role="option"
             :class="$computedClass(getOptionStyles(option))"
             :aria-selected="isOptionSelected(option).toString()"
-            :aria-setsize="filteredOptions.length"
+            :aria-setsize="displayedOptions.length"
             :aria-posinset="index + 1"
             :style="{
               padding: '8px 12px',
@@ -287,7 +288,7 @@
         </ul>
 
         <div
-          v-if="!filteredOptions.length"
+          v-if="!displayedOptions.length"
           role="status"
           class="no-options"
           :style="{
@@ -372,28 +373,39 @@
         );
       });
 
-      const filteredOptions = computed(() => {
-        if (!autocomplete.value || !searchText.value) return options.value;
+      const displayedOptions = computed(() => {
+        // If autocomplete is disabled, always show all options
+        if (!autocomplete.value) {
+          return options.value;
+        }
 
+        // If autocomplete is enabled but no search text, show all options
+        if (!searchText.value) {
+          return options.value;
+        }
+
+        // Filter options based on search text
         const query = searchText.value.toLowerCase();
         return options.value.filter(option =>
           option.label.toLowerCase().includes(query)
         );
       });
 
+      const filteredOptions = computed(() => displayedOptions.value);
+
       const showSelectAll = computed(() => {
-        return filteredOptions.value.length > 1;
+        return displayedOptions.value.length > 1;
       });
 
       const allOptionsSelected = computed(() => {
-        return filteredOptions.value.length > 0 &&
-          filteredOptions.value.every(option =>
+        return displayedOptions.value.length > 0 &&
+          displayedOptions.value.every(option =>
             selectedOptions.value.includes(option.id)
           );
       });
 
       const someOptionsSelected = computed(() => {
-        return filteredOptions.value.some(option =>
+        return displayedOptions.value.some(option =>
           selectedOptions.value.includes(option.id)
         );
       });
@@ -534,6 +546,9 @@
             closeDropdown();
             instance.proxy.$refs.comboboxInput.focus();
             break;
+
+          case 'Tab':
+            break;
         }
       }
 
@@ -559,9 +574,11 @@
           if (!isDropdownOpen.value) {
             isDropdownOpen.value = true;
           }
-          // Reset focus state when searching
           resetFocusState();
-          sendPoliteMessage(`${filteredOptions.value.length} options available`);
+          sendPoliteMessage(`${displayedOptions.value.length} options available`);
+        } else {
+          event.preventDefault();
+          searchText.value = '';
         }
       }
 
@@ -590,7 +607,7 @@
             isInsideComponent.value = false;
             closeDropdown();
           }
-        }, 50); // Reduced timeout for better responsiveness
+        }, 50);
       }
 
       function handleInputClick() {
@@ -601,6 +618,9 @@
 
       function openDropdown() {
         isDropdownOpen.value = true;
+        if (!autocomplete.value) {
+          searchText.value = '';
+        }
         nextTick(() => {
           setInitialFocus();
         });
@@ -611,9 +631,9 @@
           isSelectAllFocused.value = true;
           focusedIndex.value = -1;
           focusedOption.value = null;
-        } else if (filteredOptions.value.length > 0) {
+        } else if (displayedOptions.value.length > 0) {
           focusedIndex.value = 0;
-          focusedOption.value = filteredOptions.value[0];
+          focusedOption.value = displayedOptions.value[0];
           isSelectAllFocused.value = false;
         }
       }
@@ -621,6 +641,9 @@
       function closeDropdown() {
         isDropdownOpen.value = false;
         resetFocusState();
+        if (!autocomplete.value) {
+          searchText.value = '';
+        }
       }
 
       // Improved toggle dropdown function
@@ -653,32 +676,20 @@
           selectedOptions.value = uniq([...selectedOptions.value, option.id]);
           sendPoliteMessage(`${option.label} selected`);
         }
-
-        // Keep dropdown open and maintain focus - improved focus retention
-        nextTick(() => {
-          // Ensure the option remains visually focused
-          if (focusedOption.value?.id === option.id) {
-            const optionElement = document.getElementById(getElementOptionId(option));
-            if (optionElement) {
-              // Don't actually focus, just ensure visual state is maintained
-              // This prevents the selection from disappearing
-            }
-          }
-        });
       }
 
       function selectAll() {
         if (allOptionsSelected.value) {
-          const filteredIds = filteredOptions.value.map(opt => opt.id);
+          const displayedIds = displayedOptions.value.map(opt => opt.id);
           selectedOptions.value = selectedOptions.value.filter(id =>
-            !filteredIds.includes(id)
+            !displayedIds.includes(id)
           );
           sendPoliteMessage('All options deselected');
         } else {
-          const filteredIds = filteredOptions.value.map(opt => opt.id);
+          const displayedIds = displayedOptions.value.map(opt => opt.id);
           selectedOptions.value = uniq([
             ...selectedOptions.value,
-            ...filteredIds
+            ...displayedIds
           ]);
           sendPoliteMessage('All options selected');
         }
@@ -714,7 +725,7 @@
 
       function setFocusedOption(option) {
         focusedOption.value = option;
-        focusedIndex.value = filteredOptions.value.findIndex(
+        focusedIndex.value = displayedOptions.value.findIndex(
           opt => opt.id === option.id
         );
         isSelectAllFocused.value = false;
@@ -754,6 +765,12 @@
       function handleComboboxKeydown(event) {
         const { key } = event;
 
+        if (!autocomplete.value && key.length === 1 &&
+          !event.ctrlKey && !event.metaKey && !event.altKey) {
+          event.preventDefault();
+          return;
+        }
+
         switch (key) {
           case 'ArrowDown':
             event.preventDefault();
@@ -769,11 +786,10 @@
             event.preventDefault();
             if (!isDropdownOpen.value) {
               openDropdown();
-              // Focus last item when opening with arrow up
               nextTick(() => {
-                if (filteredOptions.value.length > 0) {
-                  focusedIndex.value = filteredOptions.value.length - 1;
-                  focusedOption.value = filteredOptions.value[filteredOptions.value.length - 1];
+                if (displayedOptions.value.length > 0) {
+                  focusedIndex.value = displayedOptions.value.length - 1;
+                  focusedOption.value = displayedOptions.value[displayedOptions.value.length - 1];
                   isSelectAllFocused.value = false;
                   focusCurrentOption();
                 }
@@ -823,7 +839,8 @@
             event.preventDefault();
             if (isDropdownOpen.value) {
               closeDropdown();
-            } else if (searchText.value) {
+            } else if (autocomplete.value && searchText.value) {
+              // Only clear search if autocomplete is enabled
               searchText.value = '';
             }
             break;
@@ -832,45 +849,41 @@
 
       function navigateDown() {
         if (isSelectAllFocused.value) {
-          if (filteredOptions.value.length > 0) {
+          if (displayedOptions.value.length > 0) {
             isSelectAllFocused.value = false;
             focusedIndex.value = 0;
-            focusedOption.value = filteredOptions.value[0];
+            focusedOption.value = displayedOptions.value[0];
           }
-        } else if (focusedIndex.value < filteredOptions.value.length - 1) {
+        } else if (focusedIndex.value < displayedOptions.value.length - 1) {
           focusedIndex.value++;
-          focusedOption.value = filteredOptions.value[focusedIndex.value];
+          focusedOption.value = displayedOptions.value[focusedIndex.value];
         } else if (showSelectAll.value) {
-          // Wrap to select all
           isSelectAllFocused.value = true;
           focusedIndex.value = -1;
           focusedOption.value = null;
-        } else if (filteredOptions.value.length > 0) {
-          // Wrap to first option
+        } else if (displayedOptions.value.length > 0) {
           focusedIndex.value = 0;
-          focusedOption.value = filteredOptions.value[0];
+          focusedOption.value = displayedOptions.value[0];
         }
       }
 
       function navigateUp() {
         if (isSelectAllFocused.value) {
-          if (filteredOptions.value.length > 0) {
+          if (displayedOptions.value.length > 0) {
             isSelectAllFocused.value = false;
-            focusedIndex.value = filteredOptions.value.length - 1;
-            focusedOption.value = filteredOptions.value[filteredOptions.value.length - 1];
+            focusedIndex.value = displayedOptions.value.length - 1;
+            focusedOption.value = displayedOptions.value[displayedOptions.value.length - 1];
           }
         } else if (focusedIndex.value > 0) {
           focusedIndex.value--;
-          focusedOption.value = filteredOptions.value[focusedIndex.value];
+          focusedOption.value = displayedOptions.value[focusedIndex.value];
         } else if (showSelectAll.value) {
-          // Wrap to select all
           isSelectAllFocused.value = true;
           focusedIndex.value = -1;
           focusedOption.value = null;
-        } else if (filteredOptions.value.length > 0) {
-          // Wrap to last option
-          focusedIndex.value = filteredOptions.value.length - 1;
-          focusedOption.value = filteredOptions.value[filteredOptions.value.length - 1];
+        } else if (displayedOptions.value.length > 0) {
+          focusedIndex.value = displayedOptions.value.length - 1;
+          focusedOption.value = displayedOptions.value[displayedOptions.value.length - 1];
         }
       }
 
@@ -917,7 +930,7 @@
       return {
         searchText, isDropdownOpen, focusedOption, focusedIndex,
         isSelectAllFocused, inputFocused, selectedOptions, selectedOptionsData,
-        filteredOptions, allOptionsSelected, someOptionsSelected, showSelectAll,
+        displayedOptions, filteredOptions, allOptionsSelected, someOptionsSelected, showSelectAll,
         comboboxContainer, dropdownContainer, optionRefs, listboxId,
         ariaDescribedById, comboboxAriaLabel, inputStyles, uid,
         handleInput, handleInputFocus, handleInputBlur,
@@ -943,7 +956,7 @@
           typeof option.id === 'string' && typeof option.label === 'string'
         )
       },
-      autocomplete: { type: Boolean, default: true },
+      autocomplete: { type: Boolean, default: false },
       placeholder: { type: String, default: 'Select options...' },
       searchLabel: { type: String, default: 'Search options' },
       ariaLabelledby: { type: String, default: null },
@@ -976,6 +989,16 @@
 }
 
 .combobox-input:focus {
+  outline: 2px solid var(--primary);
+  outline-offset: -2px;
+}
+
+.combobox-input[readonly] {
+  cursor: pointer;
+  background-color: transparent;
+}
+
+.combobox-input[readonly]:focus {
   outline: 2px solid var(--primary);
   outline-offset: -2px;
 }
