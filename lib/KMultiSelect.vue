@@ -1,58 +1,7 @@
 <template>
 
   <div class="autocomplete-multiselect">
-    <!-- Selected Pills Container -->
-    <div
-      v-if="selectedOptions && selectedOptions.length"
-      class="pills-container"
-      :style="{
-        borderBottom: `1px solid ${$themeTokens.fineLine}`,
-        padding: '8px',
-        display: 'flex',
-        flexWrap: 'wrap',
-        gap: '6px',
-        alignItems: 'center',
-      }"
-      role="region"
-      :aria-label="`${selectedOptions.length} options selected`"
-    >
-      <div
-        v-for="(option, index) in selectedOptionsData"
-        :key="option.id"
-        class="pill"
-        :style="{
-          backgroundColor: $themeTokens.surface,
-          border: `1px solid ${$themeTokens.fineLine}`,
-          borderRadius: '16px',
-          padding: '4px 8px',
-          display: 'flex',
-          alignItems: 'center',
-          gap: '4px',
-          fontSize: '14px',
-        }"
-        role="listitem"
-      >
-        <span>{{ option.label }}</span>
-        <KIconButton
-          size="small"
-          icon="clear"
-          :ariaLabel="getClearPillLabel(option.label)"
-          @click="deselectOption(option)"
-          @keydown="handlePillButtonKeydown($event, option, index)"
-        />
-      </div>
-
-      <!-- Clear All Button -->
-      <KIconButton
-        size="small"
-        icon="clear"
-        :ariaLabel="clearAllMessage"
-        class="clear-all-button"
-        @click="clearAll"
-      />
-    </div>
-
-    <!-- Combobox Input -->
+    <!-- Combobox Input Container -->
     <div
       ref="comboboxContainer"
       class="combobox-container"
@@ -68,10 +17,15 @@
           position: 'relative',
           display: 'flex',
           alignItems: 'center',
+          flexWrap: 'wrap',
+          minHeight: '40px',
+          padding: '4px',
+          gap: '4px'
         }"
       >
+        <!-- Search Icon -->
         <KIcon
-          v-if="autocomplete"
+          v-if="autocomplete && !selectedOptions.length"
           icon="search"
           class="search-icon"
           :style="{
@@ -86,6 +40,46 @@
           aria-hidden="true"
         />
 
+        <!-- Selected Pills inside input -->
+        <div
+          v-for="(option, index) in selectedOptionsData"
+          :key="option.id"
+          class="pill"
+          :style="{
+            backgroundColor: $themeTokens.surface,
+            border: `1px solid ${$themeTokens.fineLine}`,
+            borderRadius: '16px',
+            padding: '4px 8px',
+            display: 'flex',
+            alignItems: 'center',
+            gap: '4px',
+            fontSize: '14px',
+            flexShrink: 0,
+          }"
+          role="listitem"
+        >
+          <span>{{ option.label }}</span>
+          <KIconButton
+            size="small"
+            icon="clear"
+            :ariaLabel="getClearPillLabel(option.label)"
+            @click="deselectOption(option)"
+            @keydown="handlePillButtonKeydown($event, option, index)"
+          />
+        </div>
+
+        <!-- Clear All Button (only when there are selections) -->
+        <KIconButton
+          v-if="selectedOptions && selectedOptions.length"
+          size="small"
+          icon="clear"
+          :ariaLabel="clearAllMessage"
+          class="clear-all-button"
+          :style="{ flexShrink: 0 }"
+          @click="clearAll"
+        />
+
+        <!-- Input Field -->
         <input
           ref="comboboxInput"
           v-model.trim="searchText"
@@ -93,15 +87,16 @@
           role="combobox"
           :class="['combobox-input', $computedClass(inputStyles)]"
           :style="{
-            width: '100%',
-            height: '40px',
-            padding: autocomplete ? '0 40px 0 40px' : '0 40px 0 12px',
+            flex: '1',
+            minWidth: '120px',
+            height: '32px',
+            padding: autocomplete && !selectedOptions.length ? '0 40px 0 40px' : '0 40px 0 8px',
             border: 'none',
             outline: 'none',
             fontSize: '14px',
             color: $themeTokens.text,
           }"
-          :placeholder="placeholder"
+          :placeholder="selectedOptions.length ? '' : placeholder"
           :aria-label="comboboxAriaLabel"
           :aria-expanded="isDropdownOpen.toString()"
           :aria-controls="listboxId"
@@ -119,6 +114,7 @@
           @click="handleInputClick"
         >
 
+        <!-- Clear Search Button -->
         <KIconButton
           v-if="searchText && autocomplete"
           size="small"
@@ -129,11 +125,13 @@
             right: '32px',
             top: '50%',
             transform: 'translateY(-50%)',
+            flexShrink: 0,
           }"
           :ariaLabel="clearSearchMessage"
           @click="clearSearch"
         />
 
+        <!-- Dropdown Toggle Button -->
         <KIconButton
           size="small"
           :icon="isDropdownOpen ? 'chevronUp' : 'chevronDown'"
@@ -143,6 +141,7 @@
             right: '8px',
             top: '50%',
             transform: 'translateY(-50%)',
+            flexShrink: 0,
           }"
           :ariaLabel="getToggleDropdownLabel()"
           :aria-expanded="isDropdownOpen.toString()"
@@ -170,7 +169,6 @@
           overflowY: 'auto',
         }"
         role="region"
-        :aria-live="autocomplete ? 'polite' : 'off'"
         @mousedown.prevent
       >
         <ul
@@ -194,7 +192,7 @@
             :id="`select-all-${uid}`"
             role="option"
             :class="$computedClass(getSelectAllStyles())"
-            :aria-selected="false"
+            :aria-selected="allOptionsSelected.toString()"
             :style="{
               padding: '8px 12px',
               cursor: 'pointer',
@@ -297,7 +295,6 @@
             textAlign: 'center',
             color: $themeTokens.annotation,
           }"
-          aria-live="polite"
         >
           {{ noResultsMessage }}
         </div>
@@ -672,10 +669,8 @@
           selectedOptions.value = selectedOptions.value.filter(
             id => id !== option.id
           );
-          sendPoliteMessage(`${option.label} deselected`);
         } else {
           selectedOptions.value = uniq([...selectedOptions.value, option.id]);
-          sendPoliteMessage(`${option.label} selected`);
         }
 
         // Keep dropdown open and maintain focus - improved focus retention
@@ -1042,8 +1037,8 @@
   transition: background-color 0.15s ease, outline 0.15s ease;
 }
 
-.pills-container {
-  min-height: 40px;
+.input-wrapper {
+  min-height: 40px !important;
 }
 
 /* Enhanced focus styles for better visual feedback */
