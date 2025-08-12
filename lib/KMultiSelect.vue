@@ -185,6 +185,10 @@
           :aria-labelledby="ariaLabelledby"
           :aria-describedby="ariaDescribedById"
           tabindex="-1"
+          @keydown="handleListKeydown"
+          @click="handleListClick"
+          @mouseenter="handleListMouseEnter"
+          @focus="handleListFocus"
         >
           <!-- Select All Option -->
           <li
@@ -207,10 +211,7 @@
               outlineOffset: isSelectAllFocused ? '-2px' : '0',
             }"
             :tabindex="isSelectAllFocused ? 0 : -1"
-            @click.stop="selectAll"
-            @mouseenter="setFocusedSelectAll"
-            @keydown="handleOptionKeydown($event, null, -1)"
-            @focus="setFocusedSelectAll"
+            data-option-type="select-all"
             @mousedown.prevent
           >
             <KCheckbox
@@ -246,10 +247,9 @@
               outlineOffset: getOptionOutlineOffset(option),
             }"
             :tabindex="focusedOption?.id === option.id ? 0 : -1"
-            @click.stop="toggleOption(option)"
-            @mouseenter="setFocusedOption(option)"
-            @keydown="handleOptionKeydown($event, option, index)"
-            @focus="setFocusedOption(option)"
+            :data-option-id="option.id"
+            :data-option-index="index"
+            data-option-type="regular"
             @mousedown.prevent
           >
             <KCheckbox
@@ -511,18 +511,23 @@
         }
       }
 
-      // Improved option keydown handling
-      function handleOptionKeydown(event, option) {
-        const { key } = event;
+      function handleListKeydown(event) {
+        const { key, target } = event;
+
+        const optionType = target.dataset?.optionType;
+        const optionId = target.dataset?.optionId;
+
+        const option = optionType === 'regular' ?
+          displayedOptions.value.find(opt => opt.id === optionId) : null;
 
         switch (key) {
           case 'Enter':
           case ' ':
             event.preventDefault();
-            if (option) {
-              toggleOption(option);
-            } else {
+            if (optionType === 'select-all') {
               selectAll();
+            } else if (option) {
+              toggleOption(option);
             }
             break;
 
@@ -546,6 +551,65 @@
 
           case 'Tab':
             break;
+        }
+      }
+
+      function handleListClick(event) {
+        const { target } = event;
+
+        const listItem = target.closest('li[role="option"]');
+        if (!listItem) return;
+
+        event.stopPropagation();
+
+        const optionType = listItem.dataset?.optionType;
+        const optionId = listItem.dataset?.optionId;
+
+        if (optionType === 'select-all') {
+          selectAll();
+        } else if (optionId) {
+          const option = displayedOptions.value.find(opt => opt.id === optionId);
+          if (option) {
+            toggleOption(option);
+          }
+        }
+      }
+
+      function handleListMouseEnter(event) {
+        const { target } = event;
+
+        const listItem = target.closest('li[role="option"]');
+        if (!listItem) return;
+
+        const optionType = listItem.dataset?.optionType;
+        const optionId = listItem.dataset?.optionId;
+
+        if (optionType === 'select-all') {
+          setFocusedSelectAll();
+        } else if (optionId) {
+          const option = displayedOptions.value.find(opt => opt.id === optionId);
+          if (option) {
+            setFocusedOption(option);
+          }
+        }
+      }
+
+      function handleListFocus(event) {
+        const { target } = event;
+
+        const listItem = target.closest('li[role="option"]');
+        if (!listItem) return;
+
+        const optionType = listItem.dataset?.optionType;
+        const optionId = listItem.dataset?.optionId;
+
+        if (optionType === 'select-all') {
+          setFocusedSelectAll();
+        } else if (optionId) {
+          const option = displayedOptions.value.find(opt => opt.id === optionId);
+          if (option) {
+            setFocusedOption(option);
+          }
         }
       }
 
@@ -947,11 +1011,13 @@
         selectAll, deselectOption, clearAll, clearSearch, setFocusedOption,
         setFocusedSelectAll, getElementOptionId, getOptionStyles,
         getSelectAllStyles, handleComboboxKeydown, getHighlightedSegments,
-        handlePillButtonKeydown, handleOptionKeydown, noResultsMessage,
+        handlePillButtonKeydown, noResultsMessage,
         shouldHighlight, getActiveDescendant, clearSearchMessage, clearAllMessage,
         getClearPillLabel, getToggleDropdownLabel, isClient, resetFocusState,
         setInitialFocus, focusCurrentOption, getOptionBackgroundColor,
         getOptionOutline, getOptionOutlineOffset,
+        handleListKeydown, handleListClick, handleListMouseEnter, handleListFocus,
+        navigateDown, navigateUp,
       };
     },
     props: {
@@ -1056,6 +1122,22 @@
 .dropdown-list li[tabindex="0"] {
   outline: 2px solid var(--primary);
   outline-offset: -2px;
+}
+
+/* Enhanced focus visibility for keyboard navigation */
+.dropdown-list li[tabindex="0"]:focus,
+.dropdown-list li[tabindex="0"]:focus-visible {
+  outline: 2px solid var(--primary) !important;
+  outline-offset: -2px !important;
+  background-color: var(--primary-light) !important;
+}
+
+/* Ensure blue highlight is visible when navigating with Tab */
+.dropdown-list li[data-option-type="select-all"][tabindex="0"],
+.dropdown-list li[data-option-type="regular"][tabindex="0"] {
+  outline: 2px solid var(--primary) !important;
+  outline-offset: -2px !important;
+  background-color: var(--primary-light) !important;
 }
 
 @media (prefers-contrast: high) {
