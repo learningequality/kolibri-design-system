@@ -188,6 +188,7 @@
           @keydown="handleListKeydown"
           @click="handleListClick"
           @mouseenter="handleListMouseEnter"
+          @mouseleave="handleListMouseLeave"
           @focus="handleListFocus"
         >
           <!-- Select All Option -->
@@ -206,13 +207,14 @@
               minHeight: '40px',
               borderBottom: `1px solid ${$themeTokens.fineLine}`,
               fontWeight: 'bold',
-              backgroundColor: isSelectAllFocused ? $themeTokens.primary + '20' : 'transparent',
-              outline: isSelectAllFocused ? `2px solid ${$themeTokens.primary}` : 'none',
-              outlineOffset: isSelectAllFocused ? '-2px' : '0',
+              backgroundColor: getSelectAllBackgroundColor(),
+              outline: getSelectAllOutline(),
+              outlineOffset: getSelectAllOutlineOffset(),
             }"
             :tabindex="isSelectAllFocused ? 0 : -1"
             data-option-type="select-all"
             @mousedown.prevent
+            @mouseenter="handleSelectAllMouseEnter"
           >
             <KCheckbox
               presentational
@@ -251,6 +253,7 @@
             :data-option-index="index"
             data-option-type="regular"
             @mousedown.prevent
+            @mouseenter="handleOptionMouseEnter(option)"
           >
             <KCheckbox
               presentational
@@ -338,6 +341,8 @@
       const isClient = ref(false);
       const isInsideComponent = ref(false); // Track if focus is within component
 
+      const isKeyboardNavigating = ref(false);
+
       const instance = getCurrentInstance();
       const uid = instance.proxy._uid;
 
@@ -407,12 +412,13 @@
         );
       });
 
-      // Enhanced styling functions for better visual feedback
+      // FIXED: Enhanced styling functions - only show blue highlight during keyboard navigation
       function getOptionBackgroundColor(option) {
         const isFocused = focusedOption.value?.id === option.id;
         const isSelected = isOptionSelected(option);
 
-        if (isFocused) {
+        // Only show blue highlight if keyboard navigating AND focused
+        if (isFocused && isKeyboardNavigating.value) {
           return isSelected ?
             `${themeTokens().primary}30` : // Lighter blue for focused selected
             `${themeTokens().primary}20`; // Light blue for focused
@@ -422,12 +428,28 @@
 
       function getOptionOutline(option) {
         const isFocused = focusedOption.value?.id === option.id;
-        return isFocused ? `2px solid ${themeTokens().primary}` : 'none';
+        return (isFocused && isKeyboardNavigating.value) ? `2px solid ${themeTokens().primary}` : 'none';
       }
 
       function getOptionOutlineOffset(option) {
         const isFocused = focusedOption.value?.id === option.id;
-        return isFocused ? '-2px' : '0';
+        return (isFocused && isKeyboardNavigating.value) ? '-2px' : '0';
+      }
+
+
+      function getSelectAllBackgroundColor() {
+        if (isSelectAllFocused.value && isKeyboardNavigating.value) {
+          return `${themeTokens().primary}20`; // Light blue for focused
+        }
+        return 'transparent';
+      }
+
+      function getSelectAllOutline() {
+        return (isSelectAllFocused.value && isKeyboardNavigating.value) ? `2px solid ${themeTokens().primary}` : 'none';
+      }
+
+      function getSelectAllOutlineOffset() {
+        return (isSelectAllFocused.value && isKeyboardNavigating.value) ? '-2px' : '0';
       }
 
       // Safe highlighting function that returns text segments
@@ -506,13 +528,19 @@
           if (index < pillButtons.length - 1) {
             pillButtons[index + 1].focus();
           } else {
-            document.querySelector('.clear-all-button').focus();
+            const clearAllButton = document.querySelector('.clear-all-button');
+            if (clearAllButton) {
+              clearAllButton.focus();
+            }
           }
         }
       }
 
       function handleListKeydown(event) {
         const { key, target } = event;
+
+        // Set keyboard navigation flag when using keyboard
+        isKeyboardNavigating.value = true;
 
         const optionType = target.dataset?.optionType;
         const optionId = target.dataset?.optionId;
@@ -534,13 +562,11 @@
           case 'ArrowDown':
             event.preventDefault();
             navigateDown();
-            focusCurrentOption();
             break;
 
           case 'ArrowUp':
             event.preventDefault();
             navigateUp();
-            focusCurrentOption();
             break;
 
           case 'Escape':
@@ -576,8 +602,9 @@
       }
 
       function handleListMouseEnter(event) {
-        const { target } = event;
+        isKeyboardNavigating.value = false;
 
+        const { target } = event;
         const listItem = target.closest('li[role="option"]');
         if (!listItem) return;
 
@@ -592,6 +619,22 @@
             setFocusedOption(option);
           }
         }
+      }
+
+      function handleListMouseLeave() {
+        if (!isKeyboardNavigating.value) {
+          resetFocusState();
+        }
+      }
+
+      function handleOptionMouseEnter(option) {
+        isKeyboardNavigating.value = false;
+        setFocusedOption(option);
+      }
+
+      function handleSelectAllMouseEnter() {
+        isKeyboardNavigating.value = false;
+        setFocusedSelectAll();
       }
 
       function handleListFocus(event) {
@@ -613,22 +656,6 @@
         }
       }
 
-      function focusCurrentOption() {
-        nextTick(() => {
-          if (isSelectAllFocused.value) {
-            const selectAllElement = document.getElementById(`select-all-${uid}`);
-            if (selectAllElement) {
-              selectAllElement.focus();
-            }
-          } else if (focusedOption.value) {
-            const optionElement = document.getElementById(getElementOptionId(focusedOption.value));
-            if (optionElement) {
-              optionElement.focus();
-            }
-          }
-        });
-      }
-
       function handleInput(event) {
         if (autocomplete.value) {
           searchText.value = event.target.value;
@@ -647,6 +674,7 @@
         focusedIndex.value = -1;
         focusedOption.value = null;
         isSelectAllFocused.value = false;
+        isKeyboardNavigating.value = false;
       }
 
       function handleInputFocus() {
@@ -688,6 +716,8 @@
       }
 
       function setInitialFocus() {
+        isKeyboardNavigating.value = true;
+
         if (showSelectAll.value) {
           isSelectAllFocused.value = true;
           focusedIndex.value = -1;
@@ -737,14 +767,12 @@
           selectedOptions.value = uniq([...selectedOptions.value, option.id]);
         }
 
-        // Keep dropdown open and maintain focus - improved focus retention
+        // Keep focus state intact after selection
         nextTick(() => {
+          // Maintain the focused state on the current option
           if (focusedOption.value?.id === option.id) {
-            const optionElement = document.getElementById(getElementOptionId(option));
-            if (optionElement) {
-              // Don't actually focus, just ensure visual state is maintained
-              // This prevents the selection from disappearing
-            }
+            // The focused option styling will automatically update
+            // due to the reactive computed properties
           }
         });
       }
@@ -765,14 +793,10 @@
           sendPoliteMessage('All options selected');
         }
 
-        // Keep dropdown open and maintain focus
+        // Maintain focus state on select all
         nextTick(() => {
-          if (isSelectAllFocused.value) {
-            const selectAllElement = document.getElementById(`select-all-${uid}`);
-            if (selectAllElement) {
-              // Maintain visual focus state
-            }
-          }
+          // The select all styling will automatically update
+          // due to the reactive computed properties
         });
       }
 
@@ -846,16 +870,17 @@
         switch (key) {
           case 'ArrowDown':
             event.preventDefault();
+            isKeyboardNavigating.value = true;
             if (!isDropdownOpen.value) {
               openDropdown();
             } else {
               navigateDown();
-              focusCurrentOption();
             }
             break;
 
           case 'ArrowUp':
             event.preventDefault();
+            isKeyboardNavigating.value = true;
             if (!isDropdownOpen.value) {
               openDropdown();
               // Focus last item when opening with arrow up
@@ -864,39 +889,24 @@
                   focusedIndex.value = displayedOptions.value.length - 1;
                   focusedOption.value = displayedOptions.value[displayedOptions.value.length - 1];
                   isSelectAllFocused.value = false;
-                  focusCurrentOption();
                 }
               });
             } else {
               navigateUp();
-              focusCurrentOption();
             }
             break;
 
           case 'Tab':
             if (isDropdownOpen.value) {
-              // Move focus into dropdown
-              event.preventDefault();
-              nextTick(() => {
-                if (isSelectAllFocused.value) {
-                  const selectAllElement = document.getElementById(`select-all-${uid}`);
-                  if (selectAllElement) {
-                    selectAllElement.focus();
-                  }
-                } else if (focusedOption.value) {
-                  const optionElement =
-                    document.getElementById(getElementOptionId(focusedOption.value));
-                  if (optionElement) {
-                    optionElement.focus();
-                  }
-                }
-              });
+              // Allow natural tab behavior to move focus into dropdown
+              // The tabindex management will handle focus appropriately
             }
             break;
 
           case 'Enter':
           case ' ':
             event.preventDefault();
+            isKeyboardNavigating.value = true;
             if (isDropdownOpen.value) {
               if (isSelectAllFocused.value) {
                 selectAll();
@@ -921,6 +931,8 @@
       }
 
       function navigateDown() {
+        isKeyboardNavigating.value = true;
+
         if (isSelectAllFocused.value) {
           if (displayedOptions.value.length > 0) {
             isSelectAllFocused.value = false;
@@ -941,6 +953,8 @@
       }
 
       function navigateUp() {
+        isKeyboardNavigating.value = true;
+
         if (isSelectAllFocused.value) {
           if (displayedOptions.value.length > 0) {
             isSelectAllFocused.value = false;
@@ -960,7 +974,6 @@
         }
       }
 
-      // Improved click outside handling
       function handleClickOutside(event) {
         if (comboboxContainer.value &&
           !comboboxContainer.value.contains(event.target)) {
@@ -1006,6 +1019,7 @@
         displayedOptions, filteredOptions, allOptionsSelected, someOptionsSelected, showSelectAll,
         comboboxContainer, dropdownContainer, optionRefs, listboxId,
         ariaDescribedById, comboboxAriaLabel, inputStyles, uid,
+        isKeyboardNavigating, // NEW: Export keyboard navigation state
         handleInput, handleInputFocus, handleInputBlur,
         handleInputClick, toggleDropdown, isOptionSelected, toggleOption,
         selectAll, deselectOption, clearAll, clearSearch, setFocusedOption,
@@ -1014,9 +1028,11 @@
         handlePillButtonKeydown, noResultsMessage,
         shouldHighlight, getActiveDescendant, clearSearchMessage, clearAllMessage,
         getClearPillLabel, getToggleDropdownLabel, isClient, resetFocusState,
-        setInitialFocus, focusCurrentOption, getOptionBackgroundColor,
+        setInitialFocus, getOptionBackgroundColor,
         getOptionOutline, getOptionOutlineOffset,
-        handleListKeydown, handleListClick, handleListMouseEnter, handleListFocus,
+        getSelectAllBackgroundColor, getSelectAllOutline, getSelectAllOutlineOffset,
+        handleListKeydown, handleListClick, handleListMouseEnter, handleListMouseLeave,
+        handleListFocus, handleOptionMouseEnter, handleSelectAllMouseEnter,
         navigateDown, navigateUp,
       };
     },
@@ -1107,37 +1123,20 @@
   min-height: 40px !important;
 }
 
-/* Enhanced focus styles for better visual feedback */
-.dropdown-list li:focus {
-  outline: 2px solid var(--primary) !important;
-  outline-offset: -2px !important;
-  background-color: var(--primary-light) !important;
-}
-
+/* Enhanced focus styles - These styles are now handled dynamically in JS */
 .dropdown-list li:hover {
   background-color: var(--hover-background);
 }
 
-/* Ensure consistent focus ring appearance */
-.dropdown-list li[tabindex="0"] {
-  outline: 2px solid var(--primary);
-  outline-offset: -2px;
-}
-
-/* Enhanced focus visibility for keyboard navigation */
-.dropdown-list li[tabindex="0"]:focus,
-.dropdown-list li[tabindex="0"]:focus-visible {
+/* Fallback focus styles for accessibility */
+.dropdown-list li:focus {
   outline: 2px solid var(--primary) !important;
   outline-offset: -2px !important;
-  background-color: var(--primary-light) !important;
 }
 
-/* Ensure blue highlight is visible when navigating with Tab */
-.dropdown-list li[data-option-type="select-all"][tabindex="0"],
-.dropdown-list li[data-option-type="regular"][tabindex="0"] {
+.dropdown-list li:focus-visible {
   outline: 2px solid var(--primary) !important;
   outline-offset: -2px !important;
-  background-color: var(--primary-light) !important;
 }
 
 @media (prefers-contrast: high) {
