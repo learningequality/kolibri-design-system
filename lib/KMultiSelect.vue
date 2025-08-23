@@ -63,6 +63,7 @@
             size="small"
             icon="clear"
             :ariaLabel="getClearPillLabel(option.label)"
+            :title="getClearPillLabel(option.label)"
             @click="deselectOption(option)"
             @keydown="handlePillButtonKeydown($event, option, index)"
           />
@@ -74,6 +75,7 @@
           size="small"
           icon="clear"
           :ariaLabel="clearAllMessage"
+          :title="clearAllMessage"
           class="clear-all-button"
           :style="{ flexShrink: 0 }"
           @click="clearAll"
@@ -128,6 +130,7 @@
             flexShrink: 0,
           }"
           :ariaLabel="clearSearchMessage"
+          :title="clearSearchMessage"
           @click="clearSearch"
         />
 
@@ -144,6 +147,7 @@
             flexShrink: 0,
           }"
           :ariaLabel="getToggleDropdownLabel()"
+          :title="getToggleDropdownLabel()"
           :aria-expanded="isDropdownOpen.toString()"
           @click="toggleDropdown"
           @mousedown.prevent
@@ -680,6 +684,14 @@
       function handleInputFocus() {
         inputFocused.value = true;
         isInsideComponent.value = true;
+
+        const selectedCount = selectedOptions.value.length;
+        if (selectedCount > 0) {
+          const optionText = selectedCount === 1 ? 'option' : 'options';
+          sendPoliteMessage(`Search field focused, ${selectedCount} ${optionText} selected`);
+        } else {
+          sendPoliteMessage('Search field focused');
+        }
       }
 
       // Improved blur handling - less aggressive
@@ -710,9 +722,8 @@
         if (!autocomplete.value) {
           searchText.value = '';
         }
-        nextTick(() => {
-          setInitialFocus();
-        });
+        // FIXED: Don't automatically focus on select all when opening dropdown via click
+        // Only set initial focus during keyboard navigation
       }
 
       function setInitialFocus() {
@@ -763,8 +774,10 @@
           selectedOptions.value = selectedOptions.value.filter(
             id => id !== option.id
           );
+          sendPoliteMessage(`${option.label} deselected`);
         } else {
           selectedOptions.value = uniq([...selectedOptions.value, option.id]);
+          sendPoliteMessage(`${option.label} selected`);
         }
 
         // Keep focus state intact after selection
@@ -816,6 +829,7 @@
       function clearSearch() {
         searchText.value = '';
         instance.proxy.$refs.comboboxInput.focus();
+        sendPoliteMessage('Search cleared');
       }
 
       function setFocusedOption(option) {
@@ -873,6 +887,9 @@
             isKeyboardNavigating.value = true;
             if (!isDropdownOpen.value) {
               openDropdown();
+              nextTick(() => {
+                setInitialFocus();
+              });
             } else {
               navigateDown();
             }
@@ -915,6 +932,9 @@
               }
             } else {
               openDropdown();
+              nextTick(() => {
+                setInitialFocus();
+              });
             }
             break;
 
@@ -925,6 +945,7 @@
             } else if (autocomplete.value && searchText.value) {
               // Only clear search if autocomplete is enabled
               searchText.value = '';
+              sendPoliteMessage('Search cleared');
             }
             break;
         }
