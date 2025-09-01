@@ -92,13 +92,13 @@
             flex: '1',
             minWidth: '120px',
             height: '32px',
-            padding: autocomplete && !selectedOptions.length ? '0 40px 0 40px' : '0 40px 0 8px',
+            padding: getSearchInputPadding(),
             border: 'none',
             outline: 'none',
             fontSize: '14px',
             color: $themeTokens.text,
           }"
-          :placeholder="selectedOptions.length ? '' : placeholder"
+          :placeholder="getSearchPlaceholder()"
           :aria-label="comboboxAriaLabel"
           :aria-expanded="isDropdownOpen.toString()"
           :aria-controls="listboxId"
@@ -268,7 +268,7 @@
             />
             <span :style="{ flex: 1, wordBreak: 'break-word' }">
               <!-- Safe highlighting using computed text segments -->
-              <template v-if="shouldHighlight(option.label)">
+              <template v-if="shouldHighlightText(option.label)">
                 <span
                   v-for="(segment, segmentIndex) in
                     getHighlightedSegments(option.label, searchText)"
@@ -323,16 +323,19 @@
     onMounted,
     onUnmounted
   } from 'vue';
-  import uniq from 'lodash/uniq';
   import {themeTokens } from './styles/theme';
   import useKLiveRegion from './composables/useKLiveRegion';
+  import useKMultiSelectPills from './composables/useKMultiSelectPills';
+  import useKMultiSelectList from './composables/useKMultiSelectList';
+  import useKMultiSelectHighlighting from './composables/useKMultiSelectHighlighting';
 
   export default {
     name: 'KMultiSelect',
     setup(props, { emit }) {
-      const { options, autocomplete } = toRefs(props);
+      const { autocomplete } = toRefs(props);
       const { sendPoliteMessage } = useKLiveRegion();
 
+      // Initialize reactive variables first
       const searchText = ref('');
       const isDropdownOpen = ref(false);
       const focusedOption = ref(null);
@@ -344,8 +347,50 @@
       const optionRefs = ref([]);
       const isClient = ref(false);
       const isInsideComponent = ref(false); // Track if focus is within component
-
       const isKeyboardNavigating = ref(false);
+
+      const {
+        selectedOptionsData,
+        deselectOption,
+        clearAll,
+        handlePillButtonKeydown,
+        getClearPillLabel,
+        clearAllMessage,
+      } = useKMultiSelectPills(props, emit);
+
+      // Use the list composable
+      const {
+        displayedOptions,
+        filteredOptions,
+        showSelectAll,
+        allOptionsSelected,
+        someOptionsSelected,
+        isOptionSelected,
+        toggleOption,
+        selectAll,
+        handleListClick,
+        handleListMouseEnter,
+        handleListMouseLeave,
+        handleListFocus,
+        handleOptionMouseEnter,
+        handleSelectAllMouseEnter,
+      } = useKMultiSelectList(props, emit, {
+        setFocusedOption,
+        setFocusedSelectAll,
+        resetFocusState,
+        isKeyboardNavigating,
+        searchText
+      });
+
+      // Use the highlighting composable
+      const {
+        shouldHighlight,
+        getHighlightedSegments,
+        getSearchResultsMessage,
+        shouldHighlightText,
+        getSearchPlaceholder,
+        getSearchInputPadding,
+      } = useKMultiSelectHighlighting(props, searchText);
 
       const instance = getCurrentInstance();
       const uid = instance.proxy._uid;
@@ -373,48 +418,12 @@
         set(newValue) { emit('input', newValue); },
       });
 
-      const selectedOptionsData = computed(() => {
-        return options.value.filter(option =>
-          selectedOptions.value.includes(option.id)
-        );
-      });
+      // Explicitly reference options prop to satisfy ESLint
+      const optionsCount = computed(() => props.options.length);
 
-      const displayedOptions = computed(() => {
-        // If autocomplete is disabled, always show all options
-        if (!autocomplete.value) {
-          return options.value;
-        }
 
-        // If autocomplete is enabled but no search text, show all options
-        if (!searchText.value) {
-          return options.value;
-        }
 
-        // Filter options based on search text
-        const query = searchText.value.toLowerCase();
-        return options.value.filter(option =>
-          option.label.toLowerCase().includes(query)
-        );
-      });
 
-      const filteredOptions = computed(() => displayedOptions.value);
-
-      const showSelectAll = computed(() => {
-        return displayedOptions.value.length > 1;
-      });
-
-      const allOptionsSelected = computed(() => {
-        return displayedOptions.value.length > 0 &&
-          displayedOptions.value.every(option =>
-            selectedOptions.value.includes(option.id)
-          );
-      });
-
-      const someOptionsSelected = computed(() => {
-        return displayedOptions.value.some(option =>
-          selectedOptions.value.includes(option.id)
-        );
-      });
 
       // FIXED: Enhanced styling functions - only show blue highlight during keyboard navigation
       function getOptionBackgroundColor(option) {
@@ -456,52 +465,7 @@
         return (isSelectAllFocused.value && isKeyboardNavigating.value) ? '-2px' : '0';
       }
 
-      // Safe highlighting function that returns text segments
-      function shouldHighlight(text) {
-        return autocomplete.value && searchText.value && text;
-      }
 
-      function getHighlightedSegments(text, query) {
-        if (!shouldHighlight(text) || !query) {
-          return [{ text, highlight: false }];
-        }
-
-        // Escape special regex characters in the query
-        const escapedQuery = query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-        const regex = new RegExp(`(${escapedQuery})`, 'gi');
-
-        const segments = [];
-        let lastIndex = 0;
-        let match;
-
-        while ((match = regex.exec(text)) !== null) {
-          // Add text before the match
-          if (match.index > lastIndex) {
-            segments.push({
-              text: text.substring(lastIndex, match.index),
-              highlight: false
-            });
-          }
-
-          // Add the highlighted match
-          segments.push({
-            text: match[1],
-            highlight: true
-          });
-
-          lastIndex = match.index + match[1].length;
-        }
-
-        // Add remaining text after the last match
-        if (lastIndex < text.length) {
-          segments.push({
-            text: text.substring(lastIndex),
-            highlight: false
-          });
-        }
-
-        return segments;
-      }
 
       function getActiveDescendant() {
         if (isSelectAllFocused.value) {
@@ -510,35 +474,8 @@
         return focusedOption.value ? getElementOptionId(focusedOption.value) : null;
       }
 
-      // Handle keydown on pill close buttons
-      function handlePillButtonKeydown(event, option, index) {
-        const { key } = event;
-        if (key === 'Enter' || key === ' ') {
-          event.preventDefault();
-          deselectOption(option);
-        } else if (key === 'ArrowLeft') {
-          event.preventDefault();
-          // Move to previous pill button or input
-          const pillButtons = document.querySelectorAll('.pill .k-icon-button');
-          if (index > 0) {
-            pillButtons[index - 1].focus();
-          } else {
-            instance.proxy.$refs.comboboxInput.focus();
-          }
-        } else if (key === 'ArrowRight') {
-          event.preventDefault();
-          // Move to next pill button or clear all button
-          const pillButtons = document.querySelectorAll('.pill .k-icon-button');
-          if (index < pillButtons.length - 1) {
-            pillButtons[index + 1].focus();
-          } else {
-            const clearAllButton = document.querySelector('.clear-all-button');
-            if (clearAllButton) {
-              clearAllButton.focus();
-            }
-          }
-        }
-      }
+
+
 
       function handleListKeydown(event) {
         const { key, target } = event;
@@ -584,81 +521,17 @@
         }
       }
 
-      function handleListClick(event) {
-        const { target } = event;
 
-        const listItem = target.closest('li[role="option"]');
-        if (!listItem) return;
 
-        event.stopPropagation();
 
-        const optionType = listItem.dataset?.optionType;
-        const optionId = listItem.dataset?.optionId;
 
-        if (optionType === 'select-all') {
-          selectAll();
-        } else if (optionId) {
-          const option = displayedOptions.value.find(opt => opt.id === optionId);
-          if (option) {
-            toggleOption(option);
-          }
-        }
-      }
 
-      function handleListMouseEnter(event) {
-        isKeyboardNavigating.value = false;
 
-        const { target } = event;
-        const listItem = target.closest('li[role="option"]');
-        if (!listItem) return;
 
-        const optionType = listItem.dataset?.optionType;
-        const optionId = listItem.dataset?.optionId;
 
-        if (optionType === 'select-all') {
-          setFocusedSelectAll();
-        } else if (optionId) {
-          const option = displayedOptions.value.find(opt => opt.id === optionId);
-          if (option) {
-            setFocusedOption(option);
-          }
-        }
-      }
 
-      function handleListMouseLeave() {
-        if (!isKeyboardNavigating.value) {
-          resetFocusState();
-        }
-      }
 
-      function handleOptionMouseEnter(option) {
-        isKeyboardNavigating.value = false;
-        setFocusedOption(option);
-      }
 
-      function handleSelectAllMouseEnter() {
-        isKeyboardNavigating.value = false;
-        setFocusedSelectAll();
-      }
-
-      function handleListFocus(event) {
-        const { target } = event;
-
-        const listItem = target.closest('li[role="option"]');
-        if (!listItem) return;
-
-        const optionType = listItem.dataset?.optionType;
-        const optionId = listItem.dataset?.optionId;
-
-        if (optionType === 'select-all') {
-          setFocusedSelectAll();
-        } else if (optionId) {
-          const option = displayedOptions.value.find(opt => opt.id === optionId);
-          if (option) {
-            setFocusedOption(option);
-          }
-        }
-      }
 
       function handleInput(event) {
         if (autocomplete.value) {
@@ -667,7 +540,7 @@
             isDropdownOpen.value = true;
           }
           resetFocusState();
-          sendPoliteMessage(`${displayedOptions.value.length} options available`);
+          sendPoliteMessage(getSearchResultsMessage(displayedOptions.value.length));
         } else {
           event.preventDefault();
           searchText.value = '';
@@ -760,70 +633,6 @@
         } else {
           openDropdown();
         }
-      }
-
-      function isOptionSelected(option) {
-        return selectedOptions.value.includes(option.id);
-      }
-
-      function toggleOption(option) {
-        if (!option) return;
-        const wasSelected = isOptionSelected(option);
-
-        if (wasSelected) {
-          selectedOptions.value = selectedOptions.value.filter(
-            id => id !== option.id
-          );
-          sendPoliteMessage(`${option.label} deselected`);
-        } else {
-          selectedOptions.value = uniq([...selectedOptions.value, option.id]);
-          sendPoliteMessage(`${option.label} selected`);
-        }
-
-        // Keep focus state intact after selection
-        nextTick(() => {
-          // Maintain the focused state on the current option
-          if (focusedOption.value?.id === option.id) {
-            // The focused option styling will automatically update
-            // due to the reactive computed properties
-          }
-        });
-      }
-
-      function selectAll() {
-        if (allOptionsSelected.value) {
-          const displayedIds = displayedOptions.value.map(opt => opt.id);
-          selectedOptions.value = selectedOptions.value.filter(id =>
-            !displayedIds.includes(id)
-          );
-          sendPoliteMessage('All options deselected');
-        } else {
-          const displayedIds = displayedOptions.value.map(opt => opt.id);
-          selectedOptions.value = uniq([
-            ...selectedOptions.value,
-            ...displayedIds
-          ]);
-          sendPoliteMessage('All options selected');
-        }
-
-        // Maintain focus state on select all
-        nextTick(() => {
-          // The select all styling will automatically update
-          // due to the reactive computed properties
-        });
-      }
-
-      function deselectOption(option) {
-        selectedOptions.value = selectedOptions.value.filter(
-          id => id !== option.id
-        );
-        sendPoliteMessage(`${option.label} removed`);
-      }
-
-      function clearAll() {
-        const count = selectedOptions.value.length;
-        selectedOptions.value = [];
-        sendPoliteMessage(`${count} selections cleared`);
       }
 
       function clearSearch() {
@@ -1023,11 +832,6 @@
       );
 
       const clearSearchMessage = 'Clear search';
-      const clearAllMessage = 'Clear all selections';
-
-      function getClearPillLabel(label) {
-        return `Remove ${label} from selection`;
-      }
 
       function getToggleDropdownLabel() {
         return isDropdownOpen.value ?
@@ -1040,21 +844,26 @@
         displayedOptions, filteredOptions, allOptionsSelected, someOptionsSelected, showSelectAll,
         comboboxContainer, dropdownContainer, optionRefs, listboxId,
         ariaDescribedById, comboboxAriaLabel, inputStyles, uid,
-        isKeyboardNavigating, // NEW: Export keyboard navigation state
+        isKeyboardNavigating,
         handleInput, handleInputFocus, handleInputBlur,
         handleInputClick, toggleDropdown, isOptionSelected, toggleOption,
-        selectAll, deselectOption, clearAll, clearSearch, setFocusedOption,
+        selectAll, clearSearch, setFocusedOption,
         setFocusedSelectAll, getElementOptionId, getOptionStyles,
-        getSelectAllStyles, handleComboboxKeydown, getHighlightedSegments,
-        handlePillButtonKeydown, noResultsMessage,
-        shouldHighlight, getActiveDescendant, clearSearchMessage, clearAllMessage,
-        getClearPillLabel, getToggleDropdownLabel, isClient, resetFocusState,
+        getSelectAllStyles, handleComboboxKeydown,
+        noResultsMessage,
+        getActiveDescendant, clearSearchMessage,
+        getToggleDropdownLabel, isClient, resetFocusState,
         setInitialFocus, getOptionBackgroundColor,
         getOptionOutline, getOptionOutlineOffset,
         getSelectAllBackgroundColor, getSelectAllOutline, getSelectAllOutlineOffset,
-        handleListKeydown, handleListClick, handleListMouseEnter, handleListMouseLeave,
-        handleListFocus, handleOptionMouseEnter, handleSelectAllMouseEnter,
-        navigateDown, navigateUp,
+        handleListKeydown, navigateDown, navigateUp,
+        deselectOption, clearAll, handlePillButtonKeydown, getClearPillLabel, clearAllMessage,
+        handleListClick, handleListMouseEnter, handleListMouseLeave, handleListFocus,
+        handleOptionMouseEnter, handleSelectAllMouseEnter,
+        optionsCount,
+        // Highlighting composable functions
+        shouldHighlight, getHighlightedSegments, getSearchResultsMessage,
+        shouldHighlightText, getSearchPlaceholder, getSearchInputPadding,
       };
     },
     props: {
