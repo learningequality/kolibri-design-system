@@ -328,6 +328,7 @@
   import useKMultiSelectPills from './composables/useKMultiSelectPills';
   import useKMultiSelectList from './composables/useKMultiSelectList';
   import useKMultiSelectHighlighting from './composables/useKMultiSelectHighlighting';
+  import useKMultiSelectKeyboard from './composables/useKMultiSelectKeyboard';
 
   export default {
     name: 'KMultiSelect',
@@ -353,7 +354,6 @@
         selectedOptionsData,
         deselectOption,
         clearAll,
-        handlePillButtonKeydown,
         getClearPillLabel,
         clearAllMessage,
       } = useKMultiSelectPills(props, emit);
@@ -394,6 +394,33 @@
 
       const instance = getCurrentInstance();
       const uid = instance.proxy._uid;
+
+      // Use the keyboard composable
+      const {
+        navigateDown,
+        navigateUp,
+        setInitialFocus,
+        handleComboboxKeydown,
+        handleListKeydown,
+        handlePillButtonKeydown,
+      } = useKMultiSelectKeyboard(props, emit, {
+        searchText,
+        isDropdownOpen,
+        focusedOption,
+        focusedIndex,
+        isSelectAllFocused,
+        isKeyboardNavigating,
+        displayedOptions,
+        showSelectAll,
+        instance
+      }, {
+        openDropdown,
+        closeDropdown,
+        toggleOption,
+        selectAll,
+        clearSearch,
+        deselectOption
+      });
 
       const listboxId = computed(() =>
         `autocomplete-multiselect-listbox-${uid}`
@@ -477,49 +504,7 @@
 
 
 
-      function handleListKeydown(event) {
-        const { key, target } = event;
 
-        // Set keyboard navigation flag when using keyboard
-        isKeyboardNavigating.value = true;
-
-        const optionType = target.dataset?.optionType;
-        const optionId = target.dataset?.optionId;
-
-        const option = optionType === 'regular' ?
-          displayedOptions.value.find(opt => opt.id === optionId) : null;
-
-        switch (key) {
-          case 'Enter':
-          case ' ':
-            event.preventDefault();
-            if (optionType === 'select-all') {
-              selectAll();
-            } else if (option) {
-              toggleOption(option);
-            }
-            break;
-
-          case 'ArrowDown':
-            event.preventDefault();
-            navigateDown();
-            break;
-
-          case 'ArrowUp':
-            event.preventDefault();
-            navigateUp();
-            break;
-
-          case 'Escape':
-            event.preventDefault();
-            closeDropdown();
-            instance.proxy.$refs.comboboxInput.focus();
-            break;
-
-          case 'Tab':
-            break;
-        }
-      }
 
 
 
@@ -599,19 +584,7 @@
         // Only set initial focus during keyboard navigation
       }
 
-      function setInitialFocus() {
-        isKeyboardNavigating.value = true;
 
-        if (showSelectAll.value) {
-          isSelectAllFocused.value = true;
-          focusedIndex.value = -1;
-          focusedOption.value = null;
-        } else if (displayedOptions.value.length > 0) {
-          focusedIndex.value = 0;
-          focusedOption.value = displayedOptions.value[0];
-          isSelectAllFocused.value = false;
-        }
-      }
 
       function closeDropdown() {
         isDropdownOpen.value = false;
@@ -680,129 +653,9 @@
         };
       }
 
-      function handleComboboxKeydown(event) {
-        const { key } = event;
 
-        // Prevent typing when autocomplete is disabled
-        if (!autocomplete.value && key.length === 1 &&
-          !event.ctrlKey && !event.metaKey && !event.altKey) {
-          event.preventDefault();
-          return;
-        }
 
-        switch (key) {
-          case 'ArrowDown':
-            event.preventDefault();
-            isKeyboardNavigating.value = true;
-            if (!isDropdownOpen.value) {
-              openDropdown();
-              nextTick(() => {
-                setInitialFocus();
-              });
-            } else {
-              navigateDown();
-            }
-            break;
 
-          case 'ArrowUp':
-            event.preventDefault();
-            isKeyboardNavigating.value = true;
-            if (!isDropdownOpen.value) {
-              openDropdown();
-              // Focus last item when opening with arrow up
-              nextTick(() => {
-                if (displayedOptions.value.length > 0) {
-                  focusedIndex.value = displayedOptions.value.length - 1;
-                  focusedOption.value = displayedOptions.value[displayedOptions.value.length - 1];
-                  isSelectAllFocused.value = false;
-                }
-              });
-            } else {
-              navigateUp();
-            }
-            break;
-
-          case 'Tab':
-            if (isDropdownOpen.value) {
-              // Allow natural tab behavior to move focus into dropdown
-              // The tabindex management will handle focus appropriately
-            }
-            break;
-
-          case 'Enter':
-          case ' ':
-            event.preventDefault();
-            isKeyboardNavigating.value = true;
-            if (isDropdownOpen.value) {
-              if (isSelectAllFocused.value) {
-                selectAll();
-              } else if (focusedOption.value) {
-                toggleOption(focusedOption.value);
-              }
-            } else {
-              openDropdown();
-              nextTick(() => {
-                setInitialFocus();
-              });
-            }
-            break;
-
-          case 'Escape':
-            event.preventDefault();
-            if (isDropdownOpen.value) {
-              closeDropdown();
-            } else if (autocomplete.value && searchText.value) {
-              // Only clear search if autocomplete is enabled
-              searchText.value = '';
-              sendPoliteMessage('Search cleared');
-            }
-            break;
-        }
-      }
-
-      function navigateDown() {
-        isKeyboardNavigating.value = true;
-
-        if (isSelectAllFocused.value) {
-          if (displayedOptions.value.length > 0) {
-            isSelectAllFocused.value = false;
-            focusedIndex.value = 0;
-            focusedOption.value = displayedOptions.value[0];
-          }
-        } else if (focusedIndex.value < displayedOptions.value.length - 1) {
-          focusedIndex.value++;
-          focusedOption.value = displayedOptions.value[focusedIndex.value];
-        } else if (showSelectAll.value) {
-          isSelectAllFocused.value = true;
-          focusedIndex.value = -1;
-          focusedOption.value = null;
-        } else if (displayedOptions.value.length > 0) {
-          focusedIndex.value = 0;
-          focusedOption.value = displayedOptions.value[0];
-        }
-      }
-
-      function navigateUp() {
-        isKeyboardNavigating.value = true;
-
-        if (isSelectAllFocused.value) {
-          if (displayedOptions.value.length > 0) {
-            isSelectAllFocused.value = false;
-            focusedIndex.value = displayedOptions.value.length - 1;
-            focusedOption.value = displayedOptions.value[displayedOptions.value.length - 1];
-          }
-        } else if (focusedIndex.value > 0) {
-          focusedIndex.value--;
-          focusedOption.value = displayedOptions.value[focusedIndex.value];
-        } else if (showSelectAll.value) {
-          isSelectAllFocused.value = true;
-          focusedIndex.value = -1;
-          focusedOption.value = null;
-        } else if (displayedOptions.value.length > 0) {
-          focusedIndex.value = displayedOptions.value.length - 1;
-          focusedOption.value = displayedOptions.value[displayedOptions.value.length - 1];
-        }
-      }
 
       function handleClickOutside(event) {
         if (comboboxContainer.value &&
@@ -849,14 +702,13 @@
         handleInputClick, toggleDropdown, isOptionSelected, toggleOption,
         selectAll, clearSearch, setFocusedOption,
         setFocusedSelectAll, getElementOptionId, getOptionStyles,
-        getSelectAllStyles, handleComboboxKeydown,
+        getSelectAllStyles,
         noResultsMessage,
         getActiveDescendant, clearSearchMessage,
         getToggleDropdownLabel, isClient, resetFocusState,
-        setInitialFocus, getOptionBackgroundColor,
+        getOptionBackgroundColor,
         getOptionOutline, getOptionOutlineOffset,
         getSelectAllBackgroundColor, getSelectAllOutline, getSelectAllOutlineOffset,
-        handleListKeydown, navigateDown, navigateUp,
         deselectOption, clearAll, handlePillButtonKeydown, getClearPillLabel, clearAllMessage,
         handleListClick, handleListMouseEnter, handleListMouseLeave, handleListFocus,
         handleOptionMouseEnter, handleSelectAllMouseEnter,
@@ -864,6 +716,8 @@
         // Highlighting composable functions
         shouldHighlight, getHighlightedSegments, getSearchResultsMessage,
         shouldHighlightText, getSearchPlaceholder, getSearchInputPadding,
+        // Keyboard composable functions
+        handleComboboxKeydown, handleListKeydown, navigateDown, navigateUp, setInitialFocus,
       };
     },
     props: {
