@@ -319,7 +319,6 @@
     computed,
     toRefs,
     getCurrentInstance,
-    nextTick,
     onMounted,
     onUnmounted
   } from 'vue';
@@ -329,6 +328,7 @@
   import useKMultiSelectList from './composables/useKMultiSelectList';
   import useKMultiSelectHighlighting from './composables/useKMultiSelectHighlighting';
   import useKMultiSelectKeyboard from './composables/useKMultiSelectKeyboard';
+  import useKMultiSelectDropdown from './composables/useKMultiSelectDropdown';
 
   export default {
     name: 'KMultiSelect',
@@ -395,6 +395,150 @@
       const instance = getCurrentInstance();
       const uid = instance.proxy._uid;
 
+      const listboxId = computed(() =>
+        `autocomplete-multiselect-listbox-${uid}`
+      );
+      const ariaDescribedById = computed(() =>
+        `autocomplete-multiselect-description-${uid}`
+      );
+
+      const comboboxAriaLabel = computed(() => {
+        const baseLabel = autocomplete.value ?
+          props.searchLabel : props.placeholder;
+        const selectedCount = selectedOptions.value.length;
+        if (selectedCount > 0) {
+          const optionText = selectedCount === 1 ? 'option' : 'options';
+          return `${baseLabel}, ${selectedCount} ${optionText} selected`;
+        }
+        return baseLabel;
+      });
+
+      const selectedOptions = computed({
+        get() { return props.value; },
+        set(newValue) { emit('input', newValue); },
+      });
+
+      // Explicitly reference options prop to satisfy ESLint
+      const optionsCount = computed(() => props.options.length);
+
+      // Define required functions before composables
+      function resetFocusState() {
+        focusedIndex.value = -1;
+        focusedOption.value = null;
+        isSelectAllFocused.value = false;
+        isKeyboardNavigating.value = false;
+      }
+
+      function setFocusedOption(option) {
+        focusedOption.value = option;
+        focusedIndex.value = displayedOptions.value.findIndex(
+          opt => opt.id === option.id
+        );
+        isSelectAllFocused.value = false;
+        isInsideComponent.value = true;
+      }
+
+      function setFocusedSelectAll() {
+        isSelectAllFocused.value = true;
+        focusedOption.value = null;
+        focusedIndex.value = -1;
+        isInsideComponent.value = true;
+      }
+
+      function getElementOptionId(option) {
+        if (!option?.id) return null;
+        return `autocomplete-multiselect-option-${uid}-${option.id}`;
+      }
+
+      function getActiveDescendant() {
+        if (isSelectAllFocused.value) {
+          return `select-all-${uid}`;
+        }
+        return focusedOption.value ? getElementOptionId(focusedOption.value) : null;
+      }
+
+      function clearSearch() {
+        searchText.value = '';
+        instance.proxy.$refs.comboboxInput.focus();
+        sendPoliteMessage('Search cleared');
+      }
+
+      function handleInput(event) {
+        if (autocomplete.value) {
+          searchText.value = event.target.value;
+          if (!isDropdownOpen.value) {
+            isDropdownOpen.value = true;
+          }
+          resetFocusState();
+          sendPoliteMessage(getSearchResultsMessage(displayedOptions.value.length));
+        } else {
+          event.preventDefault();
+          searchText.value = '';
+        }
+      }
+
+      function handleInputFocus() {
+        inputFocused.value = true;
+        isInsideComponent.value = true;
+
+        const selectedCount = selectedOptions.value.length;
+        if (selectedCount > 0) {
+          const optionText = selectedCount === 1 ? 'option' : 'options';
+          sendPoliteMessage(`Search field focused, ${selectedCount} ${optionText} selected`);
+        } else {
+          sendPoliteMessage('Search field focused');
+        }
+      }
+
+      function handleInputBlur() {
+        inputFocused.value = false;
+
+        // Only close dropdown if focus is moving completely outside the component
+        setTimeout(() => {
+          const activeElement = document.activeElement;
+          const isStillInComponent = comboboxContainer.value &&
+            comboboxContainer.value.contains(activeElement);
+
+          if (!isStillInComponent) {
+            isInsideComponent.value = false;
+            closeDropdown();
+          }
+        }, 50); // Reduced timeout for better responsiveness
+      }
+
+      function handleInputClick() {
+        if (!isDropdownOpen.value) {
+          openDropdown();
+        }
+      }
+
+      // Use the dropdown composable
+      const {
+        openDropdown,
+        closeDropdown,
+        toggleDropdown,
+        handleClickOutside,
+        getDropdownStyles,
+        getDropdownContainerStyles,
+        getInputWrapperStyles,
+        isDropdownVisible,
+        getToggleDropdownLabel,
+        getToggleDropdownIcon,
+        getDropdownAriaAttributes,
+        getDropdownListAriaAttributes,
+      } = useKMultiSelectDropdown(props, emit, {
+        isDropdownOpen,
+        searchText,
+        instance,
+        comboboxContainer,
+        isInsideComponent,
+        listboxId,
+        ariaDescribedById,
+        getActiveDescendant
+      }, {
+        resetFocusState
+      });
+
       // Use the keyboard composable
       const {
         navigateDown,
@@ -421,32 +565,6 @@
         clearSearch,
         deselectOption
       });
-
-      const listboxId = computed(() =>
-        `autocomplete-multiselect-listbox-${uid}`
-      );
-      const ariaDescribedById = computed(() =>
-        `autocomplete-multiselect-description-${uid}`
-      );
-
-      const comboboxAriaLabel = computed(() => {
-        const baseLabel = autocomplete.value ?
-          props.searchLabel : props.placeholder;
-        const selectedCount = selectedOptions.value.length;
-        if (selectedCount > 0) {
-          const optionText = selectedCount === 1 ? 'option' : 'options';
-          return `${baseLabel}, ${selectedCount} ${optionText} selected`;
-        }
-        return baseLabel;
-      });
-
-      const selectedOptions = computed({
-        get() { return props.value; },
-        set(newValue) { emit('input', newValue); },
-      });
-
-      // Explicitly reference options prop to satisfy ESLint
-      const optionsCount = computed(() => props.options.length);
 
 
 
@@ -494,147 +612,6 @@
 
 
 
-      function getActiveDescendant() {
-        if (isSelectAllFocused.value) {
-          return `select-all-${uid}`;
-        }
-        return focusedOption.value ? getElementOptionId(focusedOption.value) : null;
-      }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-      function handleInput(event) {
-        if (autocomplete.value) {
-          searchText.value = event.target.value;
-          if (!isDropdownOpen.value) {
-            isDropdownOpen.value = true;
-          }
-          resetFocusState();
-          sendPoliteMessage(getSearchResultsMessage(displayedOptions.value.length));
-        } else {
-          event.preventDefault();
-          searchText.value = '';
-        }
-      }
-
-      function resetFocusState() {
-        focusedIndex.value = -1;
-        focusedOption.value = null;
-        isSelectAllFocused.value = false;
-        isKeyboardNavigating.value = false;
-      }
-
-      function handleInputFocus() {
-        inputFocused.value = true;
-        isInsideComponent.value = true;
-
-        const selectedCount = selectedOptions.value.length;
-        if (selectedCount > 0) {
-          const optionText = selectedCount === 1 ? 'option' : 'options';
-          sendPoliteMessage(`Search field focused, ${selectedCount} ${optionText} selected`);
-        } else {
-          sendPoliteMessage('Search field focused');
-        }
-      }
-
-      // Improved blur handling - less aggressive
-      function handleInputBlur() {
-        inputFocused.value = false;
-
-        // Only close dropdown if focus is moving completely outside the component
-        setTimeout(() => {
-          const activeElement = document.activeElement;
-          const isStillInComponent = comboboxContainer.value &&
-            comboboxContainer.value.contains(activeElement);
-
-          if (!isStillInComponent) {
-            isInsideComponent.value = false;
-            closeDropdown();
-          }
-        }, 50); // Reduced timeout for better responsiveness
-      }
-
-      function handleInputClick() {
-        if (!isDropdownOpen.value) {
-          openDropdown();
-        }
-      }
-
-      function openDropdown() {
-        isDropdownOpen.value = true;
-        if (!autocomplete.value) {
-          searchText.value = '';
-        }
-        // FIXED: Don't automatically focus on select all when opening dropdown via click
-        // Only set initial focus during keyboard navigation
-      }
-
-
-
-      function closeDropdown() {
-        isDropdownOpen.value = false;
-        resetFocusState();
-        // Clear search text when autocomplete is disabled
-        if (!autocomplete.value) {
-          searchText.value = '';
-        }
-      }
-
-      // Improved toggle dropdown function
-      function toggleDropdown() {
-        if (isDropdownOpen.value) {
-          closeDropdown();
-          // Return focus to input after closing
-          nextTick(() => {
-            instance.proxy.$refs.comboboxInput.focus();
-          });
-        } else {
-          openDropdown();
-        }
-      }
-
-      function clearSearch() {
-        searchText.value = '';
-        instance.proxy.$refs.comboboxInput.focus();
-        sendPoliteMessage('Search cleared');
-      }
-
-      function setFocusedOption(option) {
-        focusedOption.value = option;
-        focusedIndex.value = displayedOptions.value.findIndex(
-          opt => opt.id === option.id
-        );
-        isSelectAllFocused.value = false;
-        isInsideComponent.value = true;
-      }
-
-      function setFocusedSelectAll() {
-        isSelectAllFocused.value = true;
-        focusedOption.value = null;
-        focusedIndex.value = -1;
-        isInsideComponent.value = true;
-      }
-
-      function getElementOptionId(option) {
-        if (!option?.id) return null;
-        return `autocomplete-multiselect-option-${uid}-${option.id}`;
-      }
-
       function getOptionStyles(option) {
         const isSelected = isOptionSelected(option);
 
@@ -657,13 +634,7 @@
 
 
 
-      function handleClickOutside(event) {
-        if (comboboxContainer.value &&
-          !comboboxContainer.value.contains(event.target)) {
-          isInsideComponent.value = false;
-          closeDropdown();
-        }
-      }
+
 
       onMounted(() => {
         isClient.value = true;
@@ -686,10 +657,7 @@
 
       const clearSearchMessage = 'Clear search';
 
-      function getToggleDropdownLabel() {
-        return isDropdownOpen.value ?
-          'Close options list' : 'Open options list';
-      }
+
 
       return {
         searchText, isDropdownOpen, focusedOption, focusedIndex,
@@ -705,7 +673,7 @@
         getSelectAllStyles,
         noResultsMessage,
         getActiveDescendant, clearSearchMessage,
-        getToggleDropdownLabel, isClient, resetFocusState,
+        isClient, resetFocusState,
         getOptionBackgroundColor,
         getOptionOutline, getOptionOutlineOffset,
         getSelectAllBackgroundColor, getSelectAllOutline, getSelectAllOutlineOffset,
@@ -718,6 +686,11 @@
         shouldHighlightText, getSearchPlaceholder, getSearchInputPadding,
         // Keyboard composable functions
         handleComboboxKeydown, handleListKeydown, navigateDown, navigateUp, setInitialFocus,
+        // Dropdown composable functions
+        openDropdown, closeDropdown,handleClickOutside,
+        getDropdownStyles, getDropdownContainerStyles, getInputWrapperStyles,
+        isDropdownVisible, getToggleDropdownLabel, getToggleDropdownIcon,
+        getDropdownAriaAttributes, getDropdownListAriaAttributes,
       };
     },
     props: {
