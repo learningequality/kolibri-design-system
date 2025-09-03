@@ -107,7 +107,7 @@
         default: false,
       },
       /**
-       * If provided, sets the styles of the toolbar
+       * If provided, sets the styles of the tooltip
        */
       appearanceOverrides: {
         type: Object,

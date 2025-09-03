@@ -89,6 +89,7 @@
         reference="maxWidthButton"
         :refs="$refs"
         maxWidth="200px"
+        :appearanceOverrides="{ zIndex: 100 }"
       >
         This tooltip has a max width of 200px
       </KTooltip>
@@ -104,6 +105,27 @@
         <button ref="maxWidthButton">Learn More</button>
       </DocsShowCode>
       <p>The <code>maxWidth</code> prop can be used to limit the tooltip width.</p>
+
+      <h3>Appearance Overrides</h3>
+      <KTooltip
+        reference="appearanceButton"
+        :refs="$refs"
+        :appearanceOverrides="{ backgroundColor: 'red', zIndex: 100 }"
+      >
+        This tooltip has a red background
+      </KTooltip>
+      <button ref="appearanceButton">Learn More</button>
+      <DocsShowCode language="html">
+        <KTooltip
+          reference="appearanceButton"
+          :refs="$refs"
+          :appearanceOverrides="{ backgroundColor: 'red' }"
+        >
+          This tooltip has a red background
+        </KTooltip>
+        <button ref="appearanceButton">Learn More</button>
+      </DocsShowCode>
+      <p>The <code>appearanceOverrides</code> prop can be used to override the appearance of the tooltip.</p>
     </DocsPageSection>
   </DocsPageTemplate>
 
