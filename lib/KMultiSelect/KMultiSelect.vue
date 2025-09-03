@@ -322,7 +322,7 @@
     onMounted,
     onUnmounted
   } from 'vue';
-  import {themeTokens } from './styles/theme';
+  import {themeTokens } from '../styles/theme';
 
   import useKMultiSelectPills from './composables/useKMultiSelectPills';
   import useKMultiSelectList from './composables/useKMultiSelectList';
