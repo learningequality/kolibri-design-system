@@ -347,10 +347,9 @@
       const dropdownContainer = ref(null);
       const optionRefs = ref([]);
       const isClient = ref(false);
-      const isInsideComponent = ref(false); // Track if focus is within component
+      const isInsideComponent = ref(false);
       const isKeyboardNavigating = ref(false);
 
-      // Define required functions BEFORE composables
       function resetFocusState() {
         focusedIndex.value = -1;
         focusedOption.value = null;
@@ -364,7 +363,6 @@
         isInsideComponent.value = true;
       }
 
-      // Function to update focused index after displayedOptions is available
       function updateFocusedIndex() {
         if (focusedOption.value && displayedOptions && displayedOptions.value) {
           focusedIndex.value = displayedOptions.value.findIndex(
@@ -380,7 +378,6 @@
         isInsideComponent.value = true;
       }
 
-      // Use the list composable
       const {
         displayedOptions,
         filteredOptions,
@@ -404,7 +401,6 @@
         searchText
       });
 
-      // Use the highlighting composable
       const {
         shouldHighlight,
         getHighlightedSegments,
@@ -424,8 +420,6 @@
         `autocomplete-multiselect-description-${uid}`
       );
 
-
-
       const selectedOptions = computed({
         get() { return props.value; },
         set(newValue) { emit('input', newValue); },
@@ -433,8 +427,6 @@
       const optionsCount = computed(() => props.options.length);
       const placeholderText = computed(() => props.placeholder);
       const searchLabelText = computed(() => props.searchLabel);
-
-
 
       function getElementOptionId(option) {
         if (!option?.id) return null;
@@ -477,7 +469,6 @@
       function handleInputBlur() {
         inputFocused.value = false;
 
-        // Only close dropdown if focus is moving completely outside the component
         setTimeout(() => {
           const activeElement = document.activeElement;
           const isStillInComponent = comboboxContainer.value &&
@@ -487,7 +478,7 @@
             isInsideComponent.value = false;
             closeDropdown();
           }
-        }, 50); // Reduced timeout for better responsiveness
+        }, 50);
       }
 
       function handleInputClick() {
@@ -496,7 +487,6 @@
         }
       }
 
-      // Use the dropdown composable
       const {
         openDropdown,
         closeDropdown,
@@ -523,7 +513,6 @@
         resetFocusState
       });
 
-      // Use the accessibility composable FIRST (for messaging functions)
       const {
         comboboxAriaLabel,
         comboboxAriaAttributes,
@@ -568,7 +557,6 @@
         instance
       });
 
-      // Use the pills composable SECOND (needs accessibility messaging)
       const {
         selectedOptionsData,
         deselectOption,
@@ -580,7 +568,6 @@
         announceAllCleared
       });
 
-      // Use the keyboard composable THIRD (needs deselectOption from pills)
       const {
         navigateDown,
         navigateUp,
@@ -607,23 +594,15 @@
         deselectOption
       });
 
-
-
-
-
-
-
-      // FIXED: Enhanced styling functions - only show blue highlight during keyboard navigation
       function getOptionBackgroundColor(option) {
         const isFocused = focusedOption.value?.id === option.id;
         const isSelected = isOptionSelected(option);
 
-        // Only show blue highlight if keyboard navigating AND focused
         if (isFocused && isKeyboardNavigating.value) {
           try {
             return isSelected ?
-              `${themeTokens().primary}30` : // Lighter blue for focused selected
-              `${themeTokens().primary}20`; // Light blue for focused
+              `${themeTokens().primary}30` :
+              `${themeTokens().primary}20`;
           } catch (error) {
             return isSelected ? 'rgba(0, 0, 255, 0.3)' : 'rgba(0, 0, 255, 0.2)';
           }
@@ -668,11 +647,8 @@
         return (isSelectAllFocused.value && isKeyboardNavigating.value) ? '-2px' : '0';
       }
 
-
-
       function getOptionStyles(option) {
         const isSelected = isOptionSelected(option);
-
         try {
           return {
             ':hover': { backgroundColor: `${themeTokens().primary}15` },
@@ -682,7 +658,6 @@
             ...(isSelected ? { fontWeight: 'bold' } : {})
           };
         } catch (error) {
-          // Fallback if themeTokens is not available
           return {
             ':hover': { backgroundColor: 'rgba(0, 0, 0, 0.1)' },
             ':not(:last-child)': {
@@ -699,18 +674,11 @@
             ':hover': { backgroundColor: `${themeTokens().primary}15` },
           };
         } catch (error) {
-          // Fallback if themeTokens is not available
           return {
             ':hover': { backgroundColor: 'rgba(0, 0, 0, 0.1)' },
           };
         }
       }
-
-
-
-
-
-
 
       onMounted(() => {
         isClient.value = true;
@@ -741,8 +709,6 @@
 
       const clearSearchMessage = 'Clear search';
 
-
-
       return {
         searchText, isDropdownOpen, focusedOption, focusedIndex,
         isSelectAllFocused, inputFocused, selectedOptions, selectedOptionsData,
@@ -767,17 +733,13 @@
         optionsCount,
         placeholderText,
         searchLabelText,
-        // Highlighting composable functions
         shouldHighlight, getHighlightedSegments, getSearchResultsMessage,
         shouldHighlightText, getSearchPlaceholder, getSearchInputPadding,
-        // Keyboard composable functions
         handleComboboxKeydown, handleListKeydown, navigateDown, navigateUp, setInitialFocus,
-        // Dropdown composable functions
         openDropdown, closeDropdown,handleClickOutside,
         getDropdownStyles, getDropdownContainerStyles, getInputWrapperStyles,
         isDropdownVisible, getToggleDropdownLabel, getToggleDropdownIcon,
         getDropdownAriaAttributes, getDropdownListAriaAttributes,
-        // Accessibility composable functions
         comboboxAriaLabel,
         comboboxAriaAttributes,
         listboxAriaAttributes,
@@ -849,7 +811,6 @@
   outline-offset: -2px;
 }
 
-/* Additional readonly input styling */
 .combobox-input[readonly] {
   cursor: pointer;
   background-color: transparent;
@@ -888,12 +849,10 @@
   min-height: 40px !important;
 }
 
-/* Enhanced focus styles - These styles are now handled dynamically in JS */
 .dropdown-list li:hover {
   background-color: var(--hover-background);
 }
 
-/* Fallback focus styles for accessibility */
 .dropdown-list li:focus {
   outline: 2px solid var(--primary) !important;
   outline-offset: -2px !important;
