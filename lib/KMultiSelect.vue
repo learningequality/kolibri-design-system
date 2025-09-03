@@ -323,18 +323,18 @@
     onUnmounted
   } from 'vue';
   import {themeTokens } from './styles/theme';
-  import useKLiveRegion from './composables/useKLiveRegion';
+
   import useKMultiSelectPills from './composables/useKMultiSelectPills';
   import useKMultiSelectList from './composables/useKMultiSelectList';
   import useKMultiSelectHighlighting from './composables/useKMultiSelectHighlighting';
   import useKMultiSelectKeyboard from './composables/useKMultiSelectKeyboard';
   import useKMultiSelectDropdown from './composables/useKMultiSelectDropdown';
+  import useKMultiSelectAccessibility from './composables/useKMultiSelectAccessibility';
 
   export default {
     name: 'KMultiSelect',
     setup(props, { emit }) {
       const { autocomplete } = toRefs(props);
-      const { sendPoliteMessage } = useKLiveRegion();
 
       // Initialize reactive variables first
       const searchText = ref('');
@@ -350,13 +350,35 @@
       const isInsideComponent = ref(false); // Track if focus is within component
       const isKeyboardNavigating = ref(false);
 
-      const {
-        selectedOptionsData,
-        deselectOption,
-        clearAll,
-        getClearPillLabel,
-        clearAllMessage,
-      } = useKMultiSelectPills(props, emit);
+      // Define required functions BEFORE composables
+      function resetFocusState() {
+        focusedIndex.value = -1;
+        focusedOption.value = null;
+        isSelectAllFocused.value = false;
+        isKeyboardNavigating.value = false;
+      }
+
+      function setFocusedOption(option) {
+        focusedOption.value = option;
+        isSelectAllFocused.value = false;
+        isInsideComponent.value = true;
+      }
+
+      // Function to update focused index after displayedOptions is available
+      function updateFocusedIndex() {
+        if (focusedOption.value && displayedOptions && displayedOptions.value) {
+          focusedIndex.value = displayedOptions.value.findIndex(
+            opt => opt.id === focusedOption.value.id
+          );
+        }
+      }
+
+      function setFocusedSelectAll() {
+        isSelectAllFocused.value = true;
+        focusedOption.value = null;
+        focusedIndex.value = -1;
+        isInsideComponent.value = true;
+      }
 
       // Use the list composable
       const {
@@ -402,48 +424,17 @@
         `autocomplete-multiselect-description-${uid}`
       );
 
-      const comboboxAriaLabel = computed(() => {
-        const baseLabel = autocomplete.value ?
-          props.searchLabel : props.placeholder;
-        const selectedCount = selectedOptions.value.length;
-        if (selectedCount > 0) {
-          const optionText = selectedCount === 1 ? 'option' : 'options';
-          return `${baseLabel}, ${selectedCount} ${optionText} selected`;
-        }
-        return baseLabel;
-      });
+
 
       const selectedOptions = computed({
         get() { return props.value; },
         set(newValue) { emit('input', newValue); },
       });
-
-      // Explicitly reference options prop to satisfy ESLint
       const optionsCount = computed(() => props.options.length);
+      const placeholderText = computed(() => props.placeholder);
+      const searchLabelText = computed(() => props.searchLabel);
 
-      // Define required functions before composables
-      function resetFocusState() {
-        focusedIndex.value = -1;
-        focusedOption.value = null;
-        isSelectAllFocused.value = false;
-        isKeyboardNavigating.value = false;
-      }
 
-      function setFocusedOption(option) {
-        focusedOption.value = option;
-        focusedIndex.value = displayedOptions.value.findIndex(
-          opt => opt.id === option.id
-        );
-        isSelectAllFocused.value = false;
-        isInsideComponent.value = true;
-      }
-
-      function setFocusedSelectAll() {
-        isSelectAllFocused.value = true;
-        focusedOption.value = null;
-        focusedIndex.value = -1;
-        isInsideComponent.value = true;
-      }
 
       function getElementOptionId(option) {
         if (!option?.id) return null;
@@ -460,7 +451,7 @@
       function clearSearch() {
         searchText.value = '';
         instance.proxy.$refs.comboboxInput.focus();
-        sendPoliteMessage('Search cleared');
+        announceSearchCleared();
       }
 
       function handleInput(event) {
@@ -470,7 +461,7 @@
             isDropdownOpen.value = true;
           }
           resetFocusState();
-          sendPoliteMessage(getSearchResultsMessage(displayedOptions.value.length));
+          announceSearchResults(displayedOptions.value.length);
         } else {
           event.preventDefault();
           searchText.value = '';
@@ -480,14 +471,7 @@
       function handleInputFocus() {
         inputFocused.value = true;
         isInsideComponent.value = true;
-
-        const selectedCount = selectedOptions.value.length;
-        if (selectedCount > 0) {
-          const optionText = selectedCount === 1 ? 'option' : 'options';
-          sendPoliteMessage(`Search field focused, ${selectedCount} ${optionText} selected`);
-        } else {
-          sendPoliteMessage('Search field focused');
-        }
+        announceInputFocus();
       }
 
       function handleInputBlur() {
@@ -539,7 +523,64 @@
         resetFocusState
       });
 
-      // Use the keyboard composable
+      // Use the accessibility composable FIRST (for messaging functions)
+      const {
+        comboboxAriaLabel,
+        comboboxAriaAttributes,
+        listboxAriaAttributes,
+        optionAriaAttributes,
+        selectAllAriaAttributes,
+        announceOptionSelection,
+        announceSelectAll,
+        announceSearchResults,
+        announceSearchCleared,
+        announceInputFocus,
+        announceOptionRemoval,
+        announceAllCleared,
+        announceDropdownToggle,
+        announceCurrentFocus,
+        announceOptionCount,
+        focusFirstOption,
+        focusLastOption,
+        focusSelectAll,
+        focusInput,
+        getNextFocusableElement,
+        validateAccessibility,
+      } = useKMultiSelectAccessibility(props, emit, {
+        searchText,
+        isDropdownOpen,
+        focusedOption,
+        focusedIndex,
+        isSelectAllFocused,
+        selectedOptions,
+        displayedOptions,
+        showSelectAll,
+        listboxId,
+        ariaDescribedById,
+        uid
+      }, {
+        getActiveDescendant,
+        getElementOptionId,
+        isOptionSelected: isOptionSelected,
+        allOptionsSelected: allOptionsSelected,
+        setFocusedOption,
+        setFocusedSelectAll,
+        instance
+      });
+
+      // Use the pills composable SECOND (needs accessibility messaging)
+      const {
+        selectedOptionsData,
+        deselectOption,
+        clearAll,
+        getClearPillLabel,
+        clearAllMessage,
+      } = useKMultiSelectPills(props, emit, {
+        announceOptionRemoval,
+        announceAllCleared
+      });
+
+      // Use the keyboard composable THIRD (needs deselectOption from pills)
       const {
         navigateDown,
         navigateUp,
@@ -570,6 +611,8 @@
 
 
 
+
+
       // FIXED: Enhanced styling functions - only show blue highlight during keyboard navigation
       function getOptionBackgroundColor(option) {
         const isFocused = focusedOption.value?.id === option.id;
@@ -577,16 +620,27 @@
 
         // Only show blue highlight if keyboard navigating AND focused
         if (isFocused && isKeyboardNavigating.value) {
-          return isSelected ?
-            `${themeTokens().primary}30` : // Lighter blue for focused selected
-            `${themeTokens().primary}20`; // Light blue for focused
+          try {
+            return isSelected ?
+              `${themeTokens().primary}30` : // Lighter blue for focused selected
+              `${themeTokens().primary}20`; // Light blue for focused
+          } catch (error) {
+            return isSelected ? 'rgba(0, 0, 255, 0.3)' : 'rgba(0, 0, 255, 0.2)';
+          }
         }
         return 'transparent';
       }
 
       function getOptionOutline(option) {
         const isFocused = focusedOption.value?.id === option.id;
-        return (isFocused && isKeyboardNavigating.value) ? `2px solid ${themeTokens().primary}` : 'none';
+        if (isFocused && isKeyboardNavigating.value) {
+          try {
+            return `2px solid ${themeTokens().primary}`;
+          } catch (error) {
+            return '2px solid #0000ff';
+          }
+        }
+        return 'none';
       }
 
       function getOptionOutlineOffset(option) {
@@ -597,7 +651,11 @@
 
       function getSelectAllBackgroundColor() {
         if (isSelectAllFocused.value && isKeyboardNavigating.value) {
-          return `${themeTokens().primary}20`; // Light blue for focused
+          try {
+            return `${themeTokens().primary}20`; // Light blue for focused
+          } catch (error) {
+            return 'rgba(0, 0, 255, 0.2)';
+          }
         }
         return 'transparent';
       }
@@ -615,19 +673,37 @@
       function getOptionStyles(option) {
         const isSelected = isOptionSelected(option);
 
-        return {
-          ':hover': { backgroundColor: `${themeTokens().primary}15` },
-          ':not(:last-child)': {
-            borderBottom: `1px solid ${themeTokens().fineLine}`
-          },
-          ...(isSelected ? { fontWeight: 'bold' } : {})
-        };
+        try {
+          return {
+            ':hover': { backgroundColor: `${themeTokens().primary}15` },
+            ':not(:last-child)': {
+              borderBottom: `1px solid ${themeTokens().fineLine}`
+            },
+            ...(isSelected ? { fontWeight: 'bold' } : {})
+          };
+        } catch (error) {
+          // Fallback if themeTokens is not available
+          return {
+            ':hover': { backgroundColor: 'rgba(0, 0, 0, 0.1)' },
+            ':not(:last-child)': {
+              borderBottom: '1px solid #e0e0e0'
+            },
+            ...(isSelected ? { fontWeight: 'bold' } : {})
+          };
+        }
       }
 
       function getSelectAllStyles() {
-        return {
-          ':hover': { backgroundColor: `${themeTokens().primary}15` },
-        };
+        try {
+          return {
+            ':hover': { backgroundColor: `${themeTokens().primary}15` },
+          };
+        } catch (error) {
+          // Fallback if themeTokens is not available
+          return {
+            ':hover': { backgroundColor: 'rgba(0, 0, 0, 0.1)' },
+          };
+        }
       }
 
 
@@ -647,9 +723,17 @@
         }
       });
 
-      const inputStyles = computed(() => ({
-        '::placeholder': { color: themeTokens().annotation }
-      }));
+      const inputStyles = computed(() => {
+        try {
+          return {
+            '::placeholder': { color: themeTokens().annotation }
+          };
+        } catch (error) {
+          return {
+            '::placeholder': { color: '#666666' }
+          };
+        }
+      });
 
       const noResultsMessage = computed(() =>
         autocomplete.value ? 'No results found' : 'No options available'
@@ -664,12 +748,12 @@
         isSelectAllFocused, inputFocused, selectedOptions, selectedOptionsData,
         displayedOptions, filteredOptions, allOptionsSelected, someOptionsSelected, showSelectAll,
         comboboxContainer, dropdownContainer, optionRefs, listboxId,
-        ariaDescribedById, comboboxAriaLabel, inputStyles, uid,
+        ariaDescribedById, inputStyles, uid,
         isKeyboardNavigating,
         handleInput, handleInputFocus, handleInputBlur,
         handleInputClick, toggleDropdown, isOptionSelected, toggleOption,
-        selectAll, clearSearch, setFocusedOption,
-        setFocusedSelectAll, getElementOptionId, getOptionStyles,
+        selectAll, clearSearch,         setFocusedOption,
+        setFocusedSelectAll, updateFocusedIndex, getElementOptionId, getOptionStyles,
         getSelectAllStyles,
         noResultsMessage,
         getActiveDescendant, clearSearchMessage,
@@ -681,6 +765,8 @@
         handleListClick, handleListMouseEnter, handleListMouseLeave, handleListFocus,
         handleOptionMouseEnter, handleSelectAllMouseEnter,
         optionsCount,
+        placeholderText,
+        searchLabelText,
         // Highlighting composable functions
         shouldHighlight, getHighlightedSegments, getSearchResultsMessage,
         shouldHighlightText, getSearchPlaceholder, getSearchInputPadding,
@@ -691,6 +777,28 @@
         getDropdownStyles, getDropdownContainerStyles, getInputWrapperStyles,
         isDropdownVisible, getToggleDropdownLabel, getToggleDropdownIcon,
         getDropdownAriaAttributes, getDropdownListAriaAttributes,
+        // Accessibility composable functions
+        comboboxAriaLabel,
+        comboboxAriaAttributes,
+        listboxAriaAttributes,
+        optionAriaAttributes,
+        selectAllAriaAttributes,
+        announceOptionSelection,
+        announceSelectAll,
+        announceSearchResults,
+        announceSearchCleared,
+        announceInputFocus,
+        announceOptionRemoval,
+        announceAllCleared,
+        announceDropdownToggle,
+        announceCurrentFocus,
+        announceOptionCount,
+        focusFirstOption,
+        focusLastOption,
+        focusSelectAll,
+        focusInput,
+        getNextFocusableElement,
+        validateAccessibility,
       };
     },
     props: {
