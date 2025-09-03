@@ -16,6 +16,7 @@
         backgroundColor: $themeTokens.text,
         color: $themeTokens.textInverted,
         maxWidth: maxWidth ? maxWidth : 'calc(100vw - 10px)',
+        ...appearanceOverrides,
       }"
     >
       <!-- If text prop is provided, display the text -->
@@ -104,6 +105,13 @@
       appendToOverlay: {
         type: Boolean,
         default: false,
+      },
+      /**
+       * If provided, sets the styles of the toolbar
+       */
+      appearanceOverrides: {
+        type: Object,
+        default: () => ({}),
       },
     },
     data() {
