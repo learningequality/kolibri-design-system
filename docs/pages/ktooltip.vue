@@ -125,7 +125,10 @@
         </KTooltip>
         <button ref="appearanceButton">Learn More</button>
       </DocsShowCode>
-      <p>The <code>appearanceOverrides</code> prop can be used to override the appearance of the tooltip.</p>
+      <p>
+        The <code>appearanceOverrides</code> prop can be used to override the appearance of the
+        tooltip.
+      </p>
     </DocsPageSection>
   </DocsPageTemplate>
 
