@@ -20,6 +20,7 @@ import KIconVisualTest from '~~/lib/KIcon/__tests__/components/KIconVisualTest.v
 import KTextboxVisualTest from '~~/lib/KTextbox/__tests__/components/KTextboxVisualTest.vue';
 import KTableVisualTest from '~~/lib/KTable/__tests__/components/KTableVisualTest.vue';
 import CardsVisualTest from '~~/lib/cards/__tests__/components/CardsVisualTest.vue';
+import KLogoVisualTest from '~~/lib/KLogo/__tests__/components/KLogoVisualTest.vue';
 
 // Visual tests helper components
 Vue.component('VisualTestExample', VisualTestExample);
@@ -44,3 +45,4 @@ Vue.component('KTextboxVisualTest', KTextboxVisualTest);
 Vue.component('KTableVisualTest', KTableVisualTest);
 Vue.component('CardsVisualTest', CardsVisualTest);
 Vue.component('KBreadcrumbs', KBreadcrumbs);
+Vue.component('KLogoVisualTest', KLogoVisualTest);
