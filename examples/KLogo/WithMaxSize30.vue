@@ -1,4 +1,5 @@
 <template>
+
   <KLogo
     altText="Kolibri logo with rectangular background and maxSize 30"
     :size="35"
@@ -6,4 +7,5 @@
     :showBackground="true"
     backgroundStyle="rect"
   />
+
 </template>
