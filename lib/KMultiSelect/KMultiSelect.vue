@@ -11,148 +11,38 @@
         borderRadius: '4px',
       }"
     >
-      <div
-        class="input-wrapper"
-        :style="{
-          position: 'relative',
-          display: 'flex',
-          alignItems: 'center',
-          flexWrap: 'wrap',
-          minHeight: '40px',
-          padding: '4px',
-          gap: '4px'
-        }"
-      >
-        <!-- Search Icon -->
-        <KIcon
-          v-if="autocomplete && !selectedOptions.length"
-          icon="search"
-          class="search-icon"
-          :style="{
-            color: $themeTokens.annotation,
-            position: 'absolute',
-            left: '12px',
-            top: '50%',
-            transform: 'translateY(-50%)',
-            fontSize: '16px',
-            zIndex: 1,
-          }"
-          aria-hidden="true"
-        />
-
-        <!-- Selected Pills inside input -->
-        <div
-          v-for="(option, index) in selectedOptionsData"
-          :key="option.id"
-          class="pill"
-          :style="{
-            backgroundColor: $themeTokens.surface,
-            border: `1px solid ${$themeTokens.fineLine}`,
-            borderRadius: '16px',
-            padding: '4px 8px',
-            display: 'flex',
-            alignItems: 'center',
-            gap: '4px',
-            fontSize: '14px',
-            flexShrink: 0,
-          }"
-          role="listitem"
-        >
-          <span>{{ option.label }}</span>
-          <KIconButton
-            size="small"
-            icon="clear"
-            :ariaLabel="getClearPillLabel(option.label)"
-            :title="getClearPillLabel(option.label)"
-            @click="deselectOption(option)"
-            @keydown="handlePillButtonKeydown($event, option, index)"
-          />
-        </div>
-
-        <!-- Clear All Button (only when there are selections) -->
-        <KIconButton
-          v-if="selectedOptions && selectedOptions.length"
-          size="small"
-          icon="clear"
-          :ariaLabel="clearAllMessage"
-          :title="clearAllMessage"
-          class="clear-all-button"
-          :style="{ flexShrink: 0 }"
-          @click="clearAll"
-        />
-
-        <!-- Input Field -->
-        <input
-          ref="comboboxInput"
-          v-model.trim="searchText"
-          type="text"
-          role="combobox"
-          :class="['combobox-input', $computedClass(inputStyles)]"
-          :style="{
-            flex: '1',
-            minWidth: '120px',
-            height: '32px',
-            padding: getSearchInputPadding(),
-            border: 'none',
-            outline: 'none',
-            fontSize: '14px',
-            color: $themeTokens.text,
-          }"
-          :placeholder="getSearchPlaceholder()"
-          :aria-label="comboboxAriaLabel"
-          :aria-expanded="isDropdownOpen.toString()"
-          :aria-controls="listboxId"
-          :aria-activedescendant="getActiveDescendant()"
-          :aria-describedby="ariaDescribedById"
-          :aria-autocomplete="autocomplete ? 'list' : 'none'"
-          :aria-required="required ? 'true' : 'false'"
-          :aria-invalid="invalid ? 'true' : 'false'"
-          :disabled="disabled"
-          :readonly="!autocomplete"
-          @input="handleInput"
-          @keydown="handleComboboxKeydown"
-          @focus="handleInputFocus"
-          @blur="handleInputBlur"
-          @click="handleInputClick"
-        >
-
-        <!-- Clear Search Button -->
-        <KIconButton
-          v-if="searchText && autocomplete"
-          size="small"
-          icon="clear"
-          class="clear-search-button"
-          :style="{
-            position: 'absolute',
-            right: '32px',
-            top: '50%',
-            transform: 'translateY(-50%)',
-            flexShrink: 0,
-          }"
-          :ariaLabel="clearSearchMessage"
-          :title="clearSearchMessage"
-          @click="clearSearch"
-        />
-
-        <!-- Dropdown Toggle Button -->
-        <KIconButton
-          size="small"
-          :icon="isDropdownOpen ? 'chevronUp' : 'chevronDown'"
-          class="dropdown-toggle"
-          :style="{
-            position: 'absolute',
-            right: '8px',
-            top: '50%',
-            transform: 'translateY(-50%)',
-            flexShrink: 0,
-          }"
-          :ariaLabel="getToggleDropdownLabel()"
-          :title="getToggleDropdownLabel()"
-          :aria-expanded="isDropdownOpen.toString()"
-          @click="toggleDropdown"
-          @mousedown.prevent
-        />
-      </div>
+      <KMultiSelectInput
+        ref="multiSelectInput"
+        :searchText="searchText"
+        :autocomplete="autocomplete"
+        :searchPlaceholder="getSearchPlaceholder()"
+        :searchInputPadding="getSearchInputPadding()"
+        :selectedOptions="selectedOptions"
+        :selectedOptionsData="selectedOptionsData"
+        :ariaLabel="comboboxAriaLabel"
+        :listboxId="listboxId"
+        :activeDescendant="getActiveDescendant()"
+        :ariaDescribedById="ariaDescribedById"
+        :isDropdownOpen="isDropdownOpen"
+        :disabled="disabled"
+        :required="required"
+        :invalid="invalid"
+        :clearAllMessage="clearAllMessage"
+        :clearSearchMessage="clearSearchMessage"
+        :toggleDropdownLabel="getToggleDropdownLabel()"
+        :getClearPillLabel="getClearPillLabel"
+        @update:searchText="searchText = $event"
+        @deselect-option="deselectOption"
+        @clear-all="clearAll"
+        @input-keydown="handleComboboxKeydown"
+        @input-focus="handleInputFocus"
+        @input-blur="handleInputBlur"
+        @input-click="handleInputClick"
+        @clear-search="clearSearch"
+        @toggle-dropdown="toggleDropdown"
+        @search-input="handleInput"
+        @pill-keydown="handlePillButtonKeydown"
+      />
 
       <!-- Dropdown List -->
       <div
@@ -324,6 +214,7 @@
   } from 'vue';
   import {themeTokens } from '../styles/theme';
 
+  import KMultiSelectInput from './components/KMultiSelectInput.vue';
   import useKMultiSelectPills from './composables/useKMultiSelectPills';
   import useKMultiSelectList from './composables/useKMultiSelectList';
   import useKMultiSelectHighlighting from './composables/useKMultiSelectHighlighting';
@@ -333,6 +224,9 @@
 
   export default {
     name: 'KMultiSelect',
+    components: {
+      KMultiSelectInput,
+    },
     setup(props, { emit }) {
       const { autocomplete } = toRefs(props);
 
@@ -345,6 +239,7 @@
       const inputFocused = ref(false);
       const comboboxContainer = ref(null);
       const dropdownContainer = ref(null);
+      const multiSelectInput = ref(null);
       const optionRefs = ref([]);
       const isClient = ref(false);
       const isInsideComponent = ref(false);
@@ -442,7 +337,9 @@
 
       function clearSearch() {
         searchText.value = '';
-        instance.proxy.$refs.comboboxInput.focus();
+        if (multiSelectInput.value) {
+          multiSelectInput.value.focusInput();
+        }
         announceSearchCleared();
       }
 
@@ -713,7 +610,7 @@
         searchText, isDropdownOpen, focusedOption, focusedIndex,
         isSelectAllFocused, inputFocused, selectedOptions, selectedOptionsData,
         displayedOptions, filteredOptions, allOptionsSelected, someOptionsSelected, showSelectAll,
-        comboboxContainer, dropdownContainer, optionRefs, listboxId,
+        comboboxContainer, dropdownContainer, multiSelectInput, optionRefs, listboxId,
         ariaDescribedById, inputStyles, uid,
         isKeyboardNavigating,
         handleInput, handleInputFocus, handleInputBlur,
@@ -806,47 +703,13 @@
   border: 0;
 }
 
-.combobox-input:focus {
-  outline: 2px solid var(--primary);
-  outline-offset: -2px;
-}
-
-.combobox-input[readonly] {
-  cursor: pointer;
-  background-color: transparent;
-}
-
-.combobox-input[readonly]:focus {
-  outline: 2px solid var(--primary);
-  outline-offset: -2px;
-}
-
 .dropdown-container {
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-}
-
-.pill {
-  animation: fadeIn 0.2s ease-in-out;
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: scale(0.8);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
 }
 
 .dropdown-list li {
   user-select: none;
   transition: background-color 0.15s ease, outline 0.15s ease;
-}
-
-.input-wrapper {
-  min-height: 40px !important;
 }
 
 .dropdown-list li:hover {
