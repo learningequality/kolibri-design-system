@@ -77,65 +77,26 @@
       </li>
 
       <!-- Individual Options -->
-      <li
+      <KMultiSelectOption
         v-for="(option, index) in displayedOptions"
-        :id="getElementOptionId(option)"
         :key="option.id"
         :ref="el => { if (el) optionRefs[index] = el }"
-        role="option"
-        :class="$computedClass(getOptionStyles(option))"
-        :aria-selected="isOptionSelected(option).toString()"
-        :aria-setsize="displayedOptions.length"
-        :aria-posinset="index + 1"
-        :style="{
-          padding: '8px 12px',
-          cursor: 'pointer',
-          display: 'flex',
-          alignItems: 'center',
-          gap: '8px',
-          minHeight: '40px',
-          backgroundColor: getOptionBackgroundColor(option),
-          outline: getOptionOutline(option),
-          outlineOffset: getOptionOutlineOffset(option),
-        }"
-        :tabindex="focusedOption?.id === option.id ? 0 : -1"
-        :data-option-id="option.id"
-        :data-option-index="index"
-        data-option-type="regular"
-        @mousedown.prevent
-        @mouseenter="$emit('option-mouseenter', option)"
-      >
-        <KCheckbox
-          presentational
-          :checked="isOptionSelected(option)"
-          :style="{ flexShrink: 0 }"
-          tabindex="-1"
-          aria-hidden="true"
-        />
-        <span :style="{ flex: 1, wordBreak: 'break-word' }">
-          <!-- Safe highlighting using computed text segments -->
-          <template v-if="shouldHighlightText(option.label)">
-            <span
-              v-for="(segment, segmentIndex) in
-                getHighlightedSegments(option.label, searchText)"
-              :key="`${option.id}-segment-${segmentIndex}`"
-            >
-              <mark
-                v-if="segment.highlight"
-                :style="{
-                  backgroundColor: 'yellow',
-                  color: 'black',
-                  padding: '0'
-                }"
-              >{{ segment.text }}</mark>
-              <span v-else>{{ segment.text }}</span>
-            </span>
-          </template>
-          <template v-else>
-            {{ option.label }}
-          </template>
-        </span>
-      </li>
+        :option="option"
+        :index="index"
+        :isSelected="isOptionSelected(option)"
+        :isFocused="focusedOption?.id === option.id"
+        :totalOptions="displayedOptions.length"
+        :position="index + 1"
+        :optionStyles="getOptionStyles(option)"
+        :backgroundColor="getOptionBackgroundColor(option)"
+        :outline="getOptionOutline(option)"
+        :outlineOffset="getOptionOutlineOffset(option)"
+        :searchText="searchText"
+        :shouldHighlight="shouldHighlightText(option.label)"
+        :highlightedSegments="getHighlightedSegments(option.label, searchText)"
+        :elementId="getElementOptionId(option)"
+        @option-mouseenter="$emit('option-mouseenter', option)"
+      />
     </ul>
 
     <!-- No Results Message -->
@@ -160,9 +121,13 @@
 <script>
 
   import { ref } from 'vue';
+  import KMultiSelectOption from './KMultiSelectOption.vue';
 
   export default {
     name: 'KMultiSelectDropdown',
+    components: {
+      KMultiSelectOption,
+    },
     setup() {
       const dropdownContainer = ref(null);
       const optionRefs = ref([]);
@@ -232,38 +197,6 @@
 
 .dropdown-container {
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-}
-
-.dropdown-list li {
-  user-select: none;
-  transition: background-color 0.15s ease, outline 0.15s ease;
-}
-
-.dropdown-list li:hover {
-  background-color: var(--hover-background);
-}
-
-.dropdown-list li:focus {
-  outline: 2px solid var(--primary) !important;
-  outline-offset: -2px !important;
-}
-
-.dropdown-list li:focus-visible {
-  outline: 2px solid var(--primary) !important;
-  outline-offset: -2px !important;
-}
-
-@media (prefers-contrast: high) {
-  .dropdown-list li:focus {
-    outline: 3px solid;
-    outline-offset: -1px;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .dropdown-list li {
-    transition: none;
-  }
 }
 
 </style>
