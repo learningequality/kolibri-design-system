@@ -44,158 +44,41 @@
         @pill-keydown="handlePillButtonKeydown"
       />
 
-      <!-- Dropdown List -->
-      <div
-        v-show="isDropdownOpen"
-        ref="dropdownContainer"
-        class="dropdown-container"
-        :style="{
-          position: 'absolute',
-          top: '100%',
-          left: '0',
-          right: '0',
-          zIndex: '1000',
-          backgroundColor: $themeTokens.surface,
-          border: `1px solid ${$themeTokens.fineLine}`,
-          borderTop: 'none',
-          borderRadius: '0 0 4px 4px',
-          maxHeight: '400px',
-          overflowY: 'auto',
-        }"
-        role="region"
-        @mousedown.prevent
-      >
-        <ul
-          :id="listboxId"
-          class="dropdown-list"
-          role="listbox"
-          aria-multiselectable="true"
-          :style="{
-            margin: '0',
-            padding: '0',
-            listStyle: 'none',
-            outline: 'none',
-          }"
-          :aria-labelledby="ariaLabelledby"
-          :aria-describedby="ariaDescribedById"
-          tabindex="-1"
-          @keydown="handleListKeydown"
-          @click="handleListClick"
-          @mouseenter="handleListMouseEnter"
-          @mouseleave="handleListMouseLeave"
-          @focus="handleListFocus"
-        >
-          <!-- Select All Option -->
-          <li
-            v-if="showSelectAll"
-            :id="`select-all-${uid}`"
-            role="option"
-            :class="$computedClass(getSelectAllStyles())"
-            :aria-selected="allOptionsSelected.toString()"
-            :style="{
-              padding: '8px 12px',
-              cursor: 'pointer',
-              display: 'flex',
-              alignItems: 'center',
-              gap: '8px',
-              minHeight: '40px',
-              borderBottom: `1px solid ${$themeTokens.fineLine}`,
-              fontWeight: 'bold',
-              backgroundColor: getSelectAllBackgroundColor(),
-              outline: getSelectAllOutline(),
-              outlineOffset: getSelectAllOutlineOffset(),
-            }"
-            :tabindex="isSelectAllFocused ? 0 : -1"
-            data-option-type="select-all"
-            @mousedown.prevent
-            @mouseenter="handleSelectAllMouseEnter"
-          >
-            <KCheckbox
-              presentational
-              :checked="allOptionsSelected"
-              :indeterminate="someOptionsSelected && !allOptionsSelected"
-              :style="{ flexShrink: 0 }"
-              tabindex="-1"
-              aria-hidden="true"
-            />
-            <span :style="{ flex: 1 }">Select All</span>
-          </li>
-
-          <li
-            v-for="(option, index) in displayedOptions"
-            :id="getElementOptionId(option)"
-            :key="option.id"
-            :ref="el => { if (el) optionRefs[index] = el }"
-            role="option"
-            :class="$computedClass(getOptionStyles(option))"
-            :aria-selected="isOptionSelected(option).toString()"
-            :aria-setsize="displayedOptions.length"
-            :aria-posinset="index + 1"
-            :style="{
-              padding: '8px 12px',
-              cursor: 'pointer',
-              display: 'flex',
-              alignItems: 'center',
-              gap: '8px',
-              minHeight: '40px',
-              backgroundColor: getOptionBackgroundColor(option),
-              outline: getOptionOutline(option),
-              outlineOffset: getOptionOutlineOffset(option),
-            }"
-            :tabindex="focusedOption?.id === option.id ? 0 : -1"
-            :data-option-id="option.id"
-            :data-option-index="index"
-            data-option-type="regular"
-            @mousedown.prevent
-            @mouseenter="handleOptionMouseEnter(option)"
-          >
-            <KCheckbox
-              presentational
-              :checked="isOptionSelected(option)"
-              :style="{ flexShrink: 0 }"
-              tabindex="-1"
-              aria-hidden="true"
-            />
-            <span :style="{ flex: 1, wordBreak: 'break-word' }">
-              <!-- Safe highlighting using computed text segments -->
-              <template v-if="shouldHighlightText(option.label)">
-                <span
-                  v-for="(segment, segmentIndex) in
-                    getHighlightedSegments(option.label, searchText)"
-                  :key="`${option.id}-segment-${segmentIndex}`"
-                >
-                  <mark
-                    v-if="segment.highlight"
-                    :style="{
-                      backgroundColor: 'yellow',
-                      color: 'black',
-                      padding: '0'
-                    }"
-                  >{{ segment.text }}</mark>
-                  <span v-else>{{ segment.text }}</span>
-                </span>
-              </template>
-              <template v-else>
-                {{ option.label }}
-              </template>
-            </span>
-          </li>
-        </ul>
-
-        <div
-          v-if="!displayedOptions.length"
-          role="status"
-          class="no-options"
-          :style="{
-            padding: '12px',
-            margin: '0',
-            textAlign: 'center',
-            color: $themeTokens.annotation,
-          }"
-        >
-          {{ noResultsMessage }}
-        </div>
-      </div>
+      <KMultiSelectDropdown
+        ref="multiSelectDropdown"
+        :isDropdownOpen="isDropdownOpen"
+        :displayedOptions="displayedOptions"
+        :searchText="searchText"
+        :allOptionsSelected="allOptionsSelected"
+        :someOptionsSelected="someOptionsSelected"
+        :showSelectAll="showSelectAll"
+        :focusedOption="focusedOption"
+        :isSelectAllFocused="isSelectAllFocused"
+        :selectAllStyles="getSelectAllStyles()"
+        :selectAllBackgroundColor="getSelectAllBackgroundColor()"
+        :selectAllOutline="getSelectAllOutline()"
+        :selectAllOutlineOffset="getSelectAllOutlineOffset()"
+        :listboxId="listboxId"
+        :ariaLabelledby="ariaLabelledby"
+        :ariaDescribedById="ariaDescribedById"
+        :uid="uid"
+        :noResultsMessage="noResultsMessage"
+        :getElementOptionId="getElementOptionId"
+        :getOptionStyles="getOptionStyles"
+        :getOptionBackgroundColor="getOptionBackgroundColor"
+        :getOptionOutline="getOptionOutline"
+        :getOptionOutlineOffset="getOptionOutlineOffset"
+        :isOptionSelected="isOptionSelected"
+        :shouldHighlightText="shouldHighlightText"
+        :getHighlightedSegments="getHighlightedSegments"
+        @list-keydown="handleListKeydown"
+        @list-click="handleListClick"
+        @list-mouseenter="handleListMouseEnter"
+        @list-mouseleave="handleListMouseLeave"
+        @list-focus="handleListFocus"
+        @select-all-mouseenter="handleSelectAllMouseEnter"
+        @option-mouseenter="handleOptionMouseEnter"
+      />
     </div>
   </div>
 
@@ -215,6 +98,7 @@
   import {themeTokens } from '../styles/theme';
 
   import KMultiSelectInput from './components/KMultiSelectInput.vue';
+  import KMultiSelectDropdown from './components/KMultiSelectDropdown.vue';
   import useKMultiSelectPills from './composables/useKMultiSelectPills';
   import useKMultiSelectList from './composables/useKMultiSelectList';
   import useKMultiSelectHighlighting from './composables/useKMultiSelectHighlighting';
@@ -226,6 +110,7 @@
     name: 'KMultiSelect',
     components: {
       KMultiSelectInput,
+      KMultiSelectDropdown,
     },
     setup(props, { emit }) {
       const { autocomplete } = toRefs(props);
@@ -240,6 +125,7 @@
       const comboboxContainer = ref(null);
       const dropdownContainer = ref(null);
       const multiSelectInput = ref(null);
+      const multiSelectDropdown = ref(null);
       const optionRefs = ref([]);
       const isClient = ref(false);
       const isInsideComponent = ref(false);
@@ -610,7 +496,8 @@
         searchText, isDropdownOpen, focusedOption, focusedIndex,
         isSelectAllFocused, inputFocused, selectedOptions, selectedOptionsData,
         displayedOptions, filteredOptions, allOptionsSelected, someOptionsSelected, showSelectAll,
-        comboboxContainer, dropdownContainer, multiSelectInput, optionRefs, listboxId,
+        comboboxContainer, dropdownContainer,
+        multiSelectInput, multiSelectDropdown, optionRefs, listboxId,
         ariaDescribedById, inputStyles, uid,
         isKeyboardNavigating,
         handleInput, handleInputFocus, handleInputBlur,
@@ -701,47 +588,6 @@
   clip: rect(0, 0, 0, 0);
   white-space: nowrap;
   border: 0;
-}
-
-.dropdown-container {
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-}
-
-.dropdown-list li {
-  user-select: none;
-  transition: background-color 0.15s ease, outline 0.15s ease;
-}
-
-.dropdown-list li:hover {
-  background-color: var(--hover-background);
-}
-
-.dropdown-list li:focus {
-  outline: 2px solid var(--primary) !important;
-  outline-offset: -2px !important;
-}
-
-.dropdown-list li:focus-visible {
-  outline: 2px solid var(--primary) !important;
-  outline-offset: -2px !important;
-}
-
-@media (prefers-contrast: high) {
-  .combobox-input:focus,
-  .dropdown-list li:focus {
-    outline: 3px solid;
-    outline-offset: -1px;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .pill {
-    animation: none;
-  }
-
-  .dropdown-list li {
-    transition: none;
-  }
 }
 
 </style>
