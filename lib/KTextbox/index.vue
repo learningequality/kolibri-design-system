@@ -24,11 +24,28 @@
       :floatingLabel="floatingLabel"
       :multiLine="textArea"
       :rows="3"
+      :icon="icon"
       @input="updateText"
       @keydown="emitKeydown"
       @focus="emitFocus"
       @blur="emitBlur"
-    />
+    >
+      <template #outerBefore>
+        <slot name="outerBefore"></slot>
+      </template>
+      <template #icon>
+        <slot name="icon"></slot>
+      </template>
+      <template #innerBefore>
+        <slot name="innerBefore"></slot>
+      </template>
+      <template #innerAfter>
+        <slot name="innerAfter"></slot>
+      </template>
+      <template #outerAfter>
+        <slot name="outerAfter"></slot>
+      </template>
+    </UiTextbox>
   </div>
 
 </template>
@@ -52,6 +69,13 @@
       label: {
         type: String,
         required: true,
+      },
+      /**
+       * Icon for the text field (uses UiIcon names)
+       */
+      icon: {
+        type: String,
+        default: null,
       },
       /**
        * Value of the aria-label for clear button

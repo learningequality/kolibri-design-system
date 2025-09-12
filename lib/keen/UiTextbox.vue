@@ -8,9 +8,16 @@
    want to simply consolidate it with our component and remove any unused
    functionality.
   -->
-  <div class="ui-textbox" :class="classes">
-
-    <div v-if="icon || $slots.icon" class="ui-textbox-icon-wrapper">
+  <div
+    class="ui-textbox" 
+    :class="classes"
+  >
+    <!-- Outer slot: before content -->
+    <slot name="outerBefore"></slot>
+    <div 
+      v-if="icon || $slots.icon" 
+      class="ui-textbox-icon-wrapper"
+    >
       <slot name="icon" >
         <UiIcon 
           :icon="icon" 
@@ -20,62 +27,80 @@
     </div>
 
     <div class="ui-textbox-content">
-      <label class="ui-textbox-label"
-             :style="labelBorderStyles"
+      <label
+        class="ui-textbox-label"
+        :style="labelBorderStyles"
       >
         <div :class="['ui-input-content', inputContentClasses]">
-          <input
-            v-if="!multiLine"
-            ref="input"
-            v-autofocus="autofocus"
-            class="ui-textbox-input"
-            :style="isActive ? { borderBottomColor: $themeTokens.primaryDark } : {}"
-            :autocapitalize="autocapitalize ? autocapitalize : null"
-            :autocomplete="autocomplete ? autocomplete : null"
-            :disabled="disabled"
-            :max="maxValue"
-            :maxlength="enforceMaxlength ? maxlength : null"
-            :minlength="minlength"
-            :min="minValue"
-            :name="name"
-            :number="type === 'number' ? true : null"
-            :placeholder="hasFloatingLabel ? null : placeholder"
-            :readonly="readonly" :required="required"
-            :step="stepValue"
-            :tabindex="tabindex"
-            :type="type"
-            :value="value"
-            @blur="onBlur"
-            @change="onChange"
-            @focus="onFocus"
-            @input="updateValue($event.target.value)"
-            @keydown.enter="onKeydownEnter"
-            @keydown="onKeydown"
-          >
+          <div class="ui-input-wrapper">
+            <!-- Inner slot: before input -->
+            <div class="ui-inner-before">
+              <slot name="innerBefore"></slot>
+            </div>
+            
+            <div class="ui-input-field-wrapper">
+              <input
+                v-if="!multiLine"
+                ref="input"
+                v-autofocus="autofocus"
+                class="ui-textbox-input"
+                :style="isActive ? { borderBottomColor: $themeTokens.primaryDark } : {}"
+                :autocapitalize="autocapitalize ? autocapitalize : null"
+                :autocomplete="autocomplete ? autocomplete : null"
+                :disabled="disabled"
+                :max="maxValue"
+                :maxlength="enforceMaxlength ? maxlength : null"
+                :minlength="minlength"
+                :min="minValue"
+                :name="name"
+                :number="type === 'number' ? true : null"
+                :placeholder="hasFloatingLabel ? null : placeholder"
+                :readonly="readonly" 
+                :required="required"
+                :step="stepValue"
+                :tabindex="tabindex"
+                :type="type"
+                :value="value"
+                @blur="onBlur"
+                @change="onChange"
+                @focus="onFocus"
+                @input="updateValue($event.target.value)"
+                @keydown.enter="onKeydownEnter"
+                @keydown="onKeydown"
+              >
 
-          <textarea
-            v-else ref="textarea"
-            v-autofocus="autofocus"
-            :value="value"
-            class="ui-textbox-textarea"
-            :style="isActive ? { borderBottomColor: $themeTokens.primaryDark } : {}"
-            :autocpitalize="autocapitalize ? autocapitalize : null"
-            :autocomplete="autocomplete ? autocomplete : null"
-            :disabled="disabled"
-            :maxlength="enforceMaxlength ? maxlength : null"
-            :minlength="minlength"
-            :name="name"
-            :placeholder="hasFloatingLabel ? null : placeholder"
-            :readonly="readonly"
-            :required="required"
-            :rows="rows"
-            :tabindex="tabindex"
-            @blur="onBlur"
-            @change="onChange"
-            @focus="onFocus"
-            @input="updateValue($event.target.value)"
-            @keydown.enter="onKeydownEnter" @keydown="onKeydown"
-          ></textarea>
+              <textarea
+                v-else 
+                ref="textarea"
+                v-autofocus="autofocus"
+                :value="value"
+                class="ui-textbox-textarea"
+                :style="isActive ? { borderBottomColor: $themeTokens.primaryDark } : {}"
+                :autocpitalize="autocapitalize ? autocapitalize : null"
+                :autocomplete="autocomplete ? autocomplete : null"
+                :disabled="disabled"
+                :maxlength="enforceMaxlength ? maxlength : null"
+                :minlength="minlength"
+                :name="name"
+                :placeholder="hasFloatingLabel ? null : placeholder"
+                :readonly="readonly"
+                :required="required"
+                :rows="rows"
+                :tabindex="tabindex"
+                @blur="onBlur"
+                @change="onChange"
+                @focus="onFocus"
+                @input="updateValue($event.target.value)"
+                @keydown.enter="onKeydownEnter" 
+                @keydown="onKeydown"
+              ></textarea>
+            </div>
+            <!-- Inner slot: after input -->
+            <div class="ui-inner-after">
+              <slot name="innerAfter"></slot>
+            </div>
+          </div>
+
           <KIconButton
             v-if="showClearButton"
             icon="clear"
@@ -93,7 +118,7 @@
           :class="labelClasses"
           :style="labelStyles"
         >
-          <slot>{{ label }}</slot>
+          <slot> {{ label }}</slot>
         </div>
       </label>
 
@@ -108,7 +133,11 @@
           </slot>
         </div>
 
-        <div v-else-if="showHelp" class="ui-textbox-feedback-text">
+        <div 
+          v-else-if="showHelp" 
+          class="ui-textbox-feedback-text"
+        >
+
           <slot name="help">
             {{ help }}
           </slot>
@@ -116,15 +145,23 @@
 
         <!-- Placeholder to keep the text height spacing in place even when
              not showing any errors -->
-        <div v-else class="ui-textbox-feedback-text">
+        <div 
+          v-else 
+          class="ui-textbox-feedback-text"
+        >
           &nbsp;
         </div>
 
-        <div v-if="maxlength" class="ui-textbox-counter">
+        <div
+          v-if="maxlength"
+          class="ui-textbox-counter"
+        >
           {{ valueLength + '/' + maxlength }}
         </div>
       </div>
     </div>
+    <!-- Outer slot: after content -->
+    <slot name="outerAfter"></slot>
   </div>
 
 </template>
@@ -134,7 +171,6 @@
 
   import autosize from 'autosize';
   import UiIcon from './UiIcon.vue';
-  import KIconButton from '../buttons-and-links/KIconButton.vue';
 
   const autofocus = {
     inserted(el, { value }) {
@@ -651,5 +687,25 @@
       margin-left: rem(8px);
     }
   }
+
+
+.ui-input-wrapper {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.ui-inner-before,
+.ui-inner-after {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.5 0.5rem;
+}
+
+.ui-input-field-wrapper {
+  flex: 1;
+  display: flex;
+  width: 100%;
+}
 
 </style>
