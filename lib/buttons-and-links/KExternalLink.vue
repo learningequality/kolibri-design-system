@@ -25,9 +25,7 @@
       <slot v-if="$slots.default"></slot>
 
       <template v-else>
-        <span
-          class="link-text"
-        >{{ text }}</span>
+        <span class="link-text">{{ text }}</span>
       </template>
 
       <slot name="iconAfter">
@@ -109,10 +107,10 @@
 
   @import './buttons';
 
-.kexlink-inner {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-}
+  .kexlink-inner {
+    display: inline-flex;
+    gap: 8px;
+    align-items: center;
+  }
 
 </style>
