@@ -305,6 +305,7 @@
           { 'is-readonly': this.readonly},
           { 'has-label': this.hasLabel },
           { 'has-floating-label': this.hasFloatingLabel },
+          { 'has-inner-slot': this.hasInnerSlot },
         ];
       },
 
@@ -372,6 +373,13 @@
 
       showHelp() {
         return Boolean(this.help) || Boolean(this.$slots.help);
+      },
+
+      hasInnerSlot() {
+        return Boolean(
+          (this.$slots.innerBefore && this.$slots.innerBefore.length) ||
+          (this.$slots.innerAfter && this.$slots.innerAfter.length)
+        );
       },
     },
 
@@ -628,6 +636,23 @@
     transform-origin: left;
   }
 
+  // override when inner slot present
+  .ui-textbox.has-inner-slot .ui-textbox-label-text {
+    margin: 0 auto;
+  }
+
+  // Add padding if innerBefore slot exists
+  .ui-textbox .ui-inner-before:not(:empty) ~ .ui-input-field-wrapper ~ .ui-textbox-label-text,
+  .ui-textbox .ui-inner-before:has(*:not(:empty)) ~ .ui-input-field-wrapper ~ .ui-textbox-label-text {
+    padding-left: 1.5rem;
+  }
+
+  // Add padding if innerAfter slot exists
+  .ui-textbox .ui-inner-after:not(:empty) ~ .ui-textbox-label-text,
+  .ui-textbox .ui-inner-after:has(*:not(:empty)) ~ .ui-textbox-label-text {
+    padding-right: 1.5rem;
+  }
+
   .ui-textbox-input,
   .ui-textbox-textarea {
     display: block;
@@ -699,7 +724,6 @@
 .ui-inner-after {
   display: inline-flex;
   align-items: center;
-  padding: 0.5 0.5rem;
 }
 
 .ui-input-field-wrapper {

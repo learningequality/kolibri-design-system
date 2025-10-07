@@ -67,6 +67,23 @@
       width="400px"
       loadExample="KTextbox/InvalidText.vue"
     />
+
+    <!-- Slot scenarios -->
+    <VisualTestExample
+      title="Outer slots"
+      width="400px"
+      loadExample="KTextbox/OuterSlots.vue"
+    />
+    <VisualTestExample
+      title="Inner slots"
+      width="400px"
+      loadExample="KTextbox/InnerSlots.vue"
+    />
+    <VisualTestExample
+      title="All slots"
+      width="400px"
+      loadExample="KTextbox/AllSlots.vue"
+    />
   </VisualTestLayout>
 
 </template>

@@ -28,6 +28,7 @@
           { text: 'Text area', href: '#textarea' },
           { text: 'Clearable', href: '#clearable' },
           { text: 'Validation text', href: '#invalidtext' },
+          { text: 'All slots demo', href: '#all-slots' },
         ]"
       />
 
@@ -166,6 +167,33 @@
       <DocsExample
         loadExample="KTextbox/InvalidText.vue"
         exampleId="ktextbox-invalidtext"
+        block
+      />
+
+      <h3>
+        All slots demonstration
+        <DocsAnchorTarget anchor="#all-slots" />
+      </h3>
+      <p>
+        The following examples demonstrate how to use the <code>outerBefore</code>,
+        <code>outerAfter</code>, <code>innerBefore</code>, and <code>innerAfter</code> slots for
+        advanced customization of <code>KTextbox</code>. You can use these slots to add icons,
+        buttons, dropdowns, or any custom content before or after the input, both inside and outside
+        the input area.
+      </p>
+      <DocsExample
+        loadExample="KTextbox/OuterSlots.vue"
+        exampleId="ktextbox-outer-slots"
+        block
+      />
+      <DocsExample
+        loadExample="KTextbox/InnerSlots.vue"
+        exampleId="ktextbox-inner-slots"
+        block
+      />
+      <DocsExample
+        loadExample="KTextbox/AllSlots.vue"
+        exampleId="ktextbox-all-slots"
         block
       />
     </DocsPageSection>
