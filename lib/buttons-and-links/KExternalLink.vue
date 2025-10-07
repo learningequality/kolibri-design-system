@@ -18,6 +18,7 @@
         <KIcon
           v-if="icon"
           :icon="icon"
+          style="top: 4px"
           :color="iconColor"
         />
       </slot>
@@ -32,12 +33,14 @@
         <KIcon
           v-if="iconAfter"
           :icon="iconAfter"
+          style="top: 4px"
           :color="iconColor"
         />
       </slot>
       <KIcon
         v-if="openInNewTab"
         icon="openNewTab"
+        style="top: 4px"
         :color="iconColor"
       />
     </span>
@@ -110,7 +113,7 @@
   .kexlink-inner {
     display: inline-flex;
     gap: 8px;
-    align-items: center;
+    align-items: baseline;
   }
 
 </style>
