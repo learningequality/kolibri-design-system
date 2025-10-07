@@ -15,7 +15,8 @@
           type="checkbox"
           class="k-checkbox-input"
           :aria-checked="ariaChecked"
-          :checked="checked"
+          :checked="isChecked"
+          :value="value"
           :indeterminate.prop="indeterminate"
           :disabled="disabled"
           @click.stop="toggleCheck"
@@ -31,7 +32,7 @@
           icon="indeterminateCheck"
         />
         <KIcon
-          v-else-if="!indeterminate && checked"
+          v-else-if="!indeterminate && isChecked"
           :style="[notBlank, activeOutline]"
           class="checkbox-icon"
           icon="checked"
@@ -80,6 +81,10 @@
    */
   export default {
     name: 'KCheckbox',
+    model: {
+      prop: 'inputValue',
+      event: 'input',
+    },
     props: {
       /**
        * Text label
@@ -104,18 +109,39 @@
         default: true,
       },
       /**
-       * Checked state
+       * Reactive v-model checkbox state. Updates with the `input` event.
        */
-      checked: {
-        type: Boolean,
+      /*
+       * The reactive state of the checkbox which is used with v-model.
+       * It is changed with the "input" event.
+       * If used as an array, "value" prop is added/removed from it based on the checkbox state.
+       * If used as a boolean, it is set to true when checked and false when unchecked.
+       * If used as any other type, it is set to "value" prop when checked and null when unchecked.
+       */
+      inputValue: {
+        type: [Array, Boolean, Number, String, Object],
         default: false,
       },
       /**
-       * Indeterminate state. Overrides `checked` state
+       * Indeterminate state. Overrides `v-model`.
        */
       indeterminate: {
         type: Boolean,
         default: false,
+      },
+      /**
+       * Checkbox value
+       */
+      /*
+       * The value of the checkbox.
+       * If the checkbox is used with a v-model of array type,
+       * then this value would be added/removed from the array based on the checkbox state.
+       * If the checkbox is used with a v-model of any other type, then the v-model would
+       * be set to this value when the checkbox is checked and set to null when unchecked.
+       */
+      value: {
+        type: [Number, String, Object],
+        default: null,
       },
       /**
        * Disabled state
@@ -147,8 +173,45 @@
       isActive: false,
     }),
     computed: {
+      isChecked: {
+        get() {
+          if (Array.isArray(this.inputValue)) {
+            return this.inputValue.includes(this.value);
+          }
+
+          if (typeof this.inputValue === 'boolean') {
+            return this.inputValue;
+          }
+
+          return Boolean(this.inputValue);
+        },
+        set(checked) {
+          if (Array.isArray(this.inputValue)) {
+            const index = this.inputValue.indexOf(this.value);
+            if (checked && index === -1) {
+              this.updateInputValue([this.value, ...this.inputValue]);
+            } else if (!checked && index !== -1) {
+              const newInputValue = [...this.inputValue];
+              newInputValue.splice(index, 1);
+              this.updateInputValue(newInputValue);
+            }
+            return;
+          }
+
+          if (typeof this.inputValue === 'boolean') {
+            this.updateInputValue(checked);
+            return;
+          }
+
+          if (checked) {
+            this.updateInputValue(this.value);
+          } else {
+            this.updateInputValue(null);
+          }
+        },
+      },
       ariaChecked() {
-        return this.indeterminate ? 'mixed' : this.checked ? 'true' : 'false';
+        return this.indeterminate ? 'mixed' : this.isChecked ? 'true' : 'false';
       },
       id() {
         return `k-checkbox-${this._uid}`;
@@ -176,14 +239,18 @@
       },
     },
     methods: {
-      toggleCheck(event) {
+      toggleCheck() {
         if (!this.disabled) {
           this.$refs.kCheckboxInput.focus();
-          /**
-           * Emits change event
-           */
-          this.$emit('change', !this.checked, event);
+          this.isChecked = !this.isChecked;
         }
+      },
+      updateInputValue(newValue) {
+        /**
+         * Emits input event with the new checkbox value.
+         * Used by v-model to keep the checkbox state in sync.
+         */
+        this.$emit('input', newValue);
       },
       markInactive() {
         this.isActive = false;
