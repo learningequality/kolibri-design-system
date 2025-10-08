@@ -249,7 +249,7 @@
         return {
           color: this.$themeTokens.text,
           fontWeight: 'bold',
-          textAlign: 'left',
+          textAlign: 'start',
         };
       },
     },
@@ -442,6 +442,8 @@
   .content {
     padding: 0 24px;
     overflow-x: hidden;
+    white-space: normal;
+    text-align: start;
   }
 
   .scroll-shadow {
