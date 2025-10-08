@@ -246,7 +246,6 @@
       titleStyles() {
         return {
           color: this.$themeTokens.text,
-          
         };
       },
       contentStyles() {
@@ -439,15 +438,15 @@
     padding: 24px;
     margin: 0;
     font-size: 24px;
-    font-Weight: bold;
-    text-Align: start;
+    font-weight: bold;
+    text-align: start;
   }
 
   .content {
     padding: 0 24px;
     overflow-x: hidden;
+    text-align: start;
     white-space: normal;
-    text-Align: start,
   }
 
   .scroll-shadow {
