@@ -52,6 +52,7 @@
                 class="content"
                 :style="[
                   contentSectionMaxHeight,
+                  contentStyles,
                   scrollShadow
                     ? {
                       borderTop: `1px solid ${$themeTokens.fineLine}`,
@@ -215,8 +216,6 @@
         delayedEnough: false,
       };
     },
-    // Add this to the computed section of KModal/index.vue
-
     computed: {
       modalStyles() {
         return {
@@ -244,12 +243,15 @@
       wrapper() {
         return this.appendToOverlay ? 'KOverlay' : 'div';
       },
-      // ADD THIS NEW COMPUTED PROPERTY:
       titleStyles() {
         return {
           color: this.$themeTokens.text,
-          fontWeight: 'bold',
-          textAlign: 'start',
+          
+        };
+      },
+      contentStyles() {
+        return {
+          color: this.$themeTokens.text,
         };
       },
     },
@@ -437,13 +439,15 @@
     padding: 24px;
     margin: 0;
     font-size: 24px;
+    font-Weight: bold;
+    text-Align: start;
   }
 
   .content {
     padding: 0 24px;
     overflow-x: hidden;
     white-space: normal;
-    text-align: start;
+    text-Align: start,
   }
 
   .scroll-shadow {
