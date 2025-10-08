@@ -27,6 +27,7 @@
               id="modal-title"
               ref="title"
               class="title"
+              :style="titleStyles"
             >
               {{ title }}
               <!-- Accessible error reporting per @radina -->
@@ -214,6 +215,8 @@
         delayedEnough: false,
       };
     },
+    // Add this to the computed section of KModal/index.vue
+
     computed: {
       modalStyles() {
         return {
@@ -240,6 +243,14 @@
       },
       wrapper() {
         return this.appendToOverlay ? 'KOverlay' : 'div';
+      },
+      // ADD THIS NEW COMPUTED PROPERTY:
+      titleStyles() {
+        return {
+          color: this.$themeTokens.text,
+          fontWeight: 'bold',
+          textAlign: 'left',
+        };
       },
     },
     created() {
