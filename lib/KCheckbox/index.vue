@@ -30,18 +30,21 @@
           :style="[notBlank, activeOutline]"
           class="checkbox-icon"
           icon="indeterminateCheck"
+          data-testid="icon-indeterminateCheck"
         />
         <KIcon
           v-else-if="!indeterminate && isChecked"
           :style="[notBlank, activeOutline]"
           class="checkbox-icon"
           icon="checked"
+          data-testid="icon-checked"
         />
         <KIcon
           v-else
           :style="[blank, activeOutline]"
           class="checkbox-icon"
           icon="unchecked"
+          data-testid="icon-unchecked"
         />
       </div>
 
