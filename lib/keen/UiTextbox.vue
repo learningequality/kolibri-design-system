@@ -516,14 +516,17 @@
           // 1em here is custom to keep text centered
           transform: translateY(1em) scale(1.1);
         }
-
-        &.is-floating {
-          transform: translateY(0) scale(1);
-        }
       }
 
-      
-
+      // do not apply transform when inner slot is present
+      // to prevent from overlapping
+      &.has-floating-label.has-inner-slot {
+        .ui-textbox-label-text {
+          &.is-inline {
+            transform: none;
+          }
+        }
+      }
     
       // Fixes glitch in chrome where label and input value overlap each other
       // when webkit-autofill value has not been propagated yet (e.g. https://github.com/vuejs/vue/issues/1331)
@@ -590,11 +593,6 @@
     cursor: default;
     transition: color 0.1s ease, transform 0.2s ease;
     transform-origin: left;
-  }
-
-  // override when inner slot present
-  .ui-textbox.has-inner-slot .ui-textbox-label-text {
-    margin: 0 auto;
   }
 
   .ui-textbox-input,
