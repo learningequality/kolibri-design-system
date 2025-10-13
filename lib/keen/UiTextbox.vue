@@ -12,19 +12,8 @@
     class="ui-textbox" 
     :class="classes"
   >
-    <!-- Outer slot: before content -->
+
     <slot name="outerBefore"></slot>
-    <div 
-      v-if="icon || $slots.icon" 
-      class="ui-textbox-icon-wrapper"
-    >
-      <slot name="icon" >
-        <UiIcon 
-          :icon="icon" 
-          :iconStyle="{ color: $themePalette.grey.v_700 }"
-        />
-      </slot>
-    </div>
 
     <div class="ui-textbox-content">
       <label
@@ -33,7 +22,7 @@
       >
         <div :class="['ui-input-content', inputContentClasses]">
           <div class="ui-input-wrapper">
-            <!-- Inner slot: before input -->
+
             <div class="ui-inner-before">
               <slot name="innerBefore"></slot>
             </div>
@@ -95,7 +84,7 @@
                 @keydown="onKeydown"
               ></textarea>
             </div>
-            <!-- Inner slot: after input -->
+
             <div class="ui-inner-after">
               <slot name="innerAfter"></slot>
             </div>
@@ -160,8 +149,9 @@
         </div>
       </div>
     </div>
-    <!-- Outer slot: after content -->
+
     <slot name="outerAfter"></slot>
+
   </div>
 
 </template>
@@ -170,7 +160,6 @@
 <script>
 
   import autosize from 'autosize';
-  import UiIcon from './UiIcon.vue';
 
   const autofocus = {
     inserted(el, { value }) {
@@ -182,10 +171,6 @@
 
   export default {
     name: 'UiTextbox',
-
-    components: {
-      UiIcon,
-    },
 
     directives: {
       autofocus,
@@ -202,11 +187,6 @@
       clearAriaLabel: { 
         type: String,
         default: 'Clear',
-      },
-      icon: String,
-      iconPosition: {
-        type: String,
-        default: 'left', // 'left' or 'right'
       },
       label: String,
       floatingLabel: {
@@ -295,7 +275,6 @@
 
       classes() {
         return [
-          `ui-textbox--icon-position-${this.iconPosition}`,
           { 'is-active': this.isActive },
           { 'is-invalid': this.invalid },
           { 'is-touched': this.isTouched },
@@ -518,14 +497,8 @@
           padding-right: 0;
     }
 
-      .ui-input-content.clear-button-padding {
-          padding-right: 0.15rem;
-      }
-
-    .ui-cle &.has-label {
-      .ui-textbox-icon-wrapper {
-        padding-top: $ui-input-icon-margin-top--with-label;
-      }
+    .ui-input-content.clear-button-padding {
+        padding-right: 0.15rem;
     }
 
     &.has-counter {
@@ -569,7 +542,6 @@
     &.is-invalid:not(.is-disabled) {
 
       .ui-textbox-label-text,
-      .ui-textbox-icon-wrapper .ui-icon,
       .ui-textbox-counter {
         color: $ui-input-label-color--invalid;
       }
@@ -593,10 +565,6 @@
         border-bottom-width: $ui-input-border-width--active;
       }
 
-      .ui-textbox-icon-wrapper .ui-icon {
-        opacity: $ui-input-icon-opacity--disabled;
-      }
-
       .ui-textbox-feedback {
         opacity: $ui-input-feedback-opacity--disabled;
       }
@@ -613,14 +581,6 @@
     border-radius: 4px 4px 0 0;
     border-bottom-style: solid;
     border-bottom-width: $ui-input-border-width;
-  }
-
-  .ui-textbox-icon-wrapper {
-    flex-shrink: 0;
-    padding-top: $ui-input-icon-margin-top;
-    margin-right: rem(12px);
-
-   
   }
 
   .ui-textbox-content {
@@ -700,19 +660,6 @@
     top: $ui-input-feedback-padding-top;
     right: 0;
   }
-
-  // ================================================
-  // Icon position
-  // ================================================
-
-  .ui-textbox--icon-position-right {
-    .ui-textbox-icon-wrapper {
-      order: 1;
-      margin-right: 0;
-      margin-left: rem(8px);
-    }
-  }
-
 
 .ui-input-wrapper {
   display: flex;
