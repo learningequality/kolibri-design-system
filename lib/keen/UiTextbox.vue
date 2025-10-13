@@ -12,7 +12,10 @@
     class="ui-textbox" 
     :class="classes"
   >
-    <div v-if="$slots.outerBefore">
+    <div
+      v-if="$slots.outerBefore"
+      class="outer-before"  
+    >
       <slot name="outerBefore"></slot>
     </div>
 
@@ -22,7 +25,10 @@
         :style="labelBorderStyles"
       >
         <div :class="['ui-input-content', inputContentClasses]">
-          <div v-if="$slots.innerBefore">
+          <div
+            v-if="$slots.innerBefore"
+            class="inner-before"
+          >
             <slot name="innerBefore"></slot>
           </div>
           
@@ -82,7 +88,10 @@
             @keydown="onKeydown"
           ></textarea>
 
-          <div v-if="$slots.innerAfter">
+          <div
+            v-if="$slots.innerAfter"
+            class="inner-after"
+          >
             <slot name="innerAfter"></slot>
           </div>
 
@@ -146,7 +155,10 @@
       </div>
     </div>
 
-    <div v-if="$slots.outerAfter">
+    <div
+      v-if="$slots.outerAfter"
+      class="outer-after"  
+    >
       <slot name="outerAfter"></slot>
     </div>
 
@@ -642,6 +654,16 @@
     position: absolute;
     top: $ui-input-feedback-padding-top;
     right: 0;
+  }
+
+  // Ensure that slot stretch to full height
+  // so that consumers can style their inner
+  // more easily (e.g. center an icon vertically)
+  .outer-before,
+  .outer-after,
+  .inner-before,
+  .inner-after {
+    align-self: stretch;
   }
 
 </style>

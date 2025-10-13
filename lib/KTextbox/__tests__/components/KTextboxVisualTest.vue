@@ -68,21 +68,22 @@
       loadExample="KTextbox/InvalidText.vue"
     />
 
-    <!-- Slot scenarios -->
     <VisualTestExample
-      title="Outer slots"
+      title="Outer before and inner afterslots"
       width="400px"
-      loadExample="KTextbox/OuterSlots.vue"
+      loadExample="KTextbox/OuterBeforeInnerAfter.vue"
     />
+
     <VisualTestExample
-      title="Inner slots"
+      title="Inner before and outer after slots"
       width="400px"
-      loadExample="KTextbox/InnerSlots.vue"
+      loadExample="KTextbox/InnerBeforeOuterAfter.vue"
     />
+
     <VisualTestExample
-      title="All slots"
+      title="Combination of several features"
       width="400px"
-      loadExample="KTextbox/AllSlots.vue"
+      loadExample="KTextbox/Combined.vue"
     />
   </VisualTestLayout>
 
