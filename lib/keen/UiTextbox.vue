@@ -22,73 +22,68 @@
         :style="labelBorderStyles"
       >
         <div :class="['ui-input-content', inputContentClasses]">
-          <div class="ui-input-wrapper">
+          <div v-if="$slots.innerBefore">
+            <slot name="innerBefore"></slot>
+          </div>
+          
+          <input
+            v-if="!multiLine"
+            ref="input"
+            v-autofocus="autofocus"
+            class="ui-textbox-input"
+            :style="isActive ? { borderBottomColor: $themeTokens.primaryDark } : {}"
+            :autocapitalize="autocapitalize ? autocapitalize : null"
+            :autocomplete="autocomplete ? autocomplete : null"
+            :disabled="disabled"
+            :max="maxValue"
+            :maxlength="enforceMaxlength ? maxlength : null"
+            :minlength="minlength"
+            :min="minValue"
+            :name="name"
+            :number="type === 'number' ? true : null"
+            :placeholder="hasFloatingLabel ? null : placeholder"
+            :readonly="readonly" 
+            :required="required"
+            :step="stepValue"
+            :tabindex="tabindex"
+            :type="type"
+            :value="value"
+            @blur="onBlur"
+            @change="onChange"
+            @focus="onFocus"
+            @input="updateValue($event.target.value)"
+            @keydown.enter="onKeydownEnter"
+            @keydown="onKeydown"
+          >
 
-            <div v-if="$slots.innerBefore">
-              <slot name="innerBefore"></slot>
-            </div>
-            
-            <div class="ui-input-field-wrapper">
-              <input
-                v-if="!multiLine"
-                ref="input"
-                v-autofocus="autofocus"
-                class="ui-textbox-input"
-                :style="isActive ? { borderBottomColor: $themeTokens.primaryDark } : {}"
-                :autocapitalize="autocapitalize ? autocapitalize : null"
-                :autocomplete="autocomplete ? autocomplete : null"
-                :disabled="disabled"
-                :max="maxValue"
-                :maxlength="enforceMaxlength ? maxlength : null"
-                :minlength="minlength"
-                :min="minValue"
-                :name="name"
-                :number="type === 'number' ? true : null"
-                :placeholder="hasFloatingLabel ? null : placeholder"
-                :readonly="readonly" 
-                :required="required"
-                :step="stepValue"
-                :tabindex="tabindex"
-                :type="type"
-                :value="value"
-                @blur="onBlur"
-                @change="onChange"
-                @focus="onFocus"
-                @input="updateValue($event.target.value)"
-                @keydown.enter="onKeydownEnter"
-                @keydown="onKeydown"
-              >
+          <textarea
+            v-else 
+            ref="textarea"
+            v-autofocus="autofocus"
+            :value="value"
+            class="ui-textbox-textarea"
+            :style="isActive ? { borderBottomColor: $themeTokens.primaryDark } : {}"
+            :autocpitalize="autocapitalize ? autocapitalize : null"
+            :autocomplete="autocomplete ? autocomplete : null"
+            :disabled="disabled"
+            :maxlength="enforceMaxlength ? maxlength : null"
+            :minlength="minlength"
+            :name="name"
+            :placeholder="hasFloatingLabel ? null : placeholder"
+            :readonly="readonly"
+            :required="required"
+            :rows="rows"
+            :tabindex="tabindex"
+            @blur="onBlur"
+            @change="onChange"
+            @focus="onFocus"
+            @input="updateValue($event.target.value)"
+            @keydown.enter="onKeydownEnter" 
+            @keydown="onKeydown"
+          ></textarea>
 
-              <textarea
-                v-else 
-                ref="textarea"
-                v-autofocus="autofocus"
-                :value="value"
-                class="ui-textbox-textarea"
-                :style="isActive ? { borderBottomColor: $themeTokens.primaryDark } : {}"
-                :autocpitalize="autocapitalize ? autocapitalize : null"
-                :autocomplete="autocomplete ? autocomplete : null"
-                :disabled="disabled"
-                :maxlength="enforceMaxlength ? maxlength : null"
-                :minlength="minlength"
-                :name="name"
-                :placeholder="hasFloatingLabel ? null : placeholder"
-                :readonly="readonly"
-                :required="required"
-                :rows="rows"
-                :tabindex="tabindex"
-                @blur="onBlur"
-                @change="onChange"
-                @focus="onFocus"
-                @input="updateValue($event.target.value)"
-                @keydown.enter="onKeydownEnter" 
-                @keydown="onKeydown"
-              ></textarea>
-            </div>
-
-            <div v-if="$slots.innerAfter">
-              <slot name="innerAfter"></slot>
-            </div>
+          <div v-if="$slots.innerAfter">
+            <slot name="innerAfter"></slot>
           </div>
 
           <KIconButton
@@ -488,11 +483,9 @@
       }
     }
 
-   
-
     .ui-input-content {
-      display: grid;
-      grid-template-columns: 1fr auto;
+      display: flex;  
+      align-items: center;
       position: relative;
     }
 
@@ -606,6 +599,7 @@
 
   .ui-textbox-input,
   .ui-textbox-textarea {
+    flex: 1;
     display: block;
     width: 100%;
     padding: 0 0 0 8px;
@@ -651,17 +645,5 @@
     top: $ui-input-feedback-padding-top;
     right: 0;
   }
-
-.ui-input-wrapper {
-  display: flex;
-  align-items: center;
-  width: 100%;
-}
-
-.ui-input-field-wrapper {
-  flex: 1;
-  display: flex;
-  width: 100%;
-}
 
 </style>
