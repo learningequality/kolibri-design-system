@@ -12,8 +12,9 @@
     class="ui-textbox" 
     :class="classes"
   >
-
-    <slot name="outerBefore"></slot>
+    <div v-if="$slots.outerBefore">
+      <slot name="outerBefore"></slot>
+    </div>
 
     <div class="ui-textbox-content">
       <label
@@ -23,7 +24,7 @@
         <div :class="['ui-input-content', inputContentClasses]">
           <div class="ui-input-wrapper">
 
-            <div class="ui-inner-before">
+            <div v-if="$slots.innerBefore">
               <slot name="innerBefore"></slot>
             </div>
             
@@ -85,7 +86,7 @@
               ></textarea>
             </div>
 
-            <div class="ui-inner-after">
+            <div v-if="$slots.innerAfter">
               <slot name="innerAfter"></slot>
             </div>
           </div>
@@ -150,7 +151,9 @@
       </div>
     </div>
 
-    <slot name="outerAfter"></slot>
+    <div v-if="$slots.outerAfter">
+      <slot name="outerAfter"></slot>
+    </div>
 
   </div>
 
@@ -601,18 +604,6 @@
     margin: 0 auto;
   }
 
-  // Add padding if innerBefore slot exists
-  .ui-textbox .ui-inner-before:not(:empty) ~ .ui-input-field-wrapper ~ .ui-textbox-label-text,
-  .ui-textbox .ui-inner-before:has(*:not(:empty)) ~ .ui-input-field-wrapper ~ .ui-textbox-label-text {
-    padding-left: 1.5rem;
-  }
-
-  // Add padding if innerAfter slot exists
-  .ui-textbox .ui-inner-after:not(:empty) ~ .ui-textbox-label-text,
-  .ui-textbox .ui-inner-after:has(*:not(:empty)) ~ .ui-textbox-label-text {
-    padding-right: 1.5rem;
-  }
-
   .ui-textbox-input,
   .ui-textbox-textarea {
     display: block;
@@ -665,12 +656,6 @@
   display: flex;
   align-items: center;
   width: 100%;
-}
-
-.ui-inner-before,
-.ui-inner-after {
-  display: inline-flex;
-  align-items: center;
 }
 
 .ui-input-field-wrapper {
