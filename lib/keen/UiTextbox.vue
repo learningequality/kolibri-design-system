@@ -528,6 +528,10 @@
           // 1em here is custom to keep text centered
           transform: translateY(1em) scale(1.1);
         }
+
+        &.is-floating {
+          transform: translateY(0) scale(1);
+        }
       }
 
       // do not apply transform when inner slot is present
