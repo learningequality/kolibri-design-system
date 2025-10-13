@@ -30,15 +30,19 @@
       @blur="emitBlur"
     >
       <template #outerBefore>
+        <!--@slot Places content before the input area-->
         <slot name="outerBefore"></slot>
       </template>
       <template #innerBefore>
+        <!--@slot Places content before the input's inner content -->
         <slot name="innerBefore"></slot>
       </template>
       <template #innerAfter>
+        <!--@slot Places content after the input's inner content -->
         <slot name="innerAfter"></slot>
       </template>
       <template #outerAfter>
+        <!--@slot Places content after the input area-->
         <slot name="outerAfter"></slot>
       </template>
     </UiTextbox>
