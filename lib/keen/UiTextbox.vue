@@ -572,7 +572,6 @@
     }
 
     &.is-disabled, &.is-readonly{
-      .ui-textbox-input,
       .ui-textbox-label,
       .ui-textbox-textarea {
         color: $ui-input-text-color--disabled;
