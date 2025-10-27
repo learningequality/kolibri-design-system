@@ -46,7 +46,10 @@
       title="States"
       anchor="#states"
     >
-      <p>The v-model checkbox state represents an affirmative value.</p>
+      <p>
+        The <code>v-model</code> or <code>checked</code> checkbox state represents an affirmative
+        value.
+      </p>
       <p>
         Checkboxes can also have a "partially-checked" or "indeterminate" state used in cases where
         the value is neither true nor false, such as when a subset of a topic is selected:
@@ -146,42 +149,25 @@
         Each <code>value</code> will be added/removed from the <code>selectedGroupIds</code> array
         based on each checkbox state.
       </p>
-      <!-- eslint-disable -->
-      <!-- prettier-ignore -->
-      <DocsShowCode language="html">
-        <KCheckbox
-          v-for="group in groups"
-          :key="group.id"
-          v-model="selectedGroupIds"
-          :label="group.name"
-          :value="group.id"
-        />
-      </DocsShowCode>
-      <!-- prettier-ignore -->
-      <DocsShowCode language="javascript">
-        export default {
-          data() {
-            return {
-              groups: [
-                { 'id': 'group-1', 'name': 'First group', },
-                { 'id': 'group-2', 'name': 'Second group' },
-                { 'id': 'group-3', 'name': 'Third group' }
-              ],
-              selectedGroupIds: ['group-1'],
-            };
-          },
-        };
-      </DocsShowCode>
-      <!-- eslint-enable -->
-      <DocsShow>
-        <KCheckbox
-          v-for="group in groups"
-          :key="group.id"
-          v-model="selectedGroupIds"
-          :label="group.name"
-          :value="group.id"
-        />
-      </DocsShow>
+      <DocsExample
+        exampleId="v-model-array"
+        loadExample="KCheckbox/VModelArray.vue"
+      >
+        <template #html>
+          <!-- eslint-disable -->
+          <!-- prettier-ignore -->
+          <DocsShowCode language="html">
+            <KCheckbox
+              v-for="group in groups"
+              :key="group.id"
+              v-model="selectedGroupIds"
+              :label="group.name"
+              :value="group.id"
+            />
+          </DocsShowCode>
+          <!-- eslint-enable -->
+        </template>
+      </DocsExample>
 
       <h3>
         Boolean
@@ -191,31 +177,10 @@
         If checked, <code>isSelected</code> will become <code>true</code>, otherwise
         <code>false</code>. Note that here, <code>value</code> is not needed.
       </p>
-      <!-- eslint-disable -->
-      <!-- prettier-ignore -->
-      <DocsShowCode language="html">
-        <KCheckbox
-          v-model="isSelected"
-          :label="`isSelected = ${isSelected}`"
-        />
-      </DocsShowCode>
-      <!-- prettier-ignore -->
-      <DocsShowCode language="javascript">
-        export default {
-          data() {
-            return {
-              isSelected: true,
-            };
-          },
-        };
-      </DocsShowCode>
-      <!-- eslint-enable -->
-      <DocsShow>
-        <KCheckbox
-          v-model="isSelected"
-          :label="`isSelected = ${isSelected}`"
-        />
-      </DocsShow>
+      <DocsExample
+        exampleId="v-model-boolean"
+        loadExample="KCheckbox/VModelBoolean.vue"
+      />
 
       <h3>
         Number
@@ -225,33 +190,10 @@
         If checked, <code>selectedNumber</code> will be set to <code>value</code>, otherwise
         <code>null</code>.
       </p>
-      <!-- eslint-disable -->
-      <!-- prettier-ignore -->
-      <DocsShowCode language="html">
-        <KCheckbox
-          v-model="selectedNumber"
-          :label="`selectedNumber = ${selectedNumber}`"
-          :value="1"
-        />
-      </DocsShowCode>
-      <!-- prettier-ignore -->
-      <DocsShowCode language="javascript">
-        export default {
-          data() {
-            return {
-              selectedNumber: 1,
-            };
-          },
-        };
-      </DocsShowCode>
-      <!-- eslint-enable -->
-      <DocsShow>
-        <KCheckbox
-          v-model="selectedNumber"
-          :label="`selectedNumber = ${selectedNumber}`"
-          :value="1"
-        />
-      </DocsShow>
+      <DocsExample
+        exampleId="v-model-number"
+        loadExample="KCheckbox/VModelNumber.vue"
+      />
 
       <h3>
         String
@@ -261,33 +203,10 @@
         If checked, <code>selectedString</code> will be set to <code>value</code>, otherwise
         <code>null</code>.
       </p>
-      <!-- eslint-disable -->
-      <!-- prettier-ignore -->
-      <DocsShowCode language="html">
-        <KCheckbox
-          v-model="selectedString"
-          :label="`selectedString = ${selectedString}`"
-          :value="'String'"
-        />
-      </DocsShowCode>
-      <!-- prettier-ignore -->
-      <DocsShowCode language="javascript">
-        export default {
-          data() {
-            return {
-              selectedString: 'String',
-            };
-          },
-        };
-      </DocsShowCode>
-      <!-- eslint-enable -->
-      <DocsShow>
-        <KCheckbox
-          v-model="selectedString"
-          :label="`selectedString = ${selectedString}`"
-          :value="'String'"
-        />
-      </DocsShow>
+      <DocsExample
+        exampleId="v-model-string"
+        loadExample="KCheckbox/VModelString.vue"
+      />
 
       <h3>
         Object
@@ -297,33 +216,59 @@
         If checked, <code>selectedObject</code> will be set to <code>value</code>, otherwise
         <code>null</code>.
       </p>
-      <!-- eslint-disable -->
-      <!-- prettier-ignore -->
-      <DocsShowCode language="html">
-        <KCheckbox
-          v-model="selectedObject"
-          :label="`selectedObject = ${JSON.stringify(selectedObject)}`"
-          :value="{ id: 1, name: 'Name 1' }"
-        />
-      </DocsShowCode>
-      <!-- prettier-ignore -->
-      <DocsShowCode language="javascript">
-        export default {
-          data() {
-            return {
-              selectedObject: { id: 1, name: 'Name 1' },
-            };
-          },
-        };
-      </DocsShowCode>
-      <!-- eslint-enable -->
-      <DocsShow>
-        <KCheckbox
-          v-model="selectedObject"
-          :label="`selectedObject = ${JSON.stringify(selectedObject)}`"
-          :value="{ id: 1, name: 'Name 1' }"
-        />
-      </DocsShow>
+      <DocsExample
+        exampleId="v-model-object"
+        loadExample="KCheckbox/VModelObject.vue"
+      />
+    </DocsPageSection>
+
+    <DocsPageSection
+      title="Example: checked"
+      anchor="#example-checked"
+    >
+      As an alternative to <code>v-model</code>, the combination of <code>:checked</code> and
+      <code>@changed</code> can also be used to dynamically update selected choices.
+
+      <h3>
+        Multiple checkboxes
+        <DocsAnchorTarget anchor="#checked-multiple" />
+      </h3>
+      <p>
+        This example achieves the same result as v-model's
+        <a href="#v-model-array">array example</a>.
+      </p>
+      <DocsExample
+        exampleId="checked-api-multiple"
+        loadExample="KCheckbox/CheckedApiMultiple.vue"
+      >
+        <template #html>
+          <!-- eslint-disable -->
+          <!-- prettier-ignore -->
+          <DocsShowCode language="html">
+            <KCheckbox
+              v-for="group in groups"
+              :label="group.name"
+              :key="group.id"
+              :checked="groupIsSelected(group)"
+              @change="toggleGroup($event, group)"
+            />
+          </DocsShowCode>
+          <!-- eslint-enable -->
+        </template>
+      </DocsExample>
+
+      <h3>
+        Single checkbox
+        <DocsAnchorTarget anchor="#checked-single" />
+      </h3>
+      <p>
+        This example achieves the same result as v-model's
+        <a href="#v-model-boolean">boolean example</a>.
+      </p>
+      <DocsExample
+        exampleId="checked-api-single"
+        loadExample="KCheckbox/CheckedApiSingle.vue"
+      />
     </DocsPageSection>
   </DocsPageTemplate>
 
@@ -341,16 +286,6 @@
         indeterminate3: true,
         checked4: false,
         checked5: false,
-        groups: [
-          { id: 'group-1', name: 'First group' },
-          { id: 'group-2', name: 'Second group' },
-          { id: 'group-3', name: 'Third group' },
-        ],
-        selectedGroupIds: ['group-1'],
-        isSelected: true,
-        selectedNumber: 1,
-        selectedString: 'String',
-        selectedObject: { id: 1, name: 'Name 1' },
       };
     },
     methods: {
