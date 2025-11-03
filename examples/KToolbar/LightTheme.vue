@@ -15,18 +15,3 @@
   </KToolbar>
 
 </template>
-
-
-<script>
-
-  import KToolbar from '../../../lib/KToolbar.vue';
-  import KIconButton from '../../../lib/KIcon/index.vue';
-
-  export default {
-    components: {
-      KToolbar,
-      KIconButton,
-    },
-  };
-
-</script>
