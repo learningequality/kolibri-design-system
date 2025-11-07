@@ -80,14 +80,11 @@
 
 <script>
 
-  /**
-   * Used for toggling boolean user input
-   */
   export default {
     name: 'KCheckbox',
     model: {
       prop: 'inputValue',
-      event: 'input',
+      event: 'change',
     },
     props: {
       /**
@@ -113,26 +110,26 @@
         default: true,
       },
       /**
-       * Reactive v-model checkbox state. Updates with the `input` event.
+       * Reactive v-model checkbox state. Updates with the `change` event.
        */
       /*
        * The reactive state of the checkbox which is used with v-model.
-       * It is changed with the "input" event.
+       * It is changed with the "change" event.
        * If used as an array, "value" prop is added/removed from it based on the checkbox state.
        * If used as a boolean, it is set to true when checked and false when unchecked.
        * If used as any other type, it is set to "value" prop when checked and null when unchecked.
        */
       inputValue: {
         type: [Array, Boolean, Number, String, Object],
-        default: false,
+        default: undefined, // Use undefined to differentiate if it’s passed
       },
       /**
        * Legacy API checkbox state. (Note: Use either `v-model` or `checked`.
-       * If both are passed, `checked` takes precedence and disables two‑way reactivity.)
+       * If both are passed, `v-model` takes precedence.)
        */
       checked: {
         type: Boolean,
-        default: undefined, // Use undefined to differentiate if it’s passed
+        default: false,
       },
       /**
        * Indeterminate state. Overrides `v-model` or `checked` checkbox state.
@@ -184,10 +181,11 @@
     },
     data: () => ({
       isActive: false,
+      lastUserEvent: null,
     }),
     computed: {
       usingLegacyApi() {
-        return this.checked !== undefined;
+        return this.inputValue === undefined;
       },
       isChecked: {
         get() {
@@ -202,8 +200,6 @@
           return Boolean(this.inputValue !== null);
         },
         set(checked) {
-          if (this.usingLegacyApi) return;
-
           if (Array.isArray(this.inputValue)) {
             const index = this.inputValue.indexOf(this.value);
             if (checked && index === -1) {
@@ -216,7 +212,7 @@
             return;
           }
 
-          if (typeof this.inputValue === 'boolean') {
+          if (this.usingLegacyApi || typeof this.inputValue === 'boolean') {
             this.updateInputValue(checked);
             return;
           }
@@ -259,22 +255,18 @@
     methods: {
       toggleCheck(event) {
         if (!this.disabled) {
+          this.lastUserEvent = event || null;
           this.$refs.kCheckboxInput.focus();
           this.isChecked = !this.isChecked;
-          if (this.usingLegacyApi) {
-            /**
-             * Emits change event with the new legacy API checkbox state.
-             */
-            this.$emit('change', !this.checked, event);
-          }
+          this.lastUserEvent = null;
         }
       },
       updateInputValue(newValue) {
         /**
-         * Emits input event with the new v-model checkbox state.
-         * Used by v-model to keep the checkbox state in sync.
+         * Emits change event with the new checkbox state.
+         * Used by v-model or legacy API to keep the checkbox state in sync.
          */
-        this.$emit('input', newValue);
+        this.$emit('change', newValue, this.lastUserEvent);
       },
       markInactive() {
         this.isActive = false;

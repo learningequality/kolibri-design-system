@@ -59,7 +59,7 @@
           v-model="checked3"
           label="Topic is selected"
           :indeterminate="indeterminate3"
-          @input="handle3"
+          @change="handle3"
         />
       </DocsShow>
       <p>
