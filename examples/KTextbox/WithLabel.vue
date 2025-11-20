@@ -1,5 +1,5 @@
 <template>
 
-  <KTextbox label="Input with label" />
+  <KTextbox label="Label via prop" />
 
 </template>

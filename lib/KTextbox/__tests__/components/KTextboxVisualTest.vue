@@ -85,6 +85,18 @@
       width="400px"
       loadExample="KTextbox/Combined.vue"
     />
+
+    <VisualTestExample
+      title="Label via slot"
+      width="400px"
+      loadExample="KTextbox/LabelSlot.vue"
+    />
+
+    <VisualTestExample
+      title="Visually hidden label"
+      width="400px"
+      loadExample="KTextbox/VisuallyHiddenLabel.vue"
+    />
   </VisualTestLayout>
 
 </template>

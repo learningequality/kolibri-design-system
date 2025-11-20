@@ -29,6 +29,13 @@
       @focus="emitFocus"
       @blur="emitBlur"
     >
+      <!--@slot Label. Alternative to the label prop. -->
+      <template
+        v-if="$slots.label"
+        #default
+      >
+        <slot name="label"></slot>
+      </template>
       <template #outerBefore>
         <!--@slot Places content before the input area-->
         <slot name="outerBefore"></slot>
@@ -68,7 +75,7 @@
        */
       label: {
         type: String,
-        required: true,
+        default: null,
       },
       /**
        * Value of the aria-label for clear button
@@ -214,6 +221,12 @@
       value(val) {
         this.currentText = val;
       },
+    },
+    created() {
+      if (!this.label && !this.$slots.label) {
+        // eslint-disable-next-line no-console
+        console.error('[KTextbox] A label must be provided via prop or slot');
+      }
     },
     methods: {
       updateText() {
