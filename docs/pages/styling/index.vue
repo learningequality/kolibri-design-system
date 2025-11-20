@@ -38,7 +38,8 @@
       anchor="#definitions"
     >
       <p>
-        The design system provides a set of reusable style constants, snippets, and dynamic values.
+        The design system provides a set of reusable style constants, snippets, dynamic values, and
+        helper styles.
       </p>
       <p>
         Constants are made available as
@@ -96,6 +97,22 @@
           href="/colors"
         />.
       </p>
+
+      <p>
+        Finally, <code>styles/common</code> registration during the
+        <DocsInternalLink
+          href="/installation"
+          text="installation step"
+        />
+        globally exposes the following helper styles:
+      </p>
+
+      <ul>
+        <li>
+          <code>.visuallyhidden</code> class: hides an element visually but keeps it accessible to
+          screen readers
+        </li>
+      </ul>
     </DocsPageSection>
 
     <DocsPageSection

@@ -24,6 +24,12 @@
       </DocsShowCode>
       <!-- eslint-enable -->
 
+      <p>Register KDS styles in the main application stylesheet:</p>
+
+      <DocsShowCode language="scss">
+        @import '~kolibri-design-system/lib/styles/common';
+      </DocsShowCode>
+
       This ensures the following:
 
       <ul>
@@ -53,6 +59,13 @@
           Inserts the overlay container element <code>#k-overlay</code> to an application's document
           body (see <DocsLibraryLink component="KOverlay" /> or search for
           <code>appendToOverlay</code> prop on components).
+        </li>
+        <li>
+          Globally registers styles needed for components to display correctly and exposes
+          <DocsInternalLink
+            href="/styling#helper-styles"
+            text="helper styles"
+          />
         </li>
       </ul>
     </DocsPageSection>
