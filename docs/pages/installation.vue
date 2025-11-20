@@ -24,12 +24,6 @@
       </DocsShowCode>
       <!-- eslint-enable -->
 
-      <p>Register KDS styles in the main application stylesheet:</p>
-
-      <DocsShowCode language="scss">
-        @import '~kolibri-design-system/lib/styles/common';
-      </DocsShowCode>
-
       This ensures the following:
 
       <ul>
@@ -60,18 +54,28 @@
           body (see <DocsLibraryLink component="KOverlay" /> or search for
           <code>appendToOverlay</code> prop on components).
         </li>
-        <li>
-          Globally registers styles needed for components to display correctly and exposes
-          <DocsInternalLink
-            href="/styling#helper-styles"
-            text="helper styles"
-          />
-        </li>
       </ul>
     </DocsPageSection>
 
     <DocsPageSection
-      title="2. Initialize theme"
+      title="2. Register global styles"
+      anchor="#register-global-styles"
+    >
+      <p>Import KDS styles in the main application stylesheet:</p>
+
+      <DocsShowCode language="scss">
+        @import '~kolibri-design-system/lib/styles/common';
+      </DocsShowCode>
+
+      This globally registers styles needed for components to display correctly and also exposes
+      <DocsInternalLink
+        href="/styling#helper-styles"
+        text="helper styles"
+      />.
+    </DocsPageSection>
+
+    <DocsPageSection
+      title="3. Initialize theme"
       anchor="#initialize-theme"
     >
       <p>

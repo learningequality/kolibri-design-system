@@ -118,7 +118,7 @@
       <p>
         <code>styles/common</code> registration during the
         <DocsInternalLink
-          href="/installation"
+          href="/installation#register-global-styles"
           text="installation step"
         />
         globally exposes the following helper styles:
