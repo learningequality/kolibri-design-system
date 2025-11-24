@@ -29,11 +29,11 @@
       @focus="emitFocus"
       @blur="emitBlur"
     >
-      <!--@slot Label. Alternative to the label prop. -->
       <template
         v-if="$slots.label"
         #default
       >
+        <!--@slot Label. Alternative to the label prop. -->
         <slot name="label"></slot>
       </template>
       <template #outerBefore>
