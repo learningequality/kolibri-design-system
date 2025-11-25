@@ -7,6 +7,19 @@ Changelog is rather internal in nature. See release notes for the public overvie
 <!-- [DO NOT REMOVE-USED BY GH ACTION] PASTE CHANGELOG -->
 
 
+- [#1167]
+  - **Description:** Bump @testing-library/jest-dom from 6.6.3 to 6.9.1
+  - **Products impact:** Dev Dependency upgrade
+  - **Addresses:** -
+  - **Components:** -
+  - **Breaking:** -
+  - **Impacts a11y:** -
+  - **Guidance:** -
+
+[#1167]: https://github.com/learningequality/kolibri-design-system/pull/1167
+
+
+
 - [#1154]
   - **Description:** Bump @babel/core from 7.28.4 to 7.28.5 in the babel group
   - **Products impact:** Dev Dependency upgrade
