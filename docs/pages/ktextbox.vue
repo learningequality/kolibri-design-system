@@ -19,6 +19,7 @@
       <DocsSubNav
         :items="[
           { text: 'Input with label', href: '#with-label' },
+          { text: 'Visually hidden label', href: '#visually-hidden-label' },
           { text: 'Valid and invalid input', href: '#validation' },
           { text: 'Character limit', href: '#charlimit' },
           { text: 'Disabled input', href: '#disabled' },
@@ -37,12 +38,33 @@
         <DocsAnchorTarget anchor="#with-label" />
       </h3>
       <p>
-        This text box includes a visible label, providing clear guidance and context to the user
-        about the expected input.
+        The label can be provided via the <code>label</code> prop or the <code>label</code> slot.
       </p>
       <DocsExample
         loadExample="KTextbox/WithLabel.vue"
         exampleId="ktextbox-label"
+        block
+      />
+      <DocsExample
+        loadExample="KTextbox/LabelSlot.vue"
+        exampleId="ktextbox-label-slot"
+        block
+      />
+
+      <h3>
+        Visually hidden label
+        <DocsAnchorTarget anchor="#visually-hidden-label" />
+      </h3>
+
+      <p>
+        Although a visible label is preferred, occasionaly it may need to be hidden. Use the
+        <code>label</code> slot together with the <code>visuallyhidden</code> class to ensure the
+        label remains accessible to assistive technologies.
+      </p>
+
+      <DocsExample
+        loadExample="KTextbox/VisuallyHiddenLabel.vue"
+        exampleId="ktextbox-visually-hidden-label"
         block
       />
 

@@ -38,8 +38,15 @@
       anchor="#definitions"
     >
       <p>
-        The design system provides a set of reusable style constants, snippets, and dynamic values.
+        The design system provides a set of reusable style constants, snippets, dynamic values, and
+        helper styles.
       </p>
+
+      <h3>
+        Constants and snippets
+        <DocsAnchorTarget anchor="#constants-and-snippets" />
+      </h3>
+
       <p>
         Constants are made available as
         <DocsExternalLink
@@ -79,6 +86,12 @@
       <DocsShow>
         <div class="box box-2dp">Hello!</div>
       </DocsShow>
+
+      <h3>
+        Dynamic values
+        <DocsAnchorTarget anchor="#dynamic-values" />
+      </h3>
+
       <p>
         In order for Kolibri to be dynamically themed colors cannot be defined as SCSS constants.
         Instead, colors are defined in Javascript. Every Vue component instance gets a few reactive
@@ -96,6 +109,27 @@
           href="/colors"
         />.
       </p>
+
+      <h3>
+        Helper styles
+        <DocsAnchorTarget anchor="#helper-styles" />
+      </h3>
+
+      <p>
+        <code>styles/common</code> registration during the
+        <DocsInternalLink
+          href="/installation#register-global-styles"
+          text="installation step"
+        />
+        globally exposes the following helper styles:
+      </p>
+
+      <ul>
+        <li>
+          <code>.visuallyhidden</code> class: hides an element visually but keeps it accessible to
+          screen readers
+        </li>
+      </ul>
     </DocsPageSection>
 
     <DocsPageSection
@@ -112,7 +146,10 @@
         overlap.
       </p>
 
-      <h3>Drop shadows</h3>
+      <h3>
+        Drop shadows
+        <DocsAnchorTarget anchor="#drop-shadows" />
+      </h3>
       <p>
         In the real world, the shadow an object casts is often a physical manifestation of its
         elevation.
@@ -162,7 +199,10 @@
       </DocsShowCode>
       <!-- eslint-enable -->
 
-      <h3>Z-indexes</h3>
+      <h3>
+        Z-indexes
+        <DocsAnchorTarget anchor="#z-indexes" />
+      </h3>
       <p>
         CSS <code>z-index</code> is sometimes used to determine whether some element will show in
         front of or behind overlapping elements. A common challenge is that
