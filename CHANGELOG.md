@@ -7,6 +7,30 @@ Changelog is rather internal in nature. See release notes for the public overvie
 <!-- [DO NOT REMOVE-USED BY GH ACTION] PASTE CHANGELOG -->
 
 
+- [#1169]
+  - **Description:** Fixes internal visually hidden style not taking effect in KDS components, and exposes the `.visuallyhidden` class as public
+  - **Products impact:** bugfix
+  - **Addresses:** https://github.com/learningequality/kolibri-design-system/issues/1163
+  - **Components:** -
+  - **Breaking:** no
+  - **Impacts a11y:** no
+  - **Guidance:** Import KDS styles in the main application stylesheet with `@import '~kolibri-design-system/lib/styles/common';` as described in https://design-system.learningequality.org/installation#register-global-styles. Cleanup custom `.visuallyhidden` class from application styles. See https://design-system.learningequality.org/#helper-styles.
+
+[#1169]: https://github.com/learningequality/kolibri-design-system/pull/1169
+
+- [#1169]
+  - **Description:** Allows `KTextbox` label to be passed via slot
+  - **Products impact:** new API
+  - **Addresses:** https://github.com/learningequality/kolibri-design-system/issues/1166
+  - **Components:** `KTextbox`
+  - **Breaking:** no
+  - **Impacts a11y:** yes
+  - **Guidance:** -
+
+[#1169]: https://github.com/learningequality/kolibri-design-system/pull/1169
+
+
+
 - [#1167]
   - **Description:** Bump @testing-library/jest-dom from 6.6.3 to 6.9.1
   - **Products impact:** Dev Dependency upgrade
