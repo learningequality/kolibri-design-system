@@ -7,6 +7,19 @@ Changelog is rather internal in nature. See release notes for the public overvie
 <!-- [DO NOT REMOVE-USED BY GH ACTION] PASTE CHANGELOG -->
 
 
+- [#1171]
+  - **Description:** Bump babel-jest from 29.7.0 to 30.2.0
+  - **Products impact:** Dev Dependency upgrade
+  - **Addresses:** -
+  - **Components:** -
+  - **Breaking:** -
+  - **Impacts a11y:** -
+  - **Guidance:** -
+
+[#1171]: https://github.com/learningequality/kolibri-design-system/pull/1171
+
+
+
 - [#1169]
   - **Description:** Fixes internal visually hidden style not taking effect in KDS components, and exposes the `.visuallyhidden` class as public
   - **Products impact:** bugfix
