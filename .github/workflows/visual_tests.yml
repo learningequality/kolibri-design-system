@@ -42,12 +42,12 @@ jobs:
     steps:
       - name: Checkout code from PR
         if: github.event.pull_request.merged == false
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
         with:
           ref: ${{ github.event.pull_request.head.sha }}
       - name: Checkout code from target branch
         if: github.event.pull_request.merged == true
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
         with:
           ref: ${{ github.event.pull_request.base.ref }}
       - name: Set PERCY_BRANCH to target branch
@@ -91,7 +91,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code from PR
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
         with:
           ref: ${{ github.event.pull_request.head.sha }}
       - name: Define comment body
