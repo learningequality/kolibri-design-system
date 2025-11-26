@@ -7,6 +7,19 @@ Changelog is rather internal in nature. See release notes for the public overvie
 <!-- [DO NOT REMOVE-USED BY GH ACTION] PASTE CHANGELOG -->
 
 
+- [#1170]
+  - **Description:** Bump actions/checkout from 5 to 6 in the github group
+  - **Products impact:** Dev Dependency upgrade
+  - **Addresses:** -
+  - **Components:** -
+  - **Breaking:** -
+  - **Impacts a11y:** -
+  - **Guidance:** -
+
+[#1170]: https://github.com/learningequality/kolibri-design-system/pull/1170
+
+
+
 - [#1171]
   - **Description:** Bump babel-jest from 29.7.0 to 30.2.0
   - **Products impact:** Dev Dependency upgrade
