@@ -2,6 +2,7 @@
 
   <div
     class="k-checkbox-container"
+    data-testid="k-checkbox-container"
     :class="{ 'k-checkbox-disabled': disabled }"
     :style="{ pointerEvents: presentational ? 'none' : 'auto' }"
     @click="toggleCheck"
@@ -15,7 +16,8 @@
           type="checkbox"
           class="k-checkbox-input"
           :aria-checked="ariaChecked"
-          :checked="checked"
+          :checked="isChecked"
+          :value="value"
           :indeterminate.prop="indeterminate"
           :disabled="disabled"
           @click.stop="toggleCheck"
@@ -29,18 +31,21 @@
           :style="[notBlank, activeOutline]"
           class="checkbox-icon"
           icon="indeterminateCheck"
+          data-testid="icon-indeterminateCheck"
         />
         <KIcon
-          v-else-if="!indeterminate && checked"
+          v-else-if="!indeterminate && isChecked"
           :style="[notBlank, activeOutline]"
           class="checkbox-icon"
           icon="checked"
+          data-testid="icon-checked"
         />
         <KIcon
           v-else
           :style="[blank, activeOutline]"
           class="checkbox-icon"
           icon="unchecked"
+          data-testid="icon-unchecked"
         />
       </div>
 
@@ -75,11 +80,12 @@
 
 <script>
 
-  /**
-   * Used for toggling boolean user input
-   */
   export default {
     name: 'KCheckbox',
+    model: {
+      prop: 'inputValue',
+      event: 'change',
+    },
     props: {
       /**
        * Text label
@@ -104,18 +110,48 @@
         default: true,
       },
       /**
-       * Checked state
+       * Reactive v-model checkbox state. Updates with the `change` event.
+       */
+      /*
+       * The reactive state of the checkbox which is used with v-model.
+       * It is changed with the "change" event.
+       * If used as an array, "value" prop is added/removed from it based on the checkbox state.
+       * If used as a boolean, it is set to true when checked and false when unchecked.
+       * If used as any other type, it is set to "value" prop when checked and null when unchecked.
+       */
+      inputValue: {
+        type: [Array, Boolean, Number, String, Object],
+        default: undefined, // Use undefined to differentiate if it’s passed
+      },
+      /**
+       * Legacy API checkbox state. (Note: Use either `v-model` or `checked`.
+       * If both are passed, `v-model` takes precedence.)
        */
       checked: {
         type: Boolean,
         default: false,
       },
       /**
-       * Indeterminate state. Overrides `checked` state
+       * Indeterminate state. Overrides `v-model` or `checked` checkbox state.
        */
       indeterminate: {
         type: Boolean,
         default: false,
+      },
+      /**
+       * The value that (1) will be added to the `v-model` array, or (2) `v-model` will be set to,
+       * when the checkbox is checked.
+       */
+      /*
+       * The value of the checkbox.
+       * If the checkbox is used with a v-model of array type,
+       * then this value would be added/removed from the array based on the checkbox state.
+       * If the checkbox is used with a v-model of any other type, then the v-model would
+       * be set to this value when the checkbox is checked and set to null when unchecked.
+       */
+      value: {
+        type: [Number, String, Object],
+        default: null,
       },
       /**
        * Disabled state
@@ -145,10 +181,51 @@
     },
     data: () => ({
       isActive: false,
+      lastUserEvent: null,
     }),
     computed: {
+      usingLegacyApi() {
+        return this.inputValue === undefined;
+      },
+      isChecked: {
+        get() {
+          if (this.usingLegacyApi) return this.checked;
+
+          if (Array.isArray(this.inputValue)) {
+            return this.inputValue.includes(this.value);
+          }
+          if (typeof this.inputValue === 'boolean') {
+            return this.inputValue;
+          }
+          return this.inputValue !== null;
+        },
+        set(checked) {
+          if (Array.isArray(this.inputValue)) {
+            const index = this.inputValue.indexOf(this.value);
+            if (checked && index === -1) {
+              this.updateInputValue([this.value, ...this.inputValue]);
+            } else if (!checked && index !== -1) {
+              const newInputValue = [...this.inputValue];
+              newInputValue.splice(index, 1);
+              this.updateInputValue(newInputValue);
+            }
+            return;
+          }
+
+          if (this.usingLegacyApi || typeof this.inputValue === 'boolean') {
+            this.updateInputValue(checked);
+            return;
+          }
+
+          if (checked) {
+            this.updateInputValue(this.value);
+          } else {
+            this.updateInputValue(null);
+          }
+        },
+      },
       ariaChecked() {
-        return this.indeterminate ? 'mixed' : this.checked ? 'true' : 'false';
+        return this.indeterminate ? 'mixed' : this.isChecked ? 'true' : 'false';
       },
       id() {
         return `k-checkbox-${this._uid}`;
@@ -178,17 +255,27 @@
     methods: {
       toggleCheck(event) {
         if (!this.disabled) {
+          // Store the event that triggered this state change (mouse or keyboard)
+          // so it can be forwarded with the emitted `change` event.
+          this.lastUserEvent = event || null;
           this.$refs.kCheckboxInput.focus();
-          /**
-           * Emits change event
-           */
-          this.$emit('change', !this.checked, event);
+          this.isChecked = !this.isChecked;
         }
+      },
+      updateInputValue(newValue) {
+        /**
+         * Emits change event with the new checkbox state.
+         * Used by v-model or legacy API to keep the checkbox state in sync.
+         * The original user event that triggered the change (if any)
+         * is forwarded as a second argument for legacy API compatibility.
+         */
+        this.$emit('change', newValue, this.lastUserEvent);
+        this.lastUserEvent = null; // Reset after emitting the change event
       },
       markInactive() {
         this.isActive = false;
         /**
-         * Emits blur event, useful for validation
+         * Emits blur event, useful for validation.
          */
         this.$emit('blur');
       },

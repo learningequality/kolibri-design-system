@@ -1,9 +1,22 @@
 <template>
 
   <KCheckbox
+    v-model="inputValue"
     label="Deselected disabled checkbox"
-    :checked="false"
     :disabled="true"
   />
 
 </template>
+
+
+<script>
+
+  export default {
+    data() {
+      return {
+        inputValue: false,
+      };
+    },
+  };
+
+</script>

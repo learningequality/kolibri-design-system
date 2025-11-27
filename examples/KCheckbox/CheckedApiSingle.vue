@@ -1,8 +1,9 @@
 <template>
 
   <KCheckbox
-    v-model="inputValue"
-    label="Selected checkbox"
+    :label="`isSelected = ${isSelected}`"
+    :checked="isSelected"
+    @change="isSelected = $event"
   />
 
 </template>
@@ -13,7 +14,7 @@
   export default {
     data() {
       return {
-        inputValue: true,
+        isSelected: true,
       };
     },
   };
