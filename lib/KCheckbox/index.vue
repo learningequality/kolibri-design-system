@@ -197,7 +197,7 @@
           if (typeof this.inputValue === 'boolean') {
             return this.inputValue;
           }
-          return Boolean(this.inputValue !== null);
+          return this.inputValue !== null;
         },
         set(checked) {
           if (Array.isArray(this.inputValue)) {
@@ -255,18 +255,22 @@
     methods: {
       toggleCheck(event) {
         if (!this.disabled) {
+          // Store the event that triggered this state change (mouse or keyboard)
+          // so it can be forwarded with the emitted `change` event.
           this.lastUserEvent = event || null;
           this.$refs.kCheckboxInput.focus();
           this.isChecked = !this.isChecked;
-          this.lastUserEvent = null;
         }
       },
       updateInputValue(newValue) {
         /**
          * Emits change event with the new checkbox state.
          * Used by v-model or legacy API to keep the checkbox state in sync.
+         * The original user event that triggered the change (if any)
+         * is forwarded as a second argument for legacy API compatibility.
          */
         this.$emit('change', newValue, this.lastUserEvent);
+        this.lastUserEvent = null; // Reset after emitting the change event
       },
       markInactive() {
         this.isActive = false;
