@@ -110,7 +110,7 @@ Changelog is rather internal in nature. See release notes for the public overvie
 
 
 - [#1165]
-  - **Description:** Bumps KDS version to 4.5.2.
+  - **Description:** Bumps KDS version to 5.4.2.
   - **Products impact:** -.
   - **Addresses:** -.
   - **Components:** -.
