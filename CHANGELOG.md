@@ -7,6 +7,19 @@ Changelog is rather internal in nature. See release notes for the public overvie
 <!-- [DO NOT REMOVE-USED BY GH ACTION] PASTE CHANGELOG -->
 
 
+- [#1178]
+  - **Description:** Upgrade workflows to .github#35
+  - **Products impact:** None
+  - **Addresses:** -
+  - **Components:** -
+  - **Breaking:** -
+  - **Impacts a11y:** -
+  - **Guidance:** -
+
+[#1178]: https://github.com/learningequality/kolibri-design-system/pull/1178
+
+
+
 - [#1175]
   - **Description:** Bumps KDS version to 5.5.0.
   - **Products impact:** -.
