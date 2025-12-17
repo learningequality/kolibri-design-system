@@ -7,6 +7,19 @@ Changelog is rather internal in nature. See release notes for the public overvie
 <!-- [DO NOT REMOVE-USED BY GH ACTION] PASTE CHANGELOG -->
 
 
+- [#1182]
+  - **Description:** Fix KToolbar documentation examples not loaded
+  - **Products impact:** none
+  - **Addresses:** -
+  - **Components:** KToolbar
+  - **Breaking:** no
+  - **Impacts a11y:** -
+  - **Guidance:** -
+
+[#1182]: https://github.com/learningequality/kolibri-design-system/pull/1182
+
+
+
 - [#1178]
   - **Description:** Upgrade workflows to .github#35
   - **Products impact:** None
