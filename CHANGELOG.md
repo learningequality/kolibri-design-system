@@ -7,6 +7,19 @@ Changelog is rather internal in nature. See release notes for the public overvie
 <!-- [DO NOT REMOVE-USED BY GH ACTION] PASTE CHANGELOG -->
 
 
+- [#1181]
+  - **Description:** Bump actions/cache from 4 to 5 in the github group
+  - **Products impact:** Dev Dependency upgrade
+  - **Addresses:** -
+  - **Components:** -
+  - **Breaking:** -
+  - **Impacts a11y:** -
+  - **Guidance:** -
+
+[#1181]: https://github.com/learningequality/kolibri-design-system/pull/1181
+
+
+
 - [#1182]
   - **Description:** Fix KToolbar documentation examples not loaded
   - **Products impact:** none
