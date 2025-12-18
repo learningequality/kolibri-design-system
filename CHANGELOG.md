@@ -7,6 +7,19 @@ Changelog is rather internal in nature. See release notes for the public overvie
 <!-- [DO NOT REMOVE-USED BY GH ACTION] PASTE CHANGELOG -->
 
 
+- [#1186]
+  - **Description:** Update dependabot configuration
+  - **Products impact:** none
+  - **Addresses:** -
+  - **Components:** -
+  - **Breaking:** no
+  - **Impacts a11y:** no
+  - **Guidance:** -
+
+[#1186]: https://github.com/learningequality/kolibri-design-system/pull/1186
+
+
+
 - [#1181]
   - **Description:** Bump actions/cache from 4 to 5 in the github group
   - **Products impact:** Dev Dependency upgrade
