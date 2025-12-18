@@ -7,9 +7,9 @@ updates:
   - package-ecosystem: "npm"
     directory: "/"
     schedule:
-      interval: "weekly"
-      day: "wednesday"
-      time: "00:00"
+      interval: "monthly"
+    cooldown:
+      default-days: 7
     groups:
       babel:
         patterns:
@@ -19,9 +19,9 @@ updates:
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
-      interval: "weekly"
-      day: "wednesday"
-      time: "00:00"
+      interval: "monthly"
+    cooldown:
+      default-days: 7
     groups:
       github:
         patterns:
