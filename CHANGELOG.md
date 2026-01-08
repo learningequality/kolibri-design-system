@@ -7,6 +7,19 @@ Changelog is rather internal in nature. See release notes for the public overvie
 <!-- [DO NOT REMOVE-USED BY GH ACTION] PASTE CHANGELOG -->
 
 
+- [#1190]
+  - **Description:** Remove call-holiday-message GitHub workflow
+  - **Products impact:** none
+  - **Addresses:** -
+  - **Components:** -
+  - **Breaking:** -
+  - **Impacts a11y:** -
+  - **Guidance:** -
+
+[#1190]: https://github.com/learningequality/kolibri-design-system/pull/1190
+
+
+
 - [#1186]
   - **Description:** Update dependabot configuration
   - **Products impact:** none
