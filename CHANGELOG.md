@@ -7,6 +7,19 @@ Changelog is rather internal in nature. See release notes for the public overvie
 <!-- [DO NOT REMOVE-USED BY GH ACTION] PASTE CHANGELOG -->
 
 
+- [#1191]
+  - **Description:** Updates lodash import to use specific module path
+  - **Products impact:** bugfix
+  - **Addresses:** Bloated asset size due to import of entire lodash library
+  - **Components:** KTable
+  - **Breaking:** no
+  - **Impacts a11y:** no
+  - **Guidance:** N/A
+
+[#1191]: https://github.com/learningequality/kolibri-design-system/pull/1191
+
+
+
 - [#1190]
   - **Description:** Remove call-holiday-message GitHub workflow
   - **Products impact:** none
