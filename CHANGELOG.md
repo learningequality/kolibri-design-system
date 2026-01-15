@@ -7,6 +7,19 @@ Changelog is rather internal in nature. See release notes for the public overvie
 <!-- [DO NOT REMOVE-USED BY GH ACTION] PASTE CHANGELOG -->
 
 
+- [#1184]
+  - **Description:** Adds bell icon
+  - **Products impact:** new API.
+  - **Addresses:** https://github.com/learningequality/studio/issues/5174.
+  - **Components:** KIcon.
+  - **Breaking:** no
+  - **Impacts a11y:** no
+  - **Guidance:** -.
+
+[#1184]: https://github.com/learningequality/kolibri-design-system/pull/1184
+
+
+
 - [#1192]
   - **Description:**  Fixes the UID reference and using global counter for uid
   - **Products impact:** KDS (KDropdownMenu)
