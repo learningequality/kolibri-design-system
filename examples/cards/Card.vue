@@ -12,6 +12,12 @@
     :title="cardTitle"
   >
     <template
+      v-if="$slots.thumbnail"
+      #thumbnail
+    >
+      <slot name="thumbnail"></slot>
+    </template>
+    <template
       v-if="$slots.thumbnailPlaceholder"
       #thumbnailPlaceholder
     >

@@ -52,6 +52,26 @@
     />
 
     <VisualTestExample
+      title="Thumbnail slot with 16:9 KImg, small thumbnail area, horizontal orientation"
+      loadExample="cards/ThumbnailSlotSmallHorizontal.vue"
+    />
+
+    <VisualTestExample
+      title="Thumbnail slot with 16:9 KImg, large thumbnail area, horizontal orientation"
+      loadExample="cards/ThumbnailSlotLargeHorizontal.vue"
+    />
+
+    <VisualTestExample
+      title="Thumbnail slot with 16:9 KImg, small thumbnail area, vertical orientation"
+      loadExample="cards/ThumbnailSlotSmallVertical.vue"
+    />
+
+    <VisualTestExample
+      title="Thumbnail slot with 16:9 KImg, large thumbnail area, vertical orientation"
+      loadExample="cards/ThumbnailSlotLargeVertical.vue"
+    />
+
+    <VisualTestExample
       title="Thumbnail placeholder"
       loadExample="cards/Placeholder.vue"
       :loadFor="0"
