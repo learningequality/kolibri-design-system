@@ -132,11 +132,19 @@
           v-if="thumbnailDisplay !== ThumbnailDisplays.NONE"
           class="k-thumbnail"
         >
+          <!-- @slot Overrides the default thumbnail image. -->
+          <div
+            v-if="$slots.thumbnail"
+            :style="{ width: '100%', height: '100%' }"
+          >
+            <slot name="thumbnail"></slot>
+          </div>
           <!--
             Render KImg even if thumbnailSrc is not provided since in that case
             KImg takes care of showing the gray placeholder area.
           -->
           <KImg
+            v-else
             data-test="thumbnail-img"
             :src="thumbnailSrc"
             :scaleType="thumbnailScaleType"
@@ -146,7 +154,7 @@
             @error="onThumbnailError"
           />
           <span
-            v-if="!thumbnailSrc || thumbnailError"
+            v-if="(!thumbnailSrc || thumbnailError) && !$slots.thumbnail"
             class="k-thumbnail-placeholder"
           >
             <!-- @slot Places content to the thumbnail placeholder area. -->

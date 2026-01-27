@@ -685,6 +685,48 @@
         />.
       </p>
 
+      <h4>
+        Thumbnail slot
+        <DocsAnchorTarget anchor="#thumbnail-slot" />
+      </h4>
+
+      <p>
+        When the thumbnail configuration options are insufficient, the <code>thumbnail</code> slot
+        can be utilized. It is typically used to gain full access to
+        <code>KImg</code> configurations, such as aspect ratio.
+      </p>
+
+      <p>
+        If providing <code>KImg</code>, set <code>isDecorative</code> to <code>true</code> on
+        <code>KImg</code> for correct accessibility.
+      </p>
+
+      <DocsExample
+        loadExample="cards/ThumbnailSlotSmall.vue"
+        exampleId="kcard-thumbnail-slot-small"
+        hideScript
+        block
+      >
+        <template #html>
+          <!-- eslint-disable -->
+          <DocsShowCode language="html">
+            <KCardGrid ...>
+              <KCard ...>
+                <template #thumbnail>
+                  <KImg
+                    :src="..."
+                    :style="{ width: '100%', height: '100%' }"
+                    aspectRatio="16:9"
+                    isDecorative
+                  />
+                </template>
+              </KCard>
+            </KCardGrid>
+          </DocsShowCode>
+          <!-- eslint-enable -->
+        </template>
+      </DocsExample>
+
       <h3>
         Interactive elements
         <DocsAnchorTarget anchor="#interactive-elements" />
