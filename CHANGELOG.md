@@ -7,6 +7,19 @@ Changelog is rather internal in nature. See release notes for the public overvie
 <!-- [DO NOT REMOVE-USED BY GH ACTION] PASTE CHANGELOG -->
 
 
+- [#1194]
+  - **Description:** Add the `thumbnail` slot to `KCard`
+  - **Products impact:** new API
+  - **Addresses:** https://github.com/learningequality/kolibri-design-system/issues/1162
+  - **Components:** `KCard`
+  - **Breaking:** no
+  - **Impacts a11y:** no
+  - **Guidance:** -
+
+[#1194]: https://github.com/learningequality/kolibri-design-system/pull/1194
+
+
+
 - [#1193]
   - **Description:** Bumps KDS version to 5.5.1
   - **Products impact:** -
