@@ -2,16 +2,16 @@
 
   <div class="k-snackbar-wrapper">
     <transition name="k-snackbar-fade">
-      <div 
-        v-if="isOpen && backdrop" 
+      <div
+        v-if="isOpen && backdrop"
         class="k-snackbar-backdrop"
         @click.stop="handleBackdropClick"
       ></div>
     </transition>
 
-    <transition 
-      :name="transitionName" 
-      @after-enter="onEnter" 
+    <transition
+      :name="transitionName"
+      @after-enter="onEnter"
       @after-leave="onLeave"
     >
       <div
@@ -29,8 +29,8 @@
           <slot>{{ text }}</slot>
         </div>
 
-        <div 
-          v-if="actionText" 
+        <div
+          v-if="actionText"
           class="k-snackbar-action"
         >
           <KButton
@@ -63,32 +63,29 @@
    */
   export default {
     name: 'KSnackbar',
-
     setup(props, { emit }) {
       const { windowBreakpoint } = useKResponsiveWindow();
       const snackbarElement = ref(null);
       const actionButton = ref(null);
-      
+
       // Store the element that had focus before snackbar opened
       const previousActiveElement = ref(null);
-      
+
       let hideTimeoutId = null;
 
       // --- Computed Styles ---
       const transitionName = computed(() => `k-snackbar--transition-${props.transition}`);
-      
+
       const snackbarStyles = computed(() => {
         const styles = {
           bottom: `${24 + props.bottomOffset}px`,
-          left: '24px'
+          left: '24px',
         };
         // Breakpoint 2 corresponds to medium screens (600px+)
         if (windowBreakpoint.value < 2) {
           styles.right = '24px';
-
         } else {
           styles.right = 'auto';
-
         }
         return styles;
       });
@@ -96,7 +93,6 @@
       const actionButtonStyles = computed(() => ({
         color: '#FFFFFF', // Hardcoded KDS token for white text
         textDecoration: 'none',
-        fontWeight: 'bold',
         textTransform: 'uppercase',
         ':hover': {
           backgroundColor: 'rgba(255, 255, 255, 0.1)',
@@ -104,7 +100,7 @@
         ':focus': {
           outline: '2px solid white',
           outlineOffset: '2px',
-        }
+        },
       }));
 
       // --- Methods ---
@@ -129,8 +125,8 @@
        */
       const restoreFocus = async () => {
         await nextTick();
-        if (previousActiveElement.value && 
-          typeof previousActiveElement.value.focus === 'function' && 
+        if (previousActiveElement.value &&
+          typeof previousActiveElement.value.focus === 'function' &&
           document.body.contains(previousActiveElement.value)) {
           previousActiveElement.value.focus();
         }
@@ -142,7 +138,7 @@
        */
       const manageFocusOnOpen = async () => {
         await nextTick();
-        
+
         // If backdrop is active, we treat this like a modal: focus the container
         if (props.backdrop && snackbarElement.value) {
           snackbarElement.value.focus();
@@ -166,11 +162,11 @@
           // OPENING
           previousActiveElement.value = document.activeElement;
           setupAutoHide();
-          
+
           if (props.text) {
             sendPoliteMessage(props.text);
           }
-          
+
           manageFocusOnOpen();
 
         } else if (!newValue && oldValue) {
@@ -197,30 +193,48 @@
         actionButtonStyles,
         handleClose: () => emit('close'),
         setupAutoHide,
-        clearAutoHide
+        clearAutoHide,
       };
     },
-
     props: {
-      isOpen: { type: Boolean, default: false },
-      text: { type: String, default: '' },
-      actionText: { type: String, default: '' },
-      actionCallback: { type: Function, default: null },
-      duration: { type: Number, default: 4000 },
-      bottomOffset: { type: Number, default: 0 },
-      backdrop: { type: Boolean, default: false },
-      transition: { 
-        type: String, 
+      isOpen: {
+        type: Boolean,
+        default: false,
+      },
+      text: {
+        type: String,
+        default: '',
+      },
+      actionText: {
+        type: String,
+        default: '',
+      },
+      actionCallback: {
+        type: Function,
+        default: null,
+      },
+      duration: {
+        type: Number,
+        default: 4000,
+      },
+      bottomOffset: {
+        type: Number,
+        default: 0,
+      },
+      backdrop: {
+        type: Boolean,
+        default: false,
+      },
+      transition: {
+        type: String,
         default: 'slide',
-        validator: val => ['slide', 'fade'].includes(val)
+        validator: val => ['slide', 'fade'].includes(val),
       },
     },
-
     beforeDestroy() {
       // Cleanup timeout if component is destroyed while open
       this.clearAutoHide();
     },
-
     methods: {
       onClick() {
         this.$emit('click');
@@ -232,7 +246,7 @@
         this.$emit('action-click');
       },
       handleBackdropClick() {
-        // CoreSnackbar usually does NOT dismiss on backdrop click, 
+        // CoreSnackbar usually does NOT dismiss on backdrop click,
         // it just blocks interaction. We do nothing here.
       },
       onEnter() {
@@ -240,7 +254,7 @@
       },
       onLeave() {
         this.$emit('hide');
-      }
+      },
     },
   };
 
@@ -252,9 +266,9 @@
   @import '../styles/definitions';
 
   // Fallback if $k-grey-900 isn't globally available in your import
-  $k-grey-900: #212121 !default; 
+  $k-grey-900: #212121 !default;
   // Focus color fallback
-  $brand-secondary-v-100: #E6D2F3 !default; //e with actual token if imports work
+  $brand-secondary-v-100: #E6D2F3 !default; // Replace with actual token if imports work
 
   .k-snackbar-wrapper {
     position: relative;
@@ -276,19 +290,19 @@
     z-index: 24;
     display: inline-flex;
     align-items: center;
-    
+
     // SPEC: Dimensions
-    min-width: 344px;  // Spec: Min width 344px
-    max-width: 512px;  // Spec: Max width 512px
-    min-height: 48px;  // Spec: Height 48px (using min-height for safety with long text)
-    
-    // SPEC: Spacing and Radius
+    min-width: 344px; // Spec: Min width 344px
+    min-height: 48px; // Spec: Height 48px (using min-height for safety with long text)
+    max-width: 512px; // Spec: Max width 512px
     padding: 14px 24px;
-    border-radius: 4px; // Spec: Corner radius 4px
+
+    // SPEC: Spacing and Radius
+    color: white;
+    background-color: $k-grey-900; // Spec: Background color
 
     // SPEC: Colors
-    color: white; 
-    background-color: $k-grey-900; // Spec: Background color
+    border-radius: 4px; // Spec: Corner radius 4px
 
     // SPEC: Box Shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.25)
     box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.25);
@@ -299,12 +313,12 @@
 
     // SPEC: Focused State
     &:focus-visible {
-       // KDS often uses outline or box-shadow for focus.
-       // Spec says: brand.secondary.v_100
-       outline: 3px solid $brand-secondary-v-100;
-       outline-offset: 2px;
+      // KDS often uses outline or box-shadow for focus.
+      // Spec says: brand.secondary.v_100
+      outline: 3px solid $brand-secondary-v-100;
+      outline-offset: 2px;
     }
-    
+
     // Support for Backdrop focus ring
     &[aria-live="assertive"]:focus {
       outline: 3px solid $brand-secondary-v-100;
@@ -315,7 +329,7 @@
   .k-snackbar-message {
     flex-grow: 1;
     cursor: default;
-    
+
     // SPEC: Text 14px white and BOLDED
     font-size: 14px;
     font-weight: bold; // Spec requirement
@@ -351,10 +365,10 @@
   .k-snackbar-fade-leave-active {
     transition: opacity 0.3s ease;
   }
-  
+
   .k-snackbar-fade-enter,
   .k-snackbar-fade-leave-to {
     opacity: 0;
   }
-  
+
 </style>
