@@ -1,21 +1,33 @@
 <template>
 
-  <div style="padding: 40px; max-width: 800px; margin: 0 auto;">
+  <div style="padding: 40px; max-width: 800px; margin: 0 auto; padding-bottom: 200px;">
     
     <h1>KSnackbar Playground</h1>
     <p style="margin-bottom: 30px; color: #666;">
-      Use the controls below to verify behavior. The component is rendered at the bottom of the screen.
+      Manual verification board for KSnackbar.
     </p>
 
-    <div class="playground-grid">
+    <div style="margin-bottom: 40px; padding: 20px; border: 2px dashed #666; background: #eee;">
+      <h3 style="margin-top: 0;">📸 Visual Regression Suite</h3>
+      <p>Show all variants simultaneously to check for layout regressions (wrapping, padding, alignment).</p>
+      <KButton 
+        :text="showVisualSuite ? 'Hide Visual Suite' : 'Show All Variants (Stack)'" 
+        appearance="raised-button"
+        primary
+        @click="showVisualSuite = !showVisualSuite"
+      />
+    </div>
+
+    <div 
+      v-if="!showVisualSuite" 
+      class="playground-grid"
+    >
       
       <div class="control-card">
         <h3>1. Basic Notification</h3>
         <p>Standard text message. Auto-closes in 4s.</p>
         <KButton 
-          appearance="raised-button" 
-          primary 
-          text="Show Basic" 
+          text="Trigger Basic" 
           @click="triggerBasic" 
         />
       </div>
@@ -24,44 +36,35 @@
         <h3>2. Action Button</h3>
         <p>Includes a clickable 'RETRY' action.</p>
         <KButton 
-          appearance="raised-button" 
-          text="Show Action" 
+          text="Trigger Action" 
           @click="triggerAction" 
         />
       </div>
 
       <div class="control-card">
-        <h3>3. Force Reuse</h3>
-        <p>Click repeatedly. Text should update instantly without animation.</p>
+        <h3>3. Force Reuse (Updates)</h3>
+        <p>Click repeatedly. Text should update instantly.</p>
         <KButton 
-          appearance="raised-button" 
-          :text="`Update Progress: ${progress}%`" 
+          :text="`Update: ${progress}%`" 
           @click="triggerUpdate" 
         />
       </div>
 
       <div class="control-card">
         <h3>4. Backdrop (Modal)</h3>
-        <p>Dims background. Blocks clicks outside.</p>
+        <p>Dims background. Blocks clicks.</p>
         <KButton 
-          appearance="raised-button" 
-          text="Show Backdrop" 
+          text="Trigger Backdrop"
           @click="triggerBackdrop" 
         />
       </div>
 
       <div class="control-card">
         <h3>5. Focus Return (A11y)</h3>
-        <p>
-          1. Tab to this button.<br>
-          2. Press ENTER.<br>
-          3. Wait for close.<br>
-          <strong>Focus must return here.</strong>
-        </p>
+        <p>Focus must return to this button after close.</p>
         <KButton 
-          ref="focusBtn"
-          appearance="flat-button" 
-          text="Test Focus Return" 
+          ref="focusBtn" 
+          text="Test Focus" 
           @click="triggerBasic" 
         />
       </div>
@@ -69,6 +72,7 @@
     </div>
 
     <KSnackbar
+      v-if="!showVisualSuite"
       :is-open="snackbarState.isOpen"
       :text="snackbarState.text"
       :action-text="snackbarState.actionText"
@@ -79,6 +83,31 @@
       @close="hideSnackbar"
     />
 
+    <div v-if="showVisualSuite">
+      <KSnackbar
+        :is-open="true"
+        text="1. Basic message (Short)"
+        :duration="0"
+        :bottom-offset="0"
+      />
+      
+      <KSnackbar
+        :is-open="true"
+        text="2. Message with Action"
+        action-text="Retry"
+        :duration="0"
+        :bottom-offset="70"
+      />
+
+      <KSnackbar
+        :is-open="true"
+        text="3. Regression Check: This is a very long message that should wrap to a second line correctly without breaking the layout or overlapping the action button."
+        action-text="Dismiss"
+        :duration="0"
+        :bottom-offset="140"
+      />
+    </div>
+
   </div>
 
 </template>
@@ -86,68 +115,56 @@
 
 <script>
 
-  // Import the composable from the library
-  // We use ../../../ because this file is in docs/pages/playground/
+  import { ref } from 'vue';
   import useKSnackbar from '../../../lib/composables/useKSnackbar';
+  
+  // CORRECTED IMPORT PATH: Pointing to your new component location
   import KSnackbar from '../../../lib/keen/KSnackbar.vue';
 
   export default {
     name: 'Playground',
-    components: {
-      KSnackbar
-    },
+    components: { KSnackbar },
     setup() {
-      // Deconstruct the composable
       const { snackbarState, createSnackbar, hideSnackbar } = useKSnackbar();
-      
-      // Local state for the "Progress" test
+      const showVisualSuite = ref(false);
       let progress = 0;
 
-      // --- Trigger Methods ---
-
       const triggerBasic = () => {
-        createSnackbar({ 
-          text: 'File saved successfully.',
-          duration: 4000
-        });
+        createSnackbar({ text: 'File saved successfully.' });
       };
 
       const triggerAction = () => {
         createSnackbar({
-          text: 'Connection lost. Please check your internet.',
+          text: 'Connection lost.',
           actionText: 'Retry',
-          actionCallback: () => {
-            window.alert('Action Callback Fired!');
-          }
+          actionCallback: () => alert('Clicked!')
         });
       };
 
       const triggerUpdate = () => {
         progress += 10;
         if (progress > 100) progress = 0;
-
         createSnackbar({
-          text: `Uploading file... ${progress}% complete`,
-          forceReuse: true, // Updates text without re-triggering animation
-          duration: 0 // Keep open while updating
+          text: `Uploading... ${progress}%`,
+          forceReuse: true,
+          duration: 0
         });
       };
 
       const triggerBackdrop = () => {
         createSnackbar({
-          text: 'Session expired. Please log in again.',
+          text: 'Session expired.',
           actionText: 'Log In',
-          backdrop: true, // Enables the dim overlay
-          duration: 0, // Forces user to click action
-          actionCallback: () => {
-            hideSnackbar();
-          }
+          backdrop: true,
+          duration: 0,
+          actionCallback: hideSnackbar
         });
       };
 
       return {
         snackbarState,
         hideSnackbar,
+        showVisualSuite,
         triggerBasic,
         triggerAction,
         triggerUpdate,
@@ -164,28 +181,16 @@
 
   .playground-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 24px;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
   }
-
   .control-card {
-    padding: 24px;
-    background-color: #f9f9f9;
-    border: 1px solid #e0e0e0;
+    padding: 20px;
+    background: #f9f9f9;
+    border: 1px solid #ddd;
     border-radius: 8px;
   }
-
-  .control-card h3 {
-    margin-top: 0;
-    font-size: 16px;
-    font-weight: bold;
-  }
-
-  .control-card p {
-    min-height: 48px;
-    margin-bottom: 16px;
-    font-size: 14px;
-    color: #555;
-  }
-
+  h3 { margin-top: 0; font-size: 16px; }
+  p { font-size: 14px; color: #666; min-height: 40px; }
+  
 </style>
