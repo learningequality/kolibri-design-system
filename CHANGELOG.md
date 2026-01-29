@@ -7,6 +7,19 @@ Changelog is rather internal in nature. See release notes for the public overvie
 <!-- [DO NOT REMOVE-USED BY GH ACTION] PASTE CHANGELOG -->
 
 
+- [#1198]
+  - **Description:** Prevent external link icon from becoming tiny
+  - **Products impact:** bugfix
+  - **Addresses:** -
+  - **Components:** KExternalLink
+  - **Breaking:** no
+  - **Impacts a11y:** no
+  - **Guidance:** -
+
+[#1198]: https://github.com/learningequality/kolibri-design-system/pull/1198
+
+
+
 - [#1194]
   - **Description:** Add the `thumbnail` slot to `KCard`
   - **Products impact:** new API
