@@ -7,6 +7,19 @@ Changelog is rather internal in nature. See release notes for the public overvie
 <!-- [DO NOT REMOVE-USED BY GH ACTION] PASTE CHANGELOG -->
 
 
+- [#1197]
+  - **Description:** Adds open/close Sidepanel icon for courses; adds courses icon
+  -  **Products impact:** Choose from - none (for internal updates) / bugfix / new API / updated API / removed API. If it's 'none', use "-" for all items below to indicate they are not relevant.
+  - **Addresses:** [1195](https://github.com/learningequality/kolibri-design-system/issues/1195)
+  - **Components:** Adds KIcon options `openSidepanel`, `closeSidepanel`, `courses`
+  - **Breaking:** No
+  - **Impacts a11y:** No
+  - **Guidance:** Feature-specific for now (courses in Kolibri); new icons may be extended to other features in the future
+
+[#1197]: https://github.com/learningequality/kolibri-design-system/pull/1197
+
+
+
 - [#1198]
   - **Description:** Prevent external link icon from becoming tiny
   - **Products impact:** bugfix
