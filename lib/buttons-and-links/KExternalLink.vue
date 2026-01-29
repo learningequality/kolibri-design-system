@@ -17,8 +17,8 @@
       <slot name="icon">
         <KIcon
           v-if="icon"
+          class="icon"
           :icon="icon"
-          style="top: 4px"
           :color="iconColor"
         />
       </slot>
@@ -32,15 +32,15 @@
       <slot name="iconAfter">
         <KIcon
           v-if="iconAfter"
+          class="icon"
           :icon="iconAfter"
-          style="top: 4px"
           :color="iconColor"
         />
       </slot>
       <KIcon
         v-if="openInNewTab"
+        class="icon"
         icon="openNewTab"
-        style="top: 4px"
         :color="iconColor"
       />
     </span>
@@ -114,6 +114,11 @@
     display: inline-flex;
     gap: 8px;
     align-items: baseline;
+  }
+
+  .icon {
+    top: 4px;
+    flex-shrink: 0;
   }
 
 </style>
