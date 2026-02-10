@@ -7,6 +7,19 @@ Changelog is rather internal in nature. See release notes for the public overvie
 <!-- [DO NOT REMOVE-USED BY GH ACTION] PASTE CHANGELOG -->
 
 
+- [#1202]
+  - **Description:** Update KIcon docs
+  - **Products impact:** -
+  - **Addresses:** -
+  - **Components:** KIcon (docs)
+  - **Breaking:** no
+  - **Impacts a11y:** no (this is already a requirement for icons, it just makes the dev guidance clearer)
+  - **Guidance:** -
+
+[#1202]: https://github.com/learningequality/kolibri-design-system/pull/1202
+
+
+
 - [#1199]
   - **Description:** Bumps KDS version to 5.5.2
   - **Products impact:** -
