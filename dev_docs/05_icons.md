@@ -16,7 +16,7 @@ In order to use icons on some Learning Equality's documentation pages written in
 
 ## How to add a new icon
 
-1. **Paste a svg file** to [`custom-icons`](../custom-icons/)
+1. **Paste a svg file** to [`custom-icons`](../custom-icons/). If the svg has a hardcoded fill (for example `fill="black"`) that would prevent the icon color from being successfully overriden, remove it.
 2. **Run `yarn run precompile-custom-svgs` to generate a corresponding Vue component.** The generated component will be saved to [`lib/KIcon/precompiled-icons/le`](../lib/KIcon/precompiled-icons/le)
 3. **Add a new entry for the generated component to [the icons definitions file](../lib/KIcon/iconDefinitions.js).** As a key name, choose a unique alias that describes the purpose of the icon in our products well. Set the following attributes:
   - `icon`: A Vue component which renders the icon (generated in the previous step)
@@ -29,6 +29,7 @@ To **check that the new icon is successfully added**:
 - Run the development server
 - See that the new icon is present in the icons list: http://localhost:4000/icons#icons
 - See that there is a new entry for the icon in the reStructuredText replacement strings file: http://localhost:4000/icons#rst
+- Test the color override by passing a color to the new `KIcon` and confirming that the color changes.
 
 ## How to update an existing icon
 
