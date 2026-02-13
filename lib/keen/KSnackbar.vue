@@ -200,6 +200,8 @@
           // Use textInverted token
           color: this.$themeTokens.textInverted, 
           textDecoration: 'none',
+          fontWeight: 'bold',
+
           textTransform: 'uppercase',
           ':hover': {
             // Keep semi-transparent white for hover state on dark background

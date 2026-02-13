@@ -1,111 +1,162 @@
 <template>
 
-  <div style="padding: 40px; max-width: 800px; margin: 0 auto; padding-bottom: 200px;">
+  <div style="padding: 40px; max-width: 900px; margin: 0 auto; padding-bottom: 200px;">
     
-    <h1>KSnackbar Playground</h1>
+    <h1>KSnackbar Migration Playground</h1>
     <p style="margin-bottom: 30px; color: #666;">
-      Manual verification board for KSnackbar.
+      Compare the legacy <code>UiSnackbar</code> against the new <code>KSnackbar</code>.
     </p>
 
     <div style="margin-bottom: 40px; padding: 20px; border: 2px dashed #666; background: #eee;">
-      <h3 style="margin-top: 0;">📸 Visual Regression Suite</h3>
-      <p>Show all variants simultaneously to check for layout regressions (wrapping, padding, alignment).</p>
-      <KButton 
-        :text="showVisualSuite ? 'Hide Visual Suite' : 'Show All Variants (Stack)'" 
-        appearance="raised-button"
-        primary
-        @click="showVisualSuite = !showVisualSuite"
+      <h3 style="margin-top: 0;">🛠 Testing Controls</h3>
+      <div style="display: flex; gap: 10px; margin-bottom: 20px;">
+        <KButton 
+          :text="viewMode === 'interactive' ? 'Switch to Visual Suite' : 'Switch to Interactive'" 
+          appearance="raised-button"
+          primary
+          @click="toggleView"
+        />
+      </div>
+      
+      <div v-if="viewMode === 'interactive'">
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 40px;">
+          
+          <div>
+            <h4 style="margin-bottom: 10px;">Legacy (UiSnackbar)</h4>
+            <div style="display: flex; flex-direction: column; gap: 10px;">
+              <KButton 
+                text="1. Basic Text" 
+                @click="triggerLegacy('basic')" 
+              />
+              <KButton 
+                text="2. With Action" 
+                @click="triggerLegacy('action')" 
+              />
+              <KButton 
+                text="3. Long Text" 
+                @click="triggerLegacy('long')" 
+              />
+            </div>
+          </div>
+
+          <div>
+            <h4 style="margin-bottom: 10px;">New (KSnackbar)</h4>
+            <div style="display: flex; flex-direction: column; gap: 10px;">
+              <KButton 
+                text="1. Basic Text" 
+                appearance="outline-button"
+                @click="triggerNew('basic')" 
+              />
+              <KButton 
+                text="2. With Action" 
+                appearance="outline-button"
+                @click="triggerNew('action')" 
+              />
+              <KButton 
+                text="3. Long Text" 
+                appearance="outline-button"
+                @click="triggerNew('long')" 
+              />
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <div v-if="viewMode === 'interactive'">
+      
+      <transition name="ui-snackbar--transition-slide">
+        <UiSnackbar
+          v-if="legacyState.isOpen"
+          :message="legacyState.text"
+          :action="legacyState.actionText"
+          @action-click="() => alert('Legacy Action Clicked')"
+        />
+      </transition>
+
+      <KSnackbar
+        :is-open="snackbarState.isOpen"
+        :text="snackbarState.text"
+        :action-text="snackbarState.actionText"
+        :action-callback="snackbarState.actionCallback"
+        :duration="snackbarState.duration"
+        :bottom-offset="snackbarState.bottomOffset"
+        :backdrop="snackbarState.backdrop"
+        @close="hideSnackbar"
       />
     </div>
 
     <div 
-      v-if="!showVisualSuite" 
-      class="playground-grid"
+      v-if="viewMode === 'visual'" 
+      class="visual-suite"
     >
       
-      <div class="control-card">
-        <h3>1. Basic Notification</h3>
-        <p>Standard text message. Auto-closes in 4s.</p>
-        <KButton 
-          text="Trigger Basic" 
-          @click="triggerBasic" 
-        />
+      <div class="comparison-row">
+        <div class="label">Basic Message</div>
+        <div class="component-box">
+          <small>Legacy</small>
+          <UiSnackbar message="File saved successfully" />
+        </div>
+        <div class="component-box">
+          <small>New (KSnackbar)</small>
+          <div class="static-wrapper">
+            <KSnackbar 
+              :is-open="true" 
+              text="File saved successfully" 
+              :duration="0" 
+              style="position: static;" 
+            />
+          </div>
+        </div>
       </div>
 
-      <div class="control-card">
-        <h3>2. Action Button</h3>
-        <p>Includes a clickable 'RETRY' action.</p>
-        <KButton 
-          text="Trigger Action" 
-          @click="triggerAction" 
-        />
+      <div class="comparison-row">
+        <div class="label">With Action</div>
+        <div class="component-box">
+          <small>Legacy</small>
+          <UiSnackbar 
+            message="Connection lost" 
+            action="Retry" 
+          />
+        </div>
+        <div class="component-box">
+          <small>New (KSnackbar)</small>
+          <div class="static-wrapper">
+            <KSnackbar 
+              :is-open="true" 
+              text="Connection lost" 
+              action-text="Retry" 
+              :duration="0" 
+              style="position: static;" 
+            />
+          </div>
+        </div>
       </div>
 
-      <div class="control-card">
-        <h3>3. Force Reuse (Updates)</h3>
-        <p>Click repeatedly. Text should update instantly.</p>
-        <KButton 
-          :text="`Update: ${progress}%`" 
-          @click="triggerUpdate" 
-        />
+      <div class="comparison-row">
+        <div class="label">Text Wrapping</div>
+        <div class="component-box">
+          <small>Legacy</small>
+          <UiSnackbar 
+            message="This is a very long message that should wrap to a second line correctly without breaking." 
+            action="Dismiss" 
+          />
+        </div>
+        <div class="component-box">
+          <small>New (KSnackbar)</small>
+          <div class="static-wrapper">
+            <KSnackbar 
+              :is-open="true" 
+              text="This is a very long message that should wrap to a second line correctly without breaking." 
+              action-text="Dismiss" 
+              :duration="0" 
+              style="position: static;" 
+            />
+          </div>
+        </div>
       </div>
 
-      <div class="control-card">
-        <h3>4. Backdrop (Modal)</h3>
-        <p>Dims background. Blocks clicks.</p>
-        <KButton 
-          text="Trigger Backdrop"
-          @click="triggerBackdrop" 
-        />
-      </div>
-
-      <div class="control-card">
-        <h3>5. Focus Return (A11y)</h3>
-        <p>Focus must return to this button after close.</p>
-        <KButton 
-          ref="focusBtn" 
-          text="Test Focus" 
-          @click="triggerBasic" 
-        />
-      </div>
-
-    </div>
-
-    <KSnackbar
-      v-if="!showVisualSuite"
-      :is-open="snackbarState.isOpen"
-      :text="snackbarState.text"
-      :action-text="snackbarState.actionText"
-      :action-callback="snackbarState.actionCallback"
-      :duration="snackbarState.duration"
-      :bottom-offset="snackbarState.bottomOffset"
-      :backdrop="snackbarState.backdrop"
-      @close="hideSnackbar"
-    />
-
-    <div v-if="showVisualSuite">
-      <KSnackbar
-        :is-open="true"
-        text="1. Basic message (Short)"
-        :duration="0"
-        :bottom-offset="0"
-      />
-      
-      <KSnackbar
-        :is-open="true"
-        text="2. Message with Action"
-        action-text="Retry"
-        :duration="0"
-        :bottom-offset="70"
-      />
-
-      <KSnackbar
-        :is-open="true"
-        text="3. Regression Check: This is a very long message that should wrap to a second line correctly without breaking the layout or overlapping the action button."
-        action-text="Dismiss"
-        :duration="0"
-        :bottom-offset="140"
-      />
     </div>
 
   </div>
@@ -115,61 +166,81 @@
 
 <script>
 
-  import { ref } from 'vue';
+  import { ref, reactive } from 'vue';
+  
+  // 1. Import Composable for New Component
   import useKSnackbar from '../../../lib/composables/useKSnackbar';
   
-  // CORRECTED IMPORT PATH: Pointing to your new component location
+  // 2. Import Components
   import KSnackbar from '../../../lib/keen/KSnackbar.vue';
+  import UiSnackbar from '../../../lib/keen/UiSnackbar.vue'; 
 
   export default {
     name: 'Playground',
-    components: { KSnackbar },
+    components: { KSnackbar, UiSnackbar },
     setup() {
+      // New System State
       const { snackbarState, createSnackbar, hideSnackbar } = useKSnackbar();
-      const showVisualSuite = ref(false);
-      let progress = 0;
+      
+      // Legacy System Manual State
+      const legacyState = reactive({
+        isOpen: false,
+        text: '',
+        actionText: ''
+      });
 
-      const triggerBasic = () => {
-        createSnackbar({ text: 'File saved successfully.' });
+      const viewMode = ref('visual'); // 'visual' or 'interactive'
+
+      const toggleView = () => {
+        viewMode.value = viewMode.value === 'visual' ? 'interactive' : 'visual';
       };
 
-      const triggerAction = () => {
-        createSnackbar({
-          text: 'Connection lost.',
-          actionText: 'Retry',
-          actionCallback: () => alert('Clicked!')
-        });
+      // --- Trigger for Legacy (UiSnackbar) ---
+      const triggerLegacy = (type) => {
+        // Reset current
+        legacyState.isOpen = false;
+
+        setTimeout(() => {
+          if (type === 'basic') {
+             
+            legacyState.text = 'File saved successfully';
+             
+            legacyState.actionText = '';
+          }
+          if (type === 'action') {
+            legacyState.text = 'Connection lost';
+            legacyState.actionText = 'Retry';
+          }
+          if (type === 'long') {
+            legacyState.text = 'This is a very long message that should wrap to a second line correctly.';
+            legacyState.actionText = 'Dismiss';
+          }
+
+          legacyState.isOpen = true;
+
+          // Auto hide legacy
+          setTimeout(() => { legacyState.isOpen = false }, 4000);
+        }, 100);
       };
 
-      const triggerUpdate = () => {
-        progress += 10;
-        if (progress > 100) progress = 0;
-        createSnackbar({
-          text: `Uploading... ${progress}%`,
-          forceReuse: true,
-          duration: 0
-        });
-      };
+      // --- Trigger for New (KSnackbar) ---
+      const triggerNew = (type) => {
+        // Ensure legacy is closed so they don't visually conflict if defaults overlap
+        legacyState.isOpen = false; 
 
-      const triggerBackdrop = () => {
-        createSnackbar({
-          text: 'Session expired.',
-          actionText: 'Log In',
-          backdrop: true,
-          duration: 0,
-          actionCallback: hideSnackbar
-        });
+        if (type === 'basic') createSnackbar({ text: 'File saved successfully' });
+        if (type === 'action') createSnackbar({ text: 'Connection lost', actionText: 'Retry' });
+        if (type === 'long') createSnackbar({ text: 'This is a very long message that should wrap to a second line correctly.', actionText: 'Dismiss' });
       };
 
       return {
+        viewMode,
+        toggleView,
+        triggerLegacy,
+        triggerNew,
         snackbarState,
         hideSnackbar,
-        showVisualSuite,
-        triggerBasic,
-        triggerAction,
-        triggerUpdate,
-        triggerBackdrop,
-        progress
+        legacyState
       };
     }
   };
@@ -179,18 +250,50 @@
 
 <style scoped>
 
-  .playground-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    gap: 20px;
+  /* Visual Suite Styling */
+  .visual-suite {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
   }
-  .control-card {
-    padding: 20px;
-    background: #f9f9f9;
+
+  .comparison-row {
+    background: #fff;
     border: 1px solid #ddd;
+    padding: 20px;
     border-radius: 8px;
   }
-  h3 { margin-top: 0; font-size: 16px; }
-  p { font-size: 14px; color: #666; min-height: 40px; }
+
+  .label {
+    font-weight: bold;
+    margin-bottom: 15px;
+    font-size: 18px;
+    border-bottom: 2px solid #eee;
+    padding-bottom: 5px;
+  }
+
+  .component-box {
+    margin-bottom: 20px;
+    padding: 10px;
+    background: #f5f5f5; 
+  }
+
+  small {
+    display: block;
+    margin-bottom: 8px;
+    font-family: monospace;
+    color: #666;
+    font-weight: bold;
+  }
+
+  .static-wrapper >>> .k-snackbar {
+    position: static !important;
+    display: inline-flex !important;
+    transform: none !important;
+  }
+  
+  .static-wrapper >>> .k-snackbar-wrapper {
+    position: static !important;
+  }
   
 </style>
