@@ -9,6 +9,13 @@
       ></div>
     </transition>
 
+    <div 
+      v-if="isOpen && backdrop" 
+      tabindex="0" 
+      class="k-focus-sentinel"
+      @focus="trapFocus"
+    ></div>
+
     <transition 
       :name="transitionName" 
       @after-enter="onEnter" 
@@ -45,6 +52,14 @@
         </div>
       </div>
     </transition>
+
+    <div 
+      v-if="isOpen && backdrop" 
+      tabindex="0" 
+      class="k-focus-sentinel"
+      @focus="trapFocus"
+    ></div>
+
   </div>
 
 </template>
@@ -97,11 +112,24 @@
 
       const manageFocusOnOpen = async () => {
         await nextTick();
+      
         if (props.backdrop && snackbarElement.value) {
           snackbarElement.value.focus();
-        } else if (props.actionText) {
+        } 
+      
+        else if (props.actionText) {
           const btn = actionButton.value?.$el || actionButton.value;
           if (btn && typeof btn.focus === 'function') btn.focus();
+        }
+      };
+
+      const trapFocus = (e) => {
+  
+        if (e) e.stopPropagation();
+        
+        
+        if (snackbarElement.value) {
+          snackbarElement.value.focus();
         }
       };
 
@@ -134,6 +162,7 @@
         handleClose: () => emit('close'),
         setupAutoHide,
         clearAutoHide,
+        trapFocus
       };
     },
 
@@ -198,7 +227,6 @@
           ':hover': {
             backgroundColor: 'rgba(255, 255, 255, 0.1)',
           },
-        
         };
       }
     },
@@ -208,6 +236,7 @@
       onActionClick() {
         if (this.actionCallback) this.actionCallback();
         this.$emit('action-click');
+        this.$emit('close');
       },
       onEnter() { this.$emit('show'); },
       onLeave() { this.$emit('hide'); },
@@ -236,6 +265,12 @@
     background-color: rgba(0, 0, 0, 0.7);
     z-index: 23;
   }
+  
+  .k-focus-sentinel {
+    position: fixed; 
+    opacity: 0;
+    pointer-events: none;
+  }
 
   .k-snackbar {
     position: fixed;
@@ -259,14 +294,17 @@
   }
 
   .k-snackbar-action {
-    margin-left: auto;
+    margin-left: auto; 
     padding-left: 48px;
-    margin: -9px -12px -9px 0px;
+    margin-right: -12px; 
+    margin-top: -9px;
+    margin-bottom: -9px;
+    display: flex;
+    align-items: center;
   }
 
-  /* Added to match the specific margins from the legacy screenshot */
   .k-snackbar-action-button {
-   
+    margin: 0;
   }
 
   .k-snackbar--transition-slide-enter-active,

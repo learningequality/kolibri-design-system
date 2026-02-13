@@ -57,6 +57,29 @@
                 appearance="outline-button"
                 @click="triggerNew('long')" 
               />
+              
+              <div style="border-top: 1px solid #ccc; margin: 10px 0;"></div>
+              
+              <KButton 
+                text="4. With Backdrop (Modal)" 
+                appearance="outline-button"
+                @click="triggerNew('backdrop')" 
+              />
+              <KButton 
+                text="5. Queue Test (Rapid Fire)" 
+                appearance="outline-button"
+                @click="triggerNew('queue')" 
+              />
+              <KButton 
+                text="6. Force Reuse (Update Text)" 
+                appearance="outline-button"
+                @click="triggerNew('reuse')" 
+              />
+              <KButton 
+                text="7. Custom Offset (bottom: 100px)" 
+                appearance="outline-button"
+                @click="triggerNew('offset')" 
+              />
             </div>
           </div>
 
@@ -93,6 +116,7 @@
       v-if="viewMode === 'visual'" 
       class="visual-suite"
     >
+      
       <div class="comparison-row">
         <div class="label">Basic Message</div>
         <div class="component-box">
@@ -157,6 +181,7 @@
           </div>
         </div>
       </div>
+
     </div>
 
   </div>
@@ -198,9 +223,7 @@
       // --- Trigger for Legacy (UiSnackbar) ---
       const triggerLegacy = (type) => {
         legacyState.isOpen = false;
-        
-        // Ensure New Snackbar is closed
-        hideSnackbar();
+        hideSnackbar(); // Ensure New Snackbar is closed
 
         setTimeout(() => {
           if (type === 'basic') {
@@ -217,20 +240,62 @@
           }
 
           legacyState.isOpen = true;
-
-          // Auto hide legacy
           setTimeout(() => { legacyState.isOpen = false }, 4000);
         }, 100);
       };
 
       // --- Trigger for New (KSnackbar) ---
       const triggerNew = (type) => {
-        // Ensure legacy is closed
         legacyState.isOpen = false; 
 
-        if (type === 'basic') createSnackbar({ text: 'File saved successfully' });
-        if (type === 'action') createSnackbar({ text: 'Connection lost', actionText: 'Retry' });
-        if (type === 'long') createSnackbar({ text: 'This is a very long message that should wrap to a second line correctly.', actionText: 'Dismiss' });
+        if (type === 'basic') {
+          createSnackbar({ text: 'File saved successfully' });
+        }
+        else if (type === 'action') {
+          createSnackbar({ 
+            text: 'Connection lost', 
+            actionText: 'Retry', 
+            actionCallback: () => alert('Retry clicked!') 
+          });
+        }
+        else if (type === 'long') {
+          createSnackbar({ 
+            text: 'This is a very long message that should wrap to a second line correctly without breaking.', 
+            actionText: 'Dismiss' 
+          });
+        }
+        // --- Advanced Features ---
+        else if (type === 'backdrop') {
+          createSnackbar({
+            text: 'I am a modal snackbar! I trap focus.',
+            actionText: 'Got it',
+            backdrop: true,
+            duration: 0 // Stay open until clicked
+          });
+        }
+        else if (type === 'queue') {
+          // Trigger 3 messages rapidly
+          createSnackbar({ text: 'Message 1 (Click me away or wait)', duration: 2000 });
+          setTimeout(() => createSnackbar({ text: 'Message 2 (I was queued)', duration: 2000 }), 500);
+          setTimeout(() => createSnackbar({ text: 'Message 3 (I am last)', actionText: 'Close', duration: 4000 }), 1000);
+        }
+        else if (type === 'reuse') {
+          createSnackbar({ text: 'Initial Message...', duration: 5000 });
+          
+          setTimeout(() => {
+            createSnackbar({ 
+              text: 'Updated Message! (No Transition)', 
+              forceReuse: true 
+            });
+          }, 1500);
+        }
+        else if (type === 'offset') {
+          createSnackbar({ 
+            text: 'I am floating higher up!', 
+            bottomOffset: 100,
+            actionText: 'Cool' 
+          });
+        }
       };
 
       return {
@@ -286,10 +351,7 @@
     font-weight: bold;
   }
 
-  /* * LEGACY OVERRIDE 
-   * Forces UiSnackbar to appear in the bottom-left (New KSnackbar default)
-   * instead of its default (usually top-right).
-   */
+  /* Legacy Override to match new bottom-left positioning */
   .legacy-override >>> .ui-snackbar {
     top: auto !important;
     right: auto !important;
@@ -298,7 +360,7 @@
     position: fixed !important;
   }
 
-  /* Force KSnackbar to behave statically for the visual suite */
+  /* Static wrapper for Visual Suite */
   .static-wrapper >>> .k-snackbar {
     position: static !important;
     display: inline-flex !important;
@@ -308,5 +370,5 @@
   .static-wrapper >>> .k-snackbar-wrapper {
     position: static !important;
   }
-
+  
 </style>
