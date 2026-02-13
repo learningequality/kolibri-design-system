@@ -18,6 +18,7 @@
         v-if="isOpen"
         ref="snackbarElement"
         class="k-snackbar"
+        :class="$computedClass(focusStyles)"
         role="alert"
         :aria-live="backdrop ? 'assertive' : 'polite'"
         :style="snackbarStyles"
@@ -60,7 +61,6 @@
   export default {
     name: 'KSnackbar',
 
-    // 1. SETUP FIRST (Per your linting rule)
     setup(props, { emit }) {
       const { windowBreakpoint } = useKResponsiveWindow();
       const snackbarElement = ref(null);
@@ -127,7 +127,6 @@
 
       onBeforeUnmount(() => clearAutoHide());
 
-      // Expose to template
       return {
         windowBreakpoint,
         snackbarElement,
@@ -138,7 +137,6 @@
       };
     },
 
-    // 2. PROPS SECOND
     props: {
       isOpen: { type: Boolean, default: false },
       text: { type: String, default: '' },
@@ -154,16 +152,20 @@
       },
     },
 
-    // 3. COMPUTED (using 'this')
     computed: {
       transitionName() {
         return `k-snackbar--transition-${this.transition}`;
       },
       
+      // Dynamic styles using Theme Palette/Tokens
       snackbarStyles() {
         const styles = {
           bottom: `${24 + this.bottomOffset}px`,
-          left: '24px'
+          left: '24px',
+          // Use palette grey 900 as per spec
+          backgroundColor: this.$themePalette.grey.v_800,
+          // Use textInverted (white) for contrast on dark background
+          color: this.$themeTokens.textInverted,
         };
         
         if (this.windowBreakpoint < 2) {
@@ -174,13 +176,33 @@
         return styles;
       },
 
+      // Handle pseudo-classes (:focus-visible) dynamically
+      focusStyles() {
+        return {
+          ':focus': {
+            outline: 'none',
+          },
+          ':focus-visible': {
+            // Use brand secondary v_100 for focus ring
+            outline: `3px solid ${this.$themeBrand.secondary.v_100}`,
+            outlineOffset: '2px',
+          },
+          // Also apply to [aria-live="assertive"] (backdrop mode)
+          '&[aria-live="assertive"]:focus': {
+            outline: `3px solid ${this.$themeBrand.secondary.v_100}`,
+            outlineOffset: '2px',
+          }
+        };
+      },
+
       actionButtonStyles() {
         return {
+          // Use textInverted token
           color: this.$themeTokens.textInverted, 
           textDecoration: 'none',
-          fontWeight: 'bold',
           textTransform: 'uppercase',
           ':hover': {
+            // Keep semi-transparent white for hover state on dark background
             backgroundColor: 'rgba(255, 255, 255, 0.1)',
           },
           ':focus': {
@@ -191,7 +213,6 @@
       }
     },
 
-    // 4. METHODS
     methods: {
       onClick() { this.$emit('click'); },
       onActionClick() {
@@ -200,7 +221,7 @@
       },
       onEnter() { this.$emit('show'); },
       onLeave() { this.$emit('hide'); },
-      handleBackdropClick() {} // No-op
+      handleBackdropClick() {} 
     }
   };
 
@@ -210,9 +231,6 @@
 <style lang="scss" scoped>
 
   @import '../styles/definitions';
-
-  $k-grey-900: #212121 !default; 
-  $brand-secondary-v-100: #E6D2F3 !default; 
 
   .k-snackbar-wrapper {
     position: relative;
@@ -242,31 +260,14 @@
     padding: 14px 24px;
     border-radius: 4px;
 
-    // Spec Colors
-    color: white; 
-    background-color: $k-grey-900;
+    // Spec Colors managed in computed properties now
     box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.25);
-
-    &:focus {
-      outline: none;
-    }
-
-    &:focus-visible {
-       outline: 3px solid $brand-secondary-v-100;
-       outline-offset: 2px;
-    }
-    
-    &[aria-live="assertive"]:focus {
-      outline: 3px solid $brand-secondary-v-100;
-      outline-offset: 2px;
-    }
   }
 
   .k-snackbar-message {
     flex-grow: 1;
     cursor: default;
     font-size: 14px;
-    font-weight: bold;
     line-height: 1.5;
   }
 
@@ -303,5 +304,5 @@
   .k-snackbar-fade-leave-to {
     opacity: 0;
   }
-  
+
 </style>
