@@ -36,7 +36,7 @@
         >
           <KButton
             ref="actionButton"
-            appearance="basic-link"
+            appearance="flat-button"
             class="k-snackbar-action-button"
             :text="actionText"
             :appearanceOverrides="actionButtonStyles"
@@ -157,14 +157,11 @@
         return `k-snackbar--transition-${this.transition}`;
       },
       
-      // Dynamic styles using Theme Palette/Tokens
       snackbarStyles() {
         const styles = {
           bottom: `${24 + this.bottomOffset}px`,
           left: '24px',
-          // Use palette grey 900 as per spec
           backgroundColor: this.$themePalette.grey.v_800,
-          // Use textInverted (white) for contrast on dark background
           color: this.$themeTokens.textInverted,
         };
         
@@ -176,18 +173,15 @@
         return styles;
       },
 
-      // Handle pseudo-classes (:focus-visible) dynamically
       focusStyles() {
         return {
           ':focus': {
             outline: 'none',
           },
           ':focus-visible': {
-            // Use brand secondary v_100 for focus ring
             outline: `3px solid ${this.$themeBrand.secondary.v_100}`,
             outlineOffset: '2px',
           },
-          // Also apply to [aria-live="assertive"] (backdrop mode)
           '&[aria-live="assertive"]:focus': {
             outline: `3px solid ${this.$themeBrand.secondary.v_100}`,
             outlineOffset: '2px',
@@ -196,21 +190,15 @@
       },
 
       actionButtonStyles() {
-        return {
-          // Use textInverted token
-          color: this.$themeTokens.textInverted, 
-          textDecoration: 'none',
-          fontWeight: 'bold',
+        const whiteColor = this.$themeTokens.textInverted;
 
-          textTransform: 'uppercase',
+        return {
+          color: whiteColor, 
+          textDecoration: 'none',
           ':hover': {
-            // Keep semi-transparent white for hover state on dark background
             backgroundColor: 'rgba(255, 255, 255, 0.1)',
           },
-          ':focus': {
-            outline: `2px solid ${this.$themeTokens.textInverted}`,
-            outlineOffset: '2px',
-          }
+        
         };
       }
     },
@@ -255,14 +243,11 @@
     display: inline-flex;
     align-items: center;
     
-    // Spec Dimensions
     min-width: 344px;
     max-width: 512px;
     min-height: 48px;
     padding: 14px 24px;
     border-radius: 4px;
-
-    // Spec Colors managed in computed properties now
     box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.25);
   }
 
@@ -276,16 +261,14 @@
   .k-snackbar-action {
     margin-left: auto;
     padding-left: 48px;
+    margin: -9px -12px -9px 0px;
   }
 
+  /* Added to match the specific margins from the legacy screenshot */
   .k-snackbar-action-button {
-    min-width: initial;
-    min-height: initial;
-    padding: 8px 16px;
-    margin: -8px -12px;
+   
   }
 
-  /* Transitions */
   .k-snackbar--transition-slide-enter-active,
   .k-snackbar--transition-slide-leave-active {
     transition: transform 0.4s ease, opacity 0.4s ease;

@@ -66,14 +66,16 @@
 
     <div v-if="viewMode === 'interactive'">
       
-      <transition name="ui-snackbar--transition-slide">
-        <UiSnackbar
-          v-if="legacyState.isOpen"
-          :message="legacyState.text"
-          :action="legacyState.actionText"
-          @action-click="() => alert('Legacy Action Clicked')"
-        />
-      </transition>
+      <div class="legacy-override">
+        <transition name="ui-snackbar--transition-slide">
+          <UiSnackbar
+            v-if="legacyState.isOpen"
+            :message="legacyState.text"
+            :action="legacyState.actionText"
+            @action-click="() => alert('Legacy Action Clicked')"
+          />
+        </transition>
+      </div>
 
       <KSnackbar
         :is-open="snackbarState.isOpen"
@@ -91,7 +93,6 @@
       v-if="viewMode === 'visual'" 
       class="visual-suite"
     >
-      
       <div class="comparison-row">
         <div class="label">Basic Message</div>
         <div class="component-box">
@@ -156,7 +157,6 @@
           </div>
         </div>
       </div>
-
     </div>
 
   </div>
@@ -197,14 +197,14 @@
 
       // --- Trigger for Legacy (UiSnackbar) ---
       const triggerLegacy = (type) => {
-        // Reset current
         legacyState.isOpen = false;
+        
+        // Ensure New Snackbar is closed
+        hideSnackbar();
 
         setTimeout(() => {
           if (type === 'basic') {
-             
             legacyState.text = 'File saved successfully';
-             
             legacyState.actionText = '';
           }
           if (type === 'action') {
@@ -225,7 +225,7 @@
 
       // --- Trigger for New (KSnackbar) ---
       const triggerNew = (type) => {
-        // Ensure legacy is closed so they don't visually conflict if defaults overlap
+        // Ensure legacy is closed
         legacyState.isOpen = false; 
 
         if (type === 'basic') createSnackbar({ text: 'File saved successfully' });
@@ -286,6 +286,19 @@
     font-weight: bold;
   }
 
+  /* * LEGACY OVERRIDE 
+   * Forces UiSnackbar to appear in the bottom-left (New KSnackbar default)
+   * instead of its default (usually top-right).
+   */
+  .legacy-override >>> .ui-snackbar {
+    top: auto !important;
+    right: auto !important;
+    bottom: 24px !important;
+    left: 24px !important;
+    position: fixed !important;
+  }
+
+  /* Force KSnackbar to behave statically for the visual suite */
   .static-wrapper >>> .k-snackbar {
     position: static !important;
     display: inline-flex !important;
@@ -295,5 +308,5 @@
   .static-wrapper >>> .k-snackbar-wrapper {
     position: static !important;
   }
-  
+
 </style>
