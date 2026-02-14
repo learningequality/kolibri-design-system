@@ -197,7 +197,7 @@
   import useKSnackbar from '../../../lib/composables/useKSnackbar';
   
   // 2. Import Components
-  import KSnackbar from '../../../lib/keen/KSnackbar.vue';
+  import KSnackbar from '../../../lib/KSnackbar/KSnackbar.vue';
   import UiSnackbar from '../../../lib/keen/UiSnackbar.vue'; 
 
   export default {
