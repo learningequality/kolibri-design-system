@@ -2,23 +2,23 @@
 
   <div class="k-snackbar-wrapper">
     <transition name="k-snackbar-fade">
-      <div 
-        v-if="isOpen && backdrop" 
+      <div
+        v-if="isOpen && backdrop"
         class="k-snackbar-backdrop"
         @click.stop="handleBackdropClick"
       ></div>
     </transition>
 
-    <div 
-      v-if="isOpen && backdrop" 
-      tabindex="0" 
+    <div
+      v-if="isOpen && backdrop"
+      tabindex="0"
       class="k-focus-sentinel"
       @focus="trapFocus"
     ></div>
 
-    <transition 
-      :name="transitionName" 
-      @after-enter="onEnter" 
+    <transition
+      :name="transitionName"
+      @after-enter="onEnter"
       @after-leave="onLeave"
     >
       <div
@@ -37,8 +37,8 @@
           <slot>{{ text }}</slot>
         </div>
 
-        <div 
-          v-if="actionText" 
+        <div
+          v-if="actionText"
           class="k-snackbar-action"
         >
           <KButton
@@ -53,13 +53,12 @@
       </div>
     </transition>
 
-    <div 
-      v-if="isOpen && backdrop" 
-      tabindex="0" 
+    <div
+      v-if="isOpen && backdrop"
+      tabindex="0"
       class="k-focus-sentinel"
       @focus="trapFocus"
     ></div>
-
   </div>
 
 </template>
@@ -102,9 +101,11 @@
 
       const restoreFocus = async () => {
         await nextTick();
-        if (previousActiveElement.value && 
+        if (
+          previousActiveElement.value &&
           document.body.contains(previousActiveElement.value) &&
-          typeof previousActiveElement.value.focus === 'function') {
+          typeof previousActiveElement.value.focus === 'function'
+        ) {
           previousActiveElement.value.focus();
         }
         previousActiveElement.value = null;
@@ -112,46 +113,48 @@
 
       const manageFocusOnOpen = async () => {
         await nextTick();
-      
+
         if (props.backdrop && snackbarElement.value) {
           snackbarElement.value.focus();
-        } 
-      
-        else if (props.actionText) {
+        } else if (props.actionText) {
           const btn = actionButton.value?.$el || actionButton.value;
           if (btn && typeof btn.focus === 'function') btn.focus();
         }
       };
 
-      const trapFocus = (e) => {
-  
+      const trapFocus = e => {
         if (e) e.stopPropagation();
-        
-        
+
         if (snackbarElement.value) {
           snackbarElement.value.focus();
         }
       };
 
       // --- Watchers ---
-      watch(() => props.isOpen, (val, old) => {
-        if (val && !old) {
-          previousActiveElement.value = document.activeElement;
-          setupAutoHide();
-          if (props.text) sendPoliteMessage(props.text);
-          manageFocusOnOpen();
-        } else if (!val && old) {
-          clearAutoHide();
-          restoreFocus();
-        }
-      });
+      watch(
+        () => props.isOpen,
+        (val, old) => {
+          if (val && !old) {
+            previousActiveElement.value = document.activeElement;
+            setupAutoHide();
+            if (props.text) sendPoliteMessage(props.text);
+            manageFocusOnOpen();
+          } else if (!val && old) {
+            clearAutoHide();
+            restoreFocus();
+          }
+        },
+      );
 
-      watch(() => props.text, (val) => {
-        if (props.isOpen && val) {
-          sendPoliteMessage(val);
-          setupAutoHide();
-        }
-      });
+      watch(
+        () => props.text,
+        val => {
+          if (props.isOpen && val) {
+            sendPoliteMessage(val);
+            setupAutoHide();
+          }
+        },
+      );
 
       onBeforeUnmount(() => clearAutoHide());
 
@@ -162,7 +165,7 @@
         handleClose: () => emit('close'),
         setupAutoHide,
         clearAutoHide,
-        trapFocus
+        trapFocus,
       };
     },
 
@@ -174,10 +177,10 @@
       duration: { type: Number, default: 4000 },
       bottomOffset: { type: Number, default: 0 },
       backdrop: { type: Boolean, default: false },
-      transition: { 
-        type: String, 
+      transition: {
+        type: String,
         default: 'slide',
-        validator: val => ['slide', 'fade'].includes(val)
+        validator: val => ['slide', 'fade'].includes(val),
       },
     },
 
@@ -185,7 +188,7 @@
       transitionName() {
         return `k-snackbar--transition-${this.transition}`;
       },
-      
+
       snackbarStyles() {
         const styles = {
           bottom: `${24 + this.bottomOffset}px`,
@@ -193,7 +196,7 @@
           backgroundColor: this.$themePalette.grey.v_800,
           color: this.$themeTokens.textInverted,
         };
-        
+
         if (this.windowBreakpoint < 2) {
           styles.right = '24px';
         } else {
@@ -214,7 +217,7 @@
           '&[aria-live="assertive"]:focus': {
             outline: `3px solid ${this.$themeBrand.secondary.v_100}`,
             outlineOffset: '2px',
-          }
+          },
         };
       },
 
@@ -222,26 +225,32 @@
         const whiteColor = this.$themeTokens.textInverted;
 
         return {
-          color: whiteColor, 
+          color: whiteColor,
           textDecoration: 'none',
           ':hover': {
             backgroundColor: 'rgba(255, 255, 255, 0.1)',
           },
         };
-      }
+      },
     },
 
     methods: {
-      onClick() { this.$emit('click'); },
+      onClick() {
+        this.$emit('click');
+      },
       onActionClick() {
         if (this.actionCallback) this.actionCallback();
         this.$emit('action-click');
         this.$emit('close');
       },
-      onEnter() { this.$emit('show'); },
-      onLeave() { this.$emit('hide'); },
-      handleBackdropClick() {} 
-    }
+      onEnter() {
+        this.$emit('show');
+      },
+      onLeave() {
+        this.$emit('hide');
+      },
+      handleBackdropClick() {},
+    },
   };
 
 </script>
@@ -260,16 +269,16 @@
     position: fixed;
     top: 0;
     left: 0;
+    z-index: 23;
     width: 100vw;
     height: 100vh;
     background-color: rgba(0, 0, 0, 0.7);
-    z-index: 23;
   }
-  
+
   .k-focus-sentinel {
-    position: fixed; 
-    opacity: 0;
+    position: fixed;
     pointer-events: none;
+    opacity: 0;
   }
 
   .k-snackbar {
@@ -277,7 +286,6 @@
     z-index: 24;
     display: inline-flex;
     align-items: center;
-    
     min-width: 344px;
     max-width: 512px;
     min-height: 48px;
@@ -288,19 +296,19 @@
 
   .k-snackbar-message {
     flex-grow: 1;
-    cursor: default;
     font-size: 14px;
     line-height: 1.5;
+    cursor: default;
   }
 
   .k-snackbar-action {
-    margin-left: auto; 
-    padding-left: 48px;
-    margin-right: -12px; 
-    margin-top: -9px;
-    margin-bottom: -9px;
     display: flex;
     align-items: center;
+    padding-left: 48px;
+    margin-top: -9px;
+    margin-right: -12px;
+    margin-bottom: -9px;
+    margin-left: auto;
   }
 
   .k-snackbar-action-button {
@@ -309,20 +317,22 @@
 
   .k-snackbar--transition-slide-enter-active,
   .k-snackbar--transition-slide-leave-active {
-    transition: transform 0.4s ease, opacity 0.4s ease;
+    transition:
+      transform 0.4s ease,
+      opacity 0.4s ease;
   }
 
   .k-snackbar--transition-slide-enter,
   .k-snackbar--transition-slide-leave-to {
-    transform: translateY(100px);
     opacity: 0;
+    transform: translateY(100px);
   }
 
   .k-snackbar-fade-enter-active,
   .k-snackbar-fade-leave-active {
     transition: opacity 0.3s ease;
   }
-  
+
   .k-snackbar-fade-enter,
   .k-snackbar-fade-leave-to {
     opacity: 0;
