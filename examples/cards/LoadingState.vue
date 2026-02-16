@@ -5,15 +5,15 @@
       <KButtonGroup>
         <KButton
           primary
-          @click="load500"
+          @click="load200"
         >
-          Load (0.5 s)
+          Load (0.2 s)
         </KButton>
         <KButton
           primary
-          @click="load1200"
+          @click="load400"
         >
-          Load (1.2 s)
+          Load (0.4 s)
         </KButton>
         <KButton
           primary
@@ -82,17 +82,17 @@
       }, 3000);
     },
     methods: {
-      load500() {
+      load200() {
         this.loading = true;
         setTimeout(() => {
           this.loading = false;
-        }, 500);
+        }, 200);
       },
-      load1200() {
+      load400() {
         this.loading = true;
         setTimeout(() => {
           this.loading = false;
-        }, 1200);
+        }, 400);
       },
       load4000() {
         this.loading = true;

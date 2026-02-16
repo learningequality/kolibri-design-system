@@ -598,8 +598,8 @@
         <code>loading</code> value:
       </p>
       <ul>
-        <li>The loading skeletons won't be displayed for short loading times (&lt; 1s)</li>
-        <li>When the loading skeletons are displayed, they will be visible for at least 1s</li>
+        <li>The loading skeletons won't be displayed for short loading times (&lt; 300ms)</li>
+        <li>When the loading skeletons are displayed, they will be visible for at least 300ms</li>
       </ul>
       <p>Use the buttons in the example below to preview.</p>
 
