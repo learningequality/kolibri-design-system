@@ -22,6 +22,7 @@
             :orientation="skeletonOrientation"
             :thumbnailDisplay="skeletonThumbnailDisplay"
             :thumbnailAlign="skeletonThumbnailAlign"
+            :thumbnailAspectRatio="skeletonThumbnailAspectRatio"
           />
         </ul>
         <ul
@@ -78,6 +79,7 @@
         skeletonOrientation,
         skeletonThumbnailDisplay,
         skeletonThumbnailAlign,
+        skeletonThumbnailAspectRatio,
       } = useGridLoading(props);
 
       const gridStyle = ref({});
@@ -123,6 +125,7 @@
         skeletonOrientation,
         skeletonThumbnailDisplay,
         skeletonThumbnailAlign,
+        skeletonThumbnailAspectRatio,
       };
     },
     props: {

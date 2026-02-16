@@ -15,6 +15,16 @@
     :thumbnailDisplay="thumbnailDisplay"
     :thumbnailAlign="thumbnailAlign"
   >
+    <template
+      v-if="thumbnailAspectRatio"
+      #thumbnail
+    >
+      <KImg
+        :style="{ width: '100%', height: '100%' }"
+        :aspectRatio="thumbnailAspectRatio"
+        isDecorative
+      />
+    </template>
     <template #title>
       <span
         class="k-title-placeholder"
@@ -76,6 +86,14 @@
         required: false,
         type: String,
         default: 'left',
+      },
+      /**
+       * Thumbnail area aspect ratio
+       */
+      thumbnailAspectRatio: {
+        required: false,
+        type: String,
+        default: null,
       },
     },
   };
