@@ -634,8 +634,7 @@
   }
 
   .k-title {
-    display: inline-block; // allows title placeholder in the skeleton card
-    width: 100%; // allows title placeholder in the skeleton card
+    width: 100%;
     color: inherit;
     text-decoration: none;
     outline: none; // the focus ring is moved to the whole <li>
