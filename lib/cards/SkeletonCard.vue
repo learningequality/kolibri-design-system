@@ -10,7 +10,7 @@
     aria-hidden="true"
     class="k-skeleton-card"
     title="_"
-    :style="{ height: height }"
+    :style="{ minHeight: minHeight }"
     :orientation="orientation"
     :thumbnailDisplay="thumbnailDisplay"
     :thumbnailAlign="thumbnailAlign"
@@ -46,9 +46,9 @@
     name: 'SkeletonCard',
     props: {
       /**
-       * Card height
+       * Card minimum height
        */
-      height: {
+      minHeight: {
         required: false,
         type: String,
         default: '300px',

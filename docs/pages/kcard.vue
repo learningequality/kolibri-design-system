@@ -912,17 +912,17 @@
             breakpoints: [0, 1, 2, 3, 4, 5, 6, 7],
             orientation: 'vertical',
             thumbnailDisplay: 'large',
-            height: '490px',
+            minHeight: '490px',
           },
           {
             breakpoints: [2],
-            height: '430px',
+            minHeight: '430px',
           },
           {
             breakpoints: [3, 4, 5, 6, 7],
             orientation: 'horizontal',
             thumbnailAlign: 'right',
-            height: '220px',
+            minHeight: '220px',
           },
         ],
       };

@@ -624,8 +624,7 @@
 
       <p>
         <code>skeletonsConfig</code> takes an array of objects
-        <code>{ breakpoints, count, height, orientation, thumbnailDisplay, thumbnailAlign }</code>,
-        where:
+        <code>{ breakpoints, count, minHeight, orientation, thumbnailDisplay, thumbnailAlign }</code>, where:
       </p>
 
       <ul>
@@ -644,7 +643,8 @@
           />.
         </li>
         <li>
-          <code>height</code> sets the height of skeleton cards for the specified breakpoints.
+          <code>minHeight</code> sets the minimum height of skeleton cards for the specified
+          breakpoints.
         </li>
         <li>
           <code>orientation</code> sets the orientation of skeleton cards for the specified
@@ -718,14 +718,14 @@
                   skeletonsConfig: [
                     {
                       breakpoints: [0, 1, 2, 3, 4, 5, 6, 7],
-                      height: '400px',
+                      minHeight: '400px',
                       orientation: 'vertical',
                       thumbnailDisplay: 'large',
                       thumbnailAlign: 'left'
                     },
                     {
                       breakpoints: [4, 5, 6, 7],
-                      height: '220px',
+                      minHeight: '220px',
                       orientation: 'horizontal'
                     }
                   ],
@@ -738,12 +738,12 @@
       </DocsExample>
 
       <p>
-        Here, the height of loading skeleton cards is <code>400px</code> with vertical orientation
-        on breakpoints <code>0-3</code>, and <code>220px</code> with horizontal orientation on
-        breakpoints <code>4-7</code>. This makes skeleton cards resemble loaded cards at all
-        breakpoints, creating a smooth transition for users during data loading. Note the bottom-up
-        approach where we begin with a base setup for all breakpoints and gradually override on
-        higher breakpoints. This simplifies the configuration object.
+        Here, the minimum height of loading skeleton cards is <code>400px</code> with vertical
+        orientation on breakpoints <code>0-3</code>, and <code>220px</code> with horizontal
+        orientation on breakpoints <code>4-7</code>. This makes skeleton cards resemble loaded cards
+        at all breakpoints, creating a smooth transition for users during data loading. Note the
+        bottom-up approach where we begin with a base setup for all breakpoints and gradually
+        override on higher breakpoints. This simplifies the configuration object.
       </p>
 
       <p>

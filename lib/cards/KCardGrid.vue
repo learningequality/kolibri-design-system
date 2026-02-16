@@ -18,7 +18,7 @@
           <SkeletonCard
             v-for="i in skeletonCount"
             :key="i"
-            :height="skeletonHeight"
+            :minHeight="skeletonMinHeight"
             :orientation="skeletonOrientation"
             :thumbnailDisplay="skeletonThumbnailDisplay"
             :thumbnailAlign="skeletonThumbnailAlign"
@@ -74,7 +74,7 @@
         showGrid,
         isLoading,
         skeletonCount,
-        skeletonHeight,
+        skeletonMinHeight,
         skeletonOrientation,
         skeletonThumbnailDisplay,
         skeletonThumbnailAlign,
@@ -119,7 +119,7 @@
         isLoading,
         showGrid,
         skeletonCount,
-        skeletonHeight,
+        skeletonMinHeight,
         skeletonOrientation,
         skeletonThumbnailDisplay,
         skeletonThumbnailAlign,

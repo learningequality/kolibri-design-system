@@ -54,7 +54,7 @@
             orientation: 'horizontal',
             thumbnailDisplay: 'small',
             thumbnailAlign: 'right',
-            height: '130px',
+            minHeight: '130px',
           },
         ],
       };

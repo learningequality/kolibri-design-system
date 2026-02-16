@@ -150,7 +150,7 @@
         skeletonsConfig: [
           {
             breakpoints: [0, 1, 2, 3, 4, 5, 6, 7],
-            height: '380px',
+            minHeight: '380px',
             orientation: 'vertical',
             thumbnailDisplay: 'large',
           },
