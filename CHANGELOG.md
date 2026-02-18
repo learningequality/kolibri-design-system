@@ -7,6 +7,19 @@ Changelog is rather internal in nature. See release notes for the public overvie
 <!-- [DO NOT REMOVE-USED BY GH ACTION] PASTE CHANGELOG -->
 
 
+- [#1207]
+  - **Description:** Migrate GitHub Actions workflows from deprecated tibdex/github-app-token to official actions/create-github-app-token
+  - **Products impact:** none
+  - **Addresses:** https://github.com/learningequality/kolibri-design-system/issues/1206
+  - **Components:** -
+  - **Breaking:** no
+  - **Impacts a11y:** no
+  - **Guidance:** -
+
+[#1207]: https://github.com/learningequality/kolibri-design-system/pull/1207
+
+
+
 - [#1202]
   - **Description:** Update KIcon docs
   - **Products impact:** -
