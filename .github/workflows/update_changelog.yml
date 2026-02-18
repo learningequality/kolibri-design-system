@@ -59,11 +59,11 @@ jobs:
 
           with open("CHANGELOG.md", "w") as f:
               f.write(new_changelog)
-      - uses: tibdex/github-app-token@v2
+      - uses: actions/create-github-app-token@v2
         id: generate-token
         with:
-          app_id: ${{ secrets.LE_BOT_APP_ID }}
-          private_key: ${{ secrets.LE_BOT_PRIVATE_KEY }}
+          app-id: ${{ secrets.LE_BOT_APP_ID }}
+          private-key: ${{ secrets.LE_BOT_PRIVATE_KEY }}
       - name: Commit updated CHANGELOG.md
         run: |
           git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
