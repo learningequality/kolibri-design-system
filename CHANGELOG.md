@@ -7,6 +7,19 @@ Changelog is rather internal in nature. See release notes for the public overvie
 <!-- [DO NOT REMOVE-USED BY GH ACTION] PASTE CHANGELOG -->
 
 
+- [#1209]
+  - **Description:** Update grey v_50 to #FAFAFA
+  - **Products impact:** bugfix
+  - **Addresses:** -
+  - **Components:** None
+  - **Breaking:** no
+  - **Impacts a11y:** no
+  - **Guidance:** Bug fix to make grey v_50 actually grey
+
+[#1209]: https://github.com/learningequality/kolibri-design-system/pull/1209
+
+
+
 - [#1207]
   - **Description:** Migrate GitHub Actions workflows from deprecated tibdex/github-app-token to official actions/create-github-app-token
   - **Products impact:** none
