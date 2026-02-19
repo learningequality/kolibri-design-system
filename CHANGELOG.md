@@ -7,6 +7,19 @@ Changelog is rather internal in nature. See release notes for the public overvie
 <!-- [DO NOT REMOVE-USED BY GH ACTION] PASTE CHANGELOG -->
 
 
+- [#1196]
+  - **Description:** Bump lodash from 4.17.21 to 4.17.23
+  - **Products impact:** Dev Dependency upgrade
+  - **Addresses:** -
+  - **Components:** -
+  - **Breaking:** -
+  - **Impacts a11y:** -
+  - **Guidance:** -
+
+[#1196]: https://github.com/learningequality/kolibri-design-system/pull/1196
+
+
+
 - [#1204]
   - **Description:** Bump qs from 6.14.0 to 6.14.2
   - **Products impact:** Dev Dependency upgrade
