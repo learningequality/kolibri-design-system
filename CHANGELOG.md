@@ -7,6 +7,19 @@ Changelog is rather internal in nature. See release notes for the public overvie
 <!-- [DO NOT REMOVE-USED BY GH ACTION] PASTE CHANGELOG -->
 
 
+- [#1204]
+  - **Description:** Bump qs from 6.14.0 to 6.14.2
+  - **Products impact:** Dev Dependency upgrade
+  - **Addresses:** -
+  - **Components:** -
+  - **Breaking:** -
+  - **Impacts a11y:** -
+  - **Guidance:** -
+
+[#1204]: https://github.com/learningequality/kolibri-design-system/pull/1204
+
+
+
 - [#1209]
   - **Description:** Update grey v_50 to #FAFAFA
   - **Products impact:** bugfix
