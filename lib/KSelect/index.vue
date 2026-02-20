@@ -275,7 +275,7 @@
           if (Array.isArray(value)) {
             return value.every(item => item && typeof item === 'object' && 'value' in item);
           }
-          return value && typeof value === 'object' && 'value' in value;
+          return value && typeof value === 'object';
         },
       },
       /**
