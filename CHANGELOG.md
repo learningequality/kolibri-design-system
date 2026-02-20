@@ -7,6 +7,19 @@ Changelog is rather internal in nature. See release notes for the public overvie
 <!-- [DO NOT REMOVE-USED BY GH ACTION] PASTE CHANGELOG -->
 
 
+- [#1208]
+  - **Description:** Fixes KSelect `value` prop validator forcing a `value` key to be defined.
+  - **Products impact:** bugfix.
+  - **Addresses:** -.
+  - **Components:** KSelect.
+  - **Breaking:** no
+  - **Impacts a11y:**  no
+  - **Guidance:** .
+
+[#1208]: https://github.com/learningequality/kolibri-design-system/pull/1208
+
+
+
 - [#1196]
   - **Description:** Bump lodash from 4.17.21 to 4.17.23
   - **Products impact:** Dev Dependency upgrade
