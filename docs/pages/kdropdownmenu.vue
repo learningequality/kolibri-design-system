@@ -25,6 +25,7 @@
           { text: 'Icon button with dropdown', href: '#icon-button-with-dropdown' },
           { text: 'Options with icons', href: '#options-with-icons' },
           { text: 'Context menu', href: '#context-menu' },
+          { text: 'Custom option slot', href: '#custom-option-slot' },
         ]"
       />
 
@@ -211,6 +212,23 @@
         loadExample="KDropdownMenu/ContextMenu.vue"
         exampleId="context-menu"
         block
+      />
+
+      <h3>
+        Custom option slot
+        <DocsAnchorTarget anchor="#custom-option-slot" />
+      </h3>
+
+      <p>
+        Use the <code>#option</code> scoped slot to customize the rendering of each menu item. The
+        slot receives <code>{ option }</code> — the option object — as a slot prop.
+      </p>
+
+      <DocsExample
+        loadExample="KDropdownMenu/CustomOption.vue"
+        exampleId="custom-option-slot"
+        block
+        :openOnMount="false"
       />
     </DocsPageSection>
   </DocsPageTemplate>

@@ -37,6 +37,12 @@
       width="200px"
       height="125px"
     />
+    <VisualTestExample
+      title="Custom option slot"
+      loadExample="KDropdownMenu/CustomOption.vue"
+      width="200px"
+      height="200px"
+    />
   </VisualTestLayout>
 
 </template>
