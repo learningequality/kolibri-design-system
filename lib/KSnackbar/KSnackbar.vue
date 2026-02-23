@@ -25,9 +25,8 @@
         v-if="isOpen"
         ref="snackbarElement"
         class="k-snackbar"
+        data-testid="snackbar"
         :class="$computedClass(focusStyles)"
-        role="alert"
-        :aria-live="backdrop ? 'assertive' : 'polite'"
         :style="snackbarStyles"
         tabindex="0"
         @click="onClick"
@@ -66,7 +65,8 @@
 
 <script>
 
-  import { ref, watch, nextTick, onBeforeUnmount } from 'vue';
+  import { ref, computed, watch, nextTick, onBeforeUnmount, getCurrentInstance } from 'vue';
+  import { themeTokens, themeBrand, themePalette } from '../styles/theme';
   import useKLiveRegion from '../composables/useKLiveRegion';
   import useKResponsiveWindow from '../composables/useKResponsiveWindow';
 
@@ -77,6 +77,7 @@
 
     setup(props, { emit }) {
       const { windowBreakpoint } = useKResponsiveWindow();
+      const instance = getCurrentInstance();
       const snackbarElement = ref(null);
       const actionButton = ref(null);
       const previousActiveElement = ref(null);
@@ -158,6 +159,68 @@
 
       onBeforeUnmount(() => clearAutoHide());
 
+      const transitionName = computed(() => {
+        return `k-snackbar--transition-${props.transition}`;
+      });
+
+      const snackbarStyles = computed(() => {
+        const isRtl = instance.proxy.isRtl;
+
+        const styles = {
+          bottom: `${24 + props.bottomOffset}px`,
+          backgroundColor: themePalette().grey.v_800,
+          color: themeTokens().textInverted,
+        };
+
+        if (windowBreakpoint.value < 2) {
+          styles.left = '24px';
+          styles.right = '24px';
+        } else {
+          if (isRtl) {
+            styles.right = '24px';
+            styles.left = 'auto';
+          } else {
+            styles.left = '24px';
+            styles.right = 'auto';
+          }
+        }
+        return styles;
+      });
+
+      const focusStyles = computed(() => {
+        return {
+          ':focus': {
+            outline: 'none',
+          },
+          ':focus-visible': {
+            outline: `3px solid ${themeBrand().secondary.v_100}`,
+            outlineOffset: '2px',
+          },
+        };
+      });
+
+      const actionButtonStyles = computed(() => {
+        const whiteColor = themeTokens().textInverted;
+
+        return {
+          color: whiteColor,
+          textDecoration: 'none',
+          ':hover': {
+            backgroundColor: 'rgba(255, 255, 255, 0.1)',
+          },
+        };
+      });
+
+      const onClick = () => emit('click');
+      const onActionClick = () => {
+        if (props.actionCallback) props.actionCallback();
+        emit('action-click');
+        emit('close');
+      };
+      const onEnter = () => emit('show');
+      const onLeave = () => emit('hide');
+      const handleBackdropClick = () => {};
+
       return {
         windowBreakpoint,
         snackbarElement,
@@ -166,6 +229,15 @@
         setupAutoHide,
         clearAutoHide,
         trapFocus,
+        transitionName,
+        snackbarStyles,
+        focusStyles,
+        actionButtonStyles,
+        onClick,
+        onActionClick,
+        onEnter,
+        onLeave,
+        handleBackdropClick,
       };
     },
 
@@ -182,74 +254,6 @@
         default: 'slide',
         validator: val => ['slide', 'fade'].includes(val),
       },
-    },
-
-    computed: {
-      transitionName() {
-        return `k-snackbar--transition-${this.transition}`;
-      },
-
-      snackbarStyles() {
-        const styles = {
-          bottom: `${24 + this.bottomOffset}px`,
-          left: '24px',
-          backgroundColor: this.$themePalette.grey.v_800,
-          color: this.$themeTokens.textInverted,
-        };
-
-        if (this.windowBreakpoint < 2) {
-          styles.right = '24px';
-        } else {
-          styles.right = 'auto';
-        }
-        return styles;
-      },
-
-      focusStyles() {
-        return {
-          ':focus': {
-            outline: 'none',
-          },
-          ':focus-visible': {
-            outline: `3px solid ${this.$themeBrand.secondary.v_100}`,
-            outlineOffset: '2px',
-          },
-          '&[aria-live="assertive"]:focus': {
-            outline: `3px solid ${this.$themeBrand.secondary.v_100}`,
-            outlineOffset: '2px',
-          },
-        };
-      },
-
-      actionButtonStyles() {
-        const whiteColor = this.$themeTokens.textInverted;
-
-        return {
-          color: whiteColor,
-          textDecoration: 'none',
-          ':hover': {
-            backgroundColor: 'rgba(255, 255, 255, 0.1)',
-          },
-        };
-      },
-    },
-
-    methods: {
-      onClick() {
-        this.$emit('click');
-      },
-      onActionClick() {
-        if (this.actionCallback) this.actionCallback();
-        this.$emit('action-click');
-        this.$emit('close');
-      },
-      onEnter() {
-        this.$emit('show');
-      },
-      onLeave() {
-        this.$emit('hide');
-      },
-      handleBackdropClick() {},
     },
   };
 
@@ -298,6 +302,7 @@
     flex-grow: 1;
     font-size: 14px;
     line-height: 1.5;
+    text-align: start;
     cursor: default;
   }
 

@@ -1,6 +1,6 @@
 <template>
 
-  <DocsPageTemplate>
+  <DocsPageTemplate apiDocs>
     <DocsPageSection
       title="Overview"
       anchor="#overview"
@@ -45,6 +45,35 @@
         action. Common examples are 'undo' and 'retry'. Note that some users will never have the
         opportunity to click this button.
       </p>
+    </DocsPageSection>
+
+    <DocsPageSection
+      title="Example"
+      anchor="#example"
+    >
+      <DocsShow>
+        <KButtonGroup>
+          <KButton
+            text="Show simple snackbar"
+            @click="showBasic"
+          />
+          <KButton
+            text="Show snackbar with action"
+            @click="showWithAction"
+          />
+        </KButtonGroup>
+
+        <KSnackbar
+          :isOpen="snackbarState.isOpen"
+          :text="snackbarState.text"
+          :actionText="snackbarState.actionText"
+          :backdrop="snackbarState.backdrop"
+          :duration="snackbarState.duration"
+          :bottomOffset="snackbarState.bottomOffset"
+          @action-click="snackbarState.actionCallback"
+          @close="hideSnackbar"
+        />
+      </DocsShow>
     </DocsPageSection>
 
     <DocsPageSection
@@ -105,6 +134,21 @@
         <li>Corner radius: 4px</li>
       </ul>
     </DocsPageSection>
+
+    <DocsPageSection
+      title="Related"
+      anchor="#related"
+    >
+      <ul>
+        <li>
+          <DocsInternalLink
+            text="useKSnackbar"
+            href="/useksnackbar"
+          />
+          composable is used to control global snackbar state.
+        </li>
+      </ul>
+    </DocsPageSection>
   </DocsPageTemplate>
 
 </template>
@@ -112,7 +156,32 @@
 
 <script>
 
-  export default {};
+  import useKSnackbar from '../../lib/composables/useKSnackbar';
+
+  export default {
+    setup() {
+      const { createSnackbar, hideSnackbar, snackbarState } = useKSnackbar();
+
+      const showBasic = () => {
+        createSnackbar({ text: 'Changes saved' });
+      };
+
+      const showWithAction = () => {
+        createSnackbar({
+          text: 'Item deleted',
+          actionText: 'Undo',
+          actionCallback: () => {},
+        });
+      };
+
+      return {
+        snackbarState,
+        hideSnackbar,
+        showBasic,
+        showWithAction,
+      };
+    },
+  };
 
 </script>
 
