@@ -263,13 +263,13 @@
           <!-- prettier-ignore -->
           <DocsShowCode language="javascript">
               export default {
-                computed: {
-                  options() {
-                    return [
+                data() {
+                  return {
+                    options: [
                       { label: 'Edit', value: 'edit', icon: 'edit', color: null },
                       { label: 'Delete', value: 'delete', icon: 'delete', color: this.$themeTokens.error },
-                    ];
-                  },
+                    ],
+                  };
                 },
               };
             </DocsShowCode>
