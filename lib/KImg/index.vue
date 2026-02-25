@@ -3,6 +3,7 @@
   <span :style="outerContainerStyles">
     <span :style="innerContainerStyles">
       <img
+        v-if="src"
         :src="src"
         :alt="alternativeText"
         :style="imgStyles"

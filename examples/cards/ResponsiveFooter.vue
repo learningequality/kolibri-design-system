@@ -110,11 +110,11 @@
             breakpoints: [0, 1, 2, 3, 4, 5, 6, 7],
             orientation: 'vertical',
             thumbnailDisplay: 'large',
-            height: '430px',
+            minHeight: '430px',
           },
           {
             breakpoints: [4, 5, 6, 7],
-            height: '370px',
+            minHeight: '370px',
           },
         ],
       };

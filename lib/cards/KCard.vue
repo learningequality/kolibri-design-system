@@ -130,7 +130,7 @@
 
         <div
           v-if="thumbnailDisplay !== ThumbnailDisplays.NONE"
-          class="k-thumbnail"
+          :class="{ 'k-thumbnail': true, 'k-default-thumbnail': !$slots.thumbnail }"
         >
           <!-- @slot Overrides the default thumbnail image. -->
           <div
@@ -634,8 +634,7 @@
   }
 
   .k-title {
-    display: inline-block; // allows title placeholder in the skeleton card
-    width: 100%; // allows title placeholder in the skeleton card
+    width: 100%;
     color: inherit;
     text-decoration: none;
     outline: none; // the focus ring is moved to the whole <li>
@@ -723,6 +722,9 @@
 
     .k-thumbnail {
       order: 1;
+    }
+
+    .k-default-thumbnail {
       height: 180px;
     }
 
@@ -737,8 +739,11 @@
     /* stylelint-enable scss/at-extend-no-missing-placeholder */
 
     .k-thumbnail {
-      height: calc(180px - #{$spacer});
       margin: $spacer $spacer 0;
+    }
+
+    .k-default-thumbnail {
+      height: calc(180px - #{$spacer});
     }
   }
 

@@ -10,11 +10,21 @@
     aria-hidden="true"
     class="k-skeleton-card"
     title="_"
-    :style="{ height: height }"
+    :style="{ minHeight: minHeight }"
     :orientation="orientation"
     :thumbnailDisplay="thumbnailDisplay"
     :thumbnailAlign="thumbnailAlign"
   >
+    <template
+      v-if="thumbnailAspectRatio"
+      #thumbnail
+    >
+      <KImg
+        :style="{ width: '100%', height: '100%' }"
+        :aspectRatio="thumbnailAspectRatio"
+        isDecorative
+      />
+    </template>
     <template #title>
       <span
         class="k-title-placeholder"
@@ -46,9 +56,9 @@
     name: 'SkeletonCard',
     props: {
       /**
-       * Card height
+       * Card minimum height
        */
-      height: {
+      minHeight: {
         required: false,
         type: String,
         default: '300px',
@@ -76,6 +86,14 @@
         required: false,
         type: String,
         default: 'left',
+      },
+      /**
+       * Thumbnail area aspect ratio
+       */
+      thumbnailAspectRatio: {
+        required: false,
+        type: String,
+        default: null,
       },
     },
   };

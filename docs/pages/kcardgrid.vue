@@ -598,21 +598,9 @@
         <code>loading</code> value:
       </p>
       <ul>
-        <li>The loading skeletons won't be displayed for short loading times (&lt; 1s)</li>
-        <li>When the loading skeletons are displayed, they will be visible for at least 1s</li>
+        <li>The loading skeletons won't be displayed for short loading times (&lt; 300ms)</li>
+        <li>When the loading skeletons are displayed, they will be visible for at least 300ms</li>
       </ul>
-      <p>Use the buttons in the example below to preview.</p>
-
-      <h4>
-        Number of loading skeletons <DocsAnchorTarget anchor="#loading-state-skeletons-count" />
-      </h4>
-
-      <p>
-        By default, the number of loading skeletons corresponds to the number of cards in a single
-        grid row if it were full. This behavior can be overridden via the
-        <code>count</code> attribute (below), however do not override it unless indicated in the
-        designs.
-      </p>
 
       <h4>Loading skeletons configuration</h4>
 
@@ -624,8 +612,8 @@
 
       <p>
         <code>skeletonsConfig</code> takes an array of objects
-        <code>{ breakpoints, count, height, orientation, thumbnailDisplay, thumbnailAlign }</code>,
-        where:
+        <code>{ breakpoints, count, minHeight, orientation, thumbnailDisplay, thumbnailAlign,
+          thumbnailAspectRatio }</code>, where:
       </p>
 
       <ul>
@@ -637,14 +625,12 @@
           />. All other attributes in the same object take effect on these breakpoints.
         </li>
         <li>
-          <code>count</code> sets the number of skeleton cards for the specified breakpoints. See
-          <DocsInternalLink
-            text="Number of loading skeletons"
-            href="#loading-state-skeletons-count"
-          />.
+          <code>count</code> sets the number of skeleton cards for the specified breakpoints.
+          Corresponds to the number of cards in a single grid row by default.
         </li>
         <li>
-          <code>height</code> sets the height of skeleton cards for the specified breakpoints.
+          <code>minHeight</code> sets the minimum height of skeleton cards for the specified
+          breakpoints.
         </li>
         <li>
           <code>orientation</code> sets the orientation of skeleton cards for the specified
@@ -670,6 +656,15 @@
           <DocsInternalLink
             text="KCard's thumbnailAlign"
             href="/kcard#prop:thumbnailAlign"
+            code
+          />.
+        </li>
+        <li>
+          <code>thumbnailAspectRatio</code> sets the thumbnail area aspect ratio for the specified
+          breakpoints. Corresponds to
+          <DocsInternalLink
+            text="KImg's aspectRatio"
+            href="/kimg#prop:aspectRatio"
             code
           />.
         </li>
@@ -718,14 +713,14 @@
                   skeletonsConfig: [
                     {
                       breakpoints: [0, 1, 2, 3, 4, 5, 6, 7],
-                      height: '400px',
+                      minHeight: '400px',
                       orientation: 'vertical',
                       thumbnailDisplay: 'large',
                       thumbnailAlign: 'left'
                     },
                     {
                       breakpoints: [4, 5, 6, 7],
-                      height: '220px',
+                      minHeight: '220px',
                       orientation: 'horizontal'
                     }
                   ],
@@ -738,12 +733,12 @@
       </DocsExample>
 
       <p>
-        Here, the height of loading skeleton cards is <code>400px</code> with vertical orientation
-        on breakpoints <code>0-3</code>, and <code>220px</code> with horizontal orientation on
-        breakpoints <code>4-7</code>. This makes skeleton cards resemble loaded cards at all
-        breakpoints, creating a smooth transition for users during data loading. Note the bottom-up
-        approach where we begin with a base setup for all breakpoints and gradually override on
-        higher breakpoints. This simplifies the configuration object.
+        Here, the minimum height of loading skeleton cards is <code>400px</code> with vertical
+        orientation on breakpoints <code>0-3</code>, and <code>220px</code> with horizontal
+        orientation on breakpoints <code>4-7</code>. This makes skeleton cards resemble loaded cards
+        at all breakpoints, creating a smooth transition for users during data loading. Note the
+        bottom-up approach where we begin with a base setup for all breakpoints and gradually
+        override on higher breakpoints. This simplifies the configuration object.
       </p>
 
       <p>

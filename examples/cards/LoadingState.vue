@@ -5,15 +5,15 @@
       <KButtonGroup>
         <KButton
           primary
-          @click="load500"
+          @click="load200"
         >
-          Load (0.5 s)
+          Load (0.2 s)
         </KButton>
         <KButton
           primary
-          @click="load1200"
+          @click="load400"
         >
-          Load (1.2 s)
+          Load (0.4 s)
         </KButton>
         <KButton
           primary
@@ -65,11 +65,11 @@
             breakpoints: [0, 1, 2, 3, 4, 5, 6, 7],
             orientation: 'vertical',
             thumbnailDisplay: 'large',
-            height: '400px',
+            minHeight: '400px',
           },
           {
             breakpoints: [4, 5, 6, 7],
-            height: '220px',
+            minHeight: '220px',
             orientation: 'horizontal',
             thumbnailAlign: 'left',
           },
@@ -82,17 +82,17 @@
       }, 3000);
     },
     methods: {
-      load500() {
+      load200() {
         this.loading = true;
         setTimeout(() => {
           this.loading = false;
-        }, 500);
+        }, 200);
       },
-      load1200() {
+      load400() {
         this.loading = true;
         setTimeout(() => {
           this.loading = false;
-        }, 1200);
+        }, 400);
       },
       load4000() {
         this.loading = true;

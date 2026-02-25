@@ -94,17 +94,17 @@
             breakpoints: [0, 1, 2, 3, 4, 5, 6, 7],
             orientation: 'vertical',
             thumbnailDisplay: 'large',
-            height: '400px',
+            minHeight: '400px',
           },
           {
             breakpoints: [2],
-            height: '380px',
+            minHeight: '380px',
           },
           {
             breakpoints: [3, 4, 5, 6, 7],
             orientation: 'horizontal',
             thumbnailAlign: 'right',
-            height: '180px',
+            minHeight: '180px',
           },
         ],
       };

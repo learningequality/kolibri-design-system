@@ -18,10 +18,11 @@
           <SkeletonCard
             v-for="i in skeletonCount"
             :key="i"
-            :height="skeletonHeight"
+            :minHeight="skeletonMinHeight"
             :orientation="skeletonOrientation"
             :thumbnailDisplay="skeletonThumbnailDisplay"
             :thumbnailAlign="skeletonThumbnailAlign"
+            :thumbnailAspectRatio="skeletonThumbnailAspectRatio"
           />
         </ul>
         <ul
@@ -74,10 +75,11 @@
         showGrid,
         isLoading,
         skeletonCount,
-        skeletonHeight,
+        skeletonMinHeight,
         skeletonOrientation,
         skeletonThumbnailDisplay,
         skeletonThumbnailAlign,
+        skeletonThumbnailAspectRatio,
       } = useGridLoading(props);
 
       const gridStyle = ref({});
@@ -119,10 +121,11 @@
         isLoading,
         showGrid,
         skeletonCount,
-        skeletonHeight,
+        skeletonMinHeight,
         skeletonOrientation,
         skeletonThumbnailDisplay,
         skeletonThumbnailAlign,
+        skeletonThumbnailAspectRatio,
       };
     },
     props: {

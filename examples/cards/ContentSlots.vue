@@ -65,11 +65,11 @@
             orientation: 'horizontal',
             thumbnailDisplay: 'large',
             thumbnailAlign: 'left',
-            height: '300px',
+            minHeight: '300px',
           },
           {
             breakpoints: [3, 4, 5, 6, 7],
-            height: '190px',
+            minHeight: '190px',
           },
         ],
       };
