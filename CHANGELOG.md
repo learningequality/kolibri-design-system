@@ -7,6 +7,63 @@ Changelog is rather internal in nature. See release notes for the public overvie
 <!-- [DO NOT REMOVE-USED BY GH ACTION] PASTE CHANGELOG -->
 
 
+- [#1203]
+  - **Description:** Do not render `<img>` when `src` not provided
+  - **Products impact:** bugfix
+  - **Addresses:** -
+  - **Components:** `KImg`
+  - **Breaking:** no
+  - **Impacts a11y:** no
+  - **Guidance:** -
+
+[#1203]: https://github.com/learningequality/kolibri-design-system/pull/1203
+
+- [#1203]
+  - **Description:** Do not enforce fixed height of a thumbnail area when a custom thumbnail is provided via the `thumbnail` slot
+  - **Products impact:** bugfix
+  - **Addresses:** -
+  - **Components:** `KCard`
+  - **Breaking:** no
+  - **Impacts a11y:** no
+  - **Guidance:** -
+
+[#1203]: https://github.com/learningequality/kolibri-design-system/pull/1203
+
+- [#1203]
+  - **Description:** Optimize skeleton loading times
+  - **Products impact:** optimization
+  - **Addresses:** -
+  - **Components:** `KCard`, `KCardGrid`
+  - **Breaking:** no
+  - **Impacts a11y:** no
+  - **Guidance:** -
+
+[#1203]: https://github.com/learningequality/kolibri-design-system/pull/1203
+
+- [#1203]
+  - **Description:** Don't set fixed height on loading skeletons and change `skeletonsConfig.height` to `skeletonsConfig.minHeight`
+  - **Products impact:** bugfix
+  - **Addresses:** -
+  - **Components:** `KCard`, `KCardGrid`
+  - **Breaking:** no (skeletonsConfig is not yet used in production)
+  - **Impacts a11y:** no
+  - **Guidance:**  Change `skeletonsConfig.height` to `skeletonsConfig.minHeight`
+
+[#1203]: https://github.com/learningequality/kolibri-design-system/pull/1203
+
+- [#1203]
+  - **Description:** Add `skeletonsConfig.thumbnailAspectRatio` option for configuring aspect ratio of the thumbnail area in loading skeletons
+  - **Products impact:** new API
+  - **Addresses:** -
+  - **Components:** `KCard`, `KCardGrid`
+  - **Breaking:** no
+  - **Impacts a11y:** no
+  - **Guidance:** -
+
+[#1203]: https://github.com/learningequality/kolibri-design-system/pull/1203
+
+
+
 - [#1208]
   - **Description:** Fixes KSelect `value` prop validator forcing a `value` key to be defined.
   - **Products impact:** bugfix.
