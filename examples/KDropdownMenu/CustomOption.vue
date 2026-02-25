@@ -12,7 +12,7 @@
         @select="onOptionSelect"
       >
         <template #option="{ option }">
-          <div style="display: flex; align-items: center; height: 40px; padding: 0 16px">
+          <div style="display: flex; align-items: center; padding: 0 16px">
             <KIcon
               :icon="option.icon"
               :style="{ color: option.color, marginInlineEnd: '8px' }"
@@ -45,13 +45,13 @@
         default: false,
       },
     },
-    data() {
-      return {
-        options: [
+    computed: {
+      options() {
+        return [
           { label: 'Edit', value: 'edit', icon: 'edit', color: null },
-          { label: 'Delete', value: 'delete', icon: 'delete', color: '#e74c3c' },
-        ],
-      };
+          { label: 'Delete', value: 'delete', icon: 'delete', color: this.$themeTokens.error },
+        ];
+      },
     },
     mounted() {
       if (this.openOnMount) {

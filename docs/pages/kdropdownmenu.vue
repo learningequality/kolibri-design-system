@@ -220,8 +220,8 @@
       </h3>
 
       <p>
-        Use the <code>#option</code> scoped slot to customize the rendering of each menu item. The
-        slot receives <code>{ option }</code> — the option object — as a slot prop.
+        Use the <code>#option</code> scoped slot to customize each menu item. The slot provides the
+        option object via the <code>option</code> prop.
       </p>
 
       <DocsExample
@@ -229,7 +229,53 @@
         exampleId="custom-option-slot"
         block
         :openOnMount="false"
-      />
+      >
+        <template #html>
+          <!-- eslint-disable -->
+          <DocsShowCode language="html">
+            <KButton
+              text="Options"
+              hasDropdown
+            >
+              <template #menu>
+                <KDropdownMenu
+                  :options="options"
+                  ...
+                >
+                  <template #option="{ option }">
+                    <div style="display: flex; align-items: center; padding: 0 16px">
+                      <KIcon
+                        :icon="option.icon"
+                        :style="{ color: option.color, marginInlineEnd: '8px' }"
+                      />
+                      <span :style="{ color: option.color }">{{ option.label }}</span>
+                    </div>
+                  </template>
+                </KDropdownMenu>
+              </template>
+            </KButton>
+          </DocsShowCode>
+          <!-- eslint-enable -->
+        </template>
+
+        <template #javascript>
+          <!-- eslint-disable -->
+          <!-- prettier-ignore -->
+          <DocsShowCode language="javascript">
+              export default {
+                computed: {
+                  options() {
+                    return [
+                      { label: 'Edit', value: 'edit', icon: 'edit', color: null },
+                      { label: 'Delete', value: 'delete', icon: 'delete', color: this.$themeTokens.error },
+                    ];
+                  },
+                },
+              };
+            </DocsShowCode>
+          <!-- eslint-enable -->
+        </template>
+      </DocsExample>
     </DocsPageSection>
   </DocsPageTemplate>
 
