@@ -72,6 +72,15 @@
 
   const { sendPoliteMessage } = useKLiveRegion();
 
+  /**
+   * A globally-managed notification component for displaying non-critical messages
+   * @slot default - Optional custom content to display instead of the text prop
+   * @fires close - Emitted when the snackbar is closed (via timeout, action, or ESC key)
+   * @fires action-click - Emitted when the action button is clicked
+   * @fires show - Emitted after the snackbar has finished its entry animation
+   * @fires hide - Emitted after the snackbar has finished its exit animation
+   * @fires click - Emitted when the snackbar content area is clicked
+   */
   export default {
     name: 'KSnackbar',
 
@@ -241,14 +250,65 @@
       };
     },
 
+    emits: {
+      /**
+       * Emitted when the snackbar is closed (via timeout, action, or ESC key)
+       */
+      close: null,
+      /**
+       * Emitted when the action button is clicked
+       */
+      'action-click': null,
+      /**
+       * Emitted after the snackbar has finished its entry animation
+       */
+      show: null,
+      /**
+       * Emitted after the snackbar has finished its exit animation
+       */
+      hide: null,
+      /**
+       * Emitted when the snackbar content area is clicked
+       */
+      click: null,
+    },
+
     props: {
+      /**
+       * Controls whether the snackbar is visible
+       */
       isOpen: { type: Boolean, default: false },
+      /**
+       * The main message text displayed in the snackbar
+       */
       text: { type: String, default: '' },
+      /**
+       * Optional text for an action button (e.g., "Undo")
+       */
       actionText: { type: String, default: '' },
+      /**
+       * Function called when the action button is clicked
+       */
       actionCallback: { type: Function, default: null },
+      /**
+       * Time in milliseconds until the snackbar auto-hides.
+       * Set to 0 to disable auto-hide
+       */
       duration: { type: Number, default: 4000 },
+      /**
+       * Additional bottom offset in pixels.
+       * Useful when a bottom navigation bar is present
+       */
       bottomOffset: { type: Number, default: 0 },
+      /**
+       * If true, shows a darkening backdrop behind the snackbar and sets
+       * focus to the snackbar. Used for critical messages
+       */
       backdrop: { type: Boolean, default: false },
+      /**
+       * Animation type for the snackbar entrance/exit
+       * @values slide, fade
+       */
       transition: {
         type: String,
         default: 'slide',

@@ -17,13 +17,35 @@
       title="Usage"
       anchor="#usage"
     >
+      <!-- eslint-disable -->
+      <!-- prettier-ignore -->
       <DocsShowCode language="javascript">
-        import useKSnackbar from 'kolibri-design-system/lib/composables/useKSnackbar'; export
-        default { setup() { const { createSnackbar, hideSnackbar, clearSnackbarQueue, snackbarState
-        } = useKSnackbar(); function showSuccess() { createSnackbar({ text: 'Item was successfully
-        created!', duration: 4000, actionText: 'Undo', actionCallback: () => {}, }); } return {
-        showSuccess }; } };
+        import useKSnackbar from 'kolibri-design-system/lib/composables/useKSnackbar';
+
+        export default {
+          setup() {
+            const { createSnackbar, hideSnackbar, clearSnackbarQueue, snackbarState } = useKSnackbar();
+
+            function showSuccess() {
+              createSnackbar({
+                text: 'Item was successfully created!',
+                duration: 4000,
+                actionText: 'Undo',
+                actionCallback: () => {
+                  // Handle undo action
+                },
+              });
+            }
+
+            return {
+              showSuccess,
+              hideSnackbar,
+              snackbarState,
+            };
+          },
+        };
       </DocsShowCode>
+      <!-- eslint-enable -->
     </DocsPageSection>
 
     <DocsPageSection
@@ -35,6 +57,22 @@
         properties:
       </p>
       <PropsTable :api="options" />
+    </DocsPageSection>
+
+    <DocsPageSection
+      title="Related"
+      anchor="#related"
+    >
+      <ul>
+        <li><DocsLibraryLink component="KSnackbar" /> for the snackbar component</li>
+        <li>
+          <DocsInternalLink
+            text="Snackbars"
+            href="/snackbars"
+          />
+          has design guidelines and usage guidance
+        </li>
+      </ul>
     </DocsPageSection>
   </DocsPageTemplate>
 
