@@ -229,6 +229,18 @@ export default [
           'loading',
         ],
       }),
+      new Page({
+        path: '/useksnackbar',
+        title: 'useKSnackbar',
+        isCode: true,
+        keywords: [
+          ...compositionRelatedKeywords,
+          'snackbar',
+          'notification',
+          'message',
+          'toast',
+        ],
+      }),
     ],
   }),
   new Section({
@@ -324,6 +336,12 @@ export default [
         title: 'KSelect',
         isCode: true,
         keywords: ['field', 'box'],
+      }),
+      new Page({
+        path: '/ksnackbar',
+        title: 'KSnackbar',
+        isCode: true,
+        keywords: ['notification', 'message', 'toast', 'snackbar'],
       }),
       new Page({
         path: '/kswitch',
