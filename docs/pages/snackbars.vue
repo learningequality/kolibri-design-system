@@ -6,7 +6,7 @@
       anchor="#overview"
     >
       <p>
-        Snackbars are short and affirmative messages that momentarily grab the user's attention to
+        Snackbars are short and affirmative messages that momentarily grab the user’s attention to
         convey non-critical information. They are transient and do not persist on the page.
       </p>
     </DocsPageSection>
@@ -103,25 +103,6 @@
         <li>Min width: 344px</li>
         <li>Max width: 512px</li>
         <li>Corner radius: 4px</li>
-      </ul>
-    </DocsPageSection>
-
-    <DocsPageSection
-      title="Related"
-      anchor="#related"
-    >
-      <ul>
-        <li>
-          <DocsLibraryLink component="KSnackbar" />
-          is the component implementation
-        </li>
-        <li>
-          <DocsInternalLink
-            text="useKSnackbar"
-            href="/useksnackbar"
-          />
-          is the composable for managing global snackbar state
-        </li>
       </ul>
     </DocsPageSection>
   </DocsPageTemplate>
