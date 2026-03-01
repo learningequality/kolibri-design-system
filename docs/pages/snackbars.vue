@@ -1,12 +1,12 @@
 <template>
 
-  <DocsPageTemplate apiDocs>
+  <DocsPageTemplate>
     <DocsPageSection
       title="Overview"
       anchor="#overview"
     >
       <p>
-        Snackbars are short and affirmative messages that momentarily grab the user’s attention to
+        Snackbars are short and affirmative messages that momentarily grab the user's attention to
         convey non-critical information. They are transient and do not persist on the page.
       </p>
     </DocsPageSection>
@@ -45,35 +45,6 @@
         action. Common examples are 'undo' and 'retry'. Note that some users will never have the
         opportunity to click this button.
       </p>
-    </DocsPageSection>
-
-    <DocsPageSection
-      title="Example"
-      anchor="#example"
-    >
-      <DocsShow>
-        <KButtonGroup>
-          <KButton
-            text="Show simple snackbar"
-            @click="showBasic"
-          />
-          <KButton
-            text="Show snackbar with action"
-            @click="showWithAction"
-          />
-        </KButtonGroup>
-
-        <KSnackbar
-          :isOpen="snackbarState.isOpen"
-          :text="snackbarState.text"
-          :actionText="snackbarState.actionText"
-          :backdrop="snackbarState.backdrop"
-          :duration="snackbarState.duration"
-          :bottomOffset="snackbarState.bottomOffset"
-          @action-click="snackbarState.actionCallback"
-          @close="hideSnackbar"
-        />
-      </DocsShow>
     </DocsPageSection>
 
     <DocsPageSection
@@ -141,11 +112,15 @@
     >
       <ul>
         <li>
+          <DocsLibraryLink component="KSnackbar" />
+          is the component implementation
+        </li>
+        <li>
           <DocsInternalLink
             text="useKSnackbar"
             href="/useksnackbar"
           />
-          composable is used to control global snackbar state.
+          is the composable for managing global snackbar state
         </li>
       </ul>
     </DocsPageSection>
@@ -156,32 +131,7 @@
 
 <script>
 
-  import useKSnackbar from '../../lib/composables/useKSnackbar';
-
-  export default {
-    setup() {
-      const { createSnackbar, hideSnackbar, snackbarState } = useKSnackbar();
-
-      const showBasic = () => {
-        createSnackbar({ text: 'Changes saved' });
-      };
-
-      const showWithAction = () => {
-        createSnackbar({
-          text: 'Item deleted',
-          actionText: 'Undo',
-          actionCallback: () => {},
-        });
-      };
-
-      return {
-        snackbarState,
-        hideSnackbar,
-        showBasic,
-        showWithAction,
-      };
-    },
-  };
+  export default {};
 
 </script>
 
