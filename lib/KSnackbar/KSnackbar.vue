@@ -74,12 +74,6 @@
 
   /**
    * A globally-managed notification component for displaying non-critical messages
-   * @slot default - Optional custom content to display instead of the text prop
-   * @fires close - Emitted when the snackbar is closed (via timeout, action, or ESC key)
-   * @fires action-click - Emitted when the action button is clicked
-   * @fires show - Emitted after the snackbar has finished its entry animation
-   * @fires hide - Emitted after the snackbar has finished its exit animation
-   * @fires click - Emitted when the snackbar content area is clicked
    */
   export default {
     name: 'KSnackbar',
@@ -221,20 +215,29 @@
       });
 
       const onClick = () => emit('click');
+
       const onActionClick = () => {
         if (props.actionCallback) props.actionCallback();
         emit('action-click');
         emit('close');
       };
+
       const onEnter = () => emit('show');
+
       const onLeave = () => emit('hide');
+
+      /**
+       * Handles backdrop click - currently a no-op but available for future use
+       */
       const handleBackdropClick = () => {};
+
+      const handleClose = () => emit('close');
 
       return {
         windowBreakpoint,
         snackbarElement,
         actionButton,
-        handleClose: () => emit('close'),
+        handleClose,
         setupAutoHide,
         clearAutoHide,
         trapFocus,
@@ -248,29 +251,6 @@
         onLeave,
         handleBackdropClick,
       };
-    },
-
-    emits: {
-      /**
-       * Emitted when the snackbar is closed (via timeout, action, or ESC key)
-       */
-      close: null,
-      /**
-       * Emitted when the action button is clicked
-       */
-      'action-click': null,
-      /**
-       * Emitted after the snackbar has finished its entry animation
-       */
-      show: null,
-      /**
-       * Emitted after the snackbar has finished its exit animation
-       */
-      hide: null,
-      /**
-       * Emitted when the snackbar content area is clicked
-       */
-      click: null,
     },
 
     props: {

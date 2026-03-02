@@ -99,15 +99,9 @@
 
 <style lang="scss" scoped>
 
-  // Override snackbar positioning to account for the left navigation menu in docs
-  ::v-deep .k-snackbar {
-    // Add offset for the documentation navigation menu (approximately 280px)
-    left: 304px !important;
-
-    // On smaller screens, keep the default behavior
-    @media (max-width: 1024px) {
-      left: 24px !important;
-    }
+  /* Display snackbar above the left navigation menu by increasing z-index */
+  ::v-deep .k-snackbar-wrapper {
+    z-index: 100;
   }
 
 </style>
