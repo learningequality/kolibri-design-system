@@ -5,14 +5,6 @@
       text="Show snackbar with action"
       @click="showWithAction"
     />
-
-    <KSnackbar
-      :isOpen="snackbarState.isOpen"
-      :text="snackbarState.text"
-      :actionText="snackbarState.actionText"
-      :actionCallback="snackbarState.actionCallback"
-      @close="hideSnackbar"
-    />
   </div>
 
 </template>

@@ -25,14 +25,34 @@
     >
       <h3>Composable usage</h3>
       <p>
-        Use the
+        Use the <code>useKSnackbar</code>composable to create and manage snackbars globally. See the full setup guide in the
         <DocsInternalLink
           text="useKSnackbar"
           href="/useksnackbar"
         />
-        composable to create and manage snackbars. The component itself connects to the global state
-        and automatically renders the latest snackbar state.
+        documentation.
       </p>
+      <p>
+        The component binds to the global <code>snackbarState</code> and automatically displays
+        snackbars when <code>createSnackbar</code> is called:
+      </p>
+
+      <!-- eslint-disable -->
+      <!-- prettier-ignore -->
+      <DocsShowCode language="html">
+        <KSnackbar
+          :isOpen="snackbarState.isOpen"
+          :text="snackbarState.text"
+          :actionText="snackbarState.actionText"
+          :actionCallback="snackbarState.actionCallback"
+          :duration="snackbarState.duration"
+          :bottomOffset="snackbarState.bottomOffset"
+          :backdrop="snackbarState.backdrop"
+          :transition="snackbarState.transition"
+          @close="hideSnackbar"
+        />
+      </DocsShowCode>
+      <!-- eslint-enable -->
 
       <h3>Basic snackbar</h3>
       <p>
@@ -86,6 +106,17 @@
         block
       />
     </DocsPageSection>
+
+    <!-- Global snackbar instance for all examples on this page -->
+    <KSnackbar
+      :isOpen="snackbarState.isOpen"
+      :text="snackbarState.text"
+      :actionText="snackbarState.actionText"
+      :actionCallback="snackbarState.actionCallback"
+      :duration="snackbarState.duration"
+      :bottomOffset="snackbarState.bottomOffset"
+      @close="hideSnackbar"
+    />
   </DocsPageTemplate>
 
 </template>
@@ -93,8 +124,18 @@
 
 <script>
 
+  import useKSnackbar from '../../lib/composables/useKSnackbar';
+
   export default {
     name: 'DocsKSnackbar',
+    setup() {
+      const { snackbarState, hideSnackbar } = useKSnackbar();
+
+      return {
+        snackbarState,
+        hideSnackbar,
+      };
+    },
   };
 
 </script>

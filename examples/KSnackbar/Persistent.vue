@@ -5,15 +5,6 @@
       text="Show persistent snackbar"
       @click="showPersistent"
     />
-
-    <KSnackbar
-      :isOpen="snackbarState.isOpen"
-      :text="snackbarState.text"
-      :actionText="snackbarState.actionText"
-      :actionCallback="snackbarState.actionCallback"
-      :duration="snackbarState.duration"
-      @close="hideSnackbar"
-    />
   </div>
 
 </template>

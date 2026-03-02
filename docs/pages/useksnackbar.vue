@@ -46,6 +46,32 @@
         };
       </DocsShowCode>
       <!-- eslint-enable -->
+
+      <h3>Component setup</h3>
+      <p>
+        You must also place a
+        <DocsLibraryLink component="KSnackbar" />
+        component in your template (typically at the root/app level) and bind it to the
+        <code>snackbarState</code>. This component will automatically display snackbars when
+        <code>createSnackbar</code> is called from anywhere in your app.
+      </p>
+
+      <!-- eslint-disable -->
+      <!-- prettier-ignore -->
+      <DocsShowCode language="html">
+        <KSnackbar
+          :isOpen="snackbarState.isOpen"
+          :text="snackbarState.text"
+          :actionText="snackbarState.actionText"
+          :actionCallback="snackbarState.actionCallback"
+          :duration="snackbarState.duration"
+          :bottomOffset="snackbarState.bottomOffset"
+          :backdrop="snackbarState.backdrop"
+          :transition="snackbarState.transition"
+          @close="hideSnackbar"
+        />
+      </DocsShowCode>
+      <!-- eslint-enable -->
     </DocsPageSection>
 
     <DocsPageSection

@@ -5,12 +5,6 @@
       text="Show and replace snackbar"
       @click="showForceReuse"
     />
-
-    <KSnackbar
-      :isOpen="snackbarState.isOpen"
-      :text="snackbarState.text"
-      @close="hideSnackbar"
-    />
   </div>
 
 </template>

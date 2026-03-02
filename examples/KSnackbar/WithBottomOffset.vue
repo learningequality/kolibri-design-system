@@ -5,13 +5,6 @@
       text="Show snackbar with bottom offset"
       @click="showWithBottomOffset"
     />
-
-    <KSnackbar
-      :isOpen="snackbarState.isOpen"
-      :text="snackbarState.text"
-      :bottomOffset="snackbarState.bottomOffset"
-      @close="hideSnackbar"
-    />
   </div>
 
 </template>

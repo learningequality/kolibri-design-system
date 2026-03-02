@@ -5,12 +5,6 @@
       text="Show basic snackbar"
       @click="showBasic"
     />
-
-    <KSnackbar
-      :isOpen="snackbarState.isOpen"
-      :text="snackbarState.text"
-      @close="hideSnackbar"
-    />
   </div>
 
 </template>
