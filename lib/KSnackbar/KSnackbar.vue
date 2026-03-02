@@ -46,7 +46,6 @@
             :text="actionText"
             :appearanceOverrides="actionButtonStyles"
             @click.stop="onActionClick"
-            @blur="onActionBlur"
           />
         </div>
       </div>
@@ -107,6 +106,37 @@
           if (btn && typeof btn.focus === 'function') btn.focus();
         }
       };
+      const onActionBlur = e => {
+        if (props.onBlur) props.onBlur(e);
+      };
+
+      const onActionKeydown = e => {
+        if (e.key === 'Tab' && props.onBlur) {
+          e.preventDefault();
+          props.onBlur(e);
+        }
+      };
+
+      const addActionButtonListeners = async () => {
+        if (!props.actionText || !props.onBlur) return;
+        
+        await nextTick();
+        const btn = actionButton.value?.$el || actionButton.value;
+        if (btn) {
+          btn.addEventListener('blur', onActionBlur);
+          btn.addEventListener('keydown', onActionKeydown);
+        }
+      };
+
+      const removeActionButtonListeners = () => {
+        if (!props.actionText || !props.onBlur) return;
+        
+        const btn = actionButton.value?.$el || actionButton.value;
+        if (btn) {
+          btn.removeEventListener('blur', onActionBlur);
+          btn.removeEventListener('keydown', onActionKeydown);
+        }
+      };
 
       const trapFocus = e => {
         if (e) e.stopPropagation();
@@ -144,8 +174,10 @@
             setupAutoHide();
             if (props.text) sendPoliteMessage(props.text);
             manageFocusOnOpen();
+            addActionButtonListeners();
           } else if (!val && old) {
             clearAutoHide();
+            removeActionButtonListeners();
             restoreFocus();
           }
         },
@@ -215,17 +247,16 @@
         emit('action-click');
       };
 
-      const onActionBlur = e => {
-        if (props.onBlur) props.onBlur(e);
-      };
-
       const onEnter = () => emit('show');
 
       const onLeave = () => emit('hide');
 
       const handleClose = () => emit('close');
 
-      onBeforeUnmount(() => clearAutoHide());
+      onBeforeUnmount(() => {
+        clearAutoHide();
+        removeActionButtonListeners();
+      });
 
       return {
         windowBreakpoint,
@@ -238,7 +269,6 @@
         actionButtonStyles,
         onClick,
         onActionClick,
-        onActionBlur,
         onEnter,
         onLeave,
       };
