@@ -38,6 +38,12 @@
         showWithBottomOffset,
       };
     },
+    mounted() {
+      // Auto-trigger for visual tests
+      this.$nextTick(() => {
+        this.showWithBottomOffset();
+      });
+    },
   };
 
 </script>

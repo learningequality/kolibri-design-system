@@ -2,8 +2,8 @@
 
   <div>
     <KButton
-      text="Show snackbar with action"
-      @click="showWithAction"
+      text="Show snackbar with long text"
+      @click="showWithLongText"
     />
 
     <KSnackbar
@@ -26,10 +26,10 @@
     setup() {
       const { createSnackbar, hideSnackbar, snackbarState } = useKSnackbar();
 
-      const showWithAction = () => {
+      const showWithLongText = () => {
         createSnackbar({
-          text: 'Item deleted',
-          actionText: 'Undo',
+          text: 'This is a longer message demonstrating how the snackbar handles extended text',
+          actionText: 'Got it',
           actionCallback: () => {},
         });
       };
@@ -37,13 +37,13 @@
       return {
         snackbarState,
         hideSnackbar,
-        showWithAction,
+        showWithLongText,
       };
     },
     mounted() {
       // Auto-trigger for visual tests
       this.$nextTick(() => {
-        this.showWithAction();
+        this.showWithLongText();
       });
     },
   };

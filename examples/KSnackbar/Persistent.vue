@@ -42,6 +42,12 @@
         showPersistent,
       };
     },
+    mounted() {
+      // Auto-trigger for visual tests
+      this.$nextTick(() => {
+        this.showPersistent();
+      });
+    },
   };
 
 </script>

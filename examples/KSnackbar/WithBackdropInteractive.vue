@@ -2,8 +2,8 @@
 
   <div>
     <KButton
-      text="Show snackbar with action"
-      @click="showWithAction"
+      text="Show snackbar with backdrop"
+      @click="showWithBackdrop"
     />
 
     <KSnackbar
@@ -11,6 +11,7 @@
       :text="snackbarState.text"
       :actionText="snackbarState.actionText"
       :actionCallback="snackbarState.actionCallback"
+      :backdrop="snackbarState.backdrop"
       @close="hideSnackbar"
     />
   </div>
@@ -26,10 +27,12 @@
     setup() {
       const { createSnackbar, hideSnackbar, snackbarState } = useKSnackbar();
 
-      const showWithAction = () => {
+      const showWithBackdrop = () => {
         createSnackbar({
-          text: 'Item deleted',
-          actionText: 'Undo',
+          text: 'Critical message with backdrop',
+          actionText: 'Dismiss',
+          backdrop: true,
+          duration: 0,
           actionCallback: () => {},
         });
       };
@@ -37,13 +40,13 @@
       return {
         snackbarState,
         hideSnackbar,
-        showWithAction,
+        showWithBackdrop,
       };
     },
     mounted() {
       // Auto-trigger for visual tests
       this.$nextTick(() => {
-        this.showWithAction();
+        this.showWithBackdrop();
       });
     },
   };
