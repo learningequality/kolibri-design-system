@@ -5,7 +5,6 @@
       <div
         v-if="isOpen && backdrop"
         class="k-snackbar-backdrop"
-        @click.stop="handleBackdropClick"
       ></div>
     </transition>
 
@@ -17,7 +16,7 @@
     ></div>
 
     <transition
-      :name="transitionName"
+      name="k-snackbar--transition-slide"
       @after-enter="onEnter"
       @after-leave="onLeave"
     >
@@ -66,7 +65,7 @@
 
 <script>
 
-  import { ref, computed, watch, nextTick, onBeforeUnmount, getCurrentInstance } from 'vue';
+  import { ref, computed, watch, nextTick, onBeforeUnmount } from 'vue';
   import { themeTokens, themeBrand, themePalette } from '../styles/theme';
   import useKLiveRegion from '../composables/useKLiveRegion';
   import useKResponsiveWindow from '../composables/useKResponsiveWindow';
@@ -81,29 +80,11 @@
 
     setup(props, { emit }) {
       const { windowBreakpoint } = useKResponsiveWindow();
-      const instance = getCurrentInstance();
       const snackbarElement = ref(null);
       const actionButton = ref(null);
       const previousActiveElement = ref(null);
-      let hideTimeoutId = null;
 
       // --- Logic ---
-      const clearAutoHide = () => {
-        if (hideTimeoutId) {
-          clearTimeout(hideTimeoutId);
-          hideTimeoutId = null;
-        }
-      };
-
-      const setupAutoHide = () => {
-        clearAutoHide();
-        if (props.autoDismiss && props.duration > 0) {
-          hideTimeoutId = setTimeout(() => {
-            emit('close');
-          }, props.duration);
-        }
-      };
-
       const restoreFocus = async () => {
         await nextTick();
         if (
@@ -135,6 +116,25 @@
         }
       };
 
+      // --- Auto-hide timer logic ---
+      let hideTimeoutId = null;
+
+      const clearAutoHide = () => {
+        if (hideTimeoutId) {
+          clearTimeout(hideTimeoutId);
+          hideTimeoutId = null;
+        }
+      };
+
+      const setupAutoHide = () => {
+        clearAutoHide();
+        if (props.autoDismiss && props.duration > 0) {
+          hideTimeoutId = setTimeout(() => {
+            emit('close');
+          }, props.duration);
+        }
+      };
+
       // --- Watchers ---
       watch(
         () => props.isOpen,
@@ -161,14 +161,8 @@
         },
       );
 
-      onBeforeUnmount(() => clearAutoHide());
-
-      const transitionName = computed(() => {
-        return `k-snackbar--transition-${props.transition}`;
-      });
-
       const snackbarStyles = computed(() => {
-        const isRtl = instance.proxy.isRtl;
+        const isRtl = window.isRtl;
 
         const styles = {
           bottom: `${24 + props.bottomOffset}px`,
@@ -218,9 +212,7 @@
       const onClick = () => emit('click');
 
       const onActionClick = () => {
-        if (props.actionCallback) props.actionCallback();
         emit('action-click');
-        emit('close');
       };
 
       const onActionBlur = e => {
@@ -231,22 +223,16 @@
 
       const onLeave = () => emit('hide');
 
-      /**
-       * Handles backdrop click - currently a no-op but available for future use
-       */
-      const handleBackdropClick = () => {};
-
       const handleClose = () => emit('close');
+
+      onBeforeUnmount(() => clearAutoHide());
 
       return {
         windowBreakpoint,
         snackbarElement,
         actionButton,
         handleClose,
-        setupAutoHide,
-        clearAutoHide,
         trapFocus,
-        transitionName,
         snackbarStyles,
         focusStyles,
         actionButtonStyles,
@@ -255,7 +241,6 @@
         onActionBlur,
         onEnter,
         onLeave,
-        handleBackdropClick,
       };
     },
 
@@ -273,20 +258,6 @@
        */
       actionText: { type: String, default: '' },
       /**
-       * Function called when the action button is clicked
-       */
-      actionCallback: { type: Function, default: null },
-      /**
-       * Time in milliseconds until the snackbar auto-hides.
-       * Set to 0 to disable auto-hide
-       */
-      duration: { type: Number, default: 4000 },
-      /**
-       * Whether the snackbar should auto-dismiss after duration.
-       * More semantic than setting duration to 0
-       */
-      autoDismiss: { type: Boolean, default: true },
-      /**
        * Additional bottom offset in pixels.
        * Useful when a bottom navigation bar is present
        */
@@ -297,15 +268,6 @@
        */
       backdrop: { type: Boolean, default: false },
       /**
-       * Animation type for the snackbar entrance/exit
-       * @values slide, fade
-       */
-      transition: {
-        type: String,
-        default: 'slide',
-        validator: val => ['slide', 'fade'].includes(val),
-      },
-      /**
        * If true, autofocuses the action button when snackbar appears
        */
       autofocus: { type: Boolean, default: false },
@@ -313,6 +275,14 @@
        * Blur event handler for when the action button loses focus
        */
       onBlur: { type: Function, default: null },
+      /**
+       * If true, the snackbar will auto-dismiss after the duration
+       */
+      autoDismiss: { type: Boolean, default: true },
+      /**
+       * Duration in milliseconds before auto-dismissing (if autoDismiss is true)
+       */
+      duration: { type: Number, default: 4000 },
     },
   };
 
@@ -390,16 +360,6 @@
   .k-snackbar--transition-slide-leave-to {
     opacity: 0;
     transform: translateY(100px);
-  }
-
-  .k-snackbar-fade-enter-active,
-  .k-snackbar-fade-leave-active {
-    transition: opacity 0.3s ease;
-  }
-
-  .k-snackbar-fade-enter,
-  .k-snackbar-fade-leave-to {
-    opacity: 0;
   }
 
 </style>

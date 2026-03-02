@@ -40,7 +40,7 @@
       </p>
       <p>
         The component binds to the global <code>snackbarIsVisible</code> and <code>snackbarOptions</code> refs and automatically displays
-        snackbars when <code>createSnackbar</code> is called:
+        snackbars when <code>createSnackbar</code> is called. The <code>@action-click</code> event must be handled at the app root level to execute the callback stored in the composable:
       </p>
 
       <!-- eslint-disable -->
@@ -50,14 +50,13 @@
           :isOpen="snackbarIsVisible"
           :text="snackbarOptions.text"
           :actionText="snackbarOptions.actionText"
-          :actionCallback="snackbarOptions.actionCallback"
-          :duration="snackbarOptions.duration"
-          :autoDismiss="snackbarOptions.autoDismiss"
           :bottomOffset="snackbarOptions.bottomOffset"
           :backdrop="snackbarOptions.backdrop"
-          :transition="snackbarOptions.transition"
           :autofocus="snackbarOptions.autofocus"
           :onBlur="snackbarOptions.onBlur"
+          :autoDismiss="snackbarOptions.autoDismiss"
+          :duration="snackbarOptions.duration"
+          @action-click="handleActionClick"
           @close="clearSnackbar"
         />
       </DocsShowCode>
@@ -73,8 +72,9 @@
 
       <h3>Snackbar with action</h3>
       <p>
-        Use <code>actionText</code> and <code>actionCallback</code> to provide an immediate action
-        such as Undo.
+        Provide <code>actionText</code> and <code>actionCallback</code> when calling <code>createSnackbar()</code> 
+        to enable an immediate action such as Undo. The callback is stored in the composable and executed 
+        when the user clicks the action button.
       </p>
       <DocsExample
         loadExample="KSnackbar/WithAction.vue"
@@ -84,7 +84,8 @@
 
       <h3>Persistent snackbar</h3>
       <p>
-        Set <code>duration</code> to <code>0</code> to disable auto-hide for important messages.
+        Set <code>autoDismiss: false</code> in <code>createSnackbar()</code> to disable auto-hide for important messages.
+        Alternatively, set <code>duration: 0</code> to achieve the same effect.
       </p>
       <DocsExample
         loadExample="KSnackbar/Persistent.vue"
@@ -117,12 +118,13 @@
       :isOpen="snackbarIsVisible"
       :text="snackbarOptions.text"
       :actionText="snackbarOptions.actionText"
-      :actionCallback="snackbarOptions.actionCallback"
-      :duration="snackbarOptions.duration"
-      :autoDismiss="snackbarOptions.autoDismiss"
       :bottomOffset="snackbarOptions.bottomOffset"
+      :backdrop="snackbarOptions.backdrop"
       :autofocus="snackbarOptions.autofocus"
       :onBlur="snackbarOptions.onBlur"
+      :autoDismiss="snackbarOptions.autoDismiss"
+      :duration="snackbarOptions.duration"
+      @action-click="handleActionClick"
       @close="clearSnackbar"
     />
   </DocsPageTemplate>
@@ -139,10 +141,18 @@
     setup() {
       const { snackbarIsVisible, snackbarOptions, clearSnackbar } = useKSnackbar();
 
+      const handleActionClick = () => {
+        if (snackbarOptions.value.actionCallback) {
+          snackbarOptions.value.actionCallback();
+        }
+        clearSnackbar();
+      };
+
       return {
         snackbarIsVisible,
         snackbarOptions,
         clearSnackbar,
+        handleActionClick,
       };
     },
   };

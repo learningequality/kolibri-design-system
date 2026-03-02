@@ -11,12 +11,6 @@
         <code>snackbarIsVisible</code> and <code>snackbarOptions</code> refs. It is used to manage a global snackbar state, allowing any
         component to trigger a snackbar without having to pass props deeply.
       </p>
-      <p>
-        When <code>createSnackbar</code> is called while a snackbar is already visible, the current
-        snackbar will be hidden and replaced with the new one. Vue's <code>nextTick()</code> 
-        ensures the hide transition completes before the new snackbar appears, creating smooth 
-        visual transitions between snackbars.
-      </p>
     </DocsPageSection>
 
     <DocsPageSection
@@ -30,12 +24,12 @@
 
         export default {
           setup() {
-            const { createSnackbar, clearSnackbar, setSnackbarText, snackbarIsVisible, snackbarOptions } = useKSnackbar();
+            const { createSnackbar, clearSnackbar, snackbarIsVisible, snackbarOptions } = useKSnackbar();
 
-            function showSuccess() {
+            // 1. Create a snackbar with action button
+            function showSnackbar() {
               createSnackbar({
                 text: 'Item was successfully created!',
-                duration: 4000,
                 actionText: 'Undo',
                 actionCallback: () => {
                   // Handle undo action
@@ -43,20 +37,17 @@
               });
             }
 
-            // String shorthand (Kolibri/Studio pattern)
-            function showQuick() {
-              createSnackbar('Quick message');
-            }
-
-            // Update text in place
-            function updateMessage() {
-              setSnackbarText('Updated text');
+            // 2. Handle action button clicks at app root level
+            function handleActionClick() {
+              if (snackbarOptions.value.actionCallback) {
+                snackbarOptions.value.actionCallback();
+              }
+              clearSnackbar();
             }
 
             return {
-              showSuccess,
-              showQuick,
-              updateMessage,
+              showSnackbar,
+              handleActionClick,
               clearSnackbar,
               snackbarIsVisible,
               snackbarOptions,
@@ -82,14 +73,13 @@
           :isOpen="snackbarIsVisible"
           :text="snackbarOptions.text"
           :actionText="snackbarOptions.actionText"
-          :actionCallback="snackbarOptions.actionCallback"
-          :duration="snackbarOptions.duration"
-          :autoDismiss="snackbarOptions.autoDismiss"
           :bottomOffset="snackbarOptions.bottomOffset"
           :backdrop="snackbarOptions.backdrop"
-          :transition="snackbarOptions.transition"
           :autofocus="snackbarOptions.autofocus"
           :onBlur="snackbarOptions.onBlur"
+          :autoDismiss="snackbarOptions.autoDismiss"
+          :duration="snackbarOptions.duration"
+          @action-click="handleActionClick"
           @close="clearSnackbar"
         />
       </DocsShowCode>
@@ -156,7 +146,7 @@
             required: false,
             default: 'null',
             type: { name: 'function' },
-            description: 'Function called when the action button is clicked.',
+            description: 'Function stored in composable and called when the action button is clicked. Retrieved via @action-click event handler at the app root level.',
           },
           {
             name: 'duration',
@@ -188,13 +178,6 @@
             type: { name: 'boolean' },
             description:
               'If true, shows a darkening backdrop behind the snackbar. Also makes the snackbar announce assertively instead of politely for screen readers.',
-          },
-          {
-            name: 'transition',
-            required: false,
-            default: "'slide'",
-            type: { name: 'string' },
-            description: 'Animation type for the snackbar entrance/exit. Options: "slide" or "fade".',
           },
           {
             name: 'autofocus',
