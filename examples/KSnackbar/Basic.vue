@@ -9,11 +9,6 @@
     <KSnackbar
       :isOpen="snackbarState.isOpen"
       :text="snackbarState.text"
-      :actionText="snackbarState.actionText"
-      :actionCallback="snackbarState.actionCallback"
-      :backdrop="snackbarState.backdrop"
-      :duration="snackbarState.duration"
-      :bottomOffset="snackbarState.bottomOffset"
       @close="hideSnackbar"
     />
   </div>

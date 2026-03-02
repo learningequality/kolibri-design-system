@@ -65,16 +65,6 @@
         block
       />
 
-      <h3>Snackbar with backdrop</h3>
-      <p>
-        Enable <code>backdrop</code> for higher-priority messages that require more user attention.
-      </p>
-      <DocsExample
-        loadExample="KSnackbar/WithBackdrop.vue"
-        exampleId="with-backdrop"
-        block
-      />
-
       <h3>Snackbar with bottom offset</h3>
       <p>
         Use <code>bottomOffset</code> when a bottom navigation bar or fixed footer is present.
@@ -111,5 +101,9 @@
 
 
 <style lang="scss" scoped>
+
+  ::v-deep .k-snackbar-wrapper {
+    z-index: 100;
+  }
 
 </style>
