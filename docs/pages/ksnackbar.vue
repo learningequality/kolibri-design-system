@@ -7,8 +7,8 @@
     >
       <p>
         The <code>KSnackbar</code> component provides a globally-managed notification system for
-        displaying non-critical messages to users. It supports action buttons, custom timing,
-        focus management, and full keyboard accessibility.
+        displaying non-critical messages to users. It supports action buttons, custom timing, focus
+        management, and full keyboard accessibility.
       </p>
       <ul>
         <li>Global notification state via the <code>useKSnackbar</code> composable</li>
@@ -25,7 +25,8 @@
     >
       <h3>Composable usage</h3>
       <p>
-        Use the <code>useKSnackbar</code>composable to create and manage snackbars globally. See the full setup guide in the
+        Use the <code>useKSnackbar</code>composable to create and manage snackbars globally. See the
+        full setup guide in the
         <DocsInternalLink
           text="useKSnackbar"
           href="/useksnackbar"
@@ -55,9 +56,7 @@
       <!-- eslint-enable -->
 
       <h3>Basic snackbar</h3>
-      <p>
-        Use the default behavior for short confirmation messages.
-      </p>
+      <p>Use the default behavior for short confirmation messages.</p>
       <DocsExample
         loadExample="KSnackbar/Basic.vue"
         exampleId="basic"
@@ -86,9 +85,7 @@
       />
 
       <h3>Snackbar with bottom offset</h3>
-      <p>
-        Use <code>bottomOffset</code> when a bottom navigation bar or fixed footer is present.
-      </p>
+      <p>Use <code>bottomOffset</code> when a bottom navigation bar or fixed footer is present.</p>
       <DocsExample
         loadExample="KSnackbar/WithBottomOffset.vue"
         exampleId="with-bottom-offset"
