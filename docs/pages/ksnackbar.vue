@@ -7,19 +7,23 @@
     >
       <p>
         The <code>KSnackbar</code> component provides a globally-managed notification system for
-        displaying non-critical messages to users. It supports action buttons, custom timing, and
-        full keyboard accessibility.
+        displaying non-critical messages to users. It supports action buttons, custom timing,
+        focus management, and full keyboard accessibility.
       </p>
-      <p>
-        This component should be used with the <code>useKSnackbar</code> composable for state
-        management.
-      </p>
+      <ul>
+        <li>Global notification state via the <code>useKSnackbar</code> composable</li>
+        <li>Optional action button for quick follow-up actions</li>
+        <li>Auto-hide with configurable duration (or persistent mode)</li>
+        <li>Backdrop mode for higher-priority messages</li>
+        <li>Bottom offset support for layouts with bottom navigation</li>
+      </ul>
     </DocsPageSection>
 
     <DocsPageSection
       title="Usage"
       anchor="#usage"
     >
+      <h3>Composable usage</h3>
       <p>
         Use the
         <DocsInternalLink
@@ -27,38 +31,70 @@
           href="/useksnackbar"
         />
         composable to create and manage snackbars. The component itself connects to the global state
-        and automatically displays queued messages.
+        and automatically renders the latest snackbar state.
       </p>
-    </DocsPageSection>
 
-    <DocsPageSection
-      title="Examples"
-      anchor="#examples"
-    >
-      <DocsShow>
-        <KButtonGroup>
-          <KButton
-            text="Show simple snackbar"
-            @click="showBasic"
-          />
-          <KButton
-            text="Show snackbar with action"
-            @click="showWithAction"
-          />
-        </KButtonGroup>
+      <h3>Basic snackbar</h3>
+      <p>
+        Use the default behavior for short confirmation messages.
+      </p>
+      <DocsExample
+        loadExample="KSnackbar/Basic.vue"
+        exampleId="basic"
+        block
+      />
 
-        <KSnackbar
-          :isOpen="snackbarState.isOpen"
-          :text="snackbarState.text"
-          :actionText="snackbarState.actionText"
-          :actionCallback="snackbarState.actionCallback"
-          :backdrop="snackbarState.backdrop"
-          :duration="snackbarState.duration"
-          :bottomOffset="snackbarState.bottomOffset"
-          :transition="snackbarState.transition"
-          @close="hideSnackbar"
-        />
-      </DocsShow>
+      <h3>Snackbar with action</h3>
+      <p>
+        Use <code>actionText</code> and <code>actionCallback</code> to provide an immediate action
+        such as Undo.
+      </p>
+      <DocsExample
+        loadExample="KSnackbar/WithAction.vue"
+        exampleId="with-action"
+        block
+      />
+
+      <h3>Persistent snackbar</h3>
+      <p>
+        Set <code>duration</code> to <code>0</code> to disable auto-hide for important messages.
+      </p>
+      <DocsExample
+        loadExample="KSnackbar/Persistent.vue"
+        exampleId="persistent"
+        block
+      />
+
+      <h3>Snackbar with backdrop</h3>
+      <p>
+        Enable <code>backdrop</code> for higher-priority messages that require more user attention.
+      </p>
+      <DocsExample
+        loadExample="KSnackbar/WithBackdrop.vue"
+        exampleId="with-backdrop"
+        block
+      />
+
+      <h3>Snackbar with bottom offset</h3>
+      <p>
+        Use <code>bottomOffset</code> when a bottom navigation bar or fixed footer is present.
+      </p>
+      <DocsExample
+        loadExample="KSnackbar/WithBottomOffset.vue"
+        exampleId="with-bottom-offset"
+        block
+      />
+
+      <h3>Force-reuse current snackbar</h3>
+      <p>
+        Use <code>forceReuse</code> to replace the currently visible snackbar immediately instead of
+        waiting for it to close.
+      </p>
+      <DocsExample
+        loadExample="KSnackbar/ForceReuse.vue"
+        exampleId="force-reuse"
+        block
+      />
     </DocsPageSection>
   </DocsPageTemplate>
 
@@ -67,41 +103,13 @@
 
 <script>
 
-  import useKSnackbar from '../../lib/composables/useKSnackbar';
-
   export default {
-    setup() {
-      const { createSnackbar, hideSnackbar, snackbarState } = useKSnackbar();
-
-      const showBasic = () => {
-        createSnackbar({ text: 'Changes saved' });
-      };
-
-      const showWithAction = () => {
-        createSnackbar({
-          text: 'Item deleted',
-          actionText: 'Undo',
-          actionCallback: () => {},
-        });
-      };
-
-      return {
-        snackbarState,
-        hideSnackbar,
-        showBasic,
-        showWithAction,
-      };
-    },
+    name: 'DocsKSnackbar',
   };
 
 </script>
 
 
 <style lang="scss" scoped>
-
-  /* Display snackbar above the left navigation menu by increasing z-index */
-  ::v-deep .k-snackbar-wrapper {
-    z-index: 100;
-  }
 
 </style>
