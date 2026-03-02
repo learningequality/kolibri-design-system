@@ -16,15 +16,16 @@
 
   export default {
     setup() {
-      const { createSnackbar, hideSnackbar, snackbarState } = useKSnackbar();
+      const { createSnackbar, clearSnackbar, snackbarIsVisible, snackbarOptions } = useKSnackbar();
 
       const showBasic = () => {
         createSnackbar({ text: 'Changes saved' });
       };
 
       return {
-        snackbarState,
-        hideSnackbar,
+        snackbarIsVisible,
+        snackbarOptions,
+        clearSnackbar,
         showBasic,
       };
     },

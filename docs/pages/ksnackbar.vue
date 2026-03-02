@@ -10,6 +10,11 @@
         displaying non-critical messages to users. It supports action buttons, custom timing, focus
         management, and full keyboard accessibility.
       </p>
+      <p>
+        When multiple snackbars are triggered, new messages automatically replace the current one
+        with a smooth transition. For status updates that need to change text without animation, use
+        <code>forceReuse</code>.
+      </p>
       <ul>
         <li>Global notification state via the <code>useKSnackbar</code> composable</li>
         <li>Optional action button for quick follow-up actions</li>
@@ -34,7 +39,7 @@
         documentation.
       </p>
       <p>
-        The component binds to the global <code>snackbarState</code> and automatically displays
+        The component binds to the global <code>snackbarIsVisible</code> and <code>snackbarOptions</code> refs and automatically displays
         snackbars when <code>createSnackbar</code> is called:
       </p>
 
@@ -42,15 +47,18 @@
       <!-- prettier-ignore -->
       <DocsShowCode language="html">
         <KSnackbar
-          :isOpen="snackbarState.isOpen"
-          :text="snackbarState.text"
-          :actionText="snackbarState.actionText"
-          :actionCallback="snackbarState.actionCallback"
-          :duration="snackbarState.duration"
-          :bottomOffset="snackbarState.bottomOffset"
-          :backdrop="snackbarState.backdrop"
-          :transition="snackbarState.transition"
-          @close="hideSnackbar"
+          :isOpen="snackbarIsVisible"
+          :text="snackbarOptions.text"
+          :actionText="snackbarOptions.actionText"
+          :actionCallback="snackbarOptions.actionCallback"
+          :duration="snackbarOptions.duration"
+          :autoDismiss="snackbarOptions.autoDismiss"
+          :bottomOffset="snackbarOptions.bottomOffset"
+          :backdrop="snackbarOptions.backdrop"
+          :transition="snackbarOptions.transition"
+          :autofocus="snackbarOptions.autofocus"
+          :onBlur="snackbarOptions.onBlur"
+          @close="clearSnackbar"
         />
       </DocsShowCode>
       <!-- eslint-enable -->
@@ -92,10 +100,10 @@
         block
       />
 
-      <h3>Force-reuse current snackbar</h3>
+      <h3>Update snackbar without transition</h3>
       <p>
-        Use <code>forceReuse</code> to replace the currently visible snackbar immediately instead of
-        waiting for it to close.
+        Use <code>forceReuse</code> to update the snackbar text in place without replaying the
+        transition animation. Useful for status updates like connection state changes.
       </p>
       <DocsExample
         loadExample="KSnackbar/ForceReuse.vue"
@@ -106,13 +114,16 @@
 
     <!-- Global snackbar instance for all examples on this page -->
     <KSnackbar
-      :isOpen="snackbarState.isOpen"
-      :text="snackbarState.text"
-      :actionText="snackbarState.actionText"
-      :actionCallback="snackbarState.actionCallback"
-      :duration="snackbarState.duration"
-      :bottomOffset="snackbarState.bottomOffset"
-      @close="hideSnackbar"
+      :isOpen="snackbarIsVisible"
+      :text="snackbarOptions.text"
+      :actionText="snackbarOptions.actionText"
+      :actionCallback="snackbarOptions.actionCallback"
+      :duration="snackbarOptions.duration"
+      :autoDismiss="snackbarOptions.autoDismiss"
+      :bottomOffset="snackbarOptions.bottomOffset"
+      :autofocus="snackbarOptions.autofocus"
+      :onBlur="snackbarOptions.onBlur"
+      @close="clearSnackbar"
     />
   </DocsPageTemplate>
 
@@ -126,11 +137,12 @@
   export default {
     name: 'DocsKSnackbar',
     setup() {
-      const { snackbarState, hideSnackbar } = useKSnackbar();
+      const { snackbarIsVisible, snackbarOptions, clearSnackbar } = useKSnackbar();
 
       return {
-        snackbarState,
-        hideSnackbar,
+        snackbarIsVisible,
+        snackbarOptions,
+        clearSnackbar,
       };
     },
   };

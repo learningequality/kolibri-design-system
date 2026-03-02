@@ -47,6 +47,7 @@
             :text="actionText"
             :appearanceOverrides="actionButtonStyles"
             @click.stop="onActionClick"
+            @blur="onActionBlur"
           />
         </div>
       </div>
@@ -96,7 +97,7 @@
 
       const setupAutoHide = () => {
         clearAutoHide();
-        if (props.duration > 0) {
+        if (props.autoDismiss && props.duration > 0) {
           hideTimeoutId = setTimeout(() => {
             emit('close');
           }, props.duration);
@@ -120,7 +121,7 @@
 
         if (props.backdrop && snackbarElement.value) {
           snackbarElement.value.focus();
-        } else if (props.actionText) {
+        } else if (props.autofocus && props.actionText) {
           const btn = actionButton.value?.$el || actionButton.value;
           if (btn && typeof btn.focus === 'function') btn.focus();
         }
@@ -222,6 +223,10 @@
         emit('close');
       };
 
+      const onActionBlur = e => {
+        if (props.onBlur) props.onBlur(e);
+      };
+
       const onEnter = () => emit('show');
 
       const onLeave = () => emit('hide');
@@ -247,6 +252,7 @@
         actionButtonStyles,
         onClick,
         onActionClick,
+        onActionBlur,
         onEnter,
         onLeave,
         handleBackdropClick,
@@ -276,6 +282,11 @@
        */
       duration: { type: Number, default: 4000 },
       /**
+       * Whether the snackbar should auto-dismiss after duration.
+       * More semantic than setting duration to 0
+       */
+      autoDismiss: { type: Boolean, default: true },
+      /**
        * Additional bottom offset in pixels.
        * Useful when a bottom navigation bar is present
        */
@@ -294,6 +305,14 @@
         default: 'slide',
         validator: val => ['slide', 'fade'].includes(val),
       },
+      /**
+       * If true, autofocuses the action button when snackbar appears
+       */
+      autofocus: { type: Boolean, default: false },
+      /**
+       * Blur event handler for when the action button loses focus
+       */
+      onBlur: { type: Function, default: null },
     },
   };
 

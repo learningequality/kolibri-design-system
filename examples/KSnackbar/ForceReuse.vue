@@ -2,7 +2,7 @@
 
   <div>
     <KButton
-      text="Show and replace snackbar"
+      text="Show connection status updates"
       @click="showForceReuse"
     />
   </div>
@@ -16,25 +16,35 @@
 
   export default {
     setup() {
-      const { createSnackbar, hideSnackbar, snackbarState } = useKSnackbar();
+      const { createSnackbar, clearSnackbar, snackbarIsVisible, snackbarOptions } = useKSnackbar();
 
       const showForceReuse = () => {
         createSnackbar({
-          text: 'Original snackbar',
-          duration: 4000,
+          text: 'Connection lost',
+          autoDismiss: false,
         });
 
         setTimeout(() => {
           createSnackbar({
-            text: 'Replaced immediately using forceReuse',
+            text: 'Reconnecting...',
+            autoDismiss: false,
             forceReuse: true,
           });
-        }, 800);
+        }, 1500);
+
+        setTimeout(() => {
+          createSnackbar({
+            text: 'Connected',
+            duration: 3000,
+            forceReuse: true,
+          });
+        }, 3000);
       };
 
       return {
-        snackbarState,
-        hideSnackbar,
+        snackbarIsVisible,
+        snackbarOptions,
+        clearSnackbar,
         showForceReuse,
       };
     },

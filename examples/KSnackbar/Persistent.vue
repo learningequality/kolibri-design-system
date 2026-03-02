@@ -16,20 +16,21 @@
 
   export default {
     setup() {
-      const { createSnackbar, hideSnackbar, snackbarState } = useKSnackbar();
+      const { createSnackbar, clearSnackbar, snackbarIsVisible, snackbarOptions } = useKSnackbar();
 
       const showPersistent = () => {
         createSnackbar({
           text: 'Connection lost. Check your network and try again.',
           actionText: 'Dismiss',
-          duration: 0,
+          autoDismiss: false,
           actionCallback: () => {},
         });
       };
 
       return {
-        snackbarState,
-        hideSnackbar,
+        snackbarIsVisible,
+        snackbarOptions,
+        clearSnackbar,
         showPersistent,
       };
     },

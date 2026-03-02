@@ -6,10 +6,16 @@
       anchor="#overview"
     >
       <p>
-        A composable that offers the <code>createSnackbar</code>, <code>hideSnackbar</code>, and
-        <code>clearSnackbarQueue</code> functions, as well as the reactive
-        <code>snackbarState</code>. It is used to manage a global snackbar state, allowing any
+        A composable that offers the <code>createSnackbar</code>, <code>clearSnackbar</code>, and
+        <code>setSnackbarText</code> functions, as well as the reactive
+        <code>snackbarIsVisible</code> and <code>snackbarOptions</code> refs. It is used to manage a global snackbar state, allowing any
         component to trigger a snackbar without having to pass props deeply.
+      </p>
+      <p>
+        When <code>createSnackbar</code> is called while a snackbar is already visible, the current
+        snackbar will be hidden and replaced with the new one. Vue's <code>nextTick()</code> 
+        ensures the hide transition completes before the new snackbar appears, creating smooth 
+        visual transitions between snackbars.
       </p>
     </DocsPageSection>
 
@@ -24,7 +30,7 @@
 
         export default {
           setup() {
-            const { createSnackbar, hideSnackbar, clearSnackbarQueue, snackbarState } = useKSnackbar();
+            const { createSnackbar, clearSnackbar, setSnackbarText, snackbarIsVisible, snackbarOptions } = useKSnackbar();
 
             function showSuccess() {
               createSnackbar({
@@ -37,10 +43,23 @@
               });
             }
 
+            // String shorthand (Kolibri/Studio pattern)
+            function showQuick() {
+              createSnackbar('Quick message');
+            }
+
+            // Update text in place
+            function updateMessage() {
+              setSnackbarText('Updated text');
+            }
+
             return {
               showSuccess,
-              hideSnackbar,
-              snackbarState,
+              showQuick,
+              updateMessage,
+              clearSnackbar,
+              snackbarIsVisible,
+              snackbarOptions,
             };
           },
         };
@@ -52,7 +71,7 @@
         You must also place a
         <DocsLibraryLink component="KSnackbar" />
         component in your template (typically at the root/app level) and bind it to the
-        <code>snackbarState</code>. This component will automatically display snackbars when
+        <code>snackbarIsVisible</code> and <code>snackbarOptions</code> refs. This component will automatically display snackbars when
         <code>createSnackbar</code> is called from anywhere in your app.
       </p>
 
@@ -60,15 +79,18 @@
       <!-- prettier-ignore -->
       <DocsShowCode language="html">
         <KSnackbar
-          :isOpen="snackbarState.isOpen"
-          :text="snackbarState.text"
-          :actionText="snackbarState.actionText"
-          :actionCallback="snackbarState.actionCallback"
-          :duration="snackbarState.duration"
-          :bottomOffset="snackbarState.bottomOffset"
-          :backdrop="snackbarState.backdrop"
-          :transition="snackbarState.transition"
-          @close="hideSnackbar"
+          :isOpen="snackbarIsVisible"
+          :text="snackbarOptions.text"
+          :actionText="snackbarOptions.actionText"
+          :actionCallback="snackbarOptions.actionCallback"
+          :duration="snackbarOptions.duration"
+          :autoDismiss="snackbarOptions.autoDismiss"
+          :bottomOffset="snackbarOptions.bottomOffset"
+          :backdrop="snackbarOptions.backdrop"
+          :transition="snackbarOptions.transition"
+          :autofocus="snackbarOptions.autofocus"
+          :onBlur="snackbarOptions.onBlur"
+          @close="clearSnackbar"
         />
       </DocsShowCode>
       <!-- eslint-enable -->
@@ -144,6 +166,14 @@
             description: 'Time in ms until the snackbar auto-hides. Set to 0 to disable auto-hide.',
           },
           {
+            name: 'autoDismiss',
+            required: false,
+            default: 'true',
+            type: { name: 'boolean' },
+            description:
+              'Whether the snackbar should auto-dismiss after the duration. More semantic than setting duration to 0.',
+          },
+          {
             name: 'bottomOffset',
             required: false,
             default: '0',
@@ -160,20 +190,43 @@
               'If true, shows a darkening backdrop behind the snackbar. Also makes the snackbar announce assertively instead of politely for screen readers.',
           },
           {
+            name: 'transition',
+            required: false,
+            default: "'slide'",
+            type: { name: 'string' },
+            description: 'Animation type for the snackbar entrance/exit. Options: "slide" or "fade".',
+          },
+          {
+            name: 'autofocus',
+            required: false,
+            default: 'false',
+            type: { name: 'boolean' },
+            description:
+              'If true, autofocuses the action button when the snackbar appears. Improves accessibility for critical actions.',
+          },
+          {
+            name: 'onBlur',
+            required: false,
+            default: 'null',
+            type: { name: 'function' },
+            description:
+              'Blur event handler for when the action button loses focus. Useful for advanced focus management.',
+          },
+          {
             name: 'forceReuse',
             required: false,
             default: 'false',
             type: { name: 'boolean' },
             description:
-              'When true, replaces the current snackbar immediately instead of queueing.',
+              'When true, updates the current snackbar text in place without replaying the transition animation. Useful for status updates like connection state changes.',
           },
           {
-            name: 'onClose',
+            name: 'hideCallback',
             required: false,
             default: 'null',
             type: { name: 'function' },
             description:
-              'Function called when the snackbar closes (either via timeout, action, or manual close).',
+              'Function called when the snackbar is hidden or replaced (Studio pattern). Useful for cleanup or promise resolution.',
           },
         ],
       };

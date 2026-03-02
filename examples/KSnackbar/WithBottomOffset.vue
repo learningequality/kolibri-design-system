@@ -3,7 +3,7 @@
   <div>
     <KButton
       text="Show snackbar with bottom offset"
-      @click="showWithBottomOffset"
+      @click="showWithOffset"
     />
   </div>
 
@@ -16,19 +16,20 @@
 
   export default {
     setup() {
-      const { createSnackbar, hideSnackbar, snackbarState } = useKSnackbar();
+      const { createSnackbar, clearSnackbar, snackbarIsVisible, snackbarOptions } = useKSnackbar();
 
-      const showWithBottomOffset = () => {
+      const showWithOffset = () => {
         createSnackbar({
-          text: 'Snackbar shown above bottom navigation.',
-          bottomOffset: 64,
+          text: 'This snackbar has bottom offset',
+          bottomOffset: 72,
         });
       };
 
       return {
-        snackbarState,
-        hideSnackbar,
-        showWithBottomOffset,
+        snackbarIsVisible,
+        snackbarOptions,
+        clearSnackbar,
+        showWithOffset,
       };
     },
   };
