@@ -8,8 +8,9 @@
       <p>
         A composable that offers the <code>createSnackbar</code>, <code>clearSnackbar</code>, and
         <code>setSnackbarText</code> functions, as well as the reactive
-        <code>snackbarIsVisible</code> and <code>snackbarOptions</code> refs. It is used to manage a global snackbar state, allowing any
-        component to trigger a snackbar without having to pass props deeply.
+        <code>snackbarIsVisible</code> and <code>snackbarOptions</code> refs. It is used to manage a
+        global snackbar state, allowing any component to trigger a snackbar without having to pass
+        props deeply.
       </p>
     </DocsPageSection>
 
@@ -62,8 +63,9 @@
         You must also place a
         <DocsLibraryLink component="KSnackbar" />
         component in your template (typically at the root/app level) and bind it to the
-        <code>snackbarIsVisible</code> and <code>snackbarOptions</code> refs. This component will automatically display snackbars when
-        <code>createSnackbar</code> is called from anywhere in your app.
+        <code>snackbarIsVisible</code> and <code>snackbarOptions</code> refs. This component will
+        automatically display snackbars when <code>createSnackbar</code> is called from anywhere in
+        your app.
       </p>
 
       <!-- eslint-disable -->
@@ -146,7 +148,8 @@
             required: false,
             default: 'null',
             type: { name: 'function' },
-            description: 'Function stored in composable and called when the action button is clicked. Retrieved via @action-click event handler at the app root level.',
+            description:
+              'Function stored in composable and called when the action button is clicked. Retrieved via @action-click event handler at the app root level.',
           },
           {
             name: 'duration',

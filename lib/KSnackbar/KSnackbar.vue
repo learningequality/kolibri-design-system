@@ -119,7 +119,7 @@
 
       const addActionButtonListeners = async () => {
         if (!props.actionText || !props.onBlur) return;
-        
+
         await nextTick();
         const btn = actionButton.value?.$el || actionButton.value;
         if (btn) {
@@ -130,7 +130,7 @@
 
       const removeActionButtonListeners = () => {
         if (!props.actionText || !props.onBlur) return;
-        
+
         const btn = actionButton.value?.$el || actionButton.value;
         if (btn) {
           btn.removeEventListener('blur', onActionBlur);

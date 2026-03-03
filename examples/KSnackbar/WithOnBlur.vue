@@ -22,8 +22,8 @@
         createSnackbar({
           text: 'Message with blur handling',
           actionText: 'Confirm',
-          autofocus: true, 
-          autoDismiss: false, 
+          autofocus: true,
+          autoDismiss: false,
           onBlur: () => {
             clearSnackbar();
           },
