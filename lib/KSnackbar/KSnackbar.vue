@@ -277,7 +277,7 @@
       /**
        * Controls whether the snackbar is visible
        */
-      isOpen: { type: Boolean, default: false },
+      isOpen: { type: Boolean, required: true },
       /**
        * The main message text displayed in the snackbar
        */
