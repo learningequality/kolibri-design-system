@@ -111,6 +111,28 @@
         exampleId="force-reuse"
         block
       />
+
+      <h3>Snackbar with autofocus</h3>
+      <p>
+        Set <code>autofocus: true</code> to immediately focus the action button when the 
+        snackbar appears. Useful for critical actions that need immediate attention.
+      </p>
+      <DocsExample
+        loadExample="KSnackbar/WithAutofocus.vue"
+        exampleId="with-autofocus"
+        block
+      />
+
+      <h3>Snackbar with onBlur handling</h3>  
+      <p>
+        Provide an <code>onBlur</code> callback to handle advanced focus management scenarios,
+        such as auto-dismissing when the user tabs away or clicks elsewhere.
+      </p>
+      <DocsExample
+        loadExample="KSnackbar/WithOnBlur.vue"
+        exampleId="with-onblur"
+        block
+      />
     </DocsPageSection>
 
     <!-- Global snackbar instance for all examples on this page -->
