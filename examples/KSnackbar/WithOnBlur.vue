@@ -21,14 +21,14 @@
       const showWithOnBlur = () => {
         createSnackbar({
           text: 'Message with blur handling',
-          actionText: 'Confirm',
+          actionText: 'Dismiss',
           autofocus: true,
           autoDismiss: false,
           onBlur: () => {
             clearSnackbar();
           },
           actionCallback: () => {
-            alert('Confirmed!');
+            clearSnackbar();
           },
         });
       };

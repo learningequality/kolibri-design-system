@@ -65,7 +65,7 @@
 <script>
 
   import { ref, computed, watch, nextTick, onBeforeUnmount } from 'vue';
-  import { themeTokens, themeBrand, themePalette } from '../styles/theme';
+  import { themeTokens, themePalette } from '../styles/theme';
   import useKLiveRegion from '../composables/useKLiveRegion';
   import useKResponsiveWindow from '../composables/useKResponsiveWindow';
 
@@ -223,8 +223,7 @@
             outline: 'none',
           },
           ':focus-visible': {
-            outline: `3px solid ${themeBrand().secondary.v_100}`,
-            outlineOffset: '2px',
+            outline: `3px solid ${themeTokens().focusOutline}`,
           },
         };
       });
@@ -282,7 +281,7 @@
       /**
        * The main message text displayed in the snackbar
        */
-      text: { type: String, default: '' },
+      text: { type: String, required: true },
       /**
        * Optional text for an action button (e.g., "Undo")
        */
