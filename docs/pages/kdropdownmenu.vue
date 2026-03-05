@@ -228,6 +228,7 @@
         loadExample="KDropdownMenu/CustomOption.vue"
         exampleId="custom-option-slot"
         block
+        :hideOnClick="true"
         :openOnMount="false"
       >
         <template #html>
@@ -243,13 +244,12 @@
                   ...
                 >
                   <template #option="{ option }">
-                    <div style="display: flex; align-items: center; padding: 0 16px">
-                      <KIcon
-                        :icon="option.icon"
-                        :style="{ color: option.color, marginInlineEnd: '8px' }"
-                      />
-                      <span :style="{ color: option.color }">{{ option.label }}</span>
-                    </div>
+                    <KLabeledIcon
+                      :icon="option.icon"
+                      :label="option.label"
+                      :color="option.color"
+                      :style="{ color: option.color }"
+                    />
                   </template>
                 </KDropdownMenu>
               </template>
