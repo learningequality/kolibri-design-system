@@ -7,6 +7,19 @@ Changelog is rather internal in nature. See release notes for the public overvie
 <!-- [DO NOT REMOVE-USED BY GH ACTION] PASTE CHANGELOG -->
 
 
+- [#1216]
+  - **Description:** Add GitHub Actions workflow for pull request events
+  - **Products impact:** none
+  - **Addresses:** Related to https://github.com/learningequality/.github/pull/50
+  - **Components:** -
+  - **Breaking:** no
+  - **Impacts a11y:** no
+  - **Guidance:** -
+
+[#1216]: https://github.com/learningequality/kolibri-design-system/pull/1216
+
+
+
 - [#1203]
   - **Description:** Do not render `<img>` when `src` not provided
   - **Products impact:** bugfix
