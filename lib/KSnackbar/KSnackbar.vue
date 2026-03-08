@@ -85,7 +85,7 @@
       /** Emitted when the snackbar leaves the screen. */
       'hide',
       /** Emitted when the snackbar is closed (e.g., via auto-dismiss or Esc key). */
-      'close'
+      'close',
     ],
 
     setup(props, { emit }) {
@@ -247,7 +247,6 @@
           },
         };
       });
-
 
       const onActionClick = () => {
         emit('action-click');
