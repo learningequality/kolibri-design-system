@@ -83,7 +83,6 @@
       const actionButton = ref(null);
       const previousActiveElement = ref(null);
 
-      // --- Logic ---
       const restoreFocus = async () => {
         await nextTick();
         if (
@@ -146,7 +145,6 @@
         }
       };
 
-      // --- Auto-hide timer logic ---
       let hideTimeoutId = null;
 
       const clearAutoHide = () => {
@@ -165,7 +163,6 @@
         }
       };
 
-      // --- Watchers ---
       watch(
         () => props.isOpen,
         (val, old) => {

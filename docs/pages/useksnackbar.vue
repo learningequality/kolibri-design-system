@@ -212,7 +212,7 @@
             default: 'null',
             type: { name: 'function' },
             description:
-              'Function called when the snackbar is hidden or replaced (Studio pattern). Useful for cleanup or promise resolution.',
+              'Function called when the snackbar is hidden or replaced. Useful for cleanup or promise resolution.',
           },
         ],
       };
