@@ -28,10 +28,10 @@
         :class="$computedClass(focusStyles)"
         :style="snackbarStyles"
         tabindex="0"
-        @click="onClick"
         @keydown.esc="handleClose"
       >
         <div class="k-snackbar-message">
+          <!-- @slot Optional slot as an alternative to the `text` prop for the snackbar message -->
           <slot>{{ text }}</slot>
         </div>
 
@@ -76,6 +76,17 @@
    */
   export default {
     name: 'KSnackbar',
+
+    emits: [
+      /** Emitted when the action button is clicked. */
+      'action-click',
+      /** Emitted when the snackbar enters the screen. */
+      'show',
+      /** Emitted when the snackbar leaves the screen. */
+      'hide',
+      /** Emitted when the snackbar is closed (e.g., via auto-dismiss or Esc key). */
+      'close'
+    ],
 
     setup(props, { emit }) {
       const { windowBreakpoint } = useKResponsiveWindow();
@@ -237,17 +248,22 @@
         };
       });
 
-      const onClick = () => emit('click');
 
       const onActionClick = () => {
         emit('action-click');
       };
 
-      const onEnter = () => emit('show');
+      const onEnter = () => {
+        emit('show');
+      };
 
-      const onLeave = () => emit('hide');
+      const onLeave = () => {
+        emit('hide');
+      };
 
-      const handleClose = () => emit('close');
+      const handleClose = () => {
+        emit('close');
+      };
 
       onBeforeUnmount(() => {
         clearAutoHide();
@@ -263,7 +279,6 @@
         snackbarStyles,
         focusStyles,
         actionButtonStyles,
-        onClick,
         onActionClick,
         onEnter,
         onLeave,
