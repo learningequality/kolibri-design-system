@@ -110,19 +110,19 @@
         default: 0,
       },
       /**
-       * Whether there should be a delay before the loader displays.
-       * Useful if the action often takes less than a second or two.
+       * Apply 300ms delay before showing loading state.
+       * Recommended in majority of cases.
        */
       delay: {
         type: Boolean,
         default: false,
       },
       /**
-       * Do not hide the loader until `minVisibleTime` in milliseconds.
-       * Useful to avoid jarring UX when the actions finishes very fast.
-       * In comparison to `delay`, `minVisibleTime` emphasizes that an
-       * action associated with the loader is indeed taking place.
-       * `shouldShow` prop needs to be used instead of `v-if/v-show` for this to work.
+       * Guarantee that loading state will be visible for at least this
+       * value in milliseconds once shown. Recommended in majority of cases.
+       * Recommended value `400ms`.
+       * `shouldShow` prop needs to be used instead of `v-if/v-show`
+       * for this to work.
        */
       minVisibleTime: {
         type: Number,
@@ -215,7 +215,7 @@
   @import '../keen/styles/imports';
 
   .delay {
-    animation-delay: 1s;
+    animation-delay: 300ms;
   }
 
   @keyframes fade-in {

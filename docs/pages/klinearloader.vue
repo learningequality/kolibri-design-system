@@ -5,69 +5,60 @@
       title="Overview"
       anchor="#overview"
     >
+      <p>Linear loaders illustrate progress by moving an indicator along a horizontal track.</p>
+
       <p>
-        Linear loaders illustrate progress by moving an indicator along a horizontal track. There
-        are two types of linear loaders:
+        See the
+        <DocsInternalLink
+          href="/loaders"
+          text="loaders page"
+        />
+        for more information and guidelines.
       </p>
-
-      <ul>
-        <li>
-          Determinate: these loaders show a visual indicator of detectable and measurable progress
-          percentage
-        </li>
-        <DocsShow>
-          <KLinearLoader
-            :progress="75"
-            type="determinate"
-            class="loader"
-            style="width: 400px; margin: 24px"
-          />
-        </DocsShow>
-        <li>
-          Indeterminate: these loaders show an ongoing process with an unspecified or undetectable
-          percentage completion
-        </li>
-        <DocsShow>
-          <KLinearLoader
-            :progress="75"
-            type="indeterminate"
-            class="loader"
-            style="width: 400px; margin: 24px"
-          />
-        </DocsShow>
-      </ul>
-
-      See the
-      <DocsInternalLink
-        href="/loaders"
-        text="loaders page"
-      />
-      for more information.
     </DocsPageSection>
 
     <DocsPageSection
-      title="Specifications"
-      anchor="#specifications"
+      title="Usage"
+      anchor="#usage"
     >
-      <ul>
-        <li>Progress track uses palette.grey.v_200</li>
-        <li>Progress indicator uses palette.grey.v_800</li>
-        <li>Progress track height is 4px</li>
-        <li>Include a 2px corner radius</li>
-        <li>
-          Remove the corner radius when appended to other components, such as appbars or data tables
-        </li>
-      </ul>
-    </DocsPageSection>
+      <section>
+        <h3>
+          Determinate
+          <DocsAnchorTarget anchor="#determinate" />
+        </h3>
 
-    <DocsPageSection
-      title="Placement"
-      anchor="#placement"
-    >
-      <ul>
-        <li>Can be attached to existing components such as appbars or table rows</li>
-        <li>As a progress bar, should be near task-related metadata</li>
-      </ul>
+        <DocsExample
+          loadExample="KLinearLoader/Determinate.vue"
+          exampleId="klinearloader-determinate"
+        >
+          <template #html>
+            <DocsShowCode language="html">
+              <KLinearLoader
+                type="determinate"
+                :progress="75"
+              />
+            </DocsShowCode>
+          </template>
+        </DocsExample>
+      </section>
+
+      <section>
+        <h3>
+          Indeterminate
+          <DocsAnchorTarget anchor="#indeterminate" />
+        </h3>
+
+        <DocsExample
+          loadExample="KLinearLoader/Indeterminate.vue"
+          exampleId="klinearloader-indeterminate"
+        >
+          <template #html>
+            <DocsShowCode language="html">
+              <KLinearLoader type="indeterminate" />
+            </DocsShowCode>
+          </template>
+        </DocsExample>
+      </section>
     </DocsPageSection>
   </DocsPageTemplate>
 

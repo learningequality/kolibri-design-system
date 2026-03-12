@@ -1,0 +1,10 @@
+<template>
+
+  <div style="width: 400px; padding: 24px 0">
+    <KLinearLoader
+      type="determinate"
+      :progress="75"
+    />
+  </div>
+
+</template>

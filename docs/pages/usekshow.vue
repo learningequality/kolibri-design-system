@@ -6,11 +6,22 @@
       anchor="#overview"
     >
       <p>
-        A composable that offers the <code>show</code> reactive function. This function guarantees
-        that something will be displayed at least for a specified duration after an initial trigger.
-        This is typically used to prevent a jarring user experience when showing or hiding certain
-        elements. For example, it can be used to ensure that a loader remains visible for a certain
-        amount of time, even when the related data has already been loaded.
+        A composable that offers the <code>show</code> reactive function which guarantees that
+        something will be displayed at least for a specified duration after an initial trigger. It
+        is typically used to guarantee
+        <DocsInternalLink href="/loaders#minimum-visible-time">
+          minimum visible time
+        </DocsInternalLink>
+        behavior of loading state.
+      </p>
+
+      <p>
+        See the
+        <DocsInternalLink
+          href="/loaders"
+          text="loaders page"
+        />
+        for more information and guidelines.
       </p>
     </DocsPageSection>
 
@@ -128,21 +139,6 @@
     </DocsPageSection>
 
     <DocsPageSection
-      title="Related"
-      anchor="#related"
-    >
-      <ul>
-        <li>
-          Some components offer a simpler interfance to achieve the same effect when there is no
-          need to be switching between more components. For example, see
-          <DocsInternalLink href="/kcircularloader#prop:minVisibleTime">
-            KCircularLoader's <code>minVisibleTime</code>
-          </DocsInternalLink>.
-        </li>
-      </ul>
-    </DocsPageSection>
-
-    <DocsPageSection
       title="Parameters"
       anchor="#parameters"
     >
@@ -183,11 +179,11 @@
       let timeoutId;
       const isFetching = ref(false);
 
-      const minVisibleTime = ref(5000);
-      const minVisibleTimeInput = ref(5000);
+      const minVisibleTime = ref(400);
+      const minVisibleTimeInput = ref(400);
 
-      const fetchingTime = ref(1000);
-      const fetchingTimeInput = ref(1000);
+      const fetchingTime = ref(100);
+      const fetchingTimeInput = ref(100);
 
       function fetchData() {
         clearTimeout(timeoutId);
@@ -234,7 +230,8 @@
             required: false,
             default: 0,
             type: { name: 'number' },
-            description: 'For how long should `show` return `true` after an initial trigger',
+            description:
+              'For how long should `show` return `true` after an initial trigger. Recommended value for loaders is `400ms`.',
           },
         ],
       };
