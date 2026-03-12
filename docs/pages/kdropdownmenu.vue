@@ -244,12 +244,14 @@
                   ...
                 >
                   <template #option="{ option }">
-                    <KLabeledIcon
-                      :icon="option.icon"
-                      :label="option.label"
-                      :color="option.color"
-                      :style="{ color: option.color }"
-                    />
+                    <div style="display: flex; align-items: center; padding: 0 16px">
+                      <KLabeledIcon
+                        :icon="option.icon"
+                        :label="option.label"
+                        :color="option.color"
+                        :style="{ color: option.color }"
+                      />
+                    </div>
                   </template>
                 </KDropdownMenu>
               </template>
