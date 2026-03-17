@@ -24,7 +24,15 @@
         :hasIcons="hasIcons"
         :maxWidth="maxWidth"
         @select="handleSelection"
-      />
+      >
+        <template #option="{ option }">
+          <!-- @slot Optional slot to customize the rendering of each menu option -->
+          <slot
+            name="option"
+            :option="option"
+          ></slot>
+        </template>
+      </UiMenu>
     </UiPopover>
   </div>
 

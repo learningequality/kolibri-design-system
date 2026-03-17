@@ -119,6 +119,8 @@
     }
 
     &:not(.is-divider) {
+      display: flex;
+      flex-direction: column;
       min-height: rem(40px);
       font-size: $ui-dropdown-item-font-size;
       font-weight: normal;
@@ -145,6 +147,10 @@
         .ui-menu-option-secondary-text {
           color: $secondary-text-color;
         }
+      }
+
+      & > * {
+        flex-grow: 1;
       }
     }
   }

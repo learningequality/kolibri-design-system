@@ -25,6 +25,7 @@
           { text: 'Icon button with dropdown', href: '#icon-button-with-dropdown' },
           { text: 'Options with icons', href: '#options-with-icons' },
           { text: 'Context menu', href: '#context-menu' },
+          { text: 'Custom option slot', href: '#custom-option-slot' },
         ]"
       />
 
@@ -212,6 +213,71 @@
         exampleId="context-menu"
         block
       />
+
+      <h3>
+        Custom option slot
+        <DocsAnchorTarget anchor="#custom-option-slot" />
+      </h3>
+
+      <p>
+        Use the <code>#option</code> scoped slot to customize each menu item. The slot provides the
+        option object via the <code>option</code> prop.
+      </p>
+
+      <DocsExample
+        loadExample="KDropdownMenu/CustomOption.vue"
+        exampleId="custom-option-slot"
+        block
+        :hideOnClick="true"
+        :openOnMount="false"
+      >
+        <template #html>
+          <!-- eslint-disable -->
+          <DocsShowCode language="html">
+            <KButton
+              text="Options"
+              hasDropdown
+            >
+              <template #menu>
+                <KDropdownMenu
+                  :options="options"
+                  ...
+                >
+                  <template #option="{ option }">
+                    <div style="display: flex; align-items: center; padding: 0 16px">
+                      <KLabeledIcon
+                        :icon="option.icon"
+                        :label="option.label"
+                        :color="option.color"
+                        :style="{ color: option.color }"
+                      />
+                    </div>
+                  </template>
+                </KDropdownMenu>
+              </template>
+            </KButton>
+          </DocsShowCode>
+          <!-- eslint-enable -->
+        </template>
+
+        <template #javascript>
+          <!-- eslint-disable -->
+          <!-- prettier-ignore -->
+          <DocsShowCode language="javascript">
+              export default {
+                data() {
+                  return {
+                    options: [
+                      { label: 'Edit', value: 'edit', icon: 'edit', color: null },
+                      { label: 'Delete', value: 'delete', icon: 'delete', color: this.$themeTokens.error },
+                    ],
+                  };
+                },
+              };
+            </DocsShowCode>
+          <!-- eslint-enable -->
+        </template>
+      </DocsExample>
     </DocsPageSection>
   </DocsPageTemplate>
 
