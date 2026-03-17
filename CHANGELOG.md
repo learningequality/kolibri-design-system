@@ -7,6 +7,19 @@ Changelog is rather internal in nature. See release notes for the public overvie
 <!-- [DO NOT REMOVE-USED BY GH ACTION] PASTE CHANGELOG -->
 
 
+- [#1176]
+  - **Description:** Bump jest-puppeteer from 10.1.4 to 11.0.0
+  - **Products impact:** Dev Dependency upgrade
+  - **Addresses:** -
+  - **Components:** -
+  - **Breaking:** -
+  - **Impacts a11y:** -
+  - **Guidance:** -
+
+[#1176]: https://github.com/learningequality/kolibri-design-system/pull/1176
+
+
+
 - [#1210]
   - **Description:**  New option scoped slot on KDropdownMenu. Use <template #option="{ option }"> to customize how each menu item renders (icon placement, color, text size, etc.).
   - **Products impact:** new API
