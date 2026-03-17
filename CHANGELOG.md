@@ -7,6 +7,19 @@ Changelog is rather internal in nature. See release notes for the public overvie
 <!-- [DO NOT REMOVE-USED BY GH ACTION] PASTE CHANGELOG -->
 
 
+- [#1210]
+  - **Description:**  New option scoped slot on KDropdownMenu. Use <template #option="{ option }"> to customize how each menu item renders (icon placement, color, text size, etc.).
+  - **Products impact:** new API
+  - **Addresses:** learningequality/kolibri-design-system#1200.
+  - **Components:** KDropdownMenu
+  - **Breaking:** no
+  - **Impacts a11y:** no
+  - **Guidance:**Use #option when the options array config isn't sufficient. Existing behavior is unchanged when the slot is not used.
+
+[#1210]: https://github.com/learningequality/kolibri-design-system/pull/1210
+
+
+
 - [#1216]
   - **Description:** Add GitHub Actions workflow for pull request events
   - **Products impact:** none
