@@ -7,6 +7,19 @@ Changelog is rather internal in nature. See release notes for the public overvie
 <!-- [DO NOT REMOVE-USED BY GH ACTION] PASTE CHANGELOG -->
 
 
+- [#1212]
+  - **Description:** Bump basic-ftp from 5.0.5 to 5.2.0
+  - **Products impact:** Dev Dependency upgrade
+  - **Addresses:** -
+  - **Components:** -
+  - **Breaking:** -
+  - **Impacts a11y:** -
+  - **Guidance:** -
+
+[#1212]: https://github.com/learningequality/kolibri-design-system/pull/1212
+
+
+
 - [#1176]
   - **Description:** Bump jest-puppeteer from 10.1.4 to 11.0.0
   - **Products impact:** Dev Dependency upgrade
