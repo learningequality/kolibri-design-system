@@ -4,6 +4,10 @@ on:
   release:
     types: [published]
 
+permissions:
+  id-token: write  # Required for OIDC
+  contents: read
+
 jobs:
   publish:
     runs-on: ubuntu-latest
@@ -14,6 +18,3 @@ jobs:
           node-version: '18.x'
           registry-url: 'https://registry.npmjs.org'
       - run: npm publish
-        env:
-          # NPM_API_TOKEN is an organization-level secret
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_API_TOKEN }}
