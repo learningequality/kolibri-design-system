@@ -46,10 +46,10 @@
       />
     </div>
 
-    <h3 v-if="picturePasscodes.length">Picture Passcodes</h3>
+    <h3 v-if="pictureLoginIcons.length">Picture Login Icons</h3>
     <div class="icon-table">
       <IconBlock
-        v-for="(aliasList, index) in picturePasscodes"
+        v-for="(aliasList, index) in pictureLoginIcons"
         :key="index"
         :aliasList="aliasList"
         class="icon-block"
@@ -130,7 +130,7 @@
               !KolibriIcons[alias].defaultColor &&
               !KolibriIcons[alias].learningActivity &&
               !KolibriIcons[alias].resourceCategory &&
-              !KolibriIcons[alias].picturePasscode
+              !KolibriIcons[alias].pictureLogin
             );
           }),
         ).filter(this.termFilter);
@@ -150,9 +150,9 @@
           getIconGroups(alias => Boolean(KolibriIcons[alias].resourceCategory)),
         ).filter(this.termFilter);
       },
-      picturePasscodes() {
+      pictureLoginIcons() {
         return sortedIconAliases(
-          getIconGroups(alias => Boolean(KolibriIcons[alias].picturePasscode)),
+          getIconGroups(alias => Boolean(KolibriIcons[alias].pictureLogin)),
         ).filter(this.termFilter);
       },
     },
