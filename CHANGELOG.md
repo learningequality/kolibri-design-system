@@ -7,6 +7,19 @@ Changelog is rather internal in nature. See release notes for the public overvie
 <!-- [DO NOT REMOVE-USED BY GH ACTION] PASTE CHANGELOG -->
 
 
+- [#1224]
+  - **Description:** Adds community library icon.
+  - **Products impact:** new API.
+  - **Addresses:** -.
+  - **Components:** KIcon.
+  - **Breaking:** no
+  - **Impacts a11y:** no
+  - **Guidance:** -.
+
+[#1224]: https://github.com/learningequality/kolibri-design-system/pull/1224
+
+
+
 - [#1212]
   - **Description:** Bump basic-ftp from 5.0.5 to 5.2.0
   - **Products impact:** Dev Dependency upgrade
