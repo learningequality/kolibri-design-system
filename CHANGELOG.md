@@ -7,6 +7,19 @@ Changelog is rather internal in nature. See release notes for the public overvie
 <!-- [DO NOT REMOVE-USED BY GH ACTION] PASTE CHANGELOG -->
 
 
+- [#1227]
+  - **Description:** * Upgrades nodejs on the npm-publish workflow
+  - **Products impact:** none.
+  - **Addresses:** -
+  - **Components:** -.
+  - **Breaking:** no
+  - **Impacts a11y:** no
+  - **Guidance:** -.
+
+[#1227]: https://github.com/learningequality/kolibri-design-system/pull/1227
+
+
+
 - [#1226]
   - **Description:** Updates npm publish to use the trusted publishers workflow.
   - **Products impact:** none.
