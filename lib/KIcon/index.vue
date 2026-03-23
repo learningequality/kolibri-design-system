@@ -2,7 +2,7 @@
 
   <component
     :is="svgIconComponent"
-    :style="{ fill: computedColor, width: computedSize, height: computedSize }"
+    :style="{ fill: computedColor }"
     :class="{ 'rtl-flip-icon': rtlFlip }"
   />
 
@@ -40,14 +40,6 @@
         default: null,
       },
       /**
-       * Size override for the icon (e.g. '2em', '48px').
-       *  Falls back to the icon's defaultSize, then the CSS default.
-       */
-      size: {
-        type: String,
-        default: null,
-      },
-      /**
        * @ignore
        * Don't apply automatic fill, allowing external styling.
        * Currently used by the design system itself. Not exposed until we see a broader need
@@ -74,9 +66,6 @@
           return this.selectedIcon.defaultColor;
         }
         return this.$themeTokens.text;
-      },
-      computedSize() {
-        return this.size || this.selectedIcon.defaultSize || null;
       },
       rtlFlip() {
         return this.selectedIcon.rtlFlip && this.isRtl;
