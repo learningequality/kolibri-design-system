@@ -47,12 +47,12 @@
     </div>
 
     <h3 v-if="pictureLoginIcons.length">Picture Login Icons</h3>
-    <div class="icon-table">
+    <div class="icon-table picture-login-table">
       <IconBlock
         v-for="(aliasList, index) in pictureLoginIcons"
         :key="index"
         :aliasList="aliasList"
-        class="icon-block picture-login-block"
+        class="icon-block"
       />
     </div>
   </div>
@@ -189,14 +189,9 @@
     margin: 8px;
   }
 
-  .picture-login-block {
-    width: 200px;
-    min-width: unset;
-
-    ::v-deep .icon {
-      width: 48px;
-      height: 48px;
-    }
+  .picture-login-table {
+    max-width: 600px;
   }
+
 
 </style>
