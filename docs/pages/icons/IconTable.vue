@@ -193,5 +193,4 @@
     max-width: 600px;
   }
 
-
 </style>
