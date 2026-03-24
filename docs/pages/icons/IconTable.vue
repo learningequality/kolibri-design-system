@@ -189,8 +189,19 @@
     margin: 8px;
   }
 
+  /* Keeps the two distinct picture login icon styles in separate columns */
   .picture-login-table {
-    max-width: 600px;
+    width: 600px;
+
+    .icon-block {
+      width: 200px;
+      min-width: unset;
+
+      ::v-deep .icon {
+        width: 48px;
+        height: 48px;
+      }
+    }
   }
 
 </style>
