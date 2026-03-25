@@ -76,7 +76,7 @@
 
     emits: [
       /** Emitted when the action button is clicked. */
-      'action-click',
+      'actionClick',
       /** Emitted when the snackbar enters the screen. */
       'show',
       /** Emitted when the snackbar leaves the screen. */
@@ -152,27 +152,28 @@
         }
       };
 
-      watch(
-        () => props.isOpen,
-        (val, old) => {
-          if (val && !old) {
-            previousActiveElement.value = document.activeElement;
-            setupAutoHide();
-            if (props.text) sendPoliteMessage(props.text);
-            manageFocusOnOpen();
-          } else if (!val && old) {
-            clearAutoHide();
-            restoreFocus();
-          }
-        },
-      );
+      const onOpen = () => {
+        previousActiveElement.value = document.activeElement;
+        setupAutoHide();
+        if (props.text) sendPoliteMessage(props.text);
+        manageFocusOnOpen();
+      };
+
+      const onClose = () => {
+        clearAutoHide();
+        restoreFocus();
+      };
 
       watch(
-        () => props.text,
-        val => {
-          if (props.isOpen && val) {
-            sendPoliteMessage(val);
-            setupAutoHide();
+        [() => props.isOpen, () => props.text],
+        ([isOpen, text], [wasOpen]) => {
+          if (isOpen && !wasOpen) {
+            onOpen();
+          } else if (!isOpen && wasOpen) {
+            onClose();
+          } else if (isOpen && text) {
+            // text changed while snackbar is already open — just announce
+            sendPoliteMessage(text);
           }
         },
       );
@@ -198,9 +199,8 @@
       });
 
       const onActionClick = () => {
-        emit('action-click');
+        emit('actionClick');
       };
-
       const onEnter = () => {
         emit('show');
       };

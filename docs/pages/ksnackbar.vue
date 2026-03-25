@@ -41,7 +41,7 @@
       <p>
         The component binds to the global <code>snackbarIsVisible</code> and
         <code>snackbarOptions</code> refs and automatically displays snackbars when
-        <code>createSnackbar</code> is called. The <code>@action-click</code> event must be handled
+        <code>createSnackbar</code> is called. The <code>@actionClick</code> event must be handled
         at the app root level to execute the callback stored in the composable:
       </p>
 
@@ -55,10 +55,9 @@
           :bottomOffset="snackbarOptions.bottomOffset"
           :backdrop="snackbarOptions.backdrop"
           :autofocus="snackbarOptions.autofocus"
-          :onBlur="snackbarOptions.onBlur"
           :autoDismiss="snackbarOptions.autoDismiss"
           :duration="snackbarOptions.duration"
-          @action-click="handleActionClick"
+          @actionClick="handleActionClick"
           @close="clearSnackbar"
         />
       </DocsShowCode>
@@ -147,10 +146,9 @@
       :bottomOffset="snackbarOptions.bottomOffset"
       :backdrop="snackbarOptions.backdrop"
       :autofocus="snackbarOptions.autofocus"
-      :onBlur="snackbarOptions.onBlur"
       :autoDismiss="snackbarOptions.autoDismiss"
       :duration="snackbarOptions.duration"
-      @action-click="handleActionClick"
+      @actionClick="handleActionClick"
       @close="clearSnackbar"
     />
   </DocsPageTemplate>
