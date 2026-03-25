@@ -8,55 +8,48 @@
       ></div>
     </transition>
 
-    <div
-      v-if="isOpen && backdrop"
-      tabindex="0"
-      class="k-focus-sentinel"
-      @focus="trapFocus"
-    ></div>
-
-    <transition
-      name="k-snackbar--transition-slide"
-      @after-enter="onEnter"
-      @after-leave="onLeave"
+    <KFocusTrap
+      :disabled="!isOpen || !backdrop"
+      @shouldFocusFirstEl="focusSnackbar"
+      @shouldFocusLastEl="focusLastEl"
     >
-      <div
-        v-if="isOpen"
-        ref="snackbarElement"
-        class="k-snackbar"
-        data-testid="snackbar"
-        :class="$computedClass(focusStyles)"
-        :style="snackbarStyles"
-        tabindex="0"
-        @keydown.esc="handleClose"
+      <transition
+        name="k-snackbar--transition-slide"
+        @after-enter="onEnter"
+        @after-leave="onLeave"
       >
-        <div class="k-snackbar-message">
-          <!-- @slot Optional slot as an alternative to the `text` prop for the snackbar message -->
-          <slot>{{ text }}</slot>
-        </div>
-
         <div
-          v-if="actionText"
-          class="k-snackbar-action"
+          v-if="isOpen"
+          ref="snackbarElement"
+          class="k-snackbar"
+          data-testid="snackbar"
+          :class="$computedClass({ ':focus-visible': $coreOutline })"
+          :style="snackbarStyles"
+          tabindex="0"
+          @keydown.esc="handleClose"
         >
-          <KButton
-            ref="actionButton"
-            appearance="flat-button"
-            class="k-snackbar-action-button"
-            :text="actionText"
-            :appearanceOverrides="actionButtonStyles"
-            @click.stop="onActionClick"
-          />
-        </div>
-      </div>
-    </transition>
+          <div class="k-snackbar-message">
+            <!-- @slot Optional slot as an alternative to the `text` prop for the message -->
+            <slot>{{ text }}</slot>
+          </div>
 
-    <div
-      v-if="isOpen && backdrop"
-      tabindex="0"
-      class="k-focus-sentinel"
-      @focus="trapFocus"
-    ></div>
+          <div
+            v-if="actionText"
+            class="k-snackbar-action"
+          >
+            <KButton
+              ref="actionButton"
+              appearance="flat-button"
+              class="k-snackbar-action-button"
+              :text="actionText"
+              :appearanceOverrides="actionButtonStyles"
+              @click.stop="onActionClick"
+              @blur="$emit('blur', $event)"
+            />
+          </div>
+        </div>
+      </transition>
+    </KFocusTrap>
   </div>
 
 </template>
@@ -68,14 +61,15 @@
   import { themeTokens, themePalette } from '../styles/theme';
   import useKLiveRegion from '../composables/useKLiveRegion';
   import useKResponsiveWindow from '../composables/useKResponsiveWindow';
-
-  const { sendPoliteMessage } = useKLiveRegion();
+  import KFocusTrap from '../KFocusTrap.vue';
 
   /**
    * A globally-managed notification component for displaying non-critical messages
    */
   export default {
     name: 'KSnackbar',
+
+    components: { KFocusTrap },
 
     emits: [
       /** Emitted when the action button is clicked. */
@@ -86,9 +80,12 @@
       'hide',
       /** Emitted when the snackbar is closed (e.g., via auto-dismiss or Esc key). */
       'close',
+      /** Emitted when the action button loses focus. */
+      'blur',
     ],
 
     setup(props, { emit }) {
+      const { sendPoliteMessage } = useKLiveRegion();
       const { windowBreakpoint } = useKResponsiveWindow();
       const snackbarElement = ref(null);
       const actionButton = ref(null);
@@ -106,6 +103,23 @@
         previousActiveElement.value = null;
       };
 
+      const focusSnackbar = async () => {
+        await nextTick();
+        if (snackbarElement.value) {
+          snackbarElement.value.focus();
+        }
+      };
+
+      const focusLastEl = async () => {
+        await nextTick();
+        const btn = actionButton.value?.$el || actionButton.value;
+        if (btn && typeof btn.focus === 'function') {
+          btn.focus();
+        } else if (snackbarElement.value) {
+          snackbarElement.value.focus();
+        }
+      };
+
       const manageFocusOnOpen = async () => {
         await nextTick();
 
@@ -114,45 +128,6 @@
         } else if (props.autofocus && props.actionText) {
           const btn = actionButton.value?.$el || actionButton.value;
           if (btn && typeof btn.focus === 'function') btn.focus();
-        }
-      };
-      const onActionBlur = e => {
-        if (props.onBlur) props.onBlur(e);
-      };
-
-      const onActionKeydown = e => {
-        if (e.key === 'Tab' && props.onBlur) {
-          e.preventDefault();
-          props.onBlur(e);
-        }
-      };
-
-      const addActionButtonListeners = async () => {
-        if (!props.actionText || !props.onBlur) return;
-
-        await nextTick();
-        const btn = actionButton.value?.$el || actionButton.value;
-        if (btn) {
-          btn.addEventListener('blur', onActionBlur);
-          btn.addEventListener('keydown', onActionKeydown);
-        }
-      };
-
-      const removeActionButtonListeners = () => {
-        if (!props.actionText || !props.onBlur) return;
-
-        const btn = actionButton.value?.$el || actionButton.value;
-        if (btn) {
-          btn.removeEventListener('blur', onActionBlur);
-          btn.removeEventListener('keydown', onActionKeydown);
-        }
-      };
-
-      const trapFocus = e => {
-        if (e) e.stopPropagation();
-
-        if (snackbarElement.value) {
-          snackbarElement.value.focus();
         }
       };
 
@@ -182,10 +157,8 @@
             setupAutoHide();
             if (props.text) sendPoliteMessage(props.text);
             manageFocusOnOpen();
-            addActionButtonListeners();
           } else if (!val && old) {
             clearAutoHide();
-            removeActionButtonListeners();
             restoreFocus();
           }
         },
@@ -216,24 +189,11 @@
         } else {
           if (isRtl) {
             styles.right = '24px';
-            styles.left = 'auto';
           } else {
             styles.left = '24px';
-            styles.right = 'auto';
           }
         }
         return styles;
-      });
-
-      const focusStyles = computed(() => {
-        return {
-          ':focus': {
-            outline: 'none',
-          },
-          ':focus-visible': {
-            outline: `3px solid ${themeTokens().focusOutline}`,
-          },
-        };
       });
 
       const actionButtonStyles = computed(() => {
@@ -266,7 +226,6 @@
 
       onBeforeUnmount(() => {
         clearAutoHide();
-        removeActionButtonListeners();
       });
 
       return {
@@ -274,9 +233,9 @@
         snackbarElement,
         actionButton,
         handleClose,
-        trapFocus,
+        focusSnackbar,
+        focusLastEl,
         snackbarStyles,
-        focusStyles,
         actionButtonStyles,
         onActionClick,
         onEnter,
@@ -312,10 +271,6 @@
        */
       autofocus: { type: Boolean, default: false },
       /**
-       * Blur event handler for when the action button loses focus
-       */
-      onBlur: { type: Function, default: null },
-      /**
        * If true, the snackbar will auto-dismiss after the duration
        */
       autoDismiss: { type: Boolean, default: true },
@@ -342,16 +297,10 @@
     position: fixed;
     top: 0;
     left: 0;
+    right: 0;
+    bottom: 0;
     z-index: 23;
-    width: 100vw;
-    height: 100vh;
     background-color: rgba(0, 0, 0, 0.7);
-  }
-
-  .k-focus-sentinel {
-    position: fixed;
-    pointer-events: none;
-    opacity: 0;
   }
 
   .k-snackbar {
