@@ -23,7 +23,10 @@
           ref="snackbarElement"
           class="k-snackbar"
           data-testid="snackbar"
-          :class="$computedClass({ ':focus-visible': $coreOutline })"
+          :class="[
+            $computedClass({ ':focus-visible': $coreOutline }),
+            { 'k-snackbar-small': isSmall },
+          ]"
           :style="snackbarStyles"
           tabindex="0"
           @keydown.esc="handleClose"
@@ -174,27 +177,13 @@
         },
       );
 
-      const snackbarStyles = computed(() => {
-        const isRtl = window.isRtl;
+      const isSmall = computed(() => windowBreakpoint.value < 2);
 
-        const styles = {
-          bottom: `${24 + props.bottomOffset}px`,
-          backgroundColor: themePalette().grey.v_800,
-          color: themeTokens().textInverted,
-        };
-
-        if (windowBreakpoint.value < 2) {
-          styles.left = '24px';
-          styles.right = '24px';
-        } else {
-          if (isRtl) {
-            styles.right = '24px';
-          } else {
-            styles.left = '24px';
-          }
-        }
-        return styles;
-      });
+      const snackbarStyles = computed(() => ({
+        bottom: `${24 + props.bottomOffset}px`,
+        backgroundColor: themePalette().grey.v_800,
+        color: themeTokens().textInverted,
+      }));
 
       const actionButtonStyles = computed(() => {
         const whiteColor = themeTokens().textInverted;
@@ -229,7 +218,7 @@
       });
 
       return {
-        windowBreakpoint,
+        isSmall,
         snackbarElement,
         actionButton,
         handleClose,
@@ -305,15 +294,29 @@
 
   .k-snackbar {
     position: fixed;
+    bottom: 24px;
+    left: 24px;
     z-index: 24;
     display: inline-flex;
     align-items: center;
+    gap: 48px;
     min-width: 344px;
     max-width: 512px;
     min-height: 48px;
-    padding: 14px 24px;
+    padding: 14px 12px 14px 24px;
     border-radius: 4px;
     @extend %dropshadow-2dp;
+  }
+
+  // On small screens, stretch edge to edge
+  .k-snackbar.k-snackbar-small {
+    right: 24px;
+  }
+
+  // RTL: flip to the right side on larger screens
+  [dir='rtl'] .k-snackbar:not(.k-snackbar-small) {
+    right: 24px;
+    left: auto;
   }
 
   .k-snackbar-message {
@@ -334,10 +337,6 @@
   .k-snackbar-action {
     display: flex;
     align-items: center;
-    padding-left: 48px;
-    margin-top: -9px;
-    margin-right: -12px;
-    margin-bottom: -9px;
     margin-left: auto;
   }
 
