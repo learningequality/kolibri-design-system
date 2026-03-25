@@ -16,7 +16,7 @@
 
   export default {
     setup() {
-      const { createSnackbar, clearSnackbar, snackbarIsVisible, snackbarOptions } = useKSnackbar();
+      const { createSnackbar } = useKSnackbar();
 
       const showPersistent = () => {
         createSnackbar({
@@ -28,9 +28,6 @@
       };
 
       return {
-        snackbarIsVisible,
-        snackbarOptions,
-        clearSnackbar,
         showPersistent,
       };
     },
