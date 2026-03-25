@@ -76,7 +76,7 @@
 
     emits: [
       /** Emitted when the action button is clicked. */
-      'actionClick',
+      'action-click',
       /** Emitted when the snackbar enters the screen. */
       'show',
       /** Emitted when the snackbar leaves the screen. */
@@ -199,7 +199,7 @@
       });
 
       const onActionClick = () => {
-        emit('actionClick');
+        emit('action-click');
       };
       const onEnter = () => {
         emit('show');

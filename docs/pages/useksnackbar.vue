@@ -80,7 +80,7 @@
           :autofocus="snackbarOptions.autofocus"
           :autoDismiss="snackbarOptions.autoDismiss"
           :duration="snackbarOptions.duration"
-          @actionClick="handleActionClick"
+          @action-click="handleActionClick"
           @close="clearSnackbar"
         />
       </DocsShowCode>
@@ -148,7 +148,7 @@
             default: 'null',
             type: { name: 'function' },
             description:
-              'Function stored in composable and called when the action button is clicked. Retrieved via @actionClick event handler at the app root level.',
+              'Function stored in composable and called when the action button is clicked. Retrieved via @action-click event handler at the app root level.',
           },
           {
             name: 'duration',
