@@ -7,6 +7,19 @@ Changelog is rather internal in nature. See release notes for the public overvie
 <!-- [DO NOT REMOVE-USED BY GH ACTION] PASTE CHANGELOG -->
 
 
+- [#1221]
+  - **Description:** adds set of 24 icons to support picture login work.
+  - **Products impact:** Kolibri
+  - **Addresses:** #1215
+  - **Components:**
+  - **Breaking:**N/A
+  - **Impacts a11y:** NO
+  - **Guidance:** Test this icon on Kolibri by running  `pnpm devserver-with-kds /path` to verify if they render correctly
+
+[#1221]: https://github.com/learningequality/kolibri-design-system/pull/1221
+
+
+
 - [#1228]
   - **Description:** Pin npm-publish to node 24
   - **Products impact:** none.
