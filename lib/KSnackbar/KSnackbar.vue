@@ -322,7 +322,7 @@
       /**
        * Duration in milliseconds before auto-dismissing (if autoDismiss is true)
        */
-      duration: { type: Number, default: 4000 },
+      duration: { type: Number, default: 5000 },
     },
   };
 
@@ -364,15 +364,22 @@
     min-height: 48px;
     padding: 14px 24px;
     border-radius: 4px;
-    box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.25);
+    @extend %dropshadow-2dp;
   }
 
   .k-snackbar-message {
+    display: -webkit-box;
     flex-grow: 1;
+    overflow: hidden;
     font-size: 14px;
+    font-weight: bold;
     line-height: 1.5;
     text-align: start;
+    text-overflow: ellipsis;
     cursor: default;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    -webkit-box-orient: vertical;
   }
 
   .k-snackbar-action {
