@@ -45,6 +45,16 @@
         class="icon-block"
       />
     </div>
+
+    <h3 v-if="pictureLoginIcons.length">Picture Login Icons</h3>
+    <div class="icon-table picture-login-table">
+      <IconBlock
+        v-for="(aliasList, index) in pictureLoginIcons"
+        :key="index"
+        :aliasList="aliasList"
+        class="icon-block"
+      />
+    </div>
   </div>
 
 </template>
@@ -119,7 +129,8 @@
             return (
               !KolibriIcons[alias].defaultColor &&
               !KolibriIcons[alias].learningActivity &&
-              !KolibriIcons[alias].resourceCategory
+              !KolibriIcons[alias].resourceCategory &&
+              !KolibriIcons[alias].pictureLogin
             );
           }),
         ).filter(this.termFilter);
@@ -137,6 +148,11 @@
       resourceCategories() {
         return sortedIconAliases(
           getIconGroups(alias => Boolean(KolibriIcons[alias].resourceCategory)),
+        ).filter(this.termFilter);
+      },
+      pictureLoginIcons() {
+        return sortedIconAliases(
+          getIconGroups(alias => Boolean(KolibriIcons[alias].pictureLogin)),
         ).filter(this.termFilter);
       },
     },
@@ -171,6 +187,21 @@
     display: inline-block;
     min-width: 250px;
     margin: 8px;
+  }
+
+  /* Keeps the two distinct picture login icon styles in separate columns */
+  .picture-login-table {
+    width: 600px;
+
+    .icon-block {
+      width: 200px;
+      min-width: unset;
+
+      ::v-deep .icon {
+        width: 48px;
+        height: 48px;
+      }
+    }
   }
 
 </style>
