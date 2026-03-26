@@ -18,73 +18,91 @@
       title="Usage"
       anchor="#usage"
     >
-      <!-- eslint-disable -->
-      <!-- prettier-ignore -->
-      <DocsShowCode language="javascript">
-        import useKSnackbar from 'kolibri-design-system/lib/composables/useKSnackbar';
-
-        export default {
-          setup() {
-            const { createSnackbar, clearSnackbar, snackbarIsVisible, snackbarOptions } = useKSnackbar();
-
-            // 1. Create a snackbar with action button
-            function showSnackbar() {
-              createSnackbar({
-                text: 'Item was successfully created!',
-                actionText: 'Undo',
-                actionCallback: () => {
-                  // Handle undo action
-                },
-              });
-            }
-
-            // 2. Handle action button clicks at app root level
-            function handleActionClick() {
-              if (snackbarOptions.value.actionCallback) {
-                snackbarOptions.value.actionCallback();
-              }
-              clearSnackbar();
-            }
-
-            return {
-              showSnackbar,
-              handleActionClick,
-              clearSnackbar,
-              snackbarIsVisible,
-              snackbarOptions,
-            };
-          },
-        };
-      </DocsShowCode>
-      <!-- eslint-enable -->
-
-      <h3>Component setup</h3>
       <p>
-        You must also place a
-        <DocsLibraryLink component="KSnackbar" />
-        component in your template (typically at the root/app level) and bind it to the
-        <code>snackbarIsVisible</code> and <code>snackbarOptions</code> refs. This component will
-        automatically display snackbars when <code>createSnackbar</code> is called from anywhere in
-        your app.
+        Before using this composable to show messages, ensure you have mounted the root component.
+        For instructions, please see the
+        <DocsInternalLink
+          text="KSnackbar"
+          href="/ksnackbar"
+        />
+        global setup.
       </p>
 
-      <!-- eslint-disable -->
-      <!-- prettier-ignore -->
-      <DocsShowCode language="html">
-        <KSnackbar
-          :isOpen="snackbarIsVisible"
-          :text="snackbarOptions.text"
-          :actionText="snackbarOptions.actionText"
-          :bottomOffset="snackbarOptions.bottomOffset"
-          :backdrop="snackbarOptions.backdrop"
-          :autofocus="snackbarOptions.autofocus"
-          :autoDismiss="snackbarOptions.autoDismiss"
-          :duration="snackbarOptions.duration"
-          @action-click="handleActionClick"
-          @close="clearSnackbar"
-        />
-      </DocsShowCode>
-      <!-- eslint-enable -->
+      <h3>Examples</h3>
+
+      <h4>Basic snackbar</h4>
+      <p>Use the default behavior for short confirmation messages.</p>
+      <DocsExample
+        loadExample="KSnackbar/Basic.vue"
+        exampleId="basic"
+        block
+      />
+
+      <h4>Snackbar with action</h4>
+      <p>
+        Provide <code>actionText</code> and <code>actionCallback</code> when calling
+        <code>createSnackbar()</code>
+        to enable an immediate action such as Undo. The callback is stored in the composable and
+        executed when the user clicks the action button.
+      </p>
+      <DocsExample
+        loadExample="KSnackbar/WithAction.vue"
+        exampleId="with-action"
+        block
+      />
+
+      <h4>Persistent snackbar</h4>
+      <p>
+        Set <code>autoDismiss: false</code> in <code>createSnackbar()</code> to disable auto-hide
+        for important messages. Alternatively, set <code>duration: 0</code> to achieve the same
+        effect.
+      </p>
+      <DocsExample
+        loadExample="KSnackbar/Persistent.vue"
+        exampleId="persistent"
+        block
+      />
+
+      <h4>Snackbar with bottom offset</h4>
+      <p>Use <code>bottomOffset</code> when a bottom navigation bar or fixed footer is present.</p>
+      <DocsExample
+        loadExample="KSnackbar/WithBottomOffset.vue"
+        exampleId="with-bottom-offset"
+        block
+      />
+
+      <h4>Update snackbar without transition</h4>
+      <p>
+        Use <code>forceReuse</code> to update the snackbar text in place without replaying the
+        transition animation. Useful for status updates like connection state changes.
+      </p>
+      <DocsExample
+        loadExample="KSnackbar/ForceReuse.vue"
+        exampleId="force-reuse"
+        block
+      />
+
+      <h4>Snackbar with autofocus</h4>
+      <p>
+        Set <code>autofocus: true</code> to immediately focus the action button when the snackbar
+        appears. Useful for critical actions that need immediate attention.
+      </p>
+      <DocsExample
+        loadExample="KSnackbar/WithAutofocus.vue"
+        exampleId="with-autofocus"
+        block
+      />
+
+      <h4>Snackbar with onBlur handling</h4>
+      <p>
+        Provide an <code>onBlur</code> callback to handle advanced focus management scenarios, such
+        as auto-dismissing when the user tabs away or clicks elsewhere.
+      </p>
+      <DocsExample
+        loadExample="KSnackbar/WithOnBlur.vue"
+        exampleId="with-onblur"
+        block
+      />
     </DocsPageSection>
 
     <DocsPageSection
@@ -113,6 +131,21 @@
         </li>
       </ul>
     </DocsPageSection>
+
+    <!-- Global snackbar instance for all examples on this page -->
+    <KSnackbar
+      :isOpen="snackbarIsVisible"
+      :text="snackbarOptions.text"
+      :actionText="snackbarOptions.actionText"
+      :bottomOffset="snackbarOptions.bottomOffset"
+      :backdrop="snackbarOptions.backdrop"
+      :autofocus="snackbarOptions.autofocus"
+      :autoDismiss="snackbarOptions.autoDismiss"
+      :duration="snackbarOptions.duration"
+      @action-click="handleActionClick"
+      @blur="handleBlur"
+      @close="clearSnackbar"
+    />
   </DocsPageTemplate>
 
 </template>
@@ -121,10 +154,35 @@
 <script>
 
   import PropsTable from '../common/DocsPageTemplate/jsdocs/PropsTable';
+  import useKSnackbar from '../../lib/composables/useKSnackbar';
 
   export default {
     components: {
       PropsTable,
+    },
+    setup() {
+      const { snackbarIsVisible, snackbarOptions, clearSnackbar } = useKSnackbar();
+
+      const handleActionClick = () => {
+        if (snackbarOptions.value.actionCallback) {
+          snackbarOptions.value.actionCallback();
+        }
+        clearSnackbar();
+      };
+
+      const handleBlur = () => {
+        if (typeof snackbarOptions.value.onBlur === 'function') {
+          snackbarOptions.value.onBlur();
+        }
+      };
+
+      return {
+        snackbarIsVisible,
+        snackbarOptions,
+        clearSnackbar,
+        handleActionClick,
+        handleBlur,
+      };
     },
     data() {
       return {
@@ -219,3 +277,12 @@
   };
 
 </script>
+
+
+<style lang="scss" scoped>
+
+  ::v-deep .k-snackbar-wrapper {
+    z-index: 100;
+  }
+
+</style>

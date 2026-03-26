@@ -33,7 +33,12 @@
         >
           <div class="k-snackbar-message">
             <!-- @slot Optional slot as an alternative to the `text` prop for the message -->
-            <slot>{{ text }}</slot>
+            <slot>
+              <KTextTruncator
+                :text="text"
+                :maxLines="2"
+              />
+            </slot>
           </div>
 
           <div
@@ -65,6 +70,7 @@
   import useKLiveRegion from '../composables/useKLiveRegion';
   import useKResponsiveWindow from '../composables/useKResponsiveWindow';
   import KFocusTrap from '../KFocusTrap.vue';
+  import KTextTruncator from '../KTextTruncator.vue';
 
   /**
    * A globally-managed notification component for displaying non-critical messages
@@ -72,7 +78,7 @@
   export default {
     name: 'KSnackbar',
 
-    components: { KFocusTrap },
+    components: { KFocusTrap, KTextTruncator },
 
     emits: [
       /** Emitted when the action button is clicked. */
@@ -164,19 +170,16 @@
         restoreFocus();
       };
 
-      watch(
-        [() => props.isOpen, () => props.text],
-        ([isOpen, text], [wasOpen]) => {
-          if (isOpen && !wasOpen) {
-            onOpen();
-          } else if (!isOpen && wasOpen) {
-            onClose();
-          } else if (isOpen && text) {
-            sendPoliteMessage(text);
-            setupAutoHide();
-          }
-        },
-      );
+      watch([() => props.isOpen, () => props.text], ([isOpen, text], [wasOpen]) => {
+        if (isOpen && !wasOpen) {
+          onOpen();
+        } else if (!isOpen && wasOpen) {
+          onClose();
+        } else if (isOpen && text) {
+          sendPoliteMessage(text);
+          setupAutoHide();
+        }
+      });
 
       const isSmall = computed(() => windowBreakpoint.value < 2);
 
@@ -285,9 +288,9 @@
   .k-snackbar-backdrop {
     position: fixed;
     top: 0;
-    left: 0;
     right: 0;
     bottom: 0;
+    left: 0;
     z-index: 23;
     background-color: rgba(0, 0, 0, 0.7);
   }
@@ -298,8 +301,8 @@
     left: 24px;
     z-index: 24;
     display: inline-flex;
-    align-items: center;
     gap: 48px;
+    align-items: center;
     min-width: 344px;
     max-width: 512px;
     min-height: 48px;
@@ -318,18 +321,15 @@
   }
 
   .k-snackbar-message {
-    display: -webkit-box;
+    display: flex;
     flex-grow: 1;
+    align-items: center;
     overflow: hidden;
     font-size: 14px;
     font-weight: bold;
     line-height: 1.5;
     text-align: start;
-    text-overflow: ellipsis;
     cursor: default;
-    -webkit-line-clamp: 2;
-    line-clamp: 2;
-    -webkit-box-orient: vertical;
   }
 
   .k-snackbar-action {
