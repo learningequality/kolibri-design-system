@@ -16,7 +16,7 @@
 
   export default {
     setup() {
-      const { createSnackbar, clearSnackbar, snackbarIsVisible, snackbarOptions } = useKSnackbar();
+      const { createSnackbar } = useKSnackbar();
 
       const showWithOffset = () => {
         createSnackbar({
@@ -26,9 +26,6 @@
       };
 
       return {
-        snackbarIsVisible,
-        snackbarOptions,
-        clearSnackbar,
         showWithOffset,
       };
     },

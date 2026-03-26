@@ -16,7 +16,7 @@
 
   export default {
     setup() {
-      const { createSnackbar, clearSnackbar, snackbarIsVisible, snackbarOptions } = useKSnackbar();
+      const { createSnackbar, clearSnackbar } = useKSnackbar();
 
       const showWithOnBlur = () => {
         createSnackbar({
@@ -34,9 +34,6 @@
       };
 
       return {
-        snackbarIsVisible,
-        snackbarOptions,
-        clearSnackbar,
         showWithOnBlur,
       };
     },

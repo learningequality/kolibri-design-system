@@ -16,7 +16,7 @@
 
   export default {
     setup() {
-      const { createSnackbar, clearSnackbar, snackbarIsVisible, snackbarOptions } = useKSnackbar();
+      const { createSnackbar } = useKSnackbar();
 
       const showWithAction = () => {
         createSnackbar({
@@ -27,9 +27,6 @@
       };
 
       return {
-        snackbarIsVisible,
-        snackbarOptions,
-        clearSnackbar,
         showWithAction,
       };
     },

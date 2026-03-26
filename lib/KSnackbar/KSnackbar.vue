@@ -47,7 +47,7 @@
               :text="actionText"
               :appearanceOverrides="actionButtonStyles"
               @click.stop="onActionClick"
-              @blur="$emit('blur', $event)"
+              @blur.native="$emit('blur', $event)"
             />
           </div>
         </div>
@@ -172,8 +172,8 @@
           } else if (!isOpen && wasOpen) {
             onClose();
           } else if (isOpen && text) {
-            // text changed while snackbar is already open — just announce
             sendPoliteMessage(text);
+            setupAutoHide();
           }
         },
       );
@@ -308,12 +308,10 @@
     @extend %dropshadow-2dp;
   }
 
-  // On small screens, stretch edge to edge
   .k-snackbar.k-snackbar-small {
     right: 24px;
   }
 
-  // RTL: flip to the right side on larger screens
   [dir='rtl'] .k-snackbar:not(.k-snackbar-small) {
     right: 24px;
     left: auto;

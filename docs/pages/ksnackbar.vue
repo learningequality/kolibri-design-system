@@ -149,6 +149,7 @@
       :autoDismiss="snackbarOptions.autoDismiss"
       :duration="snackbarOptions.duration"
       @action-click="handleActionClick"
+      @blur="handleBlur"
       @close="clearSnackbar"
     />
   </DocsPageTemplate>
@@ -172,11 +173,18 @@
         clearSnackbar();
       };
 
+      const handleBlur = () => {
+        if (typeof snackbarOptions.value.onBlur === 'function') {
+          snackbarOptions.value.onBlur();
+        }
+      };
+
       return {
         snackbarIsVisible,
         snackbarOptions,
         clearSnackbar,
         handleActionClick,
+        handleBlur,
       };
     },
   };
