@@ -315,6 +315,10 @@
     right: 24px;
   }
 
+  [dir='rtl'] .k-snackbar {
+    padding: 14px 24px 14px 12px;
+  }
+
   [dir='rtl'] .k-snackbar:not(.k-snackbar-small) {
     right: 24px;
     left: auto;
