@@ -178,16 +178,20 @@
         restoreFocus();
       };
 
-      watch([() => props.isOpen, () => props.text], ([isOpen, text], [wasOpen] = []) => {
-        if (isOpen && !wasOpen) {
-          onOpen();
-        } else if (!isOpen && wasOpen) {
-          onClose();
-        } else if (isOpen && text) {
-          announce(text);
-          setupAutoHide();
-        }
-      }, { immediate: true });
+      watch(
+        [() => props.isOpen, () => props.text],
+        ([isOpen, text], [wasOpen] = []) => {
+          if (isOpen && !wasOpen) {
+            onOpen();
+          } else if (!isOpen && wasOpen) {
+            onClose();
+          } else if (isOpen && text) {
+            announce(text);
+            setupAutoHide();
+          }
+        },
+        { immediate: true },
+      );
 
       const isSmall = computed(() => windowBreakpoint.value < 2);
 
