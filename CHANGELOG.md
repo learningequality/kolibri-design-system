@@ -7,6 +7,19 @@ Changelog is rather internal in nature. See release notes for the public overvie
 <!-- [DO NOT REMOVE-USED BY GH ACTION] PASTE CHANGELOG -->
 
 
+- [#1229]
+  - **Description:** Bumps KDS version to 5.6.1
+  - **Products impact:** -
+  - **Addresses:** -.
+  - **Components:** -.
+  - **Breaking:** no
+  - **Impacts a11y:** no
+  - **Guidance:** -.
+
+[#1229]: https://github.com/learningequality/kolibri-design-system/pull/1229
+
+
+
 - [#1221]
   - **Description:** adds set of 24 icons to support picture login work.
   - **Products impact:** Kolibri
