@@ -211,7 +211,7 @@
           {
             name: 'duration',
             required: false,
-            default: '4000',
+            default: '5000',
             type: { name: 'number' },
             description: 'Time in ms until the snackbar auto-hides. Set to 0 to disable auto-hide.',
           },

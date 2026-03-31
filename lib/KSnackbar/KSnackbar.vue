@@ -94,7 +94,15 @@
     ],
 
     setup(props, { emit }) {
-      const { sendPoliteMessage } = useKLiveRegion();
+      const { sendPoliteMessage, sendAssertiveMessage } = useKLiveRegion();
+
+      const announce = message => {
+        if (props.backdrop) {
+          sendAssertiveMessage(message);
+        } else {
+          sendPoliteMessage(message);
+        }
+      };
       const { windowBreakpoint } = useKResponsiveWindow();
       const snackbarElement = ref(null);
       const actionButton = ref(null);
@@ -161,7 +169,7 @@
       const onOpen = () => {
         previousActiveElement.value = document.activeElement;
         setupAutoHide();
-        if (props.text) sendPoliteMessage(props.text);
+        if (props.text) announce(props.text);
         manageFocusOnOpen();
       };
 
@@ -170,16 +178,16 @@
         restoreFocus();
       };
 
-      watch([() => props.isOpen, () => props.text], ([isOpen, text], [wasOpen]) => {
+      watch([() => props.isOpen, () => props.text], ([isOpen, text], [wasOpen] = []) => {
         if (isOpen && !wasOpen) {
           onOpen();
         } else if (!isOpen && wasOpen) {
           onClose();
         } else if (isOpen && text) {
-          sendPoliteMessage(text);
+          announce(text);
           setupAutoHide();
         }
-      });
+      }, { immediate: true });
 
       const isSmall = computed(() => windowBreakpoint.value < 2);
 
@@ -339,7 +347,6 @@
   .k-snackbar-action {
     display: flex;
     align-items: center;
-    margin-left: auto;
   }
 
   .k-snackbar-action-button {
