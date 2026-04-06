@@ -592,15 +592,13 @@
       </h3>
 
       <p>
-        While data is loading, <code>KCardGrid</code> shows loading skeleton cards. Use the
-        <code>loading</code> prop to toggle the state. Note that <code>KCardGrid</code> internal
-        optimizations may affect how closely the visual loading experience matches the
-        <code>loading</code> value:
+        While data is loading, <code>KCardGrid</code> shows loading skeleton cards.Loading
+        experience is internally already optimized according to our
+        <DocsInternalLink
+          href="/loaders"
+          text="loading guidance"
+        />. Simply use the <code>loading</code> prop to toggle the loading state.
       </p>
-      <ul>
-        <li>The loading skeletons won't be displayed for short loading times (&lt; 300ms)</li>
-        <li>When the loading skeletons are displayed, they will be visible for at least 300ms</li>
-      </ul>
 
       <h4>Loading skeletons configuration</h4>
 

@@ -6,59 +6,59 @@
       anchor="#overview"
     >
       <p>Circular loaders illustrate progress by moving an indicator along a circular track.</p>
-      <DocsShow>
-        <KCircularLoader style="margin: 24px" />
-      </DocsShow>
 
-      See the
-      <DocsInternalLink
-        href="/loaders"
-        text="loaders page"
-      />
-      for more information.
+      <p>
+        See the
+        <DocsInternalLink
+          href="/loaders"
+          text="loaders page"
+        />
+        for more information and guidelines.
+      </p>
     </DocsPageSection>
 
     <DocsPageSection
-      title="Specifications"
-      anchor="#specifications"
+      title="Usage"
+      anchor="#usage"
     >
-      <ul>
-        <li>Dimensions do not exceed 48x48px</li>
-        <li>Progress indicator uses palette.grey.v_800</li>
-        <li>Track width is 4px</li>
-      </ul>
-    </DocsPageSection>
+      <section>
+        <h3>
+          Determinate
+          <DocsAnchorTarget anchor="#determinate" />
+        </h3>
 
-    <DocsPageSection
-      title="Placement"
-      anchor="#placement"
-    >
-      <ul>
-        <li>When loading new content, center the loader</li>
-        <li>The loader can routinely appear and disappear when indicating a background task</li>
-        <li>
-          Do not break the flow of information or content by placing between items (e.g. list items,
-          content cards, table rows)
-        </li>
-      </ul>
-    </DocsPageSection>
+        <DocsExample
+          loadExample="KCircularLoader/Determinate.vue"
+          exampleId="kcircularloader-determinate"
+        >
+          <template #html>
+            <DocsShowCode language="html">
+              <KCircularLoader
+                type="determinate"
+                :progress="75"
+              />
+            </DocsShowCode>
+          </template>
+        </DocsExample>
+      </section>
 
-    <DocsPageSection
-      title="Related"
-      anchor="#related"
-    >
-      <ul>
-        <li>
-          <code>KCircularLoader</code>'s <code>minVisibleTime</code> isn't sufficient when switching
-          between more components, for example as part of <code>v-if/v-else</code> blocks. In such
-          situations,
-          <DocsInternalLink
-            text="useKShow"
-            href="/usekshow"
-          />
-          may come handy.
-        </li>
-      </ul>
+      <section>
+        <h3>
+          Indeterminate
+          <DocsAnchorTarget anchor="#indeterminate" />
+        </h3>
+
+        <DocsExample
+          loadExample="KCircularLoader/Indeterminate.vue"
+          exampleId="kcircularloader-indeterminate"
+        >
+          <template #html>
+            <DocsShowCode language="html">
+              <KCircularLoader type="indeterminate" />
+            </DocsShowCode>
+          </template>
+        </DocsExample>
+      </section>
     </DocsPageSection>
   </DocsPageTemplate>
 

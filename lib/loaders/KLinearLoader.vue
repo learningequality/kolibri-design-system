@@ -68,8 +68,8 @@
         default: 0,
       },
       /**
-       * Whether there should be a delay before the loader displays.
-       * Useful if the action often takes less than a second or two.
+       * Apply `300ms` delay before showing loading state.
+       * Recommended in majority of cases.
        */
       delay: {
         type: Boolean,
@@ -105,7 +105,7 @@
   @import '../styles/definitions';
 
   .delay {
-    animation-delay: 1s;
+    animation-delay: 300ms;
   }
 
   @keyframes fade-in {
