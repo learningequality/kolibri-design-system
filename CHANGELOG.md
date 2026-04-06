@@ -7,6 +7,41 @@ Changelog is rather internal in nature. See release notes for the public overvie
 <!-- [DO NOT REMOVE-USED BY GH ACTION] PASTE CHANGELOG -->
 
 
+- [#1218]
+  - **Description:** Align minimum visible time value for card skeleton loader with the design guidance
+  - **Products impact:** ux
+  - **Addresses:** -
+  - **Components:** `KCardGrid`, `KCard`
+  - **Breaking:** no
+  - **Impacts a11y:** -
+  - **Guidance:** -
+
+[#1218]: https://github.com/learningequality/kolibri-design-system/pull/1218
+
+- [#1218]
+  - **Description:** Align `delay` value for `KCircularLoader` and `KLinearLoader` with the design guidance
+  - **Products impact:** ux
+  - **Addresses:** -
+  - **Components:** `KCircularLoader`, `KLinearLoader`
+  - **Breaking:** no
+  - **Impacts a11y:** -
+  - **Guidance:** -
+
+[#1218]: https://github.com/learningequality/kolibri-design-system/pull/1218
+
+- [#1218]
+  - **Description:** Updates the _Loaders_ documentation page to the latest design guidance. Centralizes general guidance on the _Loaders_ page, while leaving component pages to focus only on Vue-specific usage. Removes duplicate or obsolete sections from other pages related to loading states.
+  - **Products impact:** documentation
+  - **Addresses:** -
+  - **Components:**  Loaders page, `KCircularLoader`, `KLinearLoader` , `useKShow`,  `KCardGrid`, `KCard`
+  - **Breaking:** no
+  - **Impacts a11y:** -
+  - **Guidance:** -
+
+[#1218]: https://github.com/learningequality/kolibri-design-system/pull/1218
+
+
+
 - [#1229]
   - **Description:** Bumps KDS version to 5.6.1
   - **Products impact:** -
