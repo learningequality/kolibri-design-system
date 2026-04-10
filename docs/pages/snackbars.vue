@@ -57,10 +57,15 @@
         <li>Changes saved</li>
         <li>Resource added</li>
       </ul>
+
+      <p>For longer messages, consider a different pattern.</p>
+
       <p>
         Avoid including user-inputted text such as the name of a resource or lesson because we have
         less control over the length of this text.
       </p>
+
+      <p>Snackbar text should have a maximum of 2 lines (truncate with ellipsis).</p>
     </DocsPageSection>
 
     <DocsPageSection
@@ -68,15 +73,36 @@
       anchor="#specifications"
     >
       <ul>
-        <li>Background color: $k-grey-900</li>
-        <li>Text: 14px white and bolded</li>
-        <li>Height: 48px</li>
+        <li>Timeout: 5 seconds</li>
+        <li>
+          Background color:
+          <DocsInternalLink
+            text="palette.grey.v_800"
+            code
+            href="/colors#palette-grey-v_800"
+          />
+        </li>
+        <li>
+          Text color:
+          <DocsInternalLink
+            text="tokens.textInverted"
+            code
+            href="/colors#tokens-textInverted"
+          />
+        </li>
+        <li>
+          Box shadow:
+          <DocsInternalLink
+            text="%dropshadow-2dp"
+            code
+            href="/styling#drop-shadows"
+          />
+        </li>
+        <li>Text: 14px, bold</li>
+        <li>Height: Maximum 2 lines of text (truncate with ellipsis)</li>
         <li>Min width: 344px</li>
         <li>Max width: 512px</li>
-        <li>Focused state: brand.secondary.v_100</li>
-        <li>Box shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.25);</li>
         <li>Corner radius: 4px</li>
-        <li>Timeout: 4 seconds</li>
       </ul>
     </DocsPageSection>
   </DocsPageTemplate>

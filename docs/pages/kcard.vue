@@ -696,10 +696,18 @@
         <code>KImg</code> configurations, such as aspect ratio.
       </p>
 
-      <p>
-        If providing <code>KImg</code>, set <code>isDecorative</code> to <code>true</code> on
-        <code>KImg</code> for correct accessibility.
-      </p>
+      <p>When using with <code>KImg</code>:</p>
+
+      <ul>
+        <li>Set <code>isDecorative</code> on <code>KImg</code> for correct accessibility</li>
+        <li>
+          Utilize <code>KImg</code>'s <code>placeholder</code> slot for placeholder content (<code>thumbnailPlaceholder</code>
+          slot doesn't take effect when using the <code>thumbnail</code> slot)
+        </li>
+        <li>
+          Depending on the card layout, you may need to set width and height on <code>KImg</code>
+        </li>
+      </ul>
 
       <DocsExample
         loadExample="cards/ThumbnailSlotSmall.vue"
@@ -718,7 +726,11 @@
                     :style="{ width: '100%', height: '100%' }"
                     aspectRatio="16:9"
                     isDecorative
-                  />
+                  >
+                    <template #placeholder>
+                      <KIcon ... />
+                    </template>
+                  </KImg>
                 </template>
               </KCard>
             </KCardGrid>
