@@ -7,6 +7,19 @@ Changelog is rather internal in nature. See release notes for the public overvie
 <!-- [DO NOT REMOVE-USED BY GH ACTION] PASTE CHANGELOG -->
 
 
+- [#1217]
+  - **Description:** Improve snackbar, `KCard`, and `useKLiveRegion` documentation pages
+  - **Products impact:** Documentation
+  - **Addresses:** -
+  - **Components:** Snackbar, `KCard`, `useKLiveRegion`
+  - **Breaking:** no
+  - **Impacts a11y:** no
+  - **Guidance:** -
+
+[#1217]: https://github.com/learningequality/kolibri-design-system/pull/1217
+
+
+
 - [#1218]
   - **Description:** Align minimum visible time value for card skeleton loader with the design guidance
   - **Products impact:** ux
