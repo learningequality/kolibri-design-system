@@ -40,8 +40,12 @@
           DOM structure are problematic. Always use <code>useKLiveRegion</code>.
         </li>
         <li>
-          <strong>Use assertive messages only for critical information that requires immediate
-            attention.</strong>
+          <strong>Use assertive messages sparingly and only for time-sensitive/critical notifications
+            that absolutely require the user's immediate attention</strong>
+          (<DocsExternalLink
+            href="https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Guides/Live_regions#live_regions"
+            text="see more at MDN"
+          />).
         </li>
         <li>
           <strong>For errors or updates that need immediate user action, make sure that related elements
@@ -97,8 +101,12 @@
       <p>
         Sending an assertive message updates the text content of
         <code>aria-live="assertive"</code> region.
-        <em>Use this only for messages that require immediate attention, such as critical errors or
-          messages, as it interrupts the user's current activity.</em>
+        <em>It should only be used sparingly and for time-sensitive/critical notifications that
+          absolutely require the user's immediate attention</em>
+        (<DocsExternalLink
+          href="https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Guides/Live_regions#live_regions"
+          text="see more at MDN"
+        />).
       </p>
 
       <!-- eslint-disable -->
