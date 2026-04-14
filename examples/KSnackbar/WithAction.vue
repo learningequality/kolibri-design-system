@@ -23,7 +23,7 @@
           text: 'Item deleted',
           announce: true,
           actionText: 'Undo',
-          actionCallback: () => window.alert('Action undone!'),
+          actionCallback: () => window.alert('Action done!'),
         });
       };
 
