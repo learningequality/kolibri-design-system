@@ -90,9 +90,4 @@
 
 
 <style lang="scss" scoped>
-
-  ::v-deep .k-snackbar-wrapper {
-    z-index: 100;
-  }
-
 </style>
