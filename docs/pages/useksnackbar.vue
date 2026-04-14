@@ -120,7 +120,8 @@
         <code>&lt;KSnackbar&gt;</code> component within your template and binding the local
         composable's state manually, rather than relying on the globally installed snackbar.
       </p>
-      <!-- eslint-disable vue/html-indent -->
+      <!-- eslint-disable -->
+      <!-- prettier-ignore -->
       <DocsShowCode language="javascript">
         import { useKLocalSnackbar } from 'kolibri-design-system/lib/composables/useKSnackbar';
 
@@ -137,9 +138,9 @@
               notifyInfo
             };
           }
-        }
+        };
       </DocsShowCode>
-      <!-- eslint-enable vue/html-indent -->
+      <!-- eslint-enable -->
       <p>In the template where this is used, you manage the KSnackbar component yourself:</p>
       <!-- eslint-disable -->
       <!-- prettier-ignore -->
