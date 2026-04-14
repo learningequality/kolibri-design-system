@@ -52,7 +52,7 @@
               :text="actionText"
               :appearanceOverrides="actionButtonStyles"
               @click.stop="onActionClick"
-              @blur.native="$emit('blur', $event)"
+              @blur="$emit('blur', $event)"
             />
           </div>
         </div>
@@ -129,9 +129,8 @@
 
       const focusLastEl = async () => {
         await nextTick();
-        const btn = actionButton.value?.$el || actionButton.value;
-        if (btn && typeof btn.focus === 'function') {
-          btn.focus();
+        if (actionButton.value) {
+          actionButton.value.focus();
         } else if (snackbarElement.value) {
           snackbarElement.value.focus();
         }
@@ -142,9 +141,8 @@
 
         if (props.backdrop && snackbarElement.value) {
           snackbarElement.value.focus();
-        } else if (props.autofocus && props.actionText) {
-          const btn = actionButton.value?.$el || actionButton.value;
-          if (btn && typeof btn.focus === 'function') btn.focus();
+        } else if (props.autofocus && props.actionText && actionButton.value) {
+          actionButton.value.focus();
         }
       };
 
