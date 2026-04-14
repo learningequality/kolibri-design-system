@@ -303,6 +303,7 @@
 
   .k-snackbar-wrapper {
     position: relative;
+
     /* Highest standard layer, ensuring it covers modals and app bars */
     z-index: 24;
   }
@@ -313,6 +314,7 @@
     right: 0;
     bottom: 0;
     left: 0;
+
     /* Sits just below the snackbar (24) */
     z-index: 23;
     background-color: rgba(0, 0, 0, 0.7);
@@ -322,6 +324,7 @@
     position: fixed;
     bottom: 24px;
     left: 24px;
+
     /* Highest standard layer, ensuring it covers modals and app bars */
     z-index: 24;
     display: inline-flex;

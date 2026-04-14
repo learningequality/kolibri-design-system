@@ -110,34 +110,26 @@
       anchor="#local"
     >
       <p>
-        By default, <code>useKSnackbar</code> controls a global application-wide snackbar instance. However, if you need a localized snackbar (for instance, to pass a custom slot with a <code>&lt;KIcon&gt;</code> component inside), you can use the <code>useKLocalSnackbar</code> named export. 
+        By default, <code>useKSnackbar</code> controls a global application-wide snackbar instance.
+        However, if you need a localized snackbar (for instance, to pass a custom slot with a
+        <code>&lt;KIcon&gt;</code> component inside), you can use the
+        <code>useKLocalSnackbar</code> named export.
       </p>
       <p>
-        Note that this advanced usage requires placing a separate <code>&lt;KSnackbar&gt;</code> component within your template and binding the local composable's state manually, rather than relying on the globally installed snackbar.
+        Note that this advanced usage requires placing a separate
+        <code>&lt;KSnackbar&gt;</code> component within your template and binding the local
+        composable's state manually, rather than relying on the globally installed snackbar.
       </p>
       <!-- eslint-disable vue/html-indent -->
       <DocsShowCode language="javascript">
         import { useKLocalSnackbar } from 'kolibri-design-system/lib/composables/useKSnackbar';
-
-        export default {
-          setup() {
-            const { snackbarIsVisible, snackbarOptions, createSnackbar } = useKLocalSnackbar();
-
-            // Usage is identical
-            const notifyInfo = () => createSnackbar({ text: 'Task completed', announce: true });
-
-            return {
-              snackbarIsVisible,
-              snackbarOptions,
-              notifyInfo
-            };
-          }
-        }
+        export default { setup() { const { snackbarIsVisible, snackbarOptions, createSnackbar } =
+        useKLocalSnackbar(); // Usage is identical const notifyInfo = () => createSnackbar({ text:
+        'Task completed', announce: true }); return { snackbarIsVisible, snackbarOptions, notifyInfo
+        }; } }
       </DocsShowCode>
       <!-- eslint-enable vue/html-indent -->
-      <p>
-        In the template where this is used, you manage the KSnackbar component yourself:
-      </p>
+      <p>In the template where this is used, you manage the KSnackbar component yourself:</p>
       <!-- eslint-disable -->
       <!-- prettier-ignore -->
       <DocsShowCode language="html">
@@ -249,29 +241,29 @@
           {
             name: 'actionText',
             required: false,
-            default: "''",
+            defaultValue: { value: "''" },
             type: { name: 'string' },
             description: 'Optional text for an action button (e.g. "Undo").',
           },
           {
             name: 'actionCallback',
             required: false,
-            default: 'null',
+            defaultValue: { value: 'null' },
             type: { name: 'function' },
             description:
-              'Function stored in composable and called when the action button is clicked. Retrieved via @action-click event handler at the app root level.',
+              'Function stored in composable and called when the action button is clicked. Retrieved via @actionClick event handler at the app root level.',
           },
           {
             name: 'duration',
             required: false,
-            default: '5000',
+            defaultValue: { value: '5000' },
             type: { name: 'number' },
             description: 'Time in ms until the snackbar auto-hides. Set to 0 to disable auto-hide.',
           },
           {
             name: 'autoDismiss',
             required: false,
-            default: 'true',
+            defaultValue: { value: 'true' },
             type: { name: 'boolean' },
             description:
               'Whether the snackbar should auto-dismiss after the duration. More semantic than setting duration to 0.',
@@ -279,7 +271,7 @@
           {
             name: 'bottomOffset',
             required: false,
-            default: '0',
+            defaultValue: { value: '0' },
             type: { name: 'number' },
             description:
               'Additional bottom offset in pixels. Useful when a bottom navigation bar is present.',
@@ -287,15 +279,14 @@
           {
             name: 'backdrop',
             required: false,
-            default: 'false',
+            defaultValue: { value: 'false' },
             type: { name: 'boolean' },
-            description:
-              'If true, shows a darkening backdrop behind the snackbar.',
+            description: 'If true, shows a darkening backdrop behind the snackbar.',
           },
           {
             name: 'announce',
             required: true,
-            default: 'undefined',
+            defaultValue: { value: 'undefined' },
             type: { name: 'boolean' },
             description:
               'Whether to trigger a live-region announcement for screen readers. Explicitly required for each usage to ensure conscious accessibility decisions.',
@@ -303,7 +294,7 @@
           {
             name: 'assertive',
             required: false,
-            default: 'false',
+            defaultValue: { value: 'false' },
             type: { name: 'boolean' },
             description:
               'When true, uses an assertive live region instead of polite. Only applies if `announce` is true. Use sparingly for critical errors.',
@@ -311,7 +302,7 @@
           {
             name: 'autofocus',
             required: false,
-            default: 'false',
+            defaultValue: { value: 'false' },
             type: { name: 'boolean' },
             description:
               'If true, autofocuses the action button when the snackbar appears. Improves accessibility for critical actions.',
@@ -319,7 +310,7 @@
           {
             name: 'onBlur',
             required: false,
-            default: 'null',
+            defaultValue: { value: 'null' },
             type: { name: 'function' },
             description:
               'Blur event handler for when the action button loses focus. Useful for advanced focus management.',
@@ -327,7 +318,7 @@
           {
             name: 'forceReuse',
             required: false,
-            default: 'false',
+            defaultValue: { value: 'false' },
             type: { name: 'boolean' },
             description:
               'When true, updates the current snackbar text in place without replaying the transition animation. Useful for status updates like connection state changes.',
@@ -335,7 +326,7 @@
           {
             name: 'hideCallback',
             required: false,
-            default: 'null',
+            defaultValue: { value: 'null' },
             type: { name: 'function' },
             description:
               'Function called when the snackbar is hidden or replaced. Useful for cleanup or promise resolution.',
