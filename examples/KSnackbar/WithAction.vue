@@ -22,8 +22,8 @@
         createSnackbar({
           text: 'Item deleted',
           announce: true,
-          actionText: 'Undo',
-          actionCallback: () => window.alert('Action done!'),
+          actionText: 'Dismiss',
+          actionCallback: () => {},
         });
       };
 
