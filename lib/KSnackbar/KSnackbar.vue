@@ -97,7 +97,8 @@
       const { sendPoliteMessage, sendAssertiveMessage } = useKLiveRegion();
 
       const announce = message => {
-        if (props.backdrop) {
+        if (props.announce === false || props.announce === undefined) return;
+        if (props.assertive) {
           sendAssertiveMessage(message);
         } else {
           sendPoliteMessage(message);
@@ -269,6 +270,16 @@
        */
       backdrop: { type: Boolean, default: false },
       /**
+       * Whether to trigger a live-region announcement for screen readers.
+       * Explicitly required for each usage via the composable.
+       */
+      announce: { type: Boolean, default: undefined },
+      /**
+       * When true and announce is true, uses an assertive live region.
+       * Use sparingly — only for critical errors.
+       */
+      assertive: { type: Boolean, default: false },
+      /**
        * If true, autofocuses the action button when snackbar appears
        */
       autofocus: { type: Boolean, default: false },
@@ -292,6 +303,7 @@
 
   .k-snackbar-wrapper {
     position: relative;
+    /* Highest standard layer, ensuring it covers modals and app bars */
     z-index: 24;
   }
 
@@ -301,6 +313,7 @@
     right: 0;
     bottom: 0;
     left: 0;
+    /* Sits just below the snackbar (24) */
     z-index: 23;
     background-color: rgba(0, 0, 0, 0.7);
   }
@@ -309,6 +322,7 @@
     position: fixed;
     bottom: 24px;
     left: 24px;
+    /* Highest standard layer, ensuring it covers modals and app bars */
     z-index: 24;
     display: inline-flex;
     gap: 48px;

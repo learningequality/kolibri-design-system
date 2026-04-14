@@ -21,12 +21,14 @@
       const showForceReuse = () => {
         createSnackbar({
           text: 'Connection lost',
+          announce: true,
           autoDismiss: false,
         });
 
         setTimeout(() => {
           createSnackbar({
             text: 'Reconnecting...',
+            announce: true,
             autoDismiss: false,
             forceReuse: true,
           });
@@ -35,6 +37,7 @@
         setTimeout(() => {
           createSnackbar({
             text: 'Connected',
+            announce: true,
             duration: 3000,
             forceReuse: true,
           });

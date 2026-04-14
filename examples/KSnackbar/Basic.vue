@@ -19,7 +19,7 @@
       const { createSnackbar } = useKSnackbar();
 
       const showBasic = () => {
-        createSnackbar({ text: 'Changes saved' });
+        createSnackbar({ text: 'Changes saved', announce: true });
       };
 
       return {

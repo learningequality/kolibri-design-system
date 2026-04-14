@@ -21,6 +21,7 @@
       const showWithOffset = () => {
         createSnackbar({
           text: 'This snackbar has bottom offset',
+          announce: true,
           bottomOffset: 72,
         });
       };

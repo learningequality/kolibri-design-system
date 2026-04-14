@@ -20,7 +20,8 @@
 
       const showWithOnBlur = () => {
         createSnackbar({
-          text: 'Message with blur handling',
+          text: 'Changes saved',
+          announce: true,
           actionText: 'Dismiss',
           autofocus: true,
           autoDismiss: false,

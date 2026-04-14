@@ -21,6 +21,7 @@
       const showPersistent = () => {
         createSnackbar({
           text: 'Connection lost. Check your network and try again.',
+          announce: true,
           actionText: 'Dismiss',
           autoDismiss: false,
           actionCallback: () => {},

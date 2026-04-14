@@ -54,6 +54,8 @@
           :actionText="snackbarOptions.actionText"
           :bottomOffset="snackbarOptions.bottomOffset"
           :backdrop="snackbarOptions.backdrop"
+          :announce="snackbarOptions.announce"
+          :assertive="snackbarOptions.assertive"
           :autofocus="snackbarOptions.autofocus"
           :autoDismiss="snackbarOptions.autoDismiss"
           :duration="snackbarOptions.duration"

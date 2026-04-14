@@ -106,6 +106,55 @@
     </DocsPageSection>
 
     <DocsPageSection
+      title="Advanced: Local snackbars"
+      anchor="#local"
+    >
+      <p>
+        By default, <code>useKSnackbar</code> controls a global application-wide snackbar instance. However, if you need a localized snackbar (for instance, to pass a custom slot with a <code>&lt;KIcon&gt;</code> component inside), you can use the <code>useKLocalSnackbar</code> named export. 
+      </p>
+      <p>
+        Note that this advanced usage requires placing a separate <code>&lt;KSnackbar&gt;</code> component within your template and binding the local composable's state manually, rather than relying on the globally installed snackbar.
+      </p>
+      <!-- eslint-disable vue/html-indent -->
+      <DocsShowCode language="javascript">
+import { useKLocalSnackbar } from 'kolibri-design-system/lib/composables/useKSnackbar';
+
+export default {
+  setup() {
+    const { snackbarIsVisible, snackbarOptions, createSnackbar } = useKLocalSnackbar();
+
+    // Usage is identical
+    const notifyInfo = () => createSnackbar({ text: 'Task completed', announce: true });
+
+    return {
+      snackbarIsVisible,
+      snackbarOptions,
+      notifyInfo
+    };
+  }
+}
+      </DocsShowCode>
+      <!-- eslint-enable vue/html-indent -->
+      <p>
+        In the template where this is used, you manage the KSnackbar component yourself:
+      </p>
+      <!-- eslint-disable vue/html-indent -->
+      <DocsShowCode language="html">
+&lt;KSnackbar
+  :isOpen="snackbarIsVisible"
+  :text="snackbarOptions.text"
+  :announce="snackbarOptions.announce"
+  @close="clearSnackbar"
+&gt;
+  &lt;template #text="{ text }"&gt;
+    &lt;KIcon icon="warning" /&gt; {{ text }}
+  &lt;/template&gt;
+&lt;/KSnackbar&gt;
+      </DocsShowCode>
+      <!-- eslint-enable vue/html-indent -->
+    </DocsPageSection>
+
+    <DocsPageSection
       title="Parameters"
       anchor="#parameters"
     >
@@ -139,6 +188,8 @@
       :actionText="snackbarOptions.actionText"
       :bottomOffset="snackbarOptions.bottomOffset"
       :backdrop="snackbarOptions.backdrop"
+      :announce="snackbarOptions.announce"
+      :assertive="snackbarOptions.assertive"
       :autofocus="snackbarOptions.autofocus"
       :autoDismiss="snackbarOptions.autoDismiss"
       :duration="snackbarOptions.duration"
@@ -237,7 +288,23 @@
             default: 'false',
             type: { name: 'boolean' },
             description:
-              'If true, shows a darkening backdrop behind the snackbar. Also makes the snackbar announce assertively instead of politely for screen readers.',
+              'If true, shows a darkening backdrop behind the snackbar.',
+          },
+          {
+            name: 'announce',
+            required: true,
+            default: 'undefined',
+            type: { name: 'boolean' },
+            description:
+              'Whether to trigger a live-region announcement for screen readers. Explicitly required for each usage to ensure conscious accessibility decisions.',
+          },
+          {
+            name: 'assertive',
+            required: false,
+            default: 'false',
+            type: { name: 'boolean' },
+            description:
+              'When true, uses an assertive live region instead of polite. Only applies if `announce` is true. Use sparingly for critical errors.',
           },
           {
             name: 'autofocus',

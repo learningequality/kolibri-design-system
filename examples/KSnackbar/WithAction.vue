@@ -21,6 +21,7 @@
       const showWithAction = () => {
         createSnackbar({
           text: 'Item deleted',
+          announce: true,
           actionText: 'Undo',
           actionCallback: () => {},
         });

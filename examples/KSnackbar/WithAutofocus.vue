@@ -21,6 +21,7 @@
       const showWithAutofocus = () => {
         createSnackbar({
           text: 'Critical action required',
+          announce: true,
           actionText: 'Dismiss',
           autofocus: true,
           actionCallback: () => {
