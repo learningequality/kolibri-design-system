@@ -255,7 +255,8 @@
        */
       isOpen: { type: Boolean, required: true },
       /**
-       * The main message text displayed in the snackbar
+       * The main message text displayed in the snackbar.
+       * Also used for live-region announcements even when the `#text` slot is used.
        */
       text: { type: String, required: true },
       /**
