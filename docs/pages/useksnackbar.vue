@@ -117,41 +117,42 @@
       </p>
       <!-- eslint-disable vue/html-indent -->
       <DocsShowCode language="javascript">
-import { useKLocalSnackbar } from 'kolibri-design-system/lib/composables/useKSnackbar';
+        import { useKLocalSnackbar } from 'kolibri-design-system/lib/composables/useKSnackbar';
 
-export default {
-  setup() {
-    const { snackbarIsVisible, snackbarOptions, createSnackbar } = useKLocalSnackbar();
+        export default {
+          setup() {
+            const { snackbarIsVisible, snackbarOptions, createSnackbar } = useKLocalSnackbar();
 
-    // Usage is identical
-    const notifyInfo = () => createSnackbar({ text: 'Task completed', announce: true });
+            // Usage is identical
+            const notifyInfo = () => createSnackbar({ text: 'Task completed', announce: true });
 
-    return {
-      snackbarIsVisible,
-      snackbarOptions,
-      notifyInfo
-    };
-  }
-}
+            return {
+              snackbarIsVisible,
+              snackbarOptions,
+              notifyInfo
+            };
+          }
+        }
       </DocsShowCode>
       <!-- eslint-enable vue/html-indent -->
       <p>
         In the template where this is used, you manage the KSnackbar component yourself:
       </p>
-      <!-- eslint-disable vue/html-indent -->
+      <!-- eslint-disable -->
+      <!-- prettier-ignore -->
       <DocsShowCode language="html">
-&lt;KSnackbar
-  :isOpen="snackbarIsVisible"
-  :text="snackbarOptions.text"
-  :announce="snackbarOptions.announce"
-  @close="clearSnackbar"
-&gt;
-  &lt;template #text="{ text }"&gt;
-    &lt;KIcon icon="warning" /&gt; {{ text }}
-  &lt;/template&gt;
-&lt;/KSnackbar&gt;
+        <KSnackbar
+          :isOpen="snackbarIsVisible"
+          :text="snackbarOptions.text"
+          :announce="snackbarOptions.announce"
+          @close="clearSnackbar"
+        >
+          <template #text="{ text }">
+            <KIcon icon="warning" /> {{ text }}
+          </template>
+        </KSnackbar>
       </DocsShowCode>
-      <!-- eslint-enable vue/html-indent -->
+      <!-- eslint-enable -->
     </DocsPageSection>
 
     <DocsPageSection
@@ -193,7 +194,7 @@ export default {
       :autofocus="snackbarOptions.autofocus"
       :autoDismiss="snackbarOptions.autoDismiss"
       :duration="snackbarOptions.duration"
-      @action-click="handleActionClick"
+      @actionClick="handleActionClick"
       @blur="handleBlur"
       @close="clearSnackbar"
     />
@@ -237,6 +238,7 @@ export default {
     },
     data() {
       return {
+        text: '', // Dummy variable to satisfy vue-loader for the DocsShowCode template interpolation
         options: [
           {
             name: 'text',

@@ -82,7 +82,7 @@
 
     emits: [
       /** Emitted when the action button is clicked. */
-      'action-click',
+      'actionClick',
       /** Emitted when the snackbar enters the screen. */
       'show',
       /** Emitted when the snackbar leaves the screen. */
@@ -213,7 +213,7 @@
       });
 
       const onActionClick = () => {
-        emit('action-click');
+        emit('actionClick');
       };
       const onEnter = () => {
         emit('show');
@@ -256,7 +256,7 @@
        */
       text: { type: String, required: true },
       /**
-       * Optional text for an action button (e.g., "Undo")
+       * Optional text for an action button (e.g. "Undo")
        */
       actionText: { type: String, default: '' },
       /**
@@ -276,7 +276,7 @@
       announce: { type: Boolean, default: undefined },
       /**
        * When true and announce is true, uses an assertive live region.
-       * Use sparingly — only for critical errors.
+       * Use sparingly, only for critical errors.
        */
       assertive: { type: Boolean, default: false },
       /**
