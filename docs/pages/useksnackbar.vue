@@ -129,7 +129,6 @@
           setup() {
             const { snackbarIsVisible, snackbarOptions, createSnackbar } = useKLocalSnackbar();
 
-            // Usage is identical
             const notifyInfo = () => createSnackbar({ text: 'Task completed', announce: true });
 
             return {
@@ -243,7 +242,7 @@
     },
     data() {
       return {
-        text: '{{ text }}', // Dummy variable to satisfy vue-loader for the DocsShowCode template interpolation
+        text: '{{ text }}',
         options: [
           {
             name: 'text',
@@ -298,7 +297,7 @@
           },
           {
             name: 'announce',
-            required: true,
+            required: false,
             defaultValue: { value: 'undefined' },
             type: { name: 'boolean' },
             description:
