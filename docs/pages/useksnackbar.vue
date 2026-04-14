@@ -123,10 +123,21 @@
       <!-- eslint-disable vue/html-indent -->
       <DocsShowCode language="javascript">
         import { useKLocalSnackbar } from 'kolibri-design-system/lib/composables/useKSnackbar';
-        export default { setup() { const { snackbarIsVisible, snackbarOptions, createSnackbar } =
-        useKLocalSnackbar(); // Usage is identical const notifyInfo = () => createSnackbar({ text:
-        'Task completed', announce: true }); return { snackbarIsVisible, snackbarOptions, notifyInfo
-        }; } }
+
+        export default {
+          setup() {
+            const { snackbarIsVisible, snackbarOptions, createSnackbar } = useKLocalSnackbar();
+
+            // Usage is identical
+            const notifyInfo = () => createSnackbar({ text: 'Task completed', announce: true });
+
+            return {
+              snackbarIsVisible,
+              snackbarOptions,
+              notifyInfo
+            };
+          }
+        }
       </DocsShowCode>
       <!-- eslint-enable vue/html-indent -->
       <p>In the template where this is used, you manage the KSnackbar component yourself:</p>
