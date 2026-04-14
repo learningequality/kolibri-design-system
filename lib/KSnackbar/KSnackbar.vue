@@ -33,7 +33,10 @@
         >
           <div class="k-snackbar-message">
             <!-- @slot Optional slot as an alternative to the `text` prop for the message -->
-            <slot>
+            <slot
+              name="text"
+              :text="text"
+            >
               <KTextTruncator
                 :text="text"
                 :maxLines="2"

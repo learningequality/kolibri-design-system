@@ -152,7 +152,8 @@
           @close="clearSnackbar"
         >
           <template #text="{ text }">
-            <KIcon icon="warning" /> {{ text }}
+            <KIcon icon="warning" />
+            {{ text }}
           </template>
         </KSnackbar>
       </DocsShowCode>
@@ -242,7 +243,7 @@
     },
     data() {
       return {
-        text: '', // Dummy variable to satisfy vue-loader for the DocsShowCode template interpolation
+        text: '{{ text }}', // Dummy variable to satisfy vue-loader for the DocsShowCode template interpolation
         options: [
           {
             name: 'text',
