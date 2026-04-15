@@ -6,7 +6,7 @@ KDS has a visual testing system that allows you to take Percy snapshots of how K
 
 ## Prerequisites
 
-- Ensure Node.js version is >= 18.x and all dependencies from package.json are installed.
+- Ensure Node.js version is >= 20.x and all dependencies from package.json are installed.
 - Make sure nothing is running on `port:4000`
 - Obtain your `PERCY_TOKEN`:
 
