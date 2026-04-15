@@ -222,7 +222,8 @@
 <style scoped>
 
   .halfsquare-background {
-    background-image: linear-gradient(45deg, #ffffff 50%, #f5f5f5 50%),
+    background-image:
+      linear-gradient(45deg, #ffffff 50%, #f5f5f5 50%),
       linear-gradient(45deg, #f5f5f5 50%, #ffffff 50%);
     background-repeat: repeat;
     background-position:

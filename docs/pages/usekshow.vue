@@ -200,7 +200,6 @@
       return {
         show,
         isFetching,
-        fetchingTime,
         minVisibleTime,
         fetchingTimeInput,
         minVisibleTimeInput,

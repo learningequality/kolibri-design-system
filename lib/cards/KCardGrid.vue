@@ -39,8 +39,10 @@
         v-if="debug"
         class="k-debug"
       >
+        <!-- eslint-disable vue/no-bare-strings-in-template -->
         <div>DEBUG</div>
         <div>breakpoint: {{ windowBreakpoint }}</div>
+        <!-- eslint-enable vue/no-bare-strings-in-template -->
       </div>
     </div>
   </div>

@@ -4,9 +4,9 @@
  * to allow for easier before/after precompilation preview
  */
 
-const fs = require('fs');
-const path = require('path');
-const { exec } = require('child_process');
+const fs = require('node:fs');
+const path = require('node:path');
+const { exec } = require('node:child_process');
 const consola = require('consola');
 
 const ICONS_DEFINITIONS_PATH = './lib/KIcon/iconDefinitions.js';

@@ -4,6 +4,7 @@
     Required props set to avoid console validation errors.
     Their logic is disabled in skeleton mode.
   -->
+  <!-- eslint-disable vue/no-bare-strings-in-template -->
   <KCard
     :headingLevel="2"
     isSkeleton
@@ -15,6 +16,7 @@
     :thumbnailDisplay="thumbnailDisplay"
     :thumbnailAlign="thumbnailAlign"
   >
+    <!-- eslint-enable vue/no-bare-strings-in-template -->
     <template
       v-if="thumbnailAspectRatio"
       #thumbnail

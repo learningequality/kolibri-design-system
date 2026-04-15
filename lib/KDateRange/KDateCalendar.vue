@@ -23,7 +23,7 @@
       <div class="calendar-month-left">
         <div
           class="months-text"
-          data-test="previousMonth"
+          data-testid="previousMonth"
         >
           {{ monthString(activeMonth) + ' ' + activeYearStart }}
         </div>
@@ -103,7 +103,7 @@
       <div class="calendar-month-right">
         <div
           class="months-text"
-          data-test="currentMonth"
+          data-testid="currentMonth"
         >
           {{ monthString(nextActiveMonth) + ' ' + activeYearEnd }}
         </div>
@@ -214,6 +214,7 @@
 
 <script>
 
+  // eslint-disable-next-line small-import/no-full-import
   import { format, isAfter } from 'date-fns';
   import KIconButton from '../buttons-and-links/KIconButton';
   import KDateDay from './KDateDay';

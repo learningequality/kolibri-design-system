@@ -110,7 +110,7 @@
 
           <div
             v-if="hasAboveTitleArea"
-            data-test="aboveTitle"
+            data-testid="aboveTitle"
             class="k-above-title"
           >
             <!-- @slot Places content to the area above the title. -->
@@ -119,7 +119,7 @@
 
           <div
             v-if="hasBelowTitleArea"
-            data-test="belowTitle"
+            data-testid="belowTitle"
             class="k-below-title"
             :style="{ color: $themeTokens.annotation }"
           >
@@ -129,7 +129,7 @@
         </div>
 
         <div
-          v-if="thumbnailDisplay !== ThumbnailDisplays.NONE"
+          v-if="thumbnailDisplay !== thumbnailDisplayNone"
           :class="{ 'k-thumbnail': true, 'k-default-thumbnail': !$slots.thumbnail }"
         >
           <!-- @slot Overrides the default thumbnail image. -->
@@ -145,7 +145,7 @@
           -->
           <KImg
             v-else
-            data-test="thumbnail-img"
+            data-testid="thumbnail-img"
             :src="thumbnailSrc"
             :scaleType="thumbnailScaleType"
             :aspectRatio="thumbnailAspectRatio"
@@ -165,7 +165,7 @@
 
       <div
         v-if="hasFooterArea"
-        data-test="footer"
+        data-testid="footer"
         class="k-footer"
       >
         <!-- @slot Places content to the footer area. -->
@@ -383,7 +383,7 @@
     data() {
       return {
         mouseDownTime: 0,
-        ThumbnailDisplays,
+        thumbnailDisplayNone: ThumbnailDisplays.NONE,
         isTitleFocused: false,
         thumbnailError: false,
       };

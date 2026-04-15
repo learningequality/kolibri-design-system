@@ -9,7 +9,7 @@
     :class="buttonClasses"
     :to="to"
     :replace="replace"
-    data-test="router-link"
+    data-testid="router-link"
     dir="auto"
     @mouseenter.native="hovering = true"
     @mouseleave.native="hovering = false"
@@ -21,7 +21,7 @@
         :icon="icon"
         style="top: 4px"
         :color="iconColor"
-        data-test="icon-before"
+        data-testid="icon-before"
       />
     </slot>
 
@@ -42,7 +42,7 @@
         :icon="iconAfter"
         style="top: 4px"
         :color="iconColor"
-        data-test="icon-after"
+        data-testid="icon-after"
       />
     </slot>
   </router-link>
