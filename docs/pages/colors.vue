@@ -371,9 +371,11 @@
           text="Google's Material convention"
           href="https://material.io/archive/guidelines/style/color.html"
         />
-        and segment colors into brightness levels, named <code>v_100</code>, <code>v_200</code>,
-        <code>v_300</code>, <code>v_400</code>, <code>v_500</code>, <code>v_600</code>:
+        and segment colors into brightness levels, named <code>v_50</code>, <code>v_100</code>,
+        <code>v_200</code>, <code>v_300</code>, <code>v_400</code>, <code>v_500</code>,
+        <code>v_600</code>. Note that <code>v_50</code> is only present on select color families:
       </p>
+      <DocsColorBlock name="palette.green.v_50" />
       <DocsColorBlock name="palette.green.v_100" />
       <DocsColorBlock name="palette.green.v_200" />
       <DocsColorBlock name="palette.green.v_300" />
