@@ -7,6 +7,19 @@ Changelog is rather internal in nature. See release notes for the public overvie
 <!-- [DO NOT REMOVE-USED BY GH ACTION] PASTE CHANGELOG -->
 
 
+- [#1239]
+  - **Description:** Add `v_50` shade to palette colors (`red`, `green`, `orange`, `pink`, `darkgreen`, `lightblue`) and brand colors (`primary`, `secondary`)
+  - **Products impact:** ux
+  - **Addresses:** #1238
+  - **Components:** Color palette, brand colors
+  - **Breaking:** no
+  - **Impacts a11y:** no
+  - **Guidance:** New `v_50` shades are available via `$themePalette.<color>.v_50` and `$themeBrand.<primary|secondary>.v_50`
+
+[#1239]: https://github.com/learningequality/kolibri-design-system/pull/1239
+
+
+
 - [#1217]
   - **Description:** Improve snackbar, `KCard`, and `useKLiveRegion` documentation pages
   - **Products impact:** Documentation
