@@ -1,7 +1,7 @@
 <template>
 
   <div class="k-snackbar-wrapper">
-    <transition name="k-snackbar-fade">
+    <transition>
       <div
         v-if="isOpen && backdrop"
         class="k-snackbar-backdrop"
