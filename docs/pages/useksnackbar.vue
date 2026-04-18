@@ -209,8 +209,8 @@
       :autofocus="snackbarOptions.autofocus"
       :autoDismiss="snackbarOptions.autoDismiss"
       :duration="snackbarOptions.duration"
-      @actionClick="handleActionClick"
-      @blur="handleBlur"
+      @actionClick="snackbarOptions.actionCallback"
+      @blur="snackbarOptions.onBlur"
       @close="clearSnackbar"
     />
   </DocsPageTemplate>
@@ -230,25 +230,10 @@
     setup() {
       const { snackbarIsVisible, snackbarOptions, clearSnackbar } = useKSnackbar();
 
-      const handleActionClick = () => {
-        if (snackbarOptions.value.actionCallback) {
-          snackbarOptions.value.actionCallback();
-        }
-        clearSnackbar();
-      };
-
-      const handleBlur = () => {
-        if (typeof snackbarOptions.value.onBlur === 'function') {
-          snackbarOptions.value.onBlur();
-        }
-      };
-
       return {
         snackbarIsVisible,
         snackbarOptions,
         clearSnackbar,
-        handleActionClick,
-        handleBlur,
       };
     },
     data() {
@@ -274,7 +259,7 @@
             defaultValue: { value: 'null' },
             type: { name: 'function' },
             description:
-              'Function stored in composable and called when the action button is clicked. Retrieved via @actionClick event handler at the app root level.',
+              'Function called when the action button is clicked. The snackbar is automatically dismissed after this callback executes.',
           },
           {
             name: 'duration',

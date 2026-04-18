@@ -16,7 +16,7 @@
 
   export default {
     setup() {
-      const { createSnackbar, clearSnackbar } = useKSnackbar();
+      const { createSnackbar } = useKSnackbar();
 
       const showWithBackdrop = () => {
         createSnackbar({
@@ -24,9 +24,7 @@
           announce: true,
           backdrop: true,
           actionText: 'Acknowledge',
-          actionCallback: () => {
-            clearSnackbar();
-          },
+          actionCallback: () => {},
         });
       };
 

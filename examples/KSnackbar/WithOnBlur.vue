@@ -28,9 +28,7 @@
           onBlur: () => {
             clearSnackbar();
           },
-          actionCallback: () => {
-            clearSnackbar();
-          },
+          actionCallback: () => {},
         });
       };
 

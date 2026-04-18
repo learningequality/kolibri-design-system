@@ -59,8 +59,8 @@
           :autofocus="snackbarOptions.autofocus"
           :autoDismiss="snackbarOptions.autoDismiss"
           :duration="snackbarOptions.duration"
-          @actionClick="handleActionClick"
-          @blur="handleBlur"
+          @actionClick="snackbarOptions.actionCallback"
+          @blur="snackbarOptions.onBlur"
           @close="clearSnackbar"
         />
       </DocsShowCode>

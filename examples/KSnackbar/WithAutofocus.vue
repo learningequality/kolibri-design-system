@@ -16,7 +16,7 @@
 
   export default {
     setup() {
-      const { createSnackbar, clearSnackbar } = useKSnackbar();
+      const { createSnackbar } = useKSnackbar();
 
       const showWithAutofocus = () => {
         createSnackbar({
@@ -24,9 +24,7 @@
           announce: true,
           actionText: 'Dismiss',
           autofocus: true,
-          actionCallback: () => {
-            clearSnackbar();
-          },
+          actionCallback: () => {},
         });
       };
 
