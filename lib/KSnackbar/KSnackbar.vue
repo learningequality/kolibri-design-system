@@ -24,10 +24,7 @@
           class="k-snackbar"
           data-testid="snackbar"
           data-focus="true"
-          :class="[
-            $computedClass({ ':focus': $coreOutline }),
-            { 'k-snackbar-small': isSmall },
-          ]"
+          :class="[$computedClass({ ':focus': $coreOutline }), { 'k-snackbar-small': isSmall }]"
           :style="snackbarStyles"
           tabindex="0"
           @keydown.esc="handleClose"
@@ -342,7 +339,6 @@
   .k-snackbar.k-snackbar-small {
     right: 24px;
   }
-
 
   .k-snackbar-message {
     display: flex;
