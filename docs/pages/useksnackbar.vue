@@ -10,7 +10,7 @@
         <code>setSnackbarText</code> functions, as well as the reactive
         <code>snackbarIsVisible</code> and <code>snackbarOptions</code> refs. It is used to manage a
         global snackbar state, allowing any component to trigger a snackbar without having to pass
-        props deeply.
+        props deeply. This composable automatically handles setting the ARIA live node for screen readers when the <code>announce</code> option is enabled.
       </p>
     </DocsPageSection>
 
