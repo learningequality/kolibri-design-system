@@ -10,7 +10,8 @@
         <code>setSnackbarText</code> functions, as well as the reactive
         <code>snackbarIsVisible</code> and <code>snackbarOptions</code> refs. It is used to manage a
         global snackbar state, allowing any component to trigger a snackbar without having to pass
-        props deeply. This composable automatically handles setting the ARIA live node for screen readers when the <code>announce</code> option is enabled.
+        props deeply. This composable automatically handles setting the ARIA live node for screen
+        readers when the <code>announce</code> option is enabled.
       </p>
     </DocsPageSection>
 
@@ -74,7 +75,9 @@
       <h4>Update snackbar without transition</h4>
       <p>
         Use <code>forceReuse</code> to update the snackbar text in place without replaying the
-        transition animation. Note that doing this purposely resets the auto-hide timer and re-triggers the screen reader announcement. Useful for status updates like connection state changes.
+        transition animation. Note that doing this purposely resets the auto-hide timer and
+        re-triggers the screen reader announcement. Useful for status updates like connection state
+        changes.
       </p>
       <DocsExample
         loadExample="KSnackbar/ForceReuse.vue"
@@ -106,8 +109,8 @@
 
       <h4>Snackbar with backdrop</h4>
       <p>
-        Set <code>backdrop: true</code> to display a darkening backdrop behind the snackbar and trap keyboard focus. Useful
-        for higher-priority messages that require user focus.
+        Set <code>backdrop: true</code> to display a darkening backdrop behind the snackbar and trap
+        keyboard focus. Useful for higher-priority messages that require user focus.
       </p>
       <DocsExample
         loadExample="KSnackbar/WithBackdrop.vue"
@@ -295,7 +298,8 @@
             required: false,
             defaultValue: { value: 'false' },
             type: { name: 'boolean' },
-            description: 'If true, shows a darkening backdrop behind the snackbar and traps keyboard focus.',
+            description:
+              'If true, shows a darkening backdrop behind the snackbar and traps keyboard focus.',
           },
           {
             name: 'announce',
