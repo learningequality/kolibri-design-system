@@ -103,6 +103,17 @@
         exampleId="with-onblur"
         block
       />
+
+      <h4>Snackbar with backdrop</h4>
+      <p>
+        Set <code>backdrop: true</code> to display a darkening backdrop behind the snackbar. Useful
+        for higher-priority messages that require user focus.
+      </p>
+      <DocsExample
+        loadExample="KSnackbar/WithBackdrop.vue"
+        exampleId="with-backdrop"
+        block
+      />
     </DocsPageSection>
 
     <DocsPageSection
