@@ -74,7 +74,7 @@
       <h4>Update snackbar without transition</h4>
       <p>
         Use <code>forceReuse</code> to update the snackbar text in place without replaying the
-        transition animation. Useful for status updates like connection state changes.
+        transition animation. Note that doing this purposely resets the auto-hide timer and re-triggers the screen reader announcement. Useful for status updates like connection state changes.
       </p>
       <DocsExample
         loadExample="KSnackbar/ForceReuse.vue"
@@ -106,7 +106,7 @@
 
       <h4>Snackbar with backdrop</h4>
       <p>
-        Set <code>backdrop: true</code> to display a darkening backdrop behind the snackbar. Useful
+        Set <code>backdrop: true</code> to display a darkening backdrop behind the snackbar and trap keyboard focus. Useful
         for higher-priority messages that require user focus.
       </p>
       <DocsExample
@@ -138,13 +138,19 @@
 
         export default {
           setup() {
-            const { snackbarIsVisible, snackbarOptions, createSnackbar } = useKLocalSnackbar();
+            const {
+              snackbarIsVisible,
+              snackbarOptions,
+              createSnackbar,
+              clearSnackbar,
+            } = useKLocalSnackbar();
 
             const notifyInfo = () => createSnackbar({ text: 'Task completed', announce: true });
 
             return {
               snackbarIsVisible,
               snackbarOptions,
+              clearSnackbar,
               notifyInfo
             };
           }
@@ -289,11 +295,11 @@
             required: false,
             defaultValue: { value: 'false' },
             type: { name: 'boolean' },
-            description: 'If true, shows a darkening backdrop behind the snackbar.',
+            description: 'If true, shows a darkening backdrop behind the snackbar and traps keyboard focus.',
           },
           {
             name: 'announce',
-            required: false,
+            required: true,
             defaultValue: { value: 'undefined' },
             type: { name: 'boolean' },
             description:
@@ -329,7 +335,7 @@
             defaultValue: { value: 'false' },
             type: { name: 'boolean' },
             description:
-              'When true, updates the current snackbar text in place without replaying the transition animation. Useful for status updates like connection state changes.',
+              'When true, updates the current snackbar text in place without replaying the transition animation. Note: this purposely resets the auto-hide timer and re-triggers the screen reader announcement. Useful for status updates like connection state changes.',
           },
           {
             name: 'hideCallback',
