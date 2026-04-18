@@ -23,8 +23,9 @@
           ref="snackbarElement"
           class="k-snackbar"
           data-testid="snackbar"
+          data-focus="true"
           :class="[
-            $computedClass({ ':focus-visible': $coreOutline }),
+            $computedClass({ ':focus': $coreOutline }),
             { 'k-snackbar-small': isSmall },
           ]"
           :style="snackbarStyles"
@@ -188,7 +189,9 @@
           } else if (!isOpen && wasOpen) {
             onClose();
           } else if (isOpen && text) {
+            // Re-announce text if it changes while the snackbar is already open
             announce(text);
+            // Purposely reset the auto-hide timeout so the user has full time to read the new text
             setupAutoHide();
           }
         },
