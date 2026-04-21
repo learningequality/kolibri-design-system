@@ -29,9 +29,20 @@
         type: Boolean,
         default: false,
       },
+      warning: {
+        type: Boolean,
+        default: false,
+      },
     },
     computed: {
       config() {
+        if (this.warning) {
+          return {
+            icon: 'warning',
+            backgroundColor: this.$themePalette.yellow.v_100,
+            iconColor: this.$themePalette.yellow.v_500,
+          };
+        }
         if (this.a11y) {
           return {
             icon: 'a11y',

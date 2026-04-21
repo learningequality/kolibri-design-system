@@ -65,6 +65,17 @@ const compositionRelatedKeywords = ['composable', 'composition'];
 const cardRelatedKeywords = ['grid', 'card', 'cardgrid'];
 const listboxRelatedKeywords = ['listbox', 'option', 'select', 'multi'];
 const multiselectRelatedKeywords = ['multiselect', 'chip', 'tag', 'option', 'select', 'multi'];
+const floatingRelatedKeywords = [
+  'tooltip',
+  'dropdown',
+  'popover',
+  'floating',
+  'trigger',
+  'anchor',
+  'reference',
+  'activator',
+  'position',
+];
 
 export default [
   new Section({
@@ -76,6 +87,10 @@ export default [
       new Page({
         path: '/installation',
         title: 'Installation',
+      }),
+      new Page({
+        path: '/browsersupport',
+        title: 'Browser support',
       }),
       new Page({
         path: '/principles',
@@ -181,6 +196,11 @@ export default [
         path: '/loaders',
         title: 'Loaders',
       }),
+      new Page({
+        path: '/floatingelements',
+        title: 'Floating elements',
+        keywords: floatingRelatedKeywords,
+      }),
     ],
   }),
   new Section({
@@ -234,6 +254,12 @@ export default [
         title: 'useKSnackbar',
         isCode: true,
         keywords: [...compositionRelatedKeywords, 'snackbar', 'notification', 'message', 'toast'],
+      }),
+      new Page({
+        path: '/usekfloatingposition',
+        title: 'useKFloatingPosition',
+        isCode: true,
+        keywords: [...compositionRelatedKeywords, ...floatingRelatedKeywords],
       }),
     ],
   }),
