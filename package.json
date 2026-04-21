@@ -28,6 +28,7 @@
     "lib"
   ],
   "dependencies": {
+    "@floating-ui/dom": "1.7.6",
     "aphrodite": "https://github.com/learningequality/aphrodite/",
     "autosize": "3.0.21",
     "color": "4.2.3",
