@@ -7,6 +7,19 @@ Changelog is rather internal in nature. See release notes for the public overvie
 <!-- [DO NOT REMOVE-USED BY GH ACTION] PASTE CHANGELOG -->
 
 
+- [#1241]
+  - **Description:** Bumps KDS version to 5.6.2
+  - **Products impact:** none.
+  - **Addresses:** -.
+  - **Components:** -.
+  - **Breaking:** no
+  - **Impacts a11y:** no
+  - **Guidance:** -.
+
+[#1241]: https://github.com/learningequality/kolibri-design-system/pull/1241
+
+
+
 - [#1239]
   - **Description:** Add `v_50` shade to palette colors (`red`, `green`, `orange`, `pink`, `darkgreen`, `lightblue`) and brand colors (`primary`, `secondary`)
   - **Products impact:** ux
