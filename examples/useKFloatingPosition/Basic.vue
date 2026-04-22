@@ -26,10 +26,10 @@
   import { ref, onBeforeUnmount, nextTick } from 'vue';
   import useKFloatingPosition from '../../lib/composables/useKFloatingPosition';
 
-  const FLOATING_ID = 'tooltip-unique-id';
-
   export default {
     setup() {
+      const TOOLTIP_ID = 'tooltip-unique-id';
+
       const { initPosition, destroyPosition, offset, flip } = useKFloatingPosition();
 
       const isVisible = ref(false);
@@ -40,7 +40,7 @@
         isVisible.value = true;
 
         nextTick(() => {
-          initPosition(FLOATING_ID, floatingRef.value, anchorRef.value.$el, {
+          initPosition(TOOLTIP_ID, floatingRef.value, anchorRef.value.$el, {
             placement: 'bottom',
             middleware: [offset(8), flip()],
           });
@@ -49,7 +49,7 @@
 
       function hide() {
         isVisible.value = false;
-        destroyPosition(FLOATING_ID);
+        destroyPosition(TOOLTIP_ID);
       }
 
       function toggle() {
@@ -57,7 +57,7 @@
       }
 
       onBeforeUnmount(() => {
-        destroyPosition(FLOATING_ID);
+        destroyPosition(TOOLTIP_ID);
       });
 
       return { isVisible, anchorRef, floatingRef, toggle };
