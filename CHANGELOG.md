@@ -7,6 +7,19 @@ Changelog is rather internal in nature. See release notes for the public overvie
 <!-- [DO NOT REMOVE-USED BY GH ACTION] PASTE CHANGELOG -->
 
 
+- [#1237]
+  - **Description:** Update Node.js from 18 to 20 and kolibri-format from 1.x to 2.x. Rename `data-test` attributes to `data-testid` across KRouterLink, KDateRange, KDateCalendar, and KCard.
+  - **Products impact:** updated API
+  - **Addresses:** #1149
+  - **Components:** KRouterLink, KDateRange, KCard
+  - **Breaking:** yes
+  - **Impacts a11y:** no
+  - **Guidance:** Consumers querying `[data-test="..."]` in tests must update selectors to `[data-testid="..."]`.
+
+[#1237]: https://github.com/learningequality/kolibri-design-system/pull/1237
+
+
+
 - [#1241]
   - **Description:** Bumps KDS version to 5.6.2
   - **Products impact:** none.
