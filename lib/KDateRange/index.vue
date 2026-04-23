@@ -6,7 +6,7 @@
     :submitText="submitText"
     :size="modalSize"
     :submitDisabled="disabled"
-    data-test="dateRangeModal"
+    data-testid="dateRangeModal"
     @submit="onSubmit"
     @cancel="$emit('cancel')"
   >
@@ -28,7 +28,7 @@
             inputRef="dateStartRangeInput"
             :errorMessage="invalidStartErrorMessage"
             :legendText="startDateLegendText"
-            data-test="startDate"
+            data-testid="startDate"
             @updateDate="debouncedSetStartDate"
           />
         </div>
@@ -38,7 +38,7 @@
             inputRef="dateEndRangeInput"
             :errorMessage="invalidEndErrorMessage"
             :legendText="endDateLegendText"
-            data-test="endDate"
+            data-testid="endDate"
             @updateDate="debouncedSetEndDate"
           />
         </div>
@@ -63,6 +63,7 @@
 
 <script>
 
+  // eslint-disable-next-line small-import/no-full-import
   import { format, startOfDay, startOfToday } from 'date-fns';
   import { interpret } from 'xstate';
   import get from 'lodash/get';

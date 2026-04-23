@@ -7,7 +7,7 @@ async function generateComment(percyUrl) {
 **Percy Dashboard:** [View Detailed Report](${percyUrl})
 
 **Environment:**
-- **Node.js Version:** 18.x
+- **Node.js Version:** 20.x
 - **OS:** Ubuntu-latest
 
 **Instructions for Reviewers:**

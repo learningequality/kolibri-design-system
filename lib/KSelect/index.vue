@@ -412,7 +412,6 @@
         quickMatchString: '',
         quickMatchTimeout: null,
         dropdownButtonBottom: 'auto',
-        maxDropdownHeight: 256,
         // workaround for Keen-ui not displaying floating labels for empty objects
         selection: Object.keys(this.value || {}).length === 0 ? '' : this.value,
       };
@@ -577,15 +576,6 @@
 
           return option;
         });
-      },
-      activeColorStyle() {
-        if (this.isActive) {
-          return {
-            color: this.$themeTokens.primary,
-          };
-        }
-
-        return {};
       },
       activeBorderStyle() {
         if (this.isActive && !this.clearableState) {
