@@ -283,11 +283,6 @@
           { id: 'tabLearners', label: 'Learners' },
           { id: 'tabGroups', label: 'Groups' },
         ],
-        icons: {
-          tabLessons: 'lesson',
-          tabLearners: 'person',
-          tabGroups: 'people',
-        },
       };
     },
   };

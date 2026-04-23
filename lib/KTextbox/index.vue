@@ -240,11 +240,11 @@
        * Resets text field value to default.
        * Unclear if this is used anywhere.
        */
-      /* eslint-disable kolibri/vue-no-unused-methods */
+      /* eslint-disable vue/no-unused-properties */
       reset() {
         this.$refs.textbox.reset();
       },
-      /* eslint-enable kolibri/vue-no-unused-methods */
+      /* eslint-enable vue/no-unused-properties */
       emitKeydown(e) {
         /**
          * Emitted with `keydown` events

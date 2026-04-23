@@ -52,6 +52,8 @@
     name: 'KListWithOverflow',
     setup() {
       const { elementWidth } = useKResponsiveElement();
+      // Used via this.$watch in mounted(), not detectable by the linter
+      // eslint-disable-next-line vue/no-unused-properties
       return { elementWidth };
     },
     props: {

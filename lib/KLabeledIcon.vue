@@ -27,8 +27,10 @@
         <!-- @slot Optional slot as alternative to `label` prop -->
         <slot>
           <span v-if="!labelEmpty">{{ label }}</span>
+          <!-- eslint-disable vue/no-bare-strings-in-template -->
           <!-- Use zero-width space when empty -->
           <span v-else>&#8203;</span>
+          <!-- eslint-enable vue/no-bare-strings-in-template -->
         </slot>
       </span>
     </span>

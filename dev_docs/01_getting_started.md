@@ -4,7 +4,7 @@ The design system has two primary parts, the UI component library [`/lib`](../li
 
 ## Prerequisites
 
-The project requires `Node 18.X` as the runtime and `Yarn >= 1.22.X` as the package manager. We make use of [`Volta`](https://docs.volta.sh/guide/getting-started) to manage the same automatically. Please make sure you have volta installed and your shell configured to use volta.
+The project requires `Node 20.X` as the runtime and `Yarn >= 1.22.X` as the package manager. We make use of [`Volta`](https://docs.volta.sh/guide/getting-started) to manage the same automatically. Please make sure you have volta installed and your shell configured to use volta.
 
 ## Troubleshooting
 
