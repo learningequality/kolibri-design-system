@@ -7,6 +7,19 @@ Changelog is rather internal in nature. See release notes for the public overvie
 <!-- [DO NOT REMOVE-USED BY GH ACTION] PASTE CHANGELOG -->
 
 
+- [#1243]
+  - **Description:** Merges `release-v5` into `develop`.
+  - **Products impact:** -.
+  - **Addresses:** -.
+  - **Components:** -.
+  - **Breaking:** no
+  - **Impacts a11y:** -
+  - **Guidance:** -.
+
+[#1243]: https://github.com/learningequality/kolibri-design-system/pull/1243
+
+
+
 - [#1237]
   - **Description:** Update Node.js from 18 to 20 and kolibri-format from 1.x to 2.x. Rename `data-test` attributes to `data-testid` across KRouterLink, KDateRange, KDateCalendar, and KCard.
   - **Products impact:** updated API
