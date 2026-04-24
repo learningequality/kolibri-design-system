@@ -218,8 +218,8 @@
       :autofocus="snackbarOptions.autofocus"
       :autoDismiss="snackbarOptions.autoDismiss"
       :duration="snackbarOptions.duration"
-      @actionClick="snackbarOptions.actionCallback"
-      @blur="snackbarOptions.onBlur"
+      @actionClick="() => snackbarOptions.actionCallback && snackbarOptions.actionCallback()"
+      @blur="() => snackbarOptions.onBlur && snackbarOptions.onBlur()"
       @close="clearSnackbar"
     />
   </DocsPageTemplate>
