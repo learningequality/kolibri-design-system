@@ -74,7 +74,7 @@
   import KTextTruncator from '../KTextTruncator.vue';
 
   /**
-   * A globally-managed notification component for displaying non-critical messages
+   * A notification component for displaying non-critical messages to users
    */
   export default {
     name: 'KSnackbar',
