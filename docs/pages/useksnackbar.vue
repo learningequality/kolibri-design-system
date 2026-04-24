@@ -247,7 +247,6 @@
     },
     data() {
       return {
-        text: '{{ text }}',
         options: [
           {
             name: 'text',
