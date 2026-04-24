@@ -247,6 +247,8 @@
     },
     data() {
       return {
+        // eslint-disable-next-line vue/no-unused-properties
+        text: '{{ text }}',
         options: [
           {
             name: 'text',
