@@ -7,7 +7,12 @@
       loadExample="KToolbar/Default.vue"
     />
     <VisualTestExample
-      title="Inverted (custom colors via :style)"
+      title="Brand color (appBar via :style)"
+      width="600px"
+      loadExample="KToolbar/AppBarColor.vue"
+    />
+    <VisualTestExample
+      title="Inverted (appBarDark via :style)"
       width="600px"
       loadExample="KToolbar/Inverted.vue"
     />

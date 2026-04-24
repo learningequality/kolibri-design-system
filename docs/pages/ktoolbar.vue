@@ -19,8 +19,7 @@
       <h3>Default</h3>
       <p>
         Out of the box, <code>KToolbar</code> renders with default colors from
-        <code>$themeTokens.surface</code> (background) and
-        <code>$themeTokens.text</code> (text).
+        <code>$themeTokens.surface</code> (background) and <code>$themeTokens.text</code> (text).
       </p>
 
       <DocsExample
@@ -29,12 +28,23 @@
         block
       />
 
-      <h3>Overriding colors</h3>
+      <h3>Brand color</h3>
       <p>
-        Override the defaults via the native <code>:style</code> binding on the component.
-        The example below uses <code>$themeTokens.appBarDark</code> and
-        <code>$themeTokens.textInverted</code> for an inverted palette typical of full-
-        screen modal or immersive bars.
+        Override the defaults via the native <code>:style</code> binding on the component. The most
+        common pattern across Kolibri pairs the default text color with the
+        <code>$themeTokens.appBar</code> brand background.
+      </p>
+
+      <DocsExample
+        loadExample="KToolbar/AppBarColor.vue"
+        exampleId="ktoolbar-appbar-color"
+        block
+      />
+
+      <h3>Inverted palette</h3>
+      <p>
+        For fullscreen modals or immersive bars, use <code>$themeTokens.appBarDark</code> with
+        <code>$themeTokens.textInverted</code>.
       </p>
 
       <DocsExample
@@ -45,8 +55,8 @@
 
       <h3>Navigation and actions</h3>
       <p>
-        The <code>#navigation</code> and <code>#actions</code> slots hold links or menu
-        items and action buttons respectively.
+        The <code>#navigation</code> and <code>#actions</code> slots hold links or menu items and
+        action buttons respectively.
       </p>
 
       <DocsExample
@@ -56,9 +66,7 @@
       />
 
       <h3>Brand area</h3>
-      <p>
-        The <code>#brand</code> slot accommodates a product mark.
-      </p>
+      <p>The <code>#brand</code> slot accommodates a product mark.</p>
 
       <DocsExample
         loadExample="KToolbar/Brand.vue"
@@ -67,9 +75,7 @@
       />
 
       <h3>Not raised</h3>
-      <p>
-        Pass <code>:raised="false"</code> for an in-page toolbar without a drop shadow.
-      </p>
+      <p>Pass <code>:raised="false"</code> for an in-page toolbar without a drop shadow.</p>
 
       <DocsExample
         loadExample="KToolbar/NotRaised.vue"
