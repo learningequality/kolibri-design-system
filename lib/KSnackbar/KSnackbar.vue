@@ -1,6 +1,7 @@
 <template>
 
   <div class="k-snackbar-wrapper">
+    <!-- Backdrop appears instantly; transition deferred to a future design spec -->
     <transition>
       <div
         v-if="isOpen && backdrop"
@@ -323,7 +324,7 @@
   .k-snackbar {
     position: fixed;
     bottom: 24px;
-    left: 24px;
+    inset-inline-start: 24px;
     z-index: 24;
     display: inline-flex;
     gap: 48px;
@@ -337,7 +338,7 @@
   }
 
   .k-snackbar.k-snackbar-small {
-    right: 24px;
+    inset-inline-end: 24px;
   }
 
   .k-snackbar-message {
