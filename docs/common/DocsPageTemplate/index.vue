@@ -16,6 +16,7 @@
       :sections="pageSections"
       :title="page.title"
       :codeStyle="page.isCode"
+      :candidate="page.candidate"
       class="floating-header"
       @update-side-nav="handleSideNavUpdate"
     />
@@ -26,10 +27,26 @@
         :sections="pageSections"
         :title="page.title"
         :codeStyle="page.isCode"
+        :candidate="page.candidate"
         style="visibility: hidden"
       />
 
       <div class="content">
+        <DocsPageSection>
+          <DocsBanner v-if="page.candidate">
+            <p style="margin: 0">
+              This component is a
+              <DocsInternalLink
+                href="/candidate-components"
+                text="candidate"
+              />.
+            </p>
+            <div v-if="$slots.developerNotes">
+              <h2 class="developer-notes-title">Developer notes</h2>
+              <slot name="developerNotes"></slot>
+            </div>
+          </DocsBanner>
+        </DocsPageSection>
         <slot></slot>
         <DocsPageSection
           v-for="(section, i) in apiSections"
@@ -242,6 +259,13 @@
       padding: 0 16px 200px;
       overflow-x: hidden;
     }
+  }
+
+  .developer-notes-title {
+    margin: 18px 0 4px;
+    font-size: inherit;
+    font-weight: normal;
+    text-decoration: underline;
   }
 
   .overlay {

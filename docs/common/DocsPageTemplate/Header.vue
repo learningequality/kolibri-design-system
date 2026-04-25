@@ -12,6 +12,7 @@
           @click="toggleSideNav"
         />
         <span :class="{ code: codeStyle }">{{ title }}</span>
+        <BadgeCandidate v-if="candidate" />
         <a
           href="#"
           @click="scrollToTop"
@@ -49,11 +50,13 @@
 
 <script>
 
+  import BadgeCandidate from './BadgeCandidate.vue';
   import BranchLink from './BranchLink.vue';
 
   export default {
     name: 'Header',
     components: {
+      BadgeCandidate,
       BranchLink,
     },
     props: {
@@ -68,6 +71,10 @@
       title: {
         type: String,
         required: true,
+      },
+      candidate: {
+        type: Boolean,
+        default: false,
       },
     },
     data() {
@@ -147,20 +154,18 @@
   }
 
   .header-text {
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
     margin: 0;
     font-weight: 400;
   }
 
-  .header-text > * {
-    vertical-align: middle;
-  }
-
   .icon-link {
+    display: block;
     width: 14px;
     height: 14px;
     margin-right: 8px;
-    margin-left: 8px;
+    margin-left: 16px;
     transition: all 0.15s ease;
   }
 
