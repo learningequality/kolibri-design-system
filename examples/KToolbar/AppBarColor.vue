@@ -4,7 +4,7 @@
     title="Toolbar title"
     :style="{ backgroundColor: $themeTokens.appBar }"
   >
-    <template #icon>
+    <template #leading-actions>
       <KIconButton
         icon="menu"
         :color="$themeTokens.text"

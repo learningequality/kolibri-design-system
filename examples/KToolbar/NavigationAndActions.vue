@@ -13,7 +13,7 @@
         class="link"
       />
     </template>
-    <template #actions>
+    <template #trailing-actions>
       <KIconButton
         icon="optionsVertical"
         :ariaLabel="'More options'"

@@ -7,7 +7,7 @@
       color: $themeTokens.textInverted,
     }"
   >
-    <template #icon>
+    <template #leading-actions>
       <KIconButton
         icon="back"
         :color="$themeTokens.textInverted"

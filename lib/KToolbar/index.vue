@@ -7,11 +7,11 @@
   >
     <div class="k-toolbar-left">
       <div
-        v-if="$slots.icon"
-        class="k-toolbar-nav-icon"
+        v-if="$slots['leading-actions']"
+        class="k-toolbar-leading-actions"
       >
-        <!-- @slot Navigation icon area (typically a KIconButton). Hidden when empty. -->
-        <slot name="icon"></slot>
+        <!-- @slot Leading actions area (typically a KIconButton). Hidden when empty. -->
+        <slot name="leading-actions"></slot>
       </div>
 
       <div
@@ -42,8 +42,8 @@
     </div>
 
     <div class="k-toolbar-right">
-      <!-- @slot Action buttons or secondary controls area. -->
-      <slot name="actions"></slot>
+      <!-- @slot Trailing actions area (typically action buttons or secondary controls). -->
+      <slot name="trailing-actions"></slot>
     </div>
   </div>
 
@@ -111,7 +111,7 @@
     margin-left: 16px;
   }
 
-  .k-toolbar-nav-icon {
+  .k-toolbar-leading-actions {
     margin-right: 8px;
     margin-left: -16px;
   }
