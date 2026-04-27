@@ -22,13 +22,13 @@
         <slot name="brand"></slot>
       </div>
 
-      <!-- @slot Main content area. Shows the title by default. -->
+      <!-- @slot Main content area. Shows the truncated title by default. -->
       <slot>
         <div
           v-if="title"
           class="k-toolbar-title"
         >
-          {{ title }}
+          <KTextTruncator :text="title" />
         </div>
       </slot>
 
@@ -108,6 +108,7 @@
   .k-toolbar-left {
     display: flex;
     align-items: center;
+    min-width: 0;
     margin-left: 16px;
   }
 
@@ -132,8 +133,8 @@
   }
 
   .k-toolbar-title {
-    overflow: hidden;
-    white-space: nowrap;
+    min-width: 0;
+    line-height: 1;
   }
 
 </style>
