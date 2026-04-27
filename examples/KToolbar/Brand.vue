@@ -1,6 +1,6 @@
 <template>
 
-  <KToolbar title="Toolbar title">
+  <KToolbar title="Brand title">
     <template #brand>
       <div class="logo-wrapper">
         <KLogo
