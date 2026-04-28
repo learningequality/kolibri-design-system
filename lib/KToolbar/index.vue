@@ -5,45 +5,55 @@
     :class="{ 'is-raised': raised }"
     :style="toolbarStyles"
   >
-    <div class="k-toolbar-left">
-      <div
-        v-if="$slots['leading-actions']"
-        class="k-toolbar-leading-actions"
-      >
-        <!-- @slot Leading actions area (typically a KIconButton). Hidden when empty. -->
-        <slot name="leading-actions"></slot>
-      </div>
-
-      <div
-        v-if="$slots.brand"
-        class="k-toolbar-brand"
-      >
-        <!-- @slot Brand area (typically a KLogo). Hidden when empty. -->
-        <slot name="brand"></slot>
-      </div>
-
-      <!-- @slot Main content area. Shows the truncated title by default. -->
-      <slot>
+    <div class="k-toolbar-main">
+      <div class="k-toolbar-left">
         <div
-          v-if="title"
-          class="k-toolbar-title"
+          v-if="$slots['leading-actions']"
+          class="k-toolbar-leading-actions"
         >
-          <KTextTruncator :text="title" />
+          <!-- @slot Leading actions area (typically a KIconButton). Hidden when empty. -->
+          <slot name="leading-actions"></slot>
         </div>
-      </slot>
 
-      <div
-        v-if="$slots.navigation"
-        class="k-toolbar-nav"
-      >
-        <!-- @slot Navigation links or menu items area. -->
-        <slot name="navigation"></slot>
+        <div
+          v-if="$slots.brand"
+          class="k-toolbar-brand"
+        >
+          <!-- @slot Brand area (typically a KLogo). Hidden when empty. -->
+          <slot name="brand"></slot>
+        </div>
+
+        <!-- @slot Main content area. Shows the truncated title by default. -->
+        <slot>
+          <div
+            v-if="title"
+            class="k-toolbar-title"
+          >
+            <KTextTruncator :text="title" />
+          </div>
+        </slot>
+
+        <div
+          v-if="$slots.navigation"
+          class="k-toolbar-nav"
+        >
+          <!-- @slot Navigation links or menu items area. -->
+          <slot name="navigation"></slot>
+        </div>
+      </div>
+
+      <div class="k-toolbar-right">
+        <!-- @slot Trailing actions area (typically action buttons or secondary controls). -->
+        <slot name="trailing-actions"></slot>
       </div>
     </div>
 
-    <div class="k-toolbar-right">
-      <!-- @slot Trailing actions area (typically action buttons or secondary controls). -->
-      <slot name="trailing-actions"></slot>
+    <div
+      v-if="$slots.extension"
+      class="k-toolbar-extension"
+    >
+      <!-- @slot Sub-toolbar below the main row, in the same surface. Hidden when empty. -->
+      <slot name="extension"></slot>
     </div>
   </div>
 
@@ -90,19 +100,29 @@
 
   .k-toolbar {
     position: relative;
-    display: flex;
-    align-content: center;
-    align-items: center;
-    justify-content: space-between;
     max-width: 100%;
-    height: 3.5rem;
-    padding: 0 16px;
     font-family: inherit;
     font-size: 1.125rem;
 
     &.is-raised {
       @extend %dropshadow-2dp;
     }
+  }
+
+  .k-toolbar-main {
+    display: flex;
+    align-content: center;
+    align-items: center;
+    justify-content: space-between;
+    height: 3.5rem;
+    padding: 0 16px;
+  }
+
+  .k-toolbar-extension {
+    display: flex;
+    align-items: center;
+    min-height: 3rem;
+    padding: 0 16px;
   }
 
   .k-toolbar-left {

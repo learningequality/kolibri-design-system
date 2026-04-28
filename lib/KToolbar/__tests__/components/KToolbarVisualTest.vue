@@ -31,6 +31,11 @@
       width="600px"
       loadExample="KToolbar/Brand.vue"
     />
+    <VisualTestExample
+      title="With extension (sub-nav below main row)"
+      width="600px"
+      loadExample="KToolbar/Extension.vue"
+    />
   </VisualTestLayout>
 
 </template>

@@ -82,6 +82,19 @@
         exampleId="ktoolbar-not-raised"
         block
       />
+
+      <h3>Extension (sub-toolbar)</h3>
+      <p>
+        The <code>#extension</code> slot renders below the main row but inside the same visual
+        surface — same background, same shadow. Use it for sub-navigation, tabs, or breadcrumbs that
+        conceptually belong to the toolbar rather than the page below it.
+      </p>
+
+      <DocsExample
+        loadExample="KToolbar/Extension.vue"
+        exampleId="ktoolbar-extension"
+        block
+      />
     </DocsPageSection>
   </DocsPageTemplate>
 
