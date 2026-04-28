@@ -188,6 +188,9 @@
             const idx = overflowItemsIdx.pop();
             const item = list.children[idx];
             item.style.visibility = 'visible';
+            // Reset position; the overflow loop above set it to 'absolute' to
+            // remove the item from layout, which must be undone when restoring.
+            item.style.position = 'unset';
             maxWidth += itemsSizes[idx].width;
           }
         }
@@ -266,9 +269,13 @@
   .list {
     position: relative;
     display: flex;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
     align-items: center;
-    overflow: visible;
+    /* Clip items during the brief window before setOverflowItems() runs on
+       resize; without this, items wrap visibly to a second row before being
+       hidden. nowrap keeps them on one line; overflow:hidden clips horizontal
+       extension before maxWidth is recomputed. */
+    overflow: hidden;
   }
 
   .list > * {
