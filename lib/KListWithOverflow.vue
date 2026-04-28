@@ -271,6 +271,7 @@
     display: flex;
     flex-wrap: nowrap;
     align-items: center;
+
     /* Clip items during the brief window before setOverflowItems() runs on
        resize; without this, items wrap visibly to a second row before being
        hidden. nowrap keeps them on one line; overflow:hidden clips horizontal
