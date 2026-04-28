@@ -16,16 +16,19 @@
         text="Overview"
         :to="{ path: '/ktoolbar' }"
         class="link"
+        appearance="flat-button"
       />
       <KRouterLink
         text="Lessons"
         :to="{ path: '/ktoolbar' }"
         class="link"
+        appearance="flat-button"
       />
       <KRouterLink
         text="Learners"
         :to="{ path: '/ktoolbar' }"
         class="link"
+        appearance="flat-button"
       />
     </template>
   </KToolbar>

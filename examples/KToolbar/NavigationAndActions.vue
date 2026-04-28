@@ -6,11 +6,13 @@
         text="Home"
         :to="{ path: '/ktoolbar' }"
         class="link"
+        appearance="flat-button"
       />
       <KRouterLink
         text="About"
         :to="{ path: '/ktoolbar' }"
         class="link"
+        appearance="flat-button"
       />
     </template>
     <template #trailing-actions>
