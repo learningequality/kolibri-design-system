@@ -111,7 +111,6 @@
 
   .k-toolbar-main {
     display: flex;
-    align-content: center;
     align-items: center;
     justify-content: space-between;
     height: 3.5rem;
@@ -129,27 +128,10 @@
     display: flex;
     align-items: center;
     min-width: 0;
-    margin-left: 16px;
-  }
-
-  .k-toolbar-leading-actions {
-    margin-right: 8px;
-    margin-left: -16px;
-  }
-
-  .k-toolbar-nav {
-    display: flex;
-    align-items: baseline;
-    margin-right: 8px;
-    margin-left: 16px;
   }
 
   .k-toolbar-brand {
     min-width: inherit;
-  }
-
-  .k-toolbar-right {
-    display: inline-block;
   }
 
   .k-toolbar-title {

@@ -29,7 +29,7 @@
 <style lang="scss" scoped>
 
   .link {
-    margin-right: 16px;
+    margin: 0 8px;
   }
 
 </style>
