@@ -54,9 +54,10 @@
 
       <h4>Persistent snackbar</h4>
       <p>
-        Set <code>autoDismiss: false</code> in <code>createSnackbar()</code> to disable auto-hide
-        for important messages. Alternatively, set <code>duration: 0</code> to achieve the same
-        effect.
+        Set <code>autoDismiss: false</code> to keep the snackbar visible until explicitly dismissed.
+        When using this option, always provide a way to close the snackbar, either via
+        <code>actionText</code>, an <code>onBlur</code> callback, or a programmatic
+        <code>clearSnackbar()</code> call, otherwise it will remain on screen indefinitely.
       </p>
       <DocsExample
         loadExample="KSnackbar/Persistent.vue"
@@ -99,7 +100,8 @@
       <h4>Snackbar with onBlur handling</h4>
       <p>
         Provide an <code>onBlur</code> callback to handle advanced focus management scenarios, such
-        as auto-dismissing when the user tabs away or clicks elsewhere.
+        as auto-dismissing when the user tabs away. The callback fires when either the snackbar
+        itself or its action button loses focus.
       </p>
       <DocsExample
         loadExample="KSnackbar/WithOnBlur.vue"
@@ -284,7 +286,7 @@
             defaultValue: { value: 'true' },
             type: { name: 'boolean' },
             description:
-              'Whether the snackbar should auto-dismiss after the duration. More semantic than setting duration to 0.',
+              'When false, the snackbar stays visible until explicitly dismissed. Ensure a dismissal mechanism is provided via actionText, onBlur, or a programmatic clearSnackbar() call.',
           },
           {
             name: 'bottomOffset',
@@ -332,7 +334,7 @@
             defaultValue: { value: 'null' },
             type: { name: 'function' },
             description:
-              'Blur event handler for when the action button loses focus. Useful for advanced focus management.',
+              'Blur event handler triggered when either the snackbar itself or its action button loses focus. Useful for advanced focus management such as auto-dismissing on tab away.',
           },
           {
             name: 'forceReuse',

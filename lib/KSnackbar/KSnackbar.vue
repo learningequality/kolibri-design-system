@@ -29,6 +29,7 @@
           :style="snackbarStyles"
           tabindex="0"
           @keydown.esc="handleClose"
+          @blur="$emit('blur', $event)"
         >
           <div class="k-snackbar-message">
             <!-- @slot Optional slot as an alternative to the `text` prop for the message -->
