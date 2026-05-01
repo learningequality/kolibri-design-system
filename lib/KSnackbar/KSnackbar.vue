@@ -323,8 +323,8 @@
 
   .k-snackbar {
     position: fixed;
-    inset-inline-start: 24px;
     bottom: 24px;
+    left: 24px;
     z-index: 24;
     display: inline-flex;
     gap: 48px;
@@ -338,7 +338,7 @@
   }
 
   .k-snackbar.k-snackbar-small {
-    inset-inline-end: 24px;
+    right: 24px;
   }
 
   .k-snackbar-message {

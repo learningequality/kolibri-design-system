@@ -46,26 +46,11 @@
         composable.
       </p>
 
-      <!-- eslint-disable -->
-      <!-- prettier-ignore -->
-      <DocsShowCode language="html">
-        <KSnackbar
-          :isOpen="snackbarIsVisible"
-          :text="snackbarOptions.text"
-          :actionText="snackbarOptions.actionText"
-          :bottomOffset="snackbarOptions.bottomOffset"
-          :backdrop="snackbarOptions.backdrop"
-          :announce="snackbarOptions.announce"
-          :assertive="snackbarOptions.assertive"
-          :autofocus="snackbarOptions.autofocus"
-          :autoDismiss="snackbarOptions.autoDismiss"
-          :duration="snackbarOptions.duration"
-          @actionClick="snackbarOptions.actionCallback"
-          @blur="snackbarOptions.onBlur"
-          @close="clearSnackbar"
-        />
-      </DocsShowCode>
-      <!-- eslint-enable -->
+      <DocsExample
+        loadExample="KSnackbar/GlobalSetup.vue"
+        exampleId="global-setup"
+        block
+      />
 
       <p>
         For interactive examples (Basic, With Action, Persistent, Force Reuse, etc.), please see the
@@ -90,4 +75,10 @@
 </script>
 
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+
+  ::v-deep .k-snackbar-wrapper {
+    z-index: 100;
+  }
+
+</style>
