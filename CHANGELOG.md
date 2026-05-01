@@ -7,6 +7,19 @@ Changelog is rather internal in nature. See release notes for the public overvie
 <!-- [DO NOT REMOVE-USED BY GH ACTION] PASTE CHANGELOG -->
 
 
+- [#1244]
+  - **Description:** Bump the github group across 1 directory with 3 updates
+  - **Products impact:** Dev Dependency upgrade
+  - **Addresses:** -
+  - **Components:** -
+  - **Breaking:** -
+  - **Impacts a11y:** -
+  - **Guidance:** -
+
+[#1244]: https://github.com/learningequality/kolibri-design-system/pull/1244
+
+
+
 - [#1243]
   - **Description:** Merges `release-v5` into `develop`.
   - **Products impact:** -.
