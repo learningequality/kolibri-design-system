@@ -7,6 +7,19 @@ Changelog is rather internal in nature. See release notes for the public overvie
 <!-- [DO NOT REMOVE-USED BY GH ACTION] PASTE CHANGELOG -->
 
 
+- [#1250]
+  - **Description:** Bump actions/setup-node from 6.3.0 to 6.4.0 in the github group
+  - **Products impact:** Dev Dependency upgrade
+  - **Addresses:** -
+  - **Components:** -
+  - **Breaking:** -
+  - **Impacts a11y:** -
+  - **Guidance:** -
+
+[#1250]: https://github.com/learningequality/kolibri-design-system/pull/1250
+
+
+
 - [#1251]
   - **Description:** Bump ad-m/github-push-action from 1.0.0 to 1.1.0
   - **Products impact:** Dev Dependency upgrade
