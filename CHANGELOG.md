@@ -7,6 +7,19 @@ Changelog is rather internal in nature. See release notes for the public overvie
 <!-- [DO NOT REMOVE-USED BY GH ACTION] PASTE CHANGELOG -->
 
 
+- [#1249]
+  - **Description:** Listen for `opened` events in the shared pull-request-target caller workflow, so the new dependabot reviewer handler in `learningequality/.github` fires on dependabot PR open.
+  - **Products impact:** none
+  - **Addresses:** -
+  - **Components:** -
+  - **Breaking:** no
+  - **Impacts a11y:** -
+  - **Guidance:** -
+
+[#1249]: https://github.com/learningequality/kolibri-design-system/pull/1249
+
+
+
 - [#1244]
   - **Description:** Bump the github group across 1 directory with 3 updates
   - **Products impact:** Dev Dependency upgrade
