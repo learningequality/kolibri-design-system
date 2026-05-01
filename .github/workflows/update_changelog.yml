@@ -71,7 +71,7 @@ jobs:
           git add CHANGELOG.md
           git commit -m "Update CHANGELOG.md for PR #${{ github.event.pull_request.number }}"
       - name: Push changes
-        uses: ad-m/github-push-action@v1.0.0
+        uses: ad-m/github-push-action@v1.1.0
         with:
           github_token: ${{ steps.generate-token.outputs.token }}
           branch: ${{ github.event.pull_request.base.ref }}
