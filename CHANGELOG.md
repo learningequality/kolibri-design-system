@@ -7,6 +7,19 @@ Changelog is rather internal in nature. See release notes for the public overvie
 <!-- [DO NOT REMOVE-USED BY GH ACTION] PASTE CHANGELOG -->
 
 
+- [#1251]
+  - **Description:** Bump ad-m/github-push-action from 1.0.0 to 1.1.0
+  - **Products impact:** Dev Dependency upgrade
+  - **Addresses:** -
+  - **Components:** -
+  - **Breaking:** -
+  - **Impacts a11y:** -
+  - **Guidance:** -
+
+[#1251]: https://github.com/learningequality/kolibri-design-system/pull/1251
+
+
+
 - [#1249]
   - **Description:** Listen for `opened` events in the shared pull-request-target caller workflow, so the new dependabot reviewer handler in `learningequality/.github` fires on dependabot PR open.
   - **Products impact:** none
