@@ -7,6 +7,19 @@ Changelog is rather internal in nature. See release notes for the public overvie
 <!-- [DO NOT REMOVE-USED BY GH ACTION] PASTE CHANGELOG -->
 
 
+- [#1235]
+  - **Description:** Bump follow-redirects from 1.15.9 to 1.16.0
+  - **Products impact:** Dev Dependency upgrade
+  - **Addresses:** -
+  - **Components:** -
+  - **Breaking:** -
+  - **Impacts a11y:** -
+  - **Guidance:** -
+
+[#1235]: https://github.com/learningequality/kolibri-design-system/pull/1235
+
+
+
 - [#1233]
   - **Description:** Bump basic-ftp from 5.2.0 to 5.2.2
   - **Products impact:** Dev Dependency upgrade
