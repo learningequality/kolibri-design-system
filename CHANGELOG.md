@@ -7,6 +7,19 @@ Changelog is rather internal in nature. See release notes for the public overvie
 <!-- [DO NOT REMOVE-USED BY GH ACTION] PASTE CHANGELOG -->
 
 
+- [#1233]
+  - **Description:** Bump basic-ftp from 5.2.0 to 5.2.2
+  - **Products impact:** Dev Dependency upgrade
+  - **Addresses:** -
+  - **Components:** -
+  - **Breaking:** -
+  - **Impacts a11y:** -
+  - **Guidance:** -
+
+[#1233]: https://github.com/learningequality/kolibri-design-system/pull/1233
+
+
+
 - [#1232]
   - **Description:** Bump lodash from 4.17.23 to 4.18.1
   - **Products impact:** Dev Dependency upgrade
