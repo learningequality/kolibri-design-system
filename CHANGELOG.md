@@ -7,6 +7,19 @@ Changelog is rather internal in nature. See release notes for the public overvie
 <!-- [DO NOT REMOVE-USED BY GH ACTION] PASTE CHANGELOG -->
 
 
+- [#1255]
+  - **Description:** Bump @babel/plugin-transform-modules-systemjs from 7.25.9 to 7.29.4
+  - **Products impact:** Dev Dependency upgrade
+  - **Addresses:** -
+  - **Components:** -
+  - **Breaking:** -
+  - **Impacts a11y:** -
+  - **Guidance:** -
+
+[#1255]: https://github.com/learningequality/kolibri-design-system/pull/1255
+
+
+
 - [#1253]
   - **Description:** Bump axios from 1.8.2 to 1.16.0
   - **Products impact:** Dev Dependency upgrade
