@@ -7,6 +7,19 @@ Changelog is rather internal in nature. See release notes for the public overvie
 <!-- [DO NOT REMOVE-USED BY GH ACTION] PASTE CHANGELOG -->
 
 
+- [#1253]
+  - **Description:** Bump axios from 1.8.2 to 1.16.0
+  - **Products impact:** Dev Dependency upgrade
+  - **Addresses:** -
+  - **Components:** -
+  - **Breaking:** -
+  - **Impacts a11y:** -
+  - **Guidance:** -
+
+[#1253]: https://github.com/learningequality/kolibri-design-system/pull/1253
+
+
+
 - [#1254]
   - **Description:** Bump fast-uri from 3.0.6 to 3.1.2
   - **Products impact:** Dev Dependency upgrade
