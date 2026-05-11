@@ -62,6 +62,19 @@
         <li>It is highly specific to a single application</li>
       </ul>
     </DocsPageSection>
+
+    <DocsPageSection
+      title="Note"
+      anchor="#note"
+    >
+      <p>
+        See additional details and examples on the candidate process in this
+        <DocsExternalLink
+          href="https://www.figma.com/design/nGLCIW2iZBsY1AZcyjQdDE/KDS-Candidate"
+          text="Figma file"
+        />.
+      </p>
+    </DocsPageSection>
   </DocsPageTemplate>
 
 </template>
