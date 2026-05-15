@@ -18,11 +18,8 @@
       </ul>
 
       <p>
-        Candidate components are <strong>in active use</strong> in consuming applications.
-        Therefore, they need to follow the
-        <strong>same release planning as regular components</strong>, particularly regarding
-        breaking changes. Thorough unit and visual test coverage is expected to allow for smooth
-        iteration.
+        Candidate components are <strong>in active use</strong> in consuming applications. Thorough
+        unit and visual test coverage is expected to allow for smooth iterations.
       </p>
     </DocsPageSection>
 
