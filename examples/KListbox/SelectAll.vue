@@ -5,7 +5,7 @@
     <KListbox
       :id="listboxId"
       v-model="selected"
-      :aria-labelledby="classLabel"
+      :ariaLabelledBy="classLabel"
       :messages="messages"
     >
       <template #selectAll="{ allSelected, someSelected, toggle }">

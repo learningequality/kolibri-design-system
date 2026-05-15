@@ -6,7 +6,7 @@
       :id="listboxId"
       v-model="selected"
       class="listbox"
-      :aria-labelledby="classLabel"
+      :ariaLabelledBy="classLabel"
       :messages="messages"
       :style="{ borderColor: $themeTokens.fineLine }"
     >

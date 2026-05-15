@@ -90,8 +90,8 @@
 
       <DocsBanner a11y>
         If <code>KListbox</code> is not part of another widget, such as a combobox, add either a
-        visible label referenced by <code>aria-labelledby</code> or a value specified for
-        <code>aria-label</code>. Use concise and descriptive value.
+        visible label referenced by <code>ariaLabelledBy</code> or a value specified for
+        <code>ariaLabel</code>. Use concise and descriptive value.
       </DocsBanner>
 
       <DocsExample
@@ -111,8 +111,8 @@
       </p>
 
       <DocsBanner a11y>
-        Set <code>aria-controls</code> on the control to the listbox <code>id</code> to associate
-        the two.
+        Set <code>aria-controls</code> on the select all control to the listbox <code>id</code> to
+        associate the two.
       </DocsBanner>
 
       <DocsExample

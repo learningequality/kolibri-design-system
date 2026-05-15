@@ -6,7 +6,7 @@
       :id="listboxId"
       v-model="selected"
       class="listbox"
-      :aria-labelledby="classLabel"
+      :ariaLabelledBy="classLabel"
       :style="{ maxHeight: '200px', borderColor: $themeTokens.fineLine }"
       :messages="messages"
     >

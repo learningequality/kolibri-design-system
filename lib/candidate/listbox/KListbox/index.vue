@@ -30,9 +30,10 @@
 
     <ul
       v-show="hasOptions"
-      v-bind="$attrs"
       :id="id"
       ref="listEl"
+      :aria-label="ariaLabel"
+      :aria-labelledby="ariaLabelledBy"
       class="k-listbox-list"
       tabindex="0"
       role="listbox"
@@ -67,8 +68,12 @@
    */
   export default {
     name: 'KListbox',
-    inheritAttrs: false,
     setup(props, { emit }) {
+      if (!props.ariaLabel && !props.ariaLabelledBy) {
+        // eslint-disable-next-line no-console
+        console.warn(`[KListbox] Missing 'ariaLabel' or 'ariaLabelledBy'.`);
+      }
+
       const { sendPoliteMessage } = useKLiveRegion();
       const instance = getCurrentInstance();
       const ariaDescribedById = `${props.id}-description`;
@@ -287,7 +292,7 @@
           ).some(el => el.parentElement !== listEl.value);
           if (hasIndirectOptions) {
             // eslint-disable-next-line no-console
-            console.warn('[KListboxOption] must be a direct child of KListbox.');
+            console.warn('[KListbox] KListboxOption must be a direct child of KListbox.');
           }
         }
       });
@@ -321,6 +326,20 @@
       value: {
         type: Array,
         required: true,
+      },
+      /**
+       * Accessible label for the listbox. Provide either this or `ariaLabelledBy`.
+       */
+      ariaLabel: {
+        type: String,
+        default: null,
+      },
+      /**
+       * ID of an element that labels the listbox. Provide either this or `ariaLabel`.
+       */
+      ariaLabelledBy: {
+        type: String,
+        default: null,
       },
       /**
        * Localized strings
