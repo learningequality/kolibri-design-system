@@ -60,6 +60,7 @@
   import { ref, computed, provide, getCurrentInstance, onMounted, nextTick } from 'vue';
   import uniq from 'lodash/uniq';
   import useKLiveRegion from '../../../composables/useKLiveRegion';
+  import useNextTickOnce from '../../../composables/useNextTickOnce';
   import { themePalette } from '../../../styles/theme';
 
   /**
@@ -85,11 +86,15 @@
       const hasOptions = computed(() => options.value.length > 0);
 
       // Registration API (consumed by KListboxOption via inject)
+      const { once: onceSort } = useNextTickOnce();
+
       function registerOption(option) {
         options.value.push(option);
         // After an option mounts, reorder options state to match DOM order
         // so that keyboard navigation and focus behave as expected
-        nextTick(() => {
+        onceSort(() => {
+          // just in case the tick runs after the listbox unmounted
+          if (!listEl.value) return;
           const orderedIds = Array.from(listEl.value.querySelectorAll('[role="option"]')).map(
             el => el.id,
           );
