@@ -44,6 +44,12 @@
         It currently defaults to multi selection and does not yet support single selection or
         grouped options (see developer notes above).
       </p>
+
+      <p>
+        <code>KListbox</code> supports dynamic option sets (useful for integration with filtering,
+        pagination, etc.). Currently rendered options are referred to as <i>visible options</i>.
+        Selection state of hidden options is preserved.
+      </p>
     </DocsPageSection>
 
     <DocsPageSection
@@ -107,8 +113,20 @@
 
       <p>
         Use the <code>#selectAll</code> scoped slot together with a select control, typically
-        <code>KCheckbox</code>, to implement the select all functionality.
+        <code>KCheckbox</code>, to implement the select all functionality. The slot provides:
       </p>
+
+      <ul>
+        <li><code>allSelected</code>: <code>true</code> when every visible option is selected.</li>
+        <li>
+          <code>someSelected</code>: <code>true</code> when at least one (but not all) visible
+          options are selected. Useful for indicating indeterminate state.
+        </li>
+        <li>
+          <code>setAllSelected(checked)</code>: Controls selection of all visible options. Call with
+          <code>true</code> to select all visible options or <code>false</code> to deselect them.
+        </li>
+      </ul>
 
       <DocsBanner a11y>
         Set <code>aria-controls</code> on the select all control to the listbox <code>id</code> to

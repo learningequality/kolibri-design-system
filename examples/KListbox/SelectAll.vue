@@ -8,7 +8,7 @@
       :ariaLabelledBy="classLabel"
       :messages="messages"
     >
-      <template #selectAll="{ allSelected, someSelected, toggle }">
+      <template #selectAll="{ allSelected, someSelected, setAllSelected }">
         <!--
           margin reset prevents KCheckbox from taking more space
           than necessary and aligns its correctly within the row
@@ -20,7 +20,7 @@
           :checked="allSelected"
           :indeterminate="someSelected"
           :style="{ marginTop: '6px', marginBottom: '0' }"
-          @change="toggle"
+          @change="setAllSelected"
         />
       </template>
       <KListboxOption

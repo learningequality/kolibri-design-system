@@ -10,7 +10,7 @@
       :style="{ maxHeight: '200px', borderColor: $themeTokens.fineLine }"
       :messages="messages"
     >
-      <template #selectAll="{ allSelected, someSelected, toggle }">
+      <template #selectAll="{ allSelected, someSelected, setAllSelected }">
         <div
           class="select-all"
           :style="{ borderColor: $themeTokens.fineLine }"
@@ -23,7 +23,7 @@
             :checked="allSelected"
             :indeterminate="someSelected"
             :style="{ marginTop: '6px', marginBottom: '0' }"
-            @change="toggle"
+            @change="setAllSelected"
           />
         </div>
       </template>

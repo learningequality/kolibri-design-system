@@ -24,7 +24,7 @@
         name="selectAll"
         :allSelected="allSelected"
         :someSelected="someSelected"
-        :toggle="changeSelectAll"
+        :setAllSelected="changeSelectAll"
       ></slot>
     </div>
 

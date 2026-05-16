@@ -10,14 +10,14 @@
       :messages="messages"
       :style="{ borderColor: $themeTokens.fineLine }"
     >
-      <template #selectAll="{ allSelected, someSelected, toggle }">
+      <template #selectAll="{ allSelected, someSelected, setAllSelected }">
         <div
           class="select-all"
           :style="{ borderColor: $themeTokens.fineLine }"
         >
           <!--
             margin reset prevents KCheckbox from taking more space
-            than necessary and aligns its correctly within the row 
+            than necessary and aligns its correctly within the row
           -->
           <KCheckbox
             label="All users"
@@ -27,7 +27,7 @@
             :checked="allSelected"
             :indeterminate="someSelected"
             :style="{ marginTop: '6px', marginBottom: '0' }"
-            @change="toggle"
+            @change="setAllSelected"
           >
             <KLabeledIcon label="All users">
               <template #icon>
