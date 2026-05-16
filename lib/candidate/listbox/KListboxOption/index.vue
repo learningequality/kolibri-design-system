@@ -5,6 +5,7 @@
     role="option"
     class="k-listbox-option"
     :class="$computedClass(rowStyles)"
+    :style="isFocused ? { ...$coreOutline, outlineOffset: '-3px' } : {}"
     :aria-selected="String(isSelected)"
     @click="onClick"
   >
@@ -29,7 +30,7 @@
 <script>
 
   import { computed, inject, onMounted, onBeforeUnmount } from 'vue';
-  import { themePalette, themeOutlineStyle, themeTokens } from '../../../styles/theme';
+  import { themePalette, themeTokens } from '../../../styles/theme';
 
   let optionCount = 0;
 
@@ -50,14 +51,13 @@
 
       const isSelected = computed(() => listbox.isSelected(props.value));
 
-      const isFocusVisible = computed(() => listbox.isFocusVisible(props.value));
+      const isFocused = computed(() => listbox.isFocused(props.value));
 
       const rowStyles = computed(() => ({
         backgroundColor: themeTokens().surface,
         ':hover': {
           backgroundColor: themePalette().grey.v_100,
         },
-        ...(isFocusVisible.value ? { ...themeOutlineStyle(), outlineOffset: '-3px' } : {}),
       }));
 
       function onClick() {
@@ -67,6 +67,7 @@
       return {
         optionId,
         isSelected,
+        isFocused,
         rowStyles,
         onClick,
       };

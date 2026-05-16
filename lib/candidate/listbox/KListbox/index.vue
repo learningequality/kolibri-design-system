@@ -44,7 +44,6 @@
       :aria-activedescendant="focusedOptionId || undefined"
       @focus="onListFocus"
       @blur="onListBlur"
-      @mousedown="onListMousedown"
       @keydown="onListKeydown"
     >
       <!-- @slot For `KListboxOption`(s) -->
@@ -80,7 +79,6 @@
       const ariaDescribedById = `${props.id}-description`;
       const options = ref([]);
       const focusedValue = ref(null);
-      const isKeyboardFocus = ref(false);
       const listEl = ref(null);
 
       const hasOptions = computed(() => options.value.length > 0);
@@ -182,10 +180,6 @@
         return focusedValue.value === value;
       }
 
-      function isFocusVisible(value) {
-        return focusedValue.value === value && isKeyboardFocus.value;
-      }
-
       function optionValueAt(index) {
         return options.value[index].value;
       }
@@ -219,7 +213,6 @@
         if (!hasOptions.value) return;
         // Don't override focus when an option was clicked directly with mouse
         if (focusedValue.value !== null) return;
-        isKeyboardFocus.value = instance.proxy.$inputModality === 'keyboard';
         // Focus the first selected option if any, otherwise the first available one
         const firstSelected = options.value.find(o => isSelected(o.value));
         if (firstSelected) {
@@ -231,15 +224,9 @@
 
       function onListBlur() {
         focusedValue.value = null;
-        isKeyboardFocus.value = false;
-      }
-
-      function onListMousedown() {
-        isKeyboardFocus.value = false;
       }
 
       function onListKeydown(event) {
-        isKeyboardFocus.value = true;
         if (!hasOptions.value) return;
         const { key } = event;
 
@@ -285,7 +272,6 @@
         unregisterOption,
         isSelected,
         isFocused,
-        isFocusVisible,
         toggleOption,
       });
 
@@ -313,7 +299,6 @@
         changeSelectAll,
         onListFocus,
         onListBlur,
-        onListMousedown,
         onListKeydown,
       };
     },
