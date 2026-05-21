@@ -7,6 +7,30 @@ Changelog is rather internal in nature. See release notes for the public overvie
 <!-- [DO NOT REMOVE-USED BY GH ACTION] PASTE CHANGELOG -->
 
 
+- [#1247]
+  - **Description:** Add KListbox and KListboxOption
+  - **Products impact:** New component
+  - **Addresses:**-
+  - **Components:** KListbox, KListboxOption
+  - **Breaking:** No
+  - **Impacts a11y:** yes
+  - **Guidance:** -
+
+[#1247]: https://github.com/learningequality/kolibri-design-system/pull/1247
+
+- [#1247]
+  - **Description:**  Cleans up unnecessary global Jest router setup and router imports in tests
+  - **Products impact:** None
+  - **Addresses:**-
+  - **Components:** -
+  - **Breaking:** No
+  - **Impacts a11y:** -
+  - **Guidance:** -
+
+[#1247]: https://github.com/learningequality/kolibri-design-system/pull/1247
+
+
+
 - [#1237]
   - **Description:** Update Node.js from 18 to 20 and kolibri-format from 1.x to 2.x. Rename `data-test` attributes to `data-testid` across KRouterLink, KDateRange, KDateCalendar, and KCard.
   - **Products impact:** updated API
