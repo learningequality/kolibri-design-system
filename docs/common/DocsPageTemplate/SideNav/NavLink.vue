@@ -6,6 +6,10 @@
     :class="{ code: page.isCode }"
   >
     {{ page.title }}
+    <BadgeCandidate
+      v-if="page.candidate"
+      small
+    />
   </div>
   <router-link
     v-else
@@ -15,6 +19,10 @@
     :class="{ 'current-page': currentPage, code: page.isCode }"
   >
     {{ page.title }}
+    <BadgeCandidate
+      v-if="page.candidate"
+      small
+    />
   </router-link>
 
 </template>
@@ -22,8 +30,13 @@
 
 <script>
 
+  import BadgeCandidate from '../BadgeCandidate.vue';
+
   export default {
     name: 'NavLink',
+    components: {
+      BadgeCandidate,
+    },
     props: {
       page: {
         type: Object,
@@ -58,7 +71,8 @@
   @import '~/assets/definitions';
 
   .block {
-    display: block;
+    display: flex;
+    align-items: center;
     padding: 4px 8px;
     margin-right: -8px;
     margin-bottom: 2px;

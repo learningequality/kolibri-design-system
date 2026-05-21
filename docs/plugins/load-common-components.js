@@ -17,6 +17,7 @@ import DocsToggleButton from '~/common/DocsToggleButton';
 import DocsFilter from '~/common/DocsFilter';
 import DocsTable from '~/common/DocsTable';
 import DocsSubNav from '~/common/DocsSubNav';
+import DocsBanner from '~/common/DocsBanner';
 import VisualTestExample from '~~/jest.conf/components/VisualTestExample.vue';
 import VisualTestLayout from '~~/jest.conf/components/VisualTestLayout.vue';
 
@@ -36,6 +37,7 @@ Vue.component('DocsToggleContent', DocsToggleContent);
 Vue.component('DocsToggleButton', DocsToggleButton);
 Vue.component('DocsTable', DocsTable);
 Vue.component('DocsSubNav', DocsSubNav);
+Vue.component('DocsBanner', DocsBanner);
 
 Vue.use(VueSimpleMarkdown);
 
