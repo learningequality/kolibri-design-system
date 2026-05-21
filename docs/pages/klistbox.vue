@@ -21,6 +21,11 @@
           listbox pattern and use cases vary. If a frequent pattern emerges, it may motivate
           dedicated search/filter components that integrate well with <code>KListbox</code>.
         </li>
+        <li>
+          Currently KListbox doesn't support options reodering, so bear in mind that if the list
+          changes due to a filter, the filtered list should preserve the order of the original list
+          to avoid unexpected keyboard navigation.
+        </li>
       </ul>
     </template>
 
