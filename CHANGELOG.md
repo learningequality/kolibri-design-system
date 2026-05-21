@@ -7,6 +7,19 @@ Changelog is rather internal in nature. See release notes for the public overvie
 <!-- [DO NOT REMOVE-USED BY GH ACTION] PASTE CHANGELOG -->
 
 
+- [#1257]
+  - **Description:** Bumps KDS version to 5.7.0
+  - **Products impact:** none.
+  - **Addresses:** -.
+  - **Components:** -.
+  - **Breaking:** no
+  - **Impacts a11y:** no
+  - **Guidance:** -.
+
+[#1257]: https://github.com/learningequality/kolibri-design-system/pull/1257
+
+
+
 - [#1247]
   - **Description:** Add KListbox and KListboxOption
   - **Products impact:** New component
