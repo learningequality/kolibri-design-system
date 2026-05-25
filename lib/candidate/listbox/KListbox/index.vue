@@ -276,14 +276,29 @@
       });
 
       onMounted(() => {
-        // Warn if any KListboxOption is not a direct child of the listbox element
+        // Warn if any KListboxOption is not a direct child of the listbox
+        // element or properly nested under KListboxGroup elements
         if (process.env.NODE_ENV !== 'production') {
           const hasIndirectOptions = Array.from(
             listEl.value.querySelectorAll('[role="option"]'),
-          ).some(el => el.parentElement !== listEl.value);
+          ).some(el => {
+            let parent = el.parentElement;
+            while (parent && parent !== listEl.value) {
+              const tag = parent.tagName.toLowerCase();
+              const role = parent.getAttribute('role');
+              if ((tag === 'ul' && role === 'group') || (tag === 'li' && role === 'presentation')) {
+                parent = parent.parentElement;
+              } else {
+                return true;
+              }
+            }
+            return false;
+          });
           if (hasIndirectOptions) {
             // eslint-disable-next-line no-console
-            console.warn('[KListbox] KListboxOption must be a direct child of KListbox.');
+            console.warn(
+              '[KListbox] KListboxOption must be a direct child of KListbox or nested inside KListboxGroup.',
+            );
           }
         }
       });

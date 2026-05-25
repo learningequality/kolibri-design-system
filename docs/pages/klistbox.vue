@@ -89,6 +89,7 @@
           { text: 'Select all', href: '#select-all' },
           { text: 'Customized', href: '#customized' },
           { text: 'Scrollable', href: '#scrollable' },
+          { text: 'Grouped', href: '#grouped' },
         ]"
       />
 
@@ -193,6 +194,17 @@
           <!-- eslint-enable -->
         </template>
       </DocsExample>
+
+      <h3>
+        Grouped
+        <DocsAnchorTarget anchor="#grouped" />
+      </h3>
+      <p>Group options using <code>KListboxGroup</code>.</p>
+      <DocsExample
+        block
+        exampleId="klistbox-grouped"
+        loadExample="KListbox/Grouped.vue"
+      />
     </DocsPageSection>
 
     <DocsPageSection

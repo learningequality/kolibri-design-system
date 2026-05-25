@@ -476,6 +476,13 @@ export default [
         keywords: listboxRelatedKeywords,
       }),
       new Page({
+        path: '/klistboxgroup',
+        title: 'KListboxGroup',
+        isCode: true,
+        candidate: true,
+        keywords: listboxRelatedKeywords,
+      }),
+      new Page({
         path: '/kmultiselect',
         title: 'KMultiselect',
         isCode: true,
