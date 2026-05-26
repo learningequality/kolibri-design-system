@@ -138,14 +138,14 @@
         optionDeselected: 'Deselected',
       };
 
-      // Leaf-only descendants per group — used to derive indeterminate and checked states
+      // Leaf-only descendants per group: used to derive indeterminate and checked states
       const groupLeaves = {
         sciences: ['biology', 'mechanics', 'electromagnetism'],
         physics: ['mechanics', 'electromagnetism'],
         humanities: ['literature'],
       };
 
-      // All descendants per group (nodes + leaves) — used for downward cascade
+      // All descendants per group (nodes + leaves): used for downward cascade
       const groupDescendants = {
         sciences: ['biology', 'physics', 'mechanics', 'electromagnetism'],
         physics: ['mechanics', 'electromagnetism'],
