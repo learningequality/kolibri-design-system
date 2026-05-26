@@ -54,8 +54,11 @@
               :label="child.label"
               :indeterminate="isGroupIndeterminate(child)"
               class="option"
-              :style="{ paddingLeft: '36px', paddingRight: '12px',
-                        borderColor: $themeTokens.fineLine }"
+              :style="{
+                paddingLeft: '36px',
+                paddingRight: '12px',
+                borderColor: $themeTokens.fineLine,
+              }"
             />
 
             <KListboxOption
@@ -64,8 +67,11 @@
               :value="subchild.value"
               :label="subchild.label"
               class="option"
-              :style="{ paddingLeft: '60px', paddingRight: '12px',
-                        borderColor: $themeTokens.fineLine }"
+              :style="{
+                paddingLeft: '60px',
+                paddingRight: '12px',
+                borderColor: $themeTokens.fineLine,
+              }"
             />
           </KListboxGroup>
 
@@ -75,8 +81,11 @@
             :value="child.value"
             :label="child.label"
             class="option"
-            :style="{ paddingLeft: '36px', paddingRight: '12px',
-                      borderColor: $themeTokens.fineLine }"
+            :style="{
+              paddingLeft: '36px',
+              paddingRight: '12px',
+              borderColor: $themeTokens.fineLine,
+            }"
           />
         </template>
       </KListboxGroup>
@@ -118,9 +127,7 @@
         {
           label: 'Humanities',
           value: 'humanities',
-          children: [
-            { label: 'Literature', value: 'literature' },
-          ],
+          children: [{ label: 'Literature', value: 'literature' }],
         },
       ]);
 
@@ -157,9 +164,7 @@
           updated = updated.filter(v => v !== 'physics');
         }
 
-        const sciencesAll = ['biology', 'physics'].every(v =>
-          updated.includes(v),
-        );
+        const sciencesAll = ['biology', 'physics'].every(v => updated.includes(v));
         if (sciencesAll && !updated.includes('sciences')) {
           updated.push('sciences');
         } else if (!sciencesAll && updated.includes('sciences')) {
@@ -227,9 +232,9 @@
 <style lang="scss" scoped>
 
   .listbox {
+    overflow: hidden;
     border: 1px solid;
     border-radius: 4px;
-    overflow: hidden;
   }
 
   .select-all,
