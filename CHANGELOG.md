@@ -7,6 +7,19 @@ Changelog is rather internal in nature. See release notes for the public overvie
 <!-- [DO NOT REMOVE-USED BY GH ACTION] PASTE CHANGELOG -->
 
 
+- [#1261]
+  - **Description:**  Migrate and harden StudioChip to KDS as KChip candidate component
+  -  **Products impact:**  new API
+  - **Addresses:** [Link(s) to GH issue(s) addressed. Include KDS links as well as links to related issues in a consumer product repository too.](https://github.com/learningequality/kolibri-design-system/issues/1260)
+  - **Components:** KChip
+  - **Breaking:** no
+  - **Impacts a11y:** yes
+  - **Guidance:** Introduces `KChip`, a pill-shaped tag representing a selected value or filter token. Supports keyboard accessibility, standard design system styling, custom translation label via `removeLabel`, and a `disabled` state.
+
+[#1261]: https://github.com/learningequality/kolibri-design-system/pull/1261
+
+
+
 - [#1257]
   - **Description:** Bumps KDS version to 5.7.0
   - **Products impact:** none.
