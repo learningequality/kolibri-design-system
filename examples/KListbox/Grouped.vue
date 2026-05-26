@@ -1,15 +1,33 @@
 <template>
 
   <div>
-    <h4 :id="labelId">Choose subjects</h4>
+    <h4 :id="labelId">Class</h4>
 
     <KListbox
       :id="listboxId"
       :value="selected"
+      class="listbox"
       :ariaLabelledBy="labelId"
       :messages="messages"
+      :style="{ borderColor: $themeTokens.fineLine }"
       @input="handleInput"
     >
+      <template #selectAll="{ allSelected, someSelected, setAllSelected }">
+        <div
+          class="select-all"
+          :style="{ borderColor: $themeTokens.fineLine }"
+        >
+          <KCheckbox
+            label="All classes"
+            class="select-all-checkbox"
+            :aria-controls="listboxId"
+            :checked="allSelected"
+            :indeterminate="someSelected"
+            :style="{ marginTop: '6px', marginBottom: '0' }"
+            @change="setAllSelected"
+          />
+        </div>
+      </template>
       <KListboxGroup
         v-for="group in subjectsData"
         :key="group.value"
@@ -20,7 +38,8 @@
           :value="group.value"
           :label="group.label"
           :indeterminate="isGroupIndeterminate(group)"
-          :style="{ paddingLeft: '16px', paddingRight: '16px' }"
+          class="option"
+          :style="{ paddingLeft: '12px', paddingRight: '12px', borderColor: $themeTokens.fineLine }"
         />
 
         <template v-for="child in group.children">
@@ -34,7 +53,9 @@
               :value="child.value"
               :label="child.label"
               :indeterminate="isGroupIndeterminate(child)"
-              :style="{ paddingLeft: '40px', paddingRight: '16px' }"
+              class="option"
+              :style="{ paddingLeft: '36px', paddingRight: '12px',
+                        borderColor: $themeTokens.fineLine }"
             />
 
             <KListboxOption
@@ -42,7 +63,9 @@
               :key="subchild.value"
               :value="subchild.value"
               :label="subchild.label"
-              :style="{ paddingLeft: '64px', paddingRight: '16px' }"
+              class="option"
+              :style="{ paddingLeft: '60px', paddingRight: '12px',
+                        borderColor: $themeTokens.fineLine }"
             />
           </KListboxGroup>
 
@@ -51,7 +74,9 @@
             :key="'option-' + child.value"
             :value="child.value"
             :label="child.label"
-            :style="{ paddingLeft: '40px', paddingRight: '16px' }"
+            class="option"
+            :style="{ paddingLeft: '36px', paddingRight: '12px',
+                      borderColor: $themeTokens.fineLine }"
           />
         </template>
       </KListboxGroup>
@@ -88,7 +113,6 @@
                 { label: 'Electromagnetism', value: 'electromagnetism' },
               ],
             },
-            { label: 'Chemistry', value: 'chemistry' },
           ],
         },
         {
@@ -96,7 +120,6 @@
           value: 'humanities',
           children: [
             { label: 'Literature', value: 'literature' },
-            { label: 'History', value: 'history' },
           ],
         },
       ]);
@@ -110,16 +133,16 @@
 
       // Leaf-only descendants per group — used to derive indeterminate and checked states
       const groupLeaves = {
-        sciences: ['biology', 'mechanics', 'electromagnetism', 'chemistry'],
+        sciences: ['biology', 'mechanics', 'electromagnetism'],
         physics: ['mechanics', 'electromagnetism'],
-        humanities: ['literature', 'history'],
+        humanities: ['literature'],
       };
 
       // All descendants per group (nodes + leaves) — used for downward cascade
       const groupDescendants = {
-        sciences: ['biology', 'physics', 'mechanics', 'electromagnetism', 'chemistry'],
+        sciences: ['biology', 'physics', 'mechanics', 'electromagnetism'],
         physics: ['mechanics', 'electromagnetism'],
-        humanities: ['literature', 'history'],
+        humanities: ['literature'],
       };
 
       // Upward cascade: sync each group's checked state to its leaf descendants,
@@ -134,7 +157,7 @@
           updated = updated.filter(v => v !== 'physics');
         }
 
-        const sciencesAll = ['biology', 'physics', 'chemistry'].every(v =>
+        const sciencesAll = ['biology', 'physics'].every(v =>
           updated.includes(v),
         );
         if (sciencesAll && !updated.includes('sciences')) {
@@ -143,7 +166,7 @@
           updated = updated.filter(v => v !== 'sciences');
         }
 
-        const humanitiesAll = ['literature', 'history'].every(v => updated.includes(v));
+        const humanitiesAll = ['literature'].every(v => updated.includes(v));
         if (humanitiesAll && !updated.includes('humanities')) {
           updated.push('humanities');
         } else if (!humanitiesAll && updated.includes('humanities')) {
@@ -153,7 +176,7 @@
         return updated;
       };
 
-      const selected = ref(resolveSelections(['mechanics', 'history']));
+      const selected = ref(resolveSelections(['mechanics']));
 
       const isGroupIndeterminate = group => {
         const leaves = groupLeaves[group.value];
@@ -199,3 +222,29 @@
   };
 
 </script>
+
+
+<style lang="scss" scoped>
+
+  .listbox {
+    border: 1px solid;
+    border-radius: 4px;
+    overflow: hidden;
+  }
+
+  .select-all,
+  .select-all-checkbox {
+    width: 100%;
+  }
+
+  .select-all {
+    padding: 8px 12px;
+    border-bottom: 1px solid;
+  }
+
+  .option {
+    padding: 8px 0;
+    border-bottom: 1px solid;
+  }
+
+</style>
