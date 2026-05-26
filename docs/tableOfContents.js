@@ -64,6 +64,7 @@ const tabsRelatedKeywords = ['tab', 'tabs', 'panel', 'tablist', 'tabpanel'];
 const compositionRelatedKeywords = ['composable', 'composition'];
 const cardRelatedKeywords = ['grid', 'card', 'cardgrid'];
 const listboxRelatedKeywords = ['listbox', 'option', 'select', 'multi'];
+const multiselectRelatedKeywords = ['multiselect', 'chip', 'tag', 'option', 'select', 'multi'];
 
 export default [
   new Section({
@@ -473,6 +474,13 @@ export default [
         isCode: true,
         candidate: true,
         keywords: listboxRelatedKeywords,
+      }),
+      new Page({
+        path: '/kmultiselect',
+        title: 'KMultiselect',
+        isCode: true,
+        candidate: true,
+        keywords: multiselectRelatedKeywords,
       }),
     ],
   }),
