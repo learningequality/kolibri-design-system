@@ -7,6 +7,19 @@ Changelog is rather internal in nature. See release notes for the public overvie
 <!-- [DO NOT REMOVE-USED BY GH ACTION] PASTE CHANGELOG -->
 
 
+- [#1265]
+  - **Description:** Fixes KPageContainer `noPadding` prop not working on mobile devices.
+  - **Products impact:** bugfix.
+  - **Addresses:** https://github.com/learningequality/studio/pull/5924.
+  - **Components:** KPageContainer.
+  - **Breaking:** no
+  - **Impacts a11y:** no
+  - **Guidance:** -.
+
+[#1265]: https://github.com/learningequality/kolibri-design-system/pull/1265
+
+
+
 - [#1261]
   - **Description:**  Migrate and harden StudioChip to KDS as KChip candidate component
   -  **Products impact:**  new API
