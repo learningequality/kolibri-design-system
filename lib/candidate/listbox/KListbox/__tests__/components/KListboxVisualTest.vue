@@ -21,6 +21,11 @@
       width="400px"
       loadExample="KListbox/Scrollable.vue"
     />
+    <VisualTestExample
+      title="Grouped"
+      width="400px"
+      loadExample="KListbox/Grouped.vue"
+    />
   </VisualTestLayout>
 
 </template>

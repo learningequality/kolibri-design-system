@@ -17,6 +17,7 @@
       presentational
       :style="{ marginTop: '6px', marginBottom: '0' }"
       :checked="isSelected"
+      :indeterminate="indeterminate"
       :label="label"
     >
       <!-- @slot For customizing option label -->
@@ -86,6 +87,13 @@
       label: {
         type: String,
         required: true,
+      },
+      /**
+       * Indeterminate visual state for group checkboxes.
+       */
+      indeterminate: {
+        type: Boolean,
+        default: false,
       },
     },
   };
