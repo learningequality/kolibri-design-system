@@ -7,6 +7,19 @@ Changelog is rather internal in nature. See release notes for the public overvie
 <!-- [DO NOT REMOVE-USED BY GH ACTION] PASTE CHANGELOG -->
 
 
+- [#1264]
+  - **Description:** Adds KListboxGroup
+  - **Products impact:**new API
+  - **Addresses:** #1263
+  - **Components:** KListboxGroup, KListboxOption, KListbox
+  - **Breaking:** no
+  - **Impacts a11y:** yes
+  - **Guidance:** KListboxGroup is a candidate component intended for use inside KListbox. Pass a label prop (required) for the accessible group name. Use hideLabel to suppress the visual category label when a KListboxOption serves as the interactive group header.
+
+[#1264]: https://github.com/learningequality/kolibri-design-system/pull/1264
+
+
+
 - [#1265]
   - **Description:** Fixes KPageContainer `noPadding` prop not working on mobile devices.
   - **Products impact:** bugfix.
