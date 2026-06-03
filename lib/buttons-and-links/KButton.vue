@@ -12,6 +12,7 @@
     @keyup.enter.stop.prevent="handlePressEnter"
     @mouseenter="hovering = true"
     @mouseleave="hovering = false"
+    @blur="$emit('blur', $event)"
   >
     <!-- @slot Slot alternative to the `icon` prop -->
 
@@ -186,6 +187,13 @@
         if (this.htmlTag === 'a') {
           this.$el.blur();
         }
+      },
+      /**
+       * Programmatically focuses the button element.
+       * @public
+       */
+      focus() {
+        this.$el.focus();
       },
     },
   };
