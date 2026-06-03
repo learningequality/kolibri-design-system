@@ -7,6 +7,19 @@ Changelog is rather internal in nature. See release notes for the public overvie
 <!-- [DO NOT REMOVE-USED BY GH ACTION] PASTE CHANGELOG -->
 
 
+- [#1205]
+  - **Description:** Add KSnackbar component and useKSnackbar composable for globally-managed notifications with action buttons, auto-hide, backdrop mode, and full keyboard accessibility
+  - **Products impact:** new API
+  - **Addresses:** https://github.com/learningequality/studio/issues/5445
+  - **Components:** KSnackbar, useKSnackbar
+  - **Breaking:** no
+  - **Impacts a11y:** yes
+  - **Guidance:** Import and use KSnackbar with the useKSnackbar composable to display global notifications. Place a single KSnackbar component at the root level of your app and bind it to snackbarState from useKSnackbar. Call createSnackbar() from anywhere to display notifications. The component uses useKLiveRegion for screen reader announcements, supports keyboard navigation, and includes focus management with backdrop mode.
+
+[#1205]: https://github.com/learningequality/kolibri-design-system/pull/1205
+
+
+
 - [#1264]
   - **Description:** Adds KListboxGroup
   - **Products impact:**new API
