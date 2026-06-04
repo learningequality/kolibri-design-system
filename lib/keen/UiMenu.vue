@@ -24,7 +24,7 @@
 
       :type="option[keys.type]"
       @click.native="($event) => selectOption(option, $event)"
-      @keydown.enter.native="($event) => selectOption(option, $event)"
+      @keydown.enter.native.prevent="($event) => selectOption(option, $event)"
 
       @keydown.esc.native.esc="closeMenu"
       :style="[ activeOutline ]"
@@ -109,7 +109,7 @@
       getWidth() {
         if (this.maxWidth){
           return {
-            maxWidth: this.maxWidth && 
+            maxWidth: this.maxWidth &&
               (typeof this.maxWidth === 'number' ? `${this.maxWidth}px` : this.maxWidth)
           };
         }
