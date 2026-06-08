@@ -269,14 +269,9 @@
   .list {
     position: relative;
     display: flex;
-    flex-wrap: nowrap;
+    flex-wrap: wrap;
     align-items: center;
-
-    /* Clip items during the brief window before setOverflowItems() runs on
-       resize; without this, items wrap visibly to a second row before being
-       hidden. nowrap keeps them on one line; overflow:hidden clips horizontal
-       extension before maxWidth is recomputed. */
-    overflow: hidden;
+    overflow: visible;
   }
 
   .list > * {
