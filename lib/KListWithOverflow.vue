@@ -268,7 +268,7 @@
   .list {
     position: relative;
     display: flex;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
     align-items: center;
     overflow: visible;
   }
