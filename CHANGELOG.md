@@ -7,6 +7,19 @@ Changelog is rather internal in nature. See release notes for the public overvie
 <!-- [DO NOT REMOVE-USED BY GH ACTION] PASTE CHANGELOG -->
 
 
+- [#1246]
+  - **Description:** Reset ``position: 'unset'`` when restoring items in the "could everything fit if we hid the More button?" branch of ``setOverflowItems()``. Without this, restored items remained ``position: absolute`` (set earlier by the overflow loop) and painted at the top-left of ``.list``, overlapping the first visible item. The misbehavior is most visible at viewport widths where exactly the restoration branch fires (e.g. ~850–950px in the Studio toolbar case).
+  - **Products impact:** bugfix
+  - **Addresses:** [learningequality/studio#5258](https://github.com/learningequality/studio/issues/5258), [learningequality/studio#5707](https://github.com/learningequality/studio/pull/5707)
+  - **Components:** KListWithOverflow
+  - **Breaking:** no
+  - **Impacts a11y:** no
+  - **Guidance:** -
+
+[#1246]: https://github.com/learningequality/kolibri-design-system/pull/1246
+
+
+
 - [#1256]
   - **Description:** Fixes a bug where pressing the Enter key on a KDropdownMenu item could inadvertently trigger click events on elements that received focus immediately after that.
   - **Products impact:** bugfix.
