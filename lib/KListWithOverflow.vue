@@ -190,6 +190,9 @@
             const idx = overflowItemsIdx.pop();
             const item = list.children[idx];
             item.style.visibility = 'visible';
+            // Reset position; the overflow loop above set it to 'absolute' to
+            // remove the item from layout, which must be undone when restoring.
+            item.style.position = 'unset';
             maxWidth += itemsSizes[idx].width;
           }
         }
