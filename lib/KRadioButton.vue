@@ -29,7 +29,7 @@
           icon="radioSelected"
           class="radio-button-icon"
           name="radio_button_checked"
-          :style="[{ fill: $themeTokens.primary }, disabledStyle, activeStyle]"
+          :style="[{ fill: color || $themeTokens.primary }, disabledStyle, activeStyle]"
         />
         <KIcon
           v-else
@@ -163,6 +163,13 @@
       truncateLabel: {
         type: Boolean,
         default: false,
+      },
+      /**
+       * Color for the selected radio button icon
+       */
+      color: {
+        type: String,
+        default: null,
       },
     },
     data: () => ({

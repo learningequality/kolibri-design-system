@@ -44,6 +44,12 @@
             buttonValue="val-d"
             truncateLabel
           />
+          <KRadioButton
+            v-model="exampleValue"
+            label="Option E (Custom Color)"
+            buttonValue="val-e"
+            :color="$themePalette.green.v_600"
+          />
         </KRadioButtonGroup>
         <p>Current value: {{ exampleValue }}</p>
       </DocsShow>
@@ -71,6 +77,12 @@
             label="Truncated label. Adjusting your browser window size to see this in action."
             buttonValue="val-d"
             truncateLabel
+          />
+          <KRadioButton
+            v-model="exampleValue"
+            label="Option E (Custom Color)"
+            buttonValue="val-e"
+            :color="$themePalette.green.v_600"
           />
         </KRadioButtonGroup>
       </DocsShowCode>
