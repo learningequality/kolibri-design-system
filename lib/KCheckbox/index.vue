@@ -178,6 +178,13 @@
         type: Boolean,
         default: false,
       },
+      /**
+       * Color for the checked and indeterminate icons
+       */
+      color: {
+        type: String,
+        default: null,
+      },
     },
     data: () => ({
       isActive: false,
@@ -237,7 +244,9 @@
       },
       notBlank() {
         return {
-          fill: this.disabled ? this.$themeTokens.textDisabled : this.$themeTokens.primary,
+          fill: this.disabled
+            ? this.$themeTokens.textDisabled
+            : this.color || this.$themeTokens.primary,
         };
       },
       activeOutline() {
