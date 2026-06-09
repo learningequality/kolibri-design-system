@@ -7,6 +7,19 @@ Changelog is rather internal in nature. See release notes for the public overvie
 <!-- [DO NOT REMOVE-USED BY GH ACTION] PASTE CHANGELOG -->
 
 
+- [#1283]
+  - **Description:** Bumps KDS version to 5.8.0
+  - **Products impact:** .
+  - **Addresses:** .
+  - **Components:** .
+  - **Breaking:** no
+  - **Impacts a11y:** no
+  - **Guidance:** .
+
+[#1283]: https://github.com/learningequality/kolibri-design-system/pull/1283
+
+
+
 - [#1282]
   - **Description:** Adds an optional color prop to KRadioButton and included component tests
   - **Products impact:** new API.
