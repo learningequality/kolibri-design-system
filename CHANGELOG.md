@@ -7,6 +7,19 @@ Changelog is rather internal in nature. See release notes for the public overvie
 <!-- [DO NOT REMOVE-USED BY GH ACTION] PASTE CHANGELOG -->
 
 
+- [#1282]
+  - **Description:** Adds an optional color prop to KRadioButton and included component tests
+  - **Products impact:** new API.
+  - **Addresses:** .
+  - **Components:** KRadioButton.
+  - **Breaking:** no
+  - **Impacts a11y:** no
+  - **Guidance:** .
+
+[#1282]: https://github.com/learningequality/kolibri-design-system/pull/1282
+
+
+
 - [#1279]
   - **Description:**  Added colour prop to KCheckbox to customise checked and indeterminate icon colours, and added unit tests.
   - **Products impact:**  KDS
