@@ -72,7 +72,7 @@
       </p>
 
       <DocsExample
-        exampleId="click"
+        exampleId="interactions"
         loadExample="useKFloatingInteraction/Interactions.vue"
         block
       />
