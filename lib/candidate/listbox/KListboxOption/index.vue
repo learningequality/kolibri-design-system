@@ -11,9 +11,10 @@
   >
     <!--
       margin reset prevents KCheckbox from taking more space
-      than necessary and aligns its correctly within the row
+      than necessary and aligns it correctly within the row
     -->
     <KCheckbox
+      v-if="showCheckbox"
       presentational
       :style="{ marginTop: '6px', marginBottom: '0' }"
       :checked="isSelected"
@@ -23,6 +24,19 @@
       <!-- @slot For customizing option label -->
       <slot></slot>
     </KCheckbox>
+    <!--
+      When showCheckbox is false (e.g. single-select or hideSelected mode),
+      render the label as plain text. aria-selected on the <li> still conveys
+      the selected state to screen readers.
+    -->
+    <span
+      v-else
+      class="k-listbox-option-label"
+      :style="{ padding: '10px 8px', fontSize: '14px' }"
+    >
+      <!-- @slot For customizing option label -->
+      <slot>{{ label }}</slot>
+    </span>
   </li>
 
 </template>
@@ -94,6 +108,16 @@
       indeterminate: {
         type: Boolean,
         default: false,
+      },
+      /**
+       * When true (default), wraps the option label in a KCheckbox for
+       * multi-select use cases. When false, renders a plain label — used
+       * when checkboxes are not meaningful (e.g. single-select, or
+       * hideSelected mode where selected items are already removed from the list).
+       */
+      showCheckbox: {
+        type: Boolean,
+        default: true,
       },
     },
   };

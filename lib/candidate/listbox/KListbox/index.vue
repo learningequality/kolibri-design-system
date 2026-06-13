@@ -38,7 +38,7 @@
       tabindex="0"
       role="listbox"
       data-focus="true"
-      aria-multiselectable="true"
+      :aria-multiselectable="String(multiple)"
       :style="{ outline: 'none' }"
       :aria-describedby="ariaDescribedById"
       :aria-activedescendant="focusedOptionId || undefined"
@@ -56,7 +56,7 @@
 
 <script>
 
-  import { ref, computed, provide, getCurrentInstance, onMounted, nextTick } from 'vue';
+  import { ref, computed, watch, provide, getCurrentInstance, onMounted, nextTick } from 'vue';
   import uniq from 'lodash/uniq';
   import useKLiveRegion from '../../../composables/useKLiveRegion';
   import useNextTickOnce from '../../../composables/useNextTickOnce';
@@ -174,6 +174,10 @@
       const focusedOptionId = computed(() => {
         const focused = options.value.find(o => o.value === focusedValue.value);
         return focused ? focused.id : null;
+      });
+
+      watch(focusedOptionId, newId => {
+        emit('active-descendant-change', newId);
       });
 
       function isFocused(value) {
@@ -371,6 +375,14 @@
           }
           return true;
         },
+      },
+      /**
+       * Whether the listbox allows multiple selections.
+       * Controls the aria-multiselectable attribute.
+       */
+      multiple: {
+        type: Boolean,
+        default: true,
       },
     },
   };
