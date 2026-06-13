@@ -1,6 +1,5 @@
 <template>
 
-  <!-- Wrapper provides the visible focus ring around the whole input area -->
   <div
     class="kmselect-input"
     :class="[
@@ -30,33 +29,23 @@
     }"
     @click="handleWrapperClick"
   >
-    <!-- ── Selected chips ─────────────────────────────────────── -->
     <template v-if="multiple">
       <span
         v-for="option in selectedOptions"
         :key="option[itemValue] || option.value"
       >
-        <!--
-          #chip slot: { option, remove }
-          Consumers can customize each chip (e.g. wrap in KTooltip).
-          Default: plain KChip with close button.
-        -->
         <slot
           name="chip"
           :option="option"
           :remove="() => $emit('chip-remove', getOptionValue(option))"
         >
-          <!--
-            Wrap each chip in a ref'd span so KTooltip can anchor to it.
-            Dynamic ref key = 'chip-' + value — unique per option,
-            matching the pattern used in LanguageFilter (Studio).
-          -->
           <span :ref="'chip-' + getOptionValue(option)">
             <KChip
               :text="getOptionText(option)"
               :disabled="disabled"
               close
               @close="$emit('chip-remove', getOptionValue(option))"
+              @mousedown.native.prevent
             />
           </span>
           <KTooltip
@@ -69,7 +58,6 @@
       </span>
     </template>
 
-    <!-- ── Single select text ─────────────────────────────────────── -->
     <span
       v-else-if="selectedOptions.length > 0 && !isOpen && !searchText"
       :style="{
@@ -85,7 +73,6 @@
       {{ getOptionText(selectedOptions[0]) }}
     </span>
 
-    <!-- ── Search input ───────────────────────────────────────── -->
     <input
       ref="inputEl"
       v-model="inputModel"
@@ -94,7 +81,6 @@
       type="text"
       :placeholder="selectedOptions.length === 0 ? placeholder : ''"
       :disabled="disabled"
-      :maxlength="maxlength || undefined"
       v-bind="inputAriaAttrs"
       data-focus="true"
       :style="{
@@ -114,13 +100,12 @@
       @blur="$emit('input-blur', $event)"
     >
 
-    <!-- ── Clear-all button ───────────────────────────────────── -->
     <KIconButton
       v-if="clearable && selectedOptions.length > 0 && !disabled"
       size="small"
       icon="clear"
-      :ariaLabel="'Clear all selections'"
-      :tooltip="'Clear all selections'"
+      :ariaLabel="clearAllLabel"
+      :tooltip="clearAllLabel"
       :style="{
         position: 'absolute',
         right: '36px',
@@ -132,14 +117,12 @@
       @keydown.space.stop
     />
 
-    <!-- ── Dropdown toggle ────────────────────────────────────── -->
     <KIconButton
-      v-if="!hideDropdown"
       tabindex="-1"
       size="small"
       :icon="isOpen ? 'chevronUp' : 'chevronDown'"
-      :ariaLabel="isOpen ? 'Close options' : 'Open options'"
-      :tooltip="isOpen ? 'Close options' : 'Open options'"
+      :ariaLabel="isOpen ? closeLabel : openLabel"
+      :tooltip="isOpen ? closeLabel : openLabel"
       :disabled="disabled"
       :style="{
         position: 'absolute',
@@ -167,12 +150,10 @@
     components: { KIconButton, KChip, KTooltip },
 
     props: {
-      /** Array of full option objects that are currently selected */
       selectedOptions: {
         type: Array,
         required: true,
       },
-      /** Bound to the native input for type-to-filter */
       searchText: {
         type: String,
         default: '',
@@ -181,17 +162,14 @@
         type: String,
         default: '',
       },
-      /** ID of the KListbox <ul> — used for aria-controls on the <input> */
       listboxId: {
         type: String,
         required: true,
       },
-      /** Whether the field is required (aria-required) */
       required: {
         type: Boolean,
         default: false,
       },
-      /** ID of the error message element (aria-describedby when invalid) */
       errorId: {
         type: String,
         default: null,
@@ -207,10 +185,6 @@
       itemValue: {
         type: String,
         default: 'value',
-      },
-      hideDropdown: {
-        type: Boolean,
-        default: false,
       },
       clearable: {
         type: Boolean,
@@ -228,18 +202,29 @@
         type: Boolean,
         default: false,
       },
-      /**
-       * Forwarded from KMultiSelect. Applied as the HTML maxlength attribute
-       * on the native <input> so the browser natively prevents typing beyond
-       * the limit. null means no limit.
-       */
-      maxlength: {
-        type: Number,
-        default: null,
-      },
       focused: {
         type: Boolean,
         default: false,
+      },
+      clearAllLabel: {
+        type: String,
+        default: 'Clear all selections',
+      },
+      openLabel: {
+        type: String,
+        default: 'Open options',
+      },
+      closeLabel: {
+        type: String,
+        default: 'Close options',
+      },
+      activeDescendant: {
+        type: String,
+        default: null,
+      },
+      labelId: {
+        type: String,
+        default: null,
       },
     },
 
@@ -252,22 +237,22 @@
           this.$emit('update:searchText', val);
         },
       },
-      /**
-       * ARIA attributes for the combobox <input>.
-       * Inlined here following the KDS KCard pattern — no separate composable.
-       *
-       * role="combobox" follows the ARIA 1.0 pattern (widely supported).
-       */
       inputAriaAttrs() {
         const attrs = {
           role: 'combobox',
           'aria-expanded': String(this.isOpen),
+          'aria-haspopup': 'listbox',
           'aria-controls': this.listboxId,
           'aria-autocomplete': 'list',
           'aria-required': this.required ? 'true' : 'false',
           'aria-invalid': this.invalid ? 'true' : 'false',
         };
-        // Only link the error message element when actually invalid.
+        if (this.labelId) {
+          attrs['aria-labelledby'] = this.labelId;
+        }
+        if (this.isOpen && this.activeDescendant) {
+          attrs['aria-activedescendant'] = this.activeDescendant;
+        }
         if (this.invalid && this.errorId) {
           attrs['aria-describedby'] = this.errorId;
         }
@@ -283,10 +268,6 @@
     },
 
     methods: {
-      /**
-       * @public
-       * Focus the native input. Called by the parent via $refs.inputComponent.focus().
-       */
       // eslint-disable-next-line vue/no-unused-properties
       focus() {
         this.$refs.inputEl.focus();
@@ -295,14 +276,14 @@
       handleWrapperClick() {
         if (!this.disabled) {
           this.$refs.inputEl.focus();
-          if (!this.isOpen && !this.hideDropdown) {
+          if (!this.isOpen) {
             this.$emit('toggle');
           }
         }
       },
       getOptionText(option) {
         if (!option) return '';
-        return option[this.itemText];
+        return typeof this.itemText === 'function' ? this.itemText(option) : option[this.itemText];
       },
       getOptionValue(option) {
         if (!option) return null;
@@ -314,8 +295,4 @@
 </script>
 
 
-<style lang="scss" scoped>
-
-  // Styles handled via inline :style bindings to use KDS $themeTokens
-
-</style>
+<style lang="scss" scoped></style>
