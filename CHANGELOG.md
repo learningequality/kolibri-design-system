@@ -7,6 +7,19 @@ Changelog is rather internal in nature. See release notes for the public overvie
 <!-- [DO NOT REMOVE-USED BY GH ACTION] PASTE CHANGELOG -->
 
 
+- [#1284]
+  - **Description:** Bump shell-quote from 1.8.2 to 1.8.4
+  - **Products impact:** Dev Dependency upgrade
+  - **Addresses:** -
+  - **Components:** -
+  - **Breaking:** -
+  - **Impacts a11y:** -
+  - **Guidance:** -
+
+[#1284]: https://github.com/learningequality/kolibri-design-system/pull/1284
+
+
+
 - [#1271]
   - **Description:** Bump ad-m/github-push-action from 1.1.0 to 1.3.0
   - **Products impact:** Dev Dependency upgrade
