@@ -7,6 +7,19 @@ Changelog is rather internal in nature. See release notes for the public overvie
 <!-- [DO NOT REMOVE-USED BY GH ACTION] PASTE CHANGELOG -->
 
 
+- [#1262]
+  - **Description:** Bump qs from 6.14.2 to 6.15.2
+  - **Products impact:** Dev Dependency upgrade
+  - **Addresses:** -
+  - **Components:** -
+  - **Breaking:** -
+  - **Impacts a11y:** -
+  - **Guidance:** -
+
+[#1262]: https://github.com/learningequality/kolibri-design-system/pull/1262
+
+
+
 - [#1270]
   - **Description:** Bump actions/checkout from 6 to 6.0.2 in the github group
   - **Products impact:** Dev Dependency upgrade
