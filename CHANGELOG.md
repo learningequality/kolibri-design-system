@@ -7,6 +7,19 @@ Changelog is rather internal in nature. See release notes for the public overvie
 <!-- [DO NOT REMOVE-USED BY GH ACTION] PASTE CHANGELOG -->
 
 
+- [#1271]
+  - **Description:** Bump ad-m/github-push-action from 1.1.0 to 1.3.0
+  - **Products impact:** Dev Dependency upgrade
+  - **Addresses:** -
+  - **Components:** -
+  - **Breaking:** -
+  - **Impacts a11y:** -
+  - **Guidance:** -
+
+[#1271]: https://github.com/learningequality/kolibri-design-system/pull/1271
+
+
+
 - [#1280]
   - **Description:** Added an optional color prop to KRadioButton and included component tests
   - **Products impact:** KDS
