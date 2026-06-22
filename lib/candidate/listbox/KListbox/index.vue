@@ -5,7 +5,7 @@
       :id="ariaDescribedById"
       class="visuallyhidden"
     >
-      {{ messages.clickable }}
+      {{ getMessage('clickable') }}
     </p>
 
     <!--
@@ -118,7 +118,7 @@
       function toggleOption(value) {
         if (isSelected(value)) {
           emitInput(props.value.filter(v => v !== value));
-          sendPoliteMessage(props.messages.optionDeselected);
+          sendPoliteMessage(getMessage('optionDeselected'));
         } else {
           emitInput([...props.value, value]);
         }
@@ -134,7 +134,7 @@
         // by merging previously selected values with all visible options
         const allValues = uniq([...props.value, ...options.value.map(o => o.value)]);
         emitInput(allValues);
-        sendPoliteMessage(props.messages.allOptionsSelected);
+        sendPoliteMessage(getMessage('allOptionsSelected'));
       }
 
       function deselectAllOptions() {
@@ -144,7 +144,11 @@
         const optionValues = new Set(options.value.map(o => o.value));
         const remainingValues = props.value.filter(v => !optionValues.has(v));
         emitInput(remainingValues);
-        sendPoliteMessage(props.messages.allOptionsDeselected);
+        sendPoliteMessage(getMessage('allOptionsDeselected'));
+      }
+
+      function getMessage(key) {
+        return typeof props.messages[key] === 'function' ? props.messages[key]() : props.messages[key];
       }
 
       const allSelected = computed(
@@ -315,6 +319,7 @@
         onListFocus,
         onListBlur,
         onListKeydown,
+        getMessage,
       };
     },
     props: {
@@ -347,7 +352,8 @@
         default: null,
       },
       /**
-       * Localized strings
+       * Localized strings for screen reader announcements.
+       * Can be static strings or functions returning strings.
        */
       messages: {
         type: Object,
@@ -360,12 +366,12 @@
             'optionDeselected',
           ];
           const missing = requiredKeys.filter(
-            key => typeof messages[key] !== 'string' || messages[key].length === 0,
+            key => typeof messages[key] !== 'string' && typeof messages[key] !== 'function',
           );
           if (missing.length) {
             // eslint-disable-next-line no-console
             console.warn(
-              `[KListbox] 'messages' prop is missing required string keys: ${missing.join(', ')}`,
+              `[KListbox] 'messages' prop keys must be strings or functions. Invalid keys: ${missing.join(', ')}`,
             );
             return false;
           }
