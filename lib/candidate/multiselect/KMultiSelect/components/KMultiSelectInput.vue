@@ -32,7 +32,7 @@
     <template v-if="multiple">
       <span
         v-for="option in selectedOptions"
-        :key="option[itemValue] || option.value"
+        :key="getOptionValue(option)"
       >
         <slot
           name="chip"
@@ -81,6 +81,7 @@
       type="text"
       :placeholder="selectedOptions.length === 0 ? placeholder : ''"
       :disabled="disabled"
+      :maxlength="maxlength || null"
       v-bind="inputAriaAttrs"
       data-focus="true"
       :style="{
@@ -208,15 +209,15 @@
       },
       clearAllLabel: {
         type: String,
-        default: 'Clear all selections',
+        default: null,
       },
       openLabel: {
         type: String,
-        default: 'Open options',
+        default: null,
       },
       closeLabel: {
         type: String,
-        default: 'Close options',
+        default: null,
       },
       activeDescendant: {
         type: String,
@@ -224,6 +225,10 @@
       },
       labelId: {
         type: String,
+        default: null,
+      },
+      maxlength: {
+        type: Number,
         default: null,
       },
     },
@@ -261,7 +266,7 @@
       placeholderClass() {
         return this.$computedClass({
           '::placeholder': {
-            color: this.$themeTokens.annotation,
+            color: this.$themeTokens.textDisabled,
           },
         });
       },
