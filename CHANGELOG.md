@@ -7,6 +7,19 @@ Changelog is rather internal in nature. See release notes for the public overvie
 <!-- [DO NOT REMOVE-USED BY GH ACTION] PASTE CHANGELOG -->
 
 
+- [#1274]
+  - **Description:** Add useMultiSelectDropdown composable — manages dropdown open/close state, click-outside dismissal, and single-mode search text pre-fill for the upcoming KMultiSelect component.
+  - **Products impact:** none
+  - **Addresses:** #1269
+  - **Components:** -
+  - **Breaking:**no
+  - **Impacts a11y:** yes
+  - **Guidance:** -
+
+[#1274]: https://github.com/learningequality/kolibri-design-system/pull/1274
+
+
+
 - [#1273]
   - **Description:** Add `useMultiSelectcascade` composable — core data and filtering layer for the new `KMultiSelect` candidate component
   - **Products impact:** new API
