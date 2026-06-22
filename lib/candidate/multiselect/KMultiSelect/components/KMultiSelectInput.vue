@@ -288,11 +288,11 @@
       },
       getOptionText(option) {
         if (!option) return '';
-        return typeof this.itemText === 'function' ? this.itemText(option) : option[this.itemText];
+        return option[this.itemText];
       },
       getOptionValue(option) {
         if (!option) return null;
-        return option[this.itemValue] !== undefined ? option[this.itemValue] : option.value;
+        return option[this.itemValue];
       },
     },
   };

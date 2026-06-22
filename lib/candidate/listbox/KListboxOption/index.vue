@@ -34,7 +34,6 @@
       class="k-listbox-option-label"
       :style="{ padding: '10px 8px', fontSize: '14px' }"
     >
-      <!-- @slot For customizing option label -->
       <slot>{{ label }}</slot>
     </span>
   </li>
