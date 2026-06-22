@@ -148,7 +148,9 @@
       }
 
       function getMessage(key) {
-        return typeof props.messages[key] === 'function' ? props.messages[key]() : props.messages[key];
+        return typeof props.messages[key] === 'function'
+          ? props.messages[key]()
+          : props.messages[key];
       }
 
       const allSelected = computed(
