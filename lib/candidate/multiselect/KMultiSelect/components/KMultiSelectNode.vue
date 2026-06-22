@@ -3,10 +3,9 @@
   <KListboxGroup
     v-if="hasChildren"
     :label="node.label"
-    :hideLabel="node.selectable !== false"
+    hideLabel
   >
     <KListboxOption
-      v-if="node.selectable !== false"
       :value="node.value"
       :label="node.label"
       :indeterminate="isIndeterminate"
