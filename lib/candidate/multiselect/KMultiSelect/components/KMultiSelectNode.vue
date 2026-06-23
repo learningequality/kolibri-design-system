@@ -62,6 +62,7 @@
 
 <script>
 
+  import { computed } from 'vue';
   import KListboxGroup from '../../../listbox/KListboxGroup/index.vue';
   import KListboxOption from '../../../listbox/KListboxOption/index.vue';
 
@@ -71,6 +72,20 @@
     components: {
       KListboxGroup,
       KListboxOption,
+    },
+
+    setup(props) {
+      const hasChildren = computed(
+        () => Array.isArray(props.node.children) && props.node.children.length > 0,
+      );
+
+      const isIndeterminate = computed(() => props.indeterminateValues.has(props.node.value));
+
+      const indentStyle = computed(() =>
+        props.depth > 0 ? { paddingInlineStart: `${props.depth * 24}px` } : {},
+      );
+
+      return { hasChildren, isIndeterminate, indentStyle };
     },
 
     props: {
@@ -93,20 +108,6 @@
       showCheckbox: {
         type: Boolean,
         default: true,
-      },
-    },
-
-    computed: {
-      hasChildren() {
-        return Array.isArray(this.node.children) && this.node.children.length > 0;
-      },
-
-      isIndeterminate() {
-        return this.indeterminateValues.has(this.node.value);
-      },
-
-      indentStyle() {
-        return this.depth > 0 ? { paddingInlineStart: `${this.depth * 24}px` } : {};
       },
     },
   };

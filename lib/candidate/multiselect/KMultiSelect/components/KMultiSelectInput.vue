@@ -16,7 +16,9 @@
       alignItems: 'center',
       gap: '4px',
       minHeight: '40px',
-      padding: '4px 40px 4px 8px',
+      paddingBlock: '4px',
+      paddingInlineStart: '8px',
+      paddingInlineEnd: '40px',
       position: 'relative',
       border: 'none',
       borderBottom: `2px solid ${
@@ -77,11 +79,11 @@
       ref="inputEl"
       v-model="inputModel"
       class="kmselect-native-input"
-      :class="placeholderClass"
+      :class="$computedClass(placeholderStyle)"
       type="text"
       :placeholder="selectedOptions.length === 0 ? placeholder : ''"
       :disabled="disabled"
-      :maxlength="maxlength || null"
+      :maxlength="maxlength"
       v-bind="inputAriaAttrs"
       data-focus="true"
       :style="{
@@ -109,7 +111,7 @@
       :tooltip="clearAllLabel"
       :style="{
         position: 'absolute',
-        right: '36px',
+        insetInlineEnd: '36px',
         top: '50%',
         transform: 'translateY(-50%)',
       }"
@@ -127,7 +129,7 @@
       :disabled="disabled"
       :style="{
         position: 'absolute',
-        right: '4px',
+        insetInlineEnd: '4px',
         top: '50%',
         transform: 'translateY(-50%)',
       }"
@@ -141,6 +143,7 @@
 
 <script>
 
+  import { ref, computed, getCurrentInstance } from 'vue';
   import KIconButton from '../../../../buttons-and-links/KIconButton';
   import KChip from '../../KChip/index.vue';
   import KTooltip from '../../../../KTooltip/index.vue';
@@ -149,6 +152,83 @@
     name: 'KMultiSelectInput',
 
     components: { KIconButton, KChip, KTooltip },
+
+    setup(props, { emit }) {
+      const inputEl = ref(null);
+      const instance = getCurrentInstance();
+
+      const inputModel = computed({
+        get() {
+          return props.searchText;
+        },
+        set(val) {
+          emit('update:searchText', val);
+        },
+      });
+
+      const inputAriaAttrs = computed(() => {
+        const attrs = {
+          role: 'combobox',
+          'aria-expanded': String(props.isOpen),
+          'aria-haspopup': 'listbox',
+          'aria-controls': props.listboxId,
+          'aria-autocomplete': 'list',
+          ...(props.required && { 'aria-required': 'true' }),
+          'aria-invalid': props.invalid ? 'true' : 'false',
+        };
+        if (props.labelId) {
+          attrs['aria-labelledby'] = props.labelId;
+        }
+        if (props.isOpen && props.activeDescendant) {
+          attrs['aria-activedescendant'] = props.activeDescendant;
+        }
+        if (props.invalid && props.errorId) {
+          attrs['aria-describedby'] = props.errorId;
+        }
+        return attrs;
+      });
+
+      const placeholderStyle = computed(() => ({
+        '::placeholder': {
+          color: instance.proxy.$themeTokens.textDisabled,
+        },
+      }));
+
+      function focus() {
+        inputEl.value.focus();
+      }
+
+      function handleWrapperClick() {
+        if (!props.disabled) {
+          inputEl.value.focus();
+          if (!props.isOpen) {
+            emit('toggle');
+          }
+        }
+      }
+
+      function getOptionText(option) {
+        if (!option) return '';
+        return option[props.itemText];
+      }
+
+      function getOptionValue(option) {
+        if (!option) return null;
+        return option[props.itemValue];
+      }
+
+      return {
+        inputEl,
+        inputModel,
+        inputAriaAttrs,
+        placeholderStyle,
+        // eslint-disable-next-line vue/no-unused-properties
+        focus,
+        handleWrapperClick,
+        getOptionText,
+        getOptionValue,
+      };
+    },
 
     props: {
       selectedOptions: {
@@ -230,69 +310,6 @@
       maxlength: {
         type: Number,
         default: null,
-      },
-    },
-
-    computed: {
-      inputModel: {
-        get() {
-          return this.searchText;
-        },
-        set(val) {
-          this.$emit('update:searchText', val);
-        },
-      },
-      inputAriaAttrs() {
-        const attrs = {
-          role: 'combobox',
-          'aria-expanded': String(this.isOpen),
-          'aria-haspopup': 'listbox',
-          'aria-controls': this.listboxId,
-          'aria-autocomplete': 'list',
-          'aria-required': this.required ? 'true' : 'false',
-          'aria-invalid': this.invalid ? 'true' : 'false',
-        };
-        if (this.labelId) {
-          attrs['aria-labelledby'] = this.labelId;
-        }
-        if (this.isOpen && this.activeDescendant) {
-          attrs['aria-activedescendant'] = this.activeDescendant;
-        }
-        if (this.invalid && this.errorId) {
-          attrs['aria-describedby'] = this.errorId;
-        }
-        return attrs;
-      },
-      placeholderClass() {
-        return this.$computedClass({
-          '::placeholder': {
-            color: this.$themeTokens.textDisabled,
-          },
-        });
-      },
-    },
-
-    methods: {
-      // eslint-disable-next-line vue/no-unused-properties
-      focus() {
-        this.$refs.inputEl.focus();
-      },
-
-      handleWrapperClick() {
-        if (!this.disabled) {
-          this.$refs.inputEl.focus();
-          if (!this.isOpen) {
-            this.$emit('toggle');
-          }
-        }
-      },
-      getOptionText(option) {
-        if (!option) return '';
-        return option[this.itemText];
-      },
-      getOptionValue(option) {
-        if (!option) return null;
-        return option[this.itemValue];
       },
     },
   };
