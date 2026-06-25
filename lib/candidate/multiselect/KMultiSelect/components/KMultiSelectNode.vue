@@ -84,7 +84,7 @@
 
       const indentStyle = computed(() => {
         const style = {
-          paddingInlineStart: `${16 + (props.depth * 24)}px`,
+          paddingInlineStart: `${16 + props.depth * 24}px`,
           paddingInlineEnd: '16px',
           minHeight: '48px',
         };
