@@ -32,7 +32,7 @@
     <span
       v-else
       class="k-listbox-option-label"
-      :style="{ padding: '10px 8px', fontSize: '14px' }"
+      :style="{ padding: '10px 0', fontSize: '14px' }"
     >
       <slot>{{ label }}</slot>
     </span>

@@ -63,6 +63,7 @@
 <script>
 
   import { computed } from 'vue';
+  import { themeTokens } from '../../../../styles/theme';
   import KListboxGroup from '../../../listbox/KListboxGroup/index.vue';
   import KListboxOption from '../../../listbox/KListboxOption/index.vue';
 
@@ -81,9 +82,17 @@
 
       const isIndeterminate = computed(() => props.indeterminateValues.has(props.node.value));
 
-      const indentStyle = computed(() =>
-        props.depth > 0 ? { paddingInlineStart: `${props.depth * 24}px` } : {},
-      );
+      const indentStyle = computed(() => {
+        const style = {
+          paddingInlineStart: `${16 + (props.depth * 24)}px`,
+          paddingInlineEnd: '16px',
+          minHeight: '48px',
+        };
+        if (props.showTopBorder) {
+          style.borderTop = `1px solid ${themeTokens().fineLine}`;
+        }
+        return style;
+      });
 
       return { hasChildren, isIndeterminate, indentStyle };
     },
@@ -108,6 +117,15 @@
       showCheckbox: {
         type: Boolean,
         default: true,
+      },
+      /**
+       * When true, renders a top border on this node to visually separate
+       * hierarchical root groups. Set by KMultiSelectDropdown's decoratedOptionTree.
+       * Never applied to flat lists or child nodes.
+       */
+      showTopBorder: {
+        type: Boolean,
+        default: false,
       },
     },
   };
