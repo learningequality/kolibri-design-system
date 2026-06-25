@@ -101,8 +101,8 @@
 
 <style lang="scss" scoped>
 
-  @import '../keen/styles/imports';
-  @import '../styles/definitions';
+  @use '../keen/styles/imports' as *;
+  @use '../styles/definitions' as *;
 
   .delay {
     animation-delay: 300ms;

@@ -157,7 +157,7 @@
 
 <style lang="scss">
 
-  @import './styles/imports';
+  @use './styles/imports' as *;
 
   $ui-progress-indeterminate-rotation-duration: 0.7s !default;
   $ui-progress-indeterminate-color-duration: 6s !default;

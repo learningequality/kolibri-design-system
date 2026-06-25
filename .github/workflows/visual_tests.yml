@@ -67,9 +67,7 @@ jobs:
           restore-keys: |
             ${{ runner.OS }}-node-
       - name: Install dependencies
-        run: |
-          yarn --frozen-lockfile
-          npm rebuild node-sass
+        run: yarn --frozen-lockfile
       - name: Download Chromium
         run: npx puppeteer browsers install chrome
       - name: Extract jsdocs and environment info

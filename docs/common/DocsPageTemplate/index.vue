@@ -186,8 +186,8 @@
 
 <style lang="scss" scoped>
 
-  @import '~/assets/definitions';
-  @import '../../../lib/styles/definitions';
+  @use '~/assets/definitions' as *;
+  @use '../../../lib/styles/definitions' as *;
 
   .floating-header {
     position: fixed;

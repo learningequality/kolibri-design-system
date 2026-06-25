@@ -195,7 +195,7 @@
 
 <style lang="scss" scoped>
 
-  @import './buttons';
+  @use './buttons' as *;
 
   .icon-container {
     position: relative;

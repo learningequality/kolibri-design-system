@@ -108,7 +108,7 @@
 
 <style lang="scss" scoped>
 
-  @import './buttons';
+  @use './buttons' as *;
 
   .kexlink-inner {
     display: inline-flex;

@@ -89,7 +89,7 @@
 
 <style lang="scss" scoped>
 
-  @import '../styles/definitions';
+  @use '../styles/definitions' as *;
 
   svg {
     position: relative;

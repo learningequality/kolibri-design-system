@@ -218,8 +218,9 @@
 </script>
 
 <style lang="scss">
-  @import '../styles/definitions';
-  @import './styles/imports';
+  @use '../styles/definitions' as *;
+  @use './styles/imports' as *;
+  @use 'sass:color';
 
   .ui-button {
     position: relative;
@@ -424,7 +425,7 @@
 
       &:hover:not(.is-disabled),
       &.has-dropdown-open {
-        background-color: darken($md-grey-200, 7.5%);
+        background-color: color.adjust($md-grey-200, $lightness: -7.5%);
       }
 
       .ui-ripple-ink__ink {
@@ -452,7 +453,7 @@
     &.ui-button--color-primary {
       &:hover:not(.is-disabled),
       &.has-dropdown-open {
-        background-color: darken($brand-primary-color, 10%);
+        background-color: color.adjust($brand-primary-color, $lightness: -10%);
       }
     }
 
@@ -461,7 +462,7 @@
 
       &:hover:not(.is-disabled),
       &.has-dropdown-open {
-        background-color: darken($brand-accent-color, 10%);
+        background-color: color.adjust($brand-accent-color, $lightness: -10%);
       }
     }
 
@@ -470,7 +471,7 @@
 
       &:hover:not(.is-disabled),
       &.has-dropdown-open {
-        background-color: darken($md-green, 10%);
+        background-color: color.adjust($md-green, $lightness: -10%);
       }
     }
 
@@ -479,7 +480,7 @@
 
       &:hover:not(.is-disabled),
       &.has-dropdown-open {
-        background-color: darken($md-orange, 10%);
+        background-color: color.adjust($md-orange, $lightness: -10%);
       }
     }
 
@@ -488,7 +489,7 @@
 
       &:hover:not(.is-disabled),
       &.has-dropdown-open {
-        background-color: darken($md-red, 10%);
+        background-color: color.adjust($md-red, $lightness: -10%);
       }
     }
   }

@@ -477,7 +477,7 @@
 
   /* stylelint-disable */
 
-  @import './styles/imports';
+  @use './styles/imports' as *;
 
   .ui-textbox {
     display: flex;

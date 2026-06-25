@@ -71,7 +71,7 @@
 
 <style lang="scss">
 
-  @import './styles/imports';
+  @use './styles/imports' as *;
 
   $ui-close-button-size: rem(36px) !default;
   $ui-close-button--size-mini: rem(24px) !default;

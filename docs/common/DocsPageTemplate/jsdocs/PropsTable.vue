@@ -81,6 +81,6 @@
 
 <style lang="scss" scoped>
 
-  @import './styles';
+  @use './styles' as *;
 
 </style>

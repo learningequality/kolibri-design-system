@@ -85,8 +85,8 @@
 
   /* stylelint-disable */
   
-  @import '../styles/definitions';
-  @import './styles/imports';
+  @use '../styles/definitions' as *;
+  @use './styles/imports' as *;
 
   $ui-snackbar-background-color: #323232 !default;
   $ui-snackbar-font-size: rem(14px) !default;

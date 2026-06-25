@@ -197,8 +197,8 @@
 
 <style lang="scss">
 
-  @import './styles/definitions';
-  @import './keen/styles/imports';
+  @use './styles/definitions' as *;
+  @use './keen/styles/imports' as *;
 
   $k-toolbar-font-size: rem(18px) !default;
   $k-toolbar-height: rem(56px) !default;

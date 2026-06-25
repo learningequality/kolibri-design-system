@@ -212,7 +212,7 @@
 
 <style lang="scss" scoped>
 
-  @import '../keen/styles/imports';
+  @use '../keen/styles/imports' as *;
 
   .delay {
     animation-delay: 300ms;

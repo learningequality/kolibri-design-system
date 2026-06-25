@@ -254,7 +254,8 @@
 
 <style lang="scss">
 
-  @import './styles/imports';
+  @use './styles/imports' as *;
+  @use 'sass:color';
 
   /* stylelint-disable */
 
@@ -429,11 +430,11 @@
 
       &:hover:not(.is-disabled),
       &.has-dropdown-open {
-        background-color: darken($md-grey-200, 7.5%);
+        background-color: color.adjust($md-grey-200, $lightness: -7.5%);
       }
 
       .ui-icon-button-focus-ring {
-        background-color: darken($md-grey-200, 12%);
+        background-color: color.adjust($md-grey-200, $lightness: -12%);
       }
     }
 
@@ -452,11 +453,11 @@
 
       &:hover:not(.is-disabled),
       &.has-dropdown-open {
-        background-color: darken($brand-accent-color, 10%);
+        background-color: color.adjust($brand-accent-color, $lightness: -10%);
       }
 
       .ui-icon-button-focus-ring {
-        background-color: darken($brand-accent-color, 12%);
+        background-color: color.adjust($brand-accent-color, $lightness: -12%);
       }
     }
 
@@ -465,11 +466,11 @@
 
       &:hover:not(.is-disabled),
       &.has-dropdown-open {
-        background-color: darken($md-green, 10%);
+        background-color: color.adjust($md-green, $lightness: -10%);
       }
 
       .ui-icon-button-focus-ring {
-        background-color: darken($md-green, 12%);
+        background-color: color.adjust($md-green, $lightness: -12%);
       }
     }
 
@@ -478,11 +479,11 @@
 
       &:hover:not(.is-disabled),
       &.has-dropdown-open {
-        background-color: darken($md-orange, 10%);
+        background-color: color.adjust($md-orange, $lightness: -10%);
       }
 
       .ui-icon-button-focus-ring {
-        background-color: darken($md-orange, 12%);
+        background-color: color.adjust($md-orange, $lightness: -12%);
       }
     }
 
@@ -491,11 +492,11 @@
 
       &:hover:not(.is-disabled),
       &.has-dropdown-open {
-        background-color: darken($md-red, 10%);
+        background-color: color.adjust($md-red, $lightness: -10%);
       }
 
       .ui-icon-button-focus-ring {
-        background-color: darken($md-red, 12%);
+        background-color: color.adjust($md-red, $lightness: -12%);
       }
     }
   }

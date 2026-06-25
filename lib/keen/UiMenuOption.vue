@@ -101,7 +101,7 @@
 
   /* stylelint-disable */
 
-  @import './styles/imports';
+  @use './styles/imports' as *;
 
   .ui-menu-option {
     position: relative;

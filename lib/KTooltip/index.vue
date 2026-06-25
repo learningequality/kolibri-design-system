@@ -154,7 +154,7 @@
 
 <style lang="scss" scoped>
 
-  @import '../styles/definitions';
+  @use '../styles/definitions' as *;
 
   .k-tooltip {
     @extend %dropshadow-1dp;

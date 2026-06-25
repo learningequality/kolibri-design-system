@@ -200,7 +200,7 @@
 
 <style lang="scss">
 
-  @import './styles/definitions';
+  @use './styles/definitions' as *;
   $k-switch-height: 32px !default;
   $k-switch-thumb-size: 20px !default;
   $k-switch-thumb-color: #f5f5f5 !default;
@@ -261,7 +261,7 @@
 
   .k-switch-track {
     position: absolute;
-    top: (($k-switch-thumb-size - $k-switch-track-height) / 2);
+    top: calc(($k-switch-thumb-size - $k-switch-track-height) / 2);
     width: $k-switch-track-width;
     height: $k-switch-track-height;
     background-color: #cccccc;

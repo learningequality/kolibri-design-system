@@ -127,7 +127,7 @@
 
 <style lang="scss" scoped>
 
-  @import '../styles/definitions';
+  @use '../styles/definitions' as *;
 
   .grid-item {
     // override pure grid default font family

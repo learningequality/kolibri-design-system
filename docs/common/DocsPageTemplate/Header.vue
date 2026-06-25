@@ -106,7 +106,7 @@
 
 <style lang="scss" scoped>
 
-  @import '~/assets/definitions';
+  @use '~/assets/definitions' as *;
 
   .header {
     padding-top: 16px;

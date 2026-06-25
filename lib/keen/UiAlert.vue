@@ -91,7 +91,7 @@
 
 <style lang="scss">
 
-  @import './styles/imports';
+  @use './styles/imports' as *;
 
   $ui-alert-color: rgba(black, 0.75) !default;
   $ui-alert-font-size: rem(15px) !default;

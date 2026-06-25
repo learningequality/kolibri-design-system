@@ -582,7 +582,7 @@
 
 <style lang="scss" scoped>
 
-  @import '../styles/definitions';
+  @use '../styles/definitions' as *;
 
   $spacer: 16px;
 
