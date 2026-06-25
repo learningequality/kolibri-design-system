@@ -7,6 +7,19 @@ Changelog is rather internal in nature. See release notes for the public overvie
 <!-- [DO NOT REMOVE-USED BY GH ACTION] PASTE CHANGELOG -->
 
 
+- [#1291]
+  - **Description:** KListbox messages prop now accepts both plain strings and functions. A getMessage() helper resolves the value at runtime by calling the function if needed, or returning the string directly.
+  - **Products impact:** updated API
+  - **Addresses:** #1290
+  - **Components:** Klistbox
+  - **Breaking:** no
+  - **Impacts a11y:** yes
+  - **Guidance:** No changes required for existing consumers passing plain strings
+
+[#1291]: https://github.com/learningequality/kolibri-design-system/pull/1291
+
+
+
 - [#1274]
   - **Description:** Add useMultiSelectDropdown composable — manages dropdown open/close state, click-outside dismissal, and single-mode search text pre-fill for the upcoming KMultiSelect component.
   - **Products impact:** none
