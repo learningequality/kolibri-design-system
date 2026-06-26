@@ -116,6 +116,16 @@
       }
 
       function toggleOption(value) {
+        if (!props.multiple) {
+          if (!isSelected(value)) {
+            emitInput([value]);
+          }
+          if (focusedValue.value !== value) {
+            setFocus(value);
+          }
+          return;
+        }
+
         if (isSelected(value)) {
           emitInput(props.value.filter(v => v !== value));
           sendPoliteMessage(getMessage('optionDeselected'));

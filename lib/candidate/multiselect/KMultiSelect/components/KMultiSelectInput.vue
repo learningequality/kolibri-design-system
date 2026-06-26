@@ -11,23 +11,11 @@
       }),
     ]"
     :style="{
-      display: 'flex',
-      flexWrap: 'wrap',
-      alignItems: 'center',
-      gap: '4px',
-      minHeight: '40px',
-      paddingBlock: '4px',
-      paddingInlineStart: '8px',
-      paddingInlineEnd: '40px',
-      position: 'relative',
-      border: 'none',
       borderBottom: `2px solid ${
         invalid ? $themeTokens.error : focused ? $themeTokens.primary : $themeTokens.fineLine
       }`,
-      borderRadius: '2px 2px 0 0',
       cursor: disabled ? 'not-allowed' : 'default',
       backgroundColor: disabled ? $themeTokens.textDisabled + '20' : $themePalette.grey.v_100,
-      outline: 'none',
     }"
     @click="handleWrapperClick"
   >
@@ -87,14 +75,6 @@
       v-bind="inputAriaAttrs"
       data-focus="true"
       :style="{
-        flex: '1 1 80px',
-        minWidth: '80px',
-        height: '28px',
-        padding: '0 4px',
-        border: 'none',
-        outline: 'none',
-        background: 'transparent',
-        fontSize: '14px',
         color: disabled ? $themeTokens.textDisabled : $themeTokens.text,
         cursor: disabled ? 'not-allowed' : 'text',
       }"
@@ -109,13 +89,9 @@
       icon="clear"
       :ariaLabel="clearAllLabel"
       :tooltip="clearAllLabel"
-      :style="{
-        position: 'absolute',
-        insetInlineEnd: '36px',
-        top: '50%',
-        transform: 'translateY(-50%)',
-      }"
+      class="kmselect-clear-btn"
       @click.stop="$emit('clear-all')"
+      @mousedown.native.prevent
       @keydown.enter.stop
       @keydown.space.stop
     />
@@ -195,12 +171,12 @@
       }));
 
       function focus() {
-        inputEl.value.focus();
+        inputEl.value?.focus();
       }
 
       function handleWrapperClick() {
         if (!props.disabled) {
-          inputEl.value.focus();
+          inputEl.value?.focus();
           if (!props.isOpen) {
             emit('toggle');
           }
@@ -317,4 +293,39 @@
 </script>
 
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+
+  .kmselect-input {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    align-items: center;
+    min-height: 40px;
+    padding-block: 4px;
+    padding-inline-start: 8px;
+    padding-inline-end: 40px;
+    border: 0;
+    border-radius: 2px 2px 0 0;
+    outline: none;
+  }
+
+  .kmselect-native-input {
+    flex: 1 1 80px;
+    min-width: 80px;
+    height: 28px;
+    padding: 0 4px;
+    font-size: 14px;
+    background: transparent;
+    border: 0;
+    outline: none;
+  }
+
+  .kmselect-clear-btn {
+    position: absolute;
+    inset-inline-end: 36px;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+</style>
