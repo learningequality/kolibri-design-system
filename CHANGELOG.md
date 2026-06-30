@@ -7,6 +7,19 @@ Changelog is rather internal in nature. See release notes for the public overvie
 <!-- [DO NOT REMOVE-USED BY GH ACTION] PASTE CHANGELOG -->
 
 
+- [#1287]
+  - **Description:** Bump launch-editor from 2.9.1 to 2.14.1
+  - **Products impact:** Dev Dependency upgrade
+  - **Addresses:** -
+  - **Components:** -
+  - **Breaking:** -
+  - **Impacts a11y:** -
+  - **Guidance:** -
+
+[#1287]: https://github.com/learningequality/kolibri-design-system/pull/1287
+
+
+
 - [#1286]
   - **Description:** Bump @babel/core from 7.28.5 to 7.29.6
   - **Products impact:** Dev Dependency upgrade
