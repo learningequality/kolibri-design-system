@@ -7,6 +7,19 @@ Changelog is rather internal in nature. See release notes for the public overvie
 <!-- [DO NOT REMOVE-USED BY GH ACTION] PASTE CHANGELOG -->
 
 
+- [#1286]
+  - **Description:** Bump @babel/core from 7.28.5 to 7.29.6
+  - **Products impact:** Dev Dependency upgrade
+  - **Addresses:** -
+  - **Components:** -
+  - **Breaking:** -
+  - **Impacts a11y:** -
+  - **Guidance:** -
+
+[#1286]: https://github.com/learningequality/kolibri-design-system/pull/1286
+
+
+
 - [#1285]
   - **Description:** Bump form-data from 4.0.5 to 4.0.6
   - **Products impact:** Dev Dependency upgrade
