@@ -7,6 +7,19 @@ Changelog is rather internal in nature. See release notes for the public overvie
 <!-- [DO NOT REMOVE-USED BY GH ACTION] PASTE CHANGELOG -->
 
 
+- [#1285]
+  - **Description:** Bump form-data from 4.0.5 to 4.0.6
+  - **Products impact:** Dev Dependency upgrade
+  - **Addresses:** -
+  - **Components:** -
+  - **Breaking:** -
+  - **Impacts a11y:** -
+  - **Guidance:** -
+
+[#1285]: https://github.com/learningequality/kolibri-design-system/pull/1285
+
+
+
 - [#1258]
   - **Description:** Bump js-cookie from 3.0.5 to 3.0.7
   - **Products impact:** Dev Dependency upgrade
