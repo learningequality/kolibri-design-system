@@ -193,15 +193,17 @@
         messages: props.messages,
       });
 
-      const { isOpen, openDropdown, closeDropdown, toggleDropdown } =
-        useMultiSelectDropdownLogic(props, {
+      const { isOpen, openDropdown, closeDropdown, toggleDropdown } = useMultiSelectDropdownLogic(
+        props,
+        {
           containerEl,
           setSearchText,
           suppressFilter,
           normalizedOptions,
           getOptionValue,
           getOptionText,
-        });
+        },
+      );
 
       const {
         indeterminateValues,
@@ -290,8 +292,6 @@
               openDropdown();
             }
             break;
-
-
 
           case 'Tab':
             closeDropdown();
@@ -432,16 +432,15 @@
 
     props: {
       /**
-       * Custom CSS styles to apply directly to the root container.
+       * Custom CSS styles applied to the root container element.
        */
       appearanceOverrides: {
         type: Object,
         default: null,
       },
       /**
-       * The currently selected value(s). Bind this prop using v-model.
-       * When multiple is true, this must be an Array. When multiple is false,
-       * this can be a String or Number.
+       * The currently selected value(s). Use v-model to keep in sync.
+       * Array when multiple=true, String/Number/null when multiple=false.
        */
       value: {
         default: null,
@@ -449,8 +448,7 @@
           v === null || Array.isArray(v) || typeof v === 'string' || typeof v === 'number',
       },
       /**
-       * An array of all available options to display in the dropdown.
-       * Options can be objects or primitive values.
+       * Array of option objects or primitive values to display in the dropdown.
        */
       // eslint-disable-next-line vue/no-unused-properties
       options: {
@@ -458,36 +456,36 @@
         required: true,
       },
       /**
-       * The current search/filter string. Supports .sync modifier.
+       * The current search/filter input text. Supports .sync modifier.
        */
       searchText: {
         type: String,
         default: '',
       },
       /**
-       * Determines whether multiple options can be selected simultaneously.
+       * Whether multiple options can be selected or not.
        */
       multiple: {
         type: Boolean,
         default: true,
       },
       /**
-       * The object key to use for resolving the display text of each option.
+       * Key on option objects used as the display label.
        */
       itemText: {
         type: String,
         default: 'label',
       },
       /**
-       * The object key to use for resolving the unique identifier of each option.
+       * Key on option objects used as the unique value for selection tracking.
        */
       itemValue: {
         type: String,
         default: 'value',
       },
       /**
-       * An array of object keys to search against when the user types in the input
-       * (defaults to itemText).
+       * Additional option object keys to include in search matching.
+       * By default, only itemText is searched.
        */
       // eslint-disable-next-line vue/no-unused-properties
       searchKeys: {
@@ -495,71 +493,64 @@
         default: null,
       },
       /**
-       * The visible, human-readable label rendered above the input field.
+       * Label for the field.
        */
       label: {
         type: String,
         default: '',
       },
       /**
-       * The placeholder text shown inside the input field when no options are selected.
+       * Sets the placeholder value.
        */
       placeholder: {
         type: String,
         default: '',
       },
       /**
-       * The message shown in the dropdown menu when a user's search query
-       * yields no matching options.
+       * Text shown in the dropdown when the search query has no matching options.
        */
       noResultsText: {
         type: String,
         default: null,
       },
       /**
-       * When true, the input is completely disabled.
+       * Whether or not the field is disabled.
        */
       disabled: {
         type: Boolean,
         default: false,
       },
       /**
-       * When true, visually indicates an error state by turning the input border red.
+       * Whether or not the current value is invalid.
        */
       invalid: {
         type: Boolean,
         default: false,
       },
       /**
-       * The validation error message shown directly below the input field when
-       * invalid is true.
+       * Text conditionally displayed when invalid=true.
        */
       invalidText: {
         type: String,
         default: '',
       },
       /**
-       * When true, displays a clear 'X' icon button on the right side of the input.
+       * Whether to turn into a clearable state when a value has been selected.
        */
       clearable: {
         type: Boolean,
         default: false,
       },
       /**
-       * When true, marks the field as required for form submission.
+       * Whether or not the field is required.
        */
       required: {
         type: Boolean,
         default: false,
       },
       /**
-       * Only applies to hierarchical (tree) options.
-       * When true, selecting a child option automatically selects all its ancestor
-       * options too — both the child and its parents will appear as chips in the input
-       * and as fully checked in the dropdown.
-       * When false (default), only the explicitly selected option is added; ancestor
-       * options that have some but not all children selected will appear with an
-       * indeterminate state in the dropdown and will not produce a chip.
+       * Only applies to hierarchical options. When true, selecting a child
+       * automatically selects all its ancestors as well.
        */
       // eslint-disable-next-line vue/no-unused-properties
       autoSelectParent: {
@@ -568,24 +559,14 @@
       },
       /**
        * Dictionary of translation strings used for accessibility announcements
-       * and localizable UI text. All keys are optional.
-       *
-       * Supported keys:
-       * - `removed`   — announced to screen readers when a chip is removed
-       * - `cleared`   — announced to screen readers when all chips are cleared
-       * - `clearText` — aria-label for the clear (×) button (used when clearable=true).
-       * - `open`      — aria-label for the dropdown expand (▼) button.
-       * - `close`     — aria-label for the dropdown collapse (▲) button.
+       * and localizable UI text.
        */
       messages: {
         type: Object,
         default: () => ({}),
       },
       /**
-       * When true, removes already-selected options from the dropdown list so they
-       * only appear as chips above the input — never as checkboxes in the dropdown.
-       * Use this for Tags-style free-text chip creation (allowCustom).
-       * Also automatically hides checkboxes since items vanish on selection.
+       * When true, hides already-selected options from the dropdown list.
        */
       hideSelected: {
         type: Boolean,

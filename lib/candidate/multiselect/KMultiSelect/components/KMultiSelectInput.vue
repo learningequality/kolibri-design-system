@@ -75,12 +75,8 @@
       v-bind="inputAriaAttrs"
       data-focus="true"
       :style="{
-        flex:
-          !multiple && selectedOptions.length > 0 && !isOpen && !searchText
-            ? '0 0 0px'
-            : '',
-        minWidth:
-          !multiple && selectedOptions.length > 0 && !isOpen && !searchText ? '0' : '',
+        flex: !multiple && selectedOptions.length > 0 && !isOpen && !searchText ? '0 0 0px' : '',
+        minWidth: !multiple && selectedOptions.length > 0 && !isOpen && !searchText ? '0' : '',
         color: disabled ? $themeTokens.textDisabled : $themeTokens.text,
         cursor: disabled ? 'not-allowed' : 'text',
       }"

@@ -28,6 +28,28 @@
     </DocsPageSection>
 
     <DocsPageSection
+      title="Messages"
+      anchor="#messages"
+    >
+      <p>
+        <code>KMultiSelect</code> requires a <code>messages</code> object. Each entry must be a
+        translated string or a function returning a string that is short and focused.
+      </p>
+      <KTable
+        :headers="messageHeaders"
+        :rows="tableRows"
+        caption="KMultiSelect messages"
+        :stickyColumns="['first']"
+      >
+        <template #cell="{ content, colIndex }">
+          <code v-if="colIndex === 0">{{ content }}</code>
+          <i v-else-if="colIndex === 3">{{ content }}</i>
+          <template v-else>{{ content }}</template>
+        </template>
+      </KTable>
+    </DocsPageSection>
+
+    <DocsPageSection
       title="Usage"
       anchor="#usage"
     >
@@ -323,8 +345,18 @@
   ];
 
   const languageDropdownOptions = [
-    { id: 'en', name: 'English', native_name: 'English, Anglais', related_names: ['English', 'en'] },
-    { id: 'es', name: 'Spanish', native_name: 'Español, Castellano', related_names: ['Spanish', 'es'] },
+    {
+      id: 'en',
+      name: 'English',
+      native_name: 'English, Anglais',
+      related_names: ['English', 'en'],
+    },
+    {
+      id: 'es',
+      name: 'Spanish',
+      native_name: 'Español, Castellano',
+      related_names: ['Spanish', 'es'],
+    },
     { id: 'fr', name: 'French', native_name: 'Français', related_names: ['French', 'fr'] },
     { id: 'de', name: 'German', native_name: 'Deutsch', related_names: ['German', 'de'] },
     { id: 'zh', name: 'Chinese', native_name: '中文, 汉语', related_names: ['Chinese', 'zh'] },
@@ -379,6 +411,74 @@
     },
     data() {
       return {
+        messageHeaders: [
+          { label: 'Name', dataType: 'string', columnId: 'name', minWidth: '190px' },
+          { label: 'Required', dataType: 'string', columnId: 'required', minWidth: '100px' },
+          { label: 'Description', dataType: 'string', columnId: 'description' },
+          { label: 'Examples', dataType: 'string', columnId: 'example', minWidth: '200px' },
+        ],
+        messageRows: [
+          {
+            name: 'removed',
+            required: 'No',
+            description: 'Screen reader announcement when a chip is removed. Receives { label }.',
+            example: 'Removed Apple',
+          },
+          {
+            name: 'cleared',
+            required: 'No',
+            description: 'Screen reader announcement when all chips are cleared.',
+            example: 'All selections cleared',
+          },
+          {
+            name: 'clearText',
+            required: 'No',
+            description: 'aria-label for the clear (×) button. Used when clearable=true.',
+            example: 'Clear all selections',
+          },
+          {
+            name: 'open',
+            required: 'No',
+            description: 'aria-label for the dropdown expand (▼) button.',
+            example: 'Open menu',
+          },
+          {
+            name: 'close',
+            required: 'No',
+            description: 'aria-label for the dropdown collapse (▲) button.',
+            example: 'Close menu',
+          },
+          {
+            name: 'selected',
+            required: 'No',
+            description: 'Announced when an option is selected. Receives { label, count }.',
+            example: 'Selected Apple, 3 items selected',
+          },
+          {
+            name: 'clickable',
+            required: 'No',
+            description: 'Forwarded to KListbox. Describes that options are clickable.',
+            example: 'Options are clickable',
+          },
+          {
+            name: 'allOptionsSelected',
+            required: 'No',
+            description: 'Forwarded to KListbox. Announced when all options are selected.',
+            example: 'All options selected',
+          },
+          {
+            name: 'allOptionsDeselected',
+            required: 'No',
+            description: 'Forwarded to KListbox. Announced when all options are deselected.',
+            example: 'No options selected',
+          },
+          {
+            name: 'optionDeselected',
+            required: 'No',
+            description: 'Forwarded to KListbox. Announced when an option is deselected.',
+            example: 'Option deselected',
+          },
+        ],
         allCountries,
         languageDropdownOptions,
         languageFilterOptions,
@@ -401,16 +501,19 @@
           close: () => 'Close menu',
           removed: ({ label }) => 'Removed ' + label,
           cleared: () => 'All selections cleared',
-          selected: ({ label, count }) => 'Selected ' + label + ', ' + count + ' items currently selected',
+          selected: ({ label, count }) =>
+            'Selected ' + label + ', ' + count + ' items currently selected',
           allOptionsSelected: () => 'All options selected',
           allOptionsDeselected: () => 'All options deselected',
           optionDeselected: () => 'Option deselected',
-          clickable: () => 'Clickable'
+          clickable: () => 'Clickable',
         },
-
       };
     },
     computed: {
+      tableRows() {
+        return this.messageRows.map(m => [m.name, m.required, m.description, m.example]);
+      },
       formattedLanguageDropdown() {
         return this.languageDropdownOptions.map(opt => ({
           ...opt,
