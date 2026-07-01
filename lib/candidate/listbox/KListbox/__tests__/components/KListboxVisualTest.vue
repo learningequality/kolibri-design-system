@@ -12,6 +12,11 @@
       loadExample="KListbox/SelectAll.vue"
     />
     <VisualTestExample
+      title="Single select"
+      width="400px"
+      loadExample="KListbox/SingleSelect.vue"
+    />
+    <VisualTestExample
       title="Customized"
       width="400px"
       loadExample="KListbox/Customized.vue"

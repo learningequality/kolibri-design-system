@@ -31,8 +31,10 @@
     -->
     <span
       v-else
-      class="k-listbox-option-label"
-      :style="{ lineHeight: '24px' }"
+      :style="{
+        color: isSelected ? $themeTokens.primary : 'inherit',
+        fontWeight: isSelected ? '500' : 'normal',
+      }"
     >
       <slot>{{ label }}</slot>
     </span>
@@ -68,7 +70,8 @@
       const isFocused = computed(() => listbox.isFocused(props.value));
 
       const rowStyles = computed(() => ({
-        backgroundColor: themeTokens().surface,
+        backgroundColor:
+          !props.showCheckbox && isSelected.value ? 'rgba(0, 0, 0, 0.05)' : themeTokens().surface,
         ':hover': {
           backgroundColor: themePalette().grey.v_100,
         },
@@ -109,10 +112,8 @@
         default: false,
       },
       /**
-       * When true (default), wraps the option label in a KCheckbox for
-       * multi-select use cases. When false, renders a plain label — used
-       * when checkboxes are not meaningful (e.g. single-select, or
-       * hideSelected mode where selected items are already removed from the list).
+       * When true, wraps the option label in a KCheckbox for multi-select use cases.
+       * When false, renders a plain label for single-select use cases.
        */
       showCheckbox: {
         type: Boolean,

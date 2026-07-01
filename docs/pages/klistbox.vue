@@ -12,10 +12,7 @@
           />
           (likely adding <code>KListboxGroup</code>)
         </li>
-        <li>
-          Reflecting our first use-cases, multi selection is the default behavior. Single selection
-          mode could be added by a few adjustments in line with the same APG listbox pattern.
-        </li>
+
         <li>
           Listboxes are often combined with searching or filtering, but that's not part of the
           listbox pattern and use cases vary. If a frequent pattern emerges, it may motivate
@@ -46,8 +43,8 @@
       <p>Its options are provided via <DocsLibraryLink component="KListboxOption" />.</p>
 
       <p>
-        It currently defaults to multi selection and does not yet support single selection or
-        grouped options (see developer notes above).
+        It currently defaults to multi selection and does not yet support grouped options (see
+        developer notes above).
       </p>
 
       <p>
@@ -87,6 +84,7 @@
         :items="[
           { text: 'Default', href: '#default' },
           { text: 'Select all', href: '#select-all' },
+          { text: 'Single Select', href: '#single-select' },
           { text: 'Customized', href: '#customized' },
           { text: 'Scrollable', href: '#scrollable' },
           { text: 'Grouped', href: '#grouped' },
@@ -143,6 +141,22 @@
         block
         exampleId="klistbox-select-all"
         loadExample="KListbox/SelectAll.vue"
+      />
+
+      <h3>
+        Single Select
+        <DocsAnchorTarget anchor="#single-select" />
+      </h3>
+
+      <p>
+        Set <code>multiple="false"</code> on the listbox and <code>showCheckbox="false"</code> on
+        the options to render plain text options for single selection.
+      </p>
+
+      <DocsExample
+        block
+        exampleId="klistbox-single-select"
+        loadExample="KListbox/SingleSelect.vue"
       />
 
       <h3>
