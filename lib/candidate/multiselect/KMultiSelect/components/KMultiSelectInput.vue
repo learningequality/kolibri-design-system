@@ -75,6 +75,16 @@
       v-bind="inputAriaAttrs"
       data-focus="true"
       :style="{
+        // When the selected-value span is showing (single-select, closed, no
+        // search text), collapse the input to zero width so it doesn't create
+        // a blank 80px gap with a blinking cursor next to the selected label.
+        // The input stays in the DOM so it can still receive focus/keydown events.
+        flex:
+          !multiple && selectedOptions.length > 0 && !isOpen && !searchText
+            ? '0 0 0px'
+            : '',
+        minWidth:
+          !multiple && selectedOptions.length > 0 && !isOpen && !searchText ? '0' : '',
         color: disabled ? $themeTokens.textDisabled : $themeTokens.text,
         cursor: disabled ? 'not-allowed' : 'text',
       }"
