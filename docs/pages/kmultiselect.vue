@@ -74,24 +74,11 @@
         Demonstrates selecting multiple countries from a flat array, replicating the
         <code>CountryField</code> used globally in Studio.
       </p>
-      <DocsShow>
-        <KMultiSelect
-          v-model="countrySelectionMultiple"
-          noResultsText="No results found"
-          :messages="mockMessages"
-          :options="allCountries"
-          itemText="name"
-          itemValue="id"
-          label="Countries"
-          placeholder="Select countries..."
-          :multiple="true"
-          clearable
-          :appearanceOverrides="{ maxWidth: '500px' }"
-        />
-        <div style="margin-top: 16px; font-size: 14px">
-          <strong>Selected:</strong> {{ countrySelectionMultiple }}
-        </div>
-      </DocsShow>
+      <DocsExample
+        block
+        exampleId="kmultiselect-country-multiple"
+        loadExample="KMultiSelect/CountryFieldMultiple.vue"
+      />
 
       <h3>
         CountryField (Single)
@@ -102,24 +89,11 @@
         <code>RequestForm.vue</code> usage. Uses
         <code>appearanceOverrides="{ maxWidth: '500px' }"</code> to lock width like KTextbox.
       </p>
-      <DocsShow>
-        <KMultiSelect
-          v-model="countrySelectionSingle"
-          noResultsText="No results found"
-          :messages="mockMessages"
-          :options="allCountries"
-          itemText="name"
-          itemValue="id"
-          label="Country"
-          placeholder="Select a country..."
-          :multiple="false"
-          clearable
-          :appearanceOverrides="{ maxWidth: '500px' }"
-        />
-        <div style="margin-top: 16px; font-size: 14px">
-          <strong>Selected:</strong> {{ countrySelectionSingle }}
-        </div>
-      </DocsShow>
+      <DocsExample
+        block
+        exampleId="kmultiselect-country-single"
+        loadExample="KMultiSelect/CountryFieldSingle.vue"
+      />
 
       <h3>
         LanguageDropdown (Multiple)
@@ -129,25 +103,11 @@
         Demonstrates searching and selecting multiple languages, replicating
         <code>SearchFilters.vue</code> in Studio.
       </p>
-      <DocsShow>
-        <KMultiSelect
-          v-model="languageDropdownMultiple"
-          :messages="mockMessages"
-          :options="formattedLanguageDropdown"
-          itemText="displayLabel"
-          itemValue="id"
-          :searchKeys="['native_name', 'related_names']"
-          label="Languages"
-          placeholder="Search languages..."
-          noResultsText="No languages found"
-          :multiple="true"
-          clearable
-          :appearanceOverrides="{ width: '350px' }"
-        />
-        <div style="margin-top: 16px; font-size: 14px">
-          <strong>Selected:</strong> {{ languageDropdownMultiple }}
-        </div>
-      </DocsShow>
+      <DocsExample
+        block
+        exampleId="kmultiselect-language-multiple"
+        loadExample="KMultiSelect/LanguageDropdownMultiple.vue"
+      />
 
       <h3>
         LanguageDropdown (Single)
@@ -157,25 +117,11 @@
         Demonstrates searching a single language, replicating <code>ChannelModal.vue</code> in
         Studio.
       </p>
-      <DocsShow>
-        <KMultiSelect
-          v-model="languageDropdownSingle"
-          :messages="mockMessages"
-          :options="formattedLanguageDropdown"
-          itemText="displayLabel"
-          itemValue="id"
-          :searchKeys="['native_name', 'related_names']"
-          label="Language"
-          placeholder="Search language..."
-          noResultsText="No language found"
-          :multiple="false"
-          clearable
-          :appearanceOverrides="{ width: '350px' }"
-        />
-        <div style="margin-top: 16px; font-size: 14px">
-          <strong>Selected:</strong> {{ languageDropdownSingle }}
-        </div>
-      </DocsShow>
+      <DocsExample
+        block
+        exampleId="kmultiselect-language-single"
+        loadExample="KMultiSelect/LanguageDropdownSingle.vue"
+      />
 
       <h3>
         LanguageFilter (Multi-field Search)
@@ -185,25 +131,11 @@
         Demonstrates deep fuzzy searching across native names, related names, and English names. Try
         typing "Hindi" or "हिन्दी". Replicates <code>LanguageFilter.vue</code> in Studio.
       </p>
-      <DocsShow>
-        <KMultiSelect
-          v-model="languageFilterSelection"
-          :messages="mockMessages"
-          :options="formattedLanguageFilter"
-          itemText="displayLabel"
-          itemValue="id"
-          :searchKeys="['native_name', 'related_names']"
-          label="Language Filter"
-          placeholder="Search language..."
-          noResultsText="No language found"
-          :multiple="true"
-          clearable
-          :appearanceOverrides="{ width: '350px' }"
-        />
-        <div style="margin-top: 16px; font-size: 14px">
-          <strong>Selected:</strong> {{ languageFilterSelection }}
-        </div>
-      </DocsShow>
+      <DocsExample
+        block
+        exampleId="kmultiselect-language-filter"
+        loadExample="KMultiSelect/LanguageFilter.vue"
+      />
 
       <h3>
         CategoryOptions (Dropdown Tree)
@@ -213,41 +145,11 @@
         Demonstrates a hierarchical tree structure with multi-select and cascading behavior,
         replacing the custom implementation in Studio.
       </p>
-      <DocsShow>
-        <KMultiSelect
-          v-model="categorySelection"
-          :messages="mockMessages"
-          :options="allCategories"
-          itemText="text"
-          itemValue="value"
-          label="Categories"
-          placeholder="Select categories..."
-          :multiple="true"
-          clearable
-          noResultsText="No matching categories"
-          :appearanceOverrides="{ width: '750px' }"
-        >
-          <!-- Custom chip slot rendering KTooltip bound to option.filterText to show full nested path -->
-          <template #chip="{ option, remove }">
-            <span :ref="'category-chip-' + option.value">
-              <KChip
-                :text="option.text"
-                close
-                @close="remove"
-              />
-            </span>
-            <KTooltip
-              :reference="'category-chip-' + option.value"
-              :refs="$refs"
-              placement="top"
-              :text="option.filterText || option.text"
-            />
-          </template>
-        </KMultiSelect>
-        <div style="margin-top: 16px; font-size: 14px">
-          <strong>Selected:</strong> {{ categorySelection }}
-        </div>
-      </DocsShow>
+      <DocsExample
+        block
+        exampleId="kmultiselect-category-options"
+        loadExample="KMultiSelect/CategoryOptionsTree.vue"
+      />
 
       <h3>
         ActivityDuration (Short Activity)
@@ -257,20 +159,11 @@
         Demonstrates a flat primitive array in single-selection mode, replicating the Short Activity
         duration dropdown.
       </p>
-      <DocsShow>
-        <KMultiSelect
-          v-model="durationShort"
-          noResultsText="No results found"
-          :messages="mockMessages"
-          :options="shortActivityDurations"
-          label="Duration (Minutes)"
-          placeholder="Select duration..."
-          :multiple="false"
-        />
-        <div style="margin-top: 16px; font-size: 14px">
-          <strong>Selected:</strong> {{ durationShort }}
-        </div>
-      </DocsShow>
+      <DocsExample
+        block
+        exampleId="kmultiselect-activity-short"
+        loadExample="KMultiSelect/ActivityDurationShort.vue"
+      />
 
       <h3>
         ActivityDuration (Long Activity)
@@ -280,21 +173,11 @@
         Demonstrates a flat primitive array in single-selection mode, replicating the Long Activity
         duration dropdown.
       </p>
-      <DocsShow>
-        <KMultiSelect
-          v-model="durationLong"
-          noResultsText="No results found"
-          :messages="mockMessages"
-          :options="longActivityDurations"
-          label="Duration (Minutes)"
-          placeholder="Select duration..."
-          :multiple="false"
-          :appearanceOverrides="{ width: '150px' }"
-        />
-        <div style="margin-top: 16px; font-size: 14px">
-          <strong>Selected:</strong> {{ durationLong }}
-        </div>
-      </DocsShow>
+      <DocsExample
+        block
+        exampleId="kmultiselect-activity-long"
+        loadExample="KMultiSelect/ActivityDurationLong.vue"
+      />
     </DocsPageSection>
 
     <DocsPageSection
@@ -319,96 +202,8 @@
 
 <script>
 
-  import KMultiSelect from '../../lib/candidate/multiselect/KMultiSelect/index.vue';
-  import KChip from '../../lib/candidate/multiselect/KChip/index.vue';
-
-  const allCountries = [
-    { id: 'Afghanistan', name: 'AF' },
-    { id: 'Albania', name: 'AL' },
-    { id: 'Algeria', name: 'DZ' },
-    { id: 'Andorra', name: 'AD' },
-    { id: 'Angola', name: 'AO' },
-    { id: 'Argentina', name: 'AR' },
-    { id: 'Australia', name: 'AU' },
-    { id: 'Brazil', name: 'BR' },
-    { id: 'Canada', name: 'CA' },
-    { id: 'China', name: 'CN' },
-    { id: 'Egypt', name: 'EG' },
-    { id: 'France', name: 'FR' },
-    { id: 'Germany', name: 'DE' },
-    { id: 'India', name: 'IN' },
-    { id: 'Japan', name: 'JP' },
-    { id: 'Mexico', name: 'MX' },
-    { id: 'Nigeria', name: 'NG' },
-    { id: 'United Kingdom', name: 'GB' },
-    { id: 'United States', name: 'US' },
-  ];
-
-  const languageDropdownOptions = [
-    {
-      id: 'en',
-      name: 'English',
-      native_name: 'English, Anglais',
-      related_names: ['English', 'en'],
-    },
-    {
-      id: 'es',
-      name: 'Spanish',
-      native_name: 'Español, Castellano',
-      related_names: ['Spanish', 'es'],
-    },
-    { id: 'fr', name: 'French', native_name: 'Français', related_names: ['French', 'fr'] },
-    { id: 'de', name: 'German', native_name: 'Deutsch', related_names: ['German', 'de'] },
-    { id: 'zh', name: 'Chinese', native_name: '中文, 汉语', related_names: ['Chinese', 'zh'] },
-    { id: 'ja', name: 'Japanese', native_name: '日本語', related_names: ['Japanese', 'ja'] },
-    { id: 'ar', name: 'Arabic', native_name: 'العربية', related_names: ['Arabic', 'ar'] },
-    { id: 'hi', name: 'Hindi', native_name: 'हिन्दी', related_names: ['Hindi', 'hi'] },
-  ];
-
-  const languageFilterOptions = [
-    { id: 'en', name: 'English', related_names: ['English', 'en'], count: 42 },
-    { id: 'es', name: 'Spanish', related_names: ['Spanish', 'es'], count: 15 },
-    { id: 'fr', name: 'French', related_names: ['French', 'fr'], count: 10 },
-    { id: 'de', name: 'German', related_names: ['German', 'de'], count: 8 },
-    { id: 'zh', name: 'Chinese', related_names: ['Chinese', 'zh'], count: 6 },
-    { id: 'ja', name: 'Japanese', related_names: ['Japanese', 'ja'], count: 4 },
-    { id: 'ar', name: 'Arabic', related_names: ['Arabic', 'ar'], count: 3 },
-    { id: 'hi', name: 'Hindi', related_names: ['Hindi', 'hi'], count: 2 },
-  ];
-
-  const allCategories = [
-    { value: 'FOOD', text: 'Food', level: 0, filterText: 'Food' },
-    { value: 'FOOD.FRUITS', text: 'Fruits', level: 1, filterText: 'Food - Fruits' },
-    { value: 'FOOD.FRUITS.APPLE', text: 'Apple', level: 2, filterText: 'Food - Fruits - Apple' },
-    { value: 'FOOD.FRUITS.BANANA', text: 'Banana', level: 2, filterText: 'Food - Fruits - Banana' },
-    { value: 'FOOD.VEGETABLES', text: 'Vegetables', level: 1, filterText: 'Food - Vegetables' },
-    {
-      value: 'FOOD.VEGETABLES.CARROT',
-      text: 'Carrot',
-      level: 2,
-      filterText: 'Food - Vegetables - Carrot',
-    },
-    {
-      value: 'FOOD.VEGETABLES.BROCCOLI',
-      text: 'Broccoli',
-      level: 2,
-      filterText: 'Food - Vegetables - Broccoli',
-    },
-    { value: 'DRINKS', text: 'Drinks', level: 0, filterText: 'Drinks' },
-    { value: 'DRINKS.HOT', text: 'Hot Drinks', level: 1, filterText: 'Drinks - Hot' },
-    { value: 'DRINKS.HOT.COFFEE', text: 'Coffee', level: 2, filterText: 'Drinks - Hot - Coffee' },
-    { value: 'DRINKS.HOT.TEA', text: 'Tea', level: 2, filterText: 'Drinks - Hot - Tea' },
-    { value: 'DRINKS.COLD', text: 'Cold Drinks', level: 1, filterText: 'Drinks - Cold' },
-    { value: 'DRINKS.COLD.SODA', text: 'Soda', level: 2, filterText: 'Drinks - Cold - Soda' },
-    { value: 'DRINKS.COLD.WATER', text: 'Water', level: 2, filterText: 'Drinks - Cold - Water' },
-  ];
-
   export default {
     name: 'KMultiselectDocs',
-    components: {
-      KMultiSelect,
-      KChip,
-    },
     data() {
       return {
         messageHeaders: [
@@ -479,52 +274,11 @@
             example: 'Option deselected',
           },
         ],
-        allCountries,
-        languageDropdownOptions,
-        languageFilterOptions,
-        allCategories,
-        shortActivityDurations: [5, 10, 15, 20, 25, 30],
-        longActivityDurations: [40, 50, 60, 70, 80, 90, 100, 110, 120],
-
-        countrySelectionMultiple: [],
-        countrySelectionSingle: null,
-        languageDropdownMultiple: [],
-        languageDropdownSingle: null,
-        languageFilterSelection: [],
-        categorySelection: [],
-        durationShort: null,
-
-        durationLong: null,
-        mockMessages: {
-          clearText: () => 'Clear all selections',
-          open: () => 'Open menu',
-          close: () => 'Close menu',
-          removed: ({ label }) => 'Removed ' + label,
-          cleared: () => 'All selections cleared',
-          selected: ({ label, count }) =>
-            'Selected ' + label + ', ' + count + ' items currently selected',
-          allOptionsSelected: () => 'All options selected',
-          allOptionsDeselected: () => 'All options deselected',
-          optionDeselected: () => 'Option deselected',
-          clickable: () => 'Clickable',
-        },
       };
     },
     computed: {
       tableRows() {
         return this.messageRows.map(m => [m.name, m.required, m.description, m.example]);
-      },
-      formattedLanguageDropdown() {
-        return this.languageDropdownOptions.map(opt => ({
-          ...opt,
-          displayLabel: `${opt.native_name.split(',')[0].trim()} (${opt.id})`,
-        }));
-      },
-      formattedLanguageFilter() {
-        return this.languageFilterOptions.map(opt => ({
-          ...opt,
-          displayLabel: `${opt.name} (${opt.count})`,
-        }));
       },
     },
   };
