@@ -128,19 +128,12 @@
         return optionTree.value.filter(node => !selectedSet.has(String(node.value)));
       });
 
-      /**
-       * True if the option tree has at least one node with children.
-       * Used to decide whether to draw top-border separators between root nodes.
-       */
+      // True when at least one root node has children — used to add group separators.
       const isHierarchical = computed(() =>
         optionTree.value.some(node => node.children && node.children.length > 0),
       );
 
-      /**
-       * Decorates each root node with a `_showTopBorder` flag.
-       * When true, KMultiSelectNode renders a top border to visually
-       * separate hierarchical groups. Never applied to flat lists.
-       */
+      // Adds _showTopBorder to each root node so KMultiSelectNode can draw group separators.
       const decoratedOptionTree = computed(() =>
         filteredOptionTree.value.map((node, index) => ({
           ...node,
@@ -148,11 +141,7 @@
         })),
       );
 
-      /**
-       * Checkboxes are only shown when:
-       * 1. multiple=true  — single-select mode never needs checkboxes, and
-       * 2. hideSelected=false — tags mode hides them because selected items vanish.
-       */
+      // Show checkboxes only in multi-select mode without hideSelected (tags mode).
       const showCheckbox = computed(() => props.multiple && !props.hideSelected);
 
       // Forward keyboard event from input to KListbox so focus stays on the input.
@@ -243,10 +232,9 @@
         default: true,
       },
       /**
-       * When true, options that are currently selected are removed from the
-       * dropdown list. Used for Tags-style chip creation where selected items
-       * should only appear as chips, not remain visible in the dropdown.
-       * Also automatically suppresses checkboxes since there is nothing to "check".
+       * Removes selected options from the dropdown list. Intended for tags-style
+       * UX where selections should only appear as chips, not in the dropdown.
+       * Also suppresses checkboxes automatically.
        */
       hideSelected: {
         type: Boolean,

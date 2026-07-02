@@ -296,8 +296,7 @@
       }
 
       function onSearchInput(val) {
-        // User is actively typing — lift the filter suppression so the
-        // dropdown starts filtering based on what the user types.
+        // Lift filter suppression when the user starts typing.
         if (suppressFilter.value) suppressFilter.value = false;
         setSearchText(val);
         if (!isOpen.value && val) openDropdown();
