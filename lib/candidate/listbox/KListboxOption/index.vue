@@ -61,7 +61,15 @@
       const uid = optionCount++;
       const optionId = `klistbox-option-${uid}`;
 
-      onMounted(() => listbox.registerOption({ id: optionId, value: props.value }));
+      onMounted(() => {
+        listbox.registerOption({ id: optionId, value: props.value });
+        if (process.env.NODE_ENV !== 'production' && props.showCheckbox && !listbox.multiple) {
+          // eslint-disable-next-line no-console
+          console.warn(
+            "[KListboxOption] 'showCheckbox' is true but the parent KListbox is in single-select mode ('multiple: false'). Set 'showCheckbox: false' to hide the checkbox.",
+          );
+        }
+      });
 
       onBeforeUnmount(() => listbox.unregisterOption({ id: optionId, value: props.value }));
 

@@ -297,6 +297,7 @@
         isSelected,
         isFocused,
         toggleOption,
+        multiple: props.multiple,
       });
 
       onMounted(() => {

@@ -4,22 +4,12 @@
     <template #developerNotes>
       <ul :style="{ margin: 0 }">
         <li>
-          Grouped options aren't supported yet, as we haven't needed them. They could be added by
-          extending our listbox components according to
-          <DocsExternalLink
-            text="grouped options of APG's listbox pattern"
-            href="https://www.w3.org/WAI/ARIA/apg/patterns/listbox/examples/listbox-grouped/"
-          />
-          (likely adding <code>KListboxGroup</code>)
-        </li>
-
-        <li>
           Listboxes are often combined with searching or filtering, but that's not part of the
           listbox pattern and use cases vary. If a frequent pattern emerges, it may motivate
           dedicated search/filter components that integrate well with <code>KListbox</code>.
         </li>
         <li>
-          Currently KListbox doesn't support options reodering, so bear in mind that if the list
+          Currently KListbox doesn't support options reordering, so bear in mind that if the list
           changes due to a filter, the filtered list should preserve the order of the original list
           to avoid unexpected keyboard navigation.
         </li>
@@ -43,8 +33,8 @@
       <p>Its options are provided via <DocsLibraryLink component="KListboxOption" />.</p>
 
       <p>
-        It currently defaults to multi selection and does not yet support grouped options (see
-        developer notes above).
+        It supports both multi selection (default, <code>multiple: true</code>) and single selection
+        (<code>multiple: false</code>).
       </p>
 
       <p>
@@ -228,6 +218,10 @@
       <ul>
         <li>
           <DocsLibraryLink component="KListboxOption" /> is a single option inside
+          <code>KListbox</code>
+        </li>
+        <li>
+          <DocsLibraryLink component="KListboxGroup" /> groups options inside
           <code>KListbox</code>
         </li>
         <li>
