@@ -37,7 +37,7 @@
     </KListbox>
 
     <div
-      v-if="optionTree.length === 0"
+      v-if="decoratedOptionTree.length === 0"
       class="kmselect-dropdown-empty"
       role="status"
       :style="{ color: $themeTokens.annotation }"
@@ -172,7 +172,6 @@
         klistboxRef,
         normalizedSelectedValues,
         decoratedOptionTree,
-        optionTree,
         showCheckbox,
         // eslint-disable-next-line vue/no-unused-properties
         forwardKeydown,
