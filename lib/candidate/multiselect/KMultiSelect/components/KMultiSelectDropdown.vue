@@ -3,24 +3,7 @@
   <div
     v-show="isOpen"
     class="kmselect-dropdown"
-    :style="{
-      position: 'absolute',
-      top: '100%',
-      left: 0,
-      right: 0,
-      zIndex: 8,
-      marginTop: '2px',
-      padding: '8px 0',
-      borderRadius: '2px',
-      maxHeight: '256px',
-      overflowY: 'auto',
-      backgroundColor: $themeTokens.surface,
-      boxShadow: [
-        '0 2px 2px 0 rgba(0,0,0,0.14)',
-        '0 1px 5px 0 rgba(0,0,0,0.12)',
-        '0 3px 1px -2px rgba(0,0,0,0.2)',
-      ].join(', '),
-    }"
+    :style="{ backgroundColor: $themeTokens.surface }"
     @mousedown.prevent
   >
     <KListbox
@@ -55,17 +38,12 @@
 
     <div
       v-if="optionTree.length === 0"
+      class="kmselect-dropdown-empty"
       role="status"
-      :style="{
-        margin: 0,
-        padding: '12px 16px',
-        textAlign: 'center',
-        color: $themeTokens.annotation,
-        fontSize: '14px',
-      }"
+      :style="{ color: $themeTokens.annotation }"
     >
       <slot name="empty">
-        <p :style="{ margin: 0 }">
+        <p class="kmselect-dropdown-empty-text">
           {{ noResultsText }}
         </p>
       </slot>
@@ -278,3 +256,36 @@
   };
 
 </script>
+
+
+<style lang="scss" scoped>
+
+  @import '../../../../styles/definitions';
+  @import '../../../../keen/styles/variables';
+
+  .kmselect-dropdown {
+    position: absolute;
+    inset-inline-start: 0;
+    inset-inline-end: 0;
+    top: 100%;
+    z-index: $z-index-dropdown;
+    max-height: 256px;
+    padding: 8px 0;
+    margin-top: 2px;
+    overflow-y: auto;
+    border-radius: 2px;
+    @extend %dropshadow-2dp;
+  }
+
+  .kmselect-dropdown-empty {
+    padding: 12px 16px;
+    margin: 0;
+    font-size: 14px;
+    text-align: center;
+  }
+
+  .kmselect-dropdown-empty-text {
+    margin: 0;
+  }
+
+</style>

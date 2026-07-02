@@ -8,13 +8,7 @@
       v-if="label"
       :id="labelId"
       class="kmselect-label"
-      :style="{
-        display: 'block',
-        marginBottom: '4px',
-        fontSize: '12px',
-        fontWeight: 600,
-        color: disabled ? $themeTokens.textDisabled : $themeTokens.text,
-      }"
+      :style="{ color: disabled ? $themeTokens.textDisabled : $themeTokens.text }"
     >
       {{ label }}
     </label>
@@ -108,11 +102,8 @@
     <p
       v-if="showInvalidMessage && invalidText"
       :id="errorId"
-      :style="{
-        margin: '4px 0 0',
-        fontSize: '12px',
-        color: $themeTokens.error,
-      }"
+      class="kmselect-error"
+      :style="{ color: $themeTokens.error }"
     >
       {{ invalidText }}
     </p>
@@ -583,6 +574,18 @@
   .kmselect {
     position: relative;
     width: 100%;
+  }
+
+  .kmselect-label {
+    display: block;
+    margin-bottom: 4px;
+    font-size: 12px;
+    font-weight: 600;
+  }
+
+  .kmselect-error {
+    margin: 4px 0 0;
+    font-size: 12px;
   }
 
 </style>
