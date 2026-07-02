@@ -70,8 +70,7 @@
       const isFocused = computed(() => listbox.isFocused(props.value));
 
       const rowStyles = computed(() => ({
-        backgroundColor:
-          !props.showCheckbox && isSelected.value ? 'rgba(0, 0, 0, 0.05)' : themeTokens().surface,
+        backgroundColor: themeTokens().surface,
         ':hover': {
           backgroundColor: themePalette().grey.v_100,
         },
