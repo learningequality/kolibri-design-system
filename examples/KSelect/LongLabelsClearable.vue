@@ -3,6 +3,7 @@
   <KSelect
     label="Select options"
     :options="longOptions"
+    :multiple="true"
     :value="[longOptions[0], longOptions[1]]"
     :clearable="true"
   />
