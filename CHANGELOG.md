@@ -7,6 +7,19 @@ Changelog is rather internal in nature. See release notes for the public overvie
 <!-- [DO NOT REMOVE-USED BY GH ACTION] PASTE CHANGELOG -->
 
 
+- [#1294]
+  - **Description:** Migrates visual tests for KIconButton to be in one file
+  - **Products impact:** none
+  - **Addresses:** #1088
+  - **Components:** -
+  - **Breaking:** no
+  - **Impacts a11y:** no
+  - **Guidance:** N/A
+
+[#1294]: https://github.com/learningequality/kolibri-design-system/pull/1294
+
+
+
 - [#1291]
   - **Description:** KListbox messages prop now accepts both plain strings and functions. A getMessage() helper resolves the value at runtime by calling the function if needed, or returning the string directly.
   - **Products impact:** updated API
