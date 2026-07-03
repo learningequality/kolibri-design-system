@@ -297,7 +297,9 @@
         isSelected,
         isFocused,
         toggleOption,
-        multiple: props.multiple,
+        get multiple() {
+          return props.multiple;
+        },
       });
 
       onMounted(() => {
