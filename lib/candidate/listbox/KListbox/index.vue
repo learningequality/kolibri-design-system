@@ -354,7 +354,8 @@
         required: true,
       },
       /**
-       * Array of currently selected option values
+       * Array of selected option values. Always an Array in both single and
+       * multi-select modes for a consistent v-model API.
        */
       value: {
         type: Array,
