@@ -22,6 +22,7 @@ import KTableVisualTest from '~~/lib/KTable/__tests__/components/KTableVisualTes
 import CardsVisualTest from '~~/lib/cards/__tests__/components/CardsVisualTest.vue';
 import KLogoVisualTest from '~~/lib/KLogo/__tests__/components/KLogoVisualTest.vue';
 import KBreadcrumbsVisualTest from '~~/lib/KBreadcrumbs/__tests__/components/KBreadcrumbsVisualTest.vue';
+import KSelectVisualTest from '~~/lib/KSelect/__tests__/components/KSelectVisualTest.vue';
 
 // Visual tests helper components
 Vue.component('VisualTestExample', VisualTestExample);
@@ -48,3 +49,4 @@ Vue.component('KLogoVisualTest', KLogoVisualTest);
 Vue.component('KDropdownMenuVisualTest', KDropdownMenuVisualTest);
 Vue.component('KBreadcrumbsVisualTest', KBreadcrumbsVisualTest);
 Vue.component('KButtonVisualTest', KButtonVisualTest);
+Vue.component('KSelectVisualTest', KSelectVisualTest);
