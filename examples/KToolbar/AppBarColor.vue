@@ -1,15 +1,14 @@
 <template>
 
   <KToolbar
-    title="Page Title"
-    textColor="black"
+    title="Toolbar title"
     :style="{ backgroundColor: $themeTokens.appBar }"
   >
-    <template #icon>
+    <template #leading-actions>
       <KIconButton
-        icon="close"
+        icon="menu"
         :color="$themeTokens.text"
-        :ariaLabel="'Close'"
+        :ariaLabel="'Menu'"
       />
     </template>
   </KToolbar>

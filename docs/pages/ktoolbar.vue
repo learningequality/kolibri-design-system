@@ -8,7 +8,7 @@
       <p>
         KToolbar is a versatile toolbar component designed for app bars and navigation headers in
         Kolibri applications. It provides a consistent structure for displaying titles, navigation
-        icons, and action buttons with customizable colors and styling options.
+        icons, and action buttons.
       </p>
     </DocsPageSection>
 
@@ -16,32 +16,83 @@
       title="Usage"
       anchor="#usage"
     >
-      <!-- Example 1: Light theme with close icon -->
-      <h3>Light theme toolbar</h3>
+      <h3>Default</h3>
       <p>
-        This example demonstrates a toolbar with light theme colors using
-        <code>$themeTokens.appBar</code> background and <code>$themeTokens.text</code>
-        color, with a close icon in the icon slot.
+        Out of the box, <code>KToolbar</code> renders with default colors from
+        <code>$themeTokens.surface</code> (background) and <code>$themeTokens.text</code> (text).
       </p>
 
       <DocsExample
-        loadExample="KToolbar/LightTheme.vue"
-        exampleId="ktoolbar-light-theme"
+        loadExample="KToolbar/Default.vue"
+        exampleId="ktoolbar-default"
         block
       />
 
-      <!-- Example 2: Dark theme with back icon in router-link -->
-      <h3>Dark theme toolbar with router navigation</h3>
+      <h3>Brand color</h3>
       <p>
-        This example shows a dark-themed toolbar using
-        <code>$themeTokens.appBarDark</code> background and
-        <code>$themeTokens.textInverted</code> color, with a back navigation button wrapped in
-        router-link.
+        Override the defaults via the native <code>:style</code> binding on the component. The most
+        common pattern across Kolibri pairs the default text color with the
+        <code>$themeTokens.appBar</code> brand background.
       </p>
 
       <DocsExample
-        loadExample="KToolbar/DarkTheme.vue"
-        exampleId="ktoolbar-dark-theme"
+        loadExample="KToolbar/AppBarColor.vue"
+        exampleId="ktoolbar-appbar-color"
+        block
+      />
+
+      <h3>Inverted palette</h3>
+      <p>
+        For fullscreen modals or immersive bars, use <code>$themeTokens.appBarDark</code> with
+        <code>$themeTokens.textInverted</code>.
+      </p>
+
+      <DocsExample
+        loadExample="KToolbar/Inverted.vue"
+        exampleId="ktoolbar-inverted"
+        block
+      />
+
+      <h3>Navigation and actions</h3>
+      <p>
+        The <code>#navigation</code> and <code>#actions</code> slots hold links or menu items and
+        action buttons respectively.
+      </p>
+
+      <DocsExample
+        loadExample="KToolbar/NavigationAndActions.vue"
+        exampleId="ktoolbar-navigation-and-actions"
+        block
+      />
+
+      <h3>Brand area</h3>
+      <p>The <code>#brand</code> slot accommodates a product mark.</p>
+
+      <DocsExample
+        loadExample="KToolbar/Brand.vue"
+        exampleId="ktoolbar-brand"
+        block
+      />
+
+      <h3>Not raised</h3>
+      <p>Pass <code>:raised="false"</code> for an in-page toolbar without a drop shadow.</p>
+
+      <DocsExample
+        loadExample="KToolbar/NotRaised.vue"
+        exampleId="ktoolbar-not-raised"
+        block
+      />
+
+      <h3>Extension (sub-toolbar)</h3>
+      <p>
+        The <code>#extension</code> slot renders below the main row but inside the same visual
+        surface — same background, same shadow. Use it for sub-navigation, tabs, or breadcrumbs that
+        conceptually belong to the toolbar rather than the page below it.
+      </p>
+
+      <DocsExample
+        loadExample="KToolbar/Extension.vue"
+        exampleId="ktoolbar-extension"
         block
       />
     </DocsPageSection>
