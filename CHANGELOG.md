@@ -7,6 +7,19 @@ Changelog is rather internal in nature. See release notes for the public overvie
 <!-- [DO NOT REMOVE-USED BY GH ACTION] PASTE CHANGELOG -->
 
 
+- [#1298]
+  - **Description:** Consolidated KImg's 9 separate Percy visual-test snapshots into a single `KImgVisualTest.vue` page.
+  - **Products impact:** none
+  - **Addresses:** #1092
+  - **Components:** -
+  - **Breaking:** no
+  - **Impacts a11y:** no
+  - **Guidance:** -
+
+[#1298]: https://github.com/learningequality/kolibri-design-system/pull/1298
+
+
+
 - [#1299]
   - **Description:** Consolidate `KSelect` visual tests into a single `KSelectVisualTest.vue` page/snapshot, replacing the deprecated per-scenario spec file
   - **Products impact:** none (internal test infrastructure only)
