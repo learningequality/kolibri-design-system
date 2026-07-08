@@ -1,7 +1,7 @@
 <template>
 
   <div>
-    <h4 :id="classLabel">Class (Single Select)</h4>
+    <h4 :id="classLabel">Class</h4>
     <KListbox
       :id="listboxId"
       v-model="selected"
@@ -16,7 +16,6 @@
         :key="option.id"
         :value="option.id"
         :label="option.label"
-        :showCheckbox="false"
         class="option"
         :style="{ borderColor: $themeTokens.fineLine }"
       />
@@ -64,7 +63,7 @@
   }
 
   .option {
-    padding: 8px 12px;
+    padding: 8px 6px;
     border-bottom: 1px solid;
   }
 

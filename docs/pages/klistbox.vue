@@ -74,7 +74,7 @@
         :items="[
           { text: 'Default', href: '#default' },
           { text: 'Select all', href: '#select-all' },
-          { text: 'Single Select', href: '#single-select' },
+          { text: 'Single select', href: '#single-select' },
           { text: 'Customized', href: '#customized' },
           { text: 'Scrollable', href: '#scrollable' },
           { text: 'Grouped', href: '#grouped' },
@@ -91,7 +91,7 @@
       <DocsBanner a11y>
         If <code>KListbox</code> is not part of another widget, such as a combobox, add either a
         visible label referenced by <code>ariaLabelledBy</code> or a value specified for
-        <code>ariaLabel</code>. Use concise and descriptive value.
+        <code>ariaLabel</code>. Use a concise, descriptive value.
       </DocsBanner>
 
       <DocsExample
@@ -123,8 +123,7 @@
       </ul>
 
       <DocsBanner a11y>
-        Set <code>aria-controls</code> on the select all control to the listbox <code>id</code> to
-        associate the two.
+        Link the control to the listbox <code>id</code> using <code>aria-controls</code>. Provide an explicit label like <code>'Select all users'</code> instead of <code>'All users'</code> because <code>aria-controls</code> does not change what the screen reader says.
       </DocsBanner>
 
       <DocsExample
@@ -134,13 +133,14 @@
       />
 
       <h3>
-        Single Select
+        Single select
         <DocsAnchorTarget anchor="#single-select" />
       </h3>
 
       <p>
-        Set <code>multiple="false"</code> on the listbox and <code>showCheckbox="false"</code> on
-        the options to render plain text options for single selection.
+        Set <code>multiple="false"</code> on the listbox. Options automatically hide the checkbox
+        selector in single-select mode. Use the <code>showSelector</code> prop on
+        <DocsLibraryLink component="KListboxOption" /> to override this behaviour explicitly.
       </p>
 
       <DocsExample
@@ -276,6 +276,13 @@
             required: 'Yes',
             description: 'Announced via live region when an option is deselected.',
             example: 'Deselected',
+          },
+          {
+            name: 'partiallySelected',
+            required: 'No',
+            description:
+              'Renders a visually-hidden text inside indeterminate options so screen readers announce the partial selection state. Use with grouped listboxes that have parent checkboxes.',
+            example: 'Partially selected',
           },
         ],
       };

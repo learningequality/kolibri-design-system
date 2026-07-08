@@ -9,7 +9,7 @@
       :value="node.value"
       :label="node.label"
       :indeterminate="isIndeterminate"
-      :showCheckbox="showCheckbox"
+      :showSelector="showSelector"
       :style="indentStyle"
     >
       <template v-if="$scopedSlots.option">
@@ -26,7 +26,7 @@
       :key="child.value"
       :node="child"
       :depth="depth + 1"
-      :showCheckbox="showCheckbox"
+      :showSelector="showSelector"
       :indeterminateValues="indeterminateValues"
     >
       <template
@@ -45,7 +45,7 @@
     v-else
     :value="node.value"
     :label="node.label"
-    :showCheckbox="showCheckbox"
+    :showSelector="showSelector"
     :style="indentStyle"
   >
     <template v-if="$scopedSlots.option">
@@ -114,7 +114,7 @@
        * When false, options are rendered without a checkbox visual.
        * Derived automatically by KMultiSelectDropdown as `multiple && !hideSelected`.
        */
-      showCheckbox: {
+      showSelector: {
         type: Boolean,
         default: true,
       },

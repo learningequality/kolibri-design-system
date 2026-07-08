@@ -16,7 +16,7 @@
           :style="{ borderColor: $themeTokens.fineLine }"
         >
           <KCheckbox
-            label="All classes"
+            label="Select all classes"
             class="select-all-checkbox"
             :aria-controls="listboxId"
             :disabled="!options.length"

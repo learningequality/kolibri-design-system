@@ -20,7 +20,7 @@
             than necessary and aligns its correctly within the row
           -->
           <KCheckbox
-            label="All users"
+            label="Select all users"
             class="select-all-checkbox"
             :aria-controls="listboxId"
             :disabled="isDisabled"
@@ -29,7 +29,7 @@
             :style="{ marginTop: '6px', marginBottom: '0' }"
             @change="setAllSelected"
           >
-            <KLabeledIcon label="All users">
+            <KLabeledIcon label="Select all users">
               <template #icon>
                 <KIcon
                   icon="allUsers"

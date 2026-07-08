@@ -18,7 +18,7 @@
           :style="{ borderColor: $themeTokens.fineLine }"
         >
           <KCheckbox
-            label="All classes"
+            label="Select all classes"
             class="select-all-checkbox"
             :aria-controls="listboxId"
             :checked="allSelected"
@@ -136,6 +136,7 @@
         allOptionsSelected: 'All options selected',
         allOptionsDeselected: 'No options selected',
         optionDeselected: 'Deselected',
+        partiallySelected: 'Partially selected',
       };
 
       // Leaf-only descendants per group: used to derive indeterminate and checked states

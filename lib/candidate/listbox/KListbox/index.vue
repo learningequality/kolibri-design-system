@@ -297,6 +297,7 @@
         isSelected,
         isFocused,
         toggleOption,
+        getMessage,
         get multiple() {
           return props.multiple;
         },
