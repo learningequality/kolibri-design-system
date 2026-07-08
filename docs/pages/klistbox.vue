@@ -123,10 +123,10 @@
       </ul>
 
       <DocsBanner a11y>
-        Link the control to the listbox <code>id</code> using <code>aria-controls</code>. Build the
-        label for the checkbox in a way that makes it clear it affects the list below (e.g.,
-        <code>'Select all users'</code> instead of <code>'All users'</code>) because
-        <code>aria-controls</code> does not change what the screen reader says.
+        Set <code>aria-controls</code> on the select all control to the listbox <code>id</code> to
+        associate the two. Build the label for the checkbox in a way that makes it clear it affects
+        the list below (e.g., <code>'Select all users'</code> instead of <code>'All users'</code>)
+        because <code>aria-controls</code> does not change what the screen reader says.
       </DocsBanner>
 
       <DocsExample
