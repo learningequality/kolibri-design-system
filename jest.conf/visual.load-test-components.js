@@ -6,15 +6,7 @@ import KButtonVisualTest from '~~/lib/buttons-and-links/__tests__/components/KBu
 import KDropdownMenuVisualTest from '~~/lib/KDropdownMenu/__tests__/components/KDropdownMenuVisualTest.vue';
 import KCheckboxSlotTest from '~~/lib/KCheckbox/__tests__/components/KCheckboxSlotTest.vue';
 import KCheckboxVisualTest from '~~/lib/KCheckbox/__tests__/components/KCheckboxVisualTest.vue';
-import KImgTest from '~~/examples/KImg/Base.vue';
-import KImgAspectRatioTest from '~~/examples/KImg/AspectRatio.vue';
-import KImgContentOnTopTest from '~~/examples/KImg/ContentOnTop.vue';
-import KImgPlaceholderTest from '~~/examples/KImg/Placeholder.vue';
-import KImgFitXYTest from '~~/examples/KImg/FitXY.vue';
-import KImgFitCenterTest from '~~/examples/KImg/FitCenterInside.vue';
-import KImgFitContainTest from '~~/examples/KImg/FitContain.vue';
-import KImgWithBorderTest from '~~/lib/KImg/__tests__/components/KImgWithBorder.vue';
-import KImgWithBackgroundColorTest from '~~/lib/KImg/__tests__/components/KImgWithBackgroundColor.vue';
+import KImgVisualTest from '~~/lib/KImg/__tests__/components/KImgVisualTest.vue';
 
 import KIconVisualTest from '~~/lib/KIcon/__tests__/components/KIconVisualTest.vue';
 import KTextboxVisualTest from '~~/lib/KTextbox/__tests__/components/KTextboxVisualTest.vue';
@@ -31,15 +23,7 @@ Vue.component('VisualTestLayout', VisualTestLayout);
 Vue.component('KCheckboxSlotTest', KCheckboxSlotTest);
 Vue.component('KCheckboxVisualTest', KCheckboxVisualTest);
 
-Vue.component('KImgTest', KImgTest);
-Vue.component('KImgAspectRatioTest', KImgAspectRatioTest);
-Vue.component('KImgContentOnTopTest', KImgContentOnTopTest);
-Vue.component('KImgPlaceholderTest', KImgPlaceholderTest);
-Vue.component('KImgFitXYTest', KImgFitXYTest);
-Vue.component('KImgFitContainTest', KImgFitContainTest);
-Vue.component('KImgFitCenterTest', KImgFitCenterTest);
-Vue.component('KImgWithBorderTest', KImgWithBorderTest);
-Vue.component('KImgWithBackgroundColorTest', KImgWithBackgroundColorTest);
+Vue.component('KImgVisualTest', KImgVisualTest);
 
 Vue.component('KIconVisualTest', KIconVisualTest);
 Vue.component('KTextboxVisualTest', KTextboxVisualTest);
