@@ -32,10 +32,7 @@
 
       <p>Its options are provided via <DocsLibraryLink component="KListboxOption" />.</p>
 
-      <p>
-        It supports both multi selection (default, <code>multiple: true</code>) and single selection
-        (<code>multiple: false</code>).
-      </p>
+      <p>It supports both multi selection and single selection.</p>
 
       <p>
         <code>KListbox</code> supports dynamic option sets (useful for integration with filtering,

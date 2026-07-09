@@ -39,7 +39,7 @@
           :label="group.label"
           :indeterminate="isGroupIndeterminate(group)"
           class="option"
-          :style="{ paddingLeft: '12px', paddingRight: '12px', borderColor: $themeTokens.fineLine }"
+          :style="{ paddingLeft: '16px', paddingRight: '12px', borderColor: $themeTokens.fineLine }"
         />
 
         <template v-for="child in group.children">
@@ -55,7 +55,7 @@
               :indeterminate="isGroupIndeterminate(child)"
               class="option"
               :style="{
-                paddingLeft: '36px',
+                paddingLeft: '40px',
                 paddingRight: '12px',
                 borderColor: $themeTokens.fineLine,
               }"
@@ -68,7 +68,7 @@
               :label="subchild.label"
               class="option"
               :style="{
-                paddingLeft: '60px',
+                paddingLeft: '64px',
                 paddingRight: '12px',
                 borderColor: $themeTokens.fineLine,
               }"
@@ -82,7 +82,7 @@
             :label="child.label"
             class="option"
             :style="{
-              paddingLeft: '36px',
+              paddingLeft: '40px',
               paddingRight: '12px',
               borderColor: $themeTokens.fineLine,
             }"

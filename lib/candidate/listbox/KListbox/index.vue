@@ -438,6 +438,7 @@
   .k-listbox-select-all {
     display: flex;
     align-items: center;
+    padding-inline-start: 4px;
   }
 
   .k-listbox-list {

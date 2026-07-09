@@ -93,6 +93,10 @@
     border-bottom: 1px solid;
   }
 
+  .option {
+    padding-inline-start: 10px;
+  }
+
   .option:last-child {
     border-bottom: 0;
   }
