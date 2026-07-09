@@ -41,10 +41,11 @@
       }"
     >
       <KIcon
-        v-if="isSelected"
         icon="done"
         aria-hidden="true"
         class="k-option-check-icon"
+        :color="$themeTokens.primary"
+        :style="{ visibility: isSelected ? 'visible' : 'hidden' }"
       />
       <slot>{{ label }}</slot>
     </span>
@@ -167,7 +168,7 @@
 
   .k-option-check-icon {
     flex-shrink: 0;
-    font-size: 18px;
+    font-size: 16px;
   }
 
 </style>
