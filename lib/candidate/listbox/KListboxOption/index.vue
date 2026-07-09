@@ -6,7 +6,7 @@
     class="k-listbox-option"
     :class="$computedClass(rowStyles)"
     :style="isFocused ? { ...$coreOutline, outlineOffset: '-3px' } : {}"
-    :aria-selected="String(isSelected)"
+    :aria-selected="indeterminate ? undefined : String(isSelected)"
     @click="onClick"
   >
     <!--
