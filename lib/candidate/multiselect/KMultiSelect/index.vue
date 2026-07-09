@@ -7,10 +7,24 @@
     <div
       ref="containerEl"
       class="kmselect-container"
-      :class="{ 'has-label': label }"
+      :class="[
+        { 'has-label': label, 'is-disabled': disabled },
+        $computedClass({
+          ':hover:not(.is-disabled)': {
+            borderBottomColor: $themePalette.grey.v_500 + ' !important',
+          },
+        }),
+      ]"
       :style="{
         backgroundColor: disabled ? $themeTokens.textDisabled + '20' : $themePalette.grey.v_100,
         borderRadius: '2px 2px 0 0',
+        borderBottom: `2px solid ${
+          showInvalidMessage
+            ? $themeTokens.error
+            : inputFocused
+              ? $themeTokens.primary
+              : $themeTokens.fineLine
+        }`,
       }"
     >
       <label
@@ -116,14 +130,24 @@
       </KMultiSelectDropdown>
     </div>
 
-    <p
-      v-if="showInvalidMessage && invalidText"
-      :id="errorId"
-      class="kmselect-error"
-      :style="{ color: $themeTokens.error }"
-    >
-      {{ invalidText }}
-    </p>
+    <div class="kmselect-feedback">
+      <div
+        v-if="showInvalidMessage && (invalidText || $slots.error)"
+        :id="errorId"
+        class="kmselect-feedback-text"
+        :style="{ color: $themeTokens.error }"
+      >
+        <slot name="error">
+          {{ invalidText }}
+        </slot>
+      </div>
+      <div
+        v-else
+        class="kmselect-feedback-text"
+      >
+        &nbsp;
+      </div>
+    </div>
   </div>
 
 </template>
@@ -158,13 +182,12 @@
 
       const internalSearchText = ref(props.searchText || '');
       const inputFocused = ref(false);
-      const changedOrFocused = ref(false);
       const containerEl = ref(null);
       const inputComponent = ref(null);
       const dropdownComponent = ref(null);
       const activeDescendantId = ref(null);
 
-      const showInvalidMessage = computed(() => props.invalid && changedOrFocused.value);
+      const showInvalidMessage = computed(() => props.invalid);
 
       const listboxId = computed(() => `kmselect-listbox-${uid}`);
       const labelId = computed(() => `kmselect-label-${uid}`);
@@ -322,7 +345,6 @@
 
       function onInputFocus() {
         inputFocused.value = true;
-        changedOrFocused.value = true;
         emit('focus');
       }
 
@@ -389,21 +411,6 @@
         inputComponent.value?.focus();
       }
 
-      function validate() {
-        changedOrFocused.value = true;
-        if (props.required) {
-          const isEmpty = Array.isArray(props.value)
-            ? props.value.length === 0
-            : props.value == null || props.value === '';
-          return !isEmpty;
-        }
-        return true;
-      }
-
-      function resetValidation() {
-        changedOrFocused.value = false;
-        emit('reset-validation');
-      }
       const isLabelInline = computed(
         () =>
           Boolean(props.label) &&
@@ -443,10 +450,6 @@
         onInputKeydown,
         // eslint-disable-next-line vue/no-unused-properties
         focus,
-        // eslint-disable-next-line vue/no-unused-properties
-        validate,
-        // eslint-disable-next-line vue/no-unused-properties
-        resetValidation,
       };
     },
 
@@ -562,13 +565,6 @@
         default: false,
       },
       /**
-       * Whether or not the field is required.
-       */
-      required: {
-        type: Boolean,
-        default: false,
-      },
-      /**
        * Only applies to hierarchical options. When true, selecting a child
        * automatically selects all its ancestors as well.
        */
@@ -639,7 +635,7 @@
     }
   }
 
-  .kmselect-error {
+  .kmselect-feedback {
     margin: 4px 0 0;
     font-size: 12px;
   }

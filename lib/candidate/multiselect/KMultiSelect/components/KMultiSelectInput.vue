@@ -2,18 +2,8 @@
 
   <div
     class="kmselect-input"
-    :class="[
-      disabled ? 'is-disabled' : '',
-      $computedClass({
-        ':hover:not(.is-disabled)': {
-          borderBottomColor: $themePalette.grey.v_500 + ' !important',
-        },
-      }),
-    ]"
+    :class="[disabled ? 'is-disabled' : '']"
     :style="{
-      borderBottom: `2px solid ${
-        invalid ? $themeTokens.error : focused ? $themeTokens.primary : $themeTokens.fineLine
-      }`,
       cursor: disabled ? 'not-allowed' : 'default',
       backgroundColor: 'transparent',
     }"
@@ -93,7 +83,9 @@
       :ariaLabel="clearAllLabel"
       :tooltip="clearAllLabel"
       tooltipPosition="top"
-      :color="focused ? $themeTokens.primary : $themePalette.grey.v_700"
+      :color="
+        invalid ? $themeTokens.error : focused ? $themeTokens.primary : $themePalette.grey.v_700
+      "
       class="kmselect-clear-btn"
       @click.stop="$emit('clear-all')"
       @mousedown.native.prevent
@@ -109,7 +101,9 @@
       :tooltip="isOpen ? closeLabel : openLabel"
       tooltipPosition="top"
       :disabled="disabled"
-      :color="focused ? $themeTokens.primary : $themePalette.grey.v_700"
+      :color="
+        invalid ? $themeTokens.error : focused ? $themeTokens.primary : $themePalette.grey.v_700
+      "
       :style="{
         position: 'absolute',
         insetInlineEnd: '4px',
