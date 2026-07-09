@@ -15,7 +15,7 @@
         invalid ? $themeTokens.error : focused ? $themeTokens.primary : $themeTokens.fineLine
       }`,
       cursor: disabled ? 'not-allowed' : 'default',
-      backgroundColor: disabled ? $themeTokens.textDisabled + '20' : $themePalette.grey.v_100,
+      backgroundColor: 'transparent',
     }"
     @click="handleWrapperClick"
   >
@@ -64,6 +64,7 @@
     </span>
 
     <input
+      :id="inputId"
       ref="inputEl"
       v-model="inputModel"
       class="kmselect-native-input"
@@ -91,6 +92,8 @@
       icon="clear"
       :ariaLabel="clearAllLabel"
       :tooltip="clearAllLabel"
+      tooltipPosition="top"
+      :color="focused ? $themeTokens.primary : $themePalette.grey.v_700"
       class="kmselect-clear-btn"
       @click.stop="$emit('clear-all')"
       @mousedown.native.prevent
@@ -101,15 +104,17 @@
     <KIconButton
       tabindex="-1"
       size="small"
-      :icon="isOpen ? 'chevronUp' : 'chevronDown'"
+      :icon="isOpen ? 'dropup' : 'dropdown'"
       :ariaLabel="isOpen ? closeLabel : openLabel"
       :tooltip="isOpen ? closeLabel : openLabel"
+      tooltipPosition="top"
       :disabled="disabled"
+      :color="focused ? $themeTokens.primary : $themePalette.grey.v_700"
       :style="{
         position: 'absolute',
         insetInlineEnd: '4px',
         top: '50%',
-        transform: 'translateY(-50%)',
+        transform: 'translateY(calc(-50% - 8px))',
       }"
       @click.stop="$emit('toggle')"
       @mousedown.native.prevent
@@ -225,6 +230,10 @@
         type: String,
         required: true,
       },
+      inputId: {
+        type: String,
+        required: true,
+      },
       required: {
         type: Boolean,
         default: false,
@@ -305,10 +314,9 @@
     align-items: center;
     min-height: 40px;
     padding-block: 4px;
-    padding-inline-start: 8px;
+    padding-inline-start: 10px;
     padding-inline-end: 40px;
     border: 0;
-    border-radius: 2px 2px 0 0;
     outline: none;
   }
 
@@ -317,7 +325,7 @@
     min-width: 80px;
     height: 28px;
     padding: 0 4px;
-    font-size: 14px;
+    font-size: 16px;
     background: transparent;
     border: 0;
     outline: none;
@@ -327,7 +335,7 @@
     position: absolute;
     inset-inline-end: 36px;
     top: 50%;
-    transform: translateY(-50%);
+    transform: translateY(calc(-50% - 8px));
   }
 
 </style>

@@ -9,7 +9,7 @@
       label="Duration (Minutes)"
       placeholder="Select duration..."
       :multiple="false"
-      :appearanceOverrides="{ width: '150px' }"
+      :appearanceOverrides="{ width: '200px' }"
     />
     <div style="margin-top: 16px; font-size: 14px"><strong>Selected:</strong> {{ selected }}</div>
   </div>

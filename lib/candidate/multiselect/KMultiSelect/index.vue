@@ -4,25 +4,41 @@
     class="kmselect"
     :style="appearanceOverrides"
   >
-    <label
-      v-if="label"
-      :id="labelId"
-      class="kmselect-label"
-      :style="{ color: disabled ? $themeTokens.textDisabled : $themeTokens.text }"
-    >
-      {{ label }}
-    </label>
-
     <div
       ref="containerEl"
       class="kmselect-container"
-      :style="{ position: 'relative' }"
+      :class="{ 'has-label': label }"
+      :style="{
+        backgroundColor: disabled ? $themeTokens.textDisabled + '20' : $themePalette.grey.v_100,
+        borderRadius: '2px 2px 0 0',
+      }"
     >
+      <label
+        v-if="label"
+        :id="labelId"
+        :for="inputId"
+        class="kmselect-label"
+        :class="{
+          'is-inline': isLabelInline,
+          'is-floating': !isLabelInline,
+        }"
+        :style="{
+          color: disabled
+            ? $themeTokens.textDisabled
+            : showInvalidMessage
+              ? $themeTokens.error
+              : inputFocused
+                ? $themeTokens.primary
+                : $themePalette.grey.v_700,
+        }"
+      >
+        {{ label }}
+      </label>
       <KMultiSelectInput
         ref="inputComponent"
         :selectedOptions="selectedOptionsData"
         :searchText="internalSearchText"
-        :placeholder="placeholder"
+        :placeholder="computedPlaceholder"
         :listboxId="listboxId"
         :required="required"
         :errorId="errorId"
@@ -39,6 +55,7 @@
         :focused="inputFocused"
         :activeDescendant="activeDescendantId"
         :labelId="labelId"
+        :inputId="inputId"
         @update:searchText="onSearchInput"
         @input-keydown="onInputKeydown"
         @input-focus="onInputFocus"
@@ -152,6 +169,7 @@
       const listboxId = computed(() => `kmselect-listbox-${uid}`);
       const labelId = computed(() => `kmselect-label-${uid}`);
       const errorId = computed(() => `kmselect-error-${uid}`);
+      const inputId = computed(() => `kmselect-input-${uid}`);
 
       watch(
         () => props.searchText,
@@ -308,12 +326,13 @@
         emit('focus');
       }
 
-      // When the dropdown opens in single-select mode with a pre-filled value,
-      // select all the text so the user can immediately type to replace it.
       watch(isOpen, newVal => {
-        if (newVal && !props.multiple && suppressFilter.value) {
+        if (newVal) {
           nextTick(() => {
-            inputRef.value?.select();
+            inputRef.value?.focus();
+            if (!props.multiple && suppressFilter.value) {
+              inputRef.value?.select();
+            }
           });
         }
       });
@@ -385,11 +404,20 @@
         changedOrFocused.value = false;
         emit('reset-validation');
       }
+      const isLabelInline = computed(
+        () =>
+          Boolean(props.label) &&
+          selectedOptionsData.value.length === 0 &&
+          !internalSearchText.value &&
+          !inputFocused.value,
+      );
+      const computedPlaceholder = computed(() => (isLabelInline.value ? '' : props.placeholder));
 
       return {
         listboxId,
         labelId,
         errorId,
+        inputId,
         activeDescendantId,
         isOpen,
         internalSearchText,
@@ -403,6 +431,8 @@
         selectedOptionsData,
         selectedValuesArray,
         indeterminateValues,
+        isLabelInline,
+        computedPlaceholder,
         onChipRemove,
         onClearAll,
         toggleDropdown,
@@ -575,11 +605,38 @@
     width: 100%;
   }
 
+  .kmselect-container {
+    position: relative;
+    width: 100%;
+
+    &.has-label {
+      padding-top: 24px;
+    }
+  }
+
   .kmselect-label {
-    display: block;
-    margin-bottom: 4px;
-    font-size: 12px;
-    font-weight: 600;
+    position: absolute;
+    inset-inline-start: 10px;
+    top: 2px;
+    z-index: 1;
+    display: table;
+    width: fit-content;
+    margin-bottom: 0;
+    font-size: 15px;
+    font-weight: normal;
+    transition:
+      color 0.1s ease,
+      transform 0.2s ease;
+    transform-origin: left;
+
+    &.is-inline {
+      cursor: text;
+      transform: translateY(22px) scale(1.1);
+    }
+
+    &.is-floating {
+      transform: translateY(0) scale(0.9);
+    }
   }
 
   .kmselect-error {
