@@ -81,7 +81,7 @@
         @input-blur="onInputBlur"
         @chip-remove="onChipRemove"
         @clear-all="onClearAll"
-        @toggle="toggleDropdown"
+        @toggle="onToggleDropdown"
       >
         <template
           v-if="$scopedSlots.chip"
@@ -240,6 +240,7 @@
           containerEl,
           setSearchText,
           suppressFilter,
+          searchText: internalSearchText,
           normalizedOptions,
           getOptionValue,
           getOptionText,
@@ -357,8 +358,9 @@
         emit('focus');
       }
 
-      function onContainerClick() {
+      function onContainerClick(event) {
         if (props.disabled) return;
+        if (dropdownComponent.value?.$el?.contains(event.target)) return;
         inputComponent.value?.focus();
         if (!isOpen.value) {
           openDropdown();
@@ -392,11 +394,28 @@
         inputRef.value?.focus();
       }
 
+      function onToggleDropdown() {
+        inputComponent.value?.focus();
+        toggleDropdown();
+      }
+
       async function onListboxInput(newValues) {
         onCascadeListboxInput(newValues);
         await nextTick();
-        if (isOpen.value) {
-          inputRef.value?.focus();
+        
+        if (!props.multiple && props.value != null && props.value !== '') {
+          const opt = normalizedOptions.value.find(o => getOptionValue(o) === props.value);
+          if (opt) {
+            internalSearchText.value = getOptionText(opt);
+          }
+        }
+        
+        await nextTick();
+        const inputEl = inputRef.value;
+        if (inputEl) {
+          inputEl.focus();
+          const len = inputEl.value.length;
+          inputEl.setSelectionRange(len, len);
         }
       }
 
@@ -461,7 +480,7 @@
         onContainerClick,
         onChipRemove,
         onClearAll,
-        toggleDropdown,
+        onToggleDropdown,
         onSearchInput,
         onInputFocus,
         onInputBlur,

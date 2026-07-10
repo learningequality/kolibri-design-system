@@ -224,10 +224,22 @@
 
       function moveFocusBy(delta) {
         const optionsCount = options.value.length;
-        const currentIndex = options.value.findIndex(o => o.value === focusedValue.value);
-        // Modulo to wrap for circular navigation
-        const newIndex = (currentIndex + delta + optionsCount) % optionsCount;
-        setFocus(optionValueAt(newIndex));
+        if (optionsCount === 0) return;
+
+        let currentIndex = options.value.findIndex(o => o.value === focusedValue.value);
+        if (currentIndex === -1) {
+          const firstSelectedIndex = options.value.findIndex(o => isSelected(o.value));
+          if (firstSelectedIndex !== -1) {
+            currentIndex = firstSelectedIndex;
+          } else {
+            currentIndex = delta > 0 ? -1 : optionsCount;
+          }
+        }
+        const newIndex = Math.max(0, Math.min(currentIndex + delta, optionsCount - 1));
+        
+        if (newIndex !== currentIndex) {
+          setFocus(optionValueAt(newIndex));
+        }
       }
 
       function onListFocus() {
