@@ -253,8 +253,8 @@
 
   .kmselect-dropdown {
     position: absolute;
-    inset-inline-start: 0;
-    inset-inline-end: 0;
+    left: 0;
+    right: 0;
     top: 100%;
     z-index: $z-index-dropdown;
     max-height: 256px;

@@ -650,7 +650,7 @@
 
   .kmselect-label {
     position: absolute;
-    inset-inline-start: 10px;
+    left: 10px;
     top: 2px;
     z-index: 1;
     display: table;

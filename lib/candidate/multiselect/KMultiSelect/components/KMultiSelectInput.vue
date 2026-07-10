@@ -118,7 +118,7 @@
       "
       :style="{
         position: 'absolute',
-        insetInlineEnd: '4px',
+        right: '4px',
         top: '50%',
         transform: 'translateY(-50%)',
       }"
@@ -318,9 +318,10 @@
     gap: 4px;
     align-items: center;
     min-height: 32px;
-    padding-block: 4px;
-    padding-inline-start: 10px;
-    padding-inline-end: 40px;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    padding-left: 10px;
+    padding-right: 40px;
     border: 0;
     outline: none;
   }
@@ -338,7 +339,7 @@
 
   .kmselect-clear-btn {
     position: absolute;
-    inset-inline-end: 36px;
+    right: 36px;
     top: 50%;
     transform: translateY(-50%);
   }
