@@ -7,6 +7,19 @@ Changelog is rather internal in nature. See release notes for the public overvie
 <!-- [DO NOT REMOVE-USED BY GH ACTION] PASTE CHANGELOG -->
 
 
+- [#1293]
+  - **Description:** Added native single-select support to `KListbox` and `KListboxOption`.
+  - **Products impact:** none
+  - **Addresses:** #1292
+  - **Components:** KListbox, KListboxOption
+  - **Breaking:** no
+  - **Impacts a11y:** yes
+  - **Guidance:** Set `multiple="false"` on `KListbox` and `showCheckbox="false"` on `KListboxOption` to enforce single selection rules (disables Ctrl+A, replaces value instead of appending) while dropping the visual checkbox for plain text rendering with selection highlighting.
+
+[#1293]: https://github.com/learningequality/kolibri-design-system/pull/1293
+
+
+
 - [#1294]
   - **Description:** Migrates visual tests for KIconButton to be in one file
   - **Products impact:** none
