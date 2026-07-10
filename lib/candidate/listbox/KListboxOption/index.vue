@@ -42,10 +42,9 @@
     >
       <KIcon
         icon="done"
-        aria-hidden="true"
         class="k-option-check-icon"
         :color="$themeTokens.primary"
-        :style="{ visibility: isSelected ? 'visible' : 'hidden' }"
+        :style="{ visibility: isSelected ? 'visible' : 'hidden', top: '0' }"
       />
       <slot>{{ label }}</slot>
     </span>
@@ -156,7 +155,7 @@
     display: flex;
     align-items: center;
     min-height: 36px;
-    padding-inline-start: 4px;
+    padding-left: 4px;
     cursor: pointer;
   }
 

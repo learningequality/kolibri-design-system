@@ -94,7 +94,7 @@
   }
 
   .option {
-    padding-inline-start: 10px;
+    padding-left: 10px;
   }
 
   .option:last-child {
