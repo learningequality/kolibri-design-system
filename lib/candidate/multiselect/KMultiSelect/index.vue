@@ -8,24 +8,27 @@
       ref="containerEl"
       class="kmselect-container"
       :class="[
-        { 'has-label': label, 'is-disabled': disabled },
+        { 'has-label': label, 'is-disabled': disabled, 'is-active': inputFocused || isOpen },
         $computedClass({
-          ':hover:not(.is-disabled)': {
-            borderBottomColor: $themePalette.grey.v_500 + ' !important',
+          ':hover:not(.is-disabled):not(.is-active)': {
+            borderBottomColor: $themeTokens.text,
           },
         }),
       ]"
       :style="{
         backgroundColor: disabled ? $themeTokens.textDisabled + '20' : $themePalette.grey.v_100,
         borderRadius: '2px 2px 0 0',
-        borderBottom: `2px solid ${
-          showInvalidMessage
+        borderBottom: `1px solid ${
+          invalid
             ? $themeTokens.error
             : inputFocused
               ? $themeTokens.primary
-              : $themeTokens.fineLine
+              : $themePalette.grey.v_700
         }`,
       }"
+      @mouseenter="isHovered = true"
+      @mouseleave="isHovered = false"
+      @click="onContainerClick"
     >
       <label
         v-if="label"
@@ -39,11 +42,13 @@
         :style="{
           color: disabled
             ? $themeTokens.textDisabled
-            : showInvalidMessage
+            : invalid
               ? $themeTokens.error
-              : inputFocused
+              : inputFocused || isOpen
                 ? $themeTokens.primary
-                : $themePalette.grey.v_700,
+                : isHovered
+                  ? $themeTokens.text
+                  : $themePalette.grey.v_700,
         }"
       >
         {{ label }}
@@ -54,7 +59,6 @@
         :searchText="internalSearchText"
         :placeholder="computedPlaceholder"
         :listboxId="listboxId"
-        :required="required"
         :errorId="errorId"
         :isOpen="isOpen"
         :multiple="multiple"
@@ -65,8 +69,9 @@
         :openLabel="typeof messages.open === 'function' ? messages.open() : ''"
         :closeLabel="typeof messages.close === 'function' ? messages.close() : ''"
         :disabled="disabled"
-        :invalid="showInvalidMessage"
+        :invalid="invalid"
         :focused="inputFocused"
+        :hovered="isHovered && !inputFocused && !isOpen"
         :activeDescendant="activeDescendantId"
         :labelId="labelId"
         :inputId="inputId"
@@ -82,7 +87,7 @@
           v-if="$scopedSlots.chip"
           #chip="slotProps"
         >
-          <!--@slot Custom slot for rendering selected items (chips) in multiple select mode. -->
+          <!-- @slot Custom slot for rendering selected items (chips) in multiple select mode. -->
           <slot
             name="chip"
             v-bind="slotProps"
@@ -111,19 +116,19 @@
           v-if="$scopedSlots.option"
           #option="slotProps"
         >
-          <!--@slot Custom slot for rendering option items in the dropdown menu. -->
+          <!-- @slot Custom slot for rendering option items in the dropdown menu. -->
           <slot
             name="option"
             v-bind="slotProps"
           ></slot>
         </template>
         <template
-          v-if="$scopedSlots.empty"
-          #empty
+          v-if="$scopedSlots['no-results']"
+          #no-results
         >
-          <!--@slot Custom slot for rendering content when no search results are found. -->
+          <!-- @slot Optional slot as alternative to `noResultsText` prop -->
           <slot
-            name="empty"
+            name="no-results"
             :searchText="internalSearchText"
           ></slot>
         </template>
@@ -132,11 +137,12 @@
 
     <div class="kmselect-feedback">
       <div
-        v-if="showInvalidMessage && (invalidText || $slots.error)"
+        v-if="showError"
         :id="errorId"
         class="kmselect-feedback-text"
         :style="{ color: $themeTokens.error }"
       >
+        <!-- @slot Optional slot as alternative to `invalidText` prop -->
         <slot name="error">
           {{ invalidText }}
         </slot>
@@ -182,12 +188,15 @@
 
       const internalSearchText = ref(props.searchText || '');
       const inputFocused = ref(false);
+      const isHovered = ref(false);
       const containerEl = ref(null);
       const inputComponent = ref(null);
       const dropdownComponent = ref(null);
       const activeDescendantId = ref(null);
 
-      const showInvalidMessage = computed(() => props.invalid);
+      const showError = computed(
+        () => props.invalid && (Boolean(props.invalidText) || Boolean(instance.proxy.$slots.error)),
+      );
 
       const listboxId = computed(() => `kmselect-listbox-${uid}`);
       const labelId = computed(() => `kmselect-label-${uid}`);
@@ -348,6 +357,14 @@
         emit('focus');
       }
 
+      function onContainerClick() {
+        if (props.disabled) return;
+        inputComponent.value?.focus();
+        if (!isOpen.value) {
+          openDropdown();
+        }
+      }
+
       watch(isOpen, newVal => {
         if (newVal) {
           nextTick(() => {
@@ -429,7 +446,8 @@
         isOpen,
         internalSearchText,
         inputFocused,
-        showInvalidMessage,
+        isHovered,
+        showError,
         containerEl,
         inputComponent,
         dropdownComponent,
@@ -440,6 +458,7 @@
         indeterminateValues,
         isLabelInline,
         computedPlaceholder,
+        onContainerClick,
         onChipRemove,
         onClearAll,
         toggleDropdown,
@@ -606,7 +625,7 @@
     width: 100%;
 
     &.has-label {
-      padding-top: 24px;
+      padding-top: 20px;
     }
   }
 
@@ -627,11 +646,11 @@
 
     &.is-inline {
       cursor: text;
-      transform: translateY(22px) scale(1.1);
+      transform: translateY(24px) scale(1.1);
     }
 
     &.is-floating {
-      transform: translateY(0) scale(0.9);
+      transform: translateY(0) scale(1);
     }
   }
 

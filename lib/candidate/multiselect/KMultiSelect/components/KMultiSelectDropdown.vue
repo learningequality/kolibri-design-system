@@ -20,7 +20,7 @@
         v-for="node in decoratedOptionTree"
         :key="node.value"
         :node="node"
-        :showCheckbox="showCheckbox"
+        :showSelector="showSelector"
         :indeterminateValues="indeterminateValues"
         :showTopBorder="node._showTopBorder"
       >
@@ -42,7 +42,7 @@
       role="status"
       :style="{ color: $themeTokens.annotation }"
     >
-      <slot name="empty">
+      <slot name="no-results">
         <p class="kmselect-dropdown-empty-text">
           {{ noResultsText }}
         </p>
@@ -141,8 +141,9 @@
         })),
       );
 
-      // Show checkboxes only in multi-select mode without hideSelected (tags mode).
-      const showCheckbox = computed(() => props.multiple && !props.hideSelected);
+      // Show selection indicator (checkbox in multi-select, tick in single-select).
+      // Hidden when hideSelected=true (tags mode) since selected items aren't in the list.
+      const showSelector = computed(() => props.multiple && !props.hideSelected);
 
       // Forward keyboard event from input to KListbox so focus stays on the input.
       function forwardKeydown(event) {
@@ -172,7 +173,7 @@
         klistboxRef,
         normalizedSelectedValues,
         decoratedOptionTree,
-        showCheckbox,
+        showSelector,
         // eslint-disable-next-line vue/no-unused-properties
         forwardKeydown,
         // eslint-disable-next-line vue/no-unused-properties

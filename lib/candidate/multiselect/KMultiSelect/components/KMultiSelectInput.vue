@@ -84,7 +84,13 @@
       :tooltip="clearAllLabel"
       tooltipPosition="top"
       :color="
-        invalid ? $themeTokens.error : focused ? $themeTokens.primary : $themePalette.grey.v_700
+        invalid
+          ? $themeTokens.error
+          : focused
+            ? $themeTokens.primary
+            : hovered
+              ? $themeTokens.text
+              : $themePalette.grey.v_700
       "
       class="kmselect-clear-btn"
       @click.stop="$emit('clear-all')"
@@ -102,13 +108,19 @@
       tooltipPosition="top"
       :disabled="disabled"
       :color="
-        invalid ? $themeTokens.error : focused ? $themeTokens.primary : $themePalette.grey.v_700
+        invalid
+          ? $themeTokens.error
+          : focused
+            ? $themeTokens.primary
+            : hovered
+              ? $themeTokens.text
+              : $themePalette.grey.v_700
       "
       :style="{
         position: 'absolute',
         insetInlineEnd: '4px',
         top: '50%',
-        transform: 'translateY(calc(-50% - 8px))',
+        transform: 'translateY(-50%)',
       }"
       @click.stop="$emit('toggle')"
       @mousedown.native.prevent
@@ -150,7 +162,6 @@
           'aria-haspopup': 'listbox',
           'aria-controls': props.listboxId,
           'aria-autocomplete': 'list',
-          ...(props.required && { 'aria-required': 'true' }),
           'aria-invalid': props.invalid ? 'true' : 'false',
         };
         if (props.labelId) {
@@ -228,10 +239,6 @@
         type: String,
         required: true,
       },
-      required: {
-        type: Boolean,
-        default: false,
-      },
       errorId: {
         type: String,
         default: null,
@@ -265,6 +272,10 @@
         default: false,
       },
       focused: {
+        type: Boolean,
+        default: false,
+      },
+      hovered: {
         type: Boolean,
         default: false,
       },
@@ -306,7 +317,7 @@
     flex-wrap: wrap;
     gap: 4px;
     align-items: center;
-    min-height: 40px;
+    min-height: 32px;
     padding-block: 4px;
     padding-inline-start: 10px;
     padding-inline-end: 40px;
@@ -319,7 +330,7 @@
     min-width: 80px;
     height: 28px;
     padding: 0 4px;
-    font-size: 16px;
+    font-size: 15px;
     background: transparent;
     border: 0;
     outline: none;
@@ -329,7 +340,7 @@
     position: absolute;
     inset-inline-end: 36px;
     top: 50%;
-    transform: translateY(calc(-50% - 8px));
+    transform: translateY(-50%);
   }
 
 </style>
