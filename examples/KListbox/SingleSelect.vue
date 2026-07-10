@@ -7,26 +7,10 @@
       v-model="selected"
       class="listbox"
       :ariaLabelledBy="classLabel"
-      :style="{ maxHeight: '200px', borderColor: $themeTokens.fineLine }"
       :messages="messages"
+      :multiple="false"
+      :style="{ borderColor: $themeTokens.fineLine }"
     >
-      <template #selectAll="{ allSelected, someSelected, setAllSelected }">
-        <div
-          class="select-all"
-          :style="{ borderColor: $themeTokens.fineLine }"
-        >
-          <KCheckbox
-            label="Select all classes"
-            class="select-all-checkbox"
-            :aria-controls="listboxId"
-            :disabled="!options.length"
-            :checked="allSelected"
-            :indeterminate="someSelected"
-            :style="{ marginTop: '6px', marginBottom: '0' }"
-            @change="setAllSelected"
-          />
-        </div>
-      </template>
       <KListboxOption
         v-for="option in options"
         :key="option.id"
@@ -50,17 +34,13 @@
 
   export default {
     setup() {
-      const classLabel = 'scrollable-class';
-      const listboxId = 'scrollable-listbox';
-      const selected = ref(['literature', 'art', 'chemistry']);
+      const classLabel = 'single-select-class';
+      const listboxId = 'single-select-listbox';
+      const selected = ref(['literature']);
       const options = [
         { id: 'biology', label: 'Biology' },
         { id: 'literature', label: 'Literature' },
         { id: 'physics', label: 'Physics' },
-        { id: 'art', label: 'Art' },
-        { id: 'chemistry', label: 'Chemistry' },
-        { id: 'geography', label: 'Geography' },
-        { id: 'history', label: 'History' },
       ];
       const messages = {
         clickable: 'Options are clickable',
@@ -82,19 +62,9 @@
     border-radius: 4px;
   }
 
-  .select-all,
-  .select-all-checkbox {
-    width: 100%;
-  }
-
-  .option,
-  .select-all {
-    padding: 4px 6px;
-    border-bottom: 1px solid;
-  }
-
   .option {
-    padding-left: 10px;
+    padding: 8px 6px;
+    border-bottom: 1px solid;
   }
 
   .option:last-child {

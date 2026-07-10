@@ -13,7 +13,7 @@
       checkbox is clicked (otherwise click would cause double-toggle, resulting in no change))
     -->
     <div
-      v-if="$scopedSlots.selectAll"
+      v-if="multiple && $scopedSlots.selectAll"
       class="k-listbox-select-all"
       :class="$computedClass(selectAllStyles)"
       :style="{ backgroundColor: $themeTokens.surface }"
@@ -173,6 +173,7 @@
 
       function changeSelectAll(checked) {
         if (!hasOptions.value) return;
+        if (!props.multiple) return; // Prevent "select all" in single-select mode
         if (checked) {
           selectAllOptions();
         } else {
@@ -272,6 +273,9 @@
             if (!event.ctrlKey && !event.metaKey) {
               return;
             }
+            if (!props.multiple) {
+              return; // Do not allow select-all in single-select mode
+            }
             if (allSelected.value) {
               deselectAllOptions();
             } else {
@@ -293,6 +297,10 @@
         isSelected,
         isFocused,
         toggleOption,
+        getMessage,
+        get multiple() {
+          return props.multiple;
+        },
       });
 
       onMounted(() => {
@@ -347,7 +355,8 @@
         required: true,
       },
       /**
-       * Array of currently selected option values
+       * Array of selected option values. Always an Array in both single and
+       * multi-select modes for a consistent v-model API.
        */
       value: {
         type: Array,
@@ -396,7 +405,10 @@
       },
       /**
        * Whether the listbox allows multiple selections.
-       * Controls the aria-multiselectable attribute.
+       * Controls both the aria-multiselectable ARIA attribute and the
+       * actual selection behavior: when false, re-clicking an already
+       * selected option does nothing, and selecting a new option replaces
+       * the current selection instead of adding to it.
        */
       multiple: {
         type: Boolean,
@@ -426,6 +438,7 @@
   .k-listbox-select-all {
     display: flex;
     align-items: center;
+    padding-left: 4px;
   }
 
   .k-listbox-list {

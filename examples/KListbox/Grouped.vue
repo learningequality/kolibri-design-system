@@ -18,7 +18,7 @@
           :style="{ borderColor: $themeTokens.fineLine }"
         >
           <KCheckbox
-            label="All classes"
+            label="Select all classes"
             class="select-all-checkbox"
             :aria-controls="listboxId"
             :checked="allSelected"
@@ -39,7 +39,7 @@
           :label="group.label"
           :indeterminate="isGroupIndeterminate(group)"
           class="option"
-          :style="{ paddingLeft: '12px', paddingRight: '12px', borderColor: $themeTokens.fineLine }"
+          :style="{ paddingLeft: '16px', paddingRight: '12px', borderColor: $themeTokens.fineLine }"
         />
 
         <template v-for="child in group.children">
@@ -55,7 +55,7 @@
               :indeterminate="isGroupIndeterminate(child)"
               class="option"
               :style="{
-                paddingLeft: '36px',
+                paddingLeft: '40px',
                 paddingRight: '12px',
                 borderColor: $themeTokens.fineLine,
               }"
@@ -68,7 +68,7 @@
               :label="subchild.label"
               class="option"
               :style="{
-                paddingLeft: '60px',
+                paddingLeft: '64px',
                 paddingRight: '12px',
                 borderColor: $themeTokens.fineLine,
               }"
@@ -82,7 +82,7 @@
             :label="child.label"
             class="option"
             :style="{
-              paddingLeft: '36px',
+              paddingLeft: '40px',
               paddingRight: '12px',
               borderColor: $themeTokens.fineLine,
             }"
@@ -136,6 +136,7 @@
         allOptionsSelected: 'All options selected',
         allOptionsDeselected: 'No options selected',
         optionDeselected: 'Deselected',
+        partiallySelected: 'Partially selected',
       };
 
       // Leaf-only descendants per group: used to derive indeterminate and checked states

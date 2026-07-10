@@ -14,7 +14,7 @@
           than necessary and aligns its correctly within the row
         -->
         <KCheckbox
-          label="All classes"
+          label="Select all classes"
           :aria-controls="listboxId"
           :disabled="!options.length"
           :checked="allSelected"

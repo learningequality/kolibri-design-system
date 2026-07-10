@@ -4,25 +4,12 @@
     <template #developerNotes>
       <ul :style="{ margin: 0 }">
         <li>
-          Grouped options aren't supported yet, as we haven't needed them. They could be added by
-          extending our listbox components according to
-          <DocsExternalLink
-            text="grouped options of APG's listbox pattern"
-            href="https://www.w3.org/WAI/ARIA/apg/patterns/listbox/examples/listbox-grouped/"
-          />
-          (likely adding <code>KListboxGroup</code>)
-        </li>
-        <li>
-          Reflecting our first use-cases, multi selection is the default behavior. Single selection
-          mode could be added by a few adjustments in line with the same APG listbox pattern.
-        </li>
-        <li>
           Listboxes are often combined with searching or filtering, but that's not part of the
           listbox pattern and use cases vary. If a frequent pattern emerges, it may motivate
           dedicated search/filter components that integrate well with <code>KListbox</code>.
         </li>
         <li>
-          Currently KListbox doesn't support options reodering, so bear in mind that if the list
+          Currently KListbox doesn't support options reordering, so bear in mind that if the list
           changes due to a filter, the filtered list should preserve the order of the original list
           to avoid unexpected keyboard navigation.
         </li>
@@ -45,10 +32,7 @@
 
       <p>Its options are provided via <DocsLibraryLink component="KListboxOption" />.</p>
 
-      <p>
-        It currently defaults to multi selection and does not yet support single selection or
-        grouped options (see developer notes above).
-      </p>
+      <p>It supports both multi selection and single selection.</p>
 
       <p>
         <code>KListbox</code> supports dynamic option sets (useful for integration with filtering,
@@ -87,6 +71,7 @@
         :items="[
           { text: 'Default', href: '#default' },
           { text: 'Select all', href: '#select-all' },
+          { text: 'Single select', href: '#single-select' },
           { text: 'Customized', href: '#customized' },
           { text: 'Scrollable', href: '#scrollable' },
           { text: 'Grouped', href: '#grouped' },
@@ -103,7 +88,7 @@
       <DocsBanner a11y>
         If <code>KListbox</code> is not part of another widget, such as a combobox, add either a
         visible label referenced by <code>ariaLabelledBy</code> or a value specified for
-        <code>ariaLabel</code>. Use concise and descriptive value.
+        <code>ariaLabel</code>. Use a concise, descriptive value.
       </DocsBanner>
 
       <DocsExample
@@ -136,13 +121,32 @@
 
       <DocsBanner a11y>
         Set <code>aria-controls</code> on the select all control to the listbox <code>id</code> to
-        associate the two.
+        associate the two. Build the label for the checkbox in a way that makes it clear it affects
+        the list below (e.g., <code>'Select all users'</code> instead of <code>'All users'</code>)
+        because <code>aria-controls</code> does not change what the screen reader says.
       </DocsBanner>
 
       <DocsExample
         block
         exampleId="klistbox-select-all"
         loadExample="KListbox/SelectAll.vue"
+      />
+
+      <h3>
+        Single select
+        <DocsAnchorTarget anchor="#single-select" />
+      </h3>
+
+      <p>
+        Set <code>multiple="false"</code> on the listbox. Options automatically hide the checkbox
+        selector in single-select mode. Use the <code>showSelector</code> prop on
+        <DocsLibraryLink component="KListboxOption" /> to override this behaviour explicitly.
+      </p>
+
+      <DocsExample
+        block
+        exampleId="klistbox-single-select"
+        loadExample="KListbox/SingleSelect.vue"
       />
 
       <h3>
@@ -217,6 +221,10 @@
           <code>KListbox</code>
         </li>
         <li>
+          <DocsLibraryLink component="KListboxGroup" /> groups options inside
+          <code>KListbox</code>
+        </li>
+        <li>
           <DocsExternalLink
             text="APG listbox"
             href="https://www.w3.org/WAI/ARIA/apg/patterns/listbox/"
@@ -268,6 +276,13 @@
             required: 'Yes',
             description: 'Announced via live region when an option is deselected.',
             example: 'Deselected',
+          },
+          {
+            name: 'partiallySelected',
+            required: 'No',
+            description:
+              'Renders a visually-hidden text inside indeterminate options so screen readers announce the partial selection state. Use with grouped listboxes that have parent checkboxes.',
+            example: 'Partially selected',
           },
         ],
       };

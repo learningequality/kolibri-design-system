@@ -6,7 +6,7 @@
     class="k-listbox-option"
     :class="$computedClass(rowStyles)"
     :style="isFocused ? { ...$coreOutline, outlineOffset: '-3px' } : {}"
-    :aria-selected="String(isSelected)"
+    :aria-selected="indeterminate ? undefined : String(isSelected)"
     @click="onClick"
   >
     <!--
@@ -14,7 +14,7 @@
       than necessary and aligns it correctly within the row
     -->
     <KCheckbox
-      v-if="showCheckbox"
+      v-if="effectiveShowSelector"
       presentational
       :style="{ marginTop: '6px', marginBottom: '0' }"
       :checked="isSelected"
@@ -22,18 +22,30 @@
       :label="label"
     >
       <!-- @slot For customizing option label -->
-      <slot></slot>
+      <slot>{{ label }}</slot>
+      <span
+        v-if="indeterminate && partiallySelectedText"
+        class="visuallyhidden"
+        aria-hidden="false"
+      >
+        {{ partiallySelectedText }}
+      </span>
     </KCheckbox>
-    <!--
-      When showCheckbox is false (e.g. single-select or hideSelected mode),
-      render the label as plain text. aria-selected on the <li> still conveys
-      the selected state to screen readers.
-    -->
+
     <span
       v-else
-      class="k-listbox-option-label"
-      :style="{ lineHeight: '24px' }"
+      class="k-option-plain-label"
+      :style="{
+        color: isSelected ? $themeTokens.primary : 'inherit',
+        fontWeight: isSelected ? '500' : 'normal',
+      }"
     >
+      <KIcon
+        icon="done"
+        class="k-option-check-icon"
+        :color="$themeTokens.primary"
+        :style="{ visibility: isSelected ? 'visible' : 'hidden', top: '0' }"
+      />
       <slot>{{ label }}</slot>
     </span>
   </li>
@@ -59,7 +71,9 @@
       const uid = optionCount++;
       const optionId = `klistbox-option-${uid}`;
 
-      onMounted(() => listbox.registerOption({ id: optionId, value: props.value }));
+      onMounted(() => {
+        listbox.registerOption({ id: optionId, value: props.value });
+      });
 
       onBeforeUnmount(() => listbox.unregisterOption({ id: optionId, value: props.value }));
 
@@ -78,12 +92,24 @@
         listbox.toggleOption(props.value);
       }
 
+      const partiallySelectedText = computed(() => {
+        if (!listbox.getMessage) return null;
+        return listbox.getMessage('partiallySelected') || null;
+      });
+
+      const effectiveShowSelector = computed(() => {
+        if (props.showSelector !== null) return props.showSelector;
+        return listbox.multiple;
+      });
+
       return {
         optionId,
         isSelected,
         isFocused,
         rowStyles,
         onClick,
+        partiallySelectedText,
+        effectiveShowSelector,
       };
     },
     props: {
@@ -102,21 +128,20 @@
         required: true,
       },
       /**
-       * Indeterminate visual state for group checkboxes.
+       * Sets the selection indicator to an indeterminate state.
+       * Use when some but not all options within a group are selected.
        */
       indeterminate: {
         type: Boolean,
         default: false,
       },
       /**
-       * When true (default), wraps the option label in a KCheckbox for
-       * multi-select use cases. When false, renders a plain label — used
-       * when checkboxes are not meaningful (e.g. single-select, or
-       * hideSelected mode where selected items are already removed from the list).
+       * Controls whether the selector is shown. By default it is `null`, which hides
+       * it in single-select and shows it in multi-select. Set to `true` or `false` to override.
        */
-      showCheckbox: {
+      showSelector: {
         type: Boolean,
-        default: true,
+        default: null,
       },
     },
   };
@@ -130,7 +155,19 @@
     display: flex;
     align-items: center;
     min-height: 36px;
+    padding-left: 4px;
     cursor: pointer;
+  }
+
+  .k-option-plain-label {
+    display: flex;
+    gap: 4px;
+    align-items: center;
+  }
+
+  .k-option-check-icon {
+    flex-shrink: 0;
+    font-size: 16px;
   }
 
 </style>
