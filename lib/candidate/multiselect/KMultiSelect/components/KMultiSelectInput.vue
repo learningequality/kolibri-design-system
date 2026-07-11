@@ -107,6 +107,8 @@
       :tooltip="isOpen ? closeLabel : openLabel"
       tooltipPosition="top"
       :disabled="disabled"
+      :aria-expanded="String(isOpen)"
+      :aria-controls="listboxId"
       :color="
         invalid
           ? $themeTokens.error

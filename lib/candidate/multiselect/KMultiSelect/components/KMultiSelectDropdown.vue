@@ -141,17 +141,37 @@
         })),
       );
 
-      // Show selection indicator (checkbox in multi-select, tick in single-select).
-      // Hidden when hideSelected=true (tags mode) since selected items aren't in the list.
       const showSelector = computed(() => props.multiple && !props.hideSelected);
 
-      // Forward keyboard event from input to KListbox so focus stays on the input.
       function forwardKeydown(event) {
         const listEl = klistboxRef.value?.$refs?.listEl;
         if (!listEl) return;
+
+        let keyToDispatch = event.key;
+
+        if (event.key === 'ArrowDown' || event.key === 'ArrowUp') {
+          const optionEls = listEl.querySelectorAll('[role="option"]');
+          const optionCount = optionEls.length;
+
+          if (optionCount > 0) {
+            const focusedId = listEl.getAttribute('aria-activedescendant');
+            const focusedIndex = focusedId
+              ? Array.from(optionEls).findIndex(el => el.id === focusedId)
+              : -1;
+
+            if (event.key === 'ArrowDown' && focusedIndex === optionCount - 1) {
+              // At last option → wrap to first
+              keyToDispatch = 'Home';
+            } else if (event.key === 'ArrowUp' && focusedIndex === 0) {
+              // At first option → wrap to last
+              keyToDispatch = 'End';
+            }
+          }
+        }
+
         listEl.dispatchEvent(
           new KeyboardEvent('keydown', {
-            key: event.key,
+            key: keyToDispatch,
             code: event.code,
             ctrlKey: event.ctrlKey,
             metaKey: event.metaKey,
