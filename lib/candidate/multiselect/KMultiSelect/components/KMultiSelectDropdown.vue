@@ -301,9 +301,13 @@
   }
 
   .kmselect-dropdown-empty {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 48px;
     padding: 12px 16px;
     margin: 0;
-    font-size: 14px;
+    font-size: 16px;
     text-align: center;
   }
 
