@@ -4,8 +4,7 @@
     v-show="
       isOpen &&
         (decoratedOptionTree.length > 0 ||
-          Boolean(noResultsText) ||
-          Boolean($scopedSlots['no-results']))
+          (Boolean(searchText) && (Boolean(noResultsText) || Boolean($scopedSlots['no-results']))))
     "
     class="kmselect-dropdown"
     :style="{ backgroundColor: $themeTokens.surface }"
@@ -42,7 +41,11 @@
     </KListbox>
 
     <div
-      v-if="decoratedOptionTree.length === 0"
+      v-if="
+        decoratedOptionTree.length === 0 &&
+          Boolean(searchText) &&
+          (Boolean(noResultsText) || Boolean($scopedSlots['no-results']))
+      "
       class="kmselect-dropdown-empty"
       role="status"
       :style="{ color: $themeTokens.annotation }"
@@ -274,6 +277,10 @@
       hideSelected: {
         type: Boolean,
         default: false,
+      },
+      searchText: {
+        type: String,
+        default: '',
       },
     },
   };

@@ -108,6 +108,7 @@
         :listboxId="listboxId"
         :listboxLabel="label || placeholder"
         :noResultsText="noResultsText"
+        :searchText="internalSearchText"
         :itemText="itemText"
         :itemValue="itemValue"
         :indeterminateValues="indeterminateValues"
