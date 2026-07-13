@@ -163,6 +163,8 @@
 
   import { ref, computed, watch, getCurrentInstance, nextTick, onBeforeUnmount } from 'vue';
 
+  import globalThemeState from '../../../styles/globalThemeState';
+
   import KMultiSelectInput from './components/KMultiSelectInput.vue';
   import KMultiSelectDropdown from './components/KMultiSelectDropdown.vue';
 
@@ -272,6 +274,11 @@
         const navigationKeys = ['ArrowDown', 'ArrowUp'];
 
         if (navigationKeys.includes(event.key)) {
+          // Without this, if the user navigates to the component without tabbing into it,
+          // arrow keys do move through the dropdown options but no visual focus marker
+          // is shown on the active option.
+          globalThemeState.inputModality = 'keyboard';
+
           if (!isOpen.value) {
             event.preventDefault();
             openDropdown();

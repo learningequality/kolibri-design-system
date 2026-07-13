@@ -55,7 +55,7 @@
 
 <script>
 
-  import { computed, ref } from 'vue';
+  import { computed, ref, watch } from 'vue';
   import KListbox from '../../../listbox/KListbox/index.vue';
   import KMultiSelectNode from './KMultiSelectNode.vue';
 
@@ -139,6 +139,15 @@
           ...node,
           _showTopBorder: isHierarchical.value && index > 0,
         })),
+      );
+
+      watch(
+        () => props.isOpen,
+        isOpen => {
+          if (!isOpen && klistboxRef.value?.onListBlur) {
+            klistboxRef.value.onListBlur();
+          }
+        },
       );
 
       const showSelector = computed(() => props.multiple && !props.hideSelected);
