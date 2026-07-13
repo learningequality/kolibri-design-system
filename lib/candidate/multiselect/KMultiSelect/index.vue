@@ -663,6 +663,7 @@
       },
       /**
        * When true, hides already-selected options from the dropdown list.
+       * Note: This behavior is currently only supported for flat lists, not nested options.
        */
       hideSelected: {
         type: Boolean,
