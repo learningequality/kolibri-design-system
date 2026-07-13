@@ -7,6 +7,19 @@ Changelog is rather internal in nature. See release notes for the public overvie
 <!-- [DO NOT REMOVE-USED BY GH ACTION] PASTE CHANGELOG -->
 
 
+- [#1302]
+  - **Description:** Merges release-v5 into develop
+  - **Products impact:** none.
+  - **Addresses:**-.
+  - **Components:** .
+  - **Breaking:**
+  - **Impacts a11y:**
+  - **Guidance:** .
+
+[#1302]: https://github.com/learningequality/kolibri-design-system/pull/1302
+
+
+
 - [#1298]
   - **Description:** Consolidated KImg's 9 separate Percy visual-test snapshots into a single `KImgVisualTest.vue` page.
   - **Products impact:** none
