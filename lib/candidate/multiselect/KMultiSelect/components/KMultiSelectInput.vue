@@ -43,7 +43,7 @@
       :style="{
         flex: '1 1 auto',
         padding: '0 4px',
-        fontSize: '14px',
+        fontSize: '16px',
         color: disabled ? $themeTokens.textDisabled : $themeTokens.text,
         whiteSpace: 'nowrap',
         overflow: 'hidden',
