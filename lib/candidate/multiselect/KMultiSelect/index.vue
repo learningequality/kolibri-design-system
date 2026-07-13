@@ -409,14 +409,14 @@
       async function onListboxInput(newValues) {
         onCascadeListboxInput(newValues);
         await nextTick();
-        
+
         if (!props.multiple && props.value != null && props.value !== '') {
           const opt = normalizedOptions.value.find(o => getOptionValue(o) === props.value);
           if (opt) {
             internalSearchText.value = getOptionText(opt);
           }
         }
-        
+
         await nextTick();
         const inputEl = inputRef.value;
         if (inputEl) {
@@ -657,8 +657,8 @@
 
   .kmselect-label {
     position: absolute;
-    left: 10px;
     top: 2px;
+    left: 10px;
     z-index: 1;
     display: table;
     width: fit-content;

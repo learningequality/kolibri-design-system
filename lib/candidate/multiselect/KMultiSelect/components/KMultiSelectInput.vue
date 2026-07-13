@@ -321,9 +321,9 @@
     align-items: center;
     min-height: 32px;
     padding-top: 4px;
+    padding-right: 40px;
     padding-bottom: 4px;
     padding-left: 10px;
-    padding-right: 40px;
     border: 0;
     outline: none;
   }
@@ -341,8 +341,8 @@
 
   .kmselect-clear-btn {
     position: absolute;
-    right: 36px;
     top: 50%;
+    right: 36px;
     transform: translateY(-50%);
   }
 
