@@ -1,7 +1,12 @@
 <template>
 
   <div
-    v-show="isOpen"
+    v-show="
+      isOpen &&
+        (decoratedOptionTree.length > 0 ||
+          Boolean(noResultsText) ||
+          Boolean($scopedSlots['no-results']))
+    "
     class="kmselect-dropdown"
     :style="{ backgroundColor: $themeTokens.surface }"
     @mousedown.prevent
@@ -254,6 +259,7 @@
           allOptionsSelected: () => '',
           allOptionsDeselected: () => '',
           optionDeselected: () => '',
+          partiallySelected: () => '',
         }),
       },
       multiple: {

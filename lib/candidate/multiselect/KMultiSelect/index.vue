@@ -8,9 +8,14 @@
       ref="containerEl"
       class="kmselect-container"
       :class="[
-        { 'has-label': label, 'is-disabled': disabled, 'is-active': inputFocused || isOpen },
+        {
+          'has-label': label,
+          'is-disabled': disabled,
+          'is-active': inputFocused || isOpen,
+          'is-invalid': invalid,
+        },
         $computedClass({
-          ':hover:not(.is-disabled):not(.is-active)': {
+          ':hover:not(.is-disabled):not(.is-active):not(.is-invalid)': {
             borderBottomColor: $themeTokens.text,
           },
         }),
