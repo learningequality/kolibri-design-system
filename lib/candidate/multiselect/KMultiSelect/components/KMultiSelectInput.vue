@@ -333,7 +333,7 @@
     min-width: 80px;
     height: 28px;
     padding: 0 4px;
-    font-size: 15px;
+    font-size: 16px;
     background: transparent;
     border: 0;
     outline: none;
