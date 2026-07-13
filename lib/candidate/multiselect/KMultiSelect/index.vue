@@ -161,7 +161,7 @@
 
 <script>
 
-  import { ref, computed, watch, getCurrentInstance, nextTick } from 'vue';
+  import { ref, computed, watch, getCurrentInstance, nextTick, onBeforeUnmount } from 'vue';
 
   import globalThemeState from '../../../styles/globalThemeState';
 
@@ -385,15 +385,20 @@
         }
       });
 
+      let blurTimer = null;
       function onInputBlur() {
         inputFocused.value = false;
-        setTimeout(() => {
+        blurTimer = setTimeout(() => {
           if (containerEl.value && !containerEl.value.contains(document.activeElement)) {
             closeDropdown();
             emit('blur');
           }
         }, 150);
       }
+
+      onBeforeUnmount(() => {
+        clearTimeout(blurTimer);
+      });
 
       async function onClearAll() {
         clearAll();

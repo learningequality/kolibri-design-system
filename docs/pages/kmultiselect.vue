@@ -32,8 +32,8 @@
       anchor="#messages"
     >
       <p>
-        <code>KMultiSelect</code> requires a <code>messages</code> object. Each entry must be a
-        translated string or a function returning a string that is short and focused.
+        <code>KMultiSelect</code> requires a <code>messages</code> object. Each entry must be a 
+        function returning a string that is short and focused.
       </p>
       <KTable
         :headers="messageHeaders"
