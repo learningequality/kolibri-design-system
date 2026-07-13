@@ -205,12 +205,12 @@
         return options.value[index].value;
       }
 
-      function setFocus(value) {
+      function setFocus(value, forceScroll = false) {
         focusedValue.value = value;
         nextTick(() => {
           const option = options.value.find(o => o.value === value);
           if (!option) return;
-          if (instance.proxy.$inputModality === 'keyboard') {
+          if (forceScroll || instance.proxy.$inputModality === 'keyboard') {
             const optionElement = document.getElementById(option.id);
             if (optionElement) {
               optionElement.scrollIntoView({
@@ -232,7 +232,7 @@
         }
         // Modulo to wrap for circular navigation
         const newIndex = (currentIndex + delta + optionsCount) % optionsCount;
-        setFocus(optionValueAt(newIndex));
+        setFocus(optionValueAt(newIndex), true);
       }
 
       function onListFocus() {
@@ -264,10 +264,10 @@
             moveFocusBy(-1);
             break;
           case 'Home':
-            setFocus(optionValueAt(0));
+            setFocus(optionValueAt(0), true);
             break;
           case 'End':
-            setFocus(optionValueAt(options.value.length - 1));
+            setFocus(optionValueAt(options.value.length - 1), true);
             break;
           case ' ':
             toggleOption(focusedValue.value);

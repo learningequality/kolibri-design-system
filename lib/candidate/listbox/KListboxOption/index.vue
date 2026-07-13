@@ -82,7 +82,7 @@
       const isFocused = computed(() => listbox.isFocused(props.value));
 
       const rowStyles = computed(() => ({
-        backgroundColor: themeTokens().surface,
+        backgroundColor: isFocused.value ? themePalette().grey.v_100 : themeTokens().surface,
         ':hover': {
           backgroundColor: themePalette().grey.v_100,
         },
