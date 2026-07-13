@@ -270,6 +270,17 @@
         loadExample="KCheckbox/CheckedApiSingle.vue"
       />
     </DocsPageSection>
+
+    <DocsPageSection
+      title="Example: Custom Color"
+      anchor="#example-custom-color"
+    >
+      <p>The <code>color</code> prop overrides the default checked/indeterminate icon color.</p>
+      <DocsExample
+        exampleId="custom-color"
+        loadExample="KCheckbox/CustomColor.vue"
+      />
+    </DocsPageSection>
   </DocsPageTemplate>
 
 </template>

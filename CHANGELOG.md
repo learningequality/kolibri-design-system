@@ -304,6 +304,236 @@ Changelog is rather internal in nature. See release notes for the public overvie
 
 [#1243]: https://github.com/learningequality/kolibri-design-system/pull/1243
 
+- [#1293]
+  - **Description:** Added native single-select support to `KListbox` and `KListboxOption`.
+  - **Products impact:** none
+  - **Addresses:** #1292
+  - **Components:** KListbox, KListboxOption
+  - **Breaking:** no
+  - **Impacts a11y:** yes
+  - **Guidance:** Set `multiple="false"` on `KListbox` and `showCheckbox="false"` on `KListboxOption` to enforce single selection rules (disables Ctrl+A, replaces value instead of appending) while dropping the visual checkbox for plain text rendering with selection highlighting.
+
+[#1293]: https://github.com/learningequality/kolibri-design-system/pull/1293
+
+
+
+- [#1294]
+  - **Description:** Migrates visual tests for KIconButton to be in one file
+  - **Products impact:** none
+  - **Addresses:** #1088
+  - **Components:** -
+  - **Breaking:** no
+  - **Impacts a11y:** no
+  - **Guidance:** N/A
+
+[#1294]: https://github.com/learningequality/kolibri-design-system/pull/1294
+
+
+
+- [#1291]
+  - **Description:** KListbox messages prop now accepts both plain strings and functions. A getMessage() helper resolves the value at runtime by calling the function if needed, or returning the string directly.
+  - **Products impact:** updated API
+  - **Addresses:** #1290
+  - **Components:** Klistbox
+  - **Breaking:** no
+  - **Impacts a11y:** yes
+  - **Guidance:** No changes required for existing consumers passing plain strings
+
+[#1291]: https://github.com/learningequality/kolibri-design-system/pull/1291
+
+
+
+- [#1274]
+  - **Description:** Add useMultiSelectDropdown composable — manages dropdown open/close state, click-outside dismissal, and single-mode search text pre-fill for the upcoming KMultiSelect component.
+  - **Products impact:** none
+  - **Addresses:** #1269
+  - **Components:** -
+  - **Breaking:**no
+  - **Impacts a11y:** yes
+  - **Guidance:** -
+
+[#1274]: https://github.com/learningequality/kolibri-design-system/pull/1274
+
+
+
+- [#1273]
+  - **Description:** Add `useMultiSelectcascade` composable — core data and filtering layer for the new `KMultiSelect` candidate component
+  - **Products impact:** new API
+  - **Addresses:** #1268
+  - **Components:** `KMultiSelect` (candidate)
+  - **Breaking:**  no
+  - **Impacts a11y:** yes
+  - **Guidance:** Emits polite screen reader announcements via `useKLiveRegion` when options are removed or cleared
+
+[#1273]: https://github.com/learningequality/kolibri-design-system/pull/1273
+
+
+
+- [#1272]
+  - **Description:** Add `useMultiSelectList` composable — core data and filtering layer for the new `KMultiSelect` candidate component
+  - **Products impact:** new API
+  - **Addresses:** #1267
+  - **Components:** `KMultiSelect` (candidate)
+  - **Breaking:**  no
+  - **Impacts a11y:** yes
+  - **Guidance:** Emits polite screen reader announcements via `useKLiveRegion` when options are removed or cleared
+
+[#1272]: https://github.com/learningequality/kolibri-design-system/pull/1272
+
+
+
+- [#1283]
+  - **Description:** Bumps KDS version to 5.8.0
+  - **Products impact:** .
+  - **Addresses:** .
+  - **Components:** .
+  - **Breaking:** no
+  - **Impacts a11y:** no
+  - **Guidance:** .
+
+[#1283]: https://github.com/learningequality/kolibri-design-system/pull/1283
+
+
+
+- [#1282]
+  - **Description:** Adds an optional color prop to KRadioButton and included component tests
+  - **Products impact:** new API.
+  - **Addresses:** .
+  - **Components:** KRadioButton.
+  - **Breaking:** no
+  - **Impacts a11y:** no
+  - **Guidance:** .
+
+[#1282]: https://github.com/learningequality/kolibri-design-system/pull/1282
+
+
+
+- [#1279]
+  - **Description:**  Added colour prop to KCheckbox to customise checked and indeterminate icon colours, and added unit tests.
+  - **Products impact:**  KDS
+  - **Addresses:**  #1275
+  - **Components:**  KCheckbox
+  - **Breaking:** No
+  - **Impacts a11y:** No
+  - **Guidance:**
+
+[#1279]: https://github.com/learningequality/kolibri-design-system/pull/1279
+
+
+
+- [#1246]
+  - **Description:** Reset ``position: 'unset'`` when restoring items in the "could everything fit if we hid the More button?" branch of ``setOverflowItems()``. Without this, restored items remained ``position: absolute`` (set earlier by the overflow loop) and painted at the top-left of ``.list``, overlapping the first visible item. The misbehavior is most visible at viewport widths where exactly the restoration branch fires (e.g. ~850–950px in the Studio toolbar case).
+  - **Products impact:** bugfix
+  - **Addresses:** [learningequality/studio#5258](https://github.com/learningequality/studio/issues/5258), [learningequality/studio#5707](https://github.com/learningequality/studio/pull/5707)
+  - **Components:** KListWithOverflow
+  - **Breaking:** no
+  - **Impacts a11y:** no
+  - **Guidance:** -
+
+[#1246]: https://github.com/learningequality/kolibri-design-system/pull/1246
+
+
+
+- [#1256]
+  - **Description:** Fixes a bug where pressing the Enter key on a KDropdownMenu item could inadvertently trigger click events on elements that received focus immediately after that.
+  - **Products impact:** bugfix.
+  - **Addresses:** -.
+  - **Components:** KDropdownMenu.
+  - **Breaking:** no
+  - **Impacts a11y:** no
+  - **Guidance:** -.
+
+[#1256]: https://github.com/learningequality/kolibri-design-system/pull/1256
+
+
+
+- [#1205]
+  - **Description:** Add KSnackbar component and useKSnackbar composable for globally-managed notifications with action buttons, auto-hide, backdrop mode, and full keyboard accessibility
+  - **Products impact:** new API
+  - **Addresses:** https://github.com/learningequality/studio/issues/5445
+  - **Components:** KSnackbar, useKSnackbar
+  - **Breaking:** no
+  - **Impacts a11y:** yes
+  - **Guidance:** Import and use KSnackbar with the useKSnackbar composable to display global notifications. Place a single KSnackbar component at the root level of your app and bind it to snackbarState from useKSnackbar. Call createSnackbar() from anywhere to display notifications. The component uses useKLiveRegion for screen reader announcements, supports keyboard navigation, and includes focus management with backdrop mode.
+
+[#1205]: https://github.com/learningequality/kolibri-design-system/pull/1205
+
+
+
+- [#1264]
+  - **Description:** Adds KListboxGroup
+  - **Products impact:**new API
+  - **Addresses:** #1263
+  - **Components:** KListboxGroup, KListboxOption, KListbox
+  - **Breaking:** no
+  - **Impacts a11y:** yes
+  - **Guidance:** KListboxGroup is a candidate component intended for use inside KListbox. Pass a label prop (required) for the accessible group name. Use hideLabel to suppress the visual category label when a KListboxOption serves as the interactive group header.
+
+[#1264]: https://github.com/learningequality/kolibri-design-system/pull/1264
+
+
+
+- [#1265]
+  - **Description:** Fixes KPageContainer `noPadding` prop not working on mobile devices.
+  - **Products impact:** bugfix.
+  - **Addresses:** https://github.com/learningequality/studio/pull/5924.
+  - **Components:** KPageContainer.
+  - **Breaking:** no
+  - **Impacts a11y:** no
+  - **Guidance:** -.
+
+[#1265]: https://github.com/learningequality/kolibri-design-system/pull/1265
+
+
+
+- [#1261]
+  - **Description:**  Migrate and harden StudioChip to KDS as KChip candidate component
+  -  **Products impact:**  new API
+  - **Addresses:** [Link(s) to GH issue(s) addressed. Include KDS links as well as links to related issues in a consumer product repository too.](https://github.com/learningequality/kolibri-design-system/issues/1260)
+  - **Components:** KChip
+  - **Breaking:** no
+  - **Impacts a11y:** yes
+  - **Guidance:** Introduces `KChip`, a pill-shaped tag representing a selected value or filter token. Supports keyboard accessibility, standard design system styling, custom translation label via `removeLabel`, and a `disabled` state.
+
+[#1261]: https://github.com/learningequality/kolibri-design-system/pull/1261
+
+
+
+- [#1257]
+  - **Description:** Bumps KDS version to 5.7.0
+  - **Products impact:** none.
+  - **Addresses:** -.
+  - **Components:** -.
+  - **Breaking:** no
+  - **Impacts a11y:** no
+  - **Guidance:** -.
+
+[#1257]: https://github.com/learningequality/kolibri-design-system/pull/1257
+
+
+
+- [#1247]
+  - **Description:** Add KListbox and KListboxOption
+  - **Products impact:** New component
+  - **Addresses:**-
+  - **Components:** KListbox, KListboxOption
+  - **Breaking:** No
+  - **Impacts a11y:** yes
+  - **Guidance:** -
+
+[#1247]: https://github.com/learningequality/kolibri-design-system/pull/1247
+
+- [#1247]
+  - **Description:**  Cleans up unnecessary global Jest router setup and router imports in tests
+  - **Products impact:** None
+  - **Addresses:**-
+  - **Components:** -
+  - **Breaking:** No
+  - **Impacts a11y:** -
+  - **Guidance:** -
+
+[#1247]: https://github.com/learningequality/kolibri-design-system/pull/1247
+
 
 
 - [#1237]

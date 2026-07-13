@@ -7,7 +7,6 @@ import * as AphroditeNoImportant from 'aphrodite/no-important';
 import 'mock-match-media/jest-setup';
 
 import Vue from 'vue';
-import VueRouter from 'vue-router';
 import VueIntl from 'vue-intl';
 import KThemePlugin from '../lib/KThemePlugin';
 
@@ -37,7 +36,6 @@ global.it.visual = (name, fn) => {
 };
 
 // Register Vue plugins and components
-Vue.use(VueRouter);
 Vue.use(KThemePlugin);
 Vue.use(VueIntl);
 

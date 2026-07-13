@@ -66,13 +66,13 @@
     border-radius: 4px;
   }
 
-  .no-padding {
-    padding: 0;
-  }
-
   .page-container.small {
     padding: 8px 16px 16px;
     margin-top: 0;
+  }
+
+  .page-container.no-padding {
+    padding: 0;
   }
 
 </style>

@@ -42,7 +42,7 @@
     },
     computed: {
       style() {
-        return this.fullwidth ? {} : { maxWidth: '900px' };
+        return this.fullwidth ? {} : { maxWidth: '1000px' };
       },
     },
     mounted() {

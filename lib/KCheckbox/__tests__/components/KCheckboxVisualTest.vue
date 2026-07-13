@@ -54,6 +54,12 @@
       width="400px"
       loadExample="KCheckbox/WithDescription.vue"
     />
+
+    <VisualTestExample
+      title="Custom Color"
+      width="400px"
+      loadExample="KCheckbox/CustomColor.vue"
+    />
   </VisualTestLayout>
 
 </template>
