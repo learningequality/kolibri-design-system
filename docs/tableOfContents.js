@@ -41,12 +41,14 @@ class Page {
     title, // used in side nav, page header, and document title
     isCode = false, // if true, format using <code> tag
     disabled = false, // placeholder - don't link
+    candidate = false, // if true, show a 'Candidate' badge in the side nav and page header
     keywords = [], // additional terms to match
   } = {}) {
     this.path = path;
     this.title = title;
     this.isCode = isCode;
     this.disabled = disabled;
+    this.candidate = candidate;
     this.keywords = keywords;
   }
 }
@@ -61,6 +63,8 @@ const layoutRelatedKeywords = ['grid', 'layout', 'container', 'page'];
 const tabsRelatedKeywords = ['tab', 'tabs', 'panel', 'tablist', 'tabpanel'];
 const compositionRelatedKeywords = ['composable', 'composition'];
 const cardRelatedKeywords = ['grid', 'card', 'cardgrid'];
+const listboxRelatedKeywords = ['listbox', 'option', 'select', 'multi'];
+const multiselectRelatedKeywords = ['multiselect', 'chip', 'tag', 'option', 'select', 'multi'];
 
 export default [
   new Section({
@@ -76,6 +80,10 @@ export default [
       new Page({
         path: '/principles',
         title: 'Design principles',
+      }),
+      new Page({
+        path: '/candidate-components',
+        title: 'Candidate components',
       }),
       new Page({
         path: '/release-process',
@@ -221,6 +229,12 @@ export default [
           'loading',
         ],
       }),
+      new Page({
+        path: '/useksnackbar',
+        title: 'useKSnackbar',
+        isCode: true,
+        keywords: [...compositionRelatedKeywords, 'snackbar', 'notification', 'message', 'toast'],
+      }),
     ],
   }),
   new Section({
@@ -316,6 +330,12 @@ export default [
         title: 'KSelect',
         isCode: true,
         keywords: ['field', 'box'],
+      }),
+      new Page({
+        path: '/ksnackbar',
+        title: 'KSnackbar',
+        isCode: true,
+        keywords: ['notification', 'message', 'toast', 'snackbar'],
       }),
       new Page({
         path: '/kswitch',
@@ -452,6 +472,34 @@ export default [
         path: '/ktoolbar',
         title: 'KToolbar',
         isCode: true,
+      }),
+      new Page({
+        path: '/klistbox',
+        title: 'KListbox',
+        isCode: true,
+        candidate: true,
+        keywords: listboxRelatedKeywords,
+      }),
+      new Page({
+        path: '/klistboxoption',
+        title: 'KListboxOption',
+        isCode: true,
+        candidate: true,
+        keywords: listboxRelatedKeywords,
+      }),
+      new Page({
+        path: '/klistboxgroup',
+        title: 'KListboxGroup',
+        isCode: true,
+        candidate: true,
+        keywords: listboxRelatedKeywords,
+      }),
+      new Page({
+        path: '/kmultiselect',
+        title: 'KMultiselect',
+        isCode: true,
+        candidate: true,
+        keywords: multiselectRelatedKeywords,
       }),
     ],
   }),
