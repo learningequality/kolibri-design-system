@@ -32,8 +32,9 @@
       anchor="#messages"
     >
       <p>
-        <code>KMultiSelect</code> requires a <code>messages</code> object. Each entry must be a 
-        function returning a string that is short and focused.
+        <code>KMultiSelect</code> requires a <code>messages</code> object with seven required keys,
+        each a function returning a translated string. Additional optional keys enable live-region
+        announcements.
       </p>
       <KTable
         :headers="messageHeaders"
@@ -87,7 +88,7 @@
       <p>
         Demonstrates a single country selection, replicating Studio's
         <code>RequestForm.vue</code> usage. Uses
-        <code>appearanceOverrides="{ maxWidth: '500px' }"</code> to lock width like KTextbox.
+        <code>appearanceOverrides="{ maxWidth: '350px' }"</code> to lock width like KTextbox.
       </p>
       <DocsExample
         block
@@ -142,8 +143,8 @@
         <DocsAnchorTarget anchor="#category-options" />
       </h3>
       <p>
-        Demonstrates a hierarchical tree structure with multi-select and cascading behavior,
-        replacing the custom implementation in Studio.
+        Demonstrates a hierarchical tree structure with multi-select, where deselecting a parent
+        deselects its children, replacing the custom implementation in Studio.
       </p>
       <DocsExample
         block
@@ -214,64 +215,70 @@
         ],
         messageRows: [
           {
-            name: 'removed',
-            required: 'No',
-            description: 'Screen reader announcement when a chip is removed. Receives { label }.',
-            example: 'Removed Apple',
-          },
-          {
-            name: 'cleared',
-            required: 'No',
-            description: 'Screen reader announcement when all chips are cleared.',
-            example: 'All selections cleared',
-          },
-          {
             name: 'clearText',
-            required: 'No',
-            description: 'aria-label for the clear (×) button. Used when clearable=true.',
+            required: 'Yes',
+            description: 'aria-label for the clear (×) button.',
             example: 'Clear all selections',
           },
           {
             name: 'open',
-            required: 'No',
-            description: 'aria-label for the dropdown expand (▼) button.',
+            required: 'Yes',
+            description: 'aria-label for the open (▼) button.',
             example: 'Open menu',
           },
           {
             name: 'close',
-            required: 'No',
-            description: 'aria-label for the dropdown collapse (▲) button.',
+            required: 'Yes',
+            description: 'aria-label for the close (▲) button.',
             example: 'Close menu',
+          },
+          {
+            name: 'clickable',
+            required: 'Yes',
+            description: 'Screen reader hint that options are clickable.',
+            example: 'Options are clickable',
+          },
+          {
+            name: 'allOptionsSelected',
+            required: 'Yes',
+            description: 'Announced when all options are selected.',
+            example: 'All options selected',
+          },
+          {
+            name: 'allOptionsDeselected',
+            required: 'Yes',
+            description: 'Announced when all options are deselected.',
+            example: 'No options selected',
+          },
+          {
+            name: 'optionDeselected',
+            required: 'Yes',
+            description: 'Announced when an option is deselected.',
+            example: 'Option deselected',
+          },
+          {
+            name: 'partiallySelected',
+            required: 'No',
+            description: 'Label on indeterminate parent nodes in a tree.',
+            example: 'Partially selected',
           },
           {
             name: 'selected',
             required: 'No',
             description: 'Announced when an option is selected. Receives { label, count }.',
-            example: 'Selected Apple, 3 items selected',
+            example: 'Apple selected, 3 total',
           },
           {
-            name: 'clickable',
+            name: 'removed',
             required: 'No',
-            description: 'Forwarded to KListbox. Describes that options are clickable.',
-            example: 'Options are clickable',
+            description: 'Announced when a chip is removed. Receives { label, count }.',
+            example: 'Removed Apple, 2 remaining',
           },
           {
-            name: 'allOptionsSelected',
+            name: 'cleared',
             required: 'No',
-            description: 'Forwarded to KListbox. Announced when all options are selected.',
-            example: 'All options selected',
-          },
-          {
-            name: 'allOptionsDeselected',
-            required: 'No',
-            description: 'Forwarded to KListbox. Announced when all options are deselected.',
-            example: 'No options selected',
-          },
-          {
-            name: 'optionDeselected',
-            required: 'No',
-            description: 'Forwarded to KListbox. Announced when an option is deselected.',
-            example: 'Option deselected',
+            description: 'Announced when all selections are cleared.',
+            example: 'All selections cleared',
           },
         ],
       };

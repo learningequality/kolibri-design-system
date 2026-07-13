@@ -86,6 +86,7 @@
           allOptionsSelected: () => 'All options selected',
           allOptionsDeselected: () => 'No options selected',
           optionDeselected: () => 'Option deselected',
+          partiallySelected: () => 'Partially selected',
         },
       };
     },

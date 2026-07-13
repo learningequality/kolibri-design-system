@@ -446,6 +446,7 @@
           'allOptionsSelected',
           'allOptionsDeselected',
           'optionDeselected',
+          'partiallySelected',
         ];
         keys.forEach(key => {
           if (typeof props.messages[key] === 'function') {
@@ -624,12 +625,32 @@
         default: false,
       },
       /**
-       * Dictionary of translation strings used for accessibility announcements
-       * and localizable UI text.
+       * Translation functions for UI labels and accessibility announcements.
+       * Seven keys are required; partiallySelected, selected, removed, and cleared are optional.
        */
       messages: {
         type: Object,
-        default: () => ({}),
+        required: true,
+        validator(messages) {
+          const requiredKeys = [
+            'clearText',
+            'open',
+            'close',
+            'clickable',
+            'allOptionsSelected',
+            'allOptionsDeselected',
+            'optionDeselected',
+          ];
+          const missing = requiredKeys.filter(key => typeof messages[key] !== 'function');
+          if (missing.length) {
+            // eslint-disable-next-line no-console
+            console.warn(
+              `[KMultiSelect] 'messages' prop keys must be functions. Missing or invalid keys: ${missing.join(', ')}`,
+            );
+            return false;
+          }
+          return true;
+        },
       },
       /**
        * When true, hides already-selected options from the dropdown list.
@@ -649,6 +670,7 @@
   .kmselect {
     position: relative;
     width: 100%;
+    max-width: 100%;
   }
 
   .kmselect-container {
