@@ -46,8 +46,8 @@
           Boolean(searchText) &&
           (Boolean(noResultsText) || Boolean($scopedSlots['no-results']))
       "
+      ref="emptyMessageRef"
       class="kmselect-dropdown-empty"
-      role="status"
       :style="{ color: $themeTokens.annotation }"
     >
       <slot name="no-results">
@@ -63,8 +63,9 @@
 
 <script>
 
-  import { computed, ref, watch } from 'vue';
+  import { computed, ref, watch, nextTick, getCurrentInstance } from 'vue';
   import KListbox from '../../../listbox/KListbox/index.vue';
+  import useKLiveRegion from '../../../../composables/useKLiveRegion';
   import KMultiSelectNode from './KMultiSelectNode.vue';
 
   // Converts a flat options array with integer levels into a nested tree
@@ -111,6 +112,9 @@
 
     setup(props) {
       const klistboxRef = ref(null);
+      const emptyMessageRef = ref(null);
+      const instance = getCurrentInstance();
+      const { sendPoliteMessage } = useKLiveRegion();
 
       const normalizedSelectedValues = computed(() =>
         Array.isArray(props.selectedValues) ? props.selectedValues : [],
@@ -157,6 +161,25 @@
           }
         },
       );
+
+      const showEmptyState = computed(() => {
+        return (
+          props.isOpen &&
+          decoratedOptionTree.value.length === 0 &&
+          Boolean(props.searchText) &&
+          (Boolean(props.noResultsText) || Boolean(instance.proxy.$scopedSlots['no-results']))
+        );
+      });
+
+      watch(showEmptyState, isShown => {
+        if (isShown) {
+          nextTick(() => {
+            if (emptyMessageRef.value) {
+              sendPoliteMessage(emptyMessageRef.value.textContent.trim());
+            }
+          });
+        }
+      });
 
       const showSelector = computed(() => props.multiple && !props.hideSelected);
 
@@ -208,6 +231,7 @@
 
       return {
         klistboxRef,
+        emptyMessageRef,
         normalizedSelectedValues,
         decoratedOptionTree,
         showSelector,
