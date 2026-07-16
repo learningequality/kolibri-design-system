@@ -1,4 +1,5 @@
 <template>
+
   <DocsPageTemplate>
     <DocsPageSection
       title="1. Install the plugin"
@@ -94,4 +95,5 @@
       </p>
     </DocsPageSection>
   </DocsPageTemplate>
+
 </template>
