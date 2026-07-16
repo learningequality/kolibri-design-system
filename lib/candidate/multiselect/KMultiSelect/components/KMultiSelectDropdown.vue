@@ -1,11 +1,7 @@
 <template>
 
   <div
-    v-show="
-      isOpen &&
-        (decoratedOptionTree.length > 0 ||
-          (Boolean(searchText) && (Boolean(noResultsText) || Boolean($scopedSlots['no-results']))))
-    "
+    v-show="isOpen && (decoratedOptionTree.length > 0 || showEmptyState)"
     class="kmselect-dropdown"
     :style="{ backgroundColor: $themeTokens.surface }"
     @mousedown.prevent
@@ -41,11 +37,7 @@
     </KListbox>
 
     <div
-      v-if="
-        decoratedOptionTree.length === 0 &&
-          Boolean(searchText) &&
-          (Boolean(noResultsText) || Boolean($scopedSlots['no-results']))
-      "
+      v-if="showEmptyState"
       ref="emptyMessageRef"
       class="kmselect-dropdown-empty"
       :style="{ color: $themeTokens.annotation }"
@@ -224,9 +216,15 @@
       }
 
       function hasFocusedOption() {
-        const listEl = klistboxRef.value?.$refs?.listEl;
-        if (!listEl) return false;
-        return !!listEl.getAttribute('aria-activedescendant');
+        return klistboxRef.value?.hasFocusedOption() ?? false;
+      }
+
+      function moveFocusByOne(delta) {
+        klistboxRef.value?.moveFocusBy(delta);
+      }
+
+      function toggleFocusedOption() {
+        klistboxRef.value?.toggleFocusedOption();
       }
 
       return {
@@ -235,10 +233,15 @@
         normalizedSelectedValues,
         decoratedOptionTree,
         showSelector,
+        showEmptyState,
         // eslint-disable-next-line vue/no-unused-properties
         forwardKeydown,
         // eslint-disable-next-line vue/no-unused-properties
         hasFocusedOption,
+        // eslint-disable-next-line vue/no-unused-properties
+        moveFocusByOne,
+        // eslint-disable-next-line vue/no-unused-properties
+        toggleFocusedOption,
       };
     },
 

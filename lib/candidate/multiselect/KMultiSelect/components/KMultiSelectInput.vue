@@ -114,7 +114,7 @@
           ? $themeTokens.error
           : focused
             ? $themeTokens.primary
-            : hovered
+            : !disabled && hovered
               ? $themeTokens.text
               : $themePalette.grey.v_700
       "

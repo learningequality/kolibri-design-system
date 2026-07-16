@@ -178,6 +178,8 @@
   import useMultiSelectCascade from './useMultiSelectCascade.js';
   import useMultiSelectDropdownLogic from './useMultiSelectDropdown.js';
 
+  let componentCount = 0;
+
   /**
    * A searchable select component supporting both single and multiple selections, flat
    * arrays, and deeply nested hierarchical trees with cascading selection behavior.
@@ -192,7 +194,7 @@
 
     setup(props, { emit }) {
       const instance = getCurrentInstance();
-      const uid = instance.proxy._uid;
+      const uid = componentCount++;
 
       const internalSearchText = ref(props.searchText || '');
       const inputFocused = ref(false);
@@ -314,13 +316,10 @@
             if (!isOpen.value) {
               openDropdown();
             } else {
-              const fwd = key =>
-                dropdownComponent.value?.forwardKeydown(
-                  new KeyboardEvent('keydown', { key, bubbles: true, cancelable: true }),
-                );
-              const hasFocused = dropdownComponent.value?.hasFocusedOption();
-              if (!hasFocused) fwd('ArrowDown');
-              fwd(' ');
+              if (!dropdownComponent.value?.hasFocusedOption()) {
+                dropdownComponent.value?.moveFocusByOne(1);
+              }
+              dropdownComponent.value?.toggleFocusedOption();
 
               if (dropdownOptions.value.length === 0 && internalSearchText.value) {
                 setSearchText('');
@@ -411,6 +410,7 @@
 
       async function onClearAll() {
         clearAll();
+        setSearchText('');
         await nextTick();
         inputRef.value?.focus();
       }

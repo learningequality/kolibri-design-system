@@ -296,6 +296,16 @@
         event.preventDefault();
       }
 
+      function toggleFocusedOption() {
+        if (focusedValue.value !== null) {
+          toggleOption(focusedValue.value);
+        }
+      }
+
+      function hasFocusedOption() {
+        return focusedValue.value !== null;
+      }
+
       provide('klistbox', {
         registerOption,
         unregisterOption,
@@ -349,6 +359,12 @@
         onListBlur,
         onListKeydown,
         getMessage,
+        // eslint-disable-next-line vue/no-unused-properties
+        moveFocusBy,
+        // eslint-disable-next-line vue/no-unused-properties
+        toggleFocusedOption,
+        // eslint-disable-next-line vue/no-unused-properties
+        hasFocusedOption,
       };
     },
     props: {
