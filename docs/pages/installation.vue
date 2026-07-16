@@ -1,5 +1,4 @@
 <template>
-
   <DocsPageTemplate>
     <DocsPageSection
       title="1. Install the plugin"
@@ -41,6 +40,14 @@
           Vue instances.
         </li>
         <li>Globally registers all KDS Vue components.</li>
+        <li>
+          Emits theme values as CSS variables (<code>--theme-*</code>, <code>--brand-*</code>, and
+          <code>--palette-*</code>) to a <code>&lt;style&gt;</code> tag
+          <code>#k-theme-css-variables</code> in an application's document head so that styles can
+          reference them directly, for example <code>var(--theme-primary)</code>. The variables are
+          updated whenever the theme changes via <code>setBrandColors()</code> or
+          <code>setTokenMapping()</code>.
+        </li>
         <li>
           Inserts assertive and polite ARIA live regions <code>#k-live-region</code> to an
           application's document body (see
@@ -87,5 +94,4 @@
       </p>
     </DocsPageSection>
   </DocsPageTemplate>
-
 </template>
