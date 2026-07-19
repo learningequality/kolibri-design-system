@@ -13,6 +13,7 @@
       clearable
       noResultsText="No matching categories"
       :appearanceOverrides="{ width: '750px' }"
+      autoSelectChild
     >
       <!-- Custom chip slot using KTooltip to show full nested path -->
       <template #chip="{ option, remove }">

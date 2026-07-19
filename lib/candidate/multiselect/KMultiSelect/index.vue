@@ -656,6 +656,15 @@
         default: false,
       },
       /**
+       * Only applies to hierarchical options. When true, selecting a parent
+       * automatically selects all its descendants as well.
+       */
+      // eslint-disable-next-line vue/no-unused-properties
+      autoSelectChild: {
+        type: Boolean,
+        default: false,
+      },
+      /**
        * Translation functions for UI labels and accessibility announcements.
        * Seven keys are required; partiallySelected, selected, removed, and cleared are optional.
        */
