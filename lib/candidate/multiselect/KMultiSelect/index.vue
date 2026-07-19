@@ -447,6 +447,8 @@
           if (opt) {
             internalSearchText.value = getOptionText(opt);
           }
+        } else if (props.multiple) {
+          setSearchText('');
         }
 
         await nextTick();
