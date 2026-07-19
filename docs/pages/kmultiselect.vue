@@ -263,6 +263,12 @@
             example: 'Partially selected',
           },
           {
+            name: 'itemsSelected',
+            required: 'No (Yes if multiple)',
+            description: 'Announced when the component is focused. Receives count.',
+            example: '3 items selected',
+          },
+          {
             name: 'selected',
             required: 'No',
             description: 'Announced when an option is selected. Receives { label, count }.',

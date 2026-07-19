@@ -7,6 +7,8 @@
       cursor: disabled ? 'not-allowed' : 'default',
       backgroundColor: 'transparent',
     }"
+    role="group"
+    :aria-labelledby="`${labelId} ${selectedValuesId}`"
     @click="handleWrapperClick"
   >
     <template v-if="multiple">
@@ -166,9 +168,10 @@
           'aria-autocomplete': 'list',
           'aria-invalid': props.invalid ? 'true' : 'false',
         };
-        if (props.labelId) {
-          attrs['aria-labelledby'] = props.labelId;
-        }
+        const labelledby = [];
+        if (props.labelId) labelledby.push(props.labelId);
+        if (props.selectedValuesId) labelledby.push(props.selectedValuesId);
+        if (labelledby.length) attrs['aria-labelledby'] = labelledby.join(' ');
         if (props.isOpen && props.activeDescendant) {
           attrs['aria-activedescendant'] = props.activeDescendant;
         }
@@ -298,6 +301,10 @@
         default: null,
       },
       labelId: {
+        type: String,
+        default: null,
+      },
+      selectedValuesId: {
         type: String,
         default: null,
       },

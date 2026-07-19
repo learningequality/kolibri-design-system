@@ -58,6 +58,13 @@
       >
         {{ label }}
       </label>
+      <div
+        :id="selectedValuesId"
+        class="visuallyhidden"
+        aria-hidden="true"
+      >
+        {{ selectedValuesSummary }}
+      </div>
       <KMultiSelectInput
         ref="inputComponent"
         :selectedOptions="selectedOptionsData"
@@ -80,6 +87,7 @@
         :activeDescendant="activeDescendantId"
         :labelId="labelId"
         :inputId="inputId"
+        :selectedValuesId="selectedValuesId"
         @update:searchText="onSearchInput"
         @input-keydown="onInputKeydown"
         @input-focus="onInputFocus"
@@ -212,6 +220,7 @@
       const labelId = computed(() => `kmselect-label-${uid}`);
       const errorId = computed(() => `kmselect-error-${uid}`);
       const inputId = computed(() => `kmselect-input-${uid}`);
+      const selectedValuesId = computed(() => `kmselect-selected-${uid}`);
 
       watch(
         () => props.searchText,
@@ -242,6 +251,15 @@
         searchText: internalSearchText,
         suppressFilter,
         messages: props.messages,
+      });
+
+      const selectedValuesSummary = computed(() => {
+        const count = selectedOptionsData.value.length;
+        if (count === 0) return '';
+        if (!props.multiple) {
+          return getOptionText(selectedOptionsData.value[0]) || '';
+        }
+        return props.messages.itemsSelected ? props.messages.itemsSelected(count) : '';
       });
 
       const { isOpen, openDropdown, closeDropdown, toggleDropdown } = useMultiSelectDropdownLogic(
@@ -483,6 +501,8 @@
         labelId,
         errorId,
         inputId,
+        selectedValuesId,
+        selectedValuesSummary,
         activeDescendantId,
         isOpen,
         internalSearchText,
