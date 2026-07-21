@@ -58,7 +58,7 @@
           close: () => 'Close menu',
           removed: ({ label, count }) => `Removed ${label}. ${count} items selected.`,
           cleared: ({ label }) => `Cleared ${label}`,
-          selected: ({ label, count }) => `Selected ${label}, ${count} items currently selected`,
+          selected: ({ label }) => `Selected ${label}`,
           clickable: () => 'Options are clickable',
           allOptionsSelected: () => 'All options selected',
           allOptionsDeselected: () => 'No options selected',

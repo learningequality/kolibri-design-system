@@ -7,8 +7,8 @@
       cursor: disabled ? 'not-allowed' : 'default',
       backgroundColor: 'transparent',
     }"
-    role="group"
-    :aria-labelledby="`${labelId} ${selectedValuesId}`"
+    :role="multiple ? 'group' : undefined"
+    :aria-labelledby="multiple ? `${labelId} ${selectedValuesId}` : undefined"
     @click="handleWrapperClick"
   >
     <template v-if="multiple">
@@ -40,21 +40,6 @@
       </span>
     </template>
 
-    <span
-      v-else-if="selectedOptions.length > 0 && !isOpen && !searchText"
-      :style="{
-        flex: '1 1 auto',
-        padding: '0 4px',
-        fontSize: '16px',
-        color: disabled ? $themeTokens.textDisabled : $themeTokens.text,
-        whiteSpace: 'nowrap',
-        overflow: 'hidden',
-        textOverflow: 'ellipsis',
-      }"
-    >
-      {{ getOptionText(selectedOptions[0]) }}
-    </span>
-
     <input
       :id="inputId"
       ref="inputEl"
@@ -68,8 +53,6 @@
       v-bind="inputAriaAttrs"
       data-focus="true"
       :style="{
-        flex: !multiple && selectedOptions.length > 0 && !isOpen && !searchText ? '0 0 0px' : '',
-        minWidth: !multiple && selectedOptions.length > 0 && !isOpen && !searchText ? '0' : '',
         color: disabled ? $themeTokens.textDisabled : $themeTokens.text,
         cursor: disabled ? 'not-allowed' : 'text',
       }"
@@ -170,7 +153,7 @@
         };
         const labelledby = [];
         if (props.labelId) labelledby.push(props.labelId);
-        if (props.selectedValuesId) labelledby.push(props.selectedValuesId);
+        if (props.multiple && props.selectedValuesId) labelledby.push(props.selectedValuesId);
         if (labelledby.length) attrs['aria-labelledby'] = labelledby.join(' ');
         if (props.isOpen && props.activeDescendant) {
           attrs['aria-activedescendant'] = props.activeDescendant;

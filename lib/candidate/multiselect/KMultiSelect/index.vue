@@ -59,6 +59,7 @@
         {{ label }}
       </label>
       <div
+        v-if="multiple"
         :id="selectedValuesId"
         class="visuallyhidden"
         aria-hidden="true"
@@ -256,9 +257,6 @@
       const selectedValuesSummary = computed(() => {
         const count = selectedOptionsData.value.length;
         if (count === 0) return '';
-        if (!props.multiple) {
-          return getOptionText(selectedOptionsData.value[0]) || '';
-        }
         return props.messages.itemsSelected ? props.messages.itemsSelected(count) : '';
       });
 
@@ -288,6 +286,14 @@
         defaultRemoveOption,
         messages: props.messages,
       });
+      watch(
+        selectedOptionsData,
+        options => {
+          if (props.multiple || isOpen.value) return;
+          internalSearchText.value = options.length ? getOptionText(options[0]) : '';
+        },
+        { immediate: true },
+      );
 
       const inputRef = computed(() => inputComponent.value?.$refs?.inputEl ?? null);
 
@@ -442,12 +448,7 @@
         onCascadeListboxInput(newValues);
         await nextTick();
 
-        if (!props.multiple && props.value != null && props.value !== '') {
-          const opt = normalizedOptions.value.find(o => getOptionValue(o) === props.value);
-          if (opt) {
-            internalSearchText.value = getOptionText(opt);
-          }
-        } else if (props.multiple) {
+        if (props.multiple) {
           setSearchText('');
         }
 
