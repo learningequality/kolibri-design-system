@@ -417,19 +417,19 @@
         }
       });
 
-      let blurTimer = null;
+      let blurFrameId = null;
       function onInputBlur() {
         inputFocused.value = false;
-        blurTimer = setTimeout(() => {
+        blurFrameId = requestAnimationFrame(() => {
           if (containerEl.value && !containerEl.value.contains(document.activeElement)) {
             closeDropdown();
             emit('blur');
           }
-        }, 150);
+        });
       }
 
       onBeforeUnmount(() => {
-        clearTimeout(blurTimer);
+        cancelAnimationFrame(blurFrameId);
       });
 
       async function onClearAll() {
@@ -680,7 +680,6 @@
             'allOptionsSelected',
             'allOptionsDeselected',
             'optionDeselected',
-            'itemsSelected',
           ];
           const missing = requiredKeys.filter(key => typeof messages[key] !== 'function');
           if (missing.length) {

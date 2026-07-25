@@ -30,7 +30,7 @@
       anchor="#messages"
     >
       <p>
-        <code>KMultiSelect</code> requires a <code>messages</code> object with eight required keys,
+        <code>KMultiSelect</code> requires a <code>messages</code> object with seven required keys,
         each a function returning a translated string. Additional optional keys enable further
         live-region announcements.
       </p>
@@ -210,11 +210,10 @@
           },
           {
             name: 'itemsSelected',
-            required: 'Yes',
+            required: 'No',
             description:
-              'Announced via live region when the component receives focus. ' +
-              'In multiple mode, receives a count (number). ' +
-              'In single mode, receives the selected option label (string).',
+              'Multiple-select only. Announces how many items are selected as part of ' +
+              'the field’s accessible name. Receives the selection count (number).',
             example: '3 items selected',
           },
           {
