@@ -4,13 +4,12 @@
     <template #developerNotes>
       <ul :style="{ margin: 0 }">
         <li>
-          <code>KMultiSelect</code> currently focuses on Phase 1 & 2 of the Vuetify migration
-          strategy, fully supporting <code>v-autocomplete</code> capabilities including single/multi
-          selection, flat lists, and deeply nested hierarchical data.
+          <code>KMultiSelect</code> currently covers single and multiple selection, flat lists, and
+          deeply nested hierarchical trees with cascading behavior.
         </li>
         <li>
-          Free-text custom value entry (combobox mode) is explicitly planned for a future Phase 3
-          extension and is not currently supported.
+          Free-text custom value entry (combobox mode) is not currently supported and is planned for
+          a future release.
         </li>
       </ul>
     </template>
@@ -20,10 +19,9 @@
       anchor="#overview"
     >
       <p>
-        <code>KMultiSelect</code> is a searchable select component that supports both single and
-        multiple selections, flat arrays, and deeply nested hierarchical trees with cascading
-        selection behavior. It is designed to replace Vuetify's <code>v-autocomplete</code> and
-        <code>v-combobox</code> components.
+        <code>KMultiSelect</code> is a searchable select component that supports single and multiple
+        selections, flat arrays, and deeply nested hierarchical trees with cascading selection
+        behavior.
       </p>
     </DocsPageSection>
 
@@ -32,9 +30,9 @@
       anchor="#messages"
     >
       <p>
-        <code>KMultiSelect</code> requires a <code>messages</code> object with seven required keys,
-        each a function returning a translated string. Additional optional keys enable live-region
-        announcements.
+        <code>KMultiSelect</code> requires a <code>messages</code> object with eight required keys,
+        each a function returning a translated string. Additional optional keys enable further
+        live-region announcements.
       </p>
       <KTable
         :headers="messageHeaders"
@@ -56,128 +54,82 @@
     >
       <DocsSubNav
         :items="[
-          { text: 'CountryField (Multiple)', href: '#country-multiple' },
-          { text: 'CountryField (Single)', href: '#country-single' },
-          { text: 'LanguageDropdown (Multiple)', href: '#language-multiple' },
-          { text: 'LanguageDropdown (Single)', href: '#language-single' },
-          { text: 'LanguageFilter (Multi-field Search)', href: '#language-filter' },
-          { text: 'CategoryOptions (Dropdown Tree)', href: '#category-options' },
-          { text: 'ActivityDuration (Short)', href: '#activity-short' },
-          { text: 'ActivityDuration (Long)', href: '#activity-long' },
+          { text: 'Multiple selection', href: '#multiple-selection' },
+          { text: 'Single selection', href: '#single-selection' },
+          { text: 'Multi-field search', href: '#multifield-search' },
+          { text: 'Hierarchical tree', href: '#hierarchical-tree' },
+          { text: 'Primitive values', href: '#primitive-values' },
         ]"
       />
 
       <h3>
-        CountryField (Multiple)
-        <DocsAnchorTarget anchor="#country-multiple" />
+        Multiple selection
+        <DocsAnchorTarget anchor="#multiple-selection" />
       </h3>
       <p>
-        Demonstrates selecting multiple countries from a flat array, replicating the
-        <code>CountryField</code> used globally in Studio.
+        Selecting multiple items from a flat list of objects using <code>itemText</code> and
+        <code>itemValue</code> to map object properties.
       </p>
       <DocsExample
         block
-        exampleId="kmultiselect-country-multiple"
+        exampleId="kmultiselect-multiple-selection"
         loadExample="KMultiSelect/CountryFieldMultiple.vue"
       />
 
       <h3>
-        CountryField (Single)
-        <DocsAnchorTarget anchor="#country-single" />
+        Single selection
+        <DocsAnchorTarget anchor="#single-selection" />
       </h3>
       <p>
-        Demonstrates a single country selection, replicating Studio's
-        <code>RequestForm.vue</code> usage. Uses
-        <code>appearanceOverrides="{ maxWidth: '350px' }"</code> to lock width like KTextbox.
+        Selecting a single item from a flat list using <code>:multiple="false"</code>. Use
+        <code>appearanceOverrides</code> to constrain the width.
       </p>
       <DocsExample
         block
-        exampleId="kmultiselect-country-single"
+        exampleId="kmultiselect-single-selection"
         loadExample="KMultiSelect/CountryFieldSingle.vue"
       />
 
       <h3>
-        LanguageDropdown (Multiple)
-        <DocsAnchorTarget anchor="#language-multiple" />
+        Multi-field search
+        <DocsAnchorTarget anchor="#multifield-search" />
       </h3>
       <p>
-        Demonstrates searching and selecting multiple languages, replicating
-        <code>SearchFilters.vue</code> in Studio.
+        Searching across multiple fields on each option using the <code>searchKeys</code> prop. Try
+        typing a native script form or a related term to see matches across all configured fields.
       </p>
       <DocsExample
         block
-        exampleId="kmultiselect-language-multiple"
-        loadExample="KMultiSelect/LanguageDropdownMultiple.vue"
-      />
-
-      <h3>
-        LanguageDropdown (Single)
-        <DocsAnchorTarget anchor="#language-single" />
-      </h3>
-      <p>
-        Demonstrates searching a single language, replicating <code>ChannelModal.vue</code> in
-        Studio.
-      </p>
-      <DocsExample
-        block
-        exampleId="kmultiselect-language-single"
-        loadExample="KMultiSelect/LanguageDropdownSingle.vue"
-      />
-
-      <h3>
-        LanguageFilter (Multi-field Search)
-        <DocsAnchorTarget anchor="#language-filter" />
-      </h3>
-      <p>
-        Demonstrates deep fuzzy searching across native names, related names, and English names. Try
-        typing "Hindi" or "हिन्दी". Replicates <code>LanguageFilter.vue</code> in Studio.
-      </p>
-      <DocsExample
-        block
-        exampleId="kmultiselect-language-filter"
+        exampleId="kmultiselect-multifield-search"
         loadExample="KMultiSelect/LanguageFilter.vue"
       />
 
       <h3>
-        CategoryOptions (Dropdown Tree)
-        <DocsAnchorTarget anchor="#category-options" />
+        Hierarchical tree
+        <DocsAnchorTarget anchor="#hierarchical-tree" />
       </h3>
       <p>
-        Demonstrates a hierarchical tree structure with multi-select, where deselecting a parent
-        deselects its children, replacing the custom implementation in Studio.
+        Selecting from a nested tree of options where selecting or deselecting a parent cascades to
+        its children. An indeterminate state is shown when only some children are selected.
       </p>
       <DocsExample
         block
-        exampleId="kmultiselect-category-options"
+        exampleId="kmultiselect-hierarchical-tree"
         loadExample="KMultiSelect/CategoryOptionsTree.vue"
       />
 
       <h3>
-        ActivityDuration (Short Activity)
-        <DocsAnchorTarget anchor="#activity-short" />
+        Primitive values
+        <DocsAnchorTarget anchor="#primitive-values" />
       </h3>
       <p>
-        Demonstrates a flat primitive array in single-selection mode, replicating the Short Activity
-        duration dropdown.
+        Using a flat array of primitive values (numbers or strings) instead of objects. No
+        <code>itemText</code> or <code>itemValue</code> mapping is needed.
       </p>
       <DocsExample
         block
-        exampleId="kmultiselect-activity-short"
+        exampleId="kmultiselect-primitive-values"
         loadExample="KMultiSelect/ActivityDurationShort.vue"
-      />
-
-      <h3>
-        ActivityDuration (Long Activity)
-        <DocsAnchorTarget anchor="#activity-long" />
-      </h3>
-      <p>
-        Demonstrates a flat primitive array in single-selection mode, replicating the Long Activity
-        duration dropdown.
-      </p>
-      <DocsExample
-        block
-        exampleId="kmultiselect-activity-long"
-        loadExample="KMultiSelect/ActivityDurationLong.vue"
       />
     </DocsPageSection>
 
@@ -208,8 +160,8 @@
     data() {
       return {
         messageHeaders: [
-          { label: 'Name', dataType: 'string', columnId: 'name', minWidth: '190px' },
-          { label: 'Required', dataType: 'string', columnId: 'required', minWidth: '100px' },
+          { label: 'Name', dataType: 'string', columnId: 'name', minWidth: '220px' },
+          { label: 'Required', dataType: 'string', columnId: 'required', minWidth: '140px' },
           { label: 'Description', dataType: 'string', columnId: 'description' },
           { label: 'Examples', dataType: 'string', columnId: 'example', minWidth: '200px' },
         ],
@@ -224,66 +176,73 @@
             name: 'open',
             required: 'Yes',
             description: 'aria-label for the open (▼) button.',
-            example: 'Open menu',
+            example: 'Open options',
           },
           {
             name: 'close',
             required: 'Yes',
             description: 'aria-label for the close (▲) button.',
-            example: 'Close menu',
+            example: 'Close options',
           },
           {
             name: 'clickable',
             required: 'Yes',
-            description: 'Screen reader hint that options are clickable.',
+            description: 'Accessible description indicating that options are interactive.',
             example: 'Options are clickable',
           },
           {
             name: 'allOptionsSelected',
             required: 'Yes',
-            description: 'Announced when all options are selected.',
+            description: 'Announced via live region when every option is selected.',
             example: 'All options selected',
           },
           {
             name: 'allOptionsDeselected',
             required: 'Yes',
-            description: 'Announced when all options are deselected.',
+            description: 'Announced via live region when no options are selected.',
             example: 'No options selected',
           },
           {
             name: 'optionDeselected',
             required: 'Yes',
-            description: 'Announced when an option is deselected.',
+            description: 'Announced via live region when an individual option is deselected.',
             example: 'Option deselected',
+          },
+          {
+            name: 'itemsSelected',
+            required: 'Yes',
+            description:
+              'Announced via live region when the component receives focus. ' +
+              'In multiple mode, receives a count (number). ' +
+              'In single mode, receives the selected option label (string).',
+            example: '3 items selected',
           },
           {
             name: 'partiallySelected',
             required: 'No',
-            description: 'Label on indeterminate parent nodes in a tree.',
+            description:
+              'Renders visually-hidden text inside indeterminate parent nodes so screen ' +
+              'readers announce the partial selection state. Use with hierarchical trees.',
             example: 'Partially selected',
-          },
-          {
-            name: 'itemsSelected',
-            required: 'No (Yes if multiple)',
-            description: 'Announced when the component is focused. Receives count.',
-            example: '3 items selected',
           },
           {
             name: 'selected',
             required: 'No',
-            description: 'Announced when an option is selected. Receives { label, count }.',
+            description:
+              'Announced via live region when an option is selected. Receives { label, count }.',
             example: 'Apple selected, 3 total',
           },
           {
             name: 'removed',
             required: 'No',
-            description: 'Announced when a chip is removed. Receives { label, count }.',
+            description:
+              'Announced via live region when a chip is removed. Receives { label, count }.',
             example: 'Removed Apple, 2 remaining',
           },
           {
             name: 'cleared',
             required: 'No',
-            description: 'Announced when all selections are cleared.',
+            description: 'Announced via live region when all selections are cleared.',
             example: 'All selections cleared',
           },
         ],
