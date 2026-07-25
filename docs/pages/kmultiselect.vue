@@ -73,7 +73,7 @@
       <DocsExample
         block
         exampleId="kmultiselect-multiple-selection"
-        loadExample="KMultiSelect/CountryFieldMultiple.vue"
+        loadExample="KMultiSelect/MultipleSelection.vue"
       />
 
       <h3>
@@ -87,7 +87,7 @@
       <DocsExample
         block
         exampleId="kmultiselect-single-selection"
-        loadExample="KMultiSelect/CountryFieldSingle.vue"
+        loadExample="KMultiSelect/SingleSelection.vue"
       />
 
       <h3>
@@ -101,7 +101,7 @@
       <DocsExample
         block
         exampleId="kmultiselect-multifield-search"
-        loadExample="KMultiSelect/LanguageFilter.vue"
+        loadExample="KMultiSelect/MultifieldSearch.vue"
       />
 
       <h3>
@@ -115,7 +115,7 @@
       <DocsExample
         block
         exampleId="kmultiselect-hierarchical-tree"
-        loadExample="KMultiSelect/CategoryOptionsTree.vue"
+        loadExample="KMultiSelect/HierarchicalTree.vue"
       />
 
       <h3>
@@ -129,7 +129,7 @@
       <DocsExample
         block
         exampleId="kmultiselect-primitive-values"
-        loadExample="KMultiSelect/ActivityDurationShort.vue"
+        loadExample="KMultiSelect/PrimitiveValues.vue"
       />
     </DocsPageSection>
 

@@ -545,8 +545,8 @@
         default: null,
       },
       /**
-       * The currently selected value(s). Use v-model to keep in sync.
-       * Array when multiple=true, String/Number/null when multiple=false.
+       * The selected value. An array in multiple mode, or a string, number,
+       * or `null` in single mode.
        */
       value: {
         default: null,
@@ -562,14 +562,14 @@
         required: true,
       },
       /**
-       * The current search/filter input text. Supports .sync modifier.
+       * The current search input text.
        */
       searchText: {
         type: String,
         default: '',
       },
       /**
-       * Whether multiple options can be selected or not.
+       * Whether multiple options can be selected.
        */
       multiple: {
         type: Boolean,
@@ -583,7 +583,7 @@
         default: 'label',
       },
       /**
-       * Key on option objects used as the unique value for selection tracking.
+       * Key on option objects used to identify each selection.
        */
       itemValue: {
         type: String,
@@ -606,7 +606,7 @@
         default: '',
       },
       /**
-       * Sets the placeholder value.
+       * Placeholder text shown in the input when nothing is selected.
        */
       placeholder: {
         type: String,
@@ -634,14 +634,14 @@
         default: false,
       },
       /**
-       * Text conditionally displayed when invalid=true.
+       * Error text shown when `invalid` is true.
        */
       invalidText: {
         type: String,
         default: '',
       },
       /**
-       * Whether to turn into a clearable state when a value has been selected.
+       * Shows a clear button when a value is selected.
        */
       clearable: {
         type: Boolean,
@@ -666,8 +666,7 @@
         default: false,
       },
       /**
-       * Translation functions for UI labels and accessibility announcements.
-       * Seven keys are required; partiallySelected, selected, removed, and cleared are optional.
+       * Localized functions for UI labels and screen reader announcements.
        */
       messages: {
         type: Object,
@@ -681,6 +680,7 @@
             'allOptionsSelected',
             'allOptionsDeselected',
             'optionDeselected',
+            'itemsSelected',
           ];
           const missing = requiredKeys.filter(key => typeof messages[key] !== 'function');
           if (missing.length) {
@@ -694,8 +694,8 @@
         },
       },
       /**
-       * When true, hides already-selected options from the dropdown list.
-       * Note: This behavior is currently only supported for flat lists, not nested options.
+       * Hides already-selected options from the dropdown. Only supported for flat lists,
+       * not nested options.
        */
       hideSelected: {
         type: Boolean,
