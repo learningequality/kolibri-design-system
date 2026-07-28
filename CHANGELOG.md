@@ -7,6 +7,19 @@ Changelog is rather internal in nature. See release notes for the public overvie
 <!-- [DO NOT REMOVE-USED BY GH ACTION] PASTE CHANGELOG -->
 
 
+- [#1303]
+  - **Description:** Theme values are now emitted as CSS variables (`--tokens-*`, `--brand-*`, and `--palette-*`) in a `<style id="k-theme-css-variables">` tag in the document head, initialized by `KThemePlugin`, and kept in sync with `globalThemeState` at runtime. Version keys are emitted as `vN` (e.g. `palette.grey.v_400` -> `--palette-grey-v400`); token names are used as-is (e.g. `--theme-primary`). Also exports `themeCssVariablesText()` from `lib/styles/themeCssVariables` for SSR head injection.
+  - **Products impact:** new API
+  - **Addresses:** [Emit theme values as CSS variables on :root #1300](https://github.com/learningequality/kolibri-design-system/issues/1300)
+  - **Components:** N/A
+  - **Breaking:** no
+  - **Impacts a11y:** no
+  - **Guidance:** Styles can now reference theme values directly with `var(--theme-primary)`, `var(--brand-primary-v600)`, `var(--palette-grey-v400)`, etc., as an alternative to `$themeTokens`/`$themeBrand`/`$themePalette`. Existing APIs are unchanged.
+
+[#1303]: https://github.com/learningequality/kolibri-design-system/pull/1303
+
+
+
 - [#1293]
   - **Description:** Added native single-select support to `KListbox` and `KListboxOption`.
   - **Products impact:** none
