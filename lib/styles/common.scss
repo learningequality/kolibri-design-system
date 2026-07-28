@@ -1,3 +1,29 @@
+html,
+body {
+  color: var(--tokens-text);
+  background-color: var(--palette-grey-v100);
+}
+
+*:focus,
+*:focus:hover {
+  outline-width: 3px;
+  outline-style: solid;
+  outline-color: var(--tokens-focusOutline);
+  outline-offset: 4px;
+}
+
+::selection {
+  background: var(--brand-secondary-v100);
+}
+
+@media print {
+  * {
+    color: #000000 !important;
+    background: none !important;
+    box-shadow: none !important;
+  }
+}
+
 .visuallyhidden {
   position: absolute;
   width: 1px;
