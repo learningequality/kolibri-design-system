@@ -7,8 +7,8 @@
     >
       <p>
         Floating elements are UI elements that appear above the page content, such as tooltips and
-        dropdown menus. KDS provides built-in components as well as a low-level logic for managing
-        the positioning of any floating element.
+        dropdown menus. KDS provides built-in components as well as low-level logic for managing the
+        positioning of any floating element.
       </p>
     </DocsPageSection>
 
@@ -23,14 +23,14 @@
           menus.
         </li>
         <li>
-          <i><strong>Activator element</strong></i> is the element that a user interacts with to
-          activate a floating element. It could be a button that opens a dropdown menu, or an
-          element that shows a tooltip on hover.
+          <i><strong>Activator element</strong></i> is an element that a user interacts with to
+          activate a floating element. It could be a button that opens a dropdown menu, or an icon
+          that shows a tooltip on hover.
         </li>
 
         <li>
-          <i><strong>Anchor element</strong></i> is the element to which a floating element is
-          anchored. It is often the same as the activator element, but not always. For example, a
+          <i><strong>Anchor element</strong></i> is the element a floating element is positioned
+          against. It is often the same as the activator element, but not always. For example, a
           tooltip might be anchored to the info icon next to the input, but activated by focusing
           the input itself.
         </li>
@@ -42,7 +42,7 @@
       anchor="#components"
     >
       <ul>
-        <li><DocsLibraryLink component="KTooltip" /> displays a tooltip for an element</li>
+        <li><DocsLibraryLink component="KTooltip" /> displays a tooltip</li>
         <li><DocsLibraryLink component="KDropdownMenu" /> displays a dropdown or context menu</li>
       </ul>
     </DocsPageSection>
@@ -54,11 +54,13 @@
       <ul>
         <li>
           <DocsLibraryLink component="useKFloatingPosition" /> manages the positioning of floating
-          elements relative to their anchor elements. Some design system components use it
-          internally, but it can also be used independently, typically (but not necessarily)
-          together with <code>useKFloatingInteraction</code>.
+          elements relative to their anchor elements
         </li>
-        <li><DocsLibraryLink component="useKFloatingInteraction" /> TBD</li>
+        <li>
+          <DocsLibraryLink component="useKFloatingInteraction" /> observes interactions with
+          activator elements, such as hover, click, and others, to determine when a floating element
+          should become active
+        </li>
       </ul>
     </DocsPageSection>
   </DocsPageTemplate>
