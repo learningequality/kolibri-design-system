@@ -93,6 +93,7 @@
     top: 0;
     left: 0;
     z-index: 24;
+    width: max-content;
     min-width: 75px;
     max-width: 240px;
     padding: 8px;

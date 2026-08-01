@@ -100,9 +100,30 @@
         Initialize position
         <DocsAnchorTarget anchor="#init-position" />
       </h3>
+
       <p>
-        Call <code>initPosition</code> to position a floating element relative to the anchor element
-        and set up position auto-updating. Call when the floating element becomes visible.
+        First, give your floating element the
+        <DocsExternalLink
+          href="https://floating-ui.com/docs/computePosition#initial-layout"
+          text="styles that Floating UI requires"
+        />.
+      </p>
+
+      <!-- eslint-disable -->
+      <!-- prettier-ignore -->
+      <DocsShowCode language="css">
+        .tooltip {
+          position: absolute;
+          width: max-content; // or a fixed value
+          top: 0;
+          left: 0;
+        }
+      </DocsShowCode>
+      <!-- eslint-enable -->
+
+      <p>
+        Then call <code>initPosition</code> to position it relative to the anchor element and set up
+        position auto-updating. Call it when the floating element becomes visible.
       </p>
 
       <p>
@@ -123,7 +144,7 @@
         const { initPosition } = useKFloatingPosition();
 
         initPosition(
-          'my-tooltip',            // Unique ID of the floating element
+          'tooltip-id',            // Unique ID of the floating element
           floatingEl,              // Floating DOM element (e.g. tooltip)
           anchorEl,                // Anchor DOM element (e.g. button)
           options                  // Floating UI options

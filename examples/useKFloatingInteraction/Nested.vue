@@ -136,6 +136,7 @@
     display: flex;
     gap: 8px;
     align-items: center;
+    width: max-content;
     min-width: 260px;
     max-width: 320px;
     min-height: 80px;
@@ -150,6 +151,7 @@
     top: 0;
     left: 0;
     z-index: 24;
+    width: max-content;
     min-width: 75px;
     max-width: 240px;
     padding: 8px;

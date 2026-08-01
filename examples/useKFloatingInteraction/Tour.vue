@@ -186,6 +186,7 @@
     top: 0;
     left: 0;
     z-index: 8;
+    width: max-content;
     min-width: 260px;
     max-width: 320px;
     min-height: 80px;
