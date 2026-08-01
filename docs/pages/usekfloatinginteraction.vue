@@ -109,7 +109,7 @@
           ],
           [
             'Activation listeners',
-            '3 per activator element (total 60: 20 mouseenter, 20 touchstart, 20 focus)',
+            '3 per icon button (total 60: 20 mouseenter, 20 touchstart, 20 focus)',
             '3 page-wide (1 mouseenter, 1 touchstart, 1 focus)',
           ],
         ]"
@@ -287,8 +287,9 @@
 
       <p>
         They also wait another <code>250ms</code> before deactivating, so the floating element
-        doesn't disappear while the pointer moves from the activator to the floating element (they
-        are typically a few pixels apart). This is to meet the Hoverable requirement of the related
+        doesn't disappear while the pointer moves from the activator element to the floating element
+        (they are typically a few pixels apart). This is to meet the Hoverable requirement of the
+        related
         <DocsExternalLink
           text="WCAG Success Criterion"
           href="https://www.w3.org/WAI/WCAG21/Understanding/content-on-hover-or-focus.html"
