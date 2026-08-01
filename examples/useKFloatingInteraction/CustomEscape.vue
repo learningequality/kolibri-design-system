@@ -1,7 +1,7 @@
 <template>
 
   <div>
-    <KButton :data-floating-id="FLOATING_ID">Click or focus me</KButton>
+    <KButton :data-floating-id="FLOATING_ID">Click me</KButton>
 
     <div
       v-show="isActive"
