@@ -176,7 +176,7 @@
 
         const { destroyPosition } = useKFloatingPosition();
 
-        destroyPosition('my-tooltip');
+        destroyPosition('tooltip-id');
       </DocsShowCode>
       <!-- eslint-enable -->
 
@@ -209,7 +209,7 @@
 
         const { initPosition, offset, flip, shift } = useKFloatingPosition();
 
-        initPosition('my-tooltip', floatingEl, anchorEl, {
+        initPosition('tooltip-id', floatingEl, anchorEl, {
           placement: 'bottom',
           strategy: 'fixed',
           middleware: [
