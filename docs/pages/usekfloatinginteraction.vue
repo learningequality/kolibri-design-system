@@ -88,10 +88,10 @@
       </p>
 
       <p>
-        The table below shows the impact of <code>useKFloatingInteraction</code>'s activation
-        listeners in both modes on a page with 20 icon buttons, each with a tooltip. The tooltips
-        are configured with <code>hover</code>, <code>touch</code>, and <code>focus</code>, so that
-        they work with a mouse, on a touchscreen, and with a keyboard.
+        The table below shows the impact of <code>useKFloatingInteraction</code>'s activation logic
+        in both modes on a page with 20 icon buttons, each with a tooltip. The tooltips are
+        configured with <code>hover</code>, <code>touch</code>, and <code>focus</code>, so that they
+        work with a mouse, on a touchscreen, and with a keyboard.
       </p>
 
       <KTable
@@ -116,10 +116,10 @@
       />
 
       <p>
-        The main trade-off of non-delegated mode is a MutationObserver present all the time, and a
-        much higher number of listeners. The main trade-off of the delegated mode is that the
-        activation handler triggers for each event of a given type on the whole page - particularly
-        relevant for <code>mouseenter</code>.
+        The main trade-off of non-delegated mode is a MutationObserver processing every DOM update
+        on the page, all the time, and a much higher number of listeners. The main trade-off of
+        delegated mode is that the activation handler runs on every event of a given type anywhere
+        on the page (particularly relevant for <code>mouseenter</code>).
       </p>
     </DocsPageSection>
 
@@ -177,7 +177,7 @@
 
       <p>
         It keeps the floating element from disappearing when hover or focus moves from the activator
-        element to the floating element, as required by the Hoverable part of the
+        element to the floating element, as required by the Hoverable requirement of the related
         <DocsExternalLink
           text="WCAG Success Criterion"
           href="https://www.w3.org/WAI/WCAG21/Understanding/content-on-hover-or-focus.html"
@@ -197,9 +197,9 @@
       </h3>
 
       <p>
-        <code>options.interactions</code> configures what user interactions with the associated
-        activator element should open the floating element. Furthermore, each interaction has its
-        own configuration options. <code>options.deactivateOn</code> is an interaction-independent
+        <code>options.interactions</code> configures what user interactions with an activator
+        element should open its floating element. Furthermore, each interaction has its own
+        configuration options. <code>options.deactivateOn</code> is an interaction-independent
         setting that configures what deactivates the floating element. The examples on this page go
         through each of them in detail.
       </p>
@@ -276,31 +276,31 @@
       </h3>
 
       <p>
-        Hover and focus wait before they take effect. <code>activateDelay</code> keeps tooltips from
-        flashing one after another as the pointer travels. <code>deactivateDelay</code> keeps the
-        floating element from deactivating while the pointer moves from the activator to the
-        floating element (they are typically a few pixels apart).
+        Hover and focus wait before they take effect. <code>activateDelay</code> keeps floating
+        elements from flashing one after another as the pointer travels.
+        <code>deactivateDelay</code> keeps the floating element from deactivating while the pointer
+        moves from the activator to the floating element (they are typically a few pixels apart).
       </p>
 
       <DocsBanner a11y>
-        Turning off <code>deactivateDelay</code> makes the Hoverable part of the related
+        Turning off <code>deactivateDelay</code> makes the Hoverable requirement of the related
         <DocsExternalLink
           text="WCAG Success Criterion"
           href="https://www.w3.org/WAI/WCAG21/Understanding/content-on-hover-or-focus.html"
         />
-        your responsibility. Without the wait, the floating element deactivates before a user can
-        move the pointer across the gap onto it.
+        your responsibility. Without the delay, the floating element would deactivate before a user
+        could move the pointer across the gap onto it.
       </DocsBanner>
 
       <DocsBanner a11y>
-        Add transition to the floating element, so it doesn't appear and vanish abruptly. Every
-        floating element on this page fades in and out. The implementation varies slightly depending
-        on whether it's eager or lazy (see the
+        Consider adding transition to floating elements, so they don't appear and vanish abruptly.
+        All tooltips on this page fade in and out. The implementation varies slightly depending on
+        whether it's eager or lazy (see
         <DocsInternalLink
           href="#eager-lazy"
           text="eager and lazy"
         />
-        example).
+        examples).
       </DocsBanner>
 
       <h3>
@@ -351,8 +351,8 @@
       </p>
 
       <DocsBanner a11y>
-        Turning off the default <code>Escape</code> behavior makes the Dismissible part of the
-        related
+        Turning off the default <code>Escape</code> behavior makes the Dismissible requirement of
+        the related
         <DocsExternalLink
           text="WCAG Success Criterion"
           href="https://www.w3.org/WAI/WCAG21/Understanding/content-on-hover-or-focus.html"
