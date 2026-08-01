@@ -211,8 +211,8 @@
           interactions: ['hover', 'focus', 'click', 'touch']  // simplified notation, uses the defaults below
           interactions: { hover: true, focus: true }          // simplified notation, uses the defaults below
           interactions: {
-            hover: { activateDelay: 150, deactivateDelay: 150 },
-            focus: { keyboardOnly: false, activateDelay: 150, deactivateDelay: 150 },
+            hover: { activateDelay: 300, deactivateDelay: 250 },
+            focus: { keyboardOnly: false, activateDelay: 300, deactivateDelay: 250 },
             click: {
               deactivateOnOutside: true,
               toggle: true,
@@ -276,20 +276,32 @@
       </h3>
 
       <p>
-        Hover and focus wait before they take effect. <code>activateDelay</code> keeps floating
-        elements from flashing one after another as the pointer travels.
-        <code>deactivateDelay</code> keeps the floating element from deactivating while the pointer
-        moves from the activator to the floating element (they are typically a few pixels apart).
+        By default, hover and focus wait for <code>300ms</code> before activating a floating
+        element. This keeps floating elements from flashing one after another as the pointer travels
+        (value chosen based on manual testing and
+        <DocsExternalLink
+          text="Nielsen Norman Group guidance"
+          href="https://www.nngroup.com/articles/timing-exposing-content/"
+        />).
       </p>
 
-      <DocsBanner a11y>
-        Turning off <code>deactivateDelay</code> makes the Hoverable requirement of the related
+      <p>
+        They also wait another <code>250ms</code> before deactivating, so the floating element
+        doesn't disappear while the pointer moves from the activator to the floating element (they
+        are typically a few pixels apart). This is to meet the Hoverable requirement of the related
         <DocsExternalLink
           text="WCAG Success Criterion"
           href="https://www.w3.org/WAI/WCAG21/Understanding/content-on-hover-or-focus.html"
-        />
-        your responsibility. Without the delay, the floating element would deactivate before a user
-        could move the pointer across the gap onto it.
+        />.
+      </p>
+
+      <p>
+        Both values can be adjusted via <code>activateDelay</code> and <code>deactivateDelay</code>.
+      </p>
+
+      <DocsBanner a11y>
+        Decreasing or removing delays makes both keeping floating elements from flashing and meeting
+        the WCAG criterion mentioned above your responsibility.
       </DocsBanner>
 
       <DocsBanner a11y>
@@ -298,9 +310,8 @@
         whether it's eager or lazy (see
         <DocsInternalLink
           href="#eager-lazy"
-          text="eager and lazy"
-        />
-        examples).
+          text="Eager and lazy"
+        />.
       </DocsBanner>
 
       <h3>
