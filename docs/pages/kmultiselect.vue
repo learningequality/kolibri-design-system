@@ -109,13 +109,47 @@
         <DocsAnchorTarget anchor="#hierarchical-tree" />
       </h3>
       <p>
-        Selecting from a nested tree of options where selecting or deselecting a parent cascades to
-        its children. An indeterminate state is shown when only some children are selected.
+        Options with a <code>level</code> field render as a nested tree. The
+        <code>autoSelectChild</code> and <code>autoSelectParent</code> props control how a
+        selection cascades through the tree. Use at most one of them, since each gives a checked
+        parent a different meaning.
+      </p>
+
+      <h4>Cascading selection</h4>
+      <p>
+        With <code>autoSelectChild</code>, selecting or deselecting a parent cascades to its
+        children. A parent is checked when all of its children are selected and indeterminate when
+        only some are, no matter how it was selected.
       </p>
       <DocsExample
         block
         exampleId="kmultiselect-hierarchical-tree"
         loadExample="KMultiSelect/HierarchicalTree.vue"
+      />
+
+      <h4>Independent selection</h4>
+      <p>
+        Without the cascade props, each option is selected on its own, so checking a parent
+        selects only the parent. A parent you check directly stays checked when its children
+        change. A parent checked automatically, because all of its children were selected, becomes
+        indeterminate when one of them is deselected.
+      </p>
+      <DocsExample
+        block
+        exampleId="kmultiselect-independent-selection"
+        loadExample="KMultiSelect/IndependentSelection.vue"
+      />
+
+      <h4>Automatic parent selection</h4>
+      <p>
+        With <code>autoSelectParent</code>, selecting a child also selects all of its ancestors,
+        so the value always contains the full path to every selected option. Checking a parent
+        does not affect its children, and deselecting a parent deselects everything under it.
+      </p>
+      <DocsExample
+        block
+        exampleId="kmultiselect-auto-select-parent"
+        loadExample="KMultiSelect/AutoSelectParent.vue"
       />
 
       <h3>
