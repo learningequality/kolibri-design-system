@@ -3,7 +3,7 @@
   <div
     v-show="isOpen && (decoratedOptionTree.length > 0 || showEmptyState)"
     class="kmselect-dropdown"
-    :style="{ backgroundColor: $themeTokens.surface }"
+    :style="[{ backgroundColor: $themeTokens.surface }, flipStyle]"
     @mousedown.prevent
   >
     <KListbox
@@ -154,6 +154,32 @@
         },
       );
 
+      const dropUp = ref(false);
+      // Measured once per open so the direction stays stable while typing
+      watch(
+        () => props.isOpen,
+        isOpen => {
+          if (!isOpen || typeof window === 'undefined') {
+            dropUp.value = false;
+            return;
+          }
+          nextTick(() => {
+            const el = instance.proxy.$el;
+            const container = el?.parentElement;
+            if (!el || !container) return;
+            const rect = container.getBoundingClientRect();
+            const spaceBelow = window.innerHeight - rect.bottom;
+            // Rendered dropdown height plus its 2px margin
+            const neededSpace = el.offsetHeight + 2;
+            dropUp.value = spaceBelow < neededSpace && rect.top > spaceBelow;
+          });
+        },
+      );
+
+      const flipStyle = computed(() =>
+        dropUp.value ? { top: 'auto', bottom: '100%', marginTop: 0, marginBottom: '2px' } : {},
+      );
+
       const showEmptyState = computed(() => {
         return (
           props.isOpen &&
@@ -234,6 +260,7 @@
         decoratedOptionTree,
         showSelector,
         showEmptyState,
+        flipStyle,
         // eslint-disable-next-line vue/no-unused-properties
         forwardKeydown,
         // eslint-disable-next-line vue/no-unused-properties

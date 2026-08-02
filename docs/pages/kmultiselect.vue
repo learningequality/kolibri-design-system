@@ -110,9 +110,9 @@
       </h3>
       <p>
         Options with a <code>level</code> field render as a nested tree. The
-        <code>autoSelectChild</code> and <code>autoSelectParent</code> props control how a
-        selection cascades through the tree. Use at most one of them, since each gives a checked
-        parent a different meaning.
+        <code>autoSelectChild</code> and <code>autoSelectParent</code> props control how a selection
+        cascades through the tree. Use at most one of them, since each gives a checked parent a
+        different meaning.
       </p>
 
       <h4>Cascading selection</h4>
@@ -129,9 +129,9 @@
 
       <h4>Independent selection</h4>
       <p>
-        Without the cascade props, each option is selected on its own, so checking a parent
-        selects only the parent. A parent you check directly stays checked when its children
-        change. A parent checked automatically, because all of its children were selected, becomes
+        Without the cascade props, each option is selected on its own, so checking a parent selects
+        only the parent. A parent you check directly stays checked when its children change. A
+        parent checked automatically, because all of its children were selected, becomes
         indeterminate when one of them is deselected.
       </p>
       <DocsExample
@@ -142,9 +142,9 @@
 
       <h4>Automatic parent selection</h4>
       <p>
-        With <code>autoSelectParent</code>, selecting a child also selects all of its ancestors,
-        so the value always contains the full path to every selected option. Checking a parent
-        does not affect its children, and deselecting a parent deselects everything under it.
+        With <code>autoSelectParent</code>, selecting a child also selects all of its ancestors, so
+        the value always contains the full path to every selected option. Checking a parent does not
+        affect its children, and deselecting a parent deselects everything under it.
       </p>
       <DocsExample
         block
