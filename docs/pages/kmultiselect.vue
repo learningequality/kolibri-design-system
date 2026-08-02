@@ -143,8 +143,9 @@
       <h4>Automatic parent selection</h4>
       <p>
         With <code>autoSelectParent</code>, selecting a child also selects all of its ancestors, so
-        the value always contains the full path to every selected option. Checking a parent does not
-        affect its children, and deselecting a parent deselects everything under it.
+        the value always contains the full path to every selected option. An ancestor selected this
+        way is removed when its last selected descendant is deselected, while a parent you select
+        directly stays selected. Deselecting a parent deselects everything under it.
       </p>
       <DocsExample
         block

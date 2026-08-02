@@ -132,7 +132,7 @@
         return optionTree.value.filter(node => !selectedSet.has(String(node.value)));
       });
 
-      // True when at least one root node has children — used to add group separators.
+      // True when at least one root node has children, used to add group separators.
       const isHierarchical = computed(() =>
         optionTree.value.some(node => node.children && node.children.length > 0),
       );
