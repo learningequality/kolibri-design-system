@@ -576,22 +576,22 @@
 
 <style lang="scss" scoped>
 
-  .palette-block {
-    display: inline-block;
-    width: 350px;
-  }
+      .palette-block {
+        display: inline-block;
+        width: 350px;
+      }
 
-  .darken-block {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 140px;
-    height: 140px;
+      .darken-block {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 140px;
+        height: 140px;
 
-    code {
-      padding: 4px;
-      background-color: rgba(255, 255, 255, 0.8);
-    }
-  }
+        code {
+          padding: 4px;
+          background-color: rgba(255, 255, 255, 0.8);
+        }
+      }
 
 </style>
