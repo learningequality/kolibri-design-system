@@ -28,12 +28,18 @@
 
       <ul>
         <li>
-          Installs <code>$themeBrand</code>, <code>$themeTokens</code> <code>$themePalette</code>,
-          and <code>$computedClass</code> helpers on all Vue instances (see
+          Makes theme values available in two forms: as reactive objects on every Vue instance
+          (<code>$themeBrand</code>,
+          <code>$themeTokens</code> <code>$themePalette</code>, <code>$computedClass</code>) for use
+          in JavaScript, and as CSS variables (<code>--tokens-*</code>, <code>--brand-*</code>,
+          <code>--palette-*</code>) emitted to a <code>&lt;style&gt;</code> tag with
+          <code>#k-theme-css-variables</code> in the document head for use in style blocks. Both
+          stay in sync when the theme changes via <code>setBrandColors()</code> or
+          <code>setTokenMapping()</code>. See
           <DocsInternalLink
             href="/colors/#usage"
             text="Colors"
-          />).
+          />.
         </li>
         <li>
           Provides <code>$coreOutline</code>, <code>$inputModality</code>, <code>$mediaType</code>,
@@ -41,14 +47,6 @@
           Vue instances.
         </li>
         <li>Globally registers all KDS Vue components.</li>
-        <li>
-          Emits theme values as CSS variables (<code>--tokens-*</code>, <code>--brand-*</code>, and
-          <code>--palette-*</code>) to a <code>&lt;style&gt;</code> tag
-          <code>#k-theme-css-variables</code> in an application's document head so that styles can
-          reference them directly, for example <code>var(--tokens-primary)</code>. The variables are
-          updated whenever the theme changes via <code>setBrandColors()</code> or
-          <code>setTokenMapping()</code>.
-        </li>
         <li>
           Inserts assertive and polite ARIA live regions <code>#k-live-region</code> to an
           application's document body (see
@@ -75,7 +73,8 @@
         @import '~kolibri-design-system/lib/styles/common';
       </DocsShowCode>
 
-      This globally registers styles needed for components to display correctly and also exposes
+      This registers the styles needed for components to display correctly, along with global styles
+      for the page background, text color, focus outline, text selection, and print. It also exposes
       <DocsInternalLink
         href="/styling#helper-styles"
         text="helper styles"
