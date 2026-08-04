@@ -666,6 +666,15 @@
         default: false,
       },
       /**
+       * Only applies to hierarchical options. When true, selecting all children
+       * of a parent selects the parent as well.
+       */
+      // eslint-disable-next-line vue/no-unused-properties
+      autoPromoteParent: {
+        type: Boolean,
+        default: true,
+      },
+      /**
        * Localized functions for UI labels and screen reader announcements.
        */
       messages: {

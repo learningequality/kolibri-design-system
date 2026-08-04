@@ -130,9 +130,10 @@
       <h4>Independent selection</h4>
       <p>
         Without the cascade props, each option is selected on its own, so checking a parent selects
-        only the parent. A parent you check directly stays checked when its children change. A
-        parent checked automatically, because all of its children were selected, becomes
-        indeterminate when one of them is deselected.
+        only the parent, and a parent you check directly stays checked when its children change. By
+        default, selecting all children of a parent also selects the parent; this example turns that
+        off with <code>:autoPromoteParent="false"</code>, so the value stays limited to exactly what
+        you select and a fully covered parent shows as indeterminate.
       </p>
       <DocsExample
         block
