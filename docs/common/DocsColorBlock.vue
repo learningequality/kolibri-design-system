@@ -3,7 +3,7 @@
   <div class="block-wrapper">
     <div
       class="color-block"
-      :style="{ backgroundColor: value }"
+      :style="{ '--block-color': value }"
     ></div>
     <div class="code name">
       <code>{{ name }}</code><DocsAnchorTarget
@@ -101,8 +101,18 @@
     width: 40px;
     height: 40px;
     color: black;
+    background-color: var(--block-color);
     border: 1px solid #212121;
     border-radius: 4px;
+  }
+
+  // lib/styles/common.scss prints `* { background: none !important }`, which an inline
+  // style cannot outrank. The swatch is the content on these pages, so opt it back in
+  @media print {
+    .color-block {
+      background-color: var(--block-color) !important;
+      print-color-adjust: exact;
+    }
   }
 
   .code {
