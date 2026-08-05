@@ -9,6 +9,7 @@ body {
   background-color: var(--palette-grey-v100, #f5f5f5);
 }
 
+// Outline for keyboard-modality tab-focus, sourced from themeOutlineStyle()
 *:focus {
   outline-width: 3px;
   outline-style: solid;
@@ -16,7 +17,13 @@ body {
   outline-offset: 4px;
 }
 
+// Remove the focus outline for mouse clicks
+*:focus:not(:focus-visible) {
+  outline: none;
+}
+
 ::selection {
+  color: var(--tokens-text, #000000);
   background: var(--brand-secondary-v100, #fff5cc);
 }
 

@@ -30,8 +30,8 @@
         <li>
           Makes theme values available in two forms: as reactive objects on every Vue instance
           (<code>$themeBrand</code>,
-          <code>$themeTokens</code> <code>$themePalette</code>, <code>$computedClass</code>) for use
-          in JavaScript, and as CSS variables (<code>--tokens-*</code>, <code>--brand-*</code>,
+          <code>$themeTokens</code>, <code>$themePalette</code>, <code>$computedClass</code>) for
+          use in JavaScript, and as CSS variables (<code>--tokens-*</code>, <code>--brand-*</code>,
           <code>--palette-*</code>) emitted to a <code>&lt;style&gt;</code> tag with
           <code>#k-theme-css-variables</code> in the document head for use in style blocks. Both
           stay in sync when the theme changes via <code>setBrandColors()</code> or

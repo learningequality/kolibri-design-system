@@ -117,7 +117,7 @@
       </p>
 
       <h3>
-        Helper styles
+        Global and helper styles
         <DocsAnchorTarget anchor="#helper-styles" />
       </h3>
 
@@ -146,14 +146,10 @@
         <DocsAnchorTarget anchor="#focus-outline" />
       </h3>
       <p>
-        We provide a consistent, high-contrast focus highlight that is enabled only when we detect
-        that the user is navigating using the keyboard (i.e. tabbing from item to item).
-      </p>
-      <p>
-        It is also applied globally to focused elements as part of the installation step, using the
-        <code>--tokens-focusOutline</code> CSS variable. For dynamic cases where the outline color
-        needs to be read in JavaScript, use the <code>$coreOutline</code> attribute attached to Vue
-        objects.
+        We provide a consistent, high-contrast focus highlight, using the
+        <code>--tokens-focusOutline</code> CSS variable. For dynamic cases where the outline needs
+        to be applied from JavaScript, use the <code>$coreOutline</code> computed property available
+        on all Vue instances.
       </p>
     </DocsPageSection>
 
