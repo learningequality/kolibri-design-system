@@ -22,8 +22,10 @@
       loadExample="KMultiSelect/MultifieldSearch.vue"
     />
     <VisualTestExample
+      id="hierarchical-tree-example"
       title="Hierarchical tree"
       width="400px"
+      height="400px"
       loadExample="KMultiSelect/HierarchicalTree.vue"
     />
   </VisualTestLayout>

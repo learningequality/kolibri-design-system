@@ -50,7 +50,7 @@
     components: { KMultiSelect },
     data() {
       return {
-        selected: [],
+        selected: ['CA', 'IN', 'JP'],
         allCountries,
         messages: {
           clearText: () => 'Clear all selections',
