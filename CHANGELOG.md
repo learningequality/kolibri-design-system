@@ -7,6 +7,19 @@ Changelog is rather internal in nature. See release notes for the public overvie
 <!-- [DO NOT REMOVE-USED BY GH ACTION] PASTE CHANGELOG -->
 
 
+- [#1314]
+  - **Description:** build(deps): bump fast-uri from 3.1.2 to 3.1.5
+  - **Products impact:** Dev Dependency upgrade
+  - **Addresses:** -
+  - **Components:** -
+  - **Breaking:** -
+  - **Impacts a11y:** -
+  - **Guidance:** -
+
+[#1314]: https://github.com/learningequality/kolibri-design-system/pull/1314
+
+
+
 - [#1302]
   - **Description:** Merges release-v5 into develop
   - **Products impact:** none.
