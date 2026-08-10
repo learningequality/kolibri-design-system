@@ -205,6 +205,18 @@
       const instance = getCurrentInstance();
       const uid = componentCount++;
 
+      if (
+        process.env.NODE_ENV !== 'production' &&
+        props.autoSelectParent &&
+        props.autoSelectChild
+      ) {
+        // eslint-disable-next-line no-console
+        console.warn(
+          `[KMultiSelect] 'autoSelectParent' and 'autoSelectChild' cannot be used together ` +
+            `because they give a checked parent conflicting meanings. Use at most one of them.`,
+        );
+      }
+
       const internalSearchText = ref(props.searchText || '');
       const inputFocused = ref(false);
       const isHovered = ref(false);
@@ -257,7 +269,7 @@
       const selectedValuesSummary = computed(() => {
         const count = selectedOptionsData.value.length;
         if (count === 0) return '';
-        return props.messages.itemsSelected ? props.messages.itemsSelected(count) : '';
+        return props.messages.itemsSelected ? props.messages.itemsSelected({ count }) : '';
       });
 
       const { isOpen, openDropdown, closeDropdown, toggleDropdown } = useMultiSelectDropdownLogic(
@@ -290,7 +302,7 @@
         selectedOptionsData,
         options => {
           if (props.multiple || isOpen.value) return;
-          internalSearchText.value = options.length ? getOptionText(options[0]) : '';
+          setSearchText(options.length ? getOptionText(options[0]) : '');
         },
         { immediate: true },
       );
@@ -648,8 +660,8 @@
         default: false,
       },
       /**
-       * Only applies to hierarchical options. When true, selecting a child
-       * automatically selects all its ancestors as well.
+       * Only applies to hierarchical options. When true, selecting an option
+       * also selects all of the parents above it.
        */
       // eslint-disable-next-line vue/no-unused-properties
       autoSelectParent: {
@@ -657,8 +669,8 @@
         default: false,
       },
       /**
-       * Only applies to hierarchical options. When true, selecting a parent
-       * automatically selects all its descendants as well.
+       * Only applies to hierarchical options. When true, selecting or
+       * deselecting a parent also selects or deselects everything under it.
        */
       // eslint-disable-next-line vue/no-unused-properties
       autoSelectChild: {

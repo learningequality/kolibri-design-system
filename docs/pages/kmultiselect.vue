@@ -30,8 +30,8 @@
       anchor="#messages"
     >
       <p>
-        <code>KMultiSelect</code> requires a <code>messages</code> object with seven required keys,
-        each a function returning a translated string. Additional optional keys enable further
+        <code>KMultiSelect</code> requires a <code>messages</code> object with 7 required keys, each
+        a function returning a translated string. Additional optional keys enable further
         live-region announcements.
       </p>
       <KTable
@@ -143,10 +143,12 @@
 
       <h4>Automatic parent selection</h4>
       <p>
-        With <code>autoSelectParent</code>, selecting a child also selects all of its ancestors, so
-        the value always contains the full path to every selected option. An ancestor selected this
-        way is removed when its last selected descendant is deselected, while a parent you select
-        directly stays selected. Deselecting a parent deselects everything under it.
+        With <code>autoSelectParent</code>, selecting an option also selects all of the parents
+        above it, so the value always contains the full path to every selected option, ordered from
+        parent to child. A selected parent shows as indeterminate while only some of the options
+        under it are selected. A parent selected this way is removed when the last selected option
+        under it is deselected, while a parent you select directly stays selected. Deselecting a
+        parent deselects everything under it.
       </p>
       <DocsExample
         block
@@ -249,7 +251,7 @@
             required: 'No',
             description:
               'Multiple-select only. Announces how many items are selected as part of ' +
-              'the field’s accessible name. Receives the selection count (number).',
+              'the field’s accessible name. Receives { count }.',
             example: '3 items selected',
           },
           {

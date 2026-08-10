@@ -52,7 +52,8 @@
           allOptionsSelected: () => 'All options selected',
           allOptionsDeselected: () => 'No options selected',
           optionDeselected: () => 'Option deselected',
-          itemsSelected: count => (count === 1 ? '1 item selected' : `${count} items selected`),
+          itemsSelected: ({ count }) =>
+            count === 1 ? '1 item selected' : `${count} items selected`,
         },
       };
     },
