@@ -91,7 +91,7 @@
       <p>This will display:</p>
 
       <DocsShow>
-        <div class="error-message">This is an error</div>
+        <div class="error-message text-block">This is an error</div>
       </DocsShow>
       <p>
         For palette and brand variables, replace the dots in the path with hyphens and drop the
@@ -114,7 +114,7 @@
 
       <p>
         Use these for inline <code>:style</code> bindings and for values computed at runtime. For
-        example, to color text using <code>$themeTokens.success</code> with a
+        example, to color text using <code>$themeTokens.primary</code> with a
         <DocsExternalLink
           text="computed style"
           href="https://vuejs.org/v2/guide/class-and-style.html"
@@ -122,13 +122,18 @@
       </p>
 
       <DocsShowCode language="html">
-        <div :style="{ color: $themeTokens.success }">This is not an error</div>
+        <div :style="{ color: $themeTokens.primary }">This is not an error</div>
       </DocsShowCode>
 
       <p>This will display:</p>
 
       <DocsShow>
-        <div :style="{ color: $themeTokens.success }">This is not an error</div>
+        <div
+          class="text-block"
+          :style="{ color: $themeTokens.primary }"
+        >
+          This is not an error
+        </div>
       </DocsShow>
 
       <p>Move style definitions from the template to computed props if the style gets complex.</p>
@@ -600,6 +605,10 @@
           padding: 4px;
           background-color: rgba(255, 255, 255, 0.8);
         }
+      }
+
+      .text-block {
+        font-size: 17px;
       }
 
       .error-message {
