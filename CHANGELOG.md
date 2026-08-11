@@ -7,6 +7,19 @@ Changelog is rather internal in nature. See release notes for the public overvie
 <!-- [DO NOT REMOVE-USED BY GH ACTION] PASTE CHANGELOG -->
 
 
+- [#1315]
+  - **Description:** build(deps): bump nanoid from 3.3.8 to 3.3.18
+  - **Products impact:** Dev Dependency upgrade
+  - **Addresses:** -
+  - **Components:** -
+  - **Breaking:** -
+  - **Impacts a11y:** -
+  - **Guidance:** -
+
+[#1315]: https://github.com/learningequality/kolibri-design-system/pull/1315
+
+
+
 - [#1314]
   - **Description:** build(deps): bump fast-uri from 3.1.2 to 3.1.5
   - **Products impact:** Dev Dependency upgrade
