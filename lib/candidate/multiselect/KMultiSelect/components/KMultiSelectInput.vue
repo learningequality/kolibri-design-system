@@ -2,21 +2,13 @@
 
   <div
     class="kmselect-input"
-    :class="[
-      disabled ? 'is-disabled' : '',
-      $computedClass({
-        ':hover:not(.is-disabled)': {
-          borderBottomColor: $themePalette.grey.v_500 + ' !important',
-        },
-      }),
-    ]"
+    :class="[disabled ? 'is-disabled' : '']"
     :style="{
-      borderBottom: `2px solid ${
-        invalid ? $themeTokens.error : focused ? $themeTokens.primary : $themeTokens.fineLine
-      }`,
       cursor: disabled ? 'not-allowed' : 'default',
-      backgroundColor: disabled ? $themeTokens.textDisabled + '20' : $themePalette.grey.v_100,
+      backgroundColor: 'transparent',
     }"
+    :role="multiple ? 'group' : undefined"
+    :aria-labelledby="multiple ? `${labelId} ${selectedValuesId}` : undefined"
     @click="handleWrapperClick"
   >
     <template v-if="multiple">
@@ -48,22 +40,8 @@
       </span>
     </template>
 
-    <span
-      v-else-if="selectedOptions.length > 0 && !isOpen && !searchText"
-      :style="{
-        flex: '1 1 auto',
-        padding: '0 4px',
-        fontSize: '14px',
-        color: disabled ? $themeTokens.textDisabled : $themeTokens.text,
-        whiteSpace: 'nowrap',
-        overflow: 'hidden',
-        textOverflow: 'ellipsis',
-      }"
-    >
-      {{ getOptionText(selectedOptions[0]) }}
-    </span>
-
     <input
+      :id="inputId"
       ref="inputEl"
       v-model="inputModel"
       class="kmselect-native-input"
@@ -89,6 +67,16 @@
       icon="clear"
       :ariaLabel="clearAllLabel"
       :tooltip="clearAllLabel"
+      tooltipPosition="top"
+      :color="
+        invalid
+          ? $themeTokens.error
+          : focused
+            ? $themeTokens.primary
+            : hovered
+              ? $themeTokens.text
+              : $themePalette.grey.v_700
+      "
       class="kmselect-clear-btn"
       @click.stop="$emit('clear-all')"
       @mousedown.native.prevent
@@ -99,13 +87,25 @@
     <KIconButton
       tabindex="-1"
       size="small"
-      :icon="isOpen ? 'chevronUp' : 'chevronDown'"
+      :icon="isOpen ? 'dropup' : 'dropdown'"
       :ariaLabel="isOpen ? closeLabel : openLabel"
       :tooltip="isOpen ? closeLabel : openLabel"
+      tooltipPosition="top"
       :disabled="disabled"
+      :aria-expanded="String(isOpen)"
+      :aria-controls="listboxId"
+      :color="
+        invalid
+          ? $themeTokens.error
+          : focused
+            ? $themeTokens.primary
+            : !disabled && hovered
+              ? $themeTokens.text
+              : $themePalette.grey.v_700
+      "
       :style="{
         position: 'absolute',
-        insetInlineEnd: '4px',
+        right: '4px',
         top: '50%',
         transform: 'translateY(-50%)',
       }"
@@ -149,12 +149,12 @@
           'aria-haspopup': 'listbox',
           'aria-controls': props.listboxId,
           'aria-autocomplete': 'list',
-          ...(props.required && { 'aria-required': 'true' }),
           'aria-invalid': props.invalid ? 'true' : 'false',
         };
-        if (props.labelId) {
-          attrs['aria-labelledby'] = props.labelId;
-        }
+        const labelledby = [];
+        if (props.labelId) labelledby.push(props.labelId);
+        if (props.multiple && props.selectedValuesId) labelledby.push(props.selectedValuesId);
+        if (labelledby.length) attrs['aria-labelledby'] = labelledby.join(' ');
         if (props.isOpen && props.activeDescendant) {
           attrs['aria-activedescendant'] = props.activeDescendant;
         }
@@ -223,9 +223,9 @@
         type: String,
         required: true,
       },
-      required: {
-        type: Boolean,
-        default: false,
+      inputId: {
+        type: String,
+        required: true,
       },
       errorId: {
         type: String,
@@ -263,6 +263,10 @@
         type: Boolean,
         default: false,
       },
+      hovered: {
+        type: Boolean,
+        default: false,
+      },
       clearAllLabel: {
         type: String,
         default: null,
@@ -280,6 +284,10 @@
         default: null,
       },
       labelId: {
+        type: String,
+        default: null,
+      },
+      selectedValuesId: {
         type: String,
         default: null,
       },
@@ -301,12 +309,12 @@
     flex-wrap: wrap;
     gap: 4px;
     align-items: center;
-    min-height: 40px;
-    padding-block: 4px;
-    padding-inline-start: 8px;
-    padding-inline-end: 40px;
+    min-height: 32px;
+    padding-top: 4px;
+    padding-right: 40px;
+    padding-bottom: 4px;
+    padding-left: 10px;
     border: 0;
-    border-radius: 2px 2px 0 0;
     outline: none;
   }
 
@@ -315,7 +323,7 @@
     min-width: 80px;
     height: 28px;
     padding: 0 4px;
-    font-size: 14px;
+    font-size: 16px;
     background: transparent;
     border: 0;
     outline: none;
@@ -323,8 +331,8 @@
 
   .kmselect-clear-btn {
     position: absolute;
-    inset-inline-end: 36px;
     top: 50%;
+    right: 36px;
     transform: translateY(-50%);
   }
 

@@ -224,7 +224,12 @@
 
       function moveFocusBy(delta) {
         const optionsCount = options.value.length;
-        const currentIndex = options.value.findIndex(o => o.value === focusedValue.value);
+        if (optionsCount === 0) return;
+
+        let currentIndex = options.value.findIndex(o => o.value === focusedValue.value);
+        if (currentIndex === -1) {
+          currentIndex = delta > 0 ? -1 : optionsCount;
+        }
         // Modulo to wrap for circular navigation
         const newIndex = (currentIndex + delta + optionsCount) % optionsCount;
         setFocus(optionValueAt(newIndex));
@@ -291,6 +296,16 @@
         event.preventDefault();
       }
 
+      function toggleFocusedOption() {
+        if (focusedValue.value !== null) {
+          toggleOption(focusedValue.value);
+        }
+      }
+
+      function hasFocusedOption() {
+        return focusedValue.value !== null;
+      }
+
       provide('klistbox', {
         registerOption,
         unregisterOption,
@@ -344,6 +359,12 @@
         onListBlur,
         onListKeydown,
         getMessage,
+        // eslint-disable-next-line vue/no-unused-properties
+        moveFocusBy,
+        // eslint-disable-next-line vue/no-unused-properties
+        toggleFocusedOption,
+        // eslint-disable-next-line vue/no-unused-properties
+        hasFocusedOption,
       };
     },
     props: {

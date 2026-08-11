@@ -496,7 +496,7 @@ export default [
       }),
       new Page({
         path: '/kmultiselect',
-        title: 'KMultiselect',
+        title: 'KMultiSelect',
         isCode: true,
         candidate: true,
         keywords: multiselectRelatedKeywords,

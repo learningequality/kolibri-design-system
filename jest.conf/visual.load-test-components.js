@@ -23,6 +23,7 @@ import CardsVisualTest from '~~/lib/cards/__tests__/components/CardsVisualTest.v
 import KLogoVisualTest from '~~/lib/KLogo/__tests__/components/KLogoVisualTest.vue';
 import KBreadcrumbsVisualTest from '~~/lib/KBreadcrumbs/__tests__/components/KBreadcrumbsVisualTest.vue';
 import KListboxVisualTest from '~~/lib/candidate/listbox/KListbox/__tests__/components/KListboxVisualTest.vue';
+import KMultiSelectVisualTest from '~~/lib/candidate/multiselect/KMultiSelect/__tests__/components/KMultiSelectVisualTest.vue';
 import KSnackbarVisualTest from '~~/lib/KSnackbar/__tests__/components/KSnackbarVisualTest.vue';
 import KIconButtonVisualTest from '~~/lib/buttons-and-links/__tests__/components/KIconButtonVisualTest.vue';
 
@@ -52,5 +53,6 @@ Vue.component('KDropdownMenuVisualTest', KDropdownMenuVisualTest);
 Vue.component('KBreadcrumbsVisualTest', KBreadcrumbsVisualTest);
 Vue.component('KButtonVisualTest', KButtonVisualTest);
 Vue.component('KListboxVisualTest', KListboxVisualTest);
+Vue.component('KMultiSelectVisualTest', KMultiSelectVisualTest);
 Vue.component('KSnackbarVisualTest', KSnackbarVisualTest);
 Vue.component('KIconButtonVisualTest', KIconButtonVisualTest);

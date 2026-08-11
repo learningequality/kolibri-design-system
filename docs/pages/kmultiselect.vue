@@ -1,77 +1,190 @@
 <template>
 
-  <DocsPageTemplate>
+  <DocsPageTemplate apiDocs>
+    <template #developerNotes>
+      <ul :style="{ margin: 0 }">
+        <li>
+          <code>KMultiSelect</code> currently covers single and multiple selection, flat lists, and
+          deeply nested hierarchical trees with cascading behavior.
+        </li>
+        <li>
+          Free-text custom value entry (combobox mode) is not currently supported and is planned for
+          a future release.
+        </li>
+      </ul>
+    </template>
+
     <DocsPageSection
       title="Overview"
       anchor="#overview"
     >
       <p>
-        <code>KMultiselect</code> is a candidate component under development. It allows users to
-        select multiple options from a list or dropdown, displaying the selected items as tags or
-        chips.
-      </p>
-      <p>
-        For now, this page demonstrates <code>KChip</code>, which is used to render the individual
-        selected items.
+        <code>KMultiSelect</code> is a searchable select component that supports single and multiple
+        selections, flat arrays, and deeply nested hierarchical trees with cascading selection
+        behavior.
       </p>
     </DocsPageSection>
 
     <DocsPageSection
-      title="KChip"
-      anchor="#kchip"
+      title="Messages"
+      anchor="#messages"
     >
       <p>
-        <code>KChip</code> represents a selected option or tag. It can be standard (non-closeable),
-        closeable, or disabled, and supports custom accessible labels.
+        <code>KMultiSelect</code> requires a <code>messages</code> object with 7 required keys, each
+        a function returning a translated string. Additional optional keys enable further
+        live-region announcements.
+      </p>
+      <KTable
+        :headers="messageHeaders"
+        :rows="tableRows"
+        caption="KMultiSelect messages"
+        :stickyColumns="['first']"
+      >
+        <template #cell="{ content, colIndex }">
+          <code v-if="colIndex === 0">{{ content }}</code>
+          <i v-else-if="colIndex === 3">{{ content }}</i>
+          <template v-else>{{ content }}</template>
+        </template>
+      </KTable>
+    </DocsPageSection>
+
+    <DocsPageSection
+      title="Usage"
+      anchor="#usage"
+    >
+      <DocsSubNav
+        :items="[
+          { text: 'Multiple selection', href: '#multiple-selection' },
+          { text: 'Single selection', href: '#single-selection' },
+          { text: 'Multi-field search', href: '#multifield-search' },
+          { text: 'Hierarchical tree', href: '#hierarchical-tree' },
+          { text: 'Primitive values', href: '#primitive-values' },
+        ]"
+      />
+
+      <h3>
+        Multiple selection
+        <DocsAnchorTarget anchor="#multiple-selection" />
+      </h3>
+      <p>
+        Selecting multiple items from a flat list of objects using <code>itemText</code> and
+        <code>itemValue</code> to map object properties.
+      </p>
+      <DocsExample
+        block
+        exampleId="kmultiselect-multiple-selection"
+        loadExample="KMultiSelect/MultipleSelection.vue"
+      />
+
+      <h3>
+        Single selection
+        <DocsAnchorTarget anchor="#single-selection" />
+      </h3>
+      <p>
+        Selecting a single item from a flat list using <code>:multiple="false"</code>. Use
+        <code>appearanceOverrides</code> to constrain the width.
+      </p>
+      <DocsExample
+        block
+        exampleId="kmultiselect-single-selection"
+        loadExample="KMultiSelect/SingleSelection.vue"
+      />
+
+      <h3>
+        Multi-field search
+        <DocsAnchorTarget anchor="#multifield-search" />
+      </h3>
+      <p>
+        Searching across multiple fields on each option using the <code>searchKeys</code> prop. Try
+        typing a native script form or a related term to see matches across all configured fields.
+      </p>
+      <DocsExample
+        block
+        exampleId="kmultiselect-multifield-search"
+        loadExample="KMultiSelect/MultifieldSearch.vue"
+      />
+
+      <h3>
+        Hierarchical tree
+        <DocsAnchorTarget anchor="#hierarchical-tree" />
+      </h3>
+      <p>
+        Options with a <code>level</code> field render as a nested tree. The
+        <code>autoSelectChild</code> and <code>autoSelectParent</code> props control how a selection
+        cascades through the tree. Use at most one of them, since each gives a checked parent a
+        different meaning.
       </p>
 
-      <h3>Standard Chips (Non-closeable)</h3>
-      <DocsShow>
-        <div style="display: flex; gap: 12px; align-items: center">
-          <KChip text="Mathematics" />
-          <KChip text="English Language Arts" />
-        </div>
-      </DocsShow>
+      <h4>Cascading selection</h4>
+      <p>
+        With <code>autoSelectChild</code>, selecting or deselecting a parent cascades to its
+        children. A parent is checked when all of its children are selected and indeterminate when
+        only some are, no matter how it was selected.
+      </p>
+      <DocsExample
+        block
+        exampleId="kmultiselect-hierarchical-tree"
+        loadExample="KMultiSelect/HierarchicalTree.vue"
+      />
 
-      <h3>Closeable Chips</h3>
-      <DocsShow>
-        <div style="display: flex; gap: 12px; align-items: center">
-          <KChip
-            text="Science"
-            close
-          />
-          <KChip
-            text="Social Studies"
-            close
-          />
-        </div>
-      </DocsShow>
+      <h4>Independent selection</h4>
+      <p>
+        Without the cascade props, each option is selected on its own, so checking a parent selects
+        only the parent, and a parent you check directly stays checked when its children change. By
+        default, selecting all children of a parent also selects the parent; this example turns that
+        off with <code>:autoPromoteParent="false"</code>, so the value stays limited to exactly what
+        you select and a fully covered parent shows as indeterminate.
+      </p>
+      <DocsExample
+        block
+        exampleId="kmultiselect-independent-selection"
+        loadExample="KMultiSelect/IndependentSelection.vue"
+      />
 
-      <h3>Disabled Chips</h3>
-      <DocsShow>
-        <div style="display: flex; gap: 12px; align-items: center">
-          <KChip
-            text="History (Disabled)"
-            disabled
-          />
-          <KChip
-            text="Geography (Disabled & Closeable)"
-            close
-            disabled
-          />
-        </div>
-      </DocsShow>
+      <h4>Automatic parent selection</h4>
+      <p>
+        With <code>autoSelectParent</code>, selecting an option also selects all of the parents
+        above it, so the value always contains the full path to every selected option, ordered from
+        parent to child. A selected parent shows as indeterminate while only some of the options
+        under it are selected. A parent selected this way is removed when the last selected option
+        under it is deselected, while a parent you select directly stays selected. Deselecting a
+        parent deselects everything under it.
+      </p>
+      <DocsExample
+        block
+        exampleId="kmultiselect-auto-select-parent"
+        loadExample="KMultiSelect/AutoSelectParent.vue"
+      />
 
-      <h3>Custom Close Accessible Label (removeLabel)</h3>
-      <DocsShow>
-        <div style="display: flex; gap: 12px; align-items: center">
-          <KChip
-            text="Custom Action"
-            close
-            removeLabel="Delete Custom Action tag"
-          />
-        </div>
-      </DocsShow>
+      <h3>
+        Primitive values
+        <DocsAnchorTarget anchor="#primitive-values" />
+      </h3>
+      <p>
+        Using a flat array of primitive values (numbers or strings) instead of objects. No
+        <code>itemText</code> or <code>itemValue</code> mapping is needed.
+      </p>
+      <DocsExample
+        block
+        exampleId="kmultiselect-primitive-values"
+        loadExample="KMultiSelect/PrimitiveValues.vue"
+      />
+    </DocsPageSection>
+
+    <DocsPageSection
+      title="Related"
+      anchor="#related"
+    >
+      <ul>
+        <li>
+          <DocsLibraryLink component="KSelect" /> for simpler, non-searchable dropdowns without
+          tokenization.
+        </li>
+        <li>
+          <DocsLibraryLink component="KListbox" /> which powers the underlying dropdown menu and
+          keyboard navigation for this component.
+        </li>
+      </ul>
     </DocsPageSection>
   </DocsPageTemplate>
 
@@ -80,12 +193,102 @@
 
 <script>
 
-  import KChip from '../../lib/candidate/multiselect/KChip/index.vue';
-
   export default {
     name: 'KMultiselectDocs',
-    components: {
-      KChip,
+    data() {
+      return {
+        messageHeaders: [
+          { label: 'Name', dataType: 'string', columnId: 'name', minWidth: '220px' },
+          { label: 'Required', dataType: 'string', columnId: 'required', minWidth: '140px' },
+          { label: 'Description', dataType: 'string', columnId: 'description' },
+          { label: 'Examples', dataType: 'string', columnId: 'example', minWidth: '200px' },
+        ],
+        messageRows: [
+          {
+            name: 'clearText',
+            required: 'Yes',
+            description: 'aria-label for the clear (×) button.',
+            example: 'Clear all selections',
+          },
+          {
+            name: 'open',
+            required: 'Yes',
+            description: 'aria-label for the open (▼) button.',
+            example: 'Open options',
+          },
+          {
+            name: 'close',
+            required: 'Yes',
+            description: 'aria-label for the close (▲) button.',
+            example: 'Close options',
+          },
+          {
+            name: 'clickable',
+            required: 'Yes',
+            description: 'Accessible description indicating that options are interactive.',
+            example: 'Options are clickable',
+          },
+          {
+            name: 'allOptionsSelected',
+            required: 'Yes',
+            description: 'Announced via live region when every option is selected.',
+            example: 'All options selected',
+          },
+          {
+            name: 'allOptionsDeselected',
+            required: 'Yes',
+            description: 'Announced via live region when no options are selected.',
+            example: 'No options selected',
+          },
+          {
+            name: 'optionDeselected',
+            required: 'Yes',
+            description: 'Announced via live region when an individual option is deselected.',
+            example: 'Option deselected',
+          },
+          {
+            name: 'itemsSelected',
+            required: 'No',
+            description:
+              'Multiple-select only. Announces how many items are selected as part of ' +
+              'the field’s accessible name. Receives { count }.',
+            example: '3 items selected',
+          },
+          {
+            name: 'partiallySelected',
+            required: 'No',
+            description:
+              'Renders visually-hidden text inside indeterminate parent nodes so screen ' +
+              'readers announce the partial selection state. Use with hierarchical trees.',
+            example: 'Partially selected',
+          },
+          {
+            name: 'selected',
+            required: 'No',
+            description:
+              'Announced via live region when an option is selected. Receives { label, count }.',
+            example: 'Apple selected, 3 total',
+          },
+          {
+            name: 'removed',
+            required: 'No',
+            description:
+              'Announced via live region when a chip is removed. Receives { label, count }.',
+            example: 'Removed Apple, 2 remaining',
+          },
+          {
+            name: 'cleared',
+            required: 'No',
+            description: 'Announced via live region when all selections are cleared.',
+            example: 'All selections cleared',
+          },
+        ],
+      };
+    },
+    computed: {
+      tableRows() {
+        return this.messageRows.map(m => [m.name, m.required, m.description, m.example]);
+      },
     },
   };
 
