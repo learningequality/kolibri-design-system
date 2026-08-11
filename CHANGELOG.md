@@ -7,6 +7,19 @@ Changelog is rather internal in nature. See release notes for the public overvie
 <!-- [DO NOT REMOVE-USED BY GH ACTION] PASTE CHANGELOG -->
 
 
+- [#1296]
+  - **Description:** Implement KMultiSelect wrapper and Dropdown menu UI.
+  - **Products impact:** new API
+  - **Addresses:** Addresses #1295
+  - **Components:** KMultiSelect
+  - **Breaking:** no
+  - **Impacts a11y:** yes
+  - **Guidance:** KMultiSelect is now fully usable for consumers. It introduces robust keyboard navigation and aria-live region announcements that handle complex multiselect filtering and state changes natively.
+
+[#1296]: https://github.com/learningequality/kolibri-design-system/pull/1296
+
+
+
 - [#1303]
   - **Description:** Theme values are now emitted as CSS variables (`--tokens-*`, `--brand-*`, and `--palette-*`) in a `<style id="k-theme-css-variables">` tag in the document head, initialized by `KThemePlugin`, and kept in sync with `globalThemeState` at runtime. Version keys are emitted as `vN` (e.g. `palette.grey.v_400` -> `--palette-grey-v400`); token names are used as-is (e.g. `--theme-primary`). Also exports `themeCssVariablesText()` from `lib/styles/themeCssVariables` for SSR head injection.
   - **Products impact:** new API
