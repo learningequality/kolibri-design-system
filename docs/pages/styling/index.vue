@@ -147,8 +147,8 @@
       </h3>
       <p>
         We provide a consistent, high-contrast focus highlight that is enabled only when we detect
-        that the user is navigating using the keyboard (i.e. tabbing from item to item), using
-        the <code>--tokens-focusOutline</code> CSS variable. For dynamic cases where the outline needs
+        that the user is navigating using the keyboard (i.e. tabbing from item to item), using the
+        <code>--tokens-focusOutline</code> CSS variable. For dynamic cases where the outline needs
         to be applied from JavaScript, use the <code>$coreOutline</code> computed property available
         on all Vue instances.
       </p>

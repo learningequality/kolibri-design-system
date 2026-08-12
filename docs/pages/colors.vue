@@ -128,11 +128,7 @@
       <p>This will display:</p>
 
       <DocsShow>
-        <div
-          :style="{ color: $themeTokens.primary }"
-        >
-          This is not an error
-        </div>
+        <div :style="{ color: $themeTokens.primary }">This is not an error</div>
       </DocsShow>
 
       <p>Move style definitions from the template to computed props if the style gets complex.</p>
