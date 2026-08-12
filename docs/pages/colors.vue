@@ -91,7 +91,7 @@
       <p>This will display:</p>
 
       <DocsShow>
-        <div class="error-message text-block">This is an error</div>
+        <div class="error-message">This is an error</div>
       </DocsShow>
       <p>
         For palette and brand variables, replace the dots in the path with hyphens and drop the
@@ -129,7 +129,6 @@
 
       <DocsShow>
         <div
-          class="text-block"
           :style="{ color: $themeTokens.primary }"
         >
           This is not an error
@@ -605,10 +604,6 @@
           padding: 4px;
           background-color: rgba(255, 255, 255, 0.8);
         }
-      }
-
-      .text-block {
-        font-size: 17px;
       }
 
       .error-message {
