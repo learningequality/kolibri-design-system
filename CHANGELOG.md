@@ -7,6 +7,19 @@ Changelog is rather internal in nature. See release notes for the public overvie
 <!-- [DO NOT REMOVE-USED BY GH ACTION] PASTE CHANGELOG -->
 
 
+- [#1317]
+  - **Description:** Bumps KDS version to 5.9.0
+  - **Products impact:** -.
+  - **Addresses:** -.
+  - **Components:** -.
+  - **Breaking:** -
+  - **Impacts a11y:** no
+  - **Guidance:** -.
+
+[#1317]: https://github.com/learningequality/kolibri-design-system/pull/1317
+
+
+
 - [#1296]
   - **Description:** Implement KMultiSelect wrapper and Dropdown menu UI.
   - **Products impact:** new API
