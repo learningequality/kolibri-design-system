@@ -73,9 +73,8 @@
         @import '~kolibri-design-system/lib/styles/common';
       </DocsShowCode>
 
-      <code>common.scss</code> registers both the global styles, such as those needed for components
-      to display correctly, as well as the page background, text color, focus outline, text
-      selection, and print styles, and the
+      <code>common.scss</code> registers both the global styles, such as the page background, text
+      color, focus outline, text selection, and print styles, and the
       <DocsInternalLink
         href="/styling#helper-styles"
         text="helper styles"
