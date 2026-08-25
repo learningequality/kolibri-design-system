@@ -1,32 +1,34 @@
 <template>
 
-  <Popper
-    v-if="readyToInit"
-    :reference="htmlElement"
-    :disabled="disabled"
-    :visibleArrow="false"
-    :options="options"
-    :appendToEl="appendToEl"
-    trigger="hover"
-  >
-    <div
-      dir="auto"
-      class="k-tooltip"
-      :style="{
-        backgroundColor: $themeTokens.text,
-        color: $themeTokens.textInverted,
-        maxWidth: maxWidth ? maxWidth : 'calc(100vw - 10px)',
-        ...appearanceOverrides,
-      }"
+  <span>
+    <Popper
+      v-if="readyToInit"
+      :reference="htmlElement"
+      :disabled="disabled"
+      :visibleArrow="false"
+      :options="options"
+      :appendToEl="appendToEl"
+      trigger="hover"
     >
-      <!-- If text prop is provided, display the text -->
-      <template v-if="text">
-        {{ text }}
-      </template>
-      <!-- @slot Slot alternative to `text` prop -->
-      <slot v-else></slot>
-    </div>
-  </Popper>
+      <div
+        dir="auto"
+        class="k-tooltip"
+        :style="{
+          backgroundColor: $themeTokens.text,
+          color: $themeTokens.textInverted,
+          maxWidth: maxWidth ? maxWidth : 'calc(100vw - 10px)',
+          ...appearanceOverrides,
+        }"
+      >
+        <!-- If text prop is provided, display the text -->
+        <template v-if="text">
+          {{ text }}
+        </template>
+        <!-- @slot Slot alternative to `text` prop -->
+        <slot v-else></slot>
+      </div>
+    </Popper>
+  </span>
 
 </template>
 
