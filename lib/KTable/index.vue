@@ -445,9 +445,6 @@
           return this.stickyColumns.includes('last') && colIndex === this.headers.length - 1;
         };
       },
-      surfacecolor() {
-        return this.$themeTokens.surface;
-      },
     },
     watch: {
       // Use a watcher on props to perform validation on props.
@@ -975,8 +972,7 @@
     &::before {
       @include sticky-column-shadow-base($direction);
 
-      // stylelint-disable-next-line
-      background: v-bind(surfacecolor);
+      background: var(--tokens-surface);
     }
 
     &::after {
