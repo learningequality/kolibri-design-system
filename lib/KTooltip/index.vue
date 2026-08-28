@@ -1,34 +1,37 @@
+<!--
+  `vue/no-root-v-if` guards against a bug with a style block's `v-bind()`. 
+  This component has no `v-bind()` in its styles, so the bug doesn't apply.
+-->
+<!-- eslint-disable-next-line vue/no-root-v-if -->
 <template>
 
-  <span>
-    <Popper
-      v-if="readyToInit"
-      :reference="htmlElement"
-      :disabled="disabled"
-      :visibleArrow="false"
-      :options="options"
-      :appendToEl="appendToEl"
-      trigger="hover"
+  <Popper
+    v-if="readyToInit"
+    :reference="htmlElement"
+    :disabled="disabled"
+    :visibleArrow="false"
+    :options="options"
+    :appendToEl="appendToEl"
+    trigger="hover"
+  >
+    <div
+      dir="auto"
+      class="k-tooltip"
+      :style="{
+        backgroundColor: $themeTokens.text,
+        color: $themeTokens.textInverted,
+        maxWidth: maxWidth ? maxWidth : 'calc(100vw - 10px)',
+        ...appearanceOverrides,
+      }"
     >
-      <div
-        dir="auto"
-        class="k-tooltip"
-        :style="{
-          backgroundColor: $themeTokens.text,
-          color: $themeTokens.textInverted,
-          maxWidth: maxWidth ? maxWidth : 'calc(100vw - 10px)',
-          ...appearanceOverrides,
-        }"
-      >
-        <!-- If text prop is provided, display the text -->
-        <template v-if="text">
-          {{ text }}
-        </template>
-        <!-- @slot Slot alternative to `text` prop -->
-        <slot v-else></slot>
-      </div>
-    </Popper>
-  </span>
+      <!-- If text prop is provided, display the text -->
+      <template v-if="text">
+        {{ text }}
+      </template>
+      <!-- @slot Slot alternative to `text` prop -->
+      <slot v-else></slot>
+    </div>
+  </Popper>
 
 </template>
 
