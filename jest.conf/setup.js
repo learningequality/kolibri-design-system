@@ -1,5 +1,3 @@
-import v8 from 'node:v8';
-
 import 'regenerator-runtime/runtime';
 import '@testing-library/jest-dom';
 import * as Aphrodite from 'aphrodite';
@@ -11,12 +9,6 @@ import 'mock-match-media/jest-setup';
 import Vue from 'vue';
 import VueIntl from 'vue-intl';
 import KThemePlugin from '../lib/KThemePlugin';
-
-// jsdom does not provide `structuredClone`, which ESLint's `RuleTester` needs
-// to normalize configs in the lint rule tests
-if (typeof global.structuredClone !== 'function') {
-  global.structuredClone = value => v8.deserialize(v8.serialize(value));
-}
 
 global.beforeEach(() => {
   return new Promise(resolve => {
