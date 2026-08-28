@@ -12,13 +12,15 @@ and `--palette-*`).
 
 ### `kds/no-theme-tokens-in-v-bind` (ESLint)
 
-Reports `themeTokens()` inside a `v-bind()` argument in a `<style>` block. Colors in
-style blocks should use the theme CSS variables instead:
+Reports theme values reached from inside a `v-bind()` argument in a `<style>` block.
+Colors in style blocks should use the theme CSS variables instead:
 
 ```scss
 /* bad */
 .foo {
   color: v-bind('themeTokens().primary');
+  background: v-bind($themeTokens.surface);
+  border-color: v-bind(surfaceColor); /* a computed that reads the theme */
 }
 
 /* good */
@@ -26,6 +28,11 @@ style blocks should use the theme CSS variables instead:
   color: var(--tokens-primary);
 }
 ```
+
+It matches `themeTokens()`, `themeBrand()`, and `themePalette()`, the instance
+properties `$themeTokens`, `$themeBrand`, and `$themePalette`, and a `v-bind()` naming
+a `computed` or `methods` member that reads any of those. Member lookup goes one level
+deep, so a member that reaches the theme through another member is not reported.
 
 Implemented in [`eslint/rules/no-theme-tokens-in-v-bind.js`](./eslint/rules/no-theme-tokens-in-v-bind.js)
 and registered as the `kds` plugin in `eslint.config.mjs`.
@@ -46,6 +53,14 @@ warning anywhere.
 
 Only `--tokens-`, `--brand-`, and `--palette-` properties are checked. Components define
 their own local custom properties, so any other `var()` is left alone.
+
+Consuming apps can add theme values at runtime with `setTokenMapping()` and
+`setBrandColors()`, and those names cannot be known from KDS source. List them with the
+`ignoreProperties` secondary option, as exact strings or regular expressions:
+
+```js
+'kds/no-unknown-theme-custom-properties': [true, { ignoreProperties: [/^--tokens-app/] }],
+```
 
 If the name reported is the source `v_N` version key rather than the emitted `vN`, 
 the message contains a suggestion for the intended variable:
