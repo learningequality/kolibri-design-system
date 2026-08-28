@@ -20,6 +20,22 @@ const messages = stylelint.utils.ruleMessages(ruleName, {
     (suggestion ? `, did you mean "${suggestion}"?` : ''),
 });
 
+/**
+ * Whether `name` matches one of the `ignoreProperties` entries, each either an
+ * exact string or a regular expression.
+ */
+function isIgnored(name, ignoreProperties) {
+  if (!ignoreProperties) {
+    return false;
+  }
+  return [ignoreProperties].flat().some(entry => {
+    if (entry instanceof RegExp) {
+      return entry.test(name);
+    }
+    return entry === name;
+  });
+}
+
 const meta = {
   url: 'https://github.com/learningequality/kolibri-design-system/blob/develop/lint/README.md',
 };
@@ -35,15 +51,28 @@ function declarationValueIndex(decl) {
   return decl.prop.length + prefix + between;
 }
 
-const rule = primary => {
+const rule = (primary, secondary) => {
   return (root, result) => {
-    const validOptions = stylelint.utils.validateOptions(result, ruleName, {
-      actual: primary,
-      possible: [true],
-    });
+    const validOptions = stylelint.utils.validateOptions(
+      result,
+      ruleName,
+      {
+        actual: primary,
+        possible: [true],
+      },
+      {
+        actual: secondary,
+        optional: true,
+        possible: {
+          ignoreProperties: [value => typeof value === 'string' || value instanceof RegExp],
+        },
+      },
+    );
     if (!validOptions) {
       return;
     }
+
+    const ignoreProperties = secondary && secondary.ignoreProperties;
 
     const validNames = getThemeCssVariableNames();
 
@@ -58,6 +87,10 @@ const rule = primary => {
         }
         const name = nameNode.value;
         if (!isThemedCustomProperty(name) || validNames.has(name)) {
+          return;
+        }
+        // names an app added at runtime with `setTokenMapping()`/`setBrandColors()`
+        if (isIgnored(name, ignoreProperties)) {
           return;
         }
         const valueIndex = declarationValueIndex(decl);

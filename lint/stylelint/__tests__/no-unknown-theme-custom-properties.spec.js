@@ -3,14 +3,14 @@ import plugin from '../no-unknown-theme-custom-properties';
 
 const { ruleName, messages } = plugin.rule;
 
-function lintScss(code) {
+function lintScss(code, options = true) {
   return stylelint.lint({
     code,
     codeFilename: 'test.scss',
     customSyntax: 'postcss-scss',
     config: {
       plugins: [plugin],
-      rules: { [ruleName]: true },
+      rules: { [ruleName]: options },
     },
   });
 }
@@ -90,16 +90,46 @@ describe('no-unknown-theme-custom-properties', () => {
     expect(warnings[0].text).toBe(messages.rejected('--tokens-focusOutine'));
   });
 
+  it('accepts a name listed in `ignoreProperties`, by string or regexp', async () => {
+    // apps add their own tokens at runtime with `setTokenMapping()`
+    const code = '.a { color: var(--tokens-appDefined); }';
+    expect(
+      await warningsFor(lintScss(code, [true, { ignoreProperties: ['--tokens-appDefined'] }])),
+    ).toHaveLength(0);
+    expect(
+      await warningsFor(lintScss(code, [true, { ignoreProperties: [/^--tokens-app/] }])),
+    ).toHaveLength(0);
+  });
+
+  it('still reports names `ignoreProperties` does not cover', async () => {
+    const warnings = await warningsFor(
+      lintScss('.a { color: var(--tokens-surfase); }', [
+        true,
+        { ignoreProperties: ['--tokens-appDefined'] },
+      ]),
+    );
+    expect(warnings).toHaveLength(1);
+  });
+
+  it('rejects an `ignoreProperties` entry that is not a string or regexp', async () => {
+    const { results } = await lintScss('.a { color: var(--tokens-surfase); }', [
+      true,
+      { ignoreProperties: [42] },
+    ]);
+    expect(results[0].invalidOptionWarnings).toHaveLength(1);
+    expect(results[0].errored).toBe(true);
+  });
+
   it('reports a misspelled name inside a single file component style block', async () => {
     const warnings = await warningsFor(
       lintVue(`<template><div class="a" /></template>
-<style lang="scss" scoped>
-  .a {
-    color: var(--tokens-primary);
-    background: var(--tokens-surfase);
-  }
-</style>
-`),
+        <style lang="scss" scoped>
+          .a {
+            color: var(--tokens-primary);
+            background: var(--tokens-surfase);
+          }
+        </style>
+      `),
     );
     expect(warnings).toHaveLength(1);
     expect(warnings[0].text).toBe(messages.rejected('--tokens-surfase'));
