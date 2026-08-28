@@ -54,8 +54,13 @@ describe('eslint.config.mjs', () => {
     return JSON.parse(output.trim().split('\n').pop());
   }
 
-  it('enables `kds/no-theme-tokens-in-v-bind` and `vue/no-root-v-if`', () => {
-    const ruleIds = ruleIdsFor(`<template>
+  // spawning node and loading the flat config can outrun Jest's 5s default
+  const TIMEOUT = 30000;
+
+  it(
+    'enables `kds/no-theme-tokens-in-v-bind` and `vue/no-root-v-if`',
+    () => {
+      const ruleIds = ruleIdsFor(`<template>
   <div
     v-if="show"
     class="a"
@@ -70,7 +75,9 @@ describe('eslint.config.mjs', () => {
   }
 </style>
 `);
-    expect(ruleIds).toContain('kds/no-theme-tokens-in-v-bind');
-    expect(ruleIds).toContain('vue/no-root-v-if');
-  });
+      expect(ruleIds).toContain('kds/no-theme-tokens-in-v-bind');
+      expect(ruleIds).toContain('vue/no-root-v-if');
+    },
+    TIMEOUT,
+  );
 });
