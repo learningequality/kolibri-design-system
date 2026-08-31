@@ -146,11 +146,11 @@
         <DocsAnchorTarget anchor="#focus-outline" />
       </h3>
       <p>
-        We provide a consistent, high-contrast focus highlight that is enabled only when we detect
-        that the user is navigating using the keyboard (i.e. tabbing from item to item), using the
-        <code>--tokens-focusOutline</code> CSS variable. For dynamic cases where the outline needs
-        to be applied from JavaScript, use the <code>$coreOutline</code> computed property available
-        on all Vue instances.
+        We provide a consistent, high-contrast focus highlight, using the <code>--tokens-focusOutline</code>
+        CSS variable. The global styles apply it to any focused element, limited to keyboard navigation
+        (i.e. tabbing from item to item). To apply this within a component, use the `<code>$coreOutline</code>`
+        computed property available on Vue instances, because CSS alone cannot limit the highlight to keyboard
+        focus across all supported browsers.
       </p>
     </DocsPageSection>
 
