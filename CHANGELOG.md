@@ -7,6 +7,19 @@ Changelog is rather internal in nature. See release notes for the public overvie
 <!-- [DO NOT REMOVE-USED BY GH ACTION] PASTE CHANGELOG -->
 
 
+- [#1309]
+  - **Description:** Implement JS generated global styles with CSS variables
+  - **Products impact:** none
+  - **Addresses:** https://github.com/learningequality/kolibri-design-system/issues/1301
+  - **Components:** -
+  - **Breaking:** -
+  - **Impacts a11y:** -
+  - **Guidance:** -
+
+[#1309]: https://github.com/learningequality/kolibri-design-system/pull/1309
+
+
+
 - [#1317]
   - **Description:** Bumps KDS version to 5.9.0
   - **Products impact:** -.
