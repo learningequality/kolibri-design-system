@@ -513,6 +513,9 @@
        */
       monthString(monthIndex) {
         const date = new Date();
+        // set the day first to avoid rolling over into the following month when
+        // today's date doesn't exist in the target month (e.g. 31st -> November)
+        date.setDate(1);
         date.setMonth(monthIndex);
         return this.$formatDate(date, { month: 'long' });
       },

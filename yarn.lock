@@ -4325,10 +4325,10 @@ browserify-zlib@^0.2.0:
   dependencies:
     pako "~1.0.5"
 
-browserslist-config-kolibri@0.18.0:
-  version "0.18.0"
-  resolved "https://registry.yarnpkg.com/browserslist-config-kolibri/-/browserslist-config-kolibri-0.18.0.tgz#976ae039857c280cb99ae91173fed27873cb789a"
-  integrity sha512-d8JCoLUG8XlgfaE/wB7P58ok6ddiGGjChm6dVsL3W2702ibgFjOx+NtFHrLKCpkSuiaR2/gevvaQsIFwkVNNiA==
+browserslist-config-kolibri@0.20.0:
+  version "0.20.0"
+  resolved "https://registry.yarnpkg.com/browserslist-config-kolibri/-/browserslist-config-kolibri-0.20.0.tgz#b064885bd0f2085ba60226a5fcecfa11d2f175fb"
+  integrity sha512-n4d0LArmEqXq5F0hXAzOu+Rpzw+lcHWWhfTAsf1Au52vmGcWx1ej0I4cIkXn/5d23qOSx1yDSTZLTGkusANyvQ==
 
 browserslist@^4.0.0, browserslist@^4.21.4, browserslist@^4.23.1, browserslist@^4.23.3, browserslist@^4.24.0, browserslist@^4.24.3:
   version "4.24.4"

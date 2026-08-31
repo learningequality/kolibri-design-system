@@ -39,12 +39,71 @@
       title="Usage"
       anchor="#usage"
     >
+      <p>Colors can be referenced in two ways:</p>
+      <ul>
+        <li>
+          <strong>CSS variables</strong> in <code>&lt;style&gt;</code> blocks and SCSS files. Use
+          these by default.
+        </li>
+        <li>
+          <strong>JavaScript accessors</strong> on Vue components, for inline <code>:style</code>
+          bindings and for colors that need to be built at runtime (for example, a color combined
+          with a custom opacity).
+        </li>
+      </ul>
+      <p>
+        Both are set up by <code>Vue.use(KThemePlugin)</code> (see
+        <DocsInternalLink
+          href="/installation"
+          text="Installation"
+        />) and stay in sync when brand colors change at runtime via
+        <code>setBrandColors()</code> or <code>setTokenMapping()</code>.
+      </p>
+
+      <h3>CSS variables</h3>
+
+      <p>Theme values are emitted as CSS variables on <code>:root</code> in three layers:</p>
+      <ul>
+        <li><code>--tokens-*</code> for named color tokens (e.g. <code>--tokens-primary</code>)</li>
+        <li>
+          <code>--brand-*</code> for brand color scales (e.g. <code>--brand-primary-v500</code>)
+        </li>
+        <li>
+          <code>--palette-*</code> for the full palette (e.g. <code>--palette-grey-v200</code>)
+        </li>
+      </ul>
+      <p>
+        Reference them directly with <code>var(--name)</code>. For example, to color text using the
+        <code>error</code> token:
+      </p>
+      <!-- eslint-disable -->
+      <!-- prettier-ignore -->
+      <DocsShowCode language="html">
+        <div class="error-message">This is an error</div>
+        <style>
+          .error-message {
+            color: var(--tokens-error);
+          }
+        </style>
+      </DocsShowCode>
+      <!-- eslint-enable -->
+
+      <p>This will display:</p>
+
+      <DocsShow>
+        <div class="error-message">This is an error</div>
+      </DocsShow>
+      <p>
+        For palette and brand variables, replace the dots in the path with hyphens and drop the
+        underscore (<code>palette.grey.v_400</code> becomes <code>--palette-grey-v400</code>). Token
+        names are used as-is.
+      </p>
+
       <h3>Computed styles</h3>
 
       <p>
-        For technical reasons relating to supporting dynamic themes colors must be set using
-        Javascript. Adding <code>Vue.use(KThemePlugin)</code> makes all colors available on every
-        Vue component in your application under the following objects:
+        Colors are also available on every Vue component as JavaScript objects. Adding
+        <code>Vue.use(KThemePlugin)</code> makes the following objects available:
       </p>
 
       <ul>
@@ -54,22 +113,22 @@
       </ul>
 
       <p>
-        For example, to color text using <code>$themeTokens.error</code> you use can a
+        Use these for inline <code>:style</code> bindings and for values computed at runtime. For
+        example, to color text using <code>$themeTokens.primary</code> with a
         <DocsExternalLink
           text="computed style"
           href="https://vuejs.org/v2/guide/class-and-style.html"
-        />
-        to write:
+        />:
       </p>
 
       <DocsShowCode language="html">
-        <div :style="{ color: $themeTokens.error }">This is an error</div>
+        <div :style="{ color: $themeTokens.primary }">This is not an error</div>
       </DocsShowCode>
 
       <p>This will display:</p>
 
       <DocsShow>
-        <div :style="{ color: $themeTokens.error }">This is an error</div>
+        <div :style="{ color: $themeTokens.primary }">This is not an error</div>
       </DocsShow>
 
       <p>Move style definitions from the template to computed props if the style gets complex.</p>
@@ -77,9 +136,8 @@
       <h3>Computed classes</h3>
 
       <p>
-        We also attach a special helper function <code>$computedClass</code> which can be used to
-        dynamically create new classes. This is useful for specifying colors in pseudo-elements such
-        as <code>:hover</code> or <code>:focus</code>. For example:
+        <code>$computedClass</code> can be used to dynamically create new classes for
+        pseudo-elements such as <code>:hover</code> or <code>:focus</code>. For example:
       </p>
 
       <DocsShowCode language="html">
@@ -87,16 +145,25 @@
       </DocsShowCode>
 
       <p>
-        This is usually not necessary, and using <code>style</code> is preferred for simplicity when
-        possible.
+        This is usually not necessary, use a <code>&lt;style&gt;</code> block with
+        <code>var(--tokens-*)</code> for static pseudo-class colors.
       </p>
 
       <h3>Notation</h3>
       <p>In the references below we use the following shorthand:</p>
       <ul>
-        <li><code>brand</code> refers to <code>$themeBrand</code></li>
-        <li><code>tokens</code> refers to <code>$themeTokens</code></li>
-        <li><code>palette</code> refers to <code>$themePalette</code></li>
+        <li>
+          <code>brand</code> refers to <code>$themeBrand</code> in JavaScript, or
+          <code>--brand-*</code> in CSS
+        </li>
+        <li>
+          <code>tokens</code> refers to <code>$themeTokens</code> in JavaScript, or
+          <code>--tokens-*</code> in CSS
+        </li>
+        <li>
+          <code>palette</code> refers to <code>$themePalette</code> in JavaScript, or
+          <code>--palette-*</code> in CSS
+        </li>
       </ul>
 
       <h3>Darken utilities</h3>
@@ -517,22 +584,26 @@
 
 <style lang="scss" scoped>
 
-  .palette-block {
-    display: inline-block;
-    width: 350px;
-  }
+      .palette-block {
+        display: inline-block;
+        width: 350px;
+      }
 
-  .darken-block {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 140px;
-    height: 140px;
+      .darken-block {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 140px;
+        height: 140px;
 
-    code {
-      padding: 4px;
-      background-color: rgba(255, 255, 255, 0.8);
-    }
-  }
+        code {
+          padding: 4px;
+          background-color: rgba(255, 255, 255, 0.8);
+        }
+      }
+
+      .error-message {
+        color: var(--tokens-error);
+      }
 
 </style>
