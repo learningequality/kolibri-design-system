@@ -7,6 +7,19 @@ Changelog is rather internal in nature. See release notes for the public overvie
 <!-- [DO NOT REMOVE-USED BY GH ACTION] PASTE CHANGELOG -->
 
 
+- [#1324]
+  - **Description:** build(deps): bump browserslist from 4.24.4 to 4.28.8
+  - **Products impact:** Dev Dependency upgrade
+  - **Addresses:** -
+  - **Components:** -
+  - **Breaking:** -
+  - **Impacts a11y:** -
+  - **Guidance:** -
+
+[#1324]: https://github.com/learningequality/kolibri-design-system/pull/1324
+
+
+
 - [#1322]
   - **Description:** build(deps): bump fast-uri from 3.1.5 to 3.1.7
   - **Products impact:** Dev Dependency upgrade
