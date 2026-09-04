@@ -972,7 +972,7 @@
     &::before {
       @include sticky-column-shadow-base($direction);
 
-      background: var(--tokens-surface);
+      background: var(--tokens-surface, #ffffff);
     }
 
     &::after {

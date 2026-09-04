@@ -14,25 +14,40 @@ const THEME_FUNCTIONS = ['themeTokens', 'themeBrand', 'themePalette'];
 const THEME_PROPERTIES = ['$themeTokens', '$themeBrand', '$themePalette'];
 
 /**
- * Walks every node of an AST, skipping the `parent` back-references that
- * `vue-eslint-parser` sets, which would otherwise cycle.
+ * Walks every node of an AST, calling `visit(node, parent)`. Skips the `parent`
+ * back-references `vue-eslint-parser` sets, which would otherwise cycle.
  */
-function walk(node, visit) {
+function walk(node, visit, parent = null) {
   if (Array.isArray(node)) {
     for (const item of node) {
-      walk(item, visit);
+      walk(item, visit, parent);
     }
     return;
   }
   if (!node || typeof node !== 'object' || typeof node.type !== 'string') {
     return;
   }
-  visit(node);
+  visit(node, parent);
   for (const key of Object.keys(node)) {
     if (key !== 'parent') {
-      walk(node[key], visit);
+      walk(node[key], visit, node);
     }
   }
+}
+
+/**
+ * Whether `node` is the property name in an access like `styles.color`, which is
+ * not the theme property or component member of that name. `this.surfaceColor`
+ * is the exception: there it is that member.
+ */
+function isPropertyName(node, parent) {
+  return Boolean(
+    parent &&
+    parent.type === 'MemberExpression' &&
+    !parent.computed &&
+    parent.property === node &&
+    parent.object.type !== 'ThisExpression',
+  );
 }
 
 /**
@@ -63,8 +78,8 @@ function themeReferenceName(node) {
 
 function findThemeReference(node) {
   let found = null;
-  walk(node, current => {
-    if (!found) {
+  walk(node, (current, parent) => {
+    if (!found && !isPropertyName(current, parent)) {
       found = themeReferenceName(current);
     }
   });
@@ -165,8 +180,12 @@ module.exports = {
             continue;
           }
           // a `v-bind()` naming a component member that reads the theme itself
-          walk(vBind.expression, node => {
-            if (node.type !== 'Identifier' || !members.has(node.name)) {
+          let reported = false;
+          walk(vBind.expression, (node, parent) => {
+            if (reported || node.type !== 'Identifier' || !members.has(node.name)) {
+              return;
+            }
+            if (isPropertyName(node, parent)) {
               return;
             }
             const memberReference = findThemeReference(members.get(node.name));
@@ -176,6 +195,7 @@ module.exports = {
                 messageId: 'unexpectedThemeMember',
                 data: { member: node.name, reference: memberReference },
               });
+              reported = true;
             }
           });
         }

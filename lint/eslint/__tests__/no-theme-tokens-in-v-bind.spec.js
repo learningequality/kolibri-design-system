@@ -58,6 +58,29 @@ ruleTester.run('no-theme-tokens-in-v-bind', rule, {
       `,
     },
     {
+      // A property sharing a name with a theme-reading member is not that member
+      filename: 'Valid.vue',
+      code: `
+        <template><div class="a" /></template>
+        <script>
+          import { themeTokens } from '../styles/theme';
+          export default {
+            computed: {
+              color() {
+                return themeTokens().primary;
+              },
+              styles() {
+                return { color: 'red' };
+              },
+            },
+          };
+        </script>
+        <style lang="scss" scoped>
+          .a { color: v-bind('styles.color'); }
+        </style>
+      `,
+    },
+    {
       // A component with no style block at all
       filename: 'Valid.vue',
       code: '<template><div class="a" /></template>',
@@ -85,7 +108,7 @@ ruleTester.run('no-theme-tokens-in-v-bind', rule, {
   ],
   invalid: [
     {
-      // `v-bind()` of `themeTokens()` is allowed in a style block
+      // `v-bind()` of `themeTokens()` in a style block
       filename: 'Invalid.vue',
       code: `
         <template><div class="a" /></template>
@@ -148,7 +171,7 @@ ruleTester.run('no-theme-tokens-in-v-bind', rule, {
       code: `
         <template><div class="a" /></template>
         <style lang="scss" scoped>
-          .a { background: v-bind($themeTokens.surface); }
+          .a { background: v-bind('$themeTokens.surface'); }
         </style>
       `,
       errors: [{ messageId: 'unexpectedTheme' }],
@@ -159,7 +182,7 @@ ruleTester.run('no-theme-tokens-in-v-bind', rule, {
       code: `
         <template><div class="a" /></template>
         <style lang="scss" scoped>
-          .a { color: v-bind($themePalette.grey.v_400); }
+          .a { color: v-bind('$themePalette.grey.v_400'); }
         </style>
       `,
       errors: [{ messageId: 'unexpectedTheme' }],
@@ -201,6 +224,26 @@ ruleTester.run('no-theme-tokens-in-v-bind', rule, {
         </script>
         <style lang="scss" scoped>
           .a { background: v-bind(surfaceColor); }
+        </style>
+      `,
+      errors: [{ messageId: 'unexpectedThemeMember' }],
+    },
+    {
+      // A member named more than once in one `v-bind()` is reported once
+      filename: 'Invalid.vue',
+      code: `
+        <template><div class="a" /></template>
+        <script>
+          export default {
+            computed: {
+              surfaceColor() {
+                return this.$themeTokens.surface;
+              },
+            },
+          };
+        </script>
+        <style lang="scss" scoped>
+          .a { background: v-bind('surfaceColor ? surfaceColor : surfaceColor'); }
         </style>
       `,
       errors: [{ messageId: 'unexpectedThemeMember' }],

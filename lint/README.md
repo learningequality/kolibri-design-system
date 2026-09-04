@@ -19,7 +19,7 @@ Colors in style blocks should use the theme CSS variables instead:
 /* bad */
 .foo {
   color: v-bind('themeTokens().primary');
-  background: v-bind($themeTokens.surface);
+  background: v-bind('$themeTokens.surface');
   border-color: v-bind(surfaceColor); /* a computed that reads the theme */
 }
 
@@ -32,7 +32,9 @@ Colors in style blocks should use the theme CSS variables instead:
 It matches `themeTokens()`, `themeBrand()`, and `themePalette()`, the instance
 properties `$themeTokens`, `$themeBrand`, and `$themePalette`, and a `v-bind()` naming
 a `computed` or `methods` member that reads any of those. Member lookup goes one level
-deep, so a member that reaches the theme through another member is not reported.
+deep, so a member that reaches the theme through another member is not reported. Only
+the member itself is matched, not a property that happens to share its name: with a
+theme-reading `color()` computed, `v-bind('styles.color')` is left alone.
 
 Implemented in [`eslint/rules/no-theme-tokens-in-v-bind.js`](./eslint/rules/no-theme-tokens-in-v-bind.js)
 and registered as the `kds` plugin in `eslint.config.mjs`.
@@ -62,7 +64,7 @@ Consuming apps can add theme values at runtime with `setTokenMapping()` and
 'kds/no-unknown-theme-custom-properties': [true, { ignoreProperties: [/^--tokens-app/] }],
 ```
 
-If the name reported is the source `v_N` version key rather than the emitted `vN`, 
+If the name reported is the source `v_N` version key rather than the emitted `vN`,
 the message contains a suggestion for the intended variable:
 
 ```
