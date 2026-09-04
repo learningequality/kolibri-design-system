@@ -1,3 +1,8 @@
+<!--
+  `vue/no-root-v-if` guards against a bug with a style block's `v-bind()`. 
+  This component has no `v-bind()` in its styles, so the bug doesn't apply.
+-->
+<!-- eslint-disable-next-line vue/no-root-v-if -->
 <template>
 
   <Popper

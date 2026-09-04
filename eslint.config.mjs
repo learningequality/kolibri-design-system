@@ -1,7 +1,26 @@
 import kolibriConfig from 'kolibri-format/eslint.config.mjs';
+import noThemeTokensInVBind from './lint/eslint/rules/no-theme-tokens-in-v-bind.js';
 
 export default [
   ...kolibriConfig,
+  // Local rules supporting the migration to theme CSS variables. See `lint/README.md`
+  {
+    files: ['**/*.vue'],
+    plugins: {
+      kds: {
+        rules: {
+          'no-theme-tokens-in-v-bind': noThemeTokensInVBind,
+        },
+      },
+    },
+    rules: {
+      // Colors in `<style>` blocks should use the `--tokens-*` CSS variables
+      'kds/no-theme-tokens-in-v-bind': 'error',
+      // Vue 2.7 stops updating a style block's `v-bind()` when the bound element
+      // is the template root and is removed and re-added
+      'vue/no-root-v-if': 'error',
+    },
+  },
   // Docs and examples use Nuxt aliases (~, ~~) that can't be resolved
   {
     files: ['docs/**/*.vue', 'docs/**/*.js', 'examples/**/*.vue'],
