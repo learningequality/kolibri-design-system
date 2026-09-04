@@ -1,7 +1,4 @@
 /*
- * Smoke tests asserting the rules are actually registered and enabled in the
- * project's lint configuration.
- *
  * The rule specs build their own configs, so they pass whether or not the rules
  * are switched on for the repository. These lint through `.stylelintrc.js` and
  * `eslint.config.mjs` themselves, so dropping a registration fails the suite.
@@ -33,8 +30,8 @@ describe('.stylelintrc.js', () => {
 describe('eslint.config.mjs', () => {
   /*
    * ESLint loads a flat config with a dynamic import, which Jest cannot do
-   * without `--experimental-vm-modules`, so run it in a child process. That
-   * also makes this the same code path CI takes.
+   * without `--experimental-vm-modules`, so run it in a child process, the
+   * same code path CI takes.
    */
   function ruleIdsFor(code) {
     const script = `
