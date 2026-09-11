@@ -6,108 +6,113 @@
   >
     <div
       ref="containerEl"
-      class="kmselect-container"
-      :class="[
-        {
-          'has-label': label,
-          'is-disabled': disabled,
-          'is-active': inputFocused || isOpen,
-          'is-invalid': invalid,
-        },
-        $computedClass({
-          ':hover:not(.is-disabled):not(.is-active):not(.is-invalid)': {
-            borderBottomColor: $themeTokens.text,
-          },
-        }),
-      ]"
-      :style="{
-        backgroundColor: disabled ? $themeTokens.textDisabled + '20' : $themePalette.grey.v_100,
-        borderRadius: '2px 2px 0 0',
-        borderBottom: `1px solid ${
-          invalid
-            ? $themeTokens.error
-            : inputFocused
-              ? $themeTokens.primary
-              : $themePalette.grey.v_700
-        }`,
-      }"
-      @mouseenter="isHovered = true"
-      @mouseleave="isHovered = false"
+      class="kmselect-field"
       @click="onContainerClick"
     >
-      <label
-        v-if="label"
-        :id="labelId"
-        :for="inputId"
-        class="kmselect-label"
-        :class="{
-          'is-inline': isLabelInline,
-          'is-floating': !isLabelInline,
-        }"
-        :style="{
-          color: disabled
-            ? $themeTokens.textDisabled
-            : invalid
-              ? $themeTokens.error
-              : inputFocused || isOpen
-                ? $themeTokens.primary
-                : isHovered
-                  ? $themeTokens.text
-                  : $themePalette.grey.v_700,
-        }"
-      >
-        {{ label }}
-      </label>
       <div
-        v-if="multiple"
-        :id="selectedValuesId"
-        class="visuallyhidden"
-        aria-hidden="true"
+        class="kmselect-container"
+        :class="[
+          {
+            'has-label': label,
+            'is-disabled': disabled,
+            'is-active': inputFocused || isPopupOpen,
+            'is-invalid': invalid,
+          },
+          $computedClass({
+            ':hover:not(.is-disabled):not(.is-active):not(.is-invalid)': {
+              borderBottomColor: $themeTokens.text,
+            },
+          }),
+        ]"
+        :style="{
+          backgroundColor: disabled ? $themeTokens.textDisabled + '20' : $themePalette.grey.v_100,
+          borderRadius: '2px 2px 0 0',
+          borderBottom: `1px solid ${
+            invalid
+              ? $themeTokens.error
+              : inputFocused
+                ? $themeTokens.primary
+                : $themePalette.grey.v_700
+          }`,
+        }"
+        @mouseenter="isHovered = true"
+        @mouseleave="isHovered = false"
       >
-        {{ selectedValuesSummary }}
-      </div>
-      <KMultiSelectInput
-        ref="inputComponent"
-        :selectedOptions="selectedOptionsData"
-        :searchText="internalSearchText"
-        :placeholder="computedPlaceholder"
-        :listboxId="listboxId"
-        :errorId="errorId"
-        :isOpen="isOpen"
-        :multiple="multiple"
-        :itemText="itemText"
-        :itemValue="itemValue"
-        :clearable="clearable"
-        :clearAllLabel="typeof messages.clearText === 'function' ? messages.clearText() : ''"
-        :openLabel="typeof messages.open === 'function' ? messages.open() : ''"
-        :closeLabel="typeof messages.close === 'function' ? messages.close() : ''"
-        :disabled="disabled"
-        :invalid="invalid"
-        :focused="inputFocused"
-        :hovered="isHovered && !inputFocused && !isOpen"
-        :activeDescendant="activeDescendantId"
-        :labelId="labelId"
-        :inputId="inputId"
-        :selectedValuesId="selectedValuesId"
-        @update:searchText="onSearchInput"
-        @input-keydown="onInputKeydown"
-        @input-focus="onInputFocus"
-        @input-blur="onInputBlur"
-        @chip-remove="onChipRemove"
-        @clear-all="onClearAll"
-        @toggle="onToggleDropdown"
-      >
-        <template
-          v-if="$scopedSlots.chip"
-          #chip="slotProps"
+        <label
+          v-if="label"
+          :id="labelId"
+          :for="inputId"
+          class="kmselect-label"
+          :class="{
+            'is-inline': isLabelInline,
+            'is-floating': !isLabelInline,
+          }"
+          :style="{
+            color: disabled
+              ? $themeTokens.textDisabled
+              : invalid
+                ? $themeTokens.error
+                : inputFocused || isPopupOpen
+                  ? $themeTokens.primary
+                  : isHovered
+                    ? $themeTokens.text
+                    : $themePalette.grey.v_700,
+          }"
         >
-          <!-- @slot Custom slot for rendering selected items (chips) in multiple select mode. -->
-          <slot
-            name="chip"
-            v-bind="slotProps"
-          ></slot>
-        </template>
-      </KMultiSelectInput>
+          {{ label }}
+        </label>
+        <div
+          v-if="multiple"
+          :id="selectedValuesId"
+          class="visuallyhidden"
+          aria-hidden="true"
+        >
+          {{ selectedValuesSummary }}
+        </div>
+        <KMultiSelectInput
+          ref="inputComponent"
+          :selectedOptions="selectedOptionsData"
+          :searchText="internalSearchText"
+          :placeholder="computedPlaceholder"
+          :listboxId="listboxId"
+          :errorId="errorId"
+          :isOpen="isOpen"
+          :expanded="expanded"
+          :multiple="multiple"
+          :itemText="itemText"
+          :itemValue="itemValue"
+          :clearable="clearable"
+          :clearAllLabel="typeof messages.clearText === 'function' ? messages.clearText() : ''"
+          :openLabel="typeof messages.open === 'function' ? messages.open() : ''"
+          :closeLabel="typeof messages.close === 'function' ? messages.close() : ''"
+          :disabled="disabled"
+          :invalid="invalid"
+          :focused="inputFocused"
+          :hovered="isHovered && !inputFocused && !isPopupOpen"
+          :activeDescendant="activeDescendantId"
+          :labelId="labelId"
+          :inputId="inputId"
+          :selectedValuesId="selectedValuesId"
+          @update:searchText="onSearchInput"
+          @input-keydown="onInputKeydown"
+          @input-focus="onInputFocus"
+          @input-blur="onInputBlur"
+          @chip-remove="onChipRemove"
+          @clear-all="onClearAll"
+          @toggle="onToggleDropdown"
+        >
+          <template
+            v-if="$scopedSlots.chip"
+            #chip="slotProps"
+          >
+            <!-- @slot Custom slot for rendering selected items (chips) in multiple select mode. -->
+            <slot
+              name="chip"
+              v-bind="slotProps"
+            ></slot>
+          </template>
+        </KMultiSelectInput>
+      </div>
 
       <KMultiSelectDropdown
         ref="dropdownComponent"
@@ -124,6 +129,9 @@
         :multiple="multiple"
         :hideSelected="hideSelected"
         :listboxMessages="computedListboxMessages"
+        :expanded="expanded"
+        :maxHeight="listMaxHeight"
+        :disabled="disabled"
         @input="onListboxInput"
         @active-descendant-change="id => (activeDescendantId = id)"
       >
@@ -285,6 +293,10 @@
         },
       );
 
+      // True only while the floating dropdown is showing. In expanded mode the list is always
+      // visible, so the active border, label colour and hover key off this instead of isOpen.
+      const isPopupOpen = computed(() => isOpen.value && !props.expanded);
+
       const {
         indeterminateValues,
         onListboxInput: onCascadeListboxInput,
@@ -301,8 +313,12 @@
       watch(
         selectedOptionsData,
         options => {
-          if (props.multiple || isOpen.value) return;
-          setSearchText(options.length ? getOptionText(options[0]) : '');
+          if (props.multiple || isPopupOpen.value) return;
+          const label = options.length ? getOptionText(options[0]) : '';
+          // In expanded mode the list stays visible behind the field, so the label
+          // written back here must not filter it down to the single selection.
+          if (props.expanded) suppressFilter.value = Boolean(label);
+          setSearchText(label);
         },
         { immediate: true },
       );
@@ -340,6 +356,9 @@
 
         switch (event.key) {
           case 'Escape':
+            // Expanded mode has no popup to dismiss, so let Escape reach the host
+            // (a modal, for instance) instead of swallowing it here.
+            if (props.expanded) break;
             event.preventDefault();
             event.stopPropagation();
             closeDropdown();
@@ -388,6 +407,23 @@
 
           case 'Tab':
             closeDropdown();
+            break;
+
+          case ' ':
+            // Like Backspace above: with an empty search box this is a command, not text.
+            // A leading space cannot affect filtering anyway, since the query is trimmed.
+            if (
+              isOpen.value &&
+              !internalSearchText.value &&
+              dropdownComponent.value?.hasFocusedOption()
+            ) {
+              event.preventDefault();
+              dropdownComponent.value?.toggleFocusedOption();
+              break;
+            }
+            if (!isOpen.value) {
+              openDropdown();
+            }
             break;
 
           default:
@@ -457,6 +493,9 @@
       }
 
       async function onListboxInput(newValues) {
+        // In expanded mode the list stays rendered while disabled, and `pointer-events: none`
+        // only stops real pointer input, not the synthetic clicks assistive tech dispatches.
+        if (props.disabled) return;
         onCascadeListboxInput(newValues);
         await nextTick();
 
@@ -524,6 +563,7 @@
         inputFocused,
         isHovered,
         showError,
+        isPopupOpen,
         containerEl,
         inputComponent,
         dropdownComponent,
@@ -721,6 +761,22 @@
         type: Boolean,
         default: false,
       },
+      /**
+       * Renders the listbox inline and permanently visible below the field instead of as a
+       * floating dropdown: no open/close lifecycle, and no toggle button.
+       */
+      expanded: {
+        type: Boolean,
+        default: false,
+      },
+      /**
+       * Max height of the option list before it scrolls internally, as a CSS length.
+       * Applies to both the floating dropdown and the expanded list.
+       */
+      listMaxHeight: {
+        type: String,
+        default: '256px',
+      },
     },
   };
 
@@ -733,6 +789,11 @@
     position: relative;
     width: 100%;
     max-width: 100%;
+  }
+
+  .kmselect-field {
+    position: relative;
+    width: 100%;
   }
 
   .kmselect-container {

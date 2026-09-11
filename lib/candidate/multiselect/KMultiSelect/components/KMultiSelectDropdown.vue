@@ -3,7 +3,9 @@
   <div
     v-show="isOpen && (decoratedOptionTree.length > 0 || showEmptyState)"
     class="kmselect-dropdown"
-    :style="[{ backgroundColor: $themeTokens.surface }, flipStyle]"
+    :class="{ 'kmselect-dropdown-inline': expanded, 'is-disabled': expanded && disabled }"
+    :style="[{ backgroundColor: $themeTokens.surface, maxHeight }, flipStyle]"
+    :aria-disabled="expanded && disabled ? 'true' : undefined"
     @mousedown.prevent
   >
     <KListbox
@@ -159,7 +161,7 @@
       watch(
         () => props.isOpen,
         isOpen => {
-          if (!isOpen || typeof window === 'undefined') {
+          if (props.expanded || !isOpen || typeof window === 'undefined') {
             dropUp.value = false;
             return;
           }
@@ -336,6 +338,29 @@
         type: String,
         default: '',
       },
+      /**
+       * Renders the list in normal document flow, permanently visible, instead of as a
+       * floating panel. Drops the absolute positioning, z-index and drop shadow.
+       */
+      expanded: {
+        type: Boolean,
+        default: false,
+      },
+      /**
+       * Max height of the list before it scrolls internally, as a CSS length.
+       */
+      maxHeight: {
+        type: String,
+        default: '256px',
+      },
+      /**
+       * Only applies in expanded mode, where the list stays visible rather than closing.
+       * Renders it inert instead of removing it, so the layout does not shift.
+       */
+      disabled: {
+        type: Boolean,
+        default: false,
+      },
     },
   };
 
@@ -348,17 +373,31 @@
   @import '../../../../keen/styles/variables';
 
   .kmselect-dropdown {
+    padding: 8px 0;
+    overflow-y: auto;
+    border-radius: 2px;
+  }
+
+  // The floating panel. `@extend` cannot be applied conditionally on a single selector,
+  // so the drop shadow lives here rather than being reset by the inline modifier.
+  .kmselect-dropdown:not(.kmselect-dropdown-inline) {
     position: absolute;
     top: 100%;
     right: 0;
     left: 0;
     z-index: $z-index-dropdown;
-    max-height: 256px;
-    padding: 8px 0;
     margin-top: 2px;
-    overflow-y: auto;
-    border-radius: 2px;
     @extend %dropshadow-2dp;
+  }
+
+  .kmselect-dropdown-inline {
+    position: static;
+    margin-top: 4px;
+  }
+
+  .kmselect-dropdown.is-disabled {
+    pointer-events: none;
+    opacity: 0.5;
   }
 
   .kmselect-dropdown-empty {
