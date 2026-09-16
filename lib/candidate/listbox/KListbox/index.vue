@@ -174,6 +174,7 @@
       );
 
       function changeSelectAll(checked) {
+        if (props.disabled) return;
         if (!hasOptions.value) return;
         if (!props.multiple) return; // Prevent "select all" in single-select mode
         if (checked) {
@@ -183,11 +184,13 @@
         }
       }
 
+      const selectAllInteractive = computed(() => hasOptions.value && !props.disabled);
+
       const selectAllStyles = computed(() => ({
         ':hover': {
-          backgroundColor: hasOptions.value ? themePalette().grey.v_100 : 'transparent',
+          backgroundColor: selectAllInteractive.value ? themePalette().grey.v_100 : 'transparent',
         },
-        cursor: hasOptions.value ? 'pointer' : 'default',
+        cursor: selectAllInteractive.value ? 'pointer' : 'default',
       }));
 
       const focusedOptionId = computed(() => {
