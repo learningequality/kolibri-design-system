@@ -62,7 +62,7 @@
 
       <h3>CSS variables</h3>
 
-      <p>Theme values are emitted as CSS variables on <code>:root</code> in three layers:</p>
+      <p>Theme values are emitted as CSS variables on <code>html:root</code> in three layers:</p>
       <ul>
         <li><code>--tokens-*</code> for named color tokens (e.g. <code>--tokens-primary</code>)</li>
         <li>
@@ -93,6 +93,7 @@
       <DocsShow>
         <div class="error-message">This is an error</div>
       </DocsShow>
+
       <p>
         For palette and brand variables, replace the dots in the path with hyphens and drop the
         underscore (<code>palette.grey.v_400</code> becomes <code>--palette-grey-v400</code>). Token

@@ -139,6 +139,11 @@
           Global styles for page background, text color, text selection, focus outline, and print,
           using the theme CSS variables
         </li>
+        <li>
+          Every theme CSS variable at its default value, so they resolve when the page first
+          renders, before the theme plugin has run. These come with the helper styles rather than
+          the global styles, so they are always registered.
+        </li>
       </ul>
 
       <h3>

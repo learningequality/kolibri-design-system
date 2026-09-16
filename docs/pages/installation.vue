@@ -79,8 +79,9 @@
         href="/styling#helper-styles"
         text="helper styles"
       />. The helper styles are also a public entry point of their own. An application that doesn't
-      need the global layer can import
-      <code>~kolibri-design-system/lib/styles/helper-styles</code> instead.
+      need the global styles can import
+      <code>~kolibri-design-system/lib/styles/helper-styles</code> instead. Every theme CSS variable
+      is still defined at its default value here, the global styles are the only optional part.
     </DocsPageSection>
 
     <DocsPageSection
