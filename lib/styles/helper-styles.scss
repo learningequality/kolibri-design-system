@@ -1,4 +1,7 @@
-// Utility classes
+// Utility classes, plus the theme CSS variable defaults.
+
+// every theme CSS variable at its default value, on `:root`
+@import 'themeDefaults';
 
 .visuallyhidden {
   position: absolute;
