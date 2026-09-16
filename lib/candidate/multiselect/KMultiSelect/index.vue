@@ -421,6 +421,9 @@
               dropdownComponent.value?.toggleFocusedOption();
               break;
             }
+            if (!internalSearchText.value) {
+              event.preventDefault();
+            }
             if (!isOpen.value) {
               openDropdown();
             }
@@ -455,7 +458,7 @@
       }
 
       watch(isOpen, newVal => {
-        if (newVal) {
+        if (newVal && !props.expanded) {
           nextTick(() => {
             inputRef.value?.focus();
             if (!props.multiple && suppressFilter.value) {
@@ -471,6 +474,10 @@
         blurFrameId = requestAnimationFrame(() => {
           if (containerEl.value && !containerEl.value.contains(document.activeElement)) {
             closeDropdown();
+            if (props.expanded) {
+              activeDescendantId.value = null;
+              dropdownComponent.value?.clearActiveOption();
+            }
             emit('blur');
           }
         });

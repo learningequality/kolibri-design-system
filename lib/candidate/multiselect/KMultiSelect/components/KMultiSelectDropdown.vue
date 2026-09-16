@@ -15,6 +15,7 @@
       :ariaLabel="listboxLabel"
       :messages="listboxMessages"
       :multiple="multiple"
+      :disabled="expanded && disabled"
       @input="$emit('input', $event)"
       @active-descendant-change="$emit('active-descendant-change', $event)"
     >
@@ -150,9 +151,7 @@
       watch(
         () => props.isOpen,
         isOpen => {
-          if (!isOpen && klistboxRef.value?.onListBlur) {
-            klistboxRef.value.onListBlur();
-          }
+          if (!isOpen) clearActiveOption();
         },
       );
 
@@ -255,6 +254,10 @@
         klistboxRef.value?.toggleFocusedOption();
       }
 
+      function clearActiveOption() {
+        klistboxRef.value?.onListBlur?.();
+      }
+
       return {
         klistboxRef,
         emptyMessageRef,
@@ -271,6 +274,8 @@
         moveFocusByOne,
         // eslint-disable-next-line vue/no-unused-properties
         toggleFocusedOption,
+        // eslint-disable-next-line vue/no-unused-properties
+        clearActiveOption,
       };
     },
 
