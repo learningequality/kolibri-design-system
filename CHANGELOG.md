@@ -7,6 +7,19 @@ Changelog is rather internal in nature. See release notes for the public overvie
 <!-- [DO NOT REMOVE-USED BY GH ACTION] PASTE CHANGELOG -->
 
 
+- [#1319]
+  - **Description:** Adds three lint rules supporting the migration to theme CSS variables: the ESLint rules `kds/no-theme-tokens-in-v-bind` and `vue/no-root-v-if`, and the stylelint rule `kds/no-unknown-theme-custom-properties`. The set of valid variable names and values is derived from `defaultTokenMapping`, `defaultBrandColors`, and `colorsMaterial.js`, so it stays in sync as tokens are added. `KTable`'s sticky column shadow is migrated from `v-bind()` to `var(--tokens-surface, #ffffff)`, removing its `surfacecolor` computed. The rules live in `lint/` and will be removed once ported to `kolibri-format`.
+  - **Products impact:** none
+  - **Addresses:** #1305
+  - **Components:** -
+  - **Breaking:** -
+  - **Impacts a11y:** -
+  - **Guidance:** -
+
+[#1319]: https://github.com/learningequality/kolibri-design-system/pull/1319
+
+
+
 - [#1309]
   - **Description:** Implement JS generated global styles with CSS variables
   - **Products impact:** none
