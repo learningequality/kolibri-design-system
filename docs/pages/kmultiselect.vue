@@ -11,16 +11,6 @@
           Free-text custom value entry (combobox mode) is not currently supported and is planned for
           a future release.
         </li>
-        <li>
-          In expanded mode the listbox is permanently visible, so the combobox keeps
-          <code>role="combobox"</code> and reports <code>aria-expanded="true"</code> at all times,
-          following the
-          <DocsExternalLink
-            href="https://www.w3.org/WAI/ARIA/apg/patterns/combobox/"
-            text="WAI-ARIA APG combobox pattern"
-          />. <code>messages.open</code> and <code>messages.close</code> are unused in that mode,
-          since no toggle button is rendered.
-        </li>
       </ul>
     </template>
 

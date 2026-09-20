@@ -6,6 +6,7 @@
     :class="{ 'kmselect-dropdown-inline': expanded, 'is-disabled': expanded && disabled }"
     :style="[{ backgroundColor: $themeTokens.surface, maxHeight }, flipStyle]"
     :aria-disabled="expanded && disabled ? 'true' : undefined"
+    data-testid="kmselect-dropdown-panel"
     @mousedown.prevent
   >
     <KListbox
