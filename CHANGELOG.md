@@ -7,6 +7,19 @@ Changelog is rather internal in nature. See release notes for the public overvie
 <!-- [DO NOT REMOVE-USED BY GH ACTION] PASTE CHANGELOG -->
 
 
+- [#1329]
+  - **Description:** Internal: replace seven per-automation caller workflows with one copy of the shared automation-template.yml
+  - **Products impact:** none
+  - **Addresses:** #1328
+  - **Components:** -
+  - **Breaking:** -
+  - **Impacts a11y:** -
+  - **Guidance:** -
+
+[#1329]: https://github.com/learningequality/kolibri-design-system/pull/1329
+
+
+
 - [#1324]
   - **Description:** build(deps): bump browserslist from 4.24.4 to 4.28.8
   - **Products impact:** Dev Dependency upgrade
