@@ -7,6 +7,19 @@ Changelog is rather internal in nature. See release notes for the public overvie
 <!-- [DO NOT REMOVE-USED BY GH ACTION] PASTE CHANGELOG -->
 
 
+- [#1326]
+  - **Description:** build(deps): bump joi from 17.13.3 to 17.13.7
+  - **Products impact:** Dev Dependency upgrade
+  - **Addresses:** -
+  - **Components:** -
+  - **Breaking:** -
+  - **Impacts a11y:** -
+  - **Guidance:** -
+
+[#1326]: https://github.com/learningequality/kolibri-design-system/pull/1326
+
+
+
 - [#1329]
   - **Description:** Internal: replace seven per-automation caller workflows with one copy of the shared automation-template.yml
   - **Products impact:** none
