@@ -58,6 +58,7 @@
           { text: 'Single selection', href: '#single-selection' },
           { text: 'Multi-field search', href: '#multifield-search' },
           { text: 'Hierarchical tree', href: '#hierarchical-tree' },
+          { text: 'Expanded mode', href: '#expanded-mode' },
           { text: 'Primitive values', href: '#primitive-values' },
         ]"
       />
@@ -154,6 +155,25 @@
         block
         exampleId="kmultiselect-auto-select-parent"
         loadExample="KMultiSelect/AutoSelectParent.vue"
+      />
+
+      <h3>
+        Expanded mode
+        <DocsAnchorTarget anchor="#expanded-mode" />
+      </h3>
+      <p>
+        With <code>expanded</code>, the option list renders inline and permanently visible below the
+        field instead of as a floating dropdown. There is no open/close lifecycle: blur, clicking
+        outside, <code>Escape</code>, <code>Tab</code>, and selecting an option all leave the list
+        in place, and no toggle button is rendered. Use <code>listMaxHeight</code> to cap the height
+        before the list scrolls internally. Everything else behaves as it does in dropdown mode:
+        search filtering, chips, clear all, the slots, hierarchical indentation, and the cascade
+        props.
+      </p>
+      <DocsExample
+        block
+        exampleId="kmultiselect-expanded-mode"
+        loadExample="KMultiSelect/ExpandedMode.vue"
       />
 
       <h3>
