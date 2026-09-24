@@ -5,7 +5,6 @@
     class="kmselect-dropdown"
     :class="{ 'kmselect-dropdown-inline': expanded, 'is-disabled': expanded && disabled }"
     :style="[{ backgroundColor: $themeTokens.surface, maxHeight }, flipStyle]"
-    :aria-disabled="expanded && disabled ? 'true' : undefined"
     data-testid="kmselect-dropdown-panel"
     @mousedown.prevent
   >
@@ -17,6 +16,7 @@
       :messages="listboxMessages"
       :multiple="multiple"
       :disabled="expanded && disabled"
+      :tabbable="!expanded"
       @input="$emit('input', $event)"
       @active-descendant-change="$emit('active-descendant-change', $event)"
     >

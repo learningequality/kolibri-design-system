@@ -35,7 +35,7 @@
       :aria-label="ariaLabel"
       :aria-labelledby="ariaLabelledBy"
       class="k-listbox-list"
-      :tabindex="disabled ? -1 : 0"
+      :tabindex="disabled || !tabbable ? -1 : 0"
       role="listbox"
       data-focus="true"
       :aria-disabled="disabled ? 'true' : undefined"
@@ -448,6 +448,15 @@
       disabled: {
         type: Boolean,
         default: false,
+      },
+      /**
+       * Whether the list is a tab stop. Set to `false` when another element
+       * owns focus and drives the list through `aria-activedescendant`, such as
+       * a combobox input. The list stays enabled and operable.
+       */
+      tabbable: {
+        type: Boolean,
+        default: true,
       },
     },
   };

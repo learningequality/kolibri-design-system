@@ -412,6 +412,9 @@
           case ' ':
             // Like Backspace above: with an empty search box this is a command, not text.
             // A leading space cannot affect filtering anyway, since the query is trimmed.
+            // Unlike Enter, Space has no fallback to the top match: Enter accepts, Space
+            // only toggles the active option. Falling back would let a single Space press
+            // select an option the user never navigated to.
             if (
               isOpen.value &&
               !internalSearchText.value &&

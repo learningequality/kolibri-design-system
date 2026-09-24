@@ -17,6 +17,19 @@
       :appearanceOverrides="{ width: '400px' }"
     />
     <div style="margin-top: 16px; font-size: 14px"><strong>Selected:</strong> {{ selected }}</div>
+    <KMultiSelect
+      :value="['WORK']"
+      :messages="messages"
+      :options="allCategories"
+      itemText="text"
+      itemValue="value"
+      label="Categories (disabled)"
+      expanded
+      disabled
+      listMaxHeight="250px"
+      :autoPromoteParent="false"
+      :appearanceOverrides="{ width: '400px', marginTop: '24px' }"
+    />
   </div>
 
 </template>
