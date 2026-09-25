@@ -7,27 +7,13 @@ on:
       - synchronize
       - reopened
       - closed
+    paths:
+      - 'lib/**'
+      - 'jest.conf/visual*'
 
 jobs:
-  pre_job:
-    name: Path match check
-    runs-on: ubuntu-latest
-    # Map a step output to a job output
-    outputs:
-      should_skip: ${{ steps.skip_check.outputs.should_skip }}
-    steps:
-      - id: skip_check
-        uses: fkirc/skip-duplicate-actions@master
-        with:
-          github_token: ${{ github.token }}
-          paths: '["lib/**", "jest.conf/visual*" ]'
-          # Avoid duplicate skipping so it can be run again on the target branch
-          skip_after_successful_duplicate: false
-
   visual_tests:
     name: Frontend Visual Tests
-    needs: pre_job
-    if: ${{ needs.pre_job.outputs.should_skip != 'true' }}
     runs-on: ubuntu-latest
     strategy:
       # Using matrix just to dynamically set the environment variable
@@ -54,7 +40,7 @@ jobs:
         if: github.event.pull_request.merged == true
         # set the PERCY_BRANCH environment variable to the target branch for the Percy build
         # to be associated with the target branch
-        run: echo "PERCY_BRANCH=${{ github.event.pull_request.base.ref }}" >> $GITHUB_ENV
+        run: echo "PERCY_BRANCH=${{ github.event.pull_request.base.ref }}" >> "$GITHUB_ENV"
       - name: Use Node.js
         uses: actions/setup-node@v6.4.0
         with:
@@ -82,7 +68,7 @@ jobs:
         id: extract-url
         run: |
           url=$(grep -o 'https://percy.io/[a-zA-Z0-9/_-]*' test-output.log | tail -1)
-          echo "percy_url=$url" >> $GITHUB_OUTPUT
+          echo "percy_url=$url" >> "$GITHUB_OUTPUT"
 
   comment:
     name: Comment Percy results
