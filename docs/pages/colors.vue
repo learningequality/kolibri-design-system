@@ -616,6 +616,13 @@
         <code>v_200</code>, <code>v_300</code>, <code>v_400</code>, <code>v_500</code>,
         <code>v_600</code>. Note that <code>v_50</code> is only present on select color families:
       </p>
+      <DocsBanner>
+        The next major release will rename the JavaScript keys from <code>v_N</code> to
+        <code>vN</code>, for example <code>$themePalette.green.v_100</code> will become
+        <code>$themePalette.green.v100</code>. The keys change on <code>$themeBrand</code>,
+        <code>$themePalette</code>, and the objects that <code>themeBrand()</code> and
+        <code>themePalette()</code> return.
+      </DocsBanner>
       <DocsColorBlock name="palette.green.v_50" />
       <DocsColorBlock name="palette.green.v_100" />
       <DocsColorBlock name="palette.green.v_200" />
