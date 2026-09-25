@@ -73,13 +73,13 @@
         @import '~kolibri-design-system/lib/styles/common';
       </DocsShowCode>
 
-      <code>common.scss</code> registers both the global styles, such as the page background, text
-      color, focus outline, text selection, and print styles, and the
+      <code>common.scss</code> registers the global styles and the
       <DocsInternalLink
         href="/styling#helper-styles"
         text="helper styles"
-      />. The helper styles are also a public entry point of their own. An application that doesn't
-      need the global styles can import
+      />. The global styles include the Pure CSS base (normalize.css), the page background, text
+      color, focus outline, text selection, and print styles. The helper styles are also a public
+      entry point of their own. An application that doesn't need the global styles can import
       <code>~kolibri-design-system/lib/styles/helper-styles</code> instead. Every theme CSS variable
       is still defined at its default value here, the global styles are the only optional part.
     </DocsPageSection>
