@@ -41,7 +41,10 @@
     </template>
 
     <!-- @slot Slot alternative to the `iconAfter` prop -->
-    <slot name="iconAfter"></slot>
+    <span class="icon-container">
+      <slot name="iconAfter"></slot>
+    </span>
+
     <KIcon
       v-if="iconAfter"
       :icon="iconAfter"
