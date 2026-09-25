@@ -7,6 +7,19 @@ Changelog is rather internal in nature. See release notes for the public overvie
 <!-- [DO NOT REMOVE-USED BY GH ACTION] PASTE CHANGELOG -->
 
 
+- [#1338]
+  - **Description:** Replace `fkirc/skip-duplicate-actions` with `dorny/paths-filter` and native `paths:` in CI workflows
+  - **Products impact:** none
+  - **Addresses:** -
+  - **Components:** -
+  - **Breaking:** -
+  - **Impacts a11y:** -
+  - **Guidance:** -
+
+[#1338]: https://github.com/learningequality/kolibri-design-system/pull/1338
+
+
+
 - [#1326]
   - **Description:** build(deps): bump joi from 17.13.3 to 17.13.7
   - **Products impact:** Dev Dependency upgrade
