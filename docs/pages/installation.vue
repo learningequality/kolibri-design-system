@@ -30,12 +30,15 @@
         <li>
           Makes theme values available in two forms: as reactive objects on every Vue instance
           (<code>$themeBrand</code>,
-          <code>$themeTokens</code>, <code>$themePalette</code>, <code>$computedClass</code>) for
-          use in JavaScript, and as CSS variables (<code>--tokens-*</code>, <code>--brand-*</code>,
-          <code>--palette-*</code>) emitted to a <code>&lt;style&gt;</code> tag with
-          <code>#k-theme-css-variables</code> in the document head for use in style blocks. Both
-          stay in sync when the theme changes via <code>setBrandColors()</code> or
-          <code>setTokenMapping()</code>. See
+          <code>$themeTokens</code>, <code>$themePalette</code>, and the deprecated
+          <DocsInternalLink
+            href="/colors#computed-classes"
+            text="$computedClass"
+          />) for use in JavaScript, and as CSS variables (<code>--tokens-*</code>,
+          <code>--brand-*</code>, <code>--palette-*</code>) emitted to a
+          <code>&lt;style&gt;</code> tag with <code>#k-theme-css-variables</code> in the document
+          head for use in style blocks. Both stay in sync when the theme changes via
+          <code>setBrandColors()</code> or <code>setTokenMapping()</code>. See
           <DocsInternalLink
             href="/colors/#usage"
             text="Colors"
@@ -73,15 +76,29 @@
         @import '~kolibri-design-system/lib/styles/common';
       </DocsShowCode>
 
-      <code>common.scss</code> registers both the global styles, such as the page background, text
-      color, focus outline, text selection, and print styles, and the
+      <code>common.scss</code> registers the global styles and the
       <DocsInternalLink
         href="/styling#helper-styles"
         text="helper styles"
-      />. The helper styles are also a public entry point of their own. An application that doesn't
-      need the global styles can import
+      />. The global styles include the Pure CSS base (normalize.css), the page background, text
+      color, focus outline, text selection, and print styles. The helper styles are also a public
+      entry point of their own. An application that doesn't need the global styles can import
       <code>~kolibri-design-system/lib/styles/helper-styles</code> instead. Every theme CSS variable
       is still defined at its default value here, the global styles are the only optional part.
+
+      <DocsBanner>
+        <code>generateGlobalStyles</code> from
+        <code>kolibri-design-system/lib/styles/generateGlobalStyles</code> is deprecated. The next
+        major release will remove it, together with the Aphrodite library that it uses. It continues
+        to work in version 5.
+      </DocsBanner>
+
+      <p>To replace <code>generateGlobalStyles</code>:</p>
+
+      <ol>
+        <li>Remove the import of <code>generateGlobalStyles</code> and each call to it.</li>
+        <li>Import <code>~kolibri-design-system/lib/styles/common</code> as shown above.</li>
+      </ol>
     </DocsPageSection>
 
     <DocsPageSection
