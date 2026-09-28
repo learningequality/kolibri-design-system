@@ -7,6 +7,19 @@ Changelog is rather internal in nature. See release notes for the public overvie
 <!-- [DO NOT REMOVE-USED BY GH ACTION] PASTE CHANGELOG -->
 
 
+- [#1340]
+  - **Description:** Internal: refresh the copied automation.yml so it matches the current shared template
+  - **Products impact:** none
+  - **Addresses:** -
+  - **Components:** -
+  - **Breaking:** -
+  - **Impacts a11y:** -
+  - **Guidance:** -
+
+[#1340]: https://github.com/learningequality/kolibri-design-system/pull/1340
+
+
+
 - [#1338]
   - **Description:** Replace `fkirc/skip-duplicate-actions` with `dorny/paths-filter` and native `paths:` in CI workflows
   - **Products impact:** none
