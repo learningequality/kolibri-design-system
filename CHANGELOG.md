@@ -7,6 +7,19 @@ Changelog is rather internal in nature. See release notes for the public overvie
 <!-- [DO NOT REMOVE-USED BY GH ACTION] PASTE CHANGELOG -->
 
 
+- [#1308]
+  - **Description:** build(deps): bump shell-quote from 1.8.4 to 1.10.0
+  - **Products impact:** Dev Dependency upgrade
+  - **Addresses:** -
+  - **Components:** -
+  - **Breaking:** -
+  - **Impacts a11y:** -
+  - **Guidance:** -
+
+[#1308]: https://github.com/learningequality/kolibri-design-system/pull/1308
+
+
+
 - [#1340]
   - **Description:** Internal: refresh the copied automation.yml so it matches the current shared template
   - **Products impact:** none
