@@ -35,9 +35,10 @@
       :aria-label="ariaLabel"
       :aria-labelledby="ariaLabelledBy"
       class="k-listbox-list"
-      tabindex="0"
+      :tabindex="disabled || !tabbable ? -1 : 0"
       role="listbox"
       data-focus="true"
+      :aria-disabled="disabled ? 'true' : undefined"
       :aria-multiselectable="String(multiple)"
       :style="{ outline: 'none' }"
       :aria-describedby="ariaDescribedById"
@@ -116,6 +117,7 @@
       }
 
       function toggleOption(value) {
+        if (props.disabled) return;
         if (!props.multiple) {
           if (!isSelected(value)) {
             emitInput([value]);
@@ -172,6 +174,7 @@
       );
 
       function changeSelectAll(checked) {
+        if (props.disabled) return;
         if (!hasOptions.value) return;
         if (!props.multiple) return; // Prevent "select all" in single-select mode
         if (checked) {
@@ -181,11 +184,13 @@
         }
       }
 
+      const selectAllInteractive = computed(() => hasOptions.value && !props.disabled);
+
       const selectAllStyles = computed(() => ({
         ':hover': {
-          backgroundColor: hasOptions.value ? themePalette().grey.v_100 : 'transparent',
+          backgroundColor: selectAllInteractive.value ? themePalette().grey.v_100 : 'transparent',
         },
-        cursor: hasOptions.value ? 'pointer' : 'default',
+        cursor: selectAllInteractive.value ? 'pointer' : 'default',
       }));
 
       const focusedOptionId = computed(() => {
@@ -236,7 +241,7 @@
       }
 
       function onListFocus() {
-        if (!hasOptions.value) return;
+        if (props.disabled || !hasOptions.value) return;
         // Don't override focus when an option was clicked directly with mouse
         if (focusedValue.value !== null) return;
         // Focus the first selected option if any, otherwise the first available one
@@ -253,7 +258,7 @@
       }
 
       function onListKeydown(event) {
-        if (!hasOptions.value) return;
+        if (props.disabled || !hasOptions.value) return;
         const { key } = event;
 
         switch (key) {
@@ -432,6 +437,24 @@
        * the current selection instead of adding to it.
        */
       multiple: {
+        type: Boolean,
+        default: true,
+      },
+      /**
+       * Whether the listbox is disabled. Takes the list out of the tab order and
+       * ignores keyboard interaction, so it is not presented as operable to
+       * assistive technology.
+       */
+      disabled: {
+        type: Boolean,
+        default: false,
+      },
+      /**
+       * Whether the list is a tab stop. Set to `false` when another element
+       * owns focus and drives the list through `aria-activedescendant`, such as
+       * a combobox input. The list stays enabled and operable.
+       */
+      tabbable: {
         type: Boolean,
         default: true,
       },

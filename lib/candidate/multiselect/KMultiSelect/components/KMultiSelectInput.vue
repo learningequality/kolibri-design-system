@@ -2,7 +2,11 @@
 
   <div
     class="kmselect-input"
-    :class="[disabled ? 'is-disabled' : '']"
+    :class="[
+      disabled ? 'is-disabled' : '',
+      expanded ? 'kmselect-input-no-toggle' : '',
+      showClearButton ? 'has-clear' : '',
+    ]"
     :style="{
       cursor: disabled ? 'not-allowed' : 'default',
       backgroundColor: 'transparent',
@@ -62,7 +66,7 @@
     >
 
     <KIconButton
-      v-if="clearable && selectedOptions.length > 0 && !disabled"
+      v-if="showClearButton"
       size="small"
       icon="clear"
       :ariaLabel="clearAllLabel"
@@ -85,6 +89,7 @@
     />
 
     <KIconButton
+      v-if="!expanded"
       tabindex="-1"
       size="small"
       :icon="isOpen ? 'dropup' : 'dropdown'"
@@ -164,6 +169,10 @@
         return attrs;
       });
 
+      const showClearButton = computed(
+        () => props.clearable && props.selectedOptions.length > 0 && !props.disabled,
+      );
+
       const placeholderStyle = computed(() => ({
         '::placeholder': {
           color: instance.proxy.$themeTokens.textDisabled,
@@ -197,6 +206,7 @@
         inputEl,
         inputModel,
         inputAriaAttrs,
+        showClearButton,
         placeholderStyle,
         // eslint-disable-next-line vue/no-unused-properties
         focus,
@@ -248,6 +258,11 @@
         default: false,
       },
       isOpen: {
+        type: Boolean,
+        default: false,
+      },
+
+      expanded: {
         type: Boolean,
         default: false,
       },
@@ -334,6 +349,20 @@
     top: 50%;
     right: 36px;
     transform: translateY(-50%);
+  }
+
+  // Without the toggle there is no gutter to reserve on the right, beyond
+  // whatever the clear button needs.
+  .kmselect-input-no-toggle {
+    padding-right: 10px;
+
+    &.has-clear {
+      padding-right: 36px;
+    }
+
+    .kmselect-clear-btn {
+      right: 4px;
+    }
   }
 
 </style>

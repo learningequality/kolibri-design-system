@@ -28,6 +28,21 @@
       height="400px"
       loadExample="KMultiSelect/HierarchicalTree.vue"
     />
+    <VisualTestExample
+      id="expanded-example"
+      title="Expanded mode"
+      width="400px"
+      height="420px"
+      loadExample="KMultiSelect/ExpandedMode.vue"
+    />
+    <VisualTestExample
+      id="expanded-disabled-example"
+      title="Expanded mode (disabled)"
+      width="400px"
+      height="420px"
+      loadExample="KMultiSelect/ExpandedMode.vue"
+      :disabled="true"
+    />
   </VisualTestLayout>
 
 </template>
