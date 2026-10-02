@@ -7,6 +7,19 @@ Changelog is rather internal in nature. See release notes for the public overvie
 <!-- [DO NOT REMOVE-USED BY GH ACTION] PASTE CHANGELOG -->
 
 
+- [#1327]
+  - **Description:** Add an opt-in `expanded` mode to `KMultiSelect` that renders the option list inline and permanently visible below the field, with no open/close lifecycle, plus a `listMaxHeight` prop to cap the list height in both modes. Also makes `Space` toggle the active option in both modes.
+  - **Products impact:** new API
+  - **Addresses:** https://github.com/learningequality/kolibri-design-system/issues/1318, https://github.com/learningequality/studio/pull/6092
+  - **Components:** KMultiSelect
+  - **Breaking:** no
+  - **Impacts a11y:** yes
+  - **Guidance:** Pass `expanded` to render the listbox in normal document flow, always visible. Blur, outside click, `Escape`, `Tab` and selection all leave it in place, and no toggle button is rendered. Use `listMaxHeight` (default `256px`) for the scroll cap. Per the WAI-ARIA APG combobox pattern the input keeps `role="combobox"` and reports `aria-expanded="true"` permanently. `messages.open` and `messages.close` are unused in this mode. Existing dropdown consumers are unaffected.
+
+[#1327]: https://github.com/learningequality/kolibri-design-system/pull/1327
+
+
+
 - [#1319]
   - **Description:** Adds three lint rules supporting the migration to theme CSS variables: the ESLint rules `kds/no-theme-tokens-in-v-bind` and `vue/no-root-v-if`, and the stylelint rule `kds/no-unknown-theme-custom-properties`. The set of valid variable names and values is derived from `defaultTokenMapping`, `defaultBrandColors`, and `colorsMaterial.js`, so it stays in sync as tokens are added. `KTable`'s sticky column shadow is migrated from `v-bind()` to `var(--tokens-surface, #ffffff)`, removing its `surfacecolor` computed. The rules live in `lint/` and will be removed once ported to `kolibri-format`.
   - **Products impact:** none
