@@ -153,10 +153,12 @@
       <p>
         We provide a consistent, high-contrast focus highlight, using the
         <code>--tokens-focusOutline</code>
-        CSS variable. The global styles apply it to any focused element, limited to keyboard
-        navigation (i.e. tabbing from item to item). To apply this within a component, use the
-        `<code>$coreOutline</code>` computed property available on Vue instances, because CSS alone
-        cannot limit the highlight to keyboard focus across all supported browsers.
+        CSS variable. The global styles apply it to focused elements that match
+        <code>:focus-visible</code>, so the browser decides when it shows. For example, most
+        browsers show it on a text input clicked with a mouse. To show the highlight only after
+        keyboard navigation (i.e. tabbing from item to item), use the
+        <code>$coreOutline</code> computed property available on Vue instances. It follows the input
+        modality that KDS tracks.
       </p>
     </DocsPageSection>
 
