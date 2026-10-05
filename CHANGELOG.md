@@ -7,6 +7,19 @@ Changelog is rather internal in nature. See release notes for the public overvie
 <!-- [DO NOT REMOVE-USED BY GH ACTION] PASTE CHANGELOG -->
 
 
+- [#1346]
+  - **Description:** Adds `insert` icon.
+  - **Products impact:** new API
+  - **Addresses:** https://github.com/learningequality/kolibri-design-system/issues/1343
+  - **Components:** KIcon
+  - **Breaking:** no
+  - **Impacts a11y:** no
+  - **Guidance:** -
+
+[#1346]: https://github.com/learningequality/kolibri-design-system/pull/1346
+
+
+
 - [#1327]
   - **Description:** Add an opt-in `expanded` mode to `KMultiSelect` that renders the option list inline and permanently visible below the field, with no open/close lifecycle, plus a `listMaxHeight` prop to cap the list height in both modes. Also makes `Space` toggle the active option in both modes.
   - **Products impact:** new API
