@@ -3,7 +3,7 @@
   <div
     class="k-checkbox-container"
     data-testid="k-checkbox-container"
-    :class="{ 'k-checkbox-disabled': disabled }"
+    :class="{ 'k-checkbox-disabled': disabled, 'k-checkbox-readonly': isReadonly }"
     :style="{ pointerEvents: presentational ? 'none' : 'auto' }"
     @click="toggleCheck"
   >
@@ -20,6 +20,7 @@
           :value="value"
           :indeterminate.prop="indeterminate"
           :disabled="disabled"
+          :aria-readonly="isReadonly"
           @click.stop="toggleCheck"
           @focus="isActive = true"
           @blur="markInactive"
@@ -161,6 +162,14 @@
         default: false,
       },
       /**
+       * Prevents changing the checkbox state while keeping it focusable
+       * and enabled-looking. Cannot be combined with `disabled`.
+       */
+      readonly: {
+        type: Boolean,
+        default: false,
+      },
+      /**
        * Description - subtext to the label
        */
       description: {
@@ -191,6 +200,9 @@
       lastUserEvent: null,
     }),
     computed: {
+      isReadonly() {
+        return this.readonly && !this.disabled;
+      },
       usingLegacyApi() {
         return this.inputValue === undefined;
       },
@@ -261,15 +273,27 @@
         return this.presentational ? 'div' : 'label';
       },
     },
+    mounted() {
+      if (process.env.NODE_ENV !== 'production' && this.readonly && this.disabled) {
+        // eslint-disable-next-line no-console
+        console.warn(
+          "KCheckbox: 'readonly' and 'disabled' cannot be used together. Falling back to 'disabled'.",
+        );
+      }
+    },
     methods: {
       toggleCheck(event) {
-        if (!this.disabled) {
-          // Store the event that triggered this state change (mouse or keyboard)
-          // so it can be forwarded with the emitted `change` event.
-          this.lastUserEvent = event || null;
-          this.$refs.kCheckboxInput.focus();
-          this.isChecked = !this.isChecked;
+        if (this.disabled) return;
+        this.$refs.kCheckboxInput.focus();
+        if (this.isReadonly) {
+          // Cancelling the click makes the browser restore `checked` and `indeterminate`
+          if (event && event.target === this.$refs.kCheckboxInput) event.preventDefault();
+          return;
         }
+        // Store the event that triggered this state change (mouse or keyboard)
+        // so it can be forwarded with the emitted `change` event.
+        this.lastUserEvent = event || null;
+        this.isChecked = !this.isChecked;
       },
       updateInputValue(newValue) {
         /**
@@ -341,7 +365,8 @@
     user-select: none;
   }
 
-  .k-checkbox-disabled {
+  .k-checkbox-disabled,
+  .k-checkbox-readonly {
     .k-checkbox,
     .k-checkbox-input,
     .k-checkbox-label {

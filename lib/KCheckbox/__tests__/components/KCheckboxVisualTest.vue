@@ -38,6 +38,24 @@
     />
 
     <VisualTestExample
+      title="Deselected Readonly"
+      width="400px"
+      loadExample="KCheckbox/DeselectedReadonly.vue"
+    />
+
+    <VisualTestExample
+      title="Indeterminate Readonly"
+      width="400px"
+      loadExample="KCheckbox/IndeterminateReadonly.vue"
+    />
+
+    <VisualTestExample
+      title="Selected Readonly"
+      width="400px"
+      loadExample="KCheckbox/SelectedReadonly.vue"
+    />
+
+    <VisualTestExample
       title="Without Label"
       width="400px"
       loadExample="KCheckbox/WithoutLabel.vue"
