@@ -2,7 +2,7 @@
 
   <div
     class="k-radio-button-container"
-    :class="{ 'k-radio-button-disabled': disabled }"
+    :class="{ 'k-radio-button-disabled': disabled, 'k-radio-button-readonly': isReadonly }"
     @click="toggleCheck"
   >
     <div class="tr">
@@ -92,6 +92,9 @@
     model: {
       prop: 'currentValue',
     },
+    inject: {
+      kRadioButtonGroup: { default: null },
+    },
     props: {
       /**
        * Text label
@@ -177,6 +180,12 @@
       tabIndex: 0,
     }),
     computed: {
+      groupReadonly() {
+        return Boolean(this.kRadioButtonGroup && this.kRadioButtonGroup.readonly);
+      },
+      isReadonly() {
+        return !this.disabled && this.groupReadonly;
+      },
       isChecked() {
         return this.currentValue === (this.buttonValue === null ? this.value : this.buttonValue);
       },
@@ -212,6 +221,12 @@
       }
       if (process.env.NODE_ENV !== 'production') {
         this.checkForKRadioButtonGroup();
+        if (this.disabled && this.groupReadonly) {
+          // eslint-disable-next-line no-console
+          console.warn(
+            "KRadioButton: 'disabled' cannot be used inside a 'readonly' KRadioButtonGroup. Falling back to 'disabled'.",
+          );
+        }
       }
     },
     methods: {
@@ -222,10 +237,14 @@
        * @param {Event} event - The event object.
        */
       toggleCheck(event) {
-        if (!this.disabled) {
-          this.focus();
-          this.update(event);
+        if (this.disabled) return;
+        this.focus();
+        if (this.isReadonly) {
+          // Cancelling the click makes the browser restore `checked`
+          if (event && event.target === this.$refs.input) event.preventDefault();
+          return;
         }
+        this.update(event);
       },
       /**
        * @public
@@ -326,7 +345,8 @@
     user-select: none;
   }
 
-  .k-radio-button-disabled {
+  .k-radio-button-disabled,
+  .k-radio-button-readonly {
     .k-radio-button,
     .k-radio-button-input,
     .k-radio-button-label {

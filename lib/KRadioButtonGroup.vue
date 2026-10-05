@@ -3,6 +3,7 @@
   <div
     class="k-radio-button-group"
     role="radiogroup"
+    :aria-readonly="readonly"
   >
     <!-- @slot For `KRadioButton`s -->
     <slot></slot>
@@ -24,6 +25,17 @@
    */
   export default {
     name: 'KRadioButtonGroup',
+    props: {
+      /**
+       * Prevents changing the selected radio button while keeping the group
+       * focusable and enabled-looking. Applies to every `KRadioButton` inside;
+       * `disabled` radios stay disabled.
+       */
+      readonly: {
+        type: Boolean,
+        default: false,
+      },
+    },
     data() {
       return {
         radioButtons: [],
@@ -31,6 +43,17 @@
         firstRadioIdx: 0,
         lastRadioIdx: 0,
         radioBtnIdx: 0,
+      };
+    },
+    provide() {
+      // Getter keeps `readonly` reactive in the injecting radios
+      const vm = this;
+      return {
+        kRadioButtonGroup: {
+          get readonly() {
+            return vm.readonly;
+          },
+        },
       };
     },
     computed: {
@@ -47,6 +70,7 @@
         this.queryAndAddRadioBtns(KRadioButtonGroupChildren);
 
         this.$el.addEventListener('keyup', this.onKeyUp);
+        this.$el.addEventListener('focusin', this.onFocusIn);
 
         this.lastRadioIdx = this.radioButtons.length - 1;
 
@@ -88,6 +112,16 @@
           }
         }
         return;
+      },
+      // Readonly radios emit no `input`, so also move the tab stop on focus
+      onFocusIn(event) {
+        if (!this.readonly) {
+          return;
+        }
+        const idx = this.radioButtons.findIndex(radioBtn => radioBtn.$refs.input === event.target);
+        if (idx !== -1 && idx !== this.focusedRadioIdx) {
+          this.handleInputChange(idx);
+        }
       },
       onKeyUp(event) {
         if (event.target.className === 'k-radio-button-input') {
