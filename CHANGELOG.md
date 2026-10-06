@@ -7,6 +7,19 @@ Changelog is rather internal in nature. See release notes for the public overvie
 <!-- [DO NOT REMOVE-USED BY GH ACTION] PASTE CHANGELOG -->
 
 
+- [#1347]
+  - **Description:** Add `readonly` prop to `KCheckbox` and `KRadioButtonGroup` (applies to all child `KRadioButton`s). Combining it with `disabled` warns and falls back to disabled.
+  - **Products impact:** new API
+  - **Addresses:** https://github.com/learningequality/kolibri-design-system/issues/1342
+  - **Components:** KCheckbox, KRadioButton, KRadioButtonGroup
+  - **Breaking:** no
+  - **Impacts a11y:** yes
+  - **Guidance:** Prefer `readonly` over `disabled` for view-only choice inputs.
+
+[#1347]: https://github.com/learningequality/kolibri-design-system/pull/1347
+
+
+
 - [#1346]
   - **Description:** Adds `insert` icon.
   - **Products impact:** new API
