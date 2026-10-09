@@ -43,7 +43,8 @@
       <ul>
         <li>
           <strong>CSS variables</strong> for every static color, in
-          <code>&lt;style&gt;</code> blocks, SCSS files, and inline <code>:style</code> bindings.
+          <code>&lt;style&gt;</code> blocks, SCSS files, and in some cases, inline
+          <code>:style</code> bindings.
         </li>
         <li>
           <strong>JavaScript accessors</strong> on Vue components, for colors that need to be built
@@ -90,7 +91,11 @@
       <DocsShow>
         <div class="error-message">This is an error</div>
       </DocsShow>
-      <p>Or within an inline <code>&lt;style&gt;</code> block:</p>
+      <p>
+        Use a class rule in a <code>&lt;style&gt;</code> block for new styles. You can also
+        reference a variable from an inline <code>:style</code> binding when a class rule is not
+        practical:
+      </p>
       <DocsShowCode language="html">
         <div :style="{ color: 'var(--tokens-error)' }">This is an error</div>
       </DocsShowCode>
@@ -119,9 +124,39 @@
       </ul>
 
       <p>
-        Computed styles should be used for values computed at runtime. CSS variables replace them
-        for static colors.
+        Use these when you must build a color value in JavaScript. For a static color, use a CSS
+        variable instead. For example, to make a translucent background from
+        <code>$themeTokens.primary</code>, compute the color and bind it with a
+        <DocsExternalLink
+          text="computed style"
+          href="https://vuejs.org/v2/guide/class-and-style.html"
+        />:
       </p>
+
+      <!-- eslint-disable -->
+      <!-- prettier-ignore -->
+      <DocsShowCode language="javascript">
+        import Color from 'color';
+
+        export default {
+          computed: {
+            translucentPrimary() {
+              return Color(this.$themeTokens.primary).alpha(0.3).string();
+            },
+          },
+        };
+      </DocsShowCode>
+      <!-- eslint-enable -->
+
+      <DocsShowCode language="html">
+        <div :style="{ backgroundColor: translucentPrimary }">Translucent primary</div>
+      </DocsShowCode>
+
+      <p>This will display:</p>
+
+      <DocsShow>
+        <div :style="{ backgroundColor: translucentPrimary }">Translucent primary</div>
+      </DocsShow>
 
       <h3>
         Darken utilities
@@ -605,6 +640,14 @@
       title="Scales"
       anchor="#scales"
     >
+      <DocsBanner>
+        The next major release renames JavaScript keys from <code>v_N</code> to <code>vN</code>. For
+        example, <code>$themePalette.green.v_100</code> will become
+        <code>$themePalette.green.v100</code>. This applies to <code>$themeBrand</code>,
+        <code>$themePalette</code>, and objects returned by <code>themeBrand()</code> and
+        <code>themePalette()</code>. Application keys will also change: brand colors passed to
+        <code>setBrandColors()</code> and color paths in <code>setTokenMapping()</code>.
+      </DocsBanner>
       <p>
         A color scale – sometimes called a color ramp – is an evenly-spaced ramp of shades for a
         particular color hue. In the Kolibri Design System, we follow
@@ -616,13 +659,6 @@
         <code>v_200</code>, <code>v_300</code>, <code>v_400</code>, <code>v_500</code>,
         <code>v_600</code>. Note that <code>v_50</code> is only present on select color families:
       </p>
-      <DocsBanner>
-        The next major release will rename the JavaScript keys from <code>v_N</code> to
-        <code>vN</code>, for example <code>$themePalette.green.v_100</code> will become
-        <code>$themePalette.green.v100</code>. The keys change on <code>$themeBrand</code>,
-        <code>$themePalette</code>, and the objects that <code>themeBrand()</code> and
-        <code>themePalette()</code> return.
-      </DocsBanner>
       <DocsColorBlock name="palette.green.v_50" />
       <DocsColorBlock name="palette.green.v_100" />
       <DocsColorBlock name="palette.green.v_200" />
@@ -739,6 +775,8 @@
 
 <script>
 
+  import Color from 'color';
+
   import DocsColorBlock from '~/common/DocsColorBlock';
 
   export default {
@@ -759,6 +797,9 @@
       },
       deleteButtonHoverColor() {
         return this.$darken1(this.$themePalette.red.v_600);
+      },
+      translucentPrimary() {
+        return Color(this.$themeTokens.primary).alpha(0.3).string();
       },
     },
   };
