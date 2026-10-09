@@ -74,4 +74,10 @@
     font-size: 1em;
   }
 
+  // long paths and identifiers have no break opportunity of their own and
+  // overflow the banner on a narrow screen
+  .content ::v-deep code {
+    overflow-wrap: anywhere;
+  }
+
 </style>
