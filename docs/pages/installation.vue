@@ -86,11 +86,17 @@
       <code>~kolibri-design-system/lib/styles/helper-styles</code> instead. Every theme CSS variable
       is still defined at its default value here, the global styles are the only optional part.
 
+      <p>
+        The import path above, and the <code>purecss</code> import inside the global styles, use the
+        webpack <code>~</code> prefix for <code>node_modules</code>. Compile the stylesheet with
+        webpack and <code>sass-loader</code>. Other Sass compilers, such as Vite and the
+        <code>sass</code> command line, do not resolve <code>~</code> without a custom importer.
+      </p>
+
       <DocsBanner>
-        <code>generateGlobalStyles</code> from
-        <code>kolibri-design-system/lib/styles/generateGlobalStyles</code> is deprecated. The next
-        major release will remove it, together with the Aphrodite library that it uses. It continues
-        to work in version 5.
+        <code>generateGlobalStyles</code> from <code>lib/styles/generateGlobalStyles</code> is
+        deprecated. The next major release will remove it, together with the Aphrodite library that
+        it uses. It continues to work in version 5.
       </DocsBanner>
 
       <p>To replace <code>generateGlobalStyles</code>:</p>
