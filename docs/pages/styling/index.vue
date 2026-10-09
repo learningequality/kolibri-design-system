@@ -154,11 +154,24 @@
         We provide a consistent, high-contrast focus highlight, using the
         <code>--tokens-focusOutline</code>
         CSS variable. The global styles apply it to focused elements that match
-        <code>:focus-visible</code>, so the browser decides when it shows. For example, most
-        browsers show it on a text input clicked with a mouse. To show the highlight only after
-        keyboard navigation (i.e. tabbing from item to item), use the
-        <code>$coreOutline</code> computed property available on Vue instances. It follows the input
-        modality that KDS tracks.
+        <code>:focus-visible</code>.
+      </p>
+      <p>
+        <DocsInternalLink
+          href="/installation#install-plugin"
+          text="trackInputModality()"
+        />
+        changes this. Its <code>disableFocusRingByDefault</code> option defaults to
+        <code>true</code>, which removes the outline whenever the user is not navigating with the
+        keyboard. <code>:focus-visible</code> then makes no visible difference. Pass
+        <code>disableFocusRingByDefault: false</code> to let <code>:focus-visible</code> decide. In
+        that case most browsers show the highlight on a text input clicked with a mouse. This
+        documentation site uses that setting.
+      </p>
+      <p>
+        To apply the highlight from JavaScript, use the <code>$coreOutline</code> computed property
+        available on Vue instances. It returns the outline style while the user navigates with the
+        keyboard, and <code>outline: none</code> at other times.
       </p>
     </DocsPageSection>
 
