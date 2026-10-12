@@ -7,6 +7,19 @@ Changelog is rather internal in nature. See release notes for the public overvie
 <!-- [DO NOT REMOVE-USED BY GH ACTION] PASTE CHANGELOG -->
 
 
+- [#1339]
+  - **Description:** Deprecates `computedClass` / `$computedClass`, `generateGlobalStyles`, and the Aphrodite dependency. All will be removed in the next major release and still work in v5. Announces the rename of the `v_N` version keys to `vN` on `$themeBrand`, `$themePalette`, `themeBrand()`, and `themePalette()` in the next major release. `common.scss` now includes the Pure CSS base (normalize.css), so it fully replaces `generateGlobalStyles`.
+  - **Products impact:** updated API
+  - **Addresses:** #1320
+  - **Components:** -
+  - **Breaking:** no
+  - **Impacts a11y:** no
+  - **Guidance:** Replace `$computedClass` with a `<style>` rule: a CSS variable for theme colors, `v-bind()` for props and darkened colors, `:focus-visible` for focus outlines. See [Colors > Computed classes](https://design-system.learningequality.org/colors#computed-classes). Replace `generateGlobalStyles` with `@import '~kolibri-design-system/lib/styles/common'`. See [Installation > Register global styles](https://design-system.learningequality.org/installation#register-global-styles). No action is needed for the `v_N` rename until the next major release.
+
+[#1339]: https://github.com/learningequality/kolibri-design-system/pull/1339
+
+
+
 - [#1347]
   - **Description:** Add `readonly` prop to `KCheckbox` and `KRadioButtonGroup` (applies to all child `KRadioButton`s). Combining it with `disabled` warns and falls back to disabled.
   - **Products impact:** new API
