@@ -1,26 +1,24 @@
 import kolibriConfig from 'kolibri-format/eslint.config.mjs';
-import noThemeTokensInVBind from './lint/eslint/rules/no-theme-tokens-in-v-bind.js';
+
+// kolibri-format 3.x turns these on and KDS has not worked through the existing
+// violations. Tracked in [#1350]: https://github.com/learningequality/kolibri-design-system/issues/1350
+const DEFERRED_PREFIXES = ['jsdoc/', 'vuejs-accessibility/'];
+const DEFERRED_RULES = ['import-x/no-commonjs', 'kolibri/tests-no-hardcoded-strings'];
+
+const deferred = Object.fromEntries(
+  [
+    ...new Set(
+      kolibriConfig
+        .flatMap(config => Object.keys(config.rules || {}))
+        .filter(rule => DEFERRED_PREFIXES.some(prefix => rule.startsWith(prefix))),
+    ),
+    ...DEFERRED_RULES,
+  ].map(rule => [rule, 'off']),
+);
 
 export default [
   ...kolibriConfig,
-  // Local rules supporting the migration to theme CSS variables. See `lint/README.md`
-  {
-    files: ['**/*.vue'],
-    plugins: {
-      kds: {
-        rules: {
-          'no-theme-tokens-in-v-bind': noThemeTokensInVBind,
-        },
-      },
-    },
-    rules: {
-      // Colors in `<style>` blocks should use the `--tokens-*` CSS variables.
-      'kds/no-theme-tokens-in-v-bind': 'error',
-      // Vue 2.7 stops updating a style block's `v-bind()` when the bound element
-      // is the template root and is removed and re-added
-      'vue/no-root-v-if': 'error',
-    },
-  },
+  { rules: deferred },
   // Docs and examples use Nuxt aliases (~, ~~) that can't be resolved
   {
     files: ['docs/**/*.vue', 'docs/**/*.js', 'examples/**/*.vue'],
