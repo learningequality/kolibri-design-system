@@ -153,10 +153,27 @@
       <p>
         We provide a consistent, high-contrast focus highlight, using the
         <code>--tokens-focusOutline</code>
-        CSS variable. The global styles apply it to any focused element, limited to keyboard
-        navigation (i.e. tabbing from item to item). To apply this within a component, use the
-        `<code>$coreOutline</code>` computed property available on Vue instances, because CSS alone
-        cannot limit the highlight to keyboard focus across all supported browsers.
+        CSS variable. The global styles apply it to focused elements that match
+        <code>:focus-visible</code>, which the browser decides.
+      </p>
+      <p>
+        <DocsInternalLink
+          href="/installation#install-plugin"
+          text="trackInputModality()"
+        />
+        overrides that decision. Its <code>disableFocusRingByDefault</code> option defaults to
+        <code>true</code>, which adds the rule
+        <code>body:not([modality=keyboard]) :focus { outline: none; }</code>. That rule outranks the
+        global styles, so the outline appears only during keyboard navigation, and
+        <code>:focus-visible</code> makes no visible difference. Pass
+        <code>disableFocusRingByDefault: false</code> to let it decide again. This documentation
+        site uses that setting.
+      </p>
+      <p>
+        CSS can only outline the element that has focus. When the outline belongs on a different
+        element, use the <code>$coreOutline</code> computed property available on Vue instances. It
+        returns the outline style while the user navigates with the keyboard, and
+        <code>outline: none</code> at other times.
       </p>
     </DocsPageSection>
 
