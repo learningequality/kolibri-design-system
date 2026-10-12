@@ -9,14 +9,10 @@
       class="listbox"
       :ariaLabelledBy="labelId"
       :messages="messages"
-      :style="{ borderColor: $themeTokens.fineLine }"
       @input="handleInput"
     >
       <template #selectAll="{ allSelected, someSelected, setAllSelected }">
-        <div
-          class="select-all"
-          :style="{ borderColor: $themeTokens.fineLine }"
-        >
+        <div class="select-all">
           <KCheckbox
             label="Select all classes"
             class="select-all-checkbox"
@@ -39,7 +35,10 @@
           :label="group.label"
           :indeterminate="isGroupIndeterminate(group)"
           class="option"
-          :style="{ paddingLeft: '16px', paddingRight: '12px', borderColor: $themeTokens.fineLine }"
+          :style="{
+            paddingLeft: '16px',
+            paddingRight: '12px',
+          }"
         />
 
         <template v-for="child in group.children">
@@ -57,7 +56,6 @@
               :style="{
                 paddingLeft: '40px',
                 paddingRight: '12px',
-                borderColor: $themeTokens.fineLine,
               }"
             />
 
@@ -70,7 +68,6 @@
               :style="{
                 paddingLeft: '64px',
                 paddingRight: '12px',
-                borderColor: $themeTokens.fineLine,
               }"
             />
           </KListboxGroup>
@@ -84,7 +81,6 @@
             :style="{
               paddingLeft: '40px',
               paddingRight: '12px',
-              borderColor: $themeTokens.fineLine,
             }"
           />
         </template>
@@ -234,7 +230,7 @@
 
   .listbox {
     overflow: hidden;
-    border: 1px solid;
+    border: 1px solid var(--tokens-fineLine);
     border-radius: 4px;
   }
 
@@ -245,12 +241,12 @@
 
   .select-all {
     padding: 8px 12px;
-    border-bottom: 1px solid;
+    border-bottom: 1px solid var(--tokens-fineLine);
   }
 
   .option {
     padding: 8px 0;
-    border-bottom: 1px solid;
+    border-bottom: 1px solid var(--tokens-fineLine);
   }
 
 </style>

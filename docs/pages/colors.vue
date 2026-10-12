@@ -175,7 +175,7 @@
       </p>
 
       <DocsShowCode language="html">
-        <div :style="{ backgroundColor: $themePalette.red.v_600 }">base</div>
+        <div :style="{ backgroundColor: 'var(--palette-red-v600)' }">base</div>
         <div :style="{ backgroundColor: $darken1($themePalette.red.v_600) }">$darken1</div>
         <div :style="{ backgroundColor: $darken2($themePalette.red.v_600) }">$darken2</div>
         <div :style="{ backgroundColor: $darken3($themePalette.red.v_600) }">$darken3</div>
@@ -183,7 +183,7 @@
       <DocsShow>
         <div
           class="darken-block"
-          :style="{ backgroundColor: $themePalette.red.v_600 }"
+          :style="{ backgroundColor: 'var(--palette-red-v600)' }"
         >
           <code>base</code>
         </div>

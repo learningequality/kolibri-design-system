@@ -7,7 +7,7 @@
     :tabs="tabs"
     :appearanceOverrides="{
       ':hover': {
-        color: $themeTokens.primary,
+        color: 'var(--tokens-primary)',
       },
       textTransform: 'none',
       margin: '0 32px',

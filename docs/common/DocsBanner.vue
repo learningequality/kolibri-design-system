@@ -4,7 +4,7 @@
     class="banner"
     :style="{
       backgroundColor: config.backgroundColor,
-      color: $themeTokens.text,
+      color: 'var(--tokens-text)',
     }"
   >
     <KIcon
@@ -35,14 +35,14 @@
         if (this.a11y) {
           return {
             icon: 'a11y',
-            backgroundColor: this.$themePalette.orange.v_50,
+            backgroundColor: 'var(--palette-orange-v50)',
             iconColor: undefined,
           };
         }
         return {
           icon: 'info',
-          backgroundColor: this.$themePalette.lightblue.v_50,
-          iconColor: this.$themePalette.lightblue.v_500,
+          backgroundColor: 'var(--palette-lightblue-v50)',
+          iconColor: 'var(--palette-lightblue-v500)',
         };
       },
     },

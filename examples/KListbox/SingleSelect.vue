@@ -9,7 +9,6 @@
       :ariaLabelledBy="classLabel"
       :messages="messages"
       :multiple="false"
-      :style="{ borderColor: $themeTokens.fineLine }"
     >
       <KListboxOption
         v-for="option in options"
@@ -17,7 +16,6 @@
         :value="option.id"
         :label="option.label"
         class="option"
-        :style="{ borderColor: $themeTokens.fineLine }"
       />
     </KListbox>
     <p>
@@ -58,13 +56,13 @@
 <style lang="scss" scoped>
 
   .listbox {
-    border: 1px solid;
+    border: 1px solid var(--tokens-fineLine);
     border-radius: 4px;
   }
 
   .option {
     padding: 8px 6px;
-    border-bottom: 1px solid;
+    border-bottom: 1px solid var(--tokens-fineLine);
   }
 
   .option:last-child {
