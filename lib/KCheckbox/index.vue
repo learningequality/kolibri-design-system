@@ -251,14 +251,14 @@
       },
       blank() {
         return {
-          fill: this.disabled ? this.$themeTokens.textDisabled : this.$themeTokens.annotation,
+          fill: this.disabled ? 'var(--tokens-textDisabled)' : 'var(--tokens-annotation)',
         };
       },
       notBlank() {
         return {
           fill: this.disabled
-            ? this.$themeTokens.textDisabled
-            : this.color || this.$themeTokens.primary,
+            ? 'var(--tokens-textDisabled)'
+            : this.color || 'var(--tokens-primary)',
         };
       },
       activeOutline() {
@@ -266,7 +266,7 @@
       },
       labelStyle() {
         return {
-          color: this.disabled ? this.$themeTokens.textDisabled : '',
+          color: this.disabled ? 'var(--tokens-textDisabled)' : '',
         };
       },
       labelTag() {

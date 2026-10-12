@@ -62,7 +62,7 @@
           textAlign: this.textAlign,
           minWidth: this.minWidth,
           width: this.width,
-          borderBottom: `1px solid ${this.$themeTokens.fineLine}`,
+          borderBottom: `1px solid var(--tokens-fineLine)`,
           minHeight: '40px',
           height: 'auto',
         };

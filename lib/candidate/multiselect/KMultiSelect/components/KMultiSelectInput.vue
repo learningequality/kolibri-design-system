@@ -57,7 +57,7 @@
       v-bind="inputAriaAttrs"
       data-focus="true"
       :style="{
-        color: disabled ? $themeTokens.textDisabled : $themeTokens.text,
+        color: disabled ? 'var(--tokens-textDisabled)' : 'var(--tokens-text)',
         cursor: disabled ? 'not-allowed' : 'text',
       }"
       @keydown="$emit('input-keydown', $event)"
@@ -74,12 +74,12 @@
       tooltipPosition="top"
       :color="
         invalid
-          ? $themeTokens.error
+          ? 'var(--tokens-error)'
           : focused
-            ? $themeTokens.primary
+            ? 'var(--tokens-primary)'
             : hovered
-              ? $themeTokens.text
-              : $themePalette.grey.v_700
+              ? 'var(--tokens-text)'
+              : 'var(--palette-grey-v700)'
       "
       class="kmselect-clear-btn"
       @click.stop="$emit('clear-all')"
@@ -101,12 +101,12 @@
       :aria-controls="listboxId"
       :color="
         invalid
-          ? $themeTokens.error
+          ? 'var(--tokens-error)'
           : focused
-            ? $themeTokens.primary
+            ? 'var(--tokens-primary)'
             : !disabled && hovered
-              ? $themeTokens.text
-              : $themePalette.grey.v_700
+              ? 'var(--tokens-text)'
+              : 'var(--palette-grey-v700)'
       "
       :style="{
         position: 'absolute',
@@ -124,7 +124,7 @@
 
 <script>
 
-  import { ref, computed, getCurrentInstance } from 'vue';
+  import { ref, computed } from 'vue';
   import KIconButton from '../../../../buttons-and-links/KIconButton';
   import KChip from '../../KChip/index.vue';
   import KTooltip from '../../../../KTooltip/index.vue';
@@ -136,7 +136,6 @@
 
     setup(props, { emit }) {
       const inputEl = ref(null);
-      const instance = getCurrentInstance();
 
       const inputModel = computed({
         get() {
@@ -175,7 +174,7 @@
 
       const placeholderStyle = computed(() => ({
         '::placeholder': {
-          color: instance.proxy.$themeTokens.textDisabled,
+          color: 'var(--tokens-textDisabled)',
         },
       }));
 

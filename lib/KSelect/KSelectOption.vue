@@ -137,7 +137,7 @@
       selectedStyle() {
         if (this.selected) {
           return {
-            color: this.$themeTokens.primary,
+            color: 'var(--tokens-primary)',
           };
         }
 

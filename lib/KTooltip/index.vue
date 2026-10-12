@@ -13,8 +13,8 @@
       dir="auto"
       class="k-tooltip"
       :style="{
-        backgroundColor: $themeTokens.text,
-        color: $themeTokens.textInverted,
+        backgroundColor: 'var(--tokens-text)',
+        color: 'var(--tokens-textInverted)',
         maxWidth: maxWidth ? maxWidth : 'calc(100vw - 10px)',
         ...appearanceOverrides,
       }"

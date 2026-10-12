@@ -4,7 +4,7 @@
     v-show="isOpen && (decoratedOptionTree.length > 0 || showEmptyState)"
     class="kmselect-dropdown"
     :class="{ 'kmselect-dropdown-inline': expanded, 'is-disabled': expanded && disabled }"
-    :style="[{ backgroundColor: $themeTokens.surface, maxHeight }, flipStyle]"
+    :style="[{ backgroundColor: 'var(--tokens-surface)', maxHeight }, flipStyle]"
     data-testid="kmselect-dropdown-panel"
     @mousedown.prevent
   >
@@ -44,7 +44,7 @@
       v-if="showEmptyState"
       ref="emptyMessageRef"
       class="kmselect-dropdown-empty"
-      :style="{ color: $themeTokens.annotation }"
+      :style="{ color: 'var(--tokens-annotation)' }"
     >
       <slot name="no-results">
         <p class="kmselect-dropdown-empty-text">

@@ -22,7 +22,7 @@
         <div
           v-if="showDropdown"
           class="breadcrumbs-dropdown"
-          :style="{ background: $themeTokens.surface }"
+          :style="{ background: 'var(--tokens-surface)' }"
         >
           <ol class="breadcrumbs-dropdown-items">
             <li
