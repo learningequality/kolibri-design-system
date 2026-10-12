@@ -351,6 +351,14 @@
       <!-- eslint-enable -->
 
       <p>
+        Keep <code>$coreOutline</code> when the outline belongs on a different element than the one
+        that has focus, because <code>:focus-visible</code> never matches there. This covers a
+        visually hidden native input, like in <code>KCheckbox</code>, and a list whose container
+        holds focus through <code>aria-activedescendant</code>, such as in <code>KListbox</code> and
+        <code>KSelect</code>.
+      </p>
+
+      <p>
         If the application imports <code>helper-styles</code> instead of <code>common</code>, write
         the full outline:
       </p>

@@ -154,24 +154,26 @@
         We provide a consistent, high-contrast focus highlight, using the
         <code>--tokens-focusOutline</code>
         CSS variable. The global styles apply it to focused elements that match
-        <code>:focus-visible</code>.
+        <code>:focus-visible</code>, which the browser decides.
       </p>
       <p>
         <DocsInternalLink
           href="/installation#install-plugin"
           text="trackInputModality()"
         />
-        changes this. Its <code>disableFocusRingByDefault</code> option defaults to
-        <code>true</code>, which removes the outline whenever the user is not navigating with the
-        keyboard. <code>:focus-visible</code> then makes no visible difference. Pass
-        <code>disableFocusRingByDefault: false</code> to let <code>:focus-visible</code> decide. In
-        that case most browsers show the highlight on a text input clicked with a mouse. This
-        documentation site uses that setting.
+        overrides that decision. Its <code>disableFocusRingByDefault</code> option defaults to
+        <code>true</code>, which adds the rule
+        <code>body:not([modality=keyboard]) :focus { outline: none; }</code>. That rule outranks the
+        global styles, so the outline appears only during keyboard navigation, and
+        <code>:focus-visible</code> makes no visible difference. Pass
+        <code>disableFocusRingByDefault: false</code> to let it decide again. This documentation
+        site uses that setting.
       </p>
       <p>
-        To apply the highlight from JavaScript, use the <code>$coreOutline</code> computed property
-        available on Vue instances. It returns the outline style while the user navigates with the
-        keyboard, and <code>outline: none</code> at other times.
+        CSS can only outline the element that has focus. When the outline belongs on a different
+        element, use the <code>$coreOutline</code> computed property available on Vue instances. It
+        returns the outline style while the user navigates with the keyboard, and
+        <code>outline: none</code> at other times.
       </p>
     </DocsPageSection>
 
