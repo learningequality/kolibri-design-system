@@ -8,11 +8,11 @@ const fs = require('node:fs');
 const path = require('node:path');
 
 const consola = require('consola');
+const { flattenThemeTree } = require('kolibri-css-variables/themeCssVariableNaming');
 
 // these are ES modules, loaded through Node's `require(esm)` support
 const materialColors = require('../lib/styles/colorsMaterial').default;
 const { defaultBrandColors, defaultTokenMapping } = require('../lib/styles/colorsDefault');
-const { flattenThemeTree } = require('../lib/utils/themeCssVariableNaming');
 
 const OUTPUT_PATH = path.resolve('./lib/styles/themeDefaults.scss');
 
