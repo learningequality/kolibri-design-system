@@ -279,6 +279,32 @@
         </template>
       </DocsExample>
     </DocsPageSection>
+
+    <DocsPageSection
+      title="Accessibility"
+      anchor="#accessibility"
+    >
+      <p>
+        The menu follows the
+        <DocsExternalLink
+          text="WAI-ARIA menu button pattern"
+          href="https://www.w3.org/WAI/ARIA/apg/patterns/menu-button/"
+        />. The trigger is the only tab stop.
+      </p>
+      <ul>
+        <li>Opening the menu moves focus to the first option</li>
+        <li><kbd>Up</kbd> and <kbd>Down</kbd> arrows move between options, wrapping at the ends</li>
+        <li>
+          <kbd>Enter</kbd> selects the focused option, closes the menu, and returns focus to the
+          trigger
+        </li>
+        <li><kbd>Escape</kbd> closes the menu and returns focus to the trigger</li>
+        <li>
+          <kbd>Tab</kbd> closes the menu and moves focus to the next element after the trigger;
+          <kbd>Shift</kbd>+<kbd>Tab</kbd> moves it to the element before
+        </li>
+      </ul>
+    </DocsPageSection>
   </DocsPageTemplate>
 
 </template>
