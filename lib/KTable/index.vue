@@ -484,6 +484,10 @@
           case 'ArrowDown':
           case 'ArrowLeft':
           case 'ArrowRight':
+            // a menu trigger in the cell, e.g. KDropdownMenu's, opened its menu with this key
+            if (event.defaultPrevented && event.target.getAttribute('aria-haspopup') === 'menu') {
+              break;
+            }
             this.handleArrowKeys(event.key, rowIndex, colIndex);
             break;
           case 'Enter':
