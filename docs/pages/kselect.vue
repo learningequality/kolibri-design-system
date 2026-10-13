@@ -20,6 +20,10 @@
         options are specified with a value and a label for that value to display to the user.
         Additionally, the component can take slots to customize the display of each option.
       </p>
+      <p>
+        <code>KSelect</code> selects one option. For multi-select,
+        <DocsLibraryLink component="KMultiSelect" /> is a candidate component not yet released.
+      </p>
     </DocsPageSection>
 
     <DocsPageSection
@@ -49,6 +53,83 @@
         The select label should be very short and descriptive. Stick to using one word to describe
         the field, if possible.
       </p>
+    </DocsPageSection>
+
+    <DocsPageSection
+      title="Keyboard"
+      anchor="#keyboard"
+    >
+      <p>
+        Focus stays on the select while the list is open. It follows the
+        <DocsExternalLink
+          href="https://www.w3.org/WAI/ARIA/apg/patterns/combobox/examples/combobox-select-only/"
+          text="ARIA select-only combobox pattern"
+        />. Disabled options are skipped.
+      </p>
+      <DocsTable>
+        <thead>
+          <tr>
+            <th>Key</th>
+            <th>List closed</th>
+            <th>List open</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th>Down Arrow</th>
+            <td>Opens on the selected option</td>
+            <td>Highlights the next option</td>
+          </tr>
+          <tr>
+            <th>Up Arrow</th>
+            <td>Opens on the first option</td>
+            <td>Highlights the previous option</td>
+          </tr>
+          <tr>
+            <th>Alt + Down Arrow</th>
+            <td>Opens on the selected option</td>
+            <td>Nothing</td>
+          </tr>
+          <tr>
+            <th>Alt + Up Arrow</th>
+            <td>Opens on the first option</td>
+            <td>Selects the highlighted option and closes</td>
+          </tr>
+          <tr>
+            <th>Enter, Space</th>
+            <td>Opens on the selected option</td>
+            <td>Selects the highlighted option and closes</td>
+          </tr>
+          <tr>
+            <th>Home, End</th>
+            <td>Opens on the first or last option</td>
+            <td>Highlights the first or last option</td>
+          </tr>
+          <tr>
+            <th>Page Up, Page Down</th>
+            <td>Nothing</td>
+            <td>Moves the highlight 10 options</td>
+          </tr>
+          <tr>
+            <th>Escape</th>
+            <td>Nothing</td>
+            <td>Closes without selecting</td>
+          </tr>
+          <tr>
+            <th>Tab, Shift + Tab</th>
+            <td>Moves focus</td>
+            <td>Selects the highlighted option, closes and moves focus</td>
+          </tr>
+          <tr>
+            <th>Typed characters</th>
+            <td>Opens on the next option starting with the typed text</td>
+            <td>
+              Highlights the next option starting with the typed text. Repeating a letter cycles
+              through the options starting with it.
+            </td>
+          </tr>
+        </tbody>
+      </DocsTable>
     </DocsPageSection>
 
     <DocsPageSection
