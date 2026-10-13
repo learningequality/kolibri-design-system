@@ -4,9 +4,9 @@
     :id="optionId"
     role="option"
     class="k-listbox-option"
-    :class="$computedClass(rowStyles)"
-    :style="isFocused ? { ...$coreOutline, outlineOffset: '-3px' } : {}"
+    :style="isFocused ? [$coreOutline, focusedStyles] : {}"
     :aria-selected="indeterminate ? undefined : String(isSelected)"
+    :aria-disabled="disabled ? 'true' : undefined"
     @click="onClick"
   >
     <!--
@@ -18,6 +18,7 @@
       presentational
       :style="{ marginTop: '6px', marginBottom: '0' }"
       :checked="isSelected"
+      :disabled="disabled"
       :indeterminate="indeterminate"
       :label="label"
     >
@@ -36,7 +37,11 @@
       v-else
       class="k-option-plain-label"
       :style="{
-        color: isSelected ? 'var(--tokens-primary)' : 'inherit',
+        color: disabled
+          ? 'var(--tokens-textDisabled)'
+          : isSelected
+            ? 'var(--tokens-primary)'
+            : 'inherit',
         fontWeight: isSelected ? '500' : 'normal',
       }"
     >
@@ -71,7 +76,13 @@
       const optionId = `klistbox-option-${uid}`;
 
       onMounted(() => {
-        listbox.registerOption({ id: optionId, value: props.value });
+        listbox.registerOption({
+          id: optionId,
+          value: props.value,
+          get disabled() {
+            return props.disabled;
+          },
+        });
       });
 
       onBeforeUnmount(() => listbox.unregisterOption({ id: optionId, value: props.value }));
@@ -80,11 +91,9 @@
 
       const isFocused = computed(() => listbox.isFocused(props.value));
 
-      const rowStyles = computed(() => ({
-        backgroundColor: 'var(--tokens-surface)',
-        ':hover': {
-          backgroundColor: 'var(--palette-grey-v100)',
-        },
+      const focusedStyles = computed(() => ({
+        outlineOffset: '-3px',
+        ...(listbox.tabbable ? {} : { backgroundColor: 'var(--palette-grey-v200)' }),
       }));
 
       function onClick() {
@@ -105,7 +114,7 @@
         optionId,
         isSelected,
         isFocused,
-        rowStyles,
+        focusedStyles,
         onClick,
         partiallySelectedText,
         effectiveShowSelector,
@@ -142,6 +151,14 @@
         type: Boolean,
         default: null,
       },
+      /**
+       * Disables the option. It gets `aria-disabled`, is skipped by keyboard
+       * navigation and cannot be selected.
+       */
+      disabled: {
+        type: Boolean,
+        default: false,
+      },
     },
   };
 
@@ -156,12 +173,22 @@
     min-height: 36px;
     padding-left: 4px;
     cursor: pointer;
+    background-color: var(--tokens-surface);
+
+    &[aria-disabled] {
+      cursor: default;
+    }
+
+    &:not([aria-disabled]):hover {
+      background-color: var(--palette-grey-v100);
+    }
   }
 
   .k-option-plain-label {
     display: flex;
     gap: 4px;
     align-items: center;
+    min-width: 0;
   }
 
   .k-option-check-icon {

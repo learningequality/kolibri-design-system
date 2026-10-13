@@ -83,6 +83,8 @@
       const listEl = ref(null);
 
       const hasOptions = computed(() => options.value.length > 0);
+      const enabledOptions = computed(() => options.value.filter(o => !o.disabled));
+      const hasEnabledOptions = computed(() => enabledOptions.value.length > 0);
 
       // Registration API (consumed by KListboxOption via inject)
       const { once: onceSort } = useNextTickOnce();
@@ -118,6 +120,8 @@
 
       function toggleOption(value) {
         if (props.disabled) return;
+        const option = options.value.find(o => o.value === value);
+        if (option && option.disabled) return;
         if (!props.multiple) {
           if (!isSelected(value)) {
             emitInput([value]);
@@ -144,7 +148,7 @@
         // Options may be dynamic, e.g. when KListbox used with a filter
         // or pagination => preserve selections outside the visible options
         // by merging previously selected values with all visible options
-        const allValues = uniq([...props.value, ...options.value.map(o => o.value)]);
+        const allValues = uniq([...props.value, ...enabledOptions.value.map(o => o.value)]);
         emitInput(allValues);
         sendPoliteMessage(getMessage('allOptionsSelected'));
       }
@@ -153,7 +157,7 @@
         // Options may be dynamic, e.g. when KListbox used with a filter
         // or pagination => preserve selections outside the visible
         // options by removing only values for currently visible options
-        const optionValues = new Set(options.value.map(o => o.value));
+        const optionValues = new Set(enabledOptions.value.map(o => o.value));
         const remainingValues = props.value.filter(v => !optionValues.has(v));
         emitInput(remainingValues);
         sendPoliteMessage(getMessage('allOptionsDeselected'));
@@ -166,16 +170,16 @@
       }
 
       const allSelected = computed(
-        () => hasOptions.value && options.value.every(o => isSelected(o.value)),
+        () => hasEnabledOptions.value && enabledOptions.value.every(o => isSelected(o.value)),
       );
 
       const someSelected = computed(
-        () => !allSelected.value && options.value.some(o => isSelected(o.value)),
+        () => !allSelected.value && enabledOptions.value.some(o => isSelected(o.value)),
       );
 
       function changeSelectAll(checked) {
         if (props.disabled) return;
-        if (!hasOptions.value) return;
+        if (!hasEnabledOptions.value) return;
         if (!props.multiple) return; // Prevent "select all" in single-select mode
         if (checked) {
           selectAllOptions();
@@ -184,7 +188,7 @@
         }
       }
 
-      const selectAllInteractive = computed(() => hasOptions.value && !props.disabled);
+      const selectAllInteractive = computed(() => hasEnabledOptions.value && !props.disabled);
 
       const selectAllStyles = computed(() => ({
         ':hover': {
@@ -206,38 +210,54 @@
         return focusedValue.value === value;
       }
 
-      function optionValueAt(index) {
-        return options.value[index].value;
-      }
-
       function setFocus(value) {
         focusedValue.value = value;
         nextTick(() => {
           const option = options.value.find(o => o.value === value);
           if (!option) return;
-          if (instance.proxy.$inputModality === 'keyboard') {
-            const optionElement = document.getElementById(option.id);
-            if (optionElement) {
-              optionElement.scrollIntoView({
-                block: 'nearest',
-                inline: 'nearest',
-              });
-            }
+          const optionElement = document.getElementById(option.id);
+          if (!optionElement) return;
+          if (props.containScroll) {
+            scrollListTo(optionElement);
+          } else if (instance.proxy.$inputModality === 'keyboard') {
+            optionElement.scrollIntoView({
+              block: 'nearest',
+              inline: 'nearest',
+            });
           }
         });
       }
 
-      function moveFocusBy(delta) {
-        const optionsCount = options.value.length;
-        if (optionsCount === 0) return;
+      function scrollListTo(optionElement) {
+        const list = listEl.value;
+        const listRect = list.getBoundingClientRect();
+        const optionRect = optionElement.getBoundingClientRect();
+        if (optionRect.top < listRect.top) {
+          list.scrollTop -= listRect.top - optionRect.top;
+        } else if (optionRect.bottom > listRect.bottom) {
+          list.scrollTop += optionRect.bottom - listRect.bottom;
+        }
+      }
 
+      function focusOption(option) {
+        if (option) {
+          setFocus(option.value);
+        }
+      }
+
+      function moveFocusBy(step) {
+        const optionsCount = options.value.length;
         let currentIndex = options.value.findIndex(o => o.value === focusedValue.value);
         if (currentIndex === -1) {
-          currentIndex = delta > 0 ? -1 : optionsCount;
+          currentIndex = step > 0 ? -1 : optionsCount;
         }
-        // Modulo to wrap for circular navigation
-        const newIndex = (currentIndex + delta + optionsCount) % optionsCount;
-        setFocus(optionValueAt(newIndex));
+        for (let i = 1; i <= optionsCount; i++) {
+          const option = options.value[(currentIndex + step * i + optionsCount) % optionsCount];
+          if (!option.disabled) {
+            setFocus(option.value);
+            return;
+          }
+        }
       }
 
       function onListFocus() {
@@ -246,11 +266,7 @@
         if (focusedValue.value !== null) return;
         // Focus the first selected option if any, otherwise the first available one
         const firstSelected = options.value.find(o => isSelected(o.value));
-        if (firstSelected) {
-          setFocus(firstSelected.value);
-        } else {
-          setFocus(optionValueAt(0));
-        }
+        focusOption(firstSelected || enabledOptions.value[0]);
       }
 
       function onListBlur() {
@@ -269,10 +285,10 @@
             moveFocusBy(-1);
             break;
           case 'Home':
-            setFocus(optionValueAt(0));
+            focusOption(enabledOptions.value[0]);
             break;
           case 'End':
-            setFocus(optionValueAt(options.value.length - 1));
+            focusOption(enabledOptions.value[enabledOptions.value.length - 1]);
             break;
           case ' ':
             toggleOption(focusedValue.value);
@@ -320,6 +336,9 @@
         getMessage,
         get multiple() {
           return props.multiple;
+        },
+        get tabbable() {
+          return props.tabbable;
         },
       });
 
@@ -370,6 +389,10 @@
         toggleFocusedOption,
         // eslint-disable-next-line vue/no-unused-properties
         hasFocusedOption,
+        // eslint-disable-next-line vue/no-unused-properties
+        setFocus,
+        // eslint-disable-next-line vue/no-unused-properties
+        focusedValue,
       };
     },
     props: {
@@ -457,6 +480,15 @@
       tabbable: {
         type: Boolean,
         default: true,
+      },
+      /**
+       * Whether the highlighted option is kept in view by scrolling only the
+       * list, never the page, under any input modality. Set it when the list is
+       * in a popover that closes on page scroll.
+       */
+      containScroll: {
+        type: Boolean,
+        default: false,
       },
     },
   };
