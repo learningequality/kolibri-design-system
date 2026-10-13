@@ -318,6 +318,28 @@
       </DocsShowCode>
       <!-- eslint-enable -->
     </DocsPageSection>
+
+    <DocsPageSection
+      title="Accessibility"
+      anchor="#accessibility"
+    >
+      <p>Keyboard interaction:</p>
+      <ul>
+        <li><code>Down Arrow</code> on the trigger opens the menu and focuses the first option</li>
+        <li><code>Up Arrow</code> on the trigger opens the menu and focuses the last option</li>
+        <li>
+          <code>Home</code> and <code>End</code> in the menu move to the first and last option
+        </li>
+      </ul>
+      <p>
+        Context menus open on right-click, not on the arrow keys. Inside a <code>KTable</code>, the
+        arrow keys move between cells; <code>Enter</code> opens the menu.
+      </p>
+      <p>
+        Opening with the arrow keys fires no <code>click</code> on the trigger, so don't track the
+        open state from the trigger's <code>@click</code>; listen to the menu's <code>@open</code>.
+      </p>
+    </DocsPageSection>
   </DocsPageTemplate>
 
 </template>
