@@ -14,6 +14,7 @@
     />
 
     <VisualTestExample
+      id="dropdown-open"
       title="Dropdown open"
       width="320px"
       height="180px"
@@ -21,6 +22,7 @@
     />
 
     <VisualTestExample
+      id="dropdown-open-with-placeholder"
       title="Dropdown open with placeholder"
       width="320px"
       height="180px"
@@ -34,6 +36,7 @@
     />
 
     <VisualTestExample
+      id="selected-option-dropdown-open"
       title="Selected option with dropdown open"
       width="320px"
       height="180px"
@@ -71,27 +74,13 @@
     />
 
     <VisualTestExample
-      title="Multiple with dropdown open"
-      width="320px"
-      height="180px"
-      loadExample="KSelect/MultipleDropdownOpen.vue"
-    />
-
-    <VisualTestExample
-      title="Multiple selection with dropdown open"
-      width="320px"
-      height="180px"
-      loadExample="KSelect/MultipleSelectedDropdownOpen.vue"
-    />
-
-    <VisualTestExample
-      title="Multiple selection with long labels"
+      title="Long labels"
       width="320px"
       loadExample="KSelect/LongLabels.vue"
     />
 
     <VisualTestExample
-      title="Multiple selection with long labels and clearable"
+      title="Long labels and clearable"
       width="320px"
       loadExample="KSelect/LongLabelsClearable.vue"
     />
