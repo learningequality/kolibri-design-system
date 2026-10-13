@@ -7,6 +7,19 @@ Changelog is rather internal in nature. See release notes for the public overvie
 <!-- [DO NOT REMOVE-USED BY GH ACTION] PASTE CHANGELOG -->
 
 
+- [#1364]
+  - **Description:** build(deps): bump joi from 17.13.7 to 17.13.8
+  - **Products impact:** Dev Dependency upgrade
+  - **Addresses:** -
+  - **Components:** -
+  - **Breaking:** -
+  - **Impacts a11y:** -
+  - **Guidance:** -
+
+[#1364]: https://github.com/learningequality/kolibri-design-system/pull/1364
+
+
+
 - [#1365]
   - **Description:** build(deps): bump source-map-js from 1.2.1 to 1.2.2
   - **Products impact:** Dev Dependency upgrade
