@@ -7,6 +7,19 @@ Changelog is rather internal in nature. See release notes for the public overvie
 <!-- [DO NOT REMOVE-USED BY GH ACTION] PASTE CHANGELOG -->
 
 
+- [#1362]
+  - **Description:** build(deps): bump shell-quote from 1.10.0 to 1.12.0
+  - **Products impact:** Dev Dependency upgrade
+  - **Addresses:** -
+  - **Components:** -
+  - **Breaking:** -
+  - **Impacts a11y:** -
+  - **Guidance:** -
+
+[#1362]: https://github.com/learningequality/kolibri-design-system/pull/1362
+
+
+
 - [#1341]
   - **Description:** build(deps): bump axios from 1.19.0 to 1.20.0
   - **Products impact:** Dev Dependency upgrade
