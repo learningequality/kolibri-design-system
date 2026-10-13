@@ -164,6 +164,9 @@
         }
       },
     },
+    created() {
+      this.closing = false;
+    },
     mounted() {
       this.trigger = this.$el.parentElement;
       this.trigger.setAttribute('aria-haspopup', 'menu');
@@ -177,9 +180,15 @@
         this.lastFocusElement = document.activeElement;
         await this.$nextTick();
         await this.$nextTick();
+        if (!this.isMenuOpen()) {
+          return;
+        }
         this.setFocus();
         window.addEventListener('keydown', this.handleOpenMenuNavigation, true);
         this.trigger.setAttribute('aria-expanded', true);
+      },
+      isMenuOpen() {
+        return Boolean(this.$refs.popover && this.$refs.popover.isOpen());
       },
       setFocus() {
         this.$refs.menu.$el.querySelector('li').focus();
@@ -260,8 +269,20 @@
         this.$emit('select', selection, $event);
         this.closePopover();
       },
+      /**
+       * Does nothing if the menu is already closed.
+       * @public
+       */
       closePopover() {
+        if (this.closing || !this.isMenuOpen()) {
+          return;
+        }
+        this.closing = true;
+        /**
+         * Emitted when the menu is closed by `closePopover`, an option selection, or Tab
+         */
         this.$emit('close');
+        this.closing = false;
         this.$refs.popover.close();
       },
     },
