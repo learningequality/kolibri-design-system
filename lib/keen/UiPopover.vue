@@ -341,7 +341,9 @@
 
       onShown() {
         this.lastFocusedElement = document.activeElement;
-        this.$refs.focusContainer.focus();
+        if (!this.$el.contains(document.activeElement)) {
+          this.$refs.focusContainer.focus();
+        }
         this.$emit('reveal');
       },
 
