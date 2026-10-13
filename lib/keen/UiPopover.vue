@@ -3,13 +3,14 @@
   <UiFocusContainer
     ref="focusContainer"
     class="ui-popover"
-    role="dialog"
+    :role="role"
 
     :class="{ 'is-raised': raised }"
     :contain-focus="containFocus"
     :focus-redirector="focusRedirector"
 
     @focus-overflow="close()"
+    @focusin.native="onFocusIn"
   >
     <slot></slot>
   </UiFocusContainer>
@@ -70,6 +71,11 @@
       raised: {
         type: Boolean,
         default: true,
+      },
+      // `null` drops the role from both the popover and the tippy popper
+      role: {
+        type: String,
+        default: 'dialog',
       },
       hideOnClick: {
         type: Boolean,
@@ -152,7 +158,7 @@
           onShow: this.onOpen,
           onShown: this.onShown,
           placement: this.position,
-          role: 'dialog',
+          role: this.role,
           theme: 'ui-popover',
           trigger: this.openOn.replace('hover', 'mouseenter'),
           zIndex: this.zIndex,
@@ -267,6 +273,8 @@
       },
 
       onOpen() {
+        this.lastFocusedElement = document.activeElement;
+
         if (this.hideOnClick) {
           this.addCloseEventListeners();
         }
@@ -292,13 +300,23 @@
       },
 
       onShown() {
-        this.lastFocusedElement = document.activeElement;
-        this.$refs.focusContainer.focus();
+        // Keep focus a consumer already moved into the popover
+        if (!this.$el.contains(document.activeElement)) {
+          this.$refs.focusContainer.focus();
+        }
         this.$emit('reveal');
       },
 
       onHidden() {
         this.$emit('hide');
+      },
+
+      // Focusing a clipped item scrolls the page; scroll events fire before the next frame
+      onFocusIn() {
+        this.focusScrolling = true;
+        window.requestAnimationFrame(() => {
+          this.focusScrolling = false;
+        });
       },
 
       closeOnExternal(event, closeOptions) {
@@ -325,7 +343,9 @@
           if (this.closeOnScroll) {
             /* eslint-disable-next-line import/no-named-as-default-member */
             this.removeScrollListener = events.on('scroll', document, e => {
-              this.closeOnExternal(e, { returnFocus: true });
+              if (!this.focusScrolling) {
+                this.closeOnExternal(e, { returnFocus: true });
+              }
             });
           }
         }, 0);

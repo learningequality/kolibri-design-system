@@ -5,6 +5,7 @@
       v-if="trigger"
       ref="popover"
       :zIndex="100"
+      :role="null"
       :trigger="trigger"
       :containFocus="true"
       :hideOnClick="hideOnClick"
@@ -24,6 +25,7 @@
         :hasIcons="hasIcons"
         :maxWidth="maxWidth"
         @select="handleSelection"
+        @mousemove.native="handleMouseMove"
       >
         <template #option="{ option }">
           <!-- @slot Optional slot to customize the rendering of each menu option -->
@@ -143,7 +145,6 @@
     data() {
       return {
         trigger: null,
-        lastFocusElement: null,
       };
     },
     watch: {
@@ -171,10 +172,10 @@
     },
     beforeDestroy() {
       window.removeEventListener('keydown', this.handleOpenMenuNavigation, true);
+      window.removeEventListener('keyup', this.stopEscapeKeyUp, true);
     },
     methods: {
       async handleOpen() {
-        this.lastFocusElement = document.activeElement;
         await this.$nextTick();
         await this.$nextTick();
         this.setFocus();
@@ -182,75 +183,70 @@
         this.trigger.setAttribute('aria-expanded', true);
       },
       setFocus() {
-        this.$refs.menu.$el.querySelector('li').focus();
+        const [first] = this.getMenuItems();
+        if (first) {
+          first.focus();
+        }
       },
       handleClose() {
-        const focusedElement = document.activeElement;
-        const popover = this.$refs.popover.$el;
-        if (
-          popover.contains(focusedElement) &&
-          (focusedElement.classList.contains('ui-popover') ||
-            focusedElement.classList.contains('ui-popover-focus-redirector') ||
-            focusedElement.classList.contains('ui-menu-option'))
-        ) {
-          if (this.lastFocusElement) {
-            this.lastFocusElement.focus();
-          }
-        }
         this.trigger.setAttribute('aria-expanded', false);
-        window.removeEventListener('keyup', this.handleKeyUp, true);
+        window.removeEventListener('keydown', this.handleOpenMenuNavigation, true);
       },
-      getNextFocusableSibling(focusedElement) {
-        let sibling = focusedElement.nextElementSibling;
-        while (sibling && !this.isFocusable(sibling)) {
-          sibling = sibling.nextElementSibling;
-        }
-        return sibling;
+      getMenuItems() {
+        return Array.from(this.$refs.menu.$el.querySelectorAll('[role="menuitem"]'));
       },
-      getPreviousFocusableSibling(focusedElement) {
-        let sibling = focusedElement.previousElementSibling;
-        while (sibling && !this.isFocusable(sibling)) {
-          sibling = sibling.previousElementSibling;
-        }
-        return sibling;
-      },
-      isFocusable(element) {
-        return element && element.tabIndex >= 0;
-      },
-
-      handleOpenMenuNavigation(event) {
-        // identify the menu state and length
-        if (!this.$refs.popover && !this.$refs.popover.$el) {
+      moveFocusBy(delta) {
+        const items = this.getMenuItems();
+        if (!items.length) {
           return;
         }
-        const popover = this.$refs.popover.$el;
-        const menuElements = this.$refs.menu.$el.querySelector('div').children;
-        const lastChild = menuElements[menuElements.length - 1];
-        const popoverIsOpen = popover.clientWidth > 0 && popover.clientHeight > 0;
-        // set current element and its siblings
-        const focusedElement = document.activeElement;
-
-        // manage rotating through the options using arrow keys
-        // UP arrow: .keyCode is depricated and should used only as a fallback
-        if ((event.key == 'ArrowUp' || event.keyCode == 38) && popoverIsOpen) {
+        let index = items.indexOf(document.activeElement);
+        if (index === -1) {
+          index = delta > 0 ? -1 : items.length;
+        }
+        items[(index + delta + items.length) % items.length].focus();
+      },
+      // Hover moves focus so the pointer and the arrow keys share one highlight.
+      // Not `mouseenter`: it fires when the menu opens under a resting pointer.
+      handleMouseMove(event) {
+        const item = event.target.closest('[role="menuitem"]');
+        if (
+          item &&
+          item !== document.activeElement &&
+          !item.hasAttribute('aria-disabled') &&
+          this.$refs.popover.isOpen()
+        ) {
+          item.focus({ preventScroll: true });
+        }
+      },
+      handleOpenMenuNavigation(event) {
+        if (!this.$refs.popover || !this.$refs.popover.isOpen()) {
+          return;
+        }
+        if (event.key == 'ArrowUp' || event.keyCode == 38) {
           event.preventDefault();
-
-          // Checking if previous sibling is divider and if yes then skip it
-          const prevSibling = this.getPreviousFocusableSibling(focusedElement);
-          prevSibling
-            ? this.$nextTick(() => prevSibling.focus())
-            : this.$nextTick(() => lastChild.focus());
-          // DOWN arrow
-        } else if ((event.key == 'ArrowDown' || event.keyCode == 40) && popoverIsOpen) {
+          this.moveFocusBy(-1);
+        } else if (event.key == 'ArrowDown' || event.keyCode == 40) {
           event.preventDefault();
-          //Chekcing if next sibling is divider and skipping it
-          const sibling = this.getNextFocusableSibling(focusedElement);
-          sibling ? this.$nextTick(() => sibling.focus()) : this.$nextTick(() => this.setFocus());
-          // if a TAB key, not an arrow key,
+          this.moveFocusBy(1);
+        } else if (event.key == 'Escape' || event.keyCode == 27) {
+          // Keep Escape from also closing a container, e.g. KModal on keyup
+          event.stopPropagation();
+          window.addEventListener('keyup', this.stopEscapeKeyUp, true);
+          this.hidePopover();
+        } else if (event.key == 'Tab' || event.keyCode == 9) {
           // close the popover and advance to next item in the tab index
-        } else if ((event.key == 'Tab' || event.keyCode == 9) && popoverIsOpen) {
           this.$emit('tab', event);
           this.closePopover();
+          // Tab then moves past the trigger, even if a context menu returned focus elsewhere
+          this.trigger.focus();
+        }
+      },
+      // Removed on the first keyup, so a lost Escape keyup cannot swallow a later one
+      stopEscapeKeyUp(event) {
+        window.removeEventListener('keyup', this.stopEscapeKeyUp, true);
+        if (event.key == 'Escape' || event.keyCode == 27) {
+          event.stopPropagation();
         }
       },
       handleSelection(selection, $event) {
@@ -262,7 +258,15 @@
       },
       closePopover() {
         this.$emit('close');
+        this.hidePopover();
+      },
+      hidePopover() {
         this.$refs.popover.close();
+        // UiPopover returns focus to <body> if the opening click did not focus the trigger.
+        // A context menu returns focus to what had it before the right-click, if anything did.
+        if (!this.isContextMenu || this.$refs.popover.$el.contains(document.activeElement)) {
+          this.trigger.focus();
+        }
       },
     },
   };
