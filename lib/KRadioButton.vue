@@ -29,14 +29,14 @@
           icon="radioSelected"
           class="radio-button-icon"
           name="radio_button_checked"
-          :style="[{ fill: color || $themeTokens.primary }, disabledStyle, activeStyle]"
+          :style="[{ fill: color || 'var(--tokens-primary)' }, disabledStyle, activeStyle]"
         />
         <KIcon
           v-else
           icon="radioUnselected"
           class="radio-button-icon"
           name="radio_button_unchecked"
-          :style="[{ fill: $themeTokens.annotation }, disabledStyle, activeStyle]"
+          :style="[{ fill: 'var(--tokens-annotation)' }, disabledStyle, activeStyle]"
         />
       </div>
 
@@ -58,7 +58,7 @@
         <div
           v-if="description"
           class="description"
-          :style="[{ color: disabled ? '' : $themeTokens.annotation }, disabledStyle]"
+          :style="[{ color: disabled ? '' : 'var(--tokens-annotation)' }, disabledStyle]"
         >
           {{ description }}
         </div>
@@ -197,11 +197,11 @@
         return this.active ? this.$coreOutline : {};
       },
       disabledStyle() {
-        return this.disabled ? { fill: this.$themeTokens.textDisabled } : {};
+        return this.disabled ? { fill: 'var(--tokens-textDisabled)' } : {};
       },
       labelStyle() {
         return {
-          color: this.disabled ? this.$themeTokens.textDisabled : '',
+          color: this.disabled ? 'var(--tokens-textDisabled)' : '',
         };
       },
       truncateText() {

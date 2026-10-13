@@ -7,7 +7,7 @@
     <div
       v-if="label && !hideLabel"
       class="k-listbox-group-label"
-      :style="{ color: $themeTokens.annotation }"
+      :style="{ color: 'var(--tokens-annotation)' }"
       aria-hidden="true"
     >
       {{ label }}

@@ -36,14 +36,14 @@
       v-else
       class="k-option-plain-label"
       :style="{
-        color: isSelected ? $themeTokens.primary : 'inherit',
+        color: isSelected ? 'var(--tokens-primary)' : 'inherit',
         fontWeight: isSelected ? '500' : 'normal',
       }"
     >
       <KIcon
         icon="done"
         class="k-option-check-icon"
-        :color="$themeTokens.primary"
+        color="var(--tokens-primary)"
         :style="{ visibility: isSelected ? 'visible' : 'hidden', top: '0' }"
       />
       <slot>{{ label }}</slot>
@@ -56,7 +56,6 @@
 <script>
 
   import { computed, inject, onMounted, onBeforeUnmount } from 'vue';
-  import { themePalette, themeTokens } from '../../../styles/theme';
 
   let optionCount = 0;
 
@@ -82,9 +81,9 @@
       const isFocused = computed(() => listbox.isFocused(props.value));
 
       const rowStyles = computed(() => ({
-        backgroundColor: themeTokens().surface,
+        backgroundColor: 'var(--tokens-surface)',
         ':hover': {
-          backgroundColor: themePalette().grey.v_100,
+          backgroundColor: 'var(--palette-grey-v100)',
         },
       }));
 

@@ -3,7 +3,7 @@
   <KToolbar
     title="Page Title"
     textColor="white"
-    :style="{ backgroundColor: $themeTokens.appBarDark }"
+    :style="{ backgroundColor: 'var(--tokens-appBarDark)' }"
   >
     <template #icon>
       <router-link
@@ -12,7 +12,7 @@
       >
         <KIconButton
           icon="back"
-          :color="$themeTokens.textInverted"
+          color="var(--tokens-textInverted)"
           :ariaLabel="'Go back'"
         />
       </router-link>

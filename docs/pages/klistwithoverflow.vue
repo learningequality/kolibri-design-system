@@ -191,7 +191,7 @@
       dividerStyle() {
         return {
           height: '100%',
-          backgroundColor: this.$themeTokens.fineLine,
+          backgroundColor: 'var(--tokens-fineLine)',
           width: '1px',
         };
       },

@@ -77,23 +77,15 @@
       #footer
     >
       <div class="footer-wrapper">
-        <div
-          class="pills"
-          :style="{ color: $themeTokens.annotation }"
-        >
-          <span :style="{ 'background-color': $themePalette.grey.v_100 }">
+        <div class="pills">
+          <span>
             <KIcon
               icon="readSolid"
               :style="{ fontSize: '13px', position: 'relative', top: '3px' }"
             />
             Read
           </span>
-          <span
-            v-if="!showMenuInFooter"
-            :style="{ 'background-color': $themePalette.grey.v_100 }"
-          >
-            Short Activity
-          </span>
+          <span v-if="!showMenuInFooter"> Short Activity </span>
         </div>
         <KIconButton
           v-if="showMenuInFooter"
@@ -226,11 +218,13 @@
 
   .pills {
     margin-left: -4px;
+    color: var(--tokens-annotation);
 
     span {
       display: inline-block;
       padding: 4px 8px;
       margin: 4px;
+      background-color: var(--palette-grey-v100);
       border-radius: 4px;
     }
   }

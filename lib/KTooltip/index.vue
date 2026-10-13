@@ -1,8 +1,3 @@
-<!--
-  `vue/no-root-v-if` guards against a bug with a style block's `v-bind()`. 
-  This component has no `v-bind()` in its styles, so the bug doesn't apply.
--->
-<!-- eslint-disable-next-line vue/no-root-v-if -->
 <template>
 
   <Popper
@@ -18,8 +13,8 @@
       dir="auto"
       class="k-tooltip"
       :style="{
-        backgroundColor: $themeTokens.text,
-        color: $themeTokens.textInverted,
+        backgroundColor: 'var(--tokens-text)',
+        color: 'var(--tokens-textInverted)',
         maxWidth: maxWidth ? maxWidth : 'calc(100vw - 10px)',
         ...appearanceOverrides,
       }"

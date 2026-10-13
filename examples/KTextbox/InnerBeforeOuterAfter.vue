@@ -9,7 +9,7 @@
         <KIcon
           class="search-icon"
           icon="search"
-          :color="$themeTokens.annotation"
+          color="var(--tokens-annotation)"
         />
       </template>
 
@@ -19,7 +19,7 @@
             class="help-btn"
             icon="helpOutline"
             tooltip="Show help"
-            :color="$themePalette.blue.v_500"
+            color="var(--palette-blue-v500)"
             @click="showModal = true"
           />
         </div>

@@ -175,7 +175,7 @@
       </p>
 
       <DocsShowCode language="html">
-        <div :style="{ backgroundColor: $themePalette.red.v_600 }">base</div>
+        <div :style="{ backgroundColor: 'var(--palette-red-v600)' }">base</div>
         <div :style="{ backgroundColor: $darken1($themePalette.red.v_600) }">$darken1</div>
         <div :style="{ backgroundColor: $darken2($themePalette.red.v_600) }">$darken2</div>
         <div :style="{ backgroundColor: $darken3($themePalette.red.v_600) }">$darken3</div>
@@ -183,7 +183,7 @@
       <DocsShow>
         <div
           class="darken-block"
-          :style="{ backgroundColor: $themePalette.red.v_600 }"
+          :style="{ backgroundColor: 'var(--palette-red-v600)' }"
         >
           <code>base</code>
         </div>
@@ -351,14 +351,6 @@
       <!-- eslint-enable -->
 
       <p>
-        Keep <code>$coreOutline</code> when the outline belongs on a different element than the one
-        that has focus, because <code>:focus-visible</code> never matches there. This covers a
-        visually hidden native input, like in <code>KCheckbox</code>, and a list whose container
-        holds focus through <code>aria-activedescendant</code>, such as in <code>KListbox</code> and
-        <code>KSelect</code>.
-      </p>
-
-      <p>
         If the application imports <code>helper-styles</code> instead of <code>common</code>, write
         the full outline:
       </p>
@@ -375,9 +367,11 @@
 
       <p>
         If the outline goes on an element that does not have focus, keep
-        <code>$coreOutline</code> in a <code>:style</code> binding. For example,
-        <code>KCheckbox</code> puts the outline on its checkbox icon, and the focus is on the native
-        input.
+        <code>$coreOutline</code> in a <code>:style</code> binding, because
+        <code>:focus-visible</code> never matches there. For example, <code>KCheckbox</code> puts
+        the outline on its checkbox icon while the focus is on the native input.
+        <code>KListbox</code> and <code>KSelect</code> outline an option while the container holds
+        focus through <code>aria-activedescendant</code>.
       </p>
 
       <p>

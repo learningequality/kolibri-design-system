@@ -11,7 +11,7 @@
     <div
       class="ui-progress-linear"
       :class="classes"
-      :style="{ backgroundColor: $themePalette.grey.v_200 }"
+      :style="{ backgroundColor: 'var(--palette-grey-v200)' }"
     >
       <div
         v-if="type === 'determinate'"
@@ -22,7 +22,7 @@
         :aria-valuenow="moderatedProgress"
         :style="{
           transform: `scaleX(${moderatedProgress / 100})`,
-          backgroundColor: $themeTokens.loading,
+          backgroundColor: 'var(--tokens-loading)',
         }"
       ></div>
 
@@ -32,7 +32,7 @@
         role="progressbar"
         :aria-valuemax="100"
         :aria-valuemin="0"
-        :style="{ backgroundColor: $themeTokens.loading }"
+        :style="{ backgroundColor: 'var(--tokens-loading)' }"
       ></div>
     </div>
   </transition>

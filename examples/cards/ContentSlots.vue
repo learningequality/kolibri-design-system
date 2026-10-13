@@ -25,12 +25,9 @@
         />
       </template>
       <template #footer>
-        <div
-          class="pills"
-          :style="{ color: $themeTokens.annotation }"
-        >
-          <span :style="{ backgroundColor: $themePalette.grey.v_100 }"> Short Activity </span>
-          <span :style="{ backgroundColor: $themePalette.grey.v_100 }"> Biology </span>
+        <div class="pills">
+          <span> Short Activity </span>
+          <span> Biology </span>
         </div>
       </template>
     </KCard>
@@ -90,12 +87,14 @@
 
   .pills {
     margin-left: -4px;
+    color: var(--tokens-annotation);
   }
 
   .pills span {
     display: inline-block;
     padding: 4px 8px;
     margin: 4px;
+    background-color: var(--palette-grey-v100);
     border-radius: 4px;
   }
 

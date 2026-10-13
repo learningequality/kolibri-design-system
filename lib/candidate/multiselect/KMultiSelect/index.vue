@@ -20,19 +20,19 @@
           },
           $computedClass({
             ':hover:not(.is-disabled):not(.is-active):not(.is-invalid)': {
-              borderBottomColor: $themeTokens.text,
+              borderBottomColor: 'var(--tokens-text)',
             },
           }),
         ]"
         :style="{
-          backgroundColor: disabled ? $themeTokens.textDisabled + '20' : $themePalette.grey.v_100,
+          backgroundColor: disabled ? $themeTokens.textDisabled + '20' : 'var(--palette-grey-v100)',
           borderRadius: '2px 2px 0 0',
           borderBottom: `1px solid ${
             invalid
-              ? $themeTokens.error
+              ? 'var(--tokens-error)'
               : inputFocused
-                ? $themeTokens.primary
-                : $themePalette.grey.v_700
+                ? 'var(--tokens-primary)'
+                : 'var(--palette-grey-v700)'
           }`,
         }"
         @mouseenter="isHovered = true"
@@ -49,14 +49,14 @@
           }"
           :style="{
             color: disabled
-              ? $themeTokens.textDisabled
+              ? 'var(--tokens-textDisabled)'
               : invalid
-                ? $themeTokens.error
+                ? 'var(--tokens-error)'
                 : inputFocused || isPopupOpen
-                  ? $themeTokens.primary
+                  ? 'var(--tokens-primary)'
                   : isHovered
-                    ? $themeTokens.text
-                    : $themePalette.grey.v_700,
+                    ? 'var(--tokens-text)'
+                    : 'var(--palette-grey-v700)',
           }"
         >
           {{ label }}
@@ -163,7 +163,7 @@
         v-if="showError"
         :id="errorId"
         class="kmselect-feedback-text"
-        :style="{ color: $themeTokens.error }"
+        :style="{ color: 'var(--tokens-error)' }"
       >
         <!-- @slot Optional slot as alternative to `invalidText` prop -->
         <slot name="error">

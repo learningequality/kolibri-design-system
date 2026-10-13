@@ -36,7 +36,7 @@
             textTransform: 'none',
           }"
           :colorActive="DOCS_LINK_COLOR"
-          :hoverBackgroundColor="$themePalette.green.v_100"
+          hoverBackgroundColor="var(--palette-green-v100)"
         >
           <template
             v-for="tab in presentTabs"

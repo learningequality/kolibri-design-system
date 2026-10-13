@@ -5,10 +5,10 @@
     tabsId="tabsProps"
     ariaLabel="Coach reports"
     :tabs="tabs"
-    :color="$themeTokens.primary"
-    :colorActive="$themeTokens.primary"
-    :backgroundColor="$themeTokens.secondary"
-    :hoverBackgroundColor="$themeTokens.secondaryDark"
+    color="var(--tokens-primary)"
+    colorActive="var(--tokens-primary)"
+    backgroundColor="var(--tokens-secondary)"
+    hoverBackgroundColor="var(--tokens-secondaryDark)"
   />
 
 </template>

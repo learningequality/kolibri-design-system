@@ -50,7 +50,7 @@
                   activeMonthDay,
                   activeMonthDate,
                 ) === 'second'
-                ? { backgroundColor: $themeBrand.primary.v_100 }
+                ? { backgroundColor: 'var(--brand-primary-v100)' }
                 : {},
             ]"
             :class="[
@@ -130,7 +130,7 @@
                   nextActiveMonthDay,
                   nextActiveMonthDate,
                 ) === 'second'
-                ? { backgroundColor: $themeBrand.primary.v_100 }
+                ? { backgroundColor: 'var(--brand-primary-v100)' }
                 : {},
             ]"
             :class="[

@@ -13,7 +13,7 @@
       <KIcon
         class="search-icon"
         icon="search"
-        :color="$themeTokens.annotation"
+        color="var(--tokens-annotation)"
       />
     </template>
 
@@ -29,7 +29,7 @@
         <KIcon
           class="warning-icon"
           icon="warning"
-          :color="$themePalette.yellow.v_500"
+          color="var(--palette-yellow-v500)"
         />
       </div>
     </template>
@@ -39,7 +39,7 @@
         <KIconButton
           class="help-btn"
           icon="helpOutline"
-          :color="$themePalette.blue.v_500"
+          color="var(--palette-blue-v500)"
         />
       </div>
     </template>
