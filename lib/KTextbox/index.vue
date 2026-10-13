@@ -7,6 +7,7 @@
       class="textbox"
       :label="label"
       :readonly="readonly"
+      :required="required"
       :disabled="disabled"
       :clearAriaLabel="clearAriaLabel"
       :clearable="clearable"
@@ -131,6 +132,13 @@
        * Still allowing to focus and copy the content
        */
       readonly: {
+        type: Boolean,
+        default: false,
+      },
+      /**
+       * Sets the native `required` attribute on the field
+       */
+      required: {
         type: Boolean,
         default: false,
       },
