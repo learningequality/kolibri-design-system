@@ -916,6 +916,14 @@
         this.highlightedOption = null;
       },
 
+      /**
+       * Sets keyboard focus to the select without opening the dropdown
+       * @public
+       */
+      focus() {
+        this.$refs.label.focus();
+      },
+
       resetTouched(options = { touched: false }) {
         this.isTouched = options.touched;
       },
