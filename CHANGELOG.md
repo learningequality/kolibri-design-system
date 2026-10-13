@@ -7,6 +7,30 @@ Changelog is rather internal in nature. See release notes for the public overvie
 <!-- [DO NOT REMOVE-USED BY GH ACTION] PASTE CHANGELOG -->
 
 
+- [#1361]
+  - **Description:** Bumps KDS version to 5.10.0
+  - **Products impact:** -.
+  - **Addresses:** -.
+  - **Components:** -.
+  - **Breaking:** -
+  - **Impacts a11y:** no
+  - **Guidance:** -.
+
+[#1361]: https://github.com/learningequality/kolibri-design-system/pull/1361
+
+- [#1361]
+  - **Description:** Adds a public `focus()` method to `KSelect`
+  - **Products impact:** new API
+  - **Addresses:** https://github.com/learningequality/kolibri-design-system/issues/1354, https://github.com/learningequality/studio/pull/6311
+  - **Components:** KSelect
+  - **Breaking:** no
+  - **Impacts a11y:** yes
+  - **Guidance:** Replace `$el.querySelector('[tabindex="0"]').focus()` workarounds with `$refs.select.focus()`.
+
+[#1361]: https://github.com/learningequality/kolibri-design-system/pull/1361
+
+
+
 - [#1351]
   - **Description:** Upgrades `kolibri-format` to 3.x and removes the local theming lint rules, which now come from `eslint-plugin-kolibri` and `kolibri-format`. Theme values in component styles are now written as `var(--tokens-*)`, `var(--brand-*)` and `var(--palette-*)` instead of being read through `$themeTokens`, `$themeBrand` and `$themePalette`. Theme CSS variable naming now comes from the published `kolibri-css-variables` package.
   - **Products impact:** updated API
