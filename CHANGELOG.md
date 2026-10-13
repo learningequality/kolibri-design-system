@@ -7,6 +7,19 @@ Changelog is rather internal in nature. See release notes for the public overvie
 <!-- [DO NOT REMOVE-USED BY GH ACTION] PASTE CHANGELOG -->
 
 
+- [#1365]
+  - **Description:** build(deps): bump source-map-js from 1.2.1 to 1.2.2
+  - **Products impact:** Dev Dependency upgrade
+  - **Addresses:** -
+  - **Components:** -
+  - **Breaking:** -
+  - **Impacts a11y:** -
+  - **Guidance:** -
+
+[#1365]: https://github.com/learningequality/kolibri-design-system/pull/1365
+
+
+
 - [#1362]
   - **Description:** build(deps): bump shell-quote from 1.10.0 to 1.12.0
   - **Products impact:** Dev Dependency upgrade
