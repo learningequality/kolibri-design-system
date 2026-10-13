@@ -183,8 +183,9 @@
         <DocsAnchorTarget anchor="#invalidtext" />
       </h3>
       <p>
-        When the value is invalid, shows the validation text even if the user has not focused or
-        changed the input.
+        When <code>invalid</code> is set, <code>invalidText</code> appears only while the user is
+        focused on the input. Set <code>showInvalidText</code> to surface errors on untouched
+        fields, for example on submit.
       </p>
       <DocsExample
         loadExample="KTextbox/InvalidText.vue"

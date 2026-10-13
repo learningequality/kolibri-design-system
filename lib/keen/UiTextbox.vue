@@ -40,6 +40,8 @@
             :style="isActive ? { borderBottomColor: $themeTokens.primaryDark } : {}"
             :autocapitalize="autocapitalize ? autocapitalize : null"
             :autocomplete="autocomplete ? autocomplete : null"
+            :aria-describedby="ariaDescribedby"
+            :aria-invalid="invalid ? 'true' : null"
             :disabled="disabled"
             :max="maxValue"
             :maxlength="enforceMaxlength ? maxlength : null"
@@ -71,6 +73,8 @@
             :style="isActive ? { borderBottomColor: $themeTokens.primaryDark } : {}"
             :autocpitalize="autocapitalize ? autocapitalize : null"
             :autocomplete="autocomplete ? autocomplete : null"
+            :aria-describedby="ariaDescribedby"
+            :aria-invalid="invalid ? 'true' : null"
             :disabled="disabled"
             :maxlength="enforceMaxlength ? maxlength : null"
             :minlength="minlength"
@@ -117,9 +121,21 @@
       </label>
 
       <div class="ui-textbox-feedback">
-        <div 
-          v-if="showError" 
-          class="ui-textbox-feedback-text" 
+        <div
+          v-if="showHelp"
+          :id="helpId"
+          class="ui-textbox-feedback-text"
+          :style="{ color: $themeTokens.annotation }"
+        >
+          <slot name="help">
+            {{ help }}
+          </slot>
+        </div>
+
+        <div
+          v-if="showError"
+          :id="errorId"
+          class="ui-textbox-feedback-text"
           :style="{ color: $themeTokens.error }"
         >
           <slot name="error">
@@ -127,20 +143,10 @@
           </slot>
         </div>
 
-        <div 
-          v-else-if="showHelp" 
-          class="ui-textbox-feedback-text"
-        >
-
-          <slot name="help">
-            {{ help }}
-          </slot>
-        </div>
-
         <!-- Placeholder to keep the text height spacing in place even when
              not showing any errors -->
-        <div 
-          v-else 
+        <div
+          v-if="!showHelp && !showError"
           class="ui-textbox-feedback-text"
         >
           &nbsp;
@@ -362,6 +368,19 @@
 
       showHelp() {
         return Boolean(this.help) || Boolean(this.$slots.help);
+      },
+
+      errorId() {
+        return `k-textbox-error-${this._uid}`;
+      },
+
+      helpId() {
+        return `k-textbox-help-${this._uid}`;
+      },
+
+      ariaDescribedby() {
+        const ids = [this.showHelp && this.helpId, this.showError && this.errorId];
+        return ids.filter(Boolean).join(' ') || null;
       },
 
       hasInnerSlot() {

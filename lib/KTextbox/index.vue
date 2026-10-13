@@ -12,6 +12,7 @@
       :clearable="clearable"
       :invalid="showInvalidMessage"
       :error="invalidText"
+      :help="help"
       :autofocus="autofocus"
       :maxlength="maxlength"
       :autocomplete="autocomplete"
@@ -103,12 +104,20 @@
         default: null,
       },
       /**
-       * Show the `invalidText` even if the user has not focused or change the input.
+       * Show the `invalidText` even while the input is not focused,
+       * e.g. to surface errors on untouched fields on submit.
        * `invalid` must also be `true` for this to take effect.
        */
       showInvalidText: {
         type: Boolean,
         default: false,
+      },
+      /**
+       * Shown below the field, alongside `invalidText`
+       */
+      help: {
+        type: String,
+        default: null,
       },
       /**
        * Whether or not the field is disabled
