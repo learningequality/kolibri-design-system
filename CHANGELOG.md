@@ -7,6 +7,19 @@ Changelog is rather internal in nature. See release notes for the public overvie
 <!-- [DO NOT REMOVE-USED BY GH ACTION] PASTE CHANGELOG -->
 
 
+- [#1351]
+  - **Description:** Upgrades `kolibri-format` to 3.x and removes the local theming lint rules, which now come from `eslint-plugin-kolibri` and `kolibri-format`. Theme values in component styles are now written as `var(--tokens-*)`, `var(--brand-*)` and `var(--palette-*)` instead of being read through `$themeTokens`, `$themeBrand` and `$themePalette`. Theme CSS variable naming now comes from the published `kolibri-css-variables` package.
+  - **Products impact:** updated API
+  - **Addresses:** [#15231](https://github.com/learningequality/kolibri/issues/15231)
+  - **Components:** KBreadcrumbs, KCard, KCheckbox, KCircularLoader, KDateRange, KEmptyPlaceholder, KIcon, KImg, KLabeledIcon, KLinearLoader, KListbox, KModal, KMultiSelect, KPageContainer, KRadioButton, KSelect, KSnackbar, KTable, KTabsList, KToolbar, KTooltip
+  - **Breaking:** no
+  - **Impacts a11y:** no
+  - **Guidance:** Components render the same colors, because `KThemePlugin` already defines these variables. A consumer asserting on inline style values in tests will now see `var(--tokens-*)` rather than a hex color.
+
+[#1351]: https://github.com/learningequality/kolibri-design-system/pull/1351
+
+
+
 - [#1339]
   - **Description:** Deprecates `computedClass` / `$computedClass`, `generateGlobalStyles`, and the Aphrodite dependency. All will be removed in the next major release and still work in v5. Announces the rename of the `v_N` version keys to `vN` on `$themeBrand`, `$themePalette`, `themeBrand()`, and `themePalette()` in the next major release. `common.scss` now includes the Pure CSS base (normalize.css), so it fully replaces `generateGlobalStyles`.
   - **Products impact:** updated API
