@@ -58,6 +58,11 @@
           text="Installation"
         />) and stay in sync when brand colors change at runtime via
         <code>setBrandColors()</code> or <code>setTokenMapping()</code>.
+        <code>setBrandColors()</code> expects every <code>v_N</code> shade of each default brand
+        color, and logs a console warning naming any that are missing. Read through
+        <code>$themeBrand</code> each time: a saved sub-object such as
+        <code>const primary = $themeBrand.primary</code> goes stale after
+        <code>setBrandColors()</code>.
       </p>
 
       <h3>CSS variables</h3>
