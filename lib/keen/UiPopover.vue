@@ -289,7 +289,7 @@
       onShown() {
         this.lastFocusedElement = document.activeElement;
         this.$refs.focusContainer.focus();
-        this.$emit('reveal');
+        this.$emit('reveal', this.lastFocusedElement);
       },
 
       onHidden() {
