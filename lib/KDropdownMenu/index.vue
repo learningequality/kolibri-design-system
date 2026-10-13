@@ -57,17 +57,19 @@
     },
     setup(props) {
       if (props.isContextMenu) {
-        const { clientX, clientY, isActive } = useKContextMenu();
+        const { clientX, clientY, isActive, hideMenu } = useKContextMenu();
         const contextMenuPosition = computed(() => [clientX.value, clientY.value]);
 
         return {
           contextMenuPosition,
           isContextMenuActive: isActive,
+          hideContextMenu: hideMenu,
         };
       }
       return {
         contextMenuPosition: [],
         isContextMenuActive: null,
+        hideContextMenu: () => {},
       };
     },
     props: {
@@ -152,7 +154,7 @@
           this.$nextTick(() => {
             this.$refs.popover.open();
           });
-        } else {
+        } else if (this.isMenuOpen()) {
           this.$refs.popover.close();
         }
       },
@@ -284,6 +286,7 @@
         this.$emit('close');
         this.closing = false;
         this.$refs.popover.close();
+        this.hideContextMenu();
       },
     },
   };
