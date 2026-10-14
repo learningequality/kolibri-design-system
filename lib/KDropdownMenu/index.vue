@@ -16,6 +16,7 @@
       :constrainToScrollParent="constrainToScrollParent"
       @close="handleClose"
       @open="handleOpen"
+      @keydown.native="handleOpenMenuNavigation"
     >
       <!-- Slot to set a header to the dropdown menu -->
       <slot name="header"></slot>
@@ -176,7 +177,6 @@
       this.trigger.setAttribute('aria-expanded', false);
     },
     beforeDestroy() {
-      window.removeEventListener('keydown', this.handleOpenMenuNavigation, true);
       window.removeEventListener('keyup', this.stopEscapeKeyUp, true);
     },
     methods: {
@@ -187,7 +187,6 @@
           return;
         }
         this.setFocus();
-        window.addEventListener('keydown', this.handleOpenMenuNavigation, true);
         this.trigger.setAttribute('aria-expanded', true);
       },
       isMenuOpen() {
@@ -202,7 +201,6 @@
       handleClose() {
         this.trigger.setAttribute('aria-expanded', false);
         this.hideContextMenu();
-        window.removeEventListener('keydown', this.handleOpenMenuNavigation, true);
       },
       getMenuItems() {
         return Array.from(this.$refs.menu.$el.querySelectorAll('[role="menuitem"]'));
