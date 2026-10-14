@@ -122,6 +122,7 @@
     },
 
     beforeDestroy() {
+      clearTimeout(this.focusScrollTimeout);
       this.destroyPopover();
     },
 
@@ -311,12 +312,14 @@
         this.$emit('hide');
       },
 
-      // Focusing a clipped item scrolls the page; scroll events fire before the next frame
+      // Focusing a clipped item scrolls the page, over many frames under `scroll-behavior: smooth`.
+      // Each scroll it causes extends the window, so only a scroll after it settles closes.
       onFocusIn() {
+        clearTimeout(this.focusScrollTimeout);
         this.focusScrolling = true;
-        window.requestAnimationFrame(() => {
+        this.focusScrollTimeout = setTimeout(() => {
           this.focusScrolling = false;
-        });
+        }, 100);
       },
 
       closeOnExternal(event, closeOptions) {
@@ -343,7 +346,9 @@
           if (this.closeOnScroll) {
             /* eslint-disable-next-line import/no-named-as-default-member */
             this.removeScrollListener = events.on('scroll', document, e => {
-              if (!this.focusScrolling) {
+              if (this.focusScrolling) {
+                this.onFocusIn();
+              } else {
                 this.closeOnExternal(e, { returnFocus: true });
               }
             });
