@@ -20,7 +20,7 @@
 
       :type="option[keys.type]"
       @click.native="($event) => selectOption(option, $event)"
-      @keydown.enter.native.prevent="($event) => selectOption(option, $event)"
+      @keydown.enter.native="($event) => handleEnter(option, $event)"
       :style="[ activeOutline ]"
     >
       <slot name="option" :option="option"></slot>
@@ -109,6 +109,13 @@
     },
 
     methods: {
+      handleEnter(option, $event) {
+        // Enter on a link fires a click, with any modifier keys, which selects the option
+        if (!$event.target.closest('a[href]')) {
+          $event.preventDefault();
+          this.selectOption(option, $event);
+        }
+      },
       selectOption(option, $event) {
         if (option.disabled || option.type === 'divider') {
           return;
