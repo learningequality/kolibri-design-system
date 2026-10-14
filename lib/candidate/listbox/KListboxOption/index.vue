@@ -46,11 +46,17 @@
       }"
     >
       <KIcon
+        v-if="isSelected"
         icon="done"
         class="k-option-check-icon"
+        data-testid="option-check-icon"
         color="var(--tokens-primary)"
-        :style="{ visibility: isSelected ? 'visible' : 'hidden', top: '0' }"
+        :style="{ top: '0' }"
       />
+      <span
+        v-else
+        class="k-option-check-icon k-option-check-spacer"
+      ></span>
       <slot>{{ label }}</slot>
     </span>
   </li>
@@ -194,6 +200,12 @@
   .k-option-check-icon {
     flex-shrink: 0;
     font-size: 16px;
+  }
+
+  // KIcon's size
+  .k-option-check-spacer {
+    width: 1.125em;
+    height: 1.125em;
   }
 
 </style>
