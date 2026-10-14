@@ -22,6 +22,7 @@
           { text: 'With predefined sizes', href: '#predefined-sizes' },
           { text: 'With precise size', href: '#precise-size' },
           { text: 'With custom actions', href: '#custom-actions' },
+          { text: 'Closing and non-dismissible modals', href: '#closing' },
         ]"
       />
 
@@ -76,6 +77,19 @@
         loadExample="KModal/ModalWithCustomActions.vue"
         exampleId="custom-actions"
       />
+
+      <h3>
+        Closing and non-dismissible modals
+        <DocsAnchorTarget anchor="#closing" />
+      </h3>
+      <p>
+        <code>KModal</code> never closes itself. Pressing <code>Escape</code> or the cancel button
+        emits <code>cancel</code>; the parent closes the modal in its <code>cancel</code> handler.
+        <code>Escape</code> that closes an open dropdown or menu inside the modal, or whose
+        <code>keydown</code> is <code>preventDefault</code>ed, does not emit <code>cancel</code>. To
+        make a modal non-dismissible, omit both the <code>cancel</code> listener and
+        <code>cancelText</code>.
+      </p>
     </DocsPageSection>
   </DocsPageTemplate>
 

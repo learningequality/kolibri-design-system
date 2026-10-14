@@ -347,7 +347,8 @@
       emitCancelEvent() {
         if (!this.cancelDisabled) {
           /**
-           * Emitted when the cancel button is clicked or the esc key is pressed
+           * Emitted when the cancel button is clicked or the esc key is pressed.
+           * Does not close the modal.
            */
           this.$emit('cancel');
         }
