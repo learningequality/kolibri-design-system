@@ -240,6 +240,8 @@
           }
         }
         this.trigger.setAttribute('aria-expanded', false);
+        // the popover keeps its size while it fades out, so it would still look open
+        window.removeEventListener('keydown', this.handleOpenMenuNavigation, true);
         window.removeEventListener('keyup', this.handleKeyUp, true);
       },
       getNextFocusableSibling(focusedElement) {
