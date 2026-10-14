@@ -20,7 +20,7 @@
 
       :type="option[keys.type]"
       @click.native="($event) => selectOption(option, $event)"
-      @keydown.enter.native.prevent="($event) => handleEnter(option, $event)"
+      @keydown.enter.native="($event) => handleEnter(option, $event)"
       :style="[ activeOutline ]"
     >
       <slot name="option" :option="option"></slot>
@@ -110,11 +110,9 @@
 
     methods: {
       handleEnter(option, $event) {
-        // Follow links as a click would; the click handler then selects the option
-        const link = $event.target.closest('a[href]');
-        if (link) {
-          link.click();
-        } else {
+        // Enter on a link fires a click, with any modifier keys, which selects the option
+        if (!$event.target.closest('a[href]')) {
+          $event.preventDefault();
           this.selectOption(option, $event);
         }
       },
