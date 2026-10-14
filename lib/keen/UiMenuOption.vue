@@ -17,7 +17,7 @@
       supports-modality="keyboard"
       :aria-disabled="disabled ? 'true' : null"
       :href="disabled ? null : href"
-      :target="disabled ? null : target"
+      :target="isAnchor && !disabled ? target : null"
     >
       <slot>
         <div class="ui-menu-option-content">
