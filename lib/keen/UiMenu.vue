@@ -1,12 +1,8 @@
 <template>
 
-  <UiFocusContainer
-    ref="focusContainer"
+  <ul
     class="ui-menu"
     role="menu"
-    tag="ul"
-    lazy
-
     :class="classes"
     :style="getWidth"
   >
@@ -24,28 +20,24 @@
 
       :type="option[keys.type]"
       @click.native="($event) => selectOption(option, $event)"
-      @keydown.enter.native.prevent="($event) => selectOption(option, $event)"
-
-      @keydown.esc.native.esc="closeMenu"
+      @keydown.enter.native="($event) => handleEnter(option, $event)"
       :style="[ activeOutline ]"
     >
       <slot name="option" :option="option"></slot>
     </UiMenuOption>
-  </UiFocusContainer>
+  </ul>
 
 </template>
 
 
 <script>
 
-  import UiFocusContainer from './UiFocusContainer.vue';
   import UiMenuOption from './UiMenuOption.vue';
 
   export default {
     name: 'UiMenu',
 
     components: {
-      UiFocusContainer,
       UiMenuOption,
     },
 
@@ -66,10 +58,6 @@
       },
       iconProps: Object,
       hasSecondaryText: {
-        type: Boolean,
-        default: false,
-      },
-      containFocus: {
         type: Boolean,
         default: false,
       },
@@ -121,6 +109,13 @@
     },
 
     methods: {
+      handleEnter(option, $event) {
+        // Enter on a link fires a click, with any modifier keys, which selects the option
+        if (!$event.target.closest('a[href]')) {
+          $event.preventDefault();
+          this.selectOption(option, $event);
+        }
+      },
       selectOption(option, $event) {
         if (option.disabled || option.type === 'divider') {
           return;

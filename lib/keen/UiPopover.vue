@@ -3,13 +3,14 @@
   <UiFocusContainer
     ref="focusContainer"
     class="ui-popover"
-    role="dialog"
+    :role="role"
 
     :class="{ 'is-raised': raised }"
     :contain-focus="containFocus"
     :focus-redirector="focusRedirector"
 
     @focus-overflow="close()"
+    @focusin.native="onFocusIn"
   >
     <slot></slot>
   </UiFocusContainer>
@@ -71,6 +72,11 @@
         type: Boolean,
         default: true,
       },
+      // `null` drops the role from both the popover and the tippy popper
+      role: {
+        type: String,
+        default: 'dialog',
+      },
       hideOnClick: {
         type: Boolean,
         default: true,
@@ -116,6 +122,7 @@
     },
 
     beforeDestroy() {
+      clearTimeout(this.focusScrollTimeout);
       this.destroyPopover();
     },
 
@@ -152,7 +159,7 @@
           onShow: this.onOpen,
           onShown: this.onShown,
           placement: this.position,
-          role: 'dialog',
+          role: this.role,
           theme: 'ui-popover',
           trigger: this.openOn.replace('hover', 'mouseenter'),
           zIndex: this.zIndex,
@@ -243,7 +250,8 @@
       },
 
       close(options = { returnFocus: true }) {
-        if (this.tip) {
+        // tippy runs onHide even when hidden, which would refocus lastFocusedElement
+        if (this.isOpen()) {
           this.returnFocus = options.returnFocus;
           this.tip.hide();
         }
@@ -267,6 +275,8 @@
       },
 
       onOpen() {
+        this.lastFocusedElement = document.activeElement;
+
         if (this.hideOnClick) {
           this.addCloseEventListeners();
         }
@@ -292,13 +302,36 @@
       },
 
       onShown() {
-        this.lastFocusedElement = document.activeElement;
-        this.$refs.focusContainer.focus();
+        // Keep focus a consumer already moved into the popover
+        if (!this.$el.contains(document.activeElement)) {
+          this.$refs.focusContainer.focus();
+        }
         this.$emit('reveal');
       },
 
       onHidden() {
         this.$emit('hide');
+      },
+
+      // Focusing an item outside the viewport scrolls the page, over many frames under
+      // `scroll-behavior: smooth`. focusin fires before that scroll, so the rect is pre-scroll.
+      onFocusIn(event) {
+        const { top, bottom, left, right } = event.target.getBoundingClientRect();
+        if (top < 0 || left < 0 || bottom > window.innerHeight || right > window.innerWidth) {
+          this.startFocusScroll();
+        }
+      },
+
+      // Each scroll that focus causes extends the window, so only a scroll after it settles closes
+      startFocusScroll() {
+        clearTimeout(this.focusScrollTimeout);
+        this.focusScrollTimeout = setTimeout(this.endFocusScroll, 100);
+      },
+
+      // A user scroll is not one that focus caused
+      endFocusScroll() {
+        clearTimeout(this.focusScrollTimeout);
+        this.focusScrollTimeout = null;
       },
 
       closeOnExternal(event, closeOptions) {
@@ -323,10 +356,19 @@
           });
 
           if (this.closeOnScroll) {
-            /* eslint-disable-next-line import/no-named-as-default-member */
-            this.removeScrollListener = events.on('scroll', document, e => {
-              this.closeOnExternal(e, { returnFocus: true });
-            });
+            const removeListeners = [
+              /* eslint-disable-next-line import/no-named-as-default-member */
+              events.on('scroll', document, e => {
+                if (this.focusScrollTimeout) {
+                  this.startFocusScroll();
+                } else {
+                  this.closeOnExternal(e, { returnFocus: true });
+                }
+              }),
+              /* eslint-disable-next-line import/no-named-as-default-member */
+              ...['wheel', 'touchmove'].map(name => events.on(name, document, this.endFocusScroll)),
+            ];
+            this.removeScrollListener = () => removeListeners.forEach(remove => remove());
           }
         }, 0);
       },
