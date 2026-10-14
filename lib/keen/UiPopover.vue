@@ -250,7 +250,8 @@
       },
 
       close(options = { returnFocus: true }) {
-        if (this.tip) {
+        // tippy runs onHide even when hidden, which would refocus lastFocusedElement
+        if (this.isOpen()) {
           this.returnFocus = options.returnFocus;
           this.tip.hide();
         }
