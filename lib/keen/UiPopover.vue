@@ -312,14 +312,25 @@
         this.$emit('hide');
       },
 
-      // Focusing a clipped item scrolls the page, over many frames under `scroll-behavior: smooth`.
-      // Each scroll it causes extends the window, so only a scroll after it settles closes.
-      onFocusIn() {
+      // Focusing an item outside the viewport scrolls the page, over many frames under
+      // `scroll-behavior: smooth`. focusin fires before that scroll, so the rect is pre-scroll.
+      onFocusIn(event) {
+        const { top, bottom, left, right } = event.target.getBoundingClientRect();
+        if (top < 0 || left < 0 || bottom > window.innerHeight || right > window.innerWidth) {
+          this.startFocusScroll();
+        }
+      },
+
+      // Each scroll that focus causes extends the window, so only a scroll after it settles closes
+      startFocusScroll() {
         clearTimeout(this.focusScrollTimeout);
-        this.focusScrolling = true;
-        this.focusScrollTimeout = setTimeout(() => {
-          this.focusScrolling = false;
-        }, 100);
+        this.focusScrollTimeout = setTimeout(this.endFocusScroll, 100);
+      },
+
+      // A user scroll is not one that focus caused
+      endFocusScroll() {
+        clearTimeout(this.focusScrollTimeout);
+        this.focusScrollTimeout = null;
       },
 
       closeOnExternal(event, closeOptions) {
@@ -344,14 +355,19 @@
           });
 
           if (this.closeOnScroll) {
-            /* eslint-disable-next-line import/no-named-as-default-member */
-            this.removeScrollListener = events.on('scroll', document, e => {
-              if (this.focusScrolling) {
-                this.onFocusIn();
-              } else {
-                this.closeOnExternal(e, { returnFocus: true });
-              }
-            });
+            const removeListeners = [
+              /* eslint-disable-next-line import/no-named-as-default-member */
+              events.on('scroll', document, e => {
+                if (this.focusScrollTimeout) {
+                  this.startFocusScroll();
+                } else {
+                  this.closeOnExternal(e, { returnFocus: true });
+                }
+              }),
+              /* eslint-disable-next-line import/no-named-as-default-member */
+              ...['wheel', 'touchmove'].map(name => events.on(name, document, this.endFocusScroll)),
+            ];
+            this.removeScrollListener = () => removeListeners.forEach(remove => remove());
           }
         }, 0);
       },
