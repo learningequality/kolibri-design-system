@@ -7,6 +7,19 @@ Changelog is rather internal in nature. See release notes for the public overvie
 <!-- [DO NOT REMOVE-USED BY GH ACTION] PASTE CHANGELOG -->
 
 
+- [#1356]
+  - **Description:** `$themeBrand` reflects colors set by `setBrandColors()`, and `setBrandColors()` warns in the console about shades missing from the brand tree.
+  - **Products impact:** bugfix
+  - **Addresses:** https://github.com/learningequality/kolibri-design-system/issues/1330
+  - **Components:** `KThemePlugin`, `setBrandColors`
+  - **Breaking:** no
+  - **Impacts a11y:** no
+  - **Guidance:** Brand trees without `v_50` now warn; add it to each brand color. Saved references (`const p = $themeBrand.primary`) still go stale; read through `$themeBrand`.
+
+[#1356]: https://github.com/learningequality/kolibri-design-system/pull/1356
+
+
+
 - [#1361]
   - **Description:** Bumps KDS version to 5.10.0
   - **Products impact:** -.
