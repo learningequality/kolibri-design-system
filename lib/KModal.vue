@@ -113,7 +113,12 @@
 
   import debounce from 'lodash/debounce';
   import useKResponsiveWindow from './composables/useKResponsiveWindow';
-  import { KOLIBRI_SNACKBAR_ID, hideBackground, restoreBackground } from './utils/modalBackground';
+  import {
+    KOLIBRI_SNACKBAR_ID,
+    hideBackground,
+    isTopModal,
+    restoreBackground,
+  } from './utils/modalBackground';
 
   const SIZE_SM = 'small';
   const SIZE_MD = 'medium';
@@ -283,7 +288,7 @@
       this.hideModalBackground();
       this.$nextTick(() => {
         const dialog = this.$refs['modal-overlay'];
-        if (dialog && !dialog.contains(document.activeElement)) {
+        if (dialog && isTopModal(this) && !dialog.contains(document.activeElement)) {
           this.focusModal();
         }
       });
@@ -389,6 +394,7 @@
         const noopOnFocus =
           target === window || // switching apps
           !this.$refs.modal || // if $refs.modal isn't available
+          !isTopModal(this) ||
           target === this.$refs['modal-overlay'] || // addresses #3824
           this.$refs.modal.contains(target.activeElement);
         if (noopOnFocus) {
