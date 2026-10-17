@@ -14,7 +14,7 @@
           tabindex="-1"
           role="dialog"
           aria-modal="true"
-          aria-labelledby="modal-title"
+          :aria-labelledby="`modal-title-${_uid}`"
           @keydown.esc="handleEscapeKeydown"
           @keyup.esc.stop="handleEscapeKeyup"
           @keyup.enter="handleEnter"
@@ -26,7 +26,7 @@
           >
             <!-- Modal Title -->
             <h1
-              id="modal-title"
+              :id="`modal-title-${_uid}`"
               ref="title"
               class="title"
               :style="titleStyles"
