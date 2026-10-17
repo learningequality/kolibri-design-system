@@ -370,13 +370,13 @@
         }
       },
       handleEscapeKeydown(event) {
-        this.escapeFromPopover = this.isFromPopover(event);
+        this.escapeHandled = event.defaultPrevented || this.isFromPopover(event);
       },
       handleEscapeKeyup() {
-        if (!this.escapeFromPopover) {
+        if (!this.escapeHandled) {
           this.emitCancelEvent();
         }
-        this.escapeFromPopover = false;
+        this.escapeHandled = false;
       },
       hideModalBackground() {
         hideBackground(this.$refs.focusTrap.$el, this.$refs['modal-overlay'], this);
@@ -396,7 +396,7 @@
         }
         // Fixes possible infinite recursion when disconnection snackbars appear
         // along with KModal (#6301)
-        const $coreSnackbar = document.getElementById('coresnackbar');
+        const $coreSnackbar = document.getElementById(KOLIBRI_SNACKBAR_ID);
         if ($coreSnackbar && $coreSnackbar.contains(target)) {
           return;
         }
