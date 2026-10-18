@@ -271,7 +271,11 @@
         this.$emit('open');
       },
 
-      onClose() {
+      onClose(instance) {
+        if (!instance.state.isVisible) {
+          return;
+        }
+
         if (this.returnFocus && this.lastFocusedElement) {
           this.lastFocusedElement.focus();
         }
