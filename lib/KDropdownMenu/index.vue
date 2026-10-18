@@ -170,6 +170,7 @@
     created() {
       this.closing = false;
       this.opened = false;
+      this.destroying = false;
       this.focusOnOpen = null;
     },
     mounted() {
@@ -181,6 +182,7 @@
       }
     },
     beforeDestroy() {
+      this.destroying = true;
       window.removeEventListener('keydown', this.handleOpenMenuNavigation, true);
       this.trigger.removeEventListener('keydown', this.handleTriggerKeydown);
     },
@@ -247,6 +249,14 @@
       },
       handleClose() {
         this.opened = false;
+        if (!this.destroying) {
+          this.closing = true;
+          /**
+           * Emitted when the menu closes, except on unmount
+           */
+          this.$emit('close');
+          this.closing = false;
+        }
         this.focusOnOpen = null;
         const focusedElement = document.activeElement;
         const popover = this.$refs.popover.$el;
@@ -351,12 +361,6 @@
         if (this.closing || !this.isMenuOpen()) {
           return;
         }
-        this.closing = true;
-        /**
-         * Emitted when the menu is closed by `closePopover`, an option selection, or Tab
-         */
-        this.$emit('close');
-        this.closing = false;
         this.$refs.popover.close();
       },
     },

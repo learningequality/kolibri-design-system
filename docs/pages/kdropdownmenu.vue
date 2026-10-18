@@ -337,7 +337,8 @@
       </p>
       <p>
         Opening with the arrow keys fires no <code>click</code> on the trigger, so don't track the
-        open state from the trigger's <code>@click</code>; listen to the menu's <code>@open</code>.
+        open state from the trigger's <code>@click</code>; listen to the menu's
+        <code>@open</code> and <code>@close</code>.
       </p>
     </DocsPageSection>
   </DocsPageTemplate>

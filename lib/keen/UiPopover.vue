@@ -243,7 +243,7 @@
       },
 
       close(options = { returnFocus: true }) {
-        if (this.tip) {
+        if (this.isOpen()) {
           this.returnFocus = options.returnFocus;
           this.tip.hide();
         }
@@ -276,7 +276,11 @@
         this.$emit('open');
       },
 
-      onClose() {
+      onClose(instance) {
+        if (!instance.state.isVisible) {
+          return;
+        }
+
         if (this.returnFocus && this.lastFocusedElement) {
           this.lastFocusedElement.focus();
         }
