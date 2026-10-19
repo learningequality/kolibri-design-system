@@ -3,12 +3,12 @@
   <KToolbar
     title="Page Title"
     textColor="black"
-    :style="{ backgroundColor: $themeTokens.appBar }"
+    :style="{ backgroundColor: 'var(--tokens-appBar)' }"
   >
     <template #icon>
       <KIconButton
         icon="close"
-        :color="$themeTokens.text"
+        color="var(--tokens-text)"
         :ariaLabel="'Close'"
       />
     </template>

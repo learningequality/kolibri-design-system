@@ -1,0 +1,48 @@
+<template>
+
+  <VisualTestLayout>
+    <VisualTestExample
+      title="Multiple selection"
+      width="800px"
+      loadExample="KMultiSelect/MultipleSelection.vue"
+    />
+    <VisualTestExample
+      title="Single selection"
+      width="400px"
+      loadExample="KMultiSelect/SingleSelection.vue"
+    />
+    <VisualTestExample
+      title="Primitive values"
+      width="400px"
+      loadExample="KMultiSelect/PrimitiveValues.vue"
+    />
+    <VisualTestExample
+      title="Multi-field search"
+      width="400px"
+      loadExample="KMultiSelect/MultifieldSearch.vue"
+    />
+    <VisualTestExample
+      id="hierarchical-tree-example"
+      title="Hierarchical tree"
+      width="400px"
+      height="400px"
+      loadExample="KMultiSelect/HierarchicalTree.vue"
+    />
+    <VisualTestExample
+      id="expanded-example"
+      title="Expanded mode"
+      width="400px"
+      height="420px"
+      loadExample="KMultiSelect/ExpandedMode.vue"
+    />
+    <VisualTestExample
+      id="expanded-disabled-example"
+      title="Expanded mode (disabled)"
+      width="400px"
+      height="420px"
+      loadExample="KMultiSelect/ExpandedMode.vue"
+      :disabled="true"
+    />
+  </VisualTestLayout>
+
+</template>

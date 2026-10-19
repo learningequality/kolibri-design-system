@@ -39,12 +39,87 @@
       title="Usage"
       anchor="#usage"
     >
-      <h3>Computed styles</h3>
+      <p>Colors can be referenced in two ways:</p>
+      <ul>
+        <li>
+          <strong>CSS variables</strong> for every static color, in
+          <code>&lt;style&gt;</code> blocks, SCSS files, and in some cases, inline
+          <code>:style</code> bindings.
+        </li>
+        <li>
+          <strong>JavaScript accessors</strong> on Vue components, for colors that need to be built
+          at runtime (for example, a color combined with a custom opacity).
+        </li>
+      </ul>
+      <p>
+        Both are set up by <code>Vue.use(KThemePlugin)</code> (see
+        <DocsInternalLink
+          href="/installation"
+          text="Installation"
+        />) and stay in sync when brand colors change at runtime via
+        <code>setBrandColors()</code> or <code>setTokenMapping()</code>.
+        <code>setBrandColors()</code> expects every <code>v_N</code> shade of each default brand
+        color, and logs a console warning naming any that are missing. Read through
+        <code>$themeBrand</code> each time: a saved sub-object such as
+        <code>const primary = $themeBrand.primary</code> goes stale after
+        <code>setBrandColors()</code>.
+      </p>
+
+      <h3>CSS variables</h3>
+
+      <p>Theme values are emitted as CSS variables on <code>html:root</code> in three layers:</p>
+      <ul>
+        <li><code>--tokens-*</code> for named color tokens (e.g. <code>--tokens-primary</code>)</li>
+        <li>
+          <code>--brand-*</code> for brand color scales (e.g. <code>--brand-primary-v500</code>)
+        </li>
+        <li>
+          <code>--palette-*</code> for the full palette (e.g. <code>--palette-grey-v200</code>)
+        </li>
+      </ul>
+      <p>
+        Reference them directly with <code>var(--name)</code>. For example, to color text using the
+        <code>error</code> token:
+      </p>
+      <!-- eslint-disable -->
+      <!-- prettier-ignore -->
+      <DocsShowCode language="html">
+        <div class="error-message">This is an error</div>
+        <style>
+          .error-message {
+            color: var(--tokens-error);
+          }
+        </style>
+      </DocsShowCode>
+      <p>This will display:</p>
+
+      <DocsShow>
+        <div class="error-message">This is an error</div>
+      </DocsShow>
+      <p>
+        Use a class rule in a <code>&lt;style&gt;</code> block for new styles. You can also
+        reference a variable from an inline <code>:style</code> binding when a class rule is not
+        practical:
+      </p>
+      <DocsShowCode language="html">
+        <div :style="{ color: 'var(--tokens-error)' }">This is an error</div>
+      </DocsShowCode>
+      <!-- eslint-enable -->
 
       <p>
-        For technical reasons relating to supporting dynamic themes colors must be set using
-        Javascript. Adding <code>Vue.use(KThemePlugin)</code> makes all colors available on every
-        Vue component in your application under the following objects:
+        For palette and brand variables, replace the dots in the path with hyphens and drop the
+        underscore (<code>palette.grey.v_400</code> becomes <code>--palette-grey-v400</code>). Token
+        names are used as-is.
+      </p>
+
+      <h3>
+        Computed styles
+        <DocsAnchorTarget anchor="#computed-styles" />
+      </h3>
+
+      <p>
+        Colors are also available on every Vue component as JavaScript objects. Adding
+        <code>Vue.use(KThemePlugin)</code> makes the following objects available:
       </p>
 
       <ul>
@@ -54,52 +129,44 @@
       </ul>
 
       <p>
-        For example, to color text using <code>$themeTokens.error</code> you use can a
+        Use these when you must build a color value in JavaScript. For a static color, use a CSS
+        variable instead. For example, to make a translucent background from
+        <code>$themeTokens.primary</code>, compute the color and bind it with a
         <DocsExternalLink
           text="computed style"
           href="https://vuejs.org/v2/guide/class-and-style.html"
-        />
-        to write:
+        />:
       </p>
 
+      <!-- eslint-disable -->
+      <!-- prettier-ignore -->
+      <DocsShowCode language="javascript">
+        import Color from 'color';
+
+        export default {
+          computed: {
+            translucentPrimary() {
+              return Color(this.$themeTokens.primary).alpha(0.3).string();
+            },
+          },
+        };
+      </DocsShowCode>
+      <!-- eslint-enable -->
+
       <DocsShowCode language="html">
-        <div :style="{ color: $themeTokens.error }">This is an error</div>
+        <div :style="{ backgroundColor: translucentPrimary }">Translucent primary</div>
       </DocsShowCode>
 
       <p>This will display:</p>
 
       <DocsShow>
-        <div :style="{ color: $themeTokens.error }">This is an error</div>
+        <div :style="{ backgroundColor: translucentPrimary }">Translucent primary</div>
       </DocsShow>
 
-      <p>Move style definitions from the template to computed props if the style gets complex.</p>
-
-      <h3>Computed classes</h3>
-
-      <p>
-        We also attach a special helper function <code>$computedClass</code> which can be used to
-        dynamically create new classes. This is useful for specifying colors in pseudo-elements such
-        as <code>:hover</code> or <code>:focus</code>. For example:
-      </p>
-
-      <DocsShowCode language="html">
-        <input :class="$computedClass({ '::placeholder': { color: $themeTokens.annotation } })" >
-      </DocsShowCode>
-
-      <p>
-        This is usually not necessary, and using <code>style</code> is preferred for simplicity when
-        possible.
-      </p>
-
-      <h3>Notation</h3>
-      <p>In the references below we use the following shorthand:</p>
-      <ul>
-        <li><code>brand</code> refers to <code>$themeBrand</code></li>
-        <li><code>tokens</code> refers to <code>$themeTokens</code></li>
-        <li><code>palette</code> refers to <code>$themePalette</code></li>
-      </ul>
-
-      <h3>Darken utilities</h3>
+      <h3>
+        Darken utilities
+        <DocsAnchorTarget anchor="#darken-utilities" />
+      </h3>
 
       <p>
         You can apply darken utilities <code>$darken1</code>, <code>$darken2</code>, and
@@ -107,8 +174,13 @@
         available on every Vue component.
       </p>
 
+      <p>
+        These utilities shouldn't be overused. Always check if there is a shade in the palette
+        available that can be used instead.
+      </p>
+
       <DocsShowCode language="html">
-        <div :style="{ backgroundColor: $themePalette.red.v_600 }">base</div>
+        <div :style="{ backgroundColor: 'var(--palette-red-v600)' }">base</div>
         <div :style="{ backgroundColor: $darken1($themePalette.red.v_600) }">$darken1</div>
         <div :style="{ backgroundColor: $darken2($themePalette.red.v_600) }">$darken2</div>
         <div :style="{ backgroundColor: $darken3($themePalette.red.v_600) }">$darken3</div>
@@ -116,7 +188,7 @@
       <DocsShow>
         <div
           class="darken-block"
-          :style="{ backgroundColor: $themePalette.red.v_600 }"
+          :style="{ backgroundColor: 'var(--palette-red-v600)' }"
         >
           <code>base</code>
         </div>
@@ -141,9 +213,220 @@
       </DocsShow>
 
       <p>
-        These utilities shouldn't be overused. Always check if there is a shade in the palette
-        available that can be used instead.
+        For pseudo-classes, use a computed property and bind it with <code>v-bind()</code>. For
+        example, to darken a button on hover:
       </p>
+      <!-- eslint-disable -->
+      <!-- prettier-ignore -->
+      <DocsShowCode language="javascript">
+        computed: {
+          deleteButtonHoverColor() {
+            return this.$darken1(this.$themePalette.red.v_600);
+          },
+        },
+      </DocsShowCode>
+      <!-- prettier-ignore -->
+      <DocsShowCode language="css">
+        .delete-button {
+          background-color: var(--palette-red-v600);
+        }
+
+        .delete-button:hover {
+          background-color: v-bind(deleteButtonHoverColor);
+        }
+      </DocsShowCode>
+      <DocsShow>
+        <button class="delete-button">Delete</button>
+      </DocsShow>
+      <!-- eslint-enable -->
+
+      <h3>
+        Computed classes (deprecated)
+        <DocsAnchorTarget anchor="#computed-classes" />
+      </h3>
+
+      <DocsBanner>
+        <code>$computedClass</code> is deprecated. The next major release removes it, together with
+        the Aphrodite library that it uses. It continues to work in version 5.
+      </DocsBanner>
+
+      <p>
+        <code>$computedClass</code> can be used to dynamically create new classes for
+        pseudo-elements such as <code>:hover</code> or <code>:focus</code>. Replace it with a rule
+        in a <code>&lt;style&gt;</code> block.
+      </p>
+
+      <p>
+        If the value is a theme color, use its CSS variable. For example, to color a placeholder
+        with the disabled text token:
+      </p>
+
+      <!-- eslint-disable -->
+      <!-- prettier-ignore -->
+      <DocsShowCode language="html">
+        <!-- Before -->
+        <input
+          class="sample-input"
+          :class="$computedClass({ '::placeholder': { color: $themeTokens.textDisabled } })"
+        >
+
+        <!-- After -->
+        <input class="sample-input">
+        <style>
+          .sample-input::placeholder {
+            color: var(--tokens-textDisabled);
+          }
+        </style>
+      </DocsShowCode>
+      <!-- eslint-enable -->
+
+      <p>
+        If the value comes from a prop, return it from a computed property and bind that property
+        with <code>v-bind()</code>. The computed property must always return a color. For a theme
+        default, return the CSS variable as a string. For example, where
+        <code>hoverBackgroundColor</code> is a prop:
+      </p>
+
+      <!-- eslint-disable -->
+      <!-- prettier-ignore -->
+      <DocsShowCode language="javascript">
+        // Before
+        computed: {
+          styles() {
+            const hoverBackgroundColor = this.hoverBackgroundColor || this.$themeBrand.primary.v_100;
+            return {
+              ':hover': { backgroundColor: hoverBackgroundColor },
+            };
+          },
+        },
+
+        // After
+        computed: {
+          tabHoverBackgroundColor() {
+            return this.hoverBackgroundColor || 'var(--brand-primary-v100)';
+          },
+        },
+      </DocsShowCode>
+      <!-- prettier-ignore -->
+      <DocsShowCode language="css">
+        .tab:hover {
+          background-color: v-bind(tabHoverBackgroundColor);
+        }
+      </DocsShowCode>
+      <!-- eslint-enable -->
+
+      <p>
+        If the value comes from a darken utility, bind it with <code>v-bind()</code> as in the
+        <DocsInternalLink
+          href="#darken-utilities"
+          text="darken utilities"
+        />
+        example. No CSS variable exists for a darkened color.
+      </p>
+
+      <p>
+        If the value is a focus outline, use <code>:focus-visible</code>. The global styles from
+        <code>common</code> (see
+        <DocsInternalLink
+          href="/installation#register-global-styles"
+          text="Installation"
+        />) already give every element that matches <code>:focus-visible</code> the same outline
+        style as <code>$coreOutline</code>. If the class sets only
+        <code>{ ':focus': $coreOutline }</code>, delete it. If the class changes the outline,
+        override only that property. For example, to remove the outline offset on a button:
+      </p>
+
+      <!-- eslint-disable -->
+      <!-- prettier-ignore -->
+      <DocsShowCode language="html">
+        <!-- Before -->
+        <button
+          class="k-chip-close-button"
+          :class="$computedClass({ ':focus': { ...$coreOutline, outlineOffset: 0 } })"
+        ></button>
+
+        <!-- After -->
+        <button class="k-chip-close-button"></button>
+        <style>
+          .k-chip-close-button:focus-visible {
+            outline-offset: 0;
+          }
+        </style>
+      </DocsShowCode>
+      <!-- eslint-enable -->
+
+      <p>
+        If the application imports <code>helper-styles</code> instead of <code>common</code>, write
+        the full outline:
+      </p>
+
+      <!-- eslint-disable -->
+      <!-- prettier-ignore -->
+      <DocsShowCode language="css">
+        .k-chip-close-button:focus-visible {
+          outline: 3px solid var(--tokens-focusOutline);
+          outline-offset: 0;
+        }
+      </DocsShowCode>
+      <!-- eslint-enable -->
+
+      <p>
+        If the outline goes on an element that does not have focus, keep
+        <code>$coreOutline</code> in a <code>:style</code> binding, because
+        <code>:focus-visible</code> never matches there. For example, <code>KCheckbox</code> puts
+        the outline on its checkbox icon while the focus is on the native input.
+        <code>KListbox</code> and <code>KSelect</code> outline an option while the container holds
+        focus through <code>aria-activedescendant</code>.
+      </p>
+
+      <p>
+        Note: <code>v-bind()</code> sets its variable on the component's root element.
+        <code>KOverlay</code> moves its content to <code>#k-overlay</code>, outside that root, so
+        the moved content doesn't receive the variable. This affects <code>KModal</code> and
+        <code>KTooltip</code> with <code>appendToOverlay</code>, and any component with
+        <code>KOverlay</code> as its root. Set the variable with <code>:style</code> on an element
+        inside the moved content instead:
+      </p>
+
+      <!-- eslint-disable -->
+      <!-- prettier-ignore -->
+      <DocsShowCode language="html">
+        <KOverlay>
+          <div :style="{ '--delete-button-hover-color': deleteButtonHoverColor }">
+            <button class="delete-button">Delete</button>
+          </div>
+        </KOverlay>
+      </DocsShowCode>
+      <!-- prettier-ignore -->
+      <DocsShowCode language="css">
+        .delete-button:hover {
+          background-color: var(--delete-button-hover-color);
+        }
+      </DocsShowCode>
+      <!-- eslint-enable -->
+
+      <p>
+        Note: In Vue 2.7, <code>v-bind()</code> in a <code>&lt;style&gt;</code> block stops updating
+        if the component's root element is removed and re-added, for example by a <code>v-if</code>.
+        Wrap the conditional element in a plain, non-conditional root element.
+      </p>
+
+      <h3>Notation</h3>
+      <p>In the references below we use the following shorthand:</p>
+      <ul>
+        <li>
+          <code>brand</code> refers to <code>$themeBrand</code> in JavaScript, or
+          <code>--brand-*</code> in CSS
+        </li>
+        <li>
+          <code>tokens</code> refers to <code>$themeTokens</code> in JavaScript, or
+          <code>--tokens-*</code> in CSS
+        </li>
+        <li>
+          <code>palette</code> refers to <code>$themePalette</code> in JavaScript, or
+          <code>--palette-*</code> in CSS
+        </li>
+      </ul>
     </DocsPageSection>
 
     <DocsPageSection
@@ -364,6 +647,14 @@
       title="Scales"
       anchor="#scales"
     >
+      <DocsBanner>
+        The next major release renames JavaScript keys from <code>v_N</code> to <code>vN</code>. For
+        example, <code>$themePalette.green.v_100</code> will become
+        <code>$themePalette.green.v100</code>. This applies to <code>$themeBrand</code>,
+        <code>$themePalette</code>, and objects returned by <code>themeBrand()</code> and
+        <code>themePalette()</code>. Application keys will also change: brand colors passed to
+        <code>setBrandColors()</code> and color paths in <code>setTokenMapping()</code>.
+      </DocsBanner>
       <p>
         A color scale – sometimes called a color ramp – is an evenly-spaced ramp of shades for a
         particular color hue. In the Kolibri Design System, we follow
@@ -491,6 +782,8 @@
 
 <script>
 
+  import Color from 'color';
+
   import DocsColorBlock from '~/common/DocsColorBlock';
 
   export default {
@@ -509,6 +802,12 @@
         }
         return palette;
       },
+      deleteButtonHoverColor() {
+        return this.$darken1(this.$themePalette.red.v_600);
+      },
+      translucentPrimary() {
+        return Color(this.$themeTokens.primary).alpha(0.3).string();
+      },
     },
   };
 
@@ -517,22 +816,39 @@
 
 <style lang="scss" scoped>
 
-  .palette-block {
-    display: inline-block;
-    width: 350px;
-  }
+      .palette-block {
+        display: inline-block;
+        width: 350px;
+      }
 
-  .darken-block {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 140px;
-    height: 140px;
+      .darken-block {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 140px;
+        height: 140px;
 
-    code {
-      padding: 4px;
-      background-color: rgba(255, 255, 255, 0.8);
-    }
-  }
+        code {
+          padding: 4px;
+          background-color: rgba(255, 255, 255, 0.8);
+        }
+      }
+
+      .error-message {
+        color: var(--tokens-error);
+      }
+
+      .delete-button {
+        padding: 8px 16px;
+        color: var(--tokens-textInverted);
+        background-color: var(--palette-red-v600);
+        border: 0;
+        border-radius: 4px;
+      }
+
+      .delete-button:hover {
+        /* stylelint-disable-next-line csstree/validator, value-keyword-case */
+        background-color: v-bind(deleteButtonHoverColor);
+      }
 
 </style>

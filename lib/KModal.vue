@@ -55,8 +55,8 @@
                   contentStyles,
                   scrollShadow
                     ? {
-                      borderTop: `1px solid ${$themeTokens.fineLine}`,
-                      borderBottom: `1px solid ${$themeTokens.fineLine}`,
+                      borderTop: `1px solid var(--tokens-fineLine)`,
+                      borderBottom: `1px solid var(--tokens-fineLine)`,
                     }
                     : {},
                 ]"
@@ -222,7 +222,7 @@
           'max-width': `${this.maxModalWidth - 32}px`,
           'max-height': `${this.windowHeight - 32}px`,
           width: this.modalWidth,
-          background: this.$themeTokens.surface,
+          background: 'var(--tokens-surface)',
           overflowY: 'auto',
         };
       },
@@ -245,12 +245,12 @@
       },
       titleStyles() {
         return {
-          color: this.$themeTokens.text,
+          color: 'var(--tokens-text)',
         };
       },
       contentStyles() {
         return {
-          color: this.$themeTokens.text,
+          color: 'var(--tokens-text)',
         };
       },
     },

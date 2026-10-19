@@ -15,7 +15,7 @@
   >
     <div
       :class="['k-card-area', ...cardAreaClasses]"
-      :style="{ backgroundColor: $themeTokens.surface }"
+      :style="{ backgroundColor: 'var(--tokens-surface)' }"
     >
       <div class="k-upper-card-area">
         <div class="k-around-title">
@@ -36,7 +36,7 @@
           <component
             :is="headingElement"
             class="k-heading"
-            :style="{ color: $themeTokens.text }"
+            :style="{ color: 'var(--tokens-text)' }"
           >
             <!--
               `event=""` prevents router-link click event
@@ -121,7 +121,7 @@
             v-if="hasBelowTitleArea"
             data-testid="belowTitle"
             class="k-below-title"
-            :style="{ color: $themeTokens.annotation }"
+            :style="{ color: 'var(--tokens-annotation)' }"
           >
             <!-- @slot Places content to the area below the title. -->
             <slot name="belowTitle"></slot>

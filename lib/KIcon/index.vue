@@ -65,7 +65,7 @@
         } else if (this.selectedIcon.defaultColor) {
           return this.selectedIcon.defaultColor;
         }
-        return this.$themeTokens.text;
+        return 'var(--tokens-text)';
       },
       rtlFlip() {
         return this.selectedIcon.rtlFlip && this.isRtl;

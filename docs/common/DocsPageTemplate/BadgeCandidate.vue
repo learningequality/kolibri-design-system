@@ -4,8 +4,8 @@
     class="badge"
     :class="{ small }"
     :style="{
-      backgroundColor: $themePalette.lightblue.v_50,
-      color: $themePalette.lightblue.v_600,
+      backgroundColor: 'var(--palette-lightblue-v50)',
+      color: 'var(--palette-lightblue-v600)',
     }"
   >
     Candidate

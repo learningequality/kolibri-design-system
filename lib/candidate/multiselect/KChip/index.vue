@@ -95,12 +95,12 @@
       chipStyles() {
         if (this.disabled) {
           return {
-            backgroundColor: this.$themePalette.grey.v_100,
-            color: this.$themeTokens.textDisabled,
+            backgroundColor: 'var(--palette-grey-v100)',
+            color: 'var(--tokens-textDisabled)',
           };
         }
         return {
-          backgroundColor: this.$themePalette.grey.v_200,
+          backgroundColor: 'var(--palette-grey-v200)',
         };
       },
 
@@ -110,11 +110,11 @@
       },
 
       iconOutlineColor() {
-        return this.disabled ? this.$themeTokens.textDisabled : this.$themePalette.grey.v_400;
+        return this.disabled ? 'var(--tokens-textDisabled)' : 'var(--palette-grey-v400)';
       },
 
       iconFilledColor() {
-        return this.disabled ? this.$themeTokens.textDisabled : this.$themePalette.grey.v_900;
+        return this.disabled ? 'var(--tokens-textDisabled)' : 'var(--palette-grey-v900)';
       },
 
       closeButtonClass() {

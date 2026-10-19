@@ -69,7 +69,6 @@
 <script>
 
   import { ref, computed, watch, nextTick, onBeforeUnmount } from 'vue';
-  import { themeTokens, themePalette } from '../styles/theme';
   import useKLiveRegion from '../composables/useKLiveRegion';
   import useKResponsiveWindow from '../composables/useKResponsiveWindow';
   import KFocusTrap from '../KFocusTrap.vue';
@@ -201,15 +200,13 @@
 
       const snackbarStyles = computed(() => ({
         bottom: `${24 + props.bottomOffset}px`,
-        backgroundColor: themePalette().grey.v_800,
-        color: themeTokens().textInverted,
+        backgroundColor: 'var(--palette-grey-v800)',
+        color: 'var(--tokens-textInverted)',
       }));
 
       const actionButtonStyles = computed(() => {
-        const whiteColor = themeTokens().textInverted;
-
         return {
-          color: whiteColor,
+          color: 'var(--tokens-textInverted)',
           textDecoration: 'none',
           ':hover': {
             backgroundColor: 'rgba(255, 255, 255, 0.1)',

@@ -2,7 +2,7 @@
 
   <KIcon
     icon="helpOutline"
-    :color="$themePalette.blue.v_600"
+    color="var(--palette-blue-v600)"
   />
 
 </template>

@@ -15,7 +15,7 @@
         <div
           :style="{
             marginLeft: '-4px',
-            color: $themeTokens.annotation,
+            color: 'var(--tokens-annotation)',
           }"
         >
           <span
@@ -24,7 +24,7 @@
               padding: '4px 8px',
               margin: '4px',
               borderRadius: '4px',
-              backgroundColor: $themePalette.grey.v_100,
+              backgroundColor: 'var(--palette-grey-v100)',
             }"
           >
             <KIcon
@@ -40,7 +40,7 @@
               padding: '4px 8px',
               margin: '4px',
               borderRadius: '4px',
-              backgroundColor: $themePalette.grey.v_100,
+              backgroundColor: 'var(--palette-grey-v100)',
             }"
           >
             Short Activity
@@ -53,7 +53,7 @@
                 padding: '4px 8px',
                 margin: '4px',
                 borderRadius: '4px',
-                backgroundColor: $themePalette.grey.v_100,
+                backgroundColor: 'var(--palette-grey-v100)',
               }"
             >
               Biology
@@ -65,7 +65,7 @@
                 padding: '4px 8px',
                 margin: '4px',
                 borderRadius: '4px',
-                backgroundColor: $themePalette.grey.v_100,
+                backgroundColor: 'var(--palette-grey-v100)',
               }"
             >
               Ecology

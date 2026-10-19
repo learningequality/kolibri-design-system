@@ -122,13 +122,13 @@
         return this.ariaLabel ? this.ariaLabel : this.ariaLabelledBy;
       },
       styles() {
-        const color = this.color ? this.color : this.$themeTokens.annotation;
+        const color = this.color ? this.color : 'var(--tokens-annotation)';
         const backgroundColor = this.backgroundColor
           ? this.backgroundColor
-          : this.$themeTokens.surface;
+          : 'var(--tokens-surface)';
         const hoverBackgroundColor = this.hoverBackgroundColor
           ? this.hoverBackgroundColor
-          : this.$themeBrand.primary.v_100;
+          : 'var(--brand-primary-v100)';
         return {
           color,
           backgroundColor,
@@ -140,7 +140,7 @@
         };
       },
       stylesActive() {
-        const colorActive = this.colorActive ? this.colorActive : this.$themeTokens.primary;
+        const colorActive = this.colorActive ? this.colorActive : 'var(--tokens-primary)';
         return {
           color: colorActive,
           borderColor: colorActive,

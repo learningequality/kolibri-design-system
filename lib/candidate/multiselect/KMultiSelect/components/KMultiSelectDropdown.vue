@@ -1,0 +1,424 @@
+<template>
+
+  <div
+    v-show="isOpen && (decoratedOptionTree.length > 0 || showEmptyState)"
+    class="kmselect-dropdown"
+    :class="{ 'kmselect-dropdown-inline': expanded, 'is-disabled': expanded && disabled }"
+    :style="[{ backgroundColor: 'var(--tokens-surface)', maxHeight }, flipStyle]"
+    data-testid="kmselect-dropdown-panel"
+    @mousedown.prevent
+  >
+    <KListbox
+      :id="listboxId"
+      ref="klistboxRef"
+      :value="normalizedSelectedValues"
+      :ariaLabel="listboxLabel"
+      :messages="listboxMessages"
+      :multiple="multiple"
+      :disabled="expanded && disabled"
+      :tabbable="!expanded"
+      @input="$emit('input', $event)"
+      @active-descendant-change="$emit('active-descendant-change', $event)"
+    >
+      <KMultiSelectNode
+        v-for="node in decoratedOptionTree"
+        :key="node.value"
+        :node="node"
+        :showSelector="showSelector"
+        :indeterminateValues="indeterminateValues"
+        :showTopBorder="node._showTopBorder"
+      >
+        <template
+          v-if="$scopedSlots.option"
+          #option="slotProps"
+        >
+          <slot
+            name="option"
+            v-bind="slotProps"
+          ></slot>
+        </template>
+      </KMultiSelectNode>
+    </KListbox>
+
+    <div
+      v-if="showEmptyState"
+      ref="emptyMessageRef"
+      class="kmselect-dropdown-empty"
+      :style="{ color: 'var(--tokens-annotation)' }"
+    >
+      <slot name="no-results">
+        <p class="kmselect-dropdown-empty-text">
+          {{ noResultsText }}
+        </p>
+      </slot>
+    </div>
+  </div>
+
+</template>
+
+
+<script>
+
+  import { computed, ref, watch, nextTick, getCurrentInstance } from 'vue';
+  import KListbox from '../../../listbox/KListbox/index.vue';
+  import useKLiveRegion from '../../../../composables/useKLiveRegion';
+  import KMultiSelectNode from './KMultiSelectNode.vue';
+
+  // Converts a flat options array with integer levels into a nested tree
+  function buildTree(flatOptions, resolveLabel, resolveValue) {
+    const roots = [];
+    const stack = [];
+
+    for (const opt of flatOptions) {
+      const depth = typeof opt.level === 'number' ? opt.level : 0;
+      const label = resolveLabel(opt) ?? opt.label ?? opt.text ?? '';
+      const value = resolveValue(opt) ?? opt.value;
+      const node = { value, label };
+
+      Object.keys(opt).forEach(k => {
+        if (!['label', 'level'].includes(k)) node[k] = opt[k];
+      });
+
+      if (depth === 0) {
+        roots.push(node);
+        stack.length = 1;
+        stack[0] = node;
+      } else {
+        const parent = stack[depth - 1];
+        if (parent) {
+          if (!parent.children) parent.children = [];
+          parent.children.push(node);
+          stack[depth] = node;
+          stack.length = depth + 1;
+        } else {
+          roots.push(node);
+          stack[0] = node;
+          stack.length = 1;
+        }
+      }
+    }
+
+    return roots;
+  }
+
+  export default {
+    name: 'KMultiSelectDropdown',
+
+    components: { KListbox, KMultiSelectNode },
+
+    setup(props) {
+      const klistboxRef = ref(null);
+      const emptyMessageRef = ref(null);
+      const instance = getCurrentInstance();
+      const { sendPoliteMessage } = useKLiveRegion();
+
+      const normalizedSelectedValues = computed(() =>
+        Array.isArray(props.selectedValues) ? props.selectedValues : [],
+      );
+
+      const resolveLabel = computed(() => {
+        const key = props.itemText;
+        return typeof key === 'function' ? key : opt => opt[key];
+      });
+
+      const resolveValue = computed(() => {
+        const key = props.itemValue;
+        return opt => opt[key];
+      });
+
+      const optionTree = computed(() =>
+        buildTree(props.options, resolveLabel.value, resolveValue.value),
+      );
+
+      const filteredOptionTree = computed(() => {
+        if (!props.hideSelected) return optionTree.value;
+        const selectedSet = new Set(normalizedSelectedValues.value.map(String));
+        return optionTree.value.filter(node => !selectedSet.has(String(node.value)));
+      });
+
+      // True when at least one root node has children, used to add group separators.
+      const isHierarchical = computed(() =>
+        optionTree.value.some(node => node.children && node.children.length > 0),
+      );
+
+      // Adds _showTopBorder to each root node so KMultiSelectNode can draw group separators.
+      const decoratedOptionTree = computed(() =>
+        filteredOptionTree.value.map((node, index) => ({
+          ...node,
+          _showTopBorder: isHierarchical.value && index > 0,
+        })),
+      );
+
+      watch(
+        () => props.isOpen,
+        isOpen => {
+          if (!isOpen) clearActiveOption();
+        },
+      );
+
+      const dropUp = ref(false);
+      // Measured once per open so the direction stays stable while typing
+      watch(
+        () => props.isOpen,
+        isOpen => {
+          if (props.expanded || !isOpen || typeof window === 'undefined') {
+            dropUp.value = false;
+            return;
+          }
+          nextTick(() => {
+            const el = instance.proxy.$el;
+            const container = el?.parentElement;
+            if (!el || !container) return;
+            const rect = container.getBoundingClientRect();
+            const spaceBelow = window.innerHeight - rect.bottom;
+            // Rendered dropdown height plus its 2px margin
+            const neededSpace = el.offsetHeight + 2;
+            dropUp.value = spaceBelow < neededSpace && rect.top > spaceBelow;
+          });
+        },
+      );
+
+      const flipStyle = computed(() =>
+        dropUp.value ? { top: 'auto', bottom: '100%', marginTop: 0, marginBottom: '2px' } : {},
+      );
+
+      const showEmptyState = computed(() => {
+        return (
+          props.isOpen &&
+          decoratedOptionTree.value.length === 0 &&
+          Boolean(props.searchText) &&
+          (Boolean(props.noResultsText) || Boolean(instance.proxy.$scopedSlots['no-results']))
+        );
+      });
+
+      watch(showEmptyState, isShown => {
+        if (isShown) {
+          nextTick(() => {
+            if (emptyMessageRef.value) {
+              sendPoliteMessage(emptyMessageRef.value.textContent.trim());
+            }
+          });
+        }
+      });
+
+      const showSelector = computed(() => props.multiple && !props.hideSelected);
+
+      function forwardKeydown(event) {
+        const listEl = klistboxRef.value?.$refs?.listEl;
+        if (!listEl) return;
+
+        let keyToDispatch = event.key;
+
+        if (event.key === 'ArrowDown' || event.key === 'ArrowUp') {
+          const optionEls = listEl.querySelectorAll('[role="option"]');
+          const optionCount = optionEls.length;
+
+          if (optionCount > 0) {
+            const focusedId = listEl.getAttribute('aria-activedescendant');
+            const focusedIndex = focusedId
+              ? Array.from(optionEls).findIndex(el => el.id === focusedId)
+              : -1;
+
+            if (event.key === 'ArrowDown' && focusedIndex === optionCount - 1) {
+              // At last option → wrap to first
+              keyToDispatch = 'Home';
+            } else if (event.key === 'ArrowUp' && focusedIndex === 0) {
+              // At first option → wrap to last
+              keyToDispatch = 'End';
+            }
+          }
+        }
+
+        listEl.dispatchEvent(
+          new KeyboardEvent('keydown', {
+            key: keyToDispatch,
+            code: event.code,
+            ctrlKey: event.ctrlKey,
+            metaKey: event.metaKey,
+            shiftKey: event.shiftKey,
+            altKey: event.altKey,
+            bubbles: true,
+            cancelable: true,
+          }),
+        );
+      }
+
+      function hasFocusedOption() {
+        return klistboxRef.value?.hasFocusedOption() ?? false;
+      }
+
+      function moveFocusByOne(delta) {
+        klistboxRef.value?.moveFocusBy(delta);
+      }
+
+      function toggleFocusedOption() {
+        klistboxRef.value?.toggleFocusedOption();
+      }
+
+      function clearActiveOption() {
+        klistboxRef.value?.onListBlur?.();
+      }
+
+      return {
+        klistboxRef,
+        emptyMessageRef,
+        normalizedSelectedValues,
+        decoratedOptionTree,
+        showSelector,
+        showEmptyState,
+        flipStyle,
+        // eslint-disable-next-line vue/no-unused-properties
+        forwardKeydown,
+        // eslint-disable-next-line vue/no-unused-properties
+        hasFocusedOption,
+        // eslint-disable-next-line vue/no-unused-properties
+        moveFocusByOne,
+        // eslint-disable-next-line vue/no-unused-properties
+        toggleFocusedOption,
+        // eslint-disable-next-line vue/no-unused-properties
+        clearActiveOption,
+      };
+    },
+
+    props: {
+      isOpen: {
+        type: Boolean,
+        default: false,
+      },
+      options: {
+        type: Array,
+        required: true,
+      },
+      selectedValues: {
+        type: Array,
+        default: () => [],
+      },
+      listboxId: {
+        type: String,
+        required: true,
+      },
+      listboxLabel: {
+        type: String,
+        default: '',
+      },
+      noResultsText: {
+        type: String,
+        default: null,
+      },
+      itemText: {
+        type: String,
+        default: 'label',
+      },
+      itemValue: {
+        type: String,
+        default: 'value',
+      },
+      indeterminateValues: {
+        type: Set,
+        default: () => new Set(),
+      },
+      listboxMessages: {
+        type: Object,
+        default: () => ({
+          clickable: () => '',
+          allOptionsSelected: () => '',
+          allOptionsDeselected: () => '',
+          optionDeselected: () => '',
+          partiallySelected: () => '',
+        }),
+      },
+      multiple: {
+        type: Boolean,
+        default: true,
+      },
+      /**
+       * Removes selected options from the dropdown list. Intended for tags-style
+       * UX where selections should only appear as chips, not in the dropdown.
+       * Also suppresses checkboxes automatically.
+       */
+      hideSelected: {
+        type: Boolean,
+        default: false,
+      },
+      searchText: {
+        type: String,
+        default: '',
+      },
+      /**
+       * Renders the list in normal document flow, permanently visible, instead of as a
+       * floating panel. Drops the absolute positioning, z-index and drop shadow.
+       */
+      expanded: {
+        type: Boolean,
+        default: false,
+      },
+      /**
+       * Max height of the list before it scrolls internally, as a CSS length.
+       */
+      maxHeight: {
+        type: String,
+        default: '256px',
+      },
+      /**
+       * Only applies in expanded mode, where the list stays visible rather than closing.
+       * Renders it inert instead of removing it, so the layout does not shift.
+       */
+      disabled: {
+        type: Boolean,
+        default: false,
+      },
+    },
+  };
+
+</script>
+
+
+<style lang="scss" scoped>
+
+  @import '../../../../styles/definitions';
+  @import '../../../../keen/styles/variables';
+
+  .kmselect-dropdown {
+    padding: 8px 0;
+    overflow-y: auto;
+    border-radius: 2px;
+  }
+
+  // The floating panel. `@extend` cannot be applied conditionally on a single selector,
+  // so the drop shadow lives here rather than being reset by the inline modifier.
+  .kmselect-dropdown:not(.kmselect-dropdown-inline) {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    left: 0;
+    z-index: $z-index-dropdown;
+    margin-top: 2px;
+    @extend %dropshadow-2dp;
+  }
+
+  .kmselect-dropdown-inline {
+    position: static;
+    margin-top: 4px;
+  }
+
+  .kmselect-dropdown.is-disabled {
+    pointer-events: none;
+    opacity: 0.5;
+  }
+
+  .kmselect-dropdown-empty {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 48px;
+    padding: 12px 16px;
+    margin: 0;
+    font-size: 16px;
+    text-align: center;
+  }
+
+  .kmselect-dropdown-empty-text {
+    margin: 0;
+  }
+
+</style>

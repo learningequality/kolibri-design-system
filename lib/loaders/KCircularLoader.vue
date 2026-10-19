@@ -37,7 +37,7 @@
           :style="{
             'stroke-dashoffset': strokeDashOffset,
             'stroke-width': calculatedStroke,
-            stroke: $themeTokens.loading,
+            stroke: 'var(--tokens-loading)',
           }"
         />
       </svg>
@@ -49,7 +49,7 @@
         viewBox="25 25 50 50"
         :aria-valuemax="100"
         :aria-valuemin="0"
-        :style="{ stroke: $themeTokens.loading }"
+        :style="{ stroke: 'var(--tokens-loading)' }"
       >
         <circle
           class="ui-progress-circular-indeterminate-path"
@@ -60,7 +60,7 @@
           stroke-miterlimit="10"
           :stroke-width="calculatedStroke"
           :style="{
-            stroke: $themeTokens.loading,
+            stroke: 'var(--tokens-loading)',
           }"
         />
       </svg>

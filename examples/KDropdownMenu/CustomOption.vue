@@ -50,7 +50,7 @@
       options() {
         return [
           { label: 'Edit', value: 'edit', icon: 'edit', color: null },
-          { label: 'Delete', value: 'delete', icon: 'delete', color: this.$themeTokens.error },
+          { label: 'Delete', value: 'delete', icon: 'delete', color: 'var(--tokens-error)' },
         ];
       },
     },

@@ -1,7 +1,24 @@
 import kolibriConfig from 'kolibri-format/eslint.config.mjs';
 
+// kolibri-format 3.x turns these on and KDS has not worked through the existing
+// violations. Tracked in [#1350]: https://github.com/learningequality/kolibri-design-system/issues/1350
+const DEFERRED_PREFIXES = ['jsdoc/', 'vuejs-accessibility/'];
+const DEFERRED_RULES = ['import-x/no-commonjs', 'kolibri/tests-no-hardcoded-strings'];
+
+const deferred = Object.fromEntries(
+  [
+    ...new Set(
+      kolibriConfig
+        .flatMap(config => Object.keys(config.rules || {}))
+        .filter(rule => DEFERRED_PREFIXES.some(prefix => rule.startsWith(prefix))),
+    ),
+    ...DEFERRED_RULES,
+  ].map(rule => [rule, 'off']),
+);
+
 export default [
   ...kolibriConfig,
+  { rules: deferred },
   // Docs and examples use Nuxt aliases (~, ~~) that can't be resolved
   {
     files: ['docs/**/*.vue', 'docs/**/*.js', 'examples/**/*.vue'],

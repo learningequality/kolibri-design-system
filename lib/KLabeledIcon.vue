@@ -10,7 +10,7 @@
         <KIcon
           v-if="icon"
           :icon="icon"
-          :color="color || $themeTokens.text"
+          :color="color || 'var(--tokens-text)'"
           style="top: 2px"
         />
       </slot>
@@ -40,7 +40,7 @@
         <KIcon
           v-if="iconAfter"
           :icon="iconAfter"
-          :color="color || $themeTokens.text"
+          :color="color || 'var(--tokens-text)'"
           style="top: 2px"
         />
       </slot>

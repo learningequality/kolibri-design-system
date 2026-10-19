@@ -10,7 +10,7 @@
       <KLabeledIcon
         :icon="icons[tab.id]"
         :label="tab.label"
-        :color="isActive ? $themeTokens.primary : $themeTokens.annotation"
+        :color="isActive ? 'var(--tokens-primary)' : 'var(--tokens-annotation)'"
       />
     </template>
   </KTabsList>

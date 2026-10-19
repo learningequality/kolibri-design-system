@@ -524,6 +524,172 @@ Changelog is rather internal in nature. See release notes for the public overvie
   - **Guidance:** -.
 
 [#1243]: https://github.com/learningequality/kolibri-design-system/pull/1243
+- [#1356]
+  - **Description:** `$themeBrand` reflects colors set by `setBrandColors()`, and `setBrandColors()` warns in the console about shades missing from the brand tree.
+  - **Products impact:** bugfix
+  - **Addresses:** https://github.com/learningequality/kolibri-design-system/issues/1330
+  - **Components:** `KThemePlugin`, `setBrandColors`
+  - **Breaking:** no
+  - **Impacts a11y:** no
+  - **Guidance:** Brand trees without `v_50` now warn; add it to each brand color. Saved references (`const p = $themeBrand.primary`) still go stale; read through `$themeBrand`.
+
+[#1356]: https://github.com/learningequality/kolibri-design-system/pull/1356
+
+
+
+- [#1361]
+  - **Description:** Bumps KDS version to 5.10.0
+  - **Products impact:** -.
+  - **Addresses:** -.
+  - **Components:** -.
+  - **Breaking:** -
+  - **Impacts a11y:** no
+  - **Guidance:** -.
+
+[#1361]: https://github.com/learningequality/kolibri-design-system/pull/1361
+
+- [#1361]
+  - **Description:** Adds a public `focus()` method to `KSelect`
+  - **Products impact:** new API
+  - **Addresses:** https://github.com/learningequality/kolibri-design-system/issues/1354, https://github.com/learningequality/studio/pull/6311
+  - **Components:** KSelect
+  - **Breaking:** no
+  - **Impacts a11y:** yes
+  - **Guidance:** Replace `$el.querySelector('[tabindex="0"]').focus()` workarounds with `$refs.select.focus()`.
+
+[#1361]: https://github.com/learningequality/kolibri-design-system/pull/1361
+
+
+
+- [#1351]
+  - **Description:** Upgrades `kolibri-format` to 3.x and removes the local theming lint rules, which now come from `eslint-plugin-kolibri` and `kolibri-format`. Theme values in component styles are now written as `var(--tokens-*)`, `var(--brand-*)` and `var(--palette-*)` instead of being read through `$themeTokens`, `$themeBrand` and `$themePalette`. Theme CSS variable naming now comes from the published `kolibri-css-variables` package.
+  - **Products impact:** updated API
+  - **Addresses:** [#15231](https://github.com/learningequality/kolibri/issues/15231)
+  - **Components:** KBreadcrumbs, KCard, KCheckbox, KCircularLoader, KDateRange, KEmptyPlaceholder, KIcon, KImg, KLabeledIcon, KLinearLoader, KListbox, KModal, KMultiSelect, KPageContainer, KRadioButton, KSelect, KSnackbar, KTable, KTabsList, KToolbar, KTooltip
+  - **Breaking:** no
+  - **Impacts a11y:** no
+  - **Guidance:** Components render the same colors, because `KThemePlugin` already defines these variables. A consumer asserting on inline style values in tests will now see `var(--tokens-*)` rather than a hex color.
+
+[#1351]: https://github.com/learningequality/kolibri-design-system/pull/1351
+
+
+
+- [#1339]
+  - **Description:** Deprecates `computedClass` / `$computedClass`, `generateGlobalStyles`, and the Aphrodite dependency. All will be removed in the next major release and still work in v5. Announces the rename of the `v_N` version keys to `vN` on `$themeBrand`, `$themePalette`, `themeBrand()`, and `themePalette()` in the next major release. `common.scss` now includes the Pure CSS base (normalize.css), so it fully replaces `generateGlobalStyles`.
+  - **Products impact:** updated API
+  - **Addresses:** #1320
+  - **Components:** -
+  - **Breaking:** no
+  - **Impacts a11y:** no
+  - **Guidance:** Replace `$computedClass` with a `<style>` rule: a CSS variable for theme colors, `v-bind()` for props and darkened colors, `:focus-visible` for focus outlines. See [Colors > Computed classes](https://design-system.learningequality.org/colors#computed-classes). Replace `generateGlobalStyles` with `@import '~kolibri-design-system/lib/styles/common'`. See [Installation > Register global styles](https://design-system.learningequality.org/installation#register-global-styles). No action is needed for the `v_N` rename until the next major release.
+
+[#1339]: https://github.com/learningequality/kolibri-design-system/pull/1339
+
+
+
+- [#1347]
+  - **Description:** Add `readonly` prop to `KCheckbox` and `KRadioButtonGroup` (applies to all child `KRadioButton`s). Combining it with `disabled` warns and falls back to disabled.
+  - **Products impact:** new API
+  - **Addresses:** https://github.com/learningequality/kolibri-design-system/issues/1342
+  - **Components:** KCheckbox, KRadioButton, KRadioButtonGroup
+  - **Breaking:** no
+  - **Impacts a11y:** yes
+  - **Guidance:** Prefer `readonly` over `disabled` for view-only choice inputs.
+
+[#1347]: https://github.com/learningequality/kolibri-design-system/pull/1347
+
+
+
+- [#1346]
+  - **Description:** Adds `insert` icon.
+  - **Products impact:** new API
+  - **Addresses:** https://github.com/learningequality/kolibri-design-system/issues/1343
+  - **Components:** KIcon
+  - **Breaking:** no
+  - **Impacts a11y:** no
+  - **Guidance:** -
+
+[#1346]: https://github.com/learningequality/kolibri-design-system/pull/1346
+
+
+
+- [#1327]
+  - **Description:** Add an opt-in `expanded` mode to `KMultiSelect` that renders the option list inline and permanently visible below the field, with no open/close lifecycle, plus a `listMaxHeight` prop to cap the list height in both modes. Also makes `Space` toggle the active option in both modes.
+  - **Products impact:** new API
+  - **Addresses:** https://github.com/learningequality/kolibri-design-system/issues/1318, https://github.com/learningequality/studio/pull/6092
+  - **Components:** KMultiSelect
+  - **Breaking:** no
+  - **Impacts a11y:** yes
+  - **Guidance:** Pass `expanded` to render the listbox in normal document flow, always visible. Blur, outside click, `Escape`, `Tab` and selection all leave it in place, and no toggle button is rendered. Use `listMaxHeight` (default `256px`) for the scroll cap. Per the WAI-ARIA APG combobox pattern the input keeps `role="combobox"` and reports `aria-expanded="true"` permanently. `messages.open` and `messages.close` are unused in this mode. Existing dropdown consumers are unaffected.
+
+[#1327]: https://github.com/learningequality/kolibri-design-system/pull/1327
+
+
+
+- [#1319]
+  - **Description:** Adds three lint rules supporting the migration to theme CSS variables: the ESLint rules `kds/no-theme-tokens-in-v-bind` and `vue/no-root-v-if`, and the stylelint rule `kds/no-unknown-theme-custom-properties`. The set of valid variable names and values is derived from `defaultTokenMapping`, `defaultBrandColors`, and `colorsMaterial.js`, so it stays in sync as tokens are added. `KTable`'s sticky column shadow is migrated from `v-bind()` to `var(--tokens-surface, #ffffff)`, removing its `surfacecolor` computed. The rules live in `lint/` and will be removed once ported to `kolibri-format`.
+  - **Products impact:** none
+  - **Addresses:** #1305
+  - **Components:** -
+  - **Breaking:** -
+  - **Impacts a11y:** -
+  - **Guidance:** -
+
+[#1319]: https://github.com/learningequality/kolibri-design-system/pull/1319
+
+
+
+- [#1309]
+  - **Description:** Implement JS generated global styles with CSS variables
+  - **Products impact:** none
+  - **Addresses:** https://github.com/learningequality/kolibri-design-system/issues/1301
+  - **Components:** -
+  - **Breaking:** -
+  - **Impacts a11y:** -
+  - **Guidance:** -
+
+[#1309]: https://github.com/learningequality/kolibri-design-system/pull/1309
+
+
+
+- [#1317]
+  - **Description:** Bumps KDS version to 5.9.0
+  - **Products impact:** -.
+  - **Addresses:** -.
+  - **Components:** -.
+  - **Breaking:** -
+  - **Impacts a11y:** no
+  - **Guidance:** -.
+
+[#1317]: https://github.com/learningequality/kolibri-design-system/pull/1317
+
+
+
+- [#1296]
+  - **Description:** Implement KMultiSelect wrapper and Dropdown menu UI.
+  - **Products impact:** new API
+  - **Addresses:** Addresses #1295
+  - **Components:** KMultiSelect
+  - **Breaking:** no
+  - **Impacts a11y:** yes
+  - **Guidance:** KMultiSelect is now fully usable for consumers. It introduces robust keyboard navigation and aria-live region announcements that handle complex multiselect filtering and state changes natively.
+
+[#1296]: https://github.com/learningequality/kolibri-design-system/pull/1296
+
+
+
+- [#1303]
+  - **Description:** Theme values are now emitted as CSS variables (`--tokens-*`, `--brand-*`, and `--palette-*`) in a `<style id="k-theme-css-variables">` tag in the document head, initialized by `KThemePlugin`, and kept in sync with `globalThemeState` at runtime. Version keys are emitted as `vN` (e.g. `palette.grey.v_400` -> `--palette-grey-v400`); token names are used as-is (e.g. `--theme-primary`). Also exports `themeCssVariablesText()` from `lib/styles/themeCssVariables` for SSR head injection.
+  - **Products impact:** new API
+  - **Addresses:** [Emit theme values as CSS variables on :root #1300](https://github.com/learningequality/kolibri-design-system/issues/1300)
+  - **Components:** N/A
+  - **Breaking:** no
+  - **Impacts a11y:** no
+  - **Guidance:** Styles can now reference theme values directly with `var(--theme-primary)`, `var(--brand-primary-v600)`, `var(--palette-grey-v400)`, etc., as an alternative to `$themeTokens`/`$themeBrand`/`$themePalette`. Existing APIs are unchanged.
+
+[#1303]: https://github.com/learningequality/kolibri-design-system/pull/1303
+
+
 
 - [#1293]
   - **Description:** Added native single-select support to `KListbox` and `KListboxOption`.
