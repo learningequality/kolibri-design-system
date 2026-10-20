@@ -7,14 +7,11 @@
       v-model="selected"
       class="listbox"
       :ariaLabelledBy="classLabel"
-      :style="{ maxHeight: '200px', borderColor: $themeTokens.fineLine }"
+      :style="{ maxHeight: '200px' }"
       :messages="messages"
     >
       <template #selectAll="{ allSelected, someSelected, setAllSelected }">
-        <div
-          class="select-all"
-          :style="{ borderColor: $themeTokens.fineLine }"
-        >
+        <div class="select-all">
           <KCheckbox
             label="Select all classes"
             class="select-all-checkbox"
@@ -33,7 +30,6 @@
         :value="option.id"
         :label="option.label"
         class="option"
-        :style="{ borderColor: $themeTokens.fineLine }"
       />
     </KListbox>
     <p>
@@ -78,7 +74,7 @@
 <style lang="scss" scoped>
 
   .listbox {
-    border: 1px solid;
+    border: 1px solid var(--tokens-fineLine);
     border-radius: 4px;
   }
 
@@ -90,7 +86,7 @@
   .option,
   .select-all {
     padding: 4px 6px;
-    border-bottom: 1px solid;
+    border-bottom: 1px solid var(--tokens-fineLine);
   }
 
   .option {

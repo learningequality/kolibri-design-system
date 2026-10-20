@@ -45,11 +45,11 @@
               getHeaderStyle(header),
               getStickyColumnStyle(-1, index), // Use -1 for header row
               isColumnSortActive(index)
-                ? { color: $themeBrand.primary.v_500 }
-                : { color: $themePalette.grey.v_800 },
-              isColumnFocused(index) ? { backgroundColor: $themePalette.grey.v_100 } : {},
+                ? { color: 'var(--brand-primary-v500)' }
+                : { color: 'var(--palette-grey-v800)' },
+              isColumnFocused(index) ? { backgroundColor: 'var(--palette-grey-v100)' } : {},
               { textAlign: getTextAlign(header.dataType) },
-              { borderBottom: `1px solid ${$themeTokens.fineLine}` },
+              { borderBottom: '1px solid var(--tokens-fineLine)' },
             ]"
             role="columnheader"
             data-focus="true"
@@ -73,18 +73,22 @@
               <span v-if="isColumnSortActive(index) && sortOrder === SORT_ORDER_ASC"><KIcon
                 icon="dropup"
                 :color="
-                  isColumnSortActive(index) ? $themeBrand.primary.v_600 : $themePalette.grey.v_800
+                  isColumnSortActive(index)
+                    ? 'var(--brand-primary-v600)'
+                    : 'var(--palette-grey-v800)'
                 "
               /></span>
               <span v-else-if="isColumnSortActive(index) && sortOrder === SORT_ORDER_DESC"><KIcon
                 icon="dropdown"
                 :color="
-                  isColumnSortActive(index) ? $themeBrand.primary.v_600 : $themePalette.grey.v_800
+                  isColumnSortActive(index)
+                    ? 'var(--brand-primary-v600)'
+                    : 'var(--palette-grey-v800)'
                 "
               /></span>
               <span v-else><KIcon
                 icon="sortColumn"
-                :color="$themePalette.grey.v_800"
+                color="var(--palette-grey-v800)"
               /></span>
             </span>
           </th>
@@ -402,7 +406,7 @@
       getRowStyle() {
         return rowIndex => {
           return this.hoveredRowIndex === rowIndex || this.focusedRowIndex === rowIndex
-            ? { backgroundColor: this.$themePalette.grey.v_100 }
+            ? { backgroundColor: 'var(--palette-grey-v100)' }
             : {};
         };
       },
@@ -411,7 +415,7 @@
           const styles = [];
           if (!this.colIndexIsSticky(colIndex)) {
             if (this.hoveredRowIndex === rowIndex || this.focusedRowIndex === rowIndex) {
-              styles.push({ backgroundColor: this.$themePalette.grey.v_100 });
+              styles.push({ backgroundColor: 'var(--palette-grey-v100)' });
             }
           }
 
@@ -444,9 +448,6 @@
         return colIndex => {
           return this.stickyColumns.includes('last') && colIndex === this.headers.length - 1;
         };
-      },
-      surfacecolor() {
-        return this.$themeTokens.surface;
       },
     },
     watch: {
@@ -791,8 +792,8 @@
       },
       setHighlightHeader(header, highlight) {
         header.style.backgroundColor = highlight
-          ? this.$themePalette.grey.v_100
-          : this.$themeTokens.surface;
+          ? 'var(--palette-grey-v100)'
+          : 'var(--tokens-surface)';
       },
       highlightHeader(colIndex) {
         const headers = this.$refs;
@@ -812,7 +813,7 @@
 
         // Headers are always sticky, so they need a background color "stack" properly
         if (rowIndex === -1) {
-          styles.backgroundColor = this.$themeTokens.surface;
+          styles.backgroundColor = 'var(--tokens-surface)';
         }
 
         if (!this.colIndexIsSticky(colIndex)) {
@@ -822,9 +823,9 @@
         if (this.hoveredRowIndex === rowIndex || this.focusedRowIndex === rowIndex) {
           // Handle background color based on hover/focus state
           // ensure row hover state appears but that sticky columns "stack" properly
-          styles.backgroundColor = this.$themePalette.grey.v_100;
+          styles.backgroundColor = 'var(--palette-grey-v100)';
         } else {
-          styles.backgroundColor = this.$themeTokens.surface;
+          styles.backgroundColor = 'var(--tokens-surface)';
         }
 
         const lastColIndex = this.headers.length - 1;
@@ -975,8 +976,7 @@
     &::before {
       @include sticky-column-shadow-base($direction);
 
-      // stylelint-disable-next-line
-      background: v-bind(surfacecolor);
+      background: var(--tokens-surface);
     }
 
     &::after {

@@ -1,0 +1,34 @@
+@import '~purecss/build/base-min';
+
+html,
+body {
+  color: var(--tokens-text);
+  background-color: var(--palette-grey-v100);
+}
+
+// Outline for keyboard-modality tab-focus, sourced from themeOutlineStyle()
+*:focus {
+  outline-width: 3px;
+  outline-style: solid;
+  outline-color: var(--tokens-focusOutline);
+  outline-offset: 4px;
+}
+
+// Remove the focus outline for mouse clicks
+*:focus:not(:focus-visible) {
+  outline: none;
+}
+
+::selection {
+  color: var(--tokens-text);
+  background: var(--brand-secondary-v100);
+}
+
+@media print {
+  * {
+    // Intentionally hardcoded because print ink must not be themeable
+    color: #000000 !important;
+    background: none !important;
+    box-shadow: none !important;
+  }
+}

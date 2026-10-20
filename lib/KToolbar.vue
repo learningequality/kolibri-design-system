@@ -170,7 +170,7 @@
       },
       toolbarStyles() {
         if (this.type === 'colored') {
-          return { backgroundColor: this.$themeBrand.primary.v_600 };
+          return { backgroundColor: 'var(--brand-primary-v600)' };
         }
         return {};
       },

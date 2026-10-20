@@ -8,13 +8,9 @@
       class="listbox"
       :ariaLabelledBy="classLabel"
       :messages="messages"
-      :style="{ borderColor: $themeTokens.fineLine }"
     >
       <template #selectAll="{ allSelected, someSelected, setAllSelected }">
-        <div
-          class="select-all"
-          :style="{ borderColor: $themeTokens.fineLine }"
-        >
+        <div class="select-all">
           <!--
             margin reset prevents KCheckbox from taking more space
             than necessary and aligns its correctly within the row
@@ -34,7 +30,7 @@
                 <KIcon
                   icon="allUsers"
                   class="option-icon"
-                  :color="isDisabled ? $themeTokens.textDisabled : $themeTokens.text"
+                  :color="isDisabled ? 'var(--tokens-textDisabled)' : 'var(--tokens-text)'"
                 />
               </template>
             </KLabeledIcon>
@@ -48,7 +44,6 @@
         :value="option.id"
         :label="option.label"
         class="option"
-        :style="{ borderColor: $themeTokens.fineLine }"
       >
         <KLabeledIcon :label="option.label">
           <template #icon>
@@ -99,7 +94,7 @@
 <style lang="scss" scoped>
 
   .listbox {
-    border: 1px solid;
+    border: 1px solid var(--tokens-fineLine);
     border-radius: 4px;
   }
 
@@ -111,7 +106,7 @@
   .option,
   .select-all {
     padding: 8px 12px;
-    border-bottom: 1px solid;
+    border-bottom: 1px solid var(--tokens-fineLine);
   }
 
   .option {

@@ -13,7 +13,7 @@
     :class="classes"
     :style="{
       'border-bottom-color':
-        isActive && !disabled ? $themeBrand.primary.v_600 : $themePalette.grey.v_700,
+        isActive && !disabled ? 'var(--brand-primary-v600)' : 'var(--palette-grey-v700)',
     }"
   >
     <input
@@ -46,7 +46,7 @@
           class="ui-select-label-text"
           :class="labelClasses"
           :style="{
-            color: isActive ? $themeTokens.primary : $themePalette.grey.v_700,
+            color: isActive ? 'var(--tokens-primary)' : 'var(--palette-grey-v700)',
           }"
         >
           <!-- @slot Optional slot as alternative to `label` prop -->
@@ -76,7 +76,7 @@
           <UiIcon
             v-if="!clearableState"
             class="ui-select-dropdown-button"
-            :style="{ color: isActive ? $themeTokens.primary : $themePalette.grey.v_700 }"
+            :style="{ color: isActive ? 'var(--tokens-primary)' : 'var(--palette-grey-v700)' }"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -97,7 +97,7 @@
               class="overlay-close-button"
               icon="close"
               :ariaLabel="clearText"
-              :color="$themeTokens.text"
+              color="var(--tokens-text)"
               :tooltip="clearText"
               @click.stop="onClear"
             />
@@ -121,15 +121,15 @@
             ref="dropdown"
             class="ui-select-dropdown"
             :style="{
-              color: $themeTokens.primary,
-              backgroundColor: $themeTokens.surface,
+              color: 'var(--tokens-primary)',
+              backgroundColor: 'var(--tokens-surface)',
               bottom: dropdownButtonBottom,
             }"
           >
             <ul
               ref="optionsList"
               class="ui-select-options"
-              :style="{ backgroundColor: $themeTokens.surface }"
+              :style="{ backgroundColor: 'var(--tokens-surface)' }"
             >
               <KSelectOption
                 v-for="(option, index) in filteredOptions"
@@ -580,7 +580,7 @@
       activeBorderStyle() {
         if (this.isActive && !this.clearableState) {
           return {
-            borderBottomColor: this.$themeTokens.primary,
+            borderBottomColor: 'var(--tokens-primary)',
           };
         } else if (this.clearableState) {
           return {

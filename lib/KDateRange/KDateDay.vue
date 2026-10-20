@@ -77,9 +77,9 @@
       inRangeStyle() {
         return this.isInRange
           ? {
-            backgroundColor: this.$themeBrand.primary.v_100,
+            backgroundColor: 'var(--brand-primary-v100)',
             ':hover': {
-              backgroundColor: this.$themePalette.grey.v_300,
+              backgroundColor: 'var(--palette-grey-v300)',
             },
           }
           : {};
@@ -87,8 +87,8 @@
       selectedStyle() {
         return this.isSelected
           ? {
-            backgroundColor: this.$themeBrand.primary.v_500,
-            color: this.$themePalette.white + '!important',
+            backgroundColor: 'var(--brand-primary-v500)',
+            color: 'var(--palette-white) !important',
           }
           : {};
       },
@@ -102,7 +102,7 @@
           fontWeight: 'lighter',
           lineHeight: '0px',
           padding: '0',
-          color: this.$themePalette.grey.v_700,
+          color: 'var(--palette-grey-v700)',
         };
       },
       isFirstDay() {
@@ -112,6 +112,9 @@
     methods: {
       toMonthName(monthNumber) {
         const date = new Date();
+        // set the day first to avoid rolling over into the following month when
+        // today's date doesn't exist in the target month (e.g. 31st -> November)
+        date.setDate(1);
         date.setMonth(monthNumber);
         return this.$formatDate(date, { month: 'long' });
       },

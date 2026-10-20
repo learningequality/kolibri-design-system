@@ -25,6 +25,9 @@ export default {
   css: ['normalize.css/normalize.css', '~/assets/main'],
   modulesDir: ['node_modules', 'docs'], // allow custom DocsShowCode loader to be found
   build: {
+    // webpack 4 and Nuxt's SSR externals resolver both ignore a package's `exports`
+    // field, so `kolibri-css-variables` must be bundled
+    transpile: ['kolibri-css-variables'],
     extractCSS: true,
     optimization: {
       // this appears to be necessary to prevent a flash of unstyled text
@@ -70,6 +73,11 @@ export default {
         loader: 'raw-loader',
         test: /examples\/.*\.vue$/,
       });
+      // webpack 4 ignores a package's `exports` field, so the `kolibri-css-variables`
+      // subpath doesn't resolve in this build. Node, jest and webpack 5 honor it, so
+      // consumers are unaffected, this alias is only for the docs site
+      config.resolve.alias['kolibri-css-variables/themeCssVariableNaming'] =
+        require.resolve('kolibri-css-variables/themeCssVariableNaming');
       config.devtool = 'source-map';
     },
     cssSourceMap: true,

@@ -32,14 +32,10 @@
         />
       </template>
       <template #footer>
-        <div
-          class="pills"
-          :style="{ color: $themeTokens.annotation }"
-        >
+        <div class="pills">
           <span
             v-for="(pill, i) in slicedPills"
             :key="i"
-            :style="{ 'background-color': $themePalette.grey.v_100 }"
           >
             {{ pill }}
           </span>
@@ -100,14 +96,10 @@
         />
       </template>
       <template #footer>
-        <div
-          class="pills"
-          :style="{ color: $themeTokens.annotation }"
-        >
+        <div class="pills">
           <span
             v-for="(pill, i) in slicedPills"
             :key="i"
-            :style="{ 'background-color': $themePalette.grey.v_100 }"
           >
             {{ pill }}
           </span>
@@ -178,11 +170,13 @@
 
   .pills {
     margin-left: -4px;
+    color: var(--tokens-annotation);
 
     span {
       display: inline-block;
       padding: 4px 8px;
       margin: 4px;
+      background-color: var(--palette-grey-v100);
       border-radius: 4px;
     }
   }

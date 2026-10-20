@@ -4,19 +4,15 @@
     class="kmselect-input"
     :class="[
       disabled ? 'is-disabled' : '',
-      $computedClass({
-        ':hover:not(.is-disabled)': {
-          borderBottomColor: $themePalette.grey.v_500 + ' !important',
-        },
-      }),
+      expanded ? 'kmselect-input-no-toggle' : '',
+      showClearButton ? 'has-clear' : '',
     ]"
     :style="{
-      borderBottom: `2px solid ${
-        invalid ? $themeTokens.error : focused ? $themeTokens.primary : $themeTokens.fineLine
-      }`,
       cursor: disabled ? 'not-allowed' : 'default',
-      backgroundColor: disabled ? $themeTokens.textDisabled + '20' : $themePalette.grey.v_100,
+      backgroundColor: 'transparent',
     }"
+    :role="multiple ? 'group' : undefined"
+    :aria-labelledby="multiple ? `${labelId} ${selectedValuesId}` : undefined"
     @click="handleWrapperClick"
   >
     <template v-if="multiple">
@@ -48,22 +44,8 @@
       </span>
     </template>
 
-    <span
-      v-else-if="selectedOptions.length > 0 && !isOpen && !searchText"
-      :style="{
-        flex: '1 1 auto',
-        padding: '0 4px',
-        fontSize: '14px',
-        color: disabled ? $themeTokens.textDisabled : $themeTokens.text,
-        whiteSpace: 'nowrap',
-        overflow: 'hidden',
-        textOverflow: 'ellipsis',
-      }"
-    >
-      {{ getOptionText(selectedOptions[0]) }}
-    </span>
-
     <input
+      :id="inputId"
       ref="inputEl"
       v-model="inputModel"
       class="kmselect-native-input"
@@ -75,7 +57,7 @@
       v-bind="inputAriaAttrs"
       data-focus="true"
       :style="{
-        color: disabled ? $themeTokens.textDisabled : $themeTokens.text,
+        color: disabled ? 'var(--tokens-textDisabled)' : 'var(--tokens-text)',
         cursor: disabled ? 'not-allowed' : 'text',
       }"
       @keydown="$emit('input-keydown', $event)"
@@ -84,11 +66,21 @@
     >
 
     <KIconButton
-      v-if="clearable && selectedOptions.length > 0 && !disabled"
+      v-if="showClearButton"
       size="small"
       icon="clear"
       :ariaLabel="clearAllLabel"
       :tooltip="clearAllLabel"
+      tooltipPosition="top"
+      :color="
+        invalid
+          ? 'var(--tokens-error)'
+          : focused
+            ? 'var(--tokens-primary)'
+            : hovered
+              ? 'var(--tokens-text)'
+              : 'var(--palette-grey-v700)'
+      "
       class="kmselect-clear-btn"
       @click.stop="$emit('clear-all')"
       @mousedown.native.prevent
@@ -97,15 +89,28 @@
     />
 
     <KIconButton
+      v-if="!expanded"
       tabindex="-1"
       size="small"
-      :icon="isOpen ? 'chevronUp' : 'chevronDown'"
+      :icon="isOpen ? 'dropup' : 'dropdown'"
       :ariaLabel="isOpen ? closeLabel : openLabel"
       :tooltip="isOpen ? closeLabel : openLabel"
+      tooltipPosition="top"
       :disabled="disabled"
+      :aria-expanded="String(isOpen)"
+      :aria-controls="listboxId"
+      :color="
+        invalid
+          ? 'var(--tokens-error)'
+          : focused
+            ? 'var(--tokens-primary)'
+            : !disabled && hovered
+              ? 'var(--tokens-text)'
+              : 'var(--palette-grey-v700)'
+      "
       :style="{
         position: 'absolute',
-        insetInlineEnd: '4px',
+        right: '4px',
         top: '50%',
         transform: 'translateY(-50%)',
       }"
@@ -119,7 +124,7 @@
 
 <script>
 
-  import { ref, computed, getCurrentInstance } from 'vue';
+  import { ref, computed } from 'vue';
   import KIconButton from '../../../../buttons-and-links/KIconButton';
   import KChip from '../../KChip/index.vue';
   import KTooltip from '../../../../KTooltip/index.vue';
@@ -131,7 +136,6 @@
 
     setup(props, { emit }) {
       const inputEl = ref(null);
-      const instance = getCurrentInstance();
 
       const inputModel = computed({
         get() {
@@ -149,12 +153,12 @@
           'aria-haspopup': 'listbox',
           'aria-controls': props.listboxId,
           'aria-autocomplete': 'list',
-          ...(props.required && { 'aria-required': 'true' }),
           'aria-invalid': props.invalid ? 'true' : 'false',
         };
-        if (props.labelId) {
-          attrs['aria-labelledby'] = props.labelId;
-        }
+        const labelledby = [];
+        if (props.labelId) labelledby.push(props.labelId);
+        if (props.multiple && props.selectedValuesId) labelledby.push(props.selectedValuesId);
+        if (labelledby.length) attrs['aria-labelledby'] = labelledby.join(' ');
         if (props.isOpen && props.activeDescendant) {
           attrs['aria-activedescendant'] = props.activeDescendant;
         }
@@ -164,9 +168,13 @@
         return attrs;
       });
 
+      const showClearButton = computed(
+        () => props.clearable && props.selectedOptions.length > 0 && !props.disabled,
+      );
+
       const placeholderStyle = computed(() => ({
         '::placeholder': {
-          color: instance.proxy.$themeTokens.textDisabled,
+          color: 'var(--tokens-textDisabled)',
         },
       }));
 
@@ -197,6 +205,7 @@
         inputEl,
         inputModel,
         inputAriaAttrs,
+        showClearButton,
         placeholderStyle,
         // eslint-disable-next-line vue/no-unused-properties
         focus,
@@ -223,9 +232,9 @@
         type: String,
         required: true,
       },
-      required: {
-        type: Boolean,
-        default: false,
+      inputId: {
+        type: String,
+        required: true,
       },
       errorId: {
         type: String,
@@ -251,6 +260,11 @@
         type: Boolean,
         default: false,
       },
+
+      expanded: {
+        type: Boolean,
+        default: false,
+      },
       disabled: {
         type: Boolean,
         default: false,
@@ -260,6 +274,10 @@
         default: false,
       },
       focused: {
+        type: Boolean,
+        default: false,
+      },
+      hovered: {
         type: Boolean,
         default: false,
       },
@@ -283,6 +301,10 @@
         type: String,
         default: null,
       },
+      selectedValuesId: {
+        type: String,
+        default: null,
+      },
       maxlength: {
         type: Number,
         default: null,
@@ -301,12 +323,12 @@
     flex-wrap: wrap;
     gap: 4px;
     align-items: center;
-    min-height: 40px;
-    padding-block: 4px;
-    padding-inline-start: 8px;
-    padding-inline-end: 40px;
+    min-height: 32px;
+    padding-top: 4px;
+    padding-right: 40px;
+    padding-bottom: 4px;
+    padding-left: 10px;
     border: 0;
-    border-radius: 2px 2px 0 0;
     outline: none;
   }
 
@@ -315,7 +337,7 @@
     min-width: 80px;
     height: 28px;
     padding: 0 4px;
-    font-size: 14px;
+    font-size: 16px;
     background: transparent;
     border: 0;
     outline: none;
@@ -323,9 +345,23 @@
 
   .kmselect-clear-btn {
     position: absolute;
-    inset-inline-end: 36px;
     top: 50%;
+    right: 36px;
     transform: translateY(-50%);
+  }
+
+  // Without the toggle there is no gutter to reserve on the right, beyond
+  // whatever the clear button needs.
+  .kmselect-input-no-toggle {
+    padding-right: 10px;
+
+    &.has-clear {
+      padding-right: 36px;
+    }
+
+    .kmselect-clear-btn {
+      right: 4px;
+    }
   }
 
 </style>

@@ -30,14 +30,14 @@
     <template #title>
       <span
         class="k-title-placeholder"
-        :style="{ backgroundColor: $themePalette.grey.v_100 }"
+        :style="{ backgroundColor: 'var(--palette-grey-v100)' }"
       >
       </span>
     </template>
     <template #belowTitle>
       <span
         class="k-below-title-placeholder"
-        :style="{ backgroundColor: $themePalette.grey.v_100 }"
+        :style="{ backgroundColor: 'var(--palette-grey-v100)' }"
       >
       </span>
     </template>

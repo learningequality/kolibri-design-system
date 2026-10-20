@@ -93,25 +93,31 @@
       </h3>
 
       <p>
-        In order for Kolibri to be dynamically themed colors cannot be defined as SCSS constants.
-        Instead, colors are defined in Javascript. Every Vue component instance gets a few reactive
-        Vue objects attached to it which can be accessed in computed styles:
+        Kolibri supports dynamic theming and colors update at runtime rather than being fixed SCSS
+        constants. They are available in two forms:
       </p>
       <ul>
-        <li><code>$themeBrand</code> contains colors related to the aesthetic color scheme</li>
-        <li><code>$themeTokens</code> contains colors with special meanings in Kolibri</li>
-        <li><code>$themePalette</code> contains a wide range of additional compatible colors</li>
+        <li>
+          As CSS variables (<code>--tokens-*</code>, <code>--brand-*</code>,
+          <code>--palette-*</code>) for use in <code>&lt;style&gt;</code> blocks and SCSS files.
+          Reference them with <code>var(--name)</code>.
+        </li>
+        <li>
+          As reactive objects on every Vue component instance (<code>$themeBrand</code>,
+          <code>$themeTokens</code>, <code>$themePalette</code>) for use in computed styles and
+          inline <code>:style</code> bindings.
+        </li>
       </ul>
       <p>
-        For more informatiom see the
+        For more information see the
         <DocsInternalLink
           text="Colors page"
-          href="/colors"
+          href="/colors#usage"
         />.
       </p>
 
       <h3>
-        Helper styles
+        Global and helper styles
         <DocsAnchorTarget anchor="#helper-styles" />
       </h3>
 
@@ -121,7 +127,7 @@
           href="/installation#register-global-styles"
           text="installation step"
         />
-        globally exposes the following helper styles:
+        globally exposes the following:
       </p>
 
       <ul>
@@ -129,7 +135,46 @@
           <code>.visuallyhidden</code> class: hides an element visually but keeps it accessible to
           screen readers
         </li>
+        <li>
+          Global styles for page background, text color, text selection, focus outline, and print,
+          using the theme CSS variables
+        </li>
+        <li>
+          Every theme CSS variable at its default value, so they resolve when the page first
+          renders, before the theme plugin has run. These come with the helper styles rather than
+          the global styles, so they are always registered.
+        </li>
       </ul>
+
+      <h3>
+        Focus outline
+        <DocsAnchorTarget anchor="#focus-outline" />
+      </h3>
+      <p>
+        We provide a consistent, high-contrast focus highlight, using the
+        <code>--tokens-focusOutline</code>
+        CSS variable. The global styles apply it to focused elements that match
+        <code>:focus-visible</code>, which the browser decides.
+      </p>
+      <p>
+        <DocsInternalLink
+          href="/installation#install-plugin"
+          text="trackInputModality()"
+        />
+        overrides that decision. Its <code>disableFocusRingByDefault</code> option defaults to
+        <code>true</code>, which adds the rule
+        <code>body:not([modality=keyboard]) :focus { outline: none; }</code>. That rule outranks the
+        global styles, so the outline appears only during keyboard navigation, and
+        <code>:focus-visible</code> makes no visible difference. Pass
+        <code>disableFocusRingByDefault: false</code> to let it decide again. This documentation
+        site uses that setting.
+      </p>
+      <p>
+        CSS can only outline the element that has focus. When the outline belongs on a different
+        element, use the <code>$coreOutline</code> computed property available on Vue instances. It
+        returns the outline style while the user navigates with the keyboard, and
+        <code>outline: none</code> at other times.
+      </p>
     </DocsPageSection>
 
     <DocsPageSection
@@ -276,17 +321,6 @@
         }
       </DocsShowCode>
       <!-- eslint-enable -->
-    </DocsPageSection>
-
-    <DocsPageSection
-      title="Focus outline"
-      anchor="#focus-outline"
-    >
-      <p>
-        We provide a consistent, high-contrast focus highlight that is enabled only when we detect
-        that the user is navigating using the keyboard (i.e. tabbing from item to item). Use the
-        <code>$coreOutline</code> attribute attached to Vue objects for this.
-      </p>
     </DocsPageSection>
   </DocsPageTemplate>
 

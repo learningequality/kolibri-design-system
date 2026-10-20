@@ -2,7 +2,7 @@
 
   <div
     class="k-radio-button-container"
-    :class="{ 'k-radio-button-disabled': disabled }"
+    :class="{ 'k-radio-button-disabled': disabled, 'k-radio-button-readonly': isReadonly }"
     @click="toggleCheck"
   >
     <div class="tr">
@@ -29,14 +29,14 @@
           icon="radioSelected"
           class="radio-button-icon"
           name="radio_button_checked"
-          :style="[{ fill: color || $themeTokens.primary }, disabledStyle, activeStyle]"
+          :style="[{ fill: color || 'var(--tokens-primary)' }, disabledStyle, activeStyle]"
         />
         <KIcon
           v-else
           icon="radioUnselected"
           class="radio-button-icon"
           name="radio_button_unchecked"
-          :style="[{ fill: $themeTokens.annotation }, disabledStyle, activeStyle]"
+          :style="[{ fill: 'var(--tokens-annotation)' }, disabledStyle, activeStyle]"
         />
       </div>
 
@@ -58,7 +58,7 @@
         <div
           v-if="description"
           class="description"
-          :style="[{ color: disabled ? '' : $themeTokens.annotation }, disabledStyle]"
+          :style="[{ color: disabled ? '' : 'var(--tokens-annotation)' }, disabledStyle]"
         >
           {{ description }}
         </div>
@@ -91,6 +91,9 @@
     },
     model: {
       prop: 'currentValue',
+    },
+    inject: {
+      kRadioButtonGroup: { default: null },
     },
     props: {
       /**
@@ -177,6 +180,12 @@
       tabIndex: 0,
     }),
     computed: {
+      groupReadonly() {
+        return Boolean(this.kRadioButtonGroup && this.kRadioButtonGroup.readonly);
+      },
+      isReadonly() {
+        return !this.disabled && this.groupReadonly;
+      },
       isChecked() {
         return this.currentValue === (this.buttonValue === null ? this.value : this.buttonValue);
       },
@@ -188,11 +197,11 @@
         return this.active ? this.$coreOutline : {};
       },
       disabledStyle() {
-        return this.disabled ? { fill: this.$themeTokens.textDisabled } : {};
+        return this.disabled ? { fill: 'var(--tokens-textDisabled)' } : {};
       },
       labelStyle() {
         return {
-          color: this.disabled ? this.$themeTokens.textDisabled : '',
+          color: this.disabled ? 'var(--tokens-textDisabled)' : '',
         };
       },
       truncateText() {
@@ -212,6 +221,12 @@
       }
       if (process.env.NODE_ENV !== 'production') {
         this.checkForKRadioButtonGroup();
+        if (this.disabled && this.groupReadonly) {
+          // eslint-disable-next-line no-console
+          console.warn(
+            "KRadioButton: 'disabled' cannot be used inside a 'readonly' KRadioButtonGroup. Falling back to 'disabled'.",
+          );
+        }
       }
     },
     methods: {
@@ -222,10 +237,14 @@
        * @param {Event} event - The event object.
        */
       toggleCheck(event) {
-        if (!this.disabled) {
-          this.focus();
-          this.update(event);
+        if (this.disabled) return;
+        this.focus();
+        if (this.isReadonly) {
+          // Cancelling the click makes the browser restore `checked`
+          if (event && event.target === this.$refs.input) event.preventDefault();
+          return;
         }
+        this.update(event);
       },
       /**
        * @public
@@ -326,7 +345,8 @@
     user-select: none;
   }
 
-  .k-radio-button-disabled {
+  .k-radio-button-disabled,
+  .k-radio-button-readonly {
     .k-radio-button,
     .k-radio-button-input,
     .k-radio-button-label {
