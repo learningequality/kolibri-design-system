@@ -7,6 +7,19 @@ Changelog is rather internal in nature. See release notes for the public overvie
 <!-- [DO NOT REMOVE-USED BY GH ACTION] PASTE CHANGELOG -->
 
 
+- [#1377]
+  - **Description:** Merges release-v5 into develop
+  - **Products impact:** none.
+  - **Addresses:**-.
+  - **Components:** .
+  - **Breaking:**
+  - **Impacts a11y:**
+  - **Guidance:** .
+
+[#1377]: https://github.com/learningequality/kolibri-design-system/pull/1377
+
+
+
 - [#1367]
   - **Description:** build(deps): bump compression from 1.7.5 to 1.8.2
   - **Products impact:** Dev Dependency upgrade
