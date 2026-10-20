@@ -7,6 +7,19 @@ Changelog is rather internal in nature. See release notes for the public overvie
 <!-- [DO NOT REMOVE-USED BY GH ACTION] PASTE CHANGELOG -->
 
 
+- [#1380]
+  - **Description:** build(deps): bump launch-editor from 2.14.1 to 2.14.2
+  - **Products impact:** Dev Dependency upgrade
+  - **Addresses:** -
+  - **Components:** -
+  - **Breaking:** -
+  - **Impacts a11y:** -
+  - **Guidance:** -
+
+[#1380]: https://github.com/learningequality/kolibri-design-system/pull/1380
+
+
+
 - [#1379]
   - **Description:** build(deps): bump follow-redirects from 1.16.0 to 1.16.1
   - **Products impact:** Dev Dependency upgrade
