@@ -108,14 +108,17 @@
       </p>
 
       <ul>
-        <li><code>allSelected</code>: <code>true</code> when every visible option is selected.</li>
         <li>
-          <code>someSelected</code>: <code>true</code> when at least one (but not all) visible
-          options are selected. Useful for indicating indeterminate state.
+          <code>allSelected</code>: <code>true</code> when every visible enabled option is selected.
         </li>
         <li>
-          <code>setAllSelected(checked)</code>: Controls selection of all visible options. Call with
-          <code>true</code> to select all visible options or <code>false</code> to deselect them.
+          <code>someSelected</code>: <code>true</code> when at least one (but not all) visible
+          enabled options are selected. Useful for indicating indeterminate state.
+        </li>
+        <li>
+          <code>setAllSelected(checked)</code>: Controls selection of all visible enabled options.
+          Call with <code>true</code> to select them or <code>false</code> to deselect them.
+          Disabled options keep their selection.
         </li>
       </ul>
 
