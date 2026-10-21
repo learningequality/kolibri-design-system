@@ -7,6 +7,19 @@ Changelog is rather internal in nature. See release notes for the public overvie
 <!-- [DO NOT REMOVE-USED BY GH ACTION] PASTE CHANGELOG -->
 
 
+- [#1381]
+  - **Description:** Added an AI usage section to the pull request template, and marked the required sections for the shared template check
+  - **Products impact:** none
+  - **Addresses:** learningequality/.github#102
+  - **Components:** -
+  - **Breaking:** no
+  - **Impacts a11y:** no
+  - **Guidance:** -
+
+[#1381]: https://github.com/learningequality/kolibri-design-system/pull/1381
+
+
+
 - [#1380]
   - **Description:** build(deps): bump launch-editor from 2.14.1 to 2.14.2
   - **Products impact:** Dev Dependency upgrade
