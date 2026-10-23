@@ -14,7 +14,6 @@
     class="ui-icon-button"
     :aria-label="ariaLabel || tooltip"
     :class="classes"
-    :style="buttonColor"
     :disabled="disabled || loading"
     tabindex="0"
     :href="isAnchor ? (disabled ? null : href) : null"
@@ -25,9 +24,6 @@
     <div
       v-if="icon || $slots.default"
       class="ui-icon-button-icon"
-      :style="{
-        color: !primaryType ? $themeTokens.primary : ''
-      }"
     >
       <slot>
         <UiIcon :icon="icon" />
@@ -157,35 +153,13 @@
       primaryType() {
         return this.type === 'primary';
       },
-      primaryColor() {
-        return this.color === 'primary';
-      },
-      buttonColor() {
-        if (this.primaryColor && this.primaryType) {
-          const style = {
-            backgroundColor: this.$themeTokens.primary,
-          };
-          if (this.dropdownOpen) {
-            style[':hover:not(.is-disabled)'] = {
-              backgroundColor: this.$themeTokens.primaryDark,
-            };
-          }
-          return style;
-        } else if (this.primaryColor && !this.primaryType) {
-          const style = {
-            color: this.$themeTokens.primary,
-            fill: this.$themeTokens.primary,
-          };
-          if (this.dropdownOpen) {
-            style[':hover:not(.is-disabled)'] = {
-              backgroundColor: this.$darken1(this.$themeBrand.primary.v_600)
-            }
-          }
-          style['--focus-ring-bg'] =this.$darken2(this.$themeBrand.primary.v_600)
-          return style;
-        }
-
-        return {};
+      // CSS has no relative darken. Without the fallback a missing brand color
+      // reaches CSS as the string 'undefined' and paints nothing.
+      primaryFocusRingColor() {
+        const brand = this.$themeBrand?.primary?.v_600;
+        const darkened = this.$darken2(brand);
+        // `$darken2` returns what it cannot parse, which is no darker than the input
+        return darkened && darkened !== brand ? darkened : 'var(--tokens-primaryDark)';
       },
 
       isAnchor() {
@@ -336,6 +310,11 @@
     }
   }
 
+  // the icon takes the primary token whatever the `color` prop asks for
+  .ui-icon-button:not(.ui-icon-button--type-primary) .ui-icon-button-icon {
+    color: var(--tokens-primary);
+  }
+
   .ui-icon-button-focus-ring {
     position: absolute;
     top: 0;
@@ -445,7 +424,18 @@
       color: white;
     }
 
-    
+    &.ui-icon-button--color-primary {
+      background-color: var(--tokens-primary);
+
+      &:hover:not(.is-disabled),
+      &.has-dropdown-open {
+        background-color: var(--tokens-primaryDark);
+      }
+
+      .ui-icon-button-focus-ring {
+        background-color: v-bind(primaryFocusRingColor);
+      }
+    }
 
     &.ui-icon-button--color-accent {
       background-color: $brand-accent-color;
@@ -521,6 +511,37 @@
       }
     }
 
+    // 'primary' and 'secondary' are the only documented types
+    &.ui-icon-button--color-primary {
+      color: var(--tokens-primary);
+      // so a slot SVG with no fill of its own still takes this color
+      fill: currentcolor;
+
+      // `color-mix()` is outside the browserslist baseline, and a plain second declaration
+      // computes to transparent there instead of falling back, hence `@supports`.
+      &:hover:not(.is-disabled),
+      &.has-dropdown-open {
+        background-color: var(--brand-primary-v100);
+
+        @supports (color: color-mix(in srgb, red, blue)) {
+          background-color: color-mix(in srgb, var(--tokens-primary) 12%, transparent);
+        }
+      }
+
+      .ui-icon-button-focus-ring {
+        background-color: var(--brand-primary-v100);
+
+        @supports (color: color-mix(in srgb, red, blue)) {
+          background-color: color-mix(in srgb, var(--tokens-primary) 26%, transparent);
+        }
+      }
+
+      // `.ui-icon-button` clears the outline, so the tint above is the only focus
+      // indicator, and at 1.4:1 on white it does not reach the 3:1 of WCAG 1.4.11
+      body[modality='keyboard'] &:focus .ui-icon-button-focus-ring {
+        box-shadow: inset 0 0 0 2px var(--tokens-primary);
+      }
+    }
 
     &.ui-icon-button--color-accent {
       color: $brand-accent-color;
