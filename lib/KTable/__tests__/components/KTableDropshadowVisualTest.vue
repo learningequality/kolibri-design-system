@@ -20,7 +20,7 @@
 <script>
 
   export default {
-    name: 'KTableDropshadow',
+    name: 'KTableDropshadowVisualTest',
     data() {
       return {
         wideHeaders: [

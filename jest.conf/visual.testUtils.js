@@ -83,8 +83,19 @@ export async function renderComponentForVisualTest(component, props, slots = {})
  */
 export async function takeSnapshot(name, options = {}) {
   if (process.env.VISUAL_TESTING == 'true') {
+    await waitForPageToSettle();
     await percySnapshot(page, name, options);
   }
+}
+
+async function waitForPageToSettle() {
+  // the dev server keeps a live reload connection open, so in-flight requests never
+  // reach 0. `concurrency: 2` matches `networkidle2` in `visual.setup.js`.
+  await page.waitForNetworkIdle({ idleTime: 500, timeout: 10000, concurrency: 2 });
+  // `complete` is true for a failed image too, so a broken src cannot hang this
+  await page.waitForFunction(() => Array.from(document.images).every(img => img.complete), {
+    timeout: 10000,
+  });
 }
 
 export async function delay(time) {
