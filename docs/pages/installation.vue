@@ -38,7 +38,9 @@
           <code>--brand-*</code>, <code>--palette-*</code>) emitted to a
           <code>&lt;style&gt;</code> tag with <code>#k-theme-css-variables</code> in the document
           head for use in style blocks. Both stay in sync when the theme changes via
-          <code>setBrandColors()</code> or <code>setTokenMapping()</code>. See
+          <code>setBrandColors()</code> or <code>setTokenMapping()</code>.
+          <code>setBrandColors()</code> expects every <code>v_N</code> shade of each default brand
+          color, and logs a console warning naming any that are missing. See
           <DocsInternalLink
             href="/colors/#usage"
             text="Colors"
