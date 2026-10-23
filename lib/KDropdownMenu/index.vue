@@ -272,6 +272,7 @@
         this.closePopover();
       },
       /**
+       * Closes the menu, emits `close` and resets the trigger's `aria-expanded`.
        * Does nothing if the menu is already closed.
        * @public
        */
