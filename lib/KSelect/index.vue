@@ -1040,7 +1040,6 @@
     padding: 0 10px;
     margin: 0;
 
-    // the outline moves to the option this label points at
     &.has-highlighted-option:focus {
       outline: none;
     }

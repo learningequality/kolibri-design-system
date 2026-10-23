@@ -94,7 +94,6 @@
   }
 
   .k-text-truncator-multi-line {
-    // makes the clamp work for a very long word with no spaces
     overflow-wrap: break-word;
   }
 

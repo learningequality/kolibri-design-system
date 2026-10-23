@@ -153,8 +153,6 @@
       primaryType() {
         return this.type === 'primary';
       },
-      // CSS has no relative darken. Without the fallback a missing brand color
-      // reaches CSS as the string 'undefined' and paints nothing.
       primaryFocusRingColor() {
         const brand = this.$themeBrand?.primary?.v_600;
         const darkened = this.$darken2(brand);
@@ -310,7 +308,6 @@
     }
   }
 
-  // the icon takes the primary token whatever the `color` prop asks for
   .ui-icon-button:not(.ui-icon-button--type-primary) .ui-icon-button-icon {
     color: var(--tokens-primary);
   }
@@ -511,10 +508,8 @@
       }
     }
 
-    // 'primary' and 'secondary' are the only documented types
     &.ui-icon-button--color-primary {
       color: var(--tokens-primary);
-      // so a slot SVG with no fill of its own still takes this color
       fill: currentcolor;
 
       // `color-mix()` is outside the browserslist baseline, and a plain second declaration
