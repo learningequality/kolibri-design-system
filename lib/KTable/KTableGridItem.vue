@@ -81,7 +81,6 @@
 
 <style lang="scss" scoped>
 
-  // the cell is flush with its neighbors, so the outline is drawn inside it
   td:focus-visible {
     outline-offset: -2px;
   }

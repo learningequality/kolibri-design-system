@@ -282,14 +282,12 @@
       // missing one black, so anything it cannot parse falls back to the palette.
       const disabledBackgroundColor = computed(() => {
         const token = themeTokens().textDisabled;
-        if (token && typeof token === 'string') {
-          try {
-            return Color(token).alpha(DISABLED_ALPHA).string();
-          } catch (e) {
-            // fall through to the palette
-          }
+        const source = token && typeof token === 'string' ? token : themePalette().grey.v_300;
+        try {
+          return Color(source).alpha(DISABLED_ALPHA).string();
+        } catch (e) {
+          return Color(themePalette().grey.v_300).alpha(DISABLED_ALPHA).string();
         }
-        return Color(themePalette().grey.v_300).alpha(DISABLED_ALPHA).string();
       });
 
       // a custom property rather than `v-bind()`, which does nothing on the server
@@ -299,8 +297,6 @@
           : {},
       );
 
-      // the precedence between hover and the stronger states lives here rather than
-      // in a chain of `:not()`, so a test can assert it without simulating hover
       const isHoverable = computed(
         () => !props.disabled && !props.invalid && !inputFocused.value && !isPopupOpen.value,
       );
@@ -835,7 +831,6 @@
       }
     }
 
-    // states in ascending priority: of two that apply, the later rule wins
     &.is-focused {
       border-bottom-color: var(--tokens-primary);
     }

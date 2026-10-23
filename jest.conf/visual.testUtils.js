@@ -89,9 +89,7 @@ export async function takeSnapshot(name, options = {}) {
 }
 
 /*
- * `renderComponentForVisualTest` returns on the first markup change, before a lazily
- * imported example and its images arrive. `complete` is true for a failed image too,
- * so a broken src cannot hang this.
+ * `complete` is true for a failed image too, so a broken src cannot hang this.
  */
 async function waitForPageToSettle() {
   // `concurrency: 2` matches the `networkidle2` of `visual.setup.js`: the dev
