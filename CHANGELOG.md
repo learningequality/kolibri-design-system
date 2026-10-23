@@ -7,6 +7,19 @@ Changelog is rather internal in nature. See release notes for the public overvie
 <!-- [DO NOT REMOVE-USED BY GH ACTION] PASTE CHANGELOG -->
 
 
+- [#1357]
+  - **Description:** `closePopover()` is public and documented; it does nothing when the menu is already closed.
+  - **Products impact:** new API
+  - **Addresses:** https://github.com/learningequality/kolibri-design-system/issues/1349, https://github.com/learningequality/studio/pull/6280
+  - **Components:** KDropdownMenu
+  - **Breaking:** no
+  - **Impacts a11y:** yes
+  - **Guidance:** Call `this.$refs.menu.closePopover()` to close an open menu. Closing within two ticks of opening no longer leaves `aria-expanded="true"`.
+
+[#1357]: https://github.com/learningequality/kolibri-design-system/pull/1357
+
+
+
 - [#1388]
   - **Description:** An open `KSelect` closes on outside clicks inside an ancestor that stops click propagation.
   - **Products impact:** bugfix
