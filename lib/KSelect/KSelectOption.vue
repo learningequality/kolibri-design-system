@@ -125,9 +125,6 @@
           { 'is-highlighted': this.highlighted },
           { 'is-selected': this.selected },
           { 'is-disabled': this.option.disabled },
-          this.highlighted
-            ? this.$computedClass({ ...this.$coreOutline, outlineOffset: '-2px' })
-            : '',
         ];
       },
 
@@ -166,6 +163,13 @@
     font-size: $ui-dropdown-item-font-size;
     cursor: pointer;
     user-select: none;
+
+    // The label holds the focus and points here through `aria-activedescendant`,
+    // so `:focus-visible` never matches. `trackInputModality` sets the body attribute.
+    body[modality='keyboard'] &.is-highlighted {
+      outline: 3px solid var(--tokens-focusOutline);
+      outline-offset: -2px;
+    }
 
     &.is-selected {
       font-weight: 500;

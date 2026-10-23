@@ -34,7 +34,6 @@
             tabindex="0"
             :aria-sort="isColumnSortable(index) ? getAriaSort(index) : null"
             :class="{
-              [$computedClass(coreOutlineFocus)]: true,
               sortable: isColumnSortable(index),
               'sticky-header': true,
               'sticky-column': colIndexIsSticky(index),
@@ -395,14 +394,6 @@
       };
     },
     computed: {
-      coreOutlineFocus() {
-        return {
-          ':focus': {
-            ...this.$coreOutline,
-            outlineOffset: '-2px',
-          },
-        };
-      },
       getRowStyle() {
         return rowIndex => {
           return this.hoveredRowIndex === rowIndex || this.focusedRowIndex === rowIndex
@@ -926,6 +917,11 @@
     height: auto;
     padding: 8px;
     vertical-align: middle;
+  }
+
+  // the header is flush with its neighbors, so the outline is drawn inside it
+  th:focus-visible {
+    outline-offset: -2px;
   }
 
   .sticky-header {

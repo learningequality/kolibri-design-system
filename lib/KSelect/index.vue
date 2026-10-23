@@ -28,7 +28,7 @@
       <div
         ref="label"
         class="ui-select-label"
-        :class="isAnyOptionHighlighted ? '' : $computedClass({ ':focus': $coreOutline })"
+        :class="{ 'has-highlighted-option': isAnyOptionHighlighted }"
         supports-modality="keyboard"
         :tabindex="disabled ? null : '0'"
         @focus="onFocus"
@@ -1039,7 +1039,11 @@
     width: 100%;
     padding: 0 10px;
     margin: 0;
-    outline: none;
+
+    // the outline moves to the option this label points at
+    &.has-highlighted-option:focus {
+      outline: none;
+    }
   }
 
   .ui-select-content {
