@@ -63,7 +63,6 @@
 <script>
 
   import { computed } from 'vue';
-  import { themeTokens } from '../../../../styles/theme';
   import KListboxGroup from '../../../listbox/KListboxGroup/index.vue';
   import KListboxOption from '../../../listbox/KListboxOption/index.vue';
 
@@ -89,7 +88,7 @@
           minHeight: '48px',
         };
         if (props.showTopBorder) {
-          style.borderTop = `1px solid ${themeTokens().fineLine}`;
+          style.borderTop = '1px solid var(--tokens-fineLine)';
         }
         return style;
       });

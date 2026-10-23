@@ -3,6 +3,20 @@
 // every theme CSS variable at its default value, on `:root`
 @import 'themeDefaults';
 
+// Sourced from themeOutlineStyle(). KDS components override only `outline-offset`,
+// so these rules draw every focus ring.
+*:focus {
+  outline-width: 3px;
+  outline-style: solid;
+  outline-color: var(--tokens-focusOutline);
+  outline-offset: 4px;
+}
+
+// Remove the focus outline for mouse clicks
+*:focus:not(:focus-visible) {
+  outline: none;
+}
+
 .visuallyhidden {
   position: absolute;
   width: 1px;

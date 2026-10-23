@@ -1,5 +1,6 @@
-// All unscoped KDS styles. Import `helper-styles` directly
-// to opt out of the global element styles
+// All unscoped KDS styles. Import `helper-styles` directly to opt out of the
+// global element styles. `helper-styles` carries the keyboard focus outline and
+// the theme CSS variable defaults, which are registered either way.
 
 @import 'globals';
 @import 'helper-styles';

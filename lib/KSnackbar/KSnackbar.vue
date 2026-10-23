@@ -25,7 +25,7 @@
           class="k-snackbar"
           data-testid="snackbar"
           data-focus="true"
-          :class="[$computedClass({ ':focus': $coreOutline }), { 'k-snackbar-small': isSmall }]"
+          :class="{ 'k-snackbar-small': isSmall }"
           :style="snackbarStyles"
           tabindex="0"
           @keydown.esc="handleClose"

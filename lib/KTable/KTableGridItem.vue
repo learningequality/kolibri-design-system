@@ -1,7 +1,6 @@
 <template>
 
   <td
-    :class="$computedClass(coreOutlineFocus)"
     :style="tdStyle"
     tabindex="0"
     data-focus="true"
@@ -49,14 +48,6 @@
       },
     },
     computed: {
-      coreOutlineFocus() {
-        return {
-          ':focus': {
-            ...this.$coreOutline,
-            outlineOffset: '-2px',
-          },
-        };
-      },
       tdStyle() {
         return {
           textAlign: this.textAlign,
@@ -88,7 +79,11 @@
 </script>
 
 
-<style scoped>
+<style lang="scss" scoped>
+
+  td:focus-visible {
+    outline-offset: -2px;
+  }
 
   .cell-content {
     justify-content: inherit;

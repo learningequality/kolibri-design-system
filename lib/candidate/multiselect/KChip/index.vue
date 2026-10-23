@@ -18,7 +18,6 @@
       <button
         v-if="close"
         class="k-chip-close-button"
-        :class="closeButtonClass"
         :aria-label="computedRemoveLabel"
         type="button"
         data-testid="k-chip-close"
@@ -116,15 +115,6 @@
       iconFilledColor() {
         return this.disabled ? 'var(--tokens-textDisabled)' : 'var(--palette-grey-v900)';
       },
-
-      closeButtonClass() {
-        return this.$computedClass({
-          ':focus': {
-            ...this.$coreOutline,
-            outlineOffset: 0,
-          },
-        });
-      },
     },
 
     methods: {
@@ -183,6 +173,10 @@
     background: transparent;
     border: 0;
     border-radius: 50%;
+
+    &:focus-visible {
+      outline-offset: 0;
+    }
   }
 
   .k-chip.k-chip-closeable {
