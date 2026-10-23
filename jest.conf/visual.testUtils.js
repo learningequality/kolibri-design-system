@@ -83,8 +83,23 @@ export async function renderComponentForVisualTest(component, props, slots = {})
  */
 export async function takeSnapshot(name, options = {}) {
   if (process.env.VISUAL_TESTING == 'true') {
+    await waitForPageToSettle();
     await percySnapshot(page, name, options);
   }
+}
+
+/*
+ * `renderComponentForVisualTest` returns on the first markup change, before a lazily
+ * imported example and its images arrive. `complete` is true for a failed image too,
+ * so a broken src cannot hang this.
+ */
+async function waitForPageToSettle() {
+  // `concurrency: 2` matches the `networkidle2` of `visual.setup.js`: the dev
+  // server's HMR connection can keep 0 in-flight requests out of reach.
+  await page.waitForNetworkIdle({ idleTime: 500, timeout: 10000, concurrency: 2 });
+  await page.waitForFunction(() => Array.from(document.images).every(img => img.complete), {
+    timeout: 10000,
+  });
 }
 
 export async function delay(time) {
