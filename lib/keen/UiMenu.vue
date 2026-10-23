@@ -1,12 +1,8 @@
 <template>
 
-  <UiFocusContainer
-    ref="focusContainer"
+  <ul
     class="ui-menu"
     role="menu"
-    tag="ul"
-    lazy
-
     :class="classes"
     :style="getWidth"
   >
@@ -24,28 +20,26 @@
 
       :type="option[keys.type]"
       @click.native="($event) => selectOption(option, $event)"
-      @keydown.enter.native.prevent="($event) => selectOption(option, $event)"
-
-      @keydown.esc.native.esc="closeMenu"
+      @keydown.enter.native="($event) => handleEnter(option, $event)"
+      @keydown.space.native="handleSpaceDown"
+      @keyup.space.native="($event) => handleSpaceUp(option, $event)"
       :style="[ activeOutline ]"
     >
       <slot name="option" :option="option"></slot>
     </UiMenuOption>
-  </UiFocusContainer>
+  </ul>
 
 </template>
 
 
 <script>
 
-  import UiFocusContainer from './UiFocusContainer.vue';
   import UiMenuOption from './UiMenuOption.vue';
 
   export default {
     name: 'UiMenu',
 
     components: {
-      UiFocusContainer,
       UiMenuOption,
     },
 
@@ -66,10 +60,6 @@
       },
       iconProps: Object,
       hasSecondaryText: {
-        type: Boolean,
-        default: false,
-      },
-      containFocus: {
         type: Boolean,
         default: false,
       },
@@ -98,6 +88,12 @@
       },
     },
 
+    data() {
+      return {
+        spaceKeyTarget: null,
+      };
+    },
+
     computed: {
       classes() {
         return {
@@ -121,6 +117,30 @@
     },
 
     methods: {
+      handleEnter(option, $event) {
+        // Enter on a link fires a click, with any modifier keys, which selects the option
+        if ($event.target.closest('a[href]')) {
+          return;
+        }
+        $event.preventDefault();
+        this.selectOption(option, $event);
+      },
+      handleSpaceDown($event) {
+        $event.preventDefault();
+        this.spaceKeyTarget = $event.target;
+      },
+      handleSpaceUp(option, $event) {
+        if ($event.target !== this.spaceKeyTarget) {
+          return;
+        }
+        this.spaceKeyTarget = null;
+        const link = $event.target.closest('a[href]');
+        if (link) {
+          link.click();
+        } else {
+          this.selectOption(option, $event);
+        }
+      },
       selectOption(option, $event) {
         if (option.disabled || option.type === 'divider') {
           return;

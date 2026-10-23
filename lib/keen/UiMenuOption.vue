@@ -1,37 +1,44 @@
 <template>
 
-  <component
-    :is="isAnchor ? 'a' : 'li'"
+  <li
     class="ui-menu-option"
-    supports-modality=keyboard
-    @focus="isActive = true"
-    @blur="isActive = false"
-    role="menu-item"
+    @focusin="isActive = true"
+    @focusout="isActive = false"
+    :role="isDivider ? 'separator' : 'none'"
     :class="classes"
     :style="activeStyle"
-    :href="isAnchor ? (disabled ? null : href) : null"
-    :tabindex="(isDivider || isAnchor || disabled) ? null : '0'"
-    :target="isAnchor ? (disabled ? null : target) : null"
   >
-    <slot v-if="!isDivider">
-      <div class="ui-menu-option-content">
-        <KIcon
-        class="k-icon"
-          v-if="icon"
-          :icon="icon"
-        />
- 
-        <div class="ui-menu-option-text">
-          {{ label }}
-        </div>
+    <component
+      :is="isAnchor ? 'a' : 'div'"
+      v-if="!isDivider"
+      class="ui-menu-option-wrapper"
+      role="menuitem"
+      tabindex="-1"
+      supports-modality="keyboard"
+      :aria-disabled="disabled ? 'true' : null"
+      :href="disabled ? null : href"
+      :target="isAnchor && !disabled ? target : null"
+    >
+      <slot>
+        <div class="ui-menu-option-content">
+          <KIcon
+          class="k-icon"
+            v-if="icon"
+            :icon="icon"
+          />
 
-        <div v-if="secondaryText" class="ui-menu-option-secondary-text">
-          {{ secondaryText }}
-        </div>
-      </div>
-    </slot>
+          <div class="ui-menu-option-text">
+            {{ label }}
+          </div>
 
-  </component>
+          <div v-if="secondaryText" class="ui-menu-option-secondary-text">
+            {{ secondaryText }}
+          </div>
+        </div>
+      </slot>
+    </component>
+
+  </li>
 
 </template>
 
@@ -78,6 +85,7 @@
           'is-divider': this.isDivider,
           'is-disabled': this.disabled,
           'is-anchor': this.isAnchor,
+          'is-active': this.isActive,
         };
       },
 
@@ -129,13 +137,8 @@
       cursor: pointer;
       outline: none;
 
-      &:hover:not(.is-disabled),
-      body[modality='keyboard'] &:focus {
-        background-color: $ui-menu-item-hover-color;
-      }
-
-      &:focus:not(.is-disabled),
-      body[modality='keyboard'] &:focus {
+      &.is-active:not(.is-disabled),
+      body[modality='keyboard'] &.is-active {
         background-color: $ui-menu-item-hover-color;
       }
 
@@ -152,6 +155,18 @@
       & > * {
         flex-grow: 1;
       }
+    }
+  }
+
+  .ui-menu-option .ui-menu-option-wrapper {
+    display: flex;
+    flex-direction: column;
+    color: inherit;
+    text-decoration: none;
+    outline: none;
+
+    & > * {
+      flex-grow: 1;
     }
   }
 

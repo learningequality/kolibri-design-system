@@ -372,6 +372,10 @@
         if ($coreSnackbar && $coreSnackbar.contains(target)) {
           return;
         }
+        // Popovers opened from the modal, e.g. KDropdownMenu, render in <body>
+        if (target.closest && target.closest('.ui-popover')) {
+          return;
+        }
         // focus has escaped the modal - put it back!
         if (!this.$refs.modal.contains(target)) {
           this.$nextTick(() => {
