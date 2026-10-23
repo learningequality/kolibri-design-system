@@ -333,14 +333,15 @@
       <ul>
         <li>Opening the menu moves focus to the first option</li>
         <li><kbd>Up</kbd> and <kbd>Down</kbd> arrows move between options, wrapping at the ends</li>
+        <li><kbd>Home</kbd> and <kbd>End</kbd> move to the first and last option</li>
         <li>
-          <kbd>Enter</kbd> selects the focused option, closes the menu, and returns focus to the
-          trigger
+          <kbd>Enter</kbd> and <kbd>Space</kbd> select the focused option, close the menu, and
+          return focus to the trigger
         </li>
         <li><kbd>Escape</kbd> closes the menu and returns focus to the trigger</li>
         <li>
-          For a context menu, <kbd>Enter</kbd> and <kbd>Escape</kbd> instead return focus to the
-          element focused before it opened
+          For a context menu, <kbd>Enter</kbd>, <kbd>Space</kbd> and <kbd>Escape</kbd> instead
+          return focus to the element focused before it opened
         </li>
         <li>
           <kbd>Tab</kbd> closes the menu and moves focus to the next element after the trigger;
