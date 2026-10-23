@@ -37,6 +37,7 @@
 
   import debounce from 'lodash/debounce';
   import Popper from 'popper.js';
+  import { getPopoverContainer } from './utils/modalBackground';
 
   function on(element, event, handler) {
     if (element && event && handler) {
@@ -171,7 +172,7 @@
 
     created() {
       this.appendedArrow = false;
-      this.isAppendedToEl = false;
+      this.appendedToEl = null;
       this.popperOptions = Object.assign(this.popperOptions, this.options);
     },
 
@@ -254,9 +255,9 @@
           this.popperJS = null;
         }
 
-        if (this.isAppendedToEl) {
-          this.isAppendedToEl = false;
-          this.appendToEl.removeChild(this.popper.parentElement);
+        if (this.appendedToEl) {
+          this.appendedToEl.removeChild(this.popper.parentElement);
+          this.appendedToEl = null;
         }
         if (this.closeOnScroll) {
           document.removeEventListener('scroll', this.doCloseOnScroll, true);
@@ -269,9 +270,9 @@
             this.appendArrow(this.popper);
           }
 
-          if (this.appendToEl && !this.isAppendedToEl) {
-            this.isAppendedToEl = true;
-            this.appendToEl.appendChild(this.popper.parentElement);
+          if (this.appendToEl && !this.appendedToEl) {
+            this.appendedToEl = getPopoverContainer(this.referenceElm, this.appendToEl);
+            this.appendedToEl.appendChild(this.popper.parentElement);
           }
 
           if (this.popperJS && this.popperJS.destroy) {
