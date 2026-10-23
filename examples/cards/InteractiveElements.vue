@@ -20,7 +20,7 @@
           />
           <router-link
             :to="{ path: '/kbutton' }"
-            :class="['link', linkComputedClass]"
+            class="link"
             aria-label="Read more about this resource"
             @click.native.stop
             @keyup.native.capture.stop
@@ -85,16 +85,6 @@
         ],
       };
     },
-    computed: {
-      linkComputedClass() {
-        return this.$computedClass({
-          ':hover': {
-            backgroundColor: 'rgba(0,0,0,.1)',
-          },
-          ':focus': { ...this.$coreOutline, outlineOffset: 0 },
-        });
-      },
-    },
     mounted() {
       if (this.loadFor > 0) {
         setTimeout(() => {
@@ -122,6 +112,14 @@
     width: 40px;
     height: 40px;
     border-radius: 50%;
+
+    &:hover {
+      background-color: rgba(0, 0, 0, 0.1);
+    }
+
+    &:focus-visible {
+      outline-offset: 0;
+    }
   }
 
   .link-icon {

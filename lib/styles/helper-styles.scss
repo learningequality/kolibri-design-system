@@ -3,6 +3,18 @@
 // every theme CSS variable at its default value, on `:root`
 @import 'themeDefaults';
 
+// Sourced from themeOutlineStyle(). Some KDS components clear this and draw their own ring.
+*:focus {
+  outline-width: 3px;
+  outline-style: solid;
+  outline-color: var(--tokens-focusOutline);
+  outline-offset: 4px;
+}
+
+*:focus:not(:focus-visible) {
+  outline: none;
+}
+
 .visuallyhidden {
   position: absolute;
   width: 1px;

@@ -81,10 +81,11 @@
         href="/styling#helper-styles"
         text="helper styles"
       />. The global styles include the Pure CSS base (normalize.css), the page background, text
-      color, focus outline, text selection, and print styles. The helper styles are also a public
-      entry point of their own. An application that doesn't need the global styles can import
+      color, text selection, and print styles. The helper styles are also a public entry point of
+      their own. An application that doesn't need the global styles can import
       <code>~kolibri-design-system/lib/styles/helper-styles</code> instead. Every theme CSS variable
-      is still defined at its default value here, the global styles are the only optional part.
+      is still defined at its default value here, as well as the keyboard focus outline that KDS
+      components rely on to draw their focus ring; the global styles are the only optional part.
 
       <p>
         The import path above, and the <code>purecss</code> import inside the global styles, use the
