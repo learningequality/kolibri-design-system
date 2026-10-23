@@ -11,30 +11,16 @@
     >
       <div
         class="kmselect-container"
-        :class="[
-          {
-            'has-label': label,
-            'is-disabled': disabled,
-            'is-active': inputFocused || isPopupOpen,
-            'is-invalid': invalid,
-          },
-          $computedClass({
-            ':hover:not(.is-disabled):not(.is-active):not(.is-invalid)': {
-              borderBottomColor: 'var(--tokens-text)',
-            },
-          }),
-        ]"
-        :style="{
-          backgroundColor: disabled ? $themeTokens.textDisabled + '20' : 'var(--palette-grey-v100)',
-          borderRadius: '2px 2px 0 0',
-          borderBottom: `1px solid ${
-            invalid
-              ? 'var(--tokens-error)'
-              : inputFocused
-                ? 'var(--tokens-primary)'
-                : 'var(--palette-grey-v700)'
-          }`,
+        data-testid="kmselect-container"
+        :class="{
+          'has-label': label,
+          'is-disabled': disabled,
+          'is-active': inputFocused || isPopupOpen,
+          'is-focused': inputFocused,
+          'is-invalid': invalid,
+          'is-hoverable': isHoverable,
         }"
+        :style="containerCssVariables"
         @mouseenter="isHovered = true"
         @mouseleave="isHovered = false"
       >
@@ -46,17 +32,6 @@
           :class="{
             'is-inline': isLabelInline,
             'is-floating': !isLabelInline,
-          }"
-          :style="{
-            color: disabled
-              ? 'var(--tokens-textDisabled)'
-              : invalid
-                ? 'var(--tokens-error)'
-                : inputFocused || isPopupOpen
-                  ? 'var(--tokens-primary)'
-                  : isHovered
-                    ? 'var(--tokens-text)'
-                    : 'var(--palette-grey-v700)',
           }"
         >
           {{ label }}
@@ -185,8 +160,10 @@
 <script>
 
   import { ref, computed, watch, getCurrentInstance, nextTick, onBeforeUnmount } from 'vue';
+  import Color from 'color';
 
   import globalThemeState from '../../../styles/globalThemeState';
+  import { themePalette, themeTokens } from '../../../styles/theme';
 
   import KMultiSelectInput from './components/KMultiSelectInput.vue';
   import KMultiSelectDropdown from './components/KMultiSelectDropdown.vue';
@@ -194,6 +171,10 @@
   import useMultiSelectList from './useMultiSelectList.js';
   import useMultiSelectCascade from './useMultiSelectCascade.js';
   import useMultiSelectDropdownLogic from './useMultiSelectDropdown.js';
+
+  // `rgba()`, because the oldest browser in `browserslist-config-kolibri` cannot
+  // read 8-digit hex
+  const DISABLED_ALPHA = 0.125;
 
   let componentCount = 0;
 
@@ -296,6 +277,33 @@
       // True only while the floating dropdown is showing. In expanded mode the list is always
       // visible, so the active border, label colour and hover key off this instead of isOpen.
       const isPopupOpen = computed(() => isOpen.value && !props.expanded);
+
+      // A token can hold any CSS value. `color` throws on a `var()` and turns a
+      // missing one black, so anything it cannot parse falls back to the palette.
+      const disabledBackgroundColor = computed(() => {
+        const token = themeTokens().textDisabled;
+        if (token && typeof token === 'string') {
+          try {
+            return Color(token).alpha(DISABLED_ALPHA).string();
+          } catch (e) {
+            // fall through to the palette
+          }
+        }
+        return Color(themePalette().grey.v_300).alpha(DISABLED_ALPHA).string();
+      });
+
+      // a custom property rather than `v-bind()`, which does nothing on the server
+      const containerCssVariables = computed(() =>
+        props.disabled
+          ? { '--k-multiselect-disabled-background-color': disabledBackgroundColor.value }
+          : {},
+      );
+
+      // the precedence between hover and the stronger states lives here rather than
+      // in a chain of `:not()`, so a test can assert it without simulating hover
+      const isHoverable = computed(
+        () => !props.disabled && !props.invalid && !inputFocused.value && !isPopupOpen.value,
+      );
 
       const {
         indeterminateValues,
@@ -574,6 +582,8 @@
         isHovered,
         showError,
         isPopupOpen,
+        containerCssVariables,
+        isHoverable,
         containerEl,
         inputComponent,
         dropdownComponent,
@@ -809,9 +819,45 @@
   .kmselect-container {
     position: relative;
     width: 100%;
+    background-color: var(--palette-grey-v100);
+    border-bottom: 1px solid var(--palette-grey-v700);
+    border-radius: 2px 2px 0 0;
 
     &.has-label {
       padding-top: 20px;
+    }
+
+    &.is-hoverable:hover {
+      border-bottom-color: var(--tokens-text);
+
+      .kmselect-label {
+        color: var(--tokens-text);
+      }
+    }
+
+    // states in ascending priority: of two that apply, the later rule wins
+    &.is-focused {
+      border-bottom-color: var(--tokens-primary);
+    }
+
+    &.is-active .kmselect-label {
+      color: var(--tokens-primary);
+    }
+
+    &.is-invalid {
+      border-bottom-color: var(--tokens-error);
+
+      .kmselect-label {
+        color: var(--tokens-error);
+      }
+    }
+
+    &.is-disabled {
+      background-color: var(--k-multiselect-disabled-background-color);
+
+      .kmselect-label {
+        color: var(--tokens-textDisabled);
+      }
     }
   }
 
@@ -825,6 +871,7 @@
     margin-bottom: 0;
     font-size: 15px;
     font-weight: normal;
+    color: var(--palette-grey-v700);
     transition:
       color 0.1s ease,
       transform 0.2s ease;

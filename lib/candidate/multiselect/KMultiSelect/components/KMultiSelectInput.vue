@@ -49,7 +49,6 @@
       ref="inputEl"
       v-model="inputModel"
       class="kmselect-native-input"
-      :class="$computedClass(placeholderStyle)"
       type="text"
       :placeholder="selectedOptions.length === 0 ? placeholder : ''"
       :disabled="disabled"
@@ -172,12 +171,6 @@
         () => props.clearable && props.selectedOptions.length > 0 && !props.disabled,
       );
 
-      const placeholderStyle = computed(() => ({
-        '::placeholder': {
-          color: 'var(--tokens-textDisabled)',
-        },
-      }));
-
       function focus() {
         inputEl.value?.focus();
       }
@@ -206,7 +199,6 @@
         inputModel,
         inputAriaAttrs,
         showClearButton,
-        placeholderStyle,
         // eslint-disable-next-line vue/no-unused-properties
         focus,
         handleWrapperClick,
@@ -341,6 +333,10 @@
     background: transparent;
     border: 0;
     outline: none;
+
+    &::placeholder {
+      color: var(--tokens-textDisabled);
+    }
   }
 
   .kmselect-clear-btn {
