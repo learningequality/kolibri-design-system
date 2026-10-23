@@ -41,8 +41,8 @@ const MAIN_OBJECT_PATTERN = /const KolibriIcons = {(.*?\n)}/s;
 const ICON_DEFINITION_PATTERN = /\n {2}(\w+): {.*?\s+icon:\s+require\('(.+?)'\).*?},/gs;
 
 // Within a definition object, match a defaultColor attribute:
-// `defaultColor: themeTokens().someColor`
-const ICON_DEFINITION_COLOR_PATTERN = /defaultColor:\s+themeTokens\(\)\.(\w+)/s;
+// `defaultColor: 'var(--tokens-someColor)'`
+const ICON_DEFINITION_COLOR_PATTERN = /defaultColor:\s+'var\(--tokens-(\w+)\)'/s;
 
 // Within an icon file, match just the SVG tag
 const TEMPLATE_PATTERN = /<svg.*?><\/svg>/;
