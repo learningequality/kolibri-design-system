@@ -209,6 +209,7 @@
           }
         }
         this.trigger.setAttribute('aria-expanded', false);
+        this.hideContextMenu();
         window.removeEventListener('keyup', this.handleKeyUp, true);
       },
       getNextFocusableSibling(focusedElement) {
@@ -287,7 +288,6 @@
         this.$emit('close');
         this.closing = false;
         this.$refs.popover.close();
-        this.hideContextMenu();
       },
     },
   };
