@@ -7,6 +7,19 @@ Changelog is rather internal in nature. See release notes for the public overvie
 <!-- [DO NOT REMOVE-USED BY GH ACTION] PASTE CHANGELOG -->
 
 
+- [#1388]
+  - **Description:** An open `KSelect` closes on outside clicks inside an ancestor that stops click propagation.
+  - **Products impact:** bugfix
+  - **Addresses:** https://github.com/learningequality/kolibri-design-system/issues/1383, https://github.com/learningequality/studio/issues/6325
+  - **Components:** `KSelect`
+  - **Breaking:** no
+  - **Impacts a11y:** no
+  - **Guidance:** -
+
+[#1388]: https://github.com/learningequality/kolibri-design-system/pull/1388
+
+
+
 - [#1356]
   - **Description:** `$themeBrand` reflects colors set by `setBrandColors()`, and `setBrandColors()` warns in the console about shades missing from the brand tree.
   - **Products impact:** bugfix
