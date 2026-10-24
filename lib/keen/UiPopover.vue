@@ -306,7 +306,7 @@
         this.removeCloseEventListeners();
 
         // Add event listeners in the next tick, otherwise they're triggered immediately
-        setTimeout(() => {
+        this.addListenersTimeout = setTimeout(() => {
           /* eslint-disable-next-line import/no-named-as-default-member */
           this.removeExternalClickListener = events.on('click', document, e => {
             this.closeOnExternal(e, { returnFocus: false });
@@ -327,6 +327,8 @@
       },
 
       removeCloseEventListeners() {
+        clearTimeout(this.addListenersTimeout);
+
         if (this.removeExternalClickListener) {
           this.removeExternalClickListener();
           this.removeExternalClickListener = null;
