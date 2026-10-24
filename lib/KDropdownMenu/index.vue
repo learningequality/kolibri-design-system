@@ -8,7 +8,7 @@
       :trigger="trigger"
       :containFocus="true"
       :hideOnClick="hideOnClick"
-      :dropdownPosition="position"
+      :position="popoverPlacement"
       :positionX="contextMenuPosition[0]"
       :positionY="contextMenuPosition[1]"
       :openOn="isContextMenu ? 'manual' : 'click'"
@@ -45,6 +45,10 @@
   import UiMenu from '../keen/UiMenu';
   import UiPopover from '../keen/UiPopover';
   import useKContextMenu from '../composables/_useKContextMenu';
+
+  const RTL_MIRROR = { left: 'right', right: 'left' };
+
+  const EXTENT_SUFFIX = { right: 'start', bottom: 'start', left: 'end', top: 'end' };
 
   /**
    * The KDropdownMenu component is used to contain multiple actions
@@ -101,7 +105,10 @@
         default: null,
       },
       /**
-       * The position of the dropdown relative to the button
+       * The position of the dropdown relative to the button, or to the cursor for
+       * context menus. The first word is the side it opens on; the second is the
+       * direction it extends, so `'bottom right'` aligns its left edge with the
+       * button's. `left` and `right` mirror in RTL.
        */
       position: {
         type: String,
@@ -147,6 +154,14 @@
         trigger: null,
         lastFocusElement: null,
       };
+    },
+    computed: {
+      popoverPlacement() {
+        const [side, extent] = (this.position || 'bottom right')
+          .split(' ')
+          .map(word => (this.isRtl ? RTL_MIRROR[word] || word : word));
+        return EXTENT_SUFFIX[extent] ? `${side}-${EXTENT_SUFFIX[extent]}` : side;
+      },
     },
     watch: {
       isContextMenuActive() {
