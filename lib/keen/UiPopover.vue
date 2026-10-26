@@ -149,6 +149,7 @@
           // The effect of no transition is achieved by `duration: 0` below.
           animation: this.animation === 'none' ? 'fade' : this.animation,
           appendTo: this.appendToBody ? document.body : this.triggerEl.parentElement,
+          aria: null,
           arrow: false,
           content: this.$el,
           delay: [0, 0],
