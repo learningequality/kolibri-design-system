@@ -7,6 +7,19 @@ Changelog is rather internal in nature. See release notes for the public overvie
 <!-- [DO NOT REMOVE-USED BY GH ACTION] PASTE CHANGELOG -->
 
 
+- [#1359]
+  - **Description:** `KDropdownMenu`'s `position` prop now sets where the menu opens, mirrored in RTL.
+  - **Products impact:** bugfix
+  - **Addresses:** https://github.com/learningequality/kolibri-design-system/issues/1344, https://github.com/learningequality/studio/pull/6280
+  - **Components:** KDropdownMenu
+  - **Breaking:** no
+  - **Impacts a11y:** no
+  - **Guidance:** Check menus with a non-default `position` (Kolibri: `'bottom left'`) still fit their layout.
+
+[#1359]: https://github.com/learningequality/kolibri-design-system/pull/1359
+
+
+
 - [#1357]
   - **Description:** `closePopover()` is public and documented; it does nothing when the menu is already closed.
   - **Products impact:** new API
