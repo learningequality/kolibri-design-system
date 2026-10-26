@@ -372,6 +372,9 @@
         if ($coreSnackbar && $coreSnackbar.contains(target)) {
           return;
         }
+        if (target.closest && target.closest('.ui-popover')) {
+          return;
+        }
         // focus has escaped the modal - put it back!
         if (!this.$refs.modal.contains(target)) {
           this.$nextTick(() => {
