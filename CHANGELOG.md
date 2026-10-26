@@ -7,6 +7,19 @@ Changelog is rather internal in nature. See release notes for the public overvie
 <!-- [DO NOT REMOVE-USED BY GH ACTION] PASTE CHANGELOG -->
 
 
+- [#1394]
+  - **Description:** build(deps): bump fast-uri from 3.1.7 to 3.1.9
+  - **Products impact:** Dev Dependency upgrade
+  - **Addresses:** -
+  - **Components:** -
+  - **Breaking:** -
+  - **Impacts a11y:** -
+  - **Guidance:** -
+
+[#1394]: https://github.com/learningequality/kolibri-design-system/pull/1394
+
+
+
 - [#1392]
   - **Description:** Internal: refresh the copied automation.yml so it matches the current shared template
   - **Products impact:** none
