@@ -154,7 +154,7 @@
           delay: [0, 0],
           distance: 0,
           duration: this.animation === 'none' ? 0 : [250, 200],
-          hideOnClick: this.hideOnClick,
+          hideOnClick: this.hideOnClick ? 'toggle' : false,
           ignoreAttributes: true,
           interactive: true,
           lazy: true,
@@ -339,9 +339,16 @@
         // Add event listeners in the next tick, otherwise they're triggered immediately
         this.addListenersTimeout = setTimeout(() => {
           /* eslint-disable-next-line import/no-named-as-default-member */
-          this.removeExternalClickListener = events.on('click', document, e => {
-            this.closeOnExternal(e, { returnFocus: false });
-          });
+          this.removeExternalClickListener = events.on(
+            'click',
+            document,
+            e => {
+              if (!(this.openOn === 'click' && this.triggerEl.contains(e.target))) {
+                this.closeOnExternal(e, { returnFocus: false });
+              }
+            },
+            { capture: true },
+          );
 
           /* eslint-disable-next-line import/no-named-as-default-member */
           this.removeEscListener = events.onKeydown(27, document, () => {
