@@ -201,16 +201,16 @@
         if (!this.isMenuOpen()) {
           return;
         }
-        this.setFocus();
+        this.focusItemAt(0);
         this.trigger.setAttribute('aria-expanded', true);
       },
       isMenuOpen() {
         return Boolean(this.$refs.popover && this.$refs.popover.isOpen());
       },
-      setFocus() {
-        const [first] = this.getMenuItems();
-        if (first) {
-          first.focus();
+      focusItemAt(index, items = this.getMenuItems()) {
+        const item = items[(index + items.length) % items.length];
+        if (item) {
+          item.focus();
         }
       },
       handleClose() {
@@ -222,14 +222,8 @@
       },
       moveFocusBy(delta) {
         const items = this.getMenuItems();
-        if (!items.length) {
-          return;
-        }
-        let index = items.indexOf(document.activeElement);
-        if (index === -1) {
-          index = delta > 0 ? -1 : items.length;
-        }
-        items[(index + delta + items.length) % items.length].focus();
+        const index = items.indexOf(document.activeElement);
+        this.focusItemAt(index === -1 && delta < 0 ? -1 : index + delta, items);
       },
       // Not `mouseenter`: browsers fire it when the menu opens under a resting pointer
       handleMouseMove(event) {
@@ -248,6 +242,19 @@
         } else if (event.key == 'ArrowDown' || event.keyCode == 40) {
           event.preventDefault();
           this.moveFocusBy(1);
+        } else if (event.key == 'Home' || event.keyCode == 36) {
+          event.preventDefault();
+          this.focusItemAt(0);
+        } else if (event.key == 'End' || event.keyCode == 35) {
+          event.preventDefault();
+          this.focusItemAt(-1);
+        } else if (
+          event.key == 'PageUp' ||
+          event.key == 'PageDown' ||
+          event.keyCode == 33 ||
+          event.keyCode == 34
+        ) {
+          event.preventDefault();
         } else if (event.key == 'Escape' || event.keyCode == 27) {
           event.stopPropagation();
           window.addEventListener('keyup', this.stopEscapeKeyUp, true);

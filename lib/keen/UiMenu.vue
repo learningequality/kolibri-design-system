@@ -21,6 +21,8 @@
       :type="option[keys.type]"
       @click.native="($event) => selectOption(option, $event)"
       @keydown.enter.native="($event) => handleEnter(option, $event)"
+      @keydown.space.native="handleSpaceDown"
+      @keyup.space.native="($event) => handleSpaceUp(option, $event)"
       :style="[ activeOutline ]"
     >
       <slot name="option" :option="option"></slot>
@@ -86,6 +88,10 @@
       },
     },
 
+    created() {
+      this.spaceKeyTarget = null;
+    },
+
     computed: {
       classes() {
         return {
@@ -111,8 +117,25 @@
     methods: {
       handleEnter(option, $event) {
         // Enter on a link fires a click, with any modifier keys, which selects the option
-        if (!$event.target.closest('a[href]')) {
-          $event.preventDefault();
+        if ($event.target.closest('a[href]')) {
+          return;
+        }
+        $event.preventDefault();
+        this.selectOption(option, $event);
+      },
+      handleSpaceDown($event) {
+        $event.preventDefault();
+        this.spaceKeyTarget = $event.target;
+      },
+      handleSpaceUp(option, $event) {
+        if ($event.target !== this.spaceKeyTarget) {
+          return;
+        }
+        this.spaceKeyTarget = null;
+        const link = $event.target.closest('a[href]');
+        if (link) {
+          link.click();
+        } else {
           this.selectOption(option, $event);
         }
       },
