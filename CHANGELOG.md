@@ -7,6 +7,19 @@ Changelog is rather internal in nature. See release notes for the public overvie
 <!-- [DO NOT REMOVE-USED BY GH ACTION] PASTE CHANGELOG -->
 
 
+- [#1392]
+  - **Description:** Internal: refresh the copied automation.yml so it matches the current shared template
+  - **Products impact:** none
+  - **Addresses:** -
+  - **Components:** -
+  - **Breaking:** -
+  - **Impacts a11y:** -
+  - **Guidance:** -
+
+[#1392]: https://github.com/learningequality/kolibri-design-system/pull/1392
+
+
+
 - [#1381]
   - **Description:** Added an AI usage section to the pull request template, and marked the required sections for the shared template check
   - **Products impact:** none
