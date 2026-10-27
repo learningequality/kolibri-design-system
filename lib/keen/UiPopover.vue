@@ -26,6 +26,21 @@
   import events from './helpers/events';
   import UiFocusContainer from './UiFocusContainer.vue';
 
+  let visibleViewport = null;
+
+  // Popper 1.16's 'viewport' boundary is max(clientWidth, innerWidth), which includes
+  // classic scrollbars; a fixed inset-0 element's rect excludes them.
+  function getVisibleViewport() {
+    if (!visibleViewport || !document.body.contains(visibleViewport)) {
+      visibleViewport = document.createElement('div');
+      visibleViewport.setAttribute('aria-hidden', 'true');
+      visibleViewport.style.cssText =
+        'position: fixed; top: 0; right: 0; bottom: 0; left: 0; visibility: hidden; pointer-events: none;';
+      document.body.appendChild(visibleViewport);
+    }
+    return visibleViewport;
+  }
+
   export default {
     name: 'UiPopover',
 
@@ -111,6 +126,15 @@
           this.useCursorReference();
         }
       },
+      constrainToScrollParent() {
+        if (this.tip) {
+          this.tip.set(this.getBoundaryOptions());
+          this.useCursorReference();
+          if (this.isOpen()) {
+            this.syncViewportBoundary();
+          }
+        }
+      },
     },
 
     created() {
@@ -163,21 +187,8 @@
           theme: 'ui-popover',
           trigger: this.openOn.replace('hover', 'mouseenter'),
           zIndex: this.zIndex,
-          popperOptions: {
-            modifiers: {
-              computeStyle: {
-                // Disable GPU acceleration to fix blurry text in popover on Windows (Chrome)
-                // https://github.com/twbs/bootstrap/issues/23590
-                gpuAcceleration: !(window.devicePixelRatio < 1.5 && /Win/.test(navigator.platform)),
-              },
-            },
-          },
+          ...this.getBoundaryOptions(),
         };
-
-        if (!this.constrainToScrollParent) {
-          options.popperOptions.modifiers.preventOverflow = { enabled: false };
-          options.popperOptions.modifiers.hide = { enabled: false };
-        }
 
         this.tip = tippy(this.triggerEl, options);
 
@@ -186,9 +197,35 @@
         }
       },
 
+      getBoundaryOptions() {
+        return {
+          boundary: this.constrainToScrollParent ? 'scrollParent' : getVisibleViewport(),
+          popperOptions: {
+            modifiers: {
+              computeStyle: {
+                // Disable GPU acceleration to fix blurry text in popover on Windows (Chrome)
+                // https://github.com/twbs/bootstrap/issues/23590
+                gpuAcceleration: !(window.devicePixelRatio < 1.5 && /Win/.test(navigator.platform)),
+              },
+              hide: { enabled: this.constrainToScrollParent },
+            },
+          },
+        };
+      },
+
+      syncViewportBoundary() {
+        if (this.constrainToScrollParent) {
+          window.removeEventListener('resize', this.onResize);
+        } else {
+          this.setBoundaryHeight();
+          window.addEventListener('resize', this.onResize);
+        }
+      },
+
       destroyPopover() {
         if (this.tip) {
           this.removeCloseEventListeners();
+          window.removeEventListener('resize', this.onResize);
           this.tip.destroy();
           this.tip = null;
         }
@@ -262,6 +299,8 @@
       },
 
       onOpen() {
+        this.syncViewportBoundary();
+
         if (this.hideOnClick) {
           this.addCloseEventListeners();
         }
@@ -277,6 +316,7 @@
         }
 
         this.removeCloseEventListeners();
+        window.removeEventListener('resize', this.onResize);
 
         classlist.remove(this.triggerEl, 'has-dropdown-open');
 
@@ -284,6 +324,18 @@
 
         // Reset return focus
         this.returnFocus = true;
+      },
+
+      setBoundaryHeight() {
+        this.$el.style.setProperty(
+          '--popover-boundary-height',
+          `${this.tip.props.boundary.clientHeight}px`
+        );
+      },
+
+      onResize() {
+        this.setBoundaryHeight();
+        this.scheduleUpdate();
       },
 
       onShown() {
