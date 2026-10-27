@@ -261,7 +261,10 @@
         }
       },
 
-      onOpen() {
+      onOpen(instance) {
+        // tippy 4.3.5 repositions a reused popper only in a requestAnimationFrame
+        instance.popperInstance?.update();
+
         if (this.hideOnClick) {
           this.addCloseEventListeners();
         }
