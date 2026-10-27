@@ -332,11 +332,13 @@
         const isArrowUp = event.key == 'ArrowUp' || event.keyCode == 38;
         const isArrowDown = event.key == 'ArrowDown' || event.keyCode == 40;
 
-        if ((isArrowUp || isArrowDown) && popoverIsOpen && !popover.contains(focusedElement)) {
+        if (
+          (isArrowUp || isArrowDown) &&
+          popoverIsOpen &&
+          !this.getFocusableOptions().includes(focusedElement)
+        ) {
           event.preventDefault();
           setTimeout(() => this.focusEdge(isArrowUp ? 'last' : 'first'));
-          // manage rotating through the options using arrow keys
-          // UP arrow: .keyCode is depricated and should used only as a fallback
         } else if (isArrowUp && popoverIsOpen) {
           event.preventDefault();
 
