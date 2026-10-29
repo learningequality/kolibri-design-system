@@ -23,6 +23,7 @@ import KListboxVisualTest from '~~/lib/candidate/listbox/KListbox/__tests__/comp
 import KMultiSelectVisualTest from '~~/lib/candidate/multiselect/KMultiSelect/__tests__/components/KMultiSelectVisualTest.vue';
 import KSnackbarVisualTest from '~~/lib/KSnackbar/__tests__/components/KSnackbarVisualTest.vue';
 import KIconButtonVisualTest from '~~/lib/buttons-and-links/__tests__/components/KIconButtonVisualTest.vue';
+import KDateRangeVisualTest from '~~/lib/KDateRange/__tests__/components/KDateRangeVisualTest.vue';
 
 // Visual tests helper components
 Vue.component('VisualTestExample', VisualTestExample);
@@ -50,3 +51,4 @@ Vue.component('KListboxVisualTest', KListboxVisualTest);
 Vue.component('KMultiSelectVisualTest', KMultiSelectVisualTest);
 Vue.component('KSnackbarVisualTest', KSnackbarVisualTest);
 Vue.component('KIconButtonVisualTest', KIconButtonVisualTest);
+Vue.component('KDateRangeVisualTest', KDateRangeVisualTest);
