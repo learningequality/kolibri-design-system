@@ -5,10 +5,8 @@
     tabsId="tabsAppearanceOverrides"
     ariaLabel="Coach reports"
     :tabs="tabs"
+    hoverColor="var(--tokens-primary)"
     :appearanceOverrides="{
-      ':hover': {
-        color: 'var(--tokens-primary)',
-      },
       textTransform: 'none',
       margin: '0 32px',
     }"
