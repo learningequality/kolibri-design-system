@@ -81,7 +81,7 @@
 
 <style lang="scss" scoped>
 
-  // `:focus`, for the reason given on `th:focus` in KTable/index.vue
+  // `:focus-visible` is not supported by some browsers in the browserslist.
   td:focus {
     outline-offset: -2px;
   }

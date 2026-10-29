@@ -761,6 +761,7 @@
       <DocsExample
         loadExample="cards/InteractiveElements.vue"
         exampleId="kcard-interactive-elements"
+        hideScript
         block
       >
         <template #html>
