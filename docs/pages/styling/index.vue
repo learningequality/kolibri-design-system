@@ -168,7 +168,7 @@
         overrides that decision. Its <code>disableFocusRingByDefault</code> option defaults to
         <code>true</code>, which adds the rule
         <code>body:not([modality=keyboard]) :focus { outline: none; }</code>. That rule outranks the
-        global styles, so the outline appears only during keyboard navigation, and
+        helper styles, so the outline appears only during keyboard navigation, and
         <code>:focus-visible</code> makes no visible difference. Pass
         <code>disableFocusRingByDefault: false</code> to let it decide again. This documentation
         site uses that setting.
@@ -177,10 +177,10 @@
         CSS can only outline the element that has focus. When the outline belongs on a different
         element, write the rule against <code>body[modality='keyboard']</code>, which
         <code>trackInputModality()</code> sets. <code>KSelect</code> outlines the highlighted option
-        this way while the label holds focus through <code>aria-activedescendant</code>. Where the
-        outline has to be resolved in JavaScript, the <code>$coreOutline</code> computed property
-        available on Vue instances returns the outline style while the user navigates with the
-        keyboard, and <code>outline: none</code> at other times.
+        this way, because the label keeps focus. Where the outline has to be resolved in JavaScript,
+        the <code>$coreOutline</code> computed property available on Vue instances returns the
+        outline style while the user navigates with the keyboard, and <code>outline: none</code> at
+        other times.
       </p>
     </DocsPageSection>
 

@@ -373,29 +373,13 @@
       <!-- eslint-enable -->
 
       <p>
-        If the application imports <code>helper-styles</code> instead of <code>common</code>, write
-        the full outline:
-      </p>
-
-      <!-- eslint-disable -->
-      <!-- prettier-ignore -->
-      <DocsShowCode language="css">
-        .k-chip-close-button:focus-visible {
-          outline: 3px solid var(--tokens-focusOutline);
-          outline-offset: 0;
-        }
-      </DocsShowCode>
-      <!-- eslint-enable -->
-
-      <p>
         If the outline goes on an element that does not have focus,
         <code>:focus-visible</code> never matches there. Prefer a rule keyed off
         <code>body[modality='keyboard']</code>, which <code>trackInputModality()</code> sets, so the
-        color stays in CSS; <code>KSelect</code> outlines its highlighted option this way while the
-        label holds focus through <code>aria-activedescendant</code>. Where the value has to be
-        resolved in JavaScript, keep <code>$coreOutline</code> in a <code>:style</code> binding, as
-        <code>KCheckbox</code> does for the outline on its checkbox icon and
-        <code>KListbox</code> does for an option.
+        color stays in CSS; <code>KSelect</code> outlines its highlighted option this way, because
+        the label keeps focus. Where the value has to be resolved in JavaScript, keep
+        <code>$coreOutline</code> in a <code>:style</code> binding, as <code>KCheckbox</code> does
+        for the outline on its checkbox icon and <code>KListbox</code> does for an option.
       </p>
 
       <p>
