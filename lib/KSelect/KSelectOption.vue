@@ -164,7 +164,7 @@
     cursor: pointer;
     user-select: none;
 
-    // The label holds the focus, so `:focus-visible` never matches here.
+    // The label keeps focus, so `:focus-visible` never matches here.
     // `trackInputModality` sets the body attribute.
     body[modality='keyboard'] &.is-highlighted {
       outline: 3px solid var(--tokens-focusOutline);
