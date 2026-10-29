@@ -3,6 +3,7 @@
   <!-- no extra whitespace inside link -->
   <a
     :class="buttonClasses"
+    :style="buttonStyles"
     :href="href"
     :download="download"
     :openInNewTab="openInNewTab"

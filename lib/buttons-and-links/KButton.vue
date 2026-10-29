@@ -5,6 +5,7 @@
     ref="button"
     dir="auto"
     :class="buttonClasses"
+    :style="buttonStyles"
     :type="type"
     :disabled="disabled"
     tabindex="0"
