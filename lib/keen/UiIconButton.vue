@@ -14,7 +14,7 @@
     class="ui-icon-button"
     :aria-label="ariaLabel || tooltip"
     :class="classes"
-    :style="buttonColor"
+    :style="primaryColorVariables"
     :disabled="disabled || loading"
     tabindex="0"
     :href="isAnchor ? (disabled ? null : href) : null"
@@ -25,9 +25,6 @@
     <div
       v-if="icon || $slots.default"
       class="ui-icon-button-icon"
-      :style="{
-        color: !primaryType ? $themeTokens.primary : ''
-      }"
     >
       <slot>
         <UiIcon :icon="icon" />
@@ -78,9 +75,18 @@
 
 <script>
 
+  import Color from 'color';
+
+  import { themeTokens } from '../styles/theme';
+  import { darken1 } from '../styles/darkenColors';
   import UiIcon from './UiIcon.vue';
   import UiPopover from './UiPopover.vue';
   import UiTooltip from './UiTooltip.vue';
+
+  // tints used by every sibling color below, as `rgba(<its color>, 0.12)` and
+  // `rgba(<its color>, 0.26)`
+  const HOVER_ALPHA = 0.12;
+  const FOCUS_RING_ALPHA = 0.26;
 
   export default {
     name: 'UiIconButton',
@@ -157,35 +163,25 @@
       primaryType() {
         return this.type === 'primary';
       },
-      primaryColor() {
-        return this.color === 'primary';
-      },
-      buttonColor() {
-        if (this.primaryColor && this.primaryType) {
-          const style = {
-            backgroundColor: this.$themeTokens.primary,
-          };
-          if (this.dropdownOpen) {
-            style[':hover:not(.is-disabled)'] = {
-              backgroundColor: this.$themeTokens.primaryDark,
-            };
-          }
-          return style;
-        } else if (this.primaryColor && !this.primaryType) {
-          const style = {
-            color: this.$themeTokens.primary,
-            fill: this.$themeTokens.primary,
-          };
-          if (this.dropdownOpen) {
-            style[':hover:not(.is-disabled)'] = {
-              backgroundColor: this.$darken1(this.$themeBrand.primary.v_600)
-            }
-          }
-          style['--focus-ring-bg'] =this.$darken2(this.$themeBrand.primary.v_600)
-          return style;
+      // custom properties rather than `v-bind()`, which does nothing on the server
+      primaryColorVariables() {
+        if (this.color !== 'primary') {
+          return {};
         }
-
-        return {};
+        const primary = themeTokens().primary;
+        try {
+          const parsed = Color(primary);
+          return {
+            // the siblings drop 12 points of lightness for the ring. `darken1` is a
+            // relative 19%, within a point of that for the default `tokens.primary`
+            '--ui-icon-button-primary-ring': darken1(primary),
+            '--ui-icon-button-primary-hover': parsed.alpha(HOVER_ALPHA).string(),
+            '--ui-icon-button-primary-tint': parsed.alpha(FOCUS_RING_ALPHA).string(),
+          };
+        } catch (e) {
+          // `tokens.primary` can hold any CSS value, including one `color` cannot parse
+          return {};
+        }
       },
 
       isAnchor() {
@@ -445,7 +441,24 @@
       color: white;
     }
 
-    
+    &.ui-icon-button--color-primary {
+      background-color: var(--tokens-primary);
+
+      &:hover:not(.is-disabled),
+      &.has-dropdown-open {
+        background-color: var(--tokens-primaryDark);
+      }
+
+      .ui-icon-button-focus-ring {
+        background-color: var(--ui-icon-button-primary-ring, var(--tokens-primaryDark));
+      }
+
+      // `.ui-icon-button` clears the outline, and the ring fill is 1.55:1 against the
+      // button, short of the 3:1 of WCAG 1.4.11
+      body[modality='keyboard'] &:focus .ui-icon-button-focus-ring {
+        box-shadow: inset 0 0 0 2px var(--tokens-textInverted);
+      }
+    }
 
     &.ui-icon-button--color-accent {
       background-color: $brand-accent-color;
@@ -501,6 +514,12 @@
   }
 
   .ui-icon-button--type-secondary {
+    // `KToolbar` draws its nav icon here, in the primary color. `color="white"` is
+    // left alone, so the icon stays visible on a colored toolbar.
+    &.ui-icon-button--color-black .ui-icon-button-icon {
+      color: var(--tokens-primary);
+    }
+
     &.ui-icon-button--color-default {
       color: $secondary-text-color;
 
@@ -521,6 +540,25 @@
       }
     }
 
+    &.ui-icon-button--color-primary {
+      color: var(--tokens-primary);
+      fill: currentcolor;
+
+      &:hover:not(.is-disabled),
+      &.has-dropdown-open {
+        background-color: var(--ui-icon-button-primary-hover, var(--brand-primary-v100));
+      }
+
+      .ui-icon-button-focus-ring {
+        background-color: var(--ui-icon-button-primary-tint, var(--brand-primary-v100));
+      }
+
+      // `.ui-icon-button` clears the outline, so the tint above is the only focus
+      // indicator, and at 1.4:1 on white it does not reach the 3:1 of WCAG 1.4.11
+      body[modality='keyboard'] &:focus .ui-icon-button-focus-ring {
+        box-shadow: inset 0 0 0 2px var(--tokens-primary);
+      }
+    }
 
     &.ui-icon-button--color-accent {
       color: $brand-accent-color;

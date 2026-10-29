@@ -14,11 +14,12 @@
     Some width information need to be provided to `<span>s` to allow `text-overflow`
     calculate properly when ellipsis should be added.
   -->
-  <span :style="{ display: 'inline-block', maxWidth: '100%' }">
+  <span class="k-text-truncator-outer">
     <span
       v-bind="$attrs"
-      :style="{ display: 'inline-block', maxWidth: '100%' }"
-      :class="$computedClass(truncate)"
+      class="k-text-truncator"
+      :class="truncateClass"
+      :style="truncateStyle"
     >
       {{ text }}
     </span>
@@ -54,39 +55,47 @@
       },
     },
     computed: {
-      truncate() {
-        const nuxtServerSideRendering = process && process.server;
-        if (nuxtServerSideRendering) {
-          return;
-        }
-
-        /*
-            (A)
-            For one line, use standard ellipsis text overflow
-            that works well for such scenario
-          */
+      truncateClass() {
+        return this.maxLines === 1 ? 'k-text-truncator-single-line' : 'k-text-truncator-multi-line';
+      },
+      // the line clamp is bound inline because the formatter rewrites
+      // `display: -webkit-box` in a style block to the invalid `display: box`
+      truncateStyle() {
         if (this.maxLines === 1) {
-          return {
-            overflow: 'hidden',
-            textOverflow: 'ellipsis',
-            whiteSpace: 'nowrap',
-          };
+          return null;
         }
-        /*
-              (B)
-              For multiple lines, use line clamp in browsers that support it
-              (https://developer.mozilla.org/en-US/docs/Web/CSS/-webkit-line-clamp)
-            */
         return {
-          overflow: 'hidden',
           display: '-webkit-box',
-          '-webkit-line-clamp': `${this.maxLines}`,
           '-webkit-box-orient': 'vertical',
-          // needed to make line clamp work for very long word with no spaces
-          overflowWrap: 'break-word',
+          '-webkit-line-clamp': `${this.maxLines}`,
         };
       },
     },
   };
 
 </script>
+
+
+<style lang="scss" scoped>
+
+  .k-text-truncator-outer,
+  .k-text-truncator {
+    display: inline-block;
+    max-width: 100%;
+  }
+
+  .k-text-truncator {
+    overflow: hidden;
+  }
+
+  .k-text-truncator-single-line {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .k-text-truncator-multi-line {
+    // needed to make line clamp work for very long word with no spaces
+    overflow-wrap: break-word;
+  }
+
+</style>

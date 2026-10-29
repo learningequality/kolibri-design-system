@@ -11,6 +11,10 @@ import KImgVisualTest from '~~/lib/KImg/__tests__/components/KImgVisualTest.vue'
 import KIconVisualTest from '~~/lib/KIcon/__tests__/components/KIconVisualTest.vue';
 import KTextboxVisualTest from '~~/lib/KTextbox/__tests__/components/KTextboxVisualTest.vue';
 import KTableVisualTest from '~~/lib/KTable/__tests__/components/KTableVisualTest.vue';
+import KTableCellHeightVisualTest from '~~/lib/KTable/__tests__/components/KTableCellHeightVisualTest.vue';
+import KTableDropshadowVisualTest from '~~/lib/KTable/__tests__/components/KTableDropshadowVisualTest.vue';
+import KTableStickyColumnsVisualTest from '~~/lib/KTable/__tests__/components/KTableStickyColumnsVisualTest.vue';
+import KTableStickyColumnsScrollVisualTest from '~~/lib/KTable/__tests__/components/KTableStickyColumnsScrollVisualTest.vue';
 import CardsVisualTest from '~~/lib/cards/__tests__/components/CardsVisualTest.vue';
 import KLogoVisualTest from '~~/lib/KLogo/__tests__/components/KLogoVisualTest.vue';
 import KBreadcrumbsVisualTest from '~~/lib/KBreadcrumbs/__tests__/components/KBreadcrumbsVisualTest.vue';
@@ -19,6 +23,7 @@ import KListboxVisualTest from '~~/lib/candidate/listbox/KListbox/__tests__/comp
 import KMultiSelectVisualTest from '~~/lib/candidate/multiselect/KMultiSelect/__tests__/components/KMultiSelectVisualTest.vue';
 import KSnackbarVisualTest from '~~/lib/KSnackbar/__tests__/components/KSnackbarVisualTest.vue';
 import KIconButtonVisualTest from '~~/lib/buttons-and-links/__tests__/components/KIconButtonVisualTest.vue';
+import KDateRangeVisualTest from '~~/lib/KDateRange/__tests__/components/KDateRangeVisualTest.vue';
 
 // Visual tests helper components
 Vue.component('VisualTestExample', VisualTestExample);
@@ -32,6 +37,10 @@ Vue.component('KImgVisualTest', KImgVisualTest);
 Vue.component('KIconVisualTest', KIconVisualTest);
 Vue.component('KTextboxVisualTest', KTextboxVisualTest);
 Vue.component('KTableVisualTest', KTableVisualTest);
+Vue.component('KTableCellHeightVisualTest', KTableCellHeightVisualTest);
+Vue.component('KTableDropshadowVisualTest', KTableDropshadowVisualTest);
+Vue.component('KTableStickyColumnsVisualTest', KTableStickyColumnsVisualTest);
+Vue.component('KTableStickyColumnsScrollVisualTest', KTableStickyColumnsScrollVisualTest);
 Vue.component('CardsVisualTest', CardsVisualTest);
 Vue.component('KLogoVisualTest', KLogoVisualTest);
 Vue.component('KDropdownMenuVisualTest', KDropdownMenuVisualTest);
@@ -42,3 +51,4 @@ Vue.component('KListboxVisualTest', KListboxVisualTest);
 Vue.component('KMultiSelectVisualTest', KMultiSelectVisualTest);
 Vue.component('KSnackbarVisualTest', KSnackbarVisualTest);
 Vue.component('KIconButtonVisualTest', KIconButtonVisualTest);
+Vue.component('KDateRangeVisualTest', KDateRangeVisualTest);

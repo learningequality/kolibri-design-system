@@ -136,13 +136,17 @@
           screen readers
         </li>
         <li>
-          Global styles for page background, text color, text selection, focus outline, and print,
-          using the theme CSS variables
+          Global styles for page background, text color, text selection, and print, using the theme
+          CSS variables
         </li>
         <li>
           Every theme CSS variable at its default value, so they resolve when the page first
           renders, before the theme plugin has run. These come with the helper styles rather than
           the global styles, so they are always registered.
+        </li>
+        <li>
+          The keyboard focus outline. This also comes with the helper styles, because KDS components
+          rely on it being registered.
         </li>
       </ul>
 
@@ -153,7 +157,7 @@
       <p>
         We provide a consistent, high-contrast focus highlight, using the
         <code>--tokens-focusOutline</code>
-        CSS variable. The global styles apply it to focused elements that match
+        CSS variable. The helper styles apply it to focused elements that match
         <code>:focus-visible</code>, which the browser decides.
       </p>
       <p>
@@ -164,16 +168,19 @@
         overrides that decision. Its <code>disableFocusRingByDefault</code> option defaults to
         <code>true</code>, which adds the rule
         <code>body:not([modality=keyboard]) :focus { outline: none; }</code>. That rule outranks the
-        global styles, so the outline appears only during keyboard navigation, and
+        helper styles, so the outline appears only during keyboard navigation, and
         <code>:focus-visible</code> makes no visible difference. Pass
         <code>disableFocusRingByDefault: false</code> to let it decide again. This documentation
         site uses that setting.
       </p>
       <p>
         CSS can only outline the element that has focus. When the outline belongs on a different
-        element, use the <code>$coreOutline</code> computed property available on Vue instances. It
-        returns the outline style while the user navigates with the keyboard, and
-        <code>outline: none</code> at other times.
+        element, write the rule against <code>body[modality='keyboard']</code>, which
+        <code>trackInputModality()</code> sets. <code>KSelect</code> outlines the highlighted option
+        this way, because the label keeps focus. Where the outline has to be resolved in JavaScript,
+        the <code>$coreOutline</code> computed property available on Vue instances returns the
+        outline style while the user navigates with the keyboard, and <code>outline: none</code> at
+        other times.
       </p>
     </DocsPageSection>
 

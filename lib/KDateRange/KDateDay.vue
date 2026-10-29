@@ -5,7 +5,7 @@
     :primary="false"
     appearance="flat-button"
     :appearanceOverrides="styleOverrides"
-    :style="[inRangeStyle, selectedStyle]"
+    :hoverBackgroundColor="hoverBackgroundColor"
     :disabled="isDisabled"
     :aria-hidden="isDisabled"
     :class="[
@@ -74,23 +74,27 @@
       return {};
     },
     computed: {
-      inRangeStyle() {
-        return this.isInRange
-          ? {
-            backgroundColor: 'var(--brand-primary-v100)',
-            ':hover': {
-              backgroundColor: 'var(--palette-grey-v300)',
-            },
-          }
-          : {};
-      },
-      selectedStyle() {
-        return this.isSelected
-          ? {
+      dayColors() {
+        if (this.isSelected) {
+          return {
+            color: 'var(--palette-white)',
             backgroundColor: 'var(--brand-primary-v500)',
-            color: 'var(--palette-white) !important',
-          }
-          : {};
+          };
+        }
+        if (this.isInRange) {
+          return {
+            color: 'var(--palette-grey-v700)',
+            backgroundColor: 'var(--brand-primary-v100)',
+          };
+        }
+        return { color: 'var(--palette-grey-v700)' };
+      },
+      hoverBackgroundColor() {
+        if (this.isSelected) {
+          // without this the flat-button hover strips the fill from under the white number
+          return 'var(--brand-primary-v500)';
+        }
+        return this.isInRange ? 'var(--palette-grey-v300)' : null;
       },
       styleOverrides() {
         return {
@@ -102,7 +106,7 @@
           fontWeight: 'lighter',
           lineHeight: '0px',
           padding: '0',
-          color: 'var(--palette-grey-v700)',
+          ...this.dayColors,
         };
       },
       isFirstDay() {

@@ -7,6 +7,7 @@
 
   <router-link
     :class="buttonClasses"
+    :style="buttonStyles"
     :to="to"
     :replace="replace"
     data-testid="router-link"

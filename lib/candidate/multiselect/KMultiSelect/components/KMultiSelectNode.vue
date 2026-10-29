@@ -10,6 +10,7 @@
       :label="node.label"
       :indeterminate="isIndeterminate"
       :showSelector="showSelector"
+      :class="{ 'has-top-border': showTopBorder }"
       :style="indentStyle"
     >
       <template v-if="$scopedSlots.option">
@@ -46,6 +47,7 @@
     :value="node.value"
     :label="node.label"
     :showSelector="showSelector"
+    :class="{ 'has-top-border': showTopBorder }"
     :style="indentStyle"
   >
     <template v-if="$scopedSlots.option">
@@ -63,7 +65,6 @@
 <script>
 
   import { computed } from 'vue';
-  import { themeTokens } from '../../../../styles/theme';
   import KListboxGroup from '../../../listbox/KListboxGroup/index.vue';
   import KListboxOption from '../../../listbox/KListboxOption/index.vue';
 
@@ -82,17 +83,11 @@
 
       const isIndeterminate = computed(() => props.indeterminateValues.has(props.node.value));
 
-      const indentStyle = computed(() => {
-        const style = {
-          paddingInlineStart: `${16 + props.depth * 24}px`,
-          paddingInlineEnd: '16px',
-          minHeight: '48px',
-        };
-        if (props.showTopBorder) {
-          style.borderTop = `1px solid ${themeTokens().fineLine}`;
-        }
-        return style;
-      });
+      const indentStyle = computed(() => ({
+        paddingInlineStart: `${16 + props.depth * 24}px`,
+        paddingInlineEnd: '16px',
+        minHeight: '48px',
+      }));
 
       return { hasChildren, isIndeterminate, indentStyle };
     },
@@ -131,3 +126,12 @@
   };
 
 </script>
+
+
+<style lang="scss" scoped>
+
+  .has-top-border {
+    border-top: 1px solid var(--tokens-fineLine);
+  }
+
+</style>

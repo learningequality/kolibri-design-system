@@ -16,7 +16,7 @@
 <script>
 
   export default {
-    name: 'KTableStickyColumnsScroll',
+    name: 'KTableStickyColumnsScrollVisualTest',
     data() {
       return {
         wideHeaders: [

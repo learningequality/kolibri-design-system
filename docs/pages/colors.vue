@@ -81,8 +81,6 @@
         Reference them directly with <code>var(--name)</code>. For example, to color text using the
         <code>error</code> token:
       </p>
-      <!-- eslint-disable -->
-      <!-- prettier-ignore -->
       <DocsShowCode language="html">
         <div class="error-message">This is an error</div>
         <style>
@@ -104,7 +102,6 @@
       <DocsShowCode language="html">
         <div :style="{ color: 'var(--tokens-error)' }">This is an error</div>
       </DocsShowCode>
-      <!-- eslint-enable -->
 
       <p>
         For palette and brand variables, replace the dots in the path with hyphens and drop the
@@ -130,13 +127,25 @@
 
       <p>
         Use these when you must build a color value in JavaScript. For a static color, use a CSS
-        variable instead. For example, to make a translucent background from
-        <code>$themeTokens.primary</code>, compute the color and bind it with a
+        variable instead.
+      </p>
+
+      <p>
+        For example, to make a translucent background from <code>$themePalette.blue.v_400</code>,
+        compute the color and bind it with a
         <DocsExternalLink
           text="computed style"
           href="https://vuejs.org/v2/guide/class-and-style.html"
-        />:
+        />.
       </p>
+
+      <DocsBanner>
+        Colors like these should only be built from <code>$themePalette</code>, because it is always
+        a hex string. A <code>$themeTokens</code> or a <code>$themeBrand</code> color can hold a
+        <code>var()</code> or an <code>rgb()</code> string. <code>Color()</code> throws on a
+        <code>var()</code>, and appending an alpha to one produces an invalid value that the browser
+        drops.
+      </DocsBanner>
 
       <!-- eslint-disable -->
       <!-- prettier-ignore -->
@@ -145,8 +154,8 @@
 
         export default {
           computed: {
-            translucentPrimary() {
-              return Color(this.$themeTokens.primary).alpha(0.3).string();
+            translucentBlue() {
+              return Color(this.$themePalette.blue.v_400).alpha(0.3).string();
             },
           },
         };
@@ -154,13 +163,13 @@
       <!-- eslint-enable -->
 
       <DocsShowCode language="html">
-        <div :style="{ backgroundColor: translucentPrimary }">Translucent primary</div>
+        <div :style="{ backgroundColor: translucentBlue }">Translucent blue</div>
       </DocsShowCode>
 
       <p>This will display:</p>
 
       <DocsShow>
-        <div :style="{ backgroundColor: translucentPrimary }">Translucent primary</div>
+        <div :style="{ backgroundColor: translucentBlue }">Translucent blue</div>
       </DocsShow>
 
       <h3>
@@ -281,10 +290,11 @@
       <!-- eslint-enable -->
 
       <p>
-        If the value comes from a prop, return it from a computed property and bind that property
-        with <code>v-bind()</code>. The computed property must always return a color. For a theme
-        default, return the CSS variable as a string. For example, where
-        <code>hoverBackgroundColor</code> is a prop:
+        If the value comes from a prop, keep the rule in the <code>&lt;style&gt;</code> block and
+        supply the value with <code>v-bind()</code> or a custom property. The example below uses a
+        custom property, with the theme variable as the fallback. An inline
+        <code>:style</code> binding sets the property only when the prop
+        <code>backgroundColor</code> or <code>hoverBackgroundColor</code> is given:
       </p>
 
       <!-- eslint-disable -->
@@ -293,51 +303,58 @@
         // Before
         computed: {
           styles() {
-            const hoverBackgroundColor = this.hoverBackgroundColor || this.$themeBrand.primary.v_100;
             return {
-              ':hover': { backgroundColor: hoverBackgroundColor },
+              backgroundColor: this.backgroundColor || this.$themeTokens.surface,
+              ':hover': {
+                backgroundColor: this.hoverBackgroundColor || this.$themeBrand.primary.v_100,
+              },
             };
           },
         },
 
         // After
         computed: {
-          tabHoverBackgroundColor() {
-            return this.hoverBackgroundColor || 'var(--brand-primary-v100)';
+          tabCssVariables() {
+            const variables = {};
+            if (this.backgroundColor) {
+              variables['--k-tabs-background-color'] = this.backgroundColor;
+            }
+            if (this.hoverBackgroundColor) {
+              variables['--k-tabs-hover-background-color'] = this.hoverBackgroundColor;
+            }
+            return variables;
           },
         },
       </DocsShowCode>
       <!-- prettier-ignore -->
+      <DocsShowCode language="html">
+        <div role="tablist" :style="tabCssVariables"></div>
+      </DocsShowCode>
+      <!-- prettier-ignore -->
       <DocsShowCode language="css">
+        .tab {
+          background-color: var(--k-tabs-background-color, var(--tokens-surface));
+        }
+
         .tab:hover {
-          background-color: v-bind(tabHoverBackgroundColor);
+          background-color: var(--k-tabs-hover-background-color, var(--brand-primary-v100));
         }
       </DocsShowCode>
       <!-- eslint-enable -->
 
       <p>
-        If the value comes from a darken utility, bind it with <code>v-bind()</code> as in the
+        If the value is a focus outline, use <code>:focus-visible</code>. The helper styles,
+        included in <code>common</code> (see
         <DocsInternalLink
-          href="#darken-utilities"
-          text="darken utilities"
-        />
-        example. No CSS variable exists for a darkened color.
-      </p>
-
-      <p>
-        If the value is a focus outline, use <code>:focus-visible</code>. The global styles from
-        <code>common</code> (see
-        <DocsInternalLink
-          href="/installation#register-global-styles"
-          text="Installation"
-        />) already give every element that matches <code>:focus-visible</code> the same outline
+          href="/styling#helper-styles"
+          text="Styling"
+        />), already give every element that matches <code>:focus-visible</code> the same outline
         style as <code>$coreOutline</code>. If the class sets only
         <code>{ ':focus': $coreOutline }</code>, delete it. If the class changes the outline,
         override only that property. For example, to remove the outline offset on a button:
       </p>
 
       <!-- eslint-disable -->
-      <!-- prettier-ignore -->
       <DocsShowCode language="html">
         <!-- Before -->
         <button
@@ -356,27 +373,13 @@
       <!-- eslint-enable -->
 
       <p>
-        If the application imports <code>helper-styles</code> instead of <code>common</code>, write
-        the full outline:
-      </p>
-
-      <!-- eslint-disable -->
-      <!-- prettier-ignore -->
-      <DocsShowCode language="css">
-        .k-chip-close-button:focus-visible {
-          outline: 3px solid var(--tokens-focusOutline);
-          outline-offset: 0;
-        }
-      </DocsShowCode>
-      <!-- eslint-enable -->
-
-      <p>
-        If the outline goes on an element that does not have focus, keep
-        <code>$coreOutline</code> in a <code>:style</code> binding, because
-        <code>:focus-visible</code> never matches there. For example, <code>KCheckbox</code> puts
-        the outline on its checkbox icon while the focus is on the native input.
-        <code>KListbox</code> and <code>KSelect</code> outline an option while the container holds
-        focus through <code>aria-activedescendant</code>.
+        If the outline goes on an element that does not have focus,
+        <code>:focus-visible</code> never matches there. Prefer a rule keyed off
+        <code>body[modality='keyboard']</code>, which <code>trackInputModality()</code> sets, so the
+        color stays in CSS; <code>KSelect</code> outlines its highlighted option this way, because
+        the label keeps focus. Where the value has to be resolved in JavaScript, keep
+        <code>$coreOutline</code> in a <code>:style</code> binding, as <code>KCheckbox</code> does
+        for the outline on its checkbox icon and <code>KListbox</code> does for an option.
       </p>
 
       <p>
@@ -389,7 +392,6 @@
       </p>
 
       <!-- eslint-disable -->
-      <!-- prettier-ignore -->
       <DocsShowCode language="html">
         <KOverlay>
           <div :style="{ '--delete-button-hover-color': deleteButtonHoverColor }">
@@ -805,8 +807,8 @@
       deleteButtonHoverColor() {
         return this.$darken1(this.$themePalette.red.v_600);
       },
-      translucentPrimary() {
-        return Color(this.$themeTokens.primary).alpha(0.3).string();
+      translucentBlue() {
+        return Color(this.$themePalette.blue.v_400).alpha(0.3).string();
       },
     },
   };
@@ -847,7 +849,6 @@
       }
 
       .delete-button:hover {
-        /* stylelint-disable-next-line csstree/validator, value-keyword-case */
         background-color: v-bind(deleteButtonHoverColor);
       }
 

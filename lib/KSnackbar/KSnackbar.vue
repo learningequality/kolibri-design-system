@@ -25,7 +25,7 @@
           class="k-snackbar"
           data-testid="snackbar"
           data-focus="true"
-          :class="[$computedClass({ ':focus': $coreOutline }), { 'k-snackbar-small': isSmall }]"
+          :class="{ 'k-snackbar-small': isSmall }"
           :style="snackbarStyles"
           tabindex="0"
           @keydown.esc="handleClose"
@@ -54,6 +54,7 @@
               class="k-snackbar-action-button"
               :text="actionText"
               :appearanceOverrides="actionButtonStyles"
+              hoverBackgroundColor="rgba(255, 255, 255, 0.1)"
               @click.stop="onActionClick"
               @blur="$emit('blur', $event)"
             />
@@ -208,9 +209,6 @@
         return {
           color: 'var(--tokens-textInverted)',
           textDecoration: 'none',
-          ':hover': {
-            backgroundColor: 'rgba(255, 255, 255, 0.1)',
-          },
         };
       });
 
