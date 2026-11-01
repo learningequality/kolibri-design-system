@@ -47,7 +47,7 @@
     "xstate": "4.38.3"
   },
   "devDependencies": {
-    "@babel/core": "^7.26.0",
+    "@babel/core": "^8.0.9",
     "@jest/globals": "^30.0.0",
     "@material-icons/svg": "git+https://github.com/material-icons/material-icons.git",
     "@mdi/svg": "^5.9.55",
