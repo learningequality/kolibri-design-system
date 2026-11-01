@@ -7,6 +7,19 @@ Changelog is rather internal in nature. See release notes for the public overvie
 <!-- [DO NOT REMOVE-USED BY GH ACTION] PASTE CHANGELOG -->
 
 
+- [#1404]
+  - **Description:** build(deps): bump vue2-teleport from 1.1.4 to 1.2.2
+  - **Products impact:** Dev Dependency upgrade
+  - **Addresses:** -
+  - **Components:** -
+  - **Breaking:** -
+  - **Impacts a11y:** -
+  - **Guidance:** -
+
+[#1404]: https://github.com/learningequality/kolibri-design-system/pull/1404
+
+
+
 - [#1406]
   - **Description:** build(deps-dev): bump @percy/cli from 1.30.6 to 1.32.12
   - **Products impact:** Dev Dependency upgrade
