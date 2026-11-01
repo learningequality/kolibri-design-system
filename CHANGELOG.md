@@ -7,6 +7,19 @@ Changelog is rather internal in nature. See release notes for the public overvie
 <!-- [DO NOT REMOVE-USED BY GH ACTION] PASTE CHANGELOG -->
 
 
+- [#1411]
+  - **Description:** build(deps): bump follow-redirects from 1.16.1 to 1.16.2
+  - **Products impact:** Dev Dependency upgrade
+  - **Addresses:** -
+  - **Components:** -
+  - **Breaking:** -
+  - **Impacts a11y:** -
+  - **Guidance:** -
+
+[#1411]: https://github.com/learningequality/kolibri-design-system/pull/1411
+
+
+
 - [#1404]
   - **Description:** build(deps): bump vue2-teleport from 1.1.4 to 1.2.2
   - **Products impact:** Dev Dependency upgrade
