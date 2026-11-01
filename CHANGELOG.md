@@ -7,6 +7,19 @@ Changelog is rather internal in nature. See release notes for the public overvie
 <!-- [DO NOT REMOVE-USED BY GH ACTION] PASTE CHANGELOG -->
 
 
+- [#1406]
+  - **Description:** build(deps-dev): bump @percy/cli from 1.30.6 to 1.32.12
+  - **Products impact:** Dev Dependency upgrade
+  - **Addresses:** -
+  - **Components:** -
+  - **Breaking:** -
+  - **Impacts a11y:** -
+  - **Guidance:** -
+
+[#1406]: https://github.com/learningequality/kolibri-design-system/pull/1406
+
+
+
 - [#1394]
   - **Description:** build(deps): bump fast-uri from 3.1.7 to 3.1.9
   - **Products impact:** Dev Dependency upgrade
