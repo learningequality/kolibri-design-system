@@ -7,6 +7,19 @@ Changelog is rather internal in nature. See release notes for the public overvie
 <!-- [DO NOT REMOVE-USED BY GH ACTION] PASTE CHANGELOG -->
 
 
+- [#1410]
+  - **Description:** build(deps): bump qs from 6.15.2 to 6.17.1
+  - **Products impact:** Dev Dependency upgrade
+  - **Addresses:** -
+  - **Components:** -
+  - **Breaking:** -
+  - **Impacts a11y:** -
+  - **Guidance:** -
+
+[#1410]: https://github.com/learningequality/kolibri-design-system/pull/1410
+
+
+
 - [#1411]
   - **Description:** build(deps): bump follow-redirects from 1.16.1 to 1.16.2
   - **Products impact:** Dev Dependency upgrade
