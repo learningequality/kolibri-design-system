@@ -7,6 +7,19 @@ Changelog is rather internal in nature. See release notes for the public overvie
 <!-- [DO NOT REMOVE-USED BY GH ACTION] PASTE CHANGELOG -->
 
 
+- [#1412]
+  - **Description:** build(deps): bump brace-expansion from 1.1.11 to 1.1.21
+  - **Products impact:** Dev Dependency upgrade
+  - **Addresses:** -
+  - **Components:** -
+  - **Breaking:** -
+  - **Impacts a11y:** -
+  - **Guidance:** -
+
+[#1412]: https://github.com/learningequality/kolibri-design-system/pull/1412
+
+
+
 - [#1410]
   - **Description:** build(deps): bump qs from 6.15.2 to 6.17.1
   - **Products impact:** Dev Dependency upgrade
