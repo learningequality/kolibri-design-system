@@ -68,25 +68,13 @@
     />
 
     <VisualTestExample
-      title="Multiple with dropdown open"
-      width="320px"
-      loadExample="KSelect/MultipleDropdownOpen.vue"
-    />
-
-    <VisualTestExample
-      title="Multiple selection with dropdown open"
-      width="320px"
-      loadExample="KSelect/MultipleSelectedDropdownOpen.vue"
-    />
-
-    <VisualTestExample
-      title="Multiple selection with long labels"
+      title="Long labels"
       width="320px"
       loadExample="KSelect/LongLabels.vue"
     />
 
     <VisualTestExample
-      title="Multiple selection with long labels and clearable"
+      title="Long labels and clearable"
       width="320px"
       loadExample="KSelect/LongLabelsClearable.vue"
     />

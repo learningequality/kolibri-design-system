@@ -203,7 +203,7 @@
     methods: {
       doToggle() {
         if (!this.forceShow) {
-          this.showPopper = !this.showPopper;
+          this.showPopper = !this.disabled && !this.showPopper;
         }
       },
 
@@ -211,7 +211,9 @@
        * @public
        */
       doShow() {
-        this.showPopper = true;
+        if (!this.disabled) {
+          this.showPopper = true;
+        }
       },
 
       /**

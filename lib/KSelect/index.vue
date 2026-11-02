@@ -25,84 +25,101 @@
     >
 
     <div class="ui-select-content">
-      <div
-        ref="label"
-        class="ui-select-label"
-        :class="isAnyOptionHighlighted ? '' : $computedClass({ ':focus': $coreOutline })"
-        supports-modality="keyboard"
-        :tabindex="disabled ? null : '0'"
-        @focus="onFocus"
-        @blur="selectBlur"
-        @keydown.enter.prevent="onEnterSpace"
-        @keydown.space.prevent="onEnterSpace"
-        @keydown.tab="onBlur"
-        @keydown.up.prevent="highlightPreviousOption"
-        @keydown.down.prevent="highlightNextOption"
-        @keydown.self="highlightQuickMatch"
-        @keydown.esc.prevent="closeDropdown()"
-      >
+      <div class="ui-select-control">
         <div
-          v-if="label || $slots.default"
-          class="ui-select-label-text"
-          :class="labelClasses"
-          :style="{
-            color: isActive ? 'var(--tokens-primary)' : 'var(--palette-grey-v700)',
-          }"
-        >
-          <!-- @slot Optional slot as alternative to `label` prop -->
-          <slot>{{ label }}</slot>
-        </div>
-
-        <div
-          class="ui-select-display"
-          :style="activeBorderStyle"
+          ref="label"
+          class="ui-select-label"
+          :class="$computedClass({ ':focus': $coreOutline })"
+          supports-modality="keyboard"
+          role="combobox"
+          :tabindex="disabled ? null : '0'"
+          aria-haspopup="listbox"
+          :aria-expanded="String(isDropdownOpen)"
+          :aria-controls="listboxId"
+          :aria-activedescendant="(isDropdownOpen && activeDescendantId) || null"
+          :aria-labelledby="ariaLabelledBy"
+          :aria-label="ariaLabel"
+          :aria-invalid="invalid ? 'true' : null"
+          :aria-describedby="describedBy"
+          :aria-disabled="disabled ? 'true' : null"
+          @focus="onFocus"
+          @blur="onBlur"
+          @keydown="onKeydown"
+          @keyup="onKeyup"
         >
           <div
-            class="ui-select-display-value"
-            :class="{ 'is-placeholder': !hasDisplayText }"
+            v-if="hasLabel"
+            :id="labelId"
+            class="ui-select-label-text"
+            :class="labelClasses"
+            :style="{
+              color: isActive ? 'var(--tokens-primary)' : 'var(--palette-grey-v700)',
+            }"
+            aria-hidden="true"
           >
-            <!-- @slot Optional slot to override the display of the selected value -->
-            <slot name="display">
-              {{
-                hasDisplayText
-                  ? displayText
-                  : hasFloatingLabel && isLabelInline
-                    ? null
-                    : placeholder
-              }}
-            </slot>
+            <!-- @slot Optional slot as alternative to `label` prop -->
+            <slot>{{ label }}</slot>
           </div>
 
-          <UiIcon
-            v-if="!clearableState"
-            class="ui-select-dropdown-button"
-            :style="{ color: isActive ? 'var(--tokens-primary)' : 'var(--palette-grey-v700)' }"
+          <div
+            class="ui-select-display"
+            :style="activeBorderStyle"
           >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
+            <div
+              :id="valueId"
+              class="ui-select-display-value"
+              :class="{ 'is-placeholder': !hasDisplayText }"
             >
-              <path d="M6.984 9.984h10.03L12 15z" />
-            </svg>
-          </UiIcon>
-          <!-- Trick to stop keyboard events being propagated -->
-          <span
-            v-else
-            @keydown.stop
-          >
-            <KIconButton
-              size="small"
-              class="overlay-close-button"
-              icon="close"
-              :ariaLabel="clearText"
-              color="var(--tokens-text)"
-              :tooltip="clearText"
-              @click.stop="onClear"
-            />
-          </span>
+              <!-- @slot Optional slot to override the display of the selected value -->
+              <slot name="display">
+                {{
+                  hasDisplayText
+                    ? displayText
+                    : hasFloatingLabel && isLabelInline
+                      ? null
+                      : placeholder
+                }}
+              </slot>
+            </div>
+
+            <UiIcon
+              v-if="!clearableState"
+              class="ui-select-dropdown-button"
+              aria-hidden="true"
+              :style="{ color: isActive ? 'var(--tokens-primary)' : 'var(--palette-grey-v700)' }"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+              >
+                <path d="M6.984 9.984h10.03L12 15z" />
+              </svg>
+            </UiIcon>
+            <span
+              v-else
+              class="ui-select-clear-spacer"
+            ></span>
+          </div>
         </div>
+
+        <span
+          v-if="clearableState"
+          class="ui-select-clear"
+          @keydown.stop
+        >
+          <KIconButton
+            size="small"
+            class="overlay-close-button"
+            icon="close"
+            :ariaLabel="clearText"
+            color="var(--tokens-text)"
+            :tooltip="clearText"
+            @click.stop="onClear"
+          />
+        </span>
+
         <Popper
           v-if="appendToEl"
           ref="dropdownPopper"
@@ -118,53 +135,62 @@
           @hide="onClose"
         >
           <div
-            ref="dropdown"
             class="ui-select-dropdown"
             :style="{
-              color: 'var(--tokens-primary)',
               backgroundColor: 'var(--tokens-surface)',
               bottom: dropdownButtonBottom,
             }"
+            @mousedown.prevent
           >
-            <ul
-              ref="optionsList"
+            <KListbox
+              v-if="listboxRendered"
+              :id="listboxId"
+              ref="listbox"
               class="ui-select-options"
-              :style="{ backgroundColor: 'var(--tokens-surface)' }"
+              :value="listboxValue"
+              :ariaLabelledBy="listboxLabelledBy"
+              :ariaLabel="ariaLabel"
+              :messages="listboxMessages"
+              :multiple="false"
+              :tabbable="false"
+              containScroll
+              @active-descendant-change="onActiveDescendantChange"
             >
-              <KSelectOption
+              <KListboxOption
                 v-for="(option, index) in filteredOptions"
-                ref="options"
                 :key="index"
-                :highlighted="isOptionHighlighted(option)"
-                :keys="keys"
-                :multiple="multiple"
-                :option="option"
-                :selected="isOptionSelected(option)"
-                :truncateLabel="truncateOptionsLabel"
-                type="basic"
+                :value="index"
+                :label="optionLabel(option)"
+                :disabled="Boolean(option.disabled)"
                 @click.native.stop="selectOption(option)"
               >
-                <!-- @slot Optional slot to override the display of
-                the option in the options dropdown -->
-                <slot
-                  name="option"
-                  :highlighted="isOptionHighlighted(option)"
-                  :index="index"
-                  :option="option"
-                  :selected="isOptionSelected(option)"
-                ></slot>
-              </KSelectOption>
+                <span class="ui-select-option-content">
+                  <!-- @slot Optional slot to override the display of
+                  the option in the options dropdown -->
+                  <slot
+                    name="option"
+                    :highlighted="index === slotHighlightedIndex"
+                    :index="index"
+                    :option="option"
+                    :selected="index === renderedSelectedIndex"
+                  >
+                    <span :class="{ 'ui-select-option-truncated': truncateOptionsLabel }">
+                      {{ option[keys.label] }}
+                    </span>
+                  </slot>
+                </span>
+              </KListboxOption>
+            </KListbox>
 
-              <div
-                v-show="hasNoResults"
-                class="ui-select-no-results"
-              >
-                <!-- @slot Optional slot as alternative to `noResultsText` prop -->
-                <slot name="no-results">
-                  {{ noResultsText }}
-                </slot>
-              </div>
-            </ul>
+            <div
+              v-show="hasNoResults"
+              class="ui-select-no-results"
+            >
+              <!-- @slot Optional slot as alternative to `noResultsText` prop -->
+              <slot name="no-results">
+                {{ noResultsText }}
+              </slot>
+            </div>
           </div>
         </Popper>
       </div>
@@ -175,6 +201,7 @@
       >
         <div
           v-if="showError"
+          :id="feedbackId"
           class="ui-select-feedback-text"
         >
           <!-- @slot Optional slot as alternative to `invalidText` prop -->
@@ -185,6 +212,7 @@
 
         <div
           v-else-if="showHelp"
+          :id="feedbackId"
           class="ui-select-feedback-text"
         >
           <!-- @slot Optional slot as alternative to `help` prop -->
@@ -205,17 +233,26 @@
   import isObject from 'lodash/isObject';
   import throttle from 'lodash/throttle';
   import fuzzysearch from 'fuzzysearch';
-  import startswith from 'lodash/startsWith';
-  import sortby from 'lodash/sortBy';
   import { onMounted, ref } from 'vue';
   import UiIcon from '../keen/UiIcon';
 
-  import { looseIndexOf, looseEqual } from '../keen/helpers/util';
-  import { scrollIntoView, resetScroll } from '../keen/helpers/element-scroll';
+  import { looseEqual } from '../keen/helpers/util';
   import config from '../keen/config';
   import Popper from '../_Popper.vue';
   import _useOverlay from '../composables/_useOverlay';
-  import KSelectOption from './KSelectOption.vue';
+  import KListbox from '../candidate/listbox/KListbox/index.vue';
+  import KListboxOption from '../candidate/listbox/KListboxOption/index.vue';
+
+  const PAGE_SIZE = 10;
+
+  const OPENING_KEYS = ['ArrowUp', 'ArrowDown', 'Home', 'End', 'Enter', ' '];
+
+  const SILENT_LISTBOX_MESSAGES = {
+    clickable: '',
+    allOptionsSelected: '',
+    allOptionsDeselected: '',
+    optionDeselected: '',
+  };
 
   function areValidOptions(array) {
     return array.every(object => {
@@ -244,7 +281,8 @@
     name: 'KSelect',
     components: {
       UiIcon,
-      KSelectOption,
+      KListbox,
+      KListboxOption,
       Popper,
     },
     setup() {
@@ -269,14 +307,8 @@
        * Object currently selected
        */
       value: {
-        type: [Object, Array],
+        type: Object,
         required: true,
-        validator(value) {
-          if (Array.isArray(value)) {
-            return value.every(item => item && typeof item === 'object' && 'value' in item);
-          }
-          return value && typeof value === 'object';
-        },
       },
       /**
        * Array of option objects { value, label, disabled }.
@@ -309,20 +341,6 @@
       floatingLabel: {
         type: Boolean,
         default: true,
-      },
-      /**
-       * Whether multiple options can be selected or not
-       */
-      multiple: {
-        type: Boolean,
-        default: false,
-      },
-      /**
-       * Delimiter for multiple selected options
-       */
-      multipleDelimiter: {
-        type: String,
-        default: ', ',
       },
       /**
        * Text displayed if no results
@@ -406,11 +424,17 @@
         query: '',
         isActive: false,
         isTouched: false,
-        highlightedOption: null,
+        slotHighlightedIndex: -1,
+        // Copy of selectedIndex for the option slot: reading the computed once per option
+        // re-adds all of its dependencies each time, which is quadratic in the option count
+        renderedSelectedIndex: -1,
+        activeDescendantId: null,
         isDropdownOpen: false,
+        listboxRendered: false,
         initialValue: JSON.stringify(this.value),
         quickMatchString: '',
         quickMatchTimeout: null,
+        stopEscapeKeyup: false,
         dropdownButtonBottom: 'auto',
         // workaround for Keen-ui not displaying floating labels for empty objects
         selection: Object.keys(this.value || {}).length === 0 ? '' : this.value,
@@ -421,6 +445,30 @@
       name() {
         return `ui-select-${this._uid}`;
       },
+      labelId() {
+        return `${this.name}-label`;
+      },
+      valueId() {
+        return `${this.name}-value`;
+      },
+      listboxId() {
+        return `${this.name}-listbox`;
+      },
+      feedbackId() {
+        return `${this.name}-feedback`;
+      },
+      ariaLabelledBy() {
+        return this.hasLabel ? this.labelId : null;
+      },
+      ariaLabel() {
+        return this.hasLabel ? null : this.placeholder || null;
+      },
+      listboxLabelledBy() {
+        return this.ariaLabelledBy || (this.ariaLabel ? null : this.valueId);
+      },
+      listboxMessages() {
+        return SILENT_LISTBOX_MESSAGES;
+      },
       classes() {
         return [
           `ui-select-type-basic`,
@@ -428,7 +476,6 @@
           { 'is-invalid': this.invalid },
           { 'is-touched': this.isTouched },
           { 'is-disabled': this.disabled },
-          { 'is-multiple': this.multiple },
           { 'has-label': this.hasLabel },
           { 'has-floating-label': this.hasFloatingLabel },
           { 'ui-select-inline': this.inline },
@@ -442,10 +489,6 @@
         };
       },
 
-      isAnyOptionHighlighted() {
-        return Boolean(this.highlightedOption) && this.isDropdownOpen;
-      },
-
       hasLabel() {
         return Boolean(this.label) || Boolean(this.$slots.default);
       },
@@ -455,7 +498,7 @@
       },
 
       isLabelInline() {
-        return this.selection.length === 0 && !this.isActive;
+        return !this.selection && !this.isActive;
       },
 
       hasFeedback() {
@@ -470,6 +513,10 @@
         return !this.showError && (Boolean(this.help) || Boolean(this.$slots.help));
       },
 
+      describedBy() {
+        return this.hasFeedback && (this.showError || this.showHelp) ? this.feedbackId : null;
+      },
+
       filteredOptions() {
         return this.options.filter((option, index) => {
           return this.defaultFilter(option, index);
@@ -477,16 +524,7 @@
       },
 
       displayText() {
-        if (this.multiple) {
-          if (this.selection.length > 0) {
-            return this.selection
-              .map(selection => selection[this.keys.label] || selection)
-              .join(this.multipleDelimiter);
-          }
-
-          return '';
-        }
-        return this.selection ? this.selection[this.keys.label] || this.selection : '';
+        return this.selection ? this.optionLabel(this.selection) : '';
       },
 
       hasDisplayText() {
@@ -532,51 +570,21 @@
           return;
         }
 
-        if (Array.isArray(this.selection)) {
-          return this.selection.map(option => option[this.keys.value] || option).join(',');
-        }
-
         return this.selection[this.keys.value] || this.selection;
       },
 
-      // Returns the index of the currently highlighted option
-      highlightedIndex() {
-        return this.options.findIndex(option => looseEqual(this.highlightedOption, option));
+      selectedIndex() {
+        return this.filteredOptions.findIndex(option => this.isOptionSelected(option));
       },
 
-      // Returns an array containing the options and extra annotations
-      annotatedOptions() {
-        const options = JSON.parse(JSON.stringify(this.options));
-        return options.map((option, index) => {
-          // If not object, create object
-          if (typeof option !== 'object') {
-            option = {
-              [this.keys.value]: option,
-              [this.keys.label]: option,
-            };
-          }
-
-          // Add index to object
-          option.index = index;
-
-          // Check if valid prev/next
-          if (!option.disabled) {
-            if (index < this.highlightedIndex) {
-              option.validPreviousOption = true;
-            } else if (index > this.highlightedIndex) {
-              option.validNextOption = true;
-            }
-          }
-
-          // Check if matches
-          option.startsWith = startswith(
-            option[this.keys.label].toLowerCase(),
-            this.quickMatchString.toLowerCase(),
-          );
-
-          return option;
-        });
+      enabledIndexes() {
+        return this.filteredOptions.flatMap((option, index) => (option.disabled ? [] : [index]));
       },
+
+      listboxValue() {
+        return this.selectedIndex === -1 ? [] : [this.selectedIndex];
+      },
+
       activeBorderStyle() {
         if (this.isActive && !this.clearableState) {
           return {
@@ -601,9 +609,17 @@
       value(inputValue) {
         this.selection = inputValue;
       },
-      filteredOptions() {
-        this.highlightedOption = this.filteredOptions[0];
-        resetScroll(this.$refs.optionsList);
+      selectedIndex: {
+        handler(index) {
+          this.renderedSelectedIndex = index;
+        },
+        immediate: true,
+      },
+      filteredOptions(newOptions, oldOptions) {
+        if (this.isDropdownOpen && this.$refs.listbox && !looseEqual(newOptions, oldOptions)) {
+          this.$refs.listbox.onListBlur();
+          this.highlightInitialOption();
+        }
       },
       query() {
         /**
@@ -643,7 +659,7 @@
 
     methods: {
       setValue(value) {
-        value = value ? value : this.multiple ? [] : '';
+        value = value || '';
         this.selection = value;
         /**
          * Emits an 'input' event with the new value when the selection is updated.
@@ -651,74 +667,156 @@
         this.$emit('input', value);
       },
 
-      // Highlights the matching option on key input
-      highlightQuickMatch(event) {
-        // https://github.com/ccampbell/mousetrap/blob/master/mousetrap.js#L39
-        const specialKeyCodes = [
-          8, 9, 13, 16, 17, 18, 20, 27, 32, 33, 34, 35, 36, 37, 38, 39, 40, 45, 46, 91, 93, 224,
+      highlightedOrSelectedIndex() {
+        const focusedValue = this.$refs.listbox.focusedValue;
+        return focusedValue === null ? this.selectedIndex : focusedValue;
+      },
+
+      highlightQuickMatch(key) {
+        this.quickMatchString += key.toLowerCase();
+        const query = this.quickMatchString;
+        const start = this.highlightedOrSelectedIndex() + 1;
+        const ordered = [
+          ...this.enabledIndexes.filter(index => index >= start),
+          ...this.enabledIndexes.filter(index => index < start),
         ];
-        const keyCode = event.keyCode;
-        if (specialKeyCodes.includes(keyCode)) {
-          return;
+        const startsWith = string => index =>
+          this.optionLabel(this.filteredOptions[index]).toLowerCase().startsWith(string);
+        let match = ordered.find(startsWith(query));
+        if (match === undefined && [...query].every(char => char === query[0])) {
+          match = ordered.find(startsWith(query[0]));
         }
-
-        const character = event.key.toString();
-        this.quickMatchString += character;
-        let matchingItems = this.annotatedOptions.filter(
-          option => option.startsWith && !option.disabled,
-        );
-        if (matchingItems.length !== 0) {
-          matchingItems = sortby(matchingItems, [this.keys.label]);
-          matchingItems = sortby(matchingItems, item => item[this.keys.label].length);
-          this.highlightOption(this.options[matchingItems[0].index]);
+        if (match !== undefined) {
+          this.$refs.listbox.setFocus(match);
         }
       },
 
-      // Highlights the previous valid option
-      highlightPreviousOption() {
-        const options = this.annotatedOptions;
-        let validPreviousOptionIndex = -1;
-        for (let i = 0; i < options.length; i++) {
-          if (options[i].validPreviousOption) {
-            validPreviousOptionIndex = i;
-          }
-        }
-        if (validPreviousOptionIndex !== -1) {
-          this.highlightOption(this.options[validPreviousOptionIndex]);
+      highlightIndex(index) {
+        if (index !== undefined) {
+          this.$refs.listbox.setFocus(index);
         }
       },
 
-      // Highlights the next valid option
-      highlightNextOption() {
-        const options = this.annotatedOptions;
-        const validNextOptionIndex = options.findIndex(option => option.validNextOption);
-        if (validNextOptionIndex !== -1) {
-          this.highlightOption(this.options[validNextOptionIndex]);
-        }
-      },
-
-      // Highlights the option
-      highlightOption(option, options = { autoScroll: true }) {
-        if (
-          !option ||
-          option.disabled ||
-          looseEqual(this.highlightedOption, option) ||
-          this.$refs.options.length === 0
-        ) {
-          return;
-        }
-
-        this.highlightedOption = option;
-
-        if (options.autoScroll) {
-          const index = this.filteredOptions.findIndex(option =>
-            looseEqual(this.highlightedOption, option),
+      highlightInitialOption() {
+        if (this.$refs.listbox.focusedValue === null) {
+          this.highlightIndex(
+            this.selectedIndex === -1 ? this.enabledIndexes[0] : this.selectedIndex,
           );
-          const optionToScrollTo = this.$refs.options[index];
-          if (optionToScrollTo) {
-            this.scrollOptionIntoView(optionToScrollTo.$el);
-          }
         }
+      },
+
+      highlightBy(delta) {
+        const current = this.highlightedOrSelectedIndex();
+        const ahead =
+          delta > 0
+            ? this.enabledIndexes.filter(index => index > current)
+            : this.enabledIndexes.filter(index => index < current).reverse();
+        if (ahead.length) {
+          this.$refs.listbox.setFocus(ahead[Math.min(Math.abs(delta), ahead.length) - 1]);
+        }
+      },
+
+      async renderListbox() {
+        if (!this.$refs.listbox) {
+          this.listboxRendered = true;
+          await this.$nextTick();
+        }
+      },
+
+      async onKeydown(event) {
+        const { key, altKey, ctrlKey, metaKey } = event;
+        if (!this.$refs.listbox) {
+          if (OPENING_KEYS.includes(key)) {
+            event.preventDefault();
+          }
+          await this.renderListbox();
+        }
+        const isOpen = this.isDropdownOpen;
+
+        if (key.length === 1 && key !== ' ' && !altKey && !ctrlKey && !metaKey) {
+          this.highlightQuickMatch(key);
+          this.openDropdown();
+          return;
+        }
+
+        switch (key) {
+          case 'ArrowUp':
+            event.preventDefault();
+            if (isOpen && altKey) {
+              this.selectHighlighted();
+            } else if (isOpen) {
+              this.highlightBy(-1);
+            } else {
+              this.highlightIndex(this.enabledIndexes[0]);
+              this.openDropdown();
+            }
+            break;
+          case 'ArrowDown':
+            event.preventDefault();
+            if (isOpen && !altKey) {
+              this.highlightBy(1);
+            } else {
+              this.openDropdown();
+            }
+            break;
+          case 'Home':
+          case 'End':
+            event.preventDefault();
+            this.highlightIndex(
+              this.enabledIndexes[key === 'Home' ? 0 : this.enabledIndexes.length - 1],
+            );
+            this.openDropdown();
+            break;
+          case 'PageUp':
+          case 'PageDown':
+            if (isOpen) {
+              event.preventDefault();
+              this.highlightBy(key === 'PageDown' ? PAGE_SIZE : -PAGE_SIZE);
+            }
+            break;
+          case 'Enter':
+          case ' ':
+            event.preventDefault();
+            if (isOpen) {
+              this.selectHighlighted();
+            } else {
+              this.openDropdown();
+            }
+            break;
+          case 'Tab':
+            if (isOpen) {
+              this.selectHighlighted();
+            }
+            this.$nextTick(() => {
+              /**
+               * Emitted when the select loses focus
+               */
+              this.$emit('blur', event);
+            });
+            break;
+          case 'Escape':
+            if (isOpen) {
+              event.preventDefault();
+              event.stopPropagation();
+              // KModal cancels on Escape keyup
+              this.stopEscapeKeyup = true;
+              this.closeDropdown();
+            }
+            break;
+        }
+      },
+
+      onKeyup(event) {
+        if (event.key === 'Escape' && this.stopEscapeKeyup) {
+          event.stopPropagation();
+          this.stopEscapeKeyup = false;
+        }
+      },
+
+      onActiveDescendantChange(id) {
+        this.activeDescendantId = id;
+        const focusedValue = this.$refs.listbox.focusedValue;
+        this.slotHighlightedIndex = focusedValue === null ? -1 : focusedValue;
       },
 
       onClear() {
@@ -729,72 +827,33 @@
       },
 
       selectHighlighted() {
-        if (
-          this.highlightedOption &&
-          !this.highlightedOption.disabled &&
-          this.$refs.options.length > 0
-        ) {
-          this.selectOption(this.highlightedOption);
-        }
+        this.selectOption(this.filteredOptions[this.$refs.listbox.focusedValue]);
       },
 
-      selectOption(option, options = { autoClose: true }) {
+      selectOption(option) {
         if (!option || option.disabled) {
           return;
         }
 
-        const shouldSelect = this.multiple && !this.isOptionSelected(option);
-
-        if (this.multiple) {
-          this.updateOption(option, { select: shouldSelect });
-        } else {
-          this.setValue(option);
-        }
+        this.setValue(option);
         /**
          * Emitted when an option is selected by the user. Will not be emitted if the selection is
          * changed programmatically.
          */
-        this.$emit('select', option, {
-          selected: !this.isOptionSelected(option),
-        });
+        this.$emit('select', option, { selected: false });
 
         this.clearQuery();
 
-        if (!this.multiple && options.autoClose) {
-          this.closeDropdown();
-        }
+        this.closeDropdown();
       },
 
-      // Checks if option is highlighted
-      isOptionHighlighted(option) {
-        return looseEqual(this.highlightedOption, option);
+      optionLabel(option) {
+        const label = option[this.keys.label];
+        return label === undefined || label === null ? '' : String(label);
       },
 
       isOptionSelected(option) {
-        if (this.multiple) {
-          return looseIndexOf(this.selection, option) > -1;
-        }
         return looseEqual(this.selection, option);
-      },
-
-      updateOption(option, options = { select: true }) {
-        let value = [];
-        let updated = false;
-        const i = looseIndexOf(this.selection, option);
-
-        if (options.select && i < 0) {
-          value = this.selection.concat(option);
-          updated = true;
-        }
-
-        if (!options.select && i > -1) {
-          value = this.selection.slice(0, i).concat(this.selection.slice(i + 1));
-          updated = true;
-        }
-
-        if (updated) {
-          this.setValue(value);
-        }
       },
 
       defaultFilter(option) {
@@ -812,24 +871,16 @@
         this.query = '';
       },
 
-      onEnterSpace() {
-        if (this.isDropdownOpen) {
-          this.selectHighlighted();
-        } else {
-          this.$refs.label.click();
-        }
+      openDropdown() {
+        this.$refs.dropdownPopper.doShow();
       },
 
-      async closeDropdown(options = { autoBlur: false }) {
+      closeDropdown() {
         this.$refs.dropdownPopper.doClose();
-        if (!options.autoBlur) {
-          await this.$nextTick();
-          this.$refs.label.focus();
-          this.isActive = true;
-        }
       },
 
       onFocus(e) {
+        this.renderListbox();
         if (this.isActive) {
           return;
         }
@@ -841,68 +892,35 @@
         this.$emit('focus', e);
       },
 
-      selectBlur() {
-        // A diffent blur (other than the `onBlur` method) is needed for the label
-        // to prevent the dropdown from closing
-        if (!this.isDropdownOpen) {
-          this.isActive = false;
-        }
-      },
-
-      onBlur(e) {
+      onBlur() {
         this.isActive = false;
-        /**
-         * Emitted when the select loses focus
-         */
-        this.$emit('blur', e);
 
         if (this.isDropdownOpen) {
-          this.closeDropdown({ autoBlur: true });
+          this.closeDropdown();
         }
       },
 
-      onOpen() {
-        if (this.highlightedIndex === -1) {
-          this.highlightNextOption();
-        }
-
+      async onOpen() {
         this.isActive = true;
-
-        this.highlightedOption = this.multiple ? null : this.selection;
-        this.$nextTick(() => {
-          this.$refs['dropdown'].focus();
-          const selectedOption = this.$refs.optionsList.querySelector('.is-selected');
-          if (selectedOption) {
-            this.scrollOptionIntoView(selectedOption);
-          } else {
-            this.scrollOptionIntoView(
-              this.$refs.optionsList.querySelector('.ui-select-option:not(.is-disabled)'),
-            );
-          }
-        });
         this.isDropdownOpen = true;
+        await this.renderListbox();
+        this.highlightInitialOption();
         this.$emit('dropdown-open');
       },
 
       onClose() {
-        this.isActive = false;
+        this.isActive = document.activeElement === this.$refs.label;
         this.query = '';
         if (!this.isTouched) {
           this.isTouched = true;
           this.$emit('touch');
         }
 
-        this.highlightedOption = this.multiple ? null : this.selection;
+        if (this.$refs.listbox) {
+          this.$refs.listbox.onListBlur();
+        }
         this.isDropdownOpen = false;
         this.$emit('dropdown-close');
-      },
-
-      async scrollOptionIntoView(optionEl) {
-        await this.$nextTick();
-        scrollIntoView(optionEl, {
-          container: this.$refs.optionsList,
-          marginTop: 180,
-        });
       },
 
       /**
@@ -913,7 +931,6 @@
         this.setValue(JSON.parse(this.initialValue));
         this.clearQuery();
         this.resetTouched();
-        this.highlightedOption = null;
       },
 
       /**
@@ -990,19 +1007,6 @@
       }
     }
 
-    &:not(.is-multiple) {
-      .ui-select-display {
-        height: $ui-input-height;
-      }
-    }
-
-    &.is-multiple {
-      .ui-select-display {
-        padding-top: rem-calc(4px);
-        padding-bottom: rem-calc(4px);
-      }
-    }
-
     &.is-invalid:not(.is-disabled) {
       .ui-select-label-text {
         color: $ui-input-label-color--invalid;
@@ -1033,11 +1037,19 @@
     }
   }
 
+  // KIconButton's small size
+  $ui-select-clear-size: 32px;
+  $ui-select-label-padding-x: 10px;
+
+  .ui-select-control {
+    position: relative;
+  }
+
   .ui-select-label {
     position: relative;
     display: block;
     width: 100%;
-    padding: 0 10px;
+    padding: 0 $ui-select-label-padding-x;
     margin: 0;
     outline: none;
   }
@@ -1060,6 +1072,7 @@
 
   .ui-select-display {
     display: flex;
+    height: $ui-input-height;
     align-items: center;
     width: 100%;
     padding: 0;
@@ -1101,20 +1114,36 @@
     position: absolute;
     z-index: $z-index-dropdown;
     margin-top: 2px;
-    list-style-type: none;
-    outline: none;
+  }
+
+  .ui-select-clear {
+    position: absolute;
+    right: $ui-select-label-padding-x;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    height: $ui-input-height;
+  }
+
+  .ui-select-clear-spacer {
+    flex-shrink: 0;
+    width: $ui-select-clear-size;
   }
 
   .ui-select-options {
-    position: relative;
-    display: block;
-    min-width: 100%;
     max-height: rem-calc(256px);
-    padding: 0;
-    margin: 0;
-    overflow-y: auto;
+    font-size: $ui-dropdown-item-font-size;
     color: $primary-text-color;
-    list-style-type: none;
+  }
+
+  .ui-select-option-content {
+    min-width: 0;
+  }
+
+  .ui-select-option-truncated {
+    @include text-truncation;
+
+    display: block;
   }
 
   .ui-select-no-results {
