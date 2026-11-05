@@ -16,7 +16,7 @@
 <script>
 
   export default {
-    name: 'KTableStickyColumns',
+    name: 'KTableStickyColumnsVisualTest',
     data() {
       return {
         wideHeaders: [
