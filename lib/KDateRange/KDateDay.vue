@@ -5,9 +5,9 @@
     :primary="false"
     appearance="flat-button"
     :appearanceOverrides="styleOverrides"
-    :style="[inRangeStyle, selectedStyle]"
     :disabled="isDisabled"
     :aria-hidden="isDisabled"
+    class="calendar-day"
     :class="[
       {
         'calendar-days-selected': isSelected,
@@ -74,24 +74,6 @@
       return {};
     },
     computed: {
-      inRangeStyle() {
-        return this.isInRange
-          ? {
-            backgroundColor: 'var(--brand-primary-v100)',
-            ':hover': {
-              backgroundColor: 'var(--palette-grey-v300)',
-            },
-          }
-          : {};
-      },
-      selectedStyle() {
-        return this.isSelected
-          ? {
-            backgroundColor: 'var(--brand-primary-v500)',
-            color: 'var(--palette-white) !important',
-          }
-          : {};
-      },
       styleOverrides() {
         return {
           width: '30px',
@@ -102,7 +84,6 @@
           fontWeight: 'lighter',
           lineHeight: '0px',
           padding: '0',
-          color: 'var(--palette-grey-v700)',
         };
       },
       isFirstDay() {
@@ -130,6 +111,27 @@
   button.calendar-days-selected,
   .calendar-days-in-range:hover {
     border-radius: 15px;
+  }
+
+  /* KButton's own rules are scoped, so these repeat its classes to beat them.
+     The :not() keeps the selected colors on a day that is also in the range. */
+  .button.flat.calendar-day {
+    color: var(--palette-grey-v700);
+  }
+
+  .button.flat.calendar-day.calendar-days-in-range:not(.calendar-days-selected) {
+    background-color: var(--brand-primary-v100);
+  }
+
+  .button.flat.calendar-day.calendar-days-selected {
+    color: var(--palette-white);
+    background-color: var(--brand-primary-v500);
+  }
+
+  /* the rules above outrank KButton's flat hover, so repeat its value here */
+  .button.flat.calendar-day.calendar-days-in-range:hover,
+  .button.flat.calendar-day.calendar-days-selected:hover {
+    background-color: rgba(0, 0, 0, 0.1);
   }
 
   .calendar-days-in-range {

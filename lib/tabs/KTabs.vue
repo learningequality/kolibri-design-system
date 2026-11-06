@@ -12,6 +12,7 @@
         colorActive,
         backgroundColor,
         hoverBackgroundColor,
+        hoverColor,
         appearanceOverrides,
         appearanceOverridesActive,
         enablePrint,

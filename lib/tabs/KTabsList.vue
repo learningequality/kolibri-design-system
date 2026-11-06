@@ -3,6 +3,7 @@
   <div
     v-show="enablePrint || !$isPrint"
     role="tablist"
+    :style="tabCssVariables"
     :[ariaLabelAttrName]="ariaLabelAttr"
   >
     <template v-if="useRouter">
@@ -22,6 +23,7 @@
           :data-tabid="tab.id"
           :href="href"
           :class="classes(tab.id)"
+          :style="tabStyles(tab.id)"
           :tabindex="tabIndexAttr(tab.id)"
           :aria-selected="ariaSelectedAttr(tab.id)"
           :aria-controls="ariaControlsAttr(tab.id)"
@@ -48,6 +50,7 @@
         type="button"
         role="tab"
         :class="classes(tab.id)"
+        :style="tabStyles(tab.id)"
         :tabindex="tabIndexAttr(tab.id)"
         :aria-selected="ariaSelectedAttr(tab.id)"
         :aria-controls="ariaControlsAttr(tab.id)"
@@ -70,9 +73,20 @@
 
 <script>
 
-  import merge from 'lodash/merge';
+  import warnOnPseudoSelectors from '../styles/warnOnPseudoSelectors';
   import tabsMixin from './tabsMixin';
   import { getTabElementId, getTabPanelElementId } from './utils';
+
+  function colorCssVariables(color, backgroundColor) {
+    const variables = {};
+    if (color) {
+      variables['--k-tabs-color'] = color;
+    }
+    if (backgroundColor) {
+      variables['--k-tabs-background-color'] = backgroundColor;
+    }
+    return variables;
+  }
 
   /**
    * Displays the tab list of a tabbed interface.
@@ -121,23 +135,30 @@
       ariaLabelAttr() {
         return this.ariaLabel ? this.ariaLabel : this.ariaLabelledBy;
       },
-      styles() {
-        const color = this.color ? this.color : 'var(--tokens-annotation)';
-        const backgroundColor = this.backgroundColor
-          ? this.backgroundColor
-          : 'var(--tokens-surface)';
-        const hoverBackgroundColor = this.hoverBackgroundColor
-          ? this.hoverBackgroundColor
-          : 'var(--brand-primary-v100)';
-        return {
-          color,
-          backgroundColor,
-          borderColor: backgroundColor,
-          ':focus': this.$coreOutline,
-          ':hover': {
-            backgroundColor: hoverBackgroundColor,
-          },
-        };
+      // set on the tablist, so every tab inherits them
+      tabCssVariables() {
+        const variables = colorCssVariables(this.color, this.backgroundColor);
+        if (this.backgroundColor) {
+          // the border follows the prop alone, so an `appearanceOverrides` background
+          // does not recolor it
+          variables['--k-tabs-border-color'] = this.backgroundColor;
+        }
+        if (this.hoverColor) {
+          variables['--k-tabs-hover-color'] = this.hoverColor;
+        }
+        if (this.hoverBackgroundColor) {
+          variables['--k-tabs-hover-background-color'] = this.hoverBackgroundColor;
+        }
+        return variables;
+      },
+      // set on each tab, where they shadow the tablist values by inheritance
+      overrideStyles() {
+        const { color, backgroundColor, ...rest } = this.appearanceOverrides || {};
+        return [colorCssVariables(color, backgroundColor), rest];
+      },
+      overrideStylesActive() {
+        const { backgroundColor, ...rest } = this.appearanceOverridesActive || {};
+        return [colorCssVariables(null, backgroundColor), rest];
       },
       stylesActive() {
         const colorActive = this.colorActive ? this.colorActive : 'var(--tokens-primary)';
@@ -146,19 +167,19 @@
           borderColor: colorActive,
         };
       },
-      computedClass() {
-        return this.$computedClass(merge({}, this.styles, this.appearanceOverrides));
+    },
+    watch: {
+      appearanceOverrides: {
+        immediate: true,
+        handler(overrides) {
+          warnOnPseudoSelectors(overrides, 'appearanceOverrides', 'KTabsList');
+        },
       },
-      computedClassActive() {
-        return this.$computedClass(
-          merge(
-            {},
-            this.styles,
-            this.appearanceOverrides,
-            this.stylesActive,
-            this.appearanceOverridesActive,
-          ),
-        );
+      appearanceOverridesActive: {
+        immediate: true,
+        handler(overrides) {
+          warnOnPseudoSelectors(overrides, 'appearanceOverridesActive', 'KTabsList');
+        },
       },
     },
     mounted() {
@@ -186,11 +207,13 @@
     },
     methods: {
       classes(tabId) {
-        return [
-          'tab',
-          this.isTabActive(tabId) ? 'active' : '',
-          this.isTabActive(tabId) ? this.computedClassActive : this.computedClass,
-        ];
+        return ['tab', this.isTabActive(tabId) ? 'active' : ''];
+      },
+      tabStyles(tabId) {
+        if (!this.isTabActive(tabId)) {
+          return this.overrideStyles;
+        }
+        return [...this.overrideStyles, this.stylesActive, ...this.overrideStylesActive];
       },
       tabIndexAttr(tabId) {
         return this.isTabActive(tabId) ? '0' : '-1';
@@ -299,6 +322,7 @@
     font-size: 14px;
     font-weight: bold;
     line-height: 36px;
+    color: var(--k-tabs-color, var(--tokens-annotation));
     text-align: center;
     text-decoration: none;
     text-overflow: ellipsis;
@@ -308,11 +332,18 @@
     // https://stackoverflow.com/questions/23529369/why-does-x-overflowhidden-cause-extra-space-below
     vertical-align: middle;
     cursor: pointer;
+    background-color: var(--k-tabs-background-color, var(--tokens-surface));
+    border-color: var(--k-tabs-border-color, var(--tokens-surface));
     border-style: solid;
     border-width: 0 0 2px;
     border-top-left-radius: $radius;
     border-top-right-radius: $radius;
     transition: background-color $core-time ease;
+
+    &:hover {
+      color: var(--k-tabs-hover-color, var(--k-tabs-color, var(--tokens-annotation)));
+      background-color: var(--k-tabs-hover-background-color, var(--brand-primary-v100));
+    }
 
     @media print {
       min-width: 0;

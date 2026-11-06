@@ -41,11 +41,6 @@ a {
   }
 }
 
-*:focus-visible {
-  outline: 5px solid #757575;
-  outline-offset: 2px;
-}
-
 *::selection {
   background: $selection-color;
 }

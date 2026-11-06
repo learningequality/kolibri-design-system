@@ -34,7 +34,6 @@
             tabindex="0"
             :aria-sort="isColumnSortable(index) ? getAriaSort(index) : null"
             :class="{
-              [$computedClass(coreOutlineFocus)]: true,
               sortable: isColumnSortable(index),
               'sticky-header': true,
               'sticky-column': colIndexIsSticky(index),
@@ -395,14 +394,6 @@
       };
     },
     computed: {
-      coreOutlineFocus() {
-        return {
-          ':focus': {
-            ...this.$coreOutline,
-            outlineOffset: '-2px',
-          },
-        };
-      },
       getRowStyle() {
         return rowIndex => {
           return this.hoveredRowIndex === rowIndex || this.focusedRowIndex === rowIndex
@@ -926,6 +917,12 @@
     height: auto;
     padding: 8px;
     vertical-align: middle;
+  }
+
+  // `:focus`, not `:focus-visible`, which some browsers in the browserslist lack.
+  // The default 4px offset escapes the cell and the sticky columns clip it.
+  th:focus {
+    outline-offset: -2px;
   }
 
   .sticky-header {

@@ -20,10 +20,7 @@
     </div>
 
     <div class="ui-textbox-content">
-      <label
-        class="ui-textbox-label"
-        :style="labelBorderStyles"
-      >
+      <label class="ui-textbox-label">
         <div :class="['ui-input-content', inputContentClasses]">
           <div
             v-if="$slots.innerBefore"
@@ -37,7 +34,6 @@
             ref="input"
             v-autofocus="autofocus"
             class="ui-textbox-input"
-            :style="isActive ? { borderBottomColor: $themeTokens.primaryDark } : {}"
             :autocapitalize="autocapitalize ? autocapitalize : null"
             :autocomplete="autocomplete ? autocomplete : null"
             :disabled="disabled"
@@ -68,7 +64,6 @@
             v-autofocus="autofocus"
             :value="value"
             class="ui-textbox-textarea"
-            :style="isActive ? { borderBottomColor: $themeTokens.primaryDark } : {}"
             :autocpitalize="autocapitalize ? autocapitalize : null"
             :autocomplete="autocomplete ? autocomplete : null"
             :disabled="disabled"
@@ -98,7 +93,7 @@
           <KIconButton
             v-if="showClearButton"
             icon="clear"
-            :color="$themeTokens.annotation"
+            color="var(--tokens-annotation)"
             size="small"
             :ariaLabel="clearAriaLabel"
             data-test="clearIcon"
@@ -110,7 +105,6 @@
           v-if="label || $slots.default"
           class="ui-textbox-label-text"
           :class="labelClasses"
-          :style="labelStyles"
         >
           <slot> {{ label }}</slot>
         </div>
@@ -118,9 +112,8 @@
 
       <div class="ui-textbox-feedback">
         <div 
-          v-if="showError" 
-          class="ui-textbox-feedback-text" 
-          :style="{ color: $themeTokens.error }"
+          v-if="showError"
+          class="ui-textbox-feedback-text is-error"
         >
           <slot name="error">
             {{ error }}
@@ -304,18 +297,6 @@
           'is-floating': this.hasFloatingLabel && !this.isLabelInline,
         };
       },
-      labelStyles() {
-        return {
-          color: this.isActive && !this.isDisabled
-            ? this.$themeBrand.primary.v_600 : this.$themePalette.grey.v_700
-        };
-      },
-      labelBorderStyles() {
-        return {
-          'border-bottom-color': this.isActive && !this.isDisabled
-            ? this.$themeBrand.primary.v_600 : this.$themePalette.grey.v_700
-        };
-      },
       hasLabel() {
         return Boolean(this.label) || Boolean(this.$slots.default);
       },
@@ -484,7 +465,7 @@
     align-items: flex-start;
     margin-bottom: $ui-input-margin-bottom;
 
-    &:hover:not(.is-disabled):not(.is-active){
+    &:hover:not(.is-disabled):not(.is-active):not(.is-invalid){
       .ui-textbox-label-text {
         color: $ui-input-label-color--hover !important;
       }
@@ -523,7 +504,6 @@
         width: fit-content;
 
         &.is-inline {
-          color: inherit; // So the hover styles don't override it
           cursor: text;
           // 1em here is custom to keep text centered
           transform: translateY(1em) scale(1.1);
@@ -558,16 +538,27 @@
 
       .ui-textbox-label-text,
       .ui-textbox-counter {
-        color: $ui-input-label-color--invalid;
+        color: var(--tokens-error);
       }
 
       .ui-textbox-label,
       .ui-textbox-textarea {
-        border-bottom-color: $ui-input-border-color--invalid;
+        border-bottom-color: var(--tokens-error);
       }
 
       .ui-textbox-feedback {
-        color: $ui-input-feedback-color--invalid;
+        color: var(--tokens-error);
+      }
+    }
+
+    // the error outranks focus, so an invalid field stays red while it is focused
+    &.is-active:not(.is-disabled):not(.is-invalid) {
+      .ui-textbox-label-text {
+        color: var(--brand-primary-v600);
+      }
+
+      .ui-textbox-label {
+        border-bottom-color: var(--brand-primary-v600);
       }
     }
 
@@ -595,6 +586,7 @@
     border-radius: 4px 4px 0 0;
     border-bottom-style: solid;
     border-bottom-width: $ui-input-border-width;
+    border-bottom-color: var(--palette-grey-v700);
   }
 
   .ui-textbox-content {
@@ -603,6 +595,7 @@
 
   .ui-textbox-label-text {
     margin: 0 8px 0;
+    color: var(--palette-grey-v700);
     font-size: $ui-input-label-font-size;
     line-height: $ui-input-label-line-height;
     cursor: default;
@@ -651,6 +644,10 @@
     font-size: $ui-input-feedback-font-size;
     line-height: $ui-input-feedback-line-height;
     color: $ui-input-feedback-color;
+  }
+
+  .ui-textbox-feedback-text.is-error {
+    color: var(--tokens-error);
   }
 
   .ui-textbox-counter {
