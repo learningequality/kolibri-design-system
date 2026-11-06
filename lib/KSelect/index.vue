@@ -1040,8 +1040,15 @@
     padding: 0 10px;
     margin: 0;
 
-    &.has-highlighted-option:focus {
+    // A tab to the select, followed by a click on an option, leaves the label focused and
+    // the global `*:focus` ring on. KSelectOption sets the ring on a highlighted option itself.
+    &:focus {
       outline: none;
+    }
+
+    body[modality='keyboard'] &:focus:not(.has-highlighted-option) {
+      outline: 3px solid var(--tokens-focusOutline);
+      outline-offset: 4px;
     }
   }
 
