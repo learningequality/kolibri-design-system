@@ -57,15 +57,14 @@
         default: false,
       },
       value: {
-        type: [Date, String],
+        type: String,
         default: null,
       },
     },
     computed: {
       dateDescription() {
         if (this.value) {
-          const [year, month, day] = this.value.split('-');
-          const valueAsDate = new Date(year, month - 1, day);
+          const valueAsDate = new Date(`${this.value}T00:00:00`);
           return (
             this.legendText +
             ' ' +
