@@ -64,7 +64,9 @@
     computed: {
       dateDescription() {
         if (this.value) {
-          const valueAsDate = new Date(`${this.value}T00:00:00`);
+          const [year, month, day] = this.value.split('-');
+          const valueAsDate = new Date(year, month - 1, day);
+          valueAsDate.setFullYear(year);
           return (
             this.legendText +
             ' ' +
