@@ -57,16 +57,19 @@
         default: false,
       },
       value: {
-        type: String,
+        type: [Date, String],
         default: null,
       },
     },
     computed: {
       dateDescription() {
         if (this.value) {
-          const [year, month, day] = this.value.split('-');
-          const valueAsDate = new Date(year, month - 1, day);
-          valueAsDate.setFullYear(year);
+          let valueAsDate = this.value;
+          if (typeof this.value === 'string') {
+            const [year, month, day] = this.value.split('-');
+            valueAsDate = new Date(year, month - 1, day);
+            valueAsDate.setFullYear(year);
+          }
           return (
             this.legendText +
             ' ' +
