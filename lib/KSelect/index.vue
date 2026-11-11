@@ -39,7 +39,7 @@
         @keydown.up.prevent="highlightPreviousOption"
         @keydown.down.prevent="highlightNextOption"
         @keydown.self="highlightQuickMatch"
-        @keydown.esc.prevent="closeDropdown()"
+        @keydown.esc="onEscape"
       >
         <div
           v-if="label || $slots.default"
@@ -817,6 +817,13 @@
           this.selectHighlighted();
         } else {
           this.$refs.label.click();
+        }
+      },
+
+      onEscape(event) {
+        if (this.isDropdownOpen) {
+          event.preventDefault();
+          this.closeDropdown();
         }
       },
 

@@ -11,6 +11,7 @@
 
   import tippy from 'tippy.js/umd';
   import elementRef from './helpers/element-ref';
+  import { getPopoverContainer } from '../utils/modalBackground';
 
   export default {
     name: 'UiTooltip',
@@ -87,9 +88,9 @@
         },
       };
 
-      if (!this.appendToBody) {
-        options.appendTo = this.triggerEl.parentElement;
-      }
+      options.appendTo = this.appendToBody
+        ? () => getPopoverContainer(this.triggerEl, document.body)
+        : this.triggerEl.parentElement;
 
       this.tip = tippy(this.triggerEl, options);
     },
