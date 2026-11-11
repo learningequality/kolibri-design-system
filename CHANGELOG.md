@@ -7,6 +7,19 @@ Changelog is rather internal in nature. See release notes for the public overvie
 <!-- [DO NOT REMOVE-USED BY GH ACTION] PASTE CHANGELOG -->
 
 
+- [#1389]
+  - **Description:** Fix the `KDateRange` date field descriptions announced by screen readers. They were one day late in timezones at or east of UTC, and the end date field was described with the start date's text.
+  - **Products impact:** bugfix
+  - **Addresses:** https://github.com/learningequality/kolibri-design-system/issues/1385
+  - **Components:** KDateRange
+  - **Breaking:** no
+  - **Impacts a11y:** yes
+  - **Guidance:** -
+
+[#1389]: https://github.com/learningequality/kolibri-design-system/pull/1389
+
+
+
 - [#1359]
   - **Description:** `KDropdownMenu`'s `position` prop now sets where the menu opens, mirrored in RTL.
   - **Products impact:** bugfix
