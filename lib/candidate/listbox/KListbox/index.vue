@@ -15,8 +15,7 @@
     <div
       v-if="multiple && $scopedSlots.selectAll"
       class="k-listbox-select-all"
-      :class="$computedClass(selectAllStyles)"
-      :style="{ backgroundColor: 'var(--tokens-surface)' }"
+      :class="{ 'is-interactive': selectAllInteractive }"
       @click.self="changeSelectAll(!allSelected)"
     >
       <!-- @slot Scoped slot for implementing select all functionality -->
@@ -61,7 +60,6 @@
   import uniq from 'lodash/uniq';
   import useKLiveRegion from '../../../composables/useKLiveRegion';
   import useNextTickOnce from '../../../composables/useNextTickOnce';
-  import { themePalette } from '../../../styles/theme';
 
   /**
    * Representation of the APG listbox pattern
@@ -185,13 +183,6 @@
       }
 
       const selectAllInteractive = computed(() => hasOptions.value && !props.disabled);
-
-      const selectAllStyles = computed(() => ({
-        ':hover': {
-          backgroundColor: selectAllInteractive.value ? themePalette().grey.v_100 : 'transparent',
-        },
-        cursor: selectAllInteractive.value ? 'pointer' : 'default',
-      }));
 
       const focusedOptionId = computed(() => {
         const focused = options.value.find(o => o.value === focusedValue.value);
@@ -358,7 +349,7 @@
         focusedOptionId,
         allSelected,
         someSelected,
-        selectAllStyles,
+        selectAllInteractive,
         changeSelectAll,
         onListFocus,
         onListBlur,
@@ -483,6 +474,16 @@
     display: flex;
     align-items: center;
     padding-left: 4px;
+    cursor: default;
+    background-color: var(--tokens-surface);
+
+    &.is-interactive {
+      cursor: pointer;
+
+      &:hover {
+        background-color: var(--palette-grey-v100);
+      }
+    }
   }
 
   .k-listbox-list {

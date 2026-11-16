@@ -141,7 +141,6 @@
         <DocsDoNot>
           <template #do>
             <span>Always use <code>KCardGrid</code>, even for a single card</span>
-            <!-- eslint-disable -->
             <DocsShowCode language="html">
               <template>
                 <KCardGrid>
@@ -149,11 +148,9 @@
                 </KCardGrid>
               </template>
             </DocsShowCode>
-            <!-- eslint-enable -->
           </template>
           <template #not>
             <span>Not use <code>KCardGrid</code></span>
-            <!-- eslint-disable -->
             <DocsShowCode language="html">
               <template>
                 <div>
@@ -161,42 +158,34 @@
                 </div>
               </template>
             </DocsShowCode>
-            <!-- eslint-enable -->
           </template>
         </DocsDoNot>
 
         <DocsDoNot>
           <template #do>
             <span>Make <code>KCard</code> a direct child of <code>KCardGrid</code></span>
-            <!-- eslint-disable -->
             <DocsShowCode language="html">
               <KCardGrid>
                 <MyCardComponent />
               </KCardGrid>
             </DocsShowCode>
-            <!-- eslint-enable -->
 
-            <!-- eslint-disable -->
             <DocsShowCode language="html">
               <!-- MyCardComponent.vue -->
               <template>
                 <KCard> ... </KCard>
               </template>
             </DocsShowCode>
-            <!-- eslint-enable -->
           </template>
           <template #not>
             <span>Build cards in such a way<br >that <code>KCard</code> is not a direct child of
               <code>KCardGrid</code></span>
-            <!-- eslint-disable -->
             <DocsShowCode language="html">
               <KCardGrid>
                 <MyCardComponent />
               </KCardGrid>
             </DocsShowCode>
-            <!-- eslint-enable -->
 
-            <!-- eslint-disable -->
             <DocsShowCode language="html">
               <!-- MyCardComponent.vue -->
               <template>
@@ -205,7 +194,6 @@
                 </div>
               </template>
             </DocsShowCode>
-            <!-- eslint-enable -->
           </template>
         </DocsDoNot>
       </DocsToggleContent>
@@ -788,7 +776,7 @@
                     />
                     <router-link
                       :to="{ path: '/kbutton' }"
-                      :class="['link', linkComputedClass]"
+                      class="link"
                       aria-label="Read more about this resource"
                       @click.native.stop
                       @keyup.native.capture.stop
@@ -804,23 +792,19 @@
             </KCardGrid>
           </DocsShowCode>
         </template>
-        <template #javascript>
+        <template #scss>
           <!-- eslint-disable -->
           <!-- prettier-ignore -->
-          <DocsShowCode language="javascript">
-            export default {
-              ...
-              computed: {
-                linkComputedClass() {
-                  return this.$computedClass({
-                    ':hover': {
-                      backgroundColor: 'rgba(0,0,0,.1)',
-                    },
-                    ':focus': { ...this.$coreOutline, outlineOffset: 0 },
-                  });
-                },
-              },
-            };
+          <DocsShowCode language="scss">
+            .link {
+              &:hover {
+                background-color: rgba(0, 0, 0, 0.1);
+              }
+
+              &:focus-visible {
+                outline-offset: 0;
+              }
+            }
           </DocsShowCode>
           <!-- eslint-enable -->
         </template>

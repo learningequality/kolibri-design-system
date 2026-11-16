@@ -2,7 +2,7 @@
 
   <div>
     <h3>Regular Table (no sticky columns)</h3>
-    <div style="width: 600px; height: 200px; margin-bottom: 20px; border: 1px solid #cccccc">
+    <div style="width: 600px; height: 200px; overflow: auto; border: 1px solid #cccccc">
       <KTable
         :headers="headers"
         :rows="mixedContentRows"
@@ -11,7 +11,7 @@
     </div>
 
     <h3>Sticky Columns Table</h3>
-    <div style="width: 600px; height: 200px; border: 1px solid #cccccc">
+    <div style="width: 600px; height: 200px; overflow: auto; border: 1px solid #cccccc">
       <KTable
         :headers="headers"
         :rows="mixedContentRows"
@@ -27,7 +27,7 @@
 <script>
 
   export default {
-    name: 'KTableCellHeight',
+    name: 'KTableCellHeightVisualTest',
     data() {
       return {
         headers: [

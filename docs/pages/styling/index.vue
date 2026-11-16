@@ -136,13 +136,17 @@
           screen readers
         </li>
         <li>
-          Global styles for page background, text color, text selection, focus outline, and print,
-          using the theme CSS variables
+          Global styles for page background, text color, text selection, and print, using the theme
+          CSS variables
         </li>
         <li>
           Every theme CSS variable at its default value, so they resolve when the page first
           renders, before the theme plugin has run. These come with the helper styles rather than
           the global styles, so they are always registered.
+        </li>
+        <li>
+          The keyboard focus outline. This also comes with the helper styles, because KDS components
+          rely on it being registered.
         </li>
       </ul>
 
@@ -151,28 +155,28 @@
         <DocsAnchorTarget anchor="#focus-outline" />
       </h3>
       <p>
-        We provide a consistent, high-contrast focus highlight, using the
-        <code>--tokens-focusOutline</code>
-        CSS variable. The global styles apply it to focused elements that match
-        <code>:focus-visible</code>, which the browser decides.
+        We provide a consistent focus ring through the <code>--tokens-focusOutline</code> CSS
+        variable. The helper styles set it on <code>*:focus</code>, so an application rule on
+        <code>*:focus-visible</code> will replace the color and width of the ring. The browser
+        decides when to show the ring based on how the element was focused.
       </p>
       <p>
         <DocsInternalLink
           href="/installation#install-plugin"
           text="trackInputModality()"
         />
-        overrides that decision. Its <code>disableFocusRingByDefault</code> option defaults to
-        <code>true</code>, which adds the rule
-        <code>body:not([modality=keyboard]) :focus { outline: none; }</code>. That rule outranks the
-        global styles, so the outline appears only during keyboard navigation, and
-        <code>:focus-visible</code> makes no visible difference. Pass
-        <code>disableFocusRingByDefault: false</code> to let it decide again. This documentation
-        site uses that setting.
+        overrides the browser's decision. Its <code>disableFocusRingByDefault</code> option defaults
+        to <code>true</code>, so the ring appears only during keyboard navigation. This
+        documentation site passes <code>disableFocusRingByDefault: false</code>, which leaves the
+        decision to the browser.
       </p>
       <p>
-        CSS can only outline the element that has focus. When the outline belongs on a different
-        element, use the <code>$coreOutline</code> computed property available on Vue instances. It
-        returns the outline style while the user navigates with the keyboard, and
+        CSS can outline only the element that has focus. When the ring belongs on a different
+        element, write a rule against <code>body[modality='keyboard']</code>, which
+        <code>trackInputModality()</code> sets. <code>KSelect</code> outlines its highlighted option
+        this way while the label holds focus. When JavaScript has to decide whether the ring shows,
+        use the <code>$coreOutline</code> computed property available on Vue instances. It returns
+        the outline style while the user navigates with the keyboard, and
         <code>outline: none</code> at other times.
       </p>
     </DocsPageSection>

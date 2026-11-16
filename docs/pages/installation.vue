@@ -38,7 +38,9 @@
           <code>--brand-*</code>, <code>--palette-*</code>) emitted to a
           <code>&lt;style&gt;</code> tag with <code>#k-theme-css-variables</code> in the document
           head for use in style blocks. Both stay in sync when the theme changes via
-          <code>setBrandColors()</code> or <code>setTokenMapping()</code>. See
+          <code>setBrandColors()</code> or <code>setTokenMapping()</code>.
+          <code>setBrandColors()</code> expects every <code>v_N</code> shade of each default brand
+          color, and logs a console warning naming any that are missing. See
           <DocsInternalLink
             href="/colors/#usage"
             text="Colors"
@@ -81,10 +83,11 @@
         href="/styling#helper-styles"
         text="helper styles"
       />. The global styles include the Pure CSS base (normalize.css), the page background, text
-      color, focus outline, text selection, and print styles. The helper styles are also a public
-      entry point of their own. An application that doesn't need the global styles can import
+      color, text selection, and print styles. The helper styles are also a public entry point of
+      their own. An application that doesn't need the global styles can import
       <code>~kolibri-design-system/lib/styles/helper-styles</code> instead. Every theme CSS variable
-      is still defined at its default value here, the global styles are the only optional part.
+      is still defined at its default value here, as well as the keyboard focus outline that KDS
+      components rely on to draw their focus ring; the global styles are the only optional part.
 
       <p>
         The import path above, and the <code>purecss</code> import inside the global styles, use the

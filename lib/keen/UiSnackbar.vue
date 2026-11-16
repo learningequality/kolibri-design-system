@@ -11,10 +11,7 @@
 
   <transition :name="transitionName" @after-enter="onEnter" @after-leave="onLeave">
     <div class="ui-snackbar" @click="onClick">
-      <div
-        class="ui-snackbar-message"
-        :style="{ color: $themeTokens.textInverted }"
-      >
+      <div class="ui-snackbar-message">
         <slot>{{ message }}</slot>
       </div>
 
@@ -22,7 +19,7 @@
         <KButton
           v-if="action"
           class="ui-snackbar-action-button"
-          :appearanceOverrides="{ color: $themeTokens.textInverted }"
+          :appearanceOverrides="{ color: 'var(--tokens-textInverted)' }"
           @click.stop="onActionClick"
         >
           {{ action }}
@@ -109,7 +106,7 @@
     flex-grow: 1;
     font-size: $ui-snackbar-font-size;
     line-height: 1.5;
-    color: white;
+    color: var(--tokens-textInverted);
     cursor: default;
   }
 

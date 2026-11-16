@@ -16,12 +16,14 @@
     <VisualTestExample
       title="Dropdown open"
       width="320px"
+      height="180px"
       loadExample="KSelect/DropdownOpen.vue"
     />
 
     <VisualTestExample
       title="Dropdown open with placeholder"
       width="320px"
+      height="180px"
       loadExample="KSelect/DropdownOpenWithPlaceholder.vue"
     />
 
@@ -34,6 +36,7 @@
     <VisualTestExample
       title="Selected option with dropdown open"
       width="320px"
+      height="180px"
       loadExample="KSelect/SelectedOptionDropdownOpen.vue"
     />
 
@@ -70,12 +73,14 @@
     <VisualTestExample
       title="Multiple with dropdown open"
       width="320px"
+      height="180px"
       loadExample="KSelect/MultipleDropdownOpen.vue"
     />
 
     <VisualTestExample
       title="Multiple selection with dropdown open"
       width="320px"
+      height="180px"
       loadExample="KSelect/MultipleSelectedDropdownOpen.vue"
     />
 

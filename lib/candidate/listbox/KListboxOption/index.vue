@@ -4,7 +4,6 @@
     :id="optionId"
     role="option"
     class="k-listbox-option"
-    :class="$computedClass(rowStyles)"
     :style="isFocused ? { ...$coreOutline, outlineOffset: '-3px' } : {}"
     :aria-selected="indeterminate ? undefined : String(isSelected)"
     @click="onClick"
@@ -80,13 +79,6 @@
 
       const isFocused = computed(() => listbox.isFocused(props.value));
 
-      const rowStyles = computed(() => ({
-        backgroundColor: 'var(--tokens-surface)',
-        ':hover': {
-          backgroundColor: 'var(--palette-grey-v100)',
-        },
-      }));
-
       function onClick() {
         listbox.toggleOption(props.value);
       }
@@ -105,7 +97,6 @@
         optionId,
         isSelected,
         isFocused,
-        rowStyles,
         onClick,
         partiallySelectedText,
         effectiveShowSelector,
@@ -156,6 +147,11 @@
     min-height: 36px;
     padding-left: 4px;
     cursor: pointer;
+    background-color: var(--tokens-surface);
+
+    &:hover {
+      background-color: var(--palette-grey-v100);
+    }
   }
 
   .k-option-plain-label {
