@@ -7,6 +7,27 @@ Changelog is rather internal in nature. See release notes for the public overvie
 <!-- [DO NOT REMOVE-USED BY GH ACTION] PASTE CHANGELOG -->
 
 
+- [#1382]
+  - **Description:** Dynamic colors move from `$computedClass` into component style blocks as theme CSS variables. Focus outlines move from per-component `$coreOutline` classes to the global focus rules, which move from `globals.scss` into `helper-styles.scss`. `trackInputModality()` now sets keyboard modality on a key press as well as on focus, for elements that opt in with `supports-modality="keyboard"`. `themeOutlineStyle()` returns `var(--tokens-focusOutline)` in place of a resolved color. `$darken1/2/3` returns a value it cannot parse unchanged, instead of darkening it to black. `KIcon` default colors are read as CSS variables rather than captured at module load.
+  - **Products impact:** none
+  - **Addresses:** https://github.com/learningequality/kolibri-design-system/issues/1321
+  - **Breaking:** no
+  - **Impacts a11y:** yes
+  - **Components:** KChip, KIcon, KIconButton, KListbox, KMultiSelect, KSelect, KSnackbar, KTable, KTextbox, KTextTruncator, KToolbar
+  - **Guidance:** No API change. Visible changes:
+
+[#1382]: https://github.com/learningequality/kolibri-design-system/pull/1382
+  - A focus ring appears where the browser matches `:focus-visible`. A button clicked with a mouse shows none.
+  - The focus rules moved to `helper-styles.scss`, so an application that imports `helper-styles` alone still gets them.
+  - An application rule on `*:focus-visible` has the same specificity and overrides the ring. The docs site had one, and this PR removes it.
+  - `themeOutlineStyle()` sets `outlineColor` to `var(--tokens-focusOutline)`. Code that reads `$coreOutline.outlineColor` as a color now gets that string.
+  - `trackInputModality()` also sets keyboard modality on a key press, for the `KSelect` label and `UiMenuOption`. Click one, press a key, and its outline appears.
+  - `UiIconButton` with `color="primary"` gains a hover tint, with a 2px ring inside the tint on keyboard focus.
+  - An invalid `KTextbox` colors its label and border with `var(--tokens-error)`.
+  - `KIcon` follows a token that `setTokenMapping()` remaps.
+
+
+
 - [#1412]
   - **Description:** build(deps): bump brace-expansion from 1.1.11 to 1.1.21
   - **Products impact:** Dev Dependency upgrade
