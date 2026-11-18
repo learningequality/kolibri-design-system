@@ -2,7 +2,11 @@
 
   <component :is="wrapper">
     <!-- Accessibility properties for the overlay -->
-    <KFocusTrap ref="focusTrap">
+    <KFocusTrap
+      ref="focusTrap"
+      @shouldFocusFirstEl="wrapFocus"
+      @shouldFocusLastEl="wrapFocus"
+    >
       <transition
         name="modal-fade"
         appear
@@ -386,8 +390,39 @@
           this.focusModal();
         }
       },
+      focusEdgeControl(last) {
+        const focusable = Array.from(this.$refs['modal-overlay'].querySelectorAll('*')).filter(
+          el => el.tabIndex >= 0 && !el.disabled,
+        );
+        const isUncheckedInCheckedGroup = radio =>
+          radio.type === 'radio' &&
+          radio.name &&
+          !radio.checked &&
+          focusable.some(
+            el =>
+              el.type === 'radio' && el.checked && el.name === radio.name && el.form === radio.form,
+          );
+        const controls = focusable.filter(el => !isUncheckedInCheckedGroup(el));
+        if (last) {
+          controls.reverse();
+        }
+        for (const el of controls) {
+          el.focus();
+          if (document.activeElement === el) {
+            return;
+          }
+        }
+        this.focusModal();
+      },
+      wrapFocus() {
+        const last = this.pendingWrapToLast;
+        this.pendingWrapToLast = undefined;
+        if (last !== undefined) {
+          this.focusEdgeControl(last);
+        }
+      },
       focusElementTest(event) {
-        const { target } = event;
+        const { target, relatedTarget } = event;
         const noopOnFocus =
           target === window || // switching apps
           !this.$refs.modal || // if $refs.modal isn't available
@@ -404,7 +439,16 @@
           return;
         }
         // focus has escaped the modal - put it back!
-        if (!this.$refs['modal-overlay'].contains(target)) {
+        const dialog = this.$refs['modal-overlay'];
+        if (!dialog.contains(target)) {
+          const trap = this.$refs.focusTrap.$el;
+          const wraps =
+            dialog.contains(relatedTarget) &&
+            [trap.firstElementChild, trap.lastElementChild].includes(target);
+          if (wraps) {
+            this.pendingWrapToLast = target === trap.firstElementChild;
+            return;
+          }
           this.$nextTick(() => {
             // flush any pending DOM/focus updates to prevent infinite recursion
             // from two components fighting over focus
