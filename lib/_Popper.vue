@@ -10,6 +10,7 @@
        typically to the overlay container element #k-overlay.
        'appendToBody' prop changedto 'appendToEl' and related changes.
      - Add 'closeOnScroll' prop to close the popper on scroll.
+     - Listen for document clicks in the capture phase.
   -->
 
   <span>
@@ -181,7 +182,7 @@
       switch (this.trigger) {
         case 'click':
           on(this.referenceElm, 'click', this.doToggle);
-          on(document, 'click', this.handleDocumentClick);
+          document.addEventListener('click', this.handleDocumentClick, true);
           break;
         case 'hover':
           on(this.referenceElm, 'mouseover', this.onMouseOver);
@@ -311,7 +312,7 @@
         off(this.referenceElm, 'blur', this.doClose);
         off(this.referenceElm, 'mouseout', this.onMouseOut);
         off(this.referenceElm, 'mouseover', this.onMouseOver);
-        off(document, 'click', this.handleDocumentClick);
+        document.removeEventListener('click', this.handleDocumentClick, true);
 
         this.showPopper = false;
         this.doDestroy();

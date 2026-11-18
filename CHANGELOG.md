@@ -688,6 +688,84 @@ Changelog is rather internal in nature. See release notes for the public overvie
   - **Guidance:** -.
 
 [#1243]: https://github.com/learningequality/kolibri-design-system/pull/1243
+- [#1416]
+  - **Description:** Bumps KDS version to 5.10.1
+  - **Products impact:** -.
+  - **Addresses:** -.
+  - **Components:** -.
+  - **Breaking:** -
+  - **Impacts a11y:** no
+  - **Guidance:** -.
+
+[#1416]: https://github.com/learningequality/kolibri-design-system/pull/1416
+
+
+
+- [#1395]
+  - **Description:** `KDropdownMenu` with `constrainToScrollParent: false` stays inside the viewport instead of opening off-screen.
+  - **Products impact:** bugfix
+  - **Addresses:** https://github.com/learningequality/kolibri-design-system/issues/1384, https://github.com/learningequality/studio/pull/6303
+  - **Components:** KDropdownMenu, KButton, KIconButton
+  - **Breaking:** no
+  - **Impacts a11y:** yes
+  - **Guidance:** A menu fitting neither above nor below overlaps its trigger.
+
+[#1395]: https://github.com/learningequality/kolibri-design-system/pull/1395
+
+
+
+- [#1389]
+  - **Description:** Fix the `KDateRange` date field descriptions announced by screen readers. They were one day late in timezones at or east of UTC, and the end date field was described with the start date's text.
+  - **Products impact:** bugfix
+  - **Addresses:** https://github.com/learningequality/kolibri-design-system/issues/1385
+  - **Components:** KDateRange
+  - **Breaking:** no
+  - **Impacts a11y:** yes
+  - **Guidance:** -
+
+[#1389]: https://github.com/learningequality/kolibri-design-system/pull/1389
+
+
+
+- [#1359]
+  - **Description:** `KDropdownMenu`'s `position` prop now sets where the menu opens, mirrored in RTL.
+  - **Products impact:** bugfix
+  - **Addresses:** https://github.com/learningequality/kolibri-design-system/issues/1344, https://github.com/learningequality/studio/pull/6280
+  - **Components:** KDropdownMenu
+  - **Breaking:** no
+  - **Impacts a11y:** no
+  - **Guidance:** Check menus with a non-default `position` (Kolibri: `'bottom left'`) still fit their layout.
+
+[#1359]: https://github.com/learningequality/kolibri-design-system/pull/1359
+
+
+
+- [#1357]
+  - **Description:** `closePopover()` is public and documented; it does nothing when the menu is already closed.
+  - **Products impact:** new API
+  - **Addresses:** https://github.com/learningequality/kolibri-design-system/issues/1349, https://github.com/learningequality/studio/pull/6280
+  - **Components:** KDropdownMenu
+  - **Breaking:** no
+  - **Impacts a11y:** yes
+  - **Guidance:** Call `this.$refs.menu.closePopover()` to close an open menu. Closing within two ticks of opening no longer leaves `aria-expanded="true"`.
+
+[#1357]: https://github.com/learningequality/kolibri-design-system/pull/1357
+
+
+
+- [#1388]
+  - **Description:** An open `KSelect` closes on outside clicks inside an ancestor that stops click propagation.
+  - **Products impact:** bugfix
+  - **Addresses:** https://github.com/learningequality/kolibri-design-system/issues/1383, https://github.com/learningequality/studio/issues/6325
+  - **Components:** `KSelect`
+  - **Breaking:** no
+  - **Impacts a11y:** no
+  - **Guidance:** -
+
+[#1388]: https://github.com/learningequality/kolibri-design-system/pull/1388
+
+
+
 - [#1356]
   - **Description:** `$themeBrand` reflects colors set by `setBrandColors()`, and `setBrandColors()` warns in the console about shades missing from the brand tree.
   - **Products impact:** bugfix

@@ -38,8 +38,6 @@
 
   import KTextBox from '../KTextbox';
 
-  let uuid = 0;
-
   export default {
     name: 'KDateInput',
     components: {
@@ -63,16 +61,15 @@
         default: null,
       },
     },
-    data() {
-      return {
-        uuid: 0,
-      };
-    },
     computed: {
       dateDescription() {
         if (this.value) {
-          const valueAsDate = new Date(this.value);
-          valueAsDate.setDate(valueAsDate.getDate() + 1);
+          let valueAsDate = this.value;
+          if (typeof this.value === 'string') {
+            const [year, month, day] = this.value.split('-');
+            valueAsDate = new Date(year, month - 1, day);
+            valueAsDate.setFullYear(year);
+          }
           return (
             this.legendText +
             ' ' +
@@ -88,13 +85,10 @@
       },
       inputId() {
         if (this.value) {
-          return `DateDesc_${this.uuid}`;
+          return `DateDesc_${this._uid}`;
         }
         return '';
       },
-    },
-    beforeCreate() {
-      this.uuid = String(uuid++);
     },
     mounted() {
       this.$nextTick(() => {
