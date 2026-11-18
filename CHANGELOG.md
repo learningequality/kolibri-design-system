@@ -7,6 +7,19 @@ Changelog is rather internal in nature. See release notes for the public overvie
 <!-- [DO NOT REMOVE-USED BY GH ACTION] PASTE CHANGELOG -->
 
 
+- [#1419]
+  - **Description:** Internal: refresh the copied automation.yml so it matches the current shared template
+  - **Products impact:** none
+  - **Addresses:** -
+  - **Components:** -
+  - **Breaking:** -
+  - **Impacts a11y:** -
+  - **Guidance:** -
+
+[#1419]: https://github.com/learningequality/kolibri-design-system/pull/1419
+
+
+
 - [#1382]
   - **Description:** Dynamic colors move from `$computedClass` into component style blocks as theme CSS variables. Focus outlines move from per-component `$coreOutline` classes to the global focus rules, which move from `globals.scss` into `helper-styles.scss`. `trackInputModality()` now sets keyboard modality on a key press as well as on focus, for elements that opt in with `supports-modality="keyboard"`. `themeOutlineStyle()` returns `var(--tokens-focusOutline)` in place of a resolved color. `$darken1/2/3` returns a value it cannot parse unchanged, instead of darkening it to black. `KIcon` default colors are read as CSS variables rather than captured at module load.
   - **Products impact:** none
