@@ -45,7 +45,7 @@
       </div>
       <div>
         <KDateCalendar
-          :firstAllowedDate="firstAllowedDate"
+          :firstAllowedDate="firstAllowedDay"
           :lastAllowedDate="lastAllowedDate"
           :selectedStartDate="createDate(dateRange.start)"
           :selectedEndDate="createDate(dateRange.end)"
@@ -205,6 +205,10 @@
       };
     },
     computed: {
+      // Days are compared at midnight, so a firstAllowedDate with a time would exclude its own day
+      firstAllowedDay() {
+        return this.firstAllowedDate && startOfDay(this.firstAllowedDate);
+      },
       // Modal submit button is disabled if this function returns true
       disabled() {
         return (
@@ -222,7 +226,7 @@
         startDate: this.dateRange.start,
         endDate: this.dateRange.end,
         lastAllowedDate: this.lastAllowedDate,
-        firstAllowedDate: this.firstAllowedDate,
+        firstAllowedDate: this.firstAllowedDay,
       };
       this.validationMachine = interpret(
         validationMachine.withContext({ ...initialContext, ...currentContext }),
