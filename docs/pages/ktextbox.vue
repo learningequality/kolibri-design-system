@@ -183,8 +183,14 @@
         <DocsAnchorTarget anchor="#invalidtext" />
       </h3>
       <p>
-        When the value is invalid, shows the validation text even if the user has not focused or
-        changed the input.
+        When <code>invalid</code> is set, <code>invalidText</code> appears only while the user is
+        focused on the input. Set <code>showInvalidText</code> to surface errors on untouched
+        fields, for example on submit.
+      </p>
+      <p>
+        <code>required</code> blocks native form submission while the field is empty.
+        <code>KModal</code> can emit <code>submit</code> without that check, so validate in its
+        handler too.
       </p>
       <DocsExample
         loadExample="KTextbox/InvalidText.vue"
