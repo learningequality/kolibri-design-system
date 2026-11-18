@@ -7,6 +7,19 @@ Changelog is rather internal in nature. See release notes for the public overvie
 <!-- [DO NOT REMOVE-USED BY GH ACTION] PASTE CHANGELOG -->
 
 
+- [#1416]
+  - **Description:** Bumps KDS version to 5.10.1
+  - **Products impact:** -.
+  - **Addresses:** -.
+  - **Components:** -.
+  - **Breaking:** -
+  - **Impacts a11y:** no
+  - **Guidance:** -.
+
+[#1416]: https://github.com/learningequality/kolibri-design-system/pull/1416
+
+
+
 - [#1395]
   - **Description:** `KDropdownMenu` with `constrainToScrollParent: false` stays inside the viewport instead of opening off-screen.
   - **Products impact:** bugfix
