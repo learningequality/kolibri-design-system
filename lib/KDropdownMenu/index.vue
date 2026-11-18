@@ -4,6 +4,7 @@
     <UiPopover
       v-if="trigger"
       ref="popover"
+      :class="{ 'viewport-bounded-popover': !constrainToScrollParent }"
       :zIndex="100"
       :trigger="trigger"
       :containFocus="true"
@@ -17,7 +18,9 @@
       @open="handleOpen"
     >
       <!-- Slot to set a header to the dropdown menu -->
-      <slot name="header"></slot>
+      <div v-if="$scopedSlots.header">
+        <slot name="header"></slot>
+      </div>
       <UiMenu
         ref="menu"
         :options="options"
@@ -78,8 +81,8 @@
     },
     props: {
       /**
-       * The dropdown menu popover flips its position to avoid overflows within the parent.
-       * Setting it to false disables the flipping behavior.
+       * When true, the menu is kept inside its scroll parent where it fits.
+       * When false, the menu can extend outside its scroll parent but stays inside the viewport.
        */
       constrainToScrollParent: {
         type: Boolean,
@@ -308,3 +311,27 @@
   };
 
 </script>
+
+
+<style scoped>
+
+  /* tippy.js 4 keeps poppers 4px (its PADDING) inside the boundary on each side */
+  .viewport-bounded-popover {
+    display: flex;
+    flex-direction: column;
+    max-height: calc(var(--popover-boundary-height) - 8px);
+  }
+
+  .viewport-bounded-popover ::v-deep .ui-focus-container-content {
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+  }
+
+  .viewport-bounded-popover .ui-menu {
+    flex: 1 1 auto;
+    min-height: 0;
+    max-height: none;
+  }
+
+</style>
