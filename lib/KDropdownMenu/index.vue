@@ -4,11 +4,12 @@
     <UiPopover
       v-if="trigger"
       ref="popover"
+      :class="{ 'viewport-bounded-popover': !constrainToScrollParent }"
       :zIndex="100"
       :trigger="trigger"
       :containFocus="true"
       :hideOnClick="hideOnClick"
-      :dropdownPosition="position"
+      :position="popoverPlacement"
       :positionX="contextMenuPosition[0]"
       :positionY="contextMenuPosition[1]"
       :openOn="isContextMenu ? 'manual' : 'click'"
@@ -17,7 +18,9 @@
       @open="handleOpen"
     >
       <!-- Slot to set a header to the dropdown menu -->
-      <slot name="header"></slot>
+      <div v-if="$scopedSlots.header">
+        <slot name="header"></slot>
+      </div>
       <UiMenu
         ref="menu"
         :options="options"
@@ -46,6 +49,10 @@
   import UiPopover from '../keen/UiPopover';
   import useKContextMenu from '../composables/_useKContextMenu';
 
+  const RTL_MIRROR = { left: 'right', right: 'left' };
+
+  const EXTENT_SUFFIX = { right: 'start', bottom: 'start', left: 'end', top: 'end' };
+
   /**
    * The KDropdownMenu component is used to contain multiple actions
    */
@@ -57,23 +64,25 @@
     },
     setup(props) {
       if (props.isContextMenu) {
-        const { clientX, clientY, isActive } = useKContextMenu();
+        const { clientX, clientY, isActive, hideMenu } = useKContextMenu();
         const contextMenuPosition = computed(() => [clientX.value, clientY.value]);
 
         return {
           contextMenuPosition,
           isContextMenuActive: isActive,
+          hideContextMenu: hideMenu,
         };
       }
       return {
         contextMenuPosition: [],
         isContextMenuActive: null,
+        hideContextMenu: () => {},
       };
     },
     props: {
       /**
-       * The dropdown menu popover flips its position to avoid overflows within the parent.
-       * Setting it to false disables the flipping behavior.
+       * When true, the menu is kept inside its scroll parent where it fits.
+       * When false, the menu can extend outside its scroll parent but stays inside the viewport.
        */
       constrainToScrollParent: {
         type: Boolean,
@@ -99,7 +108,10 @@
         default: null,
       },
       /**
-       * The position of the dropdown relative to the button
+       * The position of the dropdown relative to the button, or to the cursor for
+       * context menus. The first word is the side it opens on; the second is the
+       * direction it extends, so `'bottom right'` aligns its left edge with the
+       * button's. `left` and `right` mirror in RTL.
        */
       position: {
         type: String,
@@ -146,13 +158,21 @@
         lastFocusElement: null,
       };
     },
+    computed: {
+      popoverPlacement() {
+        const [side, extent] = (this.position || 'bottom right')
+          .split(' ')
+          .map(word => (this.isRtl ? RTL_MIRROR[word] || word : word));
+        return EXTENT_SUFFIX[extent] ? `${side}-${EXTENT_SUFFIX[extent]}` : side;
+      },
+    },
     watch: {
       isContextMenuActive() {
         if (this.isContextMenuActive) {
           this.$nextTick(() => {
             this.$refs.popover.open();
           });
-        } else {
+        } else if (this.isMenuOpen()) {
           this.$refs.popover.close();
         }
       },
@@ -163,6 +183,9 @@
           });
         }
       },
+    },
+    created() {
+      this.closing = false;
     },
     mounted() {
       this.trigger = this.$el.parentElement;
@@ -177,9 +200,15 @@
         this.lastFocusElement = document.activeElement;
         await this.$nextTick();
         await this.$nextTick();
+        if (!this.isMenuOpen()) {
+          return;
+        }
         this.setFocus();
         window.addEventListener('keydown', this.handleOpenMenuNavigation, true);
         this.trigger.setAttribute('aria-expanded', true);
+      },
+      isMenuOpen() {
+        return Boolean(this.$refs.popover && this.$refs.popover.isOpen());
       },
       setFocus() {
         this.$refs.menu.$el.querySelector('li').focus();
@@ -198,6 +227,7 @@
           }
         }
         this.trigger.setAttribute('aria-expanded', false);
+        this.hideContextMenu();
         window.removeEventListener('keyup', this.handleKeyUp, true);
       },
       getNextFocusableSibling(focusedElement) {
@@ -260,11 +290,48 @@
         this.$emit('select', selection, $event);
         this.closePopover();
       },
+      /**
+       * Closes the menu, emits `close` and resets the trigger's `aria-expanded`.
+       * Does nothing if the menu is already closed.
+       * @public
+       */
       closePopover() {
+        if (this.closing || !this.isMenuOpen()) {
+          return;
+        }
+        this.closing = true;
+        /**
+         * Emitted when the menu is closed by `closePopover`, an option selection, or Tab
+         */
         this.$emit('close');
+        this.closing = false;
         this.$refs.popover.close();
       },
     },
   };
 
 </script>
+
+
+<style scoped>
+
+  /* tippy.js 4 keeps poppers 4px (its PADDING) inside the boundary on each side */
+  .viewport-bounded-popover {
+    display: flex;
+    flex-direction: column;
+    max-height: calc(var(--popover-boundary-height) - 8px);
+  }
+
+  .viewport-bounded-popover ::v-deep .ui-focus-container-content {
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+  }
+
+  .viewport-bounded-popover .ui-menu {
+    flex: 1 1 auto;
+    min-height: 0;
+    max-height: none;
+  }
+
+</style>

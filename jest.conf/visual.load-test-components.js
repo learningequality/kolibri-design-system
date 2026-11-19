@@ -4,6 +4,7 @@ import VisualTestExample from './components/VisualTestExample.vue';
 import VisualTestLayout from './components/VisualTestLayout.vue';
 import KButtonVisualTest from '~~/lib/buttons-and-links/__tests__/components/KButtonVisualTest.vue';
 import KDropdownMenuVisualTest from '~~/lib/KDropdownMenu/__tests__/components/KDropdownMenuVisualTest.vue';
+import KDropdownMenuAtViewportEdge from '~~/examples/KDropdownMenu/AtViewportEdge.vue';
 import KCheckboxSlotTest from '~~/lib/KCheckbox/__tests__/components/KCheckboxSlotTest.vue';
 import KCheckboxVisualTest from '~~/lib/KCheckbox/__tests__/components/KCheckboxVisualTest.vue';
 import KImgVisualTest from '~~/lib/KImg/__tests__/components/KImgVisualTest.vue';
@@ -43,6 +44,7 @@ Vue.component('KTableStickyColumnsScrollVisualTest', KTableStickyColumnsScrollVi
 Vue.component('CardsVisualTest', CardsVisualTest);
 Vue.component('KLogoVisualTest', KLogoVisualTest);
 Vue.component('KDropdownMenuVisualTest', KDropdownMenuVisualTest);
+Vue.component('KDropdownMenuAtViewportEdge', KDropdownMenuAtViewportEdge);
 Vue.component('KBreadcrumbsVisualTest', KBreadcrumbsVisualTest);
 Vue.component('KButtonVisualTest', KButtonVisualTest);
 Vue.component('KSelectVisualTest', KSelectVisualTest);

@@ -26,6 +26,7 @@
           { text: 'Options with icons', href: '#options-with-icons' },
           { text: 'Context menu', href: '#context-menu' },
           { text: 'Custom option slot', href: '#custom-option-slot' },
+          { text: 'Closing the menu programmatically', href: '#closing-programmatically' },
         ]"
       />
 
@@ -278,6 +279,44 @@
           <!-- eslint-enable -->
         </template>
       </DocsExample>
+
+      <h3>
+        Closing the menu programmatically
+        <DocsAnchorTarget anchor="#closing-programmatically" />
+      </h3>
+
+      <p>
+        Call <code>closePopover()</code> through a ref to close an open menu, for example when its
+        trigger is hidden. It also resets the trigger's <code>aria-expanded</code>.
+      </p>
+
+      <p>
+        Focus moves to the element focused before the menu opened. When that element is hidden, move
+        focus to a visible element yourself.
+      </p>
+
+      <!-- eslint-disable -->
+      <DocsShowCode language="html">
+        <KButton
+          text="Options"
+          hasDropdown
+        >
+          <template #menu>
+            <KDropdownMenu
+              ref="menu"
+              :options="options"
+            />
+          </template>
+        </KButton>
+      </DocsShowCode>
+      <!-- eslint-enable -->
+
+      <!-- eslint-disable -->
+      <!-- prettier-ignore -->
+      <DocsShowCode language="javascript">
+        this.$refs.menu.closePopover();
+      </DocsShowCode>
+      <!-- eslint-enable -->
     </DocsPageSection>
   </DocsPageTemplate>
 
