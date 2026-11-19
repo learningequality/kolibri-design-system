@@ -298,8 +298,10 @@
         }
       },
 
-      onOpen() {
+      onOpen(instance) {
         this.syncViewportBoundary();
+        // tippy 4.3.5 repositions a reused popper only in a requestAnimationFrame
+        instance.popperInstance?.update();
 
         if (this.hideOnClick) {
           this.addCloseEventListeners();
@@ -310,7 +312,11 @@
         this.$emit('open');
       },
 
-      onClose() {
+      onClose(instance) {
+        if (!instance.state.isVisible) {
+          return;
+        }
+
         if (this.returnFocus && this.lastFocusedElement) {
           this.lastFocusedElement.focus();
         }
@@ -341,7 +347,9 @@
 
       onShown() {
         this.lastFocusedElement = document.activeElement;
-        this.$refs.focusContainer.focus();
+        if (!this.$el.contains(document.activeElement)) {
+          this.$refs.focusContainer.focus();
+        }
         this.$emit('reveal');
       },
 

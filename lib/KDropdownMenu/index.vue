@@ -186,34 +186,102 @@
     },
     created() {
       this.closing = false;
+      this.opened = false;
+      this.destroying = false;
+      this.focusOnOpen = null;
+      this.pendingFocus = null;
     },
     mounted() {
       this.trigger = this.$el.parentElement;
       this.trigger.setAttribute('aria-haspopup', 'menu');
       this.trigger.setAttribute('aria-expanded', false);
+      if (!this.isContextMenu) {
+        this.trigger.addEventListener('keydown', this.handleTriggerKeydown);
+      }
     },
     beforeDestroy() {
+      this.destroying = true;
       window.removeEventListener('keydown', this.handleOpenMenuNavigation, true);
+      this.trigger.removeEventListener('keydown', this.handleTriggerKeydown);
     },
     methods: {
       async handleOpen() {
-        this.lastFocusElement = document.activeElement;
+        if (!this.opened) {
+          this.opened = true;
+          /**
+           * Emitted when the menu opens, by click or from the keyboard
+           */
+          this.$emit('open');
+          this.lastFocusElement = document.activeElement;
+        }
         await this.$nextTick();
         await this.$nextTick();
         if (!this.isMenuOpen()) {
           return;
         }
-        this.setFocus();
+        if (this.focusOnOpen) {
+          this.getEdgeOption(this.focusOnOpen)?.focus();
+        } else {
+          this.setFocus();
+        }
         window.addEventListener('keydown', this.handleOpenMenuNavigation, true);
         this.trigger.setAttribute('aria-expanded', true);
       },
       isMenuOpen() {
         return Boolean(this.$refs.popover && this.$refs.popover.isOpen());
       },
+      handleTriggerKeydown(event) {
+        if (event.altKey || event.ctrlKey || event.metaKey || event.shiftKey) {
+          return;
+        }
+        const isArrowUp = event.key == 'ArrowUp' || event.keyCode == 38;
+        const isArrowDown = event.key == 'ArrowDown' || event.keyCode == 40;
+        if (
+          (isArrowUp || isArrowDown) &&
+          event.target === this.trigger &&
+          this.$refs.popover &&
+          !this.$refs.popover.isOpen() &&
+          !this.trigger.closest('[role="grid"]')
+        ) {
+          event.preventDefault();
+          this.focusOnOpen = isArrowUp ? 'last' : 'first';
+          this.$refs.popover.open();
+        }
+      },
       setFocus() {
         this.$refs.menu.$el.querySelector('li').focus();
       },
+      getEdgeOption(position) {
+        if (!this.$refs.menu) {
+          return null;
+        }
+        const options = this.getFocusableOptions();
+        return options[position === 'first' ? 0 : options.length - 1] || null;
+      },
+      focusAfterKeydown(option) {
+        this.pendingFocus = option;
+        setTimeout(() => {
+          if (this.pendingFocus !== option) {
+            return;
+          }
+          this.pendingFocus = null;
+          if (option && this.isMenuOpen()) {
+            option.focus();
+          }
+        });
+      },
       handleClose() {
+        this.opened = false;
+        if (!this.destroying) {
+          this.closing = true;
+          /**
+           * Emitted when the menu closes, except on unmount
+           */
+          this.$emit('close');
+          this.closing = false;
+        }
+        this.focusOnOpen = null;
+        this.pendingFocus = null;
         const focusedElement = document.activeElement;
         const popover = this.$refs.popover.$el;
         if (
@@ -228,24 +296,16 @@
         }
         this.trigger.setAttribute('aria-expanded', false);
         this.hideContextMenu();
+        window.removeEventListener('keydown', this.handleOpenMenuNavigation, true);
         window.removeEventListener('keyup', this.handleKeyUp, true);
       },
-      getNextFocusableSibling(focusedElement) {
-        let sibling = focusedElement.nextElementSibling;
-        while (sibling && !this.isFocusable(sibling)) {
-          sibling = sibling.nextElementSibling;
-        }
-        return sibling;
-      },
-      getPreviousFocusableSibling(focusedElement) {
-        let sibling = focusedElement.previousElementSibling;
-        while (sibling && !this.isFocusable(sibling)) {
-          sibling = sibling.previousElementSibling;
-        }
-        return sibling;
-      },
       isFocusable(element) {
-        return element && element.tabIndex >= 0;
+        return element && element.tabIndex >= 0 && !element.matches('a:not([href])');
+      },
+      getFocusableOptions() {
+        return Array.from(this.$refs.menu.$el.querySelector('div').children).filter(
+          this.isFocusable,
+        );
       },
 
       handleOpenMenuNavigation(event) {
@@ -254,31 +314,46 @@
           return;
         }
         const popover = this.$refs.popover.$el;
-        const menuElements = this.$refs.menu.$el.querySelector('div').children;
-        const lastChild = menuElements[menuElements.length - 1];
-        const popoverIsOpen = popover.clientWidth > 0 && popover.clientHeight > 0;
-        // set current element and its siblings
-        const focusedElement = document.activeElement;
+        if (popover.clientWidth === 0 || popover.clientHeight === 0) {
+          return;
+        }
+        const current = this.pendingFocus || document.activeElement;
+        const isHome = event.key == 'Home' || event.keyCode == 36;
+        const isEnd = event.key == 'End' || event.keyCode == 35;
+        const isArrowUp = event.key == 'ArrowUp' || event.keyCode == 38;
+        const isArrowDown = event.key == 'ArrowDown' || event.keyCode == 40;
 
-        // manage rotating through the options using arrow keys
-        // UP arrow: .keyCode is depricated and should used only as a fallback
-        if ((event.key == 'ArrowUp' || event.keyCode == 38) && popoverIsOpen) {
+        // Focus moves use setTimeout: Chromium runs microtasks between a trusted event's
+        // listeners, so a $nextTick focus lands before trackInputModality's body listener
+        // and loses the focus ring
+        if (isArrowUp || isArrowDown) {
           event.preventDefault();
-
-          // Checking if previous sibling is divider and if yes then skip it
-          const prevSibling = this.getPreviousFocusableSibling(focusedElement);
-          prevSibling
-            ? this.$nextTick(() => prevSibling.focus())
-            : this.$nextTick(() => lastChild.focus());
-          // DOWN arrow
-        } else if ((event.key == 'ArrowDown' || event.keyCode == 40) && popoverIsOpen) {
+          const options = this.getFocusableOptions();
+          const next = options[options.indexOf(current) + (isArrowUp ? -1 : 1)];
+          this.focusAfterKeydown(next || options[isArrowUp ? options.length - 1 : 0]);
+        } else if (
+          (isHome || isEnd) &&
+          !current.isContentEditable &&
+          !current.matches('input, textarea, select')
+        ) {
           event.preventDefault();
-          //Chekcing if next sibling is divider and skipping it
-          const sibling = this.getNextFocusableSibling(focusedElement);
-          sibling ? this.$nextTick(() => sibling.focus()) : this.$nextTick(() => this.setFocus());
-          // if a TAB key, not an arrow key,
-          // close the popover and advance to next item in the tab index
-        } else if ((event.key == 'Tab' || event.keyCode == 9) && popoverIsOpen) {
+          this.focusAfterKeydown(this.getEdgeOption(isHome ? 'first' : 'last'));
+        } else if ((event.key == 'Enter' || event.keyCode == 13) && this.pendingFocus) {
+          event.preventDefault();
+          event.stopPropagation();
+          const option = this.pendingFocus;
+          this.pendingFocus = null;
+          option.focus();
+          const enter = new KeyboardEvent('keydown', {
+            key: 'Enter',
+            bubbles: true,
+            cancelable: true,
+          });
+          // Browsers ignore keyCode/which in KeyboardEvent's init; Chrome 49-50 and
+          // iOS Safari <= 10.2 also lack `key`, so Vue's `.enter` matches on keyCode
+          Object.defineProperties(enter, { keyCode: { get: () => 13 }, which: { get: () => 13 } });
+          option.dispatchEvent(enter);
+        } else if (event.key == 'Tab' || event.keyCode == 9) {
           this.$emit('tab', event);
           this.closePopover();
         }
@@ -299,12 +374,6 @@
         if (this.closing || !this.isMenuOpen()) {
           return;
         }
-        this.closing = true;
-        /**
-         * Emitted when the menu is closed by `closePopover`, an option selection, or Tab
-         */
-        this.$emit('close');
-        this.closing = false;
         this.$refs.popover.close();
       },
     },
