@@ -15,6 +15,7 @@
     />
 
     <VisualTestExample
+      id="invalid-textbox"
       title="Validation"
       width="400px"
       loadExample="KTextbox/Validation.vue"

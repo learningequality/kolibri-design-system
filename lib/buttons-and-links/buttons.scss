@@ -24,9 +24,9 @@ $raised-shadow: 0 1px 5px rgba(0, 0, 0, 0.2),
   cursor: pointer;
   user-select: none;
   background: none;
+  background-color: var(--k-button-background-color, transparent);
   border: 0;
   border-radius: 2px;
-  outline: none;
   transition: $transition;
 
   &::-moz-focus-inner {
@@ -57,5 +57,78 @@ a.button {
 
   &:disabled {
     cursor: default;
+  }
+}
+
+%appearance-disabled {
+  pointer-events: none;
+  cursor: default;
+  box-shadow: none;
+  opacity: 0.5;
+}
+
+.button:disabled {
+  @extend %appearance-disabled;
+}
+
+.link.is-disabled {
+  @extend %appearance-disabled;
+}
+
+.link {
+  color: var(--k-button-color, var(--tokens-link));
+  background-color: var(--k-button-background-color, transparent);
+
+  &:hover {
+    color: var(--k-button-hover-color, var(--tokens-primaryDark));
+    background-color: var(
+      --k-button-hover-background-color,
+      var(--k-button-background-color, transparent)
+    );
+  }
+}
+
+.button.raised {
+  color: var(--k-button-color, var(--tokens-text));
+  background-color: var(--k-button-background-color, var(--palette-grey-v100));
+
+  &:hover {
+    color: var(--k-button-hover-color, var(--k-button-color, var(--tokens-text)));
+    background-color: var(--k-button-hover-background-color, var(--palette-grey-v200));
+  }
+
+  &:focus {
+    outline-offset: 6px;
+  }
+
+  &.is-primary {
+    color: var(--k-button-color, white);
+    background-color: var(--k-button-background-color, var(--tokens-primary));
+
+    &:hover {
+      color: var(--k-button-hover-color, var(--k-button-color, white));
+      background-color: var(--k-button-hover-background-color, var(--tokens-primaryDark));
+    }
+  }
+}
+
+.button.flat {
+  color: var(--k-button-color, var(--tokens-text));
+
+  &:hover {
+    color: var(--k-button-hover-color, var(--k-button-color, var(--tokens-text)));
+    background-color: var(--k-button-hover-background-color, rgba(0, 0, 0, 0.1));
+  }
+
+  &:focus {
+    outline-offset: 0;
+  }
+
+  &.is-primary {
+    color: var(--k-button-color, var(--tokens-primary));
+
+    &:hover {
+      color: var(--k-button-hover-color, var(--k-button-color, var(--tokens-primary)));
+    }
   }
 }

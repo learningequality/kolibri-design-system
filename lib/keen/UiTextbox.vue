@@ -551,7 +551,8 @@
       }
     }
 
-    &.is-active:not(.is-disabled) {
+    // the error outranks focus, so an invalid field stays red while it is focused
+    &.is-active:not(.is-disabled):not(.is-invalid) {
       .ui-textbox-label-text {
         color: var(--brand-primary-v600);
       }
