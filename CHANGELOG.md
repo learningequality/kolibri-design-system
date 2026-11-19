@@ -7,6 +7,28 @@ Changelog is rather internal in nature. See release notes for the public overvie
 <!-- [DO NOT REMOVE-USED BY GH ACTION] PASTE CHANGELOG -->
 
 
+- [#1397]
+  - **Description:** `appearanceOverrides` becomes an inline style instead of a generated class. It no longer accepts a pseudo-class, a media query, or a nested element key. New `hoverColor` and `hoverBackgroundColor` props cover the hover state. The colors of each appearance now live in the style blocks, as `var(--k-button-*)` and `var(--k-tabs-*)` custom properties. No component calls `$computedClass` any more. Buttons take the shared focus ring, because `.button` no longer sets `outline: none`.
+  - **Products impact:** updated API
+  - **Addresses:** #1321
+  - **Components:** KButton, KIconButton, KExternalLink, KRouterLink, KTabs, KTabsList, KSnackbar, KTextbox, KDateRange, KToolbar, KMultiSelect
+  - **Breaking:** yes
+  - **Impacts a11y:** yes
+  - **Guidance:** There are two breaking changes.
+
+[#1397]: https://github.com/learningequality/kolibri-design-system/pull/1397
+  1. `appearanceOverrides` and `appearanceOverridesActive` drop every pseudo-class, media query and nested element key. Audit each call site in Kolibri and Studio. A development build warns, but only about pseudo-class and media query keys. A production build stays silent.
+  - `:hover: { color }` becomes the `hoverColor` prop.
+  - `:hover: { backgroundColor }` becomes the `hoverBackgroundColor` prop.
+  - Every other key moves into the application stylesheet.
+  On `KTabsList`, `hoverColor` reaches the inactive tabs only. The active tab keeps `colorActive`.
+  2. In those same props, every key but `color` and `backgroundColor` now outranks the hover and disabled rules. A `background` key turns the hover background off. A `boxShadow` stays on a disabled button.
+  There are two more colors change on screen that require no action.
+  - An invalid `KTextbox` turns red before you click it, and stays red while it has focus.
+  - A `KToolbar` with `textColor="white"` draws a white nav icon instead of a primary one, which was close to invisible on the colored bar. `textColor="black"` does not change.
+
+
+
 - [#1417]
   - **Description:** Merges release-v5 into develop
   - **Products impact:** none.
