@@ -4,9 +4,16 @@
     :id="optionId"
     role="option"
     class="k-listbox-option"
-    :style="isFocused ? { ...$coreOutline, outlineOffset: '-3px' } : {}"
+    :style="
+      isFocused
+        ? { ...$coreOutline, outlineOffset: '-3px', backgroundColor: 'var(--palette-grey-v200)' }
+        : {}
+    "
     :aria-selected="indeterminate ? undefined : String(isSelected)"
+    :aria-disabled="disabled ? 'true' : undefined"
     @click="onClick"
+    @mouseenter="isHovered = true"
+    @mouseleave="isHovered = false"
   >
     <!--
       margin reset prevents KCheckbox from taking more space
@@ -17,6 +24,7 @@
       presentational
       :style="{ marginTop: '6px', marginBottom: '0' }"
       :checked="isSelected"
+      :disabled="disabled"
       :indeterminate="indeterminate"
       :label="label"
     >
@@ -35,16 +43,22 @@
       v-else
       class="k-option-plain-label"
       :style="{
-        color: isSelected ? 'var(--tokens-primary)' : 'inherit',
+        color: labelColor,
         fontWeight: isSelected ? '500' : 'normal',
       }"
     >
       <KIcon
+        v-if="isSelected"
         icon="done"
         class="k-option-check-icon"
-        color="var(--tokens-primary)"
-        :style="{ visibility: isSelected ? 'visible' : 'hidden', top: '0' }"
+        data-testid="option-check-icon"
+        :color="disabled ? 'var(--tokens-textDisabled)' : 'var(--tokens-primary)'"
+        :style="{ top: '0' }"
       />
+      <span
+        v-else
+        class="k-option-check-icon k-option-check-spacer"
+      ></span>
       <slot>{{ label }}</slot>
     </span>
   </li>
@@ -54,7 +68,7 @@
 
 <script>
 
-  import { computed, inject, onMounted, onBeforeUnmount } from 'vue';
+  import { computed, inject, onMounted, onBeforeUnmount, ref } from 'vue';
 
   let optionCount = 0;
 
@@ -70,7 +84,13 @@
       const optionId = `klistbox-option-${uid}`;
 
       onMounted(() => {
-        listbox.registerOption({ id: optionId, value: props.value });
+        listbox.registerOption({
+          id: optionId,
+          value: props.value,
+          get disabled() {
+            return props.disabled;
+          },
+        });
       });
 
       onBeforeUnmount(() => listbox.unregisterOption({ id: optionId, value: props.value }));
@@ -78,6 +98,16 @@
       const isSelected = computed(() => listbox.isSelected(props.value));
 
       const isFocused = computed(() => listbox.isFocused(props.value));
+
+      const isHovered = ref(false);
+
+      const labelColor = computed(() => {
+        if (props.disabled) return 'var(--tokens-textDisabled)';
+        if (!isSelected.value) return 'inherit';
+        return isFocused.value || isHovered.value
+          ? 'var(--tokens-primaryDark)'
+          : 'var(--tokens-primary)';
+      });
 
       function onClick() {
         listbox.toggleOption(props.value);
@@ -97,6 +127,8 @@
         optionId,
         isSelected,
         isFocused,
+        isHovered,
+        labelColor,
         onClick,
         partiallySelectedText,
         effectiveShowSelector,
@@ -133,6 +165,14 @@
         type: Boolean,
         default: null,
       },
+      /**
+       * Disables the option. It gets `aria-disabled`, is skipped by keyboard
+       * navigation and cannot be selected.
+       */
+      disabled: {
+        type: Boolean,
+        default: false,
+      },
     },
   };
 
@@ -149,7 +189,11 @@
     cursor: pointer;
     background-color: var(--tokens-surface);
 
-    &:hover {
+    &[aria-disabled] {
+      cursor: default;
+    }
+
+    &:not([aria-disabled]):hover {
       background-color: var(--palette-grey-v100);
     }
   }
@@ -158,11 +202,18 @@
     display: flex;
     gap: 4px;
     align-items: center;
+    min-width: 0;
   }
 
   .k-option-check-icon {
     flex-shrink: 0;
     font-size: 16px;
+  }
+
+  // KIcon's size
+  .k-option-check-spacer {
+    width: 1.125em;
+    height: 1.125em;
   }
 
 </style>

@@ -1,10 +1,9 @@
 <template>
 
   <KSelect
-    label="Select options"
+    label="Select an option"
     :options="longOptions"
-    :multiple="true"
-    :value="[longOptions[0], longOptions[1]]"
+    :value="longOptions[0]"
   />
 
 </template>
