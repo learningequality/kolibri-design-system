@@ -291,8 +291,9 @@
       </p>
 
       <p>
-        Focus moves to the element focused before the menu opened. When that element is hidden, move
-        focus to a visible element yourself.
+        Focus moves to the trigger, or for a context menu to the element focused before it opened.
+        When that element is hidden, move focus to a visible element yourself. Focus that is already
+        outside the menu stays where it is.
       </p>
 
       <!-- eslint-disable -->
@@ -317,6 +318,48 @@
         this.$refs.menu.closePopover();
       </DocsShowCode>
       <!-- eslint-enable -->
+    </DocsPageSection>
+
+    <DocsPageSection
+      title="Accessibility"
+      anchor="#accessibility"
+    >
+      <p>
+        The menu follows the
+        <DocsExternalLink
+          text="WAI-ARIA menu button pattern"
+          href="https://www.w3.org/WAI/ARIA/apg/patterns/menu-button/"
+        />. The trigger is the only tab stop.
+      </p>
+      <ul>
+        <li>Opening the menu moves focus to the first option</li>
+        <li><kbd>Up</kbd> and <kbd>Down</kbd> arrows move between options, wrapping at the ends</li>
+        <li><kbd>Home</kbd> and <kbd>End</kbd> move to the first and last option</li>
+        <li>
+          <kbd>Enter</kbd> and <kbd>Space</kbd> select the focused option, close the menu, and
+          return focus to the trigger
+        </li>
+        <li><kbd>Escape</kbd> closes the menu and returns focus to the trigger</li>
+        <li>
+          For a context menu, <kbd>Enter</kbd>, <kbd>Space</kbd> and <kbd>Escape</kbd> instead
+          return focus to the element focused before it opened
+        </li>
+        <li>
+          Focus that a <code>select</code> handler moves out of the menu stays where it put it
+        </li>
+        <li>
+          <kbd>Tab</kbd> closes the menu and moves focus to the next element after the trigger;
+          <kbd>Shift</kbd>+<kbd>Tab</kbd> moves it to the element before
+        </li>
+        <li>
+          For a context menu, <kbd>Tab</kbd> and <kbd>Shift</kbd>+<kbd>Tab</kbd> instead move on
+          from the element focused before it opened, when that element is inside the parent element
+        </li>
+        <li>
+          Focus that a <code>tab</code> handler moves out of the menu stays there when the handler
+          also calls <code>event.preventDefault()</code>
+        </li>
+      </ul>
     </DocsPageSection>
   </DocsPageTemplate>
 
