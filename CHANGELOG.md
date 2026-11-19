@@ -7,6 +7,19 @@ Changelog is rather internal in nature. See release notes for the public overvie
 <!-- [DO NOT REMOVE-USED BY GH ACTION] PASTE CHANGELOG -->
 
 
+- [#1417]
+  - **Description:** Merges release-v5 into develop
+  - **Products impact:** none.
+  - **Addresses:**-.
+  - **Components:** .
+  - **Breaking:**
+  - **Impacts a11y:**
+  - **Guidance:** .
+
+[#1417]: https://github.com/learningequality/kolibri-design-system/pull/1417
+
+
+
 - [#1419]
   - **Description:** Internal: refresh the copied automation.yml so it matches the current shared template
   - **Products impact:** none
