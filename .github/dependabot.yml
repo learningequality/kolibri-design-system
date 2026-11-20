@@ -14,6 +14,10 @@ updates:
       babel:
         patterns:
           - "@babel/*"
+    ignore:
+      # vue2-teleport >= 1.2.0 reads HTMLElement at module load, breaking SSR.
+      - dependency-name: "vue2-teleport"
+        versions: [">=1.2.0"]
 
   # Maintain dependencies for Github Actions
   - package-ecosystem: "github-actions"
