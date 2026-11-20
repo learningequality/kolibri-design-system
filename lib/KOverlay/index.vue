@@ -10,8 +10,8 @@
 
 <script>
 
-  import Teleport from 'vue2-teleport';
   import _useOverlay from '../composables/_useOverlay';
+  import Teleport from './Teleport';
 
   /**
    * Moves an element from its original place in the DOM
