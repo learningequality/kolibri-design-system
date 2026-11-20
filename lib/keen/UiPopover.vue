@@ -3,13 +3,14 @@
   <UiFocusContainer
     ref="focusContainer"
     class="ui-popover"
-    role="dialog"
+    :role="role"
 
     :class="{ 'is-raised': raised }"
     :contain-focus="containFocus"
     :focus-redirector="focusRedirector"
 
     @focus-overflow="close()"
+    @focusin.native="startFocusScroll"
   >
     <slot></slot>
   </UiFocusContainer>
@@ -86,6 +87,10 @@
         type: Boolean,
         default: true,
       },
+      role: {
+        type: String,
+        default: 'dialog',
+      },
       hideOnClick: {
         type: Boolean,
         default: true,
@@ -102,12 +107,6 @@
       zIndex: Number,
       positionX: Number,
       positionY: Number,
-    },
-
-    data() {
-      return {
-        returnFocus: true,
-      };
     },
 
     watch: {
@@ -140,6 +139,7 @@
     created() {
       this.tip = null;
       this.cursorReference = null;
+      this.focusScrollFrame = null;
     },
 
     mounted() {
@@ -167,12 +167,13 @@
           // The effect of no transition is achieved by `duration: 0` below.
           animation: this.animation === 'none' ? 'fade' : this.animation,
           appendTo: this.appendToBody ? document.body : this.triggerEl.parentElement,
+          aria: null,
           arrow: false,
           content: this.$el,
           delay: [0, 0],
           distance: 0,
           duration: this.animation === 'none' ? 0 : [250, 200],
-          hideOnClick: this.hideOnClick,
+          hideOnClick: this.hideOnClick ? 'toggle' : false,
           ignoreAttributes: true,
           interactive: true,
           lazy: true,
@@ -183,7 +184,7 @@
           onShow: this.onOpen,
           onShown: this.onShown,
           placement: this.position,
-          role: 'dialog',
+          role: this.role,
           theme: 'ui-popover',
           trigger: this.openOn.replace('hover', 'mouseenter'),
           zIndex: this.zIndex,
@@ -225,6 +226,7 @@
       destroyPopover() {
         if (this.tip) {
           this.removeCloseEventListeners();
+          this.endFocusScroll();
           window.removeEventListener('resize', this.onResize);
           this.tip.destroy();
           this.tip = null;
@@ -274,20 +276,24 @@
         }
       },
 
-      close(options = { returnFocus: true }) {
+      close() {
         if (this.tip) {
-          this.returnFocus = options.returnFocus;
           this.tip.hide();
         }
       },
       /**
        * @public
        */
-      toggle(options = { returnFocus: true }) {
+      toggle() {
         if (this.tip) {
-          this.returnFocus = options.returnFocus;
           this.tip[this.isOpen() ? 'hide' : 'show']();
         }
+      },
+      /**
+       * @public
+       */
+      focus() {
+        this.$refs.focusContainer.focus();
       },
       /**
        * @public
@@ -300,6 +306,7 @@
 
       onOpen() {
         this.syncViewportBoundary();
+        this.lastFocusedElement = document.activeElement;
 
         if (this.hideOnClick) {
           this.addCloseEventListeners();
@@ -311,8 +318,14 @@
       },
 
       onClose() {
-        if (this.returnFocus && this.lastFocusedElement) {
-          this.lastFocusedElement.focus();
+        const returnTargets =
+          this.openOn === 'click'
+            ? [this.triggerEl, this.lastFocusedElement]
+            : [this.lastFocusedElement, this.triggerEl];
+        for (const el of returnTargets) {
+          if (el && this.$el.contains(document.activeElement)) {
+            el.focus();
+          }
         }
 
         this.removeCloseEventListeners();
@@ -321,9 +334,6 @@
         classlist.remove(this.triggerEl, 'has-dropdown-open');
 
         this.$emit('close');
-
-        // Reset return focus
-        this.returnFocus = true;
       },
 
       setBoundaryHeight() {
@@ -340,8 +350,9 @@
       },
 
       onShown() {
-        this.lastFocusedElement = document.activeElement;
-        this.$refs.focusContainer.focus();
+        if (!this.$el.contains(document.activeElement)) {
+          this.focus();
+        }
         this.$emit('reveal');
       },
 
@@ -349,9 +360,21 @@
         this.$emit('hide');
       },
 
-      closeOnExternal(event, closeOptions) {
+      startFocusScroll() {
+        this.endFocusScroll();
+        this.focusScrollFrame = requestAnimationFrame(() => {
+          this.focusScrollFrame = requestAnimationFrame(this.endFocusScroll);
+        });
+      },
+
+      endFocusScroll() {
+        cancelAnimationFrame(this.focusScrollFrame);
+        this.focusScrollFrame = null;
+      },
+
+      closeOnExternal(event) {
         if (!this.$el.contains(event.target)) {
-          this.close(closeOptions);
+          this.close();
         }
       },
 
@@ -361,20 +384,37 @@
         // Add event listeners in the next tick, otherwise they're triggered immediately
         this.addListenersTimeout = setTimeout(() => {
           /* eslint-disable-next-line import/no-named-as-default-member */
-          this.removeExternalClickListener = events.on('click', document, e => {
-            this.closeOnExternal(e, { returnFocus: false });
-          });
+          this.removeExternalClickListener = events.on(
+            'click',
+            document,
+            e => {
+              if (!(this.openOn === 'click' && this.triggerEl.contains(e.target))) {
+                this.closeOnExternal(e);
+              }
+            },
+            { capture: true },
+          );
 
           /* eslint-disable-next-line import/no-named-as-default-member */
           this.removeEscListener = events.onKeydown(27, document, () => {
-            this.close({ returnFocus: true });
+            this.close();
           });
 
           if (this.closeOnScroll) {
-            /* eslint-disable-next-line import/no-named-as-default-member */
-            this.removeScrollListener = events.on('scroll', document, e => {
-              this.closeOnExternal(e, { returnFocus: true });
-            });
+            const onScroll = e => {
+              if (this.focusScrollFrame) {
+                this.startFocusScroll();
+              } else {
+                this.closeOnExternal(e);
+              }
+            };
+            const removeListeners = [
+              ['scroll', onScroll],
+              ['wheel', this.endFocusScroll],
+              ['touchmove', this.endFocusScroll],
+              /* eslint-disable-next-line import/no-named-as-default-member */
+            ].map(([name, handler]) => events.on(name, document, handler));
+            this.removeScrollListener = () => removeListeners.forEach(remove => remove());
           }
         }, 0);
       },

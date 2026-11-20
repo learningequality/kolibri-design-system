@@ -6,6 +6,7 @@
       ref="popover"
       :class="{ 'viewport-bounded-popover': !constrainToScrollParent }"
       :zIndex="100"
+      :role="null"
       :trigger="trigger"
       :containFocus="true"
       :hideOnClick="hideOnClick"
@@ -16,9 +17,13 @@
       :constrainToScrollParent="constrainToScrollParent"
       @close="handleClose"
       @open="handleOpen"
+      @keydown.native="handleOpenMenuNavigation"
     >
       <!-- Slot to set a header to the dropdown menu -->
-      <div v-if="$scopedSlots.header">
+      <div
+        v-if="$scopedSlots.header"
+        ref="header"
+      >
         <slot name="header"></slot>
       </div>
       <UiMenu
@@ -27,6 +32,8 @@
         :hasIcons="hasIcons"
         :maxWidth="maxWidth"
         @select="handleSelection"
+        @hook:updated="keepFocusInOpenMenu"
+        @mousemove.native="handleMouseMove"
       >
         <template #option="{ option }">
           <!-- @slot Optional slot to customize the rendering of each menu option -->
@@ -52,6 +59,23 @@
   const RTL_MIRROR = { left: 'right', right: 'left' };
 
   const EXTENT_SUFFIX = { right: 'start', bottom: 'start', left: 'end', top: 'end' };
+
+  const nextFrame = () => new Promise(resolve => requestAnimationFrame(resolve));
+
+  // jsdom has no scrollIntoView. Chrome < 61 and Safari < 14 read its options object as
+  // `alignToTop: true`, and neither supports `scroll-behavior`. Firefox < 58 throws a
+  // TypeError on `block: 'nearest'`.
+  function scrollIntoViewNearest(element) {
+    if (!element.scrollIntoView || !('scrollBehavior' in document.documentElement.style)) {
+      return false;
+    }
+    try {
+      element.scrollIntoView({ block: 'nearest', behavior: 'instant' });
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
 
   /**
    * The KDropdownMenu component is used to contain multiple actions
@@ -155,7 +179,6 @@
     data() {
       return {
         trigger: null,
-        lastFocusElement: null,
       };
     },
     computed: {
@@ -193,94 +216,121 @@
       this.trigger.setAttribute('aria-expanded', false);
     },
     beforeDestroy() {
-      window.removeEventListener('keydown', this.handleOpenMenuNavigation, true);
+      window.removeEventListener('keyup', this.stopEscapeKeyUp, true);
     },
     methods: {
       async handleOpen() {
-        this.lastFocusElement = document.activeElement;
-        await this.$nextTick();
         await this.$nextTick();
         if (!this.isMenuOpen()) {
           return;
         }
-        this.setFocus();
-        window.addEventListener('keydown', this.handleOpenMenuNavigation, true);
+        this.focusFirstItem();
         this.trigger.setAttribute('aria-expanded', true);
+        // tippy 4 repositions a reopened popper in a requestAnimationFrame
+        await nextFrame();
+        this.revealFocusedItem();
+      },
+      revealFocusedItem() {
+        const item = document.activeElement;
+        if (this.isMenuOpen() && this.getMenuItems().includes(item)) {
+          scrollIntoViewNearest(item);
+        }
       },
       isMenuOpen() {
         return Boolean(this.$refs.popover && this.$refs.popover.isOpen());
       },
-      setFocus() {
-        this.$refs.menu.$el.querySelector('li').focus();
+      isFocusInHeader() {
+        return Boolean(this.$refs.header && this.$refs.header.contains(document.activeElement));
+      },
+      keepFocusInOpenMenu() {
+        if (this.isMenuOpen() && [null, document.body].includes(document.activeElement)) {
+          this.focusFirstItem();
+        }
+      },
+      focusFirstItem() {
+        const [item] = this.getMenuItems();
+        if (item) {
+          this.$refs.menu.$el.scrollTop = 0;
+          item.focus({ preventScroll: true });
+        } else {
+          this.$refs.popover.focus();
+        }
+      },
+      focusItemAt(index, items = this.getMenuItems()) {
+        const item = items[(index + items.length) % items.length];
+        if (item) {
+          item.focus({ preventScroll: scrollIntoViewNearest(item) });
+        }
       },
       handleClose() {
-        const focusedElement = document.activeElement;
-        const popover = this.$refs.popover.$el;
-        if (
-          popover.contains(focusedElement) &&
-          (focusedElement.classList.contains('ui-popover') ||
-            focusedElement.classList.contains('ui-popover-focus-redirector') ||
-            focusedElement.classList.contains('ui-menu-option'))
-        ) {
-          if (this.lastFocusElement) {
-            this.lastFocusElement.focus();
-          }
-        }
         this.trigger.setAttribute('aria-expanded', false);
         this.hideContextMenu();
-        window.removeEventListener('keyup', this.handleKeyUp, true);
       },
-      getNextFocusableSibling(focusedElement) {
-        let sibling = focusedElement.nextElementSibling;
-        while (sibling && !this.isFocusable(sibling)) {
-          sibling = sibling.nextElementSibling;
+      getMenuItems() {
+        return Array.from(this.$refs.menu.$el.querySelectorAll('[role="menuitem"]'));
+      },
+      moveFocusBy(delta) {
+        const items = this.getMenuItems();
+        const index = items.indexOf(document.activeElement);
+        this.focusItemAt(index === -1 && delta < 0 ? -1 : index + delta, items);
+      },
+      // Not `mouseenter`: browsers fire it when the menu opens under a resting pointer
+      handleMouseMove(event) {
+        const item = event.target.closest('[role="menuitem"]');
+        if (
+          item &&
+          !item.hasAttribute('aria-disabled') &&
+          this.isMenuOpen() &&
+          !this.isFocusInHeader()
+        ) {
+          item.focus({ preventScroll: true });
         }
-        return sibling;
       },
-      getPreviousFocusableSibling(focusedElement) {
-        let sibling = focusedElement.previousElementSibling;
-        while (sibling && !this.isFocusable(sibling)) {
-          sibling = sibling.previousElementSibling;
-        }
-        return sibling;
-      },
-      isFocusable(element) {
-        return element && element.tabIndex >= 0;
-      },
-
       handleOpenMenuNavigation(event) {
-        // identify the menu state and length
-        if (!this.$refs.popover && !this.$refs.popover.$el) {
+        if (!this.isMenuOpen()) {
           return;
         }
-        const popover = this.$refs.popover.$el;
-        const menuElements = this.$refs.menu.$el.querySelector('div').children;
-        const lastChild = menuElements[menuElements.length - 1];
-        const popoverIsOpen = popover.clientWidth > 0 && popover.clientHeight > 0;
-        // set current element and its siblings
-        const focusedElement = document.activeElement;
-
-        // manage rotating through the options using arrow keys
-        // UP arrow: .keyCode is depricated and should used only as a fallback
-        if ((event.key == 'ArrowUp' || event.keyCode == 38) && popoverIsOpen) {
+        if (event.key == 'ArrowUp' || event.keyCode == 38) {
           event.preventDefault();
-
-          // Checking if previous sibling is divider and if yes then skip it
-          const prevSibling = this.getPreviousFocusableSibling(focusedElement);
-          prevSibling
-            ? this.$nextTick(() => prevSibling.focus())
-            : this.$nextTick(() => lastChild.focus());
-          // DOWN arrow
-        } else if ((event.key == 'ArrowDown' || event.keyCode == 40) && popoverIsOpen) {
+          this.moveFocusBy(-1);
+        } else if (event.key == 'ArrowDown' || event.keyCode == 40) {
           event.preventDefault();
-          //Chekcing if next sibling is divider and skipping it
-          const sibling = this.getNextFocusableSibling(focusedElement);
-          sibling ? this.$nextTick(() => sibling.focus()) : this.$nextTick(() => this.setFocus());
-          // if a TAB key, not an arrow key,
-          // close the popover and advance to next item in the tab index
-        } else if ((event.key == 'Tab' || event.keyCode == 9) && popoverIsOpen) {
+          this.moveFocusBy(1);
+        } else if (event.key == 'Escape' || event.keyCode == 27) {
+          event.stopPropagation();
+          window.addEventListener('keyup', this.stopEscapeKeyUp, true);
+          this.$refs.popover.close();
+        } else if (event.key == 'Tab' || event.keyCode == 9) {
           this.$emit('tab', event);
-          this.closePopover();
+          if (!this.emitClose()) {
+            return;
+          }
+          const wasFocusInMenu = this.$refs.popover.$el.contains(document.activeElement);
+          this.$refs.popover.close();
+          if (wasFocusInMenu && !this.trigger.contains(document.activeElement)) {
+            this.trigger.focus();
+          }
+        } else if (this.isFocusInHeader()) {
+          return;
+        } else if (event.key == 'Home' || event.keyCode == 36) {
+          event.preventDefault();
+          this.focusItemAt(0);
+        } else if (event.key == 'End' || event.keyCode == 35) {
+          event.preventDefault();
+          this.focusItemAt(-1);
+        } else if (
+          event.key == 'PageUp' ||
+          event.key == 'PageDown' ||
+          event.keyCode == 33 ||
+          event.keyCode == 34
+        ) {
+          event.preventDefault();
+        }
+      },
+      stopEscapeKeyUp(event) {
+        if (event.key == 'Escape' || event.keyCode == 27) {
+          window.removeEventListener('keyup', this.stopEscapeKeyUp, true);
+          event.stopPropagation();
         }
       },
       handleSelection(selection, $event) {
@@ -296,8 +346,13 @@
        * @public
        */
       closePopover() {
+        if (this.emitClose()) {
+          this.$refs.popover.close();
+        }
+      },
+      emitClose() {
         if (this.closing || !this.isMenuOpen()) {
-          return;
+          return false;
         }
         this.closing = true;
         /**
@@ -305,7 +360,7 @@
          */
         this.$emit('close');
         this.closing = false;
-        this.$refs.popover.close();
+        return true;
       },
     },
   };
@@ -326,6 +381,10 @@
     display: flex;
     flex-direction: column;
     min-height: 0;
+  }
+
+  .ui-menu ::v-deep [role='menuitem'] {
+    scroll-margin: 0.25rem 0;
   }
 
   .viewport-bounded-popover .ui-menu {
