@@ -86,7 +86,7 @@ export default [
   },
   // Visual spec files need the page global
   {
-    files: ['**/visual.spec.js'],
+    files: ['**/visual.spec.js', '**/*.visual.spec.js'],
     languageOptions: {
       globals: {
         page: 'readonly',

@@ -356,11 +356,8 @@
 
         switch (event.key) {
           case 'Escape':
-            // Expanded mode has no popup to dismiss, so let Escape reach the host
-            // (a modal, for instance) instead of swallowing it here.
-            if (props.expanded) break;
+            if (props.expanded || !isOpen.value) break;
             event.preventDefault();
-            event.stopPropagation();
             closeDropdown();
             inputRef.value?.focus();
             break;

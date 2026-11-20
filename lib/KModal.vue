@@ -2,7 +2,11 @@
 
   <component :is="wrapper">
     <!-- Accessibility properties for the overlay -->
-    <KFocusTrap>
+    <KFocusTrap
+      ref="focusTrap"
+      @shouldFocusFirstEl="wrapFocus"
+      @shouldFocusLastEl="wrapFocus"
+    >
       <transition
         name="modal-fade"
         appear
@@ -11,20 +15,22 @@
           id="modal-window"
           ref="modal-overlay"
           class="modal-overlay"
-          @keyup.esc.stop="emitCancelEvent"
+          tabindex="-1"
+          role="dialog"
+          aria-modal="true"
+          :aria-labelledby="`modal-title-${_uid}`"
+          @keydown.esc="handleEscapeKeydown"
+          @keyup.esc.stop="handleEscapeKeyup"
           @keyup.enter="handleEnter"
         >
           <div
             ref="modal"
             class="modal"
-            :tabindex="0"
-            role="dialog"
-            aria-labelledby="modal-title"
             :style="modalStyles"
           >
             <!-- Modal Title -->
             <h1
-              id="modal-title"
+              :id="`modal-title-${_uid}`"
               ref="title"
               class="title"
               :style="titleStyles"
@@ -111,6 +117,12 @@
 
   import debounce from 'lodash/debounce';
   import useKResponsiveWindow from './composables/useKResponsiveWindow';
+  import {
+    KOLIBRI_SNACKBAR_ID,
+    hideBackground,
+    isTopModal,
+    restoreBackground,
+  } from './utils/modalBackground';
 
   const SIZE_SM = 'small';
   const SIZE_MD = 'medium';
@@ -275,13 +287,7 @@
       if (nuxtServerSideRendering) {
         return;
       }
-      // Remove scrollbars from the <html> tag, so user's can't scroll while modal is open
-      window.document.documentElement.style['overflow'] = 'hidden';
-      this.$nextTick(() => {
-        if (this.$refs.modal && !this.$refs.modal.contains(document.activeElement)) {
-          this.focusModal();
-        }
-      });
+      this.openModal();
       window.addEventListener('focus', this.focusElementTest, true);
       window.setTimeout(() => (this.delayedEnough = true), 500);
 
@@ -290,12 +296,17 @@
     updated() {
       this.updateContentSectionStyle();
     },
+    activated() {
+      this.openModal();
+    },
+    deactivated() {
+      restoreBackground(this);
+    },
     destroyed() {
       if (nuxtServerSideRendering) {
         return;
       }
-      // Restore scrollbars to <html> tag
-      window.document.documentElement.style['overflow'] = '';
+      restoreBackground(this);
       window.removeEventListener('focus', this.focusElementTest, true);
       // Wait for events to finish propagating before changing the focus.
       // Otherwise the `lastFocus` item receives events such as 'enter'.
@@ -335,7 +346,8 @@
       emitCancelEvent() {
         if (!this.cancelDisabled) {
           /**
-           * Emitted when the cancel button is clicked or the esc key is pressed
+           * Emitted when the cancel button is clicked or the esc key is pressed.
+           * Does not close the modal.
            */
           this.$emit('cancel');
         }
@@ -348,32 +360,95 @@
           this.$emit('submit');
         }
       },
-      handleEnter() {
-        if (this.delayedEnough) {
+      isFromPopover({ target, currentTarget }) {
+        return target !== currentTarget && !this.$refs.modal.contains(target);
+      },
+      handleEnter(event) {
+        if (this.delayedEnough && !this.isFromPopover(event)) {
           this.emitSubmitEvent();
         }
       },
+      handleEscapeKeydown(event) {
+        this.escapeHandled = event.defaultPrevented || this.isFromPopover(event);
+      },
+      handleEscapeKeyup() {
+        if (!this.escapeHandled) {
+          this.emitCancelEvent();
+        }
+        this.escapeHandled = false;
+      },
+      openModal() {
+        hideBackground(this.$refs.focusTrap.$el, this.$refs['modal-overlay'], this);
+        this.$nextTick(this.focusModalIfOutside);
+      },
       focusModal() {
-        this.$refs.modal.focus();
+        this.$refs['modal-overlay'].focus();
+      },
+      focusModalIfOutside() {
+        const dialog = this.$refs['modal-overlay'];
+        if (dialog && isTopModal(this) && !dialog.contains(document.activeElement)) {
+          this.focusModal();
+        }
+      },
+      focusEdgeControl(last) {
+        const focusable = Array.from(this.$refs['modal-overlay'].querySelectorAll('*')).filter(
+          el => el.tabIndex >= 0 && !el.disabled,
+        );
+        const isUncheckedInCheckedGroup = radio =>
+          radio.type === 'radio' &&
+          radio.name &&
+          !radio.checked &&
+          focusable.some(
+            el =>
+              el.type === 'radio' && el.checked && el.name === radio.name && el.form === radio.form,
+          );
+        const controls = focusable.filter(el => !isUncheckedInCheckedGroup(el));
+        if (last) {
+          controls.reverse();
+        }
+        for (const el of controls) {
+          el.focus();
+          if (document.activeElement === el) {
+            return;
+          }
+        }
+        this.focusModal();
+      },
+      wrapFocus() {
+        const last = this.pendingWrapToLast;
+        this.pendingWrapToLast = undefined;
+        if (last !== undefined) {
+          this.focusEdgeControl(last);
+        }
       },
       focusElementTest(event) {
-        const { target } = event;
+        const { target, relatedTarget } = event;
         const noopOnFocus =
           target === window || // switching apps
           !this.$refs.modal || // if $refs.modal isn't available
-          target === this.$refs.modal || // addresses #3824
+          !isTopModal(this) ||
+          target === this.$refs['modal-overlay'] || // addresses #3824
           this.$refs.modal.contains(target.activeElement);
         if (noopOnFocus) {
           return;
         }
         // Fixes possible infinite recursion when disconnection snackbars appear
         // along with KModal (#6301)
-        const $coreSnackbar = document.getElementById('coresnackbar');
+        const $coreSnackbar = document.getElementById(KOLIBRI_SNACKBAR_ID);
         if ($coreSnackbar && $coreSnackbar.contains(target)) {
           return;
         }
         // focus has escaped the modal - put it back!
-        if (!this.$refs.modal.contains(target)) {
+        const dialog = this.$refs['modal-overlay'];
+        if (!dialog.contains(target)) {
+          const trap = this.$refs.focusTrap.$el;
+          const wraps =
+            dialog.contains(relatedTarget) &&
+            [trap.firstElementChild, trap.lastElementChild].includes(target);
+          if (wraps) {
+            this.pendingWrapToLast = target === trap.firstElementChild;
+            return;
+          }
           this.$nextTick(() => {
             // flush any pending DOM/focus updates to prevent infinite recursion
             // from two components fighting over focus
@@ -402,6 +477,10 @@
     background: rgba(0, 0, 0, 0.7);
     background-attachment: fixed;
     transition: opacity $core-time ease;
+
+    &:focus {
+      outline: none;
+    }
   }
 
   // TODO: margins for stacked buttons.
@@ -414,10 +493,6 @@
     margin: 0 auto;
     border-radius: $radius;
     transform: translate(-50%, -50%);
-
-    &:focus {
-      outline: none;
-    }
   }
 
   .form {
