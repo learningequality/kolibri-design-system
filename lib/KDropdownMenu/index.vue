@@ -383,6 +383,10 @@
     min-height: 0;
   }
 
+  .ui-menu ::v-deep [role='menuitem'] {
+    scroll-margin: 0.25rem 0;
+  }
+
   .viewport-bounded-popover .ui-menu {
     flex: 1 1 auto;
     min-height: 0;
